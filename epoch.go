@@ -7,7 +7,7 @@ const (
 
 var (
 	currentEpochYear int16 = 2050
-	daysFromConverterEpochToCurrentEpoch int32 = 18263
+	daysToCurrentEpochFromConverterEpoch int32 = 18263
 )
 
 func SetCurrentEpochYear(year int16) {
@@ -18,8 +18,8 @@ func GetCurrentEpochYear() int16 {
 	return currentEpochYear
 }
 
-func GetDaysFromConverterEpochToCurrentEpoch() int32 {
-	return daysFromConverterEpochToCurrentEpoch
+func GetDaysToCurrentEpochFromConverterEpoch() int32 {
+	return daysToCurrentEpochFromConverterEpoch
 }
 
 func ConvertToDays(year int16, month uint8, day uint8) int32 {
@@ -43,9 +43,9 @@ func ConvertToDays(year int16, month uint8, day uint8) int32 {
   // epoch_prime days is relative to 0000-03-01
   var dayOfEpochPrime int32 = int32(dayOfEra + 146097 * uint32(era))
 	// relative to 2000-03-01
-  dayOfEpochPrime = dayOfEpochPrime - (kConverterEpochYear / 400) * 146097
+  dayOfEpochPrime -= (kConverterEpochYear / 400) * 146097
 	// relative to 2000-01-01, 2000 is a leap year
-	dayOfEpochPrime = dayOfEpochPrime + 60
+	dayOfEpochPrime += 60
 
   return dayOfEpochPrime
 }

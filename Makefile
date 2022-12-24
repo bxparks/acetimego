@@ -1,5 +1,5 @@
 all:
-	go build epoch.go
+	go build
 
 test:
-	go test epoch.go epoch_test.go
+	go test
