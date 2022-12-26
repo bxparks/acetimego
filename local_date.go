@@ -1,9 +1,9 @@
 package acetime
 
 type LocalDate struct {
-	year int16
-	month uint8
-	day uint8
+	Year int16
+	Month uint8
+	Day uint8
 }
 
 // Offsets used to calculate the day of the week of a particular (year, month,
@@ -81,16 +81,16 @@ func DayOfWeek(year int16, month uint8, day uint8) uint8 {
 	}
 }
 
-// Factory method from epoch days
-func ForEpochDays(days int32) LocalDate {
+// Convert epoch days to LocalDate.
+func LocalDateForEpochDays(days int32) LocalDate {
 	// shift relative to Converter Epoch
 	days += GetDaysToCurrentEpochFromConverterEpoch();
 	year, month, day := ConvertFromDays(days)
 	return LocalDate{year, month, day}
 }
 
-// Convert to epoch days
+// Convert LocalDate to epoch days.
 func (ld LocalDate) ToEpochDays() int32 {
-  var converterDays int32 = ConvertToDays(ld.year, ld.month, ld.day)
+  var converterDays int32 = ConvertToDays(ld.Year, ld.Month, ld.Day)
   return converterDays - GetDaysToCurrentEpochFromConverterEpoch()
 }
