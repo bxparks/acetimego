@@ -104,3 +104,45 @@ func TestLocalDateToEpochDays(t *testing.T) {
 		t.Fatalf("LocalDateToEpochDays(2051, 1, 1) should be 365")
 	}
 }
+
+func TestLocalDateIncrementOneDay(t *testing.T) {
+	var year int16
+	var month uint8
+	var day uint8
+
+	year, month, day = LocalDateIncrementOneDay(2050, 1, 1)
+	if year != 2050 || month != 1 || day != 2 {
+		t.Fatalf("LocalDateIncrementOneDay(2050, 1, 1) should be (2050, 1, 2)")
+	}
+
+	year, month, day = LocalDateIncrementOneDay(2050, 2, 28)
+	if year != 2050 || month != 3 || day != 1 {
+		t.Fatalf("LocalDateIncrementOneDay(2050, 2, 28) should be (2050, 3, 1)")
+	}
+
+	year, month, day = LocalDateIncrementOneDay(2050, 12, 31)
+	if year != 2051 || month != 1 || day != 1 {
+		t.Fatalf("LocalDateIncrementOneDay(2050, 12, 31) should be (2051, 1, 1)")
+	}
+}
+
+func TestLocalDateDecrementOneDay(t *testing.T) {
+	var year int16
+	var month uint8
+	var day uint8
+
+	year, month, day = LocalDateDecrementOneDay(2050, 1, 1)
+	if year != 2049 || month != 12 || day != 31 {
+		t.Fatalf("LocalDateDecrementOneDay(2050, 1, 1) should be (2049, 12, 31)")
+	}
+
+	year, month, day = LocalDateDecrementOneDay(2052, 3, 1)
+	if year != 2052 || month != 2 || day != 29 {
+		t.Fatalf("LocalDateDecrementOneDay(2052, 3, 1) should be (2052, 2, 29)")
+	}
+
+	year, month, day = LocalDateDecrementOneDay(2050, 2, 1)
+	if year != 2050 || month != 1 || day != 31 {
+		t.Fatalf("LocalDateDecrementOneDay(2050, 2, 1) should be (2050, 1, 31)")
+	}
+}

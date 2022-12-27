@@ -16,10 +16,11 @@ const InvalidYear int16 = math.MinInt16
 // March to make leap years easier to handle, so the shift for March=3 is 0.
 //
 // For example:
-//    * atc_days_of_week[3] is 3 because April (index=3) 1st is shifted by 3
-//      days because March has 31 days (28 + 3).
-//    * atc_days_of_week[4] is 5 because May (index=4) 1st is shifted by 2
-//      additional days from April, because April has 30 days (28 + 2).
+//
+// * atc_days_of_week[3] is 3 because April (index=3) 1st is shifted by 3
+//   days because March has 31 days (28 + 3).
+// * atc_days_of_week[4] is 5 because May (index=4) 1st is shifted by 2
+//   additional days from April, because April has 30 days (28 + 2).
 var daysOfWeek = [12]uint8{
   5 /*Jan=31*/,
   1 /*Feb=28*/,
@@ -81,16 +82,55 @@ func DayOfWeek(year int16, month uint8, day uint8) uint8 {
 	}
 }
 
-// Convert epoch days to (y, m, d).
+// LocalDateFromEpochDays converts epoch days to (y, m, d).
 func LocalDateFromEpochDays(days int32) (year int16, month uint8, day uint8) {
-	// shift relative to Converter Epoch
-	days += GetDaysToCurrentEpochFromConverterEpoch();
+	days += GetDaysToCurrentEpochFromConverterEpoch()
 	year, month, day = ConvertFromDays(days)
 	return
 }
 
-// Convert (y, m, d) to epoch days.
+// LocalDateToEpochDays converts (y, m, d) to epoch days.
 func LocalDateToEpochDays(year int16, month uint8, day uint8) int32 {
   converterDays := ConvertToDays(year, month, day)
   return converterDays - GetDaysToCurrentEpochFromConverterEpoch()
+}
+
+// LocalDateIncrementOneDay returns the given (year, month, day) incremented by
+// one day, taking proper account of leap years.
+func  LocalDateIncrementOneDay(y int16, m uint8, d uint8) (
+		yy int16, mm uint8, dd uint8) {
+  dd = d + 1
+	mm = m
+	yy = y
+
+  if (dd > DaysInYearMonth(y, m)) {
+    dd = 1
+    mm++
+    if (mm > 12) {
+      mm = 1
+      yy++
+    }
+  }
+	return
+}
+
+// LocalDateIncrementOneDay returns the given (year, month, day) decremented by
+// one day, taking proper account of leap years.
+func LocalDateDecrementOneDay(y int16, m uint8, d uint8) (
+		yy int16, mm uint8, dd uint8) {
+  dd = d - 1
+	mm = m
+	yy = y
+
+  if (dd == 0) {
+    mm--
+    if (mm == 0) {
+      mm = 12
+      yy--
+      dd = 31
+    } else {
+      dd = DaysInYearMonth(yy, mm)
+    }
+  }
+	return
 }
