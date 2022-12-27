@@ -5,19 +5,19 @@ import (
 )
 
 func TestIsLeapYear(t *testing.T) {
-	if ! IsLeapYear(2000) {
+	if !IsLeapYear(2000) {
 		t.Fatalf(`IsLeapYear(2000) should is a leap year`)
 	}
 	if IsLeapYear(2001) {
 		t.Fatalf(`IsLeapYear(2001) should not be a leap year`)
 	}
-	if ! IsLeapYear(2004) {
+	if !IsLeapYear(2004) {
 		t.Fatalf(`IsLeapYear(2004) should be a leap year`)
 	}
 	if IsLeapYear(2100) {
 		t.Fatalf(`IsLeapYear(2100) should not be a leap year`)
 	}
-	if ! IsLeapYear(2400) {
+	if !IsLeapYear(2400) {
 		t.Fatalf(`IsLeapYear(2400) should be a leap year`)
 	}
 	if IsLeapYear(2401) {
