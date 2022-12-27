@@ -61,46 +61,46 @@ func TestDayOfWeeek(t *testing.T) {
 	}
 }
 
-func TestLocalDateForEpochDays(t *testing.T) {
-	ld := LocalDateForEpochDays(0)
-	if ld.Year != 2050 || ld.Month != 1 || ld.Day != 1 {
-		t.Fatalf(`LocalDateForEpochDays(0) should be (2050, 1, 1)`)
+func TestLocalDateFromEpochDays(t *testing.T) {
+	y, m, d := LocalDateFromEpochDays(0)
+	if y != 2050 || m != 1 || d != 1 {
+		t.Fatalf(`LocalDateFromEpochDays(0) should be (2050, 1, 1)`)
 	}
 
-	ld = LocalDateForEpochDays(1)
-	if ld.Year != 2050 || ld.Month != 1 || ld.Day != 2 {
-		t.Fatalf(`LocalDateForEpochDays(0) should be (2050, 1, 2)`)
+	y, m, d = LocalDateFromEpochDays(1)
+	if y != 2050 || m != 1 || d != 2 {
+		t.Fatalf(`LocalDateFromEpochDays(0) should be (2050, 1, 2)`)
 	}
 
-	ld = LocalDateForEpochDays(-1)
-	if ld.Year != 2049 || ld.Month != 12 || ld.Day != 31 {
-		t.Fatalf(`LocalDateForEpochDays(0) should be (2049, 12, 31)`)
+	y, m, d = LocalDateFromEpochDays(-1)
+	if y != 2049 || m != 12 || d != 31 {
+		t.Fatalf(`LocalDateFromEpochDays(0) should be (2049, 12, 31)`)
 	}
 
-	ld = LocalDateForEpochDays(365)
-	if ld.Year != 2051 || ld.Month != 1 || ld.Day != 1 {
-		t.Fatalf(`LocalDateForEpochDays(0) should be (2051, 1, 1)`)
+	y, m, d = LocalDateFromEpochDays(365)
+	if y != 2051 || m != 1 || d != 1 {
+		t.Fatalf(`LocalDateFromEpochDays(0) should be (2051, 1, 1)`)
 	}
 }
 
 func TestLocalDateToEpochDays(t *testing.T) {
-	days := LocalDate{2050, 1, 1}.ToEpochDays()
+	days := LocalDateToEpochDays(2050, 1, 1)
 	if days != 0 {
-		t.Fatalf("LocalDate{2050, 1, 1}.ToEpochDays() should be 0")
+		t.Fatalf("LocalDateToEpochDays(2050, 1, 1) should be 0")
 	}
 
-	days = LocalDate{2050, 1, 2}.ToEpochDays()
+	days = LocalDateToEpochDays(2050, 1, 2)
 	if days != 1 {
-		t.Fatalf("LocalDate{2050, 1, 2}.ToEpochDays() should be 1")
+		t.Fatalf("LocalDateToEpochDays(2050, 1, 2) should be 1")
 	}
 
-	days = LocalDate{2049, 12, 31}.ToEpochDays()
+	days = LocalDateToEpochDays(2049, 12, 31)
 	if days != -1 {
-		t.Fatalf("LocalDate{2049, 12, 31}.ToEpochDays() should be -1")
+		t.Fatalf("LocalDateToEpochDays(2049, 12, 31) should be -1")
 	}
 
-	days = LocalDate{2051, 1, 1}.ToEpochDays()
+	days = LocalDateToEpochDays(2051, 1, 1)
 	if days != 365 {
-		t.Fatalf("LocalDate{2051, 1, 1}.ToEpochDays() should be 365")
+		t.Fatalf("LocalDateToEpochDays(2051, 1, 1) should be 365")
 	}
 }
