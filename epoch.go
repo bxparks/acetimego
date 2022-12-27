@@ -2,7 +2,7 @@ package acetime
 
 const (
 	// Must be a multiple of 400
-	kConverterEpochYear = 2000
+	converterEpochYear = 2000
 )
 
 var (
@@ -44,7 +44,7 @@ func ConvertToDays(year int16, month uint8, day uint8) int32 {
 	// epoch_prime days is relative to 0000-03-01
 	var dayOfEpochPrime int32 = int32(dayOfEra + 146097*uint32(era))
 	// relative to 2000-03-01
-	dayOfEpochPrime -= (kConverterEpochYear / 400) * 146097
+	dayOfEpochPrime -= (converterEpochYear / 400) * 146097
 	// relative to 2000-01-01, 2000 is a leap year
 	dayOfEpochPrime += 60
 
@@ -55,7 +55,7 @@ func ConvertToDays(year int16, month uint8, day uint8) int32 {
 func ConvertFromDays(epochDays int32) (year int16, month uint8, day uint8) {
 	// epoch_prime days is relative to 0000-03-01
 	var dayOfEpochPrime int32 = epochDays +
-		(kConverterEpochYear/400)*146097 - 60
+		(converterEpochYear/400)*146097 - 60
 
 	var era uint16 = uint16(uint32(dayOfEpochPrime) / 146097)          // [0,24]
 	var dayOfEra uint32 = uint32(dayOfEpochPrime) - 146097*uint32(era) // [0,146096]
