@@ -17,6 +17,8 @@ type DateTuple struct {
 	suffix uint8
 }
 
+// dateTupleCompare compare 2 DateTuple instances (a, b) and returns -1, 0, 1
+// depending on whether a is less than, equal, or greater than b, respectively.
 func dateTupleCompare(a *DateTuple, b *DateTuple) int8 {
 	if a.year < b.year {
 		return -1
@@ -43,6 +45,132 @@ func dateTupleCompare(a *DateTuple, b *DateTuple) int8 {
 		return 1
 	}
 	return 0
+}
+
+// dateTupleSubtract returns the number of seconds of (a - b).
+func dateTupleSubtract(a *DateTuple, b *DateTuple) int32 {
+	eda := LocalDateToEpochDays(a.year, a.month, a.day)
+	esa := eda*86400 + int32(a.minutes)*60
+
+	edb := LocalDateToEpochDays(b.year, b.month, b.day)
+	esb := edb*86400 + int32(b.minutes)*60
+
+	return esa - esb
+}
+
+func dateTupleNormalize(dt *DateTuple) {
+	const oneDayAsMinutes = 60 * 24
+
+	if dt.minutes <= -oneDayAsMinutes {
+		dt.year, dt.month, dt.day = LocalDateDecrementOneDay(
+			dt.year, dt.month, dt.day)
+		dt.minutes += oneDayAsMinutes
+	} else if oneDayAsMinutes <= dt.minutes {
+		dt.year, dt.month, dt.day = LocalDateIncrementOneDay(
+			dt.year, dt.month, dt.day)
+		dt.minutes -= oneDayAsMinutes
+	} else {
+		// do nothing
+	}
+}
+
+// dateTupleExpand converts the given 'tt', offsetMinutes, and deltaMinutes into
+// the 'w', 's' and 'u' versions of the AtcDateTuple. It is allowed for 'ttw' to
+// be an alias of 'tt'.
+func dateTupleExpand(
+	tt *DateTuple,
+	offsetMinutes int16,
+	deltaMinutes int16,
+	ttw *DateTuple,
+	tts *DateTuple,
+	ttu *DateTuple) {
+
+	if tt.suffix == suffixS {
+		*tts = *tt
+
+		ttu.year = tt.year
+		ttu.month = tt.month
+		ttu.day = tt.day
+		ttu.minutes = tt.minutes - offsetMinutes
+		ttu.suffix = suffixU
+
+		ttw.year = tt.year
+		ttw.month = tt.month
+		ttw.day = tt.day
+		ttw.minutes = tt.minutes + deltaMinutes
+		ttw.suffix = suffixW
+	} else if tt.suffix == suffixU {
+		*ttu = *tt
+
+		tts.year = tt.year
+		tts.month = tt.month
+		tts.day = tt.day
+		tts.minutes = tt.minutes + offsetMinutes
+		tts.suffix = suffixS
+
+		ttw.year = tt.year
+		ttw.month = tt.month
+		ttw.day = tt.day
+		ttw.minutes = tt.minutes + (offsetMinutes + deltaMinutes)
+		ttw.suffix = suffixW
+	} else {
+		// Explicit set the suffix to 'w' in case it was something else.
+		*ttw = *tt
+		ttw.suffix = suffixW
+
+		tts.year = tt.year
+		tts.month = tt.month
+		tts.day = tt.day
+		tts.minutes = tt.minutes - deltaMinutes
+		tts.suffix = suffixS
+
+		ttu.year = tt.year
+		ttu.month = tt.month
+		ttu.day = tt.day
+		ttu.minutes = tt.minutes - (deltaMinutes + offsetMinutes)
+		ttu.suffix = suffixU
+	}
+
+	dateTupleNormalize(ttw)
+	dateTupleNormalize(tts)
+	dateTupleNormalize(ttu)
+}
+
+const (
+	matchStatusFarPast     = iota // 0
+	matchStatusPrior              // 1
+	matchStatusExactMatch         // 2
+	matchStatusWithinMatch        // 3
+	matchStatusFarFuture          // 4
+)
+
+// dateTupleCompareFuzzy compares the given 't' with the interval defined by
+// [start, until). The comparison is fuzzy, with a slop of about one month so
+// that we can ignore the day and minutes fields.
+//
+// The following values are returned:
+//
+//   - kAtcMatchStatusPrior if 't' is less than 'start' by at least one month,
+//   - kAtcMatchStatusFarFuture if 't' is greater than 'until' by at least one
+//     month,
+//   - kAtcMatchStatusWithinMatch if 't' is within [start, until) with a one
+//     month slop,
+//   - kAtcMatchStatusExactMatch is never returned.
+func dateTupleCompareFuzzy(
+	t *DateTuple, start *DateTuple, until *DateTuple) uint8 {
+
+	// Use int32_t because a delta year of 2730 or greater will exceed
+	// the range of an int16_t.
+	var tMonths int32 = int32(t.year)*12 + int32(t.month)
+	var startMonths int32 = int32(start.year)*12 + int32(start.month)
+	if tMonths < startMonths-1 {
+		return matchStatusPrior
+	}
+	var untilMonths int32 = int32(until.year)*12 + int32(until.month)
+	if untilMonths+1 < tMonths {
+		return matchStatusFarFuture
+	}
+	return matchStatusWithinMatch
 }
 
 //-----------------------------------------------------------------------------
