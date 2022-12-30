@@ -20,6 +20,8 @@ const (
 	maxZoneEraUntilYear = maxZoneRuleYear + 1
 )
 
+//-----------------------------------------------------------------------------
+
 type ZoneRule struct {
 
 	/** FROM year. */
@@ -72,7 +74,7 @@ type ZoneRule struct {
 	 *
 	 * If the '--scope extended' flag is given to tzcompiler.py, this field
 	 * should be interpreted as an uint8_t field, whose lower 4-bits hold a
-	 * slightly modified value of offset_code equal to (originalDeltaCode + 4).
+	 * slightly modified value of offsetCode equal to (originalDeltaCode + 4).
 	 * This allows the 4-bits to represent DST offsets from -1:00 to 2:45 in
 	 * 15-minute increments. This is the same algorithm used by
 	 * ZoneEra::deltaCode field for consistency. The
@@ -104,6 +106,8 @@ type ZoneRule struct {
 	 */
 	letter uint8
 }
+
+//-----------------------------------------------------------------------------
 
 /**
  * A collection of transition rules which describe the DST rules of a given
@@ -144,7 +148,7 @@ const (
  *
  * There are 2 types of ZoneEra:
  *    1) zonePolicy == nullptr. Then deltaCode determines the additional
- *    offset from offset_code. A value of '-' in the TZ Database file is stored
+ *    offset from offsetCode. A value of '-' in the TZ Database file is stored
  *    as 0.
  *    2) zonePolicy != nullptr. Then the deltaCode offset is given by the
  *    ZoneRule.deltaCode of the ZoneRule which matches the time instant of
@@ -185,7 +189,7 @@ type ZoneEra struct {
 	format string
 
 	/** UTC offset in 15 min increments. Determined by the STDOFF column. */
-	offset_code int8
+	offsetCode int8
 
 	/**
 	 * If zonePolicy is nullptr, then this indicates the DST offset in 15 minute
@@ -196,14 +200,14 @@ type ZoneEra struct {
 	 * should be interpreted as a uint8_t field, composed of two 4-bit fields:
 	 *
 	 *    * The upper 4-bits is an unsigned integer from 0 to 14 that represents
-	 *    the one-minute remainder from the offset_code. This allows us to capture
+	 *    the one-minute remainder from the offsetCode. This allows us to capture
 	 *    STDOFF offsets in 1-minute resolution.
 	 *    * The lower 4-bits is an unsigned integer that holds (originalDeltaCode
 	 *    + 4). This allows us to represent DST offsets from -1:00 to +2:45, in
 	 *    15-minute increments.
 	 *
 	 * The extended::ZoneEraBroker::deltaMinutes() and offsetMinutes() know how
-	 * to convert offset_code and deltaCode into the appropriate minutes.
+	 * to convert offsetCode and deltaCode into the appropriate minutes.
 	 */
 	deltaCode int8
 
@@ -240,6 +244,13 @@ type ZoneEra struct {
 	 */
 	untilTimeModifier uint8
 }
+
+func (era *ZoneEra) StdOffsetMinutes() int16 {
+  return int16(era.offsetCode) * 15 +
+		int16((uint8(era.deltaCode) & 0xf0) >> 4)
+}
+
+//-----------------------------------------------------------------------------
 
 /**
  * Representation of a given time zone, implemented as an array of ZoneEra
