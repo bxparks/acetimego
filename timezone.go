@@ -150,12 +150,12 @@ const (
 //
 // The following values are returned:
 //
-//   - kAtcMatchStatusPrior if 't' is less than 'start' by at least one month,
-//   - kAtcMatchStatusFarFuture if 't' is greater than 'until' by at least one
+//   - matchStatusPrior if 't' is less than 'start' by at least one month,
+//   - matchStatusFarFuture if 't' is greater than 'until' by at least one
 //     month,
-//   - kAtcMatchStatusWithinMatch if 't' is within [start, until) with a one
+//   - matchStatusWithinMatch if 't' is within [start, until) with a one
 //     month slop,
-//   - kAtcMatchStatusExactMatch is never returned.
+//   - matchStatusExactMatch is never returned.
 func dateTupleCompareFuzzy(
 	t *DateTuple, start *DateTuple, until *DateTuple) uint8 {
 
@@ -188,7 +188,7 @@ type MatchingEra struct {
 	/** The ZoneEra that matched the given year. NonNullable. */
 	era *ZoneEra
 
-	/** The previous MatchingEra, needed to interpret start_dt.  */
+	/** The previous MatchingEra, needed to interpret startDt.  */
 	prevMatch *MatchingEra
 
 	/** The STD offset of the last Transition in this MatchingEra. */
@@ -198,8 +198,10 @@ type MatchingEra struct {
 	lastDeltaMinutes int16
 }
 
+//-----------------------------------------------------------------------------
+
 type Transition struct {
-	/** The matching_era which generated this Transition. */
+	/** The MatchingEra which generated this Transition. */
 	match *MatchingEra
 
 	/**
@@ -212,14 +214,14 @@ type Transition struct {
 	/**
 	 * The original transition time, usually 'w' but sometimes 's' or 'u'. After
 	 * expandDateTuple() is called, this field will definitely be a 'w'. We must
-	 * remember that the transition_time* fields are expressed using the UTC
+	 * remember that the transitionTime* fields are expressed using the UTC
 	 * offset of the *previous* Transition.
 	 */
 	transitionTime DateTuple
 
 	//union {
 	/**
-	* Version of transition_time in 's' mode, using the UTC offset of the
+	* Version of transitionTime in 's' mode, using the UTC offset of the
 	* *previous* Transition. Valid before
 	* ExtendedZoneProcessor::generateStartUntilTimes() is called.
 	 */
@@ -234,7 +236,7 @@ type Transition struct {
 
 	//union {
 	/**
-	* Version of transition_time in 'u' mode, using the UTC offset of the
+	* Version of transitionTime in 'u' mode, using the UTC offset of the
 	* *previous* transition. Valid before
 	* ExtendedZoneProcessor::generateStartUntilTimes() is called.
 	 */
@@ -280,21 +282,211 @@ type Transition struct {
 	 * During processTransitionMatchStatus(), this flag indicates how the
 	 * transition falls within the time interval of the MatchingEra.
 	 */
-	matchStatus bool
+	matchStatus uint8
 }
 
+//-----------------------------------------------------------------------------
+
+const (
+	maxAbbrevSize         = 6
+	transitionStorageSize = 8
+	maxMatches            = 4
+	maxInteriorYears      = 4
+)
+
 type TransitionStorage struct {
-	/** Pointers into the pool of Transition objects. */
-	transitions []Transition
 	/** Index of the most recent prior transition [0,kTransitionStorageSize) */
 	indexPrior uint8
 	/** Index of the candidate pool [0,kTransitionStorageSize) */
 	indexCandidate uint8
 	/** Index of the free agent transition [0, kTransitionStorageSize) */
 	indexFree uint8
-
 	/** Number of allocated transitions. */
 	allocSize uint8
+
+	/** Pool of Transition objects. */
+	transitions [transitionStorageSize]Transition
+}
+
+func (ts *TransitionStorage) ResetCandidatePool() {
+	ts.indexCandidate = ts.indexPrior
+	ts.indexFree = ts.indexPrior
+}
+
+func (ts *TransitionStorage) GetFreeAgent() *Transition {
+	if ts.indexFree < transitionStorageSize {
+		if ts.indexFree >= ts.allocSize {
+			ts.allocSize = ts.indexFree + 1
+		}
+		return &ts.transitions[ts.indexFree]
+	} else {
+		return &ts.transitions[transitionStorageSize-1]
+	}
+}
+
+func (ts *TransitionStorage) AddFreeAgentToActivePool() {
+	if ts.indexFree >= transitionStorageSize {
+		return
+	}
+	ts.indexFree++
+	ts.indexPrior = ts.indexFree
+	ts.indexCandidate = ts.indexFree
+}
+
+func (ts *TransitionStorage) ReservePrior() *Transition {
+	ts.GetFreeAgent()
+	ts.indexCandidate++
+	ts.indexFree++
+	return &ts.transitions[ts.indexPrior]
+}
+
+func (ts *TransitionStorage) SetFreeAgentAsPriorIfValid() {
+	ft := &ts.transitions[ts.indexFree]
+	prior := &ts.transitions[ts.indexPrior]
+	if (prior.isValidPrior && dateTupleCompare(
+		&prior.transitionTime,
+		&ft.transitionTime) < 0) || !prior.isValidPrior {
+
+		ft.isValidPrior = true
+		prior.isValidPrior = false
+
+		// swap(prior, free)
+		*ft, *prior = *prior, *ft
+	}
+}
+
+func (ts *TransitionStorage) AddPriorToCandidatePool() {
+	ts.indexCandidate--
+}
+
+func (ts *TransitionStorage) AddFreeAgentToCandidatePool() {
+	if ts.indexFree >= transitionStorageSize {
+		return
+	}
+	for i := ts.indexFree; i > ts.indexCandidate; i-- {
+		curr := &ts.transitions[i]
+		prev := &ts.transitions[i-1]
+		if dateTupleCompare(&curr.transitionTime, &prev.transitionTime) >= 0 {
+			break
+		}
+		*curr, *prev = *prev, *curr
+	}
+	ts.indexFree++
+}
+
+func isMatchStatusActive(status uint8) bool {
+	return status == matchStatusExactMatch ||
+		status == matchStatusWithinMatch ||
+		status == matchStatusPrior
+}
+
+func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
+	// Shift active candidates to the left into the Active pool.
+	iActive := ts.indexPrior
+	iCandidate := ts.indexCandidate
+	for ; iCandidate < ts.indexFree; iCandidate++ {
+		if isMatchStatusActive(ts.transitions[iCandidate].matchStatus) {
+			if iActive != iCandidate {
+				// Shift candidate into active slot
+				ts.transitions[iActive] = ts.transitions[iCandidate]
+			}
+			iActive++
+		}
+	}
+
+	ts.indexPrior = iActive
+	ts.indexCandidate = iActive
+	ts.indexFree = iActive
+
+	return &ts.transitions[iActive-1]
+}
+
+func fixTransitionTimes(ts []Transition) {
+	if len(ts) == 0 {
+		return
+	}
+
+	prev := &ts[0]
+	for i := range ts {
+		curr := &ts[i]
+		dateTupleExpand(
+			&curr.transitionTime,
+			prev.offsetMinutes,
+			prev.deltaMinutes,
+			&curr.transitionTime,
+			&curr.transitionTimeS,
+			&curr.transitionTimeU)
+		prev = curr
+	}
+}
+
+//-----------------------------------------------------------------------------
+
+func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
+	// Find the previous Match offsets.
+	var prevMatchOffsetMinutes int16
+	var prevMatchDeltaMinutes int16
+	if match.prevMatch != nil {
+		prevMatchOffsetMinutes = match.prevMatch.lastOffsetMinutes
+		prevMatchDeltaMinutes = match.prevMatch.lastDeltaMinutes
+	} else {
+		prevMatchOffsetMinutes = match.era.StdOffsetMinutes()
+		prevMatchDeltaMinutes = 0
+	}
+
+	// Expand start times.
+	var stw DateTuple
+	var sts DateTuple
+	var stu DateTuple
+	dateTupleExpand(
+		&match.startDt,
+		prevMatchOffsetMinutes,
+		prevMatchDeltaMinutes,
+		&stw,
+		&sts,
+		&stu)
+
+	// Transition times.
+	ttw := &t.transitionTime
+	tts := &t.transitionTimeS
+	ttu := &t.transitionTimeU
+
+	// Compare Transition to Match, where equality is assumed if *any* of the
+	// 'w', 's', or 'u' versions of the DateTuple are equal. This prevents
+	// duplicate Transition instances from being created in a few cases.
+	if dateTupleCompare(ttw, &stw) == 0 ||
+		dateTupleCompare(tts, &sts) == 0 ||
+		dateTupleCompare(ttu, &stu) == 0 {
+		return matchStatusExactMatch
+	}
+
+	if dateTupleCompare(ttu, &stu) < 0 {
+		return matchStatusPrior
+	}
+
+	// Now check if the transition occurs after the given match. The
+	// untilDateTime of the current match uses the same UTC offsets as the
+	// transitionTime of the current transition, so no complicated adjustments
+	// are needed. We just make sure we compare 'w' with 'w', 's' with 's',
+	// and 'u' with 'u'.
+	matchUntil := &match.untilDt
+	var transitionTime *DateTuple
+	if matchUntil.suffix == suffixS {
+		transitionTime = tts
+	} else if matchUntil.suffix == suffixU {
+		transitionTime = ttu
+	} else { // assume 'w'
+		transitionTime = ttw
+	}
+	if dateTupleCompare(transitionTime, matchUntil) < 0 {
+		return matchStatusWithinMatch
+	}
+
+	return matchStatusFarFuture
+}
+
+func compareTransitionToMatchFuzzy(t *Transition, m *MatchingEra) uint8 {
+	return dateTupleCompareFuzzy(&t.transitionTime, &m.startDt, &m.untilDt)
 }
 
 //-----------------------------------------------------------------------------
@@ -303,7 +495,7 @@ type TimeZone struct {
 	zoneInfo          *ZoneInfo
 	year              int16
 	isFilled          bool
-	matches           []MatchingEra
+	matches           [maxMatches]MatchingEra
 	transitionStorage TransitionStorage
 }
 
