@@ -75,7 +75,7 @@ func dateTupleNormalize(dt *DateTuple) {
 }
 
 // dateTupleExpand converts the given 'tt', offsetMinutes, and deltaMinutes into
-// the 'w', 's' and 'u' versions of the AtcDateTuple. It is allowed for 'ttw' to
+// the 'w', 's' and 'u' versions of the DateTuple. It is allowed for 'ttw' to
 // be an alias of 'tt'.
 func dateTupleExpand(
 	tt *DateTuple,
@@ -489,9 +489,84 @@ func compareTransitionToMatchFuzzy(t *Transition, m *MatchingEra) uint8 {
 	return dateTupleCompareFuzzy(&t.transitionTime, &m.startDt, &m.untilDt)
 }
 
+//---------------------------------------------------------------------------
+
+/** A tuple of month and day. */
+type MonthDay struct{
+  /** month [1,12] */
+  month uint8
+
+  /** day [1,31] */
+  day uint8
+}
+
+// calcStartDayOfMonth Extracts the actual (month, day) pair from the expression
+// used in the TZ data files of the form (onDayOfWeek >= onDayOfMonth) or
+// (onDayOfWeek <= onDayOfMonth).
+//
+// There are 4 combinations:
+//
+// @verbatim
+// onDayOfWeek=0, onDayOfMonth=(1-31): exact match
+// onDayOfWeek=1-7, onDayOfMonth=1-31: dayOfWeek>=dayOfMonth
+// onDayOfWeek=1-7, onDayOfMonth=0: last{dayOfWeek}
+// onDayOfWeek=1-7, onDayOfMonth=-(1-31): dayOfWeek<=dayOfMonth
+// @endverbatim
+//
+// Caveats: This function handles expressions which crosses month boundaries,
+// but not year boundaries (e.g. Jan to Dec of the previous year, or Dec to
+// Jan of the following year.)
+func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
+	onDayOfMonth int8) (md MonthDay) {
+
+  if onDayOfWeek == 0 {
+    md.month = month
+    md.day = uint8(onDayOfMonth)
+    return
+  }
+
+  if onDayOfMonth >= 0 {
+    daysInMonth := int8(DaysInYearMonth(year, month))
+    if onDayOfMonth == 0 {
+      onDayOfMonth = daysInMonth - 6
+    }
+    dow := DayOfWeek(year, month, uint8(onDayOfMonth))
+    dayOfWeekShift := (onDayOfWeek - dow + 7) % 7
+    day := onDayOfMonth + int8(dayOfWeekShift)
+    if day > daysInMonth {
+      // TODO: Support shifting from Dec to Jan of following  year.
+      day -= daysInMonth
+      month++
+    }
+    md.month = month
+    md.day = uint8(day)
+  } else {
+    onDayOfMonth = -onDayOfMonth
+    dow := DayOfWeek(year, month, uint8(onDayOfMonth))
+    dayOfWeekShift := (dow - onDayOfWeek + 7) % 7
+    day := onDayOfMonth - int8(dayOfWeekShift)
+    if day < 1 {
+      // TODO: Support shifting from Jan to Dec of the previous year.
+      month--
+      daysInPrevMonth := DaysInYearMonth(year, month)
+      day += int8(daysInPrevMonth)
+    }
+    md.month = month
+    md.day = uint8(day)
+  }
+	return
+}
+
 //-----------------------------------------------------------------------------
 
-type TimeZone struct {
+type Err int8
+
+const (
+	ErrOk = iota
+  ErrGeneric
+)
+
+type ZoneProcessor struct {
 	zoneInfo          *ZoneInfo
 	year              int16
 	isFilled          bool
@@ -499,7 +574,24 @@ type TimeZone struct {
 	transitionStorage TransitionStorage
 }
 
-// TimeZoneFromZoneInfo creates a new TimeZone from the given ZoneInfo instance.
-func TimeZoneFromZoneInfo(zoneInfo *ZoneInfo) *TimeZone {
-	return &TimeZone{zoneInfo: zoneInfo}
+// ZoneProcessorFromZoneInfo creates a new ZoneProcessor from the given ZoneInfo
+// instance.
+func ZoneProcessorFromZoneInfo(zoneInfo *ZoneInfo) *ZoneProcessor {
+	return &ZoneProcessor{zoneInfo: zoneInfo}
+}
+
+func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
+  return zp.isFilled && (year == zp.year)
+}
+
+func (zp *ZoneProcessor) InitForYear(
+  zoneInfo *ZoneInfo, year int16) Err {
+
+	return ErrOk
+}
+
+func (zp *ZoneProcessor) InitForEpochSeconds(
+  zoneInfo *ZoneInfo, epochSeconds int32) Err {
+
+	return ErrOk
 }

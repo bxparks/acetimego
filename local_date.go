@@ -4,7 +4,19 @@ import (
 	"math"
 )
 
-const InvalidYear int16 = math.MinInt16
+const (
+	InvalidYear int16 = math.MinInt16
+)
+
+const (
+	IsoWeekdayMonday = iota + 1
+	IsoWeekdayTuesday
+	IsoWeekdayWednesday
+	IsoWeekdayThursday
+	IsoWeekdayFriday
+	IsoWeekdaySaturday
+	IsoWeekdaySunday
+)
 
 // Offsets used to calculate the day of the week of a particular (year, month,
 // day). The element represents the number of days that the first of month of
