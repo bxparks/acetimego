@@ -104,7 +104,19 @@ type ZoneRule struct {
 	 *  - StJohns ('DD'; used by America/St_Johns and America/Goose_Bay)
 	 *  - Troll ('+00' '+02'; used by Antarctica/Troll)
 	 */
-	letter uint8
+	letter string
+}
+
+func (rule *ZoneRule) AtMinutes() int16 {
+  return int16(rule.atTimeCode) * 15 + int16(rule.atTimeModifier & 0x0f)
+}
+
+func (rule *ZoneRule) AtSuffix() uint8 {
+  return rule.atTimeModifier & 0xf0
+}
+
+func (rule *ZoneRule) DstOffsetMinutes() int16 {
+  return (int16(uint8(rule.deltaCode) & 0x0f) - 4) * 15
 }
 
 //-----------------------------------------------------------------------------
@@ -206,10 +218,10 @@ type ZoneEra struct {
 	 *    + 4). This allows us to represent DST offsets from -1:00 to +2:45, in
 	 *    15-minute increments.
 	 *
-	 * The extended::ZoneEraBroker::deltaMinutes() and offsetMinutes() know how
-	 * to convert offsetCode and deltaCode into the appropriate minutes.
+	 * The StdOffsetMinutes() and DstOffsetMinutes() functions know how to convert
+	 * offsetCode and deltaCode into the appropriate minutes.
 	 */
-	deltaCode int8
+	deltaCode uint8
 
 	/**
 	 * Era is valid until currentTime < untilYear. Comes from the UNTIL column.
@@ -246,7 +258,11 @@ type ZoneEra struct {
 }
 
 func (era *ZoneEra) StdOffsetMinutes() int16 {
-	return int16(era.offsetCode)*15 + int16((uint8(era.deltaCode)&0xf0)>>4)
+	return int16(era.offsetCode)*15 + int16((era.deltaCode&0xf0)>>4)
+}
+
+func (era *ZoneEra) DstOffsetMinutes() int16 {
+  return int16((int8(era.deltaCode & 0x0f) - 4) * 15);
 }
 
 func (era *ZoneEra) UntilMinutes() int16 {

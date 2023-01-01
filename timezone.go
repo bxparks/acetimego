@@ -565,6 +565,8 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 }
 
 //-----------------------------------------------------------------------------
+// ZoneProcessor
+//-----------------------------------------------------------------------------
 
 type YearMonth struct {
 	/** year [0,10000] */
@@ -572,8 +574,6 @@ type YearMonth struct {
 	/** month [1,12] */
 	month uint8
 }
-
-//-----------------------------------------------------------------------------
 
 type Err int8
 
@@ -644,8 +644,9 @@ func (zp *ZoneProcessor) InitForEpochSeconds(
 }
 
 //-----------------------------------------------------------------------------
-
 // Step 1
+//-----------------------------------------------------------------------------
+
 func findMatches(
 	zoneInfo *ZoneInfo,
 	startYm YearMonth,
@@ -774,9 +775,82 @@ func createMatchingEra(
 }
 
 //-----------------------------------------------------------------------------
-
 // Step 2
+//-----------------------------------------------------------------------------
+
 func createTransitions(ts *TransitionStorage, matches []MatchingEra) {
+  for i := range matches {
+    createTransitionsForMatch(ts, &matches[i])
+  }
+}
+
+func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
+  policy := match.era.zonePolicy
+  if (policy == nil) {
+    // Step 2A
+    createTransitionsFromSimpleMatch(ts, match)
+  } else {
+    // Step 2B
+    createTransitionsFromNamedMatch(ts, match)
+  }
+}
+
+//-----------------------------------------------------------------------------
+// Step 2A
+//-----------------------------------------------------------------------------
+
+func createTransitionsFromSimpleMatch(
+	ts *TransitionStorage, match *MatchingEra) {
+
+  freeAgent := ts.GetFreeAgent()
+  createTransitionForYear(freeAgent, 0, nil, match)
+  freeAgent.matchStatus = matchStatusExactMatch
+  match.lastOffsetMinutes = freeAgent.offsetMinutes
+  match.lastDeltaMinutes = freeAgent.deltaMinutes
+  ts.AddFreeAgentToActivePool()
+}
+
+func createTransitionForYear(
+	t *Transition, year int16, rule *ZoneRule, match *MatchingEra) {
+
+  t.match = match
+  t.rule = rule
+  t.offsetMinutes = match.era.StdOffsetMinutes()
+  t.letter = ""
+
+  if rule != nil {
+    t.transitionTime = getTransitionTime(year, rule)
+    t.deltaMinutes = rule.DstOffsetMinutes()
+		// If LETTER is a '-', treat it the same as an empty string.
+		if rule.letter != "-" {
+			t.letter = rule.letter
+		}
+  } else {
+    // Create a Transition using the MatchingEra for the transitionTime.
+    // Used for simple MatchingEra.
+    t.transitionTime = match.startDt
+    t.deltaMinutes = match.era.DstOffsetMinutes()
+  }
+}
+
+func getTransitionTime(year int16, rule *ZoneRule) (DateTuple) {
+  md := calcStartDayOfMonth(
+      year, rule.inMonth, rule.onDayOfWeek, rule.onDayOfMonth);
+	return DateTuple{
+		year: year,
+		month: md.month,
+		day: md.day,
+		minutes: rule.AtMinutes(),
+		suffix: rule.AtSuffix(),
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Step 2B
+//-----------------------------------------------------------------------------
+
+func createTransitionsFromNamedMatch(
+	ts *TransitionStorage, match *MatchingEra) {
 }
 
 //-----------------------------------------------------------------------------

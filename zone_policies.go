@@ -23,7 +23,7 @@ var ZoneRulesUS = []ZoneRule{
     8 /*at_time_code*/,
     0 /*at_time_modifier (kAtcSuffixW + minute=0)*/,
     4 /*delta_code ((delta_minutes=0)/15 + 4)*/,
-    'S' /*letter*/,
+    "S" /*letter*/,
   },
   // Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
   {
@@ -35,7 +35,7 @@ var ZoneRulesUS = []ZoneRule{
     8 /*at_time_code*/,
     0 /*at_time_modifier (kAtcSuffixW + minute=0)*/,
     8 /*delta_code ((delta_minutes=60)/15 + 4)*/,
-    'D' /*letter*/,
+    "D" /*letter*/,
   },
   // Rule    US    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
   {
@@ -47,7 +47,7 @@ var ZoneRulesUS = []ZoneRule{
     8 /*at_time_code*/,
     0 /*at_time_modifier (kAtcSuffixW + minute=0)*/,
     8 /*delta_code ((delta_minutes=60)/15 + 4)*/,
-    'D' /*letter*/,
+    "D" /*letter*/,
   },
   // Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
   {
@@ -59,7 +59,7 @@ var ZoneRulesUS = []ZoneRule{
     8 /*at_time_code*/,
     0 /*at_time_modifier (kAtcSuffixW + minute=0)*/,
     8 /*delta_code ((delta_minutes=60)/15 + 4)*/,
-    'D' /*letter*/,
+    "D" /*letter*/,
   },
   // Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
   {
@@ -71,7 +71,7 @@ var ZoneRulesUS = []ZoneRule{
     8 /*at_time_code*/,
     0 /*at_time_modifier (kAtcSuffixW + minute=0)*/,
     4 /*delta_code ((delta_minutes=0)/15 + 4)*/,
-    'S' /*letter*/,
+    "S" /*letter*/,
   },
 
 };
