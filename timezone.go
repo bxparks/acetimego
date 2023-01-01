@@ -159,8 +159,8 @@ const (
 func dateTupleCompareFuzzy(
 	t *DateTuple, start *DateTuple, until *DateTuple) uint8 {
 
-	// Use int32_t because a delta year of 2730 or greater will exceed
-	// the range of an int16_t.
+	// Use int32 because a delta year of 2730 or greater will exceed
+	// the range of an int16.
 	var tMonths int32 = int32(t.year)*12 + int32(t.month)
 	var startMonths int32 = int32(start.year)*12 + int32(start.month)
 	if tMonths < startMonths-1 {
@@ -308,6 +308,13 @@ type TransitionStorage struct {
 	transitions [transitionStorageSize]Transition
 }
 
+func (ts *TransitionStorage) Init() {
+	ts.indexPrior = 0
+	ts.indexCandidate = 0
+	ts.indexFree = 0
+	ts.allocSize = 0
+}
+
 func (ts *TransitionStorage) ResetCandidatePool() {
 	ts.indexCandidate = ts.indexPrior
 	ts.indexFree = ts.indexPrior
@@ -401,14 +408,14 @@ func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
 	return &ts.transitions[iActive-1]
 }
 
-func fixTransitionTimes(ts []Transition) {
-	if len(ts) == 0 {
+func fixTransitionTimes(transitions []Transition) {
+	if len(transitions) == 0 {
 		return
 	}
 
-	prev := &ts[0]
-	for i := range ts {
-		curr := &ts[i]
+	prev := &transitions[0]
+	for i := range transitions {
+		curr := &transitions[i]
 		dateTupleExpand(
 			&curr.transitionTime,
 			prev.offsetMinutes,
@@ -492,12 +499,12 @@ func compareTransitionToMatchFuzzy(t *Transition, m *MatchingEra) uint8 {
 //---------------------------------------------------------------------------
 
 /** A tuple of month and day. */
-type MonthDay struct{
-  /** month [1,12] */
-  month uint8
+type MonthDay struct {
+	/** month [1,12] */
+	month uint8
 
-  /** day [1,31] */
-  day uint8
+	/** day [1,31] */
+	day uint8
 }
 
 // calcStartDayOfMonth Extracts the actual (month, day) pair from the expression
@@ -519,42 +526,51 @@ type MonthDay struct{
 func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 	onDayOfMonth int8) (md MonthDay) {
 
-  if onDayOfWeek == 0 {
-    md.month = month
-    md.day = uint8(onDayOfMonth)
-    return
-  }
+	if onDayOfWeek == 0 {
+		md.month = month
+		md.day = uint8(onDayOfMonth)
+		return
+	}
 
-  if onDayOfMonth >= 0 {
-    daysInMonth := int8(DaysInYearMonth(year, month))
-    if onDayOfMonth == 0 {
-      onDayOfMonth = daysInMonth - 6
-    }
-    dow := DayOfWeek(year, month, uint8(onDayOfMonth))
-    dayOfWeekShift := (onDayOfWeek - dow + 7) % 7
-    day := onDayOfMonth + int8(dayOfWeekShift)
-    if day > daysInMonth {
-      // TODO: Support shifting from Dec to Jan of following  year.
-      day -= daysInMonth
-      month++
-    }
-    md.month = month
-    md.day = uint8(day)
-  } else {
-    onDayOfMonth = -onDayOfMonth
-    dow := DayOfWeek(year, month, uint8(onDayOfMonth))
-    dayOfWeekShift := (dow - onDayOfWeek + 7) % 7
-    day := onDayOfMonth - int8(dayOfWeekShift)
-    if day < 1 {
-      // TODO: Support shifting from Jan to Dec of the previous year.
-      month--
-      daysInPrevMonth := DaysInYearMonth(year, month)
-      day += int8(daysInPrevMonth)
-    }
-    md.month = month
-    md.day = uint8(day)
-  }
+	if onDayOfMonth >= 0 {
+		daysInMonth := int8(DaysInYearMonth(year, month))
+		if onDayOfMonth == 0 {
+			onDayOfMonth = daysInMonth - 6
+		}
+		dow := DayOfWeek(year, month, uint8(onDayOfMonth))
+		dayOfWeekShift := (onDayOfWeek - dow + 7) % 7
+		day := onDayOfMonth + int8(dayOfWeekShift)
+		if day > daysInMonth {
+			// TODO: Support shifting from Dec to Jan of following  year.
+			day -= daysInMonth
+			month++
+		}
+		md.month = month
+		md.day = uint8(day)
+	} else {
+		onDayOfMonth = -onDayOfMonth
+		dow := DayOfWeek(year, month, uint8(onDayOfMonth))
+		dayOfWeekShift := (dow - onDayOfWeek + 7) % 7
+		day := onDayOfMonth - int8(dayOfWeekShift)
+		if day < 1 {
+			// TODO: Support shifting from Jan to Dec of the previous year.
+			month--
+			daysInPrevMonth := DaysInYearMonth(year, month)
+			day += int8(daysInPrevMonth)
+		}
+		md.month = month
+		md.day = uint8(day)
+	}
 	return
+}
+
+//-----------------------------------------------------------------------------
+
+type YearMonth struct {
+	/** year [0,10000] */
+	year int16
+	/** month [1,12] */
+	month uint8
 }
 
 //-----------------------------------------------------------------------------
@@ -563,13 +579,15 @@ type Err int8
 
 const (
 	ErrOk = iota
-  ErrGeneric
+	ErrGeneric
 )
 
 type ZoneProcessor struct {
 	zoneInfo          *ZoneInfo
 	year              int16
 	isFilled          bool
+	numMatches        uint8
+	numTransitions    uint8
 	matches           [maxMatches]MatchingEra
 	transitionStorage TransitionStorage
 }
@@ -581,17 +599,194 @@ func ZoneProcessorFromZoneInfo(zoneInfo *ZoneInfo) *ZoneProcessor {
 }
 
 func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
-  return zp.isFilled && (year == zp.year)
+	return zp.isFilled && (year == zp.year)
 }
 
-func (zp *ZoneProcessor) InitForYear(
-  zoneInfo *ZoneInfo, year int16) Err {
+func (zp *ZoneProcessor) InitForYear(zoneInfo *ZoneInfo, year int16) Err {
+	if zp.isFilledForYear(year) {
+		return ErrOk
+	}
+
+	zp.year = year
+	zp.numMatches = 0
+	zp.transitionStorage.Init()
+	if year < zoneInfo.startYear-1 || zoneInfo.untilYear < year {
+		return ErrGeneric
+	}
+
+	startYm := YearMonth{year - 1, 12}
+	untilYm := YearMonth{year + 1, 2}
+
+	// Step 1: Find matches.
+	zp.numMatches = findMatches(zp.zoneInfo, startYm, untilYm, zp.matches[:])
+
+	// Step 2: Create Transitions.
+	createTransitions(&zp.transitionStorage, zp.matches[:zp.numMatches])
+
+	// Step 3: Fix transition times.
+	ts := &zp.transitionStorage
+	transitions := ts.transitions[0:ts.indexFree]
+	fixTransitionTimes(transitions)
+
+	// Step 4: Generate start and until times.
+	generateStartUntilTimes(transitions)
+
+	// Step 5: Calc abbreviations.
+	calcAbbreviations(transitions)
 
 	return ErrOk
 }
 
 func (zp *ZoneProcessor) InitForEpochSeconds(
-  zoneInfo *ZoneInfo, epochSeconds int32) Err {
+	zoneInfo *ZoneInfo, epochSeconds int32) Err {
 
 	return ErrOk
+}
+
+//-----------------------------------------------------------------------------
+
+// Step 1
+func findMatches(
+	zoneInfo *ZoneInfo,
+	startYm YearMonth,
+	untilYm YearMonth,
+	matches []MatchingEra) uint8 {
+
+	var iMatch uint8 = 0
+	var prevMatch *MatchingEra = nil
+	var numEras uint8 = zoneInfo.numEras()
+
+	var iEra uint8
+	for iEra = 0; iEra < numEras; iEra++ {
+		era := &zoneInfo.eras[iEra]
+		var prevEra *ZoneEra = nil
+		if prevMatch != nil {
+			prevEra = prevMatch.era
+		}
+		if eraOverlapsInterval(prevEra, era, startYm, untilYm) {
+			if iMatch < uint8(len(matches)) {
+				createMatchingEra(&matches[iMatch], prevMatch, era, startYm, untilYm)
+				prevMatch = &matches[iMatch]
+				iMatch++
+			}
+		}
+	}
+	return iMatch
+}
+
+/**
+ * Determines if era overlaps the interval [startYm, untilYm). This does
+ * not need to be exact since the startYm and untilYm are created to have
+ * some slop of about one month at the low and high end, so we can ignore
+ * the day, time and timeSuffix fields of the era. The start date of the
+ * current era is represented by the UNTIL fields of the previous era, so
+ * the interval of the current era is [era.start=prev.UNTIL,
+ * era.until=era.UNTIL). Overlap happens if (era.start < untilYm) and
+ * (era.until > startYm). If prev.isNull(), then interpret prev as the
+ * earliest ZoneEra.
+ */
+func eraOverlapsInterval(
+	prevEra *ZoneEra,
+	era *ZoneEra,
+	startYm YearMonth,
+	untilYm YearMonth) bool {
+
+	return (prevEra == nil ||
+		compareEraToYearMonth(prevEra, untilYm.year, untilYm.month) < 0) &&
+		compareEraToYearMonth(era, startYm.year, startYm.month) > 0
+}
+
+/** Return (1, 0, -1) depending on how era compares to (year, month). */
+func compareEraToYearMonth(era *ZoneEra, year int16, month uint8) int8 {
+	if era.untilYear < year {
+		return -1
+	}
+	if era.untilYear > year {
+		return 1
+	}
+	if era.untilMonth < month {
+		return -1
+	}
+	if era.untilMonth > month {
+		return 1
+	}
+	if era.untilDay > 1 {
+		return 1
+	}
+	//if era.until_time_minutes < 0 { return -1; // never possible
+	if era.untilTimeCode > 0 {
+		return 1
+	}
+	return 0
+}
+
+/**
+ * Create a new MatchingEra object around the 'era' which intersects the
+ * half-open [startYm, untilYm) interval. The interval is assumed to overlap
+ * the ZoneEra using the eraOverlapsInterval() method. The 'prev' ZoneEra is
+ * needed to define the startDateTime of the current era.
+ */
+func createMatchingEra(
+	newMatch *MatchingEra,
+	prevMatch *MatchingEra,
+	era *ZoneEra,
+	startYm YearMonth,
+	untilYm YearMonth) {
+
+	// If prevMatch is nil, set startDate to be earlier than all valid ZoneEra.
+	var startDate DateTuple
+	if prevMatch == nil {
+		startDate.year = InvalidYear
+		startDate.month = 1
+		startDate.day = 1
+		startDate.minutes = 0
+		startDate.suffix = suffixW
+	} else {
+		startDate.year = prevMatch.era.untilYear
+		startDate.month = prevMatch.era.untilMonth
+		startDate.day = prevMatch.era.untilDay
+		startDate.minutes = prevMatch.era.UntilMinutes()
+		startDate.suffix = prevMatch.era.UntilSuffix()
+	}
+	lowerBound := DateTuple{startYm.year, startYm.month, 1, 0, suffixW}
+	if dateTupleCompare(&startDate, &lowerBound) < 0 {
+		startDate = lowerBound
+	}
+
+	untilDate := DateTuple{
+		era.untilYear,
+		era.untilMonth,
+		era.untilDay,
+		era.UntilMinutes(),
+		era.UntilSuffix(),
+	}
+	upperBound := DateTuple{untilYm.year, untilYm.month, 1, 0, suffixW}
+	if dateTupleCompare(&upperBound, &untilDate) < 0 {
+		untilDate = upperBound
+	}
+
+	newMatch.startDt = startDate
+	newMatch.untilDt = untilDate
+	newMatch.era = era
+	newMatch.prevMatch = prevMatch
+	newMatch.lastOffsetMinutes = 0
+	newMatch.lastDeltaMinutes = 0
+}
+
+//-----------------------------------------------------------------------------
+
+// Step 2
+func createTransitions(ts *TransitionStorage, matches []MatchingEra) {
+}
+
+//-----------------------------------------------------------------------------
+
+// Step 4
+func generateStartUntilTimes(transitions []Transition) {
+}
+
+//-----------------------------------------------------------------------------
+
+// Step 5
+func calcAbbreviations(transitions []Transition) {
 }

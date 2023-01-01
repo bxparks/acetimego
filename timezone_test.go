@@ -362,45 +362,157 @@ func TestCompareTransitionToMatch(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestCalcStartDayOfMonth(t *testing.T) {
-  // 2018-11, Sun>=1
-  monthDay := calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 1);
-  if !(monthDay == MonthDay{11, 4}) {
+	// 2018-11, Sun>=1
+	monthDay := calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 1)
+	if !(monthDay == MonthDay{11, 4}) {
 		t.Fatal("monthDay:", monthDay)
 	}
 
-  // 2018-11, lastSun
-  monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 0);
-  if !(monthDay == MonthDay{11, 25}) {
+	// 2018-11, lastSun
+	monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 0)
+	if !(monthDay == MonthDay{11, 25}) {
 		t.Fatal("monthDay:", monthDay)
 	}
 
-  // 2018-11, Sun>=30, should shift to 2018-12-2
-  monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 30);
-  if !(monthDay == MonthDay{12, 2}) {
+	// 2018-11, Sun>=30, should shift to 2018-12-2
+	monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 30)
+	if !(monthDay == MonthDay{12, 2}) {
 		t.Fatal("monthDay:", monthDay)
 	}
 
-  // 2018-11, Mon<=7
-  monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -7);
-  if !(monthDay == MonthDay{11, 5}) {
+	// 2018-11, Mon<=7
+	monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -7)
+	if !(monthDay == MonthDay{11, 5}) {
 		t.Fatal("monthDay:", monthDay)
 	}
 
-  // 2018-11, Mon<=1, shifts back into October
-  monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -1);
-  if !(monthDay == MonthDay{10, 29}) {
+	// 2018-11, Mon<=1, shifts back into October
+	monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -1)
+	if !(monthDay == MonthDay{10, 29}) {
 		t.Fatal("monthDay:", monthDay)
 	}
 
-  // 2018-03, Thu>=9
-  monthDay = calcStartDayOfMonth(2018, 3, IsoWeekdayThursday, 9);
-  if !(monthDay == MonthDay{3, 15}) {
+	// 2018-03, Thu>=9
+	monthDay = calcStartDayOfMonth(2018, 3, IsoWeekdayThursday, 9)
+	if !(monthDay == MonthDay{3, 15}) {
 		t.Fatal("monthDay:", monthDay)
 	}
 
-  // 2018-03-30 exactly
-  monthDay = calcStartDayOfMonth(2018, 3, 0, 30);
-  if !(monthDay == MonthDay{3, 30}) {
+	// 2018-03-30 exactly
+	monthDay = calcStartDayOfMonth(2018, 3, 0, 30)
+	if !(monthDay == MonthDay{3, 30}) {
 		t.Fatal("monthDay:", monthDay)
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Step 1
+//-----------------------------------------------------------------------------
+
+func TestCompareEraToYearMonth(t *testing.T) {
+	era := ZoneEra{
+		untilYear:         2000,
+		untilMonth:        1,
+		untilDay:          2,
+		untilTimeCode:     12,
+		untilTimeModifier: suffixW,
+	}
+
+	if !(1 == compareEraToYearMonth(&era, 2000, 1)) {
+		t.Fatal("fatal")
+	}
+	if !(1 == compareEraToYearMonth(&era, 2000, 1)) {
+		t.Fatal("fatal")
+	}
+	if !(-1 == compareEraToYearMonth(&era, 2000, 2)) {
+		t.Fatal("fatal")
+	}
+	if !(-1 == compareEraToYearMonth(&era, 2000, 3)) {
+		t.Fatal("fatal")
+	}
+
+	era2 := ZoneEra{
+		untilYear:         2000,
+		untilMonth:        1,
+		untilDay:          0,
+		untilTimeCode:     0,
+		untilTimeModifier: suffixW,
+	}
+	if !(0 == compareEraToYearMonth(&era2, 2000, 1)) {
+		t.Fatal("fatal")
+	}
+}
+
+func TestCreateMatchingEra(t *testing.T) {
+	// 14-month interval, from 2000-12 until 2002-02
+	startYm := YearMonth{2000, 12}
+	untilYm := YearMonth{2002, 2}
+
+	// UNTIL = 2000-12-02 3:00
+	era1 := ZoneEra{
+		untilYear:         2000,
+		untilMonth:        12,
+		untilDay:          2,
+		untilTimeCode:     3 * (60 / 15),
+		untilTimeModifier: suffixW,
+	}
+
+	// UNTIL = 2001-02-03 4:00
+	era2 := ZoneEra{
+		untilYear:         2001,
+		untilMonth:        2,
+		untilDay:          3,
+		untilTimeCode:     4 * (60 / 15),
+		untilTimeModifier: suffixW,
+	}
+
+	// UNTIL = 2002-10-11 4:00
+	era3 := ZoneEra{
+		untilYear:         2002,
+		untilMonth:        10,
+		untilDay:          11,
+		untilTimeCode:     4 * (60 / 15),
+		untilTimeModifier: suffixW,
+	}
+
+	// No previous matching era, so startDt is set to startYm.
+	var match1 MatchingEra
+	createMatchingEra(&match1, nil, &era1, startYm, untilYm)
+	if !(match1.startDt == DateTuple{2000, 12, 1, 60 * 0, suffixW}) {
+		t.Fatal("match1.startDt:", match1.startDt)
+	}
+	if !(match1.untilDt == DateTuple{2000, 12, 2, 60 * 3, suffixW}) {
+		t.Fatal("match1.startDt:", match1.startDt)
+	}
+	if !(match1.era == &era1) {
+		t.Fatal("match1.startDt:", match1.startDt)
+	}
+
+	// startDt is set to the prevMatch.untilDt.
+	// untilDt is < untilYm, so is retained.
+	var match2 MatchingEra
+	createMatchingEra(&match2, &match1, &era2, startYm, untilYm)
+	if !(match2.startDt == DateTuple{2000, 12, 2, 60 * 3, suffixW}) {
+		t.Fatal("match2.startDt:", match2.startDt)
+	}
+	if !(match2.untilDt == DateTuple{2001, 2, 3, 60 * 4, suffixW}) {
+		t.Fatal("match2.startDt:", match2.startDt)
+	}
+	if !(match2.era == &era2) {
+		t.Fatal("match2.startDt:", match2.startDt)
+	}
+
+	// startDt is set to the prevMatch.untilDt.
+	// untilDt is > untilYm so truncated to untilYm.
+	var match3 MatchingEra
+	createMatchingEra(&match3, &match2, &era3, startYm, untilYm)
+	if !(match3.startDt == DateTuple{2001, 2, 3, 60 * 4, suffixW}) {
+		t.Fatal("match3.startDt: ", match3.startDt)
+	}
+	if !(match3.untilDt == DateTuple{2002, 2, 1, 60 * 0, suffixW}) {
+		t.Fatal("match3.startDt: ", match3.startDt)
+	}
+	if !(match3.era == &era3) {
+		t.Fatal("match3.startDt: ", match3.startDt)
 	}
 }

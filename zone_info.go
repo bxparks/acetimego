@@ -11,12 +11,12 @@ const (
 
 	// The maximum value of ZoneRule::fromYear and ZoneRule::toYear,
 	// representing the sentinel value "max" in the TO and FROM columns of the
-	// TZDB files. Must be less than kAtcMaxZoneEraUntilYear.
+	// TZDB files. Must be less than maxZoneEraUntilYear.
 	maxZoneRuleYear = 9999
 
 	// The maximum value of ZoneEra::untilYear, representing the sentinel value
 	// "-" in the UNTIL column of the TZDB files. Must be greater than
-	// kAtcMaxZoneRuleYear.
+	// maxZoneRuleYear.
 	maxZoneEraUntilYear = maxZoneRuleYear + 1
 )
 
@@ -246,8 +246,15 @@ type ZoneEra struct {
 }
 
 func (era *ZoneEra) StdOffsetMinutes() int16 {
-  return int16(era.offsetCode) * 15 +
-		int16((uint8(era.deltaCode) & 0xf0) >> 4)
+	return int16(era.offsetCode)*15 + int16((uint8(era.deltaCode)&0xf0)>>4)
+}
+
+func (era *ZoneEra) UntilMinutes() int16 {
+	return int16(era.untilTimeCode)*15 + int16(era.untilTimeModifier&0x0f)
+}
+
+func (era *ZoneEra) UntilSuffix() uint8 {
+	return era.untilTimeModifier & 0xf0
 }
 
 //-----------------------------------------------------------------------------
@@ -286,4 +293,11 @@ type ZoneInfo struct {
 
 	/** If not nil, this entry is a Link to the target. */
 	target *ZoneInfo
+}
+
+// numEras returns the number of eras in the current zone, or in the target zone
+// if the current zone is a Link.
+func (zi *ZoneInfo) numEras() uint8 {
+	// TODO: Add support for Links.
+	return uint8(len(zi.eras))
 }
