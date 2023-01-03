@@ -767,7 +767,6 @@ func TestFindCandidateTransitions(t *testing.T) {
 
 	// Reserve storage for the Transitions
 	var ts TransitionStorage
-	ts.Init()
 
 	// Verify compareTransitionToMatchFuzzy() elminates various transitions
 	// to get down to 5:
@@ -921,7 +920,6 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 
 	// Reserve storage for the Transitions
 	var ts TransitionStorage
-	ts.Init()
 
 	createTransitionsFromNamedMatch(&ts, &match)
 	if !(3 == ts.indexPrior) {
@@ -960,7 +958,6 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// Create a custom template instantiation to use a different SIZE than the
 	// pre-defined typedef in ExtendedZoneProcess::TransitionStorage.
 	var storage TransitionStorage
-	storage.Init()
 
 	// Create 3 Transitions corresponding to the matches.
 	// Implements ExtendedZoneProcessor::createTransitionsFromSimpleMatch().

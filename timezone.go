@@ -4,6 +4,10 @@ import (
 	"strings"
 )
 
+//-----------------------------------------------------------------------------
+// DateTuple
+//-----------------------------------------------------------------------------
+
 type DateTuple struct {
 	/** [0,10000] */
 	year int16
@@ -178,6 +182,8 @@ func dateTupleCompareFuzzy(
 }
 
 //-----------------------------------------------------------------------------
+// MatchingEra
+//-----------------------------------------------------------------------------
 
 type MatchingEra struct {
 	/**
@@ -202,6 +208,8 @@ type MatchingEra struct {
 	lastDeltaMinutes int16
 }
 
+//-----------------------------------------------------------------------------
+// Transition
 //-----------------------------------------------------------------------------
 
 type Transition struct {
@@ -299,6 +307,8 @@ func (transition *Transition) getLetter() string {
 	}
 }
 
+//-----------------------------------------------------------------------------
+// TransitionStorage
 //-----------------------------------------------------------------------------
 
 const (
@@ -528,6 +538,8 @@ func compareTransitionToMatchFuzzy(t *Transition, m *MatchingEra) uint8 {
 }
 
 //---------------------------------------------------------------------------
+// MonthDay
+//-----------------------------------------------------------------------------
 
 /** A tuple of month and day. */
 type MonthDay struct {
@@ -618,7 +630,6 @@ type ZoneProcessor struct {
 	year              int16
 	isFilled          bool
 	numMatches        uint8
-	numTransitions    uint8
 	matches           [maxMatches]MatchingEra
 	transitionStorage TransitionStorage
 }
@@ -633,7 +644,7 @@ func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
 	return zp.isFilled && (year == zp.year)
 }
 
-func (zp *ZoneProcessor) InitForYear(zoneInfo *ZoneInfo, year int16) Err {
+func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	if zp.isFilledForYear(year) {
 		return ErrOk
 	}
@@ -641,7 +652,7 @@ func (zp *ZoneProcessor) InitForYear(zoneInfo *ZoneInfo, year int16) Err {
 	zp.year = year
 	zp.numMatches = 0
 	zp.transitionStorage.Init()
-	if year < zoneInfo.startYear-1 || zoneInfo.untilYear < year {
+	if year < zp.zoneInfo.startYear-1 || zp.zoneInfo.untilYear < year {
 		return ErrGeneric
 	}
 
@@ -650,13 +661,15 @@ func (zp *ZoneProcessor) InitForYear(zoneInfo *ZoneInfo, year int16) Err {
 
 	// Step 1: Find matches.
 	zp.numMatches = findMatches(zp.zoneInfo, startYm, untilYm, zp.matches[:])
+	if zp.numMatches == 0 {
+		return ErrGeneric
+	}
 
 	// Step 2: Create Transitions.
 	createTransitions(&zp.transitionStorage, zp.matches[:zp.numMatches])
 
 	// Step 3: Fix transition times.
-	ts := &zp.transitionStorage
-	transitions := ts.GetActives()
+	transitions := zp.transitionStorage.GetActives()
 	fixTransitionTimes(transitions)
 
 	// Step 4: Generate start and until times.
@@ -668,8 +681,7 @@ func (zp *ZoneProcessor) InitForYear(zoneInfo *ZoneInfo, year int16) Err {
 	return ErrOk
 }
 
-func (zp *ZoneProcessor) InitForEpochSeconds(
-	zoneInfo *ZoneInfo, epochSeconds int32) Err {
+func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds int32) Err {
 
 	return ErrOk
 }
