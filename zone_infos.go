@@ -15,28 +15,28 @@ const TzDatabaseVersion string = "2022g"
 //---------------------------------------------------------------------------
 
 var ZoneEraAfrica_Abidjan = []ZoneEra{
-  //              0:00    -    GMT
-  {
-    nil /*zone_policy*/,
-    "GMT" /*format*/,
-    0 /*offset_code*/,
-    4 /*delta_code (((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4))*/,
-    10000 /*until_year*/,
-    1 /*until_month*/,
-    1 /*until_day*/,
-    0 /*until_time_code*/,
-    0 /*until_time_modifier (suffixW + minute=0)*/,
-  },
+	//              0:00    -    GMT
+	{
+		nil,   /*zonePolicy*/
+		"GMT", /*format*/
+		0,     /*offsetCode*/
+		4,     /*deltaCode (((offsetMinutes=0) << 4) + ((deltaMinutes=0)/15 + 4))*/
+		10000, /*untilYear*/
+		1,     /*untilMonth*/
+		1,     /*untilDay*/
+		0,     /*untilTimeCode*/
+		0,     /*untilTimeModifier (suffixW + minute=0)*/
+	},
 }
 
 const ZoneNameAfrica_Abidjan = "Africa/Abidjan"
 
 var ZoneAfrica_Abidjan = ZoneInfo{
-  ZoneNameAfrica_Abidjan /*name*/,
-  0xc21305a3 /*zone_id*/,
-  2000 /*startYear*/,
-  10000 /*untilYear*/,
-  ZoneEraAfrica_Abidjan /*eras*/,
+	ZoneNameAfrica_Abidjan, /*name*/
+	0xc21305a3,             /*zone_id*/
+	2000,                   /*startYear*/
+	10000,                  /*untilYear*/
+	ZoneEraAfrica_Abidjan,  /*eras*/
 	nil,
 }
 
@@ -49,28 +49,27 @@ var ZoneAfrica_Abidjan = ZoneInfo{
 //---------------------------------------------------------------------------
 
 var ZoneEraAmerica_Los_Angeles = []ZoneEra{
-  //             -8:00    US    P%sT
-  {
-    &ZonePolicyUS /*zone_policy*/,
-    "P%T" /*format*/,
-    -32 /*offset_code*/,
-    4 /*delta_code (((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4))*/,
-    10000 /*until_year*/,
-    1 /*until_month*/,
-    1 /*until_day*/,
-    0 /*until_time_code*/,
-    0 /*until_time_modifier (suffixW + minute=0)*/,
-  },
-
+	//             -8:00    US    P%sT
+	{
+		&ZonePolicyUS, /*zonePolicy*/
+		"P%T",         /*format*/
+		-32,           /*offsetCode*/
+		4,             /*deltaCode (((offsetMinutes=0) << 4) + ((deltaMinutes=0)/15 + 4))*/
+		10000,         /*untilYear*/
+		1,             /*untilMonth*/
+		1,             /*untilDay*/
+		0,             /*untilTimeCode*/
+		0,             /*untilTimeModifier (suffixW + minute=0)*/
+	},
 }
 
 const ZoneNameAmerica_Los_Angeles = "America/Los_Angeles"
 
-var ZoneAmerica_Los_Angeles  = ZoneInfo{
-  ZoneNameAmerica_Los_Angeles /*name*/,
-  0xb7f7e8f2 /*zone_id*/,
-  2000 /*startYear*/,
-  10000 /*untilYear*/,
-  ZoneEraAmerica_Los_Angeles /*eras*/,
-	nil,
+var ZoneAmerica_Los_Angeles = ZoneInfo{
+	ZoneNameAmerica_Los_Angeles, /*name*/
+	0xb7f7e8f2,                  /*zone_id*/
+	2000,                        /*startYear*/
+	10000,                       /*untilYear*/
+	ZoneEraAmerica_Los_Angeles,  /*eras*/
+	nil,                         /*targetInfo*/
 }
