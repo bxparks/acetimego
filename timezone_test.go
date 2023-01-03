@@ -1143,3 +1143,64 @@ var ZoneAlmostLosAngeles = ZoneInfo{
 	eras:      ZoneEraAlmostLosAngeles,
 	target:    nil,
 }
+
+//-----------------------------------------------------------------------------
+// Step 5
+//-----------------------------------------------------------------------------
+
+func TestCreateAbbreviation(t *testing.T) {
+	// If no '%', deltaMinutes and letter should not matter
+	abbrev := createAbbreviation("SAST", 0, "")
+	if !("SAST" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	abbrev = createAbbreviation("SAST", 60, "A")
+	if !("SAST" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	// If '%', and letter is "", remove the "%" (unlike AceTimeC where letter is
+	// NULL.
+	abbrev = createAbbreviation("SA%ST", 0, "")
+	if !("SAST" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	// If '%', then replaced with (non-null) letterString.
+	abbrev = createAbbreviation("P%T", 60, "D")
+	if !("PDT" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	abbrev = createAbbreviation("P%T", 0, "S")
+	if !("PST" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	abbrev = createAbbreviation("P%T", 0, "")
+	if !("PT" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	abbrev = createAbbreviation("%", 60, "CAT")
+	if !("CAT" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	abbrev = createAbbreviation("%", 0, "WAT")
+	if !("WAT" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	// If '/', then deltaMinutes selects the first or second component.
+	abbrev = createAbbreviation("GMT/BST", 0, "")
+	if !("GMT" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	abbrev = createAbbreviation("GMT/BST", 60, "")
+	if !("BST" == abbrev) {
+		t.Fatal(abbrev)
+	}
+}

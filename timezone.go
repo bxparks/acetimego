@@ -1,5 +1,9 @@
 package acetime
 
+import (
+	"strings"
+)
+
 type DateTuple struct {
 	/** [0,10000] */
 	year int16
@@ -283,6 +287,16 @@ type Transition struct {
 	 * transition falls within the time interval of the MatchingEra.
 	 */
 	matchStatus uint8
+}
+
+// getLetter() returns the 'letter' defined by the 'rule' if it exists.
+// Otherwise, returns "".
+func (transition *Transition) getLetter() string {
+	if transition.rule != nil {
+		return transition.rule.letter
+	} else {
+		return ""
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -1086,4 +1100,36 @@ func generateStartUntilTimes(transitions []Transition) {
 //-----------------------------------------------------------------------------
 
 func calcAbbreviations(transitions []Transition) {
+	for i := range transitions {
+		transition := &transitions[i]
+		transition.abbrev = createAbbreviation(
+			transition.match.era.format,
+			transition.deltaMinutes,
+			transition.getLetter())
+	}
+}
+
+func createAbbreviation(
+	format string, deltaMinutes int16, letter string) string {
+
+	// Check if FORMAT contains a '%'.
+	if strings.IndexByte(format, '%') >= 0 {
+		// If RULES column empty, then letter == "" because Go lang does not allow
+		// strings to be set to nil. So we cannot distinguish between "" and not
+		// existing. In Go lang then, always replace "%" with "".
+		return strings.ReplaceAll(format, "%", letter)
+	} else {
+		// Check if FORMAT contains a '/'.
+		slashIndex := strings.IndexByte(format, '/')
+		if slashIndex != -1 {
+			if deltaMinutes == 0 {
+				return format[:slashIndex]
+			} else {
+				return format[slashIndex+1:]
+			}
+		} else {
+			// Just return FORMAT disregarding deltaMinutes and letter.
+			return format
+		}
+	}
 }
