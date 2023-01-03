@@ -516,3 +516,142 @@ func TestCreateMatchingEra(t *testing.T) {
 		t.Fatal("match3.startDt: ", match3.startDt)
 	}
 }
+
+//-----------------------------------------------------------------------------
+// Step 2A
+//-----------------------------------------------------------------------------
+
+var ZoneRulesTestUS = []ZoneRule{
+	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
+	{
+		1967,    /*fromYear*/
+		2006,    /*toYear*/
+		10,      /*inMonth*/
+		7,       /*onDayOfWeek*/
+		0,       /*onDayOfMonth*/
+		8,       /*atTimeCode*/
+		suffixW, /*atTimeModifier*/
+		0 + 4,   /*deltaCode*/
+		"S",     /*letter*/
+	},
+	// Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
+	{
+		1976,    /*fromYear*/
+		1986,    /*toYear*/
+		4,       /*inMonth*/
+		7,       /*onDayOfWeek*/
+		0,       /*onDayOfMonth*/
+		8,       /*atTimeCode*/
+		suffixW, /*atTimeModifier*/
+		4 + 4,   /*deltaCode*/
+		"D",     /*letter*/
+	},
+	// Rule    US    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
+	{
+		1987,    /*fromYear*/
+		2006,    /*toYear*/
+		4,       /*inMonth*/
+		7,       /*onDayOfWeek*/
+		1,       /*onDayOfMonth*/
+		8,       /*atTimeCode*/
+		suffixW, /*atTimeModifier*/
+		4 + 4,   /*deltaCode*/
+		"D",     /*letter*/
+	},
+	// Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
+	{
+		2007,    /*fromYear*/
+		9999,    /*toYear*/
+		3,       /*inMonth*/
+		7,       /*onDayOfWeek*/
+		8,       /*onDayOfMonth*/
+		8,       /*atTimeCode*/
+		suffixW, /*atTimeModifier*/
+		4 + 4,   /*deltaCode*/
+		"D",     /*letter*/
+	},
+	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
+	{
+		2007,    /*fromYear*/
+		9999,    /*toYear*/
+		11,      /*inMonth*/
+		7,       /*onDayOfWeek*/
+		1,       /*onDayOfMonth*/
+		8,       /*atTimeCode*/
+		suffixW, /*atTimeModifier*/
+		0 + 4,   /*deltaCode*/
+		"S",     /*letter*/
+	},
+}
+
+var ZonePolicyTestUS = ZonePolicy{
+	ZoneRulesTestUS, /*rules*/
+	nil,             /* letters */
+}
+
+var ZoneEraTestLos_Angeles = []ZoneEra{
+	//             -8:00    US    P%sT
+	{
+		&ZonePolicyTestUS, /*zonePolicy*/
+		"P%T",             /*format*/
+		-32,               /*offsetCode*/
+		0 + 4,             /*deltaCode*/
+		10000,             /*untilYear*/
+		1,                 /*untilMonth*/
+		1,                 /*untilDay*/
+		0,                 /*untilTimeCode*/
+		suffixW,           /*untilTimeModifier*/
+	},
+}
+
+var ZoneTestLosAngeles = ZoneInfo{
+	"America/Los_Angeles",  /*name*/
+	0xb7f7e8f2,             /*zoneId*/
+	2000,                   /*startYear*/
+	10000,                  /*untilYear*/
+	ZoneEraTestLos_Angeles, /*eras*/
+	nil,                    /*targetInfo*/
+}
+
+func TestGetTransitionTime(t *testing.T) {
+	// Nov Sun>=1
+	rule := &ZoneRulesTestUS[4]
+
+	// Nov 4 2018
+	dt := getTransitionTime(2018, rule)
+	if !(dt == DateTuple{2018, 11, 4, 15 * 8, suffixW}) {
+		t.Fatal("dt:", dt)
+	}
+
+	// Nov 3 2019
+	dt = getTransitionTime(2019, rule)
+	if !(dt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+		t.Fatal("dt:", dt)
+	}
+}
+
+func TestCreateTransitionForYear(t *testing.T) {
+	var match = MatchingEra{
+		startDt:           DateTuple{2018, 12, 1, 0, suffixW},
+		untilDt:           DateTuple{2020, 2, 1, 0, suffixW},
+		era:               &ZoneEraTestLos_Angeles[0],
+		prevMatch:         nil,
+		lastOffsetMinutes: 0,
+		lastDeltaMinutes:  0,
+	}
+	var rule = &ZoneRulesTestUS[4]
+
+	// Nov Sun>=1
+	var transition Transition
+	createTransitionForYear(&transition, 2019, rule, &match)
+	if !(transition.offsetMinutes == -15*32) {
+		t.Fatal(transition.offsetMinutes)
+	}
+	if !(transition.deltaMinutes == 0) {
+		t.Fatal(transition.deltaMinutes)
+	}
+	tt := &transition.transitionTime
+	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+		t.Fatal("tt:", tt)
+	}
+}

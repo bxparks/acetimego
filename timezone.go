@@ -387,6 +387,8 @@ func isMatchStatusActive(status uint8) bool {
 		status == matchStatusPrior
 }
 
+// AddActiveCandidatesToActivePool adds the candidate transitions to the active
+// pool, and returns the last active transition added.
 func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
 	// Shift active candidates to the left into the Active pool.
 	iActive := ts.indexPrior
@@ -779,20 +781,20 @@ func createMatchingEra(
 //-----------------------------------------------------------------------------
 
 func createTransitions(ts *TransitionStorage, matches []MatchingEra) {
-  for i := range matches {
-    createTransitionsForMatch(ts, &matches[i])
-  }
+	for i := range matches {
+		createTransitionsForMatch(ts, &matches[i])
+	}
 }
 
 func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
-  policy := match.era.zonePolicy
-  if (policy == nil) {
-    // Step 2A
-    createTransitionsFromSimpleMatch(ts, match)
-  } else {
-    // Step 2B
-    createTransitionsFromNamedMatch(ts, match)
-  }
+	policy := match.era.zonePolicy
+	if policy == nil {
+		// Step 2A
+		createTransitionsFromSimpleMatch(ts, match)
+	} else {
+		// Step 2B
+		createTransitionsFromNamedMatch(ts, match)
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -802,46 +804,46 @@ func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
 func createTransitionsFromSimpleMatch(
 	ts *TransitionStorage, match *MatchingEra) {
 
-  freeAgent := ts.GetFreeAgent()
-  createTransitionForYear(freeAgent, 0, nil, match)
-  freeAgent.matchStatus = matchStatusExactMatch
-  match.lastOffsetMinutes = freeAgent.offsetMinutes
-  match.lastDeltaMinutes = freeAgent.deltaMinutes
-  ts.AddFreeAgentToActivePool()
+	freeAgent := ts.GetFreeAgent()
+	createTransitionForYear(freeAgent, 0, nil, match)
+	freeAgent.matchStatus = matchStatusExactMatch
+	match.lastOffsetMinutes = freeAgent.offsetMinutes
+	match.lastDeltaMinutes = freeAgent.deltaMinutes
+	ts.AddFreeAgentToActivePool()
 }
 
 func createTransitionForYear(
 	t *Transition, year int16, rule *ZoneRule, match *MatchingEra) {
 
-  t.match = match
-  t.rule = rule
-  t.offsetMinutes = match.era.StdOffsetMinutes()
-  t.letter = ""
+	t.match = match
+	t.rule = rule
+	t.offsetMinutes = match.era.StdOffsetMinutes()
+	t.letter = ""
 
-  if rule != nil {
-    t.transitionTime = getTransitionTime(year, rule)
-    t.deltaMinutes = rule.DstOffsetMinutes()
+	if rule != nil {
+		t.transitionTime = getTransitionTime(year, rule)
+		t.deltaMinutes = rule.DstOffsetMinutes()
 		// If LETTER is a '-', treat it the same as an empty string.
 		if rule.letter != "-" {
 			t.letter = rule.letter
 		}
-  } else {
-    // Create a Transition using the MatchingEra for the transitionTime.
-    // Used for simple MatchingEra.
-    t.transitionTime = match.startDt
-    t.deltaMinutes = match.era.DstOffsetMinutes()
-  }
+	} else {
+		// Create a Transition using the MatchingEra for the transitionTime.
+		// Used for simple MatchingEra.
+		t.transitionTime = match.startDt
+		t.deltaMinutes = match.era.DstOffsetMinutes()
+	}
 }
 
-func getTransitionTime(year int16, rule *ZoneRule) (DateTuple) {
-  md := calcStartDayOfMonth(
-      year, rule.inMonth, rule.onDayOfWeek, rule.onDayOfMonth);
+func getTransitionTime(year int16, rule *ZoneRule) DateTuple {
+	md := calcStartDayOfMonth(
+		year, rule.inMonth, rule.onDayOfWeek, rule.onDayOfMonth)
 	return DateTuple{
-		year: year,
-		month: md.month,
-		day: md.day,
+		year:    year,
+		month:   md.month,
+		day:     md.day,
 		minutes: rule.AtMinutes(),
-		suffix: rule.AtSuffix(),
+		suffix:  rule.AtSuffix(),
 	}
 }
 
@@ -851,6 +853,151 @@ func getTransitionTime(year int16, rule *ZoneRule) (DateTuple) {
 
 func createTransitionsFromNamedMatch(
 	ts *TransitionStorage, match *MatchingEra) {
+
+	ts.ResetCandidatePool()
+
+	// Pass 1: Find candidate transitions using whole years.
+	findCandidateTransitions(ts, match)
+
+	// Pass 2: Fix the transitions times, converting 's' and 'u' into 'w'
+	// uniformly.
+	transitions := ts.transitions[ts.indexCandidate:ts.indexFree]
+	fixTransitionTimes(transitions)
+
+	// Pass 3: Select only those Transitions which overlap with the actual
+	// start and until times of the MatchingEra.
+	selectActiveTransitions(transitions)
+	lastTransition := ts.AddActiveCandidatesToActivePool()
+	match.lastOffsetMinutes = lastTransition.offsetMinutes
+	match.lastDeltaMinutes = lastTransition.deltaMinutes
+}
+
+// Step 2B: Pass 1
+func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
+	policy := match.era.zonePolicy
+	startYear := match.startDt.year
+	endYear := match.untilDt.year
+
+	prior := ts.ReservePrior()
+	prior.isValidPrior = false
+	for ir := range policy.rules {
+		rule := &policy.rules[ir]
+
+		// Add transitions for interior years
+		var interiorYears [maxInteriorYears]int16
+		numYears := calcInteriorYears(
+			interiorYears[:], rule.fromYear, rule.toYear, startYear, endYear)
+		var iy uint8
+		for iy = 0; iy < numYears; iy++ {
+			year := interiorYears[iy]
+			t := ts.GetFreeAgent()
+			createTransitionForYear(t, year, rule, match)
+			status := compareTransitionToMatchFuzzy(t, match)
+			if status == matchStatusPrior {
+				ts.SetFreeAgentAsPriorIfValid()
+			} else if status == matchStatusWithinMatch {
+				ts.AddFreeAgentToCandidatePool()
+			} else {
+				// Must be kFarFuture.
+				// Do nothing, allowing the free agent to be reused.
+			}
+		}
+
+		// Add Transition for prior year
+		priorYear := getMostRecentPriorYear(rule.fromYear, rule.toYear, startYear)
+		if priorYear != InvalidYear {
+			t := ts.GetFreeAgent()
+			createTransitionForYear(t, priorYear, rule, match)
+			ts.SetFreeAgentAsPriorIfValid()
+		}
+	}
+
+	// Add the reserved prior into the Candidate pool only if 'isValidPrior' is
+	// true.
+	if prior.isValidPrior {
+		ts.AddPriorToCandidatePool()
+	}
+}
+
+// calcInteriorYears calculates the interior years that overlaps (fromYear,
+// toYear) and (startYear, endYear). The results are placed into the
+// interiorYears slice, and the number of elements are returned.
+func calcInteriorYears(
+	interiorYears []int16,
+	fromYear int16,
+	toYear int16,
+	startYear int16,
+	endYear int16) uint8 {
+
+	var i uint8 = 0
+	for year := startYear; year <= endYear; year++ {
+		if fromYear <= year && year <= toYear {
+			interiorYears[i] = year
+			i++
+			if int(i) >= len(interiorYears) {
+				break
+			}
+		}
+	}
+	return i
+}
+
+func getMostRecentPriorYear(
+	fromYear int16, toYear int16, startYear int16) int16 {
+
+	if fromYear < startYear {
+		if toYear < startYear {
+			return toYear
+		} else {
+			return startYear - 1
+		}
+	} else {
+		return InvalidYear
+	}
+}
+
+// Step 2B: Pass 3
+func selectActiveTransitions(transitions []Transition) {
+	var prior *Transition = nil
+	for i := range transitions {
+		transition := &transitions[i]
+		prior = processTransitionMatchStatus(transition, prior)
+	}
+
+	// If the latest prior transition is found, shift it to start at the
+	// startDateTime of the current match.
+	if prior != nil {
+		prior.transitionTime = prior.match.startDt
+	}
+}
+
+func processTransitionMatchStatus(
+	transition *Transition, prior *Transition) *Transition {
+
+	status := compareTransitionToMatch(transition, transition.match)
+	transition.matchStatus = status
+
+	if status == matchStatusExactMatch {
+		if prior != nil {
+			prior.matchStatus = matchStatusFarPast
+		}
+		prior = transition
+	} else if status == matchStatusPrior {
+		if prior != nil {
+			if dateTupleCompare(
+				&prior.transitionTimeU, &transition.transitionTimeU) <= 0 {
+
+				prior.matchStatus = matchStatusFarPast
+				prior = transition
+			} else {
+				transition.matchStatus = matchStatusFarPast
+			}
+		} else {
+			prior = transition
+		}
+	}
+
+	return prior
 }
 
 //-----------------------------------------------------------------------------
