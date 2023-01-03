@@ -1016,13 +1016,74 @@ func processTransitionMatchStatus(
 }
 
 //-----------------------------------------------------------------------------
-
 // Step 4
+//-----------------------------------------------------------------------------
+
 func generateStartUntilTimes(transitions []Transition) {
+	prev := &transitions[0]
+	isAfterFirst := false
+
+	for i := range transitions {
+		transition := &transitions[i]
+
+		// 1) Update the untilDateTime of the previous Transition
+		tt := &transition.transitionTime
+		if isAfterFirst {
+			prev.untilDt = *tt
+		}
+
+		// 2) Calculate the current startDateTime by shifting the
+		// transitionTime (represented in the UTC offset of the previous
+		// transition) into the UTC offset of the *current* transition.
+		var minutes int16 = tt.minutes +
+			transition.offsetMinutes +
+			transition.deltaMinutes -
+			prev.offsetMinutes -
+			prev.deltaMinutes
+		transition.startDt.year = tt.year
+		transition.startDt.month = tt.month
+		transition.startDt.day = tt.day
+		transition.startDt.minutes = minutes
+		transition.startDt.suffix = tt.suffix
+		dateTupleNormalize(&transition.startDt)
+
+		// 3) The epochSecond of the 'transitionTime' is determined by the
+		// UTC offset of the *previous* Transition. However, the
+		// transitionTime can be represented by an illegal time (e.g. 24:00).
+		// So, it is better to use the properly normalized startDateTime
+		// (calculated above) with the *current* UTC offset.
+		//
+		// NOTE: We should also be able to  calculate this directly from
+		// 'transitionTimeU' which should still be a valid field, because it
+		// hasn't been clobbered by 'untilDateTime' yet. Not sure if this saves
+		// any CPU time though, since we still need to mutiply by 900.
+		st := &transition.startDt
+		offsetSeconds := 60 * int32(st.minutes-
+			(transition.offsetMinutes+transition.deltaMinutes))
+		epochSeconds := 86400 * LocalDateToEpochDays(st.year, st.month, st.day)
+		transition.startEpochSeconds = epochSeconds + offsetSeconds
+
+		prev = transition
+		isAfterFirst = true
+	}
+
+	// The last Transition's until time is the until time of the MatchingEra.
+	var untilTimeW DateTuple
+	var untilTimeS DateTuple
+	var untilTimeU DateTuple
+	dateTupleExpand(
+		&prev.match.untilDt,
+		prev.offsetMinutes,
+		prev.deltaMinutes,
+		&untilTimeW,
+		&untilTimeS,
+		&untilTimeU)
+	prev.untilDt = untilTimeW
 }
 
 //-----------------------------------------------------------------------------
-
 // Step 5
+//-----------------------------------------------------------------------------
+
 func calcAbbreviations(transitions []Transition) {
 }
