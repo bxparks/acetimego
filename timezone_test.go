@@ -8,32 +8,32 @@ func TestDateTupleCompare(t *testing.T) {
 	a := DateTuple{2000, 1, 1, 0, suffixW}
 	b := DateTuple{2000, 1, 1, 0, suffixW}
 	if !(dateTupleCompare(&a, &b) == 0) {
-		t.Fatalf("(2000, 1, 1, 0, w) == (2000, 1, 1, 0, w)")
+		t.Fatal("(2000, 1, 1, 0, w) == (2000, 1, 1, 0, w)")
 	}
 
 	bb := DateTuple{2000, 1, 1, 0, suffixS}
 	if !(dateTupleCompare(&a, &bb) == 0) {
-		t.Fatalf("(2000, 1, 1, 0, s) == (2000, 1, 1, 0, w)")
+		t.Fatal("(2000, 1, 1, 0, s) == (2000, 1, 1, 0, w)")
 	}
 
 	c := DateTuple{2000, 1, 1, 1, suffixW}
 	if !(dateTupleCompare(&a, &c) < 0) {
-		t.Fatalf("(2000, 1, 1, 0, w) < (2000, 1, 1, 1, w)")
+		t.Fatal("(2000, 1, 1, 0, w) < (2000, 1, 1, 1, w)")
 	}
 
 	d := DateTuple{2000, 1, 2, 0, suffixW}
 	if !(dateTupleCompare(&a, &d) < 0) {
-		t.Fatalf("(2000, 1, 1, 0, w) < (2000, 1, 2, 0, w)")
+		t.Fatal("(2000, 1, 1, 0, w) < (2000, 1, 2, 0, w)")
 	}
 
 	e := DateTuple{2000, 2, 1, 0, suffixW}
 	if !(dateTupleCompare(&a, &e) < 0) {
-		t.Fatalf("(2000, 1, 1, 0, w) < (2000, 2, 1, 0, w)")
+		t.Fatal("(2000, 1, 1, 0, w) < (2000, 2, 1, 0, w)")
 	}
 
 	f := DateTuple{2001, 1, 1, 0, suffixW}
 	if !(dateTupleCompare(&a, &f) < 0) {
-		t.Fatalf("(2000, 1, 1, 0, w) < (2001, 1, 1, 0, w)")
+		t.Fatal("(2000, 1, 1, 0, w) < (2001, 1, 1, 0, w)")
 	}
 }
 
@@ -45,28 +45,28 @@ func TestDateTupleSubtract(t *testing.T) {
 	dtb = DateTuple{2000, 1, 1, 1, suffixW} // 2000-01-01 00:01
 	diff = dateTupleSubtract(&dta, &dtb)
 	if !(-60 == diff) {
-		t.Fatalf("fatal")
+		t.Fatal(diff)
 	}
 
 	dta = DateTuple{2000, 1, 1, 0, suffixW} // 2000-01-01 00:00
 	dtb = DateTuple{2000, 1, 2, 0, suffixW} // 2000-01-02 00:00
 	diff = dateTupleSubtract(&dta, &dtb)
 	if !(-86400 == diff) {
-		t.Fatalf("fatal")
+		t.Fatal(diff)
 	}
 
 	dta = DateTuple{2000, 1, 1, 0, suffixW} // 2000-01-01 00:00
 	dtb = DateTuple{2000, 2, 1, 0, suffixW} // 2000-02-01 00:00
 	diff = dateTupleSubtract(&dta, &dtb)
 	if !(-86400*31 == diff) { // January has 31 day
-		t.Fatalf("fatal")
+		t.Fatal(diff)
 	}
 
 	dta = DateTuple{2000, 2, 1, 0, suffixW} // 2000-02-01 00:00
 	dtb = DateTuple{2000, 3, 1, 0, suffixW} // 2000-03-01 00:00
 	diff = dateTupleSubtract(&dta, &dtb)
 	if !(-86400*29 == diff) { // Feb 2000 is leap, 29 day
-		t.Fatalf("fatal")
+		t.Fatal(diff)
 	}
 }
 
@@ -77,42 +77,42 @@ func TestDateTupleNormalize(t *testing.T) {
 	dt = DateTuple{2000, 1, 1, 0, suffixW}
 	dateTupleNormalize(&dt)
 	if !(dt == DateTuple{2000, 1, 1, 0, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(dt)
 	}
 
 	// 23:45
 	dt = DateTuple{2000, 1, 1, 15 * 95, suffixW}
 	dateTupleNormalize(&dt)
 	if !(dt == DateTuple{2000, 1, 1, 15 * 95, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(dt)
 	}
 
 	// 24:00
 	dt = DateTuple{2000, 1, 1, 15 * 96, suffixW}
 	dateTupleNormalize(&dt)
 	if !(dt == DateTuple{2000, 1, 2, 0, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(dt)
 	}
 
 	// 24:15
 	dt = DateTuple{2000, 1, 1, 15 * 97, suffixW}
 	dateTupleNormalize(&dt)
 	if !(dt == DateTuple{2000, 1, 2, 15, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(dt)
 	}
 
 	// -24:00
 	dt = DateTuple{2000, 1, 1, -15 * 96, suffixW}
 	dateTupleNormalize(&dt)
 	if !(dt == DateTuple{1999, 12, 31, 0, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(dt)
 	}
 
 	// -24:15
 	dt = DateTuple{2000, 1, 1, -15 * 97, suffixW}
 	dateTupleNormalize(&dt)
 	if !(dt == DateTuple{1999, 12, 31, -15, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(dt)
 	}
 }
 
@@ -128,96 +128,104 @@ func TestDateTupleExpand(t *testing.T) {
 	tt = DateTuple{2000, 1, 30, 15 * 16, suffixW} // 04:00
 	dateTupleExpand(&tt, offsetMinutes, deltaMinutes, &ttw, &tts, &ttu)
 	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(ttw)
 	}
 	if !(tts == DateTuple{2000, 1, 30, 15 * 12, suffixS}) {
-		t.Fatalf("fatal")
+		t.Fatal(tts)
 	}
 	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, suffixU}) {
-		t.Fatalf("fatal")
+		t.Fatal(ttu)
 	}
 
 	tt = DateTuple{2000, 1, 30, 15 * 12, suffixS}
 	dateTupleExpand(&tt, offsetMinutes, deltaMinutes, &ttw, &tts, &ttu)
 	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(ttw)
 	}
 	if !(tts == DateTuple{2000, 1, 30, 15 * 12, suffixS}) {
-		t.Fatalf("fatal")
+		t.Fatal(tts)
 	}
 	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, suffixU}) {
-		t.Fatalf("fatal")
+		t.Fatal(ttu)
 	}
 
 	tt = DateTuple{2000, 1, 30, 15 * 4, suffixU}
 	dateTupleExpand(&tt, offsetMinutes, deltaMinutes, &ttw, &tts, &ttu)
 	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, suffixW}) {
-		t.Fatalf("fatal")
+		t.Fatal(ttw)
 	}
 	if !(tts == DateTuple{2000, 1, 30, 15 * 12, suffixS}) {
-		t.Fatalf("fatal")
+		t.Fatal(tts)
 	}
 	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, suffixU}) {
-		t.Fatalf("fatal")
+		t.Fatal(ttu)
 	}
 }
 
 func TestDateTupleCompareFuzzy(t *testing.T) {
-	if !(matchStatusPrior == dateTupleCompareFuzzy(
+	status := dateTupleCompareFuzzy(
 		&DateTuple{2000, 10, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
-		&DateTuple{2002, 2, 1, 1, 0})) {
-		t.Fatalf("fatal")
+		&DateTuple{2002, 2, 1, 1, 0})
+	if !(matchStatusPrior == status) {
+		t.Fatal(status)
 	}
 
-	if !(matchStatusWithinMatch == dateTupleCompareFuzzy(
+	status = dateTupleCompareFuzzy(
 		&DateTuple{2000, 11, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
-		&DateTuple{2002, 2, 1, 1, 0})) {
-		t.Fatalf("fatal")
+		&DateTuple{2002, 2, 1, 1, 0})
+	if !(matchStatusWithinMatch == status) {
+		t.Fatal(status)
 	}
 
-	if !(matchStatusWithinMatch == dateTupleCompareFuzzy(
+	status = dateTupleCompareFuzzy(
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
-		&DateTuple{2002, 2, 1, 1, 0})) {
-		t.Fatalf("fatal")
+		&DateTuple{2002, 2, 1, 1, 0})
+	if !(matchStatusWithinMatch == status) {
+		t.Fatal(status)
 	}
 
-	if !(matchStatusWithinMatch == dateTupleCompareFuzzy(
+	status = dateTupleCompareFuzzy(
 		&DateTuple{2002, 2, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
-		&DateTuple{2002, 2, 1, 1, 0})) {
-		t.Fatalf("fatal")
+		&DateTuple{2002, 2, 1, 1, 0})
+	if !(matchStatusWithinMatch == status) {
+		t.Fatal(status)
 	}
 
-	if !(matchStatusWithinMatch == dateTupleCompareFuzzy(
+	status = dateTupleCompareFuzzy(
 		&DateTuple{2002, 3, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
-		&DateTuple{2002, 2, 1, 1, 0})) {
-		t.Fatalf("fatal")
+		&DateTuple{2002, 2, 1, 1, 0})
+	if !(matchStatusWithinMatch == status) {
+		t.Fatal(status)
 	}
 
-	if !(matchStatusFarFuture == dateTupleCompareFuzzy(
+	status = dateTupleCompareFuzzy(
 		&DateTuple{2002, 4, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
-		&DateTuple{2002, 2, 1, 1, 0})) {
-		t.Fatalf("fatal")
+		&DateTuple{2002, 2, 1, 1, 0})
+	if !(matchStatusFarFuture == status) {
+		t.Fatal(status)
 	}
 
 	// Verify dates whose delta months is greater than 32767. In
 	// other words, delta years is greater than 2730.
-	if !(matchStatusFarFuture == dateTupleCompareFuzzy(
+	status = dateTupleCompareFuzzy(
 		&DateTuple{5000, 4, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
-		&DateTuple{2002, 2, 1, 1, 0})) {
-		t.Fatalf("fatal")
+		&DateTuple{2002, 2, 1, 1, 0})
+	if !(matchStatusFarFuture == status) {
+		t.Fatal(status)
 	}
-	if !(matchStatusPrior == dateTupleCompareFuzzy(
+	status = dateTupleCompareFuzzy(
 		&DateTuple{1000, 4, 1, 1, 0},
 		&DateTuple{4000, 12, 1, 1, 0},
-		&DateTuple{4002, 2, 1, 1, 0})) {
-		t.Fatalf("fatal")
+		&DateTuple{4002, 2, 1, 1, 0})
+	if !(matchStatusPrior == status) {
+		t.Fatal(status)
 	}
 }
 
