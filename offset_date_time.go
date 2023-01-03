@@ -14,6 +14,12 @@ type OffsetDateTime struct {
 	OffsetMinutes int16
 }
 
+// OffsetDateTimeError returns an instance of OffsetDateTime that indicates
+// an error condition such that IsError() returns true.
+func OffsetDateTimeError() OffsetDateTime {
+	return OffsetDateTime{Year: InvalidYear}
+}
+
 func (odt *OffsetDateTime) IsError() bool {
 	return odt.Year == InvalidYear
 }
@@ -35,7 +41,7 @@ func OffsetDateTimeFromEpochSeconds(
 	epochSeconds int32, offsetMinutes int16) OffsetDateTime {
 
 	if epochSeconds == InvalidEpochSeconds {
-		return OffsetDateTime{InvalidYear, 1, 1, 0, 0, 0, 0, 0}
+		return OffsetDateTimeError()
 	}
 
 	epochSeconds += int32(offsetMinutes) * 60

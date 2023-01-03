@@ -5,27 +5,31 @@ import (
 )
 
 func TestOffsetDateTimeIsError(t *testing.T) {
-	if (&OffsetDateTime{2000, 1, 1, 0, 0, 0, 0, 0}).IsError() {
-		t.Fatalf(`OffsetDateTime{2000, 1, 1, 0, 0, 0, 0, 0}.IsError() ` +
-			`should be false`)
+	odt := OffsetDateTime{2000, 1, 1, 0, 0, 0, 0, 0}
+	if odt.IsError() {
+		t.Fatal(odt)
 	}
-	if !(&OffsetDateTime{InvalidYear, 1, 1, 0, 0, 0, 0, 0}).IsError() {
-		t.Fatalf(`OffsetDateTime{2000, 1, 1, 0, 0, 0, 0, 0}.IsError() ` +
-			`should be true`)
+}
+
+func TestOffsetDateTimeError(t *testing.T) {
+	odt := OffsetDateTimeError()
+	if !odt.IsError() {
+		t.Fatal(odt)
 	}
 }
 
 func TestToEpochSeconds(t *testing.T) {
-	if (&OffsetDateTime{2050, 1, 1, 0, 0, 0, 0, 0}).ToEpochSeconds() != 0 {
-		t.Fatalf(`OffsetDateTime{2050, 1, 1, 0, 0, 0}.ToEpochSeconds() should be 0`)
+	odt := OffsetDateTime{2050, 1, 1, 0, 0, 0, 0, 0}
+	if !(odt.ToEpochSeconds() == 0) {
+		t.Fatal(odt)
 	}
-	if (&OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, 0}).ToEpochSeconds() != 1 {
-		t.Fatalf(`OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, 0}.ToEpochSeconds() ` +
-			` should be 1`)
+	odt = OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, 0}
+	if !(odt.ToEpochSeconds() == 1) {
+		t.Fatal(odt)
 	}
-	if (&OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, -1}).ToEpochSeconds() != 61 {
-		t.Fatalf(`OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, -1}.ToEpochSeconds() ` +
-			`should be 61`)
+	odt = OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, -1}
+	if !(odt.ToEpochSeconds() == 61) {
+		t.Fatal(odt)
 	}
 }
 
