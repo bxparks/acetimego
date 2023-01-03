@@ -307,6 +307,25 @@ func (transition *Transition) getLetter() string {
 	}
 }
 
+func fixTransitionTimes(transitions []Transition) {
+	if len(transitions) == 0 {
+		return
+	}
+
+	prev := &transitions[0]
+	for i := range transitions {
+		curr := &transitions[i]
+		dateTupleExpand(
+			&curr.transitionTime,
+			prev.offsetMinutes,
+			prev.deltaMinutes,
+			&curr.transitionTime,
+			&curr.transitionTimeS,
+			&curr.transitionTimeU)
+		prev = curr
+	}
+}
+
 //-----------------------------------------------------------------------------
 // TransitionStorage
 //-----------------------------------------------------------------------------
@@ -449,23 +468,50 @@ func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
 	return &ts.transitions[iActive-1]
 }
 
-func fixTransitionTimes(transitions []Transition) {
-	if len(transitions) == 0 {
-		return
+type MatchingTransition struct {
+	/** The matching Transition. */
+	transition *Transition
+
+	/** 1 if in the overlap, otherwise 0 */
+	fold uint8
+}
+
+func (ts *TransitionStorage) findTransitionForSeconds(
+	epochSeconds int32) MatchingTransition {
+	var prevMatch *Transition = nil
+	var match *Transition = nil
+	transitions := ts.GetActives()
+	for i := range transitions {
+		candidate := &transitions[i]
+		if candidate.startEpochSeconds > epochSeconds {
+			break
+		}
+		prevMatch = match
+		match = candidate
+	}
+	fold := calculateFold(epochSeconds, match, prevMatch)
+	return MatchingTransition{match, fold}
+}
+
+func calculateFold(
+	epochSeconds int32, match *Transition, prevMatch *Transition) uint8 {
+
+	if (match == nil) || (prevMatch == nil) {
+		return 0
 	}
 
-	prev := &transitions[0]
-	for i := range transitions {
-		curr := &transitions[i]
-		dateTupleExpand(
-			&curr.transitionTime,
-			prev.offsetMinutes,
-			prev.deltaMinutes,
-			&curr.transitionTime,
-			&curr.transitionTimeS,
-			&curr.transitionTimeU)
-		prev = curr
+	// Check if epochSeconds occurs during a "fall back" DST transition.
+	overlapSeconds := dateTupleSubtract(&prevMatch.untilDt, &match.startDt)
+	if overlapSeconds <= 0 {
+		return 0
 	}
+	secondsFromTransitionStart := epochSeconds - match.startEpochSeconds
+	if secondsFromTransitionStart >= overlapSeconds {
+		return 0
+	}
+
+	// EpochSeconds occurs within the "fall back" overlap.
+	return 1
 }
 
 //-----------------------------------------------------------------------------
@@ -682,11 +728,105 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 }
 
 func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds int32) Err {
-  ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
-  if ldt.IsError() {
+	ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
+	if ldt.IsError() {
 		return ErrGeneric
 	}
-  return zp.InitForYear(ldt.Year)
+	return zp.InitForYear(ldt.Year)
+}
+
+func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
+	epochSeconds int32) OffsetDateTime {
+
+	err := zp.InitForEpochSeconds(epochSeconds)
+	if err != ErrOk {
+		return OffsetDateTimeError()
+	}
+
+	mt := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
+	transition := mt.transition
+	if transition == nil {
+		return OffsetDateTimeError()
+	}
+
+	totalOffsetMinutes := transition.offsetMinutes + transition.deltaMinutes
+	odt := OffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetMinutes)
+	if !odt.IsError() {
+		odt.Fold = mt.fold
+	}
+	return odt
+}
+
+// OffsetDateTimeFromLocalDateTime returns the OffsetDateTime from the given
+// LocalDatetime.
+// Adapted from ExtendedZoneProcessor::getOffsetDateTime(const LocalDatetime&)
+// from ExtendedZoneProcessor in AceTime.
+func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
+	ldt *LocalDateTime, fold uint8) OffsetDateTime {
+
+	/*
+	  int8_t err = zp.InitForYear(zone_info, ldt.year)
+	  if (err) return err
+
+	  AtcTransitionResult result =
+	      atc_processing_find_transition_for_date_time(
+	          &processing.transition_storage, ldt)
+
+	  // Extract the appropriate Transition, depending on the requested 'fold'
+	  // and the 'result.search_status'.
+	  bool needs_normalization = false
+	  const AtcTransition *t
+	  if (result.search_status == kAtcSearchStatusExact) {
+	    t = result.transition0
+	  } else {
+	    if (result.transition0 == NULL || result.transition1 == NULL) {
+	      // ldt was far past or far future, and didn't match anything.
+	      t = NULL
+	    } else {
+	      needs_normalization = (result.search_status == kAtcSearchStatusGap)
+	      t = (fold == 0) ? result.transition0 : result.transition1
+	    }
+	  }
+
+	  if (! t) return kAtcErrGeneric
+
+	  odt.year = ldt.year
+	  odt.month = ldt.month
+	  odt.day = ldt.day
+	  odt.hour = ldt.hour
+	  odt.minute = ldt.minute
+	  odt.second = ldt.second
+	  odt.offset_minutes = t.offset_minutes + t.delta_minutes
+	  odt.fold = fold
+
+	  if (needs_normalization) {
+	    atc_time_t epoch_seconds = atc_offset_date_time_to_epoch_seconds(odt)
+
+	    // If in the gap, normalization means that we convert to epochSeconds
+	    // then perform another search through the Transitions, then use
+	    // that new Transition to convert the epochSeconds to OffsetDateTime. It
+	    // turns out that this process identical to just using the other
+	    // Transition returned in TransitionResult above.
+	    const AtcTransition *othert = (fold == 0)
+	        ? result.transition1
+	        : result.transition0
+	    int8_t err = atc_offset_date_time_from_epoch_seconds(
+	        epoch_seconds,
+	        othert.offset_minutes + othert.delta_minutes,
+	        odt)
+	    if (err) return err
+
+	    // Invert the fold.
+	    // 1) The normalization process causes the LocalDateTime to jump to the
+	    // other transition.
+	    // 2) Provides a user-accessible indicator that a gap normalization was
+	    // performed.
+	    odt.fold = 1 - fold
+	  }
+
+	  return kAtcErrOk
+	*/
+	return OffsetDateTimeError()
 }
 
 //-----------------------------------------------------------------------------
