@@ -315,6 +315,19 @@ func (ts *TransitionStorage) Init() {
 	ts.allocSize = 0
 }
 
+// GetActives returns the active transitions in the interval [0,indexPrior).
+func (ts *TransitionStorage) GetActives() []Transition {
+	return ts.transitions[0:ts.indexPrior]
+}
+
+// GetCandidates returns the candidate transitions in the interval
+// [indexCandidate,indexFree).
+func (ts *TransitionStorage) GetCandidates() []Transition {
+	return ts.transitions[ts.indexCandidate:ts.indexFree]
+}
+
+// ResetCandidatePool deletes the candidate pool by collapsing it into the prior
+// pool.
 func (ts *TransitionStorage) ResetCandidatePool() {
 	ts.indexCandidate = ts.indexPrior
 	ts.indexFree = ts.indexPrior
@@ -363,6 +376,8 @@ func (ts *TransitionStorage) SetFreeAgentAsPriorIfValid() {
 }
 
 func (ts *TransitionStorage) AddPriorToCandidatePool() {
+	// This simple decrement works because there is only one prior, and it is
+	// allocated just before the candidate pool.
 	ts.indexCandidate--
 }
 
@@ -627,7 +642,7 @@ func (zp *ZoneProcessor) InitForYear(zoneInfo *ZoneInfo, year int16) Err {
 
 	// Step 3: Fix transition times.
 	ts := &zp.transitionStorage
-	transitions := ts.transitions[0:ts.indexFree]
+	transitions := ts.GetActives()
 	fixTransitionTimes(transitions)
 
 	// Step 4: Generate start and until times.
@@ -861,7 +876,7 @@ func createTransitionsFromNamedMatch(
 
 	// Pass 2: Fix the transitions times, converting 's' and 'u' into 'w'
 	// uniformly.
-	transitions := ts.transitions[ts.indexCandidate:ts.indexFree]
+	transitions := ts.GetCandidates()
 	fixTransitionTimes(transitions)
 
 	// Pass 3: Select only those Transitions which overlap with the actual

@@ -620,18 +620,18 @@ func TestGetTransitionTime(t *testing.T) {
 	// Nov 4 2018
 	dt := getTransitionTime(2018, rule)
 	if !(dt == DateTuple{2018, 11, 4, 15 * 8, suffixW}) {
-		t.Fatal("dt:", dt)
+		t.Fatal(dt)
 	}
 
 	// Nov 3 2019
 	dt = getTransitionTime(2019, rule)
 	if !(dt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
-		t.Fatal("dt:", dt)
+		t.Fatal(dt)
 	}
 }
 
 func TestCreateTransitionForYear(t *testing.T) {
-	var match = MatchingEra{
+	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, suffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, suffixW},
 		era:               &ZoneEraTestLos_Angeles[0],
@@ -639,7 +639,7 @@ func TestCreateTransitionForYear(t *testing.T) {
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
 	}
-	var rule = &ZoneRulesTestUS[4]
+	rule := &ZoneRulesTestUS[4]
 
 	// Nov Sun>=1
 	var transition Transition
@@ -652,6 +652,289 @@ func TestCreateTransitionForYear(t *testing.T) {
 	}
 	tt := &transition.transitionTime
 	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
-		t.Fatal("tt:", tt)
+		t.Fatal(tt)
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Step 2B Pass 1
+//-----------------------------------------------------------------------------
+
+func TestCalcInteriorYears(t *testing.T) {
+	var interiorYears [maxInteriorYears]int16
+
+	num := calcInteriorYears(interiorYears[:], 1998, 1999, 2000, 2002)
+	if !(0 == num) {
+		t.Fatal(num)
+	}
+
+	num = calcInteriorYears(interiorYears[:], 2003, 2005, 2000, 2002)
+	if !(0 == num) {
+		t.Fatal(num)
+	}
+
+	num = calcInteriorYears(interiorYears[:], 1998, 2000, 2000, 2002)
+	if !(1 == num) {
+		t.Fatal(num)
+	}
+	if !(2000 == interiorYears[0]) {
+		t.Fatal(interiorYears[0])
+	}
+
+	num = calcInteriorYears(interiorYears[:], 2002, 2004, 2000, 2002)
+	if !(1 == num) {
+		t.Fatal(num)
+	}
+	if !(2002 == interiorYears[0]) {
+		t.Fatal(interiorYears[0])
+	}
+
+	num = calcInteriorYears(interiorYears[:], 2001, 2002, 2000, 2002)
+	if !(2 == num) {
+		t.Fatal(num)
+	}
+	if !(2001 == interiorYears[0]) {
+		t.Fatal(interiorYears[0])
+	}
+	if !(2002 == interiorYears[1]) {
+		t.Fatal(interiorYears[1])
+	}
+
+	num = calcInteriorYears(interiorYears[:], 1999, 2003, 2000, 2002)
+	if !(3 == num) {
+		t.Fatal(num)
+	}
+	if !(2000 == interiorYears[0]) {
+		t.Fatal(interiorYears[0])
+	}
+	if !(2001 == interiorYears[1]) {
+		t.Fatal(interiorYears[1])
+	}
+	if !(2002 == interiorYears[2]) {
+		t.Fatal(interiorYears[2])
+	}
+}
+
+func TestGetMostRecentPriorYear(t *testing.T) {
+	year := getMostRecentPriorYear(1998, 1999, 2000)
+	if !(1999 == year) {
+		t.Fatal(year)
+	}
+
+	year = getMostRecentPriorYear(2003, 2005, 2000)
+	if !(InvalidYear == year) {
+		t.Fatal(year)
+	}
+
+	year = getMostRecentPriorYear(1998, 2000, 2000)
+	if !(1999 == year) {
+		t.Fatal(year)
+	}
+
+	year = getMostRecentPriorYear(2002, 2004, 2000)
+	if !(InvalidYear == year) {
+		t.Fatal(year)
+	}
+
+	year = getMostRecentPriorYear(2001, 2002, 2000)
+	if !(InvalidYear == year) {
+		t.Fatal(year)
+	}
+
+	year = getMostRecentPriorYear(1999, 2003, 2000)
+	if !(1999 == year) {
+		t.Fatal(year)
+	}
+}
+
+func TestFindCandidateTransitions(t *testing.T) {
+	match := MatchingEra{
+		startDt:           DateTuple{2018, 12, 1, 0, suffixW},
+		untilDt:           DateTuple{2020, 2, 1, 0, suffixW},
+		era:               &ZoneEraTestLos_Angeles[0],
+		prevMatch:         nil,
+		lastOffsetMinutes: 0,
+		lastDeltaMinutes:  0,
+	}
+
+	// Reserve storage for the Transitions
+	var ts TransitionStorage
+	ts.Init()
+
+	// Verify compareTransitionToMatchFuzzy() elminates various transitions
+	// to get down to 5:
+	//    * 2018 Mar Sun>=8 (11)
+	//    * 2019 Nov Sun>=1 (4)
+	//    * 2019 Mar Sun>=8 (10)
+	//    * 2019 Nov Sun>=1 (3)
+	//    * 2020 Mar Sun>=8 (8)
+	ts.ResetCandidatePool()
+	findCandidateTransitions(&ts, &match)
+	candidates := ts.GetCandidates()
+	if !(5 == len(candidates)) {
+		t.Fatal()
+	}
+
+	tt := &candidates[0].transitionTime
+	if !(*tt == DateTuple{2018, 3, 11, 15 * 8, suffixW}) {
+		t.Fatal(tt)
+	}
+	//
+	tt = &candidates[1].transitionTime
+	if !(*tt == DateTuple{2018, 11, 4, 15 * 8, suffixW}) {
+		t.Fatal(tt)
+	}
+	//
+	tt = &candidates[2].transitionTime
+	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, suffixW}) {
+		t.Fatal(tt)
+	}
+	//
+	tt = &candidates[3].transitionTime
+	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+		t.Fatal(tt)
+	}
+	//
+	tt = &candidates[4].transitionTime
+	if !(*tt == DateTuple{2020, 3, 8, 15 * 8, suffixW}) {
+		t.Fatal(tt)
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Step 2B Pass 3
+//-----------------------------------------------------------------------------
+
+func TestProcessTransitionMatchStatus(t *testing.T) {
+	// UNTIL = 2002-01-02T03:00
+	era := ZoneEra{
+		zonePolicy:        nil,
+		format:            "",
+		offsetCode:        0,
+		deltaCode:         0,
+		untilYear:         2002,
+		untilMonth:        1,
+		untilDay:          2,
+		untilTimeCode:     12,
+		untilTimeModifier: suffixW,
+	}
+
+	// [2000-01-01, 2001-01-01)
+	match := MatchingEra{
+		startDt:           DateTuple{2000, 1, 1, 0, suffixW},
+		untilDt:           DateTuple{2001, 1, 1, 0, suffixW},
+		era:               &era,
+		prevMatch:         nil,
+		lastOffsetMinutes: 0,
+		lastDeltaMinutes:  0,
+	}
+
+	// This transition occurs before the match, so prior should be filled.
+	// transitionTime = 1999-12-31
+	transitions := []Transition{
+		Transition{
+			match:          &match,
+			rule:           nil,
+			transitionTime: DateTuple{1999, 12, 31, 0, suffixW},
+		},
+		// This occurs at exactly match.startDateTime, so should replace the prior.
+		// transitionTime = 2000-01-01
+		Transition{
+			match:          &match,
+			rule:           nil,
+			transitionTime: DateTuple{2000, 1, 1, 0, suffixW},
+		},
+		// An interior transition. Prior should not change.
+		// transitionTime = 2000-01-02
+		Transition{
+			match:          &match,
+			rule:           nil,
+			transitionTime: DateTuple{2000, 1, 2, 0, suffixW},
+		},
+		// Occurs after match.untilDateTime, so should be rejected.
+		// transitionTime = 2001-01-02
+		Transition{
+			match:          &match,
+			rule:           nil,
+			transitionTime: DateTuple{2001, 1, 2, 0, suffixW},
+		},
+	}
+	transition0 := &transitions[0]
+	transition1 := &transitions[1]
+	transition2 := &transitions[2]
+	transition3 := &transitions[3]
+
+	// Populate the transitionTimeS and transitionTimeU fields.
+	var prior *Transition = nil
+	fixTransitionTimes(transitions[:])
+
+	prior = processTransitionMatchStatus(transition0, prior)
+	if !(matchStatusPrior == transition0.matchStatus) {
+		t.Fatal(transition0.matchStatus)
+	}
+	if !(prior == transition0) {
+		t.Fatal(transition0)
+	}
+
+	prior = processTransitionMatchStatus(transition1, prior)
+	if !(matchStatusExactMatch == transition1.matchStatus) {
+		t.Fatal(transition1.matchStatus)
+	}
+	if !(prior == transition1) {
+		t.Fatal(transition1)
+	}
+
+	prior = processTransitionMatchStatus(transition2, prior)
+	if !(matchStatusWithinMatch == transition2.matchStatus) {
+		t.Fatal(transition2.matchStatus)
+	}
+	if !(prior == transition1) {
+		t.Fatal(transition1)
+	}
+
+	prior = processTransitionMatchStatus(transition3, prior)
+	if !(matchStatusFarFuture == transition3.matchStatus) {
+		t.Fatal(transition3.matchStatus)
+	}
+	if !(prior == transition1) {
+		t.Fatal(transition1)
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Step 2B
+//-----------------------------------------------------------------------------
+
+func TestCreateTransitionsFromNamedMatch(t *testing.T) {
+	match := MatchingEra{
+		startDt:           DateTuple{2018, 12, 1, 0, suffixW},
+		untilDt:           DateTuple{2020, 2, 1, 0, suffixW},
+		era:               &ZoneEraTestLos_Angeles[0],
+		prevMatch:         nil,
+		lastOffsetMinutes: 0,
+		lastDeltaMinutes:  0,
+	}
+
+	// Reserve storage for the Transitions
+	var ts TransitionStorage
+	ts.Init()
+
+	createTransitionsFromNamedMatch(&ts, &match)
+	if !(3 == ts.indexPrior) {
+		t.Fatal(ts.indexPrior)
+	}
+
+	//
+	tt := &ts.transitions[0].transitionTime
+	if !(*tt == DateTuple{2018, 12, 1, 0, suffixW}) {
+		t.Fatal(tt)
+	}
+	tt = &ts.transitions[1].transitionTime
+	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, suffixW}) {
+		t.Fatal(tt)
+	}
+	tt = &ts.transitions[2].transitionTime
+	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+		t.Fatal(tt)
 	}
 }
