@@ -400,3 +400,31 @@ func TestZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 		t.Fatal(zdt)
 	}
 }
+
+//-----------------------------------------------------------------------------
+
+func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
+	savedEpochYear := GetCurrentEpochYear()
+	SetCurrentEpochYear(2050)
+	defer SetCurrentEpochYear(savedEpochYear)
+
+	tzLosAngeles := TimeZoneForZoneInfo(&ZoneAmerica_Los_Angeles)
+	tzNewYork := TimeZoneForZoneInfo(&ZoneAmerica_New_York)
+
+	// 2022-08-30 20:00-07:00 in LA
+	ldt := LocalDateTime{2022, 8, 30, 20, 0, 0}
+	ladt := ZonedDateTimeFromLocalDateTime(&ldt, 0 /*fold*/, &tzLosAngeles)
+	if ladt.IsError() {
+		t.Fatal(ladt)
+	}
+
+	// 2022-08-30 23:00-04:00 in NYC
+	nydt := ladt.ConvertToTimeZone(&tzNewYork)
+	if nydt.IsError() {
+		t.Fatal(nydt)
+	}
+	if !(nydt == ZonedDateTime{
+		2022, 8, 30, 23, 0, 0, 0 /*fold*/, -4 * 60, &tzNewYork}) {
+		t.Fatal(nydt)
+	}
+}

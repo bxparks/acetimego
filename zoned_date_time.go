@@ -75,3 +75,14 @@ func ZonedDateTimeFromLocalDateTime(
 		Tz:            tz,
 	}
 }
+
+func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
+	if zdt.IsError() {
+		return NewZonedDateTimeError()
+	}
+	epochSeconds := zdt.ToEpochSeconds()
+	if epochSeconds == InvalidEpochSeconds {
+		return NewZonedDateTimeError()
+	}
+	return ZonedDateTimeFromEpochSeconds(epochSeconds, tz)
+}

@@ -75,6 +75,40 @@ var ZoneAmerica_Los_Angeles = ZoneInfo{
 }
 
 //---------------------------------------------------------------------------
+// Zone name: America/New_York
+// Zone Eras: 1
+// Strings (bytes): 21 (originally 21)
+// Memory (8-bit): 43
+// Memory (32-bit): 57
+//---------------------------------------------------------------------------
+
+var ZoneEraAmerica_New_York = []ZoneEra{
+	//             -5:00    US    E%sT
+	{
+		&ZonePolicyUS, /*zone_policy*/
+		"E%T",         /*format*/
+		-20,           /*offsetCode*/
+		4,             /*deltaCode (((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4))*/
+		10000,         /*untilYear*/
+		1,             /*untilMonth*/
+		1,             /*untilDay*/
+		0,             /*untilTimeCode*/
+		0,             /*untilTimeModifier (suffixW + minute=0)*/
+	},
+}
+
+const ZoneNameAmerica_New_York = "America/New_York"
+
+var ZoneAmerica_New_York = ZoneInfo{
+	ZoneNameAmerica_New_York, /*name*/
+	0x1e2a7654,               /*zoneID*/
+	2000,                     /*startYear*/
+	10000,                    /*untilYear*/
+	ZoneEraAmerica_New_York,  /*eras*/
+	nil,                      /*targetInfo*/
+}
+
+//---------------------------------------------------------------------------
 // Zone name: Etc/UTC
 // Zone Eras: 1
 // Strings (bytes): 12 (originally 12)
