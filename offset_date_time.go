@@ -1,21 +1,19 @@
 package acetime
 
 type OffsetDateTime struct {
-	Year  int16
-	Month uint8
-	Day   uint8
-
-	Hour   uint8
-	Minute uint8
-	Second uint8
-
-	Fold uint8
-
+	Year          int16
+	Month         uint8
+	Day           uint8
+	Hour          uint8
+	Minute        uint8
+	Second        uint8
+	Fold          uint8
 	OffsetMinutes int16
 }
 
 // OffsetDateTimeError returns an instance of OffsetDateTime that indicates
-// an error condition such that IsError() returns true.
+// an error condition such that IsError() returns true. TODO: Rename this to
+// NewOffsetDateTimeError().
 func OffsetDateTimeError() OffsetDateTime {
 	return OffsetDateTime{Year: InvalidYear}
 }

@@ -31,14 +31,14 @@ type ZoneProcessor struct {
 	transitionStorage TransitionStorage
 }
 
-// ZoneProcessorFromZoneInfo creates a new ZoneProcessor from the given ZoneInfo
-// instance.
-func ZoneProcessorFromZoneInfo(zoneInfo *ZoneInfo) *ZoneProcessor {
-	return &ZoneProcessor{zoneInfo: zoneInfo}
-}
-
 func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
 	return zp.isFilled && (year == zp.year)
+}
+
+// InitForZoneInfo initializes the ZoneProcessor for the given zoneInfo.
+func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *ZoneInfo) {
+	zp.zoneInfo = zoneInfo
+	zp.isFilled = false
 }
 
 func (zp *ZoneProcessor) InitForYear(year int16) Err {
