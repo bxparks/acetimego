@@ -22,6 +22,11 @@ const (
 	ErrGeneric
 )
 
+const (
+	maxMatches       = 4
+	maxInteriorYears = 4
+)
+
 type ZoneProcessor struct {
 	zoneInfo          *ZoneInfo
 	year              int16

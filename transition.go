@@ -327,10 +327,7 @@ func fixTransitionTimes(transitions []Transition) {
 //-----------------------------------------------------------------------------
 
 const (
-	maxAbbrevSize         = 6
 	transitionStorageSize = 8
-	maxMatches            = 4
-	maxInteriorYears      = 4
 )
 
 type TransitionStorage struct {
