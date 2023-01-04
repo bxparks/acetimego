@@ -33,7 +33,7 @@ const ZoneNameAfrica_Abidjan = "Africa/Abidjan"
 
 var ZoneAfrica_Abidjan = ZoneInfo{
 	ZoneNameAfrica_Abidjan, /*name*/
-	0xc21305a3,             /*zone_id*/
+	0xc21305a3,             /*zoneID*/
 	2000,                   /*startYear*/
 	10000,                  /*untilYear*/
 	ZoneEraAfrica_Abidjan,  /*eras*/
@@ -67,9 +67,43 @@ const ZoneNameAmerica_Los_Angeles = "America/Los_Angeles"
 
 var ZoneAmerica_Los_Angeles = ZoneInfo{
 	ZoneNameAmerica_Los_Angeles, /*name*/
-	0xb7f7e8f2,                  /*zone_id*/
+	0xb7f7e8f2,                  /*zoneID*/
 	2000,                        /*startYear*/
 	10000,                       /*untilYear*/
 	ZoneEraAmerica_Los_Angeles,  /*eras*/
 	nil,                         /*targetInfo*/
+}
+
+//---------------------------------------------------------------------------
+// Zone name: Etc/UTC
+// Zone Eras: 1
+// Strings (bytes): 12 (originally 12)
+// Memory (8-bit): 34
+// Memory (32-bit): 48
+//---------------------------------------------------------------------------
+
+var ZoneEraEtc_UTC = []ZoneEra{
+	// 0 - UTC
+	{
+		nil,   /*zonePolicy*/
+		"UTC", /*format*/
+		0,     /*offsetCode*/
+		4,     /*deltaCode (((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4))*/
+		10000, /*untilYear*/
+		1,     /*untilMonth*/
+		1,     /*untilDay*/
+		0,     /*untilTimeCode*/
+		0,     /*untilTimeModifier (kSuffixW + minute=0)*/
+	},
+}
+
+const ZoneNameEtc_UTC = "Etc/UTC"
+
+var ZoneEtc_UTC = ZoneInfo{
+	ZoneNameEtc_UTC, /*name*/
+	0xd8e31abc,      /*zoneID*/
+	2000,            /*startYear*/
+	10000,           /*untilYear*/
+	ZoneEraEtc_UTC,  /*eras*/
+	nil,             /*target*/
 }
