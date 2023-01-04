@@ -18,7 +18,7 @@ type YearMonth struct {
 type Err int8
 
 const (
-	ErrOk = iota
+	ErrOk Err = iota
 	ErrGeneric
 )
 
@@ -276,8 +276,7 @@ func findMatches(
 	var prevMatch *MatchingEra = nil
 	var numEras uint8 = zoneInfo.numEras()
 
-	var iEra uint8
-	for iEra = 0; iEra < numEras; iEra++ {
+	for iEra := uint8(0); iEra < numEras; iEra++ {
 		era := &zoneInfo.eras[iEra]
 		var prevEra *ZoneEra = nil
 		if prevMatch != nil {
@@ -504,8 +503,7 @@ func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
 		var interiorYears [maxInteriorYears]int16
 		numYears := calcInteriorYears(
 			interiorYears[:], rule.fromYear, rule.toYear, startYear, endYear)
-		var iy uint8
-		for iy = 0; iy < numYears; iy++ {
+		for iy := uint8(0); iy < numYears; iy++ {
 			year := interiorYears[iy]
 			t := ts.GetFreeAgent()
 			createTransitionForYear(t, year, rule, match)
