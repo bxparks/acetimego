@@ -10,7 +10,7 @@ type TimeZone struct {
 	zoneProcessor ZoneProcessor
 }
 
-func NewTimeZoneForZoneInfo(zoneInfo *ZoneInfo) TimeZone {
+func TimeZoneForZoneInfo(zoneInfo *ZoneInfo) TimeZone {
 	var tz TimeZone
 	tz.zoneProcessor.InitForZoneInfo(zoneInfo)
 	return tz

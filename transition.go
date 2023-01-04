@@ -551,7 +551,7 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 	var searchStatus int8 = searchStatusGap
 	transitions := ts.GetActives()
 	for i := range transitions {
-		candidate := &ts.transitions[i]
+		candidate = &ts.transitions[i]
 
 		startDt := &candidate.startDt
 		untilDt := &candidate.untilDt
