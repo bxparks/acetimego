@@ -108,15 +108,15 @@ type ZoneRule struct {
 }
 
 func (rule *ZoneRule) AtMinutes() int16 {
-  return int16(rule.atTimeCode) * 15 + int16(rule.atTimeModifier & 0x0f)
+	return int16(rule.atTimeCode)*15 + int16(rule.atTimeModifier&0x0f)
 }
 
 func (rule *ZoneRule) AtSuffix() uint8 {
-  return rule.atTimeModifier & 0xf0
+	return rule.atTimeModifier & 0xf0
 }
 
 func (rule *ZoneRule) DstOffsetMinutes() int16 {
-  return (int16(uint8(rule.deltaCode) & 0x0f) - 4) * 15
+	return (int16(uint8(rule.deltaCode)&0x0f) - 4) * 15
 }
 
 //-----------------------------------------------------------------------------
@@ -262,7 +262,7 @@ func (era *ZoneEra) StdOffsetMinutes() int16 {
 }
 
 func (era *ZoneEra) DstOffsetMinutes() int16 {
-  return int16((int8(era.deltaCode & 0x0f) - 4) * 15);
+	return int16((int8(era.deltaCode&0x0f) - 4) * 15)
 }
 
 func (era *ZoneEra) UntilMinutes() int16 {
