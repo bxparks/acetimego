@@ -115,69 +115,76 @@ func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
 func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, fold uint8) OffsetDateTime {
 
-	/*
-	  int8_t err = zp.InitForYear(zone_info, ldt.year)
-	  if (err) return err
+	err := zp.InitForYear(ldt.Year)
+	if err != ErrOk {
+		return OffsetDateTimeError()
+	}
 
-	  AtcTransitionResult result =
-	      atc_processing_find_transition_for_date_time(
-	          &processing.transition_storage, ldt)
+	result := zp.transitionStorage.findTransitionForDateTime(ldt)
 
-	  // Extract the appropriate Transition, depending on the requested 'fold'
-	  // and the 'result.search_status'.
-	  bool needs_normalization = false
-	  const AtcTransition *t
-	  if (result.search_status == kAtcSearchStatusExact) {
-	    t = result.transition0
-	  } else {
-	    if (result.transition0 == NULL || result.transition1 == NULL) {
-	      // ldt was far past or far future, and didn't match anything.
-	      t = NULL
-	    } else {
-	      needs_normalization = (result.search_status == kAtcSearchStatusGap)
-	      t = (fold == 0) ? result.transition0 : result.transition1
-	    }
-	  }
+	// Extract the appropriate Transition, depending on the requested 'fold'
+	// and the 'result.searchStatus'.
+	needsNormalization := false
+	var transition *Transition
+	if result.searchStatus == searchStatusExact {
+		transition = result.transition0
+	} else {
+		if result.transition0 == nil || result.transition1 == nil {
+			// ldt was far past or far future, and didn't match anything.
+			transition = nil
+		} else {
+			needsNormalization = (result.searchStatus == searchStatusGap)
+			if fold == 0 {
+				transition = result.transition0
+			} else {
+				transition = result.transition1
+			}
+		}
+	}
 
-	  if (! t) return kAtcErrGeneric
+	if transition == nil {
+		return OffsetDateTimeError()
+	}
 
-	  odt.year = ldt.year
-	  odt.month = ldt.month
-	  odt.day = ldt.day
-	  odt.hour = ldt.hour
-	  odt.minute = ldt.minute
-	  odt.second = ldt.second
-	  odt.offset_minutes = t.offset_minutes + t.delta_minutes
-	  odt.fold = fold
+	var odt OffsetDateTime
+	odt.Year = ldt.Year
+	odt.Month = ldt.Month
+	odt.Day = ldt.Day
+	odt.Hour = ldt.Hour
+	odt.Minute = ldt.Minute
+	odt.Second = ldt.Second
+	odt.OffsetMinutes = transition.offsetMinutes + transition.deltaMinutes
+	odt.Fold = fold
 
-	  if (needs_normalization) {
-	    atc_time_t epoch_seconds = atc_offset_date_time_to_epoch_seconds(odt)
+	if needsNormalization {
+		epochSeconds := odt.ToEpochSeconds()
 
-	    // If in the gap, normalization means that we convert to epochSeconds
-	    // then perform another search through the Transitions, then use
-	    // that new Transition to convert the epochSeconds to OffsetDateTime. It
-	    // turns out that this process identical to just using the other
-	    // Transition returned in TransitionResult above.
-	    const AtcTransition *othert = (fold == 0)
-	        ? result.transition1
-	        : result.transition0
-	    int8_t err = atc_offset_date_time_from_epoch_seconds(
-	        epoch_seconds,
-	        othert.offset_minutes + othert.delta_minutes,
-	        odt)
-	    if (err) return err
+		// If in the gap, normalization means that we convert to epochSeconds
+		// then perform another search through the Transitions, then use
+		// that new Transition to convert the epochSeconds to OffsetDateTime. It
+		// turns out that this process identical to just using the other
+		// Transition returned in TransitionResult above.
+		var othert *Transition
+		if fold == 0 {
+			othert = result.transition1
+		} else {
+			othert = result.transition0
+		}
+		odt = OffsetDateTimeFromEpochSeconds(
+			epochSeconds, othert.offsetMinutes+othert.deltaMinutes)
+		if odt.IsError() {
+			return odt
+		}
 
-	    // Invert the fold.
-	    // 1) The normalization process causes the LocalDateTime to jump to the
-	    // other transition.
-	    // 2) Provides a user-accessible indicator that a gap normalization was
-	    // performed.
-	    odt.fold = 1 - fold
-	  }
+		// Invert the fold.
+		// 1) The normalization process causes the LocalDateTime to jump to the
+		// other transition.
+		// 2) Provides a user-accessible indicator that a gap normalization was
+		// performed.
+		odt.Fold = 1 - fold
+	}
 
-	  return kAtcErrOk
-	*/
-	return OffsetDateTimeError()
+	return odt
 }
 
 //---------------------------------------------------------------------------

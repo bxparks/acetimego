@@ -464,6 +464,8 @@ func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
 	return &ts.transitions[iActive-1]
 }
 
+//-----------------------------------------------------------------------------
+
 type MatchingTransition struct {
 	/** The matching Transition. */
 	transition *Transition
@@ -508,6 +510,86 @@ func calculateFold(
 
 	// EpochSeconds occurs within the "fall back" overlap.
 	return 1
+}
+
+//-----------------------------------------------------------------------------
+
+const (
+	searchStatusGap     = 0
+	searchStatusExact   = 1
+	searchStatusOverlap = 2
+)
+
+/**
+ * The transition search result at a particular epoch second or local date
+ * time.
+ */
+type TransitionResult struct {
+	/** Transition for fold==0 */
+	transition0 *Transition
+
+	/** Transition for fold==1 */
+	transition1 *Transition
+
+	/** Result of search: 0=gap, 1=exact, 2=overlap */
+	searchStatus int8
+}
+
+func (ts *TransitionStorage) findTransitionForDateTime(
+	ldt *LocalDateTime) TransitionResult {
+
+	// Convert LocalDateTime to DateTuple.
+	localDt := DateTuple{
+		ldt.Year,
+		ldt.Month,
+		ldt.Day,
+		int16(ldt.Hour*60 + ldt.Minute),
+		suffixW,
+	}
+
+	// Examine adjacent pairs of Transitions, looking for an exact match, gap,
+	// or overlap.
+	var prevCandidate *Transition = nil
+	var candidate *Transition = nil
+	var searchStatus int8 = searchStatusGap
+	transitions := ts.GetActives()
+	for i := range transitions {
+		candidate := &ts.transitions[i]
+
+		startDt := &candidate.startDt
+		untilDt := &candidate.untilDt
+		isExactMatch := dateTupleCompare(startDt, &localDt) <= 0 &&
+			dateTupleCompare(&localDt, untilDt) < 0
+
+		if isExactMatch {
+			// Check for a previous exact match to detect an overlap.
+			if searchStatus == searchStatusExact {
+				searchStatus = searchStatusOverlap
+				break
+			}
+
+			// Loop again to detect an overlap.
+			searchStatus = searchStatusExact
+
+		} else if dateTupleCompare(startDt, &localDt) > 0 {
+			// Exit loop since no more candidate transition.
+			break
+		}
+
+		prevCandidate = candidate
+
+		// Set nullptr so that if the loop runs off the end of the list of
+		// Transitions, the candidate is marked as nullptr.
+		candidate = nil
+	}
+
+	// Check if the prev was an exact match, and clear the current to
+	// avoid confusion.
+	if searchStatus == searchStatusExact {
+		candidate = nil
+	}
+
+	return TransitionResult{prevCandidate, candidate, searchStatus}
 }
 
 //-----------------------------------------------------------------------------
