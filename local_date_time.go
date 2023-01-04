@@ -7,13 +7,16 @@ import (
 const InvalidEpochSeconds int32 = math.MinInt32
 
 type LocalDateTime struct {
-	Year  int16
-	Month uint8
-	Day   uint8
-
+	Year   int16
+	Month  uint8
+	Day    uint8
 	Hour   uint8
 	Minute uint8
 	Second uint8
+}
+
+func NewLocalDateTimeError() LocalDateTime {
+	return LocalDateTime{Year: InvalidYear}
 }
 
 func (ldt *LocalDateTime) IsError() bool {
@@ -32,7 +35,7 @@ func (ldt *LocalDateTime) ToEpochSeconds() int32 {
 
 func LocalDateTimeFromEpochSeconds(epochSeconds int32) LocalDateTime {
 	if epochSeconds == InvalidEpochSeconds {
-		return LocalDateTime{InvalidYear, 1, 1, 0, 0, 0}
+		return NewLocalDateTimeError()
 	}
 
 	// Integer floor-division towards -infinity
