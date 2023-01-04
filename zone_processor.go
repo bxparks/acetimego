@@ -91,13 +91,13 @@ func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
 
 	err := zp.InitForEpochSeconds(epochSeconds)
 	if err != ErrOk {
-		return OffsetDateTimeError()
+		return NewOffsetDateTimeError()
 	}
 
 	mt := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
 	transition := mt.transition
 	if transition == nil {
-		return OffsetDateTimeError()
+		return NewOffsetDateTimeError()
 	}
 
 	totalOffsetMinutes := transition.offsetMinutes + transition.deltaMinutes
@@ -117,7 +117,7 @@ func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
 
 	err := zp.InitForYear(ldt.Year)
 	if err != ErrOk {
-		return OffsetDateTimeError()
+		return NewOffsetDateTimeError()
 	}
 
 	result := zp.transitionStorage.findTransitionForDateTime(ldt)
@@ -143,7 +143,7 @@ func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
 	}
 
 	if transition == nil {
-		return OffsetDateTimeError()
+		return NewOffsetDateTimeError()
 	}
 
 	var odt OffsetDateTime

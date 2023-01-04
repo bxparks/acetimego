@@ -12,7 +12,7 @@ func TestOffsetDateTimeIsError(t *testing.T) {
 }
 
 func TestOffsetDateTimeError(t *testing.T) {
-	odt := OffsetDateTimeError()
+	odt := NewOffsetDateTimeError()
 	if !odt.IsError() {
 		t.Fatal(odt)
 	}
