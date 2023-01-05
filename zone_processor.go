@@ -91,6 +91,8 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds int32) Err {
 	return zp.InitForYear(ldt.Year)
 }
 
+//---------------------------------------------------------------------------
+
 func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
 	epochSeconds int32) OffsetDateTime {
 
@@ -190,6 +192,43 @@ func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
 	}
 
 	return odt
+}
+
+//---------------------------------------------------------------------------
+
+type TransitionInfo struct {
+	stdOffsetMinutes int16  // STD offset
+	dstOffsetMinutes int16  // DST offset
+	abbrev           string // abbreviation (e.g. PST, PDT)
+}
+
+func NewTransitionInfoError() TransitionInfo {
+	return TransitionInfo{stdOffsetMinutes: InvalidOffsetMinutes}
+}
+
+func (ti *TransitionInfo) IsError() bool {
+	return ti.stdOffsetMinutes == InvalidOffsetMinutes
+}
+
+func (zp *ZoneProcessor) TransitionInfoFromEpochSeconds(
+	epochSeconds int32) TransitionInfo {
+
+	err := zp.InitForEpochSeconds(epochSeconds)
+	if err != ErrOk {
+		return NewTransitionInfoError()
+	}
+
+	mt := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
+	transition := mt.transition
+	if transition == nil {
+		return NewTransitionInfoError()
+	}
+
+	return TransitionInfo{
+		stdOffsetMinutes: transition.offsetMinutes,
+		dstOffsetMinutes: transition.deltaMinutes,
+		abbrev:           transition.abbrev,
+	}
 }
 
 //---------------------------------------------------------------------------

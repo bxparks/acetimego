@@ -17,6 +17,7 @@ func TestZonedDateTimeFromEpochSeconds(t *testing.T) {
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := TimeZoneForZoneInfo(&ZoneAmerica_Los_Angeles)
+
 	var epochSeconds int32 = 0
 	zdt := ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {

@@ -27,3 +27,12 @@ func (tz *TimeZone) OffsetDateDateTimeFromEpochSeconds(
 
 	return tz.zoneProcessor.OffsetDateTimeFromEpochSeconds(epochSeconds)
 }
+
+func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds int32) ZonedExtra {
+	ti := tz.zoneProcessor.TransitionInfoFromEpochSeconds(epochSeconds)
+	return ZonedExtra{
+		stdOffsetMinutes: ti.stdOffsetMinutes,
+		dstOffsetMinutes: ti.dstOffsetMinutes,
+		abbrev:           ti.abbrev,
+	}
+}

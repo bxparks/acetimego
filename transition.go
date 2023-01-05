@@ -464,7 +464,7 @@ func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
 //-----------------------------------------------------------------------------
 
 type MatchingTransition struct {
-	/** The matching Transition. */
+	/** The matching Transition, nil if not found. */
 	transition *Transition
 
 	/** 1 if in the overlap, otherwise 0 */
@@ -488,6 +488,10 @@ func (ts *TransitionStorage) findTransitionForSeconds(
 	return MatchingTransition{match, fold}
 }
 
+// calculateFold determines the 'fold' parameter at the given epochSeconds. This
+// will become the output parameter of the corresponding LocalDateTime. A 0
+// indicates that the LocalDateTime was the first ocurrence. A 1 indicates a
+// LocalDateTime that occurred a second time.
 func calculateFold(
 	epochSeconds int32, match *Transition, prevMatch *Transition) uint8 {
 
