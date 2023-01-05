@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"testing"
 )
 
@@ -57,12 +58,12 @@ func TestCalcStartDayOfMonth(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestCompareEraToYearMonth(t *testing.T) {
-	era := ZoneEra{
-		untilYear:         2000,
-		untilMonth:        1,
-		untilDay:          2,
-		untilTimeCode:     12,
-		untilTimeModifier: suffixW,
+	era := zoneinfo.ZoneEra{
+		UntilYear:         2000,
+		UntilMonth:        1,
+		UntilDay:          2,
+		UntilTimeCode:     12,
+		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 
 	if !(1 == compareEraToYearMonth(&era, 2000, 1)) {
@@ -78,12 +79,12 @@ func TestCompareEraToYearMonth(t *testing.T) {
 		t.Fatal("fatal")
 	}
 
-	era2 := ZoneEra{
-		untilYear:         2000,
-		untilMonth:        1,
-		untilDay:          0,
-		untilTimeCode:     0,
-		untilTimeModifier: suffixW,
+	era2 := zoneinfo.ZoneEra{
+		UntilYear:         2000,
+		UntilMonth:        1,
+		UntilDay:          0,
+		UntilTimeCode:     0,
+		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 	if !(0 == compareEraToYearMonth(&era2, 2000, 1)) {
 		t.Fatal("fatal")
@@ -96,39 +97,39 @@ func TestCreateMatchingEra(t *testing.T) {
 	untilYm := YearMonth{2002, 2}
 
 	// UNTIL = 2000-12-02 3:00
-	era1 := ZoneEra{
-		untilYear:         2000,
-		untilMonth:        12,
-		untilDay:          2,
-		untilTimeCode:     3 * (60 / 15),
-		untilTimeModifier: suffixW,
+	era1 := zoneinfo.ZoneEra{
+		UntilYear:         2000,
+		UntilMonth:        12,
+		UntilDay:          2,
+		UntilTimeCode:     3 * (60 / 15),
+		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 
 	// UNTIL = 2001-02-03 4:00
-	era2 := ZoneEra{
-		untilYear:         2001,
-		untilMonth:        2,
-		untilDay:          3,
-		untilTimeCode:     4 * (60 / 15),
-		untilTimeModifier: suffixW,
+	era2 := zoneinfo.ZoneEra{
+		UntilYear:         2001,
+		UntilMonth:        2,
+		UntilDay:          3,
+		UntilTimeCode:     4 * (60 / 15),
+		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 
 	// UNTIL = 2002-10-11 4:00
-	era3 := ZoneEra{
-		untilYear:         2002,
-		untilMonth:        10,
-		untilDay:          11,
-		untilTimeCode:     4 * (60 / 15),
-		untilTimeModifier: suffixW,
+	era3 := zoneinfo.ZoneEra{
+		UntilYear:         2002,
+		UntilMonth:        10,
+		UntilDay:          11,
+		UntilTimeCode:     4 * (60 / 15),
+		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 
 	// No previous matching era, so startDt is set to startYm.
 	var match1 MatchingEra
 	createMatchingEra(&match1, nil, &era1, startYm, untilYm)
-	if !(match1.startDt == DateTuple{2000, 12, 1, 60 * 0, suffixW}) {
+	if !(match1.startDt == DateTuple{2000, 12, 1, 60 * 0, zoneinfo.SuffixW}) {
 		t.Fatal("match1.startDt:", match1.startDt)
 	}
-	if !(match1.untilDt == DateTuple{2000, 12, 2, 60 * 3, suffixW}) {
+	if !(match1.untilDt == DateTuple{2000, 12, 2, 60 * 3, zoneinfo.SuffixW}) {
 		t.Fatal("match1.startDt:", match1.startDt)
 	}
 	if !(match1.era == &era1) {
@@ -139,10 +140,10 @@ func TestCreateMatchingEra(t *testing.T) {
 	// untilDt is < untilYm, so is retained.
 	var match2 MatchingEra
 	createMatchingEra(&match2, &match1, &era2, startYm, untilYm)
-	if !(match2.startDt == DateTuple{2000, 12, 2, 60 * 3, suffixW}) {
+	if !(match2.startDt == DateTuple{2000, 12, 2, 60 * 3, zoneinfo.SuffixW}) {
 		t.Fatal("match2.startDt:", match2.startDt)
 	}
-	if !(match2.untilDt == DateTuple{2001, 2, 3, 60 * 4, suffixW}) {
+	if !(match2.untilDt == DateTuple{2001, 2, 3, 60 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("match2.startDt:", match2.startDt)
 	}
 	if !(match2.era == &era2) {
@@ -153,10 +154,10 @@ func TestCreateMatchingEra(t *testing.T) {
 	// untilDt is > untilYm so truncated to untilYm.
 	var match3 MatchingEra
 	createMatchingEra(&match3, &match2, &era3, startYm, untilYm)
-	if !(match3.startDt == DateTuple{2001, 2, 3, 60 * 4, suffixW}) {
+	if !(match3.startDt == DateTuple{2001, 2, 3, 60 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("match3.startDt: ", match3.startDt)
 	}
-	if !(match3.untilDt == DateTuple{2002, 2, 1, 60 * 0, suffixW}) {
+	if !(match3.untilDt == DateTuple{2002, 2, 1, 60 * 0, zoneinfo.SuffixW}) {
 		t.Fatal("match3.startDt: ", match3.startDt)
 	}
 	if !(match3.era == &era3) {
@@ -168,96 +169,96 @@ func TestCreateMatchingEra(t *testing.T) {
 // Step 2A
 //-----------------------------------------------------------------------------
 
-var ZoneRulesTestUS = []ZoneRule{
+var ZoneRulesTestUS = []zoneinfo.ZoneRule{
 	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
 	{
-		1967,    /*fromYear*/
-		2006,    /*toYear*/
-		10,      /*inMonth*/
-		7,       /*onDayOfWeek*/
-		0,       /*onDayOfMonth*/
-		8,       /*atTimeCode*/
-		suffixW, /*atTimeModifier*/
-		0 + 4,   /*deltaCode*/
-		"S",     /*letter*/
+		FromYear:       1967,
+		ToYear:         2006,
+		InMonth:        10,
+		OnDayOfWeek:    7,
+		OnDayOfMonth:   0,
+		AtTimeCode:     8,
+		AtTimeModifier: zoneinfo.SuffixW,
+		DeltaCode:      0 + 4,
+		Letter:         "S",
 	},
 	// Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
 	{
-		1976,    /*fromYear*/
-		1986,    /*toYear*/
-		4,       /*inMonth*/
-		7,       /*onDayOfWeek*/
-		0,       /*onDayOfMonth*/
-		8,       /*atTimeCode*/
-		suffixW, /*atTimeModifier*/
-		4 + 4,   /*deltaCode*/
-		"D",     /*letter*/
+		FromYear:       1976,
+		ToYear:         1986,
+		InMonth:        4,
+		OnDayOfWeek:    7,
+		OnDayOfMonth:   0,
+		AtTimeCode:     8,
+		AtTimeModifier: zoneinfo.SuffixW,
+		DeltaCode:      4 + 4,
+		Letter:         "D",
 	},
 	// Rule    US    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
-		1987,    /*fromYear*/
-		2006,    /*toYear*/
-		4,       /*inMonth*/
-		7,       /*onDayOfWeek*/
-		1,       /*onDayOfMonth*/
-		8,       /*atTimeCode*/
-		suffixW, /*atTimeModifier*/
-		4 + 4,   /*deltaCode*/
-		"D",     /*letter*/
+		FromYear:       1987,
+		ToYear:         2006,
+		InMonth:        4,
+		OnDayOfWeek:    7,
+		OnDayOfMonth:   1,
+		AtTimeCode:     8,
+		AtTimeModifier: zoneinfo.SuffixW,
+		DeltaCode:      4 + 4,
+		Letter:         "D",
 	},
 	// Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
-		2007,    /*fromYear*/
-		9999,    /*toYear*/
-		3,       /*inMonth*/
-		7,       /*onDayOfWeek*/
-		8,       /*onDayOfMonth*/
-		8,       /*atTimeCode*/
-		suffixW, /*atTimeModifier*/
-		4 + 4,   /*deltaCode*/
-		"D",     /*letter*/
+		FromYear:       2007,
+		ToYear:         9999,
+		InMonth:        3,
+		OnDayOfWeek:    7,
+		OnDayOfMonth:   8,
+		AtTimeCode:     8,
+		AtTimeModifier: zoneinfo.SuffixW,
+		DeltaCode:      4 + 4,
+		Letter:         "D",
 	},
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
-		2007,    /*fromYear*/
-		9999,    /*toYear*/
-		11,      /*inMonth*/
-		7,       /*onDayOfWeek*/
-		1,       /*onDayOfMonth*/
-		8,       /*atTimeCode*/
-		suffixW, /*atTimeModifier*/
-		0 + 4,   /*deltaCode*/
-		"S",     /*letter*/
+		FromYear:       2007,
+		ToYear:         9999,
+		InMonth:        11,
+		OnDayOfWeek:    7,
+		OnDayOfMonth:   1,
+		AtTimeCode:     8,
+		AtTimeModifier: zoneinfo.SuffixW,
+		DeltaCode:      0 + 4,
+		Letter:         "S",
 	},
 }
 
-var ZonePolicyTestUS = ZonePolicy{
-	ZoneRulesTestUS, /*rules*/
-	nil,             /* letters */
+var ZonePolicyTestUS = zoneinfo.ZonePolicy{
+	Rules:   ZoneRulesTestUS,
+	Letters: nil,
 }
 
-var ZoneEraTestLos_Angeles = []ZoneEra{
+var ZoneEraTestLos_Angeles = []zoneinfo.ZoneEra{
 	//             -8:00    US    P%sT
 	{
-		zonePolicy:        &ZonePolicyTestUS,
-		format:            "P%T",
-		offsetCode:        -32,
-		deltaCode:         0 + 4,
-		untilYear:         10000,
-		untilMonth:        1,
-		untilDay:          1,
-		untilTimeCode:     0,
-		untilTimeModifier: suffixW,
+		ZonePolicy:        &ZonePolicyTestUS,
+		Format:            "P%T",
+		OffsetCode:        -32,
+		DeltaCode:         0 + 4,
+		UntilYear:         10000,
+		UntilMonth:        1,
+		UntilDay:          1,
+		UntilTimeCode:     0,
+		UntilTimeModifier: zoneinfo.SuffixW,
 	},
 }
 
-var ZoneTestLosAngeles = ZoneInfo{
-	name:      "America/Los_Angeles",
-	zoneID:    0xb7f7e8f2,
-	startYear: 2000,
-	untilYear: 10000,
-	eras:      ZoneEraTestLos_Angeles,
-	target:    nil,
+var ZoneTestLosAngeles = zoneinfo.ZoneInfo{
+	Name:      "America/Los_Angeles",
+	ZoneID:    0xb7f7e8f2,
+	StartYear: 2000,
+	UntilYear: 10000,
+	Eras:      ZoneEraTestLos_Angeles,
+	Target:    nil,
 }
 
 func TestGetTransitionTime(t *testing.T) {
@@ -266,21 +267,21 @@ func TestGetTransitionTime(t *testing.T) {
 
 	// Nov 4 2018
 	dt := getTransitionTime(2018, rule)
-	if !(dt == DateTuple{2018, 11, 4, 15 * 8, suffixW}) {
+	if !(dt == DateTuple{2018, 11, 4, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 
 	// Nov 3 2019
 	dt = getTransitionTime(2019, rule)
-	if !(dt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+	if !(dt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 }
 
 func TestCreateTransitionForYear(t *testing.T) {
 	match := MatchingEra{
-		startDt:           DateTuple{2018, 12, 1, 0, suffixW},
-		untilDt:           DateTuple{2020, 2, 1, 0, suffixW},
+		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
+		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               &ZoneEraTestLos_Angeles[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
@@ -298,7 +299,7 @@ func TestCreateTransitionForYear(t *testing.T) {
 		t.Fatal(transition.deltaMinutes)
 	}
 	tt := &transition.transitionTime
-	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 }
@@ -396,8 +397,8 @@ func TestGetMostRecentPriorYear(t *testing.T) {
 
 func TestFindCandidateTransitions(t *testing.T) {
 	match := MatchingEra{
-		startDt:           DateTuple{2018, 12, 1, 0, suffixW},
-		untilDt:           DateTuple{2020, 2, 1, 0, suffixW},
+		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
+		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               &ZoneEraTestLos_Angeles[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
@@ -422,23 +423,23 @@ func TestFindCandidateTransitions(t *testing.T) {
 	}
 
 	tt := &candidates[0].transitionTime
-	if !(*tt == DateTuple{2018, 3, 11, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2018, 3, 11, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &candidates[1].transitionTime
-	if !(*tt == DateTuple{2018, 11, 4, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2018, 11, 4, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &candidates[2].transitionTime
-	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &candidates[3].transitionTime
-	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &candidates[4].transitionTime
-	if !(*tt == DateTuple{2020, 3, 8, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2020, 3, 8, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 }
@@ -449,22 +450,22 @@ func TestFindCandidateTransitions(t *testing.T) {
 
 func TestProcessTransitionMatchStatus(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
-	era := ZoneEra{
-		zonePolicy:        nil,
-		format:            "",
-		offsetCode:        0,
-		deltaCode:         0,
-		untilYear:         2002,
-		untilMonth:        1,
-		untilDay:          2,
-		untilTimeCode:     12,
-		untilTimeModifier: suffixW,
+	era := zoneinfo.ZoneEra{
+		ZonePolicy:        nil,
+		Format:            "",
+		OffsetCode:        0,
+		DeltaCode:         0,
+		UntilYear:         2002,
+		UntilMonth:        1,
+		UntilDay:          2,
+		UntilTimeCode:     12,
+		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 
 	// [2000-01-01, 2001-01-01)
 	match := MatchingEra{
-		startDt:           DateTuple{2000, 1, 1, 0, suffixW},
-		untilDt:           DateTuple{2001, 1, 1, 0, suffixW},
+		startDt:           DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
+		untilDt:           DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 		era:               &era,
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
@@ -477,28 +478,28 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 		Transition{
 			match:          &match,
 			rule:           nil,
-			transitionTime: DateTuple{1999, 12, 31, 0, suffixW},
+			transitionTime: DateTuple{1999, 12, 31, 0, zoneinfo.SuffixW},
 		},
 		// This occurs at exactly match.startDateTime, so should replace the prior.
 		// transitionTime = 2000-01-01
 		Transition{
 			match:          &match,
 			rule:           nil,
-			transitionTime: DateTuple{2000, 1, 1, 0, suffixW},
+			transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		},
 		// An interior transition. Prior should not change.
 		// transitionTime = 2000-01-02
 		Transition{
 			match:          &match,
 			rule:           nil,
-			transitionTime: DateTuple{2000, 1, 2, 0, suffixW},
+			transitionTime: DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW},
 		},
 		// Occurs after match.untilDateTime, so should be rejected.
 		// transitionTime = 2001-01-02
 		Transition{
 			match:          &match,
 			rule:           nil,
-			transitionTime: DateTuple{2001, 1, 2, 0, suffixW},
+			transitionTime: DateTuple{2001, 1, 2, 0, zoneinfo.SuffixW},
 		},
 	}
 	transition0 := &transitions[0]
@@ -549,8 +550,8 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 
 func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 	match := MatchingEra{
-		startDt:           DateTuple{2018, 12, 1, 0, suffixW},
-		untilDt:           DateTuple{2020, 2, 1, 0, suffixW},
+		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
+		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               &ZoneEraTestLos_Angeles[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
@@ -566,15 +567,15 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 	}
 
 	tt := &ts.transitions[0].transitionTime
-	if !(*tt == DateTuple{2018, 12, 1, 0, suffixW}) {
+	if !(*tt == DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &ts.transitions[1].transitionTime
-	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &ts.transitions[2].transitionTime
-	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 }
@@ -636,43 +637,43 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 
 	// Verify. The first Transition is extended to -infinity.
 	tt := &transition1.transitionTime
-	if !(*tt == DateTuple{2018, 12, 1, 0, suffixW}) {
+	if !(*tt == DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal("tt:", tt)
 	}
 	tts := &transition1.transitionTimeS
-	if !(*tts == DateTuple{2018, 12, 1, 0, suffixS}) {
+	if !(*tts == DateTuple{2018, 12, 1, 0, zoneinfo.SuffixS}) {
 		t.Fatal("tts:", tts)
 	}
 	ttu := &transition1.transitionTimeU
-	if !(*ttu == DateTuple{2018, 12, 1, 15 * 32, suffixU}) {
+	if !(*ttu == DateTuple{2018, 12, 1, 15 * 32, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
 	// Second transition uses the UTC offset of the first.
 	tt = &transition2.transitionTime
-	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal("tt:", tt)
 	}
 	tts = &transition2.transitionTimeS
-	if !(*tts == DateTuple{2019, 3, 10, 15 * 8, suffixS}) {
+	if !(*tts == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixS}) {
 		t.Fatal("tts:", tts)
 	}
 	ttu = &transition2.transitionTimeU
-	if !(*ttu == DateTuple{2019, 3, 10, 15 * 40, suffixU}) {
+	if !(*ttu == DateTuple{2019, 3, 10, 15 * 40, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
 	// Third transition uses the UTC offset of the second.
 	tt = &transition3.transitionTime
-	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal("tt:", tt)
 	}
 	tts = &transition3.transitionTimeS
-	if !(*tts == DateTuple{2019, 11, 3, 15 * 4, suffixS}) {
+	if !(*tts == DateTuple{2019, 11, 3, 15 * 4, zoneinfo.SuffixS}) {
 		t.Fatal("tts:", tts)
 	}
 	ttu = &transition3.transitionTimeU
-	if !(*ttu == DateTuple{2019, 11, 3, 15 * 36, suffixU}) {
+	if !(*ttu == DateTuple{2019, 11, 3, 15 * 36, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
@@ -682,11 +683,11 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// Verify. The first transition startTime should be the same as its
 	// transitionTime.
 	sdt := &transition1.startDt
-	if !(*sdt == DateTuple{2018, 12, 1, 0, suffixW}) {
+	if !(*sdt == DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
 	}
 	udt := &transition1.untilDt
-	if !(*udt == DateTuple{2019, 3, 10, 15 * 8, suffixW}) {
+	if !(*udt == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal("udt:", udt)
 	}
 	odt := OffsetDateTime{
@@ -698,11 +699,11 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 
 	// Second transition startTime is shifted forward one hour into PDT.
 	sdt = &transition2.startDt
-	if !(*sdt == DateTuple{2019, 3, 10, 15 * 12, suffixW}) {
+	if !(*sdt == DateTuple{2019, 3, 10, 15 * 12, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
 	}
 	udt = &transition2.untilDt
-	if !(*udt == DateTuple{2019, 11, 3, 15 * 8, suffixW}) {
+	if !(*udt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
@@ -714,11 +715,11 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 
 	// Third transition startTime is shifted back one hour into PST.
 	sdt = &transition3.startDt
-	if !(*sdt == DateTuple{2019, 11, 3, 15 * 4, suffixW}) {
+	if !(*sdt == DateTuple{2019, 11, 3, 15 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
 	}
 	udt = &transition3.untilDt
-	if !(*udt == DateTuple{2020, 2, 1, 0, suffixW}) {
+	if !(*udt == DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
@@ -735,49 +736,49 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 //---------------------------------------------------------------------------
 
 // Create simplified ZoneEras which approximate America/Los_Angeles
-var ZoneEraAlmostLosAngeles = []ZoneEra{
+var ZoneEraAlmostLosAngeles = []zoneinfo.ZoneEra{
 	{
-		zonePolicy:        nil,
-		format:            "PST",
-		offsetCode:        -32,
-		deltaCode:         0 + 4,
-		untilYear:         2019,
-		untilMonth:        3,
-		untilDay:          10,
-		untilTimeCode:     2 * 4,
-		untilTimeModifier: suffixW,
+		ZonePolicy:        nil,
+		Format:            "PST",
+		OffsetCode:        -32,
+		DeltaCode:         0 + 4,
+		UntilYear:         2019,
+		UntilMonth:        3,
+		UntilDay:          10,
+		UntilTimeCode:     2 * 4,
+		UntilTimeModifier: zoneinfo.SuffixW,
 	},
 	{
-		zonePolicy:        nil,
-		format:            "PDT",
-		offsetCode:        -32,
-		deltaCode:         4 + 4,
-		untilYear:         2019,
-		untilMonth:        11,
-		untilDay:          3,
-		untilTimeCode:     2 * 4,
-		untilTimeModifier: suffixW,
+		ZonePolicy:        nil,
+		Format:            "PDT",
+		OffsetCode:        -32,
+		DeltaCode:         4 + 4,
+		UntilYear:         2019,
+		UntilMonth:        11,
+		UntilDay:          3,
+		UntilTimeCode:     2 * 4,
+		UntilTimeModifier: zoneinfo.SuffixW,
 	},
 	{
-		zonePolicy:        nil,
-		format:            "PST",
-		offsetCode:        -32,
-		deltaCode:         0 + 4,
-		untilYear:         2020,
-		untilMonth:        3,
-		untilDay:          8,
-		untilTimeCode:     2 * 4,
-		untilTimeModifier: suffixW,
+		ZonePolicy:        nil,
+		Format:            "PST",
+		OffsetCode:        -32,
+		DeltaCode:         0 + 4,
+		UntilYear:         2020,
+		UntilMonth:        3,
+		UntilDay:          8,
+		UntilTimeCode:     2 * 4,
+		UntilTimeModifier: zoneinfo.SuffixW,
 	},
 }
 
-var ZoneAlmostLosAngeles = ZoneInfo{
-	name:      "America/Almost_Los_Angeles",
-	zoneID:    0x70166020,
-	startYear: 2000,
-	untilYear: 10000,
-	eras:      ZoneEraAlmostLosAngeles,
-	target:    nil,
+var ZoneAlmostLosAngeles = zoneinfo.ZoneInfo{
+	Name:      "America/Almost_Los_Angeles",
+	ZoneID:    0x70166020,
+	StartYear: 2000,
+	UntilYear: 10000,
+	Eras:      ZoneEraAlmostLosAngeles,
+	Target:    nil,
 }
 
 //-----------------------------------------------------------------------------
@@ -785,7 +786,7 @@ var ZoneAlmostLosAngeles = ZoneInfo{
 //-----------------------------------------------------------------------------
 
 func TestCreateAbbreviation(t *testing.T) {
-	// If no '%', deltaMinutes and letter should not matter
+	// If no '%', deltaMinutes and Letter should not matter
 	abbrev := createAbbreviation("SAST", 0, "")
 	if !("SAST" == abbrev) {
 		t.Fatal(abbrev)
@@ -796,7 +797,7 @@ func TestCreateAbbreviation(t *testing.T) {
 		t.Fatal(abbrev)
 	}
 
-	// If '%', and letter is "", remove the "%" (unlike AceTimeC where letter is
+	// If '%', and Letter is "", remove the "%" (unlike AceTimeC where Letter is
 	// NULL.
 	abbrev = createAbbreviation("SA%ST", 0, "")
 	if !("SAST" == abbrev) {

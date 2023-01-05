@@ -1,5 +1,9 @@
 package acetime
 
+import (
+	"github.com/bxparks/AceTimeGo/zoneinfo"
+)
+
 //-----------------------------------------------------------------------------
 // DateTuple
 //-----------------------------------------------------------------------------
@@ -17,7 +21,7 @@ type DateTuple struct {
 	/** negative values allowed */
 	minutes int16
 
-	/** suffixS, suffixW, suffixU */
+	/** zoneinfo.SuffixS, zoneinfo.SuffixW, zoneinfo.SuffixU */
 	suffix uint8
 }
 
@@ -89,50 +93,50 @@ func dateTupleExpand(
 	tts *DateTuple,
 	ttu *DateTuple) {
 
-	if tt.suffix == suffixS {
+	if tt.suffix == zoneinfo.SuffixS {
 		*tts = *tt
 
 		ttu.year = tt.year
 		ttu.month = tt.month
 		ttu.day = tt.day
 		ttu.minutes = tt.minutes - offsetMinutes
-		ttu.suffix = suffixU
+		ttu.suffix = zoneinfo.SuffixU
 
 		ttw.year = tt.year
 		ttw.month = tt.month
 		ttw.day = tt.day
 		ttw.minutes = tt.minutes + deltaMinutes
-		ttw.suffix = suffixW
-	} else if tt.suffix == suffixU {
+		ttw.suffix = zoneinfo.SuffixW
+	} else if tt.suffix == zoneinfo.SuffixU {
 		*ttu = *tt
 
 		tts.year = tt.year
 		tts.month = tt.month
 		tts.day = tt.day
 		tts.minutes = tt.minutes + offsetMinutes
-		tts.suffix = suffixS
+		tts.suffix = zoneinfo.SuffixS
 
 		ttw.year = tt.year
 		ttw.month = tt.month
 		ttw.day = tt.day
 		ttw.minutes = tt.minutes + (offsetMinutes + deltaMinutes)
-		ttw.suffix = suffixW
+		ttw.suffix = zoneinfo.SuffixW
 	} else {
 		// Explicit set the suffix to 'w' in case it was something else.
 		*ttw = *tt
-		ttw.suffix = suffixW
+		ttw.suffix = zoneinfo.SuffixW
 
 		tts.year = tt.year
 		tts.month = tt.month
 		tts.day = tt.day
 		tts.minutes = tt.minutes - deltaMinutes
-		tts.suffix = suffixS
+		tts.suffix = zoneinfo.SuffixS
 
 		ttu.year = tt.year
 		ttu.month = tt.month
 		ttu.day = tt.day
 		ttu.minutes = tt.minutes - (deltaMinutes + offsetMinutes)
-		ttu.suffix = suffixU
+		ttu.suffix = zoneinfo.SuffixU
 	}
 
 	dateTupleNormalize(ttw)
@@ -192,7 +196,7 @@ type MatchingEra struct {
 	untilDt DateTuple
 
 	/** The ZoneEra that matched the given year. NonNullable. */
-	era *ZoneEra
+	era *zoneinfo.ZoneEra
 
 	/** The previous MatchingEra, needed to interpret startDt.  */
 	prevMatch *MatchingEra
@@ -217,7 +221,7 @@ type Transition struct {
 	 * nullptr if the RULES column is '-', indicating that the MatchingEra was
 	 * a "simple" ZoneEra.
 	 */
-	rule *ZoneRule
+	rule *zoneinfo.ZoneRule
 
 	/**
 	 * The original transition time, usually 'w' but sometimes 's' or 'u'. After
@@ -297,7 +301,7 @@ type Transition struct {
 // Otherwise, returns "".
 func (transition *Transition) getLetter() string {
 	if transition.rule != nil {
-		return transition.rule.letter
+		return transition.rule.Letter
 	} else {
 		return ""
 	}
@@ -545,7 +549,7 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 		ldt.Month,
 		ldt.Day,
 		int16(ldt.Hour*60 + ldt.Minute),
-		suffixW,
+		zoneinfo.SuffixW,
 	}
 
 	// Examine adjacent pairs of Transitions, looking for an exact match, gap,
@@ -644,9 +648,9 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 	// and 'u' with 'u'.
 	matchUntil := &match.untilDt
 	var transitionTime *DateTuple
-	if matchUntil.suffix == suffixS {
+	if matchUntil.suffix == zoneinfo.SuffixS {
 		transitionTime = tts
-	} else if matchUntil.suffix == suffixU {
+	} else if matchUntil.suffix == zoneinfo.SuffixU {
 		transitionTime = ttu
 	} else { // assume 'w'
 		transitionTime = ttw

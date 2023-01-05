@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/zonedbtest"
 	"testing"
 )
 
@@ -15,7 +16,7 @@ func TestZonedExtraFromEpochSeconds(t *testing.T) {
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	tz := TimeZoneForZoneInfo(&ZoneAmerica_Los_Angeles)
+	tz := TimeZoneForZoneInfo(&zonedbtest.ZoneAmerica_Los_Angeles)
 
 	ze := ZonedExtraFromEpochSeconds(InvalidEpochSeconds, &tz)
 	if !ze.IsError() {
@@ -28,7 +29,7 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	tz := TimeZoneForZoneInfo(&ZoneAmerica_Los_Angeles)
+	tz := TimeZoneForZoneInfo(&zonedbtest.ZoneAmerica_Los_Angeles)
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back.
@@ -59,7 +60,7 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	tz := TimeZoneForZoneInfo(&ZoneAmerica_Los_Angeles)
+	tz := TimeZoneForZoneInfo(&zonedbtest.ZoneAmerica_Los_Angeles)
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back.

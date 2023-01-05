@@ -1,37 +1,38 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"testing"
 )
 
 func TestDateTupleCompare(t *testing.T) {
-	a := DateTuple{2000, 1, 1, 0, suffixW}
-	b := DateTuple{2000, 1, 1, 0, suffixW}
+	a := DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW}
+	b := DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW}
 	if !(dateTupleCompare(&a, &b) == 0) {
 		t.Fatal("(2000, 1, 1, 0, w) == (2000, 1, 1, 0, w)")
 	}
 
-	bb := DateTuple{2000, 1, 1, 0, suffixS}
+	bb := DateTuple{2000, 1, 1, 0, zoneinfo.SuffixS}
 	if !(dateTupleCompare(&a, &bb) == 0) {
 		t.Fatal("(2000, 1, 1, 0, s) == (2000, 1, 1, 0, w)")
 	}
 
-	c := DateTuple{2000, 1, 1, 1, suffixW}
+	c := DateTuple{2000, 1, 1, 1, zoneinfo.SuffixW}
 	if !(dateTupleCompare(&a, &c) < 0) {
 		t.Fatal("(2000, 1, 1, 0, w) < (2000, 1, 1, 1, w)")
 	}
 
-	d := DateTuple{2000, 1, 2, 0, suffixW}
+	d := DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW}
 	if !(dateTupleCompare(&a, &d) < 0) {
 		t.Fatal("(2000, 1, 1, 0, w) < (2000, 1, 2, 0, w)")
 	}
 
-	e := DateTuple{2000, 2, 1, 0, suffixW}
+	e := DateTuple{2000, 2, 1, 0, zoneinfo.SuffixW}
 	if !(dateTupleCompare(&a, &e) < 0) {
 		t.Fatal("(2000, 1, 1, 0, w) < (2000, 2, 1, 0, w)")
 	}
 
-	f := DateTuple{2001, 1, 1, 0, suffixW}
+	f := DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW}
 	if !(dateTupleCompare(&a, &f) < 0) {
 		t.Fatal("(2000, 1, 1, 0, w) < (2001, 1, 1, 0, w)")
 	}
@@ -41,29 +42,29 @@ func TestDateTupleSubtract(t *testing.T) {
 	var dta, dtb DateTuple
 	var diff int32
 
-	dta = DateTuple{2000, 1, 1, 0, suffixW} // 2000-01-01 00:00
-	dtb = DateTuple{2000, 1, 1, 1, suffixW} // 2000-01-01 00:01
+	dta = DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW} // 2000-01-01 00:00
+	dtb = DateTuple{2000, 1, 1, 1, zoneinfo.SuffixW} // 2000-01-01 00:01
 	diff = dateTupleSubtract(&dta, &dtb)
 	if !(-60 == diff) {
 		t.Fatal(diff)
 	}
 
-	dta = DateTuple{2000, 1, 1, 0, suffixW} // 2000-01-01 00:00
-	dtb = DateTuple{2000, 1, 2, 0, suffixW} // 2000-01-02 00:00
+	dta = DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW} // 2000-01-01 00:00
+	dtb = DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW} // 2000-01-02 00:00
 	diff = dateTupleSubtract(&dta, &dtb)
 	if !(-86400 == diff) {
 		t.Fatal(diff)
 	}
 
-	dta = DateTuple{2000, 1, 1, 0, suffixW} // 2000-01-01 00:00
-	dtb = DateTuple{2000, 2, 1, 0, suffixW} // 2000-02-01 00:00
+	dta = DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW} // 2000-01-01 00:00
+	dtb = DateTuple{2000, 2, 1, 0, zoneinfo.SuffixW} // 2000-02-01 00:00
 	diff = dateTupleSubtract(&dta, &dtb)
 	if !(-86400*31 == diff) { // January has 31 day
 		t.Fatal(diff)
 	}
 
-	dta = DateTuple{2000, 2, 1, 0, suffixW} // 2000-02-01 00:00
-	dtb = DateTuple{2000, 3, 1, 0, suffixW} // 2000-03-01 00:00
+	dta = DateTuple{2000, 2, 1, 0, zoneinfo.SuffixW} // 2000-02-01 00:00
+	dtb = DateTuple{2000, 3, 1, 0, zoneinfo.SuffixW} // 2000-03-01 00:00
 	diff = dateTupleSubtract(&dta, &dtb)
 	if !(-86400*29 == diff) { // Feb 2000 is leap, 29 day
 		t.Fatal(diff)
@@ -74,44 +75,44 @@ func TestDateTupleNormalize(t *testing.T) {
 	var dt DateTuple
 
 	// 00:00
-	dt = DateTuple{2000, 1, 1, 0, suffixW}
+	dt = DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW}
 	dateTupleNormalize(&dt)
-	if !(dt == DateTuple{2000, 1, 1, 0, suffixW}) {
+	if !(dt == DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 
 	// 23:45
-	dt = DateTuple{2000, 1, 1, 15 * 95, suffixW}
+	dt = DateTuple{2000, 1, 1, 15 * 95, zoneinfo.SuffixW}
 	dateTupleNormalize(&dt)
-	if !(dt == DateTuple{2000, 1, 1, 15 * 95, suffixW}) {
+	if !(dt == DateTuple{2000, 1, 1, 15 * 95, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 
 	// 24:00
-	dt = DateTuple{2000, 1, 1, 15 * 96, suffixW}
+	dt = DateTuple{2000, 1, 1, 15 * 96, zoneinfo.SuffixW}
 	dateTupleNormalize(&dt)
-	if !(dt == DateTuple{2000, 1, 2, 0, suffixW}) {
+	if !(dt == DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 
 	// 24:15
-	dt = DateTuple{2000, 1, 1, 15 * 97, suffixW}
+	dt = DateTuple{2000, 1, 1, 15 * 97, zoneinfo.SuffixW}
 	dateTupleNormalize(&dt)
-	if !(dt == DateTuple{2000, 1, 2, 15, suffixW}) {
+	if !(dt == DateTuple{2000, 1, 2, 15, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 
 	// -24:00
-	dt = DateTuple{2000, 1, 1, -15 * 96, suffixW}
+	dt = DateTuple{2000, 1, 1, -15 * 96, zoneinfo.SuffixW}
 	dateTupleNormalize(&dt)
-	if !(dt == DateTuple{1999, 12, 31, 0, suffixW}) {
+	if !(dt == DateTuple{1999, 12, 31, 0, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 
 	// -24:15
-	dt = DateTuple{2000, 1, 1, -15 * 97, suffixW}
+	dt = DateTuple{2000, 1, 1, -15 * 97, zoneinfo.SuffixW}
 	dateTupleNormalize(&dt)
-	if !(dt == DateTuple{1999, 12, 31, -15, suffixW}) {
+	if !(dt == DateTuple{1999, 12, 31, -15, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 }
@@ -125,39 +126,39 @@ func TestDateTupleExpand(t *testing.T) {
 	const offsetMinutes = 2 * 60
 	const deltaMinutes = 1 * 60
 
-	tt = DateTuple{2000, 1, 30, 15 * 16, suffixW} // 04:00
+	tt = DateTuple{2000, 1, 30, 15 * 16, zoneinfo.SuffixW} // 04:00
 	dateTupleExpand(&tt, offsetMinutes, deltaMinutes, &ttw, &tts, &ttu)
-	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, suffixW}) {
+	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, zoneinfo.SuffixW}) {
 		t.Fatal(ttw)
 	}
-	if !(tts == DateTuple{2000, 1, 30, 15 * 12, suffixS}) {
+	if !(tts == DateTuple{2000, 1, 30, 15 * 12, zoneinfo.SuffixS}) {
 		t.Fatal(tts)
 	}
-	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, suffixU}) {
+	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, zoneinfo.SuffixU}) {
 		t.Fatal(ttu)
 	}
 
-	tt = DateTuple{2000, 1, 30, 15 * 12, suffixS}
+	tt = DateTuple{2000, 1, 30, 15 * 12, zoneinfo.SuffixS}
 	dateTupleExpand(&tt, offsetMinutes, deltaMinutes, &ttw, &tts, &ttu)
-	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, suffixW}) {
+	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, zoneinfo.SuffixW}) {
 		t.Fatal(ttw)
 	}
-	if !(tts == DateTuple{2000, 1, 30, 15 * 12, suffixS}) {
+	if !(tts == DateTuple{2000, 1, 30, 15 * 12, zoneinfo.SuffixS}) {
 		t.Fatal(tts)
 	}
-	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, suffixU}) {
+	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, zoneinfo.SuffixU}) {
 		t.Fatal(ttu)
 	}
 
-	tt = DateTuple{2000, 1, 30, 15 * 4, suffixU}
+	tt = DateTuple{2000, 1, 30, 15 * 4, zoneinfo.SuffixU}
 	dateTupleExpand(&tt, offsetMinutes, deltaMinutes, &ttw, &tts, &ttu)
-	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, suffixW}) {
+	if !(ttw == DateTuple{2000, 1, 30, 15 * 16, zoneinfo.SuffixW}) {
 		t.Fatal(ttw)
 	}
-	if !(tts == DateTuple{2000, 1, 30, 15 * 12, suffixS}) {
+	if !(tts == DateTuple{2000, 1, 30, 15 * 12, zoneinfo.SuffixS}) {
 		t.Fatal(tts)
 	}
-	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, suffixU}) {
+	if !(ttu == DateTuple{2000, 1, 30, 15 * 4, zoneinfo.SuffixU}) {
 		t.Fatal(ttu)
 	}
 }
@@ -233,14 +234,14 @@ func TestDateTupleCompareFuzzy(t *testing.T) {
 
 func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 	match := MatchingEra{
-		startDt: DateTuple{2000, 1, 1, 0, suffixW},
-		untilDt: DateTuple{2001, 1, 1, 0, suffixW},
+		startDt: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
+		untilDt: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
 
 	transition := Transition{
 		match:          &match,
 		rule:           nil,
-		transitionTime: DateTuple{1999, 11, 1, 0, suffixW},
+		transitionTime: DateTuple{1999, 11, 1, 0, zoneinfo.SuffixW},
 	}
 	status := compareTransitionToMatchFuzzy(&transition, &match)
 	if !(status == matchStatusPrior) {
@@ -250,7 +251,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 	transition = Transition{
 		match:          &match,
 		rule:           nil,
-		transitionTime: DateTuple{1999, 12, 1, 0, suffixW},
+		transitionTime: DateTuple{1999, 12, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
 	if !(status == matchStatusWithinMatch) {
@@ -260,7 +261,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 	transition = Transition{
 		match:          &match,
 		rule:           nil,
-		transitionTime: DateTuple{2000, 1, 1, 0, suffixW},
+		transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
 	if !(status == matchStatusWithinMatch) {
@@ -270,7 +271,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 	transition = Transition{
 		match:          &match,
 		rule:           nil,
-		transitionTime: DateTuple{2001, 1, 1, 0, suffixW},
+		transitionTime: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
 	if !(status == matchStatusWithinMatch) {
@@ -280,7 +281,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 	transition = Transition{
 		match:          &match,
 		rule:           nil,
-		transitionTime: DateTuple{2001, 3, 1, 0, suffixW},
+		transitionTime: DateTuple{2001, 3, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
 	if !(status == matchStatusFarFuture) {
@@ -290,22 +291,22 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 func TestCompareTransitionToMatch(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
-	era := ZoneEra{
-		zonePolicy:        nil,
-		format:            "",
-		offsetCode:        0,
-		deltaCode:         0,
-		untilYear:         2,
-		untilMonth:        1,
-		untilDay:          2,
-		untilTimeCode:     12,
-		untilTimeModifier: suffixW,
+	era := zoneinfo.ZoneEra{
+		ZonePolicy:        nil,
+		Format:            "",
+		OffsetCode:        0,
+		DeltaCode:         0,
+		UntilYear:         2,
+		UntilMonth:        1,
+		UntilDay:          2,
+		UntilTimeCode:     12,
+		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 
 	// MatchingEra=[2000-01-01, 2001-01-01)
 	match := MatchingEra{
-		startDt:           DateTuple{2000, 1, 1, 0, suffixW},
-		untilDt:           DateTuple{2001, 1, 1, 0, suffixW},
+		startDt:           DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
+		untilDt:           DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 		era:               &era,
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
@@ -317,25 +318,25 @@ func TestCompareTransitionToMatch(t *testing.T) {
 		Transition{
 			match:          &match,
 			rule:           nil,
-			transitionTime: DateTuple{1999, 12, 31, 0, suffixW},
+			transitionTime: DateTuple{1999, 12, 31, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2000-01-01
 		Transition{
 			match:          &match,
 			rule:           nil,
-			transitionTime: DateTuple{2000, 1, 1, 0, suffixW},
+			transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2000-01-02
 		Transition{
 			match:          &match,
 			rule:           nil,
-			transitionTime: DateTuple{2000, 1, 2, 0, suffixW},
+			transitionTime: DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2001-02-03
 		Transition{
 			match:          &match,
 			rule:           nil,
-			transitionTime: DateTuple{2001, 2, 3, 0, suffixW},
+			transitionTime: DateTuple{2001, 2, 3, 0, zoneinfo.SuffixW},
 		},
 	}
 	transition0 := &transitions[0]

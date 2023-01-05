@@ -1,5 +1,9 @@
 package acetime
 
+import (
+	"github.com/bxparks/AceTimeGo/zoneinfo"
+)
+
 //-----------------------------------------------------------------------------
 // TimeZone represents one of the IANA TZ time zones. This is a reference type,
 // and meant to be passed around as a pointer and garbage collected when it is
@@ -10,7 +14,7 @@ type TimeZone struct {
 	zoneProcessor ZoneProcessor
 }
 
-func TimeZoneForZoneInfo(zoneInfo *ZoneInfo) TimeZone {
+func TimeZoneForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 	var tz TimeZone
 	tz.zoneProcessor.InitForZoneInfo(zoneInfo)
 	return tz

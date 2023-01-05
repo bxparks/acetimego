@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"strings"
 )
 
@@ -28,7 +29,7 @@ const (
 )
 
 type ZoneProcessor struct {
-	zoneInfo          *ZoneInfo
+	zoneInfo          *zoneinfo.ZoneInfo
 	year              int16
 	isFilled          bool
 	numMatches        uint8
@@ -41,7 +42,7 @@ func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
 }
 
 // InitForZoneInfo initializes the ZoneProcessor for the given zoneInfo.
-func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *ZoneInfo) {
+func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
 	zp.zoneInfo = zoneInfo
 	zp.isFilled = false
 }
@@ -54,7 +55,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	zp.year = year
 	zp.numMatches = 0
 	zp.transitionStorage.Init()
-	if year < zp.zoneInfo.startYear-1 || zp.zoneInfo.untilYear < year {
+	if year < zp.zoneInfo.StartYear-1 || zp.zoneInfo.UntilYear < year {
 		return ErrGeneric
 	}
 
@@ -245,16 +246,16 @@ type MonthDay struct {
 }
 
 // calcStartDayOfMonth Extracts the actual (month, day) pair from the expression
-// used in the TZ data files of the form (onDayOfWeek >= onDayOfMonth) or
-// (onDayOfWeek <= onDayOfMonth).
+// used in the TZ data files of the form (OnDayOfWeek >= OnDayOfMonth) or
+// (OnDayOfWeek <= OnDayOfMonth).
 //
 // There are 4 combinations:
 //
 // @verbatim
-// onDayOfWeek=0, onDayOfMonth=(1-31): exact match
-// onDayOfWeek=1-7, onDayOfMonth=1-31: dayOfWeek>=dayOfMonth
-// onDayOfWeek=1-7, onDayOfMonth=0: last{dayOfWeek}
-// onDayOfWeek=1-7, onDayOfMonth=-(1-31): dayOfWeek<=dayOfMonth
+// OnDayOfWeek=0, OnDayOfMonth=(1-31): exact match
+// OnDayOfWeek=1-7, OnDayOfMonth=1-31: dayOfWeek>=dayOfMonth
+// OnDayOfWeek=1-7, OnDayOfMonth=0: last{dayOfWeek}
+// OnDayOfWeek=1-7, OnDayOfMonth=-(1-31): dayOfWeek<=dayOfMonth
 // @endverbatim
 //
 // Caveats: This function handles expressions which crosses month boundaries,
@@ -306,18 +307,18 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 //-----------------------------------------------------------------------------
 
 func findMatches(
-	zoneInfo *ZoneInfo,
+	zoneInfo *zoneinfo.ZoneInfo,
 	startYm YearMonth,
 	untilYm YearMonth,
 	matches []MatchingEra) uint8 {
 
 	var iMatch uint8 = 0
 	var prevMatch *MatchingEra = nil
-	var numEras uint8 = zoneInfo.numEras()
+	var numEras uint8 = zoneInfo.NumEras()
 
 	for iEra := uint8(0); iEra < numEras; iEra++ {
-		era := &zoneInfo.eras[iEra]
-		var prevEra *ZoneEra = nil
+		era := &zoneInfo.Eras[iEra]
+		var prevEra *zoneinfo.ZoneEra = nil
 		if prevMatch != nil {
 			prevEra = prevMatch.era
 		}
@@ -344,8 +345,8 @@ func findMatches(
  * earliest ZoneEra.
  */
 func eraOverlapsInterval(
-	prevEra *ZoneEra,
-	era *ZoneEra,
+	prevEra *zoneinfo.ZoneEra,
+	era *zoneinfo.ZoneEra,
 	startYm YearMonth,
 	untilYm YearMonth) bool {
 
@@ -355,24 +356,26 @@ func eraOverlapsInterval(
 }
 
 /** Return (1, 0, -1) depending on how era compares to (year, month). */
-func compareEraToYearMonth(era *ZoneEra, year int16, month uint8) int8 {
-	if era.untilYear < year {
+func compareEraToYearMonth(
+	era *zoneinfo.ZoneEra, year int16, month uint8) int8 {
+
+	if era.UntilYear < year {
 		return -1
 	}
-	if era.untilYear > year {
+	if era.UntilYear > year {
 		return 1
 	}
-	if era.untilMonth < month {
+	if era.UntilMonth < month {
 		return -1
 	}
-	if era.untilMonth > month {
+	if era.UntilMonth > month {
 		return 1
 	}
-	if era.untilDay > 1 {
+	if era.UntilDay > 1 {
 		return 1
 	}
 	//if era.until_time_minutes < 0 { return -1; // never possible
-	if era.untilTimeCode > 0 {
+	if era.UntilTimeCode > 0 {
 		return 1
 	}
 	return 0
@@ -387,7 +390,7 @@ func compareEraToYearMonth(era *ZoneEra, year int16, month uint8) int8 {
 func createMatchingEra(
 	newMatch *MatchingEra,
 	prevMatch *MatchingEra,
-	era *ZoneEra,
+	era *zoneinfo.ZoneEra,
 	startYm YearMonth,
 	untilYm YearMonth) {
 
@@ -398,27 +401,27 @@ func createMatchingEra(
 		startDate.month = 1
 		startDate.day = 1
 		startDate.minutes = 0
-		startDate.suffix = suffixW
+		startDate.suffix = zoneinfo.SuffixW
 	} else {
-		startDate.year = prevMatch.era.untilYear
-		startDate.month = prevMatch.era.untilMonth
-		startDate.day = prevMatch.era.untilDay
+		startDate.year = prevMatch.era.UntilYear
+		startDate.month = prevMatch.era.UntilMonth
+		startDate.day = prevMatch.era.UntilDay
 		startDate.minutes = prevMatch.era.UntilMinutes()
 		startDate.suffix = prevMatch.era.UntilSuffix()
 	}
-	lowerBound := DateTuple{startYm.year, startYm.month, 1, 0, suffixW}
+	lowerBound := DateTuple{startYm.year, startYm.month, 1, 0, zoneinfo.SuffixW}
 	if dateTupleCompare(&startDate, &lowerBound) < 0 {
 		startDate = lowerBound
 	}
 
 	untilDate := DateTuple{
-		era.untilYear,
-		era.untilMonth,
-		era.untilDay,
+		era.UntilYear,
+		era.UntilMonth,
+		era.UntilDay,
 		era.UntilMinutes(),
 		era.UntilSuffix(),
 	}
-	upperBound := DateTuple{untilYm.year, untilYm.month, 1, 0, suffixW}
+	upperBound := DateTuple{untilYm.year, untilYm.month, 1, 0, zoneinfo.SuffixW}
 	if dateTupleCompare(&upperBound, &untilDate) < 0 {
 		untilDate = upperBound
 	}
@@ -442,7 +445,7 @@ func createTransitions(ts *TransitionStorage, matches []MatchingEra) {
 }
 
 func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
-	policy := match.era.zonePolicy
+	policy := match.era.ZonePolicy
 	if policy == nil {
 		// Step 2A
 		createTransitionsFromSimpleMatch(ts, match)
@@ -468,7 +471,7 @@ func createTransitionsFromSimpleMatch(
 }
 
 func createTransitionForYear(
-	t *Transition, year int16, rule *ZoneRule, match *MatchingEra) {
+	t *Transition, year int16, rule *zoneinfo.ZoneRule, match *MatchingEra) {
 
 	t.match = match
 	t.rule = rule
@@ -479,8 +482,8 @@ func createTransitionForYear(
 		t.transitionTime = getTransitionTime(year, rule)
 		t.deltaMinutes = rule.DstOffsetMinutes()
 		// If LETTER is a '-', treat it the same as an empty string.
-		if rule.letter != "-" {
-			t.letter = rule.letter
+		if rule.Letter != "-" {
+			t.letter = rule.Letter
 		}
 	} else {
 		// Create a Transition using the MatchingEra for the transitionTime.
@@ -490,9 +493,9 @@ func createTransitionForYear(
 	}
 }
 
-func getTransitionTime(year int16, rule *ZoneRule) DateTuple {
+func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) DateTuple {
 	md := calcStartDayOfMonth(
-		year, rule.inMonth, rule.onDayOfWeek, rule.onDayOfMonth)
+		year, rule.InMonth, rule.OnDayOfWeek, rule.OnDayOfMonth)
 	return DateTuple{
 		year:    year,
 		month:   md.month,
@@ -529,19 +532,19 @@ func createTransitionsFromNamedMatch(
 
 // Step 2B: Pass 1
 func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
-	policy := match.era.zonePolicy
+	policy := match.era.ZonePolicy
 	startYear := match.startDt.year
 	endYear := match.untilDt.year
 
 	prior := ts.ReservePrior()
 	prior.isValidPrior = false
-	for ir := range policy.rules {
-		rule := &policy.rules[ir]
+	for ir := range policy.Rules {
+		rule := &policy.Rules[ir]
 
 		// Add transitions for interior years
 		var interiorYears [maxInteriorYears]int16
 		numYears := calcInteriorYears(
-			interiorYears[:], rule.fromYear, rule.toYear, startYear, endYear)
+			interiorYears[:], rule.FromYear, rule.ToYear, startYear, endYear)
 		for iy := uint8(0); iy < numYears; iy++ {
 			year := interiorYears[iy]
 			t := ts.GetFreeAgent()
@@ -558,7 +561,7 @@ func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
 		}
 
 		// Add Transition for prior year
-		priorYear := getMostRecentPriorYear(rule.fromYear, rule.toYear, startYear)
+		priorYear := getMostRecentPriorYear(rule.FromYear, rule.ToYear, startYear)
 		if priorYear != InvalidYear {
 			t := ts.GetFreeAgent()
 			createTransitionForYear(t, priorYear, rule, match)
@@ -573,8 +576,8 @@ func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
 	}
 }
 
-// calcInteriorYears calculates the interior years that overlaps (fromYear,
-// toYear) and (startYear, endYear). The results are placed into the
+// calcInteriorYears calculates the interior years that overlaps (FromYear,
+// ToYear) and (startYear, endYear). The results are placed into the
 // interiorYears slice, and the number of elements are returned.
 func calcInteriorYears(
 	interiorYears []int16,
@@ -728,7 +731,7 @@ func calcAbbreviations(transitions []Transition) {
 	for i := range transitions {
 		transition := &transitions[i]
 		transition.abbrev = createAbbreviation(
-			transition.match.era.format,
+			transition.match.era.Format,
 			transition.deltaMinutes,
 			transition.getLetter())
 	}
@@ -753,7 +756,7 @@ func createAbbreviation(
 				return format[slashIndex+1:]
 			}
 		} else {
-			// Just return FORMAT disregarding deltaMinutes and letter.
+			// Just return FORMAT disregarding deltaMinutes and Letter.
 			return format
 		}
 	}
