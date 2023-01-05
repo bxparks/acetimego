@@ -12,7 +12,7 @@ var (
 
 func SetCurrentEpochYear(year int16) {
 	currentEpochYear = year
-  daysToCurrentEpochFromConverterEpoch = ConvertToDays(year, 1, 1)
+	daysToCurrentEpochFromConverterEpoch = ConvertToDays(year, 1, 1)
 }
 
 func GetCurrentEpochYear() int16 {
