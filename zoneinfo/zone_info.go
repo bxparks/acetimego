@@ -308,9 +308,9 @@ type ZoneInfo struct {
 	Target *ZoneInfo
 }
 
-// NumEras returns the number of ZoneEras in the current zone, or in the target
+// ErasActive returns the Eras of the current zone, or the Eras of the target
 // zone if the current zone is a Link.
-func (zi *ZoneInfo) NumEras() uint8 {
+func (zi *ZoneInfo) ErasActive() []ZoneEra {
 	// TODO: Add support for Links.
-	return uint8(len(zi.Eras))
+	return zi.Eras
 }

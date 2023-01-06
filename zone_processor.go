@@ -314,10 +314,10 @@ func findMatches(
 
 	var iMatch uint8 = 0
 	var prevMatch *MatchingEra = nil
-	var numEras uint8 = zoneInfo.NumEras()
+	var eras []zoneinfo.ZoneEra = zoneInfo.ErasActive()
 
-	for iEra := uint8(0); iEra < numEras; iEra++ {
-		era := &zoneInfo.Eras[iEra]
+	for iEra := range eras {
+		era := &eras[iEra]
 		var prevEra *zoneinfo.ZoneEra = nil
 		if prevMatch != nil {
 			prevEra = prevMatch.era

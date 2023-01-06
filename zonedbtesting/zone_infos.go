@@ -142,3 +142,20 @@ var ZoneEtc_UTC = zoneinfo.ZoneInfo{
 	Eras: ZoneEraEtc_UTC,
 	Target: nil,
 }
+
+//---------------------------------------------------------------------------
+// Link name: US/Pacific -> America/Los_Angeles
+// Strings (bytes): 11 (originally 11)
+// Memory (8-bit): 22
+// Memory (32-bit): 31
+//---------------------------------------------------------------------------
+
+const ZoneNameUS_Pacific = "US/Pacific"
+
+var ZoneUS_Pacific  = zoneinfo.ZoneInfo{
+  Name: ZoneNameUS_Pacific,
+  ZoneID: 0xa950f6ab,
+	StartYear: 2000,
+	UntilYear: 10000,
+	Target: &ZoneAmerica_Los_Angeles,
+}
