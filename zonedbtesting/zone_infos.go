@@ -1,4 +1,4 @@
-package zonedbtest
+package zonedbtesting
 
 import (
 	"github.com/bxparks/AceTimeGo/zoneinfo"
