@@ -308,9 +308,17 @@ type ZoneInfo struct {
 	Target *ZoneInfo
 }
 
+// IsLink returns true if the current zone is a Link.
+func (zi *ZoneInfo) IsLink() bool {
+	return zi.Target != nil
+}
+
 // ErasActive returns the Eras of the current zone, or the Eras of the target
 // zone if the current zone is a Link.
 func (zi *ZoneInfo) ErasActive() []ZoneEra {
-	// TODO: Add support for Links.
-	return zi.Eras
+	if zi.Target != nil {
+		return zi.Target.Eras
+	} else {
+		return zi.Eras
+	}
 }

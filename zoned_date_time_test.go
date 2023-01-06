@@ -430,3 +430,28 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 		t.Fatal(nydt)
 	}
 }
+
+//-----------------------------------------------------------------------------
+// Test US/Pacific which is a Link to America/Los_Angeles
+//-----------------------------------------------------------------------------
+
+func TestZonedDateTimeForLink(t *testing.T) {
+	savedEpochYear := GetCurrentEpochYear()
+	SetCurrentEpochYear(2050)
+	defer SetCurrentEpochYear(savedEpochYear)
+
+	tzLosAngeles := TimeZoneForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+	tzPacific := TimeZoneForZoneInfo(&zonedbtesting.ZoneUS_Pacific)
+
+	if !zonedbtesting.ZoneUS_Pacific.IsLink() {
+		t.Fatal("US/Pacific should be a Link")
+	}
+
+	ldt := LocalDateTime{2022, 8, 30, 20, 0, 0}
+	ladt := ZonedDateTimeFromLocalDateTime(&ldt, 0 /*fold*/, &tzLosAngeles)
+	padt := ZonedDateTimeFromLocalDateTime(&ldt, 0 /*fold*/, &tzPacific)
+
+	if !(ladt.ToEpochSeconds() == padt.ToEpochSeconds()) {
+		t.Fatal("epochSeconds not equal")
+	}
+}
