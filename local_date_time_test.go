@@ -2,7 +2,16 @@ package acetime
 
 import (
 	"testing"
+	"unsafe"
 )
+
+func TestLocalDateTimeSize(t *testing.T) {
+	ldt := LocalDateTime{2000, 1, 1, 1, 2, 3}
+	size := unsafe.Sizeof(ldt)
+	if !(size == 8) {
+		t.Fatal("Sizeof(LocalDateTime): ", size)
+	}
+}
 
 func TestLocalDateTimeIsError(t *testing.T) {
 	if (&LocalDateTime{2000, 1, 1, 0, 0, 0}).IsError() {

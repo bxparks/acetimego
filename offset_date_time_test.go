@@ -2,7 +2,16 @@ package acetime
 
 import (
 	"testing"
+	"unsafe"
 )
+
+func TestOffsetDateTimeSize(t *testing.T) {
+	odt := OffsetDateTime{2000, 1, 1, 1, 2, 3, 0 /*fold*/, -8*60}
+	size := unsafe.Sizeof(odt)
+	if !(size == 10) {
+		t.Fatal("Sizeof(OffsetDateTime): ", size)
+	}
+}
 
 func TestOffsetDateTimeIsError(t *testing.T) {
 	odt := OffsetDateTime{2000, 1, 1, 0, 0, 0, 0, 0}
