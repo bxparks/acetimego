@@ -13,18 +13,25 @@ const (
 	InvalidOffsetMinutes = math.MinInt16
 )
 
-type ZonedExtra struct {
-	stdOffsetMinutes int16  // STD offset
-	dstOffsetMinutes int16  // DST offset
-	abbrev           string // abbreviation (e.g. PST, PDT)
-}
+const (
+	ZonedExtraErr = iota
+	ZonedExtraNotFound
+	ZonedExtraExact
+	ZonedExtraGap
+	ZonedExtraOverlap
+)
 
-func (ze ZonedExtra) IsError() bool {
-	return ze.stdOffsetMinutes == InvalidOffsetMinutes
+type ZonedExtra struct {
+	zetype              uint8
+	stdOffsetMinutes    int16  // STD offset
+	dstOffsetMinutes    int16  // DST offset
+	reqStdOffsetMinutes int16  // request STD offset
+	reqDstOffsetMinutes int16  // request DST offset
+	abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
 func NewZonedExtraError() ZonedExtra {
-	return ZonedExtra{stdOffsetMinutes: InvalidOffsetMinutes}
+	return ZonedExtra{zetype: ZonedExtraErr}
 }
 
 func ZonedExtraFromEpochSeconds(epochSeconds int32, tz *TimeZone) ZonedExtra {
@@ -32,4 +39,11 @@ func ZonedExtraFromEpochSeconds(epochSeconds int32, tz *TimeZone) ZonedExtra {
 		return NewZonedExtraError()
 	}
 	return tz.ZonedExtraFromEpochSeconds(epochSeconds)
+}
+
+func ZonedExtraFromLocalDateTime(ldt *LocalDateTime, tz *TimeZone) ZonedExtra {
+	if ldt.IsError() {
+		return NewZonedExtraError()
+	}
+	return tz.ZonedExtraFromLocalDateTime(ldt)
 }

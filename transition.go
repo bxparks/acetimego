@@ -471,7 +471,7 @@ type TransitionForSeconds struct {
 	/** The matching Transition, nil if not found. */
 	curr *Transition
 
-	/** 1 if in the overlap, otherwise 0 */
+  /** 0 for the first or exact transition; 1 for the second transition */
 	fold uint8
 
 	/**
@@ -493,7 +493,7 @@ func (ts *TransitionStorage) findTransitionForSeconds(
 
 	transitions := ts.GetActives()
 	for i := range transitions {
-		next := &transitions[i]
+		next = &transitions[i] // do not use := here (bitten twice by this bug)
 		if next.startEpochSeconds > epochSeconds {
 			break
 		}
@@ -517,7 +517,9 @@ func calculateFoldAndOverlap(
 	next *Transition) (fold uint8, num uint8) {
 
 	if curr == nil {
-		return 0, 0
+		fold = 0
+		num = 0
+		return
 	}
 
 	// Check if within forward overlap shadow from prev
@@ -535,7 +537,9 @@ func calculateFoldAndOverlap(
 	}
 	if isOverlap {
 		// epochSeconds selects the second match
-		return 1, 2
+		fold = 1
+		num = 2
+		return
 	}
 
 	// Check if within backward overlap shawdow from next
@@ -551,16 +555,21 @@ func calculateFoldAndOverlap(
 			isOverlap = false
 		} else {
 			// Check if within the backward overlap shadow from next
-			isOverlap = next.startEpochSeconds-epochSeconds <= -shiftSeconds
+			delta := next.startEpochSeconds - epochSeconds
+			isOverlap = delta <= -shiftSeconds
 		}
 	}
 	if isOverlap {
 		// epochSeconds selects the first match
-		return 0, 2
+		fold = 0
+		num = 2
+		return
 	}
 
 	// Normal single match, no overlap
-	return 0, 1
+	fold = 0
+	num = 1
+	return
 }
 
 //-----------------------------------------------------------------------------

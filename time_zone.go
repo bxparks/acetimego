@@ -82,9 +82,34 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 
 func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds int32) ZonedExtra {
 	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
+	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
+		return NewZonedExtraError()
+	}
+
 	return ZonedExtra{
-		stdOffsetMinutes: result.stdOffsetMinutes,
-		dstOffsetMinutes: result.dstOffsetMinutes,
-		abbrev:           result.abbrev,
+		zetype:              result.frtype,
+		stdOffsetMinutes:    result.stdOffsetMinutes,
+		dstOffsetMinutes:    result.dstOffsetMinutes,
+		reqStdOffsetMinutes: result.reqStdOffsetMinutes,
+		reqDstOffsetMinutes: result.reqDstOffsetMinutes,
+		abbrev:              result.abbrev,
+	}
+}
+
+func (tz *TimeZone) ZonedExtraFromLocalDateTime(
+	ldt *LocalDateTime) ZonedExtra {
+
+	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
+	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
+		return NewZonedExtraError()
+	}
+
+	return ZonedExtra{
+		zetype:              result.frtype,
+		stdOffsetMinutes:    result.stdOffsetMinutes,
+		dstOffsetMinutes:    result.dstOffsetMinutes,
+		reqStdOffsetMinutes: result.reqStdOffsetMinutes,
+		reqDstOffsetMinutes: result.reqDstOffsetMinutes,
+		abbrev:              result.abbrev,
 	}
 }
