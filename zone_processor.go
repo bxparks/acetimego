@@ -692,8 +692,7 @@ func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds int32) FindResult {
 // Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDatetime&)
 // in the AceTime library and atc_processor_find_by_local_date_time() in the
 // AceTimeC library.
-func (zp *ZoneProcessor) FindByLocalDateTime(
-	ldt *LocalDateTime, fold uint8) FindResult {
+func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 
 	err := zp.InitForYear(ldt.Year)
 	if err != ErrOk {
@@ -722,7 +721,7 @@ func (zp *ZoneProcessor) FindByLocalDateTime(
 			if tfd.num == 0 { // gap
 				result.frtype = FindResultGap
 				result.fold = 0
-				if fold == 0 {
+				if ldt.Fold == 0 {
 					// ldt wants to use the 'prev' transition to convert to
 					// epochSeconds.
 					result.reqStdOffsetMinutes = tfd.prev.offsetMinutes
@@ -740,13 +739,13 @@ func (zp *ZoneProcessor) FindByLocalDateTime(
 					transition = tfd.prev
 				}
 			} else {
-				if fold == 0 {
+				if ldt.Fold == 0 {
 					transition = tfd.prev
 				} else {
 					transition = tfd.curr
 				}
 				result.frtype = FindResultOverlap
-				result.fold = fold
+				result.fold = ldt.Fold
 				result.reqStdOffsetMinutes = transition.offsetMinutes
 				result.reqDstOffsetMinutes = transition.deltaMinutes
 			}

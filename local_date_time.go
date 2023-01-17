@@ -13,6 +13,7 @@ type LocalDateTime struct {
 	Hour   uint8
 	Minute uint8
 	Second uint8
+	Fold   uint8
 }
 
 func NewLocalDateTimeError() LocalDateTime {
@@ -50,5 +51,5 @@ func LocalDateTimeFromEpochSeconds(epochSeconds int32) LocalDateTime {
 	year, month, day := LocalDateFromEpochDays(days)
 	hour, minute, second := LocalTimeFromSeconds(seconds)
 
-	return LocalDateTime{year, month, day, hour, minute, second}
+	return LocalDateTime{year, month, day, hour, minute, second, 0 /*Fold*/}
 }

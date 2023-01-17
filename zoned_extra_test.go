@@ -33,7 +33,7 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back.
-	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*fold*/, -7 * 60}
+	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 60}
 	epochSeconds := odt.ToEpochSeconds()
 
 	ze := ZonedExtraFromEpochSeconds(epochSeconds, &tz)
@@ -64,7 +64,7 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back.
-	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*fold*/, -8 * 60}
+	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 60}
 	epochSeconds := odt.ToEpochSeconds()
 
 	ze := ZonedExtraFromEpochSeconds(epochSeconds, &tz)

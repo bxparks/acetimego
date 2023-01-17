@@ -48,9 +48,9 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 // AceTimeC library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
 // the AceTime library.
 func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
-	ldt *LocalDateTime, fold uint8) OffsetDateTime {
+	ldt *LocalDateTime) OffsetDateTime {
 
-	result := tz.zoneProcessor.FindByLocalDateTime(ldt, fold)
+	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
 	if result.IsError() || result.frtype == FindResultNotFound {
 		return NewOffsetDateTimeError()
 	}

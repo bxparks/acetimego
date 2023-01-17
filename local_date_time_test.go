@@ -6,7 +6,7 @@ import (
 )
 
 func TestLocalDateTimeSize(t *testing.T) {
-	ldt := LocalDateTime{2000, 1, 1, 1, 2, 3}
+	ldt := LocalDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/}
 	size := unsafe.Sizeof(ldt)
 	if !(size == 8) {
 		t.Fatal("Sizeof(LocalDateTime): ", size)
@@ -14,22 +14,24 @@ func TestLocalDateTimeSize(t *testing.T) {
 }
 
 func TestLocalDateTimeIsError(t *testing.T) {
-	if (&LocalDateTime{2000, 1, 1, 0, 0, 0}).IsError() {
+	if (&LocalDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/}).IsError() {
 		t.Fatalf(`LocalDateTime{2000, 1, 1, 0, 0, 0}.IsError() should be false`)
 	}
-	if !(&LocalDateTime{InvalidYear, 1, 1, 0, 0, 0}).IsError() {
+	if !(&LocalDateTime{InvalidYear, 1, 1, 0, 0, 0, 0 /*Fold*/}).IsError() {
 		t.Fatalf(`LocalDateTime{2000, 1, 1, 0, 0, 0}.IsError() should be true`)
 	}
 }
 
 func TestLocalDateTimeToEpochSeconds(t *testing.T) {
-	if (&LocalDateTime{2050, 1, 1, 0, 0, 0}).ToEpochSeconds() != 0 {
+	if (&LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/}).ToEpochSeconds() != 0 {
 		t.Fatalf(`LocalDateTime{2050, 1, 1, 0, 0, 0}.ToEpochSeconds() should be 0`)
 	}
-	if (&LocalDateTime{2050, 1, 1, 0, 0, 1}).ToEpochSeconds() != 1 {
+	if (&LocalDateTime{2050, 1, 1, 0, 0, 1, 0 /*Fold*/}).ToEpochSeconds() != 1 {
 		t.Fatalf(`LocalDateTime{2050, 1, 1, 0, 0, 1}.ToEpochSeconds() should be 1`)
 	}
-	if (&LocalDateTime{2051, 1, 1, 0, 0, 1}).ToEpochSeconds() != 86400*365+1 {
+	if (&LocalDateTime{2051, 1, 1, 0, 0, 1, 0 /*Fold*/}).ToEpochSeconds() !=
+		86400*365+1 {
+
 		t.Fatalf(
 			`LocalDateTime{2051, 1, 1, 0, 0, 1}.ToEpochSeconds() should be 31536001`)
 	}

@@ -60,9 +60,9 @@ func ZonedDateTimeFromEpochSeconds(
 }
 
 func ZonedDateTimeFromLocalDateTime(
-	ldt *LocalDateTime, fold uint8, tz *TimeZone) ZonedDateTime {
+	ldt *LocalDateTime, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.OffsetDateTimeFromLocalDateTime(ldt, fold)
+	odt := tz.OffsetDateTimeFromLocalDateTime(ldt)
 	return ZonedDateTime{
 		Year:          odt.Year,
 		Month:         odt.Month,
