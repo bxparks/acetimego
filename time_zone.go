@@ -51,7 +51,7 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime) OffsetDateTime {
 
 	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
-	if result.IsError() || result.frtype == FindResultNotFound {
+	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
 		return NewOffsetDateTimeError()
 	}
 

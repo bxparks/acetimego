@@ -16,7 +16,7 @@ type YearMonth struct {
 	month uint8
 }
 
-type Err int8
+type Err uint8
 
 const (
 	ErrOk Err = iota
@@ -628,7 +628,8 @@ func createAbbreviation(
 
 // Values of the FindResult.type field.
 const (
-	FindResultNotFound = iota
+	FindResultErr = iota
+	FindResultNotFound
 	FindResultExact
 	FindResultGap
 	FindResultOverlap
@@ -644,13 +645,8 @@ type FindResult struct {
 	abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
-// TODO: Merge error condition into frtype field
 func NewFindResultError() FindResult {
-	return FindResult{stdOffsetMinutes: InvalidOffsetMinutes}
-}
-
-func (ti *FindResult) IsError() bool {
-	return ti.stdOffsetMinutes == InvalidOffsetMinutes
+	return FindResult{frtype: FindResultErr}
 }
 
 // Find the AtcFindResult at the given epoch_seconds.
