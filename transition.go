@@ -57,13 +57,10 @@ func dateTupleCompare(a *DateTuple, b *DateTuple) int8 {
 
 // dateTupleSubtract returns the number of seconds of (a - b).
 func dateTupleSubtract(a *DateTuple, b *DateTuple) int32 {
-	eda := LocalDateToEpochDays(a.year, a.month, a.day)
-	esa := eda*86400 + int32(a.minutes)*60
+	da := LocalDateToEpochDays(a.year, a.month, a.day)
+	db := LocalDateToEpochDays(b.year, b.month, b.day)
 
-	edb := LocalDateToEpochDays(b.year, b.month, b.day)
-	esb := edb*86400 + int32(b.minutes)*60
-
-	return esa - esb
+	return (da-db)*86400 + int32(a.minutes-b.minutes)*60
 }
 
 func dateTupleNormalize(dt *DateTuple) {
@@ -471,7 +468,7 @@ type TransitionForSeconds struct {
 	/** The matching Transition, nil if not found. */
 	curr *Transition
 
-  /** 0 for the first or exact transition; 1 for the second transition */
+	/** 0 for the first or exact transition; 1 for the second transition */
 	fold uint8
 
 	/**

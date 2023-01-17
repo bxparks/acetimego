@@ -71,6 +71,41 @@ func TestDateTupleSubtract(t *testing.T) {
 	}
 }
 
+// Test that there is no overflow for year 6000, which is far beyond the
+// Epoch.currentEpochYear.
+func TestDateTupleSubtractNoOverflow(t *testing.T) {
+	var dta, dtb DateTuple
+	var diff int32
+
+	dta = DateTuple{6000, 1, 1, 0, zoneinfo.SuffixW} // 6000-01-01 00:00
+	dtb = DateTuple{6000, 1, 1, 1, zoneinfo.SuffixW} // 6000-01-01 00:01
+	diff = dateTupleSubtract(&dta, &dtb)
+	if !(-60 == diff) {
+		t.Fatal(diff)
+	}
+
+	dta = DateTuple{6000, 1, 1, 0, zoneinfo.SuffixW} // 6000-01-01 00:00
+	dtb = DateTuple{6000, 1, 2, 0, zoneinfo.SuffixW} // 6000-01-02 00:00
+	diff = dateTupleSubtract(&dta, &dtb)
+	if !(-86400 == diff) {
+		t.Fatal(diff)
+	}
+
+	dta = DateTuple{6000, 1, 1, 0, zoneinfo.SuffixW} // 6000-01-01 00:00
+	dtb = DateTuple{6000, 2, 1, 0, zoneinfo.SuffixW} // 6000-02-01 00:00
+	diff = dateTupleSubtract(&dta, &dtb)
+	if !(-86400*31 == diff) { // January has 31 day
+		t.Fatal(diff)
+	}
+
+	dta = DateTuple{6000, 2, 1, 0, zoneinfo.SuffixW} // 6000-02-01 00:00
+	dtb = DateTuple{6000, 3, 1, 0, zoneinfo.SuffixW} // 6000-03-01 00:00
+	diff = dateTupleSubtract(&dta, &dtb)
+	if !(-86400*29 == diff) { // Feb 6000 is leap, 29 day
+		t.Fatal(diff)
+	}
+}
+
 func TestDateTupleNormalize(t *testing.T) {
 	var dt DateTuple
 
