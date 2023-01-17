@@ -94,6 +94,7 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds int32) Err {
 
 //---------------------------------------------------------------------------
 
+// TODO: Moved to time_zone.go; replace with FindResultFromEpochSeconds().
 func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
 	epochSeconds int32) OffsetDateTime {
 
@@ -102,8 +103,8 @@ func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
 		return NewOffsetDateTimeError()
 	}
 
-	mt := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
-	transition := mt.transition
+	tfs := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
+	transition := tfs.curr
 	if transition == nil {
 		return NewOffsetDateTimeError()
 	}
@@ -111,7 +112,7 @@ func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
 	totalOffsetMinutes := transition.offsetMinutes + transition.deltaMinutes
 	odt := OffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetMinutes)
 	if !odt.IsError() {
-		odt.Fold = mt.fold
+		odt.Fold = tfs.fold
 	}
 	return odt
 }
@@ -120,6 +121,8 @@ func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
 // LocalDatetime.
 // Adapted from ExtendedZoneProcessor::getOffsetDateTime(const LocalDatetime&)
 // from ExtendedZoneProcessor in AceTime.
+//
+// TODO: Move to time_zone.go; replace with FindResultFromLocalDateTime().
 func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, fold uint8) OffsetDateTime {
 
@@ -128,24 +131,24 @@ func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
 		return NewOffsetDateTimeError()
 	}
 
-	result := zp.transitionStorage.findTransitionForDateTime(ldt)
+	tfd := zp.transitionStorage.findTransitionForDateTime(ldt)
 
 	// Extract the appropriate Transition, depending on the requested 'fold'
-	// and the 'result.searchStatus'.
+	// and the 'tfd.searchStatus'.
 	needsNormalization := false
 	var transition *Transition
-	if result.searchStatus == searchStatusExact {
-		transition = result.transition0
+	if tfd.searchStatus == searchStatusExact {
+		transition = tfd.transition0
 	} else {
-		if result.transition0 == nil || result.transition1 == nil {
+		if tfd.transition0 == nil || tfd.transition1 == nil {
 			// ldt was far past or far future, and didn't match anything.
 			transition = nil
 		} else {
-			needsNormalization = (result.searchStatus == searchStatusGap)
+			needsNormalization = (tfd.searchStatus == searchStatusGap)
 			if fold == 0 {
-				transition = result.transition0
+				transition = tfd.transition0
 			} else {
-				transition = result.transition1
+				transition = tfd.transition1
 			}
 		}
 	}
@@ -174,9 +177,9 @@ func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
 		// Transition returned in TransitionResult above.
 		var othert *Transition
 		if fold == 0 {
-			othert = result.transition1
+			othert = tfd.transition1
 		} else {
-			othert = result.transition0
+			othert = tfd.transition0
 		}
 		odt = OffsetDateTimeFromEpochSeconds(
 			epochSeconds, othert.offsetMinutes+othert.deltaMinutes)
@@ -197,6 +200,7 @@ func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
 
 //---------------------------------------------------------------------------
 
+// TODO: Rename to FindResult.
 type TransitionInfo struct {
 	stdOffsetMinutes int16  // STD offset
 	dstOffsetMinutes int16  // DST offset
@@ -211,6 +215,7 @@ func (ti *TransitionInfo) IsError() bool {
 	return ti.stdOffsetMinutes == InvalidOffsetMinutes
 }
 
+// TODO: Rename to FindByEpochSeconds(). Add FindByLocalDateTime().
 func (zp *ZoneProcessor) TransitionInfoFromEpochSeconds(
 	epochSeconds int32) TransitionInfo {
 
@@ -219,8 +224,8 @@ func (zp *ZoneProcessor) TransitionInfoFromEpochSeconds(
 		return NewTransitionInfoError()
 	}
 
-	mt := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
-	transition := mt.transition
+	tfs := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
+	transition := tfs.curr
 	if transition == nil {
 		return NewTransitionInfoError()
 	}

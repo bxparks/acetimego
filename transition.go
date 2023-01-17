@@ -467,54 +467,99 @@ func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
 
 //-----------------------------------------------------------------------------
 
-type MatchingTransition struct {
+type TransitionForSeconds struct {
 	/** The matching Transition, nil if not found. */
-	transition *Transition
+	curr *Transition
 
 	/** 1 if in the overlap, otherwise 0 */
 	fold uint8
+
+	/**
+	 * Number of occurrences of the resulting LocalDateTime: 0, 1, or 2. This is
+	 * needed because a fold=0 can mean that the LocalDateTime occurs exactly
+	 * once, or that the first of two occurrences of LocalDateTime was selected by
+	 * the epochSeconds.
+   */
+	num uint8
 }
 
 func (ts *TransitionStorage) findTransitionForSeconds(
-	epochSeconds int32) MatchingTransition {
-	var prevMatch *Transition = nil
-	var match *Transition = nil
+	epochSeconds int32) TransitionForSeconds {
+
+	var prev *Transition = nil
+	var curr *Transition = nil
+	var next *Transition = nil
+
 	transitions := ts.GetActives()
 	for i := range transitions {
-		candidate := &transitions[i]
-		if candidate.startEpochSeconds > epochSeconds {
+		next := &transitions[i]
+		if next.startEpochSeconds > epochSeconds {
 			break
 		}
-		prevMatch = match
-		match = candidate
+		prev = curr
+		curr = next
+		next = nil // clear 'next' in case we roll off the array
 	}
-	fold := calculateFold(epochSeconds, match, prevMatch)
-	return MatchingTransition{match, fold}
+
+	fold, num := calculateFoldAndOverlap(epochSeconds, prev, curr, next)
+	return TransitionForSeconds{curr, fold, num}
 }
 
 // calculateFold determines the 'fold' parameter at the given epochSeconds. This
 // will become the output parameter of the corresponding LocalDateTime. A 0
 // indicates that the LocalDateTime was the first ocurrence. A 1 indicates a
 // LocalDateTime that occurred a second time.
-func calculateFold(
-	epochSeconds int32, match *Transition, prevMatch *Transition) uint8 {
+func calculateFoldAndOverlap(
+	epochSeconds int32,
+	prev *Transition,
+	curr *Transition,
+	next *Transition) (fold uint8, num uint8) {
 
-	if (match == nil) || (prevMatch == nil) {
-		return 0
+	if curr == nil {
+		return 0, 0
 	}
 
-	// Check if epochSeconds occurs during a "fall back" DST transition.
-	overlapSeconds := dateTupleSubtract(&prevMatch.untilDt, &match.startDt)
-	if overlapSeconds <= 0 {
-		return 0
+  // Check if within forward overlap shadow from prev
+	var isOverlap bool
+	if prev == nil {
+		isOverlap = false
+	} else {
+		shiftSeconds := dateTupleSubtract(&curr.startDt, &prev.untilDt)
+		if shiftSeconds >= 0 {
+			// sprint forward, or unchanged
+			isOverlap = false
+		} else {
+      isOverlap = epochSeconds - curr.startEpochSeconds < -shiftSeconds
+		}
 	}
-	secondsFromTransitionStart := epochSeconds - match.startEpochSeconds
-	if secondsFromTransitionStart >= overlapSeconds {
-		return 0
-	}
+  if isOverlap {
+		// epochSeconds selects the second match
+    return 1, 2
+  }
 
-	// EpochSeconds occurs within the "fall back" overlap.
-	return 1
+  // Check if within backward overlap shawdow from next
+  if (next == nil) {
+    isOverlap = false
+  } else {
+    // Extract the shift to next transition. Can be 0 in some cases where
+    // the zone changed from DST of one zone to the STD into another zone,
+    // causing the overall UTC offset to remain unchanged.
+    shiftSeconds := dateTupleSubtract(&next.startDt, &curr.untilDt)
+    if (shiftSeconds >= 0) {
+      // spring forward, or unchanged
+      isOverlap = false
+    } else {
+      // Check if within the backward overlap shadow from next
+      isOverlap = next.startEpochSeconds - epochSeconds <= -shiftSeconds
+    }
+  }
+  if isOverlap {
+		// epochSeconds selects the first match
+    return 0, 2
+  }
+
+	// Normal single match, no overlap
+	return 0, 1
 }
 
 //-----------------------------------------------------------------------------
