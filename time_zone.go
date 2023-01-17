@@ -14,29 +14,77 @@ type TimeZone struct {
 	zoneProcessor ZoneProcessor
 }
 
+// Adapted from atc_time_zone_offset_date_time_from_epoch_seconds() in the
+// AceTimeC library and, TimeZone::getOffsetDateTime(epochSeconds) from the
+// AceTime library.
 func TimeZoneForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 	var tz TimeZone
 	tz.zoneProcessor.InitForZoneInfo(zoneInfo)
 	return tz
 }
 
-func (tz *TimeZone) OffsetDateDateTimeFromLocalDateTime(
-	ldt *LocalDateTime, fold uint8) OffsetDateTime {
-
-	return tz.zoneProcessor.OffsetDateTimeFromLocalDateTime(ldt, fold)
-}
-
-func (tz *TimeZone) OffsetDateDateTimeFromEpochSeconds(
+func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	epochSeconds int32) OffsetDateTime {
 
-	return tz.zoneProcessor.OffsetDateTimeFromEpochSeconds(epochSeconds)
+	err := tz.zoneProcessor.InitForEpochSeconds(epochSeconds)
+	if err != ErrOk {
+		return NewOffsetDateTimeError()
+	}
+
+	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
+	if result.frtype == FindResultNotFound {
+		return NewOffsetDateTimeError()
+	}
+
+	totalOffsetMinutes := result.stdOffsetMinutes + result.dstOffsetMinutes
+	odt := OffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetMinutes)
+	if !odt.IsError() {
+		odt.Fold = result.fold
+	}
+	return odt
+}
+
+// Adapted from atc_time_zone_offset_date_time_from_local_date_time() from the
+// AceTimeC library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
+// the AceTime library.
+func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
+	ldt *LocalDateTime, fold uint8) OffsetDateTime {
+
+	result := tz.zoneProcessor.FindByLocalDateTime(ldt, fold)
+	if result.IsError() || result.frtype == FindResultNotFound {
+		return NewOffsetDateTimeError()
+	}
+
+	// Convert FindResult into OffsetDateTime using the requested offset.
+	odt := OffsetDateTime{
+		Year:          ldt.Year,
+		Month:         ldt.Month,
+		Day:           ldt.Day,
+		Hour:          ldt.Hour,
+		Minute:        ldt.Minute,
+		Second:        ldt.Second,
+		OffsetMinutes: result.reqStdOffsetMinutes + result.reqDstOffsetMinutes,
+		Fold:          result.fold,
+	}
+
+	// Special processor for kAtcFindResultGap: Convert to epochSeconds using the
+	// reqStdOffsetMinutes and reqDstOffsetMinutes, then convert back to
+	// OffsetDateTime using the target stdOffsetMinutes and
+	// dstOffsetMinutes.
+	if result.frtype == FindResultGap {
+		epochSeconds := odt.ToEpochSeconds()
+		targetOffset := result.stdOffsetMinutes + result.dstOffsetMinutes
+		odt = OffsetDateTimeFromEpochSeconds(epochSeconds, targetOffset)
+	}
+
+	return odt
 }
 
 func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds int32) ZonedExtra {
-	ti := tz.zoneProcessor.TransitionInfoFromEpochSeconds(epochSeconds)
+	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
 	return ZonedExtra{
-		stdOffsetMinutes: ti.stdOffsetMinutes,
-		dstOffsetMinutes: ti.dstOffsetMinutes,
-		abbrev:           ti.abbrev,
+		stdOffsetMinutes: result.stdOffsetMinutes,
+		dstOffsetMinutes: result.dstOffsetMinutes,
+		abbrev:           result.abbrev,
 	}
 }

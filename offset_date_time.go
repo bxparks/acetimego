@@ -46,5 +46,5 @@ func OffsetDateTimeFromEpochSeconds(
 	return OffsetDateTime{
 		ldt.Year, ldt.Month, ldt.Day,
 		ldt.Hour, ldt.Minute, ldt.Second,
-		0, offsetMinutes}
+		0 /*fold*/, offsetMinutes}
 }

@@ -479,10 +479,11 @@ type TransitionForSeconds struct {
 	 * needed because a fold=0 can mean that the LocalDateTime occurs exactly
 	 * once, or that the first of two occurrences of LocalDateTime was selected by
 	 * the epochSeconds.
-   */
+	 */
 	num uint8
 }
 
+// TODO: Rename to FindTransitionForSeconds().
 func (ts *TransitionStorage) findTransitionForSeconds(
 	epochSeconds int32) TransitionForSeconds {
 
@@ -519,7 +520,7 @@ func calculateFoldAndOverlap(
 		return 0, 0
 	}
 
-  // Check if within forward overlap shadow from prev
+	// Check if within forward overlap shadow from prev
 	var isOverlap bool
 	if prev == nil {
 		isOverlap = false
@@ -529,34 +530,34 @@ func calculateFoldAndOverlap(
 			// sprint forward, or unchanged
 			isOverlap = false
 		} else {
-      isOverlap = epochSeconds - curr.startEpochSeconds < -shiftSeconds
+			isOverlap = epochSeconds-curr.startEpochSeconds < -shiftSeconds
 		}
 	}
-  if isOverlap {
+	if isOverlap {
 		// epochSeconds selects the second match
-    return 1, 2
-  }
+		return 1, 2
+	}
 
-  // Check if within backward overlap shawdow from next
-  if (next == nil) {
-    isOverlap = false
-  } else {
-    // Extract the shift to next transition. Can be 0 in some cases where
-    // the zone changed from DST of one zone to the STD into another zone,
-    // causing the overall UTC offset to remain unchanged.
-    shiftSeconds := dateTupleSubtract(&next.startDt, &curr.untilDt)
-    if (shiftSeconds >= 0) {
-      // spring forward, or unchanged
-      isOverlap = false
-    } else {
-      // Check if within the backward overlap shadow from next
-      isOverlap = next.startEpochSeconds - epochSeconds <= -shiftSeconds
-    }
-  }
-  if isOverlap {
+	// Check if within backward overlap shawdow from next
+	if next == nil {
+		isOverlap = false
+	} else {
+		// Extract the shift to next transition. Can be 0 in some cases where
+		// the zone changed from DST of one zone to the STD into another zone,
+		// causing the overall UTC offset to remain unchanged.
+		shiftSeconds := dateTupleSubtract(&next.startDt, &curr.untilDt)
+		if shiftSeconds >= 0 {
+			// spring forward, or unchanged
+			isOverlap = false
+		} else {
+			// Check if within the backward overlap shadow from next
+			isOverlap = next.startEpochSeconds-epochSeconds <= -shiftSeconds
+		}
+	}
+	if isOverlap {
 		// epochSeconds selects the first match
-    return 0, 2
-  }
+		return 0, 2
+	}
 
 	// Normal single match, no overlap
 	return 0, 1
@@ -564,29 +565,33 @@ func calculateFoldAndOverlap(
 
 //-----------------------------------------------------------------------------
 
-const (
-	searchStatusGap     = 0
-	searchStatusExact   = 1
-	searchStatusOverlap = 2
-)
-
 /**
- * The transition search result at a particular epoch second or local date
- * time.
+ * The result returned by findTransitionForDateTime(). There are 5
+ * possibilities:
+ *
+ *  * num=0, prev==NULL, curr=curr: datetime is far past
+ *  * num=1, prev==prev, curr=prev: exact match to datetime
+ *  * num=2, prev==prev, curr=curr: datetime in overlap
+ *  * num=0, prev==prev, curr=curr: datetime in gap
+ *  * num=0, prev==prev, curr=NULL: datetime is far future
+ *
+ * Adapted from TransitionForDateTime in Transition.h of the AceTime library,
+ * and transition.h from the AceTimeC library.
  */
-type TransitionResult struct {
-	/** Transition for fold==0 */
-	transition0 *Transition
+type TransitionForDateTime struct {
+	/** The previous transition, or null if the first transition matches. */
+	prev *Transition
 
-	/** Transition for fold==1 */
-	transition1 *Transition
+	/** The matching transition or null if not found. */
+	curr *Transition
 
-	/** Result of search: 0=gap, 1=exact, 2=overlap */
-	searchStatus int8
+	/** Number of matches for given LocalDateTime: 0, 1, or 2. */
+	num uint8
 }
 
+// TODO: Rename to FindTransitionForDateTime().
 func (ts *TransitionStorage) findTransitionForDateTime(
-	ldt *LocalDateTime) TransitionResult {
+	ldt *LocalDateTime) TransitionForDateTime {
 
 	// Convert LocalDateTime to DateTuple.
 	localDt := DateTuple{
@@ -599,47 +604,46 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 
 	// Examine adjacent pairs of Transitions, looking for an exact match, gap,
 	// or overlap.
-	var prevCandidate *Transition = nil
-	var candidate *Transition = nil
-	var searchStatus int8 = searchStatusGap
+	var prev *Transition = nil
+	var curr *Transition = nil
+	var num uint8 = 0
 	transitions := ts.GetActives()
 	for i := range transitions {
-		candidate = &ts.transitions[i]
+		curr = &ts.transitions[i]
 
-		startDt := &candidate.startDt
-		untilDt := &candidate.untilDt
+		startDt := &curr.startDt
+		untilDt := &curr.untilDt
 		isExactMatch := dateTupleCompare(startDt, &localDt) <= 0 &&
 			dateTupleCompare(&localDt, untilDt) < 0
 
 		if isExactMatch {
 			// Check for a previous exact match to detect an overlap.
-			if searchStatus == searchStatusExact {
-				searchStatus = searchStatusOverlap
+			if num == 1 {
+				num++
 				break
 			}
 
 			// Loop again to detect an overlap.
-			searchStatus = searchStatusExact
-
+			num = 1
 		} else if dateTupleCompare(startDt, &localDt) > 0 {
 			// Exit loop since no more candidate transition.
 			break
 		}
 
-		prevCandidate = candidate
+		prev = curr
 
-		// Set nullptr so that if the loop runs off the end of the list of
-		// Transitions, the candidate is marked as nullptr.
-		candidate = nil
+		// Set nil so that if the loop runs off the end of the list of Transitions,
+		// curr is marked as nullptr.
+		curr = nil
 	}
 
 	// Check if the prev was an exact match, and clear the current to
 	// avoid confusion.
-	if searchStatus == searchStatusExact {
-		candidate = nil
+	if num == 1 {
+		curr = prev
 	}
 
-	return TransitionResult{prevCandidate, candidate, searchStatus}
+	return TransitionForDateTime{prev, curr, num}
 }
 
 //-----------------------------------------------------------------------------

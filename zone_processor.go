@@ -93,151 +93,6 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds int32) Err {
 }
 
 //---------------------------------------------------------------------------
-
-// TODO: Moved to time_zone.go; replace with FindResultFromEpochSeconds().
-func (zp *ZoneProcessor) OffsetDateTimeFromEpochSeconds(
-	epochSeconds int32) OffsetDateTime {
-
-	err := zp.InitForEpochSeconds(epochSeconds)
-	if err != ErrOk {
-		return NewOffsetDateTimeError()
-	}
-
-	tfs := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
-	transition := tfs.curr
-	if transition == nil {
-		return NewOffsetDateTimeError()
-	}
-
-	totalOffsetMinutes := transition.offsetMinutes + transition.deltaMinutes
-	odt := OffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetMinutes)
-	if !odt.IsError() {
-		odt.Fold = tfs.fold
-	}
-	return odt
-}
-
-// OffsetDateTimeFromLocalDateTime returns the OffsetDateTime from the given
-// LocalDatetime.
-// Adapted from ExtendedZoneProcessor::getOffsetDateTime(const LocalDatetime&)
-// from ExtendedZoneProcessor in AceTime.
-//
-// TODO: Move to time_zone.go; replace with FindResultFromLocalDateTime().
-func (zp *ZoneProcessor) OffsetDateTimeFromLocalDateTime(
-	ldt *LocalDateTime, fold uint8) OffsetDateTime {
-
-	err := zp.InitForYear(ldt.Year)
-	if err != ErrOk {
-		return NewOffsetDateTimeError()
-	}
-
-	tfd := zp.transitionStorage.findTransitionForDateTime(ldt)
-
-	// Extract the appropriate Transition, depending on the requested 'fold'
-	// and the 'tfd.searchStatus'.
-	needsNormalization := false
-	var transition *Transition
-	if tfd.searchStatus == searchStatusExact {
-		transition = tfd.transition0
-	} else {
-		if tfd.transition0 == nil || tfd.transition1 == nil {
-			// ldt was far past or far future, and didn't match anything.
-			transition = nil
-		} else {
-			needsNormalization = (tfd.searchStatus == searchStatusGap)
-			if fold == 0 {
-				transition = tfd.transition0
-			} else {
-				transition = tfd.transition1
-			}
-		}
-	}
-
-	if transition == nil {
-		return NewOffsetDateTimeError()
-	}
-
-	var odt OffsetDateTime
-	odt.Year = ldt.Year
-	odt.Month = ldt.Month
-	odt.Day = ldt.Day
-	odt.Hour = ldt.Hour
-	odt.Minute = ldt.Minute
-	odt.Second = ldt.Second
-	odt.OffsetMinutes = transition.offsetMinutes + transition.deltaMinutes
-	odt.Fold = fold
-
-	if needsNormalization {
-		epochSeconds := odt.ToEpochSeconds()
-
-		// If in the gap, normalization means that we convert to epochSeconds
-		// then perform another search through the Transitions, then use
-		// that new Transition to convert the epochSeconds to OffsetDateTime. It
-		// turns out that this process identical to just using the other
-		// Transition returned in TransitionResult above.
-		var othert *Transition
-		if fold == 0 {
-			othert = tfd.transition1
-		} else {
-			othert = tfd.transition0
-		}
-		odt = OffsetDateTimeFromEpochSeconds(
-			epochSeconds, othert.offsetMinutes+othert.deltaMinutes)
-		if odt.IsError() {
-			return odt
-		}
-
-		// Invert the fold.
-		// 1) The normalization process causes the LocalDateTime to jump to the
-		// other transition.
-		// 2) Provides a user-accessible indicator that a gap normalization was
-		// performed.
-		odt.Fold = 1 - fold
-	}
-
-	return odt
-}
-
-//---------------------------------------------------------------------------
-
-// TODO: Rename to FindResult.
-type TransitionInfo struct {
-	stdOffsetMinutes int16  // STD offset
-	dstOffsetMinutes int16  // DST offset
-	abbrev           string // abbreviation (e.g. PST, PDT)
-}
-
-func NewTransitionInfoError() TransitionInfo {
-	return TransitionInfo{stdOffsetMinutes: InvalidOffsetMinutes}
-}
-
-func (ti *TransitionInfo) IsError() bool {
-	return ti.stdOffsetMinutes == InvalidOffsetMinutes
-}
-
-// TODO: Rename to FindByEpochSeconds(). Add FindByLocalDateTime().
-func (zp *ZoneProcessor) TransitionInfoFromEpochSeconds(
-	epochSeconds int32) TransitionInfo {
-
-	err := zp.InitForEpochSeconds(epochSeconds)
-	if err != ErrOk {
-		return NewTransitionInfoError()
-	}
-
-	tfs := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
-	transition := tfs.curr
-	if transition == nil {
-		return NewTransitionInfoError()
-	}
-
-	return TransitionInfo{
-		stdOffsetMinutes: transition.offsetMinutes,
-		dstOffsetMinutes: transition.deltaMinutes,
-		abbrev:           transition.abbrev,
-	}
-}
-
-//---------------------------------------------------------------------------
 // MonthDay
 //-----------------------------------------------------------------------------
 
@@ -765,4 +620,145 @@ func createAbbreviation(
 			return format
 		}
 	}
+}
+
+//---------------------------------------------------------------------------
+// FindByLocalDateTime() and FindByEpochSeconds()
+//---------------------------------------------------------------------------
+
+// Values of the FindResult.type field.
+const (
+	FindResultNotFound = iota
+	FindResultExact
+	FindResultGap
+	FindResultOverlap
+)
+
+type FindResult struct {
+	frtype              uint8
+	fold                uint8
+	stdOffsetMinutes    int16  // STD offset
+	dstOffsetMinutes    int16  // DST offset
+	reqStdOffsetMinutes int16  // request STD offset
+	reqDstOffsetMinutes int16  // request DST offset
+	abbrev              string // abbreviation (e.g. PST, PDT)
+}
+
+// TODO: Merge error condition into frtype field
+func NewFindResultError() FindResult {
+	return FindResult{stdOffsetMinutes: InvalidOffsetMinutes}
+}
+
+func (ti *FindResult) IsError() bool {
+	return ti.stdOffsetMinutes == InvalidOffsetMinutes
+}
+
+// Find the AtcFindResult at the given epoch_seconds.
+//
+// Adapted from ExtendedZoneProcessor::findByEpochSeconds(epochSeconds)
+// in the AceTime library and atc_processor_find_by_epoch_seconds() in the
+// AceTimeC library.
+func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds int32) FindResult {
+	err := zp.InitForEpochSeconds(epochSeconds)
+	if err != ErrOk {
+		return NewFindResultError()
+	}
+
+	tfs := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
+	transition := tfs.curr
+	if transition == nil {
+		return NewFindResultError()
+	}
+
+	var frtype uint8
+	if tfs.num == 2 {
+		frtype = FindResultOverlap
+	} else {
+		frtype = FindResultExact
+	}
+	return FindResult{
+		frtype:              frtype,
+		fold:                tfs.fold,
+		stdOffsetMinutes:    transition.offsetMinutes,
+		dstOffsetMinutes:    transition.deltaMinutes,
+		reqStdOffsetMinutes: transition.offsetMinutes,
+		reqDstOffsetMinutes: transition.deltaMinutes,
+		abbrev:              transition.abbrev,
+	}
+}
+
+// Return the FindResult at the given LocalDateTime.
+//
+// Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDatetime&)
+// in the AceTime library and atc_processor_find_by_local_date_time() in the
+// AceTimeC library.
+func (zp *ZoneProcessor) FindByLocalDateTime(
+	ldt *LocalDateTime, fold uint8) FindResult {
+
+	err := zp.InitForYear(ldt.Year)
+	if err != ErrOk {
+		return NewFindResultError()
+	}
+
+	tfd := zp.transitionStorage.findTransitionForDateTime(ldt)
+
+	// Extract the appropriate Transition, depending on the requested 'fold'
+	// and the 'tfd.searchStatus'.
+	var transition *Transition
+	var result FindResult
+	if tfd.num == 1 {
+		transition = tfd.curr
+		result.frtype = FindResultExact
+		result.fold = 0
+		result.reqStdOffsetMinutes = transition.offsetMinutes
+		result.reqDstOffsetMinutes = transition.deltaMinutes
+	} else { // num = 0 or 2
+		if tfd.prev == nil || tfd.curr == nil {
+			// ldt was far past or far future, and didn't match anything.
+			transition = nil
+			result.frtype = FindResultNotFound
+			result.fold = 0
+		} else { // gap or overlap
+			if tfd.num == 0 { // gap
+				result.frtype = FindResultGap
+				result.fold = 0
+				if fold == 0 {
+					// ldt wants to use the 'prev' transition to convert to
+					// epochSeconds.
+					result.reqStdOffsetMinutes = tfd.prev.offsetMinutes
+					result.reqDstOffsetMinutes = tfd.prev.deltaMinutes
+					// But after normalization, it will be shifted into the curr
+					// transition, so select 'curr' as the target transition.
+					transition = tfd.curr
+				} else {
+					// ldt wants to use the 'curr' transition to convert to
+					// epochSeconds.
+					result.reqStdOffsetMinutes = tfd.curr.offsetMinutes
+					result.reqDstOffsetMinutes = tfd.curr.deltaMinutes
+					// But after normalization, it will be shifted into the prev
+					// transition, so select 'prev' as the target transition.
+					transition = tfd.prev
+				}
+			} else {
+				if fold == 0 {
+					transition = tfd.prev
+				} else {
+					transition = tfd.curr
+				}
+				result.frtype = FindResultOverlap
+				result.fold = fold
+				result.reqStdOffsetMinutes = transition.offsetMinutes
+				result.reqDstOffsetMinutes = transition.deltaMinutes
+			}
+		}
+	}
+
+	if transition == nil {
+		return NewFindResultError()
+	}
+
+	result.stdOffsetMinutes = transition.offsetMinutes
+	result.dstOffsetMinutes = transition.deltaMinutes
+	result.abbrev = transition.abbrev
+	return result
 }

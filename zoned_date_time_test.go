@@ -189,13 +189,13 @@ func TestZonedDateTimeFromLocalDateTime(t *testing.T) {
 		t.Fatal(epochSeconds)
 	}
 
-	// check that fold=1 gives identical results, while preserving fold
+	// check that fold=1 gives identical results, there is only one match
 	ldt = LocalDateTime{2000, 1, 1, 0, 0, 0}
 	zdt = ZonedDateTimeFromLocalDateTime(&ldt, 1 /*fold*/, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 1 /*fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*fold*/, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
 	epochSeconds = zdt.ToEpochSeconds()
@@ -224,13 +224,13 @@ func TestZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 		t.Fatal(epochSeconds)
 	}
 
-	// check that fold=1 gives identical results, while preserving fold
+	// check that fold=1 gives identical results, since there is one match
 	ldt = LocalDateTime{2050, 1, 1, 0, 0, 0}
 	zdt = ZonedDateTimeFromLocalDateTime(&ldt, 1 /*fold*/, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 1 /*fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*fold*/, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
 	epochSeconds = zdt.ToEpochSeconds()
@@ -256,13 +256,13 @@ func TestZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 		t.Fatal(zdt)
 	}
 
-	// check that fold=1 gives identical results, while preserving fold
+	// check that fold=1 gives identical results, since there is one match
 	ldt = LocalDateTime{2018, 3, 11, 1, 59, 0}
 	zdt = ZonedDateTimeFromLocalDateTime(&ldt, 1 /*fold*/, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 3, 11, 1, 59, 0, 1 /*fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 3, 11, 1, 59, 0, 0 /*fold*/, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
 }
@@ -283,8 +283,8 @@ func TestZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	// fold == 1 to indicate the 2nd transition
-	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 1 /*fold*/, -7 * 60, &tz}) {
+	// fold == 0 to indicate only one match
+	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*fold*/, -7 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
 
@@ -319,12 +319,12 @@ func TestZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 		t.Fatal(zdt)
 	}
 
-	// check that fold=1 gives identical results, while preserving fold
+	// check that fold=1 gives identical results, since there is one match
 	zdt = ZonedDateTimeFromLocalDateTime(&ldt, 1 /*fold*/, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 1 /*fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*fold*/, -7 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
 }
@@ -347,12 +347,12 @@ func TestZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 		t.Fatal(zdt)
 	}
 
-	// check that fold=1 gives identical results, while preserving fold
+	// check that fold=1 gives identical results, since there is one match
 	zdt = ZonedDateTimeFromLocalDateTime(&ldt, 1 /*fold*/, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 0, 59, 0, 1 /*fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 11, 4, 0, 59, 0, 0 /*fold*/, -7 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
 }
@@ -402,12 +402,12 @@ func TestZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 		t.Fatal(zdt)
 	}
 
-	// check that fold=1 gives identical results, while preserving fold
+	// check that fold=1 gives identical results, since there is one match
 	zdt = ZonedDateTimeFromLocalDateTime(&ldt, 1 /*fold*/, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 2, 1, 0, 1 /*fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 11, 4, 2, 1, 0, 0 /*fold*/, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
 }
