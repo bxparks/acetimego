@@ -40,7 +40,7 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	}
 
 	totalOffsetMinutes := result.stdOffsetMinutes + result.dstOffsetMinutes
-	odt := OffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetMinutes)
+	odt := NewOffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetMinutes)
 	if !odt.IsError() {
 		odt.Fold = result.fold
 	}
@@ -80,7 +80,7 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	if result.frtype == FindResultGap {
 		epochSeconds := odt.ToEpochSeconds()
 		targetOffset := result.stdOffsetMinutes + result.dstOffsetMinutes
-		odt = OffsetDateTimeFromEpochSeconds(epochSeconds, targetOffset)
+		odt = NewOffsetDateTimeFromEpochSeconds(epochSeconds, targetOffset)
 	}
 
 	return odt
