@@ -14,15 +14,18 @@ type TimeZone struct {
 	zoneProcessor ZoneProcessor
 }
 
-// Adapted from atc_time_zone_offset_date_time_from_epoch_seconds() in the
-// AceTimeC library and, TimeZone::getOffsetDateTime(epochSeconds) from the
-// AceTime library.
-func TimeZoneForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
+func NewTimeZoneForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 	var tz TimeZone
 	tz.zoneProcessor.InitForZoneInfo(zoneInfo)
 	return tz
 }
 
+// OffsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given
+// epochSeconds.
+//
+// Adapted from atc_time_zone_offset_date_time_from_epoch_seconds() in the
+// AceTimeC library and, TimeZone::getOffsetDateTime(epochSeconds) from the
+// AceTime library.
 func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	epochSeconds int32) OffsetDateTime {
 
@@ -44,6 +47,9 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	return odt
 }
 
+// OffsetDateTimeFromLocalDateTime calculates the OffsetDateTime from the given
+// LocalDateTime.
+//
 // Adapted from atc_time_zone_offset_date_time_from_local_date_time() from the
 // AceTimeC library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
 // the AceTime library.
