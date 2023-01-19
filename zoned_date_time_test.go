@@ -14,7 +14,7 @@ import (
 //-----------------------------------------------------------------------------
 
 func TestZonedDateTimeSize(t *testing.T) {
-	zdt := ZonedDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/, -8*60, nil}
+	zdt := ZonedDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/, -8 * 60, nil}
 	size := unsafe.Sizeof(zdt)
 	if !(size == 24) { // assumes 64-bit alignment for *TimeZone pointer
 		t.Fatal("Sizeof(ZonedDateTime): ", size)
