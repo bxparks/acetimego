@@ -44,7 +44,7 @@ func OffsetDateTimeFromEpochSeconds(
 	}
 
 	epochSeconds += int32(offsetMinutes) * 60
-	ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
+	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	return OffsetDateTime{
 		ldt.Year, ldt.Month, ldt.Day,
 		ldt.Hour, ldt.Minute, ldt.Second,
