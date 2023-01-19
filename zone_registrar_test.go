@@ -29,3 +29,19 @@ func TestFindByIdNotFound(t *testing.T) {
 		t.Fatal("Should have returned nil")
 	}
 }
+
+func TestFindByName(t *testing.T) {
+	registrar := ZoneRegistrar{zonedbtesting.ZoneAndLinkRegistry}
+	zoneInfo := registrar.FindZoneInfoByName("America/Los_Angeles")
+	if zoneInfo == nil {
+		t.Fatal("Not found")
+	}
+}
+
+func TestFindByNameNotFound(t *testing.T) {
+	registrar := ZoneRegistrar{zonedbtesting.ZoneAndLinkRegistry}
+	zoneInfo := registrar.FindZoneInfoByName("America/DoesNotExist")
+	if zoneInfo != nil {
+		t.Fatal("Should have returned nil")
+	}
+}
