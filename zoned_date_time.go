@@ -59,7 +59,7 @@ func NewZonedDateTimeFromEpochSeconds(
 	}
 }
 
-func ZonedDateTimeFromLocalDateTime(
+func NewZonedDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedDateTime {
 
 	odt := tz.OffsetDateTimeFromLocalDateTime(ldt)

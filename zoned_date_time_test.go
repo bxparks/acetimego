@@ -169,7 +169,7 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 
 //-----------------------------------------------------------------------------
 
-func TestZonedDateTimeFromLocalDateTime(t *testing.T) {
+func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -177,7 +177,7 @@ func TestZonedDateTimeFromLocalDateTime(t *testing.T) {
 	tz := NewTimeZoneForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 
 	ldt := LocalDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/}
-	zdt := ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -191,7 +191,7 @@ func TestZonedDateTimeFromLocalDateTime(t *testing.T) {
 
 	// check that fold=1 gives identical results, there is only one match
 	ldt = LocalDateTime{2000, 1, 1, 0, 0, 0, 1 /*Fold*/}
-	zdt = ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -204,7 +204,7 @@ func TestZonedDateTimeFromLocalDateTime(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
+func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -212,7 +212,7 @@ func TestZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	tz := NewTimeZoneForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 
 	ldt := LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/}
-	zdt := ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -226,7 +226,7 @@ func TestZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 
 	// check that fold=1 gives identical results, since there is one match
 	ldt = LocalDateTime{2050, 1, 1, 0, 0, 0, 1 /*Fold*/}
-	zdt = ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -239,7 +239,7 @@ func TestZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
+func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -248,7 +248,7 @@ func TestZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 
 	// 01:59 should resolve to 01:59-08:00
 	ldt := LocalDateTime{2018, 3, 11, 1, 59, 0, 0 /*Fold*/}
-	zdt := ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -258,7 +258,7 @@ func TestZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 
 	// check that fold=1 gives identical results, since there is one match
 	ldt = LocalDateTime{2018, 3, 11, 1, 59, 0, 1 /*Fold*/}
-	zdt = ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -267,7 +267,7 @@ func TestZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
+func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -279,7 +279,7 @@ func TestZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 	// UTC offset of -08:00, so this is interpreted as 02:01-08:00 which gets
 	// normalized to 03:01-07:00, which falls in the 2nd transition.
 	ldt := LocalDateTime{2018, 3, 11, 2, 1, 0, 0 /*Fold*/}
-	zdt := ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -292,7 +292,7 @@ func TestZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 	// UTC offset of -07:00, so this is interpreted as 02:01-07:00 which gets
 	// normalized to 01:01-08:00, which falls in the 1st transition.
 	ldt = LocalDateTime{2018, 3, 11, 2, 1, 0, 1 /*Fold*/}
-	zdt = ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -302,7 +302,7 @@ func TestZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
+func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -311,7 +311,7 @@ func TestZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 
 	// 03:01 should resolve to 03:01-07:00.
 	ldt := LocalDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/}
-	zdt := ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -321,7 +321,7 @@ func TestZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 
 	// check that fold=1 gives identical results, since there is one match
 	ldt.Fold = 1
-	zdt = ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -330,7 +330,7 @@ func TestZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
+func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -340,7 +340,7 @@ func TestZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	// 00:59 is an hour before the DST->STD transition, so should return
 	// 00:59-07:00.
 	ldt := LocalDateTime{2018, 11, 4, 0, 59, 0, 0 /*Fold*/}
-	zdt := ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -350,7 +350,7 @@ func TestZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 
 	// check that fold=1 gives identical results, since there is one match
 	ldt.Fold = 1
-	zdt = ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -359,7 +359,7 @@ func TestZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
+func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -369,7 +369,7 @@ func TestZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	// There were two instances of 01:01
 	// Setting (fold==0) selects the first instance, resolves to 01:01-07:00.
 	ldt := LocalDateTime{2018, 11, 4, 1, 1, 0, 0 /*Fold*/}
-	zdt := ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -379,7 +379,7 @@ func TestZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 
 	// Setting (fold==1) selects the second instance, resolves to 01:01-08:00.
 	ldt.Fold = 1
-	zdt = ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -388,7 +388,7 @@ func TestZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
+func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -397,7 +397,7 @@ func TestZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 
 	// 02:01 should resolve to 02:01-08:00
 	ldt := LocalDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/}
-	zdt := ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -407,7 +407,7 @@ func TestZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 
 	// check that fold=1 gives identical results, since there is one match
 	ldt.Fold = 1
-	zdt = ZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -428,7 +428,7 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 
 	// 2022-08-30 20:00-07:00 in LA
 	ldt := LocalDateTime{2022, 8, 30, 20, 0, 0, 0 /*Fold*/}
-	ladt := ZonedDateTimeFromLocalDateTime(&ldt, &tzLosAngeles)
+	ladt := NewZonedDateTimeFromLocalDateTime(&ldt, &tzLosAngeles)
 	if ladt.IsError() {
 		t.Fatal(ladt)
 	}
@@ -461,8 +461,8 @@ func TestZonedDateTimeForLink(t *testing.T) {
 	}
 
 	ldt := LocalDateTime{2022, 8, 30, 20, 0, 0, 0 /*Fold*/}
-	ladt := ZonedDateTimeFromLocalDateTime(&ldt, &tzLosAngeles)
-	padt := ZonedDateTimeFromLocalDateTime(&ldt, &tzPacific)
+	ladt := NewZonedDateTimeFromLocalDateTime(&ldt, &tzLosAngeles)
+	padt := NewZonedDateTimeFromLocalDateTime(&ldt, &tzPacific)
 
 	if !(ladt.ToEpochSeconds() == padt.ToEpochSeconds()) {
 		t.Fatal("epochSeconds not equal")
