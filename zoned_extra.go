@@ -1,17 +1,9 @@
 package acetime
 
-import (
-	"math"
-)
-
 //-----------------------------------------------------------------------------
 // ZonedExtra contains additional information about a specific instant
 // in time (either at a specific epochSeconds or a specific LocalDateTime{}.
 //-----------------------------------------------------------------------------
-
-const (
-	InvalidOffsetMinutes = math.MinInt16
-)
 
 const (
 	ZonedExtraErr = iota
@@ -22,16 +14,16 @@ const (
 )
 
 type ZonedExtra struct {
-	zetype              uint8
-	stdOffsetMinutes    int16  // STD offset
-	dstOffsetMinutes    int16  // DST offset
-	reqStdOffsetMinutes int16  // request STD offset
-	reqDstOffsetMinutes int16  // request DST offset
-	abbrev              string // abbreviation (e.g. PST, PDT)
+	Zetype              uint8  // type of match (e.g. gap, overlap)
+	StdOffsetMinutes    int16  // STD offset
+	DstOffsetMinutes    int16  // DST offset
+	ReqStdOffsetMinutes int16  // request STD offset
+	ReqDstOffsetMinutes int16  // request DST offset
+	Abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
 func NewZonedExtraError() ZonedExtra {
-	return ZonedExtra{zetype: ZonedExtraErr}
+	return ZonedExtra{Zetype: ZonedExtraErr}
 }
 
 func NewZonedExtraFromEpochSeconds(

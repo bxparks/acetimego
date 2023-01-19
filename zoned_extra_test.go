@@ -38,7 +38,7 @@ func TestZonedExtraFromEpochSeconds(t *testing.T) {
 	tz := NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 
 	ze := NewZonedExtraFromEpochSeconds(InvalidEpochSeconds, &tz)
-	if !(ze.zetype == ZonedExtraErr) {
+	if !(ze.Zetype == ZonedExtraErr) {
 		t.Fatal(ze)
 	}
 }
@@ -56,16 +56,16 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	epochSeconds := odt.ToEpochSeconds()
 
 	ze := NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
-	if ze.zetype == ZonedExtraErr {
+	if ze.Zetype == ZonedExtraErr {
 		t.Fatal(ze)
 	}
 	expected := ZonedExtra{
-		zetype:              ZonedExtraOverlap,
-		stdOffsetMinutes:    -8 * 60,
-		dstOffsetMinutes:    1 * 60,
-		reqStdOffsetMinutes: -8 * 60,
-		reqDstOffsetMinutes: 1 * 60,
-		abbrev:              "PDT",
+		Zetype:              ZonedExtraOverlap,
+		StdOffsetMinutes:    -8 * 60,
+		DstOffsetMinutes:    1 * 60,
+		ReqStdOffsetMinutes: -8 * 60,
+		ReqDstOffsetMinutes: 1 * 60,
+		Abbrev:              "PDT",
 	}
 	if !(ze == expected) {
 		t.Fatal(ze)
@@ -75,16 +75,16 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	// overlap.
 	epochSeconds += 3600
 	ze = NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
-	if ze.zetype == ZonedExtraErr {
+	if ze.Zetype == ZonedExtraErr {
 		t.Fatal(ze)
 	}
 	expected = ZonedExtra{
-		zetype:              ZonedExtraOverlap,
-		stdOffsetMinutes:    -8 * 60,
-		dstOffsetMinutes:    0 * 60,
-		reqStdOffsetMinutes: -8 * 60,
-		reqDstOffsetMinutes: 0 * 60,
-		abbrev:              "PST",
+		Zetype:              ZonedExtraOverlap,
+		StdOffsetMinutes:    -8 * 60,
+		DstOffsetMinutes:    0 * 60,
+		ReqStdOffsetMinutes: -8 * 60,
+		ReqDstOffsetMinutes: 0 * 60,
+		Abbrev:              "PST",
 	}
 	if !(ze == expected) {
 		t.Fatal(ze)
@@ -104,16 +104,16 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 	epochSeconds := odt.ToEpochSeconds()
 
 	ze := NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
-	if ze.zetype == ZonedExtraErr {
+	if ze.Zetype == ZonedExtraErr {
 		t.Fatal(ze)
 	}
 	expected := ZonedExtra{
-		zetype:              ZonedExtraExact,
-		stdOffsetMinutes:    -8 * 60,
-		dstOffsetMinutes:    0 * 60,
-		reqStdOffsetMinutes: -8 * 60,
-		reqDstOffsetMinutes: 0 * 60,
-		abbrev:              "PST",
+		Zetype:              ZonedExtraExact,
+		StdOffsetMinutes:    -8 * 60,
+		DstOffsetMinutes:    0 * 60,
+		ReqStdOffsetMinutes: -8 * 60,
+		ReqDstOffsetMinutes: 0 * 60,
+		Abbrev:              "PST",
 	}
 	if !(ze == expected) {
 		t.Fatal(ze)
@@ -122,16 +122,16 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 	// Go forward an hour. Should be 01:29:00-08:00.
 	epochSeconds += 3600
 	ze = NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
-	if ze.zetype == ZonedExtraErr {
+	if ze.Zetype == ZonedExtraErr {
 		t.Fatal(ze)
 	}
 	expected = ZonedExtra{
-		zetype:              ZonedExtraExact,
-		stdOffsetMinutes:    -8 * 60,
-		dstOffsetMinutes:    1 * 60,
-		reqStdOffsetMinutes: -8 * 60,
-		reqDstOffsetMinutes: 1 * 60,
-		abbrev:              "PDT",
+		Zetype:              ZonedExtraExact,
+		StdOffsetMinutes:    -8 * 60,
+		DstOffsetMinutes:    1 * 60,
+		ReqStdOffsetMinutes: -8 * 60,
+		ReqDstOffsetMinutes: 1 * 60,
+		Abbrev:              "PDT",
 	}
 	if !(ze == expected) {
 		t.Fatal(ze)

@@ -93,12 +93,12 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds int32) ZonedExtra {
 	}
 
 	return ZonedExtra{
-		zetype:              result.frtype,
-		stdOffsetMinutes:    result.stdOffsetMinutes,
-		dstOffsetMinutes:    result.dstOffsetMinutes,
-		reqStdOffsetMinutes: result.reqStdOffsetMinutes,
-		reqDstOffsetMinutes: result.reqDstOffsetMinutes,
-		abbrev:              result.abbrev,
+		Zetype:              result.frtype,
+		StdOffsetMinutes:    result.stdOffsetMinutes,
+		DstOffsetMinutes:    result.dstOffsetMinutes,
+		ReqStdOffsetMinutes: result.reqStdOffsetMinutes,
+		ReqDstOffsetMinutes: result.reqDstOffsetMinutes,
+		Abbrev:              result.abbrev,
 	}
 }
 
@@ -111,11 +111,11 @@ func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 	}
 
 	return ZonedExtra{
-		zetype:              result.frtype,
-		stdOffsetMinutes:    result.stdOffsetMinutes,
-		dstOffsetMinutes:    result.dstOffsetMinutes,
-		reqStdOffsetMinutes: result.reqStdOffsetMinutes,
-		reqDstOffsetMinutes: result.reqDstOffsetMinutes,
-		abbrev:              result.abbrev,
+		Zetype:              result.frtype,
+		StdOffsetMinutes:    result.stdOffsetMinutes,
+		DstOffsetMinutes:    result.dstOffsetMinutes,
+		ReqStdOffsetMinutes: result.reqStdOffsetMinutes,
+		ReqDstOffsetMinutes: result.reqDstOffsetMinutes,
+		Abbrev:              result.abbrev,
 	}
 }
