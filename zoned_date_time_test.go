@@ -21,7 +21,7 @@ func TestZonedDateTimeSize(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromEpochSeconds(t *testing.T) {
+func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -29,7 +29,7 @@ func TestZonedDateTimeFromEpochSeconds(t *testing.T) {
 	tz := NewTimeZoneForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 
 	var epochSeconds int32 = 0
-	zdt := ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -41,14 +41,14 @@ func TestZonedDateTimeFromEpochSeconds(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
+func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 	var epochSeconds int32 = 0
-	zdt := ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -60,14 +60,14 @@ func TestZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
+func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneForZoneInfo(&zonedbtesting.ZoneEtc_UTC)
 	var epochSeconds int32 = 1200798847
-	zdt := ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -79,14 +79,14 @@ func TestZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromEpochSeconds_Invalid(t *testing.T) {
+func TestNewZonedDateTimeFromEpochSeconds_Invalid(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneForZoneInfo(&zonedbtesting.ZoneEtc_UTC)
 	var epochSeconds int32 = InvalidEpochSeconds
-	zdt := ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if !zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -95,7 +95,7 @@ func TestZonedDateTimeFromEpochSeconds_Invalid(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
+func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -106,7 +106,7 @@ func TestZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	// fall-back.
 	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 60}
 	epochSeconds := odt.ToEpochSeconds()
-	zdt := ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -117,7 +117,7 @@ func TestZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	// Go forward an hour. Should return 01:29:00-08:00, the second time this
 	// was seen, so fold should be 1.
 	epochSeconds += 3600
-	zdt = ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt = NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -128,7 +128,7 @@ func TestZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	// Go forward another hour. Should return 02:29:00-08:00, which occurs only
 	// once, so fold should be 0.
 	epochSeconds += 3600
-	zdt = ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt = NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -137,7 +137,7 @@ func TestZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	}
 }
 
-func TestZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
+func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
@@ -148,7 +148,7 @@ func TestZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	// spring forward.
 	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 60}
 	epochSeconds := odt.ToEpochSeconds()
-	zdt := ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
@@ -158,7 +158,7 @@ func TestZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 
 	// An hour later, we spring forward to 03:29:00-07:00.
 	epochSeconds += 3600
-	zdt = ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	zdt = NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
