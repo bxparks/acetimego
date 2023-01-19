@@ -35,18 +35,18 @@ import (
 )
 
 // Supported Zones: 3
-var ZoneRegistry = map[string]*zoneinfo.ZoneInfo{
-	"America/Los_Angeles": &ZoneAmerica_Los_Angeles,
-	"America/New_York": &ZoneAmerica_New_York,
-	"Etc/UTC": &ZoneEtc_UTC,
+var ZoneRegistry = map[uint32]*zoneinfo.ZoneInfo{
+	0x1e2a7654: &ZoneAmerica_New_York, // America/New_York
+	0xb7f7e8f2: &ZoneAmerica_Los_Angeles, // America/Los_Angeles
+	0xd8e31abc: &ZoneEtc_UTC, // Etc/UTC
 
 }
 
 // Supported Zones and Links: 4
-var ZoneAndLinkRegistry = map[string]*zoneinfo.ZoneInfo{
-	"America/Los_Angeles": &ZoneAmerica_Los_Angeles,
-	"America/New_York": &ZoneAmerica_New_York,
-	"Etc/UTC": &ZoneEtc_UTC,
-	"US/Pacific": &ZoneUS_Pacific,
+var ZoneAndLinkRegistry = map[uint32]*zoneinfo.ZoneInfo{
+	0x1e2a7654: &ZoneAmerica_New_York, // America/New_York
+	0xa950f6ab: &ZoneUS_Pacific, // US/Pacific -> America/Los_Angeles
+	0xb7f7e8f2: &ZoneAmerica_Los_Angeles, // America/Los_Angeles
+	0xd8e31abc: &ZoneEtc_UTC, // Etc/UTC
 
 }
