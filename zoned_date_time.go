@@ -42,7 +42,7 @@ func (zdt *ZonedDateTime) ToEpochSeconds() int32 {
 	}).ToEpochSeconds()
 }
 
-func ZonedDateTimeFromEpochSeconds(
+func NewZonedDateTimeFromEpochSeconds(
 	epochSeconds int32, tz *TimeZone) ZonedDateTime {
 
 	odt := tz.OffsetDateTimeFromEpochSeconds(epochSeconds)
@@ -59,7 +59,7 @@ func ZonedDateTimeFromEpochSeconds(
 	}
 }
 
-func ZonedDateTimeFromLocalDateTime(
+func NewZonedDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedDateTime {
 
 	odt := tz.OffsetDateTimeFromLocalDateTime(ldt)
@@ -84,5 +84,5 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 	if epochSeconds == InvalidEpochSeconds {
 		return NewZonedDateTimeError()
 	}
-	return ZonedDateTimeFromEpochSeconds(epochSeconds, tz)
+	return NewZonedDateTimeFromEpochSeconds(epochSeconds, tz)
 }

@@ -34,7 +34,7 @@ func (ldt *LocalDateTime) ToEpochSeconds() int32 {
 	return days*86400 + seconds
 }
 
-func LocalDateTimeFromEpochSeconds(epochSeconds int32) LocalDateTime {
+func NewLocalDateTimeFromEpochSeconds(epochSeconds int32) LocalDateTime {
 	if epochSeconds == InvalidEpochSeconds {
 		return NewLocalDateTimeError()
 	}

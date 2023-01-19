@@ -36,7 +36,7 @@ func (odt *OffsetDateTime) ToEpochSeconds() int32 {
 	return epochSeconds - int32(odt.OffsetMinutes)*60
 }
 
-func OffsetDateTimeFromEpochSeconds(
+func NewOffsetDateTimeFromEpochSeconds(
 	epochSeconds int32, offsetMinutes int16) OffsetDateTime {
 
 	if epochSeconds == InvalidEpochSeconds {
@@ -44,7 +44,7 @@ func OffsetDateTimeFromEpochSeconds(
 	}
 
 	epochSeconds += int32(offsetMinutes) * 60
-	ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
+	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	return OffsetDateTime{
 		ldt.Year, ldt.Month, ldt.Day,
 		ldt.Hour, ldt.Minute, ldt.Second,

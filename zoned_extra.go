@@ -34,14 +34,18 @@ func NewZonedExtraError() ZonedExtra {
 	return ZonedExtra{zetype: ZonedExtraErr}
 }
 
-func ZonedExtraFromEpochSeconds(epochSeconds int32, tz *TimeZone) ZonedExtra {
+func NewZonedExtraFromEpochSeconds(
+	epochSeconds int32, tz *TimeZone) ZonedExtra {
+
 	if epochSeconds == InvalidEpochSeconds {
 		return NewZonedExtraError()
 	}
 	return tz.ZonedExtraFromEpochSeconds(epochSeconds)
 }
 
-func ZonedExtraFromLocalDateTime(ldt *LocalDateTime, tz *TimeZone) ZonedExtra {
+func NewZonedExtraFromLocalDateTime(
+	ldt *LocalDateTime, tz *TimeZone) ZonedExtra {
+
 	if ldt.IsError() {
 		return NewZonedExtraError()
 	}

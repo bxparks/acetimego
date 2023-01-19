@@ -85,7 +85,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 }
 
 func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds int32) Err {
-	ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
+	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	if ldt.IsError() {
 		return ErrGeneric
 	}
