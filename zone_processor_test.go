@@ -1,8 +1,8 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"github.com/bxparks/AceTimeGo/zonedbtesting"
+	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"testing"
 )
 
@@ -174,8 +174,8 @@ func TestCreateMatchingEra(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestGetTransitionTime(t *testing.T) {
-  // Rule 5, [2007,9999]
-  // Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
+	// Rule 5, [2007,9999]
+	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
 	rule := &zonedbtesting.ZoneRulesUS[5]
 
 	// Nov 4 2018
@@ -499,7 +499,7 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
-  // Step 1: America/Los_Angeles matches one era, which points to US policy.
+	// Step 1: America/Los_Angeles matches one era, which points to US policy.
 	var startYm = YearMonth{2017, 12}
 	var untilYm = YearMonth{2019, 2}
 	var matches [maxMatches]MatchingEra
@@ -510,7 +510,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal(numMatches)
 	}
 
-  // Step 2: Create transitions.
+	// Step 2: Create transitions.
 	// Create a custom template instantiation to use a different SIZE than the
 	// pre-defined typedef in ExtendedZoneProcess::TransitionStorage.
 	var storage TransitionStorage
@@ -520,7 +520,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal(len(transitions))
 	}
 
-  // Step 3: Chain the transitions by fixing the transition times.
+	// Step 3: Chain the transitions by fixing the transition times.
 	fixTransitionTimes(transitions)
 
 	// Step 3: Verification. The first Transition is extended to -infinity.
@@ -534,7 +534,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("tts:", tts)
 	}
 	ttu := &transition0.transitionTimeU
-	if !(*ttu == DateTuple{2017, 12, 1, 8*60, zoneinfo.SuffixU}) {
+	if !(*ttu == DateTuple{2017, 12, 1, 8 * 60, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
@@ -546,7 +546,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("tt:", tt)
 	}
 	tts = &transition1.transitionTimeS
-	if !(*tts == DateTuple{2018, 3, 11, 2* 60, zoneinfo.SuffixS}) {
+	if !(*tts == DateTuple{2018, 3, 11, 2 * 60, zoneinfo.SuffixS}) {
 		t.Fatal("tts:", tts)
 	}
 	ttu = &transition1.transitionTimeU
@@ -554,7 +554,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("ttu:", ttu)
 	}
 
-  // Step 3: Verification: Third transition falls back at 2018-11-04 02:00.
+	// Step 3: Verification: Third transition falls back at 2018-11-04 02:00.
 	transition2 := &transitions[2]
 	tt = &transition2.transitionTime
 	if !(*tt == DateTuple{2018, 11, 4, 2 * 60, zoneinfo.SuffixW}) {
@@ -565,15 +565,15 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("tts:", tts)
 	}
 	ttu = &transition2.transitionTimeU
-	if !(*ttu == DateTuple{2018, 11, 4, 9 * 60 , zoneinfo.SuffixU}) {
+	if !(*ttu == DateTuple{2018, 11, 4, 9 * 60, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
-  // Step 4: Generate the startDateTime and untilDateTime of the transitions.
+	// Step 4: Generate the startDateTime and untilDateTime of the transitions.
 	generateStartUntilTimes(transitions)
 
-  // Step 4: Verification: The first transition startTime should be the same as
-  // its transitionTime.
+	// Step 4: Verification: The first transition startTime should be the same as
+	// its transitionTime.
 	sdt := &transition0.startDt
 	if !(*sdt == DateTuple{2017, 12, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
@@ -589,10 +589,10 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal(transition0.startEpochSeconds)
 	}
 
-  // Step 4: Verification: Second transition startTime is shifted forward one
-  // hour into PDT.
+	// Step 4: Verification: Second transition startTime is shifted forward one
+	// hour into PDT.
 	sdt = &transition1.startDt
-	if !(*sdt == DateTuple{2018, 3, 11, 3 *  60, zoneinfo.SuffixW}) {
+	if !(*sdt == DateTuple{2018, 3, 11, 3 * 60, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
 	}
 	udt = &transition1.untilDt
@@ -606,8 +606,8 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal(transition1.startEpochSeconds)
 	}
 
-  // Step 4: Verification: Third transition startTime is shifted back one hour
-  // into PST.
+	// Step 4: Verification: Third transition startTime is shifted back one hour
+	// into PST.
 	sdt = &transition2.startDt
 	if !(*sdt == DateTuple{2018, 11, 4, 1 * 60, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
