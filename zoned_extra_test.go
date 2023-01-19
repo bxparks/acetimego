@@ -37,7 +37,7 @@ func TestZonedExtraFromEpochSeconds(t *testing.T) {
 
 	tz := NewTimeZoneForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 
-	ze := ZonedExtraFromEpochSeconds(InvalidEpochSeconds, &tz)
+	ze := NewZonedExtraFromEpochSeconds(InvalidEpochSeconds, &tz)
 	if !(ze.zetype == ZonedExtraErr) {
 		t.Fatal(ze)
 	}
@@ -55,7 +55,7 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 60}
 	epochSeconds := odt.ToEpochSeconds()
 
-	ze := ZonedExtraFromEpochSeconds(epochSeconds, &tz)
+	ze := NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
 	if ze.zetype == ZonedExtraErr {
 		t.Fatal(ze)
 	}
@@ -74,7 +74,7 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	// Go forward an hour, should be 01:29:00-08:00, which is again in the
 	// overlap.
 	epochSeconds += 3600
-	ze = ZonedExtraFromEpochSeconds(epochSeconds, &tz)
+	ze = NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
 	if ze.zetype == ZonedExtraErr {
 		t.Fatal(ze)
 	}
@@ -103,7 +103,7 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 60}
 	epochSeconds := odt.ToEpochSeconds()
 
-	ze := ZonedExtraFromEpochSeconds(epochSeconds, &tz)
+	ze := NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
 	if ze.zetype == ZonedExtraErr {
 		t.Fatal(ze)
 	}
@@ -121,7 +121,7 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 
 	// Go forward an hour. Should be 01:29:00-08:00.
 	epochSeconds += 3600
-	ze = ZonedExtraFromEpochSeconds(epochSeconds, &tz)
+	ze = NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
 	if ze.zetype == ZonedExtraErr {
 		t.Fatal(ze)
 	}
