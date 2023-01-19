@@ -3,7 +3,7 @@ TARGETS := zone_infos.go zone_policies.go zone_registry.go
 TOOLS := $(abspath ../../AceTimeTools)
 
 TZ_VERSION := 2022g
-START_YEAR := 2000
+START_YEAR := 1980
 UNTIL_YEAR := 10000
 
 all:

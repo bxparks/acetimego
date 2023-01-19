@@ -9,7 +9,7 @@
 //     --scope extended
 //     --db_namespace zonedbtesting
 //     --include_list include_list.txt
-//     --start_year 2000
+//     --start_year 1980
 //     --until_year 10000
 //
 // using the TZ Database files
@@ -71,7 +71,7 @@ const ZoneNameAmerica_Los_Angeles = "America/Los_Angeles"
 var ZoneAmerica_Los_Angeles = zoneinfo.ZoneInfo{
 	Name: ZoneNameAmerica_Los_Angeles,
 	ZoneID: 0xb7f7e8f2,
-	StartYear: 2000,
+	StartYear: 1980,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Los_Angeles,
 	Target: nil,
@@ -103,7 +103,7 @@ const ZoneNameAmerica_New_York = "America/New_York"
 var ZoneAmerica_New_York = zoneinfo.ZoneInfo{
 	Name: ZoneNameAmerica_New_York,
 	ZoneID: 0x1e2a7654,
-	StartYear: 2000,
+	StartYear: 1980,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_New_York,
 	Target: nil,
@@ -135,7 +135,7 @@ const ZoneNameEtc_UTC = "Etc/UTC"
 var ZoneEtc_UTC = zoneinfo.ZoneInfo{
 	Name: ZoneNameEtc_UTC,
 	ZoneID: 0xd8e31abc,
-	StartYear: 2000,
+	StartYear: 1980,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_UTC,
 	Target: nil,
@@ -151,7 +151,7 @@ var ZoneEtc_UTC = zoneinfo.ZoneInfo{
 var ZoneUS_Pacific = zoneinfo.ZoneInfo{
 	Name: "US/Pacific",
 	ZoneID: 0xa950f6ab,
-	StartYear: 2000,
+	StartYear: 1980,
 	UntilYear: 10000,
 	Eras: nil,
 	Target: &ZoneAmerica_Los_Angeles,

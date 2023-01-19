@@ -9,7 +9,7 @@
 //     --scope extended
 //     --db_namespace zonedbtesting
 //     --include_list include_list.txt
-//     --start_year 2000
+//     --start_year 1980
 //     --until_year 10000
 //
 // using the TZ Database files
@@ -36,12 +36,12 @@ import (
 
 // ---------------------------------------------------------------------------
 // Supported zone policies: 1
-// numRules: 5
+// numRules: 6
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
 // Policy name: US
-// Rule count: 5
+// Rule count: 6
 // ---------------------------------------------------------------------------
 var ZoneRulesUS = []zoneinfo.ZoneRule{
 	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
@@ -55,6 +55,18 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
 		Letter: "S",
+	},
+	// Rule    US    1975    only    -    Feb    lastSun    2:00    1:00    D
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		Letter: "D",
 	},
 	// Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
 	{

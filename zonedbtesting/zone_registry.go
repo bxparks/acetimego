@@ -9,7 +9,7 @@
 //     --scope extended
 //     --db_namespace zonedbtesting
 //     --include_list include_list.txt
-//     --start_year 2000
+//     --start_year 1980
 //     --until_year 10000
 //
 // using the TZ Database files
