@@ -2,8 +2,12 @@ package acetime
 
 import (
 	"github.com/bxparks/AceTimeGo/zoneinfo"
+	"github.com/bxparks/AceTimeGo/zonedbtesting"
 	"testing"
 )
+
+// Most of these tests were migrated from ExtendedZoneProcessorTest in the
+// AceTime library.
 
 //-----------------------------------------------------------------------------
 // MonthDay
@@ -169,101 +173,10 @@ func TestCreateMatchingEra(t *testing.T) {
 // Step 2A
 //-----------------------------------------------------------------------------
 
-var ZoneRulesTestUS = []zoneinfo.ZoneRule{
-	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
-	{
-		FromYear:       1967,
-		ToYear:         2006,
-		InMonth:        10,
-		OnDayOfWeek:    7,
-		OnDayOfMonth:   0,
-		AtTimeCode:     8,
-		AtTimeModifier: zoneinfo.SuffixW,
-		DeltaCode:      0 + 4,
-		Letter:         "S",
-	},
-	// Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
-	{
-		FromYear:       1976,
-		ToYear:         1986,
-		InMonth:        4,
-		OnDayOfWeek:    7,
-		OnDayOfMonth:   0,
-		AtTimeCode:     8,
-		AtTimeModifier: zoneinfo.SuffixW,
-		DeltaCode:      4 + 4,
-		Letter:         "D",
-	},
-	// Rule    US    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
-	{
-		FromYear:       1987,
-		ToYear:         2006,
-		InMonth:        4,
-		OnDayOfWeek:    7,
-		OnDayOfMonth:   1,
-		AtTimeCode:     8,
-		AtTimeModifier: zoneinfo.SuffixW,
-		DeltaCode:      4 + 4,
-		Letter:         "D",
-	},
-	// Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
-	{
-		FromYear:       2007,
-		ToYear:         9999,
-		InMonth:        3,
-		OnDayOfWeek:    7,
-		OnDayOfMonth:   8,
-		AtTimeCode:     8,
-		AtTimeModifier: zoneinfo.SuffixW,
-		DeltaCode:      4 + 4,
-		Letter:         "D",
-	},
-	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
-	{
-		FromYear:       2007,
-		ToYear:         9999,
-		InMonth:        11,
-		OnDayOfWeek:    7,
-		OnDayOfMonth:   1,
-		AtTimeCode:     8,
-		AtTimeModifier: zoneinfo.SuffixW,
-		DeltaCode:      0 + 4,
-		Letter:         "S",
-	},
-}
-
-var ZonePolicyTestUS = zoneinfo.ZonePolicy{
-	Rules:   ZoneRulesTestUS,
-	Letters: nil,
-}
-
-var ZoneEraTestLos_Angeles = []zoneinfo.ZoneEra{
-	//             -8:00    US    P%sT
-	{
-		ZonePolicy:        &ZonePolicyTestUS,
-		Format:            "P%T",
-		OffsetCode:        -32,
-		DeltaCode:         0 + 4,
-		UntilYear:         10000,
-		UntilMonth:        1,
-		UntilDay:          1,
-		UntilTimeCode:     0,
-		UntilTimeModifier: zoneinfo.SuffixW,
-	},
-}
-
-var ZoneTestLosAngeles = zoneinfo.ZoneInfo{
-	Name:      "America/Los_Angeles",
-	ZoneID:    0xb7f7e8f2,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras:      ZoneEraTestLos_Angeles,
-	Target:    nil,
-}
-
 func TestGetTransitionTime(t *testing.T) {
-	// Nov Sun>=1
-	rule := &ZoneRulesTestUS[4]
+  // Rule 5, [2007,9999]
+  // Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
+	rule := &zonedbtesting.ZoneRulesUS[5]
 
 	// Nov 4 2018
 	dt := getTransitionTime(2018, rule)
@@ -282,12 +195,12 @@ func TestCreateTransitionForYear(t *testing.T) {
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &ZoneEraTestLos_Angeles[0],
+		era:               &zonedbtesting.ZoneEraAmerica_Los_Angeles[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
 	}
-	rule := &ZoneRulesTestUS[4]
+	rule := &zonedbtesting.ZoneRulesUS[5]
 
 	// Nov Sun>=1
 	var transition Transition
@@ -399,7 +312,7 @@ func TestFindCandidateTransitions(t *testing.T) {
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &ZoneEraTestLos_Angeles[0],
+		era:               &zonedbtesting.ZoneEraAmerica_Los_Angeles[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
@@ -509,7 +422,7 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 
 	// Populate the transitionTimeS and transitionTimeU fields.
 	var prior *Transition = nil
-	fixTransitionTimes(transitions[:])
+	fixTransitionTimes(transitions)
 
 	prior = processTransitionMatchStatus(transition0, prior)
 	if !(matchStatusPrior == transition0.matchStatus) {
@@ -552,7 +465,7 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &ZoneEraTestLos_Angeles[0],
+		era:               &zonedbtesting.ZoneEraAmerica_Los_Angeles[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
@@ -581,204 +494,134 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 }
 
 //-----------------------------------------------------------------------------
-// Step 3, 4
+// Step 3, Step 4. Use America/Los_Angeles to calculate the transitions
+// beause I am familiar with it.
 //-----------------------------------------------------------------------------
 
 func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
-	// Create 3 matches for the AlmostLosAngeles test zone.
-	var startYm = YearMonth{2018, 12}
-	var untilYm = YearMonth{2020, 2}
+  // Step 1: America/Los_Angeles matches one era, which points to US policy.
+	var startYm = YearMonth{2017, 12}
+	var untilYm = YearMonth{2019, 2}
 	var matches [maxMatches]MatchingEra
 
-	numMatches := findMatches(&ZoneAlmostLosAngeles, startYm, untilYm, matches[:])
-	if !(3 == numMatches) {
+	numMatches := findMatches(
+		&zonedbtesting.ZoneAmerica_Los_Angeles, startYm, untilYm, matches[:])
+	if !(1 == numMatches) {
 		t.Fatal(numMatches)
 	}
 
+  // Step 2: Create transitions.
 	// Create a custom template instantiation to use a different SIZE than the
 	// pre-defined typedef in ExtendedZoneProcess::TransitionStorage.
 	var storage TransitionStorage
-
-	// Create 3 Transitions corresponding to the matches.
-	// Implements ExtendedZoneProcessor::createTransitionsFromSimpleMatch().
-	transition1 := storage.GetFreeAgent()
-	createTransitionForYear(transition1, 0, nil, &matches[0])
-	transition1.matchStatus = matchStatusExactMatch // synthetic example
-	storage.AddFreeAgentToCandidatePool()
-
-	transition2 := storage.GetFreeAgent()
-	createTransitionForYear(transition2, 0, nil, &matches[1])
-	transition2.matchStatus = matchStatusWithinMatch // synthetic example
-	storage.AddFreeAgentToCandidatePool()
-
-	transition3 := storage.GetFreeAgent()
-	createTransitionForYear(transition3, 0, nil, &matches[2])
-	transition3.matchStatus = matchStatusWithinMatch // synthetic example
-	storage.AddFreeAgentToCandidatePool()
-
-	// Move actives to Active pool.
-	storage.AddActiveCandidatesToActivePool()
+	createTransitions(&storage, matches[:numMatches])
 	transitions := storage.GetActives()
-	if !(3 == len(transitions)) {
+	if !(len(transitions) == 3) {
 		t.Fatal(len(transitions))
 	}
-	if !(&transitions[0] == transition1) {
-		t.Fatal(transitions[0])
-	}
-	if !(&transitions[1] == transition2) {
-		t.Fatal(transitions[1])
-	}
-	if !(&transitions[2] == transition3) {
-		t.Fatal(transitions[2])
-	}
 
-	// Chain the transitions.
+  // Step 3: Chain the transitions by fixing the transition times.
 	fixTransitionTimes(transitions)
 
-	// Verify. The first Transition is extended to -infinity.
-	tt := &transition1.transitionTime
-	if !(*tt == DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW}) {
+	// Step 3: Verification. The first Transition is extended to -infinity.
+	transition0 := &transitions[0]
+	tt := &transition0.transitionTime
+	if !(*tt == DateTuple{2017, 12, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal("tt:", tt)
 	}
-	tts := &transition1.transitionTimeS
-	if !(*tts == DateTuple{2018, 12, 1, 0, zoneinfo.SuffixS}) {
+	tts := &transition0.transitionTimeS
+	if !(*tts == DateTuple{2017, 12, 1, 0, zoneinfo.SuffixS}) {
 		t.Fatal("tts:", tts)
 	}
-	ttu := &transition1.transitionTimeU
-	if !(*ttu == DateTuple{2018, 12, 1, 15 * 32, zoneinfo.SuffixU}) {
+	ttu := &transition0.transitionTimeU
+	if !(*ttu == DateTuple{2017, 12, 1, 8*60, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
-	// Second transition uses the UTC offset of the first.
+	// Step 3: Verification: Second transition springs forward at 2018-03-11
+	// 02:00.
+	transition1 := &transitions[1]
+	tt = &transition1.transitionTime
+	if !(*tt == DateTuple{2018, 3, 11, 2 * 60, zoneinfo.SuffixW}) {
+		t.Fatal("tt:", tt)
+	}
+	tts = &transition1.transitionTimeS
+	if !(*tts == DateTuple{2018, 3, 11, 2* 60, zoneinfo.SuffixS}) {
+		t.Fatal("tts:", tts)
+	}
+	ttu = &transition1.transitionTimeU
+	if !(*ttu == DateTuple{2018, 3, 11, 10 * 60, zoneinfo.SuffixU}) {
+		t.Fatal("ttu:", ttu)
+	}
+
+  // Step 3: Verification: Third transition falls back at 2018-11-04 02:00.
+	transition2 := &transitions[2]
 	tt = &transition2.transitionTime
-	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2018, 11, 4, 2 * 60, zoneinfo.SuffixW}) {
 		t.Fatal("tt:", tt)
 	}
 	tts = &transition2.transitionTimeS
-	if !(*tts == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixS}) {
+	if !(*tts == DateTuple{2018, 11, 4, 1 * 60, zoneinfo.SuffixS}) {
 		t.Fatal("tts:", tts)
 	}
 	ttu = &transition2.transitionTimeU
-	if !(*ttu == DateTuple{2019, 3, 10, 15 * 40, zoneinfo.SuffixU}) {
+	if !(*ttu == DateTuple{2018, 11, 4, 9 * 60 , zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
-	// Third transition uses the UTC offset of the second.
-	tt = &transition3.transitionTime
-	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
-		t.Fatal("tt:", tt)
-	}
-	tts = &transition3.transitionTimeS
-	if !(*tts == DateTuple{2019, 11, 3, 15 * 4, zoneinfo.SuffixS}) {
-		t.Fatal("tts:", tts)
-	}
-	ttu = &transition3.transitionTimeU
-	if !(*ttu == DateTuple{2019, 11, 3, 15 * 36, zoneinfo.SuffixU}) {
-		t.Fatal("ttu:", ttu)
-	}
-
-	// Generate the startDateTime and untilDateTime of the transitions.
+  // Step 4: Generate the startDateTime and untilDateTime of the transitions.
 	generateStartUntilTimes(transitions)
 
-	// Verify. The first transition startTime should be the same as its
-	// transitionTime.
-	sdt := &transition1.startDt
-	if !(*sdt == DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW}) {
+  // Step 4: Verification: The first transition startTime should be the same as
+  // its transitionTime.
+	sdt := &transition0.startDt
+	if !(*sdt == DateTuple{2017, 12, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
 	}
-	udt := &transition1.untilDt
-	if !(*udt == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixW}) {
+	udt := &transition0.untilDt
+	if !(*udt == DateTuple{2018, 3, 11, 2 * 60, zoneinfo.SuffixW}) {
 		t.Fatal("udt:", udt)
 	}
 	odt := OffsetDateTime{
-		2018, 12, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60 /*offsetMinutes*/}
+		2017, 12, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60 /*offsetMinutes*/}
 	eps := odt.ToEpochSeconds()
+	if !(eps == transition0.startEpochSeconds) {
+		t.Fatal(transition0.startEpochSeconds)
+	}
+
+  // Step 4: Verification: Second transition startTime is shifted forward one
+  // hour into PDT.
+	sdt = &transition1.startDt
+	if !(*sdt == DateTuple{2018, 3, 11, 3 *  60, zoneinfo.SuffixW}) {
+		t.Fatal("sdt:", sdt)
+	}
+	udt = &transition1.untilDt
+	if !(*udt == DateTuple{2018, 11, 4, 2 * 60, zoneinfo.SuffixW}) {
+		t.Fatal("udt:", udt)
+	}
+	odt = OffsetDateTime{
+		2018, 3, 11, 3, 0, 0, 0 /*Fold*/, -7 * 60 /*offsetMinutes*/}
+	eps = odt.ToEpochSeconds()
 	if !(eps == transition1.startEpochSeconds) {
 		t.Fatal(transition1.startEpochSeconds)
 	}
 
-	// Second transition startTime is shifted forward one hour into PDT.
+  // Step 4: Verification: Third transition startTime is shifted back one hour
+  // into PST.
 	sdt = &transition2.startDt
-	if !(*sdt == DateTuple{2019, 3, 10, 15 * 12, zoneinfo.SuffixW}) {
+	if !(*sdt == DateTuple{2018, 11, 4, 1 * 60, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
 	}
 	udt = &transition2.untilDt
-	if !(*udt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*udt == DateTuple{2019, 2, 1, 0, zoneinfo.SuffixW}) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
-		2019, 3, 10, 3, 0, 0, 0 /*Fold*/, -7 * 60 /*offsetMinutes*/}
+		2018, 11, 4, 1, 0, 0, 0 /*Fold*/, -8 * 60 /*offsetMinutes*/}
 	eps = odt.ToEpochSeconds()
 	if !(eps == transition2.startEpochSeconds) {
 		t.Fatal(transition2.startEpochSeconds)
 	}
-
-	// Third transition startTime is shifted back one hour into PST.
-	sdt = &transition3.startDt
-	if !(*sdt == DateTuple{2019, 11, 3, 15 * 4, zoneinfo.SuffixW}) {
-		t.Fatal("sdt:", sdt)
-	}
-	udt = &transition3.untilDt
-	if !(*udt == DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW}) {
-		t.Fatal("udt:", udt)
-	}
-	odt = OffsetDateTime{
-		2019, 11, 3, 1, 0, 0, 0 /*Fold*/, -8 * 60 /*offsetMinutes*/}
-	eps = odt.ToEpochSeconds()
-	if !(eps == transition3.startEpochSeconds) {
-		t.Fatal(transition3.startEpochSeconds)
-	}
-}
-
-//---------------------------------------------------------------------------
-// A simplified version of America/Los_Angeles, using only simple ZoneEras
-// (i.e. no references to a ZonePolicy). Valid only for 2018.
-//---------------------------------------------------------------------------
-
-// Create simplified ZoneEras which approximate America/Los_Angeles
-var ZoneEraAlmostLosAngeles = []zoneinfo.ZoneEra{
-	{
-		ZonePolicy:        nil,
-		Format:            "PST",
-		OffsetCode:        -32,
-		DeltaCode:         0 + 4,
-		UntilYear:         2019,
-		UntilMonth:        3,
-		UntilDay:          10,
-		UntilTimeCode:     2 * 4,
-		UntilTimeModifier: zoneinfo.SuffixW,
-	},
-	{
-		ZonePolicy:        nil,
-		Format:            "PDT",
-		OffsetCode:        -32,
-		DeltaCode:         4 + 4,
-		UntilYear:         2019,
-		UntilMonth:        11,
-		UntilDay:          3,
-		UntilTimeCode:     2 * 4,
-		UntilTimeModifier: zoneinfo.SuffixW,
-	},
-	{
-		ZonePolicy:        nil,
-		Format:            "PST",
-		OffsetCode:        -32,
-		DeltaCode:         0 + 4,
-		UntilYear:         2020,
-		UntilMonth:        3,
-		UntilDay:          8,
-		UntilTimeCode:     2 * 4,
-		UntilTimeModifier: zoneinfo.SuffixW,
-	},
-}
-
-var ZoneAlmostLosAngeles = zoneinfo.ZoneInfo{
-	Name:      "America/Almost_Los_Angeles",
-	ZoneID:    0x70166020,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras:      ZoneEraAlmostLosAngeles,
-	Target:    nil,
 }
 
 //-----------------------------------------------------------------------------
