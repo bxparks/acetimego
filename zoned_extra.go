@@ -43,7 +43,9 @@ func NewZonedExtraFromEpochSeconds(
 	return tz.ZonedExtraFromEpochSeconds(epochSeconds)
 }
 
-func ZonedExtraFromLocalDateTime(ldt *LocalDateTime, tz *TimeZone) ZonedExtra {
+func NewZonedExtraFromLocalDateTime(
+	ldt *LocalDateTime, tz *TimeZone) ZonedExtra {
+
 	if ldt.IsError() {
 		return NewZonedExtraError()
 	}
