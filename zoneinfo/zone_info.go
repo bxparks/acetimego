@@ -58,14 +58,14 @@ type ZoneRule struct {
 	AtTimeCode uint8
 
 	/**
-	   * The AtTimeModifier is a packed field containing 2 pieces of info:
-	   *
-	   * * The upper 4 bits represent the AT time suffix: 'w', 's' or 'u',
-	   *   represented by SuffixW, SuffixS and SuffixU.
-	   * * The lower 4 bits represent the remaining 0-14 minutes of the AT field
-		 *   after truncation into AtTimeCode. In other words, the full AT field in
-		 *   one-minute resolution is (15 * AtTimeCode + (AtTimeModifier & 0x0f)).
-	*/
+	 * The AtTimeModifier is a packed field containing 2 pieces of info:
+	 *
+	 * * The upper 4 bits represent the AT time suffix: 'w', 's' or 'u',
+	 *   represented by SuffixW, SuffixS and SuffixU.
+	 * * The lower 4 bits represent the remaining 0-14 minutes of the AT field
+	 *   after truncation into AtTimeCode. In other words, the full AT field in
+	 *   one-minute resolution is (15 * AtTimeCode + (AtTimeModifier & 0x0f)).
+	 */
 	AtTimeModifier uint8
 
 	/**
