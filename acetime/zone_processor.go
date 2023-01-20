@@ -90,7 +90,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	return ErrOk
 }
 
-func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds int32) Err {
+func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) Err {
 	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	if ldt.IsError() {
 		return ErrGeneric
@@ -570,9 +570,10 @@ func generateStartUntilTimes(transitions []Transition) {
 		// hasn't been clobbered by 'untilDateTime' yet. Not sure if this saves
 		// any CPU time though, since we still need to mutiply by 900.
 		st := &transition.startDt
-		offsetSeconds := 60 * int32(st.minutes-
+		offsetSeconds := 60 * ATime(st.minutes-
 			(transition.offsetMinutes+transition.deltaMinutes))
-		epochSeconds := 86400 * LocalDateToEpochDays(st.year, st.month, st.day)
+		epochSeconds := 86400 * ATime(
+			LocalDateToEpochDays(st.year, st.month, st.day))
 		transition.startEpochSeconds = epochSeconds + offsetSeconds
 
 		prev = transition
@@ -664,7 +665,7 @@ func NewFindResultError() FindResult {
 // Adapted from ExtendedZoneProcessor::findByEpochSeconds(epochSeconds)
 // in the AceTime library and atc_processor_find_by_epoch_seconds() in the
 // AceTimeC library.
-func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds int32) FindResult {
+func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) FindResult {
 	err := zp.InitForEpochSeconds(epochSeconds)
 	if err != ErrOk {
 		return NewFindResultError()

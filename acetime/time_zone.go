@@ -31,7 +31,7 @@ func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 // AceTimeC library and, TimeZone::getOffsetDateTime(epochSeconds) from the
 // AceTime library.
 func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
-	epochSeconds int32) OffsetDateTime {
+	epochSeconds ATime) OffsetDateTime {
 
 	err := tz.zoneProcessor.InitForEpochSeconds(epochSeconds)
 	if err != ErrOk {
@@ -90,7 +90,7 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	return odt
 }
 
-func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds int32) ZonedExtra {
+func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
 	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
 		return NewZonedExtraError()

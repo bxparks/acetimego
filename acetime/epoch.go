@@ -1,18 +1,36 @@
 package acetime
 
+// The type of the "seconds from epoch" in this library. This type is the
+// equivalent of C lang 'time_t', or the Go lang 'time.Time'.
+//
+// A 32-bit integer is used because this library targets small microcontrollers
+// which are supported by TinyGo where 64-bit integer operations are expensive.
+// Normally, using a 32-bit integer type suffers from an overflow in the year
+// 2038 due to the use of 1970-01-01 Unix epoch.
+//
+// AceTimeGo avoids this problem by setting the default epoch to be 2050-01-01
+// Furthermore, the epoch of the AceTimeGo library is adjustable at runtime. The
+// functions in this library will produce valid results within at least +/- 50
+// years (and probably +/- 60 years) from the epoch year.
+type ATime int32
+
 const (
-	// Must be a multiple of 400
+	// The base epoch year used by the ConvertToDays() and ConvertFromDays()
+	// functions below. This must be a multiple of 400.
 	converterEpochYear = 2000
 
-	// Number of days from 1970-01-01 to 2000-01-01
+	// Number of days from 1970-01-01 to 2000-01-01. This is a constant because
+	// the converterEpochYear is a constant.
 	daysToConverterEpochFromUnixEpoch = 10957
 )
 
 var (
-	// Current epoch year.
+	// Current epoch year. This is adjustable by the library caller. It is
+	// expected to be set once by the application near the start of the app.
 	currentEpochYear int16 = 2050
 
-	// Number of days from 2000-01-01 to {currentEpochYear}-01-01.
+	// Number of days from 2000-01-01 to {currentEpochYear}-01-01. This is
+	// derived from currentEpochYear and stored here for convenience.
 	daysToCurrentEpochFromConverterEpoch int32 = 18263
 )
 

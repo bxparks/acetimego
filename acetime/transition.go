@@ -56,11 +56,11 @@ func dateTupleCompare(a *DateTuple, b *DateTuple) int8 {
 }
 
 // dateTupleSubtract returns the number of seconds of (a - b).
-func dateTupleSubtract(a *DateTuple, b *DateTuple) int32 {
+func dateTupleSubtract(a *DateTuple, b *DateTuple) ATime {
 	da := LocalDateToEpochDays(a.year, a.month, a.day)
 	db := LocalDateToEpochDays(b.year, b.month, b.day)
 
-	return (da-db)*86400 + int32(a.minutes-b.minutes)*60
+	return ATime(da-db)*86400 + ATime(a.minutes-b.minutes)*60
 }
 
 func dateTupleNormalize(dt *DateTuple) {
@@ -259,7 +259,7 @@ type Transition struct {
 	//}
 
 	/** The calculated transition time of the given rule. */
-	startEpochSeconds int32
+	startEpochSeconds ATime
 
 	/**
 	 * The base offset minutes, not the total effective UTC offset. Note that
@@ -482,7 +482,7 @@ type TransitionForSeconds struct {
 
 // TODO: Rename to FindTransitionForSeconds().
 func (ts *TransitionStorage) findTransitionForSeconds(
-	epochSeconds int32) TransitionForSeconds {
+	epochSeconds ATime) TransitionForSeconds {
 
 	var prev *Transition = nil
 	var curr *Transition = nil
@@ -508,7 +508,7 @@ func (ts *TransitionStorage) findTransitionForSeconds(
 // indicates that the LocalDateTime was the first ocurrence. A 1 indicates a
 // LocalDateTime that occurred a second time.
 func calculateFoldAndOverlap(
-	epochSeconds int32,
+	epochSeconds ATime,
 	prev *Transition,
 	curr *Transition,
 	next *Transition) (fold uint8, num uint8) {

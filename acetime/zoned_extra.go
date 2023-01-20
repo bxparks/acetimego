@@ -27,7 +27,7 @@ func NewZonedExtraError() ZonedExtra {
 }
 
 func NewZonedExtraFromEpochSeconds(
-	epochSeconds int32, tz *TimeZone) ZonedExtra {
+	epochSeconds ATime, tz *TimeZone) ZonedExtra {
 
 	if epochSeconds == InvalidEpochSeconds {
 		return NewZonedExtraError()

@@ -25,7 +25,7 @@ func (odt *OffsetDateTime) IsError() bool {
 	return odt.Year == InvalidYear
 }
 
-func (odt *OffsetDateTime) ToEpochSeconds() int32 {
+func (odt *OffsetDateTime) ToEpochSeconds() ATime {
 	if odt.IsError() {
 		return InvalidEpochSeconds
 	}
@@ -37,17 +37,17 @@ func (odt *OffsetDateTime) ToEpochSeconds() int32 {
 	if epochSeconds == InvalidEpochSeconds {
 		return epochSeconds
 	}
-	return epochSeconds - int32(odt.OffsetMinutes)*60
+	return epochSeconds - ATime(odt.OffsetMinutes)*60
 }
 
 func NewOffsetDateTimeFromEpochSeconds(
-	epochSeconds int32, offsetMinutes int16) OffsetDateTime {
+	epochSeconds ATime, offsetMinutes int16) OffsetDateTime {
 
 	if epochSeconds == InvalidEpochSeconds {
 		return NewOffsetDateTimeError()
 	}
 
-	epochSeconds += int32(offsetMinutes) * 60
+	epochSeconds += ATime(offsetMinutes) * 60
 	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	return OffsetDateTime{
 		ldt.Year, ldt.Month, ldt.Day,

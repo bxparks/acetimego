@@ -38,7 +38,7 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 
 	tz := NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 
-	var epochSeconds int32 = 0
+	var epochSeconds ATime = 0
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -57,7 +57,7 @@ func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
-	var epochSeconds int32 = 0
+	var epochSeconds ATime = 0
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -76,7 +76,7 @@ func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneEtc_UTC)
-	var epochSeconds int32 = 1200798847
+	var epochSeconds ATime = 1200798847
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -95,7 +95,7 @@ func TestNewZonedDateTimeFromEpochSeconds_Invalid(t *testing.T) {
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneEtc_UTC)
-	var epochSeconds int32 = InvalidEpochSeconds
+	var epochSeconds ATime = InvalidEpochSeconds
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if !zdt.IsError() {
 		t.Fatal(zdt)
@@ -522,7 +522,7 @@ func TestZonedDateTimeFromUnixSeconds64(t *testing.T) {
 // $ go test -run=NOMATCH -bench=.
 //-----------------------------------------------------------------------------
 
-var epochSeconds int32
+var epochSeconds ATime
 var zdt ZonedDateTime
 var ldt = LocalDateTime{2023, 1, 19, 22, 11, 0, 0 /*Fold*/}
 var tz = NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
