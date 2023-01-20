@@ -47,12 +47,18 @@ func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
 	zp.isFilled = false
 }
 
+// Clear cache
+func (zp *ZoneProcessor) Reset() {
+	zp.isFilled = false
+}
+
 func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	if zp.isFilledForYear(year) {
 		return ErrOk
 	}
 
 	zp.year = year
+	zp.isFilled = true
 	zp.numMatches = 0
 	zp.transitionStorage.Init()
 	if year < zp.zoneInfo.StartYear-1 || zp.zoneInfo.UntilYear < year {

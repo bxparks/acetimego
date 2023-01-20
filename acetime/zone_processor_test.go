@@ -57,11 +57,25 @@ func TestCalcStartDayOfMonth(t *testing.T) {
 	}
 }
 
+//-----------------------------------------------------------------------------
+
 func TestZoneProcessorToString(t *testing.T) {
 	var zp ZoneProcessor
 	zp.InitForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 	if !(zp.String() == "America/Los_Angeles") {
 		t.Fatal(zp.String(), zp)
+	}
+}
+
+func TestZoneProcessorInitForYear(t *testing.T) {
+	var zp ZoneProcessor
+	zp.InitForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+	if zp.isFilled {
+		t.Fatal(zp)
+	}
+	zp.InitForYear(2023)
+	if !zp.isFilled {
+		t.Fatal(zp)
 	}
 }
 
