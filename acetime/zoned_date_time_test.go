@@ -21,6 +21,16 @@ func TestZonedDateTimeSize(t *testing.T) {
 	}
 }
 
+func TestZonedDateTimeToString(t *testing.T) {
+	tz := NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+	ldt := LocalDateTime{2023, 1, 19, 17, 3, 23, 0 /*Fold*/}
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	s := zdt.String()
+	if !(s == "2023-01-19T17:03:23-08:00[America/Los_Angeles]") {
+		t.Fatal(s, zdt)
+	}
+}
+
 func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2000)

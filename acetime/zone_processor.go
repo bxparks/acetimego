@@ -92,6 +92,10 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds int32) Err {
 	return zp.InitForYear(ldt.Year)
 }
 
+func (zp *ZoneProcessor) String() string {
+	return zp.zoneInfo.Name
+}
+
 //---------------------------------------------------------------------------
 // MonthDay
 //-----------------------------------------------------------------------------

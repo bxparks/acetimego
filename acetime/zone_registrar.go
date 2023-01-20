@@ -40,10 +40,10 @@ func ZoneNameHash(s string) uint32 {
 }
 
 func djb2(s string) uint32 {
-  var hash uint32 = 5381
-  for _, c := range s {
-    hash = ((hash << 5) + hash) + uint32(c) /* hash * 33 + c */
-  }
+	var hash uint32 = 5381
+	for _, c := range s {
+		hash = ((hash << 5) + hash) + uint32(c) /* hash * 33 + c */
+	}
 
-  return hash
+	return hash
 }

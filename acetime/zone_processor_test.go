@@ -57,6 +57,14 @@ func TestCalcStartDayOfMonth(t *testing.T) {
 	}
 }
 
+func TestZoneProcessorToString(t *testing.T) {
+	var zp ZoneProcessor
+	zp.InitForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+	if !(zp.String() == "America/Los_Angeles") {
+		t.Fatal(zp.String(), zp)
+	}
+}
+
 //-----------------------------------------------------------------------------
 // Step 1
 //-----------------------------------------------------------------------------

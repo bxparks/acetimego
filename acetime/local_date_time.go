@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"fmt"
 	"math"
 )
 
@@ -52,4 +53,9 @@ func NewLocalDateTimeFromEpochSeconds(epochSeconds int32) LocalDateTime {
 	hour, minute, second := LocalTimeFromSeconds(seconds)
 
 	return LocalDateTime{year, month, day, hour, minute, second, 0 /*Fold*/}
+}
+
+func (ldt *LocalDateTime) String() string {
+	return fmt.Sprintf("%04d-%02d-%02dT%02d:%02d:%02d",
+		ldt.Year, ldt.Month, ldt.Day, ldt.Hour, ldt.Minute, ldt.Second)
 }

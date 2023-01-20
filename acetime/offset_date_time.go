@@ -1,5 +1,9 @@
 package acetime
 
+import (
+	"fmt"
+)
+
 type OffsetDateTime struct {
 	Year          int16
 	Month         uint8
@@ -49,4 +53,29 @@ func NewOffsetDateTimeFromEpochSeconds(
 		ldt.Year, ldt.Month, ldt.Day,
 		ldt.Hour, ldt.Minute, ldt.Second,
 		0 /*Fold*/, offsetMinutes}
+}
+
+func (odt *OffsetDateTime) String() string {
+	s, h, m := minutesToHM(odt.OffsetMinutes)
+	var c byte
+	if s < 0 {
+		c = '-'
+	} else {
+		c = '+'
+	}
+	return fmt.Sprintf("%04d-%02d-%02dT%02d:%02d:%02d%c%02d:%02d",
+		odt.Year, odt.Month, odt.Day, odt.Hour, odt.Minute, odt.Second,
+		c, h, m)
+}
+
+func minutesToHM(minutes int16) (sign int8, h uint8, m uint8) {
+	if minutes < 0 {
+		sign = -1
+		minutes = -minutes
+	} else {
+		sign = 1
+	}
+	h = uint8(minutes / 60)
+	m = uint8(minutes % 60)
+	return
 }

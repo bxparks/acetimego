@@ -1,5 +1,9 @@
 package acetime
 
+import (
+	"fmt"
+)
+
 //-----------------------------------------------------------------------------
 // ZonedDateTime represents a date/time stamp with its associated TimeZone.
 //-----------------------------------------------------------------------------
@@ -85,4 +89,17 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 		return NewZonedDateTimeError()
 	}
 	return NewZonedDateTimeFromEpochSeconds(epochSeconds, tz)
+}
+
+func (zdt *ZonedDateTime) String() string {
+	s, h, m := minutesToHM(zdt.OffsetMinutes)
+	var c byte
+	if s < 0 {
+		c = '-'
+	} else {
+		c = '+'
+	}
+	return fmt.Sprintf("%04d-%02d-%02dT%02d:%02d:%02d%c%02d:%02d[%s]",
+		zdt.Year, zdt.Month, zdt.Day, zdt.Hour, zdt.Minute, zdt.Second,
+		c, h, m, zdt.Tz.String())
 }

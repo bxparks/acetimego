@@ -65,3 +65,63 @@ func TestNewOffsetDateTimeFromEpochSeconds(t *testing.T) {
 			"should be (2050, 1, 1, 0, 0, 0, 0, 60)")
 	}
 }
+
+func TestOffsetDateTimeToString(t *testing.T) {
+	odt := OffsetDateTime{2023, 1, 19, 16, 9, 1, 0 /*Fold*/, -8*60 - 30}
+	s := odt.String()
+	if !(s == "2023-01-19T16:09:01-08:30") {
+		t.Fatal(s, odt)
+	}
+
+	odt = OffsetDateTime{2023, 1, 19, 16, 9, 1, 0 /*Fold*/, 8*60 + 15}
+	s = odt.String()
+	if !(s == "2023-01-19T16:09:01+08:15") {
+		t.Fatal(s, odt)
+	}
+}
+
+func TestMinutesToHM(t *testing.T) {
+	s, h, m := minutesToHM(0)
+	if !(s == 1) {
+		t.Fatal(s)
+	}
+	if !(h == 0) {
+		t.Fatal(h)
+	}
+	if !(m == 0) {
+		t.Fatal(m)
+	}
+
+	s, h, m = minutesToHM(1)
+	if !(s == 1) {
+		t.Fatal(s)
+	}
+	if !(h == 0) {
+		t.Fatal(h)
+	}
+	if !(m == 1) {
+		t.Fatal(m)
+	}
+
+	s, h, m = minutesToHM(62)
+	if !(s == 1) {
+		t.Fatal(s)
+	}
+	if !(h == 1) {
+		t.Fatal(h)
+	}
+	if !(m == 2) {
+		t.Fatal(m)
+	}
+
+	s, h, m = minutesToHM(-123)
+	if !(s == -1) {
+		t.Fatal(s)
+	}
+	if !(h == 2) {
+		t.Fatal(h)
+	}
+	if !(m == 3) {
+		t.Fatal(m)
+	}
+}
