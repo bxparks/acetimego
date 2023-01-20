@@ -85,15 +85,9 @@ type ZoneRule struct {
 	/**
 	 * Determined by the LETTER column. Determines the substitution into the '%s'
 	 * field (implemented here by just a '%') of the ZoneInfo::Format field.
-	 * Possible values are 'S', 'D', '-', or a number < 32 (i.e. a non-printable
-	 * character). If the value is < 32, then this number is an index offset into
-	 * the ZonePolicy.letters[] array which contains a (char*) of the
-	 * actual multi-character letter.
-	 *
-	 * BasicZoneProcessor supports only a single LETTER value (i.e. >= 32), which
-	 * also means that ZonePolicy.numLetters will always be 0 for a
-	 * BasicZoneProcessor. ExtendedZoenProcessor supports a LETTER value of < 32,
-	 * indicating a multi-character string.
+	 * Most comment values in the raw TZDB files are "S", "D", and "-". The "-" is
+	 * stored as "" (empty string) to save memory, and because that's what the "-"
+	 * in the raw file actually means.
 	 *
 	 * As of TZ DB version 2018i, there are 4 ZonePolicies which have ZoneRules
 	 * with a LETTER field longer than 1 character:
@@ -125,17 +119,10 @@ func (rule *ZoneRule) DstOffsetMinutes() int16 {
  * administrative region. A given time zone (ZoneInfo) can follow a different
  * ZonePolicy at different times. Conversely, multiple time zones (ZoneInfo)
  * can choose to follow the same ZonePolicy at different times.
- *
- * If numLetters is non-zero, then 'letters' will be a pointer to an array of
- * (char*) pointers. Any ZoneRule.Letter < 32 (i.e. non-printable) will
- * be an offset into this array of pointers.
  */
 type ZonePolicy struct {
-	/** Pointer to array of rules. */
+	/** Slice to array of rules. */
 	Rules []ZoneRule
-
-	/** Pointer to an array of DST letters (e.g. "D", "S"). */
-	Letters []string
 }
 
 //---------------------------------------------------------------------------

@@ -121,7 +121,6 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 
 var ZonePolicyUS = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesUS,
-	Letters: nil,
 }
 
 

@@ -156,7 +156,6 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 
 var ZonePolicyAN = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesAN,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -181,7 +180,6 @@ var ZoneRulesAQ = []zoneinfo.ZoneRule{
 
 var ZonePolicyAQ = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesAQ,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -278,7 +276,6 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 
 var ZonePolicyAS = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesAS,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -387,7 +384,6 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 
 var ZonePolicyAT = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesAT,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -508,7 +504,6 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 
 var ZonePolicyAV = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesAV,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -569,7 +564,6 @@ var ZoneRulesAW = []zoneinfo.ZoneRule{
 
 var ZonePolicyAW = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesAW,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -654,7 +648,6 @@ var ZoneRulesArg = []zoneinfo.ZoneRule{
 
 var ZonePolicyArg = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesArg,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -703,7 +696,6 @@ var ZoneRulesArmenia = []zoneinfo.ZoneRule{
 
 var ZonePolicyArmenia = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesArmenia,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -728,7 +720,6 @@ var ZoneRulesAus = []zoneinfo.ZoneRule{
 
 var ZonePolicyAus = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesAus,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -765,7 +756,6 @@ var ZoneRulesAzer = []zoneinfo.ZoneRule{
 
 var ZonePolicyAzer = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesAzer,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -790,7 +780,6 @@ var ZoneRulesBarb = []zoneinfo.ZoneRule{
 
 var ZonePolicyBarb = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesBarb,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -815,7 +804,6 @@ var ZoneRulesBelize = []zoneinfo.ZoneRule{
 
 var ZonePolicyBelize = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesBelize,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1068,7 +1056,6 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 
 var ZonePolicyBrazil = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesBrazil,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1117,7 +1104,6 @@ var ZoneRulesC_Eur = []zoneinfo.ZoneRule{
 
 var ZonePolicyC_Eur = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesC_Eur,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1142,7 +1128,6 @@ var ZoneRulesCO = []zoneinfo.ZoneRule{
 
 var ZonePolicyCO = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesCO,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1167,7 +1152,6 @@ var ZoneRulesCR = []zoneinfo.ZoneRule{
 
 var ZonePolicyCR = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesCR,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1240,7 +1224,6 @@ var ZoneRulesCanada = []zoneinfo.ZoneRule{
 
 var ZonePolicyCanada = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesCanada,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1313,7 +1296,6 @@ var ZoneRulesChatham = []zoneinfo.ZoneRule{
 
 var ZonePolicyChatham = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesChatham,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1530,7 +1512,6 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 
 var ZonePolicyChile = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesChile,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1555,7 +1536,6 @@ var ZoneRulesCook = []zoneinfo.ZoneRule{
 
 var ZonePolicyCook = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesCook,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1736,7 +1716,6 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 
 var ZonePolicyCuba = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesCuba,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1785,7 +1764,6 @@ var ZoneRulesDhaka = []zoneinfo.ZoneRule{
 
 var ZonePolicyDhaka = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesDhaka,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1834,7 +1812,6 @@ var ZoneRulesE_EurAsia = []zoneinfo.ZoneRule{
 
 var ZonePolicyE_EurAsia = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesE_EurAsia,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1883,7 +1860,6 @@ var ZoneRulesEU = []zoneinfo.ZoneRule{
 
 var ZonePolicyEU = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesEU,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1932,7 +1908,6 @@ var ZoneRulesEUAsia = []zoneinfo.ZoneRule{
 
 var ZonePolicyEUAsia = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesEUAsia,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -1957,7 +1932,6 @@ var ZoneRulesEcuador = []zoneinfo.ZoneRule{
 
 var ZonePolicyEcuador = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesEcuador,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2138,7 +2112,6 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 
 var ZonePolicyEgypt = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesEgypt,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2187,7 +2160,6 @@ var ZoneRulesEire = []zoneinfo.ZoneRule{
 
 var ZonePolicyEire = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesEire,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2260,7 +2232,6 @@ var ZoneRulesFalk = []zoneinfo.ZoneRule{
 
 var ZonePolicyFalk = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesFalk,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2417,7 +2388,6 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 
 var ZonePolicyFiji = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesFiji,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2442,7 +2412,6 @@ var ZoneRulesGuam = []zoneinfo.ZoneRule{
 
 var ZonePolicyGuam = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesGuam,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2491,7 +2460,6 @@ var ZoneRulesGuat = []zoneinfo.ZoneRule{
 
 var ZonePolicyGuat = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesGuat,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2516,7 +2484,6 @@ var ZoneRulesHK = []zoneinfo.ZoneRule{
 
 var ZonePolicyHK = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesHK,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2613,7 +2580,6 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 
 var ZonePolicyHaiti = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesHaiti,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2638,7 +2604,6 @@ var ZoneRulesHoliday = []zoneinfo.ZoneRule{
 
 var ZonePolicyHoliday = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesHoliday,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -2687,7 +2652,6 @@ var ZoneRulesHond = []zoneinfo.ZoneRule{
 
 var ZonePolicyHond = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesHond,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3024,7 +2988,6 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 
 var ZonePolicyIran = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesIran,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3073,7 +3036,6 @@ var ZoneRulesIraq = []zoneinfo.ZoneRule{
 
 var ZonePolicyIraq = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesIraq,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3098,7 +3060,6 @@ var ZoneRulesJapan = []zoneinfo.ZoneRule{
 
 var ZonePolicyJapan = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesJapan,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3267,7 +3228,6 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 
 var ZonePolicyJordan = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesJordan,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3316,7 +3276,6 @@ var ZoneRulesKyrgyz = []zoneinfo.ZoneRule{
 
 var ZonePolicyKyrgyz = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesKyrgyz,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3437,7 +3396,6 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 
 var ZonePolicyLH = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesLH,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3486,7 +3444,6 @@ var ZoneRulesLebanon = []zoneinfo.ZoneRule{
 
 var ZonePolicyLebanon = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesLebanon,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3535,7 +3492,6 @@ var ZoneRulesLibya = []zoneinfo.ZoneRule{
 
 var ZonePolicyLibya = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesLibya,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3560,7 +3516,6 @@ var ZoneRulesMacau = []zoneinfo.ZoneRule{
 
 var ZonePolicyMacau = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesMacau,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3609,7 +3564,6 @@ var ZoneRulesMauritius = []zoneinfo.ZoneRule{
 
 var ZonePolicyMauritius = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesMauritius,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3706,7 +3660,6 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 
 var ZonePolicyMexico = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesMexico,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3743,7 +3696,6 @@ var ZoneRulesMoldova = []zoneinfo.ZoneRule{
 
 var ZonePolicyMoldova = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesMoldova,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3792,7 +3744,6 @@ var ZoneRulesMoncton = []zoneinfo.ZoneRule{
 
 var ZonePolicyMoncton = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesMoncton,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -3877,7 +3828,6 @@ var ZoneRulesMongol = []zoneinfo.ZoneRule{
 
 var ZonePolicyMongol = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesMongol,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -5918,7 +5868,6 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 
 var ZonePolicyMorocco = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesMorocco,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -5943,7 +5892,6 @@ var ZoneRulesNC = []zoneinfo.ZoneRule{
 
 var ZonePolicyNC = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesNC,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -5992,7 +5940,6 @@ var ZoneRulesNT_YK = []zoneinfo.ZoneRule{
 
 var ZonePolicyNT_YK = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesNT_YK,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6065,7 +6012,6 @@ var ZoneRulesNZ = []zoneinfo.ZoneRule{
 
 var ZonePolicyNZ = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesNZ,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6114,7 +6060,6 @@ var ZoneRulesNamibia = []zoneinfo.ZoneRule{
 
 var ZonePolicyNamibia = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesNamibia,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6187,7 +6132,6 @@ var ZoneRulesNic = []zoneinfo.ZoneRule{
 
 var ZonePolicyNic = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesNic,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6212,7 +6156,6 @@ var ZoneRulesPRC = []zoneinfo.ZoneRule{
 
 var ZonePolicyPRC = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesPRC,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6297,7 +6240,6 @@ var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 
 var ZonePolicyPakistan = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesPakistan,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6706,7 +6648,6 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 
 var ZonePolicyPalestine = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesPalestine,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6839,7 +6780,6 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 
 var ZonePolicyPara = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesPara,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6864,7 +6804,6 @@ var ZoneRulesPeru = []zoneinfo.ZoneRule{
 
 var ZonePolicyPeru = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesPeru,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6889,7 +6828,6 @@ var ZoneRulesPhil = []zoneinfo.ZoneRule{
 
 var ZonePolicyPhil = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesPhil,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6914,7 +6852,6 @@ var ZoneRulesROK = []zoneinfo.ZoneRule{
 
 var ZonePolicyROK = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesROK,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -6963,7 +6900,6 @@ var ZoneRulesRussia = []zoneinfo.ZoneRule{
 
 var ZonePolicyRussia = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesRussia,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7012,7 +6948,6 @@ var ZoneRulesRussiaAsia = []zoneinfo.ZoneRule{
 
 var ZonePolicyRussiaAsia = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesRussiaAsia,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7037,7 +6972,6 @@ var ZoneRulesSA = []zoneinfo.ZoneRule{
 
 var ZonePolicySA = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesSA,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7062,7 +6996,6 @@ var ZoneRulesSalv = []zoneinfo.ZoneRule{
 
 var ZonePolicySalv = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesSalv,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7111,7 +7044,6 @@ var ZoneRulesSanLuis = []zoneinfo.ZoneRule{
 
 var ZonePolicySanLuis = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesSanLuis,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7184,7 +7116,6 @@ var ZoneRulesStJohns = []zoneinfo.ZoneRule{
 
 var ZonePolicyStJohns = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesStJohns,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7209,7 +7140,6 @@ var ZoneRulesSudan = []zoneinfo.ZoneRule{
 
 var ZonePolicySudan = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesSudan,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7366,7 +7296,6 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 
 var ZonePolicySyria = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesSyria,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7391,7 +7320,6 @@ var ZoneRulesTaiwan = []zoneinfo.ZoneRule{
 
 var ZonePolicyTaiwan = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesTaiwan,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7464,7 +7392,6 @@ var ZoneRulesThule = []zoneinfo.ZoneRule{
 
 var ZonePolicyThule = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesThule,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7561,7 +7488,6 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 
 var ZonePolicyTonga = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesTonga,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7610,7 +7536,6 @@ var ZoneRulesTroll = []zoneinfo.ZoneRule{
 
 var ZonePolicyTroll = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesTroll,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7683,7 +7608,6 @@ var ZoneRulesTunisia = []zoneinfo.ZoneRule{
 
 var ZonePolicyTunisia = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesTunisia,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7732,7 +7656,6 @@ var ZoneRulesTurkey = []zoneinfo.ZoneRule{
 
 var ZonePolicyTurkey = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesTurkey,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7805,7 +7728,6 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 
 var ZonePolicyUS = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesUS,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7890,7 +7812,6 @@ var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 
 var ZonePolicyUruguay = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesUruguay,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -7915,7 +7836,6 @@ var ZoneRulesVanuatu = []zoneinfo.ZoneRule{
 
 var ZonePolicyVanuatu = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesVanuatu,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -8000,7 +7920,6 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 
 var ZonePolicyWS = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesWS,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -8049,7 +7968,6 @@ var ZoneRulesWinn = []zoneinfo.ZoneRule{
 
 var ZonePolicyWinn = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesWinn,
-	Letters: nil,
 }
 
 // ---------------------------------------------------------------------------
@@ -8350,7 +8268,6 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 
 var ZonePolicyZion = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesZion,
-	Letters: nil,
 }
 
 
