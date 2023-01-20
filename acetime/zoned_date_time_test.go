@@ -482,6 +482,42 @@ func TestZonedDateTimeForLink(t *testing.T) {
 }
 
 //-----------------------------------------------------------------------------
+// UnixSeconds64
+//-----------------------------------------------------------------------------
+
+func TestZonedDateTimeFromUnixSeconds64(t *testing.T) {
+	savedEpochYear := GetCurrentEpochYear()
+	SetCurrentEpochYear(2050)
+	defer SetCurrentEpochYear(savedEpochYear)
+
+	// TODO: Change to NewTimeZoneUTC() when it becomes available
+	tz := NewTimeZoneFromZoneInfo(
+		&zonedbtesting.ZoneAmerica_Los_Angeles)
+	zdt := NewZonedDateTimeFromUnixSeconds64(InvalidUnixSeconds64, &tz)
+	if !zdt.IsError() {
+		t.Fatal(zdt)
+	}
+
+	// Test FromUnixSeconds64().
+	// Unix seconds from 'date +%s -d 2050-01-02T03:04:05-08:00'.
+	unixSeconds64 := int64(2524734245)
+	zdt = NewZonedDateTimeFromUnixSeconds64(unixSeconds64, &tz)
+	ldt := LocalDateTime{2050, 1, 2, 3, 4, 5, 0 /*Fold*/}
+	if !(ldt == zdt.ToLocalDateTime()) {
+		t.Fatal(zdt)
+	}
+
+	// Test ToUnixSeconds64(). Use +1 day after the previous ldt.
+	ldt.Day++
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	unixSeconds64 = zdt.ToUnixSeconds64()
+	expected := int64(2524734245 + 24*60*60)
+	if !(expected == unixSeconds64) {
+		t.Fatal(unixSeconds64)
+	}
+}
+
+//-----------------------------------------------------------------------------
 // Benchmarks
 // $ go test -run=NOMATCH -bench=.
 //-----------------------------------------------------------------------------
@@ -492,26 +528,26 @@ var ldt = LocalDateTime{2023, 1, 19, 22, 11, 0, 0 /*Fold*/}
 var tz = NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
 
 func BenchmarkZonedDateTimeFromEpochSeconds_Cache(b *testing.B) {
-	for n := 0; n <	b.N; n++ {
+	for n := 0; n < b.N; n++ {
 		zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
 	}
 }
 
 func BenchmarkZonedDateTimeFromEpochSeconds_NoCache(b *testing.B) {
-	for n := 0; n <	b.N; n++ {
+	for n := 0; n < b.N; n++ {
 		tz.zoneProcessor.Reset()
 		zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
 	}
 }
 
 func BenchmarkZonedDateTimeFromLocalDateTime_Cache(b *testing.B) {
-	for n := 0; n <	b.N; n++ {
+	for n := 0; n < b.N; n++ {
 		zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	}
 }
 
 func BenchmarkZonedDateTimeFromLocalDateTime_NoCache(b *testing.B) {
-	for n := 0; n <	b.N; n++ {
+	for n := 0; n < b.N; n++ {
 		tz.zoneProcessor.Reset()
 		zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	}
@@ -519,7 +555,7 @@ func BenchmarkZonedDateTimeFromLocalDateTime_NoCache(b *testing.B) {
 
 func BenchmarkZonedDateTimeToEpochSeconds(b *testing.B) {
 	zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
-	for n := 0; n <	b.N; n++ {
-		epochSeconds = zdt.ToEpochSeconds();
+	for n := 0; n < b.N; n++ {
+		epochSeconds = zdt.ToEpochSeconds()
 	}
 }

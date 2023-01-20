@@ -3,10 +3,16 @@ package acetime
 const (
 	// Must be a multiple of 400
 	converterEpochYear = 2000
+
+	// Number of days from 1970-01-01 to 2000-01-01
+	daysToConverterEpochFromUnixEpoch = 10957
 )
 
 var (
-	currentEpochYear                     int16 = 2050
+	// Current epoch year.
+	currentEpochYear int16 = 2050
+
+	// Number of days from 2000-01-01 to {currentEpochYear}-01-01.
 	daysToCurrentEpochFromConverterEpoch int32 = 18263
 )
 
@@ -21,6 +27,15 @@ func GetCurrentEpochYear() int16 {
 
 func GetDaysToCurrentEpochFromConverterEpoch() int32 {
 	return daysToCurrentEpochFromConverterEpoch
+}
+
+func GetDaysToCurrentEpochFromUnixEpoch() int32 {
+	return daysToCurrentEpochFromConverterEpoch +
+		daysToConverterEpochFromUnixEpoch
+}
+
+func GetSecondsToCurrentEpochFromUnixEpoch64() int64 {
+	return 86400 * int64(GetDaysToCurrentEpochFromUnixEpoch())
 }
 
 // Convert to days relative to "converter epoch"

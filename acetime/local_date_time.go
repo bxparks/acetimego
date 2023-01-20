@@ -5,7 +5,10 @@ import (
 	"math"
 )
 
-const InvalidEpochSeconds int32 = math.MinInt32
+const (
+	InvalidEpochSeconds  int32 = math.MinInt32
+	InvalidUnixSeconds64 int64 = math.MinInt64
+)
 
 type LocalDateTime struct {
 	Year   int16

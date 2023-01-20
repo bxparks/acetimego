@@ -30,6 +30,18 @@ func (zdt *ZonedDateTime) IsError() bool {
 	return zdt.Year == InvalidYear
 }
 
+func (zdt *ZonedDateTime) ToLocalDateTime() LocalDateTime {
+	return LocalDateTime{
+		Year:   zdt.Year,
+		Month:  zdt.Month,
+		Day:    zdt.Day,
+		Hour:   zdt.Hour,
+		Minute: zdt.Minute,
+		Second: zdt.Second,
+		Fold:   zdt.Fold,
+	}
+}
+
 func (zdt *ZonedDateTime) ToEpochSeconds() int32 {
 	if zdt.IsError() {
 		return InvalidEpochSeconds
@@ -61,6 +73,38 @@ func NewZonedDateTimeFromEpochSeconds(
 		OffsetMinutes: odt.OffsetMinutes,
 		Tz:            tz,
 	}
+}
+
+func NewZonedDateTimeFromUnixSeconds64(
+	unixSeconds64 int64, tz *TimeZone) ZonedDateTime {
+
+	if unixSeconds64 == InvalidUnixSeconds64 {
+		return NewZonedDateTimeError()
+	}
+
+	epochSeconds := int32(unixSeconds64 -
+		GetSecondsToCurrentEpochFromUnixEpoch64())
+
+	odt := tz.OffsetDateTimeFromEpochSeconds(epochSeconds)
+	return ZonedDateTime{
+		Year:          odt.Year,
+		Month:         odt.Month,
+		Day:           odt.Day,
+		Hour:          odt.Hour,
+		Minute:        odt.Minute,
+		Second:        odt.Second,
+		Fold:          odt.Fold,
+		OffsetMinutes: odt.OffsetMinutes,
+		Tz:            tz,
+	}
+}
+
+func (zdt *ZonedDateTime) ToUnixSeconds64() int64 {
+	epochSeconds := zdt.ToEpochSeconds()
+	if epochSeconds == InvalidEpochSeconds {
+		return InvalidUnixSeconds64
+	}
+	return int64(epochSeconds) + GetSecondsToCurrentEpochFromUnixEpoch64()
 }
 
 func NewZonedDateTimeFromLocalDateTime(
