@@ -480,3 +480,46 @@ func TestZonedDateTimeForLink(t *testing.T) {
 		t.Fatal("epochSeconds not equal")
 	}
 }
+
+//-----------------------------------------------------------------------------
+// Benchmarks
+// $ go test -run=NOMATCH -bench=.
+//-----------------------------------------------------------------------------
+
+var epochSeconds int32
+var zdt ZonedDateTime
+var ldt = LocalDateTime{2023, 1, 19, 22, 11, 0, 0 /*Fold*/}
+var tz = NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+
+func BenchmarkZonedDateTimeFromEpochSeconds_Cache(b *testing.B) {
+	for n := 0; n <	b.N; n++ {
+		zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
+	}
+}
+
+func BenchmarkZonedDateTimeFromEpochSeconds_NoCache(b *testing.B) {
+	for n := 0; n <	b.N; n++ {
+		tz.zoneProcessor.Reset()
+		zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
+	}
+}
+
+func BenchmarkZonedDateTimeFromLocalDateTime_Cache(b *testing.B) {
+	for n := 0; n <	b.N; n++ {
+		zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	}
+}
+
+func BenchmarkZonedDateTimeFromLocalDateTime_NoCache(b *testing.B) {
+	for n := 0; n <	b.N; n++ {
+		tz.zoneProcessor.Reset()
+		zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	}
+}
+
+func BenchmarkZonedDateTimeToEpochSeconds(b *testing.B) {
+	zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
+	for n := 0; n <	b.N; n++ {
+		epochSeconds = zdt.ToEpochSeconds();
+	}
+}
