@@ -1,12 +1,21 @@
-TARGETS := printmemory printmemory.tiny
+TARGETS := printmemory validatetime
+TINY_TARGETS := printmemory.tiny validatetime.tiny
 
 all: $(TARGETS)
 
-printmemory:
-	go build printmemory.go
+tiny: $(TINY_TARGETS)
 
-printmemory.tiny:
-	tinygo build -o printmemory.tiny printmemory.go
+printmemory: printmemory.go
+	go build $<
+
+printmemory.tiny: printmemory.go
+	tinygo build -o printmemory.tiny $<
+
+validatetime: validatetime.go
+	go build $<
+
+validatetime.tiny: validatetime.go
+	tinygo build -o validatetime.tiny $<
 
 clean:
-	rm -f $(TARGETS)
+	rm -f $(TARGETS) $(TINY_TARGETS)

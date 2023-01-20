@@ -1,12 +1,15 @@
-// $ go run helloacetime.go
+// Print the memory usage of various acetime data structs, such as ZonedDateTime
+// and ZoneAndLinkRegistry.
+//
+//$ go run printmemory.go
 
 package main
 
 import (
 	"fmt"
 	"github.com/bxparks/AceTimeGo/acetime"
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
 	"github.com/bxparks/AceTimeGo/zonedb"
+	"github.com/bxparks/AceTimeGo/zonedbtesting"
 	"runtime"
 )
 
