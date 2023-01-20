@@ -1,0 +1,25 @@
+name: Go Tests
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-go@v3
+      with:
+        go-version: 'stable'
+
+    - name: Tests
+      run: |
+        cd acetime
+        go test
+
+    - name: Cmds
+      run: |
+        cd cmd
+        make
