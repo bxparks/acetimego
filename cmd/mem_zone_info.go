@@ -9,7 +9,6 @@ import (
 	"fmt"
 	"github.com/bxparks/AceTimeGo/acetime"
 	"github.com/bxparks/AceTimeGo/zonedb"
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
 	"runtime"
 )
 
@@ -18,25 +17,10 @@ func main() {
 	PrintMemUsage()
 
 	fmt.Println("---- Create ZonedDateTime using ZoneInfo")
-	tz := acetime.NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+	tz := acetime.NewTimeZoneFromZoneInfo(&zonedb.ZoneAmerica_Los_Angeles)
 	ldt := acetime.LocalDateTime{2023, 1, 19, 18, 36, 0, 0 /*Fold*/}
 	zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
-	fmt.Println("zdt1:", zdt.String())
-	PrintMemUsage()
-
-	fmt.Println("---- Load the ZoneAndLinkRegistry")
-	zr := acetime.ZoneRegistrar{zonedb.ZoneAndLinkRegistry}
-	PrintMemUsage()
-
-	fmt.Println("---- Create ZonedDateTime using Registry")
-	zi := zr.FindZoneInfoByName("US/Pacific")
-	if zi == nil {
-		fmt.Println("US/Pacific not found")
-		return
-	}
-	tz = acetime.NewTimeZoneFromZoneInfo(zi)
-	zdt = acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
-	fmt.Println("zdt2:", zdt.String())
+	fmt.Println("zdt:", zdt.String())
 	PrintMemUsage()
 
 	fmt.Println("---- Run GC()")

@@ -1,15 +1,28 @@
-TARGETS := printmemory validatetime
-TINY_TARGETS := printmemory.tiny validatetime.tiny
+TARGETS := \
+mem_zone_info \
+mem_zone_registry \
+validatetime
+
+TARGETS_TINY := \
+mem_zone_info.tiny \
+mem_zone_registry.tiny \
+validatetime.tiny
 
 all: $(TARGETS)
 
-tiny: $(TINY_TARGETS)
+alltiny: $(TARGETS_TINY)
 
-printmemory: printmemory.go
+mem_zone_info: mem_zone_info.go
 	go build $<
 
-printmemory.tiny: printmemory.go
-	tinygo build -o printmemory.tiny $<
+mem_zone_info.tiny: mem_zone_info.go
+	tinygo build -o mem_zone_info.tiny $<
+
+mem_zone_registry: mem_zone_registry.go
+	go build $<
+
+mem_zone_registry.tiny: mem_zone_registry.go
+	tinygo build -o mem_zone_registry.tiny $<
 
 validatetime: validatetime.go
 	go build $<
@@ -18,4 +31,4 @@ validatetime.tiny: validatetime.go
 	tinygo build -o validatetime.tiny $<
 
 clean:
-	rm -f $(TARGETS) $(TINY_TARGETS)
+	rm -f $(TARGETS) $(TARGETS_TINY)
