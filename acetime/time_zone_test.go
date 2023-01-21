@@ -11,3 +11,14 @@ func TestTimeZoneToString(t *testing.T) {
 		t.Fatal(tz.String(), tz)
 	}
 }
+
+func TestTimeZoneUTC(t *testing.T) {
+	tz := NewTimeZoneUTC()
+	if !(tz.String() == "UTC") {
+		t.Fatal(tz.String(), tz)
+	}
+
+	if !tz.IsUTC() {
+		t.Fatal(tz.String(), tz)
+	}
+}

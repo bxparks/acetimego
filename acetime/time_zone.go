@@ -11,17 +11,30 @@ import (
 //-----------------------------------------------------------------------------
 
 type TimeZone struct {
-	zoneProcessor ZoneProcessor
+	zoneProcessor *ZoneProcessor
 }
 
 func (tz *TimeZone) String() string {
-	return tz.zoneProcessor.String()
+	if tz.zoneProcessor == nil {
+		return "UTC"
+	} else {
+		return tz.zoneProcessor.String()
+	}
+}
+
+// NewTimeZoneUTC returns a TimeZone instance that represents the UTC timezone.
+func NewTimeZoneUTC() TimeZone {
+	return TimeZone{}
+}
+
+func (tz *TimeZone) IsUTC() bool {
+	return tz.zoneProcessor == nil
 }
 
 func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
-	var tz TimeZone
-	tz.zoneProcessor.InitForZoneInfo(zoneInfo)
-	return tz
+	var zoneProcessor ZoneProcessor
+	zoneProcessor.InitForZoneInfo(zoneInfo)
+	return TimeZone{&zoneProcessor}
 }
 
 // OffsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given
@@ -32,6 +45,11 @@ func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 // AceTime library.
 func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	epochSeconds ATime) OffsetDateTime {
+
+	// UTC
+	if tz.zoneProcessor == nil {
+		return NewOffsetDateTimeFromEpochSeconds(epochSeconds, 0)
+	}
 
 	err := tz.zoneProcessor.InitForEpochSeconds(epochSeconds)
 	if err != ErrOk {
@@ -60,12 +78,18 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime) OffsetDateTime {
 
+	// UTC
+	if tz.zoneProcessor == nil {
+		return NewOffsetDateTimeFromLocalDateTime(ldt, 0)
+	}
+
 	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
 	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
 		return NewOffsetDateTimeError()
 	}
 
-	// Convert FindResult into OffsetDateTime using the requested offset.
+	// Convert FindResult into OffsetDateTime using the request offset, and the
+	// result fold.
 	odt := OffsetDateTime{
 		Year:          ldt.Year,
 		Month:         ldt.Month,
@@ -91,6 +115,17 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 }
 
 func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
+	if tz.zoneProcessor == nil {
+		return ZonedExtra{
+			Zetype:              ZonedExtraExact,
+			StdOffsetMinutes:    0,
+			DstOffsetMinutes:    0,
+			ReqStdOffsetMinutes: 0,
+			ReqDstOffsetMinutes: 0,
+			Abbrev:              "UTC",
+		}
+	}
+
 	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
 	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
 		return NewZonedExtraError()
@@ -108,6 +143,17 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 
 func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 	ldt *LocalDateTime) ZonedExtra {
+
+	if tz.zoneProcessor == nil {
+		return ZonedExtra{
+			Zetype:              ZonedExtraExact,
+			StdOffsetMinutes:    0,
+			DstOffsetMinutes:    0,
+			ReqStdOffsetMinutes: 0,
+			ReqDstOffsetMinutes: 0,
+			Abbrev:              "UTC",
+		}
+	}
 
 	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
 	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {

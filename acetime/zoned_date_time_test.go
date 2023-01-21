@@ -31,6 +31,44 @@ func TestZonedDateTimeToString(t *testing.T) {
 	}
 }
 
+//-----------------------------------------------------------------------------
+// TimeZoneUTC()
+//-----------------------------------------------------------------------------
+
+func TestZonedDateTimeFromUTC(t *testing.T) {
+	// A UTC timezone
+	tz := NewTimeZoneUTC()
+	if !(tz.String() == "UTC") {
+		t.Fatal(tz)
+	}
+
+	// Create a ZonedDateTime from a random epochSeconds.
+	epochSeconds := ATime(-32423234)
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	if zdt.IsError() {
+		t.Fatal(zdt)
+	}
+
+	// Create the expected LocalDateTime.
+	expected := NewLocalDateTimeFromEpochSeconds(epochSeconds)
+	ldt := zdt.ToLocalDateTime()
+	if !(expected == ldt) {
+		t.Fatal(expected, zdt)
+	}
+
+	// String(). If TimeZone.IsUTC(), then the ISO8601 format is simplified.
+	ldt = LocalDateTime{2023, 1, 19, 17, 3, 23, 0 /*Fold*/}
+	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	s := zdt.String()
+	if !(s == "2023-01-19T17:03:23 UTC") {
+		t.Fatal(s, zdt)
+	}
+}
+
+//-----------------------------------------------------------------------------
+// NewZonedDateTimeFromEpochSeconds()
+//-----------------------------------------------------------------------------
+
 func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 	savedEpochYear := GetCurrentEpochYear()
 	SetCurrentEpochYear(2000)
@@ -177,6 +215,8 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	}
 }
 
+//-----------------------------------------------------------------------------
+// NewZonedDateTimeFromLocalDateTime()
 //-----------------------------------------------------------------------------
 
 func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
@@ -482,7 +522,7 @@ func TestZonedDateTimeForLink(t *testing.T) {
 }
 
 //-----------------------------------------------------------------------------
-// UnixSeconds64
+// FromUnixSeconds64(), ToUnixSeconds64()
 //-----------------------------------------------------------------------------
 
 func TestZonedDateTimeFromUnixSeconds64(t *testing.T) {

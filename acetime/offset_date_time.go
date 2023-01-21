@@ -21,6 +21,15 @@ func NewOffsetDateTimeError() OffsetDateTime {
 	return OffsetDateTime{Year: InvalidYear}
 }
 
+func NewOffsetDateTimeFromLocalDateTime(
+	ldt *LocalDateTime, offsetMinutes int16) OffsetDateTime {
+
+	return OffsetDateTime{
+		ldt.Year, ldt.Month, ldt.Day,
+		ldt.Hour, ldt.Minute, ldt.Second,
+		ldt.Fold, offsetMinutes}
+}
+
 func (odt *OffsetDateTime) IsError() bool {
 	return odt.Year == InvalidYear
 }

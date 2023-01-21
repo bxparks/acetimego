@@ -136,6 +136,12 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 }
 
 func (zdt *ZonedDateTime) String() string {
+	// Return a simplified version of ISO 8601 date format for UTC.
+	if zdt.Tz.IsUTC() {
+		return fmt.Sprintf("%04d-%02d-%02dT%02d:%02d:%02d UTC",
+			zdt.Year, zdt.Month, zdt.Day, zdt.Hour, zdt.Minute, zdt.Second)
+	}
+
 	s, h, m := minutesToHM(zdt.OffsetMinutes)
 	var c byte
 	if s < 0 {
