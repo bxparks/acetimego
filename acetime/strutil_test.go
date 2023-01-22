@@ -1,8 +1,8 @@
 package acetime
 
 import (
-	"testing"
 	"strings"
+	"testing"
 )
 
 func TestWriteUint8Pad2(t *testing.T) {
@@ -86,6 +86,65 @@ func TestWriteUint16Pad4(t *testing.T) {
 	WriteUint16Pad4(&b, 421, '0')
 	s = b.String()
 	if !(s == "0421") {
+		t.Fatal(s)
+	}
+}
+
+func TestWriteUint64(t *testing.T) {
+	var b strings.Builder
+
+	WriteUint64(&b, 0)
+	s := b.String()
+	if !(s == "0") {
+		t.Fatal(s)
+	}
+
+	b.Reset()
+	WriteUint64(&b, 1)
+	s = b.String()
+	if !(s == "1") {
+		t.Fatal(s)
+	}
+
+	b.Reset()
+	WriteUint64(&b, 10)
+	s = b.String()
+	if !(s == "10") {
+		t.Fatal(s)
+	}
+
+	b.Reset()
+	WriteUint64(&b, 12)
+	s = b.String()
+	if !(s == "12") {
+		t.Fatal(s)
+	}
+
+	b.Reset()
+	WriteUint64(&b, 1234)
+	s = b.String()
+	if !(s == "1234") {
+		t.Fatal(s)
+	}
+
+	b.Reset()
+	WriteUint64(&b, 12345678)
+	s = b.String()
+	if !(s == "12345678") {
+		t.Fatal(s)
+	}
+
+	b.Reset()
+	WriteUint64(&b, 1234567890123456)
+	s = b.String()
+	if !(s == "1234567890123456") {
+		t.Fatal(s)
+	}
+
+	b.Reset()
+	WriteUint64(&b, 1234567890123456789)
+	s = b.String()
+	if !(s == "1234567890123456789") {
 		t.Fatal(s)
 	}
 }
