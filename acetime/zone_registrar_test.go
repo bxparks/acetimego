@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"github.com/bxparks/AceTimeGo/zonedbtesting"
 	"testing"
 )
@@ -43,5 +44,29 @@ func TestFindByNameNotFound(t *testing.T) {
 	zoneInfo := registrar.FindZoneInfoByName("America/DoesNotExist")
 	if zoneInfo != nil {
 		t.Fatal("Should have returned nil")
+	}
+}
+
+func TestIsZoneRegistrySorted_Sorted(t *testing.T) {
+	zis := []*zoneinfo.ZoneInfo{
+		&zonedbtesting.ZoneAmerica_New_York, // 0x1e2a7654
+		&zonedbtesting.ZoneAmerica_Los_Angeles, // 0xb7f7e8f2
+		&zonedbtesting.ZoneEtc_UTC, // 0xd8e31abc
+	}
+	isSorted := IsZoneRegistrySorted(zis)
+	if !isSorted {
+		t.Fatal(isSorted)
+	}
+}
+
+func TestIsZoneRegistrySorted_NotSorted(t *testing.T) {
+	zis := []*zoneinfo.ZoneInfo{
+		&zonedbtesting.ZoneAmerica_Los_Angeles, // 0xb7f7e8f2
+		&zonedbtesting.ZoneAmerica_New_York, // 0x1e2a7654
+		&zonedbtesting.ZoneEtc_UTC, // 0xd8e31abc
+	}
+	isSorted := IsZoneRegistrySorted(zis)
+	if isSorted {
+		t.Fatal(isSorted)
 	}
 }

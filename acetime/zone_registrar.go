@@ -15,6 +15,8 @@ import (
 
 type ZoneRegistry = map[uint32]*zoneinfo.ZoneInfo
 
+type ZoneRegistry2 = []*zoneinfo.ZoneInfo
+
 type ZoneRegistrar struct {
 	Registry ZoneRegistry
 }
@@ -46,4 +48,16 @@ func djb2(s string) uint32 {
 	}
 
 	return hash
+}
+
+func IsZoneRegistrySorted(zis ZoneRegistry2) bool {
+	var prevID uint32 = 0
+	for _, zi := range zis {
+		id := zi.ZoneID
+		if id < prevID {
+			return false
+		}
+		prevID = id
+	}
+	return true
 }
