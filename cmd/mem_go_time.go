@@ -1,37 +1,33 @@
-// Print the memory usage of various acetime data structs, such as ZonedDateTime
-// and ZoneAndLinkRegistry.
+// Print the memory usage when using the standard Go time package.
 //
-//$ go run printmemory.go
+//$ go run mem_go_time.go
 
 package main
 
 import (
 	"github.com/bxparks/AceTimeGo/acetime"
-	"github.com/bxparks/AceTimeGo/zonedb"
 	"os"
 	"runtime"
 	"strings"
+	"time"
 )
 
 func main() {
 	os.Stdout.WriteString("---- Initial memory usage\n")
 	PrintMemUsage()
 
-	os.Stdout.WriteString("---- Load the ZoneAndLinkRegistry\n")
-	zr := acetime.NewZoneRegistrar(zonedb.ZoneAndLinkRegistry)
-	PrintMemUsage()
-
-	os.Stdout.WriteString("---- Create ZonedDateTime using Zone Registry\n")
-	zi := zr.FindZoneInfoByName("America/Los_Angeles")
-	if zi == nil {
-		os.Stdout.WriteString("America/Los_Angeles not found\n")
+	os.Stdout.WriteString("---- Create America/Los_Angeles using time package\n")
+	name := "America/Los_Angeles"
+	tz, err := time.LoadLocation(name)
+	if err != nil {
+		os.Stdout.WriteString("ERROR: Zone not found: ")
+		os.Stdout.WriteString(name)
+		os.Stdout.WriteString("\n")
 		return
 	}
-	tz := acetime.NewTimeZoneFromZoneInfo(zi)
-	ldt := acetime.LocalDateTime{2023, 1, 19, 18, 36, 0, 0 /*Fold*/}
-	zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
-	os.Stdout.WriteString("zdt:")
-	os.Stdout.WriteString(zdt.String())
+	t := time.Date(2023, 1, 19, 18, 36, 0, 0 /*nanos*/, tz)
+	os.Stdout.WriteString("t:")
+	os.Stdout.WriteString(t.String())
 	os.Stdout.WriteString("\n")
 	PrintMemUsage()
 

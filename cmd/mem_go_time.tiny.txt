@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25    4209      16     601 |    4250     617 | (unknown)
+     25   10357      20     633 |   10402     653 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -15,18 +15,25 @@
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/unistd
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/internal/task
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
-    147       0       0      24 |     147      24 | /usr/local/go/src/syscall
+   1783    2128       0      56 |    3911      56 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
-   7145      29       0       0 |    7174       0 | github.com/bxparks/AceTimeGo/acetime
-      0   13702   75368       0 |   89070   75368 | github.com/bxparks/AceTimeGo/zonedb
-    218       0       0       0 |     218       0 | github.com/bxparks/AceTimeGo/zoneinfo
-     59       0       0       0 |      59       0 | internal/bytealg
+     55       0       0       0 |      55       0 | Go interface assert
+    176       0       0       0 |     176       0 | Go interface method
+      0      91       0       0 |      91       0 | Go reflect data
+     45       0       0       0 |      45       0 | errors
+    161       0       0       0 |     161       0 | github.com/bxparks/AceTimeGo/acetime
+     26       0       0       0 |      26       0 | internal/bytealg
+    157       2       0       0 |     159       0 | internal/itoa
       0      38      32       0 |      70      32 | internal/oserror
-    305      24       0      16 |     329      16 | internal/task
-    226     194       0       0 |     420       0 | main
+    420      24       0      16 |     444      16 | internal/task
+    103       3       0       0 |     106       0 | io/fs
+    231     156       0       0 |     387       0 | main
      72      16       0      24 |      88      24 | os
-   2781     146       8     135 |    2935     143 | runtime
-    609     124       0       0 |     733       0 | strings
-      0       0       0       8 |       0       8 | syscall
+   3074     678       0       0 |    3752       0 | reflect
+   7046     220      12     119 |    7278     131 | runtime
+    106      72       0       0 |     178       0 | strings
+    633     200       0       0 |     833       0 | sync
+     71    2954       0       8 |    3025       8 | syscall
+  18436    1003     168     160 |   19607     328 | time
 ------------------------------- | --------------- | -------
-  15529   18482   75424     808 |  109435   76232 | total
+  36562   17942     232    1016 |   54736    1248 | total
