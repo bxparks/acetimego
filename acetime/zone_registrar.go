@@ -2,6 +2,7 @@ package acetime
 
 import (
 	"github.com/bxparks/AceTimeGo/zoneinfo"
+	"math"
 )
 
 //-----------------------------------------------------------------------------
@@ -12,6 +13,10 @@ import (
 // using a binary search on zoneId, just like the AceTime and AceTimeC
 // libraries.
 //-----------------------------------------------------------------------------
+
+const (
+	InvalidRegistryIndex = math.MaxUint16
+)
 
 type ZoneRegistry = map[uint32]*zoneinfo.ZoneInfo
 
@@ -60,4 +65,36 @@ func IsZoneRegistrySorted(zis ZoneRegistry2) bool {
 		prevID = id
 	}
 	return true
+}
+
+func FindByIdLinear(zis ZoneRegistry2, id uint32) uint16 {
+	for i, zi := range zis {
+		if zi.ZoneID == id {
+			return uint16(i)
+		}
+	}
+	return InvalidRegistryIndex
+}
+
+func FindByIdBinary(zis ZoneRegistry2, id uint32) uint16 {
+  var a uint16 = 0
+  var b uint16 = uint16(len(zis))
+  for {
+    diff := b - a
+    if (diff == 0) {
+			break
+		}
+
+    c := a + diff / 2
+    current := zis[c].ZoneID
+    if id == current {
+			return c
+		}
+    if (id < current) {
+      b = c
+    } else {
+      a = c + 1
+    }
+  }
+  return InvalidRegistryIndex
 }
