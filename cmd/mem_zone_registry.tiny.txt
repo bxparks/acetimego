@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25    4209      16     601 |    4250     617 | (unknown)
+     25    4208      16     601 |    4249     617 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -17,16 +17,16 @@
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     147       0       0      24 |     147      24 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
-   6950      29       0       0 |    6979       0 | github.com/bxparks/AceTimeGo/acetime
-      0   23279   76152       0 |   99431   76152 | github.com/bxparks/AceTimeGo/zonedb
+   7145      29       0       0 |    7174       0 | github.com/bxparks/AceTimeGo/acetime
+      0   13711   75368       0 |   89079   75368 | github.com/bxparks/AceTimeGo/zonedb
     218       0       0       0 |     218       0 | github.com/bxparks/AceTimeGo/zoneinfo
      59       0       0       0 |      59       0 | internal/bytealg
       0      38      32       0 |      70      32 | internal/oserror
     305      24       0      16 |     329      16 | internal/task
-    221     171       0       0 |     392       0 | main
+    226     171       0       0 |     397       0 | main
      72      16       0      24 |      88      24 | os
-   2906     146       8     135 |    3060     143 | runtime
+   2781     146       8     135 |    2935     143 | runtime
     609     124       0       0 |     733       0 | strings
       0       0       0       8 |       0       8 | syscall
 ------------------------------- | --------------- | -------
-  15454   28036   76208     808 |  119698   77016 | total
+  15529   18467   75424     808 |  109420   76232 | total
