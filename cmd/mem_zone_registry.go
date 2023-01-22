@@ -6,44 +6,54 @@
 package main
 
 import (
-	"fmt"
 	"github.com/bxparks/AceTimeGo/acetime"
 	"github.com/bxparks/AceTimeGo/zonedb"
+	"os"
 	"runtime"
+	"strings"
 )
 
 func main() {
-	fmt.Println("---- Initial memory usage")
+	os.Stdout.WriteString("---- Initial memory usage\n")
 	PrintMemUsage()
 
-	fmt.Println("---- Load the ZoneAndLinkRegistry")
+	os.Stdout.WriteString("---- Load the ZoneAndLinkRegistry\n")
 	zr := acetime.ZoneRegistrar{zonedb.ZoneAndLinkRegistry}
 	PrintMemUsage()
 
-	fmt.Println("---- Create ZonedDateTime using Registry")
+	os.Stdout.WriteString("---- Create ZonedDateTime using Registry\n")
 	zi := zr.FindZoneInfoByName("US/Pacific")
 	if zi == nil {
-		fmt.Println("US/Pacific not found")
+		os.Stdout.WriteString("US/Pacific not found\n")
 		return
 	}
 	tz := acetime.NewTimeZoneFromZoneInfo(zi)
 	ldt := acetime.LocalDateTime{2023, 1, 19, 18, 36, 0, 0 /*Fold*/}
 	zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
-	fmt.Println("zdt:", zdt.String())
+	os.Stdout.WriteString("zdt:")
+	os.Stdout.WriteString(zdt.String())
+	os.Stdout.WriteString("\n")
 	PrintMemUsage()
 
-	fmt.Println("---- Run GC()")
+	os.Stdout.WriteString("---- Run GC()\n")
 	runtime.GC()
 	PrintMemUsage()
 }
 
 func PrintMemUsage() {
+	// For info on each, see: https://golang.org/pkg/runtime/#MemStats
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
 
-	// For info on each, see: https://golang.org/pkg/runtime/#MemStats
-	fmt.Printf("TotalAlloc = %v B", m.TotalAlloc)
-	fmt.Printf("\tSys = %v B\n", m.Sys)
+	var b strings.Builder
+	os.Stdout.WriteString("TotalAlloc = ")
+	acetime.WriteUint64(&b, m.TotalAlloc)
+	os.Stdout.WriteString(b.String())
+	os.Stdout.WriteString("\tSys = ")
+	b.Reset()
+	acetime.WriteUint64(&b, m.Sys)
+	os.Stdout.WriteString(b.String())
+	os.Stdout.WriteString("\n")
 
 	// These are not found on tinygo.
 	//fmt.Printf("Alloc = %v B", m.Alloc)
