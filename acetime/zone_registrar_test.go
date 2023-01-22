@@ -1,13 +1,13 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"github.com/bxparks/AceTimeGo/zonedbtesting"
+	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"testing"
 )
 
 func TestFindById(t *testing.T) {
-	registrar := ZoneRegistrar{zonedbtesting.ZoneAndLinkRegistry}
+	registrar := NewZoneRegistrar(zonedbtesting.ZoneAndLinkRegistry)
 	zoneInfo := registrar.FindZoneInfoByID(
 		zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID)
 	if zoneInfo == nil {
@@ -24,7 +24,7 @@ func TestFindById(t *testing.T) {
 }
 
 func TestFindByIdNotFound(t *testing.T) {
-	registrar := ZoneRegistrar{zonedbtesting.ZoneAndLinkRegistry}
+	registrar := NewZoneRegistrar(zonedbtesting.ZoneAndLinkRegistry)
 	zoneInfo := registrar.FindZoneInfoByID(0)
 	if zoneInfo != nil {
 		t.Fatal("Should have returned nil")
@@ -32,7 +32,7 @@ func TestFindByIdNotFound(t *testing.T) {
 }
 
 func TestFindByName(t *testing.T) {
-	registrar := ZoneRegistrar{zonedbtesting.ZoneAndLinkRegistry}
+	registrar := NewZoneRegistrar(zonedbtesting.ZoneAndLinkRegistry)
 	zoneInfo := registrar.FindZoneInfoByName("America/Los_Angeles")
 	if zoneInfo == nil {
 		t.Fatal("Not found")
@@ -40,7 +40,7 @@ func TestFindByName(t *testing.T) {
 }
 
 func TestFindByNameNotFound(t *testing.T) {
-	registrar := ZoneRegistrar{zonedbtesting.ZoneAndLinkRegistry}
+	registrar := NewZoneRegistrar(zonedbtesting.ZoneAndLinkRegistry)
 	zoneInfo := registrar.FindZoneInfoByName("America/DoesNotExist")
 	if zoneInfo != nil {
 		t.Fatal("Should have returned nil")
@@ -49,9 +49,9 @@ func TestFindByNameNotFound(t *testing.T) {
 
 func TestIsZoneRegistrySorted_Sorted(t *testing.T) {
 	zis := []*zoneinfo.ZoneInfo{
-		&zonedbtesting.ZoneAmerica_New_York, // 0x1e2a7654
+		&zonedbtesting.ZoneAmerica_New_York,    // 0x1e2a7654
 		&zonedbtesting.ZoneAmerica_Los_Angeles, // 0xb7f7e8f2
-		&zonedbtesting.ZoneEtc_UTC, // 0xd8e31abc
+		&zonedbtesting.ZoneEtc_UTC,             // 0xd8e31abc
 	}
 	isSorted := IsZoneRegistrySorted(zis)
 	if !isSorted {
@@ -62,8 +62,8 @@ func TestIsZoneRegistrySorted_Sorted(t *testing.T) {
 func TestIsZoneRegistrySorted_NotSorted(t *testing.T) {
 	zis := []*zoneinfo.ZoneInfo{
 		&zonedbtesting.ZoneAmerica_Los_Angeles, // 0xb7f7e8f2
-		&zonedbtesting.ZoneAmerica_New_York, // 0x1e2a7654
-		&zonedbtesting.ZoneEtc_UTC, // 0xd8e31abc
+		&zonedbtesting.ZoneAmerica_New_York,    // 0x1e2a7654
+		&zonedbtesting.ZoneEtc_UTC,             // 0xd8e31abc
 	}
 	isSorted := IsZoneRegistrySorted(zis)
 	if isSorted {
@@ -74,8 +74,8 @@ func TestIsZoneRegistrySorted_NotSorted(t *testing.T) {
 func TestLinearSearch_NotFound(t *testing.T) {
 	zis := []*zoneinfo.ZoneInfo{
 		&zonedbtesting.ZoneAmerica_Los_Angeles, // 0xb7f7e8f2
-		&zonedbtesting.ZoneAmerica_New_York, // 0x1e2a7654
-		&zonedbtesting.ZoneEtc_UTC, // 0xd8e31abc
+		&zonedbtesting.ZoneAmerica_New_York,    // 0x1e2a7654
+		&zonedbtesting.ZoneEtc_UTC,             // 0xd8e31abc
 	}
 	i := FindByIdLinear(zis, 0x0)
 	if i != InvalidRegistryIndex {
@@ -86,8 +86,8 @@ func TestLinearSearch_NotFound(t *testing.T) {
 func TestLinearSearch_Found(t *testing.T) {
 	zis := []*zoneinfo.ZoneInfo{
 		&zonedbtesting.ZoneAmerica_Los_Angeles, // 0xb7f7e8f2
-		&zonedbtesting.ZoneAmerica_New_York, // 0x1e2a7654
-		&zonedbtesting.ZoneEtc_UTC, // 0xd8e31abc
+		&zonedbtesting.ZoneAmerica_New_York,    // 0x1e2a7654
+		&zonedbtesting.ZoneEtc_UTC,             // 0xd8e31abc
 	}
 	i := FindByIdLinear(zis, 0x1e2a7654)
 	if !(i == 1) {
@@ -97,9 +97,9 @@ func TestLinearSearch_Found(t *testing.T) {
 
 func TestBinarySearch_NotFound(t *testing.T) {
 	zis := []*zoneinfo.ZoneInfo{
-		&zonedbtesting.ZoneAmerica_New_York, // 0x1e2a7654
+		&zonedbtesting.ZoneAmerica_New_York,    // 0x1e2a7654
 		&zonedbtesting.ZoneAmerica_Los_Angeles, // 0xb7f7e8f2
-		&zonedbtesting.ZoneEtc_UTC, // 0xd8e31abc
+		&zonedbtesting.ZoneEtc_UTC,             // 0xd8e31abc
 	}
 	if !IsZoneRegistrySorted(zis) {
 		t.Fatal("Not sorted")
@@ -112,9 +112,9 @@ func TestBinarySearch_NotFound(t *testing.T) {
 
 func TestBinarySearch_Found(t *testing.T) {
 	zis := []*zoneinfo.ZoneInfo{
-		&zonedbtesting.ZoneAmerica_New_York, // 0x1e2a7654
+		&zonedbtesting.ZoneAmerica_New_York,    // 0x1e2a7654
 		&zonedbtesting.ZoneAmerica_Los_Angeles, // 0xb7f7e8f2
-		&zonedbtesting.ZoneEtc_UTC, // 0xd8e31abc
+		&zonedbtesting.ZoneEtc_UTC,             // 0xd8e31abc
 	}
 	if !IsZoneRegistrySorted(zis) {
 		t.Fatal("Not sorted")

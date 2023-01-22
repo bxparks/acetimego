@@ -14,7 +14,7 @@ import (
 func main() {
 	fmt.Println("Validating from 2000 to 2100")
 
-	zr := acetime.ZoneRegistrar{zonedb.ZoneAndLinkRegistry}
+	zr := acetime.NewZoneRegistrar(zonedb.ZoneAndLinkRegistry)
 	var index int
 	for _, zi := range zr.Registry {
 		name := zi.Name

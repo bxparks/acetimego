@@ -18,7 +18,7 @@ func main() {
 	PrintMemUsage()
 
 	os.Stdout.WriteString("---- Load the ZoneAndLinkRegistry\n")
-	zr := acetime.ZoneRegistrar{zonedb.ZoneAndLinkRegistry}
+	zr := acetime.NewZoneRegistrar(zonedb.ZoneAndLinkRegistry)
 	PrintMemUsage()
 
 	os.Stdout.WriteString("---- Create ZonedDateTime using Registry\n")
