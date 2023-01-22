@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"fmt"
+	"strings"
 )
 
 //-----------------------------------------------------------------------------
@@ -136,20 +136,23 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 }
 
 func (zdt *ZonedDateTime) String() string {
-	// Return a simplified version of ISO 8601 date format for UTC.
-	if zdt.Tz.IsUTC() {
-		return fmt.Sprintf("%04d-%02d-%02dT%02d:%02d:%02d UTC",
-			zdt.Year, zdt.Month, zdt.Day, zdt.Hour, zdt.Minute, zdt.Second)
-	}
+	var b strings.Builder
+	zdt.BuildString(&b)
+	return b.String()
+}
 
-	s, h, m := minutesToHM(zdt.OffsetMinutes)
-	var c byte
-	if s < 0 {
-		c = '-'
+func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
+	ldt := zdt.ToLocalDateTime()
+	ldt.BuildString(b)
+
+	if zdt.Tz.IsUTC() {
+		// Append just a "UTC" to simplify the ISO8601.
+		b.WriteString(" UTC")
 	} else {
-		c = '+'
+		// Append the "+/-hh:mm[tz]"
+		BuildUTCOffset(b, zdt.OffsetMinutes)
+		b.WriteByte('[')
+		b.WriteString(zdt.Tz.String())
+		b.WriteByte(']')
 	}
-	return fmt.Sprintf("%04d-%02d-%02dT%02d:%02d:%02d%c%02d:%02d[%s]",
-		zdt.Year, zdt.Month, zdt.Day, zdt.Hour, zdt.Minute, zdt.Second,
-		c, h, m, zdt.Tz.String())
 }

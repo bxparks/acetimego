@@ -1,8 +1,8 @@
 package acetime
 
 import (
-	"fmt"
 	"math"
+	"strings"
 )
 
 const (
@@ -60,6 +60,21 @@ func NewLocalDateTimeFromEpochSeconds(epochSeconds ATime) LocalDateTime {
 }
 
 func (ldt *LocalDateTime) String() string {
-	return fmt.Sprintf("%04d-%02d-%02dT%02d:%02d:%02d",
-		ldt.Year, ldt.Month, ldt.Day, ldt.Hour, ldt.Minute, ldt.Second)
+	var b strings.Builder
+	ldt.BuildString(&b)
+	return b.String()
+}
+
+func (ldt *LocalDateTime) BuildString(b *strings.Builder) {
+	WriteUint16Pad4(b, uint16(ldt.Year), '0')
+	b.WriteByte('-')
+	WriteUint8Pad2(b, ldt.Month, '0')
+	b.WriteByte('-')
+	WriteUint8Pad2(b, ldt.Day, '0')
+	b.WriteByte('T')
+	WriteUint8Pad2(b, ldt.Hour, '0')
+	b.WriteByte(':')
+	WriteUint8Pad2(b, ldt.Minute, '0')
+	b.WriteByte(':')
+	WriteUint8Pad2(b, ldt.Second, '0')
 }

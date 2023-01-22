@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"fmt"
+	"strings"
 )
 
 type OffsetDateTime struct {
@@ -64,17 +64,44 @@ func NewOffsetDateTimeFromEpochSeconds(
 		0 /*Fold*/, offsetMinutes}
 }
 
+func (odt *OffsetDateTime) ToLocalDateTime() LocalDateTime {
+	return LocalDateTime{
+		Year:   odt.Year,
+		Month:  odt.Month,
+		Day:    odt.Day,
+		Hour:   odt.Hour,
+		Minute: odt.Minute,
+		Second: odt.Second,
+		Fold:   odt.Fold,
+	}
+}
+
 func (odt *OffsetDateTime) String() string {
-	s, h, m := minutesToHM(odt.OffsetMinutes)
+	var b strings.Builder
+	odt.BuildString(&b)
+	return b.String()
+}
+
+func (odt *OffsetDateTime) BuildString(b *strings.Builder) {
+	ldt := odt.ToLocalDateTime()
+	ldt.BuildString(b)
+	BuildUTCOffset(b, odt.OffsetMinutes)
+}
+
+// Extract the UTC offset as +/-hh:mm
+func BuildUTCOffset(b *strings.Builder, offsetMinutes int16) {
+	s, h, m := minutesToHM(offsetMinutes)
 	var c byte
 	if s < 0 {
 		c = '-'
 	} else {
 		c = '+'
 	}
-	return fmt.Sprintf("%04d-%02d-%02dT%02d:%02d:%02d%c%02d:%02d",
-		odt.Year, odt.Month, odt.Day, odt.Hour, odt.Minute, odt.Second,
-		c, h, m)
+
+	b.WriteByte(c)
+	WriteUint8Pad2(b, h, '0')
+	b.WriteByte(':')
+	WriteUint8Pad2(b, m, '0')
 }
 
 func minutesToHM(minutes int16) (sign int8, h uint8, m uint8) {
