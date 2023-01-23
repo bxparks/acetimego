@@ -33,6 +33,23 @@ import (
 	"github.com/bxparks/AceTimeGo/zoneinfo"
 )
 
+// ---------------------------------------------------------------------------
+// Zone Context
+// ---------------------------------------------------------------------------
+
+const TzDatabaseVersion string = "2022g"
+
+var Context = zoneinfo.ZoneContext{
+	LetterBuffer: LetterBuffer,
+	LetterOffsets: LetterOffsets,
+	FormatBuffer: FormatBuffer,
+	FormatOffsets: FormatOffsets,
+	ZoneRegistry: ZoneAndLinkRegistry,
+	TzDatabaseVersion: TzDatabaseVersion,
+}
+
+// ---------------------------------------------------------------------------
+
 // Supported Zones: 351
 var ZoneRegistry = []*zoneinfo.ZoneInfo{
 	&ZoneAmerica_St_Johns, // 0x04b14e6e, America/St_Johns
@@ -388,6 +405,8 @@ var ZoneRegistry = []*zoneinfo.ZoneInfo{
 	&ZoneAmerica_Campo_Grande, // 0xfec3e7a6, America/Campo_Grande
 
 }
+
+// ---------------------------------------------------------------------------
 
 // Supported Zones and Links: 596
 var ZoneAndLinkRegistry = []*zoneinfo.ZoneInfo{

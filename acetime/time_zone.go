@@ -10,8 +10,40 @@ import (
 // no longer used.
 //-----------------------------------------------------------------------------
 
+const (
+	TztypeError = iota
+	TztypeUTC
+	TztypeProcessor
+)
+
 type TimeZone struct {
+	tztype        uint8
 	zoneProcessor *ZoneProcessor
+}
+
+func NewTimeZoneError() TimeZone {
+	return TimeZone{TztypeError, nil}
+}
+
+// NewTimeZoneUTC returns a TimeZone instance that represents the UTC timezone.
+func NewTimeZoneUTC() TimeZone {
+	return TimeZone{TztypeUTC, nil}
+}
+
+func NewTimeZoneFromZoneInfo(
+	zoneContext *zoneinfo.ZoneContext, zoneInfo *zoneinfo.ZoneInfo) TimeZone {
+
+	var zoneProcessor ZoneProcessor
+	zoneProcessor.InitForZoneInfo(zoneContext, zoneInfo)
+	return TimeZone{TztypeProcessor, &zoneProcessor}
+}
+
+func (tz *TimeZone) IsError() bool {
+	return tz.tztype == TztypeError
+}
+
+func (tz *TimeZone) IsUTC() bool {
+	return tz.zoneProcessor == nil
 }
 
 func (tz *TimeZone) String() string {
@@ -20,21 +52,6 @@ func (tz *TimeZone) String() string {
 	} else {
 		return tz.zoneProcessor.String()
 	}
-}
-
-// NewTimeZoneUTC returns a TimeZone instance that represents the UTC timezone.
-func NewTimeZoneUTC() TimeZone {
-	return TimeZone{}
-}
-
-func (tz *TimeZone) IsUTC() bool {
-	return tz.zoneProcessor == nil
-}
-
-func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
-	var zoneProcessor ZoneProcessor
-	zoneProcessor.InitForZoneInfo(zoneInfo)
-	return TimeZone{&zoneProcessor}
 }
 
 // OffsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given

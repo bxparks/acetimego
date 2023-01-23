@@ -29,6 +29,7 @@ const (
 )
 
 type ZoneProcessor struct {
+	zoneContext       *zoneinfo.ZoneContext
 	zoneInfo          *zoneinfo.ZoneInfo
 	year              int16
 	isFilled          bool
@@ -42,7 +43,11 @@ func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
 }
 
 // InitForZoneInfo initializes the ZoneProcessor for the given zoneInfo.
-func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
+func (zp *ZoneProcessor) InitForZoneInfo(
+	zoneContext *zoneinfo.ZoneContext,
+	zoneInfo *zoneinfo.ZoneInfo) {
+
+	zp.zoneContext = zoneContext
 	zp.zoneInfo = zoneInfo
 	zp.isFilled = false
 }
@@ -69,7 +74,9 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	untilYm := YearMonth{year + 1, 2}
 
 	// Step 1: Find matches.
-	zp.numMatches = findMatches(zp.zoneInfo, startYm, untilYm, zp.matches[:])
+	zp.numMatches = findMatches(
+		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatBuffer,
+		zp.zoneInfo, startYm, untilYm, zp.matches[:])
 	if zp.numMatches == 0 {
 		return ErrGeneric
 	}
@@ -85,7 +92,10 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	generateStartUntilTimes(transitions)
 
 	// Step 5: Calc abbreviations.
-	calcAbbreviations(transitions)
+	calcAbbreviations(
+		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatBuffer,
+		zp.zoneContext.LetterOffsets, zp.zoneContext.LetterBuffer,
+		transitions)
 
 	return ErrOk
 }
@@ -177,6 +187,8 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 //-----------------------------------------------------------------------------
 
 func findMatches(
+	formatsOffset []uint16,
+	formatsBuffer string,
 	zoneInfo *zoneinfo.ZoneInfo,
 	startYm YearMonth,
 	untilYm YearMonth,
@@ -194,7 +206,9 @@ func findMatches(
 		}
 		if eraOverlapsInterval(prevEra, era, startYm, untilYm) {
 			if iMatch < uint8(len(matches)) {
-				createMatchingEra(&matches[iMatch], prevMatch, era, startYm, untilYm)
+				createMatchingEra(
+					formatsOffset, formatsBuffer, &matches[iMatch], prevMatch, era,
+					startYm, untilYm)
 				prevMatch = &matches[iMatch]
 				iMatch++
 			}
@@ -258,6 +272,8 @@ func compareEraToYearMonth(
  * needed to define the startDateTime of the current era.
  */
 func createMatchingEra(
+	formatsOffset []uint16,
+	formatsBuffer string,
 	newMatch *MatchingEra,
 	prevMatch *MatchingEra,
 	era *zoneinfo.ZoneEra,
@@ -302,6 +318,7 @@ func createMatchingEra(
 	newMatch.prevMatch = prevMatch
 	newMatch.lastOffsetMinutes = 0
 	newMatch.lastDeltaMinutes = 0
+	newMatch.format = era.Format(formatsOffset, formatsBuffer)
 }
 
 //-----------------------------------------------------------------------------
@@ -346,20 +363,17 @@ func createTransitionForYear(
 	t.match = match
 	t.rule = rule
 	t.offsetMinutes = match.era.StdOffsetMinutes()
-	t.letter = ""
 
 	if rule != nil {
 		t.transitionTime = getTransitionTime(year, rule)
 		t.deltaMinutes = rule.DstOffsetMinutes()
-		// If LETTER is a '-', treat it the same as an empty string.
-		if rule.Letter != "-" {
-			t.letter = rule.Letter
-		}
+		t.letterIndex = rule.LetterIndex
 	} else {
 		// Create a Transition using the MatchingEra for the transitionTime.
 		// Used for simple MatchingEra.
 		t.transitionTime = match.startDt
 		t.deltaMinutes = match.era.DstOffsetMinutes()
+		t.letterIndex = 0
 	}
 }
 
@@ -598,13 +612,19 @@ func generateStartUntilTimes(transitions []Transition) {
 // Step 5
 //-----------------------------------------------------------------------------
 
-func calcAbbreviations(transitions []Transition) {
+func calcAbbreviations(
+	formatsOffset []uint16,
+	formatsBuffer string,
+	lettersOffset []uint8,
+	lettersBuffer string,
+	transitions []Transition) {
+
 	for i := range transitions {
 		transition := &transitions[i]
 		transition.abbrev = createAbbreviation(
-			transition.match.era.Format,
+			transition.match.era.Format(formatsOffset, formatsBuffer),
 			transition.deltaMinutes,
-			transition.getLetter())
+			transition.Letter(lettersOffset, lettersBuffer))
 	}
 }
 

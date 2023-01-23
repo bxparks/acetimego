@@ -6,7 +6,8 @@ import (
 )
 
 func TestTimeZoneToString(t *testing.T) {
-	tz := NewTimeZoneFromZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+	tz := NewTimeZoneFromZoneInfo(
+		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
 	if !(tz.String() == "America/Los_Angeles") {
 		t.Fatal(tz.String(), tz)
 	}

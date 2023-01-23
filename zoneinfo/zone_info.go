@@ -22,6 +22,17 @@ const (
 
 //-----------------------------------------------------------------------------
 
+type ZoneContext struct {
+	LetterBuffer string
+	LetterOffsets []uint8
+	FormatBuffer string
+	FormatOffsets []uint16
+	ZoneRegistry []*ZoneInfo
+	TzDatabaseVersion string
+}
+
+//-----------------------------------------------------------------------------
+
 type ZoneRule struct {
 
 	/** FROM year. */
@@ -86,8 +97,7 @@ type ZoneRule struct {
 	 * Determined by the LETTER column. Determines the substitution into the '%s'
 	 * field (implemented here by just a '%') of the ZoneInfo::Format field.
 	 * Most comment values in the raw TZDB files are "S", "D", and "-". The "-" is
-	 * stored as "" (empty string) to save memory, and because that's what the "-"
-	 * in the raw file actually means.
+	 * stored as "" (empty string).
 	 *
 	 * As of TZ DB version 2018i, there are 4 ZonePolicies which have ZoneRules
 	 * with a LETTER field longer than 1 character:
@@ -96,8 +106,19 @@ type ZoneRule struct {
 	 *  - Namibia ('WAT', 'CAT'; used by Africa/Windhoek)
 	 *  - StJohns ('DD'; used by America/St_Johns and America/Goose_Bay)
 	 *  - Troll ('+00' '+02'; used by Antarctica/Troll)
+	 *
+	 * This is an index into the LetterIndex array, which in turn, contains a byte
+	 * offset into the LetterBuffer which contains all the letters concatenated
+	 * into a single string.
 	 */
-	Letter string
+	LetterIndex uint8
+}
+
+func (rule *ZoneRule) Letter(offsets []uint8, buffer string) string {
+	index := rule.LetterIndex
+	begin := offsets[index]
+	end := offsets[index+1] // always exists because of terminating sentinel
+	return buffer[begin:end]
 }
 
 func (rule *ZoneRule) AtMinutes() int16 {
@@ -169,22 +190,17 @@ type ZoneEra struct {
 	 *  3) A single string with a substitution, e.g. "E%sT", where the "%s" is
 	 *  replaced by the LETTER value from the ZoneRule.
 	 *
-	 * BasicZoneProcessor supports only a single letter subsitution from LETTER,
-	 * but ExtendedZoneProcessor supports substituting multi-character strings
-	 * (e.g. "CAT", "DD", "+00").
-	 *
 	 * The TZ DB files use '%s' to indicate the substitution, but for simplicity,
 	 * AceTime replaces the "%s" with just a '%' character with no loss of
 	 * functionality. This also makes the string-replacement code a little
 	 * simpler. For example, 'E%sT' is stored as 'E%T', and the LETTER
 	 * substitution is performed on the '%' character.
 	 *
-	 * This field will never be a 'nil' if it was derived from an actual
-	 * entry from the TZ database. There is an internal object named
-	 * `ExtendedZoneProcessor::kAnchorEra` which does set this field to nil.
-	 * Maybe it should be set to ""?
+	 * This field is an index into the FormatOffsets[], which in turn is a byte
+	 * offset into the FormatBuffer string which is a concatenated string of all
+	 * format strings.
 	 */
-	Format string
+	FormatIndex uint16
 
 	/** UTC offset in 15 min increments. Determined by the STDOFF column. */
 	OffsetCode int8
@@ -241,6 +257,13 @@ type ZoneEra struct {
 	 *    (UntilTimeModifier & 0x0f)).
 	 */
 	UntilTimeModifier uint8
+}
+
+func (era *ZoneEra) Format(offsets []uint16, buffer string) string {
+	index := era.FormatIndex
+	begin := offsets[index]
+	end := offsets[index+1] // always exists because of terminating sentinel
+	return buffer[begin:end]
 }
 
 func (era *ZoneEra) StdOffsetMinutes() int16 {

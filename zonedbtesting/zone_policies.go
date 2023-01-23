@@ -35,6 +35,24 @@ import (
 )
 
 // ---------------------------------------------------------------------------
+// String constants.
+// ---------------------------------------------------------------------------
+
+const (
+	// All ZoneRule.Letter entries concatenated together.
+	LetterBuffer = "DS~"
+)
+
+var (
+	// Byte offset into LetterBuffer for each index. The actual Letter string
+	// at index `i` given by the `ZoneRule.Letter` field is
+	// `LetterBuffer[LetterOffsets[i]:LetterOffsets[i+1]]`.
+	LetterOffsets = []uint8{
+		0, 0, 1, 2,
+	}
+)
+
+// ---------------------------------------------------------------------------
 // Supported zone policies: 1
 // numRules: 6
 // ---------------------------------------------------------------------------
@@ -54,7 +72,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 2, // "S"
 	},
 	// Rule    US    1975    only    -    Feb    lastSun    2:00    1:00    D
 	{
@@ -66,7 +84,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 1, // "D"
 	},
 	// Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
 	{
@@ -78,7 +96,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 1, // "D"
 	},
 	// Rule    US    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -90,7 +108,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 1, // "D"
 	},
 	// Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -102,7 +120,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 1, // "D"
 	},
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -114,7 +132,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 2, // "S"
 	},
 
 }

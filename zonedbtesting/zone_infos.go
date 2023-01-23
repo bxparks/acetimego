@@ -35,10 +35,22 @@ import (
 )
 
 // ---------------------------------------------------------------------------
-// Zone Context
+// String constants.
 // ---------------------------------------------------------------------------
 
-const TzDatabaseVersion string = "2022g"
+const (
+	// All ZoneEra.Format entries concatenated together.
+	FormatBuffer = "E%TP%TUTC~"
+)
+
+var (
+	// Byte offset into FormatBuffer for each index. The actual Format string
+	// at index `i` given by the `ZoneEra.Format` field is
+	// `FormatBuffer[FormatOffsets[i]:FormatOffsets[i+1]]`.
+	FormatOffsets = []uint16{
+		0, 0, 3, 6, 9,
+	}
+)
 
 // ---------------------------------------------------------------------------
 // Supported zones: 3
@@ -54,7 +66,7 @@ var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
 	//             -8:00    US    P%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "P%T",
+		FormatIndex: 2, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -86,7 +98,7 @@ var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 1, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -118,7 +130,7 @@ var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 	// 0 - UTC
 	{
 		ZonePolicy: nil,
-		Format: "UTC",
+		FormatIndex: 3, // "UTC"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,

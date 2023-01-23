@@ -203,6 +203,9 @@ type MatchingEra struct {
 
 	/** The DST offset of the last Transition in this MatchingEra. */
 	lastDeltaMinutes int16
+
+	/** The format string from era.FormatIndex */
+	format string
 }
 
 //-----------------------------------------------------------------------------
@@ -276,8 +279,8 @@ type Transition struct {
 	/** The calculated effective time zone abbreviation, e.g. "PST" or "PDT". */
 	abbrev string
 
-	/** Storage for the single letter 'letter' field if 'rule' is not null. */
-	letter string
+	/** Index into LetterBuffer representing the LETTER field. */
+	letterIndex uint8
 
 	/**
 	 * During findCandidateTransitions(), this flag indicates whether the
@@ -294,14 +297,18 @@ type Transition struct {
 	matchStatus uint8
 }
 
-// getLetter() returns the 'letter' defined by the 'rule' if it exists.
+// Letter returns the 'letter' defined by the 'rule' if it exists.
 // Otherwise, returns "".
-func (transition *Transition) getLetter() string {
-	if transition.rule != nil {
-		return transition.rule.Letter
-	} else {
+func (transition *Transition) Letter(
+	lettersOffset []uint8, lettersBuffer string) string {
+
+	if transition.rule == nil {
 		return ""
 	}
+	index := transition.rule.LetterIndex
+	start := lettersOffset[index]
+	end := lettersOffset[index+1]
+	return lettersBuffer[start:end]
 }
 
 func fixTransitionTimes(transitions []Transition) {

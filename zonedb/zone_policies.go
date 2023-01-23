@@ -34,6 +34,24 @@ import (
 )
 
 // ---------------------------------------------------------------------------
+// String constants.
+// ---------------------------------------------------------------------------
+
+const (
+	// All ZoneRule.Letter entries concatenated together.
+	LetterBuffer = "+00+02CATCSTDDDSWAT~"
+)
+
+var (
+	// Byte offset into LetterBuffer for each index. The actual Letter string
+	// at index `i` given by the `ZoneRule.Letter` field is
+	// `LetterBuffer[LetterOffsets[i]:LetterOffsets[i+1]]`.
+	LetterOffsets = []uint8{
+		0, 0, 3, 6, 9, 12, 13, 15, 16, 19,
+	}
+)
+
+// ---------------------------------------------------------------------------
 // Supported zone policies: 83
 // numRules: 603
 // ---------------------------------------------------------------------------
@@ -53,7 +71,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AN    1990    1995    -    Mar    Sun>=1    2:00s    0    S
 	{
@@ -65,7 +83,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AN    1996    2005    -    Mar    lastSun    2:00s    0    S
 	{
@@ -77,7 +95,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AN    2000    only    -    Aug    lastSun    2:00s    1:00    D
 	{
@@ -89,7 +107,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AN    2001    2007    -    Oct    lastSun    2:00s    1:00    D
 	{
@@ -101,7 +119,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AN    2006    only    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -113,7 +131,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AN    2007    only    -    Mar    lastSun    2:00s    0    S
 	{
@@ -125,7 +143,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AN    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -137,7 +155,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AN    2008    max    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -149,7 +167,7 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 
 }
@@ -173,7 +191,7 @@ var ZoneRulesAQ = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -197,7 +215,7 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AS    1994    only    -    Mar    20    2:00s    0    S
 	{
@@ -209,7 +227,7 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AS    1995    2005    -    Mar    lastSun    2:00s    0    S
 	{
@@ -221,7 +239,7 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AS    2006    only    -    Apr    2    2:00s    0    S
 	{
@@ -233,7 +251,7 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AS    2007    only    -    Mar    lastSun    2:00s    0    S
 	{
@@ -245,7 +263,7 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AS    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -257,7 +275,7 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AS    2008    max    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -269,7 +287,7 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 
 }
@@ -293,7 +311,7 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AT    1991    1999    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -305,7 +323,7 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AT    1991    2005    -    Mar    lastSun    2:00s    0    S
 	{
@@ -317,7 +335,7 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AT    2000    only    -    Aug    lastSun    2:00s    1:00    D
 	{
@@ -329,7 +347,7 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AT    2001    max    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -341,7 +359,7 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AT    2006    only    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -353,7 +371,7 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AT    2007    only    -    Mar    lastSun    2:00s    0    S
 	{
@@ -365,7 +383,7 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AT    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -377,7 +395,7 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -401,7 +419,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AV    1991    1994    -    Mar    Sun>=1    2:00s    0    S
 	{
@@ -413,7 +431,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AV    1995    2005    -    Mar    lastSun    2:00s    0    S
 	{
@@ -425,7 +443,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AV    2000    only    -    Aug    lastSun    2:00s    1:00    D
 	{
@@ -437,7 +455,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AV    2001    2007    -    Oct    lastSun    2:00s    1:00    D
 	{
@@ -449,7 +467,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AV    2006    only    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -461,7 +479,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AV    2007    only    -    Mar    lastSun    2:00s    0    S
 	{
@@ -473,7 +491,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AV    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -485,7 +503,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AV    2008    max    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -497,7 +515,7 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 
 }
@@ -521,7 +539,7 @@ var ZoneRulesAW = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AW    2006    only    -    Dec     3    2:00s    1:00    D
 	{
@@ -533,7 +551,7 @@ var ZoneRulesAW = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    AW    2007    2009    -    Mar    lastSun    2:00s    0    S
 	{
@@ -545,7 +563,7 @@ var ZoneRulesAW = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    AW    2007    2008    -    Oct    lastSun    2:00s    1:00    D
 	{
@@ -557,7 +575,7 @@ var ZoneRulesAW = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 
 }
@@ -581,7 +599,7 @@ var ZoneRulesArg = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Arg    1999    only    -    Oct    Sun>=1    0:00    1:00    -
 	{
@@ -593,7 +611,7 @@ var ZoneRulesArg = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Arg    2000    only    -    Mar    3    0:00    0    -
 	{
@@ -605,7 +623,7 @@ var ZoneRulesArg = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Arg    2007    only    -    Dec    30    0:00    1:00    -
 	{
@@ -617,7 +635,7 @@ var ZoneRulesArg = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Arg    2008    2009    -    Mar    Sun>=15    0:00    0    -
 	{
@@ -629,7 +647,7 @@ var ZoneRulesArg = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Arg    2008    only    -    Oct    Sun>=15    0:00    1:00    -
 	{
@@ -641,7 +659,7 @@ var ZoneRulesArg = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -665,7 +683,7 @@ var ZoneRulesArmenia = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Armenia    2011    only    -    Mar    lastSun     2:00s    1:00    -
 	{
@@ -677,7 +695,7 @@ var ZoneRulesArmenia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Armenia    2011    only    -    Oct    lastSun     2:00s    0    -
 	{
@@ -689,7 +707,7 @@ var ZoneRulesArmenia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -713,7 +731,7 @@ var ZoneRulesAus = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -737,7 +755,7 @@ var ZoneRulesAzer = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Azer    1997    2015    -    Oct    lastSun     5:00    0    -
 	{
@@ -749,7 +767,7 @@ var ZoneRulesAzer = []zoneinfo.ZoneRule{
 		AtTimeCode: 20,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -773,7 +791,7 @@ var ZoneRulesBarb = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -797,7 +815,7 @@ var ZoneRulesBelize = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "CST",
+		LetterIndex: 4, // "CST"
 	},
 
 }
@@ -821,7 +839,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    1999    only    -    Feb    21     0:00    0    -
 	{
@@ -833,7 +851,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    1999    only    -    Oct     3     0:00    1:00    -
 	{
@@ -845,7 +863,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2000    only    -    Feb    27     0:00    0    -
 	{
@@ -857,7 +875,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2000    2001    -    Oct    Sun>=8     0:00    1:00    -
 	{
@@ -869,7 +887,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2001    2006    -    Feb    Sun>=15     0:00    0    -
 	{
@@ -881,7 +899,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2002    only    -    Nov     3     0:00    1:00    -
 	{
@@ -893,7 +911,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2003    only    -    Oct    19     0:00    1:00    -
 	{
@@ -905,7 +923,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2004    only    -    Nov     2     0:00    1:00    -
 	{
@@ -917,7 +935,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2005    only    -    Oct    16     0:00    1:00    -
 	{
@@ -929,7 +947,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2006    only    -    Nov     5     0:00    1:00    -
 	{
@@ -941,7 +959,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2007    only    -    Feb    25     0:00    0    -
 	{
@@ -953,7 +971,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2007    only    -    Oct    Sun>=8     0:00    1:00    -
 	{
@@ -965,7 +983,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2008    2017    -    Oct    Sun>=15    0:00    1:00    -
 	{
@@ -977,7 +995,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2008    2011    -    Feb    Sun>=15    0:00    0    -
 	{
@@ -989,7 +1007,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2012    only    -    Feb    Sun>=22    0:00    0    -
 	{
@@ -1001,7 +1019,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2013    2014    -    Feb    Sun>=15    0:00    0    -
 	{
@@ -1013,7 +1031,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2015    only    -    Feb    Sun>=22    0:00    0    -
 	{
@@ -1025,7 +1043,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2016    2019    -    Feb    Sun>=15    0:00    0    -
 	{
@@ -1037,7 +1055,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Brazil    2018    only    -    Nov    Sun>=1    0:00    1:00    -
 	{
@@ -1049,7 +1067,7 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1073,7 +1091,7 @@ var ZoneRulesC_Eur = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    C-Eur    1981    max    -    Mar    lastSun     2:00s    1:00    S
 	{
@@ -1085,7 +1103,7 @@ var ZoneRulesC_Eur = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    C-Eur    1996    max    -    Oct    lastSun     2:00s    0    -
 	{
@@ -1097,7 +1115,7 @@ var ZoneRulesC_Eur = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1121,7 +1139,7 @@ var ZoneRulesCO = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1145,7 +1163,7 @@ var ZoneRulesCR = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -1169,7 +1187,7 @@ var ZoneRulesCanada = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Canada    1974    2006    -    Oct    lastSun    2:00    0    S
 	{
@@ -1181,7 +1199,7 @@ var ZoneRulesCanada = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Canada    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -1193,7 +1211,7 @@ var ZoneRulesCanada = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Canada    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -1205,7 +1223,7 @@ var ZoneRulesCanada = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Canada    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -1217,7 +1235,7 @@ var ZoneRulesCanada = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -1241,7 +1259,7 @@ var ZoneRulesChatham = []zoneinfo.ZoneRule{
 		AtTimeCode: 11,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chatham    1990    2006    -    Oct    Sun>=1    2:45s    1:00    -
 	{
@@ -1253,7 +1271,7 @@ var ZoneRulesChatham = []zoneinfo.ZoneRule{
 		AtTimeCode: 11,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chatham    1990    2007    -    Mar    Sun>=15    2:45s    0    -
 	{
@@ -1265,7 +1283,7 @@ var ZoneRulesChatham = []zoneinfo.ZoneRule{
 		AtTimeCode: 11,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chatham    2007    max    -    Sep    lastSun    2:45s    1:00    -
 	{
@@ -1277,7 +1295,7 @@ var ZoneRulesChatham = []zoneinfo.ZoneRule{
 		AtTimeCode: 11,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chatham    2008    max    -    Apr    Sun>=1    2:45s    0    -
 	{
@@ -1289,7 +1307,7 @@ var ZoneRulesChatham = []zoneinfo.ZoneRule{
 		AtTimeCode: 11,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1313,7 +1331,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    1999    only    -    Apr     4    3:00u    0    -
 	{
@@ -1325,7 +1343,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    1999    2010    -    Oct    Sun>=9    4:00u    1:00    -
 	{
@@ -1337,7 +1355,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2000    2007    -    Mar    Sun>=9    3:00u    0    -
 	{
@@ -1349,7 +1367,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2008    only    -    Mar    30    3:00u    0    -
 	{
@@ -1361,7 +1379,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2009    only    -    Mar    Sun>=9    3:00u    0    -
 	{
@@ -1373,7 +1391,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2010    only    -    Apr    Sun>=1    3:00u    0    -
 	{
@@ -1385,7 +1403,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2011    only    -    May    Sun>=2    3:00u    0    -
 	{
@@ -1397,7 +1415,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2011    only    -    Aug    Sun>=16    4:00u    1:00    -
 	{
@@ -1409,7 +1427,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2012    2014    -    Apr    Sun>=23    3:00u    0    -
 	{
@@ -1421,7 +1439,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2012    2014    -    Sep    Sun>=2    4:00u    1:00    -
 	{
@@ -1433,7 +1451,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2016    2018    -    May    Sun>=9    3:00u    0    -
 	{
@@ -1445,7 +1463,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2016    2018    -    Aug    Sun>=9    4:00u    1:00    -
 	{
@@ -1457,7 +1475,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2019    max    -    Apr    Sun>=2    3:00u    0    -
 	{
@@ -1469,7 +1487,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2019    2021    -    Sep    Sun>=2    4:00u    1:00    -
 	{
@@ -1481,7 +1499,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2022    only    -    Sep    Sun>=9    4:00u    1:00    -
 	{
@@ -1493,7 +1511,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Chile    2023    max    -    Sep    Sun>=2    4:00u    1:00    -
 	{
@@ -1505,7 +1523,7 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1529,7 +1547,7 @@ var ZoneRulesCook = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1553,7 +1571,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Cuba    1998    1999    -    Mar    lastSun    0:00s    1:00    D
 	{
@@ -1565,7 +1583,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Cuba    1998    2003    -    Oct    lastSun    0:00s    0    S
 	{
@@ -1577,7 +1595,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Cuba    2000    2003    -    Apr    Sun>=1    0:00s    1:00    D
 	{
@@ -1589,7 +1607,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Cuba    2004    only    -    Mar    lastSun    0:00s    1:00    D
 	{
@@ -1601,7 +1619,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Cuba    2006    2010    -    Oct    lastSun    0:00s    0    S
 	{
@@ -1613,7 +1631,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Cuba    2007    only    -    Mar    Sun>=8    0:00s    1:00    D
 	{
@@ -1625,7 +1643,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Cuba    2008    only    -    Mar    Sun>=15    0:00s    1:00    D
 	{
@@ -1637,7 +1655,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Cuba    2009    2010    -    Mar    Sun>=8    0:00s    1:00    D
 	{
@@ -1649,7 +1667,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Cuba    2011    only    -    Mar    Sun>=15    0:00s    1:00    D
 	{
@@ -1661,7 +1679,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Cuba    2011    only    -    Nov    13    0:00s    0    S
 	{
@@ -1673,7 +1691,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Cuba    2012    only    -    Apr    1    0:00s    1:00    D
 	{
@@ -1685,7 +1703,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Cuba    2012    max    -    Nov    Sun>=1    0:00s    0    S
 	{
@@ -1697,7 +1715,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Cuba    2013    max    -    Mar    Sun>=8    0:00s    1:00    D
 	{
@@ -1709,7 +1727,7 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 
 }
@@ -1733,7 +1751,7 @@ var ZoneRulesDhaka = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Dhaka    2009    only    -    Jun    19    23:00    1:00    -
 	{
@@ -1745,7 +1763,7 @@ var ZoneRulesDhaka = []zoneinfo.ZoneRule{
 		AtTimeCode: 92,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Dhaka    2009    only    -    Dec    31    24:00    0    -
 	{
@@ -1757,7 +1775,7 @@ var ZoneRulesDhaka = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1781,7 +1799,7 @@ var ZoneRulesE_EurAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule E-EurAsia    1979    1995    -    Sep    lastSun     0:00    0    -
 	{
@@ -1793,7 +1811,7 @@ var ZoneRulesE_EurAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule E-EurAsia    1996    max    -    Oct    lastSun     0:00    0    -
 	{
@@ -1805,7 +1823,7 @@ var ZoneRulesE_EurAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1829,7 +1847,7 @@ var ZoneRulesEU = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    EU    1981    max    -    Mar    lastSun     1:00u    1:00    S
 	{
@@ -1841,7 +1859,7 @@ var ZoneRulesEU = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    EU    1996    max    -    Oct    lastSun     1:00u    0    -
 	{
@@ -1853,7 +1871,7 @@ var ZoneRulesEU = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1877,7 +1895,7 @@ var ZoneRulesEUAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    EUAsia    1979    1995    -    Sep    lastSun     1:00u    0    -
 	{
@@ -1889,7 +1907,7 @@ var ZoneRulesEUAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    EUAsia    1996    max    -    Oct    lastSun     1:00u    0    -
 	{
@@ -1901,7 +1919,7 @@ var ZoneRulesEUAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1925,7 +1943,7 @@ var ZoneRulesEcuador = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -1949,7 +1967,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    1995    2010    -    Apr    lastFri     0:00s    1:00    S
 	{
@@ -1961,7 +1979,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Egypt    1995    2005    -    Sep    lastThu    24:00    0    -
 	{
@@ -1973,7 +1991,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    2006    only    -    Sep    21    24:00    0    -
 	{
@@ -1985,7 +2003,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    2007    only    -    Sep    Thu>=1    24:00    0    -
 	{
@@ -1997,7 +2015,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    2008    only    -    Aug    lastThu    24:00    0    -
 	{
@@ -2009,7 +2027,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    2009    only    -    Aug    20    24:00    0    -
 	{
@@ -2021,7 +2039,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    2010    only    -    Aug    10    24:00    0    -
 	{
@@ -2033,7 +2051,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    2010    only    -    Sep     9    24:00    1:00    S
 	{
@@ -2045,7 +2063,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Egypt    2010    only    -    Sep    lastThu    24:00    0    -
 	{
@@ -2057,7 +2075,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    2014    only    -    May    15    24:00    1:00    S
 	{
@@ -2069,7 +2087,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Egypt    2014    only    -    Jun    26    24:00    0    -
 	{
@@ -2081,7 +2099,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Egypt    2014    only    -    Jul    31    24:00    1:00    S
 	{
@@ -2093,7 +2111,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Egypt    2014    only    -    Sep    lastThu    24:00    0    -
 	{
@@ -2105,7 +2123,7 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -2129,7 +2147,7 @@ var ZoneRulesEire = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Eire    1990    1995    -    Oct    Sun>=22     1:00u    -1:00    -
 	{
@@ -2141,7 +2159,7 @@ var ZoneRulesEire = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Eire    1996    max    -    Oct    lastSun     1:00u    -1:00    -
 	{
@@ -2153,7 +2171,7 @@ var ZoneRulesEire = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -2177,7 +2195,7 @@ var ZoneRulesFalk = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Falk    1985    2000    -    Sep    Sun>=9    0:00    1:00    -
 	{
@@ -2189,7 +2207,7 @@ var ZoneRulesFalk = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Falk    1986    2000    -    Apr    Sun>=16    0:00    0    -
 	{
@@ -2201,7 +2219,7 @@ var ZoneRulesFalk = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Falk    2001    2010    -    Apr    Sun>=15    2:00    0    -
 	{
@@ -2213,7 +2231,7 @@ var ZoneRulesFalk = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Falk    2001    2010    -    Sep    Sun>=1    2:00    1:00    -
 	{
@@ -2225,7 +2243,7 @@ var ZoneRulesFalk = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -2249,7 +2267,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    1999    2000    -    Feb    lastSun    3:00    0    -
 	{
@@ -2261,7 +2279,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2009    only    -    Nov    29    2:00    1:00    -
 	{
@@ -2273,7 +2291,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2010    only    -    Mar    lastSun    3:00    0    -
 	{
@@ -2285,7 +2303,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2010    2013    -    Oct    Sun>=21    2:00    1:00    -
 	{
@@ -2297,7 +2315,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2011    only    -    Mar    Sun>=1    3:00    0    -
 	{
@@ -2309,7 +2327,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2012    2013    -    Jan    Sun>=18    3:00    0    -
 	{
@@ -2321,7 +2339,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2014    only    -    Jan    Sun>=18    2:00    0    -
 	{
@@ -2333,7 +2351,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2014    2018    -    Nov    Sun>=1    2:00    1:00    -
 	{
@@ -2345,7 +2363,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2015    2021    -    Jan    Sun>=12    3:00    0    -
 	{
@@ -2357,7 +2375,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2019    only    -    Nov    Sun>=8    2:00    1:00    -
 	{
@@ -2369,7 +2387,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Fiji    2020    only    -    Dec    20    2:00    1:00    -
 	{
@@ -2381,7 +2399,7 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -2405,7 +2423,7 @@ var ZoneRulesGuam = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -2429,7 +2447,7 @@ var ZoneRulesGuat = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Guat    2006    only    -    Apr    30    0:00    1:00    D
 	{
@@ -2441,7 +2459,7 @@ var ZoneRulesGuat = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Guat    2006    only    -    Oct     1    0:00    0    S
 	{
@@ -2453,7 +2471,7 @@ var ZoneRulesGuat = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -2477,7 +2495,7 @@ var ZoneRulesHK = []zoneinfo.ZoneRule{
 		AtTimeCode: 14,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -2501,7 +2519,7 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Haiti    2005    2006    -    Apr    Sun>=1    0:00    1:00    D
 	{
@@ -2513,7 +2531,7 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Haiti    2005    2006    -    Oct    lastSun    0:00    0    S
 	{
@@ -2525,7 +2543,7 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Haiti    2012    2015    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -2537,7 +2555,7 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Haiti    2012    2015    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -2549,7 +2567,7 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Haiti    2017    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -2561,7 +2579,7 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Haiti    2017    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -2573,7 +2591,7 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -2597,7 +2615,7 @@ var ZoneRulesHoliday = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -2621,7 +2639,7 @@ var ZoneRulesHond = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Hond    2006    only    -    May    Sun>=1    0:00    1:00    D
 	{
@@ -2633,7 +2651,7 @@ var ZoneRulesHond = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Hond    2006    only    -    Aug    Mon>=1    0:00    0    S
 	{
@@ -2645,7 +2663,7 @@ var ZoneRulesHond = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -2669,7 +2687,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    1997    1999    -    Mar    21    24:00    1:00    -
 	{
@@ -2681,7 +2699,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    1997    1999    -    Sep    21    24:00    0    -
 	{
@@ -2693,7 +2711,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2000    only    -    Mar    20    24:00    1:00    -
 	{
@@ -2705,7 +2723,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2000    only    -    Sep    20    24:00    0    -
 	{
@@ -2717,7 +2735,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2001    2003    -    Mar    21    24:00    1:00    -
 	{
@@ -2729,7 +2747,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2001    2003    -    Sep    21    24:00    0    -
 	{
@@ -2741,7 +2759,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2004    only    -    Mar    20    24:00    1:00    -
 	{
@@ -2753,7 +2771,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2004    only    -    Sep    20    24:00    0    -
 	{
@@ -2765,7 +2783,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2005    only    -    Mar    21    24:00    1:00    -
 	{
@@ -2777,7 +2795,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2005    only    -    Sep    21    24:00    0    -
 	{
@@ -2789,7 +2807,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2008    only    -    Mar    20    24:00    1:00    -
 	{
@@ -2801,7 +2819,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2008    only    -    Sep    20    24:00    0    -
 	{
@@ -2813,7 +2831,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2009    2011    -    Mar    21    24:00    1:00    -
 	{
@@ -2825,7 +2843,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2009    2011    -    Sep    21    24:00    0    -
 	{
@@ -2837,7 +2855,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2012    only    -    Mar    20    24:00    1:00    -
 	{
@@ -2849,7 +2867,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2012    only    -    Sep    20    24:00    0    -
 	{
@@ -2861,7 +2879,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2013    2015    -    Mar    21    24:00    1:00    -
 	{
@@ -2873,7 +2891,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2013    2015    -    Sep    21    24:00    0    -
 	{
@@ -2885,7 +2903,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2016    only    -    Mar    20    24:00    1:00    -
 	{
@@ -2897,7 +2915,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2016    only    -    Sep    20    24:00    0    -
 	{
@@ -2909,7 +2927,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2017    2019    -    Mar    21    24:00    1:00    -
 	{
@@ -2921,7 +2939,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2017    2019    -    Sep    21    24:00    0    -
 	{
@@ -2933,7 +2951,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2020    only    -    Mar    20    24:00    1:00    -
 	{
@@ -2945,7 +2963,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2020    only    -    Sep    20    24:00    0    -
 	{
@@ -2957,7 +2975,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2021    2022    -    Mar    21    24:00    1:00    -
 	{
@@ -2969,7 +2987,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iran    2021    2022    -    Sep    21    24:00    0    -
 	{
@@ -2981,7 +2999,7 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3005,7 +3023,7 @@ var ZoneRulesIraq = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iraq    1991    2007    -    Apr     1    3:00s    1:00    -
 	{
@@ -3017,7 +3035,7 @@ var ZoneRulesIraq = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Iraq    1991    2007    -    Oct     1    3:00s    0    -
 	{
@@ -3029,7 +3047,7 @@ var ZoneRulesIraq = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3053,7 +3071,7 @@ var ZoneRulesJapan = []zoneinfo.ZoneRule{
 		AtTimeCode: 100,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -3077,7 +3095,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Jordan    1999    only    -    Jul     1    0:00s    1:00    S
 	{
@@ -3089,7 +3107,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Jordan    1999    2002    -    Sep    lastFri    0:00s    0    -
 	{
@@ -3101,7 +3119,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Jordan    2000    2001    -    Mar    lastThu    0:00s    1:00    S
 	{
@@ -3113,7 +3131,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Jordan    2002    2012    -    Mar    lastThu    24:00    1:00    S
 	{
@@ -3125,7 +3143,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Jordan    2003    only    -    Oct    24    0:00s    0    -
 	{
@@ -3137,7 +3155,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Jordan    2004    only    -    Oct    15    0:00s    0    -
 	{
@@ -3149,7 +3167,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Jordan    2005    only    -    Sep    lastFri    0:00s    0    -
 	{
@@ -3161,7 +3179,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Jordan    2006    2011    -    Oct    lastFri    0:00s    0    -
 	{
@@ -3173,7 +3191,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Jordan    2013    only    -    Dec    20    0:00    0    -
 	{
@@ -3185,7 +3203,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Jordan    2014    2021    -    Mar    lastThu    24:00    1:00    S
 	{
@@ -3197,7 +3215,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Jordan    2014    2022    -    Oct    lastFri    0:00s    0    -
 	{
@@ -3209,7 +3227,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Jordan    2022    only    -    Feb    lastThu    24:00    1:00    S
 	{
@@ -3221,7 +3239,7 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -3245,7 +3263,7 @@ var ZoneRulesKyrgyz = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Kyrgyz    1997    2005    -    Mar    lastSun    2:30    1:00    -
 	{
@@ -3257,7 +3275,7 @@ var ZoneRulesKyrgyz = []zoneinfo.ZoneRule{
 		AtTimeCode: 10,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Kyrgyz    1997    2004    -    Oct    lastSun    2:30    0    -
 	{
@@ -3269,7 +3287,7 @@ var ZoneRulesKyrgyz = []zoneinfo.ZoneRule{
 		AtTimeCode: 10,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3293,7 +3311,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 6, // (delta_minutes=30)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    LH    1990    1995    -    Mar    Sun>=1    2:00    0    -
 	{
@@ -3305,7 +3323,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    LH    1996    2005    -    Mar    lastSun    2:00    0    -
 	{
@@ -3317,7 +3335,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    LH    2000    only    -    Aug    lastSun    2:00    0:30    -
 	{
@@ -3329,7 +3347,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 6, // (delta_minutes=30)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    LH    2001    2007    -    Oct    lastSun    2:00    0:30    -
 	{
@@ -3341,7 +3359,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 6, // (delta_minutes=30)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    LH    2006    only    -    Apr    Sun>=1    2:00    0    -
 	{
@@ -3353,7 +3371,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    LH    2007    only    -    Mar    lastSun    2:00    0    -
 	{
@@ -3365,7 +3383,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    LH    2008    max    -    Apr    Sun>=1    2:00    0    -
 	{
@@ -3377,7 +3395,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    LH    2008    max    -    Oct    Sun>=1    2:00    0:30    -
 	{
@@ -3389,7 +3407,7 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 6, // (delta_minutes=30)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3413,7 +3431,7 @@ var ZoneRulesLebanon = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Lebanon    1993    1998    -    Sep    lastSun    0:00    0    -
 	{
@@ -3425,7 +3443,7 @@ var ZoneRulesLebanon = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Lebanon    1999    max    -    Oct    lastSun    0:00    0    -
 	{
@@ -3437,7 +3455,7 @@ var ZoneRulesLebanon = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3461,7 +3479,7 @@ var ZoneRulesLibya = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Libya    2013    only    -    Mar    lastFri    1:00    1:00    S
 	{
@@ -3473,7 +3491,7 @@ var ZoneRulesLibya = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Libya    2013    only    -    Oct    lastFri    2:00    0    -
 	{
@@ -3485,7 +3503,7 @@ var ZoneRulesLibya = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3509,7 +3527,7 @@ var ZoneRulesMacau = []zoneinfo.ZoneRule{
 		AtTimeCode: 14,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -3533,7 +3551,7 @@ var ZoneRulesMauritius = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Mauritius    2008    only    -    Oct    lastSun    2:00    1:00    -
 	{
@@ -3545,7 +3563,7 @@ var ZoneRulesMauritius = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Mauritius    2009    only    -    Mar    lastSun    2:00    0    -
 	{
@@ -3557,7 +3575,7 @@ var ZoneRulesMauritius = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3581,7 +3599,7 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Mexico    1996    2000    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -3593,7 +3611,7 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Mexico    1996    2000    -    Oct    lastSun    2:00    0    S
 	{
@@ -3605,7 +3623,7 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Mexico    2001    only    -    May    Sun>=1    2:00    1:00    D
 	{
@@ -3617,7 +3635,7 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Mexico    2001    only    -    Sep    lastSun    2:00    0    S
 	{
@@ -3629,7 +3647,7 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Mexico    2002    2022    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -3641,7 +3659,7 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Mexico    2002    2022    -    Oct    lastSun    2:00    0    S
 	{
@@ -3653,7 +3671,7 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -3677,7 +3695,7 @@ var ZoneRulesMoldova = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Moldova    1997    max    -    Oct    lastSun     3:00    0    -
 	{
@@ -3689,7 +3707,7 @@ var ZoneRulesMoldova = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3713,7 +3731,7 @@ var ZoneRulesMoncton = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Moncton    1993    2006    -    Apr    Sun>=1    0:01    1:00    D
 	{
@@ -3725,7 +3743,7 @@ var ZoneRulesMoncton = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Moncton    1993    2006    -    Oct    lastSun    0:01    0    S
 	{
@@ -3737,7 +3755,7 @@ var ZoneRulesMoncton = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -3761,7 +3779,7 @@ var ZoneRulesMongol = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Mongol    2001    only    -    Apr    lastSat    2:00    1:00    -
 	{
@@ -3773,7 +3791,7 @@ var ZoneRulesMongol = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Mongol    2001    2006    -    Sep    lastSat    2:00    0    -
 	{
@@ -3785,7 +3803,7 @@ var ZoneRulesMongol = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Mongol    2002    2006    -    Mar    lastSat    2:00    1:00    -
 	{
@@ -3797,7 +3815,7 @@ var ZoneRulesMongol = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Mongol    2015    2016    -    Mar    lastSat    2:00    1:00    -
 	{
@@ -3809,7 +3827,7 @@ var ZoneRulesMongol = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Mongol    2015    2016    -    Sep    lastSat    0:00    0    -
 	{
@@ -3821,7 +3839,7 @@ var ZoneRulesMongol = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -3845,7 +3863,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2008    only    -    Jun     1     0:00    1:00    -
 	{
@@ -3857,7 +3875,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2008    only    -    Sep     1     0:00    0    -
 	{
@@ -3869,7 +3887,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2009    only    -    Jun     1     0:00    1:00    -
 	{
@@ -3881,7 +3899,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2009    only    -    Aug    21     0:00    0    -
 	{
@@ -3893,7 +3911,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2010    only    -    May     2     0:00    1:00    -
 	{
@@ -3905,7 +3923,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2010    only    -    Aug     8     0:00    0    -
 	{
@@ -3917,7 +3935,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2011    only    -    Apr     3     0:00    1:00    -
 	{
@@ -3929,7 +3947,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2011    only    -    Jul    31     0:00    0    -
 	{
@@ -3941,7 +3959,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2012    2013    -    Apr    lastSun     2:00    1:00    -
 	{
@@ -3953,7 +3971,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2012    only    -    Jul    20     3:00    0    -
 	{
@@ -3965,7 +3983,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2012    only    -    Aug    20     2:00    1:00    -
 	{
@@ -3977,7 +3995,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2012    only    -    Sep    30     3:00    0    -
 	{
@@ -3989,7 +4007,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2013    only    -    Jul     7     3:00    0    -
 	{
@@ -4001,7 +4019,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2013    only    -    Aug    10     2:00    1:00    -
 	{
@@ -4013,7 +4031,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2013    2018    -    Oct    lastSun     3:00    0    -
 	{
@@ -4025,7 +4043,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2014    2018    -    Mar    lastSun     2:00    1:00    -
 	{
@@ -4037,7 +4055,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2014    only    -    Jun    28     3:00    0    -
 	{
@@ -4049,7 +4067,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2014    only    -    Aug     2     2:00    1:00    -
 	{
@@ -4061,7 +4079,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2015    only    -    Jun    14     3:00    0    -
 	{
@@ -4073,7 +4091,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2015    only    -    Jul    19     2:00    1:00    -
 	{
@@ -4085,7 +4103,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2016    only    -    Jun     5     3:00    0    -
 	{
@@ -4097,7 +4115,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2016    only    -    Jul    10     2:00    1:00    -
 	{
@@ -4109,7 +4127,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2017    only    -    May    21     3:00    0    -
 	{
@@ -4121,7 +4139,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2017    only    -    Jul     2     2:00    1:00    -
 	{
@@ -4133,7 +4151,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2018    only    -    May    13     3:00    0    -
 	{
@@ -4145,7 +4163,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2018    only    -    Jun    17     2:00    1:00    -
 	{
@@ -4157,7 +4175,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2019    only    -    May     5     3:00    -1:00    -
 	{
@@ -4169,7 +4187,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2019    only    -    Jun     9     2:00    0    -
 	{
@@ -4181,7 +4199,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2020    only    -    Apr    19     3:00    -1:00    -
 	{
@@ -4193,7 +4211,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2020    only    -    May    31     2:00    0    -
 	{
@@ -4205,7 +4223,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2021    only    -    Apr    11     3:00    -1:00    -
 	{
@@ -4217,7 +4235,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2021    only    -    May    16     2:00    0    -
 	{
@@ -4229,7 +4247,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2022    only    -    Mar    27     3:00    -1:00    -
 	{
@@ -4241,7 +4259,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2022    only    -    May     8     2:00    0    -
 	{
@@ -4253,7 +4271,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2023    only    -    Mar    19     3:00    -1:00    -
 	{
@@ -4265,7 +4283,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2023    only    -    Apr    30     2:00    0    -
 	{
@@ -4277,7 +4295,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2024    only    -    Mar    10     3:00    -1:00    -
 	{
@@ -4289,7 +4307,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2024    only    -    Apr    14     2:00    0    -
 	{
@@ -4301,7 +4319,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2025    only    -    Feb    23     3:00    -1:00    -
 	{
@@ -4313,7 +4331,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2025    only    -    Apr     6     2:00    0    -
 	{
@@ -4325,7 +4343,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2026    only    -    Feb    15     3:00    -1:00    -
 	{
@@ -4337,7 +4355,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2026    only    -    Mar    22     2:00    0    -
 	{
@@ -4349,7 +4367,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2027    only    -    Feb     7     3:00    -1:00    -
 	{
@@ -4361,7 +4379,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2027    only    -    Mar    14     2:00    0    -
 	{
@@ -4373,7 +4391,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2028    only    -    Jan    23     3:00    -1:00    -
 	{
@@ -4385,7 +4403,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2028    only    -    Mar     5     2:00    0    -
 	{
@@ -4397,7 +4415,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2029    only    -    Jan    14     3:00    -1:00    -
 	{
@@ -4409,7 +4427,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2029    only    -    Feb    18     2:00    0    -
 	{
@@ -4421,7 +4439,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2029    only    -    Dec    30     3:00    -1:00    -
 	{
@@ -4433,7 +4451,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2030    only    -    Feb    10     2:00    0    -
 	{
@@ -4445,7 +4463,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2030    only    -    Dec    22     3:00    -1:00    -
 	{
@@ -4457,7 +4475,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2031    only    -    Feb     2     2:00    0    -
 	{
@@ -4469,7 +4487,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2031    only    -    Dec    14     3:00    -1:00    -
 	{
@@ -4481,7 +4499,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2032    only    -    Jan    18     2:00    0    -
 	{
@@ -4493,7 +4511,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2032    only    -    Nov    28     3:00    -1:00    -
 	{
@@ -4505,7 +4523,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2033    only    -    Jan     9     2:00    0    -
 	{
@@ -4517,7 +4535,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2033    only    -    Nov    20     3:00    -1:00    -
 	{
@@ -4529,7 +4547,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2033    only    -    Dec    25     2:00    0    -
 	{
@@ -4541,7 +4559,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2034    only    -    Nov     5     3:00    -1:00    -
 	{
@@ -4553,7 +4571,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2034    only    -    Dec    17     2:00    0    -
 	{
@@ -4565,7 +4583,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2035    only    -    Oct    28     3:00    -1:00    -
 	{
@@ -4577,7 +4595,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2035    only    -    Dec     9     2:00    0    -
 	{
@@ -4589,7 +4607,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2036    only    -    Oct    19     3:00    -1:00    -
 	{
@@ -4601,7 +4619,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2036    only    -    Nov    23     2:00    0    -
 	{
@@ -4613,7 +4631,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2037    only    -    Oct     4     3:00    -1:00    -
 	{
@@ -4625,7 +4643,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2037    only    -    Nov    15     2:00    0    -
 	{
@@ -4637,7 +4655,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2038    only    -    Sep    26     3:00    -1:00    -
 	{
@@ -4649,7 +4667,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2038    only    -    Nov     7     2:00    0    -
 	{
@@ -4661,7 +4679,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2039    only    -    Sep    18     3:00    -1:00    -
 	{
@@ -4673,7 +4691,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2039    only    -    Oct    23     2:00    0    -
 	{
@@ -4685,7 +4703,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2040    only    -    Sep     2     3:00    -1:00    -
 	{
@@ -4697,7 +4715,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2040    only    -    Oct    14     2:00    0    -
 	{
@@ -4709,7 +4727,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2041    only    -    Aug    25     3:00    -1:00    -
 	{
@@ -4721,7 +4739,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2041    only    -    Sep    29     2:00    0    -
 	{
@@ -4733,7 +4751,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2042    only    -    Aug    10     3:00    -1:00    -
 	{
@@ -4745,7 +4763,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2042    only    -    Sep    21     2:00    0    -
 	{
@@ -4757,7 +4775,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2043    only    -    Aug     2     3:00    -1:00    -
 	{
@@ -4769,7 +4787,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2043    only    -    Sep    13     2:00    0    -
 	{
@@ -4781,7 +4799,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2044    only    -    Jul    24     3:00    -1:00    -
 	{
@@ -4793,7 +4811,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2044    only    -    Aug    28     2:00    0    -
 	{
@@ -4805,7 +4823,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2045    only    -    Jul     9     3:00    -1:00    -
 	{
@@ -4817,7 +4835,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2045    only    -    Aug    20     2:00    0    -
 	{
@@ -4829,7 +4847,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2046    only    -    Jul     1     3:00    -1:00    -
 	{
@@ -4841,7 +4859,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2046    only    -    Aug    12     2:00    0    -
 	{
@@ -4853,7 +4871,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2047    only    -    Jun    23     3:00    -1:00    -
 	{
@@ -4865,7 +4883,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2047    only    -    Jul    28     2:00    0    -
 	{
@@ -4877,7 +4895,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2048    only    -    Jun     7     3:00    -1:00    -
 	{
@@ -4889,7 +4907,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2048    only    -    Jul    19     2:00    0    -
 	{
@@ -4901,7 +4919,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2049    only    -    May    30     3:00    -1:00    -
 	{
@@ -4913,7 +4931,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2049    only    -    Jul     4     2:00    0    -
 	{
@@ -4925,7 +4943,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2050    only    -    May    15     3:00    -1:00    -
 	{
@@ -4937,7 +4955,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2050    only    -    Jun    26     2:00    0    -
 	{
@@ -4949,7 +4967,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2051    only    -    May     7     3:00    -1:00    -
 	{
@@ -4961,7 +4979,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2051    only    -    Jun    18     2:00    0    -
 	{
@@ -4973,7 +4991,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2052    only    -    Apr    28     3:00    -1:00    -
 	{
@@ -4985,7 +5003,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2052    only    -    Jun     2     2:00    0    -
 	{
@@ -4997,7 +5015,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2053    only    -    Apr    13     3:00    -1:00    -
 	{
@@ -5009,7 +5027,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2053    only    -    May    25     2:00    0    -
 	{
@@ -5021,7 +5039,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2054    only    -    Apr     5     3:00    -1:00    -
 	{
@@ -5033,7 +5051,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2054    only    -    May    17     2:00    0    -
 	{
@@ -5045,7 +5063,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2055    only    -    Mar    28     3:00    -1:00    -
 	{
@@ -5057,7 +5075,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2055    only    -    May     2     2:00    0    -
 	{
@@ -5069,7 +5087,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2056    only    -    Mar    12     3:00    -1:00    -
 	{
@@ -5081,7 +5099,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2056    only    -    Apr    23     2:00    0    -
 	{
@@ -5093,7 +5111,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2057    only    -    Mar     4     3:00    -1:00    -
 	{
@@ -5105,7 +5123,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2057    only    -    Apr     8     2:00    0    -
 	{
@@ -5117,7 +5135,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2058    only    -    Feb    17     3:00    -1:00    -
 	{
@@ -5129,7 +5147,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2058    only    -    Mar    31     2:00    0    -
 	{
@@ -5141,7 +5159,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2059    only    -    Feb     9     3:00    -1:00    -
 	{
@@ -5153,7 +5171,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2059    only    -    Mar    23     2:00    0    -
 	{
@@ -5165,7 +5183,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2060    only    -    Feb     1     3:00    -1:00    -
 	{
@@ -5177,7 +5195,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2060    only    -    Mar     7     2:00    0    -
 	{
@@ -5189,7 +5207,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2061    only    -    Jan    16     3:00    -1:00    -
 	{
@@ -5201,7 +5219,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2061    only    -    Feb    27     2:00    0    -
 	{
@@ -5213,7 +5231,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2062    only    -    Jan     8     3:00    -1:00    -
 	{
@@ -5225,7 +5243,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2062    only    -    Feb    19     2:00    0    -
 	{
@@ -5237,7 +5255,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2062    only    -    Dec    31     3:00    -1:00    -
 	{
@@ -5249,7 +5267,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2063    only    -    Feb     4     2:00    0    -
 	{
@@ -5261,7 +5279,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2063    only    -    Dec    16     3:00    -1:00    -
 	{
@@ -5273,7 +5291,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2064    only    -    Jan    27     2:00    0    -
 	{
@@ -5285,7 +5303,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2064    only    -    Dec     7     3:00    -1:00    -
 	{
@@ -5297,7 +5315,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2065    only    -    Jan    11     2:00    0    -
 	{
@@ -5309,7 +5327,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2065    only    -    Nov    22     3:00    -1:00    -
 	{
@@ -5321,7 +5339,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2066    only    -    Jan     3     2:00    0    -
 	{
@@ -5333,7 +5351,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2066    only    -    Nov    14     3:00    -1:00    -
 	{
@@ -5345,7 +5363,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2066    only    -    Dec    26     2:00    0    -
 	{
@@ -5357,7 +5375,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2067    only    -    Nov     6     3:00    -1:00    -
 	{
@@ -5369,7 +5387,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2067    only    -    Dec    11     2:00    0    -
 	{
@@ -5381,7 +5399,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2068    only    -    Oct    21     3:00    -1:00    -
 	{
@@ -5393,7 +5411,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2068    only    -    Dec     2     2:00    0    -
 	{
@@ -5405,7 +5423,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2069    only    -    Oct    13     3:00    -1:00    -
 	{
@@ -5417,7 +5435,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2069    only    -    Nov    24     2:00    0    -
 	{
@@ -5429,7 +5447,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2070    only    -    Oct     5     3:00    -1:00    -
 	{
@@ -5441,7 +5459,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2070    only    -    Nov     9     2:00    0    -
 	{
@@ -5453,7 +5471,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2071    only    -    Sep    20     3:00    -1:00    -
 	{
@@ -5465,7 +5483,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2071    only    -    Nov     1     2:00    0    -
 	{
@@ -5477,7 +5495,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2072    only    -    Sep    11     3:00    -1:00    -
 	{
@@ -5489,7 +5507,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2072    only    -    Oct    16     2:00    0    -
 	{
@@ -5501,7 +5519,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2073    only    -    Aug    27     3:00    -1:00    -
 	{
@@ -5513,7 +5531,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2073    only    -    Oct     8     2:00    0    -
 	{
@@ -5525,7 +5543,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2074    only    -    Aug    19     3:00    -1:00    -
 	{
@@ -5537,7 +5555,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2074    only    -    Sep    30     2:00    0    -
 	{
@@ -5549,7 +5567,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2075    only    -    Aug    11     3:00    -1:00    -
 	{
@@ -5561,7 +5579,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2075    only    -    Sep    15     2:00    0    -
 	{
@@ -5573,7 +5591,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2076    only    -    Jul    26     3:00    -1:00    -
 	{
@@ -5585,7 +5603,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2076    only    -    Sep     6     2:00    0    -
 	{
@@ -5597,7 +5615,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2077    only    -    Jul    18     3:00    -1:00    -
 	{
@@ -5609,7 +5627,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2077    only    -    Aug    29     2:00    0    -
 	{
@@ -5621,7 +5639,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2078    only    -    Jul    10     3:00    -1:00    -
 	{
@@ -5633,7 +5651,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2078    only    -    Aug    14     2:00    0    -
 	{
@@ -5645,7 +5663,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2079    only    -    Jun    25     3:00    -1:00    -
 	{
@@ -5657,7 +5675,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2079    only    -    Aug     6     2:00    0    -
 	{
@@ -5669,7 +5687,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2080    only    -    Jun    16     3:00    -1:00    -
 	{
@@ -5681,7 +5699,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2080    only    -    Jul    21     2:00    0    -
 	{
@@ -5693,7 +5711,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2081    only    -    Jun     1     3:00    -1:00    -
 	{
@@ -5705,7 +5723,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2081    only    -    Jul    13     2:00    0    -
 	{
@@ -5717,7 +5735,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2082    only    -    May    24     3:00    -1:00    -
 	{
@@ -5729,7 +5747,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2082    only    -    Jul     5     2:00    0    -
 	{
@@ -5741,7 +5759,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2083    only    -    May    16     3:00    -1:00    -
 	{
@@ -5753,7 +5771,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2083    only    -    Jun    20     2:00    0    -
 	{
@@ -5765,7 +5783,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2084    only    -    Apr    30     3:00    -1:00    -
 	{
@@ -5777,7 +5795,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2084    only    -    Jun    11     2:00    0    -
 	{
@@ -5789,7 +5807,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2085    only    -    Apr    22     3:00    -1:00    -
 	{
@@ -5801,7 +5819,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2085    only    -    Jun     3     2:00    0    -
 	{
@@ -5813,7 +5831,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2086    only    -    Apr    14     3:00    -1:00    -
 	{
@@ -5825,7 +5843,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2086    only    -    May    19     2:00    0    -
 	{
@@ -5837,7 +5855,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2087    only    -    Mar    30     3:00    -1:00    -
 	{
@@ -5849,7 +5867,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Morocco    2087    only    -    May    11     2:00    0    -
 	{
@@ -5861,7 +5879,7 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -5885,7 +5903,7 @@ var ZoneRulesNC = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -5909,7 +5927,7 @@ var ZoneRulesNT_YK = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    NT_YK    1972    2006    -    Oct    lastSun    2:00    0    S
 	{
@@ -5921,7 +5939,7 @@ var ZoneRulesNT_YK = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    NT_YK    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -5933,7 +5951,7 @@ var ZoneRulesNT_YK = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 
 }
@@ -5957,7 +5975,7 @@ var ZoneRulesNZ = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    NZ    1990    2006    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -5969,7 +5987,7 @@ var ZoneRulesNZ = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    NZ    1990    2007    -    Mar    Sun>=15    2:00s    0    S
 	{
@@ -5981,7 +5999,7 @@ var ZoneRulesNZ = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    NZ    2007    max    -    Sep    lastSun    2:00s    1:00    D
 	{
@@ -5993,7 +6011,7 @@ var ZoneRulesNZ = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    NZ    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -6005,7 +6023,7 @@ var ZoneRulesNZ = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -6029,7 +6047,7 @@ var ZoneRulesNamibia = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "WAT",
+		LetterIndex: 8, // "WAT"
 	},
 	// Rule    Namibia    1994    2017    -    Sep    Sun>=1    2:00    0    CAT
 	{
@@ -6041,7 +6059,7 @@ var ZoneRulesNamibia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "CAT",
+		LetterIndex: 3, // "CAT"
 	},
 	// Rule    Namibia    1995    2017    -    Apr    Sun>=1    2:00    -1:00    WAT
 	{
@@ -6053,7 +6071,7 @@ var ZoneRulesNamibia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		Letter: "WAT",
+		LetterIndex: 8, // "WAT"
 	},
 
 }
@@ -6077,7 +6095,7 @@ var ZoneRulesNic = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Nic    2005    only    -    Apr    10    0:00    1:00    D
 	{
@@ -6089,7 +6107,7 @@ var ZoneRulesNic = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Nic    2005    only    -    Oct    Sun>=1    0:00    0    S
 	{
@@ -6101,7 +6119,7 @@ var ZoneRulesNic = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Nic    2006    only    -    Apr    30    2:00    1:00    D
 	{
@@ -6113,7 +6131,7 @@ var ZoneRulesNic = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Nic    2006    only    -    Oct    Sun>=1    1:00    0    S
 	{
@@ -6125,7 +6143,7 @@ var ZoneRulesNic = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -6149,7 +6167,7 @@ var ZoneRulesPRC = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -6173,7 +6191,7 @@ var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Pakistan    2002    only    -    Apr    Sun>=2    0:00    1:00    S
 	{
@@ -6185,7 +6203,7 @@ var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Pakistan    2002    only    -    Oct    Sun>=2    0:00    0    -
 	{
@@ -6197,7 +6215,7 @@ var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Pakistan    2008    only    -    Jun    1    0:00    1:00    S
 	{
@@ -6209,7 +6227,7 @@ var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Pakistan    2008    2009    -    Nov    1    0:00    0    -
 	{
@@ -6221,7 +6239,7 @@ var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Pakistan    2009    only    -    Apr    15    0:00    1:00    S
 	{
@@ -6233,7 +6251,7 @@ var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -6257,7 +6275,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    1999    2005    -    Apr    Fri>=15    0:00    1:00    S
 	{
@@ -6269,7 +6287,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    1999    2003    -    Oct    Fri>=15    0:00    0    -
 	{
@@ -6281,7 +6299,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2004    only    -    Oct     1    1:00    0    -
 	{
@@ -6293,7 +6311,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2005    only    -    Oct     4    2:00    0    -
 	{
@@ -6305,7 +6323,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2006    2007    -    Apr     1    0:00    1:00    S
 	{
@@ -6317,7 +6335,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2006    only    -    Sep    22    0:00    0    -
 	{
@@ -6329,7 +6347,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2007    only    -    Sep    13    2:00    0    -
 	{
@@ -6341,7 +6359,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2008    2009    -    Mar    lastFri    0:00    1:00    S
 	{
@@ -6353,7 +6371,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2008    only    -    Sep     1    0:00    0    -
 	{
@@ -6365,7 +6383,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2009    only    -    Sep     4    1:00    0    -
 	{
@@ -6377,7 +6395,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2010    only    -    Mar    26    0:00    1:00    S
 	{
@@ -6389,7 +6407,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2010    only    -    Aug    11    0:00    0    -
 	{
@@ -6401,7 +6419,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2011    only    -    Apr     1    0:01    1:00    S
 	{
@@ -6413,7 +6431,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2011    only    -    Aug     1    0:00    0    -
 	{
@@ -6425,7 +6443,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2011    only    -    Aug    30    0:00    1:00    S
 	{
@@ -6437,7 +6455,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2011    only    -    Sep    30    0:00    0    -
 	{
@@ -6449,7 +6467,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2012    2014    -    Mar    lastThu    24:00    1:00    S
 	{
@@ -6461,7 +6479,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2012    only    -    Sep    21    1:00    0    -
 	{
@@ -6473,7 +6491,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2013    only    -    Sep    27    0:00    0    -
 	{
@@ -6485,7 +6503,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2014    only    -    Oct    24    0:00    0    -
 	{
@@ -6497,7 +6515,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2015    only    -    Mar    28    0:00    1:00    S
 	{
@@ -6509,7 +6527,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2015    only    -    Oct    23    1:00    0    -
 	{
@@ -6521,7 +6539,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2016    2018    -    Mar    Sat<=30    1:00    1:00    S
 	{
@@ -6533,7 +6551,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2016    2018    -    Oct    Sat<=30    1:00    0    -
 	{
@@ -6545,7 +6563,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2019    only    -    Mar    29    0:00    1:00    S
 	{
@@ -6557,7 +6575,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2019    only    -    Oct    Sat<=30    0:00    0    -
 	{
@@ -6569,7 +6587,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2020    2021    -    Mar    Sat<=30    0:00    1:00    S
 	{
@@ -6581,7 +6599,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2020    only    -    Oct    24    1:00    0    -
 	{
@@ -6593,7 +6611,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2021    only    -    Oct    29    1:00    0    -
 	{
@@ -6605,7 +6623,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2022    only    -    Mar    27    0:00    1:00    S
 	{
@@ -6617,7 +6635,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule Palestine    2022    max    -    Oct    Sat<=30    2:00    0    -
 	{
@@ -6629,7 +6647,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2023    max    -    Mar    Sat<=30    2:00    1:00    S
 	{
@@ -6641,7 +6659,7 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -6665,7 +6683,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    1997    only    -    Feb    lastSun    0:00    0    -
 	{
@@ -6677,7 +6695,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    1998    2001    -    Mar    Sun>=1    0:00    0    -
 	{
@@ -6689,7 +6707,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    2002    2004    -    Apr    Sun>=1    0:00    0    -
 	{
@@ -6701,7 +6719,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    2002    2003    -    Sep    Sun>=1    0:00    1:00    -
 	{
@@ -6713,7 +6731,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    2004    2009    -    Oct    Sun>=15    0:00    1:00    -
 	{
@@ -6725,7 +6743,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    2005    2009    -    Mar    Sun>=8    0:00    0    -
 	{
@@ -6737,7 +6755,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    2010    max    -    Oct    Sun>=1    0:00    1:00    -
 	{
@@ -6749,7 +6767,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    2010    2012    -    Apr    Sun>=8    0:00    0    -
 	{
@@ -6761,7 +6779,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Para    2013    max    -    Mar    Sun>=22    0:00    0    -
 	{
@@ -6773,7 +6791,7 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -6797,7 +6815,7 @@ var ZoneRulesPeru = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -6821,7 +6839,7 @@ var ZoneRulesPhil = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -6845,7 +6863,7 @@ var ZoneRulesROK = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -6869,7 +6887,7 @@ var ZoneRulesRussia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Russia    1985    2010    -    Mar    lastSun     2:00s    1:00    S
 	{
@@ -6881,7 +6899,7 @@ var ZoneRulesRussia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Russia    1996    2010    -    Oct    lastSun     2:00s    0    -
 	{
@@ -6893,7 +6911,7 @@ var ZoneRulesRussia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -6917,7 +6935,7 @@ var ZoneRulesRussiaAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule RussiaAsia    1985    2010    -    Mar    lastSun     2:00s    1:00    -
 	{
@@ -6929,7 +6947,7 @@ var ZoneRulesRussiaAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule RussiaAsia    1996    2010    -    Oct    lastSun     2:00s    0    -
 	{
@@ -6941,7 +6959,7 @@ var ZoneRulesRussiaAsia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -6965,7 +6983,7 @@ var ZoneRulesSA = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -6989,7 +7007,7 @@ var ZoneRulesSalv = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -7013,7 +7031,7 @@ var ZoneRulesSanLuis = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    SanLuis    2008    2009    -    Mar    Sun>=8    0:00    0    -
 	{
@@ -7025,7 +7043,7 @@ var ZoneRulesSanLuis = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    SanLuis    2007    2008    -    Oct    Sun>=8    0:00    1:00    -
 	{
@@ -7037,7 +7055,7 @@ var ZoneRulesSanLuis = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7061,7 +7079,7 @@ var ZoneRulesStJohns = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    StJohns    1988    only    -    Apr    Sun>=1    0:01    2:00    DD
 	{
@@ -7073,7 +7091,7 @@ var ZoneRulesStJohns = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 12, // (delta_minutes=120)/15 + 4
-		Letter: "DD",
+		LetterIndex: 6, // "DD"
 	},
 	// Rule    StJohns    1989    2006    -    Apr    Sun>=1    0:01    1:00    D
 	{
@@ -7085,7 +7103,7 @@ var ZoneRulesStJohns = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    StJohns    2007    2011    -    Mar    Sun>=8    0:01    1:00    D
 	{
@@ -7097,7 +7115,7 @@ var ZoneRulesStJohns = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    StJohns    2007    2010    -    Nov    Sun>=1    0:01    0    S
 	{
@@ -7109,7 +7127,7 @@ var ZoneRulesStJohns = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -7133,7 +7151,7 @@ var ZoneRulesSudan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7157,7 +7175,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Syria    1997    1998    -    Mar    lastMon    0:00    1:00    S
 	{
@@ -7169,7 +7187,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Syria    1999    2006    -    Apr     1    0:00    1:00    S
 	{
@@ -7181,7 +7199,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Syria    2006    only    -    Sep    22    0:00    0    -
 	{
@@ -7193,7 +7211,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Syria    2007    only    -    Mar    lastFri    0:00    1:00    S
 	{
@@ -7205,7 +7223,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Syria    2007    only    -    Nov     Fri>=1    0:00    0    -
 	{
@@ -7217,7 +7235,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Syria    2008    only    -    Apr    Fri>=1    0:00    1:00    S
 	{
@@ -7229,7 +7247,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Syria    2008    only    -    Nov    1    0:00    0    -
 	{
@@ -7241,7 +7259,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Syria    2009    only    -    Mar    lastFri    0:00    1:00    S
 	{
@@ -7253,7 +7271,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Syria    2010    2011    -    Apr    Fri>=1    0:00    1:00    S
 	{
@@ -7265,7 +7283,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Syria    2012    2022    -    Mar    lastFri    0:00    1:00    S
 	{
@@ -7277,7 +7295,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Syria    2009    2022    -    Oct    lastFri    0:00    0    -
 	{
@@ -7289,7 +7307,7 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7313,7 +7331,7 @@ var ZoneRulesTaiwan = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -7337,7 +7355,7 @@ var ZoneRulesThule = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Thule    1993    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -7349,7 +7367,7 @@ var ZoneRulesThule = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Thule    1993    2006    -    Oct    lastSun    2:00    0    S
 	{
@@ -7361,7 +7379,7 @@ var ZoneRulesThule = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Thule    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -7373,7 +7391,7 @@ var ZoneRulesThule = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Thule    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -7385,7 +7403,7 @@ var ZoneRulesThule = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -7409,7 +7427,7 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Tonga    1999    only    -    Oct     7    2:00s    1:00    -
 	{
@@ -7421,7 +7439,7 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Tonga    2000    only    -    Mar    19    2:00s    0    -
 	{
@@ -7433,7 +7451,7 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Tonga    2000    2001    -    Nov    Sun>=1    2:00    1:00    -
 	{
@@ -7445,7 +7463,7 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Tonga    2001    2002    -    Jan    lastSun    2:00    0    -
 	{
@@ -7457,7 +7475,7 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Tonga    2016    only    -    Nov    Sun>=1    2:00    1:00    -
 	{
@@ -7469,7 +7487,7 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Tonga    2017    only    -    Jan    Sun>=15    3:00    0    -
 	{
@@ -7481,7 +7499,7 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7505,7 +7523,7 @@ var ZoneRulesTroll = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "+00",
+		LetterIndex: 1, // "+00"
 	},
 	// Rule    Troll    2005    max    -    Mar    lastSun    1:00u    2:00    +02
 	{
@@ -7517,7 +7535,7 @@ var ZoneRulesTroll = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 12, // (delta_minutes=120)/15 + 4
-		Letter: "+02",
+		LetterIndex: 2, // "+02"
 	},
 	// Rule    Troll    2004    max    -    Oct    lastSun    1:00u    0:00    +00
 	{
@@ -7529,7 +7547,7 @@ var ZoneRulesTroll = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "+00",
+		LetterIndex: 1, // "+00"
 	},
 
 }
@@ -7553,7 +7571,7 @@ var ZoneRulesTunisia = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Tunisia    2005    only    -    May     1     0:00s    1:00    S
 	{
@@ -7565,7 +7583,7 @@ var ZoneRulesTunisia = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Tunisia    2005    only    -    Sep    30     1:00s    0    -
 	{
@@ -7577,7 +7595,7 @@ var ZoneRulesTunisia = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Tunisia    2006    2008    -    Mar    lastSun     2:00s    1:00    S
 	{
@@ -7589,7 +7607,7 @@ var ZoneRulesTunisia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Tunisia    2006    2008    -    Oct    lastSun     2:00s    0    -
 	{
@@ -7601,7 +7619,7 @@ var ZoneRulesTunisia = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7625,7 +7643,7 @@ var ZoneRulesTurkey = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Turkey    1995    2006    -    Mar    lastSun    1:00s    1:00    S
 	{
@@ -7637,7 +7655,7 @@ var ZoneRulesTurkey = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Turkey    1996    2006    -    Oct    lastSun    1:00s    0    -
 	{
@@ -7649,7 +7667,7 @@ var ZoneRulesTurkey = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7673,7 +7691,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
 	{
@@ -7685,7 +7703,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    US    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -7697,7 +7715,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -7709,7 +7727,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -7721,7 +7739,7 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }
@@ -7745,7 +7763,7 @@ var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Uruguay    2004    only    -    Sep    19     0:00    1:00    -
 	{
@@ -7757,7 +7775,7 @@ var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Uruguay    2005    only    -    Mar    27     2:00    0    -
 	{
@@ -7769,7 +7787,7 @@ var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Uruguay    2005    only    -    Oct     9     2:00    1:00    -
 	{
@@ -7781,7 +7799,7 @@ var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Uruguay    2006    2015    -    Mar    Sun>=8     2:00    0    -
 	{
@@ -7793,7 +7811,7 @@ var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    Uruguay    2006    2014    -    Oct    Sun>=1     2:00    1:00    -
 	{
@@ -7805,7 +7823,7 @@ var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7829,7 +7847,7 @@ var ZoneRulesVanuatu = []zoneinfo.ZoneRule{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7853,7 +7871,7 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2010    only    -    Sep    lastSun    0:00    1    -
 	{
@@ -7865,7 +7883,7 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2011    only    -    Apr    Sat>=1    4:00    0    -
 	{
@@ -7877,7 +7895,7 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2011    only    -    Sep    lastSat    3:00    1    -
 	{
@@ -7889,7 +7907,7 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2012    2021    -    Apr    Sun>=1    4:00    0    -
 	{
@@ -7901,7 +7919,7 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 		AtTimeCode: 16,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2012    2020    -    Sep    lastSun    3:00    1    -
 	{
@@ -7913,7 +7931,7 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "",
+		LetterIndex: 0, // ""
 	},
 
 }
@@ -7937,7 +7955,7 @@ var ZoneRulesWinn = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Winn    1966    2005    -    Oct    lastSun    2:00s    0    S
 	{
@@ -7949,7 +7967,7 @@ var ZoneRulesWinn = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Winn    1987    2005    -    Apr    Sun>=1    2:00s    1:00    D
 	{
@@ -7961,7 +7979,7 @@ var ZoneRulesWinn = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 
 }
@@ -7985,7 +8003,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    1999    only    -    Apr     2    2:00    1:00    D
 	{
@@ -7997,7 +8015,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Zion    1999    only    -    Sep     3    2:00    0    S
 	{
@@ -8009,7 +8027,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2000    only    -    Apr    14    2:00    1:00    D
 	{
@@ -8021,7 +8039,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Zion    2000    only    -    Oct     6    1:00    0    S
 	{
@@ -8033,7 +8051,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2001    only    -    Apr     9    1:00    1:00    D
 	{
@@ -8045,7 +8063,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Zion    2001    only    -    Sep    24    1:00    0    S
 	{
@@ -8057,7 +8075,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2002    only    -    Mar    29    1:00    1:00    D
 	{
@@ -8069,7 +8087,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Zion    2002    only    -    Oct     7    1:00    0    S
 	{
@@ -8081,7 +8099,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2003    only    -    Mar    28    1:00    1:00    D
 	{
@@ -8093,7 +8111,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Zion    2003    only    -    Oct     3    1:00    0    S
 	{
@@ -8105,7 +8123,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2004    only    -    Apr     7    1:00    1:00    D
 	{
@@ -8117,7 +8135,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Zion    2004    only    -    Sep    22    1:00    0    S
 	{
@@ -8129,7 +8147,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2005    2012    -    Apr    Fri<=1    2:00    1:00    D
 	{
@@ -8141,7 +8159,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Zion    2005    only    -    Oct     9    2:00    0    S
 	{
@@ -8153,7 +8171,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2006    only    -    Oct     1    2:00    0    S
 	{
@@ -8165,7 +8183,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2007    only    -    Sep    16    2:00    0    S
 	{
@@ -8177,7 +8195,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2008    only    -    Oct     5    2:00    0    S
 	{
@@ -8189,7 +8207,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2009    only    -    Sep    27    2:00    0    S
 	{
@@ -8201,7 +8219,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2010    only    -    Sep    12    2:00    0    S
 	{
@@ -8213,7 +8231,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2011    only    -    Oct     2    2:00    0    S
 	{
@@ -8225,7 +8243,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2012    only    -    Sep    23    2:00    0    S
 	{
@@ -8237,7 +8255,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 	// Rule    Zion    2013    max    -    Mar    Fri>=23    2:00    1:00    D
 	{
@@ -8249,7 +8267,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		Letter: "D",
+		LetterIndex: 5, // "D"
 	},
 	// Rule    Zion    2013    max    -    Oct    lastSun    2:00    0    S
 	{
@@ -8261,7 +8279,7 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		Letter: "S",
+		LetterIndex: 7, // "S"
 	},
 
 }

@@ -34,10 +34,33 @@ import (
 )
 
 // ---------------------------------------------------------------------------
-// Zone Context
+// String constants.
 // ---------------------------------------------------------------------------
 
-const TzDatabaseVersion string = "2022g"
+const (
+	// All ZoneEra.Format entries concatenated together.
+	FormatBuffer = "%+00/+01+01+01/+00+02+03+03/+04+0330/+0430+04+04/+05+0430+05+05/+06+0530+0545+06+06/+07+0630+07+07/+08+08+08/+09+0845/+0945+09+09/+10+10+10/+11+1030/+11+11+11/+12+1130+12+12/+13+1245/+1345+13+13/+14+14-00-01-01/+00-02-02/-01-03-03/-02-04-04/-03-0430-05-05/-04-06-06/-05-07-08-09-0930-10-10/-0930-11-11/-10-12A%TAC%TAE%TAEDTAK%TASTAW%TC%TCA%TCATCE%TCETCSTChSTE%TEATEE%TEESTEETESTG%TGMTGMT/BSTH%THK%THSTI%TISTIST/GMTJ%TK%TKSTM%TME%TMSKMSK/MSDMSTN%TNZ%TP%TPK%TPSTSASTSSTUTCWATWE%TWIBWITWITA~"
+)
+
+var (
+	// Byte offset into FormatBuffer for each index. The actual Format string
+	// at index `i` given by the `ZoneEra.Format` field is
+	// `FormatBuffer[FormatOffsets[i]:FormatOffsets[i+1]]`.
+	FormatOffsets = []uint16{
+		0, 0, 1, 8, 11, 18, 21, 24, 31, 42,
+		45, 52, 57, 60, 67, 72, 77, 80, 87, 92,
+		95, 102, 105, 112, 123, 126, 133, 136, 143, 152,
+		155, 162, 167, 170, 177, 188, 191, 198, 201, 204,
+		207, 214, 217, 224, 227, 234, 237, 244, 249, 252,
+		259, 262, 269, 272, 275, 278, 283, 286, 295, 298,
+		305, 308, 311, 315, 319, 323, 327, 330, 334, 337,
+		341, 344, 348, 351, 354, 358, 361, 364, 368, 372,
+		375, 378, 381, 384, 391, 394, 398, 401, 404, 407,
+		414, 417, 420, 423, 426, 430, 433, 440, 443, 446,
+		450, 453, 457, 460, 464, 467, 470, 473, 477, 480,
+		483, 487,
+	}
+)
 
 // ---------------------------------------------------------------------------
 // Supported zones: 351
@@ -53,7 +76,7 @@ var ZoneEraAfrica_Abidjan = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT
 	{
 		ZonePolicy: nil,
-		Format: "GMT",
+		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -85,7 +108,7 @@ var ZoneEraAfrica_Algiers = []zoneinfo.ZoneEra{
 	//             1:00    -    CET
 	{
 		ZonePolicy: nil,
-		Format: "CET",
+		FormatIndex: 72, // "CET"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -117,7 +140,7 @@ var ZoneEraAfrica_Bissau = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT
 	{
 		ZonePolicy: nil,
-		Format: "GMT",
+		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -149,7 +172,7 @@ var ZoneEraAfrica_Cairo = []zoneinfo.ZoneEra{
 	//             2:00    Egypt    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEgypt,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -181,7 +204,7 @@ var ZoneEraAfrica_Casablanca = []zoneinfo.ZoneEra{
 	//              0:00    Morocco    +00/+01    2018 Oct 28  3:00
 	{
 		ZonePolicy: &ZonePolicyMorocco,
-		Format: "+00/+01",
+		FormatIndex: 2, // "+00/+01"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -193,7 +216,7 @@ var ZoneEraAfrica_Casablanca = []zoneinfo.ZoneEra{
 	//              1:00    Morocco    +01/+00
 	{
 		ZonePolicy: &ZonePolicyMorocco,
-		Format: "+01/+00",
+		FormatIndex: 4, // "+01/+00"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -225,7 +248,7 @@ var ZoneEraAfrica_Ceuta = []zoneinfo.ZoneEra{
 	//              1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -257,7 +280,7 @@ var ZoneEraAfrica_El_Aaiun = []zoneinfo.ZoneEra{
 	//              0:00    Morocco    +00/+01    2018 Oct 28  3:00
 	{
 		ZonePolicy: &ZonePolicyMorocco,
-		Format: "+00/+01",
+		FormatIndex: 2, // "+00/+01"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -269,7 +292,7 @@ var ZoneEraAfrica_El_Aaiun = []zoneinfo.ZoneEra{
 	//              1:00    Morocco    +01/+00
 	{
 		ZonePolicy: &ZonePolicyMorocco,
-		Format: "+01/+00",
+		FormatIndex: 4, // "+01/+00"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -301,7 +324,7 @@ var ZoneEraAfrica_Johannesburg = []zoneinfo.ZoneEra{
 	//             2:00    SA    SAST
 	{
 		ZonePolicy: &ZonePolicySA,
-		Format: "SAST",
+		FormatIndex: 103, // "SAST"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -333,7 +356,7 @@ var ZoneEraAfrica_Juba = []zoneinfo.ZoneEra{
 	//             2:00    Sudan    CA%sT    2000 Jan 15 12:00
 	{
 		ZonePolicy: &ZonePolicySudan,
-		Format: "CA%T",
+		FormatIndex: 69, // "CA%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -345,7 +368,7 @@ var ZoneEraAfrica_Juba = []zoneinfo.ZoneEra{
 	//             3:00    -    EAT    2021 Feb  1 00:00
 	{
 		ZonePolicy: nil,
-		Format: "EAT",
+		FormatIndex: 76, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2021,
@@ -357,7 +380,7 @@ var ZoneEraAfrica_Juba = []zoneinfo.ZoneEra{
 	//             2:00    -    CAT
 	{
 		ZonePolicy: nil,
-		Format: "CAT",
+		FormatIndex: 70, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -389,7 +412,7 @@ var ZoneEraAfrica_Khartoum = []zoneinfo.ZoneEra{
 	//             2:00    Sudan    CA%sT    2000 Jan 15 12:00
 	{
 		ZonePolicy: &ZonePolicySudan,
-		Format: "CA%T",
+		FormatIndex: 69, // "CA%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -401,7 +424,7 @@ var ZoneEraAfrica_Khartoum = []zoneinfo.ZoneEra{
 	//             3:00    -    EAT    2017 Nov  1
 	{
 		ZonePolicy: nil,
-		Format: "EAT",
+		FormatIndex: 76, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2017,
@@ -413,7 +436,7 @@ var ZoneEraAfrica_Khartoum = []zoneinfo.ZoneEra{
 	//             2:00    -    CAT
 	{
 		ZonePolicy: nil,
-		Format: "CAT",
+		FormatIndex: 70, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -445,7 +468,7 @@ var ZoneEraAfrica_Lagos = []zoneinfo.ZoneEra{
 	//             1:00    -    WAT
 	{
 		ZonePolicy: nil,
-		Format: "WAT",
+		FormatIndex: 106, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -477,7 +500,7 @@ var ZoneEraAfrica_Maputo = []zoneinfo.ZoneEra{
 	//             2:00    -    CAT
 	{
 		ZonePolicy: nil,
-		Format: "CAT",
+		FormatIndex: 70, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -509,7 +532,7 @@ var ZoneEraAfrica_Monrovia = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT
 	{
 		ZonePolicy: nil,
-		Format: "GMT",
+		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -541,7 +564,7 @@ var ZoneEraAfrica_Nairobi = []zoneinfo.ZoneEra{
 	//             3:00    -    EAT
 	{
 		ZonePolicy: nil,
-		Format: "EAT",
+		FormatIndex: 76, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -573,7 +596,7 @@ var ZoneEraAfrica_Ndjamena = []zoneinfo.ZoneEra{
 	//             1:00    -    WAT
 	{
 		ZonePolicy: nil,
-		Format: "WAT",
+		FormatIndex: 106, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -605,7 +628,7 @@ var ZoneEraAfrica_Sao_Tome = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT    2018 Jan  1 01:00
 	{
 		ZonePolicy: nil,
-		Format: "GMT",
+		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -617,7 +640,7 @@ var ZoneEraAfrica_Sao_Tome = []zoneinfo.ZoneEra{
 	//              1:00    -    WAT    2019 Jan  1 02:00
 	{
 		ZonePolicy: nil,
-		Format: "WAT",
+		FormatIndex: 106, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -629,7 +652,7 @@ var ZoneEraAfrica_Sao_Tome = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT
 	{
 		ZonePolicy: nil,
-		Format: "GMT",
+		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -661,7 +684,7 @@ var ZoneEraAfrica_Tripoli = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2012 Nov 10  2:00
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -673,7 +696,7 @@ var ZoneEraAfrica_Tripoli = []zoneinfo.ZoneEra{
 	//             1:00    Libya    CE%sT    2013 Oct 25  2:00
 	{
 		ZonePolicy: &ZonePolicyLibya,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2013,
@@ -685,7 +708,7 @@ var ZoneEraAfrica_Tripoli = []zoneinfo.ZoneEra{
 	//             2:00    -    EET
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -717,7 +740,7 @@ var ZoneEraAfrica_Tunis = []zoneinfo.ZoneEra{
 	//             1:00    Tunisia    CE%sT
 	{
 		ZonePolicy: &ZonePolicyTunisia,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -749,7 +772,7 @@ var ZoneEraAfrica_Windhoek = []zoneinfo.ZoneEra{
 	//             2:00    Namibia    %s
 	{
 		ZonePolicy: &ZonePolicyNamibia,
-		Format: "%",
+		FormatIndex: 1, // "%"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -781,7 +804,7 @@ var ZoneEraAmerica_Adak = []zoneinfo.ZoneEra{
 	//             -10:00    US    H%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "H%T",
+		FormatIndex: 84, // "H%T"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -813,7 +836,7 @@ var ZoneEraAmerica_Anchorage = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "AK%T",
+		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -845,7 +868,7 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2003 Sep 24
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -857,7 +880,7 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2012 Oct 21
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -869,7 +892,7 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2013 Sep
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2013,
@@ -881,7 +904,7 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -913,7 +936,7 @@ var ZoneEraAmerica_Argentina_Buenos_Aires = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -925,7 +948,7 @@ var ZoneEraAmerica_Argentina_Buenos_Aires = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -937,7 +960,7 @@ var ZoneEraAmerica_Argentina_Buenos_Aires = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -969,7 +992,7 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -981,7 +1004,7 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -993,7 +1016,7 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2004 Jun  1
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1005,7 +1028,7 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Jun 20
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1017,7 +1040,7 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1029,7 +1052,7 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1061,7 +1084,7 @@ var ZoneEraAmerica_Argentina_Cordoba = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1073,7 +1096,7 @@ var ZoneEraAmerica_Argentina_Cordoba = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1085,7 +1108,7 @@ var ZoneEraAmerica_Argentina_Cordoba = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1117,7 +1140,7 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1129,7 +1152,7 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1141,7 +1164,7 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1153,7 +1176,7 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1185,7 +1208,7 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1197,7 +1220,7 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1209,7 +1232,7 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2004 Jun  1
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1221,7 +1244,7 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Jun 20
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1233,7 +1256,7 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1245,7 +1268,7 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1277,7 +1300,7 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1289,7 +1312,7 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1301,7 +1324,7 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2004 May 23
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1313,7 +1336,7 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Sep 26
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1325,7 +1348,7 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1337,7 +1360,7 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1369,7 +1392,7 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1381,7 +1404,7 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1393,7 +1416,7 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2004 Jun  1
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1405,7 +1428,7 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Jun 20
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1417,7 +1440,7 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1429,7 +1452,7 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1461,7 +1484,7 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1473,7 +1496,7 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1485,7 +1508,7 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1497,7 +1520,7 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1529,7 +1552,7 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1541,7 +1564,7 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1553,7 +1576,7 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2004 May 31
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1565,7 +1588,7 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Jul 25
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1577,7 +1600,7 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1589,7 +1612,7 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1621,7 +1644,7 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    1999 Oct  3
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1633,7 +1656,7 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 	//             -4:00    1:00    -03    2000 Mar  3
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -16,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
 		UntilYear: 2000,
@@ -1645,7 +1668,7 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2004 May 31
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1657,7 +1680,7 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Jul 25
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1669,7 +1692,7 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Jan 21
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1681,7 +1704,7 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 	//             -4:00    SanLuis    -04/-03    2009 Oct 11
 	{
 		ZonePolicy: &ZonePolicySanLuis,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -1693,7 +1716,7 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1725,7 +1748,7 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1737,7 +1760,7 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1749,7 +1772,7 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2004 Jun  1
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1761,7 +1784,7 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Jun 13
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1773,7 +1796,7 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1805,7 +1828,7 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1817,7 +1840,7 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1829,7 +1852,7 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2004 May 30
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1841,7 +1864,7 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Jun 20
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1853,7 +1876,7 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
 		ZonePolicy: &ZonePolicyArg,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1865,7 +1888,7 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1897,7 +1920,7 @@ var ZoneEraAmerica_Asuncion = []zoneinfo.ZoneEra{
 	//             -4:00    Para    -04/-03
 	{
 		ZonePolicy: &ZonePolicyPara,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1929,7 +1952,7 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2003 Sep 24
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -1941,7 +1964,7 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2011 Oct 16
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -1953,7 +1976,7 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2012 Oct 21
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -1965,7 +1988,7 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1997,7 +2020,7 @@ var ZoneEraAmerica_Bahia_Banderas = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    2010 Apr  4  2:00
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -2009,7 +2032,7 @@ var ZoneEraAmerica_Bahia_Banderas = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2041,7 +2064,7 @@ var ZoneEraAmerica_Barbados = []zoneinfo.ZoneEra{
 	//             -4:00    Barb    A%sT
 	{
 		ZonePolicy: &ZonePolicyBarb,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2073,7 +2096,7 @@ var ZoneEraAmerica_Belem = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2105,7 +2128,7 @@ var ZoneEraAmerica_Belize = []zoneinfo.ZoneEra{
 	//             -6:00    Belize    %s
 	{
 		ZonePolicy: &ZonePolicyBelize,
-		Format: "%",
+		FormatIndex: 1, // "%"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2137,7 +2160,7 @@ var ZoneEraAmerica_Boa_Vista = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    1999 Sep 30
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -2149,7 +2172,7 @@ var ZoneEraAmerica_Boa_Vista = []zoneinfo.ZoneEra{
 	//             -4:00    Brazil    -04/-03    2000 Oct 15
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2161,7 +2184,7 @@ var ZoneEraAmerica_Boa_Vista = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2193,7 +2216,7 @@ var ZoneEraAmerica_Bogota = []zoneinfo.ZoneEra{
 	//             -5:00    CO    -05/-04
 	{
 		ZonePolicy: &ZonePolicyCO,
-		Format: "-05/-04",
+		FormatIndex: 49, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2225,7 +2248,7 @@ var ZoneEraAmerica_Boise = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2257,7 +2280,7 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 	//             -7:00    NT_YK    M%sT    1999 Oct 31  2:00
 	{
 		ZonePolicy: &ZonePolicyNT_YK,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -2269,7 +2292,7 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 	//             -6:00    Canada    C%sT    2000 Oct 29  2:00
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2281,7 +2304,7 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2000 Nov  5  0:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2293,7 +2316,7 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST    2001 Apr  1  3:00
 	{
 		ZonePolicy: nil,
-		Format: "CST",
+		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -2305,7 +2328,7 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 	//             -7:00    Canada    M%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2337,7 +2360,7 @@ var ZoneEraAmerica_Campo_Grande = []zoneinfo.ZoneEra{
 	//             -4:00    Brazil    -04/-03
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2369,7 +2392,7 @@ var ZoneEraAmerica_Cancun = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT    2015 Feb  1  2:00
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -2381,7 +2404,7 @@ var ZoneEraAmerica_Cancun = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2413,7 +2436,7 @@ var ZoneEraAmerica_Caracas = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2007 Dec  9  3:00
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -2425,7 +2448,7 @@ var ZoneEraAmerica_Caracas = []zoneinfo.ZoneEra{
 	//             -4:30    -    -0430    2016 May  1  2:30
 	{
 		ZonePolicy: nil,
-		Format: "-0430",
+		FormatIndex: 47, // "-0430"
 		OffsetCode: -18,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -2437,7 +2460,7 @@ var ZoneEraAmerica_Caracas = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2469,7 +2492,7 @@ var ZoneEraAmerica_Cayenne = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2501,7 +2524,7 @@ var ZoneEraAmerica_Chicago = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2533,7 +2556,7 @@ var ZoneEraAmerica_Chihuahua = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    2022 Oct 30  2:00
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -2545,7 +2568,7 @@ var ZoneEraAmerica_Chihuahua = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST
 	{
 		ZonePolicy: nil,
-		Format: "CST",
+		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2577,7 +2600,7 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    2010
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -2589,7 +2612,7 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT    2022 Oct 30  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -2601,7 +2624,7 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST    2022 Nov 30  0:00
 	{
 		ZonePolicy: nil,
-		Format: "CST",
+		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -2613,7 +2636,7 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2645,7 +2668,7 @@ var ZoneEraAmerica_Costa_Rica = []zoneinfo.ZoneEra{
 	//             -6:00    CR    C%sT
 	{
 		ZonePolicy: &ZonePolicyCR,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2677,7 +2700,7 @@ var ZoneEraAmerica_Cuiaba = []zoneinfo.ZoneEra{
 	//             -4:00    Brazil    -04/-03    2003 Sep 24
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -2689,7 +2712,7 @@ var ZoneEraAmerica_Cuiaba = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2004 Oct  1
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2701,7 +2724,7 @@ var ZoneEraAmerica_Cuiaba = []zoneinfo.ZoneEra{
 	//             -4:00    Brazil    -04/-03
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2733,7 +2756,7 @@ var ZoneEraAmerica_Danmarkshavn = []zoneinfo.ZoneEra{
 	//             0:00    -    GMT
 	{
 		ZonePolicy: nil,
-		Format: "GMT",
+		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2765,7 +2788,7 @@ var ZoneEraAmerica_Dawson = []zoneinfo.ZoneEra{
 	//             -8:00    Canada    P%sT    2020 Nov  1
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -2777,7 +2800,7 @@ var ZoneEraAmerica_Dawson = []zoneinfo.ZoneEra{
 	//             -7:00    -    MST
 	{
 		ZonePolicy: nil,
-		Format: "MST",
+		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2809,7 +2832,7 @@ var ZoneEraAmerica_Dawson_Creek = []zoneinfo.ZoneEra{
 	//             -7:00    -    MST
 	{
 		ZonePolicy: nil,
-		Format: "MST",
+		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2841,7 +2864,7 @@ var ZoneEraAmerica_Denver = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2873,7 +2896,7 @@ var ZoneEraAmerica_Detroit = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2905,7 +2928,7 @@ var ZoneEraAmerica_Edmonton = []zoneinfo.ZoneEra{
 	//             -7:00    Canada    M%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2937,7 +2960,7 @@ var ZoneEraAmerica_Eirunepe = []zoneinfo.ZoneEra{
 	//             -5:00    -    -05    2008 Jun 24  0:00
 	{
 		ZonePolicy: nil,
-		Format: "-05",
+		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -2949,7 +2972,7 @@ var ZoneEraAmerica_Eirunepe = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2013 Nov 10
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2013,
@@ -2961,7 +2984,7 @@ var ZoneEraAmerica_Eirunepe = []zoneinfo.ZoneEra{
 	//             -5:00    -    -05
 	{
 		ZonePolicy: nil,
-		Format: "-05",
+		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2993,7 +3016,7 @@ var ZoneEraAmerica_El_Salvador = []zoneinfo.ZoneEra{
 	//             -6:00    Salv    C%sT
 	{
 		ZonePolicy: &ZonePolicySalv,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3025,7 +3048,7 @@ var ZoneEraAmerica_Fort_Nelson = []zoneinfo.ZoneEra{
 	//             -8:00    Canada    P%sT    2015 Mar  8  2:00
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -3037,7 +3060,7 @@ var ZoneEraAmerica_Fort_Nelson = []zoneinfo.ZoneEra{
 	//             -7:00    -    MST
 	{
 		ZonePolicy: nil,
-		Format: "MST",
+		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3069,7 +3092,7 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    1999 Sep 30
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -3081,7 +3104,7 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2000 Oct 22
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -3093,7 +3116,7 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2001 Sep 13
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -3105,7 +3128,7 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -3117,7 +3140,7 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3149,7 +3172,7 @@ var ZoneEraAmerica_Glace_Bay = []zoneinfo.ZoneEra{
 	//             -4:00    Canada    A%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3181,7 +3204,7 @@ var ZoneEraAmerica_Goose_Bay = []zoneinfo.ZoneEra{
 	//             -4:00    StJohns    A%sT    2011 Nov
 	{
 		ZonePolicy: &ZonePolicyStJohns,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -3193,7 +3216,7 @@ var ZoneEraAmerica_Goose_Bay = []zoneinfo.ZoneEra{
 	//             -4:00    Canada    A%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3225,7 +3248,7 @@ var ZoneEraAmerica_Grand_Turk = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT    2015 Mar  8  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -3237,7 +3260,7 @@ var ZoneEraAmerica_Grand_Turk = []zoneinfo.ZoneEra{
 	//             -4:00    -    AST    2018 Mar 11  3:00
 	{
 		ZonePolicy: nil,
-		Format: "AST",
+		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -3249,7 +3272,7 @@ var ZoneEraAmerica_Grand_Turk = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3281,7 +3304,7 @@ var ZoneEraAmerica_Guatemala = []zoneinfo.ZoneEra{
 	//             -6:00    Guat    C%sT
 	{
 		ZonePolicy: &ZonePolicyGuat,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3313,7 +3336,7 @@ var ZoneEraAmerica_Guayaquil = []zoneinfo.ZoneEra{
 	//             -5:00    Ecuador    -05/-04
 	{
 		ZonePolicy: &ZonePolicyEcuador,
-		Format: "-05/-04",
+		FormatIndex: 49, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3345,7 +3368,7 @@ var ZoneEraAmerica_Guyana = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3377,7 +3400,7 @@ var ZoneEraAmerica_Halifax = []zoneinfo.ZoneEra{
 	//             -4:00    Canada    A%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3409,7 +3432,7 @@ var ZoneEraAmerica_Havana = []zoneinfo.ZoneEra{
 	//             -5:00    Cuba    C%sT
 	{
 		ZonePolicy: &ZonePolicyCuba,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3441,7 +3464,7 @@ var ZoneEraAmerica_Hermosillo = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    1999
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -3453,7 +3476,7 @@ var ZoneEraAmerica_Hermosillo = []zoneinfo.ZoneEra{
 	//             -7:00    -    MST
 	{
 		ZonePolicy: nil,
-		Format: "MST",
+		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3485,7 +3508,7 @@ var ZoneEraAmerica_Indiana_Indianapolis = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3497,7 +3520,7 @@ var ZoneEraAmerica_Indiana_Indianapolis = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3529,7 +3552,7 @@ var ZoneEraAmerica_Indiana_Knox = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3541,7 +3564,7 @@ var ZoneEraAmerica_Indiana_Knox = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3573,7 +3596,7 @@ var ZoneEraAmerica_Indiana_Marengo = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3585,7 +3608,7 @@ var ZoneEraAmerica_Indiana_Marengo = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3617,7 +3640,7 @@ var ZoneEraAmerica_Indiana_Petersburg = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3629,7 +3652,7 @@ var ZoneEraAmerica_Indiana_Petersburg = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT    2007 Nov  4  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -3641,7 +3664,7 @@ var ZoneEraAmerica_Indiana_Petersburg = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3673,7 +3696,7 @@ var ZoneEraAmerica_Indiana_Tell_City = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3685,7 +3708,7 @@ var ZoneEraAmerica_Indiana_Tell_City = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3717,7 +3740,7 @@ var ZoneEraAmerica_Indiana_Vevay = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3729,7 +3752,7 @@ var ZoneEraAmerica_Indiana_Vevay = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3761,7 +3784,7 @@ var ZoneEraAmerica_Indiana_Vincennes = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3773,7 +3796,7 @@ var ZoneEraAmerica_Indiana_Vincennes = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT    2007 Nov  4  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -3785,7 +3808,7 @@ var ZoneEraAmerica_Indiana_Vincennes = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3817,7 +3840,7 @@ var ZoneEraAmerica_Indiana_Winamac = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3829,7 +3852,7 @@ var ZoneEraAmerica_Indiana_Winamac = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT    2007 Mar 11  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -3841,7 +3864,7 @@ var ZoneEraAmerica_Indiana_Winamac = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3873,7 +3896,7 @@ var ZoneEraAmerica_Inuvik = []zoneinfo.ZoneEra{
 	//             -7:00    Canada    M%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3905,7 +3928,7 @@ var ZoneEraAmerica_Iqaluit = []zoneinfo.ZoneEra{
 	//             -5:00    NT_YK    E%sT    1999 Oct 31  2:00
 	{
 		ZonePolicy: &ZonePolicyNT_YK,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -3917,7 +3940,7 @@ var ZoneEraAmerica_Iqaluit = []zoneinfo.ZoneEra{
 	//             -6:00    Canada    C%sT    2000 Oct 29  2:00
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -3929,7 +3952,7 @@ var ZoneEraAmerica_Iqaluit = []zoneinfo.ZoneEra{
 	//             -5:00    Canada    E%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3961,7 +3984,7 @@ var ZoneEraAmerica_Jamaica = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3993,7 +4016,7 @@ var ZoneEraAmerica_Juneau = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "AK%T",
+		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4025,7 +4048,7 @@ var ZoneEraAmerica_Kentucky_Louisville = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4057,7 +4080,7 @@ var ZoneEraAmerica_Kentucky_Monticello = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT    2000 Oct 29  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -4069,7 +4092,7 @@ var ZoneEraAmerica_Kentucky_Monticello = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4101,7 +4124,7 @@ var ZoneEraAmerica_La_Paz = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4133,7 +4156,7 @@ var ZoneEraAmerica_Lima = []zoneinfo.ZoneEra{
 	//             -5:00    Peru    -05/-04
 	{
 		ZonePolicy: &ZonePolicyPeru,
-		Format: "-05/-04",
+		FormatIndex: 49, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4165,7 +4188,7 @@ var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
 	//             -8:00    US    P%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4197,7 +4220,7 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    1999 Sep 30
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -4209,7 +4232,7 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2000 Oct 22
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -4221,7 +4244,7 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2001 Sep 13
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -4233,7 +4256,7 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -4245,7 +4268,7 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4277,7 +4300,7 @@ var ZoneEraAmerica_Managua = []zoneinfo.ZoneEra{
 	//             -6:00    Nic    C%sT
 	{
 		ZonePolicy: &ZonePolicyNic,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4309,7 +4332,7 @@ var ZoneEraAmerica_Manaus = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4341,7 +4364,7 @@ var ZoneEraAmerica_Martinique = []zoneinfo.ZoneEra{
 	//             -4:00    -    AST
 	{
 		ZonePolicy: nil,
-		Format: "AST",
+		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4373,7 +4396,7 @@ var ZoneEraAmerica_Matamoros = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT    2010
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -4385,7 +4408,7 @@ var ZoneEraAmerica_Matamoros = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4417,7 +4440,7 @@ var ZoneEraAmerica_Mazatlan = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4449,7 +4472,7 @@ var ZoneEraAmerica_Menominee = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4481,7 +4504,7 @@ var ZoneEraAmerica_Merida = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4513,7 +4536,7 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 	//              -8:00    -    PST    2015 Nov  1  2:00
 	{
 		ZonePolicy: nil,
-		Format: "PST",
+		FormatIndex: 102, // "PST"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -4525,7 +4548,7 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT    2018 Nov  4  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "AK%T",
+		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -4537,7 +4560,7 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 	//              -8:00    -    PST    2019 Jan 20  2:00
 	{
 		ZonePolicy: nil,
-		Format: "PST",
+		FormatIndex: 102, // "PST"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -4549,7 +4572,7 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "AK%T",
+		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4581,7 +4604,7 @@ var ZoneEraAmerica_Mexico_City = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT    2001 Sep 30  2:00
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -4593,7 +4616,7 @@ var ZoneEraAmerica_Mexico_City = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST    2002 Feb 20
 	{
 		ZonePolicy: nil,
-		Format: "CST",
+		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -4605,7 +4628,7 @@ var ZoneEraAmerica_Mexico_City = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4637,7 +4660,7 @@ var ZoneEraAmerica_Miquelon = []zoneinfo.ZoneEra{
 	//             -3:00    Canada    -03/-02
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4669,7 +4692,7 @@ var ZoneEraAmerica_Moncton = []zoneinfo.ZoneEra{
 	//             -4:00    Moncton    A%sT    2007
 	{
 		ZonePolicy: &ZonePolicyMoncton,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -4681,7 +4704,7 @@ var ZoneEraAmerica_Moncton = []zoneinfo.ZoneEra{
 	//             -4:00    Canada    A%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4713,7 +4736,7 @@ var ZoneEraAmerica_Monterrey = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4745,7 +4768,7 @@ var ZoneEraAmerica_Montevideo = []zoneinfo.ZoneEra{
 	//             -3:00    Uruguay    -03/-02
 	{
 		ZonePolicy: &ZonePolicyUruguay,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4777,7 +4800,7 @@ var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4809,7 +4832,7 @@ var ZoneEraAmerica_Nome = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "AK%T",
+		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4841,7 +4864,7 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 	//             -2:00    -    -02    1999 Sep 30
 	{
 		ZonePolicy: nil,
-		Format: "-02",
+		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -4853,7 +4876,7 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 	//             -2:00    Brazil    -02/-01    2000 Oct 15
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-02/-01",
+		FormatIndex: 42, // "-02/-01"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -4865,7 +4888,7 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 	//             -2:00    -    -02    2001 Sep 13
 	{
 		ZonePolicy: nil,
-		Format: "-02",
+		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -4877,7 +4900,7 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 	//             -2:00    Brazil    -02/-01    2002 Oct  1
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-02/-01",
+		FormatIndex: 42, // "-02/-01"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -4889,7 +4912,7 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 	//             -2:00    -    -02
 	{
 		ZonePolicy: nil,
-		Format: "-02",
+		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4921,7 +4944,7 @@ var ZoneEraAmerica_North_Dakota_Beulah = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT    2010 Nov  7  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -4933,7 +4956,7 @@ var ZoneEraAmerica_North_Dakota_Beulah = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4965,7 +4988,7 @@ var ZoneEraAmerica_North_Dakota_Center = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4997,7 +5020,7 @@ var ZoneEraAmerica_North_Dakota_New_Salem = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT    2003 Oct 26  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -5009,7 +5032,7 @@ var ZoneEraAmerica_North_Dakota_New_Salem = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5041,7 +5064,7 @@ var ZoneEraAmerica_Nuuk = []zoneinfo.ZoneEra{
 	//             -3:00    EU    -03/-02    2023 Mar 25 22:00
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2023,
@@ -5053,7 +5076,7 @@ var ZoneEraAmerica_Nuuk = []zoneinfo.ZoneEra{
 	//             -2:00    -    -02
 	{
 		ZonePolicy: nil,
-		Format: "-02",
+		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5085,7 +5108,7 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    2010
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -5097,7 +5120,7 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT    2022 Oct 30  2:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -5109,7 +5132,7 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST    2022 Nov 30  0:00
 	{
 		ZonePolicy: nil,
-		Format: "CST",
+		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -5121,7 +5144,7 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5153,7 +5176,7 @@ var ZoneEraAmerica_Panama = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5185,7 +5208,7 @@ var ZoneEraAmerica_Paramaribo = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5217,7 +5240,7 @@ var ZoneEraAmerica_Phoenix = []zoneinfo.ZoneEra{
 	//             -7:00    -    MST
 	{
 		ZonePolicy: nil,
-		Format: "MST",
+		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5249,7 +5272,7 @@ var ZoneEraAmerica_Port_au_Prince = []zoneinfo.ZoneEra{
 	//             -5:00    Haiti    E%sT
 	{
 		ZonePolicy: &ZonePolicyHaiti,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5281,7 +5304,7 @@ var ZoneEraAmerica_Porto_Velho = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5313,7 +5336,7 @@ var ZoneEraAmerica_Puerto_Rico = []zoneinfo.ZoneEra{
 	//             -4:00    -    AST
 	{
 		ZonePolicy: nil,
-		Format: "AST",
+		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5345,7 +5368,7 @@ var ZoneEraAmerica_Punta_Arenas = []zoneinfo.ZoneEra{
 	//             -4:00    Chile    -04/-03    2016 Dec  4
 	{
 		ZonePolicy: &ZonePolicyChile,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -5357,7 +5380,7 @@ var ZoneEraAmerica_Punta_Arenas = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5389,7 +5412,7 @@ var ZoneEraAmerica_Rankin_Inlet = []zoneinfo.ZoneEra{
 	//             -6:00    NT_YK    C%sT    2000 Oct 29  2:00
 	{
 		ZonePolicy: &ZonePolicyNT_YK,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -5401,7 +5424,7 @@ var ZoneEraAmerica_Rankin_Inlet = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2001 Apr  1  3:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -5413,7 +5436,7 @@ var ZoneEraAmerica_Rankin_Inlet = []zoneinfo.ZoneEra{
 	//             -6:00    Canada    C%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5445,7 +5468,7 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    1999 Sep 30
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -5457,7 +5480,7 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2000 Oct 15
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -5469,7 +5492,7 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    2001 Sep 13
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -5481,7 +5504,7 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -5493,7 +5516,7 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5525,7 +5548,7 @@ var ZoneEraAmerica_Regina = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST
 	{
 		ZonePolicy: nil,
-		Format: "CST",
+		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5557,7 +5580,7 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 	//             -6:00    NT_YK    C%sT    2000 Oct 29  2:00
 	{
 		ZonePolicy: &ZonePolicyNT_YK,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -5569,7 +5592,7 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2001 Apr  1  3:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -5581,7 +5604,7 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 	//             -6:00    Canada    C%sT    2006 Oct 29  2:00
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -5593,7 +5616,7 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2007 Mar 11  3:00
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -5605,7 +5628,7 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 	//             -6:00    Canada    C%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5637,7 +5660,7 @@ var ZoneEraAmerica_Rio_Branco = []zoneinfo.ZoneEra{
 	//             -5:00    -    -05    2008 Jun 24  0:00
 	{
 		ZonePolicy: nil,
-		Format: "-05",
+		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -5649,7 +5672,7 @@ var ZoneEraAmerica_Rio_Branco = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2013 Nov 10
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2013,
@@ -5661,7 +5684,7 @@ var ZoneEraAmerica_Rio_Branco = []zoneinfo.ZoneEra{
 	//             -5:00    -    -05
 	{
 		ZonePolicy: nil,
-		Format: "-05",
+		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5693,7 +5716,7 @@ var ZoneEraAmerica_Santarem = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2008 Jun 24  0:00
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -5705,7 +5728,7 @@ var ZoneEraAmerica_Santarem = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5737,7 +5760,7 @@ var ZoneEraAmerica_Santiago = []zoneinfo.ZoneEra{
 	//             -4:00    Chile    -04/-03
 	{
 		ZonePolicy: &ZonePolicyChile,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5769,7 +5792,7 @@ var ZoneEraAmerica_Santo_Domingo = []zoneinfo.ZoneEra{
 	//             -4:00    -    AST    2000 Oct 29  2:00
 	{
 		ZonePolicy: nil,
-		Format: "AST",
+		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -5781,7 +5804,7 @@ var ZoneEraAmerica_Santo_Domingo = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT    2000 Dec  3  1:00
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -5793,7 +5816,7 @@ var ZoneEraAmerica_Santo_Domingo = []zoneinfo.ZoneEra{
 	//             -4:00    -    AST
 	{
 		ZonePolicy: nil,
-		Format: "AST",
+		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5825,7 +5848,7 @@ var ZoneEraAmerica_Sao_Paulo = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02
 	{
 		ZonePolicy: &ZonePolicyBrazil,
-		Format: "-03/-02",
+		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5857,7 +5880,7 @@ var ZoneEraAmerica_Scoresbysund = []zoneinfo.ZoneEra{
 	//             -1:00    EU    -01/+00
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "-01/+00",
+		FormatIndex: 40, // "-01/+00"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5889,7 +5912,7 @@ var ZoneEraAmerica_Sitka = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "AK%T",
+		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5921,7 +5944,7 @@ var ZoneEraAmerica_St_Johns = []zoneinfo.ZoneEra{
 	//             -3:30    StJohns    N%sT    2011 Nov
 	{
 		ZonePolicy: &ZonePolicyStJohns,
-		Format: "N%T",
+		FormatIndex: 98, // "N%T"
 		OffsetCode: -14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -5933,7 +5956,7 @@ var ZoneEraAmerica_St_Johns = []zoneinfo.ZoneEra{
 	//             -3:30    Canada    N%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "N%T",
+		FormatIndex: 98, // "N%T"
 		OffsetCode: -14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5965,7 +5988,7 @@ var ZoneEraAmerica_Swift_Current = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST
 	{
 		ZonePolicy: nil,
-		Format: "CST",
+		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5997,7 +6020,7 @@ var ZoneEraAmerica_Tegucigalpa = []zoneinfo.ZoneEra{
 	//             -6:00    Hond    C%sT
 	{
 		ZonePolicy: &ZonePolicyHond,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6029,7 +6052,7 @@ var ZoneEraAmerica_Thule = []zoneinfo.ZoneEra{
 	//             -4:00    Thule    A%sT
 	{
 		ZonePolicy: &ZonePolicyThule,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6061,7 +6084,7 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 	//             -8:00    Mexico    P%sT    2001
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -6073,7 +6096,7 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 	//             -8:00    US    P%sT    2002 Feb 20
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -6085,7 +6108,7 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 	//             -8:00    Mexico    P%sT    2010
 	{
 		ZonePolicy: &ZonePolicyMexico,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -6097,7 +6120,7 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 	//             -8:00    US    P%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6129,7 +6152,7 @@ var ZoneEraAmerica_Toronto = []zoneinfo.ZoneEra{
 	//             -5:00    Canada    E%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6161,7 +6184,7 @@ var ZoneEraAmerica_Vancouver = []zoneinfo.ZoneEra{
 	//             -8:00    Canada    P%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6193,7 +6216,7 @@ var ZoneEraAmerica_Whitehorse = []zoneinfo.ZoneEra{
 	//             -8:00    Canada    P%sT    2020 Nov  1
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -6205,7 +6228,7 @@ var ZoneEraAmerica_Whitehorse = []zoneinfo.ZoneEra{
 	//             -7:00    -    MST
 	{
 		ZonePolicy: nil,
-		Format: "MST",
+		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6237,7 +6260,7 @@ var ZoneEraAmerica_Winnipeg = []zoneinfo.ZoneEra{
 	//             -6:00    Winn    C%sT    2006
 	{
 		ZonePolicy: &ZonePolicyWinn,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -6249,7 +6272,7 @@ var ZoneEraAmerica_Winnipeg = []zoneinfo.ZoneEra{
 	//             -6:00    Canada    C%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6281,7 +6304,7 @@ var ZoneEraAmerica_Yakutat = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "AK%T",
+		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6313,7 +6336,7 @@ var ZoneEraAmerica_Yellowknife = []zoneinfo.ZoneEra{
 	//             -7:00    Canada    M%sT
 	{
 		ZonePolicy: &ZonePolicyCanada,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6345,7 +6368,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2009 Oct 18  2:00
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -6357,7 +6380,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2010 Mar  5  2:00
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -6369,7 +6392,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2011 Oct 28  2:00
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -6381,7 +6404,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2012 Feb 21 17:00u
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -6393,7 +6416,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2016 Oct 22
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -6405,7 +6428,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2018 Mar 11  4:00
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -6417,7 +6440,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2018 Oct  7  4:00
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -6429,7 +6452,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2019 Mar 17  3:00
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -6441,7 +6464,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2019 Oct  4  3:00
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -6453,7 +6476,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2020 Mar  8  3:00
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -6465,7 +6488,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2020 Oct  4  0:01
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -6477,7 +6500,7 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//             11:00    -    +11
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6509,7 +6532,7 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 	//             7:00    -    +07    2009 Oct 18  2:00
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -6521,7 +6544,7 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 	//             5:00    -    +05    2010 Mar 10 20:00u
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -6533,7 +6556,7 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 	//             7:00    -    +07    2011 Oct 28  2:00
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -6545,7 +6568,7 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 	//             5:00    -    +05    2012 Feb 21 20:00u
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -6557,7 +6580,7 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 	//             7:00    -    +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6589,7 +6612,7 @@ var ZoneEraAntarctica_Macquarie = []zoneinfo.ZoneEra{
 	//             10:00    AT    AE%sT    2010
 	{
 		ZonePolicy: &ZonePolicyAT,
-		Format: "AE%T",
+		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -6601,7 +6624,7 @@ var ZoneEraAntarctica_Macquarie = []zoneinfo.ZoneEra{
 	//             10:00    1:00    AEDT    2011
 	{
 		ZonePolicy: nil,
-		Format: "AEDT",
+		FormatIndex: 64, // "AEDT"
 		OffsetCode: 40,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
 		UntilYear: 2011,
@@ -6613,7 +6636,7 @@ var ZoneEraAntarctica_Macquarie = []zoneinfo.ZoneEra{
 	//             10:00    AT    AE%sT
 	{
 		ZonePolicy: &ZonePolicyAT,
-		Format: "AE%T",
+		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6645,7 +6668,7 @@ var ZoneEraAntarctica_Mawson = []zoneinfo.ZoneEra{
 	//             6:00    -    +06    2009 Oct 18  2:00
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -6657,7 +6680,7 @@ var ZoneEraAntarctica_Mawson = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6689,7 +6712,7 @@ var ZoneEraAntarctica_Palmer = []zoneinfo.ZoneEra{
 	//             -4:00    Chile    -04/-03    2016 Dec  4
 	{
 		ZonePolicy: &ZonePolicyChile,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -6701,7 +6724,7 @@ var ZoneEraAntarctica_Palmer = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6733,7 +6756,7 @@ var ZoneEraAntarctica_Rothera = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6765,7 +6788,7 @@ var ZoneEraAntarctica_Troll = []zoneinfo.ZoneEra{
 	// 0 - -00 2005 Feb 12
 	{
 		ZonePolicy: nil,
-		Format: "-00",
+		FormatIndex: 38, // "-00"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2005,
@@ -6777,7 +6800,7 @@ var ZoneEraAntarctica_Troll = []zoneinfo.ZoneEra{
 	//             0:00    Troll    %s
 	{
 		ZonePolicy: &ZonePolicyTroll,
-		Format: "%",
+		FormatIndex: 1, // "%"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6809,7 +6832,7 @@ var ZoneEraAsia_Almaty = []zoneinfo.ZoneEra{
 	//             6:00 RussiaAsia    +06/+07    2004 Oct 31  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+06/+07",
+		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -6821,7 +6844,7 @@ var ZoneEraAsia_Almaty = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6853,7 +6876,7 @@ var ZoneEraAsia_Amman = []zoneinfo.ZoneEra{
 	//             2:00    Jordan    EE%sT    2022 Oct 28 0:00s
 	{
 		ZonePolicy: &ZonePolicyJordan,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -6865,7 +6888,7 @@ var ZoneEraAsia_Amman = []zoneinfo.ZoneEra{
 	//             3:00    -    +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6897,7 +6920,7 @@ var ZoneEraAsia_Anadyr = []zoneinfo.ZoneEra{
 	//             12:00    Russia    +12/+13    2010 Mar 28  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+12/+13",
+		FormatIndex: 33, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -6909,7 +6932,7 @@ var ZoneEraAsia_Anadyr = []zoneinfo.ZoneEra{
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+11/+12",
+		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -6921,7 +6944,7 @@ var ZoneEraAsia_Anadyr = []zoneinfo.ZoneEra{
 	//             12:00    -    +12
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6953,7 +6976,7 @@ var ZoneEraAsia_Aqtau = []zoneinfo.ZoneEra{
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -6965,7 +6988,7 @@ var ZoneEraAsia_Aqtau = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6997,7 +7020,7 @@ var ZoneEraAsia_Aqtobe = []zoneinfo.ZoneEra{
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+05/+06",
+		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -7009,7 +7032,7 @@ var ZoneEraAsia_Aqtobe = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7041,7 +7064,7 @@ var ZoneEraAsia_Ashgabat = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7073,7 +7096,7 @@ var ZoneEraAsia_Atyrau = []zoneinfo.ZoneEra{
 	//             5:00 RussiaAsia    +05/+06    1999 Mar 28  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+05/+06",
+		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -7085,7 +7108,7 @@ var ZoneEraAsia_Atyrau = []zoneinfo.ZoneEra{
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -7097,7 +7120,7 @@ var ZoneEraAsia_Atyrau = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7129,7 +7152,7 @@ var ZoneEraAsia_Baghdad = []zoneinfo.ZoneEra{
 	//             3:00    Iraq    +03/+04
 	{
 		ZonePolicy: &ZonePolicyIraq,
-		Format: "+03/+04",
+		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7161,7 +7184,7 @@ var ZoneEraAsia_Baku = []zoneinfo.ZoneEra{
 	//             4:00    Azer    +04/+05
 	{
 		ZonePolicy: &ZonePolicyAzer,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7193,7 +7216,7 @@ var ZoneEraAsia_Bangkok = []zoneinfo.ZoneEra{
 	//             7:00    -    +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7225,7 +7248,7 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+06/+07",
+		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7237,7 +7260,7 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7249,7 +7272,7 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 	//              6:00    -    +06    2016 Mar 27  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -7261,7 +7284,7 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 	//              7:00    -    +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7293,7 +7316,7 @@ var ZoneEraAsia_Beirut = []zoneinfo.ZoneEra{
 	//             2:00    Lebanon    EE%sT
 	{
 		ZonePolicy: &ZonePolicyLebanon,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7325,7 +7348,7 @@ var ZoneEraAsia_Bishkek = []zoneinfo.ZoneEra{
 	//             5:00    Kyrgyz    +05/+06    2005 Aug 12
 	{
 		ZonePolicy: &ZonePolicyKyrgyz,
-		Format: "+05/+06",
+		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2005,
@@ -7337,7 +7360,7 @@ var ZoneEraAsia_Bishkek = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7369,7 +7392,7 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 	//              9:00    Russia    +09/+10    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+09/+10",
+		FormatIndex: 25, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7381,7 +7404,7 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7393,7 +7416,7 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2016 Mar 27  2:00
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -7405,7 +7428,7 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 	//              9:00    -    +09
 	{
 		ZonePolicy: nil,
-		Format: "+09",
+		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7437,7 +7460,7 @@ var ZoneEraAsia_Choibalsan = []zoneinfo.ZoneEra{
 	//             9:00    Mongol    +09/+10    2008 Mar 31
 	{
 		ZonePolicy: &ZonePolicyMongol,
-		Format: "+09/+10",
+		FormatIndex: 25, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -7449,7 +7472,7 @@ var ZoneEraAsia_Choibalsan = []zoneinfo.ZoneEra{
 	//             8:00    Mongol    +08/+09
 	{
 		ZonePolicy: &ZonePolicyMongol,
-		Format: "+08/+09",
+		FormatIndex: 22, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7481,7 +7504,7 @@ var ZoneEraAsia_Colombo = []zoneinfo.ZoneEra{
 	//             6:00    -    +06    2006 Apr 15  0:30
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -7493,7 +7516,7 @@ var ZoneEraAsia_Colombo = []zoneinfo.ZoneEra{
 	//             5:30    -    +0530
 	{
 		ZonePolicy: nil,
-		Format: "+0530",
+		FormatIndex: 14, // "+0530"
 		OffsetCode: 22,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7525,7 +7548,7 @@ var ZoneEraAsia_Damascus = []zoneinfo.ZoneEra{
 	//             2:00    Syria    EE%sT    2022 Oct 28 0:00
 	{
 		ZonePolicy: &ZonePolicySyria,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -7537,7 +7560,7 @@ var ZoneEraAsia_Damascus = []zoneinfo.ZoneEra{
 	//             3:00    -    +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7569,7 +7592,7 @@ var ZoneEraAsia_Dhaka = []zoneinfo.ZoneEra{
 	//             6:00    -    +06    2009
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -7581,7 +7604,7 @@ var ZoneEraAsia_Dhaka = []zoneinfo.ZoneEra{
 	//             6:00    Dhaka    +06/+07
 	{
 		ZonePolicy: &ZonePolicyDhaka,
-		Format: "+06/+07",
+		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7613,7 +7636,7 @@ var ZoneEraAsia_Dili = []zoneinfo.ZoneEra{
 	//             8:00    -    +08    2000 Sep 17  0:00
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -7625,7 +7648,7 @@ var ZoneEraAsia_Dili = []zoneinfo.ZoneEra{
 	//             9:00    -    +09
 	{
 		ZonePolicy: nil,
-		Format: "+09",
+		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7657,7 +7680,7 @@ var ZoneEraAsia_Dubai = []zoneinfo.ZoneEra{
 	//             4:00    -    +04
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7689,7 +7712,7 @@ var ZoneEraAsia_Dushanbe = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7721,7 +7744,7 @@ var ZoneEraAsia_Famagusta = []zoneinfo.ZoneEra{
 	//             2:00    EUAsia    EE%sT    2016 Sep  8
 	{
 		ZonePolicy: &ZonePolicyEUAsia,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -7733,7 +7756,7 @@ var ZoneEraAsia_Famagusta = []zoneinfo.ZoneEra{
 	//             3:00    -    +03    2017 Oct 29 1:00u
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2017,
@@ -7745,7 +7768,7 @@ var ZoneEraAsia_Famagusta = []zoneinfo.ZoneEra{
 	//             2:00    EUAsia    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEUAsia,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7777,7 +7800,7 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00    Jordan    EE%sT    1999
 	{
 		ZonePolicy: &ZonePolicyJordan,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -7789,7 +7812,7 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00 Palestine    EE%sT    2008 Aug 29  0:00
 	{
 		ZonePolicy: &ZonePolicyPalestine,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -7801,7 +7824,7 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2008 Sep
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -7813,7 +7836,7 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00 Palestine    EE%sT    2010
 	{
 		ZonePolicy: &ZonePolicyPalestine,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -7825,7 +7848,7 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2010 Mar 27  0:01
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -7837,7 +7860,7 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00 Palestine    EE%sT    2011 Aug  1
 	{
 		ZonePolicy: &ZonePolicyPalestine,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7849,7 +7872,7 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2012
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -7861,7 +7884,7 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00 Palestine    EE%sT
 	{
 		ZonePolicy: &ZonePolicyPalestine,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7893,7 +7916,7 @@ var ZoneEraAsia_Hebron = []zoneinfo.ZoneEra{
 	//             2:00    Jordan    EE%sT    1999
 	{
 		ZonePolicy: &ZonePolicyJordan,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -7905,7 +7928,7 @@ var ZoneEraAsia_Hebron = []zoneinfo.ZoneEra{
 	//             2:00 Palestine    EE%sT
 	{
 		ZonePolicy: &ZonePolicyPalestine,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7937,7 +7960,7 @@ var ZoneEraAsia_Ho_Chi_Minh = []zoneinfo.ZoneEra{
 	//             7:00    -    +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7969,7 +7992,7 @@ var ZoneEraAsia_Hong_Kong = []zoneinfo.ZoneEra{
 	//             8:00    HK    HK%sT
 	{
 		ZonePolicy: &ZonePolicyHK,
-		Format: "HK%T",
+		FormatIndex: 85, // "HK%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8001,7 +8024,7 @@ var ZoneEraAsia_Hovd = []zoneinfo.ZoneEra{
 	//             7:00    Mongol    +07/+08
 	{
 		ZonePolicy: &ZonePolicyMongol,
-		Format: "+07/+08",
+		FormatIndex: 20, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8033,7 +8056,7 @@ var ZoneEraAsia_Irkutsk = []zoneinfo.ZoneEra{
 	//              8:00    Russia    +08/+09    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+08/+09",
+		FormatIndex: 22, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8045,7 +8068,7 @@ var ZoneEraAsia_Irkutsk = []zoneinfo.ZoneEra{
 	//              9:00    -    +09    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+09",
+		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8057,7 +8080,7 @@ var ZoneEraAsia_Irkutsk = []zoneinfo.ZoneEra{
 	//              8:00    -    +08
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8089,7 +8112,7 @@ var ZoneEraAsia_Jakarta = []zoneinfo.ZoneEra{
 	//             7:00    -    WIB
 	{
 		ZonePolicy: nil,
-		Format: "WIB",
+		FormatIndex: 108, // "WIB"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8121,7 +8144,7 @@ var ZoneEraAsia_Jayapura = []zoneinfo.ZoneEra{
 	//             9:00    -    WIT
 	{
 		ZonePolicy: nil,
-		Format: "WIT",
+		FormatIndex: 109, // "WIT"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8153,7 +8176,7 @@ var ZoneEraAsia_Jerusalem = []zoneinfo.ZoneEra{
 	//             2:00    Zion    I%sT
 	{
 		ZonePolicy: &ZonePolicyZion,
-		Format: "I%T",
+		FormatIndex: 87, // "I%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8185,7 +8208,7 @@ var ZoneEraAsia_Kabul = []zoneinfo.ZoneEra{
 	//             4:30    -    +0430
 	{
 		ZonePolicy: nil,
-		Format: "+0430",
+		FormatIndex: 11, // "+0430"
 		OffsetCode: 18,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8217,7 +8240,7 @@ var ZoneEraAsia_Kamchatka = []zoneinfo.ZoneEra{
 	//             12:00    Russia    +12/+13    2010 Mar 28  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+12/+13",
+		FormatIndex: 33, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -8229,7 +8252,7 @@ var ZoneEraAsia_Kamchatka = []zoneinfo.ZoneEra{
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+11/+12",
+		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8241,7 +8264,7 @@ var ZoneEraAsia_Kamchatka = []zoneinfo.ZoneEra{
 	//             12:00    -    +12
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8273,7 +8296,7 @@ var ZoneEraAsia_Karachi = []zoneinfo.ZoneEra{
 	//             5:00 Pakistan    PK%sT
 	{
 		ZonePolicy: &ZonePolicyPakistan,
-		Format: "PK%T",
+		FormatIndex: 101, // "PK%T"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8305,7 +8328,7 @@ var ZoneEraAsia_Kathmandu = []zoneinfo.ZoneEra{
 	//             5:45    -    +0545
 	{
 		ZonePolicy: nil,
-		Format: "+0545",
+		FormatIndex: 15, // "+0545"
 		OffsetCode: 23,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8337,7 +8360,7 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 	//              9:00    Russia    +09/+10    2004
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+09/+10",
+		FormatIndex: 25, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -8349,7 +8372,7 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+10/+11",
+		FormatIndex: 27, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8361,7 +8384,7 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2011 Sep 13  0:00s
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8373,7 +8396,7 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8385,7 +8408,7 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 	//              9:00    -    +09
 	{
 		ZonePolicy: nil,
-		Format: "+09",
+		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8417,7 +8440,7 @@ var ZoneEraAsia_Kolkata = []zoneinfo.ZoneEra{
 	//             5:30    -    IST
 	{
 		ZonePolicy: nil,
-		Format: "IST",
+		FormatIndex: 88, // "IST"
 		OffsetCode: 22,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8449,7 +8472,7 @@ var ZoneEraAsia_Krasnoyarsk = []zoneinfo.ZoneEra{
 	//              7:00    Russia    +07/+08    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+07/+08",
+		FormatIndex: 20, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8461,7 +8484,7 @@ var ZoneEraAsia_Krasnoyarsk = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8473,7 +8496,7 @@ var ZoneEraAsia_Krasnoyarsk = []zoneinfo.ZoneEra{
 	//              7:00    -    +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8505,7 +8528,7 @@ var ZoneEraAsia_Kuching = []zoneinfo.ZoneEra{
 	//             8:00    -    +08
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8537,7 +8560,7 @@ var ZoneEraAsia_Macau = []zoneinfo.ZoneEra{
 	//             8:00    Macau    C%sT
 	{
 		ZonePolicy: &ZonePolicyMacau,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8569,7 +8592,7 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+11/+12",
+		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8581,7 +8604,7 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 	//             12:00    -    +12    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8593,7 +8616,7 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 	//             10:00    -    +10    2016 Apr 24  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -8605,7 +8628,7 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 	//             11:00    -    +11
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8637,7 +8660,7 @@ var ZoneEraAsia_Makassar = []zoneinfo.ZoneEra{
 	//             8:00    -    WITA
 	{
 		ZonePolicy: nil,
-		Format: "WITA",
+		FormatIndex: 110, // "WITA"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8669,7 +8692,7 @@ var ZoneEraAsia_Manila = []zoneinfo.ZoneEra{
 	//             8:00    Phil    P%sT
 	{
 		ZonePolicy: &ZonePolicyPhil,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8701,7 +8724,7 @@ var ZoneEraAsia_Nicosia = []zoneinfo.ZoneEra{
 	//             2:00    EUAsia    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEUAsia,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8733,7 +8756,7 @@ var ZoneEraAsia_Novokuznetsk = []zoneinfo.ZoneEra{
 	//              7:00    Russia    +07/+08    2010 Mar 28  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+07/+08",
+		FormatIndex: 20, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -8745,7 +8768,7 @@ var ZoneEraAsia_Novokuznetsk = []zoneinfo.ZoneEra{
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+06/+07",
+		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8757,7 +8780,7 @@ var ZoneEraAsia_Novokuznetsk = []zoneinfo.ZoneEra{
 	//              7:00    -    +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8789,7 +8812,7 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+06/+07",
+		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8801,7 +8824,7 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8813,7 +8836,7 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 	//              6:00    -    +06    2016 Jul 24  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -8825,7 +8848,7 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 	//              7:00    -    +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8857,7 +8880,7 @@ var ZoneEraAsia_Omsk = []zoneinfo.ZoneEra{
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+06/+07",
+		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8869,7 +8892,7 @@ var ZoneEraAsia_Omsk = []zoneinfo.ZoneEra{
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8881,7 +8904,7 @@ var ZoneEraAsia_Omsk = []zoneinfo.ZoneEra{
 	//              6:00    -    +06
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8913,7 +8936,7 @@ var ZoneEraAsia_Oral = []zoneinfo.ZoneEra{
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -8925,7 +8948,7 @@ var ZoneEraAsia_Oral = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8957,7 +8980,7 @@ var ZoneEraAsia_Pontianak = []zoneinfo.ZoneEra{
 	//             7:00    -    WIB
 	{
 		ZonePolicy: nil,
-		Format: "WIB",
+		FormatIndex: 108, // "WIB"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8989,7 +9012,7 @@ var ZoneEraAsia_Pyongyang = []zoneinfo.ZoneEra{
 	//             9:00    -    KST    2015 Aug 15 00:00
 	{
 		ZonePolicy: nil,
-		Format: "KST",
+		FormatIndex: 92, // "KST"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -9001,7 +9024,7 @@ var ZoneEraAsia_Pyongyang = []zoneinfo.ZoneEra{
 	//             8:30    -    KST    2018 May  4 23:30
 	{
 		ZonePolicy: nil,
-		Format: "KST",
+		FormatIndex: 92, // "KST"
 		OffsetCode: 34,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -9013,7 +9036,7 @@ var ZoneEraAsia_Pyongyang = []zoneinfo.ZoneEra{
 	//             9:00    -    KST
 	{
 		ZonePolicy: nil,
-		Format: "KST",
+		FormatIndex: 92, // "KST"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9045,7 +9068,7 @@ var ZoneEraAsia_Qatar = []zoneinfo.ZoneEra{
 	//             3:00    -    +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9077,7 +9100,7 @@ var ZoneEraAsia_Qostanay = []zoneinfo.ZoneEra{
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+05/+06",
+		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -9089,7 +9112,7 @@ var ZoneEraAsia_Qostanay = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9121,7 +9144,7 @@ var ZoneEraAsia_Qyzylorda = []zoneinfo.ZoneEra{
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+05/+06",
+		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -9133,7 +9156,7 @@ var ZoneEraAsia_Qyzylorda = []zoneinfo.ZoneEra{
 	//             6:00    -    +06    2018 Dec 21  0:00
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -9145,7 +9168,7 @@ var ZoneEraAsia_Qyzylorda = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9177,7 +9200,7 @@ var ZoneEraAsia_Riyadh = []zoneinfo.ZoneEra{
 	//             3:00    -    +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9209,7 +9232,7 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+10/+11",
+		FormatIndex: 27, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9221,7 +9244,7 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9233,7 +9256,7 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 	//             10:00    -    +10    2016 Mar 27  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -9245,7 +9268,7 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 	//             11:00    -    +11
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9277,7 +9300,7 @@ var ZoneEraAsia_Samarkand = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9309,7 +9332,7 @@ var ZoneEraAsia_Seoul = []zoneinfo.ZoneEra{
 	//             9:00    ROK    K%sT
 	{
 		ZonePolicy: &ZonePolicyROK,
-		Format: "K%T",
+		FormatIndex: 91, // "K%T"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9341,7 +9364,7 @@ var ZoneEraAsia_Shanghai = []zoneinfo.ZoneEra{
 	//             8:00    PRC    C%sT
 	{
 		ZonePolicy: &ZonePolicyPRC,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9373,7 +9396,7 @@ var ZoneEraAsia_Singapore = []zoneinfo.ZoneEra{
 	//             8:00    -    +08
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9405,7 +9428,7 @@ var ZoneEraAsia_Srednekolymsk = []zoneinfo.ZoneEra{
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+11/+12",
+		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9417,7 +9440,7 @@ var ZoneEraAsia_Srednekolymsk = []zoneinfo.ZoneEra{
 	//             12:00    -    +12    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9429,7 +9452,7 @@ var ZoneEraAsia_Srednekolymsk = []zoneinfo.ZoneEra{
 	//             11:00    -    +11
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9461,7 +9484,7 @@ var ZoneEraAsia_Taipei = []zoneinfo.ZoneEra{
 	//             8:00    Taiwan    C%sT
 	{
 		ZonePolicy: &ZonePolicyTaiwan,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9493,7 +9516,7 @@ var ZoneEraAsia_Tashkent = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9525,7 +9548,7 @@ var ZoneEraAsia_Tbilisi = []zoneinfo.ZoneEra{
 	//             4:00 E-EurAsia    +04/+05    2004 Jun 27
 	{
 		ZonePolicy: &ZonePolicyE_EurAsia,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -9537,7 +9560,7 @@ var ZoneEraAsia_Tbilisi = []zoneinfo.ZoneEra{
 	//             3:00 RussiaAsia    +03/+04    2005 Mar lastSun  2:00
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+03/+04",
+		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2005,
@@ -9549,7 +9572,7 @@ var ZoneEraAsia_Tbilisi = []zoneinfo.ZoneEra{
 	//             4:00    -    +04
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9581,7 +9604,7 @@ var ZoneEraAsia_Tehran = []zoneinfo.ZoneEra{
 	//             3:30    Iran    +0330/+0430
 	{
 		ZonePolicy: &ZonePolicyIran,
-		Format: "+0330/+0430",
+		FormatIndex: 8, // "+0330/+0430"
 		OffsetCode: 14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9613,7 +9636,7 @@ var ZoneEraAsia_Thimphu = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9645,7 +9668,7 @@ var ZoneEraAsia_Tokyo = []zoneinfo.ZoneEra{
 	//             9:00    Japan    J%sT
 	{
 		ZonePolicy: &ZonePolicyJapan,
-		Format: "J%T",
+		FormatIndex: 90, // "J%T"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9677,7 +9700,7 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 	//              7:00    Russia    +07/+08    2002 May  1  3:00
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+07/+08",
+		FormatIndex: 20, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -9689,7 +9712,7 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+06/+07",
+		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9701,7 +9724,7 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9713,7 +9736,7 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 	//              6:00    -    +06    2016 May 29  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -9725,7 +9748,7 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 	//              7:00    -    +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9757,7 +9780,7 @@ var ZoneEraAsia_Ulaanbaatar = []zoneinfo.ZoneEra{
 	//             8:00    Mongol    +08/+09
 	{
 		ZonePolicy: &ZonePolicyMongol,
-		Format: "+08/+09",
+		FormatIndex: 22, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9789,7 +9812,7 @@ var ZoneEraAsia_Urumqi = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9821,7 +9844,7 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+11/+12",
+		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9833,7 +9856,7 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 	//             12:00    -    +12    2011 Sep 13  0:00s
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9845,7 +9868,7 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9857,7 +9880,7 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 	//             10:00    -    +10
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9889,7 +9912,7 @@ var ZoneEraAsia_Vladivostok = []zoneinfo.ZoneEra{
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+10/+11",
+		FormatIndex: 27, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9901,7 +9924,7 @@ var ZoneEraAsia_Vladivostok = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9913,7 +9936,7 @@ var ZoneEraAsia_Vladivostok = []zoneinfo.ZoneEra{
 	//             10:00    -    +10
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9945,7 +9968,7 @@ var ZoneEraAsia_Yakutsk = []zoneinfo.ZoneEra{
 	//              9:00    Russia    +09/+10    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+09/+10",
+		FormatIndex: 25, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9957,7 +9980,7 @@ var ZoneEraAsia_Yakutsk = []zoneinfo.ZoneEra{
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9969,7 +9992,7 @@ var ZoneEraAsia_Yakutsk = []zoneinfo.ZoneEra{
 	//              9:00    -    +09
 	{
 		ZonePolicy: nil,
-		Format: "+09",
+		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10001,7 +10024,7 @@ var ZoneEraAsia_Yangon = []zoneinfo.ZoneEra{
 	//             6:30    -    +0630
 	{
 		ZonePolicy: nil,
-		Format: "+0630",
+		FormatIndex: 18, // "+0630"
 		OffsetCode: 26,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10033,7 +10056,7 @@ var ZoneEraAsia_Yekaterinburg = []zoneinfo.ZoneEra{
 	//              5:00    Russia    +05/+06    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+05/+06",
+		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -10045,7 +10068,7 @@ var ZoneEraAsia_Yekaterinburg = []zoneinfo.ZoneEra{
 	//              6:00    -    +06    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -10057,7 +10080,7 @@ var ZoneEraAsia_Yekaterinburg = []zoneinfo.ZoneEra{
 	//              5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10089,7 +10112,7 @@ var ZoneEraAsia_Yerevan = []zoneinfo.ZoneEra{
 	//             4:00 RussiaAsia    +04/+05    2011
 	{
 		ZonePolicy: &ZonePolicyRussiaAsia,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -10101,7 +10124,7 @@ var ZoneEraAsia_Yerevan = []zoneinfo.ZoneEra{
 	//             4:00    Armenia    +04/+05
 	{
 		ZonePolicy: &ZonePolicyArmenia,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10133,7 +10156,7 @@ var ZoneEraAtlantic_Azores = []zoneinfo.ZoneEra{
 	//             -1:00    EU    -01/+00
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "-01/+00",
+		FormatIndex: 40, // "-01/+00"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10165,7 +10188,7 @@ var ZoneEraAtlantic_Bermuda = []zoneinfo.ZoneEra{
 	//             -4:00    US    A%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "A%T",
+		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10197,7 +10220,7 @@ var ZoneEraAtlantic_Canary = []zoneinfo.ZoneEra{
 	//              0:00    EU    WE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "WE%T",
+		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10229,7 +10252,7 @@ var ZoneEraAtlantic_Cape_Verde = []zoneinfo.ZoneEra{
 	//             -1:00    -    -01
 	{
 		ZonePolicy: nil,
-		Format: "-01",
+		FormatIndex: 39, // "-01"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10261,7 +10284,7 @@ var ZoneEraAtlantic_Faroe = []zoneinfo.ZoneEra{
 	//              0:00    EU    WE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "WE%T",
+		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10293,7 +10316,7 @@ var ZoneEraAtlantic_Madeira = []zoneinfo.ZoneEra{
 	//              0:00    EU    WE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "WE%T",
+		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10325,7 +10348,7 @@ var ZoneEraAtlantic_South_Georgia = []zoneinfo.ZoneEra{
 	//             -2:00    -    -02
 	{
 		ZonePolicy: nil,
-		Format: "-02",
+		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10357,7 +10380,7 @@ var ZoneEraAtlantic_Stanley = []zoneinfo.ZoneEra{
 	//             -4:00    Falk    -04/-03    2010 Sep  5  2:00
 	{
 		ZonePolicy: &ZonePolicyFalk,
-		Format: "-04/-03",
+		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -10369,7 +10392,7 @@ var ZoneEraAtlantic_Stanley = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10401,7 +10424,7 @@ var ZoneEraAustralia_Adelaide = []zoneinfo.ZoneEra{
 	//             9:30    AS    AC%sT
 	{
 		ZonePolicy: &ZonePolicyAS,
-		Format: "AC%T",
+		FormatIndex: 62, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10433,7 +10456,7 @@ var ZoneEraAustralia_Brisbane = []zoneinfo.ZoneEra{
 	//             10:00    AQ    AE%sT
 	{
 		ZonePolicy: &ZonePolicyAQ,
-		Format: "AE%T",
+		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10465,7 +10488,7 @@ var ZoneEraAustralia_Broken_Hill = []zoneinfo.ZoneEra{
 	//             9:30    AN    AC%sT    2000
 	{
 		ZonePolicy: &ZonePolicyAN,
-		Format: "AC%T",
+		FormatIndex: 62, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -10477,7 +10500,7 @@ var ZoneEraAustralia_Broken_Hill = []zoneinfo.ZoneEra{
 	//             9:30    AS    AC%sT
 	{
 		ZonePolicy: &ZonePolicyAS,
-		Format: "AC%T",
+		FormatIndex: 62, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10509,7 +10532,7 @@ var ZoneEraAustralia_Darwin = []zoneinfo.ZoneEra{
 	//              9:30    Aus    AC%sT
 	{
 		ZonePolicy: &ZonePolicyAus,
-		Format: "AC%T",
+		FormatIndex: 62, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10541,7 +10564,7 @@ var ZoneEraAustralia_Eucla = []zoneinfo.ZoneEra{
 	//              8:45    AW  +0845/+0945
 	{
 		ZonePolicy: &ZonePolicyAW,
-		Format: "+0845/+0945",
+		FormatIndex: 23, // "+0845/+0945"
 		OffsetCode: 35,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10573,7 +10596,7 @@ var ZoneEraAustralia_Hobart = []zoneinfo.ZoneEra{
 	//             10:00    AT    AE%sT
 	{
 		ZonePolicy: &ZonePolicyAT,
-		Format: "AE%T",
+		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10605,7 +10628,7 @@ var ZoneEraAustralia_Lindeman = []zoneinfo.ZoneEra{
 	//             10:00    Holiday    AE%sT
 	{
 		ZonePolicy: &ZonePolicyHoliday,
-		Format: "AE%T",
+		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10637,7 +10660,7 @@ var ZoneEraAustralia_Lord_Howe = []zoneinfo.ZoneEra{
 	//             10:30    LH    +1030/+11
 	{
 		ZonePolicy: &ZonePolicyLH,
-		Format: "+1030/+11",
+		FormatIndex: 28, // "+1030/+11"
 		OffsetCode: 42,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10669,7 +10692,7 @@ var ZoneEraAustralia_Melbourne = []zoneinfo.ZoneEra{
 	//             10:00    AV    AE%sT
 	{
 		ZonePolicy: &ZonePolicyAV,
-		Format: "AE%T",
+		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10701,7 +10724,7 @@ var ZoneEraAustralia_Perth = []zoneinfo.ZoneEra{
 	//              8:00    AW    AW%sT
 	{
 		ZonePolicy: &ZonePolicyAW,
-		Format: "AW%T",
+		FormatIndex: 67, // "AW%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10733,7 +10756,7 @@ var ZoneEraAustralia_Sydney = []zoneinfo.ZoneEra{
 	//             10:00    AN    AE%sT
 	{
 		ZonePolicy: &ZonePolicyAN,
-		Format: "AE%T",
+		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10765,7 +10788,7 @@ var ZoneEraCET = []zoneinfo.ZoneEra{
 	// 1:00 C-Eur CE%sT
 	{
 		ZonePolicy: &ZonePolicyC_Eur,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10797,7 +10820,7 @@ var ZoneEraCST6CDT = []zoneinfo.ZoneEra{
 	// -6:00 US C%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "C%T",
+		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10829,7 +10852,7 @@ var ZoneEraEET = []zoneinfo.ZoneEra{
 	// 2:00 EU EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10861,7 +10884,7 @@ var ZoneEraEST = []zoneinfo.ZoneEra{
 	// -5:00 - EST
 	{
 		ZonePolicy: nil,
-		Format: "EST",
+		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10893,7 +10916,7 @@ var ZoneEraEST5EDT = []zoneinfo.ZoneEra{
 	// -5:00 US E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "E%T",
+		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10925,7 +10948,7 @@ var ZoneEraEtc_GMT = []zoneinfo.ZoneEra{
 	// 0 - GMT
 	{
 		ZonePolicy: nil,
-		Format: "GMT",
+		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10957,7 +10980,7 @@ var ZoneEraEtc_GMT_PLUS_1 = []zoneinfo.ZoneEra{
 	// -1 - -01
 	{
 		ZonePolicy: nil,
-		Format: "-01",
+		FormatIndex: 39, // "-01"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10989,7 +11012,7 @@ var ZoneEraEtc_GMT_PLUS_10 = []zoneinfo.ZoneEra{
 	// -10 - -10
 	{
 		ZonePolicy: nil,
-		Format: "-10",
+		FormatIndex: 56, // "-10"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11021,7 +11044,7 @@ var ZoneEraEtc_GMT_PLUS_11 = []zoneinfo.ZoneEra{
 	// -11 - -11
 	{
 		ZonePolicy: nil,
-		Format: "-11",
+		FormatIndex: 58, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11053,7 +11076,7 @@ var ZoneEraEtc_GMT_PLUS_12 = []zoneinfo.ZoneEra{
 	// -12 - -12
 	{
 		ZonePolicy: nil,
-		Format: "-12",
+		FormatIndex: 60, // "-12"
 		OffsetCode: -48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11085,7 +11108,7 @@ var ZoneEraEtc_GMT_PLUS_2 = []zoneinfo.ZoneEra{
 	// -2 - -02
 	{
 		ZonePolicy: nil,
-		Format: "-02",
+		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11117,7 +11140,7 @@ var ZoneEraEtc_GMT_PLUS_3 = []zoneinfo.ZoneEra{
 	// -3 - -03
 	{
 		ZonePolicy: nil,
-		Format: "-03",
+		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11149,7 +11172,7 @@ var ZoneEraEtc_GMT_PLUS_4 = []zoneinfo.ZoneEra{
 	// -4 - -04
 	{
 		ZonePolicy: nil,
-		Format: "-04",
+		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11181,7 +11204,7 @@ var ZoneEraEtc_GMT_PLUS_5 = []zoneinfo.ZoneEra{
 	// -5 - -05
 	{
 		ZonePolicy: nil,
-		Format: "-05",
+		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11213,7 +11236,7 @@ var ZoneEraEtc_GMT_PLUS_6 = []zoneinfo.ZoneEra{
 	// -6 - -06
 	{
 		ZonePolicy: nil,
-		Format: "-06",
+		FormatIndex: 50, // "-06"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11245,7 +11268,7 @@ var ZoneEraEtc_GMT_PLUS_7 = []zoneinfo.ZoneEra{
 	// -7 - -07
 	{
 		ZonePolicy: nil,
-		Format: "-07",
+		FormatIndex: 52, // "-07"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11277,7 +11300,7 @@ var ZoneEraEtc_GMT_PLUS_8 = []zoneinfo.ZoneEra{
 	// -8 - -08
 	{
 		ZonePolicy: nil,
-		Format: "-08",
+		FormatIndex: 53, // "-08"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11309,7 +11332,7 @@ var ZoneEraEtc_GMT_PLUS_9 = []zoneinfo.ZoneEra{
 	// -9 - -09
 	{
 		ZonePolicy: nil,
-		Format: "-09",
+		FormatIndex: 54, // "-09"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11341,7 +11364,7 @@ var ZoneEraEtc_GMT_1 = []zoneinfo.ZoneEra{
 	// 1 - +01
 	{
 		ZonePolicy: nil,
-		Format: "+01",
+		FormatIndex: 3, // "+01"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11373,7 +11396,7 @@ var ZoneEraEtc_GMT_10 = []zoneinfo.ZoneEra{
 	// 10 - +10
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11405,7 +11428,7 @@ var ZoneEraEtc_GMT_11 = []zoneinfo.ZoneEra{
 	// 11 - +11
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11437,7 +11460,7 @@ var ZoneEraEtc_GMT_12 = []zoneinfo.ZoneEra{
 	// 12 - +12
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11469,7 +11492,7 @@ var ZoneEraEtc_GMT_13 = []zoneinfo.ZoneEra{
 	// 13 - +13
 	{
 		ZonePolicy: nil,
-		Format: "+13",
+		FormatIndex: 35, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11501,7 +11524,7 @@ var ZoneEraEtc_GMT_14 = []zoneinfo.ZoneEra{
 	// 14 - +14
 	{
 		ZonePolicy: nil,
-		Format: "+14",
+		FormatIndex: 37, // "+14"
 		OffsetCode: 56,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11533,7 +11556,7 @@ var ZoneEraEtc_GMT_2 = []zoneinfo.ZoneEra{
 	// 2 - +02
 	{
 		ZonePolicy: nil,
-		Format: "+02",
+		FormatIndex: 5, // "+02"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11565,7 +11588,7 @@ var ZoneEraEtc_GMT_3 = []zoneinfo.ZoneEra{
 	// 3 - +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11597,7 +11620,7 @@ var ZoneEraEtc_GMT_4 = []zoneinfo.ZoneEra{
 	// 4 - +04
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11629,7 +11652,7 @@ var ZoneEraEtc_GMT_5 = []zoneinfo.ZoneEra{
 	// 5 - +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11661,7 +11684,7 @@ var ZoneEraEtc_GMT_6 = []zoneinfo.ZoneEra{
 	// 6 - +06
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11693,7 +11716,7 @@ var ZoneEraEtc_GMT_7 = []zoneinfo.ZoneEra{
 	// 7 - +07
 	{
 		ZonePolicy: nil,
-		Format: "+07",
+		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11725,7 +11748,7 @@ var ZoneEraEtc_GMT_8 = []zoneinfo.ZoneEra{
 	// 8 - +08
 	{
 		ZonePolicy: nil,
-		Format: "+08",
+		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11757,7 +11780,7 @@ var ZoneEraEtc_GMT_9 = []zoneinfo.ZoneEra{
 	// 9 - +09
 	{
 		ZonePolicy: nil,
-		Format: "+09",
+		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11789,7 +11812,7 @@ var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 	// 0 - UTC
 	{
 		ZonePolicy: nil,
-		Format: "UTC",
+		FormatIndex: 105, // "UTC"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11821,7 +11844,7 @@ var ZoneEraEurope_Andorra = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11853,7 +11876,7 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+03/+04",
+		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -11865,7 +11888,7 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -11877,7 +11900,7 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 	//              3:00    -    +03    2016 Mar 27  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -11889,7 +11912,7 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 	//              4:00    -    +04
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11921,7 +11944,7 @@ var ZoneEraEurope_Athens = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11953,7 +11976,7 @@ var ZoneEraEurope_Belgrade = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11985,7 +12008,7 @@ var ZoneEraEurope_Berlin = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12017,7 +12040,7 @@ var ZoneEraEurope_Brussels = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12049,7 +12072,7 @@ var ZoneEraEurope_Bucharest = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12081,7 +12104,7 @@ var ZoneEraEurope_Budapest = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12113,7 +12136,7 @@ var ZoneEraEurope_Chisinau = []zoneinfo.ZoneEra{
 	//             2:00    Moldova    EE%sT
 	{
 		ZonePolicy: &ZonePolicyMoldova,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12145,7 +12168,7 @@ var ZoneEraEurope_Dublin = []zoneinfo.ZoneEra{
 	//              1:00    Eire    IST/GMT
 	{
 		ZonePolicy: &ZonePolicyEire,
-		Format: "IST/GMT",
+		FormatIndex: 89, // "IST/GMT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12177,7 +12200,7 @@ var ZoneEraEurope_Gibraltar = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12209,7 +12232,7 @@ var ZoneEraEurope_Helsinki = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12241,7 +12264,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    Turkey    EE%sT    2007
 	{
 		ZonePolicy: &ZonePolicyTurkey,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -12253,7 +12276,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT    2011 Mar 27  1:00u
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -12265,7 +12288,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2011 Mar 28  1:00u
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -12277,7 +12300,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT    2014 Mar 30  1:00u
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -12289,7 +12312,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2014 Mar 31  1:00u
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -12301,7 +12324,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT    2015 Oct 25  1:00u
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -12313,7 +12336,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    1:00    EEST    2015 Nov  8  1:00u
 	{
 		ZonePolicy: nil,
-		Format: "EEST",
+		FormatIndex: 78, // "EEST"
 		OffsetCode: 8,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
 		UntilYear: 2015,
@@ -12325,7 +12348,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT    2016 Sep  7
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -12337,7 +12360,7 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             3:00    -    +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12369,7 +12392,7 @@ var ZoneEraEurope_Kaliningrad = []zoneinfo.ZoneEra{
 	//              2:00    Russia    EE%sT    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -12381,7 +12404,7 @@ var ZoneEraEurope_Kaliningrad = []zoneinfo.ZoneEra{
 	//              3:00    -    +03    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -12393,7 +12416,7 @@ var ZoneEraEurope_Kaliningrad = []zoneinfo.ZoneEra{
 	//              2:00    -    EET
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12425,7 +12448,7 @@ var ZoneEraEurope_Kirov = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+03/+04",
+		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -12437,7 +12460,7 @@ var ZoneEraEurope_Kirov = []zoneinfo.ZoneEra{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -12449,7 +12472,7 @@ var ZoneEraEurope_Kirov = []zoneinfo.ZoneEra{
 	//              3:00    -    +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12481,7 +12504,7 @@ var ZoneEraEurope_Kyiv = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12513,7 +12536,7 @@ var ZoneEraEurope_Lisbon = []zoneinfo.ZoneEra{
 	//              0:00    EU    WE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "WE%T",
+		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12545,7 +12568,7 @@ var ZoneEraEurope_London = []zoneinfo.ZoneEra{
 	//              0:00    EU    GMT/BST
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "GMT/BST",
+		FormatIndex: 83, // "GMT/BST"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12577,7 +12600,7 @@ var ZoneEraEurope_Madrid = []zoneinfo.ZoneEra{
 	//              1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12609,7 +12632,7 @@ var ZoneEraEurope_Malta = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12641,7 +12664,7 @@ var ZoneEraEurope_Minsk = []zoneinfo.ZoneEra{
 	//             2:00    Russia    EE%sT    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -12653,7 +12676,7 @@ var ZoneEraEurope_Minsk = []zoneinfo.ZoneEra{
 	//             3:00    -    +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12685,7 +12708,7 @@ var ZoneEraEurope_Moscow = []zoneinfo.ZoneEra{
 	//              3:00    Russia    MSK/MSD    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "MSK/MSD",
+		FormatIndex: 96, // "MSK/MSD"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -12697,7 +12720,7 @@ var ZoneEraEurope_Moscow = []zoneinfo.ZoneEra{
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "MSK",
+		FormatIndex: 95, // "MSK"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -12709,7 +12732,7 @@ var ZoneEraEurope_Moscow = []zoneinfo.ZoneEra{
 	//              3:00    -    MSK
 	{
 		ZonePolicy: nil,
-		Format: "MSK",
+		FormatIndex: 95, // "MSK"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12741,7 +12764,7 @@ var ZoneEraEurope_Paris = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12773,7 +12796,7 @@ var ZoneEraEurope_Prague = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12805,7 +12828,7 @@ var ZoneEraEurope_Riga = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT    2000 Feb 29
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -12817,7 +12840,7 @@ var ZoneEraEurope_Riga = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2001 Jan  2
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -12829,7 +12852,7 @@ var ZoneEraEurope_Riga = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12861,7 +12884,7 @@ var ZoneEraEurope_Rome = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12893,7 +12916,7 @@ var ZoneEraEurope_Samara = []zoneinfo.ZoneEra{
 	//              4:00    Russia    +04/+05    2010 Mar 28  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -12905,7 +12928,7 @@ var ZoneEraEurope_Samara = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+03/+04",
+		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -12917,7 +12940,7 @@ var ZoneEraEurope_Samara = []zoneinfo.ZoneEra{
 	//              4:00    -    +04
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -12949,7 +12972,7 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+03/+04",
+		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -12961,7 +12984,7 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -12973,7 +12996,7 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 	//              3:00    -    +03    2016 Dec  4  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -12985,7 +13008,7 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 	//              4:00    -    +04
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13017,7 +13040,7 @@ var ZoneEraEurope_Simferopol = []zoneinfo.ZoneEra{
 	//              2:00    EU    EE%sT    2014 Mar 30  2:00
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -13029,7 +13052,7 @@ var ZoneEraEurope_Simferopol = []zoneinfo.ZoneEra{
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "MSK",
+		FormatIndex: 95, // "MSK"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -13041,7 +13064,7 @@ var ZoneEraEurope_Simferopol = []zoneinfo.ZoneEra{
 	//              3:00    -    MSK
 	{
 		ZonePolicy: nil,
-		Format: "MSK",
+		FormatIndex: 95, // "MSK"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13073,7 +13096,7 @@ var ZoneEraEurope_Sofia = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13105,7 +13128,7 @@ var ZoneEraEurope_Tallinn = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT    1999 Oct 31  4:00
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -13117,7 +13140,7 @@ var ZoneEraEurope_Tallinn = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2002 Feb 21
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -13129,7 +13152,7 @@ var ZoneEraEurope_Tallinn = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13161,7 +13184,7 @@ var ZoneEraEurope_Tirane = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13193,7 +13216,7 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+03/+04",
+		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -13205,7 +13228,7 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -13217,7 +13240,7 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 	//              3:00    -    +03    2016 Mar 27  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -13229,7 +13252,7 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 	//              4:00    -    +04
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13261,7 +13284,7 @@ var ZoneEraEurope_Vienna = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13293,7 +13316,7 @@ var ZoneEraEurope_Vilnius = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT    1999 Oct 31  1:00u
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -13305,7 +13328,7 @@ var ZoneEraEurope_Vilnius = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2003 Jan  1
 	{
 		ZonePolicy: nil,
-		Format: "EET",
+		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -13317,7 +13340,7 @@ var ZoneEraEurope_Vilnius = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "EE%T",
+		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13349,7 +13372,7 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
 		ZonePolicy: &ZonePolicyRussia,
-		Format: "+03/+04",
+		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -13361,7 +13384,7 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -13373,7 +13396,7 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 	//              3:00    -    +03    2018 Oct 28  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -13385,7 +13408,7 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 	//              4:00    -    +04    2020 Dec 27  2:00s
 	{
 		ZonePolicy: nil,
-		Format: "+04",
+		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -13397,7 +13420,7 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 	//              3:00    -    +03
 	{
 		ZonePolicy: nil,
-		Format: "+03",
+		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13429,7 +13452,7 @@ var ZoneEraEurope_Warsaw = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13461,7 +13484,7 @@ var ZoneEraEurope_Zurich = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "CE%T",
+		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13493,7 +13516,7 @@ var ZoneEraHST = []zoneinfo.ZoneEra{
 	// -10:00 - HST
 	{
 		ZonePolicy: nil,
-		Format: "HST",
+		FormatIndex: 86, // "HST"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13525,7 +13548,7 @@ var ZoneEraIndian_Chagos = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
 		ZonePolicy: nil,
-		Format: "+06",
+		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13557,7 +13580,7 @@ var ZoneEraIndian_Maldives = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
 		ZonePolicy: nil,
-		Format: "+05",
+		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13589,7 +13612,7 @@ var ZoneEraIndian_Mauritius = []zoneinfo.ZoneEra{
 	//             4:00 Mauritius    +04/+05
 	{
 		ZonePolicy: &ZonePolicyMauritius,
-		Format: "+04/+05",
+		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13621,7 +13644,7 @@ var ZoneEraMET = []zoneinfo.ZoneEra{
 	// 1:00 C-Eur ME%sT
 	{
 		ZonePolicy: &ZonePolicyC_Eur,
-		Format: "ME%T",
+		FormatIndex: 94, // "ME%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13653,7 +13676,7 @@ var ZoneEraMST = []zoneinfo.ZoneEra{
 	// -7:00 - MST
 	{
 		ZonePolicy: nil,
-		Format: "MST",
+		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13685,7 +13708,7 @@ var ZoneEraMST7MDT = []zoneinfo.ZoneEra{
 	// -7:00 US M%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "M%T",
+		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13717,7 +13740,7 @@ var ZoneEraPST8PDT = []zoneinfo.ZoneEra{
 	// -8:00 US P%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		Format: "P%T",
+		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13749,7 +13772,7 @@ var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 	//             -11:00    WS    -11/-10    2011 Dec 29 24:00
 	{
 		ZonePolicy: &ZonePolicyWS,
-		Format: "-11/-10",
+		FormatIndex: 59, // "-11/-10"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -13761,7 +13784,7 @@ var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 	//              13:00    WS    +13/+14
 	{
 		ZonePolicy: &ZonePolicyWS,
-		Format: "+13/+14",
+		FormatIndex: 36, // "+13/+14"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13793,7 +13816,7 @@ var ZoneEraPacific_Auckland = []zoneinfo.ZoneEra{
 	//             12:00    NZ    NZ%sT
 	{
 		ZonePolicy: &ZonePolicyNZ,
-		Format: "NZ%T",
+		FormatIndex: 99, // "NZ%T"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13825,7 +13848,7 @@ var ZoneEraPacific_Bougainville = []zoneinfo.ZoneEra{
 	//             10:00    -    +10    2014 Dec 28  2:00
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -13837,7 +13860,7 @@ var ZoneEraPacific_Bougainville = []zoneinfo.ZoneEra{
 	//             11:00    -    +11
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13869,7 +13892,7 @@ var ZoneEraPacific_Chatham = []zoneinfo.ZoneEra{
 	//             12:45    Chatham    +1245/+1345
 	{
 		ZonePolicy: &ZonePolicyChatham,
-		Format: "+1245/+1345",
+		FormatIndex: 34, // "+1245/+1345"
 		OffsetCode: 51,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13901,7 +13924,7 @@ var ZoneEraPacific_Easter = []zoneinfo.ZoneEra{
 	//             -6:00    Chile    -06/-05
 	{
 		ZonePolicy: &ZonePolicyChile,
-		Format: "-06/-05",
+		FormatIndex: 51, // "-06/-05"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13933,7 +13956,7 @@ var ZoneEraPacific_Efate = []zoneinfo.ZoneEra{
 	//             11:00    Vanuatu    +11/+12
 	{
 		ZonePolicy: &ZonePolicyVanuatu,
-		Format: "+11/+12",
+		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -13965,7 +13988,7 @@ var ZoneEraPacific_Fakaofo = []zoneinfo.ZoneEra{
 	//             -11:00    -    -11    2011 Dec 30
 	{
 		ZonePolicy: nil,
-		Format: "-11",
+		FormatIndex: 58, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -13977,7 +14000,7 @@ var ZoneEraPacific_Fakaofo = []zoneinfo.ZoneEra{
 	//             13:00    -    +13
 	{
 		ZonePolicy: nil,
-		Format: "+13",
+		FormatIndex: 35, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14009,7 +14032,7 @@ var ZoneEraPacific_Fiji = []zoneinfo.ZoneEra{
 	//             12:00    Fiji    +12/+13
 	{
 		ZonePolicy: &ZonePolicyFiji,
-		Format: "+12/+13",
+		FormatIndex: 33, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14041,7 +14064,7 @@ var ZoneEraPacific_Galapagos = []zoneinfo.ZoneEra{
 	//             -6:00    Ecuador    -06/-05
 	{
 		ZonePolicy: &ZonePolicyEcuador,
-		Format: "-06/-05",
+		FormatIndex: 51, // "-06/-05"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14073,7 +14096,7 @@ var ZoneEraPacific_Gambier = []zoneinfo.ZoneEra{
 	//              -9:00    -    -09
 	{
 		ZonePolicy: nil,
-		Format: "-09",
+		FormatIndex: 54, // "-09"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14105,7 +14128,7 @@ var ZoneEraPacific_Guadalcanal = []zoneinfo.ZoneEra{
 	//             11:00    -    +11
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14137,7 +14160,7 @@ var ZoneEraPacific_Guam = []zoneinfo.ZoneEra{
 	//             10:00    Guam    G%sT    2000 Dec 23
 	{
 		ZonePolicy: &ZonePolicyGuam,
-		Format: "G%T",
+		FormatIndex: 81, // "G%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -14149,7 +14172,7 @@ var ZoneEraPacific_Guam = []zoneinfo.ZoneEra{
 	//             10:00    -    ChST
 	{
 		ZonePolicy: nil,
-		Format: "ChST",
+		FormatIndex: 74, // "ChST"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14181,7 +14204,7 @@ var ZoneEraPacific_Honolulu = []zoneinfo.ZoneEra{
 	//             -10:00    -    HST
 	{
 		ZonePolicy: nil,
-		Format: "HST",
+		FormatIndex: 86, // "HST"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14213,7 +14236,7 @@ var ZoneEraPacific_Kanton = []zoneinfo.ZoneEra{
 	//              13:00    -    +13
 	{
 		ZonePolicy: nil,
-		Format: "+13",
+		FormatIndex: 35, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14245,7 +14268,7 @@ var ZoneEraPacific_Kiritimati = []zoneinfo.ZoneEra{
 	//              14:00    -    +14
 	{
 		ZonePolicy: nil,
-		Format: "+14",
+		FormatIndex: 37, // "+14"
 		OffsetCode: 56,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14277,7 +14300,7 @@ var ZoneEraPacific_Kosrae = []zoneinfo.ZoneEra{
 	//              12:00    -    +12    1999
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -14289,7 +14312,7 @@ var ZoneEraPacific_Kosrae = []zoneinfo.ZoneEra{
 	//              11:00    -    +11
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14321,7 +14344,7 @@ var ZoneEraPacific_Kwajalein = []zoneinfo.ZoneEra{
 	//              12:00    -    +12
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14353,7 +14376,7 @@ var ZoneEraPacific_Marquesas = []zoneinfo.ZoneEra{
 	//              -9:30    -    -0930
 	{
 		ZonePolicy: nil,
-		Format: "-0930",
+		FormatIndex: 55, // "-0930"
 		OffsetCode: -38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14385,7 +14408,7 @@ var ZoneEraPacific_Nauru = []zoneinfo.ZoneEra{
 	//             12:00    -    +12
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14417,7 +14440,7 @@ var ZoneEraPacific_Niue = []zoneinfo.ZoneEra{
 	//             -11:00    -    -11
 	{
 		ZonePolicy: nil,
-		Format: "-11",
+		FormatIndex: 58, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14449,7 +14472,7 @@ var ZoneEraPacific_Norfolk = []zoneinfo.ZoneEra{
 	//             11:30    -    +1130    2015 Oct  4 02:00s
 	{
 		ZonePolicy: nil,
-		Format: "+1130",
+		FormatIndex: 31, // "+1130"
 		OffsetCode: 46,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -14461,7 +14484,7 @@ var ZoneEraPacific_Norfolk = []zoneinfo.ZoneEra{
 	//             11:00    -    +11    2019 Jul
 	{
 		ZonePolicy: nil,
-		Format: "+11",
+		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -14473,7 +14496,7 @@ var ZoneEraPacific_Norfolk = []zoneinfo.ZoneEra{
 	//             11:00    AN    +11/+12
 	{
 		ZonePolicy: &ZonePolicyAN,
-		Format: "+11/+12",
+		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14505,7 +14528,7 @@ var ZoneEraPacific_Noumea = []zoneinfo.ZoneEra{
 	//             11:00    NC    +11/+12
 	{
 		ZonePolicy: &ZonePolicyNC,
-		Format: "+11/+12",
+		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14537,7 +14560,7 @@ var ZoneEraPacific_Pago_Pago = []zoneinfo.ZoneEra{
 	//             -11:00    -    SST
 	{
 		ZonePolicy: nil,
-		Format: "SST",
+		FormatIndex: 104, // "SST"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14569,7 +14592,7 @@ var ZoneEraPacific_Palau = []zoneinfo.ZoneEra{
 	//               9:00    -    +09
 	{
 		ZonePolicy: nil,
-		Format: "+09",
+		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14601,7 +14624,7 @@ var ZoneEraPacific_Pitcairn = []zoneinfo.ZoneEra{
 	//             -8:00    -    -08
 	{
 		ZonePolicy: nil,
-		Format: "-08",
+		FormatIndex: 53, // "-08"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14633,7 +14656,7 @@ var ZoneEraPacific_Port_Moresby = []zoneinfo.ZoneEra{
 	//             10:00    -    +10
 	{
 		ZonePolicy: nil,
-		Format: "+10",
+		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14665,7 +14688,7 @@ var ZoneEraPacific_Rarotonga = []zoneinfo.ZoneEra{
 	//             -10:00    Cook    -10/-0930
 	{
 		ZonePolicy: &ZonePolicyCook,
-		Format: "-10/-0930",
+		FormatIndex: 57, // "-10/-0930"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14697,7 +14720,7 @@ var ZoneEraPacific_Tahiti = []zoneinfo.ZoneEra{
 	//             -10:00    -    -10
 	{
 		ZonePolicy: nil,
-		Format: "-10",
+		FormatIndex: 56, // "-10"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14729,7 +14752,7 @@ var ZoneEraPacific_Tarawa = []zoneinfo.ZoneEra{
 	//              12:00    -    +12
 	{
 		ZonePolicy: nil,
-		Format: "+12",
+		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14761,7 +14784,7 @@ var ZoneEraPacific_Tongatapu = []zoneinfo.ZoneEra{
 	//             13:00    -    +13    1999
 	{
 		ZonePolicy: nil,
-		Format: "+13",
+		FormatIndex: 35, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -14773,7 +14796,7 @@ var ZoneEraPacific_Tongatapu = []zoneinfo.ZoneEra{
 	//             13:00    Tonga    +13/+14
 	{
 		ZonePolicy: &ZonePolicyTonga,
-		Format: "+13/+14",
+		FormatIndex: 36, // "+13/+14"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -14805,7 +14828,7 @@ var ZoneEraWET = []zoneinfo.ZoneEra{
 	// 0:00 EU WE%sT
 	{
 		ZonePolicy: &ZonePolicyEU,
-		Format: "WE%T",
+		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
