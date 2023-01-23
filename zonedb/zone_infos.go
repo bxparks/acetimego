@@ -40,6 +40,9 @@ import (
 const (
 	// All ZoneEra.Format entries concatenated together.
 	FormatBuffer = "%+00/+01+01+01/+00+02+03+03/+04+0330/+0430+04+04/+05+0430+05+05/+06+0530+0545+06+06/+07+0630+07+07/+08+08+08/+09+0845/+0945+09+09/+10+10+10/+11+1030/+11+11+11/+12+1130+12+12/+13+1245/+1345+13+13/+14+14-00-01-01/+00-02-02/-01-03-03/-02-04-04/-03-0430-05-05/-04-06-06/-05-07-08-09-0930-10-10/-0930-11-11/-10-12A%TAC%TAE%TAEDTAK%TASTAW%TC%TCA%TCATCE%TCETCSTChSTE%TEATEE%TEESTEETESTG%TGMTGMT/BSTH%THK%THSTI%TISTIST/GMTJ%TK%TKSTM%TME%TMSKMSK/MSDMSTN%TNZ%TP%TPK%TPSTSASTSSTUTCWATWE%TWIBWITWITA~"
+
+	// All ZoneInfo.Name entries concatenated togther.
+	NameBuffer = "Africa/AbidjanAfrica/AccraAfrica/Addis_AbabaAfrica/AlgiersAfrica/AsmaraAfrica/AsmeraAfrica/BamakoAfrica/BanguiAfrica/BanjulAfrica/BissauAfrica/BlantyreAfrica/BrazzavilleAfrica/BujumburaAfrica/CairoAfrica/CasablancaAfrica/CeutaAfrica/ConakryAfrica/DakarAfrica/Dar_es_SalaamAfrica/DjiboutiAfrica/DoualaAfrica/El_AaiunAfrica/FreetownAfrica/GaboroneAfrica/HarareAfrica/JohannesburgAfrica/JubaAfrica/KampalaAfrica/KhartoumAfrica/KigaliAfrica/KinshasaAfrica/LagosAfrica/LibrevilleAfrica/LomeAfrica/LuandaAfrica/LubumbashiAfrica/LusakaAfrica/MalaboAfrica/MaputoAfrica/MaseruAfrica/MbabaneAfrica/MogadishuAfrica/MonroviaAfrica/NairobiAfrica/NdjamenaAfrica/NiameyAfrica/NouakchottAfrica/OuagadougouAfrica/Porto-NovoAfrica/Sao_TomeAfrica/TimbuktuAfrica/TripoliAfrica/TunisAfrica/WindhoekAmerica/AdakAmerica/AnchorageAmerica/AnguillaAmerica/AntiguaAmerica/AraguainaAmerica/Argentina/Buenos_AiresAmerica/Argentina/CatamarcaAmerica/Argentina/ComodRivadaviaAmerica/Argentina/CordobaAmerica/Argentina/JujuyAmerica/Argentina/La_RiojaAmerica/Argentina/MendozaAmerica/Argentina/Rio_GallegosAmerica/Argentina/SaltaAmerica/Argentina/San_JuanAmerica/Argentina/San_LuisAmerica/Argentina/TucumanAmerica/Argentina/UshuaiaAmerica/ArubaAmerica/AsuncionAmerica/AtikokanAmerica/AtkaAmerica/BahiaAmerica/Bahia_BanderasAmerica/BarbadosAmerica/BelemAmerica/BelizeAmerica/Blanc-SablonAmerica/Boa_VistaAmerica/BogotaAmerica/BoiseAmerica/Buenos_AiresAmerica/Cambridge_BayAmerica/Campo_GrandeAmerica/CancunAmerica/CaracasAmerica/CatamarcaAmerica/CayenneAmerica/CaymanAmerica/ChicagoAmerica/ChihuahuaAmerica/Ciudad_JuarezAmerica/Coral_HarbourAmerica/CordobaAmerica/Costa_RicaAmerica/CrestonAmerica/CuiabaAmerica/CuracaoAmerica/DanmarkshavnAmerica/DawsonAmerica/Dawson_CreekAmerica/DenverAmerica/DetroitAmerica/DominicaAmerica/EdmontonAmerica/EirunepeAmerica/El_SalvadorAmerica/EnsenadaAmerica/Fort_NelsonAmerica/Fort_WayneAmerica/FortalezaAmerica/Glace_BayAmerica/GodthabAmerica/Goose_BayAmerica/Grand_TurkAmerica/GrenadaAmerica/GuadeloupeAmerica/GuatemalaAmerica/GuayaquilAmerica/GuyanaAmerica/HalifaxAmerica/HavanaAmerica/HermosilloAmerica/Indiana/IndianapolisAmerica/Indiana/KnoxAmerica/Indiana/MarengoAmerica/Indiana/PetersburgAmerica/Indiana/Tell_CityAmerica/Indiana/VevayAmerica/Indiana/VincennesAmerica/Indiana/WinamacAmerica/IndianapolisAmerica/InuvikAmerica/IqaluitAmerica/JamaicaAmerica/JujuyAmerica/JuneauAmerica/Kentucky/LouisvilleAmerica/Kentucky/MonticelloAmerica/Knox_INAmerica/KralendijkAmerica/La_PazAmerica/LimaAmerica/Los_AngelesAmerica/LouisvilleAmerica/Lower_PrincesAmerica/MaceioAmerica/ManaguaAmerica/ManausAmerica/MarigotAmerica/MartiniqueAmerica/MatamorosAmerica/MazatlanAmerica/MendozaAmerica/MenomineeAmerica/MeridaAmerica/MetlakatlaAmerica/Mexico_CityAmerica/MiquelonAmerica/MonctonAmerica/MonterreyAmerica/MontevideoAmerica/MontrealAmerica/MontserratAmerica/NassauAmerica/New_YorkAmerica/NipigonAmerica/NomeAmerica/NoronhaAmerica/North_Dakota/BeulahAmerica/North_Dakota/CenterAmerica/North_Dakota/New_SalemAmerica/NuukAmerica/OjinagaAmerica/PanamaAmerica/PangnirtungAmerica/ParamariboAmerica/PhoenixAmerica/Port-au-PrinceAmerica/Port_of_SpainAmerica/Porto_AcreAmerica/Porto_VelhoAmerica/Puerto_RicoAmerica/Punta_ArenasAmerica/Rainy_RiverAmerica/Rankin_InletAmerica/RecifeAmerica/ReginaAmerica/ResoluteAmerica/Rio_BrancoAmerica/RosarioAmerica/Santa_IsabelAmerica/SantaremAmerica/SantiagoAmerica/Santo_DomingoAmerica/Sao_PauloAmerica/ScoresbysundAmerica/ShiprockAmerica/SitkaAmerica/St_BarthelemyAmerica/St_JohnsAmerica/St_KittsAmerica/St_LuciaAmerica/St_ThomasAmerica/St_VincentAmerica/Swift_CurrentAmerica/TegucigalpaAmerica/ThuleAmerica/Thunder_BayAmerica/TijuanaAmerica/TorontoAmerica/TortolaAmerica/VancouverAmerica/VirginAmerica/WhitehorseAmerica/WinnipegAmerica/YakutatAmerica/YellowknifeAntarctica/CaseyAntarctica/DavisAntarctica/DumontDUrvilleAntarctica/MacquarieAntarctica/MawsonAntarctica/McMurdoAntarctica/PalmerAntarctica/RotheraAntarctica/South_PoleAntarctica/SyowaAntarctica/TrollAntarctica/VostokArctic/LongyearbyenAsia/AdenAsia/AlmatyAsia/AmmanAsia/AnadyrAsia/AqtauAsia/AqtobeAsia/AshgabatAsia/AshkhabadAsia/AtyrauAsia/BaghdadAsia/BahrainAsia/BakuAsia/BangkokAsia/BarnaulAsia/BeirutAsia/BishkekAsia/BruneiAsia/CalcuttaAsia/ChitaAsia/ChoibalsanAsia/ChongqingAsia/ChungkingAsia/ColomboAsia/DaccaAsia/DamascusAsia/DhakaAsia/DiliAsia/DubaiAsia/DushanbeAsia/FamagustaAsia/GazaAsia/HarbinAsia/HebronAsia/Ho_Chi_MinhAsia/Hong_KongAsia/HovdAsia/IrkutskAsia/IstanbulAsia/JakartaAsia/JayapuraAsia/JerusalemAsia/KabulAsia/KamchatkaAsia/KarachiAsia/KashgarAsia/KathmanduAsia/KatmanduAsia/KhandygaAsia/KolkataAsia/KrasnoyarskAsia/Kuala_LumpurAsia/KuchingAsia/KuwaitAsia/MacaoAsia/MacauAsia/MagadanAsia/MakassarAsia/ManilaAsia/MuscatAsia/NicosiaAsia/NovokuznetskAsia/NovosibirskAsia/OmskAsia/OralAsia/Phnom_PenhAsia/PontianakAsia/PyongyangAsia/QatarAsia/QostanayAsia/QyzylordaAsia/RangoonAsia/RiyadhAsia/SaigonAsia/SakhalinAsia/SamarkandAsia/SeoulAsia/ShanghaiAsia/SingaporeAsia/SrednekolymskAsia/TaipeiAsia/TashkentAsia/TbilisiAsia/TehranAsia/Tel_AvivAsia/ThimbuAsia/ThimphuAsia/TokyoAsia/TomskAsia/Ujung_PandangAsia/UlaanbaatarAsia/Ulan_BatorAsia/UrumqiAsia/Ust-NeraAsia/VientianeAsia/VladivostokAsia/YakutskAsia/YangonAsia/YekaterinburgAsia/YerevanAtlantic/AzoresAtlantic/BermudaAtlantic/CanaryAtlantic/Cape_VerdeAtlantic/FaeroeAtlantic/FaroeAtlantic/Jan_MayenAtlantic/MadeiraAtlantic/ReykjavikAtlantic/South_GeorgiaAtlantic/St_HelenaAtlantic/StanleyAustralia/ACTAustralia/AdelaideAustralia/BrisbaneAustralia/Broken_HillAustralia/CanberraAustralia/CurrieAustralia/DarwinAustralia/EuclaAustralia/HobartAustralia/LHIAustralia/LindemanAustralia/Lord_HoweAustralia/MelbourneAustralia/NSWAustralia/NorthAustralia/PerthAustralia/QueenslandAustralia/SouthAustralia/SydneyAustralia/TasmaniaAustralia/VictoriaAustralia/WestAustralia/YancowinnaBrazil/AcreBrazil/DeNoronhaBrazil/EastBrazil/WestCETCST6CDTCanada/AtlanticCanada/CentralCanada/EasternCanada/MountainCanada/NewfoundlandCanada/PacificCanada/SaskatchewanCanada/YukonChile/ContinentalChile/EasterIslandCubaEETESTEST5EDTEgyptEireEtc/GMTEtc/GMT+0Etc/GMT+1Etc/GMT+10Etc/GMT+11Etc/GMT+12Etc/GMT+2Etc/GMT+3Etc/GMT+4Etc/GMT+5Etc/GMT+6Etc/GMT+7Etc/GMT+8Etc/GMT+9Etc/GMT-0Etc/GMT-1Etc/GMT-10Etc/GMT-11Etc/GMT-12Etc/GMT-13Etc/GMT-14Etc/GMT-2Etc/GMT-3Etc/GMT-4Etc/GMT-5Etc/GMT-6Etc/GMT-7Etc/GMT-8Etc/GMT-9Etc/GMT0Etc/GreenwichEtc/UCTEtc/UTCEtc/UniversalEtc/ZuluEurope/AmsterdamEurope/AndorraEurope/AstrakhanEurope/AthensEurope/BelfastEurope/BelgradeEurope/BerlinEurope/BratislavaEurope/BrusselsEurope/BucharestEurope/BudapestEurope/BusingenEurope/ChisinauEurope/CopenhagenEurope/DublinEurope/GibraltarEurope/GuernseyEurope/HelsinkiEurope/Isle_of_ManEurope/IstanbulEurope/JerseyEurope/KaliningradEurope/KievEurope/KirovEurope/KyivEurope/LisbonEurope/LjubljanaEurope/LondonEurope/LuxembourgEurope/MadridEurope/MaltaEurope/MariehamnEurope/MinskEurope/MonacoEurope/MoscowEurope/NicosiaEurope/OsloEurope/ParisEurope/PodgoricaEurope/PragueEurope/RigaEurope/RomeEurope/SamaraEurope/San_MarinoEurope/SarajevoEurope/SaratovEurope/SimferopolEurope/SkopjeEurope/SofiaEurope/StockholmEurope/TallinnEurope/TiraneEurope/TiraspolEurope/UlyanovskEurope/UzhgorodEurope/VaduzEurope/VaticanEurope/ViennaEurope/VilniusEurope/VolgogradEurope/WarsawEurope/ZagrebEurope/ZaporozhyeEurope/ZurichGBGB-EireGMTGMT+0GMT-0GMT0GreenwichHSTHongkongIcelandIndian/AntananarivoIndian/ChagosIndian/ChristmasIndian/CocosIndian/ComoroIndian/KerguelenIndian/MaheIndian/MaldivesIndian/MauritiusIndian/MayotteIndian/ReunionIranIsraelJamaicaJapanKwajaleinLibyaMETMSTMST7MDTMexico/BajaNorteMexico/BajaSurMexico/GeneralNZNZ-CHATNavajoPRCPST8PDTPacific/ApiaPacific/AucklandPacific/BougainvillePacific/ChathamPacific/ChuukPacific/EasterPacific/EfatePacific/EnderburyPacific/FakaofoPacific/FijiPacific/FunafutiPacific/GalapagosPacific/GambierPacific/GuadalcanalPacific/GuamPacific/HonoluluPacific/JohnstonPacific/KantonPacific/KiritimatiPacific/KosraePacific/KwajaleinPacific/MajuroPacific/MarquesasPacific/MidwayPacific/NauruPacific/NiuePacific/NorfolkPacific/NoumeaPacific/Pago_PagoPacific/PalauPacific/PitcairnPacific/PohnpeiPacific/PonapePacific/Port_MoresbyPacific/RarotongaPacific/SaipanPacific/SamoaPacific/TahitiPacific/TarawaPacific/TongatapuPacific/TrukPacific/WakePacific/WallisPacific/YapPolandPortugalROCROKSingaporeTurkeyUCTUS/AlaskaUS/AleutianUS/ArizonaUS/CentralUS/East-IndianaUS/EasternUS/HawaiiUS/Indiana-StarkeUS/MichiganUS/MountainUS/PacificUS/SamoaUTCUniversalW-SUWETZulu~"
 )
 
 var (
@@ -59,6 +62,72 @@ var (
 		414, 417, 420, 423, 426, 430, 433, 440, 443, 446,
 		450, 453, 457, 460, 464, 467, 470, 473, 477, 480,
 		483, 487,
+	}
+
+	// Byte offset into NameBuffer for each index. The actual Letter string
+	// at index `i` given by the `ZoneRule.Name` field is
+	// `NameBuffer[NameOffsets[i]:NameOffsets[i+1]]`.
+	NameOffsets = []uint16{
+		0, 0, 14, 26, 44, 58, 71, 84, 97, 110,
+		123, 136, 151, 169, 185, 197, 214, 226, 240, 252,
+		272, 287, 300, 315, 330, 345, 358, 377, 388, 402,
+		417, 430, 445, 457, 474, 485, 498, 515, 528, 541,
+		554, 567, 581, 597, 612, 626, 641, 654, 671, 689,
+		706, 721, 736, 750, 762, 777, 789, 806, 822, 837,
+		854, 884, 911, 943, 968, 991, 1017, 1042, 1072, 1095,
+		1121, 1147, 1172, 1197, 1210, 1226, 1242, 1254, 1267, 1289,
+		1305, 1318, 1332, 1352, 1369, 1383, 1396, 1416, 1437, 1457,
+		1471, 1486, 1503, 1518, 1532, 1547, 1564, 1585, 1606, 1621,
+		1639, 1654, 1668, 1683, 1703, 1717, 1737, 1751, 1766, 1782,
+		1798, 1814, 1833, 1849, 1868, 1886, 1903, 1920, 1935, 1952,
+		1970, 1985, 2003, 2020, 2037, 2051, 2066, 2080, 2098, 2126,
+		2146, 2169, 2195, 2220, 2241, 2266, 2289, 2309, 2323, 2338,
+		2353, 2366, 2380, 2407, 2434, 2449, 2467, 2481, 2493, 2512,
+		2530, 2551, 2565, 2580, 2594, 2609, 2627, 2644, 2660, 2675,
+		2692, 2706, 2724, 2743, 2759, 2774, 2791, 2809, 2825, 2843,
+		2857, 2873, 2888, 2900, 2915, 2942, 2969, 2999, 3011, 3026,
+		3040, 3059, 3077, 3092, 3114, 3135, 3153, 3172, 3191, 3211,
+		3230, 3250, 3264, 3278, 3294, 3312, 3327, 3347, 3363, 3379,
+		3400, 3417, 3437, 3453, 3466, 3487, 3503, 3519, 3535, 3552,
+		3570, 3591, 3610, 3623, 3642, 3657, 3672, 3687, 3704, 3718,
+		3736, 3752, 3767, 3786, 3802, 3818, 3843, 3863, 3880, 3898,
+		3915, 3933, 3954, 3970, 3986, 4003, 4022, 4031, 4042, 4052,
+		4063, 4073, 4084, 4097, 4111, 4122, 4134, 4146, 4155, 4167,
+		4179, 4190, 4202, 4213, 4226, 4236, 4251, 4265, 4279, 4291,
+		4301, 4314, 4324, 4333, 4343, 4356, 4370, 4379, 4390, 4401,
+		4417, 4431, 4440, 4452, 4465, 4477, 4490, 4504, 4514, 4528,
+		4540, 4552, 4566, 4579, 4592, 4604, 4620, 4637, 4649, 4660,
+		4670, 4680, 4692, 4705, 4716, 4727, 4739, 4756, 4772, 4781,
+		4790, 4805, 4819, 4833, 4843, 4856, 4870, 4882, 4893, 4904,
+		4917, 4931, 4941, 4954, 4968, 4986, 4997, 5010, 5022, 5033,
+		5046, 5057, 5069, 5079, 5089, 5107, 5123, 5138, 5149, 5162,
+		5176, 5192, 5204, 5215, 5233, 5245, 5260, 5276, 5291, 5310,
+		5325, 5339, 5357, 5373, 5391, 5413, 5431, 5447, 5460, 5478,
+		5496, 5517, 5535, 5551, 5567, 5582, 5598, 5611, 5629, 5648,
+		5667, 5680, 5695, 5710, 5730, 5745, 5761, 5779, 5797, 5811,
+		5831, 5842, 5858, 5869, 5880, 5883, 5890, 5905, 5919, 5933,
+		5948, 5967, 5981, 6000, 6012, 6029, 6047, 6051, 6054, 6057,
+		6064, 6069, 6073, 6080, 6089, 6098, 6108, 6118, 6128, 6137,
+		6146, 6155, 6164, 6173, 6182, 6191, 6200, 6209, 6218, 6228,
+		6238, 6248, 6258, 6268, 6277, 6286, 6295, 6304, 6313, 6322,
+		6331, 6340, 6348, 6361, 6368, 6375, 6388, 6396, 6412, 6426,
+		6442, 6455, 6469, 6484, 6497, 6514, 6529, 6545, 6560, 6575,
+		6590, 6607, 6620, 6636, 6651, 6666, 6684, 6699, 6712, 6730,
+		6741, 6753, 6764, 6777, 6793, 6806, 6823, 6836, 6848, 6864,
+		6876, 6889, 6902, 6916, 6927, 6939, 6955, 6968, 6979, 6990,
+		7003, 7020, 7035, 7049, 7066, 7079, 7091, 7107, 7121, 7134,
+		7149, 7165, 7180, 7192, 7206, 7219, 7233, 7249, 7262, 7275,
+		7292, 7305, 7307, 7314, 7317, 7322, 7327, 7331, 7340, 7343,
+		7351, 7358, 7377, 7390, 7406, 7418, 7431, 7447, 7458, 7473,
+		7489, 7503, 7517, 7521, 7527, 7534, 7539, 7548, 7553, 7556,
+		7559, 7566, 7582, 7596, 7610, 7612, 7619, 7625, 7628, 7635,
+		7647, 7663, 7683, 7698, 7711, 7725, 7738, 7755, 7770, 7782,
+		7798, 7815, 7830, 7849, 7861, 7877, 7893, 7907, 7925, 7939,
+		7956, 7970, 7987, 8001, 8014, 8026, 8041, 8055, 8072, 8085,
+		8101, 8116, 8130, 8150, 8167, 8181, 8194, 8208, 8222, 8239,
+		8251, 8263, 8277, 8288, 8294, 8302, 8305, 8308, 8317, 8323,
+		8326, 8335, 8346, 8356, 8366, 8381, 8391, 8400, 8417, 8428,
+		8439, 8449, 8457, 8460, 8469, 8473, 8476, 8480,
 	}
 )
 
@@ -88,11 +157,9 @@ var ZoneEraAfrica_Abidjan = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Abidjan = "Africa/Abidjan"
-
 var ZoneAfrica_Abidjan = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Abidjan,
 	ZoneID: 0xc21305a3,
+	NameIndex: 1, // "Africa/Abidjan"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Abidjan,
@@ -120,11 +187,9 @@ var ZoneEraAfrica_Algiers = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Algiers = "Africa/Algiers"
-
 var ZoneAfrica_Algiers = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Algiers,
 	ZoneID: 0xd94515c1,
+	NameIndex: 4, // "Africa/Algiers"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Algiers,
@@ -152,11 +217,9 @@ var ZoneEraAfrica_Bissau = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Bissau = "Africa/Bissau"
-
 var ZoneAfrica_Bissau = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Bissau,
 	ZoneID: 0x75564141,
+	NameIndex: 10, // "Africa/Bissau"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Bissau,
@@ -184,11 +247,9 @@ var ZoneEraAfrica_Cairo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Cairo = "Africa/Cairo"
-
 var ZoneAfrica_Cairo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Cairo,
 	ZoneID: 0x77f8e228,
+	NameIndex: 14, // "Africa/Cairo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Cairo,
@@ -228,11 +289,9 @@ var ZoneEraAfrica_Casablanca = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Casablanca = "Africa/Casablanca"
-
 var ZoneAfrica_Casablanca = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Casablanca,
 	ZoneID: 0xc59f1b33,
+	NameIndex: 15, // "Africa/Casablanca"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Casablanca,
@@ -260,11 +319,9 @@ var ZoneEraAfrica_Ceuta = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Ceuta = "Africa/Ceuta"
-
 var ZoneAfrica_Ceuta = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Ceuta,
 	ZoneID: 0x77fb46ec,
+	NameIndex: 16, // "Africa/Ceuta"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Ceuta,
@@ -304,11 +361,9 @@ var ZoneEraAfrica_El_Aaiun = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_El_Aaiun = "Africa/El_Aaiun"
-
 var ZoneAfrica_El_Aaiun = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_El_Aaiun,
 	ZoneID: 0x9d6fb118,
+	NameIndex: 22, // "Africa/El_Aaiun"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_El_Aaiun,
@@ -336,11 +391,9 @@ var ZoneEraAfrica_Johannesburg = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Johannesburg = "Africa/Johannesburg"
-
 var ZoneAfrica_Johannesburg = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Johannesburg,
 	ZoneID: 0xd5d157a0,
+	NameIndex: 26, // "Africa/Johannesburg"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Johannesburg,
@@ -392,11 +445,9 @@ var ZoneEraAfrica_Juba = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Juba = "Africa/Juba"
-
 var ZoneAfrica_Juba = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Juba,
 	ZoneID: 0xd51b395c,
+	NameIndex: 27, // "Africa/Juba"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Juba,
@@ -448,11 +499,9 @@ var ZoneEraAfrica_Khartoum = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Khartoum = "Africa/Khartoum"
-
 var ZoneAfrica_Khartoum = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Khartoum,
 	ZoneID: 0xfb3d4205,
+	NameIndex: 29, // "Africa/Khartoum"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Khartoum,
@@ -480,11 +529,9 @@ var ZoneEraAfrica_Lagos = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Lagos = "Africa/Lagos"
-
 var ZoneAfrica_Lagos = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Lagos,
 	ZoneID: 0x789bb5d0,
+	NameIndex: 32, // "Africa/Lagos"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Lagos,
@@ -512,11 +559,9 @@ var ZoneEraAfrica_Maputo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Maputo = "Africa/Maputo"
-
 var ZoneAfrica_Maputo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Maputo,
 	ZoneID: 0x8e6ca1f0,
+	NameIndex: 39, // "Africa/Maputo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Maputo,
@@ -544,11 +589,9 @@ var ZoneEraAfrica_Monrovia = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Monrovia = "Africa/Monrovia"
-
 var ZoneAfrica_Monrovia = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Monrovia,
 	ZoneID: 0x0ce90385,
+	NameIndex: 43, // "Africa/Monrovia"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Monrovia,
@@ -576,11 +619,9 @@ var ZoneEraAfrica_Nairobi = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Nairobi = "Africa/Nairobi"
-
 var ZoneAfrica_Nairobi = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Nairobi,
 	ZoneID: 0xa87ab57e,
+	NameIndex: 44, // "Africa/Nairobi"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Nairobi,
@@ -608,11 +649,9 @@ var ZoneEraAfrica_Ndjamena = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Ndjamena = "Africa/Ndjamena"
-
 var ZoneAfrica_Ndjamena = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Ndjamena,
 	ZoneID: 0x9fe09898,
+	NameIndex: 45, // "Africa/Ndjamena"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Ndjamena,
@@ -664,11 +703,9 @@ var ZoneEraAfrica_Sao_Tome = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Sao_Tome = "Africa/Sao_Tome"
-
 var ZoneAfrica_Sao_Tome = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Sao_Tome,
 	ZoneID: 0x61b319d1,
+	NameIndex: 50, // "Africa/Sao_Tome"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Sao_Tome,
@@ -720,11 +757,9 @@ var ZoneEraAfrica_Tripoli = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Tripoli = "Africa/Tripoli"
-
 var ZoneAfrica_Tripoli = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Tripoli,
 	ZoneID: 0x9dfebd3d,
+	NameIndex: 52, // "Africa/Tripoli"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Tripoli,
@@ -752,11 +787,9 @@ var ZoneEraAfrica_Tunis = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Tunis = "Africa/Tunis"
-
 var ZoneAfrica_Tunis = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Tunis,
 	ZoneID: 0x79378e6d,
+	NameIndex: 53, // "Africa/Tunis"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Tunis,
@@ -784,11 +817,9 @@ var ZoneEraAfrica_Windhoek = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAfrica_Windhoek = "Africa/Windhoek"
-
 var ZoneAfrica_Windhoek = zoneinfo.ZoneInfo{
-	Name: ZoneNameAfrica_Windhoek,
 	ZoneID: 0x789c9bd3,
+	NameIndex: 54, // "Africa/Windhoek"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAfrica_Windhoek,
@@ -816,11 +847,9 @@ var ZoneEraAmerica_Adak = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Adak = "America/Adak"
-
 var ZoneAmerica_Adak = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Adak,
 	ZoneID: 0x97fe49d7,
+	NameIndex: 55, // "America/Adak"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Adak,
@@ -848,11 +877,9 @@ var ZoneEraAmerica_Anchorage = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Anchorage = "America/Anchorage"
-
 var ZoneAmerica_Anchorage = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Anchorage,
 	ZoneID: 0x5a79260e,
+	NameIndex: 56, // "America/Anchorage"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Anchorage,
@@ -916,11 +943,9 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Araguaina = "America/Araguaina"
-
 var ZoneAmerica_Araguaina = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Araguaina,
 	ZoneID: 0x6f9a3aef,
+	NameIndex: 59, // "America/Araguaina"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Araguaina,
@@ -972,11 +997,9 @@ var ZoneEraAmerica_Argentina_Buenos_Aires = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Buenos_Aires = "America/Argentina/Buenos_Aires"
-
 var ZoneAmerica_Argentina_Buenos_Aires = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Buenos_Aires,
 	ZoneID: 0xd43b4c0d,
+	NameIndex: 60, // "America/Argentina/Buenos_Aires"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Buenos_Aires,
@@ -1064,11 +1087,9 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Catamarca = "America/Argentina/Catamarca"
-
 var ZoneAmerica_Argentina_Catamarca = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Catamarca,
 	ZoneID: 0x8d40986b,
+	NameIndex: 61, // "America/Argentina/Catamarca"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Catamarca,
@@ -1120,11 +1141,9 @@ var ZoneEraAmerica_Argentina_Cordoba = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Cordoba = "America/Argentina/Cordoba"
-
 var ZoneAmerica_Argentina_Cordoba = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Cordoba,
 	ZoneID: 0xbfccc308,
+	NameIndex: 63, // "America/Argentina/Cordoba"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Cordoba,
@@ -1188,11 +1207,9 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Jujuy = "America/Argentina/Jujuy"
-
 var ZoneAmerica_Argentina_Jujuy = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Jujuy,
 	ZoneID: 0x5f2f46c5,
+	NameIndex: 64, // "America/Argentina/Jujuy"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Jujuy,
@@ -1280,11 +1297,9 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_La_Rioja = "America/Argentina/La_Rioja"
-
 var ZoneAmerica_Argentina_La_Rioja = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_La_Rioja,
 	ZoneID: 0xa46b7eef,
+	NameIndex: 65, // "America/Argentina/La_Rioja"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_La_Rioja,
@@ -1372,11 +1387,9 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Mendoza = "America/Argentina/Mendoza"
-
 var ZoneAmerica_Argentina_Mendoza = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Mendoza,
 	ZoneID: 0xa9f72d5c,
+	NameIndex: 66, // "America/Argentina/Mendoza"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Mendoza,
@@ -1464,11 +1477,9 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Rio_Gallegos = "America/Argentina/Rio_Gallegos"
-
 var ZoneAmerica_Argentina_Rio_Gallegos = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Rio_Gallegos,
 	ZoneID: 0xc5b0f565,
+	NameIndex: 67, // "America/Argentina/Rio_Gallegos"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Rio_Gallegos,
@@ -1532,11 +1543,9 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Salta = "America/Argentina/Salta"
-
 var ZoneAmerica_Argentina_Salta = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Salta,
 	ZoneID: 0x5fc73403,
+	NameIndex: 68, // "America/Argentina/Salta"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Salta,
@@ -1624,11 +1633,9 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_San_Juan = "America/Argentina/San_Juan"
-
 var ZoneAmerica_Argentina_San_Juan = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_San_Juan,
 	ZoneID: 0x3e1009bd,
+	NameIndex: 69, // "America/Argentina/San_Juan"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_San_Juan,
@@ -1728,11 +1735,9 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_San_Luis = "America/Argentina/San_Luis"
-
 var ZoneAmerica_Argentina_San_Luis = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_San_Luis,
 	ZoneID: 0x3e11238c,
+	NameIndex: 70, // "America/Argentina/San_Luis"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_San_Luis,
@@ -1808,11 +1813,9 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Tucuman = "America/Argentina/Tucuman"
-
 var ZoneAmerica_Argentina_Tucuman = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Tucuman,
 	ZoneID: 0xe96399eb,
+	NameIndex: 71, // "America/Argentina/Tucuman"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Tucuman,
@@ -1900,11 +1903,9 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Argentina_Ushuaia = "America/Argentina/Ushuaia"
-
 var ZoneAmerica_Argentina_Ushuaia = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Argentina_Ushuaia,
 	ZoneID: 0x320dcdde,
+	NameIndex: 72, // "America/Argentina/Ushuaia"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Argentina_Ushuaia,
@@ -1932,11 +1933,9 @@ var ZoneEraAmerica_Asuncion = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Asuncion = "America/Asuncion"
-
 var ZoneAmerica_Asuncion = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Asuncion,
 	ZoneID: 0x50ec79a6,
+	NameIndex: 74, // "America/Asuncion"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Asuncion,
@@ -2000,11 +1999,9 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Bahia = "America/Bahia"
-
 var ZoneAmerica_Bahia = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Bahia,
 	ZoneID: 0x97d815fb,
+	NameIndex: 77, // "America/Bahia"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Bahia,
@@ -2044,11 +2041,9 @@ var ZoneEraAmerica_Bahia_Banderas = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Bahia_Banderas = "America/Bahia_Banderas"
-
 var ZoneAmerica_Bahia_Banderas = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Bahia_Banderas,
 	ZoneID: 0x14f6329a,
+	NameIndex: 78, // "America/Bahia_Banderas"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Bahia_Banderas,
@@ -2076,11 +2071,9 @@ var ZoneEraAmerica_Barbados = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Barbados = "America/Barbados"
-
 var ZoneAmerica_Barbados = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Barbados,
 	ZoneID: 0xcbbc3b04,
+	NameIndex: 79, // "America/Barbados"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Barbados,
@@ -2108,11 +2101,9 @@ var ZoneEraAmerica_Belem = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Belem = "America/Belem"
-
 var ZoneAmerica_Belem = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Belem,
 	ZoneID: 0x97da580b,
+	NameIndex: 80, // "America/Belem"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Belem,
@@ -2140,11 +2131,9 @@ var ZoneEraAmerica_Belize = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Belize = "America/Belize"
-
 var ZoneAmerica_Belize = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Belize,
 	ZoneID: 0x93256c81,
+	NameIndex: 81, // "America/Belize"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Belize,
@@ -2196,11 +2185,9 @@ var ZoneEraAmerica_Boa_Vista = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Boa_Vista = "America/Boa_Vista"
-
 var ZoneAmerica_Boa_Vista = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Boa_Vista,
 	ZoneID: 0x0a7b7efe,
+	NameIndex: 83, // "America/Boa_Vista"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Boa_Vista,
@@ -2228,11 +2215,9 @@ var ZoneEraAmerica_Bogota = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Bogota = "America/Bogota"
-
 var ZoneAmerica_Bogota = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Bogota,
 	ZoneID: 0x93d7bc62,
+	NameIndex: 84, // "America/Bogota"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Bogota,
@@ -2260,11 +2245,9 @@ var ZoneEraAmerica_Boise = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Boise = "America/Boise"
-
 var ZoneAmerica_Boise = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Boise,
 	ZoneID: 0x97dfc8d8,
+	NameIndex: 85, // "America/Boise"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Boise,
@@ -2340,11 +2323,9 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Cambridge_Bay = "America/Cambridge_Bay"
-
 var ZoneAmerica_Cambridge_Bay = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Cambridge_Bay,
 	ZoneID: 0xd5a44aff,
+	NameIndex: 87, // "America/Cambridge_Bay"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Cambridge_Bay,
@@ -2372,11 +2353,9 @@ var ZoneEraAmerica_Campo_Grande = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Campo_Grande = "America/Campo_Grande"
-
 var ZoneAmerica_Campo_Grande = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Campo_Grande,
 	ZoneID: 0xfec3e7a6,
+	NameIndex: 88, // "America/Campo_Grande"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Campo_Grande,
@@ -2416,11 +2395,9 @@ var ZoneEraAmerica_Cancun = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Cancun = "America/Cancun"
-
 var ZoneAmerica_Cancun = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Cancun,
 	ZoneID: 0x953331be,
+	NameIndex: 89, // "America/Cancun"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Cancun,
@@ -2472,11 +2449,9 @@ var ZoneEraAmerica_Caracas = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Caracas = "America/Caracas"
-
 var ZoneAmerica_Caracas = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Caracas,
 	ZoneID: 0x3be064f4,
+	NameIndex: 90, // "America/Caracas"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Caracas,
@@ -2504,11 +2479,9 @@ var ZoneEraAmerica_Cayenne = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Cayenne = "America/Cayenne"
-
 var ZoneAmerica_Cayenne = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Cayenne,
 	ZoneID: 0x3c617269,
+	NameIndex: 92, // "America/Cayenne"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Cayenne,
@@ -2536,11 +2509,9 @@ var ZoneEraAmerica_Chicago = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Chicago = "America/Chicago"
-
 var ZoneAmerica_Chicago = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Chicago,
 	ZoneID: 0x4b92b5d4,
+	NameIndex: 94, // "America/Chicago"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Chicago,
@@ -2580,11 +2551,9 @@ var ZoneEraAmerica_Chihuahua = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Chihuahua = "America/Chihuahua"
-
 var ZoneAmerica_Chihuahua = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Chihuahua,
 	ZoneID: 0x8827d776,
+	NameIndex: 95, // "America/Chihuahua"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Chihuahua,
@@ -2648,11 +2617,9 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Ciudad_Juarez = "America/Ciudad_Juarez"
-
 var ZoneAmerica_Ciudad_Juarez = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Ciudad_Juarez,
 	ZoneID: 0x7347fc60,
+	NameIndex: 96, // "America/Ciudad_Juarez"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Ciudad_Juarez,
@@ -2680,11 +2647,9 @@ var ZoneEraAmerica_Costa_Rica = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Costa_Rica = "America/Costa_Rica"
-
 var ZoneAmerica_Costa_Rica = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Costa_Rica,
 	ZoneID: 0x63ff66be,
+	NameIndex: 99, // "America/Costa_Rica"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Costa_Rica,
@@ -2736,11 +2701,9 @@ var ZoneEraAmerica_Cuiaba = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Cuiaba = "America/Cuiaba"
-
 var ZoneAmerica_Cuiaba = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Cuiaba,
 	ZoneID: 0x969a52eb,
+	NameIndex: 101, // "America/Cuiaba"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Cuiaba,
@@ -2768,11 +2731,9 @@ var ZoneEraAmerica_Danmarkshavn = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Danmarkshavn = "America/Danmarkshavn"
-
 var ZoneAmerica_Danmarkshavn = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Danmarkshavn,
 	ZoneID: 0xf554d204,
+	NameIndex: 103, // "America/Danmarkshavn"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Danmarkshavn,
@@ -2812,11 +2773,9 @@ var ZoneEraAmerica_Dawson = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Dawson = "America/Dawson"
-
 var ZoneAmerica_Dawson = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Dawson,
 	ZoneID: 0x978d8d12,
+	NameIndex: 104, // "America/Dawson"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Dawson,
@@ -2844,11 +2803,9 @@ var ZoneEraAmerica_Dawson_Creek = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Dawson_Creek = "America/Dawson_Creek"
-
 var ZoneAmerica_Dawson_Creek = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Dawson_Creek,
 	ZoneID: 0x6cf24e5b,
+	NameIndex: 105, // "America/Dawson_Creek"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Dawson_Creek,
@@ -2876,11 +2833,9 @@ var ZoneEraAmerica_Denver = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Denver = "America/Denver"
-
 var ZoneAmerica_Denver = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Denver,
 	ZoneID: 0x97d10b2a,
+	NameIndex: 106, // "America/Denver"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Denver,
@@ -2908,11 +2863,9 @@ var ZoneEraAmerica_Detroit = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Detroit = "America/Detroit"
-
 var ZoneAmerica_Detroit = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Detroit,
 	ZoneID: 0x925cfbc1,
+	NameIndex: 107, // "America/Detroit"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Detroit,
@@ -2940,11 +2893,9 @@ var ZoneEraAmerica_Edmonton = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Edmonton = "America/Edmonton"
-
 var ZoneAmerica_Edmonton = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Edmonton,
 	ZoneID: 0x6cb9484a,
+	NameIndex: 109, // "America/Edmonton"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Edmonton,
@@ -2996,11 +2947,9 @@ var ZoneEraAmerica_Eirunepe = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Eirunepe = "America/Eirunepe"
-
 var ZoneAmerica_Eirunepe = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Eirunepe,
 	ZoneID: 0xf9b29683,
+	NameIndex: 110, // "America/Eirunepe"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Eirunepe,
@@ -3028,11 +2977,9 @@ var ZoneEraAmerica_El_Salvador = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_El_Salvador = "America/El_Salvador"
-
 var ZoneAmerica_El_Salvador = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_El_Salvador,
 	ZoneID: 0x752ad652,
+	NameIndex: 111, // "America/El_Salvador"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_El_Salvador,
@@ -3072,11 +3019,9 @@ var ZoneEraAmerica_Fort_Nelson = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Fort_Nelson = "America/Fort_Nelson"
-
 var ZoneAmerica_Fort_Nelson = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Fort_Nelson,
 	ZoneID: 0x3f437e0f,
+	NameIndex: 113, // "America/Fort_Nelson"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Fort_Nelson,
@@ -3152,11 +3097,9 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Fortaleza = "America/Fortaleza"
-
 var ZoneAmerica_Fortaleza = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Fortaleza,
 	ZoneID: 0x2ad018ee,
+	NameIndex: 115, // "America/Fortaleza"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Fortaleza,
@@ -3184,11 +3127,9 @@ var ZoneEraAmerica_Glace_Bay = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Glace_Bay = "America/Glace_Bay"
-
 var ZoneAmerica_Glace_Bay = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Glace_Bay,
 	ZoneID: 0x9681f8dd,
+	NameIndex: 116, // "America/Glace_Bay"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Glace_Bay,
@@ -3228,11 +3169,9 @@ var ZoneEraAmerica_Goose_Bay = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Goose_Bay = "America/Goose_Bay"
-
 var ZoneAmerica_Goose_Bay = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Goose_Bay,
 	ZoneID: 0xb649541e,
+	NameIndex: 118, // "America/Goose_Bay"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Goose_Bay,
@@ -3284,11 +3223,9 @@ var ZoneEraAmerica_Grand_Turk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Grand_Turk = "America/Grand_Turk"
-
 var ZoneAmerica_Grand_Turk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Grand_Turk,
 	ZoneID: 0x6e216197,
+	NameIndex: 119, // "America/Grand_Turk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Grand_Turk,
@@ -3316,11 +3253,9 @@ var ZoneEraAmerica_Guatemala = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Guatemala = "America/Guatemala"
-
 var ZoneAmerica_Guatemala = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Guatemala,
 	ZoneID: 0x0c8259f7,
+	NameIndex: 122, // "America/Guatemala"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Guatemala,
@@ -3348,11 +3283,9 @@ var ZoneEraAmerica_Guayaquil = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Guayaquil = "America/Guayaquil"
-
 var ZoneAmerica_Guayaquil = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Guayaquil,
 	ZoneID: 0x17e64958,
+	NameIndex: 123, // "America/Guayaquil"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Guayaquil,
@@ -3380,11 +3313,9 @@ var ZoneEraAmerica_Guyana = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Guyana = "America/Guyana"
-
 var ZoneAmerica_Guyana = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Guyana,
 	ZoneID: 0x9ff7bd0b,
+	NameIndex: 124, // "America/Guyana"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Guyana,
@@ -3412,11 +3343,9 @@ var ZoneEraAmerica_Halifax = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Halifax = "America/Halifax"
-
 var ZoneAmerica_Halifax = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Halifax,
 	ZoneID: 0xbc5b7183,
+	NameIndex: 125, // "America/Halifax"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Halifax,
@@ -3444,11 +3373,9 @@ var ZoneEraAmerica_Havana = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Havana = "America/Havana"
-
 var ZoneAmerica_Havana = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Havana,
 	ZoneID: 0xa0e15675,
+	NameIndex: 126, // "America/Havana"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Havana,
@@ -3488,11 +3415,9 @@ var ZoneEraAmerica_Hermosillo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Hermosillo = "America/Hermosillo"
-
 var ZoneAmerica_Hermosillo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Hermosillo,
 	ZoneID: 0x065d21c4,
+	NameIndex: 127, // "America/Hermosillo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Hermosillo,
@@ -3532,11 +3457,9 @@ var ZoneEraAmerica_Indiana_Indianapolis = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Indiana_Indianapolis = "America/Indiana/Indianapolis"
-
 var ZoneAmerica_Indiana_Indianapolis = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Indiana_Indianapolis,
 	ZoneID: 0x28a669a4,
+	NameIndex: 128, // "America/Indiana/Indianapolis"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Indiana_Indianapolis,
@@ -3576,11 +3499,9 @@ var ZoneEraAmerica_Indiana_Knox = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Indiana_Knox = "America/Indiana/Knox"
-
 var ZoneAmerica_Indiana_Knox = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Indiana_Knox,
 	ZoneID: 0x6554adc9,
+	NameIndex: 129, // "America/Indiana/Knox"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Indiana_Knox,
@@ -3620,11 +3541,9 @@ var ZoneEraAmerica_Indiana_Marengo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Indiana_Marengo = "America/Indiana/Marengo"
-
 var ZoneAmerica_Indiana_Marengo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Indiana_Marengo,
 	ZoneID: 0x2feeee72,
+	NameIndex: 130, // "America/Indiana/Marengo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Indiana_Marengo,
@@ -3676,11 +3595,9 @@ var ZoneEraAmerica_Indiana_Petersburg = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Indiana_Petersburg = "America/Indiana/Petersburg"
-
 var ZoneAmerica_Indiana_Petersburg = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Indiana_Petersburg,
 	ZoneID: 0x94ac7acc,
+	NameIndex: 131, // "America/Indiana/Petersburg"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Indiana_Petersburg,
@@ -3720,11 +3637,9 @@ var ZoneEraAmerica_Indiana_Tell_City = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Indiana_Tell_City = "America/Indiana/Tell_City"
-
 var ZoneAmerica_Indiana_Tell_City = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Indiana_Tell_City,
 	ZoneID: 0x09263612,
+	NameIndex: 132, // "America/Indiana/Tell_City"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Indiana_Tell_City,
@@ -3764,11 +3679,9 @@ var ZoneEraAmerica_Indiana_Vevay = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Indiana_Vevay = "America/Indiana/Vevay"
-
 var ZoneAmerica_Indiana_Vevay = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Indiana_Vevay,
 	ZoneID: 0x10aca054,
+	NameIndex: 133, // "America/Indiana/Vevay"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Indiana_Vevay,
@@ -3820,11 +3733,9 @@ var ZoneEraAmerica_Indiana_Vincennes = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Indiana_Vincennes = "America/Indiana/Vincennes"
-
 var ZoneAmerica_Indiana_Vincennes = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Indiana_Vincennes,
 	ZoneID: 0x28a0b212,
+	NameIndex: 134, // "America/Indiana/Vincennes"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Indiana_Vincennes,
@@ -3876,11 +3787,9 @@ var ZoneEraAmerica_Indiana_Winamac = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Indiana_Winamac = "America/Indiana/Winamac"
-
 var ZoneAmerica_Indiana_Winamac = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Indiana_Winamac,
 	ZoneID: 0x4413fa69,
+	NameIndex: 135, // "America/Indiana/Winamac"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Indiana_Winamac,
@@ -3908,11 +3817,9 @@ var ZoneEraAmerica_Inuvik = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Inuvik = "America/Inuvik"
-
 var ZoneAmerica_Inuvik = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Inuvik,
 	ZoneID: 0xa42189fc,
+	NameIndex: 137, // "America/Inuvik"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Inuvik,
@@ -3964,11 +3871,9 @@ var ZoneEraAmerica_Iqaluit = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Iqaluit = "America/Iqaluit"
-
 var ZoneAmerica_Iqaluit = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Iqaluit,
 	ZoneID: 0x2de310bf,
+	NameIndex: 138, // "America/Iqaluit"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Iqaluit,
@@ -3996,11 +3901,9 @@ var ZoneEraAmerica_Jamaica = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Jamaica = "America/Jamaica"
-
 var ZoneAmerica_Jamaica = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Jamaica,
 	ZoneID: 0x565dad6c,
+	NameIndex: 139, // "America/Jamaica"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Jamaica,
@@ -4028,11 +3931,9 @@ var ZoneEraAmerica_Juneau = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Juneau = "America/Juneau"
-
 var ZoneAmerica_Juneau = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Juneau,
 	ZoneID: 0xa6f13e2e,
+	NameIndex: 141, // "America/Juneau"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Juneau,
@@ -4060,11 +3961,9 @@ var ZoneEraAmerica_Kentucky_Louisville = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Kentucky_Louisville = "America/Kentucky/Louisville"
-
 var ZoneAmerica_Kentucky_Louisville = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Kentucky_Louisville,
 	ZoneID: 0x1a21024b,
+	NameIndex: 142, // "America/Kentucky/Louisville"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Kentucky_Louisville,
@@ -4104,11 +4003,9 @@ var ZoneEraAmerica_Kentucky_Monticello = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Kentucky_Monticello = "America/Kentucky/Monticello"
-
 var ZoneAmerica_Kentucky_Monticello = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Kentucky_Monticello,
 	ZoneID: 0xde71c439,
+	NameIndex: 143, // "America/Kentucky/Monticello"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Kentucky_Monticello,
@@ -4136,11 +4033,9 @@ var ZoneEraAmerica_La_Paz = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_La_Paz = "America/La_Paz"
-
 var ZoneAmerica_La_Paz = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_La_Paz,
 	ZoneID: 0xaa29125d,
+	NameIndex: 146, // "America/La_Paz"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_La_Paz,
@@ -4168,11 +4063,9 @@ var ZoneEraAmerica_Lima = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Lima = "America/Lima"
-
 var ZoneAmerica_Lima = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Lima,
 	ZoneID: 0x980468c9,
+	NameIndex: 147, // "America/Lima"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Lima,
@@ -4200,11 +4093,9 @@ var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Los_Angeles = "America/Los_Angeles"
-
 var ZoneAmerica_Los_Angeles = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Los_Angeles,
 	ZoneID: 0xb7f7e8f2,
+	NameIndex: 148, // "America/Los_Angeles"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Los_Angeles,
@@ -4280,11 +4171,9 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Maceio = "America/Maceio"
-
 var ZoneAmerica_Maceio = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Maceio,
 	ZoneID: 0xac80c6d4,
+	NameIndex: 151, // "America/Maceio"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Maceio,
@@ -4312,11 +4201,9 @@ var ZoneEraAmerica_Managua = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Managua = "America/Managua"
-
 var ZoneAmerica_Managua = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Managua,
 	ZoneID: 0x3d5e7600,
+	NameIndex: 152, // "America/Managua"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Managua,
@@ -4344,11 +4231,9 @@ var ZoneEraAmerica_Manaus = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Manaus = "America/Manaus"
-
 var ZoneAmerica_Manaus = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Manaus,
 	ZoneID: 0xac86bf8b,
+	NameIndex: 153, // "America/Manaus"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Manaus,
@@ -4376,11 +4261,9 @@ var ZoneEraAmerica_Martinique = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Martinique = "America/Martinique"
-
 var ZoneAmerica_Martinique = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Martinique,
 	ZoneID: 0x551e84c5,
+	NameIndex: 155, // "America/Martinique"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Martinique,
@@ -4420,11 +4303,9 @@ var ZoneEraAmerica_Matamoros = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Matamoros = "America/Matamoros"
-
 var ZoneAmerica_Matamoros = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Matamoros,
 	ZoneID: 0xdd1b0259,
+	NameIndex: 156, // "America/Matamoros"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Matamoros,
@@ -4452,11 +4333,9 @@ var ZoneEraAmerica_Mazatlan = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Mazatlan = "America/Mazatlan"
-
 var ZoneAmerica_Mazatlan = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Mazatlan,
 	ZoneID: 0x0532189e,
+	NameIndex: 157, // "America/Mazatlan"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Mazatlan,
@@ -4484,11 +4363,9 @@ var ZoneEraAmerica_Menominee = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Menominee = "America/Menominee"
-
 var ZoneAmerica_Menominee = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Menominee,
 	ZoneID: 0xe0e9c583,
+	NameIndex: 159, // "America/Menominee"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Menominee,
@@ -4516,11 +4393,9 @@ var ZoneEraAmerica_Merida = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Merida = "America/Merida"
-
 var ZoneAmerica_Merida = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Merida,
 	ZoneID: 0xacd172d8,
+	NameIndex: 160, // "America/Merida"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Merida,
@@ -4584,11 +4459,9 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Metlakatla = "America/Metlakatla"
-
 var ZoneAmerica_Metlakatla = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Metlakatla,
 	ZoneID: 0x84de2686,
+	NameIndex: 161, // "America/Metlakatla"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Metlakatla,
@@ -4640,11 +4513,9 @@ var ZoneEraAmerica_Mexico_City = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Mexico_City = "America/Mexico_City"
-
 var ZoneAmerica_Mexico_City = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Mexico_City,
 	ZoneID: 0xd0d93f43,
+	NameIndex: 162, // "America/Mexico_City"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Mexico_City,
@@ -4672,11 +4543,9 @@ var ZoneEraAmerica_Miquelon = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Miquelon = "America/Miquelon"
-
 var ZoneAmerica_Miquelon = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Miquelon,
 	ZoneID: 0x59674330,
+	NameIndex: 163, // "America/Miquelon"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Miquelon,
@@ -4716,11 +4585,9 @@ var ZoneEraAmerica_Moncton = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Moncton = "America/Moncton"
-
 var ZoneAmerica_Moncton = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Moncton,
 	ZoneID: 0x5e07fe24,
+	NameIndex: 164, // "America/Moncton"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Moncton,
@@ -4748,11 +4615,9 @@ var ZoneEraAmerica_Monterrey = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Monterrey = "America/Monterrey"
-
 var ZoneAmerica_Monterrey = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Monterrey,
 	ZoneID: 0x269a1deb,
+	NameIndex: 165, // "America/Monterrey"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Monterrey,
@@ -4780,11 +4645,9 @@ var ZoneEraAmerica_Montevideo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Montevideo = "America/Montevideo"
-
 var ZoneAmerica_Montevideo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Montevideo,
 	ZoneID: 0xfa214780,
+	NameIndex: 166, // "America/Montevideo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Montevideo,
@@ -4812,11 +4675,9 @@ var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_New_York = "America/New_York"
-
 var ZoneAmerica_New_York = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_New_York,
 	ZoneID: 0x1e2a7654,
+	NameIndex: 170, // "America/New_York"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_New_York,
@@ -4844,11 +4705,9 @@ var ZoneEraAmerica_Nome = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Nome = "America/Nome"
-
 var ZoneAmerica_Nome = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Nome,
 	ZoneID: 0x98059b15,
+	NameIndex: 172, // "America/Nome"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Nome,
@@ -4924,11 +4783,9 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Noronha = "America/Noronha"
-
 var ZoneAmerica_Noronha = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Noronha,
 	ZoneID: 0xab5116fb,
+	NameIndex: 173, // "America/Noronha"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Noronha,
@@ -4968,11 +4825,9 @@ var ZoneEraAmerica_North_Dakota_Beulah = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_North_Dakota_Beulah = "America/North_Dakota/Beulah"
-
 var ZoneAmerica_North_Dakota_Beulah = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_North_Dakota_Beulah,
 	ZoneID: 0x9b52b384,
+	NameIndex: 174, // "America/North_Dakota/Beulah"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_North_Dakota_Beulah,
@@ -5000,11 +4855,9 @@ var ZoneEraAmerica_North_Dakota_Center = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_North_Dakota_Center = "America/North_Dakota/Center"
-
 var ZoneAmerica_North_Dakota_Center = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_North_Dakota_Center,
 	ZoneID: 0x9da42814,
+	NameIndex: 175, // "America/North_Dakota/Center"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_North_Dakota_Center,
@@ -5044,11 +4897,9 @@ var ZoneEraAmerica_North_Dakota_New_Salem = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_North_Dakota_New_Salem = "America/North_Dakota/New_Salem"
-
 var ZoneAmerica_North_Dakota_New_Salem = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_North_Dakota_New_Salem,
 	ZoneID: 0x04f9958e,
+	NameIndex: 176, // "America/North_Dakota/New_Salem"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_North_Dakota_New_Salem,
@@ -5088,11 +4939,9 @@ var ZoneEraAmerica_Nuuk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Nuuk = "America/Nuuk"
-
 var ZoneAmerica_Nuuk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Nuuk,
 	ZoneID: 0x9805b5a9,
+	NameIndex: 177, // "America/Nuuk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Nuuk,
@@ -5156,11 +5005,9 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Ojinaga = "America/Ojinaga"
-
 var ZoneAmerica_Ojinaga = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Ojinaga,
 	ZoneID: 0xebfde83f,
+	NameIndex: 178, // "America/Ojinaga"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Ojinaga,
@@ -5188,11 +5035,9 @@ var ZoneEraAmerica_Panama = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Panama = "America/Panama"
-
 var ZoneAmerica_Panama = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Panama,
 	ZoneID: 0xb3863854,
+	NameIndex: 179, // "America/Panama"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Panama,
@@ -5220,11 +5065,9 @@ var ZoneEraAmerica_Paramaribo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Paramaribo = "America/Paramaribo"
-
 var ZoneAmerica_Paramaribo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Paramaribo,
 	ZoneID: 0xb319e4c4,
+	NameIndex: 181, // "America/Paramaribo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Paramaribo,
@@ -5252,11 +5095,9 @@ var ZoneEraAmerica_Phoenix = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Phoenix = "America/Phoenix"
-
 var ZoneAmerica_Phoenix = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Phoenix,
 	ZoneID: 0x34b5af01,
+	NameIndex: 182, // "America/Phoenix"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Phoenix,
@@ -5284,11 +5125,9 @@ var ZoneEraAmerica_Port_au_Prince = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Port_au_Prince = "America/Port-au-Prince"
-
 var ZoneAmerica_Port_au_Prince = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Port_au_Prince,
 	ZoneID: 0x8e4a7bdc,
+	NameIndex: 183, // "America/Port-au-Prince"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Port_au_Prince,
@@ -5316,11 +5155,9 @@ var ZoneEraAmerica_Porto_Velho = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Porto_Velho = "America/Porto_Velho"
-
 var ZoneAmerica_Porto_Velho = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Porto_Velho,
 	ZoneID: 0x6b1aac77,
+	NameIndex: 186, // "America/Porto_Velho"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Porto_Velho,
@@ -5348,11 +5185,9 @@ var ZoneEraAmerica_Puerto_Rico = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Puerto_Rico = "America/Puerto_Rico"
-
 var ZoneAmerica_Puerto_Rico = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Puerto_Rico,
 	ZoneID: 0x6752ca31,
+	NameIndex: 187, // "America/Puerto_Rico"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Puerto_Rico,
@@ -5392,11 +5227,9 @@ var ZoneEraAmerica_Punta_Arenas = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Punta_Arenas = "America/Punta_Arenas"
-
 var ZoneAmerica_Punta_Arenas = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Punta_Arenas,
 	ZoneID: 0xc2c3bce7,
+	NameIndex: 188, // "America/Punta_Arenas"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Punta_Arenas,
@@ -5448,11 +5281,9 @@ var ZoneEraAmerica_Rankin_Inlet = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Rankin_Inlet = "America/Rankin_Inlet"
-
 var ZoneAmerica_Rankin_Inlet = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Rankin_Inlet,
 	ZoneID: 0xc8de4984,
+	NameIndex: 190, // "America/Rankin_Inlet"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Rankin_Inlet,
@@ -5528,11 +5359,9 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Recife = "America/Recife"
-
 var ZoneAmerica_Recife = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Recife,
 	ZoneID: 0xb8730494,
+	NameIndex: 191, // "America/Recife"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Recife,
@@ -5560,11 +5389,9 @@ var ZoneEraAmerica_Regina = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Regina = "America/Regina"
-
 var ZoneAmerica_Regina = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Regina,
 	ZoneID: 0xb875371c,
+	NameIndex: 192, // "America/Regina"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Regina,
@@ -5640,11 +5467,9 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Resolute = "America/Resolute"
-
 var ZoneAmerica_Resolute = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Resolute,
 	ZoneID: 0xc7093459,
+	NameIndex: 193, // "America/Resolute"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Resolute,
@@ -5696,11 +5521,9 @@ var ZoneEraAmerica_Rio_Branco = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Rio_Branco = "America/Rio_Branco"
-
 var ZoneAmerica_Rio_Branco = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Rio_Branco,
 	ZoneID: 0x9d352764,
+	NameIndex: 194, // "America/Rio_Branco"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Rio_Branco,
@@ -5740,11 +5563,9 @@ var ZoneEraAmerica_Santarem = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Santarem = "America/Santarem"
-
 var ZoneAmerica_Santarem = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Santarem,
 	ZoneID: 0x740caec1,
+	NameIndex: 197, // "America/Santarem"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Santarem,
@@ -5772,11 +5593,9 @@ var ZoneEraAmerica_Santiago = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Santiago = "America/Santiago"
-
 var ZoneAmerica_Santiago = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Santiago,
 	ZoneID: 0x7410c9bc,
+	NameIndex: 198, // "America/Santiago"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Santiago,
@@ -5828,11 +5647,9 @@ var ZoneEraAmerica_Santo_Domingo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Santo_Domingo = "America/Santo_Domingo"
-
 var ZoneAmerica_Santo_Domingo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Santo_Domingo,
 	ZoneID: 0x75a0d177,
+	NameIndex: 199, // "America/Santo_Domingo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Santo_Domingo,
@@ -5860,11 +5677,9 @@ var ZoneEraAmerica_Sao_Paulo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Sao_Paulo = "America/Sao_Paulo"
-
 var ZoneAmerica_Sao_Paulo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Sao_Paulo,
 	ZoneID: 0x1063bfc9,
+	NameIndex: 200, // "America/Sao_Paulo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Sao_Paulo,
@@ -5892,11 +5707,9 @@ var ZoneEraAmerica_Scoresbysund = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Scoresbysund = "America/Scoresbysund"
-
 var ZoneAmerica_Scoresbysund = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Scoresbysund,
 	ZoneID: 0x123f8d2a,
+	NameIndex: 201, // "America/Scoresbysund"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Scoresbysund,
@@ -5924,11 +5737,9 @@ var ZoneEraAmerica_Sitka = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Sitka = "America/Sitka"
-
 var ZoneAmerica_Sitka = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Sitka,
 	ZoneID: 0x99104ce2,
+	NameIndex: 203, // "America/Sitka"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Sitka,
@@ -5968,11 +5779,9 @@ var ZoneEraAmerica_St_Johns = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_St_Johns = "America/St_Johns"
-
 var ZoneAmerica_St_Johns = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_St_Johns,
 	ZoneID: 0x04b14e6e,
+	NameIndex: 205, // "America/St_Johns"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_St_Johns,
@@ -6000,11 +5809,9 @@ var ZoneEraAmerica_Swift_Current = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Swift_Current = "America/Swift_Current"
-
 var ZoneAmerica_Swift_Current = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Swift_Current,
 	ZoneID: 0xdef98e55,
+	NameIndex: 210, // "America/Swift_Current"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Swift_Current,
@@ -6032,11 +5839,9 @@ var ZoneEraAmerica_Tegucigalpa = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Tegucigalpa = "America/Tegucigalpa"
-
 var ZoneAmerica_Tegucigalpa = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Tegucigalpa,
 	ZoneID: 0xbfd6fd4c,
+	NameIndex: 211, // "America/Tegucigalpa"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Tegucigalpa,
@@ -6064,11 +5869,9 @@ var ZoneEraAmerica_Thule = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Thule = "America/Thule"
-
 var ZoneAmerica_Thule = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Thule,
 	ZoneID: 0x9921dd68,
+	NameIndex: 212, // "America/Thule"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Thule,
@@ -6132,11 +5935,9 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Tijuana = "America/Tijuana"
-
 var ZoneAmerica_Tijuana = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Tijuana,
 	ZoneID: 0x6aa1df72,
+	NameIndex: 214, // "America/Tijuana"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Tijuana,
@@ -6164,11 +5965,9 @@ var ZoneEraAmerica_Toronto = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Toronto = "America/Toronto"
-
 var ZoneAmerica_Toronto = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Toronto,
 	ZoneID: 0x792e851b,
+	NameIndex: 215, // "America/Toronto"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Toronto,
@@ -6196,11 +5995,9 @@ var ZoneEraAmerica_Vancouver = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Vancouver = "America/Vancouver"
-
 var ZoneAmerica_Vancouver = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Vancouver,
 	ZoneID: 0x2c6f6b1f,
+	NameIndex: 217, // "America/Vancouver"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Vancouver,
@@ -6240,11 +6037,9 @@ var ZoneEraAmerica_Whitehorse = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Whitehorse = "America/Whitehorse"
-
 var ZoneAmerica_Whitehorse = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Whitehorse,
 	ZoneID: 0x54e0e3e8,
+	NameIndex: 219, // "America/Whitehorse"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Whitehorse,
@@ -6284,11 +6079,9 @@ var ZoneEraAmerica_Winnipeg = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Winnipeg = "America/Winnipeg"
-
 var ZoneAmerica_Winnipeg = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Winnipeg,
 	ZoneID: 0x8c7dafc7,
+	NameIndex: 220, // "America/Winnipeg"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Winnipeg,
@@ -6316,11 +6109,9 @@ var ZoneEraAmerica_Yakutat = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Yakutat = "America/Yakutat"
-
 var ZoneAmerica_Yakutat = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Yakutat,
 	ZoneID: 0xd8ee31e9,
+	NameIndex: 221, // "America/Yakutat"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Yakutat,
@@ -6348,11 +6139,9 @@ var ZoneEraAmerica_Yellowknife = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Yellowknife = "America/Yellowknife"
-
 var ZoneAmerica_Yellowknife = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Yellowknife,
 	ZoneID: 0x0f76c76f,
+	NameIndex: 222, // "America/Yellowknife"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Yellowknife,
@@ -6512,11 +6301,9 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAntarctica_Casey = "Antarctica/Casey"
-
 var ZoneAntarctica_Casey = zoneinfo.ZoneInfo{
-	Name: ZoneNameAntarctica_Casey,
 	ZoneID: 0xe2022583,
+	NameIndex: 223, // "Antarctica/Casey"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAntarctica_Casey,
@@ -6592,11 +6379,9 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAntarctica_Davis = "Antarctica/Davis"
-
 var ZoneAntarctica_Davis = zoneinfo.ZoneInfo{
-	Name: ZoneNameAntarctica_Davis,
 	ZoneID: 0xe2144b45,
+	NameIndex: 224, // "Antarctica/Davis"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAntarctica_Davis,
@@ -6648,11 +6433,9 @@ var ZoneEraAntarctica_Macquarie = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAntarctica_Macquarie = "Antarctica/Macquarie"
-
 var ZoneAntarctica_Macquarie = zoneinfo.ZoneInfo{
-	Name: ZoneNameAntarctica_Macquarie,
 	ZoneID: 0x92f47626,
+	NameIndex: 226, // "Antarctica/Macquarie"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAntarctica_Macquarie,
@@ -6692,11 +6475,9 @@ var ZoneEraAntarctica_Mawson = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAntarctica_Mawson = "Antarctica/Mawson"
-
 var ZoneAntarctica_Mawson = zoneinfo.ZoneInfo{
-	Name: ZoneNameAntarctica_Mawson,
 	ZoneID: 0x399cd863,
+	NameIndex: 227, // "Antarctica/Mawson"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAntarctica_Mawson,
@@ -6736,11 +6517,9 @@ var ZoneEraAntarctica_Palmer = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAntarctica_Palmer = "Antarctica/Palmer"
-
 var ZoneAntarctica_Palmer = zoneinfo.ZoneInfo{
-	Name: ZoneNameAntarctica_Palmer,
 	ZoneID: 0x40962f4f,
+	NameIndex: 229, // "Antarctica/Palmer"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAntarctica_Palmer,
@@ -6768,11 +6547,9 @@ var ZoneEraAntarctica_Rothera = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAntarctica_Rothera = "Antarctica/Rothera"
-
 var ZoneAntarctica_Rothera = zoneinfo.ZoneInfo{
-	Name: ZoneNameAntarctica_Rothera,
 	ZoneID: 0x0e86d203,
+	NameIndex: 230, // "Antarctica/Rothera"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAntarctica_Rothera,
@@ -6812,11 +6589,9 @@ var ZoneEraAntarctica_Troll = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAntarctica_Troll = "Antarctica/Troll"
-
 var ZoneAntarctica_Troll = zoneinfo.ZoneInfo{
-	Name: ZoneNameAntarctica_Troll,
 	ZoneID: 0xe33f085b,
+	NameIndex: 233, // "Antarctica/Troll"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAntarctica_Troll,
@@ -6856,11 +6631,9 @@ var ZoneEraAsia_Almaty = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Almaty = "Asia/Almaty"
-
 var ZoneAsia_Almaty = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Almaty,
 	ZoneID: 0xa61f41fa,
+	NameIndex: 237, // "Asia/Almaty"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Almaty,
@@ -6900,11 +6673,9 @@ var ZoneEraAsia_Amman = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Amman = "Asia/Amman"
-
 var ZoneAsia_Amman = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Amman,
 	ZoneID: 0x148d21bc,
+	NameIndex: 238, // "Asia/Amman"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Amman,
@@ -6956,11 +6727,9 @@ var ZoneEraAsia_Anadyr = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Anadyr = "Asia/Anadyr"
-
 var ZoneAsia_Anadyr = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Anadyr,
 	ZoneID: 0xa63cebd1,
+	NameIndex: 239, // "Asia/Anadyr"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Anadyr,
@@ -7000,11 +6769,9 @@ var ZoneEraAsia_Aqtau = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Aqtau = "Asia/Aqtau"
-
 var ZoneAsia_Aqtau = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Aqtau,
 	ZoneID: 0x148f710e,
+	NameIndex: 240, // "Asia/Aqtau"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Aqtau,
@@ -7044,11 +6811,9 @@ var ZoneEraAsia_Aqtobe = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Aqtobe = "Asia/Aqtobe"
-
 var ZoneAsia_Aqtobe = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Aqtobe,
 	ZoneID: 0xa67dcc4e,
+	NameIndex: 241, // "Asia/Aqtobe"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Aqtobe,
@@ -7076,11 +6841,9 @@ var ZoneEraAsia_Ashgabat = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Ashgabat = "Asia/Ashgabat"
-
 var ZoneAsia_Ashgabat = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Ashgabat,
 	ZoneID: 0xba87598d,
+	NameIndex: 242, // "Asia/Ashgabat"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Ashgabat,
@@ -7132,11 +6895,9 @@ var ZoneEraAsia_Atyrau = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Atyrau = "Asia/Atyrau"
-
 var ZoneAsia_Atyrau = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Atyrau,
 	ZoneID: 0xa6b6e068,
+	NameIndex: 244, // "Asia/Atyrau"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Atyrau,
@@ -7164,11 +6925,9 @@ var ZoneEraAsia_Baghdad = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Baghdad = "Asia/Baghdad"
-
 var ZoneAsia_Baghdad = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Baghdad,
 	ZoneID: 0x9ceffbed,
+	NameIndex: 245, // "Asia/Baghdad"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Baghdad,
@@ -7196,11 +6955,9 @@ var ZoneEraAsia_Baku = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Baku = "Asia/Baku"
-
 var ZoneAsia_Baku = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Baku,
 	ZoneID: 0x1fa788b5,
+	NameIndex: 247, // "Asia/Baku"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Baku,
@@ -7228,11 +6985,9 @@ var ZoneEraAsia_Bangkok = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Bangkok = "Asia/Bangkok"
-
 var ZoneAsia_Bangkok = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Bangkok,
 	ZoneID: 0x9d6e3aaf,
+	NameIndex: 248, // "Asia/Bangkok"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Bangkok,
@@ -7296,11 +7051,9 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Barnaul = "Asia/Barnaul"
-
 var ZoneAsia_Barnaul = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Barnaul,
 	ZoneID: 0x9dba4997,
+	NameIndex: 249, // "Asia/Barnaul"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Barnaul,
@@ -7328,11 +7081,9 @@ var ZoneEraAsia_Beirut = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Beirut = "Asia/Beirut"
-
 var ZoneAsia_Beirut = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Beirut,
 	ZoneID: 0xa7f3d5fd,
+	NameIndex: 250, // "Asia/Beirut"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Beirut,
@@ -7372,11 +7123,9 @@ var ZoneEraAsia_Bishkek = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Bishkek = "Asia/Bishkek"
-
 var ZoneAsia_Bishkek = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Bishkek,
 	ZoneID: 0xb0728553,
+	NameIndex: 251, // "Asia/Bishkek"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Bishkek,
@@ -7440,11 +7189,9 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Chita = "Asia/Chita"
-
 var ZoneAsia_Chita = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Chita,
 	ZoneID: 0x14ae863b,
+	NameIndex: 254, // "Asia/Chita"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Chita,
@@ -7484,11 +7231,9 @@ var ZoneEraAsia_Choibalsan = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Choibalsan = "Asia/Choibalsan"
-
 var ZoneAsia_Choibalsan = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Choibalsan,
 	ZoneID: 0x928aa4a6,
+	NameIndex: 255, // "Asia/Choibalsan"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Choibalsan,
@@ -7528,11 +7273,9 @@ var ZoneEraAsia_Colombo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Colombo = "Asia/Colombo"
-
 var ZoneAsia_Colombo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Colombo,
 	ZoneID: 0x0af0e91d,
+	NameIndex: 258, // "Asia/Colombo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Colombo,
@@ -7572,11 +7315,9 @@ var ZoneEraAsia_Damascus = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Damascus = "Asia/Damascus"
-
 var ZoneAsia_Damascus = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Damascus,
 	ZoneID: 0x20fbb063,
+	NameIndex: 260, // "Asia/Damascus"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Damascus,
@@ -7616,11 +7357,9 @@ var ZoneEraAsia_Dhaka = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Dhaka = "Asia/Dhaka"
-
 var ZoneAsia_Dhaka = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Dhaka,
 	ZoneID: 0x14c07b8b,
+	NameIndex: 261, // "Asia/Dhaka"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Dhaka,
@@ -7660,11 +7399,9 @@ var ZoneEraAsia_Dili = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Dili = "Asia/Dili"
-
 var ZoneAsia_Dili = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Dili,
 	ZoneID: 0x1fa8c394,
+	NameIndex: 262, // "Asia/Dili"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Dili,
@@ -7692,11 +7429,9 @@ var ZoneEraAsia_Dubai = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Dubai = "Asia/Dubai"
-
 var ZoneAsia_Dubai = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Dubai,
 	ZoneID: 0x14c79f77,
+	NameIndex: 263, // "Asia/Dubai"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Dubai,
@@ -7724,11 +7459,9 @@ var ZoneEraAsia_Dushanbe = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Dushanbe = "Asia/Dushanbe"
-
 var ZoneAsia_Dushanbe = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Dushanbe,
 	ZoneID: 0x32fc5c3c,
+	NameIndex: 264, // "Asia/Dushanbe"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Dushanbe,
@@ -7780,11 +7513,9 @@ var ZoneEraAsia_Famagusta = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Famagusta = "Asia/Famagusta"
-
 var ZoneAsia_Famagusta = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Famagusta,
 	ZoneID: 0x289b4f8b,
+	NameIndex: 265, // "Asia/Famagusta"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Famagusta,
@@ -7896,11 +7627,9 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Gaza = "Asia/Gaza"
-
 var ZoneAsia_Gaza = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Gaza,
 	ZoneID: 0x1faa4875,
+	NameIndex: 266, // "Asia/Gaza"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Gaza,
@@ -7940,11 +7669,9 @@ var ZoneEraAsia_Hebron = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Hebron = "Asia/Hebron"
-
 var ZoneAsia_Hebron = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Hebron,
 	ZoneID: 0xb5eef250,
+	NameIndex: 268, // "Asia/Hebron"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Hebron,
@@ -7972,11 +7699,9 @@ var ZoneEraAsia_Ho_Chi_Minh = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Ho_Chi_Minh = "Asia/Ho_Chi_Minh"
-
 var ZoneAsia_Ho_Chi_Minh = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Ho_Chi_Minh,
 	ZoneID: 0x20f2d127,
+	NameIndex: 269, // "Asia/Ho_Chi_Minh"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Ho_Chi_Minh,
@@ -8004,11 +7729,9 @@ var ZoneEraAsia_Hong_Kong = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Hong_Kong = "Asia/Hong_Kong"
-
 var ZoneAsia_Hong_Kong = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Hong_Kong,
 	ZoneID: 0x577f28ac,
+	NameIndex: 270, // "Asia/Hong_Kong"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Hong_Kong,
@@ -8036,11 +7759,9 @@ var ZoneEraAsia_Hovd = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Hovd = "Asia/Hovd"
-
 var ZoneAsia_Hovd = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Hovd,
 	ZoneID: 0x1fab0fe3,
+	NameIndex: 271, // "Asia/Hovd"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Hovd,
@@ -8092,11 +7813,9 @@ var ZoneEraAsia_Irkutsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Irkutsk = "Asia/Irkutsk"
-
 var ZoneAsia_Irkutsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Irkutsk,
 	ZoneID: 0xdfbf213f,
+	NameIndex: 272, // "Asia/Irkutsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Irkutsk,
@@ -8124,11 +7843,9 @@ var ZoneEraAsia_Jakarta = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Jakarta = "Asia/Jakarta"
-
 var ZoneAsia_Jakarta = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Jakarta,
 	ZoneID: 0x0506ab50,
+	NameIndex: 274, // "Asia/Jakarta"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Jakarta,
@@ -8156,11 +7873,9 @@ var ZoneEraAsia_Jayapura = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Jayapura = "Asia/Jayapura"
-
 var ZoneAsia_Jayapura = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Jayapura,
 	ZoneID: 0xc6833c2f,
+	NameIndex: 275, // "Asia/Jayapura"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Jayapura,
@@ -8188,11 +7903,9 @@ var ZoneEraAsia_Jerusalem = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Jerusalem = "Asia/Jerusalem"
-
 var ZoneAsia_Jerusalem = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Jerusalem,
 	ZoneID: 0x5becd23a,
+	NameIndex: 276, // "Asia/Jerusalem"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Jerusalem,
@@ -8220,11 +7933,9 @@ var ZoneEraAsia_Kabul = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Kabul = "Asia/Kabul"
-
 var ZoneAsia_Kabul = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Kabul,
 	ZoneID: 0x153b5601,
+	NameIndex: 277, // "Asia/Kabul"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Kabul,
@@ -8276,11 +7987,9 @@ var ZoneEraAsia_Kamchatka = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Kamchatka = "Asia/Kamchatka"
-
 var ZoneAsia_Kamchatka = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Kamchatka,
 	ZoneID: 0x73baf9d7,
+	NameIndex: 278, // "Asia/Kamchatka"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Kamchatka,
@@ -8308,11 +8017,9 @@ var ZoneEraAsia_Karachi = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Karachi = "Asia/Karachi"
-
 var ZoneAsia_Karachi = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Karachi,
 	ZoneID: 0x527f5245,
+	NameIndex: 279, // "Asia/Karachi"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Karachi,
@@ -8340,11 +8047,9 @@ var ZoneEraAsia_Kathmandu = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Kathmandu = "Asia/Kathmandu"
-
 var ZoneAsia_Kathmandu = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Kathmandu,
 	ZoneID: 0x9a96ce6f,
+	NameIndex: 281, // "Asia/Kathmandu"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Kathmandu,
@@ -8420,11 +8125,9 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Khandyga = "Asia/Khandyga"
-
 var ZoneAsia_Khandyga = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Khandyga,
 	ZoneID: 0x9685a4d9,
+	NameIndex: 283, // "Asia/Khandyga"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Khandyga,
@@ -8452,11 +8155,9 @@ var ZoneEraAsia_Kolkata = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Kolkata = "Asia/Kolkata"
-
 var ZoneAsia_Kolkata = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Kolkata,
 	ZoneID: 0x72c06cd9,
+	NameIndex: 284, // "Asia/Kolkata"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Kolkata,
@@ -8508,11 +8209,9 @@ var ZoneEraAsia_Krasnoyarsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Krasnoyarsk = "Asia/Krasnoyarsk"
-
 var ZoneAsia_Krasnoyarsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Krasnoyarsk,
 	ZoneID: 0xd0376c6a,
+	NameIndex: 285, // "Asia/Krasnoyarsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Krasnoyarsk,
@@ -8540,11 +8239,9 @@ var ZoneEraAsia_Kuching = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Kuching = "Asia/Kuching"
-
 var ZoneAsia_Kuching = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Kuching,
 	ZoneID: 0x801b003b,
+	NameIndex: 287, // "Asia/Kuching"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Kuching,
@@ -8572,11 +8269,9 @@ var ZoneEraAsia_Macau = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Macau = "Asia/Macau"
-
 var ZoneAsia_Macau = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Macau,
 	ZoneID: 0x155f88b9,
+	NameIndex: 290, // "Asia/Macau"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Macau,
@@ -8640,11 +8335,9 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Magadan = "Asia/Magadan"
-
 var ZoneAsia_Magadan = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Magadan,
 	ZoneID: 0xebacc19b,
+	NameIndex: 291, // "Asia/Magadan"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Magadan,
@@ -8672,11 +8365,9 @@ var ZoneEraAsia_Makassar = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Makassar = "Asia/Makassar"
-
 var ZoneAsia_Makassar = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Makassar,
 	ZoneID: 0x6aa21c85,
+	NameIndex: 292, // "Asia/Makassar"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Makassar,
@@ -8704,11 +8395,9 @@ var ZoneEraAsia_Manila = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Manila = "Asia/Manila"
-
 var ZoneAsia_Manila = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Manila,
 	ZoneID: 0xc156c944,
+	NameIndex: 293, // "Asia/Manila"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Manila,
@@ -8736,11 +8425,9 @@ var ZoneEraAsia_Nicosia = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Nicosia = "Asia/Nicosia"
-
 var ZoneAsia_Nicosia = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Nicosia,
 	ZoneID: 0x4b0fcf78,
+	NameIndex: 295, // "Asia/Nicosia"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Nicosia,
@@ -8792,11 +8479,9 @@ var ZoneEraAsia_Novokuznetsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Novokuznetsk = "Asia/Novokuznetsk"
-
 var ZoneAsia_Novokuznetsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Novokuznetsk,
 	ZoneID: 0x69264f93,
+	NameIndex: 296, // "Asia/Novokuznetsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Novokuznetsk,
@@ -8860,11 +8545,9 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Novosibirsk = "Asia/Novosibirsk"
-
 var ZoneAsia_Novosibirsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Novosibirsk,
 	ZoneID: 0xa2a435cb,
+	NameIndex: 297, // "Asia/Novosibirsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Novosibirsk,
@@ -8916,11 +8599,9 @@ var ZoneEraAsia_Omsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Omsk = "Asia/Omsk"
-
 var ZoneAsia_Omsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Omsk,
 	ZoneID: 0x1faeddac,
+	NameIndex: 298, // "Asia/Omsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Omsk,
@@ -8960,11 +8641,9 @@ var ZoneEraAsia_Oral = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Oral = "Asia/Oral"
-
 var ZoneAsia_Oral = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Oral,
 	ZoneID: 0x1faef0a0,
+	NameIndex: 299, // "Asia/Oral"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Oral,
@@ -8992,11 +8671,9 @@ var ZoneEraAsia_Pontianak = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Pontianak = "Asia/Pontianak"
-
 var ZoneAsia_Pontianak = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Pontianak,
 	ZoneID: 0x1a76c057,
+	NameIndex: 301, // "Asia/Pontianak"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Pontianak,
@@ -9048,11 +8725,9 @@ var ZoneEraAsia_Pyongyang = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Pyongyang = "Asia/Pyongyang"
-
 var ZoneAsia_Pyongyang = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Pyongyang,
 	ZoneID: 0x93ed1c8e,
+	NameIndex: 302, // "Asia/Pyongyang"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Pyongyang,
@@ -9080,11 +8755,9 @@ var ZoneEraAsia_Qatar = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Qatar = "Asia/Qatar"
-
 var ZoneAsia_Qatar = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Qatar,
 	ZoneID: 0x15a8330b,
+	NameIndex: 303, // "Asia/Qatar"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Qatar,
@@ -9124,11 +8797,9 @@ var ZoneEraAsia_Qostanay = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Qostanay = "Asia/Qostanay"
-
 var ZoneAsia_Qostanay = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Qostanay,
 	ZoneID: 0x654fe522,
+	NameIndex: 304, // "Asia/Qostanay"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Qostanay,
@@ -9180,11 +8851,9 @@ var ZoneEraAsia_Qyzylorda = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Qyzylorda = "Asia/Qyzylorda"
-
 var ZoneAsia_Qyzylorda = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Qyzylorda,
 	ZoneID: 0x71282e81,
+	NameIndex: 305, // "Asia/Qyzylorda"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Qyzylorda,
@@ -9212,11 +8881,9 @@ var ZoneEraAsia_Riyadh = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Riyadh = "Asia/Riyadh"
-
 var ZoneAsia_Riyadh = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Riyadh,
 	ZoneID: 0xcd973d93,
+	NameIndex: 307, // "Asia/Riyadh"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Riyadh,
@@ -9280,11 +8947,9 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Sakhalin = "Asia/Sakhalin"
-
 var ZoneAsia_Sakhalin = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Sakhalin,
 	ZoneID: 0xf4a1c9bd,
+	NameIndex: 309, // "Asia/Sakhalin"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Sakhalin,
@@ -9312,11 +8977,9 @@ var ZoneEraAsia_Samarkand = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Samarkand = "Asia/Samarkand"
-
 var ZoneAsia_Samarkand = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Samarkand,
 	ZoneID: 0x13ae5104,
+	NameIndex: 310, // "Asia/Samarkand"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Samarkand,
@@ -9344,11 +9007,9 @@ var ZoneEraAsia_Seoul = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Seoul = "Asia/Seoul"
-
 var ZoneAsia_Seoul = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Seoul,
 	ZoneID: 0x15ce82da,
+	NameIndex: 311, // "Asia/Seoul"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Seoul,
@@ -9376,11 +9037,9 @@ var ZoneEraAsia_Shanghai = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Shanghai = "Asia/Shanghai"
-
 var ZoneAsia_Shanghai = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Shanghai,
 	ZoneID: 0xf895a7f5,
+	NameIndex: 312, // "Asia/Shanghai"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Shanghai,
@@ -9408,11 +9067,9 @@ var ZoneEraAsia_Singapore = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Singapore = "Asia/Singapore"
-
 var ZoneAsia_Singapore = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Singapore,
 	ZoneID: 0xcf8581fa,
+	NameIndex: 313, // "Asia/Singapore"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Singapore,
@@ -9464,11 +9121,9 @@ var ZoneEraAsia_Srednekolymsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Srednekolymsk = "Asia/Srednekolymsk"
-
 var ZoneAsia_Srednekolymsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Srednekolymsk,
 	ZoneID: 0xbf8e337d,
+	NameIndex: 314, // "Asia/Srednekolymsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Srednekolymsk,
@@ -9496,11 +9151,9 @@ var ZoneEraAsia_Taipei = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Taipei = "Asia/Taipei"
-
 var ZoneAsia_Taipei = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Taipei,
 	ZoneID: 0xd1a844ae,
+	NameIndex: 315, // "Asia/Taipei"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Taipei,
@@ -9528,11 +9181,9 @@ var ZoneEraAsia_Tashkent = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Tashkent = "Asia/Tashkent"
-
 var ZoneAsia_Tashkent = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Tashkent,
 	ZoneID: 0xf3924254,
+	NameIndex: 316, // "Asia/Tashkent"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Tashkent,
@@ -9584,11 +9235,9 @@ var ZoneEraAsia_Tbilisi = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Tbilisi = "Asia/Tbilisi"
-
 var ZoneAsia_Tbilisi = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Tbilisi,
 	ZoneID: 0x0903e442,
+	NameIndex: 317, // "Asia/Tbilisi"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Tbilisi,
@@ -9616,11 +9265,9 @@ var ZoneEraAsia_Tehran = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Tehran = "Asia/Tehran"
-
 var ZoneAsia_Tehran = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Tehran,
 	ZoneID: 0xd1f02254,
+	NameIndex: 318, // "Asia/Tehran"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Tehran,
@@ -9648,11 +9295,9 @@ var ZoneEraAsia_Thimphu = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Thimphu = "Asia/Thimphu"
-
 var ZoneAsia_Thimphu = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Thimphu,
 	ZoneID: 0x170380d1,
+	NameIndex: 321, // "Asia/Thimphu"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Thimphu,
@@ -9680,11 +9325,9 @@ var ZoneEraAsia_Tokyo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Tokyo = "Asia/Tokyo"
-
 var ZoneAsia_Tokyo = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Tokyo,
 	ZoneID: 0x15e606a8,
+	NameIndex: 322, // "Asia/Tokyo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Tokyo,
@@ -9760,11 +9403,9 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Tomsk = "Asia/Tomsk"
-
 var ZoneAsia_Tomsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Tomsk,
 	ZoneID: 0x15e60e60,
+	NameIndex: 323, // "Asia/Tomsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Tomsk,
@@ -9792,11 +9433,9 @@ var ZoneEraAsia_Ulaanbaatar = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Ulaanbaatar = "Asia/Ulaanbaatar"
-
 var ZoneAsia_Ulaanbaatar = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Ulaanbaatar,
 	ZoneID: 0x30f0cc4e,
+	NameIndex: 325, // "Asia/Ulaanbaatar"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Ulaanbaatar,
@@ -9824,11 +9463,9 @@ var ZoneEraAsia_Urumqi = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Urumqi = "Asia/Urumqi"
-
 var ZoneAsia_Urumqi = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Urumqi,
 	ZoneID: 0xd5379735,
+	NameIndex: 327, // "Asia/Urumqi"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Urumqi,
@@ -9892,11 +9529,9 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Ust_Nera = "Asia/Ust-Nera"
-
 var ZoneAsia_Ust_Nera = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Ust_Nera,
 	ZoneID: 0x4785f921,
+	NameIndex: 328, // "Asia/Ust-Nera"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Ust_Nera,
@@ -9948,11 +9583,9 @@ var ZoneEraAsia_Vladivostok = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Vladivostok = "Asia/Vladivostok"
-
 var ZoneAsia_Vladivostok = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Vladivostok,
 	ZoneID: 0x29de34a8,
+	NameIndex: 330, // "Asia/Vladivostok"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Vladivostok,
@@ -10004,11 +9637,9 @@ var ZoneEraAsia_Yakutsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Yakutsk = "Asia/Yakutsk"
-
 var ZoneAsia_Yakutsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Yakutsk,
 	ZoneID: 0x87bb3a9e,
+	NameIndex: 331, // "Asia/Yakutsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Yakutsk,
@@ -10036,11 +9667,9 @@ var ZoneEraAsia_Yangon = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Yangon = "Asia/Yangon"
-
 var ZoneAsia_Yangon = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Yangon,
 	ZoneID: 0xdd54a8be,
+	NameIndex: 332, // "Asia/Yangon"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Yangon,
@@ -10092,11 +9721,9 @@ var ZoneEraAsia_Yekaterinburg = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Yekaterinburg = "Asia/Yekaterinburg"
-
 var ZoneAsia_Yekaterinburg = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Yekaterinburg,
 	ZoneID: 0xfb544c6e,
+	NameIndex: 333, // "Asia/Yekaterinburg"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Yekaterinburg,
@@ -10136,11 +9763,9 @@ var ZoneEraAsia_Yerevan = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAsia_Yerevan = "Asia/Yerevan"
-
 var ZoneAsia_Yerevan = zoneinfo.ZoneInfo{
-	Name: ZoneNameAsia_Yerevan,
 	ZoneID: 0x9185c8cc,
+	NameIndex: 334, // "Asia/Yerevan"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAsia_Yerevan,
@@ -10168,11 +9793,9 @@ var ZoneEraAtlantic_Azores = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAtlantic_Azores = "Atlantic/Azores"
-
 var ZoneAtlantic_Azores = zoneinfo.ZoneInfo{
-	Name: ZoneNameAtlantic_Azores,
 	ZoneID: 0xf93ed918,
+	NameIndex: 335, // "Atlantic/Azores"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAtlantic_Azores,
@@ -10200,11 +9823,9 @@ var ZoneEraAtlantic_Bermuda = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAtlantic_Bermuda = "Atlantic/Bermuda"
-
 var ZoneAtlantic_Bermuda = zoneinfo.ZoneInfo{
-	Name: ZoneNameAtlantic_Bermuda,
 	ZoneID: 0x3d4bb1c4,
+	NameIndex: 336, // "Atlantic/Bermuda"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAtlantic_Bermuda,
@@ -10232,11 +9853,9 @@ var ZoneEraAtlantic_Canary = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAtlantic_Canary = "Atlantic/Canary"
-
 var ZoneAtlantic_Canary = zoneinfo.ZoneInfo{
-	Name: ZoneNameAtlantic_Canary,
 	ZoneID: 0xfc23f2c2,
+	NameIndex: 337, // "Atlantic/Canary"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAtlantic_Canary,
@@ -10264,11 +9883,9 @@ var ZoneEraAtlantic_Cape_Verde = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAtlantic_Cape_Verde = "Atlantic/Cape_Verde"
-
 var ZoneAtlantic_Cape_Verde = zoneinfo.ZoneInfo{
-	Name: ZoneNameAtlantic_Cape_Verde,
 	ZoneID: 0x5c5e1772,
+	NameIndex: 338, // "Atlantic/Cape_Verde"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAtlantic_Cape_Verde,
@@ -10296,11 +9913,9 @@ var ZoneEraAtlantic_Faroe = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAtlantic_Faroe = "Atlantic/Faroe"
-
 var ZoneAtlantic_Faroe = zoneinfo.ZoneInfo{
-	Name: ZoneNameAtlantic_Faroe,
 	ZoneID: 0xe110a971,
+	NameIndex: 340, // "Atlantic/Faroe"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAtlantic_Faroe,
@@ -10328,11 +9943,9 @@ var ZoneEraAtlantic_Madeira = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAtlantic_Madeira = "Atlantic/Madeira"
-
 var ZoneAtlantic_Madeira = zoneinfo.ZoneInfo{
-	Name: ZoneNameAtlantic_Madeira,
 	ZoneID: 0x81b5c037,
+	NameIndex: 342, // "Atlantic/Madeira"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAtlantic_Madeira,
@@ -10360,11 +9973,9 @@ var ZoneEraAtlantic_South_Georgia = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAtlantic_South_Georgia = "Atlantic/South_Georgia"
-
 var ZoneAtlantic_South_Georgia = zoneinfo.ZoneInfo{
-	Name: ZoneNameAtlantic_South_Georgia,
 	ZoneID: 0x33013174,
+	NameIndex: 344, // "Atlantic/South_Georgia"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAtlantic_South_Georgia,
@@ -10404,11 +10015,9 @@ var ZoneEraAtlantic_Stanley = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAtlantic_Stanley = "Atlantic/Stanley"
-
 var ZoneAtlantic_Stanley = zoneinfo.ZoneInfo{
-	Name: ZoneNameAtlantic_Stanley,
 	ZoneID: 0x7bb3e1c4,
+	NameIndex: 346, // "Atlantic/Stanley"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAtlantic_Stanley,
@@ -10436,11 +10045,9 @@ var ZoneEraAustralia_Adelaide = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Adelaide = "Australia/Adelaide"
-
 var ZoneAustralia_Adelaide = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Adelaide,
 	ZoneID: 0x2428e8a3,
+	NameIndex: 348, // "Australia/Adelaide"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Adelaide,
@@ -10468,11 +10075,9 @@ var ZoneEraAustralia_Brisbane = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Brisbane = "Australia/Brisbane"
-
 var ZoneAustralia_Brisbane = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Brisbane,
 	ZoneID: 0x4fedc9c0,
+	NameIndex: 349, // "Australia/Brisbane"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Brisbane,
@@ -10512,11 +10117,9 @@ var ZoneEraAustralia_Broken_Hill = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Broken_Hill = "Australia/Broken_Hill"
-
 var ZoneAustralia_Broken_Hill = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Broken_Hill,
 	ZoneID: 0xb06eada3,
+	NameIndex: 350, // "Australia/Broken_Hill"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Broken_Hill,
@@ -10544,11 +10147,9 @@ var ZoneEraAustralia_Darwin = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Darwin = "Australia/Darwin"
-
 var ZoneAustralia_Darwin = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Darwin,
 	ZoneID: 0x2876bdff,
+	NameIndex: 353, // "Australia/Darwin"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Darwin,
@@ -10576,11 +10177,9 @@ var ZoneEraAustralia_Eucla = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Eucla = "Australia/Eucla"
-
 var ZoneAustralia_Eucla = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Eucla,
 	ZoneID: 0x8cf99e44,
+	NameIndex: 354, // "Australia/Eucla"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Eucla,
@@ -10608,11 +10207,9 @@ var ZoneEraAustralia_Hobart = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Hobart = "Australia/Hobart"
-
 var ZoneAustralia_Hobart = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Hobart,
 	ZoneID: 0x32bf951a,
+	NameIndex: 355, // "Australia/Hobart"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Hobart,
@@ -10640,11 +10237,9 @@ var ZoneEraAustralia_Lindeman = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Lindeman = "Australia/Lindeman"
-
 var ZoneAustralia_Lindeman = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Lindeman,
 	ZoneID: 0xe05029e2,
+	NameIndex: 357, // "Australia/Lindeman"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Lindeman,
@@ -10672,11 +10267,9 @@ var ZoneEraAustralia_Lord_Howe = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Lord_Howe = "Australia/Lord_Howe"
-
 var ZoneAustralia_Lord_Howe = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Lord_Howe,
 	ZoneID: 0xa748b67d,
+	NameIndex: 358, // "Australia/Lord_Howe"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Lord_Howe,
@@ -10704,11 +10297,9 @@ var ZoneEraAustralia_Melbourne = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Melbourne = "Australia/Melbourne"
-
 var ZoneAustralia_Melbourne = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Melbourne,
 	ZoneID: 0x0fe559a3,
+	NameIndex: 359, // "Australia/Melbourne"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Melbourne,
@@ -10736,11 +10327,9 @@ var ZoneEraAustralia_Perth = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Perth = "Australia/Perth"
-
 var ZoneAustralia_Perth = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Perth,
 	ZoneID: 0x8db8269d,
+	NameIndex: 362, // "Australia/Perth"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Perth,
@@ -10768,11 +10357,9 @@ var ZoneEraAustralia_Sydney = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAustralia_Sydney = "Australia/Sydney"
-
 var ZoneAustralia_Sydney = zoneinfo.ZoneInfo{
-	Name: ZoneNameAustralia_Sydney,
 	ZoneID: 0x4d1e9776,
+	NameIndex: 365, // "Australia/Sydney"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraAustralia_Sydney,
@@ -10800,11 +10387,9 @@ var ZoneEraCET = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameCET = "CET"
-
 var ZoneCET = zoneinfo.ZoneInfo{
-	Name: ZoneNameCET,
 	ZoneID: 0x0b87d921,
+	NameIndex: 374, // "CET"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraCET,
@@ -10832,11 +10417,9 @@ var ZoneEraCST6CDT = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameCST6CDT = "CST6CDT"
-
 var ZoneCST6CDT = zoneinfo.ZoneInfo{
-	Name: ZoneNameCST6CDT,
 	ZoneID: 0xf0e87d00,
+	NameIndex: 375, // "CST6CDT"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraCST6CDT,
@@ -10864,11 +10447,9 @@ var ZoneEraEET = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEET = "EET"
-
 var ZoneEET = zoneinfo.ZoneInfo{
-	Name: ZoneNameEET,
 	ZoneID: 0x0b87e1a3,
+	NameIndex: 387, // "EET"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEET,
@@ -10896,11 +10477,9 @@ var ZoneEraEST = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEST = "EST"
-
 var ZoneEST = zoneinfo.ZoneInfo{
-	Name: ZoneNameEST,
 	ZoneID: 0x0b87e371,
+	NameIndex: 388, // "EST"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEST,
@@ -10928,11 +10507,9 @@ var ZoneEraEST5EDT = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEST5EDT = "EST5EDT"
-
 var ZoneEST5EDT = zoneinfo.ZoneInfo{
-	Name: ZoneNameEST5EDT,
 	ZoneID: 0x8adc72a3,
+	NameIndex: 389, // "EST5EDT"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEST5EDT,
@@ -10960,11 +10537,9 @@ var ZoneEraEtc_GMT = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT = "Etc/GMT"
-
 var ZoneEtc_GMT = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT,
 	ZoneID: 0xd8e2de58,
+	NameIndex: 392, // "Etc/GMT"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT,
@@ -10992,11 +10567,9 @@ var ZoneEraEtc_GMT_PLUS_1 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_1 = "Etc/GMT+1"
-
 var ZoneEtc_GMT_PLUS_1 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_1,
 	ZoneID: 0x9d13da14,
+	NameIndex: 394, // "Etc/GMT+1"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_1,
@@ -11024,11 +10597,9 @@ var ZoneEraEtc_GMT_PLUS_10 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_10 = "Etc/GMT+10"
-
 var ZoneEtc_GMT_PLUS_10 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_10,
 	ZoneID: 0x3f8f1cc4,
+	NameIndex: 395, // "Etc/GMT+10"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_10,
@@ -11056,11 +10627,9 @@ var ZoneEraEtc_GMT_PLUS_11 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_11 = "Etc/GMT+11"
-
 var ZoneEtc_GMT_PLUS_11 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_11,
 	ZoneID: 0x3f8f1cc5,
+	NameIndex: 396, // "Etc/GMT+11"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_11,
@@ -11088,11 +10657,9 @@ var ZoneEraEtc_GMT_PLUS_12 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_12 = "Etc/GMT+12"
-
 var ZoneEtc_GMT_PLUS_12 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_12,
 	ZoneID: 0x3f8f1cc6,
+	NameIndex: 397, // "Etc/GMT+12"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_12,
@@ -11120,11 +10687,9 @@ var ZoneEraEtc_GMT_PLUS_2 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_2 = "Etc/GMT+2"
-
 var ZoneEtc_GMT_PLUS_2 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_2,
 	ZoneID: 0x9d13da15,
+	NameIndex: 398, // "Etc/GMT+2"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_2,
@@ -11152,11 +10717,9 @@ var ZoneEraEtc_GMT_PLUS_3 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_3 = "Etc/GMT+3"
-
 var ZoneEtc_GMT_PLUS_3 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_3,
 	ZoneID: 0x9d13da16,
+	NameIndex: 399, // "Etc/GMT+3"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_3,
@@ -11184,11 +10747,9 @@ var ZoneEraEtc_GMT_PLUS_4 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_4 = "Etc/GMT+4"
-
 var ZoneEtc_GMT_PLUS_4 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_4,
 	ZoneID: 0x9d13da17,
+	NameIndex: 400, // "Etc/GMT+4"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_4,
@@ -11216,11 +10777,9 @@ var ZoneEraEtc_GMT_PLUS_5 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_5 = "Etc/GMT+5"
-
 var ZoneEtc_GMT_PLUS_5 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_5,
 	ZoneID: 0x9d13da18,
+	NameIndex: 401, // "Etc/GMT+5"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_5,
@@ -11248,11 +10807,9 @@ var ZoneEraEtc_GMT_PLUS_6 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_6 = "Etc/GMT+6"
-
 var ZoneEtc_GMT_PLUS_6 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_6,
 	ZoneID: 0x9d13da19,
+	NameIndex: 402, // "Etc/GMT+6"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_6,
@@ -11280,11 +10837,9 @@ var ZoneEraEtc_GMT_PLUS_7 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_7 = "Etc/GMT+7"
-
 var ZoneEtc_GMT_PLUS_7 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_7,
 	ZoneID: 0x9d13da1a,
+	NameIndex: 403, // "Etc/GMT+7"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_7,
@@ -11312,11 +10867,9 @@ var ZoneEraEtc_GMT_PLUS_8 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_8 = "Etc/GMT+8"
-
 var ZoneEtc_GMT_PLUS_8 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_8,
 	ZoneID: 0x9d13da1b,
+	NameIndex: 404, // "Etc/GMT+8"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_8,
@@ -11344,11 +10897,9 @@ var ZoneEraEtc_GMT_PLUS_9 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_PLUS_9 = "Etc/GMT+9"
-
 var ZoneEtc_GMT_PLUS_9 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_PLUS_9,
 	ZoneID: 0x9d13da1c,
+	NameIndex: 405, // "Etc/GMT+9"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_PLUS_9,
@@ -11376,11 +10927,9 @@ var ZoneEraEtc_GMT_1 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_1 = "Etc/GMT-1"
-
 var ZoneEtc_GMT_1 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_1,
 	ZoneID: 0x9d13da56,
+	NameIndex: 407, // "Etc/GMT-1"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_1,
@@ -11408,11 +10957,9 @@ var ZoneEraEtc_GMT_10 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_10 = "Etc/GMT-10"
-
 var ZoneEtc_GMT_10 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_10,
 	ZoneID: 0x3f8f2546,
+	NameIndex: 408, // "Etc/GMT-10"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_10,
@@ -11440,11 +10987,9 @@ var ZoneEraEtc_GMT_11 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_11 = "Etc/GMT-11"
-
 var ZoneEtc_GMT_11 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_11,
 	ZoneID: 0x3f8f2547,
+	NameIndex: 409, // "Etc/GMT-11"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_11,
@@ -11472,11 +11017,9 @@ var ZoneEraEtc_GMT_12 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_12 = "Etc/GMT-12"
-
 var ZoneEtc_GMT_12 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_12,
 	ZoneID: 0x3f8f2548,
+	NameIndex: 410, // "Etc/GMT-12"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_12,
@@ -11504,11 +11047,9 @@ var ZoneEraEtc_GMT_13 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_13 = "Etc/GMT-13"
-
 var ZoneEtc_GMT_13 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_13,
 	ZoneID: 0x3f8f2549,
+	NameIndex: 411, // "Etc/GMT-13"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_13,
@@ -11536,11 +11077,9 @@ var ZoneEraEtc_GMT_14 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_14 = "Etc/GMT-14"
-
 var ZoneEtc_GMT_14 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_14,
 	ZoneID: 0x3f8f254a,
+	NameIndex: 412, // "Etc/GMT-14"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_14,
@@ -11568,11 +11107,9 @@ var ZoneEraEtc_GMT_2 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_2 = "Etc/GMT-2"
-
 var ZoneEtc_GMT_2 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_2,
 	ZoneID: 0x9d13da57,
+	NameIndex: 413, // "Etc/GMT-2"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_2,
@@ -11600,11 +11137,9 @@ var ZoneEraEtc_GMT_3 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_3 = "Etc/GMT-3"
-
 var ZoneEtc_GMT_3 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_3,
 	ZoneID: 0x9d13da58,
+	NameIndex: 414, // "Etc/GMT-3"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_3,
@@ -11632,11 +11167,9 @@ var ZoneEraEtc_GMT_4 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_4 = "Etc/GMT-4"
-
 var ZoneEtc_GMT_4 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_4,
 	ZoneID: 0x9d13da59,
+	NameIndex: 415, // "Etc/GMT-4"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_4,
@@ -11664,11 +11197,9 @@ var ZoneEraEtc_GMT_5 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_5 = "Etc/GMT-5"
-
 var ZoneEtc_GMT_5 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_5,
 	ZoneID: 0x9d13da5a,
+	NameIndex: 416, // "Etc/GMT-5"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_5,
@@ -11696,11 +11227,9 @@ var ZoneEraEtc_GMT_6 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_6 = "Etc/GMT-6"
-
 var ZoneEtc_GMT_6 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_6,
 	ZoneID: 0x9d13da5b,
+	NameIndex: 417, // "Etc/GMT-6"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_6,
@@ -11728,11 +11257,9 @@ var ZoneEraEtc_GMT_7 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_7 = "Etc/GMT-7"
-
 var ZoneEtc_GMT_7 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_7,
 	ZoneID: 0x9d13da5c,
+	NameIndex: 418, // "Etc/GMT-7"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_7,
@@ -11760,11 +11287,9 @@ var ZoneEraEtc_GMT_8 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_8 = "Etc/GMT-8"
-
 var ZoneEtc_GMT_8 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_8,
 	ZoneID: 0x9d13da5d,
+	NameIndex: 419, // "Etc/GMT-8"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_8,
@@ -11792,11 +11317,9 @@ var ZoneEraEtc_GMT_9 = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_GMT_9 = "Etc/GMT-9"
-
 var ZoneEtc_GMT_9 = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_GMT_9,
 	ZoneID: 0x9d13da5e,
+	NameIndex: 420, // "Etc/GMT-9"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_GMT_9,
@@ -11824,11 +11347,9 @@ var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_UTC = "Etc/UTC"
-
 var ZoneEtc_UTC = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_UTC,
 	ZoneID: 0xd8e31abc,
+	NameIndex: 424, // "Etc/UTC"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_UTC,
@@ -11856,11 +11377,9 @@ var ZoneEraEurope_Andorra = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Andorra = "Europe/Andorra"
-
 var ZoneEurope_Andorra = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Andorra,
 	ZoneID: 0x97f6764b,
+	NameIndex: 428, // "Europe/Andorra"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Andorra,
@@ -11924,11 +11443,9 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Astrakhan = "Europe/Astrakhan"
-
 var ZoneEurope_Astrakhan = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Astrakhan,
 	ZoneID: 0xe22256e1,
+	NameIndex: 429, // "Europe/Astrakhan"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Astrakhan,
@@ -11956,11 +11473,9 @@ var ZoneEraEurope_Athens = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Athens = "Europe/Athens"
-
 var ZoneEurope_Athens = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Athens,
 	ZoneID: 0x4318fa27,
+	NameIndex: 430, // "Europe/Athens"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Athens,
@@ -11988,11 +11503,9 @@ var ZoneEraEurope_Belgrade = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Belgrade = "Europe/Belgrade"
-
 var ZoneEurope_Belgrade = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Belgrade,
 	ZoneID: 0xe0532b3a,
+	NameIndex: 432, // "Europe/Belgrade"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Belgrade,
@@ -12020,11 +11533,9 @@ var ZoneEraEurope_Berlin = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Berlin = "Europe/Berlin"
-
 var ZoneEurope_Berlin = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Berlin,
 	ZoneID: 0x44644c20,
+	NameIndex: 433, // "Europe/Berlin"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Berlin,
@@ -12052,11 +11563,9 @@ var ZoneEraEurope_Brussels = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Brussels = "Europe/Brussels"
-
 var ZoneEurope_Brussels = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Brussels,
 	ZoneID: 0xdee07337,
+	NameIndex: 435, // "Europe/Brussels"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Brussels,
@@ -12084,11 +11593,9 @@ var ZoneEraEurope_Bucharest = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Bucharest = "Europe/Bucharest"
-
 var ZoneEurope_Bucharest = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Bucharest,
 	ZoneID: 0xfb349ec5,
+	NameIndex: 436, // "Europe/Bucharest"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Bucharest,
@@ -12116,11 +11623,9 @@ var ZoneEraEurope_Budapest = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Budapest = "Europe/Budapest"
-
 var ZoneEurope_Budapest = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Budapest,
 	ZoneID: 0x9ce0197c,
+	NameIndex: 437, // "Europe/Budapest"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Budapest,
@@ -12148,11 +11653,9 @@ var ZoneEraEurope_Chisinau = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Chisinau = "Europe/Chisinau"
-
 var ZoneEurope_Chisinau = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Chisinau,
 	ZoneID: 0xad58aa18,
+	NameIndex: 439, // "Europe/Chisinau"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Chisinau,
@@ -12180,11 +11683,9 @@ var ZoneEraEurope_Dublin = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Dublin = "Europe/Dublin"
-
 var ZoneEurope_Dublin = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Dublin,
 	ZoneID: 0x4a275f62,
+	NameIndex: 441, // "Europe/Dublin"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Dublin,
@@ -12212,11 +11713,9 @@ var ZoneEraEurope_Gibraltar = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Gibraltar = "Europe/Gibraltar"
-
 var ZoneEurope_Gibraltar = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Gibraltar,
 	ZoneID: 0xf8e325fc,
+	NameIndex: 442, // "Europe/Gibraltar"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Gibraltar,
@@ -12244,11 +11743,9 @@ var ZoneEraEurope_Helsinki = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Helsinki = "Europe/Helsinki"
-
 var ZoneEurope_Helsinki = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Helsinki,
 	ZoneID: 0x6ab2975b,
+	NameIndex: 444, // "Europe/Helsinki"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Helsinki,
@@ -12372,11 +11869,9 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Istanbul = "Europe/Istanbul"
-
 var ZoneEurope_Istanbul = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Istanbul,
 	ZoneID: 0x9e09d6e6,
+	NameIndex: 446, // "Europe/Istanbul"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Istanbul,
@@ -12428,11 +11923,9 @@ var ZoneEraEurope_Kaliningrad = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Kaliningrad = "Europe/Kaliningrad"
-
 var ZoneEurope_Kaliningrad = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Kaliningrad,
 	ZoneID: 0xd33b2f28,
+	NameIndex: 448, // "Europe/Kaliningrad"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Kaliningrad,
@@ -12484,11 +11977,9 @@ var ZoneEraEurope_Kirov = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Kirov = "Europe/Kirov"
-
 var ZoneEurope_Kirov = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Kirov,
 	ZoneID: 0xfaf5abef,
+	NameIndex: 450, // "Europe/Kirov"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Kirov,
@@ -12516,11 +12007,9 @@ var ZoneEraEurope_Kyiv = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Kyiv = "Europe/Kyiv"
-
 var ZoneEurope_Kyiv = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Kyiv,
 	ZoneID: 0xa2c1e347,
+	NameIndex: 451, // "Europe/Kyiv"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Kyiv,
@@ -12548,11 +12037,9 @@ var ZoneEraEurope_Lisbon = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Lisbon = "Europe/Lisbon"
-
 var ZoneEurope_Lisbon = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Lisbon,
 	ZoneID: 0x5c00a70b,
+	NameIndex: 452, // "Europe/Lisbon"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Lisbon,
@@ -12580,11 +12067,9 @@ var ZoneEraEurope_London = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_London = "Europe/London"
-
 var ZoneEurope_London = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_London,
 	ZoneID: 0x5c6a84ae,
+	NameIndex: 454, // "Europe/London"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_London,
@@ -12612,11 +12097,9 @@ var ZoneEraEurope_Madrid = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Madrid = "Europe/Madrid"
-
 var ZoneEurope_Madrid = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Madrid,
 	ZoneID: 0x5dbd1535,
+	NameIndex: 456, // "Europe/Madrid"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Madrid,
@@ -12644,11 +12127,9 @@ var ZoneEraEurope_Malta = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Malta = "Europe/Malta"
-
 var ZoneEurope_Malta = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Malta,
 	ZoneID: 0xfb1560f3,
+	NameIndex: 457, // "Europe/Malta"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Malta,
@@ -12688,11 +12169,9 @@ var ZoneEraEurope_Minsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Minsk = "Europe/Minsk"
-
 var ZoneEurope_Minsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Minsk,
 	ZoneID: 0xfb19cc66,
+	NameIndex: 459, // "Europe/Minsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Minsk,
@@ -12744,11 +12223,9 @@ var ZoneEraEurope_Moscow = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Moscow = "Europe/Moscow"
-
 var ZoneEurope_Moscow = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Moscow,
 	ZoneID: 0x5ec266fc,
+	NameIndex: 461, // "Europe/Moscow"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Moscow,
@@ -12776,11 +12253,9 @@ var ZoneEraEurope_Paris = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Paris = "Europe/Paris"
-
 var ZoneEurope_Paris = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Paris,
 	ZoneID: 0xfb4bc2a3,
+	NameIndex: 464, // "Europe/Paris"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Paris,
@@ -12808,11 +12283,9 @@ var ZoneEraEurope_Prague = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Prague = "Europe/Prague"
-
 var ZoneEurope_Prague = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Prague,
 	ZoneID: 0x65ee5d48,
+	NameIndex: 466, // "Europe/Prague"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Prague,
@@ -12864,11 +12337,9 @@ var ZoneEraEurope_Riga = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Riga = "Europe/Riga"
-
 var ZoneEurope_Riga = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Riga,
 	ZoneID: 0xa2c57587,
+	NameIndex: 467, // "Europe/Riga"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Riga,
@@ -12896,11 +12367,9 @@ var ZoneEraEurope_Rome = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Rome = "Europe/Rome"
-
 var ZoneEurope_Rome = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Rome,
 	ZoneID: 0xa2c58fd7,
+	NameIndex: 468, // "Europe/Rome"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Rome,
@@ -12952,11 +12421,9 @@ var ZoneEraEurope_Samara = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Samara = "Europe/Samara"
-
 var ZoneEurope_Samara = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Samara,
 	ZoneID: 0x6bc0b139,
+	NameIndex: 469, // "Europe/Samara"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Samara,
@@ -13020,11 +12487,9 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Saratov = "Europe/Saratov"
-
 var ZoneEurope_Saratov = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Saratov,
 	ZoneID: 0xe4315da4,
+	NameIndex: 472, // "Europe/Saratov"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Saratov,
@@ -13076,11 +12541,9 @@ var ZoneEraEurope_Simferopol = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Simferopol = "Europe/Simferopol"
-
 var ZoneEurope_Simferopol = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Simferopol,
 	ZoneID: 0xda9eb724,
+	NameIndex: 473, // "Europe/Simferopol"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Simferopol,
@@ -13108,11 +12571,9 @@ var ZoneEraEurope_Sofia = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Sofia = "Europe/Sofia"
-
 var ZoneEurope_Sofia = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Sofia,
 	ZoneID: 0xfb898656,
+	NameIndex: 475, // "Europe/Sofia"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Sofia,
@@ -13164,11 +12625,9 @@ var ZoneEraEurope_Tallinn = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Tallinn = "Europe/Tallinn"
-
 var ZoneEurope_Tallinn = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Tallinn,
 	ZoneID: 0x30c4e096,
+	NameIndex: 477, // "Europe/Tallinn"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Tallinn,
@@ -13196,11 +12655,9 @@ var ZoneEraEurope_Tirane = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Tirane = "Europe/Tirane"
-
 var ZoneEurope_Tirane = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Tirane,
 	ZoneID: 0x6ea95b47,
+	NameIndex: 478, // "Europe/Tirane"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Tirane,
@@ -13264,11 +12721,9 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Ulyanovsk = "Europe/Ulyanovsk"
-
 var ZoneEurope_Ulyanovsk = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Ulyanovsk,
 	ZoneID: 0xe03783d0,
+	NameIndex: 480, // "Europe/Ulyanovsk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Ulyanovsk,
@@ -13296,11 +12751,9 @@ var ZoneEraEurope_Vienna = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Vienna = "Europe/Vienna"
-
 var ZoneEurope_Vienna = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Vienna,
 	ZoneID: 0x734cc2e5,
+	NameIndex: 484, // "Europe/Vienna"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Vienna,
@@ -13352,11 +12805,9 @@ var ZoneEraEurope_Vilnius = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Vilnius = "Europe/Vilnius"
-
 var ZoneEurope_Vilnius = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Vilnius,
 	ZoneID: 0xdd63b8ce,
+	NameIndex: 485, // "Europe/Vilnius"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Vilnius,
@@ -13432,11 +12883,9 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Volgograd = "Europe/Volgograd"
-
 var ZoneEurope_Volgograd = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Volgograd,
 	ZoneID: 0x3ed0f389,
+	NameIndex: 486, // "Europe/Volgograd"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Volgograd,
@@ -13464,11 +12913,9 @@ var ZoneEraEurope_Warsaw = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Warsaw = "Europe/Warsaw"
-
 var ZoneEurope_Warsaw = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Warsaw,
 	ZoneID: 0x75185c19,
+	NameIndex: 487, // "Europe/Warsaw"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Warsaw,
@@ -13496,11 +12943,9 @@ var ZoneEraEurope_Zurich = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEurope_Zurich = "Europe/Zurich"
-
 var ZoneEurope_Zurich = zoneinfo.ZoneInfo{
-	Name: ZoneNameEurope_Zurich,
 	ZoneID: 0x7d8195b9,
+	NameIndex: 490, // "Europe/Zurich"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraEurope_Zurich,
@@ -13528,11 +12973,9 @@ var ZoneEraHST = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameHST = "HST"
-
 var ZoneHST = zoneinfo.ZoneInfo{
-	Name: ZoneNameHST,
 	ZoneID: 0x0b87f034,
+	NameIndex: 498, // "HST"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraHST,
@@ -13560,11 +13003,9 @@ var ZoneEraIndian_Chagos = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameIndian_Chagos = "Indian/Chagos"
-
 var ZoneIndian_Chagos = zoneinfo.ZoneInfo{
-	Name: ZoneNameIndian_Chagos,
 	ZoneID: 0x456f7c3c,
+	NameIndex: 502, // "Indian/Chagos"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraIndian_Chagos,
@@ -13592,11 +13033,9 @@ var ZoneEraIndian_Maldives = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameIndian_Maldives = "Indian/Maldives"
-
 var ZoneIndian_Maldives = zoneinfo.ZoneInfo{
-	Name: ZoneNameIndian_Maldives,
 	ZoneID: 0x9869681c,
+	NameIndex: 508, // "Indian/Maldives"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraIndian_Maldives,
@@ -13624,11 +13063,9 @@ var ZoneEraIndian_Mauritius = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameIndian_Mauritius = "Indian/Mauritius"
-
 var ZoneIndian_Mauritius = zoneinfo.ZoneInfo{
-	Name: ZoneNameIndian_Mauritius,
 	ZoneID: 0x7b09c02a,
+	NameIndex: 509, // "Indian/Mauritius"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraIndian_Mauritius,
@@ -13656,11 +13093,9 @@ var ZoneEraMET = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameMET = "MET"
-
 var ZoneMET = zoneinfo.ZoneInfo{
-	Name: ZoneNameMET,
 	ZoneID: 0x0b8803ab,
+	NameIndex: 518, // "MET"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraMET,
@@ -13688,11 +13123,9 @@ var ZoneEraMST = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameMST = "MST"
-
 var ZoneMST = zoneinfo.ZoneInfo{
-	Name: ZoneNameMST,
 	ZoneID: 0x0b880579,
+	NameIndex: 519, // "MST"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraMST,
@@ -13720,11 +13153,9 @@ var ZoneEraMST7MDT = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameMST7MDT = "MST7MDT"
-
 var ZoneMST7MDT = zoneinfo.ZoneInfo{
-	Name: ZoneNameMST7MDT,
 	ZoneID: 0xf2af9375,
+	NameIndex: 520, // "MST7MDT"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraMST7MDT,
@@ -13752,11 +13183,9 @@ var ZoneEraPST8PDT = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePST8PDT = "PST8PDT"
-
 var ZonePST8PDT = zoneinfo.ZoneInfo{
-	Name: ZoneNamePST8PDT,
 	ZoneID: 0xd99ee2dc,
+	NameIndex: 528, // "PST8PDT"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPST8PDT,
@@ -13796,11 +13225,9 @@ var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Apia = "Pacific/Apia"
-
 var ZonePacific_Apia = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Apia,
 	ZoneID: 0x23359b5e,
+	NameIndex: 529, // "Pacific/Apia"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Apia,
@@ -13828,11 +13255,9 @@ var ZoneEraPacific_Auckland = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Auckland = "Pacific/Auckland"
-
 var ZonePacific_Auckland = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Auckland,
 	ZoneID: 0x25062f86,
+	NameIndex: 530, // "Pacific/Auckland"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Auckland,
@@ -13872,11 +13297,9 @@ var ZoneEraPacific_Bougainville = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Bougainville = "Pacific/Bougainville"
-
 var ZonePacific_Bougainville = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Bougainville,
 	ZoneID: 0x5e10f7a4,
+	NameIndex: 531, // "Pacific/Bougainville"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Bougainville,
@@ -13904,11 +13327,9 @@ var ZoneEraPacific_Chatham = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Chatham = "Pacific/Chatham"
-
 var ZonePacific_Chatham = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Chatham,
 	ZoneID: 0x2f0de999,
+	NameIndex: 532, // "Pacific/Chatham"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Chatham,
@@ -13936,11 +13357,9 @@ var ZoneEraPacific_Easter = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Easter = "Pacific/Easter"
-
 var ZonePacific_Easter = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Easter,
 	ZoneID: 0xcf54f7e7,
+	NameIndex: 534, // "Pacific/Easter"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Easter,
@@ -13968,11 +13387,9 @@ var ZoneEraPacific_Efate = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Efate = "Pacific/Efate"
-
 var ZonePacific_Efate = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Efate,
 	ZoneID: 0x8a2bce28,
+	NameIndex: 535, // "Pacific/Efate"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Efate,
@@ -14012,11 +13429,9 @@ var ZoneEraPacific_Fakaofo = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Fakaofo = "Pacific/Fakaofo"
-
 var ZonePacific_Fakaofo = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Fakaofo,
 	ZoneID: 0x06532bba,
+	NameIndex: 537, // "Pacific/Fakaofo"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Fakaofo,
@@ -14044,11 +13459,9 @@ var ZoneEraPacific_Fiji = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Fiji = "Pacific/Fiji"
-
 var ZonePacific_Fiji = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Fiji,
 	ZoneID: 0x23383ba5,
+	NameIndex: 538, // "Pacific/Fiji"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Fiji,
@@ -14076,11 +13489,9 @@ var ZoneEraPacific_Galapagos = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Galapagos = "Pacific/Galapagos"
-
 var ZonePacific_Galapagos = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Galapagos,
 	ZoneID: 0xa952f752,
+	NameIndex: 540, // "Pacific/Galapagos"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Galapagos,
@@ -14108,11 +13519,9 @@ var ZoneEraPacific_Gambier = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Gambier = "Pacific/Gambier"
-
 var ZonePacific_Gambier = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Gambier,
 	ZoneID: 0x53720c3a,
+	NameIndex: 541, // "Pacific/Gambier"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Gambier,
@@ -14140,11 +13549,9 @@ var ZoneEraPacific_Guadalcanal = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Guadalcanal = "Pacific/Guadalcanal"
-
 var ZonePacific_Guadalcanal = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Guadalcanal,
 	ZoneID: 0xf4dd25f0,
+	NameIndex: 542, // "Pacific/Guadalcanal"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Guadalcanal,
@@ -14184,11 +13591,9 @@ var ZoneEraPacific_Guam = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Guam = "Pacific/Guam"
-
 var ZonePacific_Guam = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Guam,
 	ZoneID: 0x2338f9ed,
+	NameIndex: 543, // "Pacific/Guam"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Guam,
@@ -14216,11 +13621,9 @@ var ZoneEraPacific_Honolulu = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Honolulu = "Pacific/Honolulu"
-
 var ZonePacific_Honolulu = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Honolulu,
 	ZoneID: 0xe6e70af9,
+	NameIndex: 544, // "Pacific/Honolulu"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Honolulu,
@@ -14248,11 +13651,9 @@ var ZoneEraPacific_Kanton = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Kanton = "Pacific/Kanton"
-
 var ZonePacific_Kanton = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Kanton,
 	ZoneID: 0xdd512f0e,
+	NameIndex: 546, // "Pacific/Kanton"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Kanton,
@@ -14280,11 +13681,9 @@ var ZoneEraPacific_Kiritimati = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Kiritimati = "Pacific/Kiritimati"
-
 var ZonePacific_Kiritimati = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Kiritimati,
 	ZoneID: 0x8305073a,
+	NameIndex: 547, // "Pacific/Kiritimati"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Kiritimati,
@@ -14324,11 +13723,9 @@ var ZoneEraPacific_Kosrae = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Kosrae = "Pacific/Kosrae"
-
 var ZonePacific_Kosrae = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Kosrae,
 	ZoneID: 0xde5139a8,
+	NameIndex: 548, // "Pacific/Kosrae"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Kosrae,
@@ -14356,11 +13753,9 @@ var ZoneEraPacific_Kwajalein = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Kwajalein = "Pacific/Kwajalein"
-
 var ZonePacific_Kwajalein = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Kwajalein,
 	ZoneID: 0x8e216759,
+	NameIndex: 549, // "Pacific/Kwajalein"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Kwajalein,
@@ -14388,11 +13783,9 @@ var ZoneEraPacific_Marquesas = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Marquesas = "Pacific/Marquesas"
-
 var ZonePacific_Marquesas = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Marquesas,
 	ZoneID: 0x57ca7135,
+	NameIndex: 551, // "Pacific/Marquesas"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Marquesas,
@@ -14420,11 +13813,9 @@ var ZoneEraPacific_Nauru = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Nauru = "Pacific/Nauru"
-
 var ZonePacific_Nauru = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Nauru,
 	ZoneID: 0x8acc41ae,
+	NameIndex: 553, // "Pacific/Nauru"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Nauru,
@@ -14452,11 +13843,9 @@ var ZoneEraPacific_Niue = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Niue = "Pacific/Niue"
-
 var ZonePacific_Niue = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Niue,
 	ZoneID: 0x233ca014,
+	NameIndex: 554, // "Pacific/Niue"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Niue,
@@ -14508,11 +13897,9 @@ var ZoneEraPacific_Norfolk = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Norfolk = "Pacific/Norfolk"
-
 var ZonePacific_Norfolk = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Norfolk,
 	ZoneID: 0x8f4eb4be,
+	NameIndex: 555, // "Pacific/Norfolk"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Norfolk,
@@ -14540,11 +13927,9 @@ var ZoneEraPacific_Noumea = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Noumea = "Pacific/Noumea"
-
 var ZonePacific_Noumea = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Noumea,
 	ZoneID: 0xe551b788,
+	NameIndex: 556, // "Pacific/Noumea"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Noumea,
@@ -14572,11 +13957,9 @@ var ZoneEraPacific_Pago_Pago = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Pago_Pago = "Pacific/Pago_Pago"
-
 var ZonePacific_Pago_Pago = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Pago_Pago,
 	ZoneID: 0x603aebd0,
+	NameIndex: 557, // "Pacific/Pago_Pago"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Pago_Pago,
@@ -14604,11 +13987,9 @@ var ZoneEraPacific_Palau = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Palau = "Pacific/Palau"
-
 var ZonePacific_Palau = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Palau,
 	ZoneID: 0x8af04a36,
+	NameIndex: 558, // "Pacific/Palau"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Palau,
@@ -14636,11 +14017,9 @@ var ZoneEraPacific_Pitcairn = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Pitcairn = "Pacific/Pitcairn"
-
 var ZonePacific_Pitcairn = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Pitcairn,
 	ZoneID: 0x8837d8bd,
+	NameIndex: 559, // "Pacific/Pitcairn"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Pitcairn,
@@ -14668,11 +14047,9 @@ var ZoneEraPacific_Port_Moresby = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Port_Moresby = "Pacific/Port_Moresby"
-
 var ZonePacific_Port_Moresby = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Port_Moresby,
 	ZoneID: 0xa7ba7f68,
+	NameIndex: 562, // "Pacific/Port_Moresby"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Port_Moresby,
@@ -14700,11 +14077,9 @@ var ZoneEraPacific_Rarotonga = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Rarotonga = "Pacific/Rarotonga"
-
 var ZonePacific_Rarotonga = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Rarotonga,
 	ZoneID: 0x9981a3b0,
+	NameIndex: 563, // "Pacific/Rarotonga"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Rarotonga,
@@ -14732,11 +14107,9 @@ var ZoneEraPacific_Tahiti = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Tahiti = "Pacific/Tahiti"
-
 var ZonePacific_Tahiti = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Tahiti,
 	ZoneID: 0xf24c2446,
+	NameIndex: 566, // "Pacific/Tahiti"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Tahiti,
@@ -14764,11 +14137,9 @@ var ZoneEraPacific_Tarawa = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Tarawa = "Pacific/Tarawa"
-
 var ZonePacific_Tarawa = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Tarawa,
 	ZoneID: 0xf2517e63,
+	NameIndex: 567, // "Pacific/Tarawa"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Tarawa,
@@ -14808,11 +14179,9 @@ var ZoneEraPacific_Tongatapu = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNamePacific_Tongatapu = "Pacific/Tongatapu"
-
 var ZonePacific_Tongatapu = zoneinfo.ZoneInfo{
-	Name: ZoneNamePacific_Tongatapu,
 	ZoneID: 0x262ca836,
+	NameIndex: 568, // "Pacific/Tongatapu"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraPacific_Tongatapu,
@@ -14840,11 +14209,9 @@ var ZoneEraWET = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameWET = "WET"
-
 var ZoneWET = zoneinfo.ZoneInfo{
-	Name: ZoneNameWET,
 	ZoneID: 0x0b882e35,
+	NameIndex: 595, // "WET"
 	StartYear: 2000,
 	UntilYear: 10000,
 	Eras: ZoneEraWET,
@@ -14859,7 +14226,7 @@ var ZoneWET = zoneinfo.ZoneInfo{
 
 // Link: Africa/Accra -> Africa/Abidjan
 var ZoneAfrica_Accra = zoneinfo.ZoneInfo{
-	Name: "Africa/Accra",
+	NameIndex: 2, // "Africa/Accra"
 	ZoneID: 0x77d5b054,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14869,7 +14236,7 @@ var ZoneAfrica_Accra = zoneinfo.ZoneInfo{
 
 // Link: Africa/Addis_Ababa -> Africa/Nairobi
 var ZoneAfrica_Addis_Ababa = zoneinfo.ZoneInfo{
-	Name: "Africa/Addis_Ababa",
+	NameIndex: 3, // "Africa/Addis_Ababa"
 	ZoneID: 0x05ae1e65,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14879,7 +14246,7 @@ var ZoneAfrica_Addis_Ababa = zoneinfo.ZoneInfo{
 
 // Link: Africa/Asmara -> Africa/Nairobi
 var ZoneAfrica_Asmara = zoneinfo.ZoneInfo{
-	Name: "Africa/Asmara",
+	NameIndex: 5, // "Africa/Asmara"
 	ZoneID: 0x73b278ef,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14889,7 +14256,7 @@ var ZoneAfrica_Asmara = zoneinfo.ZoneInfo{
 
 // Link: Africa/Asmera -> Africa/Nairobi
 var ZoneAfrica_Asmera = zoneinfo.ZoneInfo{
-	Name: "Africa/Asmera",
+	NameIndex: 6, // "Africa/Asmera"
 	ZoneID: 0x73b289f3,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14899,7 +14266,7 @@ var ZoneAfrica_Asmera = zoneinfo.ZoneInfo{
 
 // Link: Africa/Bamako -> Africa/Abidjan
 var ZoneAfrica_Bamako = zoneinfo.ZoneInfo{
-	Name: "Africa/Bamako",
+	NameIndex: 7, // "Africa/Bamako"
 	ZoneID: 0x74c1e7a5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14909,7 +14276,7 @@ var ZoneAfrica_Bamako = zoneinfo.ZoneInfo{
 
 // Link: Africa/Bangui -> Africa/Lagos
 var ZoneAfrica_Bangui = zoneinfo.ZoneInfo{
-	Name: "Africa/Bangui",
+	NameIndex: 8, // "Africa/Bangui"
 	ZoneID: 0x74c28ed0,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14919,7 +14286,7 @@ var ZoneAfrica_Bangui = zoneinfo.ZoneInfo{
 
 // Link: Africa/Banjul -> Africa/Abidjan
 var ZoneAfrica_Banjul = zoneinfo.ZoneInfo{
-	Name: "Africa/Banjul",
+	NameIndex: 9, // "Africa/Banjul"
 	ZoneID: 0x74c29b96,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14929,7 +14296,7 @@ var ZoneAfrica_Banjul = zoneinfo.ZoneInfo{
 
 // Link: Africa/Blantyre -> Africa/Maputo
 var ZoneAfrica_Blantyre = zoneinfo.ZoneInfo{
-	Name: "Africa/Blantyre",
+	NameIndex: 11, // "Africa/Blantyre"
 	ZoneID: 0xe08d813b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14939,7 +14306,7 @@ var ZoneAfrica_Blantyre = zoneinfo.ZoneInfo{
 
 // Link: Africa/Brazzaville -> Africa/Lagos
 var ZoneAfrica_Brazzaville = zoneinfo.ZoneInfo{
-	Name: "Africa/Brazzaville",
+	NameIndex: 12, // "Africa/Brazzaville"
 	ZoneID: 0x39cda760,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14949,7 +14316,7 @@ var ZoneAfrica_Brazzaville = zoneinfo.ZoneInfo{
 
 // Link: Africa/Bujumbura -> Africa/Maputo
 var ZoneAfrica_Bujumbura = zoneinfo.ZoneInfo{
-	Name: "Africa/Bujumbura",
+	NameIndex: 13, // "Africa/Bujumbura"
 	ZoneID: 0x05232a47,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14959,7 +14326,7 @@ var ZoneAfrica_Bujumbura = zoneinfo.ZoneInfo{
 
 // Link: Africa/Conakry -> Africa/Abidjan
 var ZoneAfrica_Conakry = zoneinfo.ZoneInfo{
-	Name: "Africa/Conakry",
+	NameIndex: 17, // "Africa/Conakry"
 	ZoneID: 0x7ab36b31,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14969,7 +14336,7 @@ var ZoneAfrica_Conakry = zoneinfo.ZoneInfo{
 
 // Link: Africa/Dakar -> Africa/Abidjan
 var ZoneAfrica_Dakar = zoneinfo.ZoneInfo{
-	Name: "Africa/Dakar",
+	NameIndex: 18, // "Africa/Dakar"
 	ZoneID: 0x780b00fd,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14979,7 +14346,7 @@ var ZoneAfrica_Dakar = zoneinfo.ZoneInfo{
 
 // Link: Africa/Dar_es_Salaam -> Africa/Nairobi
 var ZoneAfrica_Dar_es_Salaam = zoneinfo.ZoneInfo{
-	Name: "Africa/Dar_es_Salaam",
+	NameIndex: 19, // "Africa/Dar_es_Salaam"
 	ZoneID: 0xa04c47b6,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14989,7 +14356,7 @@ var ZoneAfrica_Dar_es_Salaam = zoneinfo.ZoneInfo{
 
 // Link: Africa/Djibouti -> Africa/Nairobi
 var ZoneAfrica_Djibouti = zoneinfo.ZoneInfo{
-	Name: "Africa/Djibouti",
+	NameIndex: 20, // "Africa/Djibouti"
 	ZoneID: 0x30ea01d4,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -14999,7 +14366,7 @@ var ZoneAfrica_Djibouti = zoneinfo.ZoneInfo{
 
 // Link: Africa/Douala -> Africa/Lagos
 var ZoneAfrica_Douala = zoneinfo.ZoneInfo{
-	Name: "Africa/Douala",
+	NameIndex: 21, // "Africa/Douala"
 	ZoneID: 0x7a6df310,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15009,7 +14376,7 @@ var ZoneAfrica_Douala = zoneinfo.ZoneInfo{
 
 // Link: Africa/Freetown -> Africa/Abidjan
 var ZoneAfrica_Freetown = zoneinfo.ZoneInfo{
-	Name: "Africa/Freetown",
+	NameIndex: 23, // "Africa/Freetown"
 	ZoneID: 0x6823dd64,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15019,7 +14386,7 @@ var ZoneAfrica_Freetown = zoneinfo.ZoneInfo{
 
 // Link: Africa/Gaborone -> Africa/Maputo
 var ZoneAfrica_Gaborone = zoneinfo.ZoneInfo{
-	Name: "Africa/Gaborone",
+	NameIndex: 24, // "Africa/Gaborone"
 	ZoneID: 0x317c0aa7,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15029,7 +14396,7 @@ var ZoneAfrica_Gaborone = zoneinfo.ZoneInfo{
 
 // Link: Africa/Harare -> Africa/Maputo
 var ZoneAfrica_Harare = zoneinfo.ZoneInfo{
-	Name: "Africa/Harare",
+	NameIndex: 25, // "Africa/Harare"
 	ZoneID: 0x82c39a2d,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15039,7 +14406,7 @@ var ZoneAfrica_Harare = zoneinfo.ZoneInfo{
 
 // Link: Africa/Kampala -> Africa/Nairobi
 var ZoneAfrica_Kampala = zoneinfo.ZoneInfo{
-	Name: "Africa/Kampala",
+	NameIndex: 28, // "Africa/Kampala"
 	ZoneID: 0xc1d30e31,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15049,7 +14416,7 @@ var ZoneAfrica_Kampala = zoneinfo.ZoneInfo{
 
 // Link: Africa/Kigali -> Africa/Maputo
 var ZoneAfrica_Kigali = zoneinfo.ZoneInfo{
-	Name: "Africa/Kigali",
+	NameIndex: 30, // "Africa/Kigali"
 	ZoneID: 0x8a4dcf2b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15059,7 +14426,7 @@ var ZoneAfrica_Kigali = zoneinfo.ZoneInfo{
 
 // Link: Africa/Kinshasa -> Africa/Lagos
 var ZoneAfrica_Kinshasa = zoneinfo.ZoneInfo{
-	Name: "Africa/Kinshasa",
+	NameIndex: 31, // "Africa/Kinshasa"
 	ZoneID: 0x6695d70c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15069,7 +14436,7 @@ var ZoneAfrica_Kinshasa = zoneinfo.ZoneInfo{
 
 // Link: Africa/Libreville -> Africa/Lagos
 var ZoneAfrica_Libreville = zoneinfo.ZoneInfo{
-	Name: "Africa/Libreville",
+	NameIndex: 33, // "Africa/Libreville"
 	ZoneID: 0x01d96de4,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15079,7 +14446,7 @@ var ZoneAfrica_Libreville = zoneinfo.ZoneInfo{
 
 // Link: Africa/Lome -> Africa/Abidjan
 var ZoneAfrica_Lome = zoneinfo.ZoneInfo{
-	Name: "Africa/Lome",
+	NameIndex: 34, // "Africa/Lome"
 	ZoneID: 0xd51c3a07,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15089,7 +14456,7 @@ var ZoneAfrica_Lome = zoneinfo.ZoneInfo{
 
 // Link: Africa/Luanda -> Africa/Lagos
 var ZoneAfrica_Luanda = zoneinfo.ZoneInfo{
-	Name: "Africa/Luanda",
+	NameIndex: 35, // "Africa/Luanda"
 	ZoneID: 0x8d7909cf,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15099,7 +14466,7 @@ var ZoneAfrica_Luanda = zoneinfo.ZoneInfo{
 
 // Link: Africa/Lubumbashi -> Africa/Maputo
 var ZoneAfrica_Lubumbashi = zoneinfo.ZoneInfo{
-	Name: "Africa/Lubumbashi",
+	NameIndex: 36, // "Africa/Lubumbashi"
 	ZoneID: 0x6fd88566,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15109,7 +14476,7 @@ var ZoneAfrica_Lubumbashi = zoneinfo.ZoneInfo{
 
 // Link: Africa/Lusaka -> Africa/Maputo
 var ZoneAfrica_Lusaka = zoneinfo.ZoneInfo{
-	Name: "Africa/Lusaka",
+	NameIndex: 37, // "Africa/Lusaka"
 	ZoneID: 0x8d82b23b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15119,7 +14486,7 @@ var ZoneAfrica_Lusaka = zoneinfo.ZoneInfo{
 
 // Link: Africa/Malabo -> Africa/Lagos
 var ZoneAfrica_Malabo = zoneinfo.ZoneInfo{
-	Name: "Africa/Malabo",
+	NameIndex: 38, // "Africa/Malabo"
 	ZoneID: 0x8e6a1906,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15129,7 +14496,7 @@ var ZoneAfrica_Malabo = zoneinfo.ZoneInfo{
 
 // Link: Africa/Maseru -> Africa/Johannesburg
 var ZoneAfrica_Maseru = zoneinfo.ZoneInfo{
-	Name: "Africa/Maseru",
+	NameIndex: 40, // "Africa/Maseru"
 	ZoneID: 0x8e6e02c7,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15139,7 +14506,7 @@ var ZoneAfrica_Maseru = zoneinfo.ZoneInfo{
 
 // Link: Africa/Mbabane -> Africa/Johannesburg
 var ZoneAfrica_Mbabane = zoneinfo.ZoneInfo{
-	Name: "Africa/Mbabane",
+	NameIndex: 41, // "Africa/Mbabane"
 	ZoneID: 0x5d3bdd40,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15149,7 +14516,7 @@ var ZoneAfrica_Mbabane = zoneinfo.ZoneInfo{
 
 // Link: Africa/Mogadishu -> Africa/Nairobi
 var ZoneAfrica_Mogadishu = zoneinfo.ZoneInfo{
-	Name: "Africa/Mogadishu",
+	NameIndex: 42, // "Africa/Mogadishu"
 	ZoneID: 0x66bc159b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15159,7 +14526,7 @@ var ZoneAfrica_Mogadishu = zoneinfo.ZoneInfo{
 
 // Link: Africa/Niamey -> Africa/Lagos
 var ZoneAfrica_Niamey = zoneinfo.ZoneInfo{
-	Name: "Africa/Niamey",
+	NameIndex: 46, // "Africa/Niamey"
 	ZoneID: 0x914a30fd,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15169,7 +14536,7 @@ var ZoneAfrica_Niamey = zoneinfo.ZoneInfo{
 
 // Link: Africa/Nouakchott -> Africa/Abidjan
 var ZoneAfrica_Nouakchott = zoneinfo.ZoneInfo{
-	Name: "Africa/Nouakchott",
+	NameIndex: 47, // "Africa/Nouakchott"
 	ZoneID: 0x3dc49dba,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15179,7 +14546,7 @@ var ZoneAfrica_Nouakchott = zoneinfo.ZoneInfo{
 
 // Link: Africa/Ouagadougou -> Africa/Abidjan
 var ZoneAfrica_Ouagadougou = zoneinfo.ZoneInfo{
-	Name: "Africa/Ouagadougou",
+	NameIndex: 48, // "Africa/Ouagadougou"
 	ZoneID: 0x04d7219a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15189,7 +14556,7 @@ var ZoneAfrica_Ouagadougou = zoneinfo.ZoneInfo{
 
 // Link: Africa/Porto-Novo -> Africa/Lagos
 var ZoneAfrica_Porto_Novo = zoneinfo.ZoneInfo{
-	Name: "Africa/Porto-Novo",
+	NameIndex: 49, // "Africa/Porto-Novo"
 	ZoneID: 0x3d1bf95d,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15199,7 +14566,7 @@ var ZoneAfrica_Porto_Novo = zoneinfo.ZoneInfo{
 
 // Link: Africa/Timbuktu -> Africa/Abidjan
 var ZoneAfrica_Timbuktu = zoneinfo.ZoneInfo{
-	Name: "Africa/Timbuktu",
+	NameIndex: 51, // "Africa/Timbuktu"
 	ZoneID: 0xb164d56f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15209,7 +14576,7 @@ var ZoneAfrica_Timbuktu = zoneinfo.ZoneInfo{
 
 // Link: America/Anguilla -> America/Puerto_Rico
 var ZoneAmerica_Anguilla = zoneinfo.ZoneInfo{
-	Name: "America/Anguilla",
+	NameIndex: 57, // "America/Anguilla"
 	ZoneID: 0xafe31333,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15219,7 +14586,7 @@ var ZoneAmerica_Anguilla = zoneinfo.ZoneInfo{
 
 // Link: America/Antigua -> America/Puerto_Rico
 var ZoneAmerica_Antigua = zoneinfo.ZoneInfo{
-	Name: "America/Antigua",
+	NameIndex: 58, // "America/Antigua"
 	ZoneID: 0xc067a32f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15229,7 +14596,7 @@ var ZoneAmerica_Antigua = zoneinfo.ZoneInfo{
 
 // Link: America/Argentina/ComodRivadavia -> America/Argentina/Catamarca
 var ZoneAmerica_Argentina_ComodRivadavia = zoneinfo.ZoneInfo{
-	Name: "America/Argentina/ComodRivadavia",
+	NameIndex: 62, // "America/Argentina/ComodRivadavia"
 	ZoneID: 0x22758877,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15239,7 +14606,7 @@ var ZoneAmerica_Argentina_ComodRivadavia = zoneinfo.ZoneInfo{
 
 // Link: America/Aruba -> America/Puerto_Rico
 var ZoneAmerica_Aruba = zoneinfo.ZoneInfo{
-	Name: "America/Aruba",
+	NameIndex: 73, // "America/Aruba"
 	ZoneID: 0x97cf8651,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15249,7 +14616,7 @@ var ZoneAmerica_Aruba = zoneinfo.ZoneInfo{
 
 // Link: America/Atikokan -> America/Panama
 var ZoneAmerica_Atikokan = zoneinfo.ZoneInfo{
-	Name: "America/Atikokan",
+	NameIndex: 75, // "America/Atikokan"
 	ZoneID: 0x81b92098,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15259,7 +14626,7 @@ var ZoneAmerica_Atikokan = zoneinfo.ZoneInfo{
 
 // Link: America/Atka -> America/Adak
 var ZoneAmerica_Atka = zoneinfo.ZoneInfo{
-	Name: "America/Atka",
+	NameIndex: 76, // "America/Atka"
 	ZoneID: 0x97fe8f27,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15269,7 +14636,7 @@ var ZoneAmerica_Atka = zoneinfo.ZoneInfo{
 
 // Link: America/Blanc-Sablon -> America/Puerto_Rico
 var ZoneAmerica_Blanc_Sablon = zoneinfo.ZoneInfo{
-	Name: "America/Blanc-Sablon",
+	NameIndex: 82, // "America/Blanc-Sablon"
 	ZoneID: 0x6e299892,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15279,7 +14646,7 @@ var ZoneAmerica_Blanc_Sablon = zoneinfo.ZoneInfo{
 
 // Link: America/Buenos_Aires -> America/Argentina/Buenos_Aires
 var ZoneAmerica_Buenos_Aires = zoneinfo.ZoneInfo{
-	Name: "America/Buenos_Aires",
+	NameIndex: 86, // "America/Buenos_Aires"
 	ZoneID: 0x67d79a05,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15289,7 +14656,7 @@ var ZoneAmerica_Buenos_Aires = zoneinfo.ZoneInfo{
 
 // Link: America/Catamarca -> America/Argentina/Catamarca
 var ZoneAmerica_Catamarca = zoneinfo.ZoneInfo{
-	Name: "America/Catamarca",
+	NameIndex: 91, // "America/Catamarca"
 	ZoneID: 0x5036e963,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15299,7 +14666,7 @@ var ZoneAmerica_Catamarca = zoneinfo.ZoneInfo{
 
 // Link: America/Cayman -> America/Panama
 var ZoneAmerica_Cayman = zoneinfo.ZoneInfo{
-	Name: "America/Cayman",
+	NameIndex: 93, // "America/Cayman"
 	ZoneID: 0x953961df,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15309,7 +14676,7 @@ var ZoneAmerica_Cayman = zoneinfo.ZoneInfo{
 
 // Link: America/Coral_Harbour -> America/Panama
 var ZoneAmerica_Coral_Harbour = zoneinfo.ZoneInfo{
-	Name: "America/Coral_Harbour",
+	NameIndex: 97, // "America/Coral_Harbour"
 	ZoneID: 0xabcb7569,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15319,7 +14686,7 @@ var ZoneAmerica_Coral_Harbour = zoneinfo.ZoneInfo{
 
 // Link: America/Cordoba -> America/Argentina/Cordoba
 var ZoneAmerica_Cordoba = zoneinfo.ZoneInfo{
-	Name: "America/Cordoba",
+	NameIndex: 98, // "America/Cordoba"
 	ZoneID: 0x5c8a7600,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15329,7 +14696,7 @@ var ZoneAmerica_Cordoba = zoneinfo.ZoneInfo{
 
 // Link: America/Creston -> America/Phoenix
 var ZoneAmerica_Creston = zoneinfo.ZoneInfo{
-	Name: "America/Creston",
+	NameIndex: 100, // "America/Creston"
 	ZoneID: 0x62a70204,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15339,7 +14706,7 @@ var ZoneAmerica_Creston = zoneinfo.ZoneInfo{
 
 // Link: America/Curacao -> America/Puerto_Rico
 var ZoneAmerica_Curacao = zoneinfo.ZoneInfo{
-	Name: "America/Curacao",
+	NameIndex: 102, // "America/Curacao"
 	ZoneID: 0x6a879184,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15349,7 +14716,7 @@ var ZoneAmerica_Curacao = zoneinfo.ZoneInfo{
 
 // Link: America/Dominica -> America/Puerto_Rico
 var ZoneAmerica_Dominica = zoneinfo.ZoneInfo{
-	Name: "America/Dominica",
+	NameIndex: 108, // "America/Dominica"
 	ZoneID: 0xcecb4c4a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15359,7 +14726,7 @@ var ZoneAmerica_Dominica = zoneinfo.ZoneInfo{
 
 // Link: America/Ensenada -> America/Tijuana
 var ZoneAmerica_Ensenada = zoneinfo.ZoneInfo{
-	Name: "America/Ensenada",
+	NameIndex: 112, // "America/Ensenada"
 	ZoneID: 0x7bc95445,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15369,7 +14736,7 @@ var ZoneAmerica_Ensenada = zoneinfo.ZoneInfo{
 
 // Link: America/Fort_Wayne -> America/Indiana/Indianapolis
 var ZoneAmerica_Fort_Wayne = zoneinfo.ZoneInfo{
-	Name: "America/Fort_Wayne",
+	NameIndex: 114, // "America/Fort_Wayne"
 	ZoneID: 0x7eaaaf24,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15379,7 +14746,7 @@ var ZoneAmerica_Fort_Wayne = zoneinfo.ZoneInfo{
 
 // Link: America/Godthab -> America/Nuuk
 var ZoneAmerica_Godthab = zoneinfo.ZoneInfo{
-	Name: "America/Godthab",
+	NameIndex: 117, // "America/Godthab"
 	ZoneID: 0x8f7eba1f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15389,7 +14756,7 @@ var ZoneAmerica_Godthab = zoneinfo.ZoneInfo{
 
 // Link: America/Grenada -> America/Puerto_Rico
 var ZoneAmerica_Grenada = zoneinfo.ZoneInfo{
-	Name: "America/Grenada",
+	NameIndex: 120, // "America/Grenada"
 	ZoneID: 0x968ce4d8,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15399,7 +14766,7 @@ var ZoneAmerica_Grenada = zoneinfo.ZoneInfo{
 
 // Link: America/Guadeloupe -> America/Puerto_Rico
 var ZoneAmerica_Guadeloupe = zoneinfo.ZoneInfo{
-	Name: "America/Guadeloupe",
+	NameIndex: 121, // "America/Guadeloupe"
 	ZoneID: 0xcd1f8a31,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15409,7 +14776,7 @@ var ZoneAmerica_Guadeloupe = zoneinfo.ZoneInfo{
 
 // Link: America/Indianapolis -> America/Indiana/Indianapolis
 var ZoneAmerica_Indianapolis = zoneinfo.ZoneInfo{
-	Name: "America/Indianapolis",
+	NameIndex: 136, // "America/Indianapolis"
 	ZoneID: 0x6a009ae1,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15419,7 +14786,7 @@ var ZoneAmerica_Indianapolis = zoneinfo.ZoneInfo{
 
 // Link: America/Jujuy -> America/Argentina/Jujuy
 var ZoneAmerica_Jujuy = zoneinfo.ZoneInfo{
-	Name: "America/Jujuy",
+	NameIndex: 140, // "America/Jujuy"
 	ZoneID: 0x9873dbbd,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15429,7 +14796,7 @@ var ZoneAmerica_Jujuy = zoneinfo.ZoneInfo{
 
 // Link: America/Knox_IN -> America/Indiana/Knox
 var ZoneAmerica_Knox_IN = zoneinfo.ZoneInfo{
-	Name: "America/Knox_IN",
+	NameIndex: 144, // "America/Knox_IN"
 	ZoneID: 0xc1db9a1c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15439,7 +14806,7 @@ var ZoneAmerica_Knox_IN = zoneinfo.ZoneInfo{
 
 // Link: America/Kralendijk -> America/Puerto_Rico
 var ZoneAmerica_Kralendijk = zoneinfo.ZoneInfo{
-	Name: "America/Kralendijk",
+	NameIndex: 145, // "America/Kralendijk"
 	ZoneID: 0xe7c456c5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15449,7 +14816,7 @@ var ZoneAmerica_Kralendijk = zoneinfo.ZoneInfo{
 
 // Link: America/Louisville -> America/Kentucky/Louisville
 var ZoneAmerica_Louisville = zoneinfo.ZoneInfo{
-	Name: "America/Louisville",
+	NameIndex: 149, // "America/Louisville"
 	ZoneID: 0x3dcb47ee,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15459,7 +14826,7 @@ var ZoneAmerica_Louisville = zoneinfo.ZoneInfo{
 
 // Link: America/Lower_Princes -> America/Puerto_Rico
 var ZoneAmerica_Lower_Princes = zoneinfo.ZoneInfo{
-	Name: "America/Lower_Princes",
+	NameIndex: 150, // "America/Lower_Princes"
 	ZoneID: 0x6ae45b62,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15469,7 +14836,7 @@ var ZoneAmerica_Lower_Princes = zoneinfo.ZoneInfo{
 
 // Link: America/Marigot -> America/Puerto_Rico
 var ZoneAmerica_Marigot = zoneinfo.ZoneInfo{
-	Name: "America/Marigot",
+	NameIndex: 154, // "America/Marigot"
 	ZoneID: 0x3dab3a59,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15479,7 +14846,7 @@ var ZoneAmerica_Marigot = zoneinfo.ZoneInfo{
 
 // Link: America/Mendoza -> America/Argentina/Mendoza
 var ZoneAmerica_Mendoza = zoneinfo.ZoneInfo{
-	Name: "America/Mendoza",
+	NameIndex: 158, // "America/Mendoza"
 	ZoneID: 0x46b4e054,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15489,7 +14856,7 @@ var ZoneAmerica_Mendoza = zoneinfo.ZoneInfo{
 
 // Link: America/Montreal -> America/Toronto
 var ZoneAmerica_Montreal = zoneinfo.ZoneInfo{
-	Name: "America/Montreal",
+	NameIndex: 167, // "America/Montreal"
 	ZoneID: 0x203a1ea8,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15499,7 +14866,7 @@ var ZoneAmerica_Montreal = zoneinfo.ZoneInfo{
 
 // Link: America/Montserrat -> America/Puerto_Rico
 var ZoneAmerica_Montserrat = zoneinfo.ZoneInfo{
-	Name: "America/Montserrat",
+	NameIndex: 168, // "America/Montserrat"
 	ZoneID: 0x199b0a35,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15509,7 +14876,7 @@ var ZoneAmerica_Montserrat = zoneinfo.ZoneInfo{
 
 // Link: America/Nassau -> America/Toronto
 var ZoneAmerica_Nassau = zoneinfo.ZoneInfo{
-	Name: "America/Nassau",
+	NameIndex: 169, // "America/Nassau"
 	ZoneID: 0xaedef011,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15519,7 +14886,7 @@ var ZoneAmerica_Nassau = zoneinfo.ZoneInfo{
 
 // Link: America/Nipigon -> America/Toronto
 var ZoneAmerica_Nipigon = zoneinfo.ZoneInfo{
-	Name: "America/Nipigon",
+	NameIndex: 171, // "America/Nipigon"
 	ZoneID: 0x9d2a8b1a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15529,7 +14896,7 @@ var ZoneAmerica_Nipigon = zoneinfo.ZoneInfo{
 
 // Link: America/Pangnirtung -> America/Iqaluit
 var ZoneAmerica_Pangnirtung = zoneinfo.ZoneInfo{
-	Name: "America/Pangnirtung",
+	NameIndex: 180, // "America/Pangnirtung"
 	ZoneID: 0x2d999193,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15539,7 +14906,7 @@ var ZoneAmerica_Pangnirtung = zoneinfo.ZoneInfo{
 
 // Link: America/Port_of_Spain -> America/Puerto_Rico
 var ZoneAmerica_Port_of_Spain = zoneinfo.ZoneInfo{
-	Name: "America/Port_of_Spain",
+	NameIndex: 184, // "America/Port_of_Spain"
 	ZoneID: 0xd8b28d59,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15549,7 +14916,7 @@ var ZoneAmerica_Port_of_Spain = zoneinfo.ZoneInfo{
 
 // Link: America/Porto_Acre -> America/Rio_Branco
 var ZoneAmerica_Porto_Acre = zoneinfo.ZoneInfo{
-	Name: "America/Porto_Acre",
+	NameIndex: 185, // "America/Porto_Acre"
 	ZoneID: 0xcce5bf54,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15559,7 +14926,7 @@ var ZoneAmerica_Porto_Acre = zoneinfo.ZoneInfo{
 
 // Link: America/Rainy_River -> America/Winnipeg
 var ZoneAmerica_Rainy_River = zoneinfo.ZoneInfo{
-	Name: "America/Rainy_River",
+	NameIndex: 189, // "America/Rainy_River"
 	ZoneID: 0x9cd58a10,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15569,7 +14936,7 @@ var ZoneAmerica_Rainy_River = zoneinfo.ZoneInfo{
 
 // Link: America/Rosario -> America/Argentina/Cordoba
 var ZoneAmerica_Rosario = zoneinfo.ZoneInfo{
-	Name: "America/Rosario",
+	NameIndex: 195, // "America/Rosario"
 	ZoneID: 0xdf448665,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15579,7 +14946,7 @@ var ZoneAmerica_Rosario = zoneinfo.ZoneInfo{
 
 // Link: America/Santa_Isabel -> America/Tijuana
 var ZoneAmerica_Santa_Isabel = zoneinfo.ZoneInfo{
-	Name: "America/Santa_Isabel",
+	NameIndex: 196, // "America/Santa_Isabel"
 	ZoneID: 0xfd18a56c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15589,7 +14956,7 @@ var ZoneAmerica_Santa_Isabel = zoneinfo.ZoneInfo{
 
 // Link: America/Shiprock -> America/Denver
 var ZoneAmerica_Shiprock = zoneinfo.ZoneInfo{
-	Name: "America/Shiprock",
+	NameIndex: 202, // "America/Shiprock"
 	ZoneID: 0x82fb7049,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15599,7 +14966,7 @@ var ZoneAmerica_Shiprock = zoneinfo.ZoneInfo{
 
 // Link: America/St_Barthelemy -> America/Puerto_Rico
 var ZoneAmerica_St_Barthelemy = zoneinfo.ZoneInfo{
-	Name: "America/St_Barthelemy",
+	NameIndex: 204, // "America/St_Barthelemy"
 	ZoneID: 0x054e6a79,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15609,7 +14976,7 @@ var ZoneAmerica_St_Barthelemy = zoneinfo.ZoneInfo{
 
 // Link: America/St_Kitts -> America/Puerto_Rico
 var ZoneAmerica_St_Kitts = zoneinfo.ZoneInfo{
-	Name: "America/St_Kitts",
+	NameIndex: 206, // "America/St_Kitts"
 	ZoneID: 0x04c0507b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15619,7 +14986,7 @@ var ZoneAmerica_St_Kitts = zoneinfo.ZoneInfo{
 
 // Link: America/St_Lucia -> America/Puerto_Rico
 var ZoneAmerica_St_Lucia = zoneinfo.ZoneInfo{
-	Name: "America/St_Lucia",
+	NameIndex: 207, // "America/St_Lucia"
 	ZoneID: 0x04d8b3ba,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15629,7 +14996,7 @@ var ZoneAmerica_St_Lucia = zoneinfo.ZoneInfo{
 
 // Link: America/St_Thomas -> America/Puerto_Rico
 var ZoneAmerica_St_Thomas = zoneinfo.ZoneInfo{
-	Name: "America/St_Thomas",
+	NameIndex: 208, // "America/St_Thomas"
 	ZoneID: 0xb1b3d778,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15639,7 +15006,7 @@ var ZoneAmerica_St_Thomas = zoneinfo.ZoneInfo{
 
 // Link: America/St_Vincent -> America/Puerto_Rico
 var ZoneAmerica_St_Vincent = zoneinfo.ZoneInfo{
-	Name: "America/St_Vincent",
+	NameIndex: 209, // "America/St_Vincent"
 	ZoneID: 0x8460e523,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15649,7 +15016,7 @@ var ZoneAmerica_St_Vincent = zoneinfo.ZoneInfo{
 
 // Link: America/Thunder_Bay -> America/Toronto
 var ZoneAmerica_Thunder_Bay = zoneinfo.ZoneInfo{
-	Name: "America/Thunder_Bay",
+	NameIndex: 213, // "America/Thunder_Bay"
 	ZoneID: 0xf962e71b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15659,7 +15026,7 @@ var ZoneAmerica_Thunder_Bay = zoneinfo.ZoneInfo{
 
 // Link: America/Tortola -> America/Puerto_Rico
 var ZoneAmerica_Tortola = zoneinfo.ZoneInfo{
-	Name: "America/Tortola",
+	NameIndex: 216, // "America/Tortola"
 	ZoneID: 0x7931462b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15669,7 +15036,7 @@ var ZoneAmerica_Tortola = zoneinfo.ZoneInfo{
 
 // Link: America/Virgin -> America/Puerto_Rico
 var ZoneAmerica_Virgin = zoneinfo.ZoneInfo{
-	Name: "America/Virgin",
+	NameIndex: 218, // "America/Virgin"
 	ZoneID: 0xc2183ab5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15679,7 +15046,7 @@ var ZoneAmerica_Virgin = zoneinfo.ZoneInfo{
 
 // Link: Antarctica/DumontDUrville -> Pacific/Port_Moresby
 var ZoneAntarctica_DumontDUrville = zoneinfo.ZoneInfo{
-	Name: "Antarctica/DumontDUrville",
+	NameIndex: 225, // "Antarctica/DumontDUrville"
 	ZoneID: 0x5a3c656c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15689,7 +15056,7 @@ var ZoneAntarctica_DumontDUrville = zoneinfo.ZoneInfo{
 
 // Link: Antarctica/McMurdo -> Pacific/Auckland
 var ZoneAntarctica_McMurdo = zoneinfo.ZoneInfo{
-	Name: "Antarctica/McMurdo",
+	NameIndex: 228, // "Antarctica/McMurdo"
 	ZoneID: 0x6eeb5585,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15699,7 +15066,7 @@ var ZoneAntarctica_McMurdo = zoneinfo.ZoneInfo{
 
 // Link: Antarctica/South_Pole -> Pacific/Auckland
 var ZoneAntarctica_South_Pole = zoneinfo.ZoneInfo{
-	Name: "Antarctica/South_Pole",
+	NameIndex: 231, // "Antarctica/South_Pole"
 	ZoneID: 0xcd96b290,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15709,7 +15076,7 @@ var ZoneAntarctica_South_Pole = zoneinfo.ZoneInfo{
 
 // Link: Antarctica/Syowa -> Asia/Riyadh
 var ZoneAntarctica_Syowa = zoneinfo.ZoneInfo{
-	Name: "Antarctica/Syowa",
+	NameIndex: 232, // "Antarctica/Syowa"
 	ZoneID: 0xe330c7e1,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15719,7 +15086,7 @@ var ZoneAntarctica_Syowa = zoneinfo.ZoneInfo{
 
 // Link: Antarctica/Vostok -> Asia/Urumqi
 var ZoneAntarctica_Vostok = zoneinfo.ZoneInfo{
-	Name: "Antarctica/Vostok",
+	NameIndex: 234, // "Antarctica/Vostok"
 	ZoneID: 0x4f966fd4,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15729,7 +15096,7 @@ var ZoneAntarctica_Vostok = zoneinfo.ZoneInfo{
 
 // Link: Arctic/Longyearbyen -> Europe/Berlin
 var ZoneArctic_Longyearbyen = zoneinfo.ZoneInfo{
-	Name: "Arctic/Longyearbyen",
+	NameIndex: 235, // "Arctic/Longyearbyen"
 	ZoneID: 0xd23e7859,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15739,7 +15106,7 @@ var ZoneArctic_Longyearbyen = zoneinfo.ZoneInfo{
 
 // Link: Asia/Aden -> Asia/Riyadh
 var ZoneAsia_Aden = zoneinfo.ZoneInfo{
-	Name: "Asia/Aden",
+	NameIndex: 236, // "Asia/Aden"
 	ZoneID: 0x1fa7084a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15749,7 +15116,7 @@ var ZoneAsia_Aden = zoneinfo.ZoneInfo{
 
 // Link: Asia/Ashkhabad -> Asia/Ashgabat
 var ZoneAsia_Ashkhabad = zoneinfo.ZoneInfo{
-	Name: "Asia/Ashkhabad",
+	NameIndex: 243, // "Asia/Ashkhabad"
 	ZoneID: 0x15454f09,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15759,7 +15126,7 @@ var ZoneAsia_Ashkhabad = zoneinfo.ZoneInfo{
 
 // Link: Asia/Bahrain -> Asia/Qatar
 var ZoneAsia_Bahrain = zoneinfo.ZoneInfo{
-	Name: "Asia/Bahrain",
+	NameIndex: 246, // "Asia/Bahrain"
 	ZoneID: 0x9d078487,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15769,7 +15136,7 @@ var ZoneAsia_Bahrain = zoneinfo.ZoneInfo{
 
 // Link: Asia/Brunei -> Asia/Kuching
 var ZoneAsia_Brunei = zoneinfo.ZoneInfo{
-	Name: "Asia/Brunei",
+	NameIndex: 252, // "Asia/Brunei"
 	ZoneID: 0xa8e595f7,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15779,7 +15146,7 @@ var ZoneAsia_Brunei = zoneinfo.ZoneInfo{
 
 // Link: Asia/Calcutta -> Asia/Kolkata
 var ZoneAsia_Calcutta = zoneinfo.ZoneInfo{
-	Name: "Asia/Calcutta",
+	NameIndex: 253, // "Asia/Calcutta"
 	ZoneID: 0x328a44c3,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15789,7 +15156,7 @@ var ZoneAsia_Calcutta = zoneinfo.ZoneInfo{
 
 // Link: Asia/Chongqing -> Asia/Shanghai
 var ZoneAsia_Chongqing = zoneinfo.ZoneInfo{
-	Name: "Asia/Chongqing",
+	NameIndex: 256, // "Asia/Chongqing"
 	ZoneID: 0xf937fb90,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15799,7 +15166,7 @@ var ZoneAsia_Chongqing = zoneinfo.ZoneInfo{
 
 // Link: Asia/Chungking -> Asia/Shanghai
 var ZoneAsia_Chungking = zoneinfo.ZoneInfo{
-	Name: "Asia/Chungking",
+	NameIndex: 257, // "Asia/Chungking"
 	ZoneID: 0xc7121dd0,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15809,7 +15176,7 @@ var ZoneAsia_Chungking = zoneinfo.ZoneInfo{
 
 // Link: Asia/Dacca -> Asia/Dhaka
 var ZoneAsia_Dacca = zoneinfo.ZoneInfo{
-	Name: "Asia/Dacca",
+	NameIndex: 259, // "Asia/Dacca"
 	ZoneID: 0x14bcac5e,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15819,7 +15186,7 @@ var ZoneAsia_Dacca = zoneinfo.ZoneInfo{
 
 // Link: Asia/Harbin -> Asia/Shanghai
 var ZoneAsia_Harbin = zoneinfo.ZoneInfo{
-	Name: "Asia/Harbin",
+	NameIndex: 267, // "Asia/Harbin"
 	ZoneID: 0xb5af1186,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15829,7 +15196,7 @@ var ZoneAsia_Harbin = zoneinfo.ZoneInfo{
 
 // Link: Asia/Istanbul -> Europe/Istanbul
 var ZoneAsia_Istanbul = zoneinfo.ZoneInfo{
-	Name: "Asia/Istanbul",
+	NameIndex: 273, // "Asia/Istanbul"
 	ZoneID: 0x382e7894,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15839,7 +15206,7 @@ var ZoneAsia_Istanbul = zoneinfo.ZoneInfo{
 
 // Link: Asia/Kashgar -> Asia/Urumqi
 var ZoneAsia_Kashgar = zoneinfo.ZoneInfo{
-	Name: "Asia/Kashgar",
+	NameIndex: 280, // "Asia/Kashgar"
 	ZoneID: 0x52955193,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15849,7 +15216,7 @@ var ZoneAsia_Kashgar = zoneinfo.ZoneInfo{
 
 // Link: Asia/Katmandu -> Asia/Kathmandu
 var ZoneAsia_Katmandu = zoneinfo.ZoneInfo{
-	Name: "Asia/Katmandu",
+	NameIndex: 282, // "Asia/Katmandu"
 	ZoneID: 0xa7ec12c7,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15859,7 +15226,7 @@ var ZoneAsia_Katmandu = zoneinfo.ZoneInfo{
 
 // Link: Asia/Kuala_Lumpur -> Asia/Singapore
 var ZoneAsia_Kuala_Lumpur = zoneinfo.ZoneInfo{
-	Name: "Asia/Kuala_Lumpur",
+	NameIndex: 286, // "Asia/Kuala_Lumpur"
 	ZoneID: 0x014763c4,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15869,7 +15236,7 @@ var ZoneAsia_Kuala_Lumpur = zoneinfo.ZoneInfo{
 
 // Link: Asia/Kuwait -> Asia/Riyadh
 var ZoneAsia_Kuwait = zoneinfo.ZoneInfo{
-	Name: "Asia/Kuwait",
+	NameIndex: 288, // "Asia/Kuwait"
 	ZoneID: 0xbe1b2f27,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15879,7 +15246,7 @@ var ZoneAsia_Kuwait = zoneinfo.ZoneInfo{
 
 // Link: Asia/Macao -> Asia/Macau
 var ZoneAsia_Macao = zoneinfo.ZoneInfo{
-	Name: "Asia/Macao",
+	NameIndex: 289, // "Asia/Macao"
 	ZoneID: 0x155f88b3,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15889,7 +15256,7 @@ var ZoneAsia_Macao = zoneinfo.ZoneInfo{
 
 // Link: Asia/Muscat -> Asia/Dubai
 var ZoneAsia_Muscat = zoneinfo.ZoneInfo{
-	Name: "Asia/Muscat",
+	NameIndex: 294, // "Asia/Muscat"
 	ZoneID: 0xc2c3565f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15899,7 +15266,7 @@ var ZoneAsia_Muscat = zoneinfo.ZoneInfo{
 
 // Link: Asia/Phnom_Penh -> Asia/Bangkok
 var ZoneAsia_Phnom_Penh = zoneinfo.ZoneInfo{
-	Name: "Asia/Phnom_Penh",
+	NameIndex: 300, // "Asia/Phnom_Penh"
 	ZoneID: 0xc224945e,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15909,7 +15276,7 @@ var ZoneAsia_Phnom_Penh = zoneinfo.ZoneInfo{
 
 // Link: Asia/Rangoon -> Asia/Yangon
 var ZoneAsia_Rangoon = zoneinfo.ZoneInfo{
-	Name: "Asia/Rangoon",
+	NameIndex: 306, // "Asia/Rangoon"
 	ZoneID: 0x6d1217c6,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15919,7 +15286,7 @@ var ZoneAsia_Rangoon = zoneinfo.ZoneInfo{
 
 // Link: Asia/Saigon -> Asia/Ho_Chi_Minh
 var ZoneAsia_Saigon = zoneinfo.ZoneInfo{
-	Name: "Asia/Saigon",
+	NameIndex: 308, // "Asia/Saigon"
 	ZoneID: 0xcf52f713,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15929,7 +15296,7 @@ var ZoneAsia_Saigon = zoneinfo.ZoneInfo{
 
 // Link: Asia/Tel_Aviv -> Asia/Jerusalem
 var ZoneAsia_Tel_Aviv = zoneinfo.ZoneInfo{
-	Name: "Asia/Tel_Aviv",
+	NameIndex: 319, // "Asia/Tel_Aviv"
 	ZoneID: 0x166d7c2c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15939,7 +15306,7 @@ var ZoneAsia_Tel_Aviv = zoneinfo.ZoneInfo{
 
 // Link: Asia/Thimbu -> Asia/Thimphu
 var ZoneAsia_Thimbu = zoneinfo.ZoneInfo{
-	Name: "Asia/Thimbu",
+	NameIndex: 320, // "Asia/Thimbu"
 	ZoneID: 0xd226e31b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15949,7 +15316,7 @@ var ZoneAsia_Thimbu = zoneinfo.ZoneInfo{
 
 // Link: Asia/Ujung_Pandang -> Asia/Makassar
 var ZoneAsia_Ujung_Pandang = zoneinfo.ZoneInfo{
-	Name: "Asia/Ujung_Pandang",
+	NameIndex: 324, // "Asia/Ujung_Pandang"
 	ZoneID: 0x5d001eb3,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15959,7 +15326,7 @@ var ZoneAsia_Ujung_Pandang = zoneinfo.ZoneInfo{
 
 // Link: Asia/Ulan_Bator -> Asia/Ulaanbaatar
 var ZoneAsia_Ulan_Bator = zoneinfo.ZoneInfo{
-	Name: "Asia/Ulan_Bator",
+	NameIndex: 326, // "Asia/Ulan_Bator"
 	ZoneID: 0x394db4d9,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15969,7 +15336,7 @@ var ZoneAsia_Ulan_Bator = zoneinfo.ZoneInfo{
 
 // Link: Asia/Vientiane -> Asia/Bangkok
 var ZoneAsia_Vientiane = zoneinfo.ZoneInfo{
-	Name: "Asia/Vientiane",
+	NameIndex: 329, // "Asia/Vientiane"
 	ZoneID: 0x89d68d75,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15979,7 +15346,7 @@ var ZoneAsia_Vientiane = zoneinfo.ZoneInfo{
 
 // Link: Atlantic/Faeroe -> Atlantic/Faroe
 var ZoneAtlantic_Faeroe = zoneinfo.ZoneInfo{
-	Name: "Atlantic/Faeroe",
+	NameIndex: 339, // "Atlantic/Faeroe"
 	ZoneID: 0x031ec516,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15989,7 +15356,7 @@ var ZoneAtlantic_Faeroe = zoneinfo.ZoneInfo{
 
 // Link: Atlantic/Jan_Mayen -> Europe/Berlin
 var ZoneAtlantic_Jan_Mayen = zoneinfo.ZoneInfo{
-	Name: "Atlantic/Jan_Mayen",
+	NameIndex: 341, // "Atlantic/Jan_Mayen"
 	ZoneID: 0x5a7535b6,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -15999,7 +15366,7 @@ var ZoneAtlantic_Jan_Mayen = zoneinfo.ZoneInfo{
 
 // Link: Atlantic/Reykjavik -> Africa/Abidjan
 var ZoneAtlantic_Reykjavik = zoneinfo.ZoneInfo{
-	Name: "Atlantic/Reykjavik",
+	NameIndex: 343, // "Atlantic/Reykjavik"
 	ZoneID: 0x1c2b4f74,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16009,7 +15376,7 @@ var ZoneAtlantic_Reykjavik = zoneinfo.ZoneInfo{
 
 // Link: Atlantic/St_Helena -> Africa/Abidjan
 var ZoneAtlantic_St_Helena = zoneinfo.ZoneInfo{
-	Name: "Atlantic/St_Helena",
+	NameIndex: 345, // "Atlantic/St_Helena"
 	ZoneID: 0x451fc5f7,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16019,7 +15386,7 @@ var ZoneAtlantic_St_Helena = zoneinfo.ZoneInfo{
 
 // Link: Australia/ACT -> Australia/Sydney
 var ZoneAustralia_ACT = zoneinfo.ZoneInfo{
-	Name: "Australia/ACT",
+	NameIndex: 347, // "Australia/ACT"
 	ZoneID: 0x8a970eb2,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16029,7 +15396,7 @@ var ZoneAustralia_ACT = zoneinfo.ZoneInfo{
 
 // Link: Australia/Canberra -> Australia/Sydney
 var ZoneAustralia_Canberra = zoneinfo.ZoneInfo{
-	Name: "Australia/Canberra",
+	NameIndex: 351, // "Australia/Canberra"
 	ZoneID: 0x2a09ae58,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16039,7 +15406,7 @@ var ZoneAustralia_Canberra = zoneinfo.ZoneInfo{
 
 // Link: Australia/Currie -> Australia/Hobart
 var ZoneAustralia_Currie = zoneinfo.ZoneInfo{
-	Name: "Australia/Currie",
+	NameIndex: 352, // "Australia/Currie"
 	ZoneID: 0x278b6a24,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16049,7 +15416,7 @@ var ZoneAustralia_Currie = zoneinfo.ZoneInfo{
 
 // Link: Australia/LHI -> Australia/Lord_Howe
 var ZoneAustralia_LHI = zoneinfo.ZoneInfo{
-	Name: "Australia/LHI",
+	NameIndex: 356, // "Australia/LHI"
 	ZoneID: 0x8a973e17,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16059,7 +15426,7 @@ var ZoneAustralia_LHI = zoneinfo.ZoneInfo{
 
 // Link: Australia/NSW -> Australia/Sydney
 var ZoneAustralia_NSW = zoneinfo.ZoneInfo{
-	Name: "Australia/NSW",
+	NameIndex: 360, // "Australia/NSW"
 	ZoneID: 0x8a974812,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16069,7 +15436,7 @@ var ZoneAustralia_NSW = zoneinfo.ZoneInfo{
 
 // Link: Australia/North -> Australia/Darwin
 var ZoneAustralia_North = zoneinfo.ZoneInfo{
-	Name: "Australia/North",
+	NameIndex: 361, // "Australia/North"
 	ZoneID: 0x8d997165,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16079,7 +15446,7 @@ var ZoneAustralia_North = zoneinfo.ZoneInfo{
 
 // Link: Australia/Queensland -> Australia/Brisbane
 var ZoneAustralia_Queensland = zoneinfo.ZoneInfo{
-	Name: "Australia/Queensland",
+	NameIndex: 363, // "Australia/Queensland"
 	ZoneID: 0xd326ed0a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16089,7 +15456,7 @@ var ZoneAustralia_Queensland = zoneinfo.ZoneInfo{
 
 // Link: Australia/South -> Australia/Adelaide
 var ZoneAustralia_South = zoneinfo.ZoneInfo{
-	Name: "Australia/South",
+	NameIndex: 364, // "Australia/South"
 	ZoneID: 0x8df3f8ad,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16099,7 +15466,7 @@ var ZoneAustralia_South = zoneinfo.ZoneInfo{
 
 // Link: Australia/Tasmania -> Australia/Hobart
 var ZoneAustralia_Tasmania = zoneinfo.ZoneInfo{
-	Name: "Australia/Tasmania",
+	NameIndex: 366, // "Australia/Tasmania"
 	ZoneID: 0xe6d76648,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16109,7 +15476,7 @@ var ZoneAustralia_Tasmania = zoneinfo.ZoneInfo{
 
 // Link: Australia/Victoria -> Australia/Melbourne
 var ZoneAustralia_Victoria = zoneinfo.ZoneInfo{
-	Name: "Australia/Victoria",
+	NameIndex: 367, // "Australia/Victoria"
 	ZoneID: 0x0260d5db,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16119,7 +15486,7 @@ var ZoneAustralia_Victoria = zoneinfo.ZoneInfo{
 
 // Link: Australia/West -> Australia/Perth
 var ZoneAustralia_West = zoneinfo.ZoneInfo{
-	Name: "Australia/West",
+	NameIndex: 368, // "Australia/West"
 	ZoneID: 0xdd858a5d,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16129,7 +15496,7 @@ var ZoneAustralia_West = zoneinfo.ZoneInfo{
 
 // Link: Australia/Yancowinna -> Australia/Broken_Hill
 var ZoneAustralia_Yancowinna = zoneinfo.ZoneInfo{
-	Name: "Australia/Yancowinna",
+	NameIndex: 369, // "Australia/Yancowinna"
 	ZoneID: 0x90bac131,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16139,7 +15506,7 @@ var ZoneAustralia_Yancowinna = zoneinfo.ZoneInfo{
 
 // Link: Brazil/Acre -> America/Rio_Branco
 var ZoneBrazil_Acre = zoneinfo.ZoneInfo{
-	Name: "Brazil/Acre",
+	NameIndex: 370, // "Brazil/Acre"
 	ZoneID: 0x66934f93,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16149,7 +15516,7 @@ var ZoneBrazil_Acre = zoneinfo.ZoneInfo{
 
 // Link: Brazil/DeNoronha -> America/Noronha
 var ZoneBrazil_DeNoronha = zoneinfo.ZoneInfo{
-	Name: "Brazil/DeNoronha",
+	NameIndex: 371, // "Brazil/DeNoronha"
 	ZoneID: 0x9b4cb496,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16159,7 +15526,7 @@ var ZoneBrazil_DeNoronha = zoneinfo.ZoneInfo{
 
 // Link: Brazil/East -> America/Sao_Paulo
 var ZoneBrazil_East = zoneinfo.ZoneInfo{
-	Name: "Brazil/East",
+	NameIndex: 372, // "Brazil/East"
 	ZoneID: 0x669578c5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16169,7 +15536,7 @@ var ZoneBrazil_East = zoneinfo.ZoneInfo{
 
 // Link: Brazil/West -> America/Manaus
 var ZoneBrazil_West = zoneinfo.ZoneInfo{
-	Name: "Brazil/West",
+	NameIndex: 373, // "Brazil/West"
 	ZoneID: 0x669f689b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16179,7 +15546,7 @@ var ZoneBrazil_West = zoneinfo.ZoneInfo{
 
 // Link: Canada/Atlantic -> America/Halifax
 var ZoneCanada_Atlantic = zoneinfo.ZoneInfo{
-	Name: "Canada/Atlantic",
+	NameIndex: 376, // "Canada/Atlantic"
 	ZoneID: 0x536b119c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16189,7 +15556,7 @@ var ZoneCanada_Atlantic = zoneinfo.ZoneInfo{
 
 // Link: Canada/Central -> America/Winnipeg
 var ZoneCanada_Central = zoneinfo.ZoneInfo{
-	Name: "Canada/Central",
+	NameIndex: 377, // "Canada/Central"
 	ZoneID: 0x626710f5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16199,7 +15566,7 @@ var ZoneCanada_Central = zoneinfo.ZoneInfo{
 
 // Link: Canada/Eastern -> America/Toronto
 var ZoneCanada_Eastern = zoneinfo.ZoneInfo{
-	Name: "Canada/Eastern",
+	NameIndex: 378, // "Canada/Eastern"
 	ZoneID: 0xf3612d5e,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16209,7 +15576,7 @@ var ZoneCanada_Eastern = zoneinfo.ZoneInfo{
 
 // Link: Canada/Mountain -> America/Edmonton
 var ZoneCanada_Mountain = zoneinfo.ZoneInfo{
-	Name: "Canada/Mountain",
+	NameIndex: 379, // "Canada/Mountain"
 	ZoneID: 0xfb8a8217,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16219,7 +15586,7 @@ var ZoneCanada_Mountain = zoneinfo.ZoneInfo{
 
 // Link: Canada/Newfoundland -> America/St_Johns
 var ZoneCanada_Newfoundland = zoneinfo.ZoneInfo{
-	Name: "Canada/Newfoundland",
+	NameIndex: 380, // "Canada/Newfoundland"
 	ZoneID: 0xb396e991,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16229,7 +15596,7 @@ var ZoneCanada_Newfoundland = zoneinfo.ZoneInfo{
 
 // Link: Canada/Pacific -> America/Vancouver
 var ZoneCanada_Pacific = zoneinfo.ZoneInfo{
-	Name: "Canada/Pacific",
+	NameIndex: 381, // "Canada/Pacific"
 	ZoneID: 0x40fa3c7b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16239,7 +15606,7 @@ var ZoneCanada_Pacific = zoneinfo.ZoneInfo{
 
 // Link: Canada/Saskatchewan -> America/Regina
 var ZoneCanada_Saskatchewan = zoneinfo.ZoneInfo{
-	Name: "Canada/Saskatchewan",
+	NameIndex: 382, // "Canada/Saskatchewan"
 	ZoneID: 0x77311f49,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16249,7 +15616,7 @@ var ZoneCanada_Saskatchewan = zoneinfo.ZoneInfo{
 
 // Link: Canada/Yukon -> America/Whitehorse
 var ZoneCanada_Yukon = zoneinfo.ZoneInfo{
-	Name: "Canada/Yukon",
+	NameIndex: 383, // "Canada/Yukon"
 	ZoneID: 0x78dd35c2,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16259,7 +15626,7 @@ var ZoneCanada_Yukon = zoneinfo.ZoneInfo{
 
 // Link: Chile/Continental -> America/Santiago
 var ZoneChile_Continental = zoneinfo.ZoneInfo{
-	Name: "Chile/Continental",
+	NameIndex: 384, // "Chile/Continental"
 	ZoneID: 0x7e2bdb18,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16269,7 +15636,7 @@ var ZoneChile_Continental = zoneinfo.ZoneInfo{
 
 // Link: Chile/EasterIsland -> Pacific/Easter
 var ZoneChile_EasterIsland = zoneinfo.ZoneInfo{
-	Name: "Chile/EasterIsland",
+	NameIndex: 385, // "Chile/EasterIsland"
 	ZoneID: 0xb0982af8,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16279,7 +15646,7 @@ var ZoneChile_EasterIsland = zoneinfo.ZoneInfo{
 
 // Link: Cuba -> America/Havana
 var ZoneCuba = zoneinfo.ZoneInfo{
-	Name: "Cuba",
+	NameIndex: 386, // "Cuba"
 	ZoneID: 0x7c83cba0,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16289,7 +15656,7 @@ var ZoneCuba = zoneinfo.ZoneInfo{
 
 // Link: Egypt -> Africa/Cairo
 var ZoneEgypt = zoneinfo.ZoneInfo{
-	Name: "Egypt",
+	NameIndex: 390, // "Egypt"
 	ZoneID: 0x0d1a278e,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16299,7 +15666,7 @@ var ZoneEgypt = zoneinfo.ZoneInfo{
 
 // Link: Eire -> Europe/Dublin
 var ZoneEire = zoneinfo.ZoneInfo{
-	Name: "Eire",
+	NameIndex: 391, // "Eire"
 	ZoneID: 0x7c84b36a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16309,7 +15676,7 @@ var ZoneEire = zoneinfo.ZoneInfo{
 
 // Link: Etc/GMT+0 -> Etc/GMT
 var ZoneEtc_GMT_PLUS_0 = zoneinfo.ZoneInfo{
-	Name: "Etc/GMT+0",
+	NameIndex: 393, // "Etc/GMT+0"
 	ZoneID: 0x9d13da13,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16319,7 +15686,7 @@ var ZoneEtc_GMT_PLUS_0 = zoneinfo.ZoneInfo{
 
 // Link: Etc/GMT-0 -> Etc/GMT
 var ZoneEtc_GMT_0 = zoneinfo.ZoneInfo{
-	Name: "Etc/GMT-0",
+	NameIndex: 406, // "Etc/GMT-0"
 	ZoneID: 0x9d13da55,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16329,7 +15696,7 @@ var ZoneEtc_GMT_0 = zoneinfo.ZoneInfo{
 
 // Link: Etc/GMT0 -> Etc/GMT
 var ZoneEtc_GMT0 = zoneinfo.ZoneInfo{
-	Name: "Etc/GMT0",
+	NameIndex: 421, // "Etc/GMT0"
 	ZoneID: 0xf53ea988,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16339,7 +15706,7 @@ var ZoneEtc_GMT0 = zoneinfo.ZoneInfo{
 
 // Link: Etc/Greenwich -> Etc/GMT
 var ZoneEtc_Greenwich = zoneinfo.ZoneInfo{
-	Name: "Etc/Greenwich",
+	NameIndex: 422, // "Etc/Greenwich"
 	ZoneID: 0x26daa98c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16349,7 +15716,7 @@ var ZoneEtc_Greenwich = zoneinfo.ZoneInfo{
 
 // Link: Etc/UCT -> Etc/UTC
 var ZoneEtc_UCT = zoneinfo.ZoneInfo{
-	Name: "Etc/UCT",
+	NameIndex: 423, // "Etc/UCT"
 	ZoneID: 0xd8e3189c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16359,7 +15726,7 @@ var ZoneEtc_UCT = zoneinfo.ZoneInfo{
 
 // Link: Etc/Universal -> Etc/UTC
 var ZoneEtc_Universal = zoneinfo.ZoneInfo{
-	Name: "Etc/Universal",
+	NameIndex: 425, // "Etc/Universal"
 	ZoneID: 0x2f8cb9a9,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16369,7 +15736,7 @@ var ZoneEtc_Universal = zoneinfo.ZoneInfo{
 
 // Link: Etc/Zulu -> Etc/UTC
 var ZoneEtc_Zulu = zoneinfo.ZoneInfo{
-	Name: "Etc/Zulu",
+	NameIndex: 426, // "Etc/Zulu"
 	ZoneID: 0xf549c240,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16379,7 +15746,7 @@ var ZoneEtc_Zulu = zoneinfo.ZoneInfo{
 
 // Link: Europe/Amsterdam -> Europe/Brussels
 var ZoneEurope_Amsterdam = zoneinfo.ZoneInfo{
-	Name: "Europe/Amsterdam",
+	NameIndex: 427, // "Europe/Amsterdam"
 	ZoneID: 0x109395c2,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16389,7 +15756,7 @@ var ZoneEurope_Amsterdam = zoneinfo.ZoneInfo{
 
 // Link: Europe/Belfast -> Europe/London
 var ZoneEurope_Belfast = zoneinfo.ZoneInfo{
-	Name: "Europe/Belfast",
+	NameIndex: 431, // "Europe/Belfast"
 	ZoneID: 0xd07dd1e5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16399,7 +15766,7 @@ var ZoneEurope_Belfast = zoneinfo.ZoneInfo{
 
 // Link: Europe/Bratislava -> Europe/Prague
 var ZoneEurope_Bratislava = zoneinfo.ZoneInfo{
-	Name: "Europe/Bratislava",
+	NameIndex: 434, // "Europe/Bratislava"
 	ZoneID: 0xda493bed,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16409,7 +15776,7 @@ var ZoneEurope_Bratislava = zoneinfo.ZoneInfo{
 
 // Link: Europe/Busingen -> Europe/Zurich
 var ZoneEurope_Busingen = zoneinfo.ZoneInfo{
-	Name: "Europe/Busingen",
+	NameIndex: 438, // "Europe/Busingen"
 	ZoneID: 0xc06d2cdf,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16419,7 +15786,7 @@ var ZoneEurope_Busingen = zoneinfo.ZoneInfo{
 
 // Link: Europe/Copenhagen -> Europe/Berlin
 var ZoneEurope_Copenhagen = zoneinfo.ZoneInfo{
-	Name: "Europe/Copenhagen",
+	NameIndex: 440, // "Europe/Copenhagen"
 	ZoneID: 0xe0ed30bc,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16429,7 +15796,7 @@ var ZoneEurope_Copenhagen = zoneinfo.ZoneInfo{
 
 // Link: Europe/Guernsey -> Europe/London
 var ZoneEurope_Guernsey = zoneinfo.ZoneInfo{
-	Name: "Europe/Guernsey",
+	NameIndex: 443, // "Europe/Guernsey"
 	ZoneID: 0x3db12c16,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16439,7 +15806,7 @@ var ZoneEurope_Guernsey = zoneinfo.ZoneInfo{
 
 // Link: Europe/Isle_of_Man -> Europe/London
 var ZoneEurope_Isle_of_Man = zoneinfo.ZoneInfo{
-	Name: "Europe/Isle_of_Man",
+	NameIndex: 445, // "Europe/Isle_of_Man"
 	ZoneID: 0xeaf84580,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16449,7 +15816,7 @@ var ZoneEurope_Isle_of_Man = zoneinfo.ZoneInfo{
 
 // Link: Europe/Jersey -> Europe/London
 var ZoneEurope_Jersey = zoneinfo.ZoneInfo{
-	Name: "Europe/Jersey",
+	NameIndex: 447, // "Europe/Jersey"
 	ZoneID: 0x570dae76,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16459,7 +15826,7 @@ var ZoneEurope_Jersey = zoneinfo.ZoneInfo{
 
 // Link: Europe/Kiev -> Europe/Kyiv
 var ZoneEurope_Kiev = zoneinfo.ZoneInfo{
-	Name: "Europe/Kiev",
+	NameIndex: 449, // "Europe/Kiev"
 	ZoneID: 0xa2c19eb3,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16469,7 +15836,7 @@ var ZoneEurope_Kiev = zoneinfo.ZoneInfo{
 
 // Link: Europe/Ljubljana -> Europe/Belgrade
 var ZoneEurope_Ljubljana = zoneinfo.ZoneInfo{
-	Name: "Europe/Ljubljana",
+	NameIndex: 453, // "Europe/Ljubljana"
 	ZoneID: 0xbd98cdb7,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16479,7 +15846,7 @@ var ZoneEurope_Ljubljana = zoneinfo.ZoneInfo{
 
 // Link: Europe/Luxembourg -> Europe/Brussels
 var ZoneEurope_Luxembourg = zoneinfo.ZoneInfo{
-	Name: "Europe/Luxembourg",
+	NameIndex: 455, // "Europe/Luxembourg"
 	ZoneID: 0x1f8bc6ce,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16489,7 +15856,7 @@ var ZoneEurope_Luxembourg = zoneinfo.ZoneInfo{
 
 // Link: Europe/Mariehamn -> Europe/Helsinki
 var ZoneEurope_Mariehamn = zoneinfo.ZoneInfo{
-	Name: "Europe/Mariehamn",
+	NameIndex: 458, // "Europe/Mariehamn"
 	ZoneID: 0x0caa6496,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16499,7 +15866,7 @@ var ZoneEurope_Mariehamn = zoneinfo.ZoneInfo{
 
 // Link: Europe/Monaco -> Europe/Paris
 var ZoneEurope_Monaco = zoneinfo.ZoneInfo{
-	Name: "Europe/Monaco",
+	NameIndex: 460, // "Europe/Monaco"
 	ZoneID: 0x5ebf9f01,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16509,7 +15876,7 @@ var ZoneEurope_Monaco = zoneinfo.ZoneInfo{
 
 // Link: Europe/Nicosia -> Asia/Nicosia
 var ZoneEurope_Nicosia = zoneinfo.ZoneInfo{
-	Name: "Europe/Nicosia",
+	NameIndex: 462, // "Europe/Nicosia"
 	ZoneID: 0x74efab8a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16519,7 +15886,7 @@ var ZoneEurope_Nicosia = zoneinfo.ZoneInfo{
 
 // Link: Europe/Oslo -> Europe/Berlin
 var ZoneEurope_Oslo = zoneinfo.ZoneInfo{
-	Name: "Europe/Oslo",
+	NameIndex: 463, // "Europe/Oslo"
 	ZoneID: 0xa2c3fba1,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16529,7 +15896,7 @@ var ZoneEurope_Oslo = zoneinfo.ZoneInfo{
 
 // Link: Europe/Podgorica -> Europe/Belgrade
 var ZoneEurope_Podgorica = zoneinfo.ZoneInfo{
-	Name: "Europe/Podgorica",
+	NameIndex: 465, // "Europe/Podgorica"
 	ZoneID: 0x1c1a499c,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16539,7 +15906,7 @@ var ZoneEurope_Podgorica = zoneinfo.ZoneInfo{
 
 // Link: Europe/San_Marino -> Europe/Rome
 var ZoneEurope_San_Marino = zoneinfo.ZoneInfo{
-	Name: "Europe/San_Marino",
+	NameIndex: 470, // "Europe/San_Marino"
 	ZoneID: 0xcef7724b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16549,7 +15916,7 @@ var ZoneEurope_San_Marino = zoneinfo.ZoneInfo{
 
 // Link: Europe/Sarajevo -> Europe/Belgrade
 var ZoneEurope_Sarajevo = zoneinfo.ZoneInfo{
-	Name: "Europe/Sarajevo",
+	NameIndex: 471, // "Europe/Sarajevo"
 	ZoneID: 0x6a576c3f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16559,7 +15926,7 @@ var ZoneEurope_Sarajevo = zoneinfo.ZoneInfo{
 
 // Link: Europe/Skopje -> Europe/Belgrade
 var ZoneEurope_Skopje = zoneinfo.ZoneInfo{
-	Name: "Europe/Skopje",
+	NameIndex: 474, // "Europe/Skopje"
 	ZoneID: 0x6c76fdd0,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16569,7 +15936,7 @@ var ZoneEurope_Skopje = zoneinfo.ZoneInfo{
 
 // Link: Europe/Stockholm -> Europe/Berlin
 var ZoneEurope_Stockholm = zoneinfo.ZoneInfo{
-	Name: "Europe/Stockholm",
+	NameIndex: 476, // "Europe/Stockholm"
 	ZoneID: 0x5bf6fbb8,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16579,7 +15946,7 @@ var ZoneEurope_Stockholm = zoneinfo.ZoneInfo{
 
 // Link: Europe/Tiraspol -> Europe/Chisinau
 var ZoneEurope_Tiraspol = zoneinfo.ZoneInfo{
-	Name: "Europe/Tiraspol",
+	NameIndex: 479, // "Europe/Tiraspol"
 	ZoneID: 0xbe704472,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16589,7 +15956,7 @@ var ZoneEurope_Tiraspol = zoneinfo.ZoneInfo{
 
 // Link: Europe/Uzhgorod -> Europe/Kyiv
 var ZoneEurope_Uzhgorod = zoneinfo.ZoneInfo{
-	Name: "Europe/Uzhgorod",
+	NameIndex: 481, // "Europe/Uzhgorod"
 	ZoneID: 0xb066f5d6,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16599,7 +15966,7 @@ var ZoneEurope_Uzhgorod = zoneinfo.ZoneInfo{
 
 // Link: Europe/Vaduz -> Europe/Zurich
 var ZoneEurope_Vaduz = zoneinfo.ZoneInfo{
-	Name: "Europe/Vaduz",
+	NameIndex: 482, // "Europe/Vaduz"
 	ZoneID: 0xfbb81bae,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16609,7 +15976,7 @@ var ZoneEurope_Vaduz = zoneinfo.ZoneInfo{
 
 // Link: Europe/Vatican -> Europe/Rome
 var ZoneEurope_Vatican = zoneinfo.ZoneInfo{
-	Name: "Europe/Vatican",
+	NameIndex: 483, // "Europe/Vatican"
 	ZoneID: 0xcb485dca,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16619,7 +15986,7 @@ var ZoneEurope_Vatican = zoneinfo.ZoneInfo{
 
 // Link: Europe/Zagreb -> Europe/Belgrade
 var ZoneEurope_Zagreb = zoneinfo.ZoneInfo{
-	Name: "Europe/Zagreb",
+	NameIndex: 488, // "Europe/Zagreb"
 	ZoneID: 0x7c11c9ff,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16629,7 +15996,7 @@ var ZoneEurope_Zagreb = zoneinfo.ZoneInfo{
 
 // Link: Europe/Zaporozhye -> Europe/Kyiv
 var ZoneEurope_Zaporozhye = zoneinfo.ZoneInfo{
-	Name: "Europe/Zaporozhye",
+	NameIndex: 489, // "Europe/Zaporozhye"
 	ZoneID: 0xeab9767f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16639,7 +16006,7 @@ var ZoneEurope_Zaporozhye = zoneinfo.ZoneInfo{
 
 // Link: GB -> Europe/London
 var ZoneGB = zoneinfo.ZoneInfo{
-	Name: "GB",
+	NameIndex: 491, // "GB"
 	ZoneID: 0x005973ae,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16649,7 +16016,7 @@ var ZoneGB = zoneinfo.ZoneInfo{
 
 // Link: GB-Eire -> Europe/London
 var ZoneGB_Eire = zoneinfo.ZoneInfo{
-	Name: "GB-Eire",
+	NameIndex: 492, // "GB-Eire"
 	ZoneID: 0xfa70e300,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16659,7 +16026,7 @@ var ZoneGB_Eire = zoneinfo.ZoneInfo{
 
 // Link: GMT -> Etc/GMT
 var ZoneGMT = zoneinfo.ZoneInfo{
-	Name: "GMT",
+	NameIndex: 493, // "GMT"
 	ZoneID: 0x0b87eb2d,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16669,7 +16036,7 @@ var ZoneGMT = zoneinfo.ZoneInfo{
 
 // Link: GMT+0 -> Etc/GMT
 var ZoneGMT_PLUS_0 = zoneinfo.ZoneInfo{
-	Name: "GMT+0",
+	NameIndex: 494, // "GMT+0"
 	ZoneID: 0x0d2f7028,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16679,7 +16046,7 @@ var ZoneGMT_PLUS_0 = zoneinfo.ZoneInfo{
 
 // Link: GMT-0 -> Etc/GMT
 var ZoneGMT_0 = zoneinfo.ZoneInfo{
-	Name: "GMT-0",
+	NameIndex: 495, // "GMT-0"
 	ZoneID: 0x0d2f706a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16689,7 +16056,7 @@ var ZoneGMT_0 = zoneinfo.ZoneInfo{
 
 // Link: GMT0 -> Etc/GMT
 var ZoneGMT0 = zoneinfo.ZoneInfo{
-	Name: "GMT0",
+	NameIndex: 496, // "GMT0"
 	ZoneID: 0x7c8550fd,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16699,7 +16066,7 @@ var ZoneGMT0 = zoneinfo.ZoneInfo{
 
 // Link: Greenwich -> Etc/GMT
 var ZoneGreenwich = zoneinfo.ZoneInfo{
-	Name: "Greenwich",
+	NameIndex: 497, // "Greenwich"
 	ZoneID: 0xc84d4221,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16709,7 +16076,7 @@ var ZoneGreenwich = zoneinfo.ZoneInfo{
 
 // Link: Hongkong -> Asia/Hong_Kong
 var ZoneHongkong = zoneinfo.ZoneInfo{
-	Name: "Hongkong",
+	NameIndex: 499, // "Hongkong"
 	ZoneID: 0x56d36560,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16719,7 +16086,7 @@ var ZoneHongkong = zoneinfo.ZoneInfo{
 
 // Link: Iceland -> Africa/Abidjan
 var ZoneIceland = zoneinfo.ZoneInfo{
-	Name: "Iceland",
+	NameIndex: 500, // "Iceland"
 	ZoneID: 0xe56a35b5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16729,7 +16096,7 @@ var ZoneIceland = zoneinfo.ZoneInfo{
 
 // Link: Indian/Antananarivo -> Africa/Nairobi
 var ZoneIndian_Antananarivo = zoneinfo.ZoneInfo{
-	Name: "Indian/Antananarivo",
+	NameIndex: 501, // "Indian/Antananarivo"
 	ZoneID: 0x9ebf5289,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16739,7 +16106,7 @@ var ZoneIndian_Antananarivo = zoneinfo.ZoneInfo{
 
 // Link: Indian/Christmas -> Asia/Bangkok
 var ZoneIndian_Christmas = zoneinfo.ZoneInfo{
-	Name: "Indian/Christmas",
+	NameIndex: 503, // "Indian/Christmas"
 	ZoneID: 0x68c207d5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16749,7 +16116,7 @@ var ZoneIndian_Christmas = zoneinfo.ZoneInfo{
 
 // Link: Indian/Cocos -> Asia/Yangon
 var ZoneIndian_Cocos = zoneinfo.ZoneInfo{
-	Name: "Indian/Cocos",
+	NameIndex: 504, // "Indian/Cocos"
 	ZoneID: 0x021e86de,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16759,7 +16126,7 @@ var ZoneIndian_Cocos = zoneinfo.ZoneInfo{
 
 // Link: Indian/Comoro -> Africa/Nairobi
 var ZoneIndian_Comoro = zoneinfo.ZoneInfo{
-	Name: "Indian/Comoro",
+	NameIndex: 505, // "Indian/Comoro"
 	ZoneID: 0x45f4deb6,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16769,7 +16136,7 @@ var ZoneIndian_Comoro = zoneinfo.ZoneInfo{
 
 // Link: Indian/Kerguelen -> Indian/Maldives
 var ZoneIndian_Kerguelen = zoneinfo.ZoneInfo{
-	Name: "Indian/Kerguelen",
+	NameIndex: 506, // "Indian/Kerguelen"
 	ZoneID: 0x4351b389,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16779,7 +16146,7 @@ var ZoneIndian_Kerguelen = zoneinfo.ZoneInfo{
 
 // Link: Indian/Mahe -> Asia/Dubai
 var ZoneIndian_Mahe = zoneinfo.ZoneInfo{
-	Name: "Indian/Mahe",
+	NameIndex: 507, // "Indian/Mahe"
 	ZoneID: 0x45e725e2,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16789,7 +16156,7 @@ var ZoneIndian_Mahe = zoneinfo.ZoneInfo{
 
 // Link: Indian/Mayotte -> Africa/Nairobi
 var ZoneIndian_Mayotte = zoneinfo.ZoneInfo{
-	Name: "Indian/Mayotte",
+	NameIndex: 510, // "Indian/Mayotte"
 	ZoneID: 0xe6880bca,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16799,7 +16166,7 @@ var ZoneIndian_Mayotte = zoneinfo.ZoneInfo{
 
 // Link: Indian/Reunion -> Asia/Dubai
 var ZoneIndian_Reunion = zoneinfo.ZoneInfo{
-	Name: "Indian/Reunion",
+	NameIndex: 511, // "Indian/Reunion"
 	ZoneID: 0x7076c047,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16809,7 +16176,7 @@ var ZoneIndian_Reunion = zoneinfo.ZoneInfo{
 
 // Link: Iran -> Asia/Tehran
 var ZoneIran = zoneinfo.ZoneInfo{
-	Name: "Iran",
+	NameIndex: 512, // "Iran"
 	ZoneID: 0x7c87090f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16819,7 +16186,7 @@ var ZoneIran = zoneinfo.ZoneInfo{
 
 // Link: Israel -> Asia/Jerusalem
 var ZoneIsrael = zoneinfo.ZoneInfo{
-	Name: "Israel",
+	NameIndex: 513, // "Israel"
 	ZoneID: 0xba88c9e5,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16829,7 +16196,7 @@ var ZoneIsrael = zoneinfo.ZoneInfo{
 
 // Link: Jamaica -> America/Jamaica
 var ZoneJamaica = zoneinfo.ZoneInfo{
-	Name: "Jamaica",
+	NameIndex: 514, // "Jamaica"
 	ZoneID: 0x2e44fdab,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16839,7 +16206,7 @@ var ZoneJamaica = zoneinfo.ZoneInfo{
 
 // Link: Japan -> Asia/Tokyo
 var ZoneJapan = zoneinfo.ZoneInfo{
-	Name: "Japan",
+	NameIndex: 515, // "Japan"
 	ZoneID: 0x0d712f8f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16849,7 +16216,7 @@ var ZoneJapan = zoneinfo.ZoneInfo{
 
 // Link: Kwajalein -> Pacific/Kwajalein
 var ZoneKwajalein = zoneinfo.ZoneInfo{
-	Name: "Kwajalein",
+	NameIndex: 516, // "Kwajalein"
 	ZoneID: 0x0e57afbb,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16859,7 +16226,7 @@ var ZoneKwajalein = zoneinfo.ZoneInfo{
 
 // Link: Libya -> Africa/Tripoli
 var ZoneLibya = zoneinfo.ZoneInfo{
-	Name: "Libya",
+	NameIndex: 517, // "Libya"
 	ZoneID: 0x0d998b16,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16869,7 +16236,7 @@ var ZoneLibya = zoneinfo.ZoneInfo{
 
 // Link: Mexico/BajaNorte -> America/Tijuana
 var ZoneMexico_BajaNorte = zoneinfo.ZoneInfo{
-	Name: "Mexico/BajaNorte",
+	NameIndex: 521, // "Mexico/BajaNorte"
 	ZoneID: 0xfcf7150f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16879,7 +16246,7 @@ var ZoneMexico_BajaNorte = zoneinfo.ZoneInfo{
 
 // Link: Mexico/BajaSur -> America/Mazatlan
 var ZoneMexico_BajaSur = zoneinfo.ZoneInfo{
-	Name: "Mexico/BajaSur",
+	NameIndex: 522, // "Mexico/BajaSur"
 	ZoneID: 0x08ee3641,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16889,7 +16256,7 @@ var ZoneMexico_BajaSur = zoneinfo.ZoneInfo{
 
 // Link: Mexico/General -> America/Mexico_City
 var ZoneMexico_General = zoneinfo.ZoneInfo{
-	Name: "Mexico/General",
+	NameIndex: 523, // "Mexico/General"
 	ZoneID: 0x93711d57,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16899,7 +16266,7 @@ var ZoneMexico_General = zoneinfo.ZoneInfo{
 
 // Link: NZ -> Pacific/Auckland
 var ZoneNZ = zoneinfo.ZoneInfo{
-	Name: "NZ",
+	NameIndex: 524, // "NZ"
 	ZoneID: 0x005974ad,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16909,7 +16276,7 @@ var ZoneNZ = zoneinfo.ZoneInfo{
 
 // Link: NZ-CHAT -> Pacific/Chatham
 var ZoneNZ_CHAT = zoneinfo.ZoneInfo{
-	Name: "NZ-CHAT",
+	NameIndex: 525, // "NZ-CHAT"
 	ZoneID: 0x4d42afda,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16919,7 +16286,7 @@ var ZoneNZ_CHAT = zoneinfo.ZoneInfo{
 
 // Link: Navajo -> America/Denver
 var ZoneNavajo = zoneinfo.ZoneInfo{
-	Name: "Navajo",
+	NameIndex: 526, // "Navajo"
 	ZoneID: 0xc4ef0e24,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16929,7 +16296,7 @@ var ZoneNavajo = zoneinfo.ZoneInfo{
 
 // Link: PRC -> Asia/Shanghai
 var ZonePRC = zoneinfo.ZoneInfo{
-	Name: "PRC",
+	NameIndex: 527, // "PRC"
 	ZoneID: 0x0b88120a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16939,7 +16306,7 @@ var ZonePRC = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Chuuk -> Pacific/Port_Moresby
 var ZonePacific_Chuuk = zoneinfo.ZoneInfo{
-	Name: "Pacific/Chuuk",
+	NameIndex: 533, // "Pacific/Chuuk"
 	ZoneID: 0x8a090b23,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16949,7 +16316,7 @@ var ZonePacific_Chuuk = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Enderbury -> Pacific/Kanton
 var ZonePacific_Enderbury = zoneinfo.ZoneInfo{
-	Name: "Pacific/Enderbury",
+	NameIndex: 536, // "Pacific/Enderbury"
 	ZoneID: 0x61599a93,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16959,7 +16326,7 @@ var ZonePacific_Enderbury = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Funafuti -> Pacific/Tarawa
 var ZonePacific_Funafuti = zoneinfo.ZoneInfo{
-	Name: "Pacific/Funafuti",
+	NameIndex: 539, // "Pacific/Funafuti"
 	ZoneID: 0xdb402d65,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16969,7 +16336,7 @@ var ZonePacific_Funafuti = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Johnston -> Pacific/Honolulu
 var ZonePacific_Johnston = zoneinfo.ZoneInfo{
-	Name: "Pacific/Johnston",
+	NameIndex: 545, // "Pacific/Johnston"
 	ZoneID: 0xb15d7b36,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16979,7 +16346,7 @@ var ZonePacific_Johnston = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Majuro -> Pacific/Tarawa
 var ZonePacific_Majuro = zoneinfo.ZoneInfo{
-	Name: "Pacific/Majuro",
+	NameIndex: 550, // "Pacific/Majuro"
 	ZoneID: 0xe1f95371,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16989,7 +16356,7 @@ var ZonePacific_Majuro = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Midway -> Pacific/Pago_Pago
 var ZonePacific_Midway = zoneinfo.ZoneInfo{
-	Name: "Pacific/Midway",
+	NameIndex: 552, // "Pacific/Midway"
 	ZoneID: 0xe286d38e,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -16999,7 +16366,7 @@ var ZonePacific_Midway = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Pohnpei -> Pacific/Guadalcanal
 var ZonePacific_Pohnpei = zoneinfo.ZoneInfo{
-	Name: "Pacific/Pohnpei",
+	NameIndex: 560, // "Pacific/Pohnpei"
 	ZoneID: 0x28929f96,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17009,7 +16376,7 @@ var ZonePacific_Pohnpei = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Ponape -> Pacific/Guadalcanal
 var ZonePacific_Ponape = zoneinfo.ZoneInfo{
-	Name: "Pacific/Ponape",
+	NameIndex: 561, // "Pacific/Ponape"
 	ZoneID: 0xe9f80086,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17019,7 +16386,7 @@ var ZonePacific_Ponape = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Saipan -> Pacific/Guam
 var ZonePacific_Saipan = zoneinfo.ZoneInfo{
-	Name: "Pacific/Saipan",
+	NameIndex: 564, // "Pacific/Saipan"
 	ZoneID: 0xeff7a35f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17029,7 +16396,7 @@ var ZonePacific_Saipan = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Samoa -> Pacific/Pago_Pago
 var ZonePacific_Samoa = zoneinfo.ZoneInfo{
-	Name: "Pacific/Samoa",
+	NameIndex: 565, // "Pacific/Samoa"
 	ZoneID: 0x8b2699b4,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17039,7 +16406,7 @@ var ZonePacific_Samoa = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Truk -> Pacific/Port_Moresby
 var ZonePacific_Truk = zoneinfo.ZoneInfo{
-	Name: "Pacific/Truk",
+	NameIndex: 569, // "Pacific/Truk"
 	ZoneID: 0x234010a9,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17049,7 +16416,7 @@ var ZonePacific_Truk = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Wake -> Pacific/Tarawa
 var ZonePacific_Wake = zoneinfo.ZoneInfo{
-	Name: "Pacific/Wake",
+	NameIndex: 570, // "Pacific/Wake"
 	ZoneID: 0x23416c2b,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17059,7 +16426,7 @@ var ZonePacific_Wake = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Wallis -> Pacific/Tarawa
 var ZonePacific_Wallis = zoneinfo.ZoneInfo{
-	Name: "Pacific/Wallis",
+	NameIndex: 571, // "Pacific/Wallis"
 	ZoneID: 0xf94ddb0f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17069,7 +16436,7 @@ var ZonePacific_Wallis = zoneinfo.ZoneInfo{
 
 // Link: Pacific/Yap -> Pacific/Port_Moresby
 var ZonePacific_Yap = zoneinfo.ZoneInfo{
-	Name: "Pacific/Yap",
+	NameIndex: 572, // "Pacific/Yap"
 	ZoneID: 0xbb40138d,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17079,7 +16446,7 @@ var ZonePacific_Yap = zoneinfo.ZoneInfo{
 
 // Link: Poland -> Europe/Warsaw
 var ZonePoland = zoneinfo.ZoneInfo{
-	Name: "Poland",
+	NameIndex: 573, // "Poland"
 	ZoneID: 0xca913b23,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17089,7 +16456,7 @@ var ZonePoland = zoneinfo.ZoneInfo{
 
 // Link: Portugal -> Europe/Lisbon
 var ZonePortugal = zoneinfo.ZoneInfo{
-	Name: "Portugal",
+	NameIndex: 574, // "Portugal"
 	ZoneID: 0xc3274593,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17099,7 +16466,7 @@ var ZonePortugal = zoneinfo.ZoneInfo{
 
 // Link: ROC -> Asia/Taipei
 var ZoneROC = zoneinfo.ZoneInfo{
-	Name: "ROC",
+	NameIndex: 575, // "ROC"
 	ZoneID: 0x0b881a29,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17109,7 +16476,7 @@ var ZoneROC = zoneinfo.ZoneInfo{
 
 // Link: ROK -> Asia/Seoul
 var ZoneROK = zoneinfo.ZoneInfo{
-	Name: "ROK",
+	NameIndex: 576, // "ROK"
 	ZoneID: 0x0b881a31,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17119,7 +16486,7 @@ var ZoneROK = zoneinfo.ZoneInfo{
 
 // Link: Singapore -> Asia/Singapore
 var ZoneSingapore = zoneinfo.ZoneInfo{
-	Name: "Singapore",
+	NameIndex: 577, // "Singapore"
 	ZoneID: 0xa8598c8d,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17129,7 +16496,7 @@ var ZoneSingapore = zoneinfo.ZoneInfo{
 
 // Link: Turkey -> Europe/Istanbul
 var ZoneTurkey = zoneinfo.ZoneInfo{
-	Name: "Turkey",
+	NameIndex: 578, // "Turkey"
 	ZoneID: 0xd455e469,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17139,7 +16506,7 @@ var ZoneTurkey = zoneinfo.ZoneInfo{
 
 // Link: UCT -> Etc/UTC
 var ZoneUCT = zoneinfo.ZoneInfo{
-	Name: "UCT",
+	NameIndex: 579, // "UCT"
 	ZoneID: 0x0b882571,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17149,7 +16516,7 @@ var ZoneUCT = zoneinfo.ZoneInfo{
 
 // Link: US/Alaska -> America/Anchorage
 var ZoneUS_Alaska = zoneinfo.ZoneInfo{
-	Name: "US/Alaska",
+	NameIndex: 580, // "US/Alaska"
 	ZoneID: 0xfa300bc9,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17159,7 +16526,7 @@ var ZoneUS_Alaska = zoneinfo.ZoneInfo{
 
 // Link: US/Aleutian -> America/Adak
 var ZoneUS_Aleutian = zoneinfo.ZoneInfo{
-	Name: "US/Aleutian",
+	NameIndex: 581, // "US/Aleutian"
 	ZoneID: 0x4fe013ef,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17169,7 +16536,7 @@ var ZoneUS_Aleutian = zoneinfo.ZoneInfo{
 
 // Link: US/Arizona -> America/Phoenix
 var ZoneUS_Arizona = zoneinfo.ZoneInfo{
-	Name: "US/Arizona",
+	NameIndex: 582, // "US/Arizona"
 	ZoneID: 0x4ec52670,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17179,7 +16546,7 @@ var ZoneUS_Arizona = zoneinfo.ZoneInfo{
 
 // Link: US/Central -> America/Chicago
 var ZoneUS_Central = zoneinfo.ZoneInfo{
-	Name: "US/Central",
+	NameIndex: 583, // "US/Central"
 	ZoneID: 0xcabdcb25,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17189,7 +16556,7 @@ var ZoneUS_Central = zoneinfo.ZoneInfo{
 
 // Link: US/East-Indiana -> America/Indiana/Indianapolis
 var ZoneUS_East_Indiana = zoneinfo.ZoneInfo{
-	Name: "US/East-Indiana",
+	NameIndex: 584, // "US/East-Indiana"
 	ZoneID: 0x6dcf558a,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17199,7 +16566,7 @@ var ZoneUS_East_Indiana = zoneinfo.ZoneInfo{
 
 // Link: US/Eastern -> America/New_York
 var ZoneUS_Eastern = zoneinfo.ZoneInfo{
-	Name: "US/Eastern",
+	NameIndex: 585, // "US/Eastern"
 	ZoneID: 0x5bb7e78e,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17209,7 +16576,7 @@ var ZoneUS_Eastern = zoneinfo.ZoneInfo{
 
 // Link: US/Hawaii -> Pacific/Honolulu
 var ZoneUS_Hawaii = zoneinfo.ZoneInfo{
-	Name: "US/Hawaii",
+	NameIndex: 586, // "US/Hawaii"
 	ZoneID: 0x09c8de2f,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17219,7 +16586,7 @@ var ZoneUS_Hawaii = zoneinfo.ZoneInfo{
 
 // Link: US/Indiana-Starke -> America/Indiana/Knox
 var ZoneUS_Indiana_Starke = zoneinfo.ZoneInfo{
-	Name: "US/Indiana-Starke",
+	NameIndex: 587, // "US/Indiana-Starke"
 	ZoneID: 0x67977be7,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17229,7 +16596,7 @@ var ZoneUS_Indiana_Starke = zoneinfo.ZoneInfo{
 
 // Link: US/Michigan -> America/Detroit
 var ZoneUS_Michigan = zoneinfo.ZoneInfo{
-	Name: "US/Michigan",
+	NameIndex: 588, // "US/Michigan"
 	ZoneID: 0x766bb7bc,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17239,7 +16606,7 @@ var ZoneUS_Michigan = zoneinfo.ZoneInfo{
 
 // Link: US/Mountain -> America/Denver
 var ZoneUS_Mountain = zoneinfo.ZoneInfo{
-	Name: "US/Mountain",
+	NameIndex: 589, // "US/Mountain"
 	ZoneID: 0x6eb88247,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17249,7 +16616,7 @@ var ZoneUS_Mountain = zoneinfo.ZoneInfo{
 
 // Link: US/Pacific -> America/Los_Angeles
 var ZoneUS_Pacific = zoneinfo.ZoneInfo{
-	Name: "US/Pacific",
+	NameIndex: 590, // "US/Pacific"
 	ZoneID: 0xa950f6ab,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17259,7 +16626,7 @@ var ZoneUS_Pacific = zoneinfo.ZoneInfo{
 
 // Link: US/Samoa -> Pacific/Pago_Pago
 var ZoneUS_Samoa = zoneinfo.ZoneInfo{
-	Name: "US/Samoa",
+	NameIndex: 591, // "US/Samoa"
 	ZoneID: 0x566821cd,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17269,7 +16636,7 @@ var ZoneUS_Samoa = zoneinfo.ZoneInfo{
 
 // Link: UTC -> Etc/UTC
 var ZoneUTC = zoneinfo.ZoneInfo{
-	Name: "UTC",
+	NameIndex: 592, // "UTC"
 	ZoneID: 0x0b882791,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17279,7 +16646,7 @@ var ZoneUTC = zoneinfo.ZoneInfo{
 
 // Link: Universal -> Etc/UTC
 var ZoneUniversal = zoneinfo.ZoneInfo{
-	Name: "Universal",
+	NameIndex: 593, // "Universal"
 	ZoneID: 0xd0ff523e,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17289,7 +16656,7 @@ var ZoneUniversal = zoneinfo.ZoneInfo{
 
 // Link: W-SU -> Europe/Moscow
 var ZoneW_SU = zoneinfo.ZoneInfo{
-	Name: "W-SU",
+	NameIndex: 594, // "W-SU"
 	ZoneID: 0x7c8d8ef1,
 	StartYear: 2000,
 	UntilYear: 10000,
@@ -17299,7 +16666,7 @@ var ZoneW_SU = zoneinfo.ZoneInfo{
 
 // Link: Zulu -> Etc/UTC
 var ZoneZulu = zoneinfo.ZoneInfo{
-	Name: "Zulu",
+	NameIndex: 596, // "Zulu"
 	ZoneID: 0x7c9069b5,
 	StartYear: 2000,
 	UntilYear: 10000,
