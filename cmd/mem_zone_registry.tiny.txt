@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25    4248     290     601 |    4563     891 | (unknown)
+     25    4272     294     601 |    4591     895 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -17,16 +17,16 @@
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     147       0       0      24 |     147      24 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
-   7555      29       0       0 |    7584       0 | github.com/bxparks/AceTimeGo/acetime
-      0    8974   63254       0 |   72228   63254 | github.com/bxparks/AceTimeGo/zonedb
-    273       0       0       0 |     273       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   7656      29       0       0 |    7685       0 | github.com/bxparks/AceTimeGo/acetime
+      0    8994   59722       0 |   68716   59722 | github.com/bxparks/AceTimeGo/zonedb
+    349       0       0       0 |     349       0 | github.com/bxparks/AceTimeGo/zoneinfo
      61       0       0       0 |      61       0 | internal/bytealg
       0      38      32       0 |      70      32 | internal/oserror
     305      24       0      16 |     329      16 | internal/task
-    252     163       0       0 |     415       0 | main
+    234     163       0       0 |     397       0 | main
      72      16       0      24 |      88      24 | os
    2834     146       8     135 |    2988     143 | runtime
     558     124       0       0 |     682       0 | strings
       0       0       0       8 |       0       8 | syscall
 ------------------------------- | --------------- | -------
-  16024   13762   63584     808 |   93370   64392 | total
+  16183   13806   60056     808 |   90045   60864 | total

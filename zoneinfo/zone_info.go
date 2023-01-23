@@ -27,6 +27,8 @@ type ZoneContext struct {
 	LetterOffsets []uint8
 	FormatBuffer string
 	FormatOffsets []uint16
+	NameBuffer string
+	NameOffsets []uint16
 	ZoneRegistry []*ZoneInfo
 	TzDatabaseVersion string
 }
@@ -114,7 +116,7 @@ type ZoneRule struct {
 	LetterIndex uint8
 }
 
-func (rule *ZoneRule) Letter(offsets []uint8, buffer string) string {
+func (rule *ZoneRule) Letter(buffer string, offsets []uint8) string {
 	index := rule.LetterIndex
 	begin := offsets[index]
 	end := offsets[index+1] // always exists because of terminating sentinel
@@ -259,7 +261,7 @@ type ZoneEra struct {
 	UntilTimeModifier uint8
 }
 
-func (era *ZoneEra) Format(offsets []uint16, buffer string) string {
+func (era *ZoneEra) Format(buffer string, offsets []uint16) string {
 	index := era.FormatIndex
 	begin := offsets[index]
 	end := offsets[index+1] // always exists because of terminating sentinel
@@ -289,15 +291,15 @@ func (era *ZoneEra) UntilSuffix() uint8 {
  * records.
  */
 type ZoneInfo struct {
-	/** Full name of zone (e.g. "America/Los_Angeles"). */
-	Name string
-
 	/**
 	 * Unique, stable ID of the zone name, created from a hash of the name.
 	 * This ID will never change once assigned. This can be used for presistence
 	 * and serialization.
 	 */
 	ZoneID uint32
+
+	/** Full name of zone (e.g. "America/Los_Angeles"). */
+	NameIndex uint16
 
 	/** Start year of the zone files. */
 	StartYear int16
@@ -316,6 +318,13 @@ type ZoneInfo struct {
 
 	/** If not nil, this entry is a Link to the target. */
 	Target *ZoneInfo
+}
+
+func (zi *ZoneInfo) Name(buffer string, offsets []uint16) string {
+	index := zi.NameIndex
+	begin := offsets[index]
+	end := offsets[index+1] // always exists because of terminating sentinel
+	return buffer[begin:end]
 }
 
 // IsLink returns true if the current zone is a Link.

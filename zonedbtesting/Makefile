@@ -17,5 +17,15 @@ all:
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 
+zonedb.json:
+	$(TOOLS)/tzcompiler.sh \
+		--tag $(TZ_VERSION) \
+		--action zonedb \
+		--language json \
+		--scope extended \
+		--generate_int16_years \
+		--start_year $(START_YEAR) \
+		--until_year $(UNTIL_YEAR)
+
 clean:
 	rm -rf tzfiles

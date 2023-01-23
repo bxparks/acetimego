@@ -21,27 +21,27 @@ const (
 type ZoneRegistry = []*zoneinfo.ZoneInfo
 
 type ZoneRegistrar struct {
-	Registry ZoneRegistry
+	Context  *zoneinfo.ZoneContext
 	IsSorted bool
 }
 
-func NewZoneRegistrar(zis ZoneRegistry) ZoneRegistrar {
-	zr := ZoneRegistrar{zis, false}
-	zr.IsSorted = IsZoneRegistrySorted(zis)
+func NewZoneRegistrar(context *zoneinfo.ZoneContext) ZoneRegistrar {
+	zr := ZoneRegistrar{context, false}
+	zr.IsSorted = IsZoneRegistrySorted(context.ZoneRegistry)
 	return zr
 }
 
 func (zr *ZoneRegistrar) FindZoneInfoByID(id uint32) *zoneinfo.ZoneInfo {
 	var i uint16
 	if zr.IsSorted {
-		i = FindByIdBinary(zr.Registry, id)
+		i = FindByIdBinary(zr.Context.ZoneRegistry, id)
 	} else {
-		i = FindByIdLinear(zr.Registry, id)
+		i = FindByIdLinear(zr.Context.ZoneRegistry, id)
 	}
 	if i == InvalidRegistryIndex {
 		return nil
 	}
-	return zr.Registry[i]
+	return zr.Context.ZoneRegistry[i]
 }
 
 func (zr *ZoneRegistrar) FindZoneInfoByName(name string) *zoneinfo.ZoneInfo {
@@ -50,7 +50,9 @@ func (zr *ZoneRegistrar) FindZoneInfoByName(name string) *zoneinfo.ZoneInfo {
 	if zi == nil {
 		return nil
 	}
-	if zi.Name != name {
+
+	zoneName := zi.Name(zr.Context.NameBuffer, zr.Context.NameOffsets)
+	if zoneName != name {
 		return nil
 	}
 	return zi

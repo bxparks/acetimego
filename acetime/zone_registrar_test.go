@@ -7,24 +7,26 @@ import (
 )
 
 func TestFindById(t *testing.T) {
-	registrar := NewZoneRegistrar(zonedbtesting.ZoneAndLinkRegistry)
-	zoneInfo := registrar.FindZoneInfoByID(
-		zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID)
+	context := &zonedbtesting.Context
+	registrar := NewZoneRegistrar(context)
+	// TODO: Replace with ZoneIDAmerica_Los_Angeles after it is added.
+	zoneID := zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID
+	zoneInfo := registrar.FindZoneInfoByID(zoneID)
 	if zoneInfo == nil {
-		t.Fatalf("%d (%s) not found",
-			zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID,
-			zonedbtesting.ZoneAmerica_Los_Angeles.Name)
+		t.Fatalf("%d not found", zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID)
 	}
-	if !(zoneInfo.Name == "America/Los_Angeles") {
-		t.Fatal(zoneInfo.Name)
+	zoneName := zoneInfo.Name(context.NameBuffer, context.NameOffsets)
+	if !(zoneName == "America/Los_Angeles") {
+		t.Fatal(zoneName)
 	}
-	if !(zoneInfo.ZoneID == zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID) {
+	if !(zoneInfo.ZoneID == zoneID) {
 		t.Fatal(zoneInfo.ZoneID)
 	}
 }
 
 func TestFindByIdNotFound(t *testing.T) {
-	registrar := NewZoneRegistrar(zonedbtesting.ZoneAndLinkRegistry)
+	context := &zonedbtesting.Context
+	registrar := NewZoneRegistrar(context)
 	zoneInfo := registrar.FindZoneInfoByID(0)
 	if zoneInfo != nil {
 		t.Fatal("Should have returned nil")
@@ -32,7 +34,8 @@ func TestFindByIdNotFound(t *testing.T) {
 }
 
 func TestFindByName(t *testing.T) {
-	registrar := NewZoneRegistrar(zonedbtesting.ZoneAndLinkRegistry)
+	context := &zonedbtesting.Context
+	registrar := NewZoneRegistrar(context)
 	zoneInfo := registrar.FindZoneInfoByName("America/Los_Angeles")
 	if zoneInfo == nil {
 		t.Fatal("Not found")
@@ -40,7 +43,8 @@ func TestFindByName(t *testing.T) {
 }
 
 func TestFindByNameNotFound(t *testing.T) {
-	registrar := NewZoneRegistrar(zonedbtesting.ZoneAndLinkRegistry)
+	context := &zonedbtesting.Context
+	registrar := NewZoneRegistrar(context)
 	zoneInfo := registrar.FindZoneInfoByName("America/DoesNotExist")
 	if zoneInfo != nil {
 		t.Fatal("Should have returned nil")
