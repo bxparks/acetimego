@@ -108,8 +108,7 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) Err {
 	return zp.InitForYear(ldt.Year)
 }
 
-// TODO: Rename to Name()
-func (zp *ZoneProcessor) String() string {
+func (zp *ZoneProcessor) Name() string {
 	return zp.zoneInfo.Name(zp.zoneContext.NameBuffer, zp.zoneContext.NameOffsets)
 }
 
@@ -362,7 +361,6 @@ func createTransitionForYear(
 	t *Transition, year int16, rule *zoneinfo.ZoneRule, match *MatchingEra) {
 
 	t.match = match
-	t.rule = rule
 	t.offsetMinutes = match.era.StdOffsetMinutes()
 
 	if rule != nil {
@@ -374,7 +372,7 @@ func createTransitionForYear(
 		// Used for simple MatchingEra.
 		t.transitionTime = match.startDt
 		t.deltaMinutes = match.era.DstOffsetMinutes()
-		t.letterIndex = 0
+		t.letterIndex = 0 // index 0 is the empty string ""
 	}
 }
 

@@ -46,11 +46,11 @@ func (tz *TimeZone) IsUTC() bool {
 	return tz.zoneProcessor == nil
 }
 
-func (tz *TimeZone) String() string {
+func (tz *TimeZone) Name() string {
 	if tz.zoneProcessor == nil {
 		return "UTC"
 	} else {
-		return tz.zoneProcessor.String()
+		return tz.zoneProcessor.Name()
 	}
 }
 

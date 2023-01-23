@@ -217,13 +217,6 @@ type Transition struct {
 	match *MatchingEra
 
 	/**
-	 * The Zone transition rule that matched for the the given year. Set to
-	 * nullptr if the RULES column is '-', indicating that the MatchingEra was
-	 * a "simple" ZoneEra.
-	 */
-	rule *zoneinfo.ZoneRule
-
-	/**
 	 * The original transition time, usually 'w' but sometimes 's' or 'u'. After
 	 * expandDateTuple() is called, this field will definitely be a 'w'. We must
 	 * remember that the transitionTime* fields are expressed using the UTC
@@ -297,15 +290,12 @@ type Transition struct {
 	matchStatus uint8
 }
 
-// Letter returns the 'letter' defined by the 'rule' if it exists.
-// Otherwise, returns "".
+// Letter returns the string identified by Transition.letterIndex which was
+// copied from Transition.rule.LetterIndex if the rule exists. Otherwise
+// letterIndex is 0 which maps to the empty string.
 func (transition *Transition) Letter(
 	lettersOffset []uint8, lettersBuffer string) string {
-
-	if transition.rule == nil {
-		return ""
-	}
-	index := transition.rule.LetterIndex
+	index := transition.letterIndex
 	start := lettersOffset[index]
 	end := lettersOffset[index+1]
 	return lettersBuffer[start:end]

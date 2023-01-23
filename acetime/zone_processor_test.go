@@ -63,8 +63,8 @@ func TestZoneProcessorToString(t *testing.T) {
 	var zp ZoneProcessor
 	zp.InitForZoneInfo(
 		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
-	if !(zp.String() == "America/Los_Angeles") {
-		t.Fatal(zp.String(), zp)
+	if !(zp.Name() == "America/Los_Angeles") {
+		t.Fatal(zp.Name(), zp)
 	}
 }
 
@@ -421,28 +421,24 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 	transitions := []Transition{
 		Transition{
 			match:          &match,
-			rule:           nil,
 			transitionTime: DateTuple{1999, 12, 31, 0, zoneinfo.SuffixW},
 		},
 		// This occurs at exactly match.startDateTime, so should replace the prior.
 		// transitionTime = 2000-01-01
 		Transition{
 			match:          &match,
-			rule:           nil,
 			transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		},
 		// An interior transition. Prior should not change.
 		// transitionTime = 2000-01-02
 		Transition{
 			match:          &match,
-			rule:           nil,
 			transitionTime: DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW},
 		},
 		// Occurs after match.untilDateTime, so should be rejected.
 		// transitionTime = 2001-01-02
 		Transition{
 			match:          &match,
-			rule:           nil,
 			transitionTime: DateTuple{2001, 1, 2, 0, zoneinfo.SuffixW},
 		},
 	}

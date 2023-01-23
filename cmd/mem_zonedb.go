@@ -1,5 +1,4 @@
-// Print the memory usage of acetime library when using the ZoneManager and the
-// zonedb.Context.
+// Print the memory usage of acetime library when using the zonedb database.
 //
 //$ go run mem_zone_registry.go
 
@@ -17,7 +16,7 @@ func main() {
 	os.Stdout.WriteString("---- Initial memory usage\n")
 	PrintMemUsage()
 
-	os.Stdout.WriteString("---- Create ZonedDateTime using ZoneManager\n")
+	os.Stdout.WriteString("---- Create ZonedDateTime using zonedb\n")
 	zm := acetime.NewZoneManager(&zonedb.Context)
 	name := "America/Los_Angeles"
 	tz := zm.NewTimeZoneFromName(name)
