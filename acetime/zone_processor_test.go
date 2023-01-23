@@ -63,8 +63,8 @@ func TestZoneProcessorToString(t *testing.T) {
 	var zp ZoneProcessor
 	zp.InitForZoneInfo(
 		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
-	if !(zp.String() == "America/Los_Angeles") {
-		t.Fatal(zp.String(), zp)
+	if !(zp.Name() == "America/Los_Angeles") {
+		t.Fatal(zp.Name(), zp)
 	}
 }
 
