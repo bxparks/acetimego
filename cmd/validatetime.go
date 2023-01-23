@@ -14,23 +14,22 @@ import (
 func main() {
 	fmt.Println("Validating from 2000 to 2100")
 
-	zr := acetime.NewZoneRegistrar(zonedb.ZoneAndLinkRegistry)
+	zm := acetime.NewZoneManager(&zonedb.Context)
 	var index int
-	for _, zi := range zr.Registry {
+	for _, zi := range zonedb.Context.ZoneRegistry {
 		name := zi.Name
 		fmt.Printf("[%3d] Zone: %s\n", index, name)
-		validateZoneName(&zr, name)
+		validateZoneName(&zm, name)
 		index++
 	}
 }
 
-func validateZoneName(zr *acetime.ZoneRegistrar, name string) {
-	zi := zr.FindZoneInfoByName(name)
-	if zi == nil {
+func validateZoneName(zm *acetime.ZoneManager, name string) {
+	atz := zm.NewTimeZoneFromName(name)
+	if atz.IsError() {
 		fmt.Println("ERROR: acetime package: Zone", name, "not found")
 		return
 	}
-	atz := acetime.NewTimeZoneFromZoneInfo(zi)
 
 	stz, err := time.LoadLocation(name)
 	if err != nil {

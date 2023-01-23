@@ -1,7 +1,7 @@
-// Print the memory usage of various acetime data structs, such as ZonedDateTime
-// and ZoneAndLinkRegistry.
+// Print the memory usage of acetime library when using the ZoneManager and the
+// zonedb.Context.
 //
-//$ go run printmemory.go
+//$ go run mem_zone_registry.go
 
 package main
 
@@ -17,17 +17,15 @@ func main() {
 	os.Stdout.WriteString("---- Initial memory usage\n")
 	PrintMemUsage()
 
-	os.Stdout.WriteString("---- Load the ZoneAndLinkRegistry\n")
-	zr := acetime.NewZoneRegistrar(zonedb.ZoneAndLinkRegistry)
-	PrintMemUsage()
-
-	os.Stdout.WriteString("---- Create ZonedDateTime using Zone Registry\n")
-	zi := zr.FindZoneInfoByName("America/Los_Angeles")
-	if zi == nil {
-		os.Stdout.WriteString("America/Los_Angeles not found\n")
-		return
+	os.Stdout.WriteString("---- Create ZonedDateTime using ZoneManager\n")
+	zm := acetime.NewZoneManager(&zonedb.Context)
+	name := "America/Los_Angeles"
+	tz := zm.NewTimeZoneFromName(name)
+	if tz.IsError() {
+		os.Stdout.WriteString("ERROR: Could not find TimeZone for ")
+		os.Stdout.WriteString(name)
+		os.Stdout.WriteString("\n")
 	}
-	tz := acetime.NewTimeZoneFromZoneInfo(zi)
 	ldt := acetime.LocalDateTime{2023, 1, 19, 18, 36, 0, 0 /*Fold*/}
 	zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	os.Stdout.WriteString("zdt:")
