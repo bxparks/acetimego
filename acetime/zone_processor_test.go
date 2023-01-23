@@ -61,7 +61,8 @@ func TestCalcStartDayOfMonth(t *testing.T) {
 
 func TestZoneProcessorToString(t *testing.T) {
 	var zp ZoneProcessor
-	zp.InitForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+	zp.InitForZoneInfo(
+		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
 	if !(zp.String() == "America/Los_Angeles") {
 		t.Fatal(zp.String(), zp)
 	}
@@ -69,7 +70,8 @@ func TestZoneProcessorToString(t *testing.T) {
 
 func TestZoneProcessorInitForYear(t *testing.T) {
 	var zp ZoneProcessor
-	zp.InitForZoneInfo(&zonedbtesting.ZoneAmerica_Los_Angeles)
+	zp.InitForZoneInfo(
+		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
 	if zp.isFilled {
 		t.Fatal(zp)
 	}
@@ -149,9 +151,14 @@ func TestCreateMatchingEra(t *testing.T) {
 		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 
+	// Fake format offsets, with only a single empty string, and terminating "~"
+	formatsOffset := []uint16{0, 0}
+	formatsBuffer := "~"
+
 	// No previous matching era, so startDt is set to startYm.
 	var match1 MatchingEra
-	createMatchingEra(&match1, nil, &era1, startYm, untilYm)
+	createMatchingEra(formatsOffset, formatsBuffer,
+		&match1, nil, &era1, startYm, untilYm)
 	if !(match1.startDt == DateTuple{2000, 12, 1, 60 * 0, zoneinfo.SuffixW}) {
 		t.Fatal("match1.startDt:", match1.startDt)
 	}
@@ -165,7 +172,8 @@ func TestCreateMatchingEra(t *testing.T) {
 	// startDt is set to the prevMatch.untilDt.
 	// untilDt is < untilYm, so is retained.
 	var match2 MatchingEra
-	createMatchingEra(&match2, &match1, &era2, startYm, untilYm)
+	createMatchingEra(formatsOffset, formatsBuffer,
+		&match2, &match1, &era2, startYm, untilYm)
 	if !(match2.startDt == DateTuple{2000, 12, 2, 60 * 3, zoneinfo.SuffixW}) {
 		t.Fatal("match2.startDt:", match2.startDt)
 	}
@@ -179,7 +187,8 @@ func TestCreateMatchingEra(t *testing.T) {
 	// startDt is set to the prevMatch.untilDt.
 	// untilDt is > untilYm so truncated to untilYm.
 	var match3 MatchingEra
-	createMatchingEra(&match3, &match2, &era3, startYm, untilYm)
+	createMatchingEra(formatsOffset, formatsBuffer,
+		&match3, &match2, &era3, startYm, untilYm)
 	if !(match3.startDt == DateTuple{2001, 2, 3, 60 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("match3.startDt: ", match3.startDt)
 	}
@@ -387,7 +396,7 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
 	era := zoneinfo.ZoneEra{
 		ZonePolicy:        nil,
-		Format:            "",
+		FormatIndex:       0,
 		OffsetCode:        0,
 		DeltaCode:         0,
 		UntilYear:         2002,
@@ -527,7 +536,10 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	var matches [maxMatches]MatchingEra
 
 	numMatches := findMatches(
-		&zonedbtesting.ZoneAmerica_Los_Angeles, startYm, untilYm, matches[:])
+		zonedbtesting.Context.FormatsOffset,
+		zonedbtesting.Context.FormatsBuffer,
+		&zonedbtesting.ZoneAmerica_Los_Angeles,
+		startYm, untilYm, matches[:])
 	if !(1 == numMatches) {
 		t.Fatal(numMatches)
 	}

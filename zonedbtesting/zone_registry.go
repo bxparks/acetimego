@@ -34,6 +34,23 @@ import (
 	"github.com/bxparks/AceTimeGo/zoneinfo"
 )
 
+// ---------------------------------------------------------------------------
+// Zone Context
+// ---------------------------------------------------------------------------
+
+const TzDatabaseVersion string = "2022g"
+
+var Context = zoneinfo.ZoneContext{
+	LettersBuffer: LettersBuffer,
+	LettersOffset: LettersOffset,
+	FormatsBuffer: FormatsBuffer,
+	FormatsOffset: FormatsOffset,
+	ZoneRegistry: ZoneAndLinkRegistry,
+	TzDatabaseVersion: TzDatabaseVersion,
+}
+
+// ---------------------------------------------------------------------------
+
 // Supported Zones: 3
 var ZoneRegistry = []*zoneinfo.ZoneInfo{
 	&ZoneAmerica_New_York, // 0x1e2a7654, America/New_York
@@ -41,6 +58,8 @@ var ZoneRegistry = []*zoneinfo.ZoneInfo{
 	&ZoneEtc_UTC, // 0xd8e31abc, Etc/UTC
 
 }
+
+// ---------------------------------------------------------------------------
 
 // Supported Zones and Links: 4
 var ZoneAndLinkRegistry = []*zoneinfo.ZoneInfo{
