@@ -22,7 +22,7 @@
       0     917       0       0 |     917       0 | Go reflect data
      49       0       0       0 |      49       0 | errors
   13007     241       0       0 |   13248       0 | fmt
-   8504      32       0       0 |    8536       0 | github.com/bxparks/AceTimeGo/acetime
+   8517      32       0       0 |    8549       0 | github.com/bxparks/AceTimeGo/acetime
       0    8994   59722       0 |   68716   59722 | github.com/bxparks/AceTimeGo/zonedb
     351       0       0       0 |     351       0 | github.com/bxparks/AceTimeGo/zoneinfo
      84       0       0       0 |      84       0 | internal/bytealg
@@ -38,10 +38,10 @@
    3827     902       0       0 |    4729       0 | reflect
    7564     217      12     119 |    7793     131 | runtime
    9109   16670    1322       0 |   27101    1322 | strconv
-    609     124       0       0 |     733       0 | strings
+    638     124       0       0 |     762       0 | strings
     633     200       0       0 |     833       0 | sync
      80    2954       0       8 |    3034       8 | syscall
   20796    1077     168     160 |   22041     328 | time
    1229     288       0       0 |    1517       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  75817   55970   61608    1016 |  193395   62624 | total
+  75859   55970   61608    1016 |  193437   62624 | total

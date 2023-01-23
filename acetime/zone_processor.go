@@ -374,7 +374,7 @@ func createTransitionForYear(
 		// Used for simple MatchingEra.
 		t.transitionTime = match.startDt
 		t.deltaMinutes = match.era.DstOffsetMinutes()
-		t.letterIndex = 0
+		t.letterIndex = 0 // index 0 is the empty string ""
 	}
 }
 

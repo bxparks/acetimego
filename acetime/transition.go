@@ -297,15 +297,12 @@ type Transition struct {
 	matchStatus uint8
 }
 
-// Letter returns the 'letter' defined by the 'rule' if it exists.
-// Otherwise, returns "".
+// Letter returns the string identified by Transition.letterIndex which was
+// copied from Transition.rule.LetterIndex if the rule exists. Otherwise
+// letterIndex is 0 which maps to the empty string.
 func (transition *Transition) Letter(
 	lettersOffset []uint8, lettersBuffer string) string {
-
-	if transition.rule == nil {
-		return ""
-	}
-	index := transition.rule.LetterIndex
+	index := transition.letterIndex
 	start := lettersOffset[index]
 	end := lettersOffset[index+1]
 	return lettersBuffer[start:end]
