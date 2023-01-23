@@ -14,7 +14,7 @@ type ZoneManager struct {
 }
 
 func NewZoneManager(context *zoneinfo.ZoneContext) ZoneManager {
-	registrar := NewZoneRegistrar(context.ZoneRegistry)
+	registrar := NewZoneRegistrar(context)
 	manager := ZoneManager{
 		zoneContext:   context,
 		zoneRegistrar: &registrar,

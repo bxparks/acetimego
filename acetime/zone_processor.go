@@ -108,8 +108,9 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) Err {
 	return zp.InitForYear(ldt.Year)
 }
 
+// TODO: Rename to Name()
 func (zp *ZoneProcessor) String() string {
-	return zp.zoneInfo.Name
+	return zp.zoneInfo.Name(zp.zoneContext.NameOffsets, zp.zoneContext.NameBuffer)
 }
 
 //---------------------------------------------------------------------------

@@ -45,6 +45,8 @@ var Context = zoneinfo.ZoneContext{
 	LetterOffsets: LetterOffsets,
 	FormatBuffer: FormatBuffer,
 	FormatOffsets: FormatOffsets,
+	NameBuffer: NameBuffer,
+	NameOffsets: NameOffsets,
 	ZoneRegistry: ZoneAndLinkRegistry,
 	TzDatabaseVersion: TzDatabaseVersion,
 }

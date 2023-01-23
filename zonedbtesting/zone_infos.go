@@ -41,6 +41,9 @@ import (
 const (
 	// All ZoneEra.Format entries concatenated together.
 	FormatBuffer = "E%TP%TUTC~"
+
+	// All ZoneInfo.Name entries concatenated togther.
+	NameBuffer = "America/Los_AngelesAmerica/New_YorkEtc/UTCUS/Pacific~"
 )
 
 var (
@@ -49,6 +52,13 @@ var (
 	// `FormatBuffer[FormatOffsets[i]:FormatOffsets[i+1]]`.
 	FormatOffsets = []uint16{
 		0, 0, 3, 6, 9,
+	}
+
+	// Byte offset into NameBuffer for each index. The actual Letter string
+	// at index `i` given by the `ZoneRule.Name` field is
+	// `NameBuffer[NameOffsets[i]:NameOffsets[i+1]]`.
+	NameOffsets = []uint16{
+		0, 0, 19, 35, 42, 52,
 	}
 )
 
@@ -78,11 +88,9 @@ var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_Los_Angeles = "America/Los_Angeles"
-
 var ZoneAmerica_Los_Angeles = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_Los_Angeles,
 	ZoneID: 0xb7f7e8f2,
+	NameIndex: 1, // "America/Los_Angeles"
 	StartYear: 1980,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_Los_Angeles,
@@ -110,11 +118,9 @@ var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameAmerica_New_York = "America/New_York"
-
 var ZoneAmerica_New_York = zoneinfo.ZoneInfo{
-	Name: ZoneNameAmerica_New_York,
 	ZoneID: 0x1e2a7654,
+	NameIndex: 2, // "America/New_York"
 	StartYear: 1980,
 	UntilYear: 10000,
 	Eras: ZoneEraAmerica_New_York,
@@ -142,11 +148,9 @@ var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 
 }
 
-const ZoneNameEtc_UTC = "Etc/UTC"
-
 var ZoneEtc_UTC = zoneinfo.ZoneInfo{
-	Name: ZoneNameEtc_UTC,
 	ZoneID: 0xd8e31abc,
+	NameIndex: 3, // "Etc/UTC"
 	StartYear: 1980,
 	UntilYear: 10000,
 	Eras: ZoneEraEtc_UTC,
@@ -161,7 +165,7 @@ var ZoneEtc_UTC = zoneinfo.ZoneInfo{
 
 // Link: US/Pacific -> America/Los_Angeles
 var ZoneUS_Pacific = zoneinfo.ZoneInfo{
-	Name: "US/Pacific",
+	NameIndex: 4, // "US/Pacific"
 	ZoneID: 0xa950f6ab,
 	StartYear: 1980,
 	UntilYear: 10000,
