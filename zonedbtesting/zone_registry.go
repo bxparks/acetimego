@@ -52,18 +52,10 @@ var Context = zoneinfo.ZoneContext{
 }
 
 // ---------------------------------------------------------------------------
-
-// Supported Zones: 3
-var ZoneRegistry = []*zoneinfo.ZoneInfo{
-	&ZoneAmerica_New_York, // 0x1e2a7654, America/New_York
-	&ZoneAmerica_Los_Angeles, // 0xb7f7e8f2, America/Los_Angeles
-	&ZoneEtc_UTC, // 0xd8e31abc, Etc/UTC
-
-}
-
+// Zone Registry
+// Total: 4 (3 zones, 1 links)
 // ---------------------------------------------------------------------------
 
-// Supported Zones and Links: 4
 var ZoneAndLinkRegistry = []*zoneinfo.ZoneInfo{
 	&ZoneAmerica_New_York, // 0x1e2a7654, America/New_York
 	&ZoneUS_Pacific, // 0xa950f6ab, US/Pacific -> America/Los_Angeles
