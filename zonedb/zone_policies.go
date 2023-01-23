@@ -39,14 +39,14 @@ import (
 
 const (
 	// All ZoneRule.Letter entries concatenated together.
-	LettersBuffer = "+00+02CATCSTDDDSWAT~"
+	LetterBuffer = "+00+02CATCSTDDDSWAT~"
 )
 
 var (
-	// Byte offset into LettersBuffer for each index. The actual Letter string
+	// Byte offset into LetterBuffer for each index. The actual Letter string
 	// at index `i` given by the `ZoneRule.Letter` field is
-	// `LettersBuffer[LettersOffset[i]:LettersOffset[i+1]]`.
-	LettersOffset = []uint8{
+	// `LetterBuffer[LetterOffsets[i]:LetterOffsets[i+1]]`.
+	LetterOffsets = []uint8{
 		0, 0, 3, 6, 9, 12, 13, 15, 16, 19,
 	}
 )

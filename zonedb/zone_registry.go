@@ -40,10 +40,10 @@ import (
 const TzDatabaseVersion string = "2022g"
 
 var Context = zoneinfo.ZoneContext{
-	LettersBuffer: LettersBuffer,
-	LettersOffset: LettersOffset,
-	FormatsBuffer: FormatsBuffer,
-	FormatsOffset: FormatsOffset,
+	LetterBuffer: LetterBuffer,
+	LetterOffsets: LetterOffsets,
+	FormatBuffer: FormatBuffer,
+	FormatOffsets: FormatOffsets,
 	ZoneRegistry: ZoneAndLinkRegistry,
 	TzDatabaseVersion: TzDatabaseVersion,
 }

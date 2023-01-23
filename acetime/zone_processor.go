@@ -75,7 +75,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 
 	// Step 1: Find matches.
 	zp.numMatches = findMatches(
-		zp.zoneContext.FormatsOffset, zp.zoneContext.FormatsBuffer,
+		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatBuffer,
 		zp.zoneInfo, startYm, untilYm, zp.matches[:])
 	if zp.numMatches == 0 {
 		return ErrGeneric
@@ -93,8 +93,8 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 
 	// Step 5: Calc abbreviations.
 	calcAbbreviations(
-		zp.zoneContext.FormatsOffset, zp.zoneContext.FormatsBuffer,
-		zp.zoneContext.LettersOffset, zp.zoneContext.LettersBuffer,
+		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatBuffer,
+		zp.zoneContext.LetterOffsets, zp.zoneContext.LetterBuffer,
 		transitions)
 
 	return ErrOk

@@ -536,8 +536,8 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	var matches [maxMatches]MatchingEra
 
 	numMatches := findMatches(
-		zonedbtesting.Context.FormatsOffset,
-		zonedbtesting.Context.FormatsBuffer,
+		zonedbtesting.Context.FormatOffsets,
+		zonedbtesting.Context.FormatBuffer,
 		&zonedbtesting.ZoneAmerica_Los_Angeles,
 		startYm, untilYm, matches[:])
 	if !(1 == numMatches) {

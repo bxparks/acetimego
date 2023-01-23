@@ -40,14 +40,14 @@ import (
 
 const (
 	// All ZoneEra.Format entries concatenated together.
-	FormatsBuffer = "E%TP%TUTC~"
+	FormatBuffer = "E%TP%TUTC~"
 )
 
 var (
-	// Byte offset into FormatsBuffer for each index. The actual Format string
+	// Byte offset into FormatBuffer for each index. The actual Format string
 	// at index `i` given by the `ZoneEra.Format` field is
-	// `FormatsBuffer[FormatsOffset[i]:FormatsOffset[i+1]]`.
-	FormatsOffset = []uint16{
+	// `FormatBuffer[FormatOffsets[i]:FormatOffsets[i+1]]`.
+	FormatOffsets = []uint16{
 		0, 0, 3, 6, 9,
 	}
 )

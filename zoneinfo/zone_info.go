@@ -23,10 +23,10 @@ const (
 //-----------------------------------------------------------------------------
 
 type ZoneContext struct {
-	LettersBuffer string
-	LettersOffset []uint8
-	FormatsBuffer string
-	FormatsOffset []uint16
+	LetterBuffer string
+	LetterOffsets []uint8
+	FormatBuffer string
+	FormatOffsets []uint16
 	ZoneRegistry []*ZoneInfo
 	TzDatabaseVersion string
 }
@@ -196,8 +196,8 @@ type ZoneEra struct {
 	 * simpler. For example, 'E%sT' is stored as 'E%T', and the LETTER
 	 * substitution is performed on the '%' character.
 	 *
-	 * This field is an index into the FormatsOffset[], which in turn is a byte
-	 * offset into the FormatsBuffer string which is a concatenated string of all
+	 * This field is an index into the FormatOffsets[], which in turn is a byte
+	 * offset into the FormatBuffer string which is a concatenated string of all
 	 * format strings.
 	 */
 	FormatIndex uint16
