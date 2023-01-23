@@ -24,7 +24,7 @@
   13007     241       0       0 |   13248       0 | fmt
    8504      32       0       0 |    8536       0 | github.com/bxparks/AceTimeGo/acetime
       0    8994   59722       0 |   68716   59722 | github.com/bxparks/AceTimeGo/zonedb
-    345       0       0       0 |     345       0 | github.com/bxparks/AceTimeGo/zoneinfo
+    351       0       0       0 |     351       0 | github.com/bxparks/AceTimeGo/zoneinfo
      84       0       0       0 |      84       0 | internal/bytealg
      79       0       0       0 |      79       0 | internal/fmtsort
     157       2       0       0 |     159       0 | internal/itoa
@@ -44,4 +44,4 @@
   20796    1077     168     160 |   22041     328 | time
    1229     288       0       0 |    1517       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  75811   55970   61608    1016 |  193389   62624 | total
+  75817   55970   61608    1016 |  193395   62624 | total

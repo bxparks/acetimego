@@ -110,7 +110,7 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) Err {
 
 // TODO: Rename to Name()
 func (zp *ZoneProcessor) String() string {
-	return zp.zoneInfo.Name(zp.zoneContext.NameOffsets, zp.zoneContext.NameBuffer)
+	return zp.zoneInfo.Name(zp.zoneContext.NameBuffer, zp.zoneContext.NameOffsets)
 }
 
 //---------------------------------------------------------------------------
@@ -319,7 +319,7 @@ func createMatchingEra(
 	newMatch.prevMatch = prevMatch
 	newMatch.lastOffsetMinutes = 0
 	newMatch.lastDeltaMinutes = 0
-	newMatch.format = era.Format(formatsOffset, formatsBuffer)
+	newMatch.format = era.Format(formatsBuffer, formatsOffset)
 }
 
 //-----------------------------------------------------------------------------
@@ -623,7 +623,7 @@ func calcAbbreviations(
 	for i := range transitions {
 		transition := &transitions[i]
 		transition.abbrev = createAbbreviation(
-			transition.match.era.Format(formatsOffset, formatsBuffer),
+			transition.match.era.Format(formatsBuffer, formatsOffset),
 			transition.deltaMinutes,
 			transition.Letter(lettersOffset, lettersBuffer))
 	}

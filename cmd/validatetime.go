@@ -18,7 +18,7 @@ func main() {
 	zm := acetime.NewZoneManager(context)
 	var index int
 	for _, zi := range zonedb.Context.ZoneRegistry {
-		name := zi.Name(context.NameOffsets, context.NameBuffer)
+		name := zi.Name(context.NameBuffer, context.NameOffsets)
 		fmt.Printf("[%3d] Zone: %s\n", index, name)
 		validateZoneName(&zm, name)
 		index++

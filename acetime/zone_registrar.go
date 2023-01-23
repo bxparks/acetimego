@@ -51,7 +51,7 @@ func (zr *ZoneRegistrar) FindZoneInfoByName(name string) *zoneinfo.ZoneInfo {
 		return nil
 	}
 
-	zoneName := zi.Name(zr.Context.NameOffsets, zr.Context.NameBuffer)
+	zoneName := zi.Name(zr.Context.NameBuffer, zr.Context.NameOffsets)
 	if zoneName != name {
 		return nil
 	}

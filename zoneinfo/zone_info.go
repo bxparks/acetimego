@@ -116,8 +116,7 @@ type ZoneRule struct {
 	LetterIndex uint8
 }
 
-// TODO: Switch order of offsets, buffer for consistency
-func (rule *ZoneRule) Letter(offsets []uint8, buffer string) string {
+func (rule *ZoneRule) Letter(buffer string, offsets []uint8) string {
 	index := rule.LetterIndex
 	begin := offsets[index]
 	end := offsets[index+1] // always exists because of terminating sentinel
@@ -262,8 +261,7 @@ type ZoneEra struct {
 	UntilTimeModifier uint8
 }
 
-// TODO: Switch order of offsets, buffer for consistency
-func (era *ZoneEra) Format(offsets []uint16, buffer string) string {
+func (era *ZoneEra) Format(buffer string, offsets []uint16) string {
 	index := era.FormatIndex
 	begin := offsets[index]
 	end := offsets[index+1] // always exists because of terminating sentinel
@@ -322,8 +320,7 @@ type ZoneInfo struct {
 	Target *ZoneInfo
 }
 
-// TODO: Switch order of offsets, buffer for consistency
-func (zi *ZoneInfo) Name(offsets []uint16, buffer string) string {
+func (zi *ZoneInfo) Name(buffer string, offsets []uint16) string {
 	index := zi.NameIndex
 	begin := offsets[index]
 	end := offsets[index+1] // always exists because of terminating sentinel
