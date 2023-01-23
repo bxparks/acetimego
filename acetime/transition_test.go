@@ -275,7 +275,6 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	transition := Transition{
 		match:          &match,
-		rule:           nil,
 		transitionTime: DateTuple{1999, 11, 1, 0, zoneinfo.SuffixW},
 	}
 	status := compareTransitionToMatchFuzzy(&transition, &match)
@@ -285,7 +284,6 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	transition = Transition{
 		match:          &match,
-		rule:           nil,
 		transitionTime: DateTuple{1999, 12, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
@@ -295,7 +293,6 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	transition = Transition{
 		match:          &match,
-		rule:           nil,
 		transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
@@ -305,7 +302,6 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	transition = Transition{
 		match:          &match,
-		rule:           nil,
 		transitionTime: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
@@ -315,7 +311,6 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	transition = Transition{
 		match:          &match,
-		rule:           nil,
 		transitionTime: DateTuple{2001, 3, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
@@ -352,25 +347,21 @@ func TestCompareTransitionToMatch(t *testing.T) {
 		// transitionTime = 1999-12-31
 		Transition{
 			match:          &match,
-			rule:           nil,
 			transitionTime: DateTuple{1999, 12, 31, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2000-01-01
 		Transition{
 			match:          &match,
-			rule:           nil,
 			transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2000-01-02
 		Transition{
 			match:          &match,
-			rule:           nil,
 			transitionTime: DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2001-02-03
 		Transition{
 			match:          &match,
-			rule:           nil,
 			transitionTime: DateTuple{2001, 2, 3, 0, zoneinfo.SuffixW},
 		},
 	}

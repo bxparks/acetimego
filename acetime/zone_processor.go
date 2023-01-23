@@ -362,7 +362,6 @@ func createTransitionForYear(
 	t *Transition, year int16, rule *zoneinfo.ZoneRule, match *MatchingEra) {
 
 	t.match = match
-	t.rule = rule
 	t.offsetMinutes = match.era.StdOffsetMinutes()
 
 	if rule != nil {

@@ -17,7 +17,7 @@
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     147       0       0      24 |     147      24 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
-   7619      29       0       0 |    7648       0 | github.com/bxparks/AceTimeGo/acetime
+   7595      29       0       0 |    7624       0 | github.com/bxparks/AceTimeGo/acetime
       0    8994   59722       0 |   68716   59722 | github.com/bxparks/AceTimeGo/zonedb
     349       0       0       0 |     349       0 | github.com/bxparks/AceTimeGo/zoneinfo
      59       0       0       0 |      59       0 | internal/bytealg
@@ -29,4 +29,4 @@
     575     124       0       0 |     699       0 | strings
       0       0       0       8 |       0       8 | syscall
 ------------------------------- | --------------- | -------
-  16171   13806   60056     808 |   90033   60864 | total
+  16147   13806   60056     808 |   90009   60864 | total
