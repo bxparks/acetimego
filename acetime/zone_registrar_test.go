@@ -9,8 +9,7 @@ import (
 func TestFindById(t *testing.T) {
 	context := &zonedbtesting.Context
 	registrar := NewZoneRegistrar(context)
-	// TODO: Replace with ZoneIDAmerica_Los_Angeles after it is added.
-	zoneID := zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID
+	zoneID := zonedbtesting.ZoneIDAmerica_Los_Angeles
 	zoneInfo := registrar.FindZoneInfoByID(zoneID)
 	if zoneInfo == nil {
 		t.Fatalf("%d not found", zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID)

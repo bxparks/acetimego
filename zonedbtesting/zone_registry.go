@@ -63,3 +63,16 @@ var ZoneAndLinkRegistry = []*zoneinfo.ZoneInfo{
 	&ZoneEtc_UTC, // 0xd8e31abc, Etc/UTC
 
 }
+
+// ---------------------------------------------------------------------------
+// Zone IDs
+// Total: 4 (3 zones, 1 links)
+// ---------------------------------------------------------------------------
+
+const (
+	ZoneIDAmerica_Los_Angeles uint32 = 0xb7f7e8f2 // America/Los_Angeles
+	ZoneIDAmerica_New_York uint32 = 0x1e2a7654 // America/New_York
+	ZoneIDEtc_UTC uint32 = 0xd8e31abc // Etc/UTC
+	ZoneIDUS_Pacific uint32 = 0xa950f6ab // US/Pacific
+
+)
