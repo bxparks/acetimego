@@ -153,11 +153,11 @@ func TestCreateMatchingEra(t *testing.T) {
 
 	// Fake format offsets, with only a single empty string, and terminating "~"
 	formatsOffset := []uint16{0, 0}
-	formatsBuffer := "~"
+	formatsData := "~"
 
 	// No previous matching era, so startDt is set to startYm.
 	var match1 MatchingEra
-	createMatchingEra(formatsOffset, formatsBuffer,
+	createMatchingEra(formatsOffset, formatsData,
 		&match1, nil, &era1, startYm, untilYm)
 	if !(match1.startDt == DateTuple{2000, 12, 1, 60 * 0, zoneinfo.SuffixW}) {
 		t.Fatal("match1.startDt:", match1.startDt)
@@ -172,7 +172,7 @@ func TestCreateMatchingEra(t *testing.T) {
 	// startDt is set to the prevMatch.untilDt.
 	// untilDt is < untilYm, so is retained.
 	var match2 MatchingEra
-	createMatchingEra(formatsOffset, formatsBuffer,
+	createMatchingEra(formatsOffset, formatsData,
 		&match2, &match1, &era2, startYm, untilYm)
 	if !(match2.startDt == DateTuple{2000, 12, 2, 60 * 3, zoneinfo.SuffixW}) {
 		t.Fatal("match2.startDt:", match2.startDt)
@@ -187,7 +187,7 @@ func TestCreateMatchingEra(t *testing.T) {
 	// startDt is set to the prevMatch.untilDt.
 	// untilDt is > untilYm so truncated to untilYm.
 	var match3 MatchingEra
-	createMatchingEra(formatsOffset, formatsBuffer,
+	createMatchingEra(formatsOffset, formatsData,
 		&match3, &match2, &era3, startYm, untilYm)
 	if !(match3.startDt == DateTuple{2001, 2, 3, 60 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("match3.startDt: ", match3.startDt)
@@ -533,7 +533,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 
 	numMatches := findMatches(
 		zonedbtesting.Context.FormatOffsets,
-		zonedbtesting.Context.FormatBuffer,
+		zonedbtesting.Context.FormatData,
 		&zonedbtesting.ZoneAmerica_Los_Angeles,
 		startYm, untilYm, matches[:])
 	if !(1 == numMatches) {

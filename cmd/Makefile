@@ -5,10 +5,10 @@ mem_zonedbtesting.out \
 validatetime.out
 
 TARGETS_TINY := \
-mem_go_time.tiny.out mem_go_time.tiny.txt \
-mem_zonedb.tiny.out mem_zonedb.tiny.txt \
-mem_zonedbtesting.tiny.out mem_zonedbtesting.tiny.txt \
-validatetime.tiny.out validatetime.tiny.txt
+mem_go_time.tiny.out \
+mem_zonedb.tiny.out \
+mem_zonedbtesting.tiny.out \
+validatetime.tiny.out
 
 # Uncomment this to compile for an ESP32
 #TINY_TARGET := -target=esp32-coreboard-v2

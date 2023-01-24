@@ -14,7 +14,7 @@ func TestFindById(t *testing.T) {
 	if zoneInfo == nil {
 		t.Fatalf("%d not found", zonedbtesting.ZoneAmerica_Los_Angeles.ZoneID)
 	}
-	zoneName := zoneInfo.Name(context.NameBuffer, context.NameOffsets)
+	zoneName := zoneInfo.Name(context.NameData, context.NameOffsets)
 	if !(zoneName == "America/Los_Angeles") {
 		t.Fatal(zoneName)
 	}

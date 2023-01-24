@@ -75,7 +75,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 
 	// Step 1: Find matches.
 	zp.numMatches = findMatches(
-		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatBuffer,
+		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatData,
 		zp.zoneInfo, startYm, untilYm, zp.matches[:])
 	if zp.numMatches == 0 {
 		return ErrGeneric
@@ -93,8 +93,8 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 
 	// Step 5: Calc abbreviations.
 	calcAbbreviations(
-		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatBuffer,
-		zp.zoneContext.LetterOffsets, zp.zoneContext.LetterBuffer,
+		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatData,
+		zp.zoneContext.LetterOffsets, zp.zoneContext.LetterData,
 		transitions)
 
 	return ErrOk
@@ -109,7 +109,7 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) Err {
 }
 
 func (zp *ZoneProcessor) Name() string {
-	return zp.zoneInfo.Name(zp.zoneContext.NameBuffer, zp.zoneContext.NameOffsets)
+	return zp.zoneInfo.Name(zp.zoneContext.NameData, zp.zoneContext.NameOffsets)
 }
 
 //---------------------------------------------------------------------------
@@ -188,7 +188,7 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 
 func findMatches(
 	formatsOffset []uint16,
-	formatsBuffer string,
+	formatsData string,
 	zoneInfo *zoneinfo.ZoneInfo,
 	startYm YearMonth,
 	untilYm YearMonth,
@@ -207,7 +207,7 @@ func findMatches(
 		if eraOverlapsInterval(prevEra, era, startYm, untilYm) {
 			if iMatch < uint8(len(matches)) {
 				createMatchingEra(
-					formatsOffset, formatsBuffer, &matches[iMatch], prevMatch, era,
+					formatsOffset, formatsData, &matches[iMatch], prevMatch, era,
 					startYm, untilYm)
 				prevMatch = &matches[iMatch]
 				iMatch++
@@ -273,7 +273,7 @@ func compareEraToYearMonth(
  */
 func createMatchingEra(
 	formatsOffset []uint16,
-	formatsBuffer string,
+	formatsData string,
 	newMatch *MatchingEra,
 	prevMatch *MatchingEra,
 	era *zoneinfo.ZoneEra,
@@ -318,7 +318,7 @@ func createMatchingEra(
 	newMatch.prevMatch = prevMatch
 	newMatch.lastOffsetMinutes = 0
 	newMatch.lastDeltaMinutes = 0
-	newMatch.format = era.Format(formatsBuffer, formatsOffset)
+	newMatch.format = era.Format(formatsData, formatsOffset)
 }
 
 //-----------------------------------------------------------------------------
@@ -613,17 +613,17 @@ func generateStartUntilTimes(transitions []Transition) {
 
 func calcAbbreviations(
 	formatsOffset []uint16,
-	formatsBuffer string,
+	formatsData string,
 	lettersOffset []uint8,
-	lettersBuffer string,
+	lettersData string,
 	transitions []Transition) {
 
 	for i := range transitions {
 		transition := &transitions[i]
 		transition.abbrev = createAbbreviation(
-			transition.match.era.Format(formatsBuffer, formatsOffset),
+			transition.match.era.Format(formatsData, formatsOffset),
 			transition.deltaMinutes,
-			transition.Letter(lettersOffset, lettersBuffer))
+			transition.Letter(lettersOffset, lettersData))
 	}
 }
 

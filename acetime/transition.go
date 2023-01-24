@@ -272,7 +272,7 @@ type Transition struct {
 	/** The calculated effective time zone abbreviation, e.g. "PST" or "PDT". */
 	abbrev string
 
-	/** Index into LetterBuffer representing the LETTER field. */
+	/** Index into LetterData representing the LETTER field. */
 	letterIndex uint8
 
 	/**
@@ -294,11 +294,11 @@ type Transition struct {
 // copied from Transition.rule.LetterIndex if the rule exists. Otherwise
 // letterIndex is 0 which maps to the empty string.
 func (transition *Transition) Letter(
-	lettersOffset []uint8, lettersBuffer string) string {
+	lettersOffset []uint8, lettersData string) string {
 	index := transition.letterIndex
 	start := lettersOffset[index]
 	end := lettersOffset[index+1]
-	return lettersBuffer[start:end]
+	return lettersData[start:end]
 }
 
 func fixTransitionTimes(transitions []Transition) {

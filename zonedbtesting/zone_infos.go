@@ -40,23 +40,23 @@ import (
 
 const (
 	// All ZoneEra.Format entries concatenated together.
-	FormatBuffer = "E%TP%TUTC~"
+	FormatData = "E%TP%TUTC~"
 
 	// All ZoneInfo.Name entries concatenated togther.
-	NameBuffer = "America/Los_AngelesAmerica/New_YorkEtc/UTCUS/Pacific~"
+	NameData = "America/Los_AngelesAmerica/New_YorkEtc/UTCUS/Pacific~"
 )
 
 var (
-	// Byte offset into FormatBuffer for each index. The actual Format string
+	// Byte offset into FormatData for each index. The actual Format string
 	// at index `i` given by the `ZoneEra.Format` field is
-	// `FormatBuffer[FormatOffsets[i]:FormatOffsets[i+1]]`.
+	// `FormatData[FormatOffsets[i]:FormatOffsets[i+1]]`.
 	FormatOffsets = []uint16{
 		0, 0, 3, 6, 9,
 	}
 
-	// Byte offset into NameBuffer for each index. The actual Letter string
+	// Byte offset into NameData for each index. The actual Letter string
 	// at index `i` given by the `ZoneRule.Name` field is
-	// `NameBuffer[NameOffsets[i]:NameOffsets[i+1]]`.
+	// `NameData[NameOffsets[i]:NameOffsets[i+1]]`.
 	NameOffsets = []uint16{
 		0, 0, 19, 35, 42, 52,
 	}

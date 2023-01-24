@@ -23,11 +23,11 @@ const (
 //-----------------------------------------------------------------------------
 
 type ZoneContext struct {
-	LetterBuffer string
+	LetterData string
 	LetterOffsets []uint8
-	FormatBuffer string
+	FormatData string
 	FormatOffsets []uint16
-	NameBuffer string
+	NameData string
 	NameOffsets []uint16
 	ZoneRegistry []*ZoneInfo
 	TzDatabaseVersion string
@@ -110,7 +110,7 @@ type ZoneRule struct {
 	 *  - Troll ('+00' '+02'; used by Antarctica/Troll)
 	 *
 	 * This is an index into the LetterIndex array, which in turn, contains a byte
-	 * offset into the LetterBuffer which contains all the letters concatenated
+	 * offset into the LetterData which contains all the letters concatenated
 	 * into a single string.
 	 */
 	LetterIndex uint8
@@ -199,7 +199,7 @@ type ZoneEra struct {
 	 * substitution is performed on the '%' character.
 	 *
 	 * This field is an index into the FormatOffsets[], which in turn is a byte
-	 * offset into the FormatBuffer string which is a concatenated string of all
+	 * offset into the FormatData string which is a concatenated string of all
 	 * format strings.
 	 */
 	FormatIndex uint16
