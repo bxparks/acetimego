@@ -46,6 +46,10 @@ func (tz *TimeZone) IsUTC() bool {
 	return tz.zoneProcessor == nil
 }
 
+func (tz *TimeZone) IsLink() bool {
+	return tz.zoneProcessor.IsLink()
+}
+
 func (tz *TimeZone) Name() string {
 	if tz.zoneProcessor == nil {
 		return "UTC"

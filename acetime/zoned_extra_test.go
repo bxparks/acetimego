@@ -36,7 +36,8 @@ func TestZonedExtraFromEpochSeconds(t *testing.T) {
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneFromZoneInfo(
-		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
+		&zonedbtesting.Context,
+		&zonedbtesting.ZoneInfos[zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles])
 
 	ze := NewZonedExtraFromEpochSeconds(InvalidEpochSeconds, &tz)
 	if !(ze.Zetype == ZonedExtraErr) {
@@ -50,7 +51,8 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneFromZoneInfo(
-		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
+		&zonedbtesting.Context,
+		&zonedbtesting.ZoneInfos[zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles])
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back, and occurs in the overlap.
@@ -99,7 +101,8 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 	defer SetCurrentEpochYear(savedEpochYear)
 
 	tz := NewTimeZoneFromZoneInfo(
-		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
+		&zonedbtesting.Context,
+		&zonedbtesting.ZoneInfos[zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles])
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// spring forward.

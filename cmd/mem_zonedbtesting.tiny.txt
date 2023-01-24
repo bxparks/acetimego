@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25    4272      24     601 |    4321     625 | (unknown)
+     25    4272      32     601 |    4329     633 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -17,16 +17,16 @@
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     147       0       0      24 |     147      24 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
-   7595      29       0       0 |    7624       0 | github.com/bxparks/AceTimeGo/acetime
-      0      97     784       0 |     881     784 | github.com/bxparks/AceTimeGo/zonedbtesting
-    349       0       0       0 |     349       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   7685      29       0       0 |    7714       0 | github.com/bxparks/AceTimeGo/acetime
+      0      97     560       0 |     657     560 | github.com/bxparks/AceTimeGo/zonedbtesting
+    535       0       0       0 |     535       0 | github.com/bxparks/AceTimeGo/zoneinfo
      59       0       0       0 |      59       0 | internal/bytealg
       0      38      32       0 |      70      32 | internal/oserror
     305      24       0      16 |     329      16 | internal/task
     252     165       0       0 |     417       0 | main
      72      16       0      24 |      88      24 | os
-   2826     146       8     135 |    2980     143 | runtime
-    575     124       0       0 |     699       0 | strings
+   2849     146       8     135 |    3003     143 | runtime
+    590     124       0       0 |     714       0 | strings
       0       0       0       8 |       0       8 | syscall
 ------------------------------- | --------------- | -------
-  16147    4911     848     808 |   21906    1656 | total
+  16461    4911     632     808 |   22004    1440 | total

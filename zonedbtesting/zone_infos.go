@@ -189,7 +189,7 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		UntilYear: 10000,
 		EraIndex: 0,
 		EraCount: 0,
-		TargetIndex: 0, // America/Los_Angeles
+		TargetIndex: 3, // America/Los_Angeles
 	},
 
 	{
@@ -212,6 +212,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		TargetIndex: 0,
 	},
 }
+
+
+// ---------------------------------------------------------------------------
+
+const (
+	ZoneInfoIndexAmerica_New_York uint16 = 0 // America/New_York
+	ZoneInfoIndexPacific_Apia uint16 = 1 // Pacific/Apia
+	ZoneInfoIndexUS_Pacific uint16 = 2 // US/Pacific
+	ZoneInfoIndexAmerica_Los_Angeles uint16 = 3 // America/Los_Angeles
+	ZoneInfoIndexEtc_UTC uint16 = 4 // Etc/UTC
+)
 
 // ---------------------------------------------------------------------------
 // Unsuported zones: 347

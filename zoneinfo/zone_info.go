@@ -307,6 +307,10 @@ func (era *ZoneEra) ZonePolicy(policies []ZonePolicy) ZonePolicy {
 	return policies[era.PolicyIndex]
 }
 
+func (era *ZoneEra) HasPolicy() bool {
+	return era.PolicyIndex != 0
+}
+
 //-----------------------------------------------------------------------------
 
 /**
