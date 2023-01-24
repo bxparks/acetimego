@@ -23,14 +23,17 @@ const (
 //-----------------------------------------------------------------------------
 
 type ZoneContext struct {
+	TzDatabaseVersion string
 	LetterData string
 	LetterOffsets []uint8
 	FormatData string
 	FormatOffsets []uint16
 	NameData string
 	NameOffsets []uint16
-	ZoneRegistry []*ZoneInfo
-	TzDatabaseVersion string
+	ZoneRules []ZoneRule
+	ZonePolicies []ZonePolicy
+	ZoneEras []ZoneEra
+	ZoneInfos []ZoneInfo
 }
 
 //-----------------------------------------------------------------------------
@@ -138,14 +141,29 @@ func (rule *ZoneRule) DstOffsetMinutes() int16 {
 //-----------------------------------------------------------------------------
 
 /**
- * A collection of transition rules which describe the DST rules of a given
- * administrative region. A given time zone (ZoneInfo) can follow a different
- * ZonePolicy at different times. Conversely, multiple time zones (ZoneInfo)
- * can choose to follow the same ZonePolicy at different times.
+ * An index into the []ZoneRule which identifies the collection of transition
+ * rules for a given zone policy index. The transition rules describe the DST
+ * rules of a given administrative region. A given time zone (ZoneInfo) can
+ * follow a different ZonePolicy at different times. Conversely, multiple time
+ * zones (ZoneInfo) can choose to follow the same ZonePolicy at different times.
+ *
+ * The collection of rules for the policy at index is
+ * `ZoneRules[RuleIndex:RuleIndex+RuleCount]`.
+ *
+ * TODO: Maybe add a PolicyNameIndex, to reveal the name of the policy (e.g.
+ * "US" or "WS". It isn't used anywhere in the code, but could be useful in
+ * debugging.
  */
 type ZonePolicy struct {
-	/** Slice to array of rules. */
-	Rules []ZoneRule
+	// Index into the ZoneRules.
+	RuleIndex uint16
+
+	// This should always be > 0 because every policy has at least one Rule.
+	RuleCount uint16
+}
+
+func (zp *ZonePolicy) Rules(rules []ZoneRule) []ZoneRule {
+	return rules[zp.RuleIndex:zp.RuleIndex+zp.RuleCount]
 }
 
 //---------------------------------------------------------------------------
@@ -177,12 +195,6 @@ const (
  */
 type ZoneEra struct {
 	/**
-	 * Zone policy, determined by the RULES column. Set to nil if the RULES
-	 * column is '-' or an explicit DST shift in the form of 'hh:mm'.
-	 */
-	ZonePolicy *ZonePolicy
-
-	/**
 	 * Zone abbreviations (e.g. PST, EST) determined by the FORMAT column. It has
 	 * 3 encodings in the TZ DB files:
 	 *
@@ -203,6 +215,13 @@ type ZoneEra struct {
 	 * format strings.
 	 */
 	FormatIndex uint16
+
+	/**
+	 * Zone policy index, determined by the RULES column. Set to 0 (which
+	 * represents no policy) if the RULES column is '-'  or if the column contains
+	 * an explicit DST shift in the form of 'hh:mm'.
+	 */
+	PolicyIndex uint8
 
 	/** UTC offset in 15 min increments. Determined by the STDOFF column. */
 	OffsetCode int8
@@ -284,6 +303,10 @@ func (era *ZoneEra) UntilSuffix() uint8 {
 	return era.UntilTimeModifier & 0xf0
 }
 
+func (era *ZoneEra) ZonePolicy(policies []ZonePolicy) ZonePolicy {
+	return policies[era.PolicyIndex]
+}
+
 //-----------------------------------------------------------------------------
 
 /**
@@ -314,10 +337,15 @@ type ZoneInfo struct {
 	 * non-nil and points to the target Zone. We have to follow the indirect
 	 * pointer, and resolve the target.Eras to obtain the actual ZoneEra entries.
 	 */
-	Eras []ZoneEra
+	EraIndex uint16
 
-	/** If not nil, this entry is a Link to the target. */
-	Target *ZoneInfo
+	// EraCount should always be > 0 for a Zone. If set to 0, indicates that this
+	// is a Link and the TargetIndex should be used to retrieve the target
+	// ZoneInfo.
+	EraCount uint16
+
+	/** If EraCount == 0, this points to the Zone target. */
+	TargetIndex uint16
 }
 
 func (zi *ZoneInfo) Name(buffer string, offsets []uint16) string {
@@ -329,15 +357,20 @@ func (zi *ZoneInfo) Name(buffer string, offsets []uint16) string {
 
 // IsLink returns true if the current zone is a Link.
 func (zi *ZoneInfo) IsLink() bool {
-	return zi.Target != nil
+	return zi.EraCount == 0
 }
 
 // ErasActive returns the Eras of the current zone, or the Eras of the target
 // zone if the current zone is a Link.
-func (zi *ZoneInfo) ErasActive() []ZoneEra {
-	if zi.Target != nil {
-		return zi.Target.Eras
-	} else {
-		return zi.Eras
+func (zi *ZoneInfo) ErasActive(
+	zoneEras []ZoneEra, zoneInfos []ZoneInfo) []ZoneEra {
+
+	var begin uint16
+	var end uint16
+	if zi.IsLink() {
+		zi = &zoneInfos[zi.TargetIndex]
 	}
+	begin = zi.EraIndex
+	end = zi.EraIndex+zi.EraCount
+	return zoneEras[begin:end]
 }

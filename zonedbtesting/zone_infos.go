@@ -67,15 +67,16 @@ var (
 // numEras: 5
 // ---------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
-// Zone name: America/Los_Angeles
-// Era count: 1
-// ---------------------------------------------------------------------------
+var ZoneEras = []zoneinfo.ZoneEra{
 
-var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
+	// ---------------------------------------------------------------------------
+	// Zone name: America/Los_Angeles
+	// Era count: 1 (#0)
+	// ---------------------------------------------------------------------------
+
 	//             -8:00    US    P%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 1, // Policy US
 		FormatIndex: 4, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -86,26 +87,14 @@ var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// Zone name: America/New_York
+	// Era count: 1 (#1)
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Los_Angeles = zoneinfo.ZoneInfo{
-	ZoneID: 0xb7f7e8f2,
-	NameIndex: 1, // "America/Los_Angeles"
-	StartYear: 1980,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Los_Angeles,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/New_York
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 1, // Policy US
 		FormatIndex: 3, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -116,26 +105,14 @@ var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// Zone name: Etc/UTC
+	// Era count: 1 (#2)
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_New_York = zoneinfo.ZoneInfo{
-	ZoneID: 0x1e2a7654,
-	NameIndex: 2, // "America/New_York"
-	StartYear: 1980,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_New_York,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/UTC
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 	// 0 - UTC
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // Policy None
 		FormatIndex: 5, // "UTC"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -146,26 +123,14 @@ var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// Zone name: Pacific/Apia
+	// Era count: 2 (#3)
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_UTC = zoneinfo.ZoneInfo{
-	ZoneID: 0xd8e31abc,
-	NameIndex: 3, // "Etc/UTC"
-	StartYear: 1980,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_UTC,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Apia
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 	//             -11:00    WS    -11/-10    2011 Dec 29 24:00
 	{
-		ZonePolicy: &ZonePolicyWS,
+		PolicyIndex: 2, // Policy WS
 		FormatIndex: 2, // "-11/-10"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -177,7 +142,7 @@ var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 	},
 	//              13:00    WS    +13/+14
 	{
-		ZonePolicy: &ZonePolicyWS,
+		PolicyIndex: 2, // Policy WS
 		FormatIndex: 1, // "+13/+14"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -190,32 +155,63 @@ var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 
 }
 
-var ZonePacific_Apia = zoneinfo.ZoneInfo{
-	ZoneID: 0x23359b5e,
-	NameIndex: 4, // "Pacific/Apia"
-	StartYear: 1980,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Apia,
-	Target: nil,
-}
-
-
-
 // ---------------------------------------------------------------------------
-// Supported links: 1
+// ZoneInfos are essentially indexes into ZoneEras (using EraIndex and
+// EraCount).
 // ---------------------------------------------------------------------------
 
-// Link: US/Pacific -> America/Los_Angeles
-var ZoneUS_Pacific = zoneinfo.ZoneInfo{
-	NameIndex: 5, // "US/Pacific"
-	ZoneID: 0xa950f6ab,
-	StartYear: 1980,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Los_Angeles,
+var ZoneInfos = []zoneinfo.ZoneInfo{
+	{
+		ZoneID: 0x1e2a7654,
+		NameIndex: 2, // "America/New_York"
+		StartYear: 1980,
+		UntilYear: 10000,
+		EraIndex: 1,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+
+	{
+		ZoneID: 0x23359b5e,
+		NameIndex: 4, // "Pacific/Apia"
+		StartYear: 1980,
+		UntilYear: 10000,
+		EraIndex: 3,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+
+	// Link: US/Pacific -> America/Los_Angeles
+	{
+		NameIndex: 5, // "US/Pacific"
+		ZoneID: 0xa950f6ab,
+		StartYear: 1980,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 0,
+		TargetIndex: 0, // America/Los_Angeles
+	},
+
+	{
+		ZoneID: 0xb7f7e8f2,
+		NameIndex: 1, // "America/Los_Angeles"
+		StartYear: 1980,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+
+	{
+		ZoneID: 0xd8e31abc,
+		NameIndex: 3, // "Etc/UTC"
+		StartYear: 1980,
+		UntilYear: 10000,
+		EraIndex: 2,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
 }
-
-
 
 // ---------------------------------------------------------------------------
 // Unsuported zones: 347

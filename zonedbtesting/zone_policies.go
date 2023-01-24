@@ -57,11 +57,12 @@ var (
 // numRules: 12
 // ---------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
-// Policy name: US
-// Rule count: 6
-// ---------------------------------------------------------------------------
-var ZoneRulesUS = []zoneinfo.ZoneRule{
+var ZoneRules = []zoneinfo.ZoneRule{
+
+	// ---------------------------------------------------------------------------
+	// Policy name: US
+	// Rule count: 6
+	// ---------------------------------------------------------------------------
 	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
 	{
 		FromYear: 1967,
@@ -135,17 +136,11 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		LetterIndex: 2, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// Policy name: WS
+	// Rule count: 6
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyUS = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesUS,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: WS
-// Rule count: 6
-// ---------------------------------------------------------------------------
-var ZoneRulesWS = []zoneinfo.ZoneRule{
 	// Anchor: Rule    WS    2011    only    -    Apr    Sat>=1    4:00    0    -
 	{
 		FromYear: 0,
@@ -221,10 +216,17 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 
 }
 
-var ZonePolicyWS = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesWS,
-}
 
+// ---------------------------------------------------------------------------
+// ZonePolicies are essentially indexes into ZoneRules (using RuleIndex and
+// RuleCount).
+// ---------------------------------------------------------------------------
+
+var ZonePolicies = []zoneinfo.ZonePolicy{
+	{0, 0}, // 0: None
+	{0, 6}, // 1: US
+	{6, 0}, // 2: WS
+}
 
 
 // ---------------------------------------------------------------------------
