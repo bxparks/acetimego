@@ -53,8 +53,8 @@ var (
 )
 
 // ---------------------------------------------------------------------------
-// Supported zone policies: 1
-// numRules: 6
+// Supported zone policies: 2
+// numRules: 12
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
@@ -141,10 +141,94 @@ var ZonePolicyUS = zoneinfo.ZonePolicy{
 	Rules: ZoneRulesUS,
 }
 
+// ---------------------------------------------------------------------------
+// Policy name: WS
+// Rule count: 6
+// ---------------------------------------------------------------------------
+var ZoneRulesWS = []zoneinfo.ZoneRule{
+	// Anchor: Rule    WS    2011    only    -    Apr    Sat>=1    4:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    WS    2010    only    -    Sep    lastSun    0:00    1    -
+	{
+		FromYear: 2010,
+		ToYear: 2010,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    WS    2011    only    -    Apr    Sat>=1    4:00    0    -
+	{
+		FromYear: 2011,
+		ToYear: 2011,
+		InMonth: 4,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 1,
+		AtTimeCode: 16,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    WS    2011    only    -    Sep    lastSat    3:00    1    -
+	{
+		FromYear: 2011,
+		ToYear: 2011,
+		InMonth: 9,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 0,
+		AtTimeCode: 12,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    WS    2012    2021    -    Apr    Sun>=1    4:00    0    -
+	{
+		FromYear: 2012,
+		ToYear: 2021,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 16,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    WS    2012    2020    -    Sep    lastSun    3:00    1    -
+	{
+		FromYear: 2012,
+		ToYear: 2020,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 12,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+}
+
+var ZonePolicyWS = zoneinfo.ZonePolicy{
+	Rules: ZoneRulesWS,
+}
+
 
 
 // ---------------------------------------------------------------------------
-// Unsupported zone policies: 133
+// Unsupported zone policies: 132
 // ---------------------------------------------------------------------------
 
 // AN {unused}
@@ -276,15 +360,15 @@ var ZonePolicyUS = zoneinfo.ZonePolicy{
 // Vanuatu {unused}
 // Vincennes {unused}
 // W-Eur {unused}
-// WS {unused}
 // Winn {unused}
 // Yukon {unused}
 // Zion {unused}
 
 
 // ---------------------------------------------------------------------------
-// Notable zone policies: 0
+// Notable zone policies: 1
 // ---------------------------------------------------------------------------
 
+// WS {Added anchor rule at year 0}
 
 

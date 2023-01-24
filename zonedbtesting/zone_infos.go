@@ -40,10 +40,10 @@ import (
 
 const (
 	// All ZoneEra.Format entries concatenated together.
-	FormatData = "E%TP%TUTC~"
+	FormatData = "+13/+14-11/-10E%TP%TUTC~"
 
 	// All ZoneInfo.Name entries concatenated togther.
-	NameData = "America/Los_AngelesAmerica/New_YorkEtc/UTCUS/Pacific~"
+	NameData = "America/Los_AngelesAmerica/New_YorkEtc/UTCPacific/ApiaUS/Pacific~"
 )
 
 var (
@@ -51,20 +51,20 @@ var (
 	// at index `i` given by the `ZoneEra.Format` field is
 	// `FormatData[FormatOffsets[i]:FormatOffsets[i+1]]`.
 	FormatOffsets = []uint16{
-		0, 0, 3, 6, 9,
+		0, 0, 7, 14, 17, 20, 23,
 	}
 
 	// Byte offset into NameData for each index. The actual Letter string
 	// at index `i` given by the `ZoneRule.Name` field is
 	// `NameData[NameOffsets[i]:NameOffsets[i+1]]`.
 	NameOffsets = []uint16{
-		0, 0, 19, 35, 42, 52,
+		0, 0, 19, 35, 42, 54, 64,
 	}
 )
 
 // ---------------------------------------------------------------------------
-// Supported zones: 3
-// numEras: 3
+// Supported zones: 4
+// numEras: 5
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
@@ -76,7 +76,7 @@ var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
 	//             -8:00    US    P%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		FormatIndex: 2, // "P%T"
+		FormatIndex: 4, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -106,7 +106,7 @@ var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
 		ZonePolicy: &ZonePolicyUS,
-		FormatIndex: 1, // "E%T"
+		FormatIndex: 3, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -136,7 +136,7 @@ var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 	// 0 - UTC
 	{
 		ZonePolicy: nil,
-		FormatIndex: 3, // "UTC"
+		FormatIndex: 5, // "UTC"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -157,6 +157,48 @@ var ZoneEtc_UTC = zoneinfo.ZoneInfo{
 	Target: nil,
 }
 
+// ---------------------------------------------------------------------------
+// Zone name: Pacific/Apia
+// Era count: 2
+// ---------------------------------------------------------------------------
+
+var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
+	//             -11:00    WS    -11/-10    2011 Dec 29 24:00
+	{
+		ZonePolicy: &ZonePolicyWS,
+		FormatIndex: 2, // "-11/-10"
+		OffsetCode: -44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 2011,
+		UntilMonth: 12,
+		UntilDay: 29,
+		UntilTimeCode: 96,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+	//              13:00    WS    +13/+14
+	{
+		ZonePolicy: &ZonePolicyWS,
+		FormatIndex: 1, // "+13/+14"
+		OffsetCode: 52,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 10000,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+}
+
+var ZonePacific_Apia = zoneinfo.ZoneInfo{
+	ZoneID: 0x23359b5e,
+	NameIndex: 4, // "Pacific/Apia"
+	StartYear: 1980,
+	UntilYear: 10000,
+	Eras: ZoneEraPacific_Apia,
+	Target: nil,
+}
+
 
 
 // ---------------------------------------------------------------------------
@@ -165,7 +207,7 @@ var ZoneEtc_UTC = zoneinfo.ZoneInfo{
 
 // Link: US/Pacific -> America/Los_Angeles
 var ZoneUS_Pacific = zoneinfo.ZoneInfo{
-	NameIndex: 4, // "US/Pacific"
+	NameIndex: 5, // "US/Pacific"
 	ZoneID: 0xa950f6ab,
 	StartYear: 1980,
 	UntilYear: 10000,
@@ -176,7 +218,7 @@ var ZoneUS_Pacific = zoneinfo.ZoneInfo{
 
 
 // ---------------------------------------------------------------------------
-// Unsuported zones: 348
+// Unsuported zones: 347
 // ---------------------------------------------------------------------------
 
 // Africa/Abidjan {Zone missing from include list}
@@ -496,7 +538,6 @@ var ZoneUS_Pacific = zoneinfo.ZoneInfo{
 // MST {Zone missing from include list}
 // MST7MDT {Zone missing from include list}
 // PST8PDT {Zone missing from include list}
-// Pacific/Apia {Zone missing from include list}
 // Pacific/Auckland {Zone missing from include list}
 // Pacific/Bougainville {Zone missing from include list}
 // Pacific/Chatham {Zone missing from include list}
@@ -533,6 +574,9 @@ var ZoneUS_Pacific = zoneinfo.ZoneInfo{
 // Notable zones: 0
 // ---------------------------------------------------------------------------
 
+// Pacific/Apia {
+//   WS {Added anchor rule at year 0}
+// }
 
 
 // ---------------------------------------------------------------------------

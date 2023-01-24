@@ -53,11 +53,12 @@ var Context = zoneinfo.ZoneContext{
 
 // ---------------------------------------------------------------------------
 // Zone Registry
-// Total: 4 (3 zones, 1 links)
+// Total: 5 (4 zones, 1 links)
 // ---------------------------------------------------------------------------
 
 var ZoneAndLinkRegistry = []*zoneinfo.ZoneInfo{
 	&ZoneAmerica_New_York, // 0x1e2a7654, America/New_York
+	&ZonePacific_Apia, // 0x23359b5e, Pacific/Apia
 	&ZoneUS_Pacific, // 0xa950f6ab, US/Pacific -> America/Los_Angeles
 	&ZoneAmerica_Los_Angeles, // 0xb7f7e8f2, America/Los_Angeles
 	&ZoneEtc_UTC, // 0xd8e31abc, Etc/UTC
@@ -66,13 +67,14 @@ var ZoneAndLinkRegistry = []*zoneinfo.ZoneInfo{
 
 // ---------------------------------------------------------------------------
 // Zone IDs
-// Total: 4 (3 zones, 1 links)
+// Total: 5 (4 zones, 1 links)
 // ---------------------------------------------------------------------------
 
 const (
 	ZoneIDAmerica_Los_Angeles uint32 = 0xb7f7e8f2 // America/Los_Angeles
 	ZoneIDAmerica_New_York uint32 = 0x1e2a7654 // America/New_York
 	ZoneIDEtc_UTC uint32 = 0xd8e31abc // Etc/UTC
+	ZoneIDPacific_Apia uint32 = 0x23359b5e // Pacific/Apia
 	ZoneIDUS_Pacific uint32 = 0xa950f6ab // US/Pacific
 
 )
