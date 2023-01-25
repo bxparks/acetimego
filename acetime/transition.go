@@ -322,6 +322,14 @@ func fixTransitionTimes(transitions []Transition) {
 
 //-----------------------------------------------------------------------------
 // TransitionStorage
+//
+// There are 4 pools indicated by the following half-open (inclusive to
+// exclusive) index ranges:
+//
+// 1) Active pool: [0, indexPrior)
+// 2) Prior pool: [indexPrior, indexCandidate), either 0 or 1 element
+// 3) Candidate pool: [indexCandidate, indexFree)
+// 4) Free agent pool: [indexFree, allocSize), 0 or 1 element
 //-----------------------------------------------------------------------------
 
 const (
@@ -435,6 +443,13 @@ func isMatchStatusActive(status uint8) bool {
 		status == matchStatusWithinMatch ||
 		status == matchStatusPrior
 }
+
+// Useful for debugging, commented out instead of deleting.
+//
+//func (ts *TransitionStorage) printPoolSizes() {
+//	fmt.Printf("indexPrior=%d; indexCandidate=%d; indexFree=%d; allocSize=%d\n",
+//		ts.indexPrior, ts.indexCandidate, ts.indexFree, ts.allocSize)
+//}
 
 // AddActiveCandidatesToActivePool adds the candidate transitions to the active
 // pool, and returns the last active transition added.

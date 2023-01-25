@@ -322,7 +322,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 func TestCompareTransitionToMatch(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
 	era := zoneinfo.ZoneEra{
-		ZonePolicy:        nil,
+		PolicyIndex:       0,
 		FormatIndex:       0,
 		OffsetCode:        0,
 		DeltaCode:         0,

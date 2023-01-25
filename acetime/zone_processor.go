@@ -57,6 +57,10 @@ func (zp *ZoneProcessor) Reset() {
 	zp.isFilled = false
 }
 
+func (zp *ZoneProcessor) IsLink() bool {
+	return zp.zoneInfo.IsLink()
+}
+
 func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	if zp.isFilledForYear(year) {
 		return ErrOk
@@ -75,14 +79,21 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 
 	// Step 1: Find matches.
 	zp.numMatches = findMatches(
-		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatData,
+		zp.zoneContext.FormatOffsets,
+		zp.zoneContext.FormatData,
+		zp.zoneContext.ZoneEras,
+		zp.zoneContext.ZoneInfos,
 		zp.zoneInfo, startYm, untilYm, zp.matches[:])
 	if zp.numMatches == 0 {
 		return ErrGeneric
 	}
 
 	// Step 2: Create Transitions.
-	createTransitions(&zp.transitionStorage, zp.matches[:zp.numMatches])
+	createTransitions(
+		zp.zoneContext.ZoneRules,
+		zp.zoneContext.ZonePolicies,
+		&zp.transitionStorage,
+		zp.matches[:zp.numMatches])
 
 	// Step 3: Fix transition times.
 	transitions := zp.transitionStorage.GetActives()
@@ -189,6 +200,8 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 func findMatches(
 	formatsOffset []uint16,
 	formatsData string,
+	zoneEras []zoneinfo.ZoneEra,
+	zoneInfos []zoneinfo.ZoneInfo,
 	zoneInfo *zoneinfo.ZoneInfo,
 	startYm YearMonth,
 	untilYm YearMonth,
@@ -196,7 +209,7 @@ func findMatches(
 
 	var iMatch uint8 = 0
 	var prevMatch *MatchingEra = nil
-	var eras []zoneinfo.ZoneEra = zoneInfo.ErasActive()
+	var eras []zoneinfo.ZoneEra = zoneInfo.ErasActive(zoneEras, zoneInfos)
 
 	for iEra := range eras {
 		era := &eras[iEra]
@@ -325,20 +338,27 @@ func createMatchingEra(
 // Step 2
 //-----------------------------------------------------------------------------
 
-func createTransitions(ts *TransitionStorage, matches []MatchingEra) {
+func createTransitions(
+	zoneRules []zoneinfo.ZoneRule,
+	zonePolicies []zoneinfo.ZonePolicy,
+	ts *TransitionStorage, matches []MatchingEra) {
+
 	for i := range matches {
-		createTransitionsForMatch(ts, &matches[i])
+		createTransitionsForMatch(zoneRules, zonePolicies, ts, &matches[i])
 	}
 }
 
-func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
-	policy := match.era.ZonePolicy
-	if policy == nil {
-		// Step 2A
-		createTransitionsFromSimpleMatch(ts, match)
-	} else {
+func createTransitionsForMatch(
+	zoneRules []zoneinfo.ZoneRule,
+	zonePolicies []zoneinfo.ZonePolicy,
+	ts *TransitionStorage, match *MatchingEra) {
+
+	if match.era.HasPolicy() {
 		// Step 2B
-		createTransitionsFromNamedMatch(ts, match)
+		createTransitionsFromNamedMatch(zoneRules, zonePolicies, ts, match)
+	} else {
+		// Step 2A
+		createTransitionsFromSimpleMatch(zoneRules, zonePolicies, ts, match)
 	}
 }
 
@@ -347,6 +367,8 @@ func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
 //-----------------------------------------------------------------------------
 
 func createTransitionsFromSimpleMatch(
+	zoneRules []zoneinfo.ZoneRule,
+	zonePolicies []zoneinfo.ZonePolicy,
 	ts *TransitionStorage, match *MatchingEra) {
 
 	freeAgent := ts.GetFreeAgent()
@@ -393,12 +415,14 @@ func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) DateTuple {
 //-----------------------------------------------------------------------------
 
 func createTransitionsFromNamedMatch(
+	zoneRules []zoneinfo.ZoneRule,
+	zonePolicies []zoneinfo.ZonePolicy,
 	ts *TransitionStorage, match *MatchingEra) {
 
 	ts.ResetCandidatePool()
 
 	// Pass 1: Find candidate transitions using whole years.
-	findCandidateTransitions(ts, match)
+	findCandidateTransitions(zoneRules, zonePolicies, ts, match)
 
 	// Pass 2: Fix the transitions times, converting 's' and 'u' into 'w'
 	// uniformly.
@@ -414,15 +438,20 @@ func createTransitionsFromNamedMatch(
 }
 
 // Step 2B: Pass 1
-func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
-	policy := match.era.ZonePolicy
+func findCandidateTransitions(
+	zoneRules []zoneinfo.ZoneRule,
+	zonePolicies []zoneinfo.ZonePolicy,
+	ts *TransitionStorage, match *MatchingEra) {
+
+	policy := match.era.ZonePolicy(zonePolicies)
 	startYear := match.startDt.year
 	endYear := match.untilDt.year
 
 	prior := ts.ReservePrior()
 	prior.isValidPrior = false
-	for ir := range policy.Rules {
-		rule := &policy.Rules[ir]
+	rules := policy.Rules(zoneRules)
+	for ir := range rules {
+		rule := &rules[ir]
 
 		// Add transitions for interior years
 		var interiorYears [maxInteriorYears]int16

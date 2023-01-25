@@ -39,7 +39,16 @@ import (
 
 const (
 	// All ZoneRule.Letter entries concatenated together.
-	LetterData = "+00+02CATCSTDDDSWAT~"
+	LetterData = "" +
+		"+00" +
+		"+02" +
+		"CAT" +
+		"CST" +
+		"D" +
+		"DD" +
+		"S" +
+		"WAT" +
+		"~"
 )
 
 var (
@@ -52,15 +61,20 @@ var (
 )
 
 // ---------------------------------------------------------------------------
+// ZoneRules is a concatenated array of zoneinfo.ZoneInfo objects from all
+// ZonePolicies.
+//
 // Supported zone policies: 83
 // numRules: 603
 // ---------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
-// Policy name: AN
-// Rule count: 9
-// ---------------------------------------------------------------------------
-var ZoneRulesAN = []zoneinfo.ZoneRule{
+var ZoneRules = []zoneinfo.ZoneRule{
+	// ---------------------------------------------------------------------------
+	// PolicyName: AN
+	// RuleIndex: 0
+	// RuleCount: 9
+	// ---------------------------------------------------------------------------
+
 	// Rule    AN    1987    1999    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1987,
@@ -170,17 +184,12 @@ var ZoneRulesAN = []zoneinfo.ZoneRule{
 		LetterIndex: 5, // "D"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: AQ
+	// RuleIndex: 9
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyAN = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesAN,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: AQ
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesAQ = []zoneinfo.ZoneRule{
 	// Rule    AQ    1990    1992    -    Mar    Sun>=1    2:00s    0    S
 	{
 		FromYear: 1990,
@@ -194,17 +203,12 @@ var ZoneRulesAQ = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: AS
+	// RuleIndex: 10
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyAQ = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesAQ,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: AS
-// Rule count: 7
-// ---------------------------------------------------------------------------
-var ZoneRulesAS = []zoneinfo.ZoneRule{
 	// Rule    AS    1987    2007    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1987,
@@ -290,17 +294,12 @@ var ZoneRulesAS = []zoneinfo.ZoneRule{
 		LetterIndex: 5, // "D"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: AT
+	// RuleIndex: 17
+	// RuleCount: 8
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyAS = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesAS,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: AT
-// Rule count: 8
-// ---------------------------------------------------------------------------
-var ZoneRulesAT = []zoneinfo.ZoneRule{
 	// Rule    AT    1988    1990    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1988,
@@ -398,17 +397,12 @@ var ZoneRulesAT = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: AV
+	// RuleIndex: 25
+	// RuleCount: 9
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyAT = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesAT,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: AV
-// Rule count: 9
-// ---------------------------------------------------------------------------
-var ZoneRulesAV = []zoneinfo.ZoneRule{
 	// Rule    AV    1988    1999    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1988,
@@ -518,17 +512,12 @@ var ZoneRulesAV = []zoneinfo.ZoneRule{
 		LetterIndex: 5, // "D"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: AW
+	// RuleIndex: 34
+	// RuleCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyAV = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesAV,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: AW
-// Rule count: 4
-// ---------------------------------------------------------------------------
-var ZoneRulesAW = []zoneinfo.ZoneRule{
 	// Rule    AW    1992    only    -    Mar    Sun>=1    2:00s    0    S
 	{
 		FromYear: 1992,
@@ -578,17 +567,12 @@ var ZoneRulesAW = []zoneinfo.ZoneRule{
 		LetterIndex: 5, // "D"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Arg
+	// RuleIndex: 38
+	// RuleCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyAW = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesAW,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Arg
-// Rule count: 6
-// ---------------------------------------------------------------------------
-var ZoneRulesArg = []zoneinfo.ZoneRule{
 	// Rule    Arg    1989    1993    -    Mar    Sun>=1    0:00    0    -
 	{
 		FromYear: 1989,
@@ -662,17 +646,12 @@ var ZoneRulesArg = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Armenia
+	// RuleIndex: 44
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyArg = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesArg,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Armenia
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesArmenia = []zoneinfo.ZoneRule{
 	// Anchor: Rule Armenia    2011    only    -    Oct    lastSun     2:00s    0    -
 	{
 		FromYear: 0,
@@ -710,17 +689,12 @@ var ZoneRulesArmenia = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Aus
+	// RuleIndex: 47
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyArmenia = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesArmenia,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Aus
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesAus = []zoneinfo.ZoneRule{
 	// Rule    Aus    1943    1944    -    Mar    lastSun    2:00s    0    S
 	{
 		FromYear: 1943,
@@ -734,17 +708,12 @@ var ZoneRulesAus = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Azer
+	// RuleIndex: 48
+	// RuleCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyAus = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesAus,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Azer
-// Rule count: 2
-// ---------------------------------------------------------------------------
-var ZoneRulesAzer = []zoneinfo.ZoneRule{
 	// Rule    Azer    1997    2015    -    Mar    lastSun     4:00    1:00    -
 	{
 		FromYear: 1997,
@@ -770,17 +739,12 @@ var ZoneRulesAzer = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Barb
+	// RuleIndex: 50
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyAzer = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesAzer,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Barb
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesBarb = []zoneinfo.ZoneRule{
 	// Rule    Barb    1980    only    -    Sep    25    2:00    0    S
 	{
 		FromYear: 1980,
@@ -794,17 +758,12 @@ var ZoneRulesBarb = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Belize
+	// RuleIndex: 51
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyBarb = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesBarb,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Belize
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesBelize = []zoneinfo.ZoneRule{
 	// Rule    Belize    1983    only    -    Feb    12    0:00    0    CST
 	{
 		FromYear: 1983,
@@ -818,17 +777,12 @@ var ZoneRulesBelize = []zoneinfo.ZoneRule{
 		LetterIndex: 4, // "CST"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Brazil
+	// RuleIndex: 52
+	// RuleCount: 20
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyBelize = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesBelize,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Brazil
-// Rule count: 20
-// ---------------------------------------------------------------------------
-var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 	// Rule    Brazil    1998    only    -    Oct    11     0:00    1:00    -
 	{
 		FromYear: 1998,
@@ -1070,17 +1024,12 @@ var ZoneRulesBrazil = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: C-Eur
+	// RuleIndex: 72
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyBrazil = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesBrazil,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: C_Eur
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesC_Eur = []zoneinfo.ZoneRule{
 	// Rule    C-Eur    1979    1995    -    Sep    lastSun     2:00s    0    -
 	{
 		FromYear: 1979,
@@ -1118,17 +1067,12 @@ var ZoneRulesC_Eur = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: CO
+	// RuleIndex: 75
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyC_Eur = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesC_Eur,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: CO
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesCO = []zoneinfo.ZoneRule{
 	// Rule    CO    1993    only    -    Feb     6    24:00    0    -
 	{
 		FromYear: 1993,
@@ -1142,17 +1086,12 @@ var ZoneRulesCO = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: CR
+	// RuleIndex: 76
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyCO = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesCO,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: CR
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesCR = []zoneinfo.ZoneRule{
 	// Rule    CR    1992    only    -    Mar    15    0:00    0    S
 	{
 		FromYear: 1992,
@@ -1166,17 +1105,12 @@ var ZoneRulesCR = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Canada
+	// RuleIndex: 77
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyCR = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesCR,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Canada
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesCanada = []zoneinfo.ZoneRule{
 	// Rule    Canada    1974    1986    -    Apr    lastSun    2:00    1:00    D
 	{
 		FromYear: 1974,
@@ -1238,17 +1172,12 @@ var ZoneRulesCanada = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Chatham
+	// RuleIndex: 82
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyCanada = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesCanada,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Chatham
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesChatham = []zoneinfo.ZoneRule{
 	// Rule    Chatham    1989    only    -    Oct    Sun>=8    2:45s    1:00    -
 	{
 		FromYear: 1989,
@@ -1310,17 +1239,12 @@ var ZoneRulesChatham = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Chile
+	// RuleIndex: 87
+	// RuleCount: 17
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyChatham = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesChatham,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Chile
-// Rule count: 17
-// ---------------------------------------------------------------------------
-var ZoneRulesChile = []zoneinfo.ZoneRule{
 	// Rule    Chile    1998    only    -    Sep    27    4:00u    1:00    -
 	{
 		FromYear: 1998,
@@ -1526,17 +1450,12 @@ var ZoneRulesChile = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Cook
+	// RuleIndex: 104
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyChile = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesChile,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Cook
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesCook = []zoneinfo.ZoneRule{
 	// Rule    Cook    1979    1991    -    Mar    Sun>=1    0:00    0    -
 	{
 		FromYear: 1979,
@@ -1550,17 +1469,12 @@ var ZoneRulesCook = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Cuba
+	// RuleIndex: 105
+	// RuleCount: 14
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyCook = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesCook,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Cuba
-// Rule count: 14
-// ---------------------------------------------------------------------------
-var ZoneRulesCuba = []zoneinfo.ZoneRule{
 	// Rule    Cuba    1997    only    -    Oct    12    0:00s    0    S
 	{
 		FromYear: 1997,
@@ -1730,17 +1644,12 @@ var ZoneRulesCuba = []zoneinfo.ZoneRule{
 		LetterIndex: 5, // "D"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Dhaka
+	// RuleIndex: 119
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyCuba = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesCuba,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Dhaka
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesDhaka = []zoneinfo.ZoneRule{
 	// Anchor: Rule    Dhaka    2009    only    -    Dec    31    24:00    0    -
 	{
 		FromYear: 0,
@@ -1778,17 +1687,12 @@ var ZoneRulesDhaka = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: E-EurAsia
+	// RuleIndex: 122
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyDhaka = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesDhaka,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: E_EurAsia
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesE_EurAsia = []zoneinfo.ZoneRule{
 	// Rule E-EurAsia    1981    max    -    Mar    lastSun     0:00    1:00    -
 	{
 		FromYear: 1981,
@@ -1826,17 +1730,12 @@ var ZoneRulesE_EurAsia = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: EU
+	// RuleIndex: 125
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyE_EurAsia = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesE_EurAsia,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: EU
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesEU = []zoneinfo.ZoneRule{
 	// Rule    EU    1979    1995    -    Sep    lastSun     1:00u    0    -
 	{
 		FromYear: 1979,
@@ -1874,17 +1773,12 @@ var ZoneRulesEU = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: EUAsia
+	// RuleIndex: 128
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyEU = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesEU,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: EUAsia
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesEUAsia = []zoneinfo.ZoneRule{
 	// Rule    EUAsia    1981    max    -    Mar    lastSun     1:00u    1:00    S
 	{
 		FromYear: 1981,
@@ -1922,17 +1816,12 @@ var ZoneRulesEUAsia = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Ecuador
+	// RuleIndex: 131
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyEUAsia = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesEUAsia,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Ecuador
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesEcuador = []zoneinfo.ZoneRule{
 	// Rule    Ecuador    1993    only    -    Feb     5    0:00    0    -
 	{
 		FromYear: 1993,
@@ -1946,17 +1835,12 @@ var ZoneRulesEcuador = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Egypt
+	// RuleIndex: 132
+	// RuleCount: 14
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyEcuador = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesEcuador,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Egypt
-// Rule count: 14
-// ---------------------------------------------------------------------------
-var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 	// Rule    Egypt    1966    1994    -    Oct     1    3:00    0    -
 	{
 		FromYear: 1966,
@@ -2126,17 +2010,12 @@ var ZoneRulesEgypt = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Eire
+	// RuleIndex: 146
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyEgypt = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesEgypt,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Eire
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesEire = []zoneinfo.ZoneRule{
 	// Rule    Eire    1981    max    -    Mar    lastSun     1:00u    0    -
 	{
 		FromYear: 1981,
@@ -2174,17 +2053,12 @@ var ZoneRulesEire = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Falk
+	// RuleIndex: 149
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyEire = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesEire,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Falk
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesFalk = []zoneinfo.ZoneRule{
 	// Rule    Falk    1984    1985    -    Apr    lastSun    0:00    0    -
 	{
 		FromYear: 1984,
@@ -2246,17 +2120,12 @@ var ZoneRulesFalk = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Fiji
+	// RuleIndex: 154
+	// RuleCount: 12
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyFalk = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesFalk,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Fiji
-// Rule count: 12
-// ---------------------------------------------------------------------------
-var ZoneRulesFiji = []zoneinfo.ZoneRule{
 	// Rule    Fiji    1998    1999    -    Nov    Sun>=1    2:00    1:00    -
 	{
 		FromYear: 1998,
@@ -2402,17 +2271,12 @@ var ZoneRulesFiji = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Guam
+	// RuleIndex: 166
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyFiji = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesFiji,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Guam
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesGuam = []zoneinfo.ZoneRule{
 	// Rule    Guam    1977    only    -    Aug    28    2:00    0    S
 	{
 		FromYear: 1977,
@@ -2426,17 +2290,12 @@ var ZoneRulesGuam = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Guat
+	// RuleIndex: 167
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyGuam = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesGuam,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Guat
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesGuat = []zoneinfo.ZoneRule{
 	// Rule    Guat    1991    only    -    Sep     7    0:00    0    S
 	{
 		FromYear: 1991,
@@ -2474,17 +2333,12 @@ var ZoneRulesGuat = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: HK
+	// RuleIndex: 170
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyGuat = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesGuat,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: HK
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesHK = []zoneinfo.ZoneRule{
 	// Rule    HK    1979    only    -    Oct    21    3:30    0    -
 	{
 		FromYear: 1979,
@@ -2498,17 +2352,12 @@ var ZoneRulesHK = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Haiti
+	// RuleIndex: 171
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyHK = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesHK,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Haiti
-// Rule count: 7
-// ---------------------------------------------------------------------------
-var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 	// Rule    Haiti    1988    1997    -    Oct    lastSun    1:00s    0    S
 	{
 		FromYear: 1988,
@@ -2594,17 +2443,12 @@ var ZoneRulesHaiti = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Holiday
+	// RuleIndex: 178
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyHaiti = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesHaiti,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Holiday
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesHoliday = []zoneinfo.ZoneRule{
 	// Rule    Holiday    1993    1994    -    Mar    Sun>=1    2:00s    0    S
 	{
 		FromYear: 1993,
@@ -2618,17 +2462,12 @@ var ZoneRulesHoliday = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Hond
+	// RuleIndex: 179
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyHoliday = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesHoliday,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Hond
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesHond = []zoneinfo.ZoneRule{
 	// Rule    Hond    1987    1988    -    Sep    lastSun    0:00    0    S
 	{
 		FromYear: 1987,
@@ -2666,17 +2505,12 @@ var ZoneRulesHond = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Iran
+	// RuleIndex: 182
+	// RuleCount: 27
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyHond = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesHond,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Iran
-// Rule count: 27
-// ---------------------------------------------------------------------------
-var ZoneRulesIran = []zoneinfo.ZoneRule{
 	// Rule    Iran    1996    only    -    Sep    20    24:00    0    -
 	{
 		FromYear: 1996,
@@ -3002,17 +2836,12 @@ var ZoneRulesIran = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Iraq
+	// RuleIndex: 209
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyIran = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesIran,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Iraq
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesIraq = []zoneinfo.ZoneRule{
 	// Rule    Iraq    1985    1990    -    Sep    lastSun    1:00s    0    -
 	{
 		FromYear: 1985,
@@ -3050,17 +2879,12 @@ var ZoneRulesIraq = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Japan
+	// RuleIndex: 212
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyIraq = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesIraq,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Japan
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesJapan = []zoneinfo.ZoneRule{
 	// Rule    Japan    1948    1951    -    Sep    Sat>=8    25:00    0    S
 	{
 		FromYear: 1948,
@@ -3074,17 +2898,12 @@ var ZoneRulesJapan = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Jordan
+	// RuleIndex: 213
+	// RuleCount: 13
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyJapan = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesJapan,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Jordan
-// Rule count: 13
-// ---------------------------------------------------------------------------
-var ZoneRulesJordan = []zoneinfo.ZoneRule{
 	// Rule    Jordan    1995    1998    -    Sep    Fri>=15    0:00s    0    -
 	{
 		FromYear: 1995,
@@ -3242,17 +3061,12 @@ var ZoneRulesJordan = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Kyrgyz
+	// RuleIndex: 226
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyJordan = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesJordan,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Kyrgyz
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesKyrgyz = []zoneinfo.ZoneRule{
 	// Rule    Kyrgyz    1992    1996    -    Sep    lastSun    0:00    0    -
 	{
 		FromYear: 1992,
@@ -3290,17 +3104,12 @@ var ZoneRulesKyrgyz = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: LH
+	// RuleIndex: 229
+	// RuleCount: 9
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyKyrgyz = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesKyrgyz,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: LH
-// Rule count: 9
-// ---------------------------------------------------------------------------
-var ZoneRulesLH = []zoneinfo.ZoneRule{
 	// Rule    LH    1987    1999    -    Oct    lastSun    2:00    0:30    -
 	{
 		FromYear: 1987,
@@ -3410,17 +3219,12 @@ var ZoneRulesLH = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Lebanon
+	// RuleIndex: 238
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyLH = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesLH,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Lebanon
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesLebanon = []zoneinfo.ZoneRule{
 	// Rule    Lebanon    1993    max    -    Mar    lastSun    0:00    1:00    S
 	{
 		FromYear: 1993,
@@ -3458,17 +3262,12 @@ var ZoneRulesLebanon = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Libya
+	// RuleIndex: 241
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyLebanon = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesLebanon,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Libya
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesLibya = []zoneinfo.ZoneRule{
 	// Rule    Libya    1997    only    -    Oct     4    0:00    0    -
 	{
 		FromYear: 1997,
@@ -3506,17 +3305,12 @@ var ZoneRulesLibya = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Macau
+	// RuleIndex: 244
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyLibya = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesLibya,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Macau
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesMacau = []zoneinfo.ZoneRule{
 	// Rule    Macau    1979    only    -    Oct    Sun>=16    03:30    0    S
 	{
 		FromYear: 1979,
@@ -3530,17 +3324,12 @@ var ZoneRulesMacau = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Mauritius
+	// RuleIndex: 245
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyMacau = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesMacau,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Mauritius
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesMauritius = []zoneinfo.ZoneRule{
 	// Rule Mauritius    1983    only    -    Mar    21    0:00    0    -
 	{
 		FromYear: 1983,
@@ -3578,17 +3367,12 @@ var ZoneRulesMauritius = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Mexico
+	// RuleIndex: 248
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyMauritius = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesMauritius,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Mexico
-// Rule count: 7
-// ---------------------------------------------------------------------------
-var ZoneRulesMexico = []zoneinfo.ZoneRule{
 	// Rule    Mexico    1950    only    -    Jul    30    0:00    0    S
 	{
 		FromYear: 1950,
@@ -3674,17 +3458,12 @@ var ZoneRulesMexico = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Moldova
+	// RuleIndex: 255
+	// RuleCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyMexico = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesMexico,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Moldova
-// Rule count: 2
-// ---------------------------------------------------------------------------
-var ZoneRulesMoldova = []zoneinfo.ZoneRule{
 	// Rule    Moldova    1997    max    -    Mar    lastSun     2:00    1:00    S
 	{
 		FromYear: 1997,
@@ -3710,17 +3489,12 @@ var ZoneRulesMoldova = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Moncton
+	// RuleIndex: 257
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyMoldova = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesMoldova,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Moncton
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesMoncton = []zoneinfo.ZoneRule{
 	// Rule    Moncton    1957    1972    -    Oct    lastSun    2:00    0    S
 	{
 		FromYear: 1957,
@@ -3758,17 +3532,12 @@ var ZoneRulesMoncton = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Mongol
+	// RuleIndex: 260
+	// RuleCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyMoncton = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesMoncton,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Mongol
-// Rule count: 6
-// ---------------------------------------------------------------------------
-var ZoneRulesMongol = []zoneinfo.ZoneRule{
 	// Rule    Mongol    1984    1998    -    Sep    lastSun    0:00    0    -
 	{
 		FromYear: 1984,
@@ -3842,17 +3611,12 @@ var ZoneRulesMongol = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Morocco
+	// RuleIndex: 266
+	// RuleCount: 169
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyMongol = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesMongol,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Morocco
-// Rule count: 169
-// ---------------------------------------------------------------------------
-var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 	// Rule    Morocco    1978    only    -    Aug     4     0:00    0    -
 	{
 		FromYear: 1978,
@@ -5882,17 +5646,12 @@ var ZoneRulesMorocco = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: NC
+	// RuleIndex: 435
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyMorocco = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesMorocco,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: NC
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesNC = []zoneinfo.ZoneRule{
 	// Rule    NC    1997    only    -    Mar     2    2:00s    0    -
 	{
 		FromYear: 1997,
@@ -5906,17 +5665,12 @@ var ZoneRulesNC = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: NT_YK
+	// RuleIndex: 436
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyNC = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesNC,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: NT_YK
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesNT_YK = []zoneinfo.ZoneRule{
 	// Rule    NT_YK    1972    1986    -    Apr    lastSun    2:00    1:00    D
 	{
 		FromYear: 1972,
@@ -5954,17 +5708,12 @@ var ZoneRulesNT_YK = []zoneinfo.ZoneRule{
 		LetterIndex: 5, // "D"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: NZ
+	// RuleIndex: 439
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyNT_YK = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesNT_YK,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: NZ
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesNZ = []zoneinfo.ZoneRule{
 	// Rule    NZ    1989    only    -    Oct    Sun>=8    2:00s    1:00    D
 	{
 		FromYear: 1989,
@@ -6026,17 +5775,12 @@ var ZoneRulesNZ = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Namibia
+	// RuleIndex: 444
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyNZ = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesNZ,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Namibia
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesNamibia = []zoneinfo.ZoneRule{
 	// Rule    Namibia    1994    only    -    Mar    21    0:00    -1:00    WAT
 	{
 		FromYear: 1994,
@@ -6074,17 +5818,12 @@ var ZoneRulesNamibia = []zoneinfo.ZoneRule{
 		LetterIndex: 8, // "WAT"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Nic
+	// RuleIndex: 447
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyNamibia = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesNamibia,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Nic
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesNic = []zoneinfo.ZoneRule{
 	// Rule    Nic    1979    1980    -    Jun    Mon>=23    0:00    0    S
 	{
 		FromYear: 1979,
@@ -6146,17 +5885,12 @@ var ZoneRulesNic = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: PRC
+	// RuleIndex: 452
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyNic = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesNic,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: PRC
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesPRC = []zoneinfo.ZoneRule{
 	// Rule    PRC    1986    1991    -    Sep    Sun>=11     2:00    0    S
 	{
 		FromYear: 1986,
@@ -6170,17 +5904,12 @@ var ZoneRulesPRC = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Pakistan
+	// RuleIndex: 453
+	// RuleCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyPRC = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesPRC,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Pakistan
-// Rule count: 6
-// ---------------------------------------------------------------------------
-var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 	// Anchor: Rule Pakistan    2002    only    -    Oct    Sun>=2    0:00    0    -
 	{
 		FromYear: 0,
@@ -6254,17 +5983,12 @@ var ZoneRulesPakistan = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Palestine
+	// RuleIndex: 459
+	// RuleCount: 33
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyPakistan = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesPakistan,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Palestine
-// Rule count: 33
-// ---------------------------------------------------------------------------
-var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 	// Anchor: Rule Palestine    1999    2003    -    Oct    Fri>=15    0:00    0    -
 	{
 		FromYear: 0,
@@ -6662,17 +6386,12 @@ var ZoneRulesPalestine = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Para
+	// RuleIndex: 492
+	// RuleCount: 10
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyPalestine = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesPalestine,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Para
-// Rule count: 10
-// ---------------------------------------------------------------------------
-var ZoneRulesPara = []zoneinfo.ZoneRule{
 	// Rule    Para    1996    2001    -    Oct    Sun>=1    0:00    1:00    -
 	{
 		FromYear: 1996,
@@ -6794,17 +6513,12 @@ var ZoneRulesPara = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Peru
+	// RuleIndex: 502
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyPara = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesPara,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Peru
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesPeru = []zoneinfo.ZoneRule{
 	// Rule    Peru    1994    only    -    Apr     1    0:00    0    -
 	{
 		FromYear: 1994,
@@ -6818,17 +6532,12 @@ var ZoneRulesPeru = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Phil
+	// RuleIndex: 503
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyPeru = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesPeru,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Phil
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesPhil = []zoneinfo.ZoneRule{
 	// Rule    Phil    1978    only    -    Sep    21    0:00    0    S
 	{
 		FromYear: 1978,
@@ -6842,17 +6551,12 @@ var ZoneRulesPhil = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: ROK
+	// RuleIndex: 504
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyPhil = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesPhil,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: ROK
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesROK = []zoneinfo.ZoneRule{
 	// Rule    ROK    1987    1988    -    Oct    Sun>=8     3:00    0    S
 	{
 		FromYear: 1987,
@@ -6866,17 +6570,12 @@ var ZoneRulesROK = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Russia
+	// RuleIndex: 505
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyROK = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesROK,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Russia
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesRussia = []zoneinfo.ZoneRule{
 	// Rule    Russia    1984    1995    -    Sep    lastSun     2:00s    0    -
 	{
 		FromYear: 1984,
@@ -6914,17 +6613,12 @@ var ZoneRulesRussia = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: RussiaAsia
+	// RuleIndex: 508
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyRussia = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesRussia,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: RussiaAsia
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesRussiaAsia = []zoneinfo.ZoneRule{
 	// Rule RussiaAsia    1984    1995    -    Sep    lastSun     2:00s    0    -
 	{
 		FromYear: 1984,
@@ -6962,17 +6656,12 @@ var ZoneRulesRussiaAsia = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: SA
+	// RuleIndex: 511
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyRussiaAsia = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesRussiaAsia,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: SA
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesSA = []zoneinfo.ZoneRule{
 	// Rule    SA    1943    1944    -    Mar    Sun>=15    2:00    0    -
 	{
 		FromYear: 1943,
@@ -6986,17 +6675,12 @@ var ZoneRulesSA = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Salv
+	// RuleIndex: 512
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicySA = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesSA,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Salv
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesSalv = []zoneinfo.ZoneRule{
 	// Rule    Salv    1987    1988    -    Sep    lastSun    0:00    0    S
 	{
 		FromYear: 1987,
@@ -7010,17 +6694,12 @@ var ZoneRulesSalv = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: SanLuis
+	// RuleIndex: 513
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicySalv = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesSalv,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: SanLuis
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesSanLuis = []zoneinfo.ZoneRule{
 	// Anchor: Rule    SanLuis    2008    2009    -    Mar    Sun>=8    0:00    0    -
 	{
 		FromYear: 0,
@@ -7058,17 +6737,12 @@ var ZoneRulesSanLuis = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: StJohns
+	// RuleIndex: 516
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicySanLuis = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesSanLuis,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: StJohns
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesStJohns = []zoneinfo.ZoneRule{
 	// Rule    StJohns    1987    2006    -    Oct    lastSun    0:01    0    S
 	{
 		FromYear: 1987,
@@ -7130,17 +6804,12 @@ var ZoneRulesStJohns = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Sudan
+	// RuleIndex: 521
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyStJohns = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesStJohns,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Sudan
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesSudan = []zoneinfo.ZoneRule{
 	// Rule    Sudan    1970    1985    -    Oct    15    0:00    0    -
 	{
 		FromYear: 1970,
@@ -7154,17 +6823,12 @@ var ZoneRulesSudan = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Syria
+	// RuleIndex: 522
+	// RuleCount: 12
+	// ---------------------------------------------------------------------------
 
-var ZonePolicySudan = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesSudan,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Syria
-// Rule count: 12
-// ---------------------------------------------------------------------------
-var ZoneRulesSyria = []zoneinfo.ZoneRule{
 	// Rule    Syria    1994    2005    -    Oct     1    0:00    0    -
 	{
 		FromYear: 1994,
@@ -7310,17 +6974,12 @@ var ZoneRulesSyria = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Taiwan
+	// RuleIndex: 534
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicySyria = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesSyria,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Taiwan
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesTaiwan = []zoneinfo.ZoneRule{
 	// Rule    Taiwan    1979    only    -    Oct    1    0:00    0    S
 	{
 		FromYear: 1979,
@@ -7334,17 +6993,12 @@ var ZoneRulesTaiwan = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Thule
+	// RuleIndex: 535
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyTaiwan = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesTaiwan,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Thule
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesThule = []zoneinfo.ZoneRule{
 	// Rule    Thule    1991    1992    -    Sep    lastSun    2:00    0    S
 	{
 		FromYear: 1991,
@@ -7406,17 +7060,12 @@ var ZoneRulesThule = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Tonga
+	// RuleIndex: 540
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyThule = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesThule,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Tonga
-// Rule count: 7
-// ---------------------------------------------------------------------------
-var ZoneRulesTonga = []zoneinfo.ZoneRule{
 	// Anchor: Rule    Tonga    2000    only    -    Mar    19    2:00s    0    -
 	{
 		FromYear: 0,
@@ -7502,17 +7151,12 @@ var ZoneRulesTonga = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Troll
+	// RuleIndex: 547
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyTonga = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesTonga,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Troll
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesTroll = []zoneinfo.ZoneRule{
 	// Anchor: Rule    Troll    2004    max    -    Oct    lastSun    1:00u    0:00    +00
 	{
 		FromYear: 0,
@@ -7550,17 +7194,12 @@ var ZoneRulesTroll = []zoneinfo.ZoneRule{
 		LetterIndex: 1, // "+00"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Tunisia
+	// RuleIndex: 550
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyTroll = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesTroll,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Tunisia
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesTunisia = []zoneinfo.ZoneRule{
 	// Rule    Tunisia    1988    1990    -    Sep    lastSun     0:00s    0    -
 	{
 		FromYear: 1988,
@@ -7622,17 +7261,12 @@ var ZoneRulesTunisia = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Turkey
+	// RuleIndex: 555
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyTunisia = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesTunisia,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Turkey
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesTurkey = []zoneinfo.ZoneRule{
 	// Rule    Turkey    1986    1995    -    Sep    lastSun    1:00s    0    -
 	{
 		FromYear: 1986,
@@ -7670,17 +7304,12 @@ var ZoneRulesTurkey = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: US
+	// RuleIndex: 558
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyTurkey = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesTurkey,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: US
-// Rule count: 5
-// ---------------------------------------------------------------------------
-var ZoneRulesUS = []zoneinfo.ZoneRule{
 	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
 	{
 		FromYear: 1967,
@@ -7742,17 +7371,12 @@ var ZoneRulesUS = []zoneinfo.ZoneRule{
 		LetterIndex: 7, // "S"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Uruguay
+	// RuleIndex: 563
+	// RuleCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyUS = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesUS,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Uruguay
-// Rule count: 6
-// ---------------------------------------------------------------------------
-var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 	// Rule    Uruguay    1993    only    -    Feb    28     0:00    0    -
 	{
 		FromYear: 1993,
@@ -7826,17 +7450,12 @@ var ZoneRulesUruguay = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Vanuatu
+	// RuleIndex: 569
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyUruguay = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesUruguay,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Vanuatu
-// Rule count: 1
-// ---------------------------------------------------------------------------
-var ZoneRulesVanuatu = []zoneinfo.ZoneRule{
 	// Rule    Vanuatu    1992    1993    -    Jan    Sat>=22    24:00    0    -
 	{
 		FromYear: 1992,
@@ -7850,17 +7469,12 @@ var ZoneRulesVanuatu = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: WS
+	// RuleIndex: 570
+	// RuleCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyVanuatu = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesVanuatu,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: WS
-// Rule count: 6
-// ---------------------------------------------------------------------------
-var ZoneRulesWS = []zoneinfo.ZoneRule{
 	// Anchor: Rule    WS    2011    only    -    Apr    Sat>=1    4:00    0    -
 	{
 		FromYear: 0,
@@ -7934,17 +7548,12 @@ var ZoneRulesWS = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Winn
+	// RuleIndex: 576
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyWS = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesWS,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Winn
-// Rule count: 3
-// ---------------------------------------------------------------------------
-var ZoneRulesWinn = []zoneinfo.ZoneRule{
 	// Rule    Winn    1966    1986    -    Apr    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1966,
@@ -7982,17 +7591,12 @@ var ZoneRulesWinn = []zoneinfo.ZoneRule{
 		LetterIndex: 5, // "D"
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// PolicyName: Zion
+	// RuleIndex: 579
+	// RuleCount: 24
+	// ---------------------------------------------------------------------------
 
-var ZonePolicyWinn = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesWinn,
-}
-
-// ---------------------------------------------------------------------------
-// Policy name: Zion
-// Rule count: 24
-// ---------------------------------------------------------------------------
-var ZoneRulesZion = []zoneinfo.ZoneRule{
 	// Rule    Zion    1998    only    -    Sep     6    0:00    0    S
 	{
 		FromYear: 1998,
@@ -8284,10 +7888,98 @@ var ZoneRulesZion = []zoneinfo.ZoneRule{
 
 }
 
-var ZonePolicyZion = zoneinfo.ZonePolicy{
-	Rules: ZoneRulesZion,
-}
 
+// ---------------------------------------------------------------------------
+// ZonePolicies are indexes into the ZoneRules.
+// Supported zone policies: 83
+// ---------------------------------------------------------------------------
+
+var ZonePolicies = []zoneinfo.ZonePolicy{
+	{RuleIndex: 0, RuleCount: 0}, // 0: PolicyName: (None)
+	{RuleIndex: 0, RuleCount: 9}, // 1: PolicyName: AN
+	{RuleIndex: 9, RuleCount: 1}, // 2: PolicyName: AQ
+	{RuleIndex: 10, RuleCount: 7}, // 3: PolicyName: AS
+	{RuleIndex: 17, RuleCount: 8}, // 4: PolicyName: AT
+	{RuleIndex: 25, RuleCount: 9}, // 5: PolicyName: AV
+	{RuleIndex: 34, RuleCount: 4}, // 6: PolicyName: AW
+	{RuleIndex: 38, RuleCount: 6}, // 7: PolicyName: Arg
+	{RuleIndex: 44, RuleCount: 3}, // 8: PolicyName: Armenia
+	{RuleIndex: 47, RuleCount: 1}, // 9: PolicyName: Aus
+	{RuleIndex: 48, RuleCount: 2}, // 10: PolicyName: Azer
+	{RuleIndex: 50, RuleCount: 1}, // 11: PolicyName: Barb
+	{RuleIndex: 51, RuleCount: 1}, // 12: PolicyName: Belize
+	{RuleIndex: 52, RuleCount: 20}, // 13: PolicyName: Brazil
+	{RuleIndex: 72, RuleCount: 3}, // 14: PolicyName: C-Eur
+	{RuleIndex: 75, RuleCount: 1}, // 15: PolicyName: CO
+	{RuleIndex: 76, RuleCount: 1}, // 16: PolicyName: CR
+	{RuleIndex: 77, RuleCount: 5}, // 17: PolicyName: Canada
+	{RuleIndex: 82, RuleCount: 5}, // 18: PolicyName: Chatham
+	{RuleIndex: 87, RuleCount: 17}, // 19: PolicyName: Chile
+	{RuleIndex: 104, RuleCount: 1}, // 20: PolicyName: Cook
+	{RuleIndex: 105, RuleCount: 14}, // 21: PolicyName: Cuba
+	{RuleIndex: 119, RuleCount: 3}, // 22: PolicyName: Dhaka
+	{RuleIndex: 122, RuleCount: 3}, // 23: PolicyName: E-EurAsia
+	{RuleIndex: 125, RuleCount: 3}, // 24: PolicyName: EU
+	{RuleIndex: 128, RuleCount: 3}, // 25: PolicyName: EUAsia
+	{RuleIndex: 131, RuleCount: 1}, // 26: PolicyName: Ecuador
+	{RuleIndex: 132, RuleCount: 14}, // 27: PolicyName: Egypt
+	{RuleIndex: 146, RuleCount: 3}, // 28: PolicyName: Eire
+	{RuleIndex: 149, RuleCount: 5}, // 29: PolicyName: Falk
+	{RuleIndex: 154, RuleCount: 12}, // 30: PolicyName: Fiji
+	{RuleIndex: 166, RuleCount: 1}, // 31: PolicyName: Guam
+	{RuleIndex: 167, RuleCount: 3}, // 32: PolicyName: Guat
+	{RuleIndex: 170, RuleCount: 1}, // 33: PolicyName: HK
+	{RuleIndex: 171, RuleCount: 7}, // 34: PolicyName: Haiti
+	{RuleIndex: 178, RuleCount: 1}, // 35: PolicyName: Holiday
+	{RuleIndex: 179, RuleCount: 3}, // 36: PolicyName: Hond
+	{RuleIndex: 182, RuleCount: 27}, // 37: PolicyName: Iran
+	{RuleIndex: 209, RuleCount: 3}, // 38: PolicyName: Iraq
+	{RuleIndex: 212, RuleCount: 1}, // 39: PolicyName: Japan
+	{RuleIndex: 213, RuleCount: 13}, // 40: PolicyName: Jordan
+	{RuleIndex: 226, RuleCount: 3}, // 41: PolicyName: Kyrgyz
+	{RuleIndex: 229, RuleCount: 9}, // 42: PolicyName: LH
+	{RuleIndex: 238, RuleCount: 3}, // 43: PolicyName: Lebanon
+	{RuleIndex: 241, RuleCount: 3}, // 44: PolicyName: Libya
+	{RuleIndex: 244, RuleCount: 1}, // 45: PolicyName: Macau
+	{RuleIndex: 245, RuleCount: 3}, // 46: PolicyName: Mauritius
+	{RuleIndex: 248, RuleCount: 7}, // 47: PolicyName: Mexico
+	{RuleIndex: 255, RuleCount: 2}, // 48: PolicyName: Moldova
+	{RuleIndex: 257, RuleCount: 3}, // 49: PolicyName: Moncton
+	{RuleIndex: 260, RuleCount: 6}, // 50: PolicyName: Mongol
+	{RuleIndex: 266, RuleCount: 169}, // 51: PolicyName: Morocco
+	{RuleIndex: 435, RuleCount: 1}, // 52: PolicyName: NC
+	{RuleIndex: 436, RuleCount: 3}, // 53: PolicyName: NT_YK
+	{RuleIndex: 439, RuleCount: 5}, // 54: PolicyName: NZ
+	{RuleIndex: 444, RuleCount: 3}, // 55: PolicyName: Namibia
+	{RuleIndex: 447, RuleCount: 5}, // 56: PolicyName: Nic
+	{RuleIndex: 452, RuleCount: 1}, // 57: PolicyName: PRC
+	{RuleIndex: 453, RuleCount: 6}, // 58: PolicyName: Pakistan
+	{RuleIndex: 459, RuleCount: 33}, // 59: PolicyName: Palestine
+	{RuleIndex: 492, RuleCount: 10}, // 60: PolicyName: Para
+	{RuleIndex: 502, RuleCount: 1}, // 61: PolicyName: Peru
+	{RuleIndex: 503, RuleCount: 1}, // 62: PolicyName: Phil
+	{RuleIndex: 504, RuleCount: 1}, // 63: PolicyName: ROK
+	{RuleIndex: 505, RuleCount: 3}, // 64: PolicyName: Russia
+	{RuleIndex: 508, RuleCount: 3}, // 65: PolicyName: RussiaAsia
+	{RuleIndex: 511, RuleCount: 1}, // 66: PolicyName: SA
+	{RuleIndex: 512, RuleCount: 1}, // 67: PolicyName: Salv
+	{RuleIndex: 513, RuleCount: 3}, // 68: PolicyName: SanLuis
+	{RuleIndex: 516, RuleCount: 5}, // 69: PolicyName: StJohns
+	{RuleIndex: 521, RuleCount: 1}, // 70: PolicyName: Sudan
+	{RuleIndex: 522, RuleCount: 12}, // 71: PolicyName: Syria
+	{RuleIndex: 534, RuleCount: 1}, // 72: PolicyName: Taiwan
+	{RuleIndex: 535, RuleCount: 5}, // 73: PolicyName: Thule
+	{RuleIndex: 540, RuleCount: 7}, // 74: PolicyName: Tonga
+	{RuleIndex: 547, RuleCount: 3}, // 75: PolicyName: Troll
+	{RuleIndex: 550, RuleCount: 5}, // 76: PolicyName: Tunisia
+	{RuleIndex: 555, RuleCount: 3}, // 77: PolicyName: Turkey
+	{RuleIndex: 558, RuleCount: 5}, // 78: PolicyName: US
+	{RuleIndex: 563, RuleCount: 6}, // 79: PolicyName: Uruguay
+	{RuleIndex: 569, RuleCount: 1}, // 80: PolicyName: Vanuatu
+	{RuleIndex: 570, RuleCount: 6}, // 81: PolicyName: WS
+	{RuleIndex: 576, RuleCount: 3}, // 82: PolicyName: Winn
+	{RuleIndex: 579, RuleCount: 24}, // 83: PolicyName: Zion
+}
 
 
 // ---------------------------------------------------------------------------

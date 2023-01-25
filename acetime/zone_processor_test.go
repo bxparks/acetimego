@@ -60,18 +60,20 @@ func TestCalcStartDayOfMonth(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestZoneProcessorToString(t *testing.T) {
+	zoneInfo := &zonedbtesting.ZoneInfos[
+		zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles]
 	var zp ZoneProcessor
-	zp.InitForZoneInfo(
-		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
+	zp.InitForZoneInfo(&zonedbtesting.Context, zoneInfo)
 	if !(zp.Name() == "America/Los_Angeles") {
 		t.Fatal(zp.Name(), zp)
 	}
 }
 
 func TestZoneProcessorInitForYear(t *testing.T) {
+	zoneInfo := &zonedbtesting.ZoneInfos[
+		zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles]
 	var zp ZoneProcessor
-	zp.InitForZoneInfo(
-		&zonedbtesting.Context, &zonedbtesting.ZoneAmerica_Los_Angeles)
+	zp.InitForZoneInfo(&zonedbtesting.Context, zoneInfo);
 	if zp.isFilled {
 		t.Fatal(zp)
 	}
@@ -207,7 +209,7 @@ func TestCreateMatchingEra(t *testing.T) {
 func TestGetTransitionTime(t *testing.T) {
 	// Rule 5, [2007,9999]
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
-	rule := &zonedbtesting.ZoneRulesUS[5]
+	rule := &zonedbtesting.ZoneRules[5]
 
 	// Nov 4 2018
 	dt := getTransitionTime(2018, rule)
@@ -226,12 +228,12 @@ func TestCreateTransitionForYear(t *testing.T) {
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &zonedbtesting.ZoneEraAmerica_Los_Angeles[0],
+		era:               &zonedbtesting.ZoneEras[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
 	}
-	rule := &zonedbtesting.ZoneRulesUS[5]
+	rule := &zonedbtesting.ZoneRules[5]
 
 	// Nov Sun>=1
 	var transition Transition
@@ -343,7 +345,7 @@ func TestFindCandidateTransitions(t *testing.T) {
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &zonedbtesting.ZoneEraAmerica_Los_Angeles[0],
+		era:               &zonedbtesting.ZoneEras[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
@@ -360,7 +362,10 @@ func TestFindCandidateTransitions(t *testing.T) {
 	//    * 2019 Nov Sun>=1 (3)
 	//    * 2020 Mar Sun>=8 (8)
 	ts.ResetCandidatePool()
-	findCandidateTransitions(&ts, &match)
+	findCandidateTransitions(
+		zonedbtesting.ZoneRules,
+		zonedbtesting.ZonePolicies,
+		&ts, &match)
 	candidates := ts.GetCandidates()
 	if !(5 == len(candidates)) {
 		t.Fatal()
@@ -395,7 +400,7 @@ func TestFindCandidateTransitions(t *testing.T) {
 func TestProcessTransitionMatchStatus(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
 	era := zoneinfo.ZoneEra{
-		ZonePolicy:        nil,
+		PolicyIndex:       0,
 		FormatIndex:       0,
 		OffsetCode:        0,
 		DeltaCode:         0,
@@ -492,7 +497,7 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &zonedbtesting.ZoneEraAmerica_Los_Angeles[0],
+		era:               &zonedbtesting.ZoneEras[0],
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
@@ -501,7 +506,10 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 	// Reserve storage for the Transitions
 	var ts TransitionStorage
 
-	createTransitionsFromNamedMatch(&ts, &match)
+	createTransitionsFromNamedMatch(
+		zonedbtesting.ZoneRules,
+		zonedbtesting.ZonePolicies,
+		&ts, &match)
 	if !(3 == ts.indexPrior) {
 		t.Fatal(ts.indexPrior)
 	}
@@ -532,9 +540,11 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	var matches [maxMatches]MatchingEra
 
 	numMatches := findMatches(
-		zonedbtesting.Context.FormatOffsets,
-		zonedbtesting.Context.FormatData,
-		&zonedbtesting.ZoneAmerica_Los_Angeles,
+		zonedbtesting.FormatOffsets,
+		zonedbtesting.FormatData,
+		zonedbtesting.ZoneEras,
+		zonedbtesting.ZoneInfos,
+		&zonedbtesting.ZoneInfos[zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles],
 		startYm, untilYm, matches[:])
 	if !(1 == numMatches) {
 		t.Fatal(numMatches)
@@ -544,7 +554,11 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// Create a custom template instantiation to use a different SIZE than the
 	// pre-defined typedef in ExtendedZoneProcess::TransitionStorage.
 	var storage TransitionStorage
-	createTransitions(&storage, matches[:numMatches])
+	createTransitions(
+		zonedbtesting.ZoneRules,
+		zonedbtesting.ZonePolicies,
+		&storage,
+		matches[:numMatches])
 	transitions := storage.GetActives()
 	if !(len(transitions) == 3) {
 		t.Fatal(len(transitions))

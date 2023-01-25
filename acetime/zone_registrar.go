@@ -18,8 +18,6 @@ const (
 	InvalidRegistryIndex = math.MaxUint16
 )
 
-type ZoneRegistry = []*zoneinfo.ZoneInfo
-
 type ZoneRegistrar struct {
 	Context  *zoneinfo.ZoneContext
 	IsSorted bool
@@ -27,21 +25,21 @@ type ZoneRegistrar struct {
 
 func NewZoneRegistrar(context *zoneinfo.ZoneContext) ZoneRegistrar {
 	zr := ZoneRegistrar{context, false}
-	zr.IsSorted = IsZoneRegistrySorted(context.ZoneRegistry)
+	zr.IsSorted = IsZoneInfosSorted(context.ZoneInfos)
 	return zr
 }
 
 func (zr *ZoneRegistrar) FindZoneInfoByID(id uint32) *zoneinfo.ZoneInfo {
 	var i uint16
 	if zr.IsSorted {
-		i = FindByIdBinary(zr.Context.ZoneRegistry, id)
+		i = FindByIdBinary(zr.Context.ZoneInfos, id)
 	} else {
-		i = FindByIdLinear(zr.Context.ZoneRegistry, id)
+		i = FindByIdLinear(zr.Context.ZoneInfos, id)
 	}
 	if i == InvalidRegistryIndex {
 		return nil
 	}
-	return zr.Context.ZoneRegistry[i]
+	return &zr.Context.ZoneInfos[i]
 }
 
 func (zr *ZoneRegistrar) FindZoneInfoByName(name string) *zoneinfo.ZoneInfo {
@@ -71,9 +69,10 @@ func djb2(s string) uint32 {
 	return hash
 }
 
-func IsZoneRegistrySorted(zis ZoneRegistry) bool {
+func IsZoneInfosSorted(zis []zoneinfo.ZoneInfo) bool {
 	var prevID uint32 = 0
-	for _, zi := range zis {
+	for i := range zis {
+		zi := &zis[i]
 		id := zi.ZoneID
 		if id < prevID {
 			return false
@@ -83,8 +82,9 @@ func IsZoneRegistrySorted(zis ZoneRegistry) bool {
 	return true
 }
 
-func FindByIdLinear(zis ZoneRegistry, id uint32) uint16 {
-	for i, zi := range zis {
+func FindByIdLinear(zis []zoneinfo.ZoneInfo, id uint32) uint16 {
+	for i := range zis {
+		zi := &zis[i]
 		if zi.ZoneID == id {
 			return uint16(i)
 		}
@@ -92,7 +92,7 @@ func FindByIdLinear(zis ZoneRegistry, id uint32) uint16 {
 	return InvalidRegistryIndex
 }
 
-func FindByIdBinary(zis ZoneRegistry, id uint32) uint16 {
+func FindByIdBinary(zis []zoneinfo.ZoneInfo, id uint32) uint16 {
 	var a uint16 = 0
 	var b uint16 = uint16(len(zis))
 	for {
