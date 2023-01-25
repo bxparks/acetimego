@@ -41,6 +41,8 @@ const TzDatabaseVersion string = "2022g"
 
 var Context = zoneinfo.ZoneContext{
 	TzDatabaseVersion: TzDatabaseVersion,
+	StartYear: 2000,
+	UntilYear: 10000,
 	LetterData: LetterData,
 	LetterOffsets: LetterOffsets,
 	FormatData: FormatData,
