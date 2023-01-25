@@ -56,6 +56,26 @@ var Context = zoneinfo.ZoneContext{
 	ZoneInfos: ZoneInfos,
 }
 
+var DataContext = zoneinfo.ZoneDataContext{
+	TzDatabaseVersion: TzDatabaseVersion,
+	StartYear: 1980,
+	UntilYear: 10000,
+	LetterData: LetterData,
+	LetterOffsets: LetterOffsets,
+	FormatData: FormatData,
+	FormatOffsets: FormatOffsets,
+	NameData: NameData,
+	NameOffsets: NameOffsets,
+	ZoneRuleChunkSize: ZoneRuleChunkSize,
+	ZonePolicyChunkSize: ZonePolicyChunkSize,
+	ZoneEraChunkSize: ZoneEraChunkSize,
+	ZoneInfoChunkSize: ZoneInfoChunkSize,
+	ZoneRulesData: ZoneRulesData,
+	ZonePoliciesData: ZonePoliciesData,
+	ZoneErasData: ZoneErasData,
+	ZoneInfosData: ZoneInfosData,
+}
+
 // ---------------------------------------------------------------------------
 // Zone IDs. Unique stable uint32 identifier for each zone which can be given to
 // ZoneManager.NewTimeZoneFromID(). Useful for microcontroller environments

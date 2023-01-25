@@ -225,6 +225,23 @@ var ZoneRules = []zoneinfo.ZoneRule{
 
 }
 
+// ZoneRulesChunkSize is the byte size of a single zoneinfo.ZoneRule item.
+const ZoneRuleChunkSize = 11
+
+// ZoneRulesData contains the ZoneRules data as a hex encoded string.
+const ZoneRulesData = "\xaf\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x02" +
+		"\xb7\x07\xb7\x07\x02\x07\x00\x08\x00\x08\x01" +
+		"\xb8\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x01" +
+		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x01" +
+		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x01" +
+		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x02" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xda\x07\xda\x07\x09\x07\x00\x00\x00\x08\x00" +
+		"\xdb\x07\xdb\x07\x04\x06\x01\x10\x00\x04\x00" +
+		"\xdb\x07\xdb\x07\x09\x06\x00\x0c\x00\x08\x00" +
+		"\xdc\x07\xe5\x07\x04\x07\x01\x10\x00\x04\x00" +
+		"\xdc\x07\xe4\x07\x09\x07\x00\x0c\x00\x08\x00"
+
 // ---------------------------------------------------------------------------
 // ZonePolicies are indexes into the ZoneRules.
 // Supported zone policies: 2
@@ -236,6 +253,14 @@ var ZonePolicies = []zoneinfo.ZonePolicy{
 	{RuleIndex: 6, RuleCount: 6}, // 2: PolicyName: WS
 
 }
+
+// ZonePolicyChunkSize is the byte size of a single zoneinfo.ZoneRule item.
+const ZonePolicyChunkSize = 4
+
+// ZonePoliciesData contains the ZonePolicies data as a hex encoded string.
+const ZonePoliciesData = "\x00\x00\x00\x00" +
+		"\x00\x00\x06\x00" +
+		"\x06\x00\x06\x00"
 
 // ---------------------------------------------------------------------------
 // Unsupported zone policies: 132

@@ -174,6 +174,16 @@ var ZoneEras = []zoneinfo.ZoneEra{
 
 }
 
+// ZoneErasChunkSize is the byte size of a single zoneinfo.ZoneEra item.
+const ZoneEraChunkSize = 11
+
+// ZoneErasData contains the ZoneEras data as a hex encoded string.
+const ZoneErasData = "\x04\x00\x01\xe0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x03\x00\x01\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x05\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x02\x00\x02\xd4\x04\xdb\x07\x0c\x1d\x60\x00" +
+		"\x01\x00\x02\x34\x04\x10\x27\x01\x01\x00\x00"
+
 // ---------------------------------------------------------------------------
 // ZoneInfos is an array of zoneinfo.ZoneInfo items concatenated together.
 //
@@ -223,6 +233,16 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	},
 
 }
+
+// ZoneInfosChunkSize is the byte size of a single zoneinfo.ZoneInfo item.
+const ZoneInfoChunkSize = 12
+
+// ZoneInfosData contains the ZoneInfos data as a hex encoded string.
+const ZoneInfosData = "\x54\x76\x2a\x1e\x02\x00\x01\x00\x01\x00\x00\x00" +
+		"\x5e\x9b\x35\x23\x04\x00\x03\x00\x02\x00\x00\x00" +
+		"\xab\xf6\x50\xa9\x05\x00\x00\x00\x00\x00\x03\x00" +
+		"\xf2\xe8\xf7\xb7\x01\x00\x00\x00\x01\x00\x00\x00" +
+		"\xbc\x1a\xe3\xd8\x03\x00\x02\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
 // Unsuported zones: 347

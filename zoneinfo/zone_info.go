@@ -22,6 +22,9 @@ const (
 
 //-----------------------------------------------------------------------------
 
+// ZoneContext contains references to variables which describe the current time
+// zone database. This version contains the ZoneRules, ZonePolicies, ZoneEras,
+// and ZoneInfos arrays which are the expanded versions of the data structures.
 type ZoneContext struct {
 	TzDatabaseVersion string
 	StartYear int16
@@ -36,6 +39,28 @@ type ZoneContext struct {
 	ZonePolicies []ZonePolicy
 	ZoneEras []ZoneEra
 	ZoneInfos []ZoneInfo
+}
+
+// ZoneDataContext is an alternate context that uses the hex encoded string
+// variables ZoneRulesData, ZonePoliciesData, ZoneErasData, and ZoneInfosData.
+type ZoneDataContext struct {
+	TzDatabaseVersion string
+	StartYear int16
+	UntilYear int16
+	LetterData string
+	LetterOffsets []uint8
+	FormatData string
+	FormatOffsets []uint16
+	NameData string
+	NameOffsets []uint16
+	ZoneRuleChunkSize uint8
+	ZonePolicyChunkSize uint8
+	ZoneEraChunkSize uint8
+	ZoneInfoChunkSize uint8
+	ZoneRulesData string
+	ZonePoliciesData string
+	ZoneErasData string
+	ZoneInfosData string
 }
 
 //-----------------------------------------------------------------------------
