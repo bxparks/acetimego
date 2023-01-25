@@ -11378,57 +11378,57 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x005973ae,
 		NameIndex: 491, // "GB"
-		EraIndex: 556,
-		EraCount: 1,
-		TargetIndex: 291, // Europe/London
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 197, // Europe/London
 	},
 	// 1: Link NZ -> Pacific/Auckland
 	{
 		ZoneID: 0x005974ad,
 		NameIndex: 524, // "NZ"
-		EraIndex: 610,
-		EraCount: 1,
-		TargetIndex: 321, // Pacific/Auckland
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 98, // Pacific/Auckland
 	},
 	// 2: Link Asia/Kuala_Lumpur -> Asia/Singapore
 	{
 		ZoneID: 0x014763c4,
 		NameIndex: 286, // "Asia/Kuala_Lumpur"
-		EraIndex: 435,
-		EraCount: 1,
-		TargetIndex: 205, // Asia/Singapore
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 494, // Asia/Singapore
 	},
 	// 3: Link Africa/Libreville -> Africa/Lagos
 	{
 		ZoneID: 0x01d96de4,
 		NameIndex: 33, // "Africa/Libreville"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 4: Link Indian/Cocos -> Asia/Yangon
 	{
 		ZoneID: 0x021e86de,
 		NameIndex: 504, // "Indian/Cocos"
-		EraIndex: 464,
-		EraCount: 1,
-		TargetIndex: 219, // Asia/Yangon
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 524, // Asia/Yangon
 	},
 	// 5: Link Australia/Victoria -> Australia/Melbourne
 	{
 		ZoneID: 0x0260d5db,
 		NameIndex: 367, // "Australia/Victoria"
-		EraIndex: 488,
-		EraCount: 1,
-		TargetIndex: 238, // Australia/Melbourne
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 49, // Australia/Melbourne
 	},
 	// 6: Link Atlantic/Faeroe -> Atlantic/Faroe
 	{
 		ZoneID: 0x031ec516,
 		NameIndex: 339, // "Atlantic/Faeroe"
-		EraIndex: 474,
-		EraCount: 1,
-		TargetIndex: 226, // Atlantic/Faroe
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 539, // Atlantic/Faroe
 	},
 	// 7: Zone America/St_Johns
 	{
@@ -11442,25 +11442,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x04c0507b,
 		NameIndex: 206, // "America/St_Kitts"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 9: Link Africa/Ouagadougou -> Africa/Abidjan
 	{
 		ZoneID: 0x04d7219a,
 		NameIndex: 48, // "Africa/Ouagadougou"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 10: Link America/St_Lucia -> America/Puerto_Rico
 	{
 		ZoneID: 0x04d8b3ba,
 		NameIndex: 207, // "America/St_Lucia"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 11: Zone America/North_Dakota/New_Salem
 	{
@@ -11482,9 +11482,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x05232a47,
 		NameIndex: 13, // "Africa/Bujumbura"
-		EraIndex: 17,
-		EraCount: 1,
-		TargetIndex: 11, // Africa/Maputo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 327, // Africa/Maputo
 	},
 	// 14: Zone America/Mazatlan
 	{
@@ -11498,17 +11498,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x054e6a79,
 		NameIndex: 204, // "America/St_Barthelemy"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 16: Link Africa/Addis_Ababa -> Africa/Nairobi
 	{
 		ZoneID: 0x05ae1e65,
 		NameIndex: 3, // "Africa/Addis_Ababa"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 17: Zone Pacific/Fakaofo
 	{
@@ -11530,9 +11530,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x08ee3641,
 		NameIndex: 522, // "Mexico/BajaSur"
-		EraIndex: 207,
-		EraCount: 1,
-		TargetIndex: 94, // America/Mazatlan
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 14, // America/Mazatlan
 	},
 	// 20: Zone Asia/Tbilisi
 	{
@@ -11554,9 +11554,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x09c8de2f,
 		NameIndex: 586, // "US/Hawaii"
-		EraIndex: 624,
-		EraCount: 1,
-		TargetIndex: 332, // Pacific/Honolulu
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 552, // Pacific/Honolulu
 	},
 	// 23: Zone America/Boa_Vista
 	{
@@ -11602,9 +11602,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x0b87eb2d,
 		NameIndex: 493, // "GMT"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 29: Zone HST
 	{
@@ -11634,41 +11634,41 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x0b88120a,
 		NameIndex: 527, // "PRC"
-		EraIndex: 434,
-		EraCount: 1,
-		TargetIndex: 204, // Asia/Shanghai
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 572, // Asia/Shanghai
 	},
 	// 33: Link ROC -> Asia/Taipei
 	{
 		ZoneID: 0x0b881a29,
 		NameIndex: 575, // "ROC"
-		EraIndex: 439,
-		EraCount: 1,
-		TargetIndex: 207, // Asia/Taipei
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 499, // Asia/Taipei
 	},
 	// 34: Link ROK -> Asia/Seoul
 	{
 		ZoneID: 0x0b881a31,
 		NameIndex: 576, // "ROK"
-		EraIndex: 433,
-		EraCount: 1,
-		TargetIndex: 203, // Asia/Seoul
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 67, // Asia/Seoul
 	},
 	// 35: Link UCT -> Etc/UTC
 	{
 		ZoneID: 0x0b882571,
 		NameIndex: 579, // "UCT"
-		EraIndex: 523,
-		EraCount: 1,
-		TargetIndex: 273, // Etc/UTC
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 515, // Etc/UTC
 	},
 	// 36: Link UTC -> Etc/UTC
 	{
 		ZoneID: 0x0b882791,
 		NameIndex: 592, // "UTC"
-		EraIndex: 523,
-		EraCount: 1,
-		TargetIndex: 273, // Etc/UTC
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 515, // Etc/UTC
 	},
 	// 37: Zone WET
 	{
@@ -11690,9 +11690,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x0caa6496,
 		NameIndex: 458, // "Europe/Mariehamn"
-		EraIndex: 538,
-		EraCount: 1,
-		TargetIndex: 285, // Europe/Helsinki
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 233, // Europe/Helsinki
 	},
 	// 40: Zone Africa/Monrovia
 	{
@@ -11706,49 +11706,49 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x0d1a278e,
 		NameIndex: 390, // "Egypt"
-		EraIndex: 3,
-		EraCount: 1,
-		TargetIndex: 3, // Africa/Cairo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 270, // Africa/Cairo
 	},
 	// 42: Link GMT+0 -> Etc/GMT
 	{
 		ZoneID: 0x0d2f7028,
 		NameIndex: 494, // "GMT+0"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 43: Link GMT-0 -> Etc/GMT
 	{
 		ZoneID: 0x0d2f706a,
 		NameIndex: 495, // "GMT-0"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 44: Link Japan -> Asia/Tokyo
 	{
 		ZoneID: 0x0d712f8f,
 		NameIndex: 515, // "Japan"
-		EraIndex: 446,
-		EraCount: 1,
-		TargetIndex: 212, // Asia/Tokyo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 68, // Asia/Tokyo
 	},
 	// 45: Link Libya -> Africa/Tripoli
 	{
 		ZoneID: 0x0d998b16,
 		NameIndex: 517, // "Libya"
-		EraIndex: 24,
-		EraCount: 3,
-		TargetIndex: 16, // Africa/Tripoli
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 398, // Africa/Tripoli
 	},
 	// 46: Link Kwajalein -> Pacific/Kwajalein
 	{
 		ZoneID: 0x0e57afbb,
 		NameIndex: 516, // "Kwajalein"
-		EraIndex: 629,
-		EraCount: 1,
-		TargetIndex: 336, // Pacific/Kwajalein
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 324, // Pacific/Kwajalein
 	},
 	// 47: Zone Antarctica/Rothera
 	{
@@ -11786,9 +11786,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x109395c2,
 		NameIndex: 427, // "Europe/Amsterdam"
-		EraIndex: 532,
-		EraCount: 1,
-		TargetIndex: 279, // Europe/Brussels
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 529, // Europe/Brussels
 	},
 	// 52: Zone America/Indiana/Vevay
 	{
@@ -11842,9 +11842,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x14bcac5e,
 		NameIndex: 259, // "Asia/Dacca"
-		EraIndex: 353,
-		EraCount: 2,
-		TargetIndex: 164, // Asia/Dhaka
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 59, // Asia/Dhaka
 	},
 	// 59: Zone Asia/Dhaka
 	{
@@ -11882,17 +11882,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x15454f09,
 		NameIndex: 243, // "Asia/Ashkhabad"
-		EraIndex: 329,
-		EraCount: 1,
-		TargetIndex: 152, // Asia/Ashgabat
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 453, // Asia/Ashgabat
 	},
 	// 64: Link Asia/Macao -> Asia/Macau
 	{
 		ZoneID: 0x155f88b3,
 		NameIndex: 289, // "Asia/Macao"
-		EraIndex: 397,
-		EraCount: 1,
-		TargetIndex: 186, // Asia/Macau
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 65, // Asia/Macau
 	},
 	// 65: Zone Asia/Macau
 	{
@@ -11938,9 +11938,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x166d7c2c,
 		NameIndex: 319, // "Asia/Tel_Aviv"
-		EraIndex: 380,
-		EraCount: 1,
-		TargetIndex: 177, // Asia/Jerusalem
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 193, // Asia/Jerusalem
 	},
 	// 71: Zone Asia/Thimphu
 	{
@@ -11962,9 +11962,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x199b0a35,
 		NameIndex: 168, // "America/Montserrat"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 74: Zone America/Kentucky/Louisville
 	{
@@ -11986,17 +11986,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x1c1a499c,
 		NameIndex: 465, // "Europe/Podgorica"
-		EraIndex: 530,
-		EraCount: 1,
-		TargetIndex: 277, // Europe/Belgrade
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 535, // Europe/Belgrade
 	},
 	// 77: Link Atlantic/Reykjavik -> Africa/Abidjan
 	{
 		ZoneID: 0x1c2b4f74,
 		NameIndex: 343, // "Atlantic/Reykjavik"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 78: Zone America/New_York
 	{
@@ -12010,17 +12010,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x1f8bc6ce,
 		NameIndex: 455, // "Europe/Luxembourg"
-		EraIndex: 532,
-		EraCount: 1,
-		TargetIndex: 279, // Europe/Brussels
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 529, // Europe/Brussels
 	},
 	// 80: Link Asia/Aden -> Asia/Riyadh
 	{
 		ZoneID: 0x1fa7084a,
 		NameIndex: 236, // "Asia/Aden"
-		EraIndex: 427,
-		EraCount: 1,
-		TargetIndex: 200, // Asia/Riyadh
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 489, // Asia/Riyadh
 	},
 	// 81: Zone Asia/Baku
 	{
@@ -12074,9 +12074,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x203a1ea8,
 		NameIndex: 167, // "America/Montreal"
-		EraIndex: 283,
-		EraCount: 1,
-		TargetIndex: 134, // America/Toronto
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 276, // America/Toronto
 	},
 	// 88: Zone Asia/Ho_Chi_Minh
 	{
@@ -12098,9 +12098,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x22758877,
 		NameIndex: 62, // "America/Argentina/ComodRivadavia"
-		EraIndex: 38,
-		EraCount: 6,
-		TargetIndex: 23, // America/Argentina/Catamarca
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 318, // America/Argentina/Catamarca
 	},
 	// 91: Zone Pacific/Apia
 	{
@@ -12138,17 +12138,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x234010a9,
 		NameIndex: 569, // "Pacific/Truk"
-		EraIndex: 640,
-		EraCount: 1,
-		TargetIndex: 345, // Pacific/Port_Moresby
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 419, // Pacific/Port_Moresby
 	},
 	// 96: Link Pacific/Wake -> Pacific/Tarawa
 	{
 		ZoneID: 0x23416c2b,
 		NameIndex: 570, // "Pacific/Wake"
-		EraIndex: 643,
-		EraCount: 1,
-		TargetIndex: 348, // Pacific/Tarawa
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 563, // Pacific/Tarawa
 	},
 	// 97: Zone Australia/Adelaide
 	{
@@ -12186,17 +12186,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x26daa98c,
 		NameIndex: 422, // "Etc/Greenwich"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 102: Link Australia/Currie -> Australia/Hobart
 	{
 		ZoneID: 0x278b6a24,
 		NameIndex: 352, // "Australia/Currie"
-		EraIndex: 485,
-		EraCount: 1,
-		TargetIndex: 235, // Australia/Hobart
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 124, // Australia/Hobart
 	},
 	// 103: Zone Australia/Darwin
 	{
@@ -12210,9 +12210,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x28929f96,
 		NameIndex: 560, // "Pacific/Pohnpei"
-		EraIndex: 621,
-		EraCount: 1,
-		TargetIndex: 330, // Pacific/Guadalcanal
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 568, // Pacific/Guadalcanal
 	},
 	// 105: Zone Asia/Famagusta
 	{
@@ -12250,9 +12250,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x2a09ae58,
 		NameIndex: 351, // "Australia/Canberra"
-		EraIndex: 490,
-		EraCount: 1,
-		TargetIndex: 240, // Australia/Sydney
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 168, // Australia/Sydney
 	},
 	// 110: Zone America/Fortaleza
 	{
@@ -12274,9 +12274,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x2d999193,
 		NameIndex: 180, // "America/Pangnirtung"
-		EraIndex: 186,
-		EraCount: 3,
-		TargetIndex: 81, // America/Iqaluit
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 113, // America/Iqaluit
 	},
 	// 113: Zone America/Iqaluit
 	{
@@ -12290,9 +12290,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x2e44fdab,
 		NameIndex: 514, // "Jamaica"
-		EraIndex: 189,
-		EraCount: 1,
-		TargetIndex: 82, // America/Jamaica
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 182, // America/Jamaica
 	},
 	// 115: Zone Pacific/Chatham
 	{
@@ -12306,9 +12306,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x2f8cb9a9,
 		NameIndex: 425, // "Etc/Universal"
-		EraIndex: 523,
-		EraCount: 1,
-		TargetIndex: 273, // Etc/UTC
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 515, // Etc/UTC
 	},
 	// 117: Zone America/Indiana/Marengo
 	{
@@ -12330,9 +12330,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x30ea01d4,
 		NameIndex: 20, // "Africa/Djibouti"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 120: Zone Asia/Ulaanbaatar
 	{
@@ -12346,9 +12346,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x317c0aa7,
 		NameIndex: 24, // "Africa/Gaborone"
-		EraIndex: 17,
-		EraCount: 1,
-		TargetIndex: 11, // Africa/Maputo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 327, // Africa/Maputo
 	},
 	// 122: Zone America/Argentina/Ushuaia
 	{
@@ -12362,9 +12362,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x328a44c3,
 		NameIndex: 253, // "Asia/Calcutta"
-		EraIndex: 392,
-		EraCount: 1,
-		TargetIndex: 183, // Asia/Kolkata
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 251, // Asia/Kolkata
 	},
 	// 124: Zone Australia/Hobart
 	{
@@ -12402,17 +12402,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x382e7894,
 		NameIndex: 273, // "Asia/Istanbul"
-		EraIndex: 539,
-		EraCount: 9,
-		TargetIndex: 286, // Europe/Istanbul
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 399, // Europe/Istanbul
 	},
 	// 129: Link Asia/Ulan_Bator -> Asia/Ulaanbaatar
 	{
 		ZoneID: 0x394db4d9,
 		NameIndex: 326, // "Asia/Ulan_Bator"
-		EraIndex: 452,
-		EraCount: 1,
-		TargetIndex: 214, // Asia/Ulaanbaatar
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 120, // Asia/Ulaanbaatar
 	},
 	// 130: Zone Antarctica/Mawson
 	{
@@ -12426,9 +12426,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x39cda760,
 		NameIndex: 12, // "Africa/Brazzaville"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 132: Zone America/Caracas
 	{
@@ -12450,9 +12450,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x3d1bf95d,
 		NameIndex: 49, // "Africa/Porto-Novo"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 135: Zone Atlantic/Bermuda
 	{
@@ -12474,33 +12474,33 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x3dab3a59,
 		NameIndex: 154, // "America/Marigot"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 138: Link Europe/Guernsey -> Europe/London
 	{
 		ZoneID: 0x3db12c16,
 		NameIndex: 443, // "Europe/Guernsey"
-		EraIndex: 556,
-		EraCount: 1,
-		TargetIndex: 291, // Europe/London
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 197, // Europe/London
 	},
 	// 139: Link Africa/Nouakchott -> Africa/Abidjan
 	{
 		ZoneID: 0x3dc49dba,
 		NameIndex: 47, // "Africa/Nouakchott"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 140: Link America/Louisville -> America/Kentucky/Louisville
 	{
 		ZoneID: 0x3dcb47ee,
 		NameIndex: 149, // "America/Louisville"
-		EraIndex: 191,
-		EraCount: 1,
-		TargetIndex: 84, // America/Kentucky/Louisville
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 74, // America/Kentucky/Louisville
 	},
 	// 141: Zone America/Argentina/San_Juan
 	{
@@ -12610,9 +12610,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x40fa3c7b,
 		NameIndex: 381, // "Canada/Pacific"
-		EraIndex: 284,
-		EraCount: 1,
-		TargetIndex: 135, // America/Vancouver
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 111, // America/Vancouver
 	},
 	// 155: Zone Europe/Athens
 	{
@@ -12626,9 +12626,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x4351b389,
 		NameIndex: 506, // "Indian/Kerguelen"
-		EraIndex: 602,
-		EraCount: 1,
-		TargetIndex: 314, // Indian/Maldives
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 360, // Indian/Maldives
 	},
 	// 157: Zone America/Indiana/Winamac
 	{
@@ -12651,8 +12651,8 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		ZoneID: 0x451fc5f7,
 		NameIndex: 345, // "Atlantic/St_Helena"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 160: Zone Indian/Chagos
 	{
@@ -12666,25 +12666,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x45e725e2,
 		NameIndex: 507, // "Indian/Mahe"
-		EraIndex: 357,
-		EraCount: 1,
-		TargetIndex: 166, // Asia/Dubai
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 60, // Asia/Dubai
 	},
 	// 162: Link Indian/Comoro -> Africa/Nairobi
 	{
 		ZoneID: 0x45f4deb6,
 		NameIndex: 505, // "Indian/Comoro"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 163: Link America/Mendoza -> America/Argentina/Mendoza
 	{
 		ZoneID: 0x46b4e054,
 		NameIndex: 158, // "America/Mendoza"
-		EraIndex: 57,
-		EraCount: 6,
-		TargetIndex: 27, // America/Argentina/Mendoza
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 427, // America/Argentina/Mendoza
 	},
 	// 164: Zone Asia/Ust-Nera
 	{
@@ -12730,33 +12730,33 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x4d42afda,
 		NameIndex: 525, // "NZ-CHAT"
-		EraIndex: 613,
-		EraCount: 1,
-		TargetIndex: 323, // Pacific/Chatham
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 115, // Pacific/Chatham
 	},
 	// 170: Link US/Arizona -> America/Phoenix
 	{
 		ZoneID: 0x4ec52670,
 		NameIndex: 582, // "US/Arizona"
-		EraIndex: 242,
-		EraCount: 1,
-		TargetIndex: 113, // America/Phoenix
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 127, // America/Phoenix
 	},
 	// 171: Link Antarctica/Vostok -> Asia/Urumqi
 	{
 		ZoneID: 0x4f966fd4,
 		NameIndex: 234, // "Antarctica/Vostok"
-		EraIndex: 453,
-		EraCount: 1,
-		TargetIndex: 215, // Asia/Urumqi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 509, // Asia/Urumqi
 	},
 	// 172: Link US/Aleutian -> America/Adak
 	{
 		ZoneID: 0x4fe013ef,
 		NameIndex: 581, // "US/Aleutian"
-		EraIndex: 29,
-		EraCount: 1,
-		TargetIndex: 19, // America/Adak
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 355, // America/Adak
 	},
 	// 173: Zone Australia/Brisbane
 	{
@@ -12770,9 +12770,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x5036e963,
 		NameIndex: 91, // "America/Catamarca"
-		EraIndex: 38,
-		EraCount: 6,
-		TargetIndex: 23, // America/Argentina/Catamarca
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 318, // America/Argentina/Catamarca
 	},
 	// 175: Zone America/Asuncion
 	{
@@ -12794,17 +12794,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x52955193,
 		NameIndex: 280, // "Asia/Kashgar"
-		EraIndex: 453,
-		EraCount: 1,
-		TargetIndex: 215, // Asia/Urumqi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 509, // Asia/Urumqi
 	},
 	// 178: Link Canada/Atlantic -> America/Halifax
 	{
 		ZoneID: 0x536b119c,
 		NameIndex: 376, // "Canada/Atlantic"
-		EraIndex: 162,
-		EraCount: 1,
-		TargetIndex: 69, // America/Halifax
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 456, // America/Halifax
 	},
 	// 179: Zone Pacific/Gambier
 	{
@@ -12842,25 +12842,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x566821cd,
 		NameIndex: 591, // "US/Samoa"
-		EraIndex: 637,
-		EraCount: 1,
-		TargetIndex: 342, // Pacific/Pago_Pago
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 208, // Pacific/Pago_Pago
 	},
 	// 184: Link Hongkong -> Asia/Hong_Kong
 	{
 		ZoneID: 0x56d36560,
 		NameIndex: 499, // "Hongkong"
-		EraIndex: 373,
-		EraCount: 1,
-		TargetIndex: 172, // Asia/Hong_Kong
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 186, // Asia/Hong_Kong
 	},
 	// 185: Link Europe/Jersey -> Europe/London
 	{
 		ZoneID: 0x570dae76,
 		NameIndex: 447, // "Europe/Jersey"
-		EraIndex: 556,
-		EraCount: 1,
-		TargetIndex: 291, // Europe/London
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 197, // Europe/London
 	},
 	// 186: Zone Asia/Hong_Kong
 	{
@@ -12890,17 +12890,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x5a3c656c,
 		NameIndex: 225, // "Antarctica/DumontDUrville"
-		EraIndex: 640,
-		EraCount: 1,
-		TargetIndex: 345, // Pacific/Port_Moresby
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 419, // Pacific/Port_Moresby
 	},
 	// 190: Link Atlantic/Jan_Mayen -> Europe/Berlin
 	{
 		ZoneID: 0x5a7535b6,
 		NameIndex: 341, // "Atlantic/Jan_Mayen"
-		EraIndex: 531,
-		EraCount: 1,
-		TargetIndex: 278, // Europe/Berlin
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 158, // Europe/Berlin
 	},
 	// 191: Zone America/Anchorage
 	{
@@ -12914,9 +12914,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x5bb7e78e,
 		NameIndex: 585, // "US/Eastern"
-		EraIndex: 222,
-		EraCount: 1,
-		TargetIndex: 103, // America/New_York
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 78, // America/New_York
 	},
 	// 193: Zone Asia/Jerusalem
 	{
@@ -12930,9 +12930,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x5bf6fbb8,
 		NameIndex: 476, // "Europe/Stockholm"
-		EraIndex: 531,
-		EraCount: 1,
-		TargetIndex: 278, // Europe/Berlin
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 158, // Europe/Berlin
 	},
 	// 195: Zone Europe/Lisbon
 	{
@@ -12962,25 +12962,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x5c8a7600,
 		NameIndex: 98, // "America/Cordoba"
-		EraIndex: 44,
-		EraCount: 3,
-		TargetIndex: 24, // America/Argentina/Cordoba
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 461, // America/Argentina/Cordoba
 	},
 	// 199: Link Asia/Ujung_Pandang -> Asia/Makassar
 	{
 		ZoneID: 0x5d001eb3,
 		NameIndex: 324, // "Asia/Ujung_Pandang"
-		EraIndex: 402,
-		EraCount: 1,
-		TargetIndex: 188, // Asia/Makassar
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 232, // Asia/Makassar
 	},
 	// 200: Link Africa/Mbabane -> Africa/Johannesburg
 	{
 		ZoneID: 0x5d3bdd40,
 		NameIndex: 41, // "Africa/Mbabane"
-		EraIndex: 9,
-		EraCount: 1,
-		TargetIndex: 7, // Africa/Johannesburg
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 511, // Africa/Johannesburg
 	},
 	// 201: Zone Europe/Madrid
 	{
@@ -13010,9 +13010,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x5ebf9f01,
 		NameIndex: 460, // "Europe/Monaco"
-		EraIndex: 564,
-		EraCount: 1,
-		TargetIndex: 296, // Europe/Paris
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 587, // Europe/Paris
 	},
 	// 205: Zone Europe/Moscow
 	{
@@ -13050,9 +13050,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x61599a93,
 		NameIndex: 536, // "Pacific/Enderbury"
-		EraIndex: 625,
-		EraCount: 1,
-		TargetIndex: 333, // Pacific/Kanton
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 523, // Pacific/Kanton
 	},
 	// 210: Zone Africa/Sao_Tome
 	{
@@ -13066,17 +13066,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x626710f5,
 		NameIndex: 377, // "Canada/Central"
-		EraIndex: 287,
-		EraCount: 2,
-		TargetIndex: 137, // America/Winnipeg
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 316, // America/Winnipeg
 	},
 	// 212: Link America/Creston -> America/Phoenix
 	{
 		ZoneID: 0x62a70204,
 		NameIndex: 100, // "America/Creston"
-		EraIndex: 242,
-		EraCount: 1,
-		TargetIndex: 113, // America/Phoenix
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 127, // America/Phoenix
 	},
 	// 213: Zone America/Costa_Rica
 	{
@@ -13114,41 +13114,41 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x66934f93,
 		NameIndex: 370, // "Brazil/Acre"
-		EraIndex: 262,
-		EraCount: 3,
-		TargetIndex: 122, // America/Rio_Branco
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 393, // America/Rio_Branco
 	},
 	// 218: Link Brazil/East -> America/Sao_Paulo
 	{
 		ZoneID: 0x669578c5,
 		NameIndex: 372, // "Brazil/East"
-		EraIndex: 271,
-		EraCount: 1,
-		TargetIndex: 126, // America/Sao_Paulo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 50, // America/Sao_Paulo
 	},
 	// 219: Link Africa/Kinshasa -> Africa/Lagos
 	{
 		ZoneID: 0x6695d70c,
 		NameIndex: 31, // "Africa/Kinshasa"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 220: Link Brazil/West -> America/Manaus
 	{
 		ZoneID: 0x669f689b,
 		NameIndex: 373, // "Brazil/West"
-		EraIndex: 203,
-		EraCount: 1,
-		TargetIndex: 91, // America/Manaus
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 432, // America/Manaus
 	},
 	// 221: Link Africa/Mogadishu -> Africa/Nairobi
 	{
 		ZoneID: 0x66bc159b,
 		NameIndex: 42, // "Africa/Mogadishu"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 222: Zone America/Puerto_Rico
 	{
@@ -13162,33 +13162,33 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x67977be7,
 		NameIndex: 587, // "US/Indiana-Starke"
-		EraIndex: 168,
-		EraCount: 2,
-		TargetIndex: 73, // America/Indiana/Knox
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 215, // America/Indiana/Knox
 	},
 	// 224: Link America/Buenos_Aires -> America/Argentina/Buenos_Aires
 	{
 		ZoneID: 0x67d79a05,
 		NameIndex: 86, // "America/Buenos_Aires"
-		EraIndex: 35,
-		EraCount: 3,
-		TargetIndex: 22, // America/Argentina/Buenos_Aires
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 505, // America/Argentina/Buenos_Aires
 	},
 	// 225: Link Africa/Freetown -> Africa/Abidjan
 	{
 		ZoneID: 0x6823dd64,
 		NameIndex: 23, // "Africa/Freetown"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 226: Link Indian/Christmas -> Asia/Bangkok
 	{
 		ZoneID: 0x68c207d5,
 		NameIndex: 503, // "Indian/Christmas"
-		EraIndex: 335,
-		EraCount: 1,
-		TargetIndex: 156, // Asia/Bangkok
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 394, // Asia/Bangkok
 	},
 	// 227: Zone Asia/Novokuznetsk
 	{
@@ -13202,25 +13202,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x6a009ae1,
 		NameIndex: 136, // "America/Indianapolis"
-		EraIndex: 166,
-		EraCount: 2,
-		TargetIndex: 72, // America/Indiana/Indianapolis
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 107, // America/Indiana/Indianapolis
 	},
 	// 229: Link Europe/Sarajevo -> Europe/Belgrade
 	{
 		ZoneID: 0x6a576c3f,
 		NameIndex: 471, // "Europe/Sarajevo"
-		EraIndex: 530,
-		EraCount: 1,
-		TargetIndex: 277, // Europe/Belgrade
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 535, // Europe/Belgrade
 	},
 	// 230: Link America/Curacao -> America/Puerto_Rico
 	{
 		ZoneID: 0x6a879184,
 		NameIndex: 102, // "America/Curacao"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 231: Zone America/Tijuana
 	{
@@ -13250,9 +13250,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x6ae45b62,
 		NameIndex: 150, // "America/Lower_Princes"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 235: Zone America/Porto_Velho
 	{
@@ -13274,9 +13274,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x6c76fdd0,
 		NameIndex: 474, // "Europe/Skopje"
-		EraIndex: 530,
-		EraCount: 1,
-		TargetIndex: 277, // Europe/Belgrade
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 535, // Europe/Belgrade
 	},
 	// 238: Zone America/Edmonton
 	{
@@ -13298,17 +13298,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x6d1217c6,
 		NameIndex: 306, // "Asia/Rangoon"
-		EraIndex: 464,
-		EraCount: 1,
-		TargetIndex: 219, // Asia/Yangon
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 524, // Asia/Yangon
 	},
 	// 241: Link US/East-Indiana -> America/Indiana/Indianapolis
 	{
 		ZoneID: 0x6dcf558a,
 		NameIndex: 584, // "US/East-Indiana"
-		EraIndex: 166,
-		EraCount: 2,
-		TargetIndex: 72, // America/Indiana/Indianapolis
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 107, // America/Indiana/Indianapolis
 	},
 	// 242: Zone America/Grand_Turk
 	{
@@ -13322,9 +13322,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x6e299892,
 		NameIndex: 82, // "America/Blanc-Sablon"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 244: Zone Europe/Tirane
 	{
@@ -13338,17 +13338,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x6eb88247,
 		NameIndex: 589, // "US/Mountain"
-		EraIndex: 139,
-		EraCount: 1,
-		TargetIndex: 56, // America/Denver
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 350, // America/Denver
 	},
 	// 246: Link Antarctica/McMurdo -> Pacific/Auckland
 	{
 		ZoneID: 0x6eeb5585,
 		NameIndex: 228, // "Antarctica/McMurdo"
-		EraIndex: 610,
-		EraCount: 1,
-		TargetIndex: 321, // Pacific/Auckland
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 98, // Pacific/Auckland
 	},
 	// 247: Zone America/Araguaina
 	{
@@ -13362,17 +13362,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x6fd88566,
 		NameIndex: 36, // "Africa/Lubumbashi"
-		EraIndex: 17,
-		EraCount: 1,
-		TargetIndex: 11, // Africa/Maputo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 327, // Africa/Maputo
 	},
 	// 249: Link Indian/Reunion -> Asia/Dubai
 	{
 		ZoneID: 0x7076c047,
 		NameIndex: 511, // "Indian/Reunion"
-		EraIndex: 357,
-		EraCount: 1,
-		TargetIndex: 166, // Asia/Dubai
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 60, // Asia/Dubai
 	},
 	// 250: Zone Asia/Qyzylorda
 	{
@@ -13410,17 +13410,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x73b278ef,
 		NameIndex: 5, // "Africa/Asmara"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 255: Link Africa/Asmera -> Africa/Nairobi
 	{
 		ZoneID: 0x73b289f3,
 		NameIndex: 6, // "Africa/Asmera"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 256: Zone Asia/Kamchatka
 	{
@@ -13451,32 +13451,32 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		ZoneID: 0x74c1e7a5,
 		NameIndex: 7, // "Africa/Bamako"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 260: Link Africa/Bangui -> Africa/Lagos
 	{
 		ZoneID: 0x74c28ed0,
 		NameIndex: 8, // "Africa/Bangui"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 261: Link Africa/Banjul -> Africa/Abidjan
 	{
 		ZoneID: 0x74c29b96,
 		NameIndex: 9, // "Africa/Banjul"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 262: Link Europe/Nicosia -> Asia/Nicosia
 	{
 		ZoneID: 0x74efab8a,
 		NameIndex: 462, // "Europe/Nicosia"
-		EraIndex: 404,
-		EraCount: 1,
-		TargetIndex: 190, // Asia/Nicosia
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 166, // Asia/Nicosia
 	},
 	// 263: Zone Europe/Warsaw
 	{
@@ -13514,25 +13514,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x766bb7bc,
 		NameIndex: 588, // "US/Michigan"
-		EraIndex: 140,
-		EraCount: 1,
-		TargetIndex: 57, // America/Detroit
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 334, // America/Detroit
 	},
 	// 268: Link Canada/Saskatchewan -> America/Regina
 	{
 		ZoneID: 0x77311f49,
 		NameIndex: 382, // "Canada/Saskatchewan"
-		EraIndex: 256,
-		EraCount: 1,
-		TargetIndex: 120, // America/Regina
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 452, // America/Regina
 	},
 	// 269: Link Africa/Accra -> Africa/Abidjan
 	{
 		ZoneID: 0x77d5b054,
 		NameIndex: 2, // "Africa/Accra"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 270: Zone Africa/Cairo
 	{
@@ -13555,8 +13555,8 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		ZoneID: 0x780b00fd,
 		NameIndex: 18, // "Africa/Dakar"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 273: Zone Africa/Lagos
 	{
@@ -13578,9 +13578,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x78dd35c2,
 		NameIndex: 383, // "Canada/Yukon"
-		EraIndex: 285,
-		EraCount: 2,
-		TargetIndex: 136, // America/Whitehorse
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 180, // America/Whitehorse
 	},
 	// 276: Zone America/Toronto
 	{
@@ -13594,9 +13594,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x7931462b,
 		NameIndex: 216, // "America/Tortola"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 278: Zone Africa/Tunis
 	{
@@ -13610,17 +13610,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x7a6df310,
 		NameIndex: 21, // "Africa/Douala"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 280: Link Africa/Conakry -> Africa/Abidjan
 	{
 		ZoneID: 0x7ab36b31,
 		NameIndex: 17, // "Africa/Conakry"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 281: Zone Indian/Mauritius
 	{
@@ -13642,65 +13642,65 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x7bc95445,
 		NameIndex: 112, // "America/Ensenada"
-		EraIndex: 279,
-		EraCount: 4,
-		TargetIndex: 133, // America/Tijuana
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 231, // America/Tijuana
 	},
 	// 284: Link Europe/Zagreb -> Europe/Belgrade
 	{
 		ZoneID: 0x7c11c9ff,
 		NameIndex: 488, // "Europe/Zagreb"
-		EraIndex: 530,
-		EraCount: 1,
-		TargetIndex: 277, // Europe/Belgrade
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 535, // Europe/Belgrade
 	},
 	// 285: Link Cuba -> America/Havana
 	{
 		ZoneID: 0x7c83cba0,
 		NameIndex: 386, // "Cuba"
-		EraIndex: 163,
-		EraCount: 1,
-		TargetIndex: 70, // America/Havana
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 404, // America/Havana
 	},
 	// 286: Link Eire -> Europe/Dublin
 	{
 		ZoneID: 0x7c84b36a,
 		NameIndex: 391, // "Eire"
-		EraIndex: 536,
-		EraCount: 1,
-		TargetIndex: 283, // Europe/Dublin
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 165, // Europe/Dublin
 	},
 	// 287: Link GMT0 -> Etc/GMT
 	{
 		ZoneID: 0x7c8550fd,
 		NameIndex: 496, // "GMT0"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 288: Link Iran -> Asia/Tehran
 	{
 		ZoneID: 0x7c87090f,
 		NameIndex: 512, // "Iran"
-		EraIndex: 444,
-		EraCount: 1,
-		TargetIndex: 210, // Asia/Tehran
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 500, // Asia/Tehran
 	},
 	// 289: Link W-SU -> Europe/Moscow
 	{
 		ZoneID: 0x7c8d8ef1,
 		NameIndex: 594, // "W-SU"
-		EraIndex: 561,
-		EraCount: 3,
-		TargetIndex: 295, // Europe/Moscow
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 205, // Europe/Moscow
 	},
 	// 290: Link Zulu -> Etc/UTC
 	{
 		ZoneID: 0x7c9069b5,
 		NameIndex: 596, // "Zulu"
-		EraIndex: 523,
-		EraCount: 1,
-		TargetIndex: 273, // Etc/UTC
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 515, // Etc/UTC
 	},
 	// 291: Zone Europe/Zurich
 	{
@@ -13714,17 +13714,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x7e2bdb18,
 		NameIndex: 384, // "Chile/Continental"
-		EraIndex: 267,
-		EraCount: 1,
-		TargetIndex: 124, // America/Santiago
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 258, // America/Santiago
 	},
 	// 293: Link America/Fort_Wayne -> America/Indiana/Indianapolis
 	{
 		ZoneID: 0x7eaaaf24,
 		NameIndex: 114, // "America/Fort_Wayne"
-		EraIndex: 166,
-		EraCount: 2,
-		TargetIndex: 72, // America/Indiana/Indianapolis
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 107, // America/Indiana/Indianapolis
 	},
 	// 294: Zone Asia/Kuching
 	{
@@ -13746,25 +13746,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x81b92098,
 		NameIndex: 75, // "America/Atikokan"
-		EraIndex: 240,
-		EraCount: 1,
-		TargetIndex: 111, // America/Panama
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 445, // America/Panama
 	},
 	// 297: Link Africa/Harare -> Africa/Maputo
 	{
 		ZoneID: 0x82c39a2d,
 		NameIndex: 25, // "Africa/Harare"
-		EraIndex: 17,
-		EraCount: 1,
-		TargetIndex: 11, // Africa/Maputo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 327, // Africa/Maputo
 	},
 	// 298: Link America/Shiprock -> America/Denver
 	{
 		ZoneID: 0x82fb7049,
 		NameIndex: 202, // "America/Shiprock"
-		EraIndex: 139,
-		EraCount: 1,
-		TargetIndex: 56, // America/Denver
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 350, // America/Denver
 	},
 	// 299: Zone Pacific/Kiritimati
 	{
@@ -13778,9 +13778,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x8460e523,
 		NameIndex: 209, // "America/St_Vincent"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 301: Zone America/Metlakatla
 	{
@@ -13818,17 +13818,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x89d68d75,
 		NameIndex: 329, // "Asia/Vientiane"
-		EraIndex: 335,
-		EraCount: 1,
-		TargetIndex: 156, // Asia/Bangkok
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 394, // Asia/Bangkok
 	},
 	// 306: Link Pacific/Chuuk -> Pacific/Port_Moresby
 	{
 		ZoneID: 0x8a090b23,
 		NameIndex: 533, // "Pacific/Chuuk"
-		EraIndex: 640,
-		EraCount: 1,
-		TargetIndex: 345, // Pacific/Port_Moresby
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 419, // Pacific/Port_Moresby
 	},
 	// 307: Zone Pacific/Efate
 	{
@@ -13842,33 +13842,33 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x8a4dcf2b,
 		NameIndex: 30, // "Africa/Kigali"
-		EraIndex: 17,
-		EraCount: 1,
-		TargetIndex: 11, // Africa/Maputo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 327, // Africa/Maputo
 	},
 	// 309: Link Australia/ACT -> Australia/Sydney
 	{
 		ZoneID: 0x8a970eb2,
 		NameIndex: 347, // "Australia/ACT"
-		EraIndex: 490,
-		EraCount: 1,
-		TargetIndex: 240, // Australia/Sydney
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 168, // Australia/Sydney
 	},
 	// 310: Link Australia/LHI -> Australia/Lord_Howe
 	{
 		ZoneID: 0x8a973e17,
 		NameIndex: 356, // "Australia/LHI"
-		EraIndex: 487,
-		EraCount: 1,
-		TargetIndex: 237, // Australia/Lord_Howe
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 418, // Australia/Lord_Howe
 	},
 	// 311: Link Australia/NSW -> Australia/Sydney
 	{
 		ZoneID: 0x8a974812,
 		NameIndex: 360, // "Australia/NSW"
-		EraIndex: 490,
-		EraCount: 1,
-		TargetIndex: 240, // Australia/Sydney
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 168, // Australia/Sydney
 	},
 	// 312: Zone Pacific/Nauru
 	{
@@ -13898,9 +13898,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x8b2699b4,
 		NameIndex: 565, // "Pacific/Samoa"
-		EraIndex: 637,
-		EraCount: 1,
-		TargetIndex: 342, // Pacific/Pago_Pago
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 208, // Pacific/Pago_Pago
 	},
 	// 316: Zone America/Winnipeg
 	{
@@ -13930,25 +13930,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x8d7909cf,
 		NameIndex: 35, // "Africa/Luanda"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 320: Link Africa/Lusaka -> Africa/Maputo
 	{
 		ZoneID: 0x8d82b23b,
 		NameIndex: 37, // "Africa/Lusaka"
-		EraIndex: 17,
-		EraCount: 1,
-		TargetIndex: 11, // Africa/Maputo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 327, // Africa/Maputo
 	},
 	// 321: Link Australia/North -> Australia/Darwin
 	{
 		ZoneID: 0x8d997165,
 		NameIndex: 361, // "Australia/North"
-		EraIndex: 483,
-		EraCount: 1,
-		TargetIndex: 233, // Australia/Darwin
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 103, // Australia/Darwin
 	},
 	// 322: Zone Australia/Perth
 	{
@@ -13962,9 +13962,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x8df3f8ad,
 		NameIndex: 364, // "Australia/South"
-		EraIndex: 479,
-		EraCount: 1,
-		TargetIndex: 230, // Australia/Adelaide
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 97, // Australia/Adelaide
 	},
 	// 324: Zone Pacific/Kwajalein
 	{
@@ -13986,9 +13986,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x8e6a1906,
 		NameIndex: 38, // "Africa/Malabo"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 327: Zone Africa/Maputo
 	{
@@ -14002,9 +14002,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x8e6e02c7,
 		NameIndex: 40, // "Africa/Maseru"
-		EraIndex: 9,
-		EraCount: 1,
-		TargetIndex: 7, // Africa/Johannesburg
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 511, // Africa/Johannesburg
 	},
 	// 329: Zone Pacific/Norfolk
 	{
@@ -14018,25 +14018,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x8f7eba1f,
 		NameIndex: 117, // "America/Godthab"
-		EraIndex: 234,
-		EraCount: 2,
-		TargetIndex: 109, // America/Nuuk
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 359, // America/Nuuk
 	},
 	// 331: Link Australia/Yancowinna -> Australia/Broken_Hill
 	{
 		ZoneID: 0x90bac131,
 		NameIndex: 369, // "Australia/Yancowinna"
-		EraIndex: 481,
-		EraCount: 2,
-		TargetIndex: 232, // Australia/Broken_Hill
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 438, // Australia/Broken_Hill
 	},
 	// 332: Link Africa/Niamey -> Africa/Lagos
 	{
 		ZoneID: 0x914a30fd,
 		NameIndex: 46, // "Africa/Niamey"
-		EraIndex: 16,
-		EraCount: 1,
-		TargetIndex: 10, // Africa/Lagos
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 273, // Africa/Lagos
 	},
 	// 333: Zone Asia/Yerevan
 	{
@@ -14082,9 +14082,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x93711d57,
 		NameIndex: 523, // "Mexico/General"
-		EraIndex: 214,
-		EraCount: 3,
-		TargetIndex: 98, // America/Mexico_City
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 497, // America/Mexico_City
 	},
 	// 339: Zone America/Bogota
 	{
@@ -14122,9 +14122,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x953961df,
 		NameIndex: 93, // "America/Cayman"
-		EraIndex: 240,
-		EraCount: 1,
-		TargetIndex: 111, // America/Panama
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 445, // America/Panama
 	},
 	// 344: Zone America/Glace_Bay
 	{
@@ -14146,9 +14146,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x968ce4d8,
 		NameIndex: 120, // "America/Grenada"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 347: Zone America/Cuiaba
 	{
@@ -14170,9 +14170,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x97cf8651,
 		NameIndex: 73, // "America/Aruba"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 350: Zone America/Denver
 	{
@@ -14226,9 +14226,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x97fe8f27,
 		NameIndex: 76, // "America/Atka"
-		EraIndex: 29,
-		EraCount: 1,
-		TargetIndex: 19, // America/Adak
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 355, // America/Adak
 	},
 	// 357: Zone America/Lima
 	{
@@ -14266,9 +14266,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x9873dbbd,
 		NameIndex: 140, // "America/Jujuy"
-		EraIndex: 47,
-		EraCount: 4,
-		TargetIndex: 25, // America/Argentina/Jujuy
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 206, // America/Argentina/Jujuy
 	},
 	// 362: Zone America/Sitka
 	{
@@ -14306,9 +14306,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x9b4cb496,
 		NameIndex: 371, // "Brazil/DeNoronha"
-		EraIndex: 224,
-		EraCount: 5,
-		TargetIndex: 105, // America/Noronha
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 429, // America/Noronha
 	},
 	// 367: Zone America/North_Dakota/Beulah
 	{
@@ -14322,9 +14322,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x9cd58a10,
 		NameIndex: 189, // "America/Rainy_River"
-		EraIndex: 287,
-		EraCount: 2,
-		TargetIndex: 137, // America/Winnipeg
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 316, // America/Winnipeg
 	},
 	// 369: Zone Europe/Budapest
 	{
@@ -14346,17 +14346,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x9d078487,
 		NameIndex: 246, // "Asia/Bahrain"
-		EraIndex: 421,
-		EraCount: 1,
-		TargetIndex: 197, // Asia/Qatar
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 66, // Asia/Qatar
 	},
 	// 372: Link Etc/GMT+0 -> Etc/GMT
 	{
 		ZoneID: 0x9d13da13,
 		NameIndex: 393, // "Etc/GMT+0"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 373: Zone Etc/GMT+1
 	{
@@ -14434,9 +14434,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x9d13da55,
 		NameIndex: 406, // "Etc/GMT-0"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 383: Zone Etc/GMT-1
 	{
@@ -14514,9 +14514,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x9d2a8b1a,
 		NameIndex: 171, // "America/Nipigon"
-		EraIndex: 283,
-		EraCount: 1,
-		TargetIndex: 134, // America/Toronto
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 276, // America/Toronto
 	},
 	// 393: Zone America/Rio_Branco
 	{
@@ -14578,9 +14578,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x9ebf5289,
 		NameIndex: 501, // "Indian/Antananarivo"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 401: Zone Africa/Ndjamena
 	{
@@ -14602,9 +14602,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xa04c47b6,
 		NameIndex: 19, // "Africa/Dar_es_Salaam"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 404: Zone America/Havana
 	{
@@ -14626,9 +14626,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xa2c19eb3,
 		NameIndex: 449, // "Europe/Kiev"
-		EraIndex: 554,
-		EraCount: 1,
-		TargetIndex: 289, // Europe/Kyiv
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 407, // Europe/Kyiv
 	},
 	// 407: Zone Europe/Kyiv
 	{
@@ -14642,9 +14642,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xa2c3fba1,
 		NameIndex: 463, // "Europe/Oslo"
-		EraIndex: 531,
-		EraCount: 1,
-		TargetIndex: 278, // Europe/Berlin
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 158, // Europe/Berlin
 	},
 	// 409: Zone Europe/Riga
 	{
@@ -14738,9 +14738,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xa7ec12c7,
 		NameIndex: 282, // "Asia/Katmandu"
-		EraIndex: 386,
-		EraCount: 1,
-		TargetIndex: 181, // Asia/Kathmandu
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 365, // Asia/Kathmandu
 	},
 	// 421: Zone Asia/Beirut
 	{
@@ -14754,9 +14754,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xa8598c8d,
 		NameIndex: 577, // "Singapore"
-		EraIndex: 435,
-		EraCount: 1,
-		TargetIndex: 205, // Asia/Singapore
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 494, // Asia/Singapore
 	},
 	// 423: Zone Africa/Nairobi
 	{
@@ -14770,17 +14770,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xa8e595f7,
 		NameIndex: 252, // "Asia/Brunei"
-		EraIndex: 396,
-		EraCount: 1,
-		TargetIndex: 185, // Asia/Kuching
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 294, // Asia/Kuching
 	},
 	// 425: Link US/Pacific -> America/Los_Angeles
 	{
 		ZoneID: 0xa950f6ab,
 		NameIndex: 590, // "US/Pacific"
-		EraIndex: 196,
-		EraCount: 1,
-		TargetIndex: 88, // America/Los_Angeles
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 450, // America/Los_Angeles
 	},
 	// 426: Zone Pacific/Galapagos
 	{
@@ -14818,9 +14818,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xabcb7569,
 		NameIndex: 97, // "America/Coral_Harbour"
-		EraIndex: 240,
-		EraCount: 1,
-		TargetIndex: 111, // America/Panama
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 445, // America/Panama
 	},
 	// 431: Zone America/Maceio
 	{
@@ -14858,25 +14858,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xaedef011,
 		NameIndex: 169, // "America/Nassau"
-		EraIndex: 283,
-		EraCount: 1,
-		TargetIndex: 134, // America/Toronto
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 276, // America/Toronto
 	},
 	// 436: Link America/Anguilla -> America/Puerto_Rico
 	{
 		ZoneID: 0xafe31333,
 		NameIndex: 57, // "America/Anguilla"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 437: Link Europe/Uzhgorod -> Europe/Kyiv
 	{
 		ZoneID: 0xb066f5d6,
 		NameIndex: 481, // "Europe/Uzhgorod"
-		EraIndex: 554,
-		EraCount: 1,
-		TargetIndex: 289, // Europe/Kyiv
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 407, // Europe/Kyiv
 	},
 	// 438: Zone Australia/Broken_Hill
 	{
@@ -14898,33 +14898,33 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xb0982af8,
 		NameIndex: 385, // "Chile/EasterIsland"
-		EraIndex: 614,
-		EraCount: 1,
-		TargetIndex: 324, // Pacific/Easter
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 493, // Pacific/Easter
 	},
 	// 441: Link Pacific/Johnston -> Pacific/Honolulu
 	{
 		ZoneID: 0xb15d7b36,
 		NameIndex: 545, // "Pacific/Johnston"
-		EraIndex: 624,
-		EraCount: 1,
-		TargetIndex: 332, // Pacific/Honolulu
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 552, // Pacific/Honolulu
 	},
 	// 442: Link Africa/Timbuktu -> Africa/Abidjan
 	{
 		ZoneID: 0xb164d56f,
 		NameIndex: 51, // "Africa/Timbuktu"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 443: Link America/St_Thomas -> America/Puerto_Rico
 	{
 		ZoneID: 0xb1b3d778,
 		NameIndex: 208, // "America/St_Thomas"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 444: Zone America/Paramaribo
 	{
@@ -14946,17 +14946,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xb396e991,
 		NameIndex: 380, // "Canada/Newfoundland"
-		EraIndex: 274,
-		EraCount: 2,
-		TargetIndex: 129, // America/St_Johns
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 7, // America/St_Johns
 	},
 	// 447: Link Asia/Harbin -> Asia/Shanghai
 	{
 		ZoneID: 0xb5af1186,
 		NameIndex: 267, // "Asia/Harbin"
-		EraIndex: 434,
-		EraCount: 1,
-		TargetIndex: 204, // Asia/Shanghai
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 572, // Asia/Shanghai
 	},
 	// 448: Zone Asia/Hebron
 	{
@@ -15010,17 +15010,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xba88c9e5,
 		NameIndex: 513, // "Israel"
-		EraIndex: 380,
-		EraCount: 1,
-		TargetIndex: 177, // Asia/Jerusalem
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 193, // Asia/Jerusalem
 	},
 	// 455: Link Pacific/Yap -> Pacific/Port_Moresby
 	{
 		ZoneID: 0xbb40138d,
 		NameIndex: 572, // "Pacific/Yap"
-		EraIndex: 640,
-		EraCount: 1,
-		TargetIndex: 345, // Pacific/Port_Moresby
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 419, // Pacific/Port_Moresby
 	},
 	// 456: Zone America/Halifax
 	{
@@ -15034,25 +15034,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xbd98cdb7,
 		NameIndex: 453, // "Europe/Ljubljana"
-		EraIndex: 530,
-		EraCount: 1,
-		TargetIndex: 277, // Europe/Belgrade
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 535, // Europe/Belgrade
 	},
 	// 458: Link Asia/Kuwait -> Asia/Riyadh
 	{
 		ZoneID: 0xbe1b2f27,
 		NameIndex: 288, // "Asia/Kuwait"
-		EraIndex: 427,
-		EraCount: 1,
-		TargetIndex: 200, // Asia/Riyadh
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 489, // Asia/Riyadh
 	},
 	// 459: Link Europe/Tiraspol -> Europe/Chisinau
 	{
 		ZoneID: 0xbe704472,
 		NameIndex: 479, // "Europe/Tiraspol"
-		EraIndex: 535,
-		EraCount: 1,
-		TargetIndex: 282, // Europe/Chisinau
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 434, // Europe/Chisinau
 	},
 	// 460: Zone Asia/Srednekolymsk
 	{
@@ -15082,17 +15082,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xc067a32f,
 		NameIndex: 58, // "America/Antigua"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 464: Link Europe/Busingen -> Europe/Zurich
 	{
 		ZoneID: 0xc06d2cdf,
 		NameIndex: 438, // "Europe/Busingen"
-		EraIndex: 599,
-		EraCount: 1,
-		TargetIndex: 311, // Europe/Zurich
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 291, // Europe/Zurich
 	},
 	// 465: Zone Asia/Manila
 	{
@@ -15106,17 +15106,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xc1d30e31,
 		NameIndex: 28, // "Africa/Kampala"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 467: Link America/Knox_IN -> America/Indiana/Knox
 	{
 		ZoneID: 0xc1db9a1c,
 		NameIndex: 144, // "America/Knox_IN"
-		EraIndex: 168,
-		EraCount: 2,
-		TargetIndex: 73, // America/Indiana/Knox
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 215, // America/Indiana/Knox
 	},
 	// 468: Zone Africa/Abidjan
 	{
@@ -15130,25 +15130,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xc2183ab5,
 		NameIndex: 218, // "America/Virgin"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 470: Link Asia/Phnom_Penh -> Asia/Bangkok
 	{
 		ZoneID: 0xc224945e,
 		NameIndex: 300, // "Asia/Phnom_Penh"
-		EraIndex: 335,
-		EraCount: 1,
-		TargetIndex: 156, // Asia/Bangkok
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 394, // Asia/Bangkok
 	},
 	// 471: Link Asia/Muscat -> Asia/Dubai
 	{
 		ZoneID: 0xc2c3565f,
 		NameIndex: 294, // "Asia/Muscat"
-		EraIndex: 357,
-		EraCount: 1,
-		TargetIndex: 166, // Asia/Dubai
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 60, // Asia/Dubai
 	},
 	// 472: Zone America/Punta_Arenas
 	{
@@ -15162,17 +15162,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xc3274593,
 		NameIndex: 574, // "Portugal"
-		EraIndex: 555,
-		EraCount: 1,
-		TargetIndex: 290, // Europe/Lisbon
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 195, // Europe/Lisbon
 	},
 	// 474: Link Navajo -> America/Denver
 	{
 		ZoneID: 0xc4ef0e24,
 		NameIndex: 526, // "Navajo"
-		EraIndex: 139,
-		EraCount: 1,
-		TargetIndex: 56, // America/Denver
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 350, // America/Denver
 	},
 	// 475: Zone Africa/Casablanca
 	{
@@ -15210,17 +15210,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xc7121dd0,
 		NameIndex: 257, // "Asia/Chungking"
-		EraIndex: 434,
-		EraCount: 1,
-		TargetIndex: 204, // Asia/Shanghai
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 572, // Asia/Shanghai
 	},
 	// 480: Link Greenwich -> Etc/GMT
 	{
 		ZoneID: 0xc84d4221,
 		NameIndex: 497, // "Greenwich"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 481: Zone America/Rankin_Inlet
 	{
@@ -15234,25 +15234,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xca913b23,
 		NameIndex: 573, // "Poland"
-		EraIndex: 598,
-		EraCount: 1,
-		TargetIndex: 310, // Europe/Warsaw
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 263, // Europe/Warsaw
 	},
 	// 483: Link US/Central -> America/Chicago
 	{
 		ZoneID: 0xcabdcb25,
 		NameIndex: 583, // "US/Central"
-		EraIndex: 124,
-		EraCount: 1,
-		TargetIndex: 48, // America/Chicago
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 167, // America/Chicago
 	},
 	// 484: Link Europe/Vatican -> Europe/Rome
 	{
 		ZoneID: 0xcb485dca,
 		NameIndex: 483, // "Europe/Vatican"
-		EraIndex: 569,
-		EraCount: 1,
-		TargetIndex: 299, // Europe/Rome
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 410, // Europe/Rome
 	},
 	// 485: Zone America/Barbados
 	{
@@ -15266,25 +15266,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xcce5bf54,
 		NameIndex: 185, // "America/Porto_Acre"
-		EraIndex: 262,
-		EraCount: 3,
-		TargetIndex: 122, // America/Rio_Branco
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 393, // America/Rio_Branco
 	},
 	// 487: Link America/Guadeloupe -> America/Puerto_Rico
 	{
 		ZoneID: 0xcd1f8a31,
 		NameIndex: 121, // "America/Guadeloupe"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 488: Link Antarctica/South_Pole -> Pacific/Auckland
 	{
 		ZoneID: 0xcd96b290,
 		NameIndex: 231, // "Antarctica/South_Pole"
-		EraIndex: 610,
-		EraCount: 1,
-		TargetIndex: 321, // Pacific/Auckland
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 98, // Pacific/Auckland
 	},
 	// 489: Zone Asia/Riyadh
 	{
@@ -15298,25 +15298,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xcecb4c4a,
 		NameIndex: 108, // "America/Dominica"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 491: Link Europe/San_Marino -> Europe/Rome
 	{
 		ZoneID: 0xcef7724b,
 		NameIndex: 470, // "Europe/San_Marino"
-		EraIndex: 569,
-		EraCount: 1,
-		TargetIndex: 299, // Europe/Rome
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 410, // Europe/Rome
 	},
 	// 492: Link Asia/Saigon -> Asia/Ho_Chi_Minh
 	{
 		ZoneID: 0xcf52f713,
 		NameIndex: 308, // "Asia/Saigon"
-		EraIndex: 372,
-		EraCount: 1,
-		TargetIndex: 171, // Asia/Ho_Chi_Minh
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 88, // Asia/Ho_Chi_Minh
 	},
 	// 493: Zone Pacific/Easter
 	{
@@ -15346,9 +15346,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xd07dd1e5,
 		NameIndex: 431, // "Europe/Belfast"
-		EraIndex: 556,
-		EraCount: 1,
-		TargetIndex: 291, // Europe/London
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 197, // Europe/London
 	},
 	// 497: Zone America/Mexico_City
 	{
@@ -15362,9 +15362,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xd0ff523e,
 		NameIndex: 593, // "Universal"
-		EraIndex: 523,
-		EraCount: 1,
-		TargetIndex: 273, // Etc/UTC
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 515, // Etc/UTC
 	},
 	// 499: Zone Asia/Taipei
 	{
@@ -15386,25 +15386,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xd226e31b,
 		NameIndex: 320, // "Asia/Thimbu"
-		EraIndex: 445,
-		EraCount: 1,
-		TargetIndex: 211, // Asia/Thimphu
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 71, // Asia/Thimphu
 	},
 	// 502: Link Arctic/Longyearbyen -> Europe/Berlin
 	{
 		ZoneID: 0xd23e7859,
 		NameIndex: 235, // "Arctic/Longyearbyen"
-		EraIndex: 531,
-		EraCount: 1,
-		TargetIndex: 278, // Europe/Berlin
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 158, // Europe/Berlin
 	},
 	// 503: Link Australia/Queensland -> Australia/Brisbane
 	{
 		ZoneID: 0xd326ed0a,
 		NameIndex: 363, // "Australia/Queensland"
-		EraIndex: 480,
-		EraCount: 1,
-		TargetIndex: 231, // Australia/Brisbane
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 173, // Australia/Brisbane
 	},
 	// 504: Zone Europe/Kaliningrad
 	{
@@ -15426,9 +15426,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xd455e469,
 		NameIndex: 578, // "Turkey"
-		EraIndex: 539,
-		EraCount: 9,
-		TargetIndex: 286, // Europe/Istanbul
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 399, // Europe/Istanbul
 	},
 	// 507: Zone Africa/Juba
 	{
@@ -15443,8 +15443,8 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		ZoneID: 0xd51c3a07,
 		NameIndex: 34, // "Africa/Lome"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 509: Zone Asia/Urumqi
 	{
@@ -15474,9 +15474,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xd8b28d59,
 		NameIndex: 184, // "America/Port_of_Spain"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 513: Zone Etc/GMT
 	{
@@ -15490,9 +15490,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xd8e3189c,
 		NameIndex: 423, // "Etc/UCT"
-		EraIndex: 523,
-		EraCount: 1,
-		TargetIndex: 273, // Etc/UTC
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 515, // Etc/UTC
 	},
 	// 515: Zone Etc/UTC
 	{
@@ -15530,9 +15530,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xda493bed,
 		NameIndex: 434, // "Europe/Bratislava"
-		EraIndex: 565,
-		EraCount: 1,
-		TargetIndex: 297, // Europe/Prague
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 216, // Europe/Prague
 	},
 	// 520: Zone Europe/Simferopol
 	{
@@ -15546,9 +15546,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xdb402d65,
 		NameIndex: 539, // "Pacific/Funafuti"
-		EraIndex: 643,
-		EraCount: 1,
-		TargetIndex: 348, // Pacific/Tarawa
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 563, // Pacific/Tarawa
 	},
 	// 522: Zone America/Matamoros
 	{
@@ -15586,9 +15586,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xdd858a5d,
 		NameIndex: 368, // "Australia/West"
-		EraIndex: 489,
-		EraCount: 1,
-		TargetIndex: 239, // Australia/Perth
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 322, // Australia/Perth
 	},
 	// 527: Zone Pacific/Kosrae
 	{
@@ -15626,9 +15626,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xdf448665,
 		NameIndex: 195, // "America/Rosario"
-		EraIndex: 44,
-		EraCount: 3,
-		TargetIndex: 24, // America/Argentina/Cordoba
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 461, // America/Argentina/Cordoba
 	},
 	// 532: Zone Asia/Irkutsk
 	{
@@ -15666,9 +15666,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xe08d813b,
 		NameIndex: 11, // "Africa/Blantyre"
-		EraIndex: 17,
-		EraCount: 1,
-		TargetIndex: 11, // Africa/Maputo
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 327, // Africa/Maputo
 	},
 	// 537: Zone America/Menominee
 	{
@@ -15682,9 +15682,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xe0ed30bc,
 		NameIndex: 440, // "Europe/Copenhagen"
-		EraIndex: 531,
-		EraCount: 1,
-		TargetIndex: 278, // Europe/Berlin
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 158, // Europe/Berlin
 	},
 	// 539: Zone Atlantic/Faroe
 	{
@@ -15698,9 +15698,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xe1f95371,
 		NameIndex: 550, // "Pacific/Majuro"
-		EraIndex: 643,
-		EraCount: 1,
-		TargetIndex: 348, // Pacific/Tarawa
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 563, // Pacific/Tarawa
 	},
 	// 541: Zone Antarctica/Casey
 	{
@@ -15730,17 +15730,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xe286d38e,
 		NameIndex: 552, // "Pacific/Midway"
-		EraIndex: 637,
-		EraCount: 1,
-		TargetIndex: 342, // Pacific/Pago_Pago
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 208, // Pacific/Pago_Pago
 	},
 	// 545: Link Antarctica/Syowa -> Asia/Riyadh
 	{
 		ZoneID: 0xe330c7e1,
 		NameIndex: 232, // "Antarctica/Syowa"
-		EraIndex: 427,
-		EraCount: 1,
-		TargetIndex: 200, // Asia/Riyadh
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 489, // Asia/Riyadh
 	},
 	// 546: Zone Antarctica/Troll
 	{
@@ -15771,24 +15771,24 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		ZoneID: 0xe56a35b5,
 		NameIndex: 500, // "Iceland"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // Africa/Abidjan
+		EraCount: 0, // IsLink=true
+		TargetIndex: 468, // Africa/Abidjan
 	},
 	// 550: Link Indian/Mayotte -> Africa/Nairobi
 	{
 		ZoneID: 0xe6880bca,
 		NameIndex: 510, // "Indian/Mayotte"
-		EraIndex: 19,
-		EraCount: 1,
-		TargetIndex: 13, // Africa/Nairobi
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 423, // Africa/Nairobi
 	},
 	// 551: Link Australia/Tasmania -> Australia/Hobart
 	{
 		ZoneID: 0xe6d76648,
 		NameIndex: 366, // "Australia/Tasmania"
-		EraIndex: 485,
-		EraCount: 1,
-		TargetIndex: 235, // Australia/Hobart
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 124, // Australia/Hobart
 	},
 	// 552: Zone Pacific/Honolulu
 	{
@@ -15802,9 +15802,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xe7c456c5,
 		NameIndex: 145, // "America/Kralendijk"
-		EraIndex: 245,
-		EraCount: 1,
-		TargetIndex: 116, // America/Puerto_Rico
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 222, // America/Puerto_Rico
 	},
 	// 554: Zone America/Argentina/Tucuman
 	{
@@ -15818,25 +15818,25 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xe9f80086,
 		NameIndex: 561, // "Pacific/Ponape"
-		EraIndex: 621,
-		EraCount: 1,
-		TargetIndex: 330, // Pacific/Guadalcanal
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 568, // Pacific/Guadalcanal
 	},
 	// 556: Link Europe/Zaporozhye -> Europe/Kyiv
 	{
 		ZoneID: 0xeab9767f,
 		NameIndex: 489, // "Europe/Zaporozhye"
-		EraIndex: 554,
-		EraCount: 1,
-		TargetIndex: 289, // Europe/Kyiv
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 407, // Europe/Kyiv
 	},
 	// 557: Link Europe/Isle_of_Man -> Europe/London
 	{
 		ZoneID: 0xeaf84580,
 		NameIndex: 445, // "Europe/Isle_of_Man"
-		EraIndex: 556,
-		EraCount: 1,
-		TargetIndex: 291, // Europe/London
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 197, // Europe/London
 	},
 	// 558: Zone Asia/Magadan
 	{
@@ -15858,9 +15858,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xeff7a35f,
 		NameIndex: 564, // "Pacific/Saipan"
-		EraIndex: 622,
-		EraCount: 2,
-		TargetIndex: 331, // Pacific/Guam
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 93, // Pacific/Guam
 	},
 	// 561: Zone CST6CDT
 	{
@@ -15898,9 +15898,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xf3612d5e,
 		NameIndex: 378, // "Canada/Eastern"
-		EraIndex: 283,
-		EraCount: 1,
-		TargetIndex: 134, // America/Toronto
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 276, // America/Toronto
 	},
 	// 566: Zone Asia/Tashkent
 	{
@@ -15930,17 +15930,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xf53ea988,
 		NameIndex: 421, // "Etc/GMT0"
-		EraIndex: 496,
-		EraCount: 1,
-		TargetIndex: 246, // Etc/GMT
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 513, // Etc/GMT
 	},
 	// 570: Link Etc/Zulu -> Etc/UTC
 	{
 		ZoneID: 0xf549c240,
 		NameIndex: 426, // "Etc/Zulu"
-		EraIndex: 523,
-		EraCount: 1,
-		TargetIndex: 273, // Etc/UTC
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 515, // Etc/UTC
 	},
 	// 571: Zone America/Danmarkshavn
 	{
@@ -15970,9 +15970,9 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xf937fb90,
 		NameIndex: 256, // "Asia/Chongqing"
-		EraIndex: 434,
-		EraCount: 1,
-		TargetIndex: 204, // Asia/Shanghai
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 572, // Asia/Shanghai
 	},
 	// 575: Zone Atlantic/Azores
 	{
@@ -15986,17 +15986,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xf94ddb0f,
 		NameIndex: 571, // "Pacific/Wallis"
-		EraIndex: 643,
-		EraCount: 1,
-		TargetIndex: 348, // Pacific/Tarawa
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 563, // Pacific/Tarawa
 	},
 	// 577: Link America/Thunder_Bay -> America/Toronto
 	{
 		ZoneID: 0xf962e71b,
 		NameIndex: 213, // "America/Thunder_Bay"
-		EraIndex: 283,
-		EraCount: 1,
-		TargetIndex: 134, // America/Toronto
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 276, // America/Toronto
 	},
 	// 578: Zone America/Eirunepe
 	{
@@ -16018,17 +16018,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xfa300bc9,
 		NameIndex: 580, // "US/Alaska"
-		EraIndex: 30,
-		EraCount: 1,
-		TargetIndex: 20, // America/Anchorage
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 191, // America/Anchorage
 	},
 	// 581: Link GB-Eire -> Europe/London
 	{
 		ZoneID: 0xfa70e300,
 		NameIndex: 492, // "GB-Eire"
-		EraIndex: 556,
-		EraCount: 1,
-		TargetIndex: 291, // Europe/London
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 197, // Europe/London
 	},
 	// 582: Zone Europe/Kirov
 	{
@@ -16098,17 +16098,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xfb8a8217,
 		NameIndex: 379, // "Canada/Mountain"
-		EraIndex: 141,
-		EraCount: 1,
-		TargetIndex: 58, // America/Edmonton
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 238, // America/Edmonton
 	},
 	// 591: Link Europe/Vaduz -> Europe/Zurich
 	{
 		ZoneID: 0xfbb81bae,
 		NameIndex: 482, // "Europe/Vaduz"
-		EraIndex: 599,
-		EraCount: 1,
-		TargetIndex: 311, // Europe/Zurich
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 291, // Europe/Zurich
 	},
 	// 592: Zone Atlantic/Canary
 	{
@@ -16122,17 +16122,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xfcf7150f,
 		NameIndex: 521, // "Mexico/BajaNorte"
-		EraIndex: 279,
-		EraCount: 4,
-		TargetIndex: 133, // America/Tijuana
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 231, // America/Tijuana
 	},
 	// 594: Link America/Santa_Isabel -> America/Tijuana
 	{
 		ZoneID: 0xfd18a56c,
 		NameIndex: 196, // "America/Santa_Isabel"
-		EraIndex: 279,
-		EraCount: 4,
-		TargetIndex: 133, // America/Tijuana
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 231, // America/Tijuana
 	},
 	// 595: Zone America/Campo_Grande
 	{

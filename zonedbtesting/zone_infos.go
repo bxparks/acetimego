@@ -202,8 +202,8 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		ZoneID: 0xa950f6ab,
 		NameIndex: 5, // "US/Pacific"
 		EraIndex: 0,
-		EraCount: 1,
-		TargetIndex: 0, // America/Los_Angeles
+		EraCount: 0, // IsLink=true
+		TargetIndex: 3, // America/Los_Angeles
 	},
 	// 3: Zone America/Los_Angeles
 	{
