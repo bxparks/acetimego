@@ -39,10 +39,718 @@ import (
 
 const (
 	// All ZoneEra.Format entries concatenated together.
-	FormatData = "%+00/+01+01+01/+00+02+03+03/+04+0330/+0430+04+04/+05+0430+05+05/+06+0530+0545+06+06/+07+0630+07+07/+08+08+08/+09+0845/+0945+09+09/+10+10+10/+11+1030/+11+11+11/+12+1130+12+12/+13+1245/+1345+13+13/+14+14-00-01-01/+00-02-02/-01-03-03/-02-04-04/-03-0430-05-05/-04-06-06/-05-07-08-09-0930-10-10/-0930-11-11/-10-12A%TAC%TAE%TAEDTAK%TASTAW%TC%TCA%TCATCE%TCETCSTChSTE%TEATEE%TEESTEETESTG%TGMTGMT/BSTH%THK%THSTI%TISTIST/GMTJ%TK%TKSTM%TME%TMSKMSK/MSDMSTN%TNZ%TP%TPK%TPSTSASTSSTUTCWATWE%TWIBWITWITA~"
+	FormatData = "" +
+		"%" +
+		"+00/+01" +
+		"+01" +
+		"+01/+00" +
+		"+02" +
+		"+03" +
+		"+03/+04" +
+		"+0330/+0430" +
+		"+04" +
+		"+04/+05" +
+		"+0430" +
+		"+05" +
+		"+05/+06" +
+		"+0530" +
+		"+0545" +
+		"+06" +
+		"+06/+07" +
+		"+0630" +
+		"+07" +
+		"+07/+08" +
+		"+08" +
+		"+08/+09" +
+		"+0845/+0945" +
+		"+09" +
+		"+09/+10" +
+		"+10" +
+		"+10/+11" +
+		"+1030/+11" +
+		"+11" +
+		"+11/+12" +
+		"+1130" +
+		"+12" +
+		"+12/+13" +
+		"+1245/+1345" +
+		"+13" +
+		"+13/+14" +
+		"+14" +
+		"-00" +
+		"-01" +
+		"-01/+00" +
+		"-02" +
+		"-02/-01" +
+		"-03" +
+		"-03/-02" +
+		"-04" +
+		"-04/-03" +
+		"-0430" +
+		"-05" +
+		"-05/-04" +
+		"-06" +
+		"-06/-05" +
+		"-07" +
+		"-08" +
+		"-09" +
+		"-0930" +
+		"-10" +
+		"-10/-0930" +
+		"-11" +
+		"-11/-10" +
+		"-12" +
+		"A%T" +
+		"AC%T" +
+		"AE%T" +
+		"AEDT" +
+		"AK%T" +
+		"AST" +
+		"AW%T" +
+		"C%T" +
+		"CA%T" +
+		"CAT" +
+		"CE%T" +
+		"CET" +
+		"CST" +
+		"ChST" +
+		"E%T" +
+		"EAT" +
+		"EE%T" +
+		"EEST" +
+		"EET" +
+		"EST" +
+		"G%T" +
+		"GMT" +
+		"GMT/BST" +
+		"H%T" +
+		"HK%T" +
+		"HST" +
+		"I%T" +
+		"IST" +
+		"IST/GMT" +
+		"J%T" +
+		"K%T" +
+		"KST" +
+		"M%T" +
+		"ME%T" +
+		"MSK" +
+		"MSK/MSD" +
+		"MST" +
+		"N%T" +
+		"NZ%T" +
+		"P%T" +
+		"PK%T" +
+		"PST" +
+		"SAST" +
+		"SST" +
+		"UTC" +
+		"WAT" +
+		"WE%T" +
+		"WIB" +
+		"WIT" +
+		"WITA" +
+		"~"
 
 	// All ZoneInfo.Name entries concatenated togther.
-	NameData = "Africa/AbidjanAfrica/AccraAfrica/Addis_AbabaAfrica/AlgiersAfrica/AsmaraAfrica/AsmeraAfrica/BamakoAfrica/BanguiAfrica/BanjulAfrica/BissauAfrica/BlantyreAfrica/BrazzavilleAfrica/BujumburaAfrica/CairoAfrica/CasablancaAfrica/CeutaAfrica/ConakryAfrica/DakarAfrica/Dar_es_SalaamAfrica/DjiboutiAfrica/DoualaAfrica/El_AaiunAfrica/FreetownAfrica/GaboroneAfrica/HarareAfrica/JohannesburgAfrica/JubaAfrica/KampalaAfrica/KhartoumAfrica/KigaliAfrica/KinshasaAfrica/LagosAfrica/LibrevilleAfrica/LomeAfrica/LuandaAfrica/LubumbashiAfrica/LusakaAfrica/MalaboAfrica/MaputoAfrica/MaseruAfrica/MbabaneAfrica/MogadishuAfrica/MonroviaAfrica/NairobiAfrica/NdjamenaAfrica/NiameyAfrica/NouakchottAfrica/OuagadougouAfrica/Porto-NovoAfrica/Sao_TomeAfrica/TimbuktuAfrica/TripoliAfrica/TunisAfrica/WindhoekAmerica/AdakAmerica/AnchorageAmerica/AnguillaAmerica/AntiguaAmerica/AraguainaAmerica/Argentina/Buenos_AiresAmerica/Argentina/CatamarcaAmerica/Argentina/ComodRivadaviaAmerica/Argentina/CordobaAmerica/Argentina/JujuyAmerica/Argentina/La_RiojaAmerica/Argentina/MendozaAmerica/Argentina/Rio_GallegosAmerica/Argentina/SaltaAmerica/Argentina/San_JuanAmerica/Argentina/San_LuisAmerica/Argentina/TucumanAmerica/Argentina/UshuaiaAmerica/ArubaAmerica/AsuncionAmerica/AtikokanAmerica/AtkaAmerica/BahiaAmerica/Bahia_BanderasAmerica/BarbadosAmerica/BelemAmerica/BelizeAmerica/Blanc-SablonAmerica/Boa_VistaAmerica/BogotaAmerica/BoiseAmerica/Buenos_AiresAmerica/Cambridge_BayAmerica/Campo_GrandeAmerica/CancunAmerica/CaracasAmerica/CatamarcaAmerica/CayenneAmerica/CaymanAmerica/ChicagoAmerica/ChihuahuaAmerica/Ciudad_JuarezAmerica/Coral_HarbourAmerica/CordobaAmerica/Costa_RicaAmerica/CrestonAmerica/CuiabaAmerica/CuracaoAmerica/DanmarkshavnAmerica/DawsonAmerica/Dawson_CreekAmerica/DenverAmerica/DetroitAmerica/DominicaAmerica/EdmontonAmerica/EirunepeAmerica/El_SalvadorAmerica/EnsenadaAmerica/Fort_NelsonAmerica/Fort_WayneAmerica/FortalezaAmerica/Glace_BayAmerica/GodthabAmerica/Goose_BayAmerica/Grand_TurkAmerica/GrenadaAmerica/GuadeloupeAmerica/GuatemalaAmerica/GuayaquilAmerica/GuyanaAmerica/HalifaxAmerica/HavanaAmerica/HermosilloAmerica/Indiana/IndianapolisAmerica/Indiana/KnoxAmerica/Indiana/MarengoAmerica/Indiana/PetersburgAmerica/Indiana/Tell_CityAmerica/Indiana/VevayAmerica/Indiana/VincennesAmerica/Indiana/WinamacAmerica/IndianapolisAmerica/InuvikAmerica/IqaluitAmerica/JamaicaAmerica/JujuyAmerica/JuneauAmerica/Kentucky/LouisvilleAmerica/Kentucky/MonticelloAmerica/Knox_INAmerica/KralendijkAmerica/La_PazAmerica/LimaAmerica/Los_AngelesAmerica/LouisvilleAmerica/Lower_PrincesAmerica/MaceioAmerica/ManaguaAmerica/ManausAmerica/MarigotAmerica/MartiniqueAmerica/MatamorosAmerica/MazatlanAmerica/MendozaAmerica/MenomineeAmerica/MeridaAmerica/MetlakatlaAmerica/Mexico_CityAmerica/MiquelonAmerica/MonctonAmerica/MonterreyAmerica/MontevideoAmerica/MontrealAmerica/MontserratAmerica/NassauAmerica/New_YorkAmerica/NipigonAmerica/NomeAmerica/NoronhaAmerica/North_Dakota/BeulahAmerica/North_Dakota/CenterAmerica/North_Dakota/New_SalemAmerica/NuukAmerica/OjinagaAmerica/PanamaAmerica/PangnirtungAmerica/ParamariboAmerica/PhoenixAmerica/Port-au-PrinceAmerica/Port_of_SpainAmerica/Porto_AcreAmerica/Porto_VelhoAmerica/Puerto_RicoAmerica/Punta_ArenasAmerica/Rainy_RiverAmerica/Rankin_InletAmerica/RecifeAmerica/ReginaAmerica/ResoluteAmerica/Rio_BrancoAmerica/RosarioAmerica/Santa_IsabelAmerica/SantaremAmerica/SantiagoAmerica/Santo_DomingoAmerica/Sao_PauloAmerica/ScoresbysundAmerica/ShiprockAmerica/SitkaAmerica/St_BarthelemyAmerica/St_JohnsAmerica/St_KittsAmerica/St_LuciaAmerica/St_ThomasAmerica/St_VincentAmerica/Swift_CurrentAmerica/TegucigalpaAmerica/ThuleAmerica/Thunder_BayAmerica/TijuanaAmerica/TorontoAmerica/TortolaAmerica/VancouverAmerica/VirginAmerica/WhitehorseAmerica/WinnipegAmerica/YakutatAmerica/YellowknifeAntarctica/CaseyAntarctica/DavisAntarctica/DumontDUrvilleAntarctica/MacquarieAntarctica/MawsonAntarctica/McMurdoAntarctica/PalmerAntarctica/RotheraAntarctica/South_PoleAntarctica/SyowaAntarctica/TrollAntarctica/VostokArctic/LongyearbyenAsia/AdenAsia/AlmatyAsia/AmmanAsia/AnadyrAsia/AqtauAsia/AqtobeAsia/AshgabatAsia/AshkhabadAsia/AtyrauAsia/BaghdadAsia/BahrainAsia/BakuAsia/BangkokAsia/BarnaulAsia/BeirutAsia/BishkekAsia/BruneiAsia/CalcuttaAsia/ChitaAsia/ChoibalsanAsia/ChongqingAsia/ChungkingAsia/ColomboAsia/DaccaAsia/DamascusAsia/DhakaAsia/DiliAsia/DubaiAsia/DushanbeAsia/FamagustaAsia/GazaAsia/HarbinAsia/HebronAsia/Ho_Chi_MinhAsia/Hong_KongAsia/HovdAsia/IrkutskAsia/IstanbulAsia/JakartaAsia/JayapuraAsia/JerusalemAsia/KabulAsia/KamchatkaAsia/KarachiAsia/KashgarAsia/KathmanduAsia/KatmanduAsia/KhandygaAsia/KolkataAsia/KrasnoyarskAsia/Kuala_LumpurAsia/KuchingAsia/KuwaitAsia/MacaoAsia/MacauAsia/MagadanAsia/MakassarAsia/ManilaAsia/MuscatAsia/NicosiaAsia/NovokuznetskAsia/NovosibirskAsia/OmskAsia/OralAsia/Phnom_PenhAsia/PontianakAsia/PyongyangAsia/QatarAsia/QostanayAsia/QyzylordaAsia/RangoonAsia/RiyadhAsia/SaigonAsia/SakhalinAsia/SamarkandAsia/SeoulAsia/ShanghaiAsia/SingaporeAsia/SrednekolymskAsia/TaipeiAsia/TashkentAsia/TbilisiAsia/TehranAsia/Tel_AvivAsia/ThimbuAsia/ThimphuAsia/TokyoAsia/TomskAsia/Ujung_PandangAsia/UlaanbaatarAsia/Ulan_BatorAsia/UrumqiAsia/Ust-NeraAsia/VientianeAsia/VladivostokAsia/YakutskAsia/YangonAsia/YekaterinburgAsia/YerevanAtlantic/AzoresAtlantic/BermudaAtlantic/CanaryAtlantic/Cape_VerdeAtlantic/FaeroeAtlantic/FaroeAtlantic/Jan_MayenAtlantic/MadeiraAtlantic/ReykjavikAtlantic/South_GeorgiaAtlantic/St_HelenaAtlantic/StanleyAustralia/ACTAustralia/AdelaideAustralia/BrisbaneAustralia/Broken_HillAustralia/CanberraAustralia/CurrieAustralia/DarwinAustralia/EuclaAustralia/HobartAustralia/LHIAustralia/LindemanAustralia/Lord_HoweAustralia/MelbourneAustralia/NSWAustralia/NorthAustralia/PerthAustralia/QueenslandAustralia/SouthAustralia/SydneyAustralia/TasmaniaAustralia/VictoriaAustralia/WestAustralia/YancowinnaBrazil/AcreBrazil/DeNoronhaBrazil/EastBrazil/WestCETCST6CDTCanada/AtlanticCanada/CentralCanada/EasternCanada/MountainCanada/NewfoundlandCanada/PacificCanada/SaskatchewanCanada/YukonChile/ContinentalChile/EasterIslandCubaEETESTEST5EDTEgyptEireEtc/GMTEtc/GMT+0Etc/GMT+1Etc/GMT+10Etc/GMT+11Etc/GMT+12Etc/GMT+2Etc/GMT+3Etc/GMT+4Etc/GMT+5Etc/GMT+6Etc/GMT+7Etc/GMT+8Etc/GMT+9Etc/GMT-0Etc/GMT-1Etc/GMT-10Etc/GMT-11Etc/GMT-12Etc/GMT-13Etc/GMT-14Etc/GMT-2Etc/GMT-3Etc/GMT-4Etc/GMT-5Etc/GMT-6Etc/GMT-7Etc/GMT-8Etc/GMT-9Etc/GMT0Etc/GreenwichEtc/UCTEtc/UTCEtc/UniversalEtc/ZuluEurope/AmsterdamEurope/AndorraEurope/AstrakhanEurope/AthensEurope/BelfastEurope/BelgradeEurope/BerlinEurope/BratislavaEurope/BrusselsEurope/BucharestEurope/BudapestEurope/BusingenEurope/ChisinauEurope/CopenhagenEurope/DublinEurope/GibraltarEurope/GuernseyEurope/HelsinkiEurope/Isle_of_ManEurope/IstanbulEurope/JerseyEurope/KaliningradEurope/KievEurope/KirovEurope/KyivEurope/LisbonEurope/LjubljanaEurope/LondonEurope/LuxembourgEurope/MadridEurope/MaltaEurope/MariehamnEurope/MinskEurope/MonacoEurope/MoscowEurope/NicosiaEurope/OsloEurope/ParisEurope/PodgoricaEurope/PragueEurope/RigaEurope/RomeEurope/SamaraEurope/San_MarinoEurope/SarajevoEurope/SaratovEurope/SimferopolEurope/SkopjeEurope/SofiaEurope/StockholmEurope/TallinnEurope/TiraneEurope/TiraspolEurope/UlyanovskEurope/UzhgorodEurope/VaduzEurope/VaticanEurope/ViennaEurope/VilniusEurope/VolgogradEurope/WarsawEurope/ZagrebEurope/ZaporozhyeEurope/ZurichGBGB-EireGMTGMT+0GMT-0GMT0GreenwichHSTHongkongIcelandIndian/AntananarivoIndian/ChagosIndian/ChristmasIndian/CocosIndian/ComoroIndian/KerguelenIndian/MaheIndian/MaldivesIndian/MauritiusIndian/MayotteIndian/ReunionIranIsraelJamaicaJapanKwajaleinLibyaMETMSTMST7MDTMexico/BajaNorteMexico/BajaSurMexico/GeneralNZNZ-CHATNavajoPRCPST8PDTPacific/ApiaPacific/AucklandPacific/BougainvillePacific/ChathamPacific/ChuukPacific/EasterPacific/EfatePacific/EnderburyPacific/FakaofoPacific/FijiPacific/FunafutiPacific/GalapagosPacific/GambierPacific/GuadalcanalPacific/GuamPacific/HonoluluPacific/JohnstonPacific/KantonPacific/KiritimatiPacific/KosraePacific/KwajaleinPacific/MajuroPacific/MarquesasPacific/MidwayPacific/NauruPacific/NiuePacific/NorfolkPacific/NoumeaPacific/Pago_PagoPacific/PalauPacific/PitcairnPacific/PohnpeiPacific/PonapePacific/Port_MoresbyPacific/RarotongaPacific/SaipanPacific/SamoaPacific/TahitiPacific/TarawaPacific/TongatapuPacific/TrukPacific/WakePacific/WallisPacific/YapPolandPortugalROCROKSingaporeTurkeyUCTUS/AlaskaUS/AleutianUS/ArizonaUS/CentralUS/East-IndianaUS/EasternUS/HawaiiUS/Indiana-StarkeUS/MichiganUS/MountainUS/PacificUS/SamoaUTCUniversalW-SUWETZulu~"
+	NameData = "" +
+		"Africa/Abidjan" +
+		"Africa/Accra" +
+		"Africa/Addis_Ababa" +
+		"Africa/Algiers" +
+		"Africa/Asmara" +
+		"Africa/Asmera" +
+		"Africa/Bamako" +
+		"Africa/Bangui" +
+		"Africa/Banjul" +
+		"Africa/Bissau" +
+		"Africa/Blantyre" +
+		"Africa/Brazzaville" +
+		"Africa/Bujumbura" +
+		"Africa/Cairo" +
+		"Africa/Casablanca" +
+		"Africa/Ceuta" +
+		"Africa/Conakry" +
+		"Africa/Dakar" +
+		"Africa/Dar_es_Salaam" +
+		"Africa/Djibouti" +
+		"Africa/Douala" +
+		"Africa/El_Aaiun" +
+		"Africa/Freetown" +
+		"Africa/Gaborone" +
+		"Africa/Harare" +
+		"Africa/Johannesburg" +
+		"Africa/Juba" +
+		"Africa/Kampala" +
+		"Africa/Khartoum" +
+		"Africa/Kigali" +
+		"Africa/Kinshasa" +
+		"Africa/Lagos" +
+		"Africa/Libreville" +
+		"Africa/Lome" +
+		"Africa/Luanda" +
+		"Africa/Lubumbashi" +
+		"Africa/Lusaka" +
+		"Africa/Malabo" +
+		"Africa/Maputo" +
+		"Africa/Maseru" +
+		"Africa/Mbabane" +
+		"Africa/Mogadishu" +
+		"Africa/Monrovia" +
+		"Africa/Nairobi" +
+		"Africa/Ndjamena" +
+		"Africa/Niamey" +
+		"Africa/Nouakchott" +
+		"Africa/Ouagadougou" +
+		"Africa/Porto-Novo" +
+		"Africa/Sao_Tome" +
+		"Africa/Timbuktu" +
+		"Africa/Tripoli" +
+		"Africa/Tunis" +
+		"Africa/Windhoek" +
+		"America/Adak" +
+		"America/Anchorage" +
+		"America/Anguilla" +
+		"America/Antigua" +
+		"America/Araguaina" +
+		"America/Argentina/Buenos_Aires" +
+		"America/Argentina/Catamarca" +
+		"America/Argentina/ComodRivadavia" +
+		"America/Argentina/Cordoba" +
+		"America/Argentina/Jujuy" +
+		"America/Argentina/La_Rioja" +
+		"America/Argentina/Mendoza" +
+		"America/Argentina/Rio_Gallegos" +
+		"America/Argentina/Salta" +
+		"America/Argentina/San_Juan" +
+		"America/Argentina/San_Luis" +
+		"America/Argentina/Tucuman" +
+		"America/Argentina/Ushuaia" +
+		"America/Aruba" +
+		"America/Asuncion" +
+		"America/Atikokan" +
+		"America/Atka" +
+		"America/Bahia" +
+		"America/Bahia_Banderas" +
+		"America/Barbados" +
+		"America/Belem" +
+		"America/Belize" +
+		"America/Blanc-Sablon" +
+		"America/Boa_Vista" +
+		"America/Bogota" +
+		"America/Boise" +
+		"America/Buenos_Aires" +
+		"America/Cambridge_Bay" +
+		"America/Campo_Grande" +
+		"America/Cancun" +
+		"America/Caracas" +
+		"America/Catamarca" +
+		"America/Cayenne" +
+		"America/Cayman" +
+		"America/Chicago" +
+		"America/Chihuahua" +
+		"America/Ciudad_Juarez" +
+		"America/Coral_Harbour" +
+		"America/Cordoba" +
+		"America/Costa_Rica" +
+		"America/Creston" +
+		"America/Cuiaba" +
+		"America/Curacao" +
+		"America/Danmarkshavn" +
+		"America/Dawson" +
+		"America/Dawson_Creek" +
+		"America/Denver" +
+		"America/Detroit" +
+		"America/Dominica" +
+		"America/Edmonton" +
+		"America/Eirunepe" +
+		"America/El_Salvador" +
+		"America/Ensenada" +
+		"America/Fort_Nelson" +
+		"America/Fort_Wayne" +
+		"America/Fortaleza" +
+		"America/Glace_Bay" +
+		"America/Godthab" +
+		"America/Goose_Bay" +
+		"America/Grand_Turk" +
+		"America/Grenada" +
+		"America/Guadeloupe" +
+		"America/Guatemala" +
+		"America/Guayaquil" +
+		"America/Guyana" +
+		"America/Halifax" +
+		"America/Havana" +
+		"America/Hermosillo" +
+		"America/Indiana/Indianapolis" +
+		"America/Indiana/Knox" +
+		"America/Indiana/Marengo" +
+		"America/Indiana/Petersburg" +
+		"America/Indiana/Tell_City" +
+		"America/Indiana/Vevay" +
+		"America/Indiana/Vincennes" +
+		"America/Indiana/Winamac" +
+		"America/Indianapolis" +
+		"America/Inuvik" +
+		"America/Iqaluit" +
+		"America/Jamaica" +
+		"America/Jujuy" +
+		"America/Juneau" +
+		"America/Kentucky/Louisville" +
+		"America/Kentucky/Monticello" +
+		"America/Knox_IN" +
+		"America/Kralendijk" +
+		"America/La_Paz" +
+		"America/Lima" +
+		"America/Los_Angeles" +
+		"America/Louisville" +
+		"America/Lower_Princes" +
+		"America/Maceio" +
+		"America/Managua" +
+		"America/Manaus" +
+		"America/Marigot" +
+		"America/Martinique" +
+		"America/Matamoros" +
+		"America/Mazatlan" +
+		"America/Mendoza" +
+		"America/Menominee" +
+		"America/Merida" +
+		"America/Metlakatla" +
+		"America/Mexico_City" +
+		"America/Miquelon" +
+		"America/Moncton" +
+		"America/Monterrey" +
+		"America/Montevideo" +
+		"America/Montreal" +
+		"America/Montserrat" +
+		"America/Nassau" +
+		"America/New_York" +
+		"America/Nipigon" +
+		"America/Nome" +
+		"America/Noronha" +
+		"America/North_Dakota/Beulah" +
+		"America/North_Dakota/Center" +
+		"America/North_Dakota/New_Salem" +
+		"America/Nuuk" +
+		"America/Ojinaga" +
+		"America/Panama" +
+		"America/Pangnirtung" +
+		"America/Paramaribo" +
+		"America/Phoenix" +
+		"America/Port-au-Prince" +
+		"America/Port_of_Spain" +
+		"America/Porto_Acre" +
+		"America/Porto_Velho" +
+		"America/Puerto_Rico" +
+		"America/Punta_Arenas" +
+		"America/Rainy_River" +
+		"America/Rankin_Inlet" +
+		"America/Recife" +
+		"America/Regina" +
+		"America/Resolute" +
+		"America/Rio_Branco" +
+		"America/Rosario" +
+		"America/Santa_Isabel" +
+		"America/Santarem" +
+		"America/Santiago" +
+		"America/Santo_Domingo" +
+		"America/Sao_Paulo" +
+		"America/Scoresbysund" +
+		"America/Shiprock" +
+		"America/Sitka" +
+		"America/St_Barthelemy" +
+		"America/St_Johns" +
+		"America/St_Kitts" +
+		"America/St_Lucia" +
+		"America/St_Thomas" +
+		"America/St_Vincent" +
+		"America/Swift_Current" +
+		"America/Tegucigalpa" +
+		"America/Thule" +
+		"America/Thunder_Bay" +
+		"America/Tijuana" +
+		"America/Toronto" +
+		"America/Tortola" +
+		"America/Vancouver" +
+		"America/Virgin" +
+		"America/Whitehorse" +
+		"America/Winnipeg" +
+		"America/Yakutat" +
+		"America/Yellowknife" +
+		"Antarctica/Casey" +
+		"Antarctica/Davis" +
+		"Antarctica/DumontDUrville" +
+		"Antarctica/Macquarie" +
+		"Antarctica/Mawson" +
+		"Antarctica/McMurdo" +
+		"Antarctica/Palmer" +
+		"Antarctica/Rothera" +
+		"Antarctica/South_Pole" +
+		"Antarctica/Syowa" +
+		"Antarctica/Troll" +
+		"Antarctica/Vostok" +
+		"Arctic/Longyearbyen" +
+		"Asia/Aden" +
+		"Asia/Almaty" +
+		"Asia/Amman" +
+		"Asia/Anadyr" +
+		"Asia/Aqtau" +
+		"Asia/Aqtobe" +
+		"Asia/Ashgabat" +
+		"Asia/Ashkhabad" +
+		"Asia/Atyrau" +
+		"Asia/Baghdad" +
+		"Asia/Bahrain" +
+		"Asia/Baku" +
+		"Asia/Bangkok" +
+		"Asia/Barnaul" +
+		"Asia/Beirut" +
+		"Asia/Bishkek" +
+		"Asia/Brunei" +
+		"Asia/Calcutta" +
+		"Asia/Chita" +
+		"Asia/Choibalsan" +
+		"Asia/Chongqing" +
+		"Asia/Chungking" +
+		"Asia/Colombo" +
+		"Asia/Dacca" +
+		"Asia/Damascus" +
+		"Asia/Dhaka" +
+		"Asia/Dili" +
+		"Asia/Dubai" +
+		"Asia/Dushanbe" +
+		"Asia/Famagusta" +
+		"Asia/Gaza" +
+		"Asia/Harbin" +
+		"Asia/Hebron" +
+		"Asia/Ho_Chi_Minh" +
+		"Asia/Hong_Kong" +
+		"Asia/Hovd" +
+		"Asia/Irkutsk" +
+		"Asia/Istanbul" +
+		"Asia/Jakarta" +
+		"Asia/Jayapura" +
+		"Asia/Jerusalem" +
+		"Asia/Kabul" +
+		"Asia/Kamchatka" +
+		"Asia/Karachi" +
+		"Asia/Kashgar" +
+		"Asia/Kathmandu" +
+		"Asia/Katmandu" +
+		"Asia/Khandyga" +
+		"Asia/Kolkata" +
+		"Asia/Krasnoyarsk" +
+		"Asia/Kuala_Lumpur" +
+		"Asia/Kuching" +
+		"Asia/Kuwait" +
+		"Asia/Macao" +
+		"Asia/Macau" +
+		"Asia/Magadan" +
+		"Asia/Makassar" +
+		"Asia/Manila" +
+		"Asia/Muscat" +
+		"Asia/Nicosia" +
+		"Asia/Novokuznetsk" +
+		"Asia/Novosibirsk" +
+		"Asia/Omsk" +
+		"Asia/Oral" +
+		"Asia/Phnom_Penh" +
+		"Asia/Pontianak" +
+		"Asia/Pyongyang" +
+		"Asia/Qatar" +
+		"Asia/Qostanay" +
+		"Asia/Qyzylorda" +
+		"Asia/Rangoon" +
+		"Asia/Riyadh" +
+		"Asia/Saigon" +
+		"Asia/Sakhalin" +
+		"Asia/Samarkand" +
+		"Asia/Seoul" +
+		"Asia/Shanghai" +
+		"Asia/Singapore" +
+		"Asia/Srednekolymsk" +
+		"Asia/Taipei" +
+		"Asia/Tashkent" +
+		"Asia/Tbilisi" +
+		"Asia/Tehran" +
+		"Asia/Tel_Aviv" +
+		"Asia/Thimbu" +
+		"Asia/Thimphu" +
+		"Asia/Tokyo" +
+		"Asia/Tomsk" +
+		"Asia/Ujung_Pandang" +
+		"Asia/Ulaanbaatar" +
+		"Asia/Ulan_Bator" +
+		"Asia/Urumqi" +
+		"Asia/Ust-Nera" +
+		"Asia/Vientiane" +
+		"Asia/Vladivostok" +
+		"Asia/Yakutsk" +
+		"Asia/Yangon" +
+		"Asia/Yekaterinburg" +
+		"Asia/Yerevan" +
+		"Atlantic/Azores" +
+		"Atlantic/Bermuda" +
+		"Atlantic/Canary" +
+		"Atlantic/Cape_Verde" +
+		"Atlantic/Faeroe" +
+		"Atlantic/Faroe" +
+		"Atlantic/Jan_Mayen" +
+		"Atlantic/Madeira" +
+		"Atlantic/Reykjavik" +
+		"Atlantic/South_Georgia" +
+		"Atlantic/St_Helena" +
+		"Atlantic/Stanley" +
+		"Australia/ACT" +
+		"Australia/Adelaide" +
+		"Australia/Brisbane" +
+		"Australia/Broken_Hill" +
+		"Australia/Canberra" +
+		"Australia/Currie" +
+		"Australia/Darwin" +
+		"Australia/Eucla" +
+		"Australia/Hobart" +
+		"Australia/LHI" +
+		"Australia/Lindeman" +
+		"Australia/Lord_Howe" +
+		"Australia/Melbourne" +
+		"Australia/NSW" +
+		"Australia/North" +
+		"Australia/Perth" +
+		"Australia/Queensland" +
+		"Australia/South" +
+		"Australia/Sydney" +
+		"Australia/Tasmania" +
+		"Australia/Victoria" +
+		"Australia/West" +
+		"Australia/Yancowinna" +
+		"Brazil/Acre" +
+		"Brazil/DeNoronha" +
+		"Brazil/East" +
+		"Brazil/West" +
+		"CET" +
+		"CST6CDT" +
+		"Canada/Atlantic" +
+		"Canada/Central" +
+		"Canada/Eastern" +
+		"Canada/Mountain" +
+		"Canada/Newfoundland" +
+		"Canada/Pacific" +
+		"Canada/Saskatchewan" +
+		"Canada/Yukon" +
+		"Chile/Continental" +
+		"Chile/EasterIsland" +
+		"Cuba" +
+		"EET" +
+		"EST" +
+		"EST5EDT" +
+		"Egypt" +
+		"Eire" +
+		"Etc/GMT" +
+		"Etc/GMT+0" +
+		"Etc/GMT+1" +
+		"Etc/GMT+10" +
+		"Etc/GMT+11" +
+		"Etc/GMT+12" +
+		"Etc/GMT+2" +
+		"Etc/GMT+3" +
+		"Etc/GMT+4" +
+		"Etc/GMT+5" +
+		"Etc/GMT+6" +
+		"Etc/GMT+7" +
+		"Etc/GMT+8" +
+		"Etc/GMT+9" +
+		"Etc/GMT-0" +
+		"Etc/GMT-1" +
+		"Etc/GMT-10" +
+		"Etc/GMT-11" +
+		"Etc/GMT-12" +
+		"Etc/GMT-13" +
+		"Etc/GMT-14" +
+		"Etc/GMT-2" +
+		"Etc/GMT-3" +
+		"Etc/GMT-4" +
+		"Etc/GMT-5" +
+		"Etc/GMT-6" +
+		"Etc/GMT-7" +
+		"Etc/GMT-8" +
+		"Etc/GMT-9" +
+		"Etc/GMT0" +
+		"Etc/Greenwich" +
+		"Etc/UCT" +
+		"Etc/UTC" +
+		"Etc/Universal" +
+		"Etc/Zulu" +
+		"Europe/Amsterdam" +
+		"Europe/Andorra" +
+		"Europe/Astrakhan" +
+		"Europe/Athens" +
+		"Europe/Belfast" +
+		"Europe/Belgrade" +
+		"Europe/Berlin" +
+		"Europe/Bratislava" +
+		"Europe/Brussels" +
+		"Europe/Bucharest" +
+		"Europe/Budapest" +
+		"Europe/Busingen" +
+		"Europe/Chisinau" +
+		"Europe/Copenhagen" +
+		"Europe/Dublin" +
+		"Europe/Gibraltar" +
+		"Europe/Guernsey" +
+		"Europe/Helsinki" +
+		"Europe/Isle_of_Man" +
+		"Europe/Istanbul" +
+		"Europe/Jersey" +
+		"Europe/Kaliningrad" +
+		"Europe/Kiev" +
+		"Europe/Kirov" +
+		"Europe/Kyiv" +
+		"Europe/Lisbon" +
+		"Europe/Ljubljana" +
+		"Europe/London" +
+		"Europe/Luxembourg" +
+		"Europe/Madrid" +
+		"Europe/Malta" +
+		"Europe/Mariehamn" +
+		"Europe/Minsk" +
+		"Europe/Monaco" +
+		"Europe/Moscow" +
+		"Europe/Nicosia" +
+		"Europe/Oslo" +
+		"Europe/Paris" +
+		"Europe/Podgorica" +
+		"Europe/Prague" +
+		"Europe/Riga" +
+		"Europe/Rome" +
+		"Europe/Samara" +
+		"Europe/San_Marino" +
+		"Europe/Sarajevo" +
+		"Europe/Saratov" +
+		"Europe/Simferopol" +
+		"Europe/Skopje" +
+		"Europe/Sofia" +
+		"Europe/Stockholm" +
+		"Europe/Tallinn" +
+		"Europe/Tirane" +
+		"Europe/Tiraspol" +
+		"Europe/Ulyanovsk" +
+		"Europe/Uzhgorod" +
+		"Europe/Vaduz" +
+		"Europe/Vatican" +
+		"Europe/Vienna" +
+		"Europe/Vilnius" +
+		"Europe/Volgograd" +
+		"Europe/Warsaw" +
+		"Europe/Zagreb" +
+		"Europe/Zaporozhye" +
+		"Europe/Zurich" +
+		"GB" +
+		"GB-Eire" +
+		"GMT" +
+		"GMT+0" +
+		"GMT-0" +
+		"GMT0" +
+		"Greenwich" +
+		"HST" +
+		"Hongkong" +
+		"Iceland" +
+		"Indian/Antananarivo" +
+		"Indian/Chagos" +
+		"Indian/Christmas" +
+		"Indian/Cocos" +
+		"Indian/Comoro" +
+		"Indian/Kerguelen" +
+		"Indian/Mahe" +
+		"Indian/Maldives" +
+		"Indian/Mauritius" +
+		"Indian/Mayotte" +
+		"Indian/Reunion" +
+		"Iran" +
+		"Israel" +
+		"Jamaica" +
+		"Japan" +
+		"Kwajalein" +
+		"Libya" +
+		"MET" +
+		"MST" +
+		"MST7MDT" +
+		"Mexico/BajaNorte" +
+		"Mexico/BajaSur" +
+		"Mexico/General" +
+		"NZ" +
+		"NZ-CHAT" +
+		"Navajo" +
+		"PRC" +
+		"PST8PDT" +
+		"Pacific/Apia" +
+		"Pacific/Auckland" +
+		"Pacific/Bougainville" +
+		"Pacific/Chatham" +
+		"Pacific/Chuuk" +
+		"Pacific/Easter" +
+		"Pacific/Efate" +
+		"Pacific/Enderbury" +
+		"Pacific/Fakaofo" +
+		"Pacific/Fiji" +
+		"Pacific/Funafuti" +
+		"Pacific/Galapagos" +
+		"Pacific/Gambier" +
+		"Pacific/Guadalcanal" +
+		"Pacific/Guam" +
+		"Pacific/Honolulu" +
+		"Pacific/Johnston" +
+		"Pacific/Kanton" +
+		"Pacific/Kiritimati" +
+		"Pacific/Kosrae" +
+		"Pacific/Kwajalein" +
+		"Pacific/Majuro" +
+		"Pacific/Marquesas" +
+		"Pacific/Midway" +
+		"Pacific/Nauru" +
+		"Pacific/Niue" +
+		"Pacific/Norfolk" +
+		"Pacific/Noumea" +
+		"Pacific/Pago_Pago" +
+		"Pacific/Palau" +
+		"Pacific/Pitcairn" +
+		"Pacific/Pohnpei" +
+		"Pacific/Ponape" +
+		"Pacific/Port_Moresby" +
+		"Pacific/Rarotonga" +
+		"Pacific/Saipan" +
+		"Pacific/Samoa" +
+		"Pacific/Tahiti" +
+		"Pacific/Tarawa" +
+		"Pacific/Tongatapu" +
+		"Pacific/Truk" +
+		"Pacific/Wake" +
+		"Pacific/Wallis" +
+		"Pacific/Yap" +
+		"Poland" +
+		"Portugal" +
+		"ROC" +
+		"ROK" +
+		"Singapore" +
+		"Turkey" +
+		"UCT" +
+		"US/Alaska" +
+		"US/Aleutian" +
+		"US/Arizona" +
+		"US/Central" +
+		"US/East-Indiana" +
+		"US/Eastern" +
+		"US/Hawaii" +
+		"US/Indiana-Starke" +
+		"US/Michigan" +
+		"US/Mountain" +
+		"US/Pacific" +
+		"US/Samoa" +
+		"UTC" +
+		"Universal" +
+		"W-SU" +
+		"WET" +
+		"Zulu" +
+		"~"
 )
 
 var (
@@ -62,7 +770,7 @@ var (
 		414, 417, 420, 423, 426, 430, 433, 440, 443, 446,
 		450, 453, 457, 460, 464, 467, 470, 473, 477, 480,
 		483, 487,
-	}
+}
 
 	// Byte offset into NameData for each index. The actual Letter string
 	// at index `i` given by the `ZoneRule.Name` field is
@@ -132,19 +840,22 @@ var (
 )
 
 // ---------------------------------------------------------------------------
+// ZoneEras is an array of zoneinfo.ZoneEra items concatenated together.
+//
 // Supported zones: 351
 // numEras: 647
 // ---------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Abidjan
-// Era count: 1
-// ---------------------------------------------------------------------------
+var ZoneEras = []zoneinfo.ZoneEra{
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Abidjan
+	// EraIndex: 0
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEraAfrica_Abidjan = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -155,26 +866,15 @@ var ZoneEraAfrica_Abidjan = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Algiers
+	// EraIndex: 1
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Abidjan = zoneinfo.ZoneInfo{
-	ZoneID: 0xc21305a3,
-	NameIndex: 1, // "Africa/Abidjan"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Abidjan,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Algiers
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Algiers = []zoneinfo.ZoneEra{
 	//             1:00    -    CET
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 72, // "CET"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -185,26 +885,15 @@ var ZoneEraAfrica_Algiers = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Bissau
+	// EraIndex: 2
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Algiers = zoneinfo.ZoneInfo{
-	ZoneID: 0xd94515c1,
-	NameIndex: 4, // "Africa/Algiers"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Algiers,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Bissau
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Bissau = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -215,26 +904,15 @@ var ZoneEraAfrica_Bissau = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Cairo
+	// EraIndex: 3
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Bissau = zoneinfo.ZoneInfo{
-	ZoneID: 0x75564141,
-	NameIndex: 10, // "Africa/Bissau"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Bissau,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Cairo
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Cairo = []zoneinfo.ZoneEra{
 	//             2:00    Egypt    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEgypt,
+		PolicyIndex: 27, // PolicyName: Egypt
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -245,26 +923,15 @@ var ZoneEraAfrica_Cairo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Casablanca
+	// EraIndex: 4
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Cairo = zoneinfo.ZoneInfo{
-	ZoneID: 0x77f8e228,
-	NameIndex: 14, // "Africa/Cairo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Cairo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Casablanca
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Casablanca = []zoneinfo.ZoneEra{
 	//              0:00    Morocco    +00/+01    2018 Oct 28  3:00
 	{
-		ZonePolicy: &ZonePolicyMorocco,
+		PolicyIndex: 51, // PolicyName: Morocco
 		FormatIndex: 2, // "+00/+01"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -274,9 +941,10 @@ var ZoneEraAfrica_Casablanca = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              1:00    Morocco    +01/+00
 	{
-		ZonePolicy: &ZonePolicyMorocco,
+		PolicyIndex: 51, // PolicyName: Morocco
 		FormatIndex: 4, // "+01/+00"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -287,26 +955,15 @@ var ZoneEraAfrica_Casablanca = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Ceuta
+	// EraIndex: 6
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Casablanca = zoneinfo.ZoneInfo{
-	ZoneID: 0xc59f1b33,
-	NameIndex: 15, // "Africa/Casablanca"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Casablanca,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Ceuta
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Ceuta = []zoneinfo.ZoneEra{
 	//              1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -317,26 +974,15 @@ var ZoneEraAfrica_Ceuta = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/El_Aaiun
+	// EraIndex: 7
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Ceuta = zoneinfo.ZoneInfo{
-	ZoneID: 0x77fb46ec,
-	NameIndex: 16, // "Africa/Ceuta"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Ceuta,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/El_Aaiun
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_El_Aaiun = []zoneinfo.ZoneEra{
 	//              0:00    Morocco    +00/+01    2018 Oct 28  3:00
 	{
-		ZonePolicy: &ZonePolicyMorocco,
+		PolicyIndex: 51, // PolicyName: Morocco
 		FormatIndex: 2, // "+00/+01"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -346,9 +992,10 @@ var ZoneEraAfrica_El_Aaiun = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              1:00    Morocco    +01/+00
 	{
-		ZonePolicy: &ZonePolicyMorocco,
+		PolicyIndex: 51, // PolicyName: Morocco
 		FormatIndex: 4, // "+01/+00"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -359,26 +1006,15 @@ var ZoneEraAfrica_El_Aaiun = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Johannesburg
+	// EraIndex: 9
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_El_Aaiun = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d6fb118,
-	NameIndex: 22, // "Africa/El_Aaiun"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_El_Aaiun,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Johannesburg
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Johannesburg = []zoneinfo.ZoneEra{
 	//             2:00    SA    SAST
 	{
-		ZonePolicy: &ZonePolicySA,
+		PolicyIndex: 66, // PolicyName: SA
 		FormatIndex: 103, // "SAST"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -389,26 +1025,15 @@ var ZoneEraAfrica_Johannesburg = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Juba
+	// EraIndex: 10
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Johannesburg = zoneinfo.ZoneInfo{
-	ZoneID: 0xd5d157a0,
-	NameIndex: 26, // "Africa/Johannesburg"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Johannesburg,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Juba
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Juba = []zoneinfo.ZoneEra{
 	//             2:00    Sudan    CA%sT    2000 Jan 15 12:00
 	{
-		ZonePolicy: &ZonePolicySudan,
+		PolicyIndex: 70, // PolicyName: Sudan
 		FormatIndex: 69, // "CA%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -418,9 +1043,10 @@ var ZoneEraAfrica_Juba = []zoneinfo.ZoneEra{
 		UntilTimeCode: 48,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             3:00    -    EAT    2021 Feb  1 00:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 76, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -430,9 +1056,10 @@ var ZoneEraAfrica_Juba = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    -    CAT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 70, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -443,26 +1070,15 @@ var ZoneEraAfrica_Juba = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Khartoum
+	// EraIndex: 13
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Juba = zoneinfo.ZoneInfo{
-	ZoneID: 0xd51b395c,
-	NameIndex: 27, // "Africa/Juba"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Juba,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Khartoum
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Khartoum = []zoneinfo.ZoneEra{
 	//             2:00    Sudan    CA%sT    2000 Jan 15 12:00
 	{
-		ZonePolicy: &ZonePolicySudan,
+		PolicyIndex: 70, // PolicyName: Sudan
 		FormatIndex: 69, // "CA%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -472,9 +1088,10 @@ var ZoneEraAfrica_Khartoum = []zoneinfo.ZoneEra{
 		UntilTimeCode: 48,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             3:00    -    EAT    2017 Nov  1
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 76, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -484,9 +1101,10 @@ var ZoneEraAfrica_Khartoum = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    -    CAT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 70, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -497,26 +1115,15 @@ var ZoneEraAfrica_Khartoum = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Lagos
+	// EraIndex: 16
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Khartoum = zoneinfo.ZoneInfo{
-	ZoneID: 0xfb3d4205,
-	NameIndex: 29, // "Africa/Khartoum"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Khartoum,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Lagos
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Lagos = []zoneinfo.ZoneEra{
 	//             1:00    -    WAT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 106, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -527,26 +1134,15 @@ var ZoneEraAfrica_Lagos = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Maputo
+	// EraIndex: 17
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Lagos = zoneinfo.ZoneInfo{
-	ZoneID: 0x789bb5d0,
-	NameIndex: 32, // "Africa/Lagos"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Lagos,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Maputo
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Maputo = []zoneinfo.ZoneEra{
 	//             2:00    -    CAT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 70, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -557,26 +1153,15 @@ var ZoneEraAfrica_Maputo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Monrovia
+	// EraIndex: 18
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Maputo = zoneinfo.ZoneInfo{
-	ZoneID: 0x8e6ca1f0,
-	NameIndex: 39, // "Africa/Maputo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Maputo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Monrovia
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Monrovia = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -587,26 +1172,15 @@ var ZoneEraAfrica_Monrovia = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Nairobi
+	// EraIndex: 19
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Monrovia = zoneinfo.ZoneInfo{
-	ZoneID: 0x0ce90385,
-	NameIndex: 43, // "Africa/Monrovia"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Monrovia,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Nairobi
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Nairobi = []zoneinfo.ZoneEra{
 	//             3:00    -    EAT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 76, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -617,26 +1191,15 @@ var ZoneEraAfrica_Nairobi = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Ndjamena
+	// EraIndex: 20
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Nairobi = zoneinfo.ZoneInfo{
-	ZoneID: 0xa87ab57e,
-	NameIndex: 44, // "Africa/Nairobi"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Nairobi,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Ndjamena
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Ndjamena = []zoneinfo.ZoneEra{
 	//             1:00    -    WAT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 106, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -647,26 +1210,15 @@ var ZoneEraAfrica_Ndjamena = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Sao_Tome
+	// EraIndex: 21
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Ndjamena = zoneinfo.ZoneInfo{
-	ZoneID: 0x9fe09898,
-	NameIndex: 45, // "Africa/Ndjamena"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Ndjamena,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Sao_Tome
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Sao_Tome = []zoneinfo.ZoneEra{
 	//              0:00    -    GMT    2018 Jan  1 01:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -676,9 +1228,10 @@ var ZoneEraAfrica_Sao_Tome = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              1:00    -    WAT    2019 Jan  1 02:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 106, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -688,9 +1241,10 @@ var ZoneEraAfrica_Sao_Tome = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              0:00    -    GMT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -701,26 +1255,15 @@ var ZoneEraAfrica_Sao_Tome = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Tripoli
+	// EraIndex: 24
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Sao_Tome = zoneinfo.ZoneInfo{
-	ZoneID: 0x61b319d1,
-	NameIndex: 50, // "Africa/Sao_Tome"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Sao_Tome,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Tripoli
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Tripoli = []zoneinfo.ZoneEra{
 	//             2:00    -    EET    2012 Nov 10  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -730,9 +1273,10 @@ var ZoneEraAfrica_Tripoli = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             1:00    Libya    CE%sT    2013 Oct 25  2:00
 	{
-		ZonePolicy: &ZonePolicyLibya,
+		PolicyIndex: 44, // PolicyName: Libya
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -742,9 +1286,10 @@ var ZoneEraAfrica_Tripoli = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    -    EET
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -755,26 +1300,15 @@ var ZoneEraAfrica_Tripoli = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Tunis
+	// EraIndex: 27
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Tripoli = zoneinfo.ZoneInfo{
-	ZoneID: 0x9dfebd3d,
-	NameIndex: 52, // "Africa/Tripoli"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Tripoli,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Tunis
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Tunis = []zoneinfo.ZoneEra{
 	//             1:00    Tunisia    CE%sT
 	{
-		ZonePolicy: &ZonePolicyTunisia,
+		PolicyIndex: 76, // PolicyName: Tunisia
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -785,26 +1319,15 @@ var ZoneEraAfrica_Tunis = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Africa/Windhoek
+	// EraIndex: 28
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Tunis = zoneinfo.ZoneInfo{
-	ZoneID: 0x79378e6d,
-	NameIndex: 53, // "Africa/Tunis"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Tunis,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Africa/Windhoek
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAfrica_Windhoek = []zoneinfo.ZoneEra{
 	//             2:00    Namibia    %s
 	{
-		ZonePolicy: &ZonePolicyNamibia,
+		PolicyIndex: 55, // PolicyName: Namibia
 		FormatIndex: 1, // "%"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -815,26 +1338,15 @@ var ZoneEraAfrica_Windhoek = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Adak
+	// EraIndex: 29
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAfrica_Windhoek = zoneinfo.ZoneInfo{
-	ZoneID: 0x789c9bd3,
-	NameIndex: 54, // "Africa/Windhoek"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAfrica_Windhoek,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Adak
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Adak = []zoneinfo.ZoneEra{
 	//             -10:00    US    H%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 84, // "H%T"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -845,26 +1357,15 @@ var ZoneEraAmerica_Adak = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Anchorage
+	// EraIndex: 30
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Adak = zoneinfo.ZoneInfo{
-	ZoneID: 0x97fe49d7,
-	NameIndex: 55, // "America/Adak"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Adak,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Anchorage
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Anchorage = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -875,26 +1376,15 @@ var ZoneEraAmerica_Anchorage = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Araguaina
+	// EraIndex: 31
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Anchorage = zoneinfo.ZoneInfo{
-	ZoneID: 0x5a79260e,
-	NameIndex: 56, // "America/Anchorage"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Anchorage,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Araguaina
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2003 Sep 24
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -904,9 +1394,10 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2012 Oct 21
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -916,9 +1407,10 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Brazil    -03/-02    2013 Sep
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -928,9 +1420,10 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -941,26 +1434,15 @@ var ZoneEraAmerica_Araguaina = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Buenos_Aires
+	// EraIndex: 35
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Araguaina = zoneinfo.ZoneInfo{
-	ZoneID: 0x6f9a3aef,
-	NameIndex: 59, // "America/Araguaina"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Araguaina,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Buenos_Aires
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Buenos_Aires = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -970,9 +1452,10 @@ var ZoneEraAmerica_Argentina_Buenos_Aires = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -982,9 +1465,10 @@ var ZoneEraAmerica_Argentina_Buenos_Aires = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -995,26 +1479,15 @@ var ZoneEraAmerica_Argentina_Buenos_Aires = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Catamarca
+	// EraIndex: 38
+	// EraCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Buenos_Aires = zoneinfo.ZoneInfo{
-	ZoneID: 0xd43b4c0d,
-	NameIndex: 60, // "America/Argentina/Buenos_Aires"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Buenos_Aires,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Catamarca
-// Era count: 6
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1024,9 +1497,10 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1036,9 +1510,10 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2004 Jun  1
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1048,9 +1523,10 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Jun 20
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1060,9 +1536,10 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1072,9 +1549,10 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1085,26 +1563,15 @@ var ZoneEraAmerica_Argentina_Catamarca = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Cordoba
+	// EraIndex: 44
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Catamarca = zoneinfo.ZoneInfo{
-	ZoneID: 0x8d40986b,
-	NameIndex: 61, // "America/Argentina/Catamarca"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Catamarca,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Cordoba
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Cordoba = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1114,9 +1581,10 @@ var ZoneEraAmerica_Argentina_Cordoba = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1126,9 +1594,10 @@ var ZoneEraAmerica_Argentina_Cordoba = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1139,26 +1608,15 @@ var ZoneEraAmerica_Argentina_Cordoba = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Jujuy
+	// EraIndex: 47
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Cordoba = zoneinfo.ZoneInfo{
-	ZoneID: 0xbfccc308,
-	NameIndex: 63, // "America/Argentina/Cordoba"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Cordoba,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Jujuy
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1168,9 +1626,10 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1180,9 +1639,10 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1192,9 +1652,10 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1205,26 +1666,15 @@ var ZoneEraAmerica_Argentina_Jujuy = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/La_Rioja
+	// EraIndex: 51
+	// EraCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Jujuy = zoneinfo.ZoneInfo{
-	ZoneID: 0x5f2f46c5,
-	NameIndex: 64, // "America/Argentina/Jujuy"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Jujuy,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/La_Rioja
-// Era count: 6
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1234,9 +1684,10 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1246,9 +1697,10 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2004 Jun  1
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1258,9 +1710,10 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Jun 20
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1270,9 +1723,10 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1282,9 +1736,10 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1295,26 +1750,15 @@ var ZoneEraAmerica_Argentina_La_Rioja = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Mendoza
+	// EraIndex: 57
+	// EraCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_La_Rioja = zoneinfo.ZoneInfo{
-	ZoneID: 0xa46b7eef,
-	NameIndex: 65, // "America/Argentina/La_Rioja"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_La_Rioja,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Mendoza
-// Era count: 6
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1324,9 +1768,10 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1336,9 +1781,10 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2004 May 23
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1348,9 +1794,10 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Sep 26
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1360,9 +1807,10 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1372,9 +1820,10 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1385,26 +1834,15 @@ var ZoneEraAmerica_Argentina_Mendoza = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Rio_Gallegos
+	// EraIndex: 63
+	// EraCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Mendoza = zoneinfo.ZoneInfo{
-	ZoneID: 0xa9f72d5c,
-	NameIndex: 66, // "America/Argentina/Mendoza"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Mendoza,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Rio_Gallegos
-// Era count: 6
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1414,9 +1852,10 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1426,9 +1865,10 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2004 Jun  1
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1438,9 +1878,10 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Jun 20
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1450,9 +1891,10 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1462,9 +1904,10 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1475,26 +1918,15 @@ var ZoneEraAmerica_Argentina_Rio_Gallegos = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Salta
+	// EraIndex: 69
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Rio_Gallegos = zoneinfo.ZoneInfo{
-	ZoneID: 0xc5b0f565,
-	NameIndex: 67, // "America/Argentina/Rio_Gallegos"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Rio_Gallegos,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Salta
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1504,9 +1936,10 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1516,9 +1949,10 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1528,9 +1962,10 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1541,26 +1976,15 @@ var ZoneEraAmerica_Argentina_Salta = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/San_Juan
+	// EraIndex: 73
+	// EraCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Salta = zoneinfo.ZoneInfo{
-	ZoneID: 0x5fc73403,
-	NameIndex: 68, // "America/Argentina/Salta"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Salta,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/San_Juan
-// Era count: 6
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1570,9 +1994,10 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1582,9 +2007,10 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2004 May 31
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1594,9 +2020,10 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Jul 25
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1606,9 +2033,10 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1618,9 +2046,10 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1631,26 +2060,15 @@ var ZoneEraAmerica_Argentina_San_Juan = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/San_Luis
+	// EraIndex: 79
+	// EraCount: 7
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_San_Juan = zoneinfo.ZoneInfo{
-	ZoneID: 0x3e1009bd,
-	NameIndex: 69, // "America/Argentina/San_Juan"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_San_Juan,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/San_Luis
-// Era count: 7
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    1999 Oct  3
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1660,9 +2078,10 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    1:00    -03    2000 Mar  3
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -16,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
@@ -1672,9 +2091,10 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2004 May 31
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1684,9 +2104,10 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Jul 25
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1696,9 +2117,10 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Jan 21
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1708,9 +2130,10 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    SanLuis    -04/-03    2009 Oct 11
 	{
-		ZonePolicy: &ZonePolicySanLuis,
+		PolicyIndex: 68, // PolicyName: SanLuis
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1720,9 +2143,10 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1733,26 +2157,15 @@ var ZoneEraAmerica_Argentina_San_Luis = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Tucuman
+	// EraIndex: 86
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_San_Luis = zoneinfo.ZoneInfo{
-	ZoneID: 0x3e11238c,
-	NameIndex: 70, // "America/Argentina/San_Luis"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_San_Luis,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Tucuman
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1762,9 +2175,10 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1774,9 +2188,10 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2004 Jun  1
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1786,9 +2201,10 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Jun 13
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1798,9 +2214,10 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1811,26 +2228,15 @@ var ZoneEraAmerica_Argentina_Tucuman = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Argentina/Ushuaia
+	// EraIndex: 91
+	// EraCount: 6
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Tucuman = zoneinfo.ZoneInfo{
-	ZoneID: 0xe96399eb,
-	NameIndex: 71, // "America/Argentina/Tucuman"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Tucuman,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Argentina/Ushuaia
-// Era count: 6
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1840,9 +2246,10 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1852,9 +2259,10 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2004 May 30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1864,9 +2272,10 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Jun 20
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1876,9 +2285,10 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		ZonePolicy: &ZonePolicyArg,
+		PolicyIndex: 7, // PolicyName: Arg
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1888,9 +2298,10 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1901,26 +2312,15 @@ var ZoneEraAmerica_Argentina_Ushuaia = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Asuncion
+	// EraIndex: 97
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Argentina_Ushuaia = zoneinfo.ZoneInfo{
-	ZoneID: 0x320dcdde,
-	NameIndex: 72, // "America/Argentina/Ushuaia"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Argentina_Ushuaia,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Asuncion
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Asuncion = []zoneinfo.ZoneEra{
 	//             -4:00    Para    -04/-03
 	{
-		ZonePolicy: &ZonePolicyPara,
+		PolicyIndex: 60, // PolicyName: Para
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1931,26 +2331,15 @@ var ZoneEraAmerica_Asuncion = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Bahia
+	// EraIndex: 98
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Asuncion = zoneinfo.ZoneInfo{
-	ZoneID: 0x50ec79a6,
-	NameIndex: 74, // "America/Asuncion"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Asuncion,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Bahia
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02    2003 Sep 24
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1960,9 +2349,10 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2011 Oct 16
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1972,9 +2362,10 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Brazil    -03/-02    2012 Oct 21
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1984,9 +2375,10 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1997,26 +2389,15 @@ var ZoneEraAmerica_Bahia = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Bahia_Banderas
+	// EraIndex: 102
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Bahia = zoneinfo.ZoneInfo{
-	ZoneID: 0x97d815fb,
-	NameIndex: 77, // "America/Bahia"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Bahia,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Bahia_Banderas
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Bahia_Banderas = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    2010 Apr  4  2:00
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2026,9 +2407,10 @@ var ZoneEraAmerica_Bahia_Banderas = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    Mexico    C%sT
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2039,26 +2421,15 @@ var ZoneEraAmerica_Bahia_Banderas = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Barbados
+	// EraIndex: 104
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Bahia_Banderas = zoneinfo.ZoneInfo{
-	ZoneID: 0x14f6329a,
-	NameIndex: 78, // "America/Bahia_Banderas"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Bahia_Banderas,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Barbados
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Barbados = []zoneinfo.ZoneEra{
 	//             -4:00    Barb    A%sT
 	{
-		ZonePolicy: &ZonePolicyBarb,
+		PolicyIndex: 11, // PolicyName: Barb
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2069,26 +2440,15 @@ var ZoneEraAmerica_Barbados = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Belem
+	// EraIndex: 105
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Barbados = zoneinfo.ZoneInfo{
-	ZoneID: 0xcbbc3b04,
-	NameIndex: 79, // "America/Barbados"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Barbados,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Belem
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Belem = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2099,26 +2459,15 @@ var ZoneEraAmerica_Belem = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Belize
+	// EraIndex: 106
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Belem = zoneinfo.ZoneInfo{
-	ZoneID: 0x97da580b,
-	NameIndex: 80, // "America/Belem"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Belem,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Belize
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Belize = []zoneinfo.ZoneEra{
 	//             -6:00    Belize    %s
 	{
-		ZonePolicy: &ZonePolicyBelize,
+		PolicyIndex: 12, // PolicyName: Belize
 		FormatIndex: 1, // "%"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2129,26 +2478,15 @@ var ZoneEraAmerica_Belize = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Boa_Vista
+	// EraIndex: 107
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Belize = zoneinfo.ZoneInfo{
-	ZoneID: 0x93256c81,
-	NameIndex: 81, // "America/Belize"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Belize,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Boa_Vista
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Boa_Vista = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    1999 Sep 30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2158,9 +2496,10 @@ var ZoneEraAmerica_Boa_Vista = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Brazil    -04/-03    2000 Oct 15
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2170,9 +2509,10 @@ var ZoneEraAmerica_Boa_Vista = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2183,26 +2523,15 @@ var ZoneEraAmerica_Boa_Vista = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Bogota
+	// EraIndex: 110
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Boa_Vista = zoneinfo.ZoneInfo{
-	ZoneID: 0x0a7b7efe,
-	NameIndex: 83, // "America/Boa_Vista"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Boa_Vista,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Bogota
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Bogota = []zoneinfo.ZoneEra{
 	//             -5:00    CO    -05/-04
 	{
-		ZonePolicy: &ZonePolicyCO,
+		PolicyIndex: 15, // PolicyName: CO
 		FormatIndex: 49, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2213,26 +2542,15 @@ var ZoneEraAmerica_Bogota = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Boise
+	// EraIndex: 111
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Bogota = zoneinfo.ZoneInfo{
-	ZoneID: 0x93d7bc62,
-	NameIndex: 84, // "America/Bogota"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Bogota,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Boise
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Boise = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2243,26 +2561,15 @@ var ZoneEraAmerica_Boise = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Cambridge_Bay
+	// EraIndex: 112
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Boise = zoneinfo.ZoneInfo{
-	ZoneID: 0x97dfc8d8,
-	NameIndex: 85, // "America/Boise"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Boise,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Cambridge_Bay
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 	//             -7:00    NT_YK    M%sT    1999 Oct 31  2:00
 	{
-		ZonePolicy: &ZonePolicyNT_YK,
+		PolicyIndex: 53, // PolicyName: NT_YK
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2272,9 +2579,10 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    Canada    C%sT    2000 Oct 29  2:00
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2284,9 +2592,10 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    -    EST    2000 Nov  5  0:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2296,9 +2605,10 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    -    CST    2001 Apr  1  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2308,9 +2618,10 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -7:00    Canada    M%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2321,26 +2632,15 @@ var ZoneEraAmerica_Cambridge_Bay = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Campo_Grande
+	// EraIndex: 117
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Cambridge_Bay = zoneinfo.ZoneInfo{
-	ZoneID: 0xd5a44aff,
-	NameIndex: 87, // "America/Cambridge_Bay"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Cambridge_Bay,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Campo_Grande
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Campo_Grande = []zoneinfo.ZoneEra{
 	//             -4:00    Brazil    -04/-03
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2351,26 +2651,15 @@ var ZoneEraAmerica_Campo_Grande = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Cancun
+	// EraIndex: 118
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Campo_Grande = zoneinfo.ZoneInfo{
-	ZoneID: 0xfec3e7a6,
-	NameIndex: 88, // "America/Campo_Grande"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Campo_Grande,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Cancun
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Cancun = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT    2015 Feb  1  2:00
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2380,9 +2669,10 @@ var ZoneEraAmerica_Cancun = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    -    EST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2393,26 +2683,15 @@ var ZoneEraAmerica_Cancun = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Caracas
+	// EraIndex: 120
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Cancun = zoneinfo.ZoneInfo{
-	ZoneID: 0x953331be,
-	NameIndex: 89, // "America/Cancun"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Cancun,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Caracas
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Caracas = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2007 Dec  9  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2422,9 +2701,10 @@ var ZoneEraAmerica_Caracas = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:30    -    -0430    2016 May  1  2:30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-0430"
 		OffsetCode: -18,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2434,9 +2714,10 @@ var ZoneEraAmerica_Caracas = []zoneinfo.ZoneEra{
 		UntilTimeCode: 10,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2447,26 +2728,15 @@ var ZoneEraAmerica_Caracas = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Cayenne
+	// EraIndex: 123
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Caracas = zoneinfo.ZoneInfo{
-	ZoneID: 0x3be064f4,
-	NameIndex: 90, // "America/Caracas"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Caracas,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Cayenne
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Cayenne = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2477,26 +2747,15 @@ var ZoneEraAmerica_Cayenne = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Chicago
+	// EraIndex: 124
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Cayenne = zoneinfo.ZoneInfo{
-	ZoneID: 0x3c617269,
-	NameIndex: 92, // "America/Cayenne"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Cayenne,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Chicago
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Chicago = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2507,26 +2766,15 @@ var ZoneEraAmerica_Chicago = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Chihuahua
+	// EraIndex: 125
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Chicago = zoneinfo.ZoneInfo{
-	ZoneID: 0x4b92b5d4,
-	NameIndex: 94, // "America/Chicago"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Chicago,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Chihuahua
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Chihuahua = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    2022 Oct 30  2:00
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2536,9 +2784,10 @@ var ZoneEraAmerica_Chihuahua = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    -    CST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2549,26 +2798,15 @@ var ZoneEraAmerica_Chihuahua = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Ciudad_Juarez
+	// EraIndex: 127
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Chihuahua = zoneinfo.ZoneInfo{
-	ZoneID: 0x8827d776,
-	NameIndex: 95, // "America/Chihuahua"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Chihuahua,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Ciudad_Juarez
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    2010
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2578,9 +2816,10 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -7:00    US    M%sT    2022 Oct 30  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2590,9 +2829,10 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    -    CST    2022 Nov 30  0:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2602,9 +2842,10 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -7:00    US    M%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2615,26 +2856,15 @@ var ZoneEraAmerica_Ciudad_Juarez = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Costa_Rica
+	// EraIndex: 131
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Ciudad_Juarez = zoneinfo.ZoneInfo{
-	ZoneID: 0x7347fc60,
-	NameIndex: 96, // "America/Ciudad_Juarez"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Ciudad_Juarez,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Costa_Rica
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Costa_Rica = []zoneinfo.ZoneEra{
 	//             -6:00    CR    C%sT
 	{
-		ZonePolicy: &ZonePolicyCR,
+		PolicyIndex: 16, // PolicyName: CR
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2645,26 +2875,15 @@ var ZoneEraAmerica_Costa_Rica = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Cuiaba
+	// EraIndex: 132
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Costa_Rica = zoneinfo.ZoneInfo{
-	ZoneID: 0x63ff66be,
-	NameIndex: 99, // "America/Costa_Rica"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Costa_Rica,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Cuiaba
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Cuiaba = []zoneinfo.ZoneEra{
 	//             -4:00    Brazil    -04/-03    2003 Sep 24
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2674,9 +2893,10 @@ var ZoneEraAmerica_Cuiaba = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2004 Oct  1
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2686,9 +2906,10 @@ var ZoneEraAmerica_Cuiaba = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Brazil    -04/-03
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2699,26 +2920,15 @@ var ZoneEraAmerica_Cuiaba = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Danmarkshavn
+	// EraIndex: 135
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Cuiaba = zoneinfo.ZoneInfo{
-	ZoneID: 0x969a52eb,
-	NameIndex: 101, // "America/Cuiaba"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Cuiaba,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Danmarkshavn
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Danmarkshavn = []zoneinfo.ZoneEra{
 	//             0:00    -    GMT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2729,26 +2939,15 @@ var ZoneEraAmerica_Danmarkshavn = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Dawson
+	// EraIndex: 136
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Danmarkshavn = zoneinfo.ZoneInfo{
-	ZoneID: 0xf554d204,
-	NameIndex: 103, // "America/Danmarkshavn"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Danmarkshavn,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Dawson
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Dawson = []zoneinfo.ZoneEra{
 	//             -8:00    Canada    P%sT    2020 Nov  1
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2758,9 +2957,10 @@ var ZoneEraAmerica_Dawson = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -7:00    -    MST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2771,26 +2971,15 @@ var ZoneEraAmerica_Dawson = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Dawson_Creek
+	// EraIndex: 138
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Dawson = zoneinfo.ZoneInfo{
-	ZoneID: 0x978d8d12,
-	NameIndex: 104, // "America/Dawson"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Dawson,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Dawson_Creek
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Dawson_Creek = []zoneinfo.ZoneEra{
 	//             -7:00    -    MST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2801,26 +2990,15 @@ var ZoneEraAmerica_Dawson_Creek = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Denver
+	// EraIndex: 139
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Dawson_Creek = zoneinfo.ZoneInfo{
-	ZoneID: 0x6cf24e5b,
-	NameIndex: 105, // "America/Dawson_Creek"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Dawson_Creek,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Denver
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Denver = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2831,26 +3009,15 @@ var ZoneEraAmerica_Denver = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Detroit
+	// EraIndex: 140
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Denver = zoneinfo.ZoneInfo{
-	ZoneID: 0x97d10b2a,
-	NameIndex: 106, // "America/Denver"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Denver,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Detroit
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Detroit = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2861,26 +3028,15 @@ var ZoneEraAmerica_Detroit = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Edmonton
+	// EraIndex: 141
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Detroit = zoneinfo.ZoneInfo{
-	ZoneID: 0x925cfbc1,
-	NameIndex: 107, // "America/Detroit"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Detroit,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Edmonton
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Edmonton = []zoneinfo.ZoneEra{
 	//             -7:00    Canada    M%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2891,26 +3047,15 @@ var ZoneEraAmerica_Edmonton = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Eirunepe
+	// EraIndex: 142
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Edmonton = zoneinfo.ZoneInfo{
-	ZoneID: 0x6cb9484a,
-	NameIndex: 109, // "America/Edmonton"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Edmonton,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Eirunepe
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Eirunepe = []zoneinfo.ZoneEra{
 	//             -5:00    -    -05    2008 Jun 24  0:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2920,9 +3065,10 @@ var ZoneEraAmerica_Eirunepe = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2013 Nov 10
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2932,9 +3078,10 @@ var ZoneEraAmerica_Eirunepe = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    -    -05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2945,26 +3092,15 @@ var ZoneEraAmerica_Eirunepe = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/El_Salvador
+	// EraIndex: 145
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Eirunepe = zoneinfo.ZoneInfo{
-	ZoneID: 0xf9b29683,
-	NameIndex: 110, // "America/Eirunepe"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Eirunepe,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/El_Salvador
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_El_Salvador = []zoneinfo.ZoneEra{
 	//             -6:00    Salv    C%sT
 	{
-		ZonePolicy: &ZonePolicySalv,
+		PolicyIndex: 67, // PolicyName: Salv
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2975,26 +3111,15 @@ var ZoneEraAmerica_El_Salvador = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Fort_Nelson
+	// EraIndex: 146
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_El_Salvador = zoneinfo.ZoneInfo{
-	ZoneID: 0x752ad652,
-	NameIndex: 111, // "America/El_Salvador"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_El_Salvador,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Fort_Nelson
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Fort_Nelson = []zoneinfo.ZoneEra{
 	//             -8:00    Canada    P%sT    2015 Mar  8  2:00
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3004,9 +3129,10 @@ var ZoneEraAmerica_Fort_Nelson = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -7:00    -    MST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3017,26 +3143,15 @@ var ZoneEraAmerica_Fort_Nelson = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Fortaleza
+	// EraIndex: 148
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Fort_Nelson = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f437e0f,
-	NameIndex: 113, // "America/Fort_Nelson"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Fort_Nelson,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Fortaleza
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    1999 Sep 30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3046,9 +3161,10 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Brazil    -03/-02    2000 Oct 22
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3058,9 +3174,10 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2001 Sep 13
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3070,9 +3187,10 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3082,9 +3200,10 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3095,26 +3214,15 @@ var ZoneEraAmerica_Fortaleza = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Glace_Bay
+	// EraIndex: 153
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Fortaleza = zoneinfo.ZoneInfo{
-	ZoneID: 0x2ad018ee,
-	NameIndex: 115, // "America/Fortaleza"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Fortaleza,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Glace_Bay
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Glace_Bay = []zoneinfo.ZoneEra{
 	//             -4:00    Canada    A%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3125,26 +3233,15 @@ var ZoneEraAmerica_Glace_Bay = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Goose_Bay
+	// EraIndex: 154
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Glace_Bay = zoneinfo.ZoneInfo{
-	ZoneID: 0x9681f8dd,
-	NameIndex: 116, // "America/Glace_Bay"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Glace_Bay,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Goose_Bay
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Goose_Bay = []zoneinfo.ZoneEra{
 	//             -4:00    StJohns    A%sT    2011 Nov
 	{
-		ZonePolicy: &ZonePolicyStJohns,
+		PolicyIndex: 69, // PolicyName: StJohns
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3154,9 +3251,10 @@ var ZoneEraAmerica_Goose_Bay = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Canada    A%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3167,26 +3265,15 @@ var ZoneEraAmerica_Goose_Bay = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Grand_Turk
+	// EraIndex: 156
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Goose_Bay = zoneinfo.ZoneInfo{
-	ZoneID: 0xb649541e,
-	NameIndex: 118, // "America/Goose_Bay"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Goose_Bay,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Grand_Turk
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Grand_Turk = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT    2015 Mar  8  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3196,9 +3283,10 @@ var ZoneEraAmerica_Grand_Turk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    AST    2018 Mar 11  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3208,9 +3296,10 @@ var ZoneEraAmerica_Grand_Turk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3221,26 +3310,15 @@ var ZoneEraAmerica_Grand_Turk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Guatemala
+	// EraIndex: 159
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Grand_Turk = zoneinfo.ZoneInfo{
-	ZoneID: 0x6e216197,
-	NameIndex: 119, // "America/Grand_Turk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Grand_Turk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Guatemala
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Guatemala = []zoneinfo.ZoneEra{
 	//             -6:00    Guat    C%sT
 	{
-		ZonePolicy: &ZonePolicyGuat,
+		PolicyIndex: 32, // PolicyName: Guat
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3251,26 +3329,15 @@ var ZoneEraAmerica_Guatemala = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Guayaquil
+	// EraIndex: 160
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Guatemala = zoneinfo.ZoneInfo{
-	ZoneID: 0x0c8259f7,
-	NameIndex: 122, // "America/Guatemala"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Guatemala,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Guayaquil
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Guayaquil = []zoneinfo.ZoneEra{
 	//             -5:00    Ecuador    -05/-04
 	{
-		ZonePolicy: &ZonePolicyEcuador,
+		PolicyIndex: 26, // PolicyName: Ecuador
 		FormatIndex: 49, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3281,26 +3348,15 @@ var ZoneEraAmerica_Guayaquil = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Guyana
+	// EraIndex: 161
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Guayaquil = zoneinfo.ZoneInfo{
-	ZoneID: 0x17e64958,
-	NameIndex: 123, // "America/Guayaquil"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Guayaquil,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Guyana
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Guyana = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3311,26 +3367,15 @@ var ZoneEraAmerica_Guyana = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Halifax
+	// EraIndex: 162
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Guyana = zoneinfo.ZoneInfo{
-	ZoneID: 0x9ff7bd0b,
-	NameIndex: 124, // "America/Guyana"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Guyana,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Halifax
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Halifax = []zoneinfo.ZoneEra{
 	//             -4:00    Canada    A%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3341,26 +3386,15 @@ var ZoneEraAmerica_Halifax = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Havana
+	// EraIndex: 163
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Halifax = zoneinfo.ZoneInfo{
-	ZoneID: 0xbc5b7183,
-	NameIndex: 125, // "America/Halifax"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Halifax,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Havana
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Havana = []zoneinfo.ZoneEra{
 	//             -5:00    Cuba    C%sT
 	{
-		ZonePolicy: &ZonePolicyCuba,
+		PolicyIndex: 21, // PolicyName: Cuba
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3371,26 +3405,15 @@ var ZoneEraAmerica_Havana = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Hermosillo
+	// EraIndex: 164
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Havana = zoneinfo.ZoneInfo{
-	ZoneID: 0xa0e15675,
-	NameIndex: 126, // "America/Havana"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Havana,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Hermosillo
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Hermosillo = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    1999
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3400,9 +3423,10 @@ var ZoneEraAmerica_Hermosillo = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -7:00    -    MST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3413,26 +3437,15 @@ var ZoneEraAmerica_Hermosillo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Indiana/Indianapolis
+	// EraIndex: 166
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Hermosillo = zoneinfo.ZoneInfo{
-	ZoneID: 0x065d21c4,
-	NameIndex: 127, // "America/Hermosillo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Hermosillo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Indiana/Indianapolis
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Indiana_Indianapolis = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3442,9 +3455,10 @@ var ZoneEraAmerica_Indiana_Indianapolis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3455,26 +3469,15 @@ var ZoneEraAmerica_Indiana_Indianapolis = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Indiana/Knox
+	// EraIndex: 168
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Indiana_Indianapolis = zoneinfo.ZoneInfo{
-	ZoneID: 0x28a669a4,
-	NameIndex: 128, // "America/Indiana/Indianapolis"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Indiana_Indianapolis,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Indiana/Knox
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Indiana_Knox = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3484,9 +3487,10 @@ var ZoneEraAmerica_Indiana_Knox = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3497,26 +3501,15 @@ var ZoneEraAmerica_Indiana_Knox = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Indiana/Marengo
+	// EraIndex: 170
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Indiana_Knox = zoneinfo.ZoneInfo{
-	ZoneID: 0x6554adc9,
-	NameIndex: 129, // "America/Indiana/Knox"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Indiana_Knox,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Indiana/Marengo
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Indiana_Marengo = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3526,9 +3519,10 @@ var ZoneEraAmerica_Indiana_Marengo = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3539,26 +3533,15 @@ var ZoneEraAmerica_Indiana_Marengo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Indiana/Petersburg
+	// EraIndex: 172
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Indiana_Marengo = zoneinfo.ZoneInfo{
-	ZoneID: 0x2feeee72,
-	NameIndex: 130, // "America/Indiana/Marengo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Indiana_Marengo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Indiana/Petersburg
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Indiana_Petersburg = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3568,9 +3551,10 @@ var ZoneEraAmerica_Indiana_Petersburg = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT    2007 Nov  4  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3580,9 +3564,10 @@ var ZoneEraAmerica_Indiana_Petersburg = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3593,26 +3578,15 @@ var ZoneEraAmerica_Indiana_Petersburg = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Indiana/Tell_City
+	// EraIndex: 175
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Indiana_Petersburg = zoneinfo.ZoneInfo{
-	ZoneID: 0x94ac7acc,
-	NameIndex: 131, // "America/Indiana/Petersburg"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Indiana_Petersburg,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Indiana/Tell_City
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Indiana_Tell_City = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3622,9 +3596,10 @@ var ZoneEraAmerica_Indiana_Tell_City = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3635,26 +3610,15 @@ var ZoneEraAmerica_Indiana_Tell_City = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Indiana/Vevay
+	// EraIndex: 177
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Indiana_Tell_City = zoneinfo.ZoneInfo{
-	ZoneID: 0x09263612,
-	NameIndex: 132, // "America/Indiana/Tell_City"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Indiana_Tell_City,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Indiana/Vevay
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Indiana_Vevay = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3664,9 +3628,10 @@ var ZoneEraAmerica_Indiana_Vevay = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3677,26 +3642,15 @@ var ZoneEraAmerica_Indiana_Vevay = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Indiana/Vincennes
+	// EraIndex: 179
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Indiana_Vevay = zoneinfo.ZoneInfo{
-	ZoneID: 0x10aca054,
-	NameIndex: 133, // "America/Indiana/Vevay"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Indiana_Vevay,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Indiana/Vincennes
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Indiana_Vincennes = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3706,9 +3660,10 @@ var ZoneEraAmerica_Indiana_Vincennes = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT    2007 Nov  4  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3718,9 +3673,10 @@ var ZoneEraAmerica_Indiana_Vincennes = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3731,26 +3687,15 @@ var ZoneEraAmerica_Indiana_Vincennes = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Indiana/Winamac
+	// EraIndex: 182
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Indiana_Vincennes = zoneinfo.ZoneInfo{
-	ZoneID: 0x28a0b212,
-	NameIndex: 134, // "America/Indiana/Vincennes"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Indiana_Vincennes,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Indiana/Winamac
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Indiana_Winamac = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3760,9 +3705,10 @@ var ZoneEraAmerica_Indiana_Winamac = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT    2007 Mar 11  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3772,9 +3718,10 @@ var ZoneEraAmerica_Indiana_Winamac = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3785,26 +3732,15 @@ var ZoneEraAmerica_Indiana_Winamac = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Inuvik
+	// EraIndex: 185
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Indiana_Winamac = zoneinfo.ZoneInfo{
-	ZoneID: 0x4413fa69,
-	NameIndex: 135, // "America/Indiana/Winamac"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Indiana_Winamac,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Inuvik
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Inuvik = []zoneinfo.ZoneEra{
 	//             -7:00    Canada    M%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3815,26 +3751,15 @@ var ZoneEraAmerica_Inuvik = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Iqaluit
+	// EraIndex: 186
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Inuvik = zoneinfo.ZoneInfo{
-	ZoneID: 0xa42189fc,
-	NameIndex: 137, // "America/Inuvik"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Inuvik,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Iqaluit
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Iqaluit = []zoneinfo.ZoneEra{
 	//             -5:00    NT_YK    E%sT    1999 Oct 31  2:00
 	{
-		ZonePolicy: &ZonePolicyNT_YK,
+		PolicyIndex: 53, // PolicyName: NT_YK
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3844,9 +3769,10 @@ var ZoneEraAmerica_Iqaluit = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    Canada    C%sT    2000 Oct 29  2:00
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3856,9 +3782,10 @@ var ZoneEraAmerica_Iqaluit = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    Canada    E%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3869,26 +3796,15 @@ var ZoneEraAmerica_Iqaluit = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Jamaica
+	// EraIndex: 189
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Iqaluit = zoneinfo.ZoneInfo{
-	ZoneID: 0x2de310bf,
-	NameIndex: 138, // "America/Iqaluit"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Iqaluit,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Jamaica
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Jamaica = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3899,26 +3815,15 @@ var ZoneEraAmerica_Jamaica = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Juneau
+	// EraIndex: 190
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Jamaica = zoneinfo.ZoneInfo{
-	ZoneID: 0x565dad6c,
-	NameIndex: 139, // "America/Jamaica"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Jamaica,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Juneau
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Juneau = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3929,26 +3834,15 @@ var ZoneEraAmerica_Juneau = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Kentucky/Louisville
+	// EraIndex: 191
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Juneau = zoneinfo.ZoneInfo{
-	ZoneID: 0xa6f13e2e,
-	NameIndex: 141, // "America/Juneau"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Juneau,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Kentucky/Louisville
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Kentucky_Louisville = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3959,26 +3853,15 @@ var ZoneEraAmerica_Kentucky_Louisville = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Kentucky/Monticello
+	// EraIndex: 192
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Kentucky_Louisville = zoneinfo.ZoneInfo{
-	ZoneID: 0x1a21024b,
-	NameIndex: 142, // "America/Kentucky/Louisville"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Kentucky_Louisville,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Kentucky/Monticello
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Kentucky_Monticello = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT    2000 Oct 29  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -3988,9 +3871,10 @@ var ZoneEraAmerica_Kentucky_Monticello = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4001,26 +3885,15 @@ var ZoneEraAmerica_Kentucky_Monticello = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/La_Paz
+	// EraIndex: 194
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Kentucky_Monticello = zoneinfo.ZoneInfo{
-	ZoneID: 0xde71c439,
-	NameIndex: 143, // "America/Kentucky/Monticello"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Kentucky_Monticello,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/La_Paz
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_La_Paz = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4031,26 +3904,15 @@ var ZoneEraAmerica_La_Paz = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Lima
+	// EraIndex: 195
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_La_Paz = zoneinfo.ZoneInfo{
-	ZoneID: 0xaa29125d,
-	NameIndex: 146, // "America/La_Paz"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_La_Paz,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Lima
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Lima = []zoneinfo.ZoneEra{
 	//             -5:00    Peru    -05/-04
 	{
-		ZonePolicy: &ZonePolicyPeru,
+		PolicyIndex: 61, // PolicyName: Peru
 		FormatIndex: 49, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4061,26 +3923,15 @@ var ZoneEraAmerica_Lima = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Los_Angeles
+	// EraIndex: 196
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Lima = zoneinfo.ZoneInfo{
-	ZoneID: 0x980468c9,
-	NameIndex: 147, // "America/Lima"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Lima,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Los_Angeles
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
 	//             -8:00    US    P%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4091,26 +3942,15 @@ var ZoneEraAmerica_Los_Angeles = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Maceio
+	// EraIndex: 197
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Los_Angeles = zoneinfo.ZoneInfo{
-	ZoneID: 0xb7f7e8f2,
-	NameIndex: 148, // "America/Los_Angeles"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Los_Angeles,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Maceio
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    1999 Sep 30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4120,9 +3960,10 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Brazil    -03/-02    2000 Oct 22
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4132,9 +3973,10 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2001 Sep 13
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4144,9 +3986,10 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4156,9 +3999,10 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4169,26 +4013,15 @@ var ZoneEraAmerica_Maceio = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Managua
+	// EraIndex: 202
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Maceio = zoneinfo.ZoneInfo{
-	ZoneID: 0xac80c6d4,
-	NameIndex: 151, // "America/Maceio"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Maceio,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Managua
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Managua = []zoneinfo.ZoneEra{
 	//             -6:00    Nic    C%sT
 	{
-		ZonePolicy: &ZonePolicyNic,
+		PolicyIndex: 56, // PolicyName: Nic
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4199,26 +4032,15 @@ var ZoneEraAmerica_Managua = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Manaus
+	// EraIndex: 203
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Managua = zoneinfo.ZoneInfo{
-	ZoneID: 0x3d5e7600,
-	NameIndex: 152, // "America/Managua"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Managua,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Manaus
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Manaus = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4229,26 +4051,15 @@ var ZoneEraAmerica_Manaus = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Martinique
+	// EraIndex: 204
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Manaus = zoneinfo.ZoneInfo{
-	ZoneID: 0xac86bf8b,
-	NameIndex: 153, // "America/Manaus"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Manaus,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Martinique
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Martinique = []zoneinfo.ZoneEra{
 	//             -4:00    -    AST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4259,26 +4070,15 @@ var ZoneEraAmerica_Martinique = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Matamoros
+	// EraIndex: 205
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Martinique = zoneinfo.ZoneInfo{
-	ZoneID: 0x551e84c5,
-	NameIndex: 155, // "America/Martinique"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Martinique,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Matamoros
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Matamoros = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT    2010
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4288,9 +4088,10 @@ var ZoneEraAmerica_Matamoros = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4301,26 +4102,15 @@ var ZoneEraAmerica_Matamoros = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Mazatlan
+	// EraIndex: 207
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Matamoros = zoneinfo.ZoneInfo{
-	ZoneID: 0xdd1b0259,
-	NameIndex: 156, // "America/Matamoros"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Matamoros,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Mazatlan
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Mazatlan = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4331,26 +4121,15 @@ var ZoneEraAmerica_Mazatlan = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Menominee
+	// EraIndex: 208
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Mazatlan = zoneinfo.ZoneInfo{
-	ZoneID: 0x0532189e,
-	NameIndex: 157, // "America/Mazatlan"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Mazatlan,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Menominee
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Menominee = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4361,26 +4140,15 @@ var ZoneEraAmerica_Menominee = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Merida
+	// EraIndex: 209
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Menominee = zoneinfo.ZoneInfo{
-	ZoneID: 0xe0e9c583,
-	NameIndex: 159, // "America/Menominee"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Menominee,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Merida
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Merida = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4391,26 +4159,15 @@ var ZoneEraAmerica_Merida = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Metlakatla
+	// EraIndex: 210
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Merida = zoneinfo.ZoneInfo{
-	ZoneID: 0xacd172d8,
-	NameIndex: 160, // "America/Merida"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Merida,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Metlakatla
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 	//              -8:00    -    PST    2015 Nov  1  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 102, // "PST"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4420,9 +4177,10 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              -9:00    US    AK%sT    2018 Nov  4  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4432,9 +4190,10 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              -8:00    -    PST    2019 Jan 20  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 102, // "PST"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4444,9 +4203,10 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              -9:00    US    AK%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4457,26 +4217,15 @@ var ZoneEraAmerica_Metlakatla = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Mexico_City
+	// EraIndex: 214
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Metlakatla = zoneinfo.ZoneInfo{
-	ZoneID: 0x84de2686,
-	NameIndex: 161, // "America/Metlakatla"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Metlakatla,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Mexico_City
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Mexico_City = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT    2001 Sep 30  2:00
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4486,9 +4235,10 @@ var ZoneEraAmerica_Mexico_City = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    -    CST    2002 Feb 20
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4498,9 +4248,10 @@ var ZoneEraAmerica_Mexico_City = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    Mexico    C%sT
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4511,26 +4262,15 @@ var ZoneEraAmerica_Mexico_City = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Miquelon
+	// EraIndex: 217
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Mexico_City = zoneinfo.ZoneInfo{
-	ZoneID: 0xd0d93f43,
-	NameIndex: 162, // "America/Mexico_City"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Mexico_City,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Miquelon
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Miquelon = []zoneinfo.ZoneEra{
 	//             -3:00    Canada    -03/-02
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4541,26 +4281,15 @@ var ZoneEraAmerica_Miquelon = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Moncton
+	// EraIndex: 218
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Miquelon = zoneinfo.ZoneInfo{
-	ZoneID: 0x59674330,
-	NameIndex: 163, // "America/Miquelon"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Miquelon,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Moncton
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Moncton = []zoneinfo.ZoneEra{
 	//             -4:00    Moncton    A%sT    2007
 	{
-		ZonePolicy: &ZonePolicyMoncton,
+		PolicyIndex: 49, // PolicyName: Moncton
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4570,9 +4299,10 @@ var ZoneEraAmerica_Moncton = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    Canada    A%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4583,26 +4313,15 @@ var ZoneEraAmerica_Moncton = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Monterrey
+	// EraIndex: 220
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Moncton = zoneinfo.ZoneInfo{
-	ZoneID: 0x5e07fe24,
-	NameIndex: 164, // "America/Moncton"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Moncton,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Monterrey
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Monterrey = []zoneinfo.ZoneEra{
 	//             -6:00    Mexico    C%sT
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4613,26 +4332,15 @@ var ZoneEraAmerica_Monterrey = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Montevideo
+	// EraIndex: 221
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Monterrey = zoneinfo.ZoneInfo{
-	ZoneID: 0x269a1deb,
-	NameIndex: 165, // "America/Monterrey"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Monterrey,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Montevideo
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Montevideo = []zoneinfo.ZoneEra{
 	//             -3:00    Uruguay    -03/-02
 	{
-		ZonePolicy: &ZonePolicyUruguay,
+		PolicyIndex: 79, // PolicyName: Uruguay
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4643,26 +4351,15 @@ var ZoneEraAmerica_Montevideo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/New_York
+	// EraIndex: 222
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Montevideo = zoneinfo.ZoneInfo{
-	ZoneID: 0xfa214780,
-	NameIndex: 166, // "America/Montevideo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Montevideo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/New_York
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 	//             -5:00    US    E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4673,26 +4370,15 @@ var ZoneEraAmerica_New_York = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Nome
+	// EraIndex: 223
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_New_York = zoneinfo.ZoneInfo{
-	ZoneID: 0x1e2a7654,
-	NameIndex: 170, // "America/New_York"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_New_York,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Nome
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Nome = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4703,26 +4389,15 @@ var ZoneEraAmerica_Nome = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Noronha
+	// EraIndex: 224
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Nome = zoneinfo.ZoneInfo{
-	ZoneID: 0x98059b15,
-	NameIndex: 172, // "America/Nome"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Nome,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Noronha
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 	//             -2:00    -    -02    1999 Sep 30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4732,9 +4407,10 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -2:00    Brazil    -02/-01    2000 Oct 15
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 42, // "-02/-01"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4744,9 +4420,10 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -2:00    -    -02    2001 Sep 13
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4756,9 +4433,10 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -2:00    Brazil    -02/-01    2002 Oct  1
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 42, // "-02/-01"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4768,9 +4446,10 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -2:00    -    -02
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4781,26 +4460,15 @@ var ZoneEraAmerica_Noronha = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/North_Dakota/Beulah
+	// EraIndex: 229
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Noronha = zoneinfo.ZoneInfo{
-	ZoneID: 0xab5116fb,
-	NameIndex: 173, // "America/Noronha"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Noronha,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/North_Dakota/Beulah
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_North_Dakota_Beulah = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT    2010 Nov  7  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4810,9 +4478,10 @@ var ZoneEraAmerica_North_Dakota_Beulah = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4823,26 +4492,15 @@ var ZoneEraAmerica_North_Dakota_Beulah = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/North_Dakota/Center
+	// EraIndex: 231
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_North_Dakota_Beulah = zoneinfo.ZoneInfo{
-	ZoneID: 0x9b52b384,
-	NameIndex: 174, // "America/North_Dakota/Beulah"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_North_Dakota_Beulah,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/North_Dakota/Center
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_North_Dakota_Center = []zoneinfo.ZoneEra{
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4853,26 +4511,15 @@ var ZoneEraAmerica_North_Dakota_Center = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/North_Dakota/New_Salem
+	// EraIndex: 232
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_North_Dakota_Center = zoneinfo.ZoneInfo{
-	ZoneID: 0x9da42814,
-	NameIndex: 175, // "America/North_Dakota/Center"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_North_Dakota_Center,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/North_Dakota/New_Salem
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_North_Dakota_New_Salem = []zoneinfo.ZoneEra{
 	//             -7:00    US    M%sT    2003 Oct 26  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4882,9 +4529,10 @@ var ZoneEraAmerica_North_Dakota_New_Salem = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4895,26 +4543,15 @@ var ZoneEraAmerica_North_Dakota_New_Salem = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Nuuk
+	// EraIndex: 234
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_North_Dakota_New_Salem = zoneinfo.ZoneInfo{
-	ZoneID: 0x04f9958e,
-	NameIndex: 176, // "America/North_Dakota/New_Salem"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_North_Dakota_New_Salem,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Nuuk
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Nuuk = []zoneinfo.ZoneEra{
 	//             -3:00    EU    -03/-02    2023 Mar 25 22:00
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4924,9 +4561,10 @@ var ZoneEraAmerica_Nuuk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 88,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -2:00    -    -02
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4937,26 +4575,15 @@ var ZoneEraAmerica_Nuuk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Ojinaga
+	// EraIndex: 236
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Nuuk = zoneinfo.ZoneInfo{
-	ZoneID: 0x9805b5a9,
-	NameIndex: 177, // "America/Nuuk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Nuuk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Ojinaga
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 	//             -7:00    Mexico    M%sT    2010
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4966,9 +4593,10 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -7:00    US    M%sT    2022 Oct 30  2:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4978,9 +4606,10 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    -    CST    2022 Nov 30  0:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -4990,9 +4619,10 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    US    C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5003,26 +4633,15 @@ var ZoneEraAmerica_Ojinaga = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Panama
+	// EraIndex: 240
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Ojinaga = zoneinfo.ZoneInfo{
-	ZoneID: 0xebfde83f,
-	NameIndex: 178, // "America/Ojinaga"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Ojinaga,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Panama
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Panama = []zoneinfo.ZoneEra{
 	//             -5:00    -    EST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5033,26 +4652,15 @@ var ZoneEraAmerica_Panama = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Paramaribo
+	// EraIndex: 241
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Panama = zoneinfo.ZoneInfo{
-	ZoneID: 0xb3863854,
-	NameIndex: 179, // "America/Panama"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Panama,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Paramaribo
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Paramaribo = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5063,26 +4671,15 @@ var ZoneEraAmerica_Paramaribo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Phoenix
+	// EraIndex: 242
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Paramaribo = zoneinfo.ZoneInfo{
-	ZoneID: 0xb319e4c4,
-	NameIndex: 181, // "America/Paramaribo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Paramaribo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Phoenix
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Phoenix = []zoneinfo.ZoneEra{
 	//             -7:00    -    MST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5093,26 +4690,15 @@ var ZoneEraAmerica_Phoenix = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Port-au-Prince
+	// EraIndex: 243
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Phoenix = zoneinfo.ZoneInfo{
-	ZoneID: 0x34b5af01,
-	NameIndex: 182, // "America/Phoenix"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Phoenix,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Port-au-Prince
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Port_au_Prince = []zoneinfo.ZoneEra{
 	//             -5:00    Haiti    E%sT
 	{
-		ZonePolicy: &ZonePolicyHaiti,
+		PolicyIndex: 34, // PolicyName: Haiti
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5123,26 +4709,15 @@ var ZoneEraAmerica_Port_au_Prince = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Porto_Velho
+	// EraIndex: 244
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Port_au_Prince = zoneinfo.ZoneInfo{
-	ZoneID: 0x8e4a7bdc,
-	NameIndex: 183, // "America/Port-au-Prince"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Port_au_Prince,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Porto_Velho
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Porto_Velho = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5153,26 +4728,15 @@ var ZoneEraAmerica_Porto_Velho = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Puerto_Rico
+	// EraIndex: 245
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Porto_Velho = zoneinfo.ZoneInfo{
-	ZoneID: 0x6b1aac77,
-	NameIndex: 186, // "America/Porto_Velho"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Porto_Velho,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Puerto_Rico
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Puerto_Rico = []zoneinfo.ZoneEra{
 	//             -4:00    -    AST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5183,26 +4747,15 @@ var ZoneEraAmerica_Puerto_Rico = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Punta_Arenas
+	// EraIndex: 246
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Puerto_Rico = zoneinfo.ZoneInfo{
-	ZoneID: 0x6752ca31,
-	NameIndex: 187, // "America/Puerto_Rico"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Puerto_Rico,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Punta_Arenas
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Punta_Arenas = []zoneinfo.ZoneEra{
 	//             -4:00    Chile    -04/-03    2016 Dec  4
 	{
-		ZonePolicy: &ZonePolicyChile,
+		PolicyIndex: 19, // PolicyName: Chile
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5212,9 +4765,10 @@ var ZoneEraAmerica_Punta_Arenas = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5225,26 +4779,15 @@ var ZoneEraAmerica_Punta_Arenas = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Rankin_Inlet
+	// EraIndex: 248
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Punta_Arenas = zoneinfo.ZoneInfo{
-	ZoneID: 0xc2c3bce7,
-	NameIndex: 188, // "America/Punta_Arenas"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Punta_Arenas,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Rankin_Inlet
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Rankin_Inlet = []zoneinfo.ZoneEra{
 	//             -6:00    NT_YK    C%sT    2000 Oct 29  2:00
 	{
-		ZonePolicy: &ZonePolicyNT_YK,
+		PolicyIndex: 53, // PolicyName: NT_YK
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5254,9 +4797,10 @@ var ZoneEraAmerica_Rankin_Inlet = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    -    EST    2001 Apr  1  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5266,9 +4810,10 @@ var ZoneEraAmerica_Rankin_Inlet = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    Canada    C%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5279,26 +4824,15 @@ var ZoneEraAmerica_Rankin_Inlet = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Recife
+	// EraIndex: 251
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Rankin_Inlet = zoneinfo.ZoneInfo{
-	ZoneID: 0xc8de4984,
-	NameIndex: 190, // "America/Rankin_Inlet"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Rankin_Inlet,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Recife
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03    1999 Sep 30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5308,9 +4842,10 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Brazil    -03/-02    2000 Oct 15
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5320,9 +4855,10 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03    2001 Sep 13
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5332,9 +4868,10 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5344,9 +4881,10 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5357,26 +4895,15 @@ var ZoneEraAmerica_Recife = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Regina
+	// EraIndex: 256
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Recife = zoneinfo.ZoneInfo{
-	ZoneID: 0xb8730494,
-	NameIndex: 191, // "America/Recife"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Recife,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Regina
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Regina = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5387,26 +4914,15 @@ var ZoneEraAmerica_Regina = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Resolute
+	// EraIndex: 257
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Regina = zoneinfo.ZoneInfo{
-	ZoneID: 0xb875371c,
-	NameIndex: 192, // "America/Regina"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Regina,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Resolute
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 	//             -6:00    NT_YK    C%sT    2000 Oct 29  2:00
 	{
-		ZonePolicy: &ZonePolicyNT_YK,
+		PolicyIndex: 53, // PolicyName: NT_YK
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5416,9 +4932,10 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    -    EST    2001 Apr  1  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5428,9 +4945,10 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    Canada    C%sT    2006 Oct 29  2:00
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5440,9 +4958,10 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    -    EST    2007 Mar 11  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5452,9 +4971,10 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    Canada    C%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5465,26 +4985,15 @@ var ZoneEraAmerica_Resolute = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Rio_Branco
+	// EraIndex: 262
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Resolute = zoneinfo.ZoneInfo{
-	ZoneID: 0xc7093459,
-	NameIndex: 193, // "America/Resolute"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Resolute,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Rio_Branco
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Rio_Branco = []zoneinfo.ZoneEra{
 	//             -5:00    -    -05    2008 Jun 24  0:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5494,9 +5003,10 @@ var ZoneEraAmerica_Rio_Branco = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    -04    2013 Nov 10
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5506,9 +5016,10 @@ var ZoneEraAmerica_Rio_Branco = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    -    -05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5519,26 +5030,15 @@ var ZoneEraAmerica_Rio_Branco = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Santarem
+	// EraIndex: 265
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Rio_Branco = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d352764,
-	NameIndex: 194, // "America/Rio_Branco"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Rio_Branco,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Santarem
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Santarem = []zoneinfo.ZoneEra{
 	//             -4:00    -    -04    2008 Jun 24  0:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5548,9 +5048,10 @@ var ZoneEraAmerica_Santarem = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5561,26 +5062,15 @@ var ZoneEraAmerica_Santarem = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Santiago
+	// EraIndex: 267
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Santarem = zoneinfo.ZoneInfo{
-	ZoneID: 0x740caec1,
-	NameIndex: 197, // "America/Santarem"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Santarem,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Santiago
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Santiago = []zoneinfo.ZoneEra{
 	//             -4:00    Chile    -04/-03
 	{
-		ZonePolicy: &ZonePolicyChile,
+		PolicyIndex: 19, // PolicyName: Chile
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5591,26 +5081,15 @@ var ZoneEraAmerica_Santiago = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Santo_Domingo
+	// EraIndex: 268
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Santiago = zoneinfo.ZoneInfo{
-	ZoneID: 0x7410c9bc,
-	NameIndex: 198, // "America/Santiago"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Santiago,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Santo_Domingo
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Santo_Domingo = []zoneinfo.ZoneEra{
 	//             -4:00    -    AST    2000 Oct 29  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5620,9 +5099,10 @@ var ZoneEraAmerica_Santo_Domingo = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -5:00    US    E%sT    2000 Dec  3  1:00
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5632,9 +5112,10 @@ var ZoneEraAmerica_Santo_Domingo = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -4:00    -    AST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 66, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5645,26 +5126,15 @@ var ZoneEraAmerica_Santo_Domingo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Sao_Paulo
+	// EraIndex: 271
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Santo_Domingo = zoneinfo.ZoneInfo{
-	ZoneID: 0x75a0d177,
-	NameIndex: 199, // "America/Santo_Domingo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Santo_Domingo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Sao_Paulo
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Sao_Paulo = []zoneinfo.ZoneEra{
 	//             -3:00    Brazil    -03/-02
 	{
-		ZonePolicy: &ZonePolicyBrazil,
+		PolicyIndex: 13, // PolicyName: Brazil
 		FormatIndex: 44, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5675,26 +5145,15 @@ var ZoneEraAmerica_Sao_Paulo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Scoresbysund
+	// EraIndex: 272
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Sao_Paulo = zoneinfo.ZoneInfo{
-	ZoneID: 0x1063bfc9,
-	NameIndex: 200, // "America/Sao_Paulo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Sao_Paulo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Scoresbysund
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Scoresbysund = []zoneinfo.ZoneEra{
 	//             -1:00    EU    -01/+00
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 40, // "-01/+00"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5705,26 +5164,15 @@ var ZoneEraAmerica_Scoresbysund = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Sitka
+	// EraIndex: 273
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Scoresbysund = zoneinfo.ZoneInfo{
-	ZoneID: 0x123f8d2a,
-	NameIndex: 201, // "America/Scoresbysund"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Scoresbysund,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Sitka
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Sitka = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5735,26 +5183,15 @@ var ZoneEraAmerica_Sitka = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/St_Johns
+	// EraIndex: 274
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Sitka = zoneinfo.ZoneInfo{
-	ZoneID: 0x99104ce2,
-	NameIndex: 203, // "America/Sitka"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Sitka,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/St_Johns
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_St_Johns = []zoneinfo.ZoneEra{
 	//             -3:30    StJohns    N%sT    2011 Nov
 	{
-		ZonePolicy: &ZonePolicyStJohns,
+		PolicyIndex: 69, // PolicyName: StJohns
 		FormatIndex: 98, // "N%T"
 		OffsetCode: -14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5764,9 +5201,10 @@ var ZoneEraAmerica_St_Johns = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:30    Canada    N%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 98, // "N%T"
 		OffsetCode: -14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5777,26 +5215,15 @@ var ZoneEraAmerica_St_Johns = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Swift_Current
+	// EraIndex: 276
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_St_Johns = zoneinfo.ZoneInfo{
-	ZoneID: 0x04b14e6e,
-	NameIndex: 205, // "America/St_Johns"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_St_Johns,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Swift_Current
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Swift_Current = []zoneinfo.ZoneEra{
 	//             -6:00    -    CST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 73, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5807,26 +5234,15 @@ var ZoneEraAmerica_Swift_Current = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Tegucigalpa
+	// EraIndex: 277
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Swift_Current = zoneinfo.ZoneInfo{
-	ZoneID: 0xdef98e55,
-	NameIndex: 210, // "America/Swift_Current"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Swift_Current,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Tegucigalpa
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Tegucigalpa = []zoneinfo.ZoneEra{
 	//             -6:00    Hond    C%sT
 	{
-		ZonePolicy: &ZonePolicyHond,
+		PolicyIndex: 36, // PolicyName: Hond
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5837,26 +5253,15 @@ var ZoneEraAmerica_Tegucigalpa = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Thule
+	// EraIndex: 278
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Tegucigalpa = zoneinfo.ZoneInfo{
-	ZoneID: 0xbfd6fd4c,
-	NameIndex: 211, // "America/Tegucigalpa"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Tegucigalpa,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Thule
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Thule = []zoneinfo.ZoneEra{
 	//             -4:00    Thule    A%sT
 	{
-		ZonePolicy: &ZonePolicyThule,
+		PolicyIndex: 73, // PolicyName: Thule
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5867,26 +5272,15 @@ var ZoneEraAmerica_Thule = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Tijuana
+	// EraIndex: 279
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Thule = zoneinfo.ZoneInfo{
-	ZoneID: 0x9921dd68,
-	NameIndex: 212, // "America/Thule"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Thule,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Tijuana
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 	//             -8:00    Mexico    P%sT    2001
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5896,9 +5290,10 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -8:00    US    P%sT    2002 Feb 20
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5908,9 +5303,10 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -8:00    Mexico    P%sT    2010
 	{
-		ZonePolicy: &ZonePolicyMexico,
+		PolicyIndex: 47, // PolicyName: Mexico
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5920,9 +5316,10 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -8:00    US    P%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5933,26 +5330,15 @@ var ZoneEraAmerica_Tijuana = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Toronto
+	// EraIndex: 283
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Tijuana = zoneinfo.ZoneInfo{
-	ZoneID: 0x6aa1df72,
-	NameIndex: 214, // "America/Tijuana"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Tijuana,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Toronto
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Toronto = []zoneinfo.ZoneEra{
 	//             -5:00    Canada    E%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5963,26 +5349,15 @@ var ZoneEraAmerica_Toronto = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Vancouver
+	// EraIndex: 284
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Toronto = zoneinfo.ZoneInfo{
-	ZoneID: 0x792e851b,
-	NameIndex: 215, // "America/Toronto"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Toronto,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Vancouver
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Vancouver = []zoneinfo.ZoneEra{
 	//             -8:00    Canada    P%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5993,26 +5368,15 @@ var ZoneEraAmerica_Vancouver = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Whitehorse
+	// EraIndex: 285
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Vancouver = zoneinfo.ZoneInfo{
-	ZoneID: 0x2c6f6b1f,
-	NameIndex: 217, // "America/Vancouver"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Vancouver,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Whitehorse
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Whitehorse = []zoneinfo.ZoneEra{
 	//             -8:00    Canada    P%sT    2020 Nov  1
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6022,9 +5386,10 @@ var ZoneEraAmerica_Whitehorse = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -7:00    -    MST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6035,26 +5400,15 @@ var ZoneEraAmerica_Whitehorse = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Winnipeg
+	// EraIndex: 287
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Whitehorse = zoneinfo.ZoneInfo{
-	ZoneID: 0x54e0e3e8,
-	NameIndex: 219, // "America/Whitehorse"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Whitehorse,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Winnipeg
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Winnipeg = []zoneinfo.ZoneEra{
 	//             -6:00    Winn    C%sT    2006
 	{
-		ZonePolicy: &ZonePolicyWinn,
+		PolicyIndex: 82, // PolicyName: Winn
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6064,9 +5418,10 @@ var ZoneEraAmerica_Winnipeg = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -6:00    Canada    C%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6077,26 +5432,15 @@ var ZoneEraAmerica_Winnipeg = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Yakutat
+	// EraIndex: 289
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Winnipeg = zoneinfo.ZoneInfo{
-	ZoneID: 0x8c7dafc7,
-	NameIndex: 220, // "America/Winnipeg"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Winnipeg,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Yakutat
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Yakutat = []zoneinfo.ZoneEra{
 	//              -9:00    US    AK%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 65, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6107,26 +5451,15 @@ var ZoneEraAmerica_Yakutat = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Yellowknife
+	// EraIndex: 290
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Yakutat = zoneinfo.ZoneInfo{
-	ZoneID: 0xd8ee31e9,
-	NameIndex: 221, // "America/Yakutat"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Yakutat,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: America/Yellowknife
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAmerica_Yellowknife = []zoneinfo.ZoneEra{
 	//             -7:00    Canada    M%sT
 	{
-		ZonePolicy: &ZonePolicyCanada,
+		PolicyIndex: 17, // PolicyName: Canada
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6137,26 +5470,15 @@ var ZoneEraAmerica_Yellowknife = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Antarctica/Casey
+	// EraIndex: 291
+	// EraCount: 12
+	// ---------------------------------------------------------------------------
 
-var ZoneAmerica_Yellowknife = zoneinfo.ZoneInfo{
-	ZoneID: 0x0f76c76f,
-	NameIndex: 222, // "America/Yellowknife"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAmerica_Yellowknife,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Antarctica/Casey
-// Era count: 12
-// ---------------------------------------------------------------------------
-
-var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 	//              8:00    -    +08    2009 Oct 18  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6166,9 +5488,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             11:00    -    +11    2010 Mar  5  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6178,9 +5501,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              8:00    -    +08    2011 Oct 28  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6190,9 +5514,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             11:00    -    +11    2012 Feb 21 17:00u
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6202,9 +5527,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 68,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//              8:00    -    +08    2016 Oct 22
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6214,9 +5540,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             11:00    -    +11    2018 Mar 11  4:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6226,9 +5553,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 16,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              8:00    -    +08    2018 Oct  7  4:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6238,9 +5566,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 16,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             11:00    -    +11    2019 Mar 17  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6250,9 +5579,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              8:00    -    +08    2019 Oct  4  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6262,9 +5592,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             11:00    -    +11    2020 Mar  8  3:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6274,9 +5605,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              8:00    -    +08    2020 Oct  4  0:01
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6286,9 +5618,10 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 1, // SuffixW + minute=1
 	},
+
 	//             11:00    -    +11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6299,26 +5632,15 @@ var ZoneEraAntarctica_Casey = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Antarctica/Davis
+	// EraIndex: 303
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAntarctica_Casey = zoneinfo.ZoneInfo{
-	ZoneID: 0xe2022583,
-	NameIndex: 223, // "Antarctica/Casey"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAntarctica_Casey,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Antarctica/Davis
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 	//             7:00    -    +07    2009 Oct 18  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6328,9 +5650,10 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             5:00    -    +05    2010 Mar 10 20:00u
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6340,9 +5663,10 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 80,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             7:00    -    +07    2011 Oct 28  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6352,9 +5676,10 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             5:00    -    +05    2012 Feb 21 20:00u
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6364,9 +5689,10 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 		UntilTimeCode: 80,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             7:00    -    +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6377,26 +5703,15 @@ var ZoneEraAntarctica_Davis = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Antarctica/Macquarie
+	// EraIndex: 308
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAntarctica_Davis = zoneinfo.ZoneInfo{
-	ZoneID: 0xe2144b45,
-	NameIndex: 224, // "Antarctica/Davis"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAntarctica_Davis,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Antarctica/Macquarie
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAntarctica_Macquarie = []zoneinfo.ZoneEra{
 	//             10:00    AT    AE%sT    2010
 	{
-		ZonePolicy: &ZonePolicyAT,
+		PolicyIndex: 4, // PolicyName: AT
 		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6406,9 +5721,10 @@ var ZoneEraAntarctica_Macquarie = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             10:00    1:00    AEDT    2011
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 64, // "AEDT"
 		OffsetCode: 40,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
@@ -6418,9 +5734,10 @@ var ZoneEraAntarctica_Macquarie = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             10:00    AT    AE%sT
 	{
-		ZonePolicy: &ZonePolicyAT,
+		PolicyIndex: 4, // PolicyName: AT
 		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6431,26 +5748,15 @@ var ZoneEraAntarctica_Macquarie = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Antarctica/Mawson
+	// EraIndex: 311
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAntarctica_Macquarie = zoneinfo.ZoneInfo{
-	ZoneID: 0x92f47626,
-	NameIndex: 226, // "Antarctica/Macquarie"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAntarctica_Macquarie,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Antarctica/Mawson
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAntarctica_Mawson = []zoneinfo.ZoneEra{
 	//             6:00    -    +06    2009 Oct 18  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6460,9 +5766,10 @@ var ZoneEraAntarctica_Mawson = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6473,26 +5780,15 @@ var ZoneEraAntarctica_Mawson = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Antarctica/Palmer
+	// EraIndex: 313
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAntarctica_Mawson = zoneinfo.ZoneInfo{
-	ZoneID: 0x399cd863,
-	NameIndex: 227, // "Antarctica/Mawson"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAntarctica_Mawson,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Antarctica/Palmer
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAntarctica_Palmer = []zoneinfo.ZoneEra{
 	//             -4:00    Chile    -04/-03    2016 Dec  4
 	{
-		ZonePolicy: &ZonePolicyChile,
+		PolicyIndex: 19, // PolicyName: Chile
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6502,9 +5798,10 @@ var ZoneEraAntarctica_Palmer = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6515,26 +5812,15 @@ var ZoneEraAntarctica_Palmer = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Antarctica/Rothera
+	// EraIndex: 315
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAntarctica_Palmer = zoneinfo.ZoneInfo{
-	ZoneID: 0x40962f4f,
-	NameIndex: 229, // "Antarctica/Palmer"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAntarctica_Palmer,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Antarctica/Rothera
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAntarctica_Rothera = []zoneinfo.ZoneEra{
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6545,26 +5831,15 @@ var ZoneEraAntarctica_Rothera = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Antarctica/Troll
+	// EraIndex: 316
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAntarctica_Rothera = zoneinfo.ZoneInfo{
-	ZoneID: 0x0e86d203,
-	NameIndex: 230, // "Antarctica/Rothera"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAntarctica_Rothera,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Antarctica/Troll
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAntarctica_Troll = []zoneinfo.ZoneEra{
 	// 0 - -00 2005 Feb 12
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 38, // "-00"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6574,9 +5849,10 @@ var ZoneEraAntarctica_Troll = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             0:00    Troll    %s
 	{
-		ZonePolicy: &ZonePolicyTroll,
+		PolicyIndex: 75, // PolicyName: Troll
 		FormatIndex: 1, // "%"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6587,26 +5863,15 @@ var ZoneEraAntarctica_Troll = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Almaty
+	// EraIndex: 318
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAntarctica_Troll = zoneinfo.ZoneInfo{
-	ZoneID: 0xe33f085b,
-	NameIndex: 233, // "Antarctica/Troll"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAntarctica_Troll,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Almaty
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Almaty = []zoneinfo.ZoneEra{
 	//             6:00 RussiaAsia    +06/+07    2004 Oct 31  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6616,9 +5881,10 @@ var ZoneEraAsia_Almaty = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             6:00    -    +06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6629,26 +5895,15 @@ var ZoneEraAsia_Almaty = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Amman
+	// EraIndex: 320
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Almaty = zoneinfo.ZoneInfo{
-	ZoneID: 0xa61f41fa,
-	NameIndex: 237, // "Asia/Almaty"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Almaty,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Amman
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Amman = []zoneinfo.ZoneEra{
 	//             2:00    Jordan    EE%sT    2022 Oct 28 0:00s
 	{
-		ZonePolicy: &ZonePolicyJordan,
+		PolicyIndex: 40, // PolicyName: Jordan
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6658,9 +5913,10 @@ var ZoneEraAsia_Amman = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             3:00    -    +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6671,26 +5927,15 @@ var ZoneEraAsia_Amman = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Anadyr
+	// EraIndex: 322
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Amman = zoneinfo.ZoneInfo{
-	ZoneID: 0x148d21bc,
-	NameIndex: 238, // "Asia/Amman"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Amman,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Anadyr
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Anadyr = []zoneinfo.ZoneEra{
 	//             12:00    Russia    +12/+13    2010 Mar 28  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 33, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6700,9 +5945,10 @@ var ZoneEraAsia_Anadyr = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6712,9 +5958,10 @@ var ZoneEraAsia_Anadyr = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             12:00    -    +12
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6725,26 +5972,15 @@ var ZoneEraAsia_Anadyr = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Aqtau
+	// EraIndex: 325
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Anadyr = zoneinfo.ZoneInfo{
-	ZoneID: 0xa63cebd1,
-	NameIndex: 239, // "Asia/Anadyr"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Anadyr,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Aqtau
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Aqtau = []zoneinfo.ZoneEra{
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6754,9 +5990,10 @@ var ZoneEraAsia_Aqtau = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6767,26 +6004,15 @@ var ZoneEraAsia_Aqtau = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Aqtobe
+	// EraIndex: 327
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Aqtau = zoneinfo.ZoneInfo{
-	ZoneID: 0x148f710e,
-	NameIndex: 240, // "Asia/Aqtau"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Aqtau,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Aqtobe
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Aqtobe = []zoneinfo.ZoneEra{
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6796,9 +6022,10 @@ var ZoneEraAsia_Aqtobe = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6809,26 +6036,15 @@ var ZoneEraAsia_Aqtobe = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Ashgabat
+	// EraIndex: 329
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Aqtobe = zoneinfo.ZoneInfo{
-	ZoneID: 0xa67dcc4e,
-	NameIndex: 241, // "Asia/Aqtobe"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Aqtobe,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Ashgabat
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Ashgabat = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6839,26 +6055,15 @@ var ZoneEraAsia_Ashgabat = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Atyrau
+	// EraIndex: 330
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Ashgabat = zoneinfo.ZoneInfo{
-	ZoneID: 0xba87598d,
-	NameIndex: 242, // "Asia/Ashgabat"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Ashgabat,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Atyrau
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Atyrau = []zoneinfo.ZoneEra{
 	//             5:00 RussiaAsia    +05/+06    1999 Mar 28  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6868,9 +6073,10 @@ var ZoneEraAsia_Atyrau = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6880,9 +6086,10 @@ var ZoneEraAsia_Atyrau = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6893,26 +6100,15 @@ var ZoneEraAsia_Atyrau = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Baghdad
+	// EraIndex: 333
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Atyrau = zoneinfo.ZoneInfo{
-	ZoneID: 0xa6b6e068,
-	NameIndex: 244, // "Asia/Atyrau"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Atyrau,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Baghdad
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Baghdad = []zoneinfo.ZoneEra{
 	//             3:00    Iraq    +03/+04
 	{
-		ZonePolicy: &ZonePolicyIraq,
+		PolicyIndex: 38, // PolicyName: Iraq
 		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6923,26 +6119,15 @@ var ZoneEraAsia_Baghdad = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Baku
+	// EraIndex: 334
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Baghdad = zoneinfo.ZoneInfo{
-	ZoneID: 0x9ceffbed,
-	NameIndex: 245, // "Asia/Baghdad"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Baghdad,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Baku
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Baku = []zoneinfo.ZoneEra{
 	//             4:00    Azer    +04/+05
 	{
-		ZonePolicy: &ZonePolicyAzer,
+		PolicyIndex: 10, // PolicyName: Azer
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6953,26 +6138,15 @@ var ZoneEraAsia_Baku = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Bangkok
+	// EraIndex: 335
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Baku = zoneinfo.ZoneInfo{
-	ZoneID: 0x1fa788b5,
-	NameIndex: 247, // "Asia/Baku"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Baku,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Bangkok
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Bangkok = []zoneinfo.ZoneEra{
 	//             7:00    -    +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -6983,26 +6157,15 @@ var ZoneEraAsia_Bangkok = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Barnaul
+	// EraIndex: 336
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Bangkok = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d6e3aaf,
-	NameIndex: 248, // "Asia/Bangkok"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Bangkok,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Barnaul
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7012,9 +6175,10 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7024,9 +6188,10 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              6:00    -    +06    2016 Mar 27  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7036,9 +6201,10 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7049,26 +6215,15 @@ var ZoneEraAsia_Barnaul = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Beirut
+	// EraIndex: 340
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Barnaul = zoneinfo.ZoneInfo{
-	ZoneID: 0x9dba4997,
-	NameIndex: 249, // "Asia/Barnaul"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Barnaul,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Beirut
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Beirut = []zoneinfo.ZoneEra{
 	//             2:00    Lebanon    EE%sT
 	{
-		ZonePolicy: &ZonePolicyLebanon,
+		PolicyIndex: 43, // PolicyName: Lebanon
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7079,26 +6234,15 @@ var ZoneEraAsia_Beirut = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Bishkek
+	// EraIndex: 341
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Beirut = zoneinfo.ZoneInfo{
-	ZoneID: 0xa7f3d5fd,
-	NameIndex: 250, // "Asia/Beirut"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Beirut,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Bishkek
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Bishkek = []zoneinfo.ZoneEra{
 	//             5:00    Kyrgyz    +05/+06    2005 Aug 12
 	{
-		ZonePolicy: &ZonePolicyKyrgyz,
+		PolicyIndex: 41, // PolicyName: Kyrgyz
 		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7108,9 +6252,10 @@ var ZoneEraAsia_Bishkek = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             6:00    -    +06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7121,26 +6266,15 @@ var ZoneEraAsia_Bishkek = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Chita
+	// EraIndex: 343
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Bishkek = zoneinfo.ZoneInfo{
-	ZoneID: 0xb0728553,
-	NameIndex: 251, // "Asia/Bishkek"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Bishkek,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Chita
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 	//              9:00    Russia    +09/+10    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 25, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7150,9 +6284,10 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7162,9 +6297,10 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              8:00    -    +08    2016 Mar 27  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7174,9 +6310,10 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              9:00    -    +09
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7187,26 +6324,15 @@ var ZoneEraAsia_Chita = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Choibalsan
+	// EraIndex: 347
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Chita = zoneinfo.ZoneInfo{
-	ZoneID: 0x14ae863b,
-	NameIndex: 254, // "Asia/Chita"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Chita,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Choibalsan
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Choibalsan = []zoneinfo.ZoneEra{
 	//             9:00    Mongol    +09/+10    2008 Mar 31
 	{
-		ZonePolicy: &ZonePolicyMongol,
+		PolicyIndex: 50, // PolicyName: Mongol
 		FormatIndex: 25, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7216,9 +6342,10 @@ var ZoneEraAsia_Choibalsan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             8:00    Mongol    +08/+09
 	{
-		ZonePolicy: &ZonePolicyMongol,
+		PolicyIndex: 50, // PolicyName: Mongol
 		FormatIndex: 22, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7229,26 +6356,15 @@ var ZoneEraAsia_Choibalsan = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Colombo
+	// EraIndex: 349
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Choibalsan = zoneinfo.ZoneInfo{
-	ZoneID: 0x928aa4a6,
-	NameIndex: 255, // "Asia/Choibalsan"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Choibalsan,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Colombo
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Colombo = []zoneinfo.ZoneEra{
 	//             6:00    -    +06    2006 Apr 15  0:30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7258,9 +6374,10 @@ var ZoneEraAsia_Colombo = []zoneinfo.ZoneEra{
 		UntilTimeCode: 2,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             5:30    -    +0530
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 14, // "+0530"
 		OffsetCode: 22,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7271,26 +6388,15 @@ var ZoneEraAsia_Colombo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Damascus
+	// EraIndex: 351
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Colombo = zoneinfo.ZoneInfo{
-	ZoneID: 0x0af0e91d,
-	NameIndex: 258, // "Asia/Colombo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Colombo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Damascus
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Damascus = []zoneinfo.ZoneEra{
 	//             2:00    Syria    EE%sT    2022 Oct 28 0:00
 	{
-		ZonePolicy: &ZonePolicySyria,
+		PolicyIndex: 71, // PolicyName: Syria
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7300,9 +6406,10 @@ var ZoneEraAsia_Damascus = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             3:00    -    +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7313,26 +6420,15 @@ var ZoneEraAsia_Damascus = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Dhaka
+	// EraIndex: 353
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Damascus = zoneinfo.ZoneInfo{
-	ZoneID: 0x20fbb063,
-	NameIndex: 260, // "Asia/Damascus"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Damascus,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Dhaka
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Dhaka = []zoneinfo.ZoneEra{
 	//             6:00    -    +06    2009
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7342,9 +6438,10 @@ var ZoneEraAsia_Dhaka = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             6:00    Dhaka    +06/+07
 	{
-		ZonePolicy: &ZonePolicyDhaka,
+		PolicyIndex: 22, // PolicyName: Dhaka
 		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7355,26 +6452,15 @@ var ZoneEraAsia_Dhaka = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Dili
+	// EraIndex: 355
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Dhaka = zoneinfo.ZoneInfo{
-	ZoneID: 0x14c07b8b,
-	NameIndex: 261, // "Asia/Dhaka"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Dhaka,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Dili
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Dili = []zoneinfo.ZoneEra{
 	//             8:00    -    +08    2000 Sep 17  0:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7384,9 +6470,10 @@ var ZoneEraAsia_Dili = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             9:00    -    +09
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7397,26 +6484,15 @@ var ZoneEraAsia_Dili = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Dubai
+	// EraIndex: 357
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Dili = zoneinfo.ZoneInfo{
-	ZoneID: 0x1fa8c394,
-	NameIndex: 262, // "Asia/Dili"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Dili,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Dubai
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Dubai = []zoneinfo.ZoneEra{
 	//             4:00    -    +04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7427,26 +6503,15 @@ var ZoneEraAsia_Dubai = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Dushanbe
+	// EraIndex: 358
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Dubai = zoneinfo.ZoneInfo{
-	ZoneID: 0x14c79f77,
-	NameIndex: 263, // "Asia/Dubai"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Dubai,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Dushanbe
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Dushanbe = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7457,26 +6522,15 @@ var ZoneEraAsia_Dushanbe = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Famagusta
+	// EraIndex: 359
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Dushanbe = zoneinfo.ZoneInfo{
-	ZoneID: 0x32fc5c3c,
-	NameIndex: 264, // "Asia/Dushanbe"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Dushanbe,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Famagusta
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Famagusta = []zoneinfo.ZoneEra{
 	//             2:00    EUAsia    EE%sT    2016 Sep  8
 	{
-		ZonePolicy: &ZonePolicyEUAsia,
+		PolicyIndex: 25, // PolicyName: EUAsia
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7486,9 +6540,10 @@ var ZoneEraAsia_Famagusta = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             3:00    -    +03    2017 Oct 29 1:00u
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7498,9 +6553,10 @@ var ZoneEraAsia_Famagusta = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             2:00    EUAsia    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEUAsia,
+		PolicyIndex: 25, // PolicyName: EUAsia
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7511,26 +6567,15 @@ var ZoneEraAsia_Famagusta = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Gaza
+	// EraIndex: 362
+	// EraCount: 8
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Famagusta = zoneinfo.ZoneInfo{
-	ZoneID: 0x289b4f8b,
-	NameIndex: 265, // "Asia/Famagusta"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Famagusta,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Gaza
-// Era count: 8
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 	//             2:00    Jordan    EE%sT    1999
 	{
-		ZonePolicy: &ZonePolicyJordan,
+		PolicyIndex: 40, // PolicyName: Jordan
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7540,9 +6585,10 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00 Palestine    EE%sT    2008 Aug 29  0:00
 	{
-		ZonePolicy: &ZonePolicyPalestine,
+		PolicyIndex: 59, // PolicyName: Palestine
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7552,9 +6598,10 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    -    EET    2008 Sep
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7564,9 +6611,10 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00 Palestine    EE%sT    2010
 	{
-		ZonePolicy: &ZonePolicyPalestine,
+		PolicyIndex: 59, // PolicyName: Palestine
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7576,9 +6624,10 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    -    EET    2010 Mar 27  0:01
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7588,9 +6637,10 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 1, // SuffixW + minute=1
 	},
+
 	//             2:00 Palestine    EE%sT    2011 Aug  1
 	{
-		ZonePolicy: &ZonePolicyPalestine,
+		PolicyIndex: 59, // PolicyName: Palestine
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7600,9 +6650,10 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    -    EET    2012
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7612,9 +6663,10 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00 Palestine    EE%sT
 	{
-		ZonePolicy: &ZonePolicyPalestine,
+		PolicyIndex: 59, // PolicyName: Palestine
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7625,26 +6677,15 @@ var ZoneEraAsia_Gaza = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Hebron
+	// EraIndex: 370
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Gaza = zoneinfo.ZoneInfo{
-	ZoneID: 0x1faa4875,
-	NameIndex: 266, // "Asia/Gaza"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Gaza,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Hebron
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Hebron = []zoneinfo.ZoneEra{
 	//             2:00    Jordan    EE%sT    1999
 	{
-		ZonePolicy: &ZonePolicyJordan,
+		PolicyIndex: 40, // PolicyName: Jordan
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7654,9 +6695,10 @@ var ZoneEraAsia_Hebron = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00 Palestine    EE%sT
 	{
-		ZonePolicy: &ZonePolicyPalestine,
+		PolicyIndex: 59, // PolicyName: Palestine
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7667,26 +6709,15 @@ var ZoneEraAsia_Hebron = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Ho_Chi_Minh
+	// EraIndex: 372
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Hebron = zoneinfo.ZoneInfo{
-	ZoneID: 0xb5eef250,
-	NameIndex: 268, // "Asia/Hebron"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Hebron,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Ho_Chi_Minh
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Ho_Chi_Minh = []zoneinfo.ZoneEra{
 	//             7:00    -    +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7697,26 +6728,15 @@ var ZoneEraAsia_Ho_Chi_Minh = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Hong_Kong
+	// EraIndex: 373
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Ho_Chi_Minh = zoneinfo.ZoneInfo{
-	ZoneID: 0x20f2d127,
-	NameIndex: 269, // "Asia/Ho_Chi_Minh"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Ho_Chi_Minh,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Hong_Kong
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Hong_Kong = []zoneinfo.ZoneEra{
 	//             8:00    HK    HK%sT
 	{
-		ZonePolicy: &ZonePolicyHK,
+		PolicyIndex: 33, // PolicyName: HK
 		FormatIndex: 85, // "HK%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7727,26 +6747,15 @@ var ZoneEraAsia_Hong_Kong = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Hovd
+	// EraIndex: 374
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Hong_Kong = zoneinfo.ZoneInfo{
-	ZoneID: 0x577f28ac,
-	NameIndex: 270, // "Asia/Hong_Kong"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Hong_Kong,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Hovd
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Hovd = []zoneinfo.ZoneEra{
 	//             7:00    Mongol    +07/+08
 	{
-		ZonePolicy: &ZonePolicyMongol,
+		PolicyIndex: 50, // PolicyName: Mongol
 		FormatIndex: 20, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7757,26 +6766,15 @@ var ZoneEraAsia_Hovd = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Irkutsk
+	// EraIndex: 375
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Hovd = zoneinfo.ZoneInfo{
-	ZoneID: 0x1fab0fe3,
-	NameIndex: 271, // "Asia/Hovd"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Hovd,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Irkutsk
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Irkutsk = []zoneinfo.ZoneEra{
 	//              8:00    Russia    +08/+09    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 22, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7786,9 +6784,10 @@ var ZoneEraAsia_Irkutsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              9:00    -    +09    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7798,9 +6797,10 @@ var ZoneEraAsia_Irkutsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              8:00    -    +08
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7811,26 +6811,15 @@ var ZoneEraAsia_Irkutsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Jakarta
+	// EraIndex: 378
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Irkutsk = zoneinfo.ZoneInfo{
-	ZoneID: 0xdfbf213f,
-	NameIndex: 272, // "Asia/Irkutsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Irkutsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Jakarta
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Jakarta = []zoneinfo.ZoneEra{
 	//             7:00    -    WIB
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 108, // "WIB"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7841,26 +6830,15 @@ var ZoneEraAsia_Jakarta = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Jayapura
+	// EraIndex: 379
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Jakarta = zoneinfo.ZoneInfo{
-	ZoneID: 0x0506ab50,
-	NameIndex: 274, // "Asia/Jakarta"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Jakarta,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Jayapura
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Jayapura = []zoneinfo.ZoneEra{
 	//             9:00    -    WIT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 109, // "WIT"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7871,26 +6849,15 @@ var ZoneEraAsia_Jayapura = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Jerusalem
+	// EraIndex: 380
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Jayapura = zoneinfo.ZoneInfo{
-	ZoneID: 0xc6833c2f,
-	NameIndex: 275, // "Asia/Jayapura"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Jayapura,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Jerusalem
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Jerusalem = []zoneinfo.ZoneEra{
 	//             2:00    Zion    I%sT
 	{
-		ZonePolicy: &ZonePolicyZion,
+		PolicyIndex: 83, // PolicyName: Zion
 		FormatIndex: 87, // "I%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7901,26 +6868,15 @@ var ZoneEraAsia_Jerusalem = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Kabul
+	// EraIndex: 381
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Jerusalem = zoneinfo.ZoneInfo{
-	ZoneID: 0x5becd23a,
-	NameIndex: 276, // "Asia/Jerusalem"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Jerusalem,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Kabul
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Kabul = []zoneinfo.ZoneEra{
 	//             4:30    -    +0430
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 11, // "+0430"
 		OffsetCode: 18,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7931,26 +6887,15 @@ var ZoneEraAsia_Kabul = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Kamchatka
+	// EraIndex: 382
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Kabul = zoneinfo.ZoneInfo{
-	ZoneID: 0x153b5601,
-	NameIndex: 277, // "Asia/Kabul"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Kabul,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Kamchatka
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Kamchatka = []zoneinfo.ZoneEra{
 	//             12:00    Russia    +12/+13    2010 Mar 28  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 33, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7960,9 +6905,10 @@ var ZoneEraAsia_Kamchatka = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7972,9 +6918,10 @@ var ZoneEraAsia_Kamchatka = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             12:00    -    +12
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -7985,26 +6932,15 @@ var ZoneEraAsia_Kamchatka = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Karachi
+	// EraIndex: 385
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Kamchatka = zoneinfo.ZoneInfo{
-	ZoneID: 0x73baf9d7,
-	NameIndex: 278, // "Asia/Kamchatka"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Kamchatka,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Karachi
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Karachi = []zoneinfo.ZoneEra{
 	//             5:00 Pakistan    PK%sT
 	{
-		ZonePolicy: &ZonePolicyPakistan,
+		PolicyIndex: 58, // PolicyName: Pakistan
 		FormatIndex: 101, // "PK%T"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8015,26 +6951,15 @@ var ZoneEraAsia_Karachi = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Kathmandu
+	// EraIndex: 386
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Karachi = zoneinfo.ZoneInfo{
-	ZoneID: 0x527f5245,
-	NameIndex: 279, // "Asia/Karachi"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Karachi,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Kathmandu
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Kathmandu = []zoneinfo.ZoneEra{
 	//             5:45    -    +0545
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 15, // "+0545"
 		OffsetCode: 23,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8045,26 +6970,15 @@ var ZoneEraAsia_Kathmandu = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Khandyga
+	// EraIndex: 387
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Kathmandu = zoneinfo.ZoneInfo{
-	ZoneID: 0x9a96ce6f,
-	NameIndex: 281, // "Asia/Kathmandu"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Kathmandu,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Khandyga
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 	//              9:00    Russia    +09/+10    2004
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 25, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8074,9 +6988,10 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 27, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8086,9 +7001,10 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    -    +11    2011 Sep 13  0:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8098,9 +7014,10 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8110,9 +7027,10 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              9:00    -    +09
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8123,26 +7041,15 @@ var ZoneEraAsia_Khandyga = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Kolkata
+	// EraIndex: 392
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Khandyga = zoneinfo.ZoneInfo{
-	ZoneID: 0x9685a4d9,
-	NameIndex: 283, // "Asia/Khandyga"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Khandyga,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Kolkata
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Kolkata = []zoneinfo.ZoneEra{
 	//             5:30    -    IST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 88, // "IST"
 		OffsetCode: 22,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8153,26 +7060,15 @@ var ZoneEraAsia_Kolkata = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Krasnoyarsk
+	// EraIndex: 393
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Kolkata = zoneinfo.ZoneInfo{
-	ZoneID: 0x72c06cd9,
-	NameIndex: 284, // "Asia/Kolkata"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Kolkata,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Krasnoyarsk
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Krasnoyarsk = []zoneinfo.ZoneEra{
 	//              7:00    Russia    +07/+08    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 20, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8182,9 +7078,10 @@ var ZoneEraAsia_Krasnoyarsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              8:00    -    +08    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8194,9 +7091,10 @@ var ZoneEraAsia_Krasnoyarsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8207,26 +7105,15 @@ var ZoneEraAsia_Krasnoyarsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Kuching
+	// EraIndex: 396
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Krasnoyarsk = zoneinfo.ZoneInfo{
-	ZoneID: 0xd0376c6a,
-	NameIndex: 285, // "Asia/Krasnoyarsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Krasnoyarsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Kuching
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Kuching = []zoneinfo.ZoneEra{
 	//             8:00    -    +08
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8237,26 +7124,15 @@ var ZoneEraAsia_Kuching = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Macau
+	// EraIndex: 397
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Kuching = zoneinfo.ZoneInfo{
-	ZoneID: 0x801b003b,
-	NameIndex: 287, // "Asia/Kuching"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Kuching,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Macau
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Macau = []zoneinfo.ZoneEra{
 	//             8:00    Macau    C%sT
 	{
-		ZonePolicy: &ZonePolicyMacau,
+		PolicyIndex: 45, // PolicyName: Macau
 		FormatIndex: 68, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8267,26 +7143,15 @@ var ZoneEraAsia_Macau = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Magadan
+	// EraIndex: 398
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Macau = zoneinfo.ZoneInfo{
-	ZoneID: 0x155f88b9,
-	NameIndex: 290, // "Asia/Macau"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Macau,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Magadan
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8296,9 +7161,10 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             12:00    -    +12    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8308,9 +7174,10 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             10:00    -    +10    2016 Apr 24  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8320,9 +7187,10 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    -    +11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8333,26 +7201,15 @@ var ZoneEraAsia_Magadan = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Makassar
+	// EraIndex: 402
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Magadan = zoneinfo.ZoneInfo{
-	ZoneID: 0xebacc19b,
-	NameIndex: 291, // "Asia/Magadan"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Magadan,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Makassar
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Makassar = []zoneinfo.ZoneEra{
 	//             8:00    -    WITA
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 110, // "WITA"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8363,26 +7220,15 @@ var ZoneEraAsia_Makassar = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Manila
+	// EraIndex: 403
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Makassar = zoneinfo.ZoneInfo{
-	ZoneID: 0x6aa21c85,
-	NameIndex: 292, // "Asia/Makassar"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Makassar,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Manila
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Manila = []zoneinfo.ZoneEra{
 	//             8:00    Phil    P%sT
 	{
-		ZonePolicy: &ZonePolicyPhil,
+		PolicyIndex: 62, // PolicyName: Phil
 		FormatIndex: 100, // "P%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8393,26 +7239,15 @@ var ZoneEraAsia_Manila = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Nicosia
+	// EraIndex: 404
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Manila = zoneinfo.ZoneInfo{
-	ZoneID: 0xc156c944,
-	NameIndex: 293, // "Asia/Manila"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Manila,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Nicosia
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Nicosia = []zoneinfo.ZoneEra{
 	//             2:00    EUAsia    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEUAsia,
+		PolicyIndex: 25, // PolicyName: EUAsia
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8423,26 +7258,15 @@ var ZoneEraAsia_Nicosia = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Novokuznetsk
+	// EraIndex: 405
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Nicosia = zoneinfo.ZoneInfo{
-	ZoneID: 0x4b0fcf78,
-	NameIndex: 295, // "Asia/Nicosia"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Nicosia,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Novokuznetsk
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Novokuznetsk = []zoneinfo.ZoneEra{
 	//              7:00    Russia    +07/+08    2010 Mar 28  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 20, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8452,9 +7276,10 @@ var ZoneEraAsia_Novokuznetsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8464,9 +7289,10 @@ var ZoneEraAsia_Novokuznetsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8477,26 +7303,15 @@ var ZoneEraAsia_Novokuznetsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Novosibirsk
+	// EraIndex: 408
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Novokuznetsk = zoneinfo.ZoneInfo{
-	ZoneID: 0x69264f93,
-	NameIndex: 296, // "Asia/Novokuznetsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Novokuznetsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Novosibirsk
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8506,9 +7321,10 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8518,9 +7334,10 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              6:00    -    +06    2016 Jul 24  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8530,9 +7347,10 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8543,26 +7361,15 @@ var ZoneEraAsia_Novosibirsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Omsk
+	// EraIndex: 412
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Novosibirsk = zoneinfo.ZoneInfo{
-	ZoneID: 0xa2a435cb,
-	NameIndex: 297, // "Asia/Novosibirsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Novosibirsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Omsk
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Omsk = []zoneinfo.ZoneEra{
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8572,9 +7379,10 @@ var ZoneEraAsia_Omsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8584,9 +7392,10 @@ var ZoneEraAsia_Omsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              6:00    -    +06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8597,26 +7406,15 @@ var ZoneEraAsia_Omsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Oral
+	// EraIndex: 415
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Omsk = zoneinfo.ZoneInfo{
-	ZoneID: 0x1faeddac,
-	NameIndex: 298, // "Asia/Omsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Omsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Oral
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Oral = []zoneinfo.ZoneEra{
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8626,9 +7424,10 @@ var ZoneEraAsia_Oral = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8639,26 +7438,15 @@ var ZoneEraAsia_Oral = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Pontianak
+	// EraIndex: 417
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Oral = zoneinfo.ZoneInfo{
-	ZoneID: 0x1faef0a0,
-	NameIndex: 299, // "Asia/Oral"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Oral,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Pontianak
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Pontianak = []zoneinfo.ZoneEra{
 	//             7:00    -    WIB
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 108, // "WIB"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8669,26 +7457,15 @@ var ZoneEraAsia_Pontianak = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Pyongyang
+	// EraIndex: 418
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Pontianak = zoneinfo.ZoneInfo{
-	ZoneID: 0x1a76c057,
-	NameIndex: 301, // "Asia/Pontianak"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Pontianak,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Pyongyang
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Pyongyang = []zoneinfo.ZoneEra{
 	//             9:00    -    KST    2015 Aug 15 00:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 92, // "KST"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8698,9 +7475,10 @@ var ZoneEraAsia_Pyongyang = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             8:30    -    KST    2018 May  4 23:30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 92, // "KST"
 		OffsetCode: 34,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8710,9 +7488,10 @@ var ZoneEraAsia_Pyongyang = []zoneinfo.ZoneEra{
 		UntilTimeCode: 94,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             9:00    -    KST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 92, // "KST"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8723,26 +7502,15 @@ var ZoneEraAsia_Pyongyang = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Qatar
+	// EraIndex: 421
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Pyongyang = zoneinfo.ZoneInfo{
-	ZoneID: 0x93ed1c8e,
-	NameIndex: 302, // "Asia/Pyongyang"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Pyongyang,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Qatar
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Qatar = []zoneinfo.ZoneEra{
 	//             3:00    -    +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8753,26 +7521,15 @@ var ZoneEraAsia_Qatar = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Qostanay
+	// EraIndex: 422
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Qatar = zoneinfo.ZoneInfo{
-	ZoneID: 0x15a8330b,
-	NameIndex: 303, // "Asia/Qatar"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Qatar,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Qostanay
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Qostanay = []zoneinfo.ZoneEra{
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8782,9 +7539,10 @@ var ZoneEraAsia_Qostanay = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             6:00    -    +06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8795,26 +7553,15 @@ var ZoneEraAsia_Qostanay = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Qyzylorda
+	// EraIndex: 424
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Qostanay = zoneinfo.ZoneInfo{
-	ZoneID: 0x654fe522,
-	NameIndex: 304, // "Asia/Qostanay"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Qostanay,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Qyzylorda
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Qyzylorda = []zoneinfo.ZoneEra{
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8824,9 +7571,10 @@ var ZoneEraAsia_Qyzylorda = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             6:00    -    +06    2018 Dec 21  0:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8836,9 +7584,10 @@ var ZoneEraAsia_Qyzylorda = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8849,26 +7598,15 @@ var ZoneEraAsia_Qyzylorda = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Riyadh
+	// EraIndex: 427
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Qyzylorda = zoneinfo.ZoneInfo{
-	ZoneID: 0x71282e81,
-	NameIndex: 305, // "Asia/Qyzylorda"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Qyzylorda,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Riyadh
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Riyadh = []zoneinfo.ZoneEra{
 	//             3:00    -    +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8879,26 +7617,15 @@ var ZoneEraAsia_Riyadh = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Sakhalin
+	// EraIndex: 428
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Riyadh = zoneinfo.ZoneInfo{
-	ZoneID: 0xcd973d93,
-	NameIndex: 307, // "Asia/Riyadh"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Riyadh,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Sakhalin
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 27, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8908,9 +7635,10 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8920,9 +7648,10 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             10:00    -    +10    2016 Mar 27  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8932,9 +7661,10 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    -    +11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8945,26 +7675,15 @@ var ZoneEraAsia_Sakhalin = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Samarkand
+	// EraIndex: 432
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Sakhalin = zoneinfo.ZoneInfo{
-	ZoneID: 0xf4a1c9bd,
-	NameIndex: 309, // "Asia/Sakhalin"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Sakhalin,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Samarkand
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Samarkand = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -8975,26 +7694,15 @@ var ZoneEraAsia_Samarkand = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Seoul
+	// EraIndex: 433
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Samarkand = zoneinfo.ZoneInfo{
-	ZoneID: 0x13ae5104,
-	NameIndex: 310, // "Asia/Samarkand"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Samarkand,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Seoul
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Seoul = []zoneinfo.ZoneEra{
 	//             9:00    ROK    K%sT
 	{
-		ZonePolicy: &ZonePolicyROK,
+		PolicyIndex: 63, // PolicyName: ROK
 		FormatIndex: 91, // "K%T"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9005,26 +7713,15 @@ var ZoneEraAsia_Seoul = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Shanghai
+	// EraIndex: 434
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Seoul = zoneinfo.ZoneInfo{
-	ZoneID: 0x15ce82da,
-	NameIndex: 311, // "Asia/Seoul"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Seoul,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Shanghai
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Shanghai = []zoneinfo.ZoneEra{
 	//             8:00    PRC    C%sT
 	{
-		ZonePolicy: &ZonePolicyPRC,
+		PolicyIndex: 57, // PolicyName: PRC
 		FormatIndex: 68, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9035,26 +7732,15 @@ var ZoneEraAsia_Shanghai = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Singapore
+	// EraIndex: 435
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Shanghai = zoneinfo.ZoneInfo{
-	ZoneID: 0xf895a7f5,
-	NameIndex: 312, // "Asia/Shanghai"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Shanghai,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Singapore
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Singapore = []zoneinfo.ZoneEra{
 	//             8:00    -    +08
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9065,26 +7751,15 @@ var ZoneEraAsia_Singapore = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Srednekolymsk
+	// EraIndex: 436
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Singapore = zoneinfo.ZoneInfo{
-	ZoneID: 0xcf8581fa,
-	NameIndex: 313, // "Asia/Singapore"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Singapore,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Srednekolymsk
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Srednekolymsk = []zoneinfo.ZoneEra{
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9094,9 +7769,10 @@ var ZoneEraAsia_Srednekolymsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             12:00    -    +12    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9106,9 +7782,10 @@ var ZoneEraAsia_Srednekolymsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    -    +11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9119,26 +7796,15 @@ var ZoneEraAsia_Srednekolymsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Taipei
+	// EraIndex: 439
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Srednekolymsk = zoneinfo.ZoneInfo{
-	ZoneID: 0xbf8e337d,
-	NameIndex: 314, // "Asia/Srednekolymsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Srednekolymsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Taipei
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Taipei = []zoneinfo.ZoneEra{
 	//             8:00    Taiwan    C%sT
 	{
-		ZonePolicy: &ZonePolicyTaiwan,
+		PolicyIndex: 72, // PolicyName: Taiwan
 		FormatIndex: 68, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9149,26 +7815,15 @@ var ZoneEraAsia_Taipei = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Tashkent
+	// EraIndex: 440
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Taipei = zoneinfo.ZoneInfo{
-	ZoneID: 0xd1a844ae,
-	NameIndex: 315, // "Asia/Taipei"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Taipei,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Tashkent
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Tashkent = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9179,26 +7834,15 @@ var ZoneEraAsia_Tashkent = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Tbilisi
+	// EraIndex: 441
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Tashkent = zoneinfo.ZoneInfo{
-	ZoneID: 0xf3924254,
-	NameIndex: 316, // "Asia/Tashkent"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Tashkent,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Tbilisi
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Tbilisi = []zoneinfo.ZoneEra{
 	//             4:00 E-EurAsia    +04/+05    2004 Jun 27
 	{
-		ZonePolicy: &ZonePolicyE_EurAsia,
+		PolicyIndex: 23, // PolicyName: E-EurAsia
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9208,9 +7852,10 @@ var ZoneEraAsia_Tbilisi = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             3:00 RussiaAsia    +03/+04    2005 Mar lastSun  2:00
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9220,9 +7865,10 @@ var ZoneEraAsia_Tbilisi = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             4:00    -    +04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9233,26 +7879,15 @@ var ZoneEraAsia_Tbilisi = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Tehran
+	// EraIndex: 444
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Tbilisi = zoneinfo.ZoneInfo{
-	ZoneID: 0x0903e442,
-	NameIndex: 317, // "Asia/Tbilisi"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Tbilisi,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Tehran
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Tehran = []zoneinfo.ZoneEra{
 	//             3:30    Iran    +0330/+0430
 	{
-		ZonePolicy: &ZonePolicyIran,
+		PolicyIndex: 37, // PolicyName: Iran
 		FormatIndex: 8, // "+0330/+0430"
 		OffsetCode: 14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9263,26 +7898,15 @@ var ZoneEraAsia_Tehran = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Thimphu
+	// EraIndex: 445
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Tehran = zoneinfo.ZoneInfo{
-	ZoneID: 0xd1f02254,
-	NameIndex: 318, // "Asia/Tehran"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Tehran,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Thimphu
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Thimphu = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9293,26 +7917,15 @@ var ZoneEraAsia_Thimphu = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Tokyo
+	// EraIndex: 446
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Thimphu = zoneinfo.ZoneInfo{
-	ZoneID: 0x170380d1,
-	NameIndex: 321, // "Asia/Thimphu"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Thimphu,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Tokyo
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Tokyo = []zoneinfo.ZoneEra{
 	//             9:00    Japan    J%sT
 	{
-		ZonePolicy: &ZonePolicyJapan,
+		PolicyIndex: 39, // PolicyName: Japan
 		FormatIndex: 90, // "J%T"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9323,26 +7936,15 @@ var ZoneEraAsia_Tokyo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Tomsk
+	// EraIndex: 447
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Tokyo = zoneinfo.ZoneInfo{
-	ZoneID: 0x15e606a8,
-	NameIndex: 322, // "Asia/Tokyo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Tokyo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Tomsk
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 	//              7:00    Russia    +07/+08    2002 May  1  3:00
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 20, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9352,9 +7954,10 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 12,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 17, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9364,9 +7967,10 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9376,9 +7980,10 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              6:00    -    +06    2016 May 29  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9388,9 +7993,10 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              7:00    -    +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9401,26 +8007,15 @@ var ZoneEraAsia_Tomsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Ulaanbaatar
+	// EraIndex: 452
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Tomsk = zoneinfo.ZoneInfo{
-	ZoneID: 0x15e60e60,
-	NameIndex: 323, // "Asia/Tomsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Tomsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Ulaanbaatar
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Ulaanbaatar = []zoneinfo.ZoneEra{
 	//             8:00    Mongol    +08/+09
 	{
-		ZonePolicy: &ZonePolicyMongol,
+		PolicyIndex: 50, // PolicyName: Mongol
 		FormatIndex: 22, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9431,26 +8026,15 @@ var ZoneEraAsia_Ulaanbaatar = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Urumqi
+	// EraIndex: 453
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Ulaanbaatar = zoneinfo.ZoneInfo{
-	ZoneID: 0x30f0cc4e,
-	NameIndex: 325, // "Asia/Ulaanbaatar"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Ulaanbaatar,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Urumqi
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Urumqi = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9461,26 +8045,15 @@ var ZoneEraAsia_Urumqi = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Ust-Nera
+	// EraIndex: 454
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Urumqi = zoneinfo.ZoneInfo{
-	ZoneID: 0xd5379735,
-	NameIndex: 327, // "Asia/Urumqi"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Urumqi,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Ust-Nera
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9490,9 +8063,10 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             12:00    -    +12    2011 Sep 13  0:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9502,9 +8076,10 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9514,9 +8089,10 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             10:00    -    +10
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9527,26 +8103,15 @@ var ZoneEraAsia_Ust_Nera = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Vladivostok
+	// EraIndex: 458
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Ust_Nera = zoneinfo.ZoneInfo{
-	ZoneID: 0x4785f921,
-	NameIndex: 328, // "Asia/Ust-Nera"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Ust_Nera,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Vladivostok
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Vladivostok = []zoneinfo.ZoneEra{
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 27, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9556,9 +8121,10 @@ var ZoneEraAsia_Vladivostok = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9568,9 +8134,10 @@ var ZoneEraAsia_Vladivostok = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             10:00    -    +10
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9581,26 +8148,15 @@ var ZoneEraAsia_Vladivostok = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Yakutsk
+	// EraIndex: 461
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Vladivostok = zoneinfo.ZoneInfo{
-	ZoneID: 0x29de34a8,
-	NameIndex: 330, // "Asia/Vladivostok"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Vladivostok,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Yakutsk
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Yakutsk = []zoneinfo.ZoneEra{
 	//              9:00    Russia    +09/+10    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 25, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9610,9 +8166,10 @@ var ZoneEraAsia_Yakutsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9622,9 +8179,10 @@ var ZoneEraAsia_Yakutsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              9:00    -    +09
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9635,26 +8193,15 @@ var ZoneEraAsia_Yakutsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Yangon
+	// EraIndex: 464
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Yakutsk = zoneinfo.ZoneInfo{
-	ZoneID: 0x87bb3a9e,
-	NameIndex: 331, // "Asia/Yakutsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Yakutsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Yangon
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Yangon = []zoneinfo.ZoneEra{
 	//             6:30    -    +0630
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 18, // "+0630"
 		OffsetCode: 26,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9665,26 +8212,15 @@ var ZoneEraAsia_Yangon = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Yekaterinburg
+	// EraIndex: 465
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Yangon = zoneinfo.ZoneInfo{
-	ZoneID: 0xdd54a8be,
-	NameIndex: 332, // "Asia/Yangon"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Yangon,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Yekaterinburg
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Yekaterinburg = []zoneinfo.ZoneEra{
 	//              5:00    Russia    +05/+06    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 13, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9694,9 +8230,10 @@ var ZoneEraAsia_Yekaterinburg = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              6:00    -    +06    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9706,9 +8243,10 @@ var ZoneEraAsia_Yekaterinburg = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9719,26 +8257,15 @@ var ZoneEraAsia_Yekaterinburg = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Asia/Yerevan
+	// EraIndex: 468
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Yekaterinburg = zoneinfo.ZoneInfo{
-	ZoneID: 0xfb544c6e,
-	NameIndex: 333, // "Asia/Yekaterinburg"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Yekaterinburg,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Asia/Yerevan
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAsia_Yerevan = []zoneinfo.ZoneEra{
 	//             4:00 RussiaAsia    +04/+05    2011
 	{
-		ZonePolicy: &ZonePolicyRussiaAsia,
+		PolicyIndex: 65, // PolicyName: RussiaAsia
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9748,9 +8275,10 @@ var ZoneEraAsia_Yerevan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             4:00    Armenia    +04/+05
 	{
-		ZonePolicy: &ZonePolicyArmenia,
+		PolicyIndex: 8, // PolicyName: Armenia
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9761,26 +8289,15 @@ var ZoneEraAsia_Yerevan = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Azores
+	// EraIndex: 470
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAsia_Yerevan = zoneinfo.ZoneInfo{
-	ZoneID: 0x9185c8cc,
-	NameIndex: 334, // "Asia/Yerevan"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAsia_Yerevan,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Atlantic/Azores
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAtlantic_Azores = []zoneinfo.ZoneEra{
 	//             -1:00    EU    -01/+00
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 40, // "-01/+00"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9791,26 +8308,15 @@ var ZoneEraAtlantic_Azores = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Bermuda
+	// EraIndex: 471
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAtlantic_Azores = zoneinfo.ZoneInfo{
-	ZoneID: 0xf93ed918,
-	NameIndex: 335, // "Atlantic/Azores"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAtlantic_Azores,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Atlantic/Bermuda
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAtlantic_Bermuda = []zoneinfo.ZoneEra{
 	//             -4:00    US    A%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 61, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9821,26 +8327,15 @@ var ZoneEraAtlantic_Bermuda = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Canary
+	// EraIndex: 472
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAtlantic_Bermuda = zoneinfo.ZoneInfo{
-	ZoneID: 0x3d4bb1c4,
-	NameIndex: 336, // "Atlantic/Bermuda"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAtlantic_Bermuda,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Atlantic/Canary
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAtlantic_Canary = []zoneinfo.ZoneEra{
 	//              0:00    EU    WE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9851,26 +8346,15 @@ var ZoneEraAtlantic_Canary = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Cape_Verde
+	// EraIndex: 473
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAtlantic_Canary = zoneinfo.ZoneInfo{
-	ZoneID: 0xfc23f2c2,
-	NameIndex: 337, // "Atlantic/Canary"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAtlantic_Canary,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Atlantic/Cape_Verde
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAtlantic_Cape_Verde = []zoneinfo.ZoneEra{
 	//             -1:00    -    -01
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 39, // "-01"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9881,26 +8365,15 @@ var ZoneEraAtlantic_Cape_Verde = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Faroe
+	// EraIndex: 474
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAtlantic_Cape_Verde = zoneinfo.ZoneInfo{
-	ZoneID: 0x5c5e1772,
-	NameIndex: 338, // "Atlantic/Cape_Verde"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAtlantic_Cape_Verde,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Atlantic/Faroe
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAtlantic_Faroe = []zoneinfo.ZoneEra{
 	//              0:00    EU    WE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9911,26 +8384,15 @@ var ZoneEraAtlantic_Faroe = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Madeira
+	// EraIndex: 475
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAtlantic_Faroe = zoneinfo.ZoneInfo{
-	ZoneID: 0xe110a971,
-	NameIndex: 340, // "Atlantic/Faroe"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAtlantic_Faroe,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Atlantic/Madeira
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAtlantic_Madeira = []zoneinfo.ZoneEra{
 	//              0:00    EU    WE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9941,26 +8403,15 @@ var ZoneEraAtlantic_Madeira = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/South_Georgia
+	// EraIndex: 476
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAtlantic_Madeira = zoneinfo.ZoneInfo{
-	ZoneID: 0x81b5c037,
-	NameIndex: 342, // "Atlantic/Madeira"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAtlantic_Madeira,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Atlantic/South_Georgia
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAtlantic_South_Georgia = []zoneinfo.ZoneEra{
 	//             -2:00    -    -02
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -9971,26 +8422,15 @@ var ZoneEraAtlantic_South_Georgia = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Stanley
+	// EraIndex: 477
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAtlantic_South_Georgia = zoneinfo.ZoneInfo{
-	ZoneID: 0x33013174,
-	NameIndex: 344, // "Atlantic/South_Georgia"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAtlantic_South_Georgia,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Atlantic/Stanley
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAtlantic_Stanley = []zoneinfo.ZoneEra{
 	//             -4:00    Falk    -04/-03    2010 Sep  5  2:00
 	{
-		ZonePolicy: &ZonePolicyFalk,
+		PolicyIndex: 29, // PolicyName: Falk
 		FormatIndex: 46, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10000,9 +8440,10 @@ var ZoneEraAtlantic_Stanley = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             -3:00    -    -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10013,26 +8454,15 @@ var ZoneEraAtlantic_Stanley = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Adelaide
+	// EraIndex: 479
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAtlantic_Stanley = zoneinfo.ZoneInfo{
-	ZoneID: 0x7bb3e1c4,
-	NameIndex: 346, // "Atlantic/Stanley"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAtlantic_Stanley,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Adelaide
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Adelaide = []zoneinfo.ZoneEra{
 	//             9:30    AS    AC%sT
 	{
-		ZonePolicy: &ZonePolicyAS,
+		PolicyIndex: 3, // PolicyName: AS
 		FormatIndex: 62, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10043,26 +8473,15 @@ var ZoneEraAustralia_Adelaide = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Brisbane
+	// EraIndex: 480
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Adelaide = zoneinfo.ZoneInfo{
-	ZoneID: 0x2428e8a3,
-	NameIndex: 348, // "Australia/Adelaide"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Adelaide,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Brisbane
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Brisbane = []zoneinfo.ZoneEra{
 	//             10:00    AQ    AE%sT
 	{
-		ZonePolicy: &ZonePolicyAQ,
+		PolicyIndex: 2, // PolicyName: AQ
 		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10073,26 +8492,15 @@ var ZoneEraAustralia_Brisbane = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Broken_Hill
+	// EraIndex: 481
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Brisbane = zoneinfo.ZoneInfo{
-	ZoneID: 0x4fedc9c0,
-	NameIndex: 349, // "Australia/Brisbane"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Brisbane,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Broken_Hill
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Broken_Hill = []zoneinfo.ZoneEra{
 	//             9:30    AN    AC%sT    2000
 	{
-		ZonePolicy: &ZonePolicyAN,
+		PolicyIndex: 1, // PolicyName: AN
 		FormatIndex: 62, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10102,9 +8510,10 @@ var ZoneEraAustralia_Broken_Hill = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             9:30    AS    AC%sT
 	{
-		ZonePolicy: &ZonePolicyAS,
+		PolicyIndex: 3, // PolicyName: AS
 		FormatIndex: 62, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10115,26 +8524,15 @@ var ZoneEraAustralia_Broken_Hill = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Darwin
+	// EraIndex: 483
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Broken_Hill = zoneinfo.ZoneInfo{
-	ZoneID: 0xb06eada3,
-	NameIndex: 350, // "Australia/Broken_Hill"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Broken_Hill,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Darwin
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Darwin = []zoneinfo.ZoneEra{
 	//              9:30    Aus    AC%sT
 	{
-		ZonePolicy: &ZonePolicyAus,
+		PolicyIndex: 9, // PolicyName: Aus
 		FormatIndex: 62, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10145,26 +8543,15 @@ var ZoneEraAustralia_Darwin = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Eucla
+	// EraIndex: 484
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Darwin = zoneinfo.ZoneInfo{
-	ZoneID: 0x2876bdff,
-	NameIndex: 353, // "Australia/Darwin"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Darwin,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Eucla
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Eucla = []zoneinfo.ZoneEra{
 	//              8:45    AW  +0845/+0945
 	{
-		ZonePolicy: &ZonePolicyAW,
+		PolicyIndex: 6, // PolicyName: AW
 		FormatIndex: 23, // "+0845/+0945"
 		OffsetCode: 35,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10175,26 +8562,15 @@ var ZoneEraAustralia_Eucla = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Hobart
+	// EraIndex: 485
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Eucla = zoneinfo.ZoneInfo{
-	ZoneID: 0x8cf99e44,
-	NameIndex: 354, // "Australia/Eucla"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Eucla,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Hobart
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Hobart = []zoneinfo.ZoneEra{
 	//             10:00    AT    AE%sT
 	{
-		ZonePolicy: &ZonePolicyAT,
+		PolicyIndex: 4, // PolicyName: AT
 		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10205,26 +8581,15 @@ var ZoneEraAustralia_Hobart = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Lindeman
+	// EraIndex: 486
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Hobart = zoneinfo.ZoneInfo{
-	ZoneID: 0x32bf951a,
-	NameIndex: 355, // "Australia/Hobart"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Hobart,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Lindeman
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Lindeman = []zoneinfo.ZoneEra{
 	//             10:00    Holiday    AE%sT
 	{
-		ZonePolicy: &ZonePolicyHoliday,
+		PolicyIndex: 35, // PolicyName: Holiday
 		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10235,26 +8600,15 @@ var ZoneEraAustralia_Lindeman = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Lord_Howe
+	// EraIndex: 487
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Lindeman = zoneinfo.ZoneInfo{
-	ZoneID: 0xe05029e2,
-	NameIndex: 357, // "Australia/Lindeman"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Lindeman,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Lord_Howe
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Lord_Howe = []zoneinfo.ZoneEra{
 	//             10:30    LH    +1030/+11
 	{
-		ZonePolicy: &ZonePolicyLH,
+		PolicyIndex: 42, // PolicyName: LH
 		FormatIndex: 28, // "+1030/+11"
 		OffsetCode: 42,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10265,26 +8619,15 @@ var ZoneEraAustralia_Lord_Howe = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Melbourne
+	// EraIndex: 488
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Lord_Howe = zoneinfo.ZoneInfo{
-	ZoneID: 0xa748b67d,
-	NameIndex: 358, // "Australia/Lord_Howe"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Lord_Howe,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Melbourne
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Melbourne = []zoneinfo.ZoneEra{
 	//             10:00    AV    AE%sT
 	{
-		ZonePolicy: &ZonePolicyAV,
+		PolicyIndex: 5, // PolicyName: AV
 		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10295,26 +8638,15 @@ var ZoneEraAustralia_Melbourne = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Perth
+	// EraIndex: 489
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Melbourne = zoneinfo.ZoneInfo{
-	ZoneID: 0x0fe559a3,
-	NameIndex: 359, // "Australia/Melbourne"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Melbourne,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Perth
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Perth = []zoneinfo.ZoneEra{
 	//              8:00    AW    AW%sT
 	{
-		ZonePolicy: &ZonePolicyAW,
+		PolicyIndex: 6, // PolicyName: AW
 		FormatIndex: 67, // "AW%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10325,26 +8657,15 @@ var ZoneEraAustralia_Perth = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Australia/Sydney
+	// EraIndex: 490
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Perth = zoneinfo.ZoneInfo{
-	ZoneID: 0x8db8269d,
-	NameIndex: 362, // "Australia/Perth"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Perth,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Australia/Sydney
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraAustralia_Sydney = []zoneinfo.ZoneEra{
 	//             10:00    AN    AE%sT
 	{
-		ZonePolicy: &ZonePolicyAN,
+		PolicyIndex: 1, // PolicyName: AN
 		FormatIndex: 63, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10355,26 +8676,15 @@ var ZoneEraAustralia_Sydney = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: CET
+	// EraIndex: 491
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneAustralia_Sydney = zoneinfo.ZoneInfo{
-	ZoneID: 0x4d1e9776,
-	NameIndex: 365, // "Australia/Sydney"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraAustralia_Sydney,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: CET
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraCET = []zoneinfo.ZoneEra{
 	// 1:00 C-Eur CE%sT
 	{
-		ZonePolicy: &ZonePolicyC_Eur,
+		PolicyIndex: 14, // PolicyName: C-Eur
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10385,26 +8695,15 @@ var ZoneEraCET = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: CST6CDT
+	// EraIndex: 492
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneCET = zoneinfo.ZoneInfo{
-	ZoneID: 0x0b87d921,
-	NameIndex: 374, // "CET"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraCET,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: CST6CDT
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraCST6CDT = []zoneinfo.ZoneEra{
 	// -6:00 US C%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 68, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10415,26 +8714,15 @@ var ZoneEraCST6CDT = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: EET
+	// EraIndex: 493
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneCST6CDT = zoneinfo.ZoneInfo{
-	ZoneID: 0xf0e87d00,
-	NameIndex: 375, // "CST6CDT"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraCST6CDT,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: EET
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEET = []zoneinfo.ZoneEra{
 	// 2:00 EU EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10445,26 +8733,15 @@ var ZoneEraEET = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: EST
+	// EraIndex: 494
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEET = zoneinfo.ZoneInfo{
-	ZoneID: 0x0b87e1a3,
-	NameIndex: 387, // "EET"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEET,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: EST
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEST = []zoneinfo.ZoneEra{
 	// -5:00 - EST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 80, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10475,26 +8752,15 @@ var ZoneEraEST = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: EST5EDT
+	// EraIndex: 495
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEST = zoneinfo.ZoneInfo{
-	ZoneID: 0x0b87e371,
-	NameIndex: 388, // "EST"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEST,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: EST5EDT
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEST5EDT = []zoneinfo.ZoneEra{
 	// -5:00 US E%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 75, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10505,26 +8771,15 @@ var ZoneEraEST5EDT = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT
+	// EraIndex: 496
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEST5EDT = zoneinfo.ZoneInfo{
-	ZoneID: 0x8adc72a3,
-	NameIndex: 389, // "EST5EDT"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEST5EDT,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT = []zoneinfo.ZoneEra{
 	// 0 - GMT
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 82, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10535,26 +8790,15 @@ var ZoneEraEtc_GMT = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+1
+	// EraIndex: 497
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT = zoneinfo.ZoneInfo{
-	ZoneID: 0xd8e2de58,
-	NameIndex: 392, // "Etc/GMT"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+1
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_1 = []zoneinfo.ZoneEra{
 	// -1 - -01
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 39, // "-01"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10565,26 +8809,15 @@ var ZoneEraEtc_GMT_PLUS_1 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+10
+	// EraIndex: 498
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_1 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da14,
-	NameIndex: 394, // "Etc/GMT+1"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_1,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+10
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_10 = []zoneinfo.ZoneEra{
 	// -10 - -10
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-10"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10595,26 +8828,15 @@ var ZoneEraEtc_GMT_PLUS_10 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+11
+	// EraIndex: 499
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_10 = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f8f1cc4,
-	NameIndex: 395, // "Etc/GMT+10"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_10,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+11
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_11 = []zoneinfo.ZoneEra{
 	// -11 - -11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 58, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10625,26 +8847,15 @@ var ZoneEraEtc_GMT_PLUS_11 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+12
+	// EraIndex: 500
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_11 = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f8f1cc5,
-	NameIndex: 396, // "Etc/GMT+11"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_11,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+12
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_12 = []zoneinfo.ZoneEra{
 	// -12 - -12
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 60, // "-12"
 		OffsetCode: -48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10655,26 +8866,15 @@ var ZoneEraEtc_GMT_PLUS_12 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+2
+	// EraIndex: 501
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_12 = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f8f1cc6,
-	NameIndex: 397, // "Etc/GMT+12"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_12,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+2
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_2 = []zoneinfo.ZoneEra{
 	// -2 - -02
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 41, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10685,26 +8885,15 @@ var ZoneEraEtc_GMT_PLUS_2 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+3
+	// EraIndex: 502
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_2 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da15,
-	NameIndex: 398, // "Etc/GMT+2"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_2,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+3
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_3 = []zoneinfo.ZoneEra{
 	// -3 - -03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10715,26 +8904,15 @@ var ZoneEraEtc_GMT_PLUS_3 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+4
+	// EraIndex: 503
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_3 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da16,
-	NameIndex: 399, // "Etc/GMT+3"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_3,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+4
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_4 = []zoneinfo.ZoneEra{
 	// -4 - -04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10745,26 +8923,15 @@ var ZoneEraEtc_GMT_PLUS_4 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+5
+	// EraIndex: 504
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_4 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da17,
-	NameIndex: 400, // "Etc/GMT+4"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_4,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+5
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_5 = []zoneinfo.ZoneEra{
 	// -5 - -05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 48, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10775,26 +8942,15 @@ var ZoneEraEtc_GMT_PLUS_5 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+6
+	// EraIndex: 505
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_5 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da18,
-	NameIndex: 401, // "Etc/GMT+5"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_5,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+6
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_6 = []zoneinfo.ZoneEra{
 	// -6 - -06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 50, // "-06"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10805,26 +8961,15 @@ var ZoneEraEtc_GMT_PLUS_6 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+7
+	// EraIndex: 506
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_6 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da19,
-	NameIndex: 402, // "Etc/GMT+6"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_6,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+7
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_7 = []zoneinfo.ZoneEra{
 	// -7 - -07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 52, // "-07"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10835,26 +8980,15 @@ var ZoneEraEtc_GMT_PLUS_7 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+8
+	// EraIndex: 507
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_7 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da1a,
-	NameIndex: 403, // "Etc/GMT+7"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_7,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+8
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_8 = []zoneinfo.ZoneEra{
 	// -8 - -08
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-08"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10865,26 +8999,15 @@ var ZoneEraEtc_GMT_PLUS_8 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT+9
+	// EraIndex: 508
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_8 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da1b,
-	NameIndex: 404, // "Etc/GMT+8"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_8,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT+9
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_PLUS_9 = []zoneinfo.ZoneEra{
 	// -9 - -09
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 54, // "-09"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10895,26 +9018,15 @@ var ZoneEraEtc_GMT_PLUS_9 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-1
+	// EraIndex: 509
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_PLUS_9 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da1c,
-	NameIndex: 405, // "Etc/GMT+9"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_PLUS_9,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-1
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_1 = []zoneinfo.ZoneEra{
 	// 1 - +01
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 3, // "+01"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10925,26 +9037,15 @@ var ZoneEraEtc_GMT_1 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-10
+	// EraIndex: 510
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_1 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da56,
-	NameIndex: 407, // "Etc/GMT-1"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_1,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-10
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_10 = []zoneinfo.ZoneEra{
 	// 10 - +10
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10955,26 +9056,15 @@ var ZoneEraEtc_GMT_10 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-11
+	// EraIndex: 511
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_10 = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f8f2546,
-	NameIndex: 408, // "Etc/GMT-10"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_10,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-11
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_11 = []zoneinfo.ZoneEra{
 	// 11 - +11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -10985,26 +9075,15 @@ var ZoneEraEtc_GMT_11 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-12
+	// EraIndex: 512
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_11 = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f8f2547,
-	NameIndex: 409, // "Etc/GMT-11"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_11,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-12
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_12 = []zoneinfo.ZoneEra{
 	// 12 - +12
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11015,26 +9094,15 @@ var ZoneEraEtc_GMT_12 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-13
+	// EraIndex: 513
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_12 = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f8f2548,
-	NameIndex: 410, // "Etc/GMT-12"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_12,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-13
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_13 = []zoneinfo.ZoneEra{
 	// 13 - +13
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11045,26 +9113,15 @@ var ZoneEraEtc_GMT_13 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-14
+	// EraIndex: 514
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_13 = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f8f2549,
-	NameIndex: 411, // "Etc/GMT-13"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_13,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-14
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_14 = []zoneinfo.ZoneEra{
 	// 14 - +14
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 37, // "+14"
 		OffsetCode: 56,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11075,26 +9132,15 @@ var ZoneEraEtc_GMT_14 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-2
+	// EraIndex: 515
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_14 = zoneinfo.ZoneInfo{
-	ZoneID: 0x3f8f254a,
-	NameIndex: 412, // "Etc/GMT-14"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_14,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-2
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_2 = []zoneinfo.ZoneEra{
 	// 2 - +02
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 5, // "+02"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11105,26 +9151,15 @@ var ZoneEraEtc_GMT_2 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-3
+	// EraIndex: 516
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_2 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da57,
-	NameIndex: 413, // "Etc/GMT-2"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_2,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-3
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_3 = []zoneinfo.ZoneEra{
 	// 3 - +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11135,26 +9170,15 @@ var ZoneEraEtc_GMT_3 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-4
+	// EraIndex: 517
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_3 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da58,
-	NameIndex: 414, // "Etc/GMT-3"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_3,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-4
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_4 = []zoneinfo.ZoneEra{
 	// 4 - +04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11165,26 +9189,15 @@ var ZoneEraEtc_GMT_4 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-5
+	// EraIndex: 518
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_4 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da59,
-	NameIndex: 415, // "Etc/GMT-4"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_4,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-5
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_5 = []zoneinfo.ZoneEra{
 	// 5 - +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11195,26 +9208,15 @@ var ZoneEraEtc_GMT_5 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-6
+	// EraIndex: 519
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_5 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da5a,
-	NameIndex: 416, // "Etc/GMT-5"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_5,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-6
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_6 = []zoneinfo.ZoneEra{
 	// 6 - +06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11225,26 +9227,15 @@ var ZoneEraEtc_GMT_6 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-7
+	// EraIndex: 520
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_6 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da5b,
-	NameIndex: 417, // "Etc/GMT-6"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_6,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-7
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_7 = []zoneinfo.ZoneEra{
 	// 7 - +07
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11255,26 +9246,15 @@ var ZoneEraEtc_GMT_7 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-8
+	// EraIndex: 521
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_7 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da5c,
-	NameIndex: 418, // "Etc/GMT-7"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_7,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-8
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_8 = []zoneinfo.ZoneEra{
 	// 8 - +08
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 21, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11285,26 +9265,15 @@ var ZoneEraEtc_GMT_8 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/GMT-9
+	// EraIndex: 522
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_8 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da5d,
-	NameIndex: 419, // "Etc/GMT-8"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_8,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/GMT-9
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_GMT_9 = []zoneinfo.ZoneEra{
 	// 9 - +09
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11315,26 +9284,15 @@ var ZoneEraEtc_GMT_9 = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Etc/UTC
+	// EraIndex: 523
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_GMT_9 = zoneinfo.ZoneInfo{
-	ZoneID: 0x9d13da5e,
-	NameIndex: 420, // "Etc/GMT-9"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_GMT_9,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Etc/UTC
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 	// 0 - UTC
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 105, // "UTC"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11345,26 +9303,15 @@ var ZoneEraEtc_UTC = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Andorra
+	// EraIndex: 524
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEtc_UTC = zoneinfo.ZoneInfo{
-	ZoneID: 0xd8e31abc,
-	NameIndex: 424, // "Etc/UTC"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEtc_UTC,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Andorra
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Andorra = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11375,26 +9322,15 @@ var ZoneEraEurope_Andorra = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Astrakhan
+	// EraIndex: 525
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Andorra = zoneinfo.ZoneInfo{
-	ZoneID: 0x97f6764b,
-	NameIndex: 428, // "Europe/Andorra"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Andorra,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Astrakhan
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11404,9 +9340,10 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11416,9 +9353,10 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    +03    2016 Mar 27  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11428,9 +9366,10 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11441,26 +9380,15 @@ var ZoneEraEurope_Astrakhan = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Athens
+	// EraIndex: 529
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Astrakhan = zoneinfo.ZoneInfo{
-	ZoneID: 0xe22256e1,
-	NameIndex: 429, // "Europe/Astrakhan"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Astrakhan,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Athens
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Athens = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11471,26 +9399,15 @@ var ZoneEraEurope_Athens = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Belgrade
+	// EraIndex: 530
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Athens = zoneinfo.ZoneInfo{
-	ZoneID: 0x4318fa27,
-	NameIndex: 430, // "Europe/Athens"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Athens,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Belgrade
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Belgrade = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11501,26 +9418,15 @@ var ZoneEraEurope_Belgrade = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Berlin
+	// EraIndex: 531
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Belgrade = zoneinfo.ZoneInfo{
-	ZoneID: 0xe0532b3a,
-	NameIndex: 432, // "Europe/Belgrade"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Belgrade,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Berlin
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Berlin = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11531,26 +9437,15 @@ var ZoneEraEurope_Berlin = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Brussels
+	// EraIndex: 532
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Berlin = zoneinfo.ZoneInfo{
-	ZoneID: 0x44644c20,
-	NameIndex: 433, // "Europe/Berlin"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Berlin,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Brussels
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Brussels = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11561,26 +9456,15 @@ var ZoneEraEurope_Brussels = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Bucharest
+	// EraIndex: 533
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Brussels = zoneinfo.ZoneInfo{
-	ZoneID: 0xdee07337,
-	NameIndex: 435, // "Europe/Brussels"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Brussels,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Bucharest
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Bucharest = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11591,26 +9475,15 @@ var ZoneEraEurope_Bucharest = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Budapest
+	// EraIndex: 534
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Bucharest = zoneinfo.ZoneInfo{
-	ZoneID: 0xfb349ec5,
-	NameIndex: 436, // "Europe/Bucharest"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Bucharest,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Budapest
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Budapest = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11621,26 +9494,15 @@ var ZoneEraEurope_Budapest = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Chisinau
+	// EraIndex: 535
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Budapest = zoneinfo.ZoneInfo{
-	ZoneID: 0x9ce0197c,
-	NameIndex: 437, // "Europe/Budapest"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Budapest,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Chisinau
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Chisinau = []zoneinfo.ZoneEra{
 	//             2:00    Moldova    EE%sT
 	{
-		ZonePolicy: &ZonePolicyMoldova,
+		PolicyIndex: 48, // PolicyName: Moldova
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11651,26 +9513,15 @@ var ZoneEraEurope_Chisinau = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Dublin
+	// EraIndex: 536
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Chisinau = zoneinfo.ZoneInfo{
-	ZoneID: 0xad58aa18,
-	NameIndex: 439, // "Europe/Chisinau"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Chisinau,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Dublin
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Dublin = []zoneinfo.ZoneEra{
 	//              1:00    Eire    IST/GMT
 	{
-		ZonePolicy: &ZonePolicyEire,
+		PolicyIndex: 28, // PolicyName: Eire
 		FormatIndex: 89, // "IST/GMT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11681,26 +9532,15 @@ var ZoneEraEurope_Dublin = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Gibraltar
+	// EraIndex: 537
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Dublin = zoneinfo.ZoneInfo{
-	ZoneID: 0x4a275f62,
-	NameIndex: 441, // "Europe/Dublin"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Dublin,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Gibraltar
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Gibraltar = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11711,26 +9551,15 @@ var ZoneEraEurope_Gibraltar = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Helsinki
+	// EraIndex: 538
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Gibraltar = zoneinfo.ZoneInfo{
-	ZoneID: 0xf8e325fc,
-	NameIndex: 442, // "Europe/Gibraltar"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Gibraltar,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Helsinki
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Helsinki = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11741,26 +9570,15 @@ var ZoneEraEurope_Helsinki = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Istanbul
+	// EraIndex: 539
+	// EraCount: 9
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Helsinki = zoneinfo.ZoneInfo{
-	ZoneID: 0x6ab2975b,
-	NameIndex: 444, // "Europe/Helsinki"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Helsinki,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Istanbul
-// Era count: 9
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 	//             2:00    Turkey    EE%sT    2007
 	{
-		ZonePolicy: &ZonePolicyTurkey,
+		PolicyIndex: 77, // PolicyName: Turkey
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11770,9 +9588,10 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    EU    EE%sT    2011 Mar 27  1:00u
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11782,9 +9601,10 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             2:00    -    EET    2011 Mar 28  1:00u
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11794,9 +9614,10 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             2:00    EU    EE%sT    2014 Mar 30  1:00u
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11806,9 +9627,10 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             2:00    -    EET    2014 Mar 31  1:00u
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11818,9 +9640,10 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             2:00    EU    EE%sT    2015 Oct 25  1:00u
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11830,9 +9653,10 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             2:00    1:00    EEST    2015 Nov  8  1:00u
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 78, // "EEST"
 		OffsetCode: 8,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
@@ -11842,9 +9666,10 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             2:00    EU    EE%sT    2016 Sep  7
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11854,9 +9679,10 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             3:00    -    +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11867,26 +9693,15 @@ var ZoneEraEurope_Istanbul = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Kaliningrad
+	// EraIndex: 548
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Istanbul = zoneinfo.ZoneInfo{
-	ZoneID: 0x9e09d6e6,
-	NameIndex: 446, // "Europe/Istanbul"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Istanbul,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Kaliningrad
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Kaliningrad = []zoneinfo.ZoneEra{
 	//              2:00    Russia    EE%sT    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11896,9 +9711,10 @@ var ZoneEraEurope_Kaliningrad = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    +03    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11908,9 +9724,10 @@ var ZoneEraEurope_Kaliningrad = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              2:00    -    EET
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11921,26 +9738,15 @@ var ZoneEraEurope_Kaliningrad = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Kirov
+	// EraIndex: 551
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Kaliningrad = zoneinfo.ZoneInfo{
-	ZoneID: 0xd33b2f28,
-	NameIndex: 448, // "Europe/Kaliningrad"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Kaliningrad,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Kirov
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Kirov = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11950,9 +9756,10 @@ var ZoneEraEurope_Kirov = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11962,9 +9769,10 @@ var ZoneEraEurope_Kirov = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -11975,26 +9783,15 @@ var ZoneEraEurope_Kirov = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Kyiv
+	// EraIndex: 554
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Kirov = zoneinfo.ZoneInfo{
-	ZoneID: 0xfaf5abef,
-	NameIndex: 450, // "Europe/Kirov"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Kirov,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Kyiv
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Kyiv = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12005,26 +9802,15 @@ var ZoneEraEurope_Kyiv = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Lisbon
+	// EraIndex: 555
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Kyiv = zoneinfo.ZoneInfo{
-	ZoneID: 0xa2c1e347,
-	NameIndex: 451, // "Europe/Kyiv"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Kyiv,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Lisbon
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Lisbon = []zoneinfo.ZoneEra{
 	//              0:00    EU    WE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12035,26 +9821,15 @@ var ZoneEraEurope_Lisbon = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/London
+	// EraIndex: 556
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Lisbon = zoneinfo.ZoneInfo{
-	ZoneID: 0x5c00a70b,
-	NameIndex: 452, // "Europe/Lisbon"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Lisbon,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/London
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_London = []zoneinfo.ZoneEra{
 	//              0:00    EU    GMT/BST
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 83, // "GMT/BST"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12065,26 +9840,15 @@ var ZoneEraEurope_London = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Madrid
+	// EraIndex: 557
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_London = zoneinfo.ZoneInfo{
-	ZoneID: 0x5c6a84ae,
-	NameIndex: 454, // "Europe/London"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_London,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Madrid
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Madrid = []zoneinfo.ZoneEra{
 	//              1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12095,26 +9859,15 @@ var ZoneEraEurope_Madrid = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Malta
+	// EraIndex: 558
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Madrid = zoneinfo.ZoneInfo{
-	ZoneID: 0x5dbd1535,
-	NameIndex: 456, // "Europe/Madrid"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Madrid,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Malta
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Malta = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12125,26 +9878,15 @@ var ZoneEraEurope_Malta = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Minsk
+	// EraIndex: 559
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Malta = zoneinfo.ZoneInfo{
-	ZoneID: 0xfb1560f3,
-	NameIndex: 457, // "Europe/Malta"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Malta,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Minsk
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Minsk = []zoneinfo.ZoneEra{
 	//             2:00    Russia    EE%sT    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12154,9 +9896,10 @@ var ZoneEraEurope_Minsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             3:00    -    +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12167,26 +9910,15 @@ var ZoneEraEurope_Minsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Moscow
+	// EraIndex: 561
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Minsk = zoneinfo.ZoneInfo{
-	ZoneID: 0xfb19cc66,
-	NameIndex: 459, // "Europe/Minsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Minsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Moscow
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Moscow = []zoneinfo.ZoneEra{
 	//              3:00    Russia    MSK/MSD    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 96, // "MSK/MSD"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12196,9 +9928,10 @@ var ZoneEraEurope_Moscow = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 95, // "MSK"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12208,9 +9941,10 @@ var ZoneEraEurope_Moscow = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    MSK
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 95, // "MSK"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12221,26 +9955,15 @@ var ZoneEraEurope_Moscow = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Paris
+	// EraIndex: 564
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Moscow = zoneinfo.ZoneInfo{
-	ZoneID: 0x5ec266fc,
-	NameIndex: 461, // "Europe/Moscow"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Moscow,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Paris
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Paris = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12251,26 +9974,15 @@ var ZoneEraEurope_Paris = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Prague
+	// EraIndex: 565
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Paris = zoneinfo.ZoneInfo{
-	ZoneID: 0xfb4bc2a3,
-	NameIndex: 464, // "Europe/Paris"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Paris,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Prague
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Prague = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12281,26 +9993,15 @@ var ZoneEraEurope_Prague = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Riga
+	// EraIndex: 566
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Prague = zoneinfo.ZoneInfo{
-	ZoneID: 0x65ee5d48,
-	NameIndex: 466, // "Europe/Prague"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Prague,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Riga
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Riga = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT    2000 Feb 29
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12310,9 +10011,10 @@ var ZoneEraEurope_Riga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    -    EET    2001 Jan  2
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12322,9 +10024,10 @@ var ZoneEraEurope_Riga = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    EU    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12335,26 +10038,15 @@ var ZoneEraEurope_Riga = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Rome
+	// EraIndex: 569
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Riga = zoneinfo.ZoneInfo{
-	ZoneID: 0xa2c57587,
-	NameIndex: 467, // "Europe/Riga"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Riga,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Rome
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Rome = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12365,26 +10057,15 @@ var ZoneEraEurope_Rome = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Samara
+	// EraIndex: 570
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Rome = zoneinfo.ZoneInfo{
-	ZoneID: 0xa2c58fd7,
-	NameIndex: 468, // "Europe/Rome"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Rome,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Samara
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Samara = []zoneinfo.ZoneEra{
 	//              4:00    Russia    +04/+05    2010 Mar 28  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12394,9 +10075,10 @@ var ZoneEraEurope_Samara = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12406,9 +10088,10 @@ var ZoneEraEurope_Samara = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12419,26 +10102,15 @@ var ZoneEraEurope_Samara = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Saratov
+	// EraIndex: 573
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Samara = zoneinfo.ZoneInfo{
-	ZoneID: 0x6bc0b139,
-	NameIndex: 469, // "Europe/Samara"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Samara,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Saratov
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12448,9 +10120,10 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12460,9 +10133,10 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    +03    2016 Dec  4  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12472,9 +10146,10 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12485,26 +10160,15 @@ var ZoneEraEurope_Saratov = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Simferopol
+	// EraIndex: 577
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Saratov = zoneinfo.ZoneInfo{
-	ZoneID: 0xe4315da4,
-	NameIndex: 472, // "Europe/Saratov"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Saratov,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Simferopol
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Simferopol = []zoneinfo.ZoneEra{
 	//              2:00    EU    EE%sT    2014 Mar 30  2:00
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12514,9 +10178,10 @@ var ZoneEraEurope_Simferopol = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 95, // "MSK"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12526,9 +10191,10 @@ var ZoneEraEurope_Simferopol = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    MSK
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 95, // "MSK"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12539,26 +10205,15 @@ var ZoneEraEurope_Simferopol = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Sofia
+	// EraIndex: 580
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Simferopol = zoneinfo.ZoneInfo{
-	ZoneID: 0xda9eb724,
-	NameIndex: 473, // "Europe/Simferopol"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Simferopol,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Sofia
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Sofia = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12569,26 +10224,15 @@ var ZoneEraEurope_Sofia = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Tallinn
+	// EraIndex: 581
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Sofia = zoneinfo.ZoneInfo{
-	ZoneID: 0xfb898656,
-	NameIndex: 475, // "Europe/Sofia"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Sofia,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Tallinn
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Tallinn = []zoneinfo.ZoneEra{
 	//             2:00    EU    EE%sT    1999 Oct 31  4:00
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12598,9 +10242,10 @@ var ZoneEraEurope_Tallinn = []zoneinfo.ZoneEra{
 		UntilTimeCode: 16,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    -    EET    2002 Feb 21
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12610,9 +10255,10 @@ var ZoneEraEurope_Tallinn = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    EU    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12623,26 +10269,15 @@ var ZoneEraEurope_Tallinn = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Tirane
+	// EraIndex: 584
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Tallinn = zoneinfo.ZoneInfo{
-	ZoneID: 0x30c4e096,
-	NameIndex: 477, // "Europe/Tallinn"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Tallinn,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Tirane
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Tirane = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12653,26 +10288,15 @@ var ZoneEraEurope_Tirane = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Ulyanovsk
+	// EraIndex: 585
+	// EraCount: 4
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Tirane = zoneinfo.ZoneInfo{
-	ZoneID: 0x6ea95b47,
-	NameIndex: 478, // "Europe/Tirane"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Tirane,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Ulyanovsk
-// Era count: 4
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12682,9 +10306,10 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12694,9 +10319,10 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    +03    2016 Mar 27  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12706,9 +10332,10 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12719,26 +10346,15 @@ var ZoneEraEurope_Ulyanovsk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Vienna
+	// EraIndex: 589
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Ulyanovsk = zoneinfo.ZoneInfo{
-	ZoneID: 0xe03783d0,
-	NameIndex: 480, // "Europe/Ulyanovsk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Ulyanovsk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Vienna
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Vienna = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12749,26 +10365,15 @@ var ZoneEraEurope_Vienna = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Vilnius
+	// EraIndex: 590
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Vienna = zoneinfo.ZoneInfo{
-	ZoneID: 0x734cc2e5,
-	NameIndex: 484, // "Europe/Vienna"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Vienna,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Vilnius
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Vilnius = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT    1999 Oct 31  1:00u
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12778,9 +10383,10 @@ var ZoneEraEurope_Vilnius = []zoneinfo.ZoneEra{
 		UntilTimeCode: 4,
 		UntilTimeModifier: 32, // SuffixU + minute=0
 	},
+
 	//             2:00    -    EET    2003 Jan  1
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 79, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12790,9 +10396,10 @@ var ZoneEraEurope_Vilnius = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             2:00    EU    EE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 77, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12803,26 +10410,15 @@ var ZoneEraEurope_Vilnius = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Volgograd
+	// EraIndex: 593
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Vilnius = zoneinfo.ZoneInfo{
-	ZoneID: 0xdd63b8ce,
-	NameIndex: 485, // "Europe/Vilnius"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Vilnius,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Volgograd
-// Era count: 5
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		ZonePolicy: &ZonePolicyRussia,
+		PolicyIndex: 64, // PolicyName: Russia
 		FormatIndex: 7, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12832,9 +10428,10 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12844,9 +10441,10 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    +03    2018 Oct 28  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12856,9 +10454,10 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              4:00    -    +04    2020 Dec 27  2:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 9, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12868,9 +10467,10 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//              3:00    -    +03
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 6, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12881,26 +10481,15 @@ var ZoneEraEurope_Volgograd = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Warsaw
+	// EraIndex: 598
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Volgograd = zoneinfo.ZoneInfo{
-	ZoneID: 0x3ed0f389,
-	NameIndex: 486, // "Europe/Volgograd"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Volgograd,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Warsaw
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Warsaw = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12911,26 +10500,15 @@ var ZoneEraEurope_Warsaw = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Zurich
+	// EraIndex: 599
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Warsaw = zoneinfo.ZoneInfo{
-	ZoneID: 0x75185c19,
-	NameIndex: 487, // "Europe/Warsaw"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Warsaw,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Europe/Zurich
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraEurope_Zurich = []zoneinfo.ZoneEra{
 	//             1:00    EU    CE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 71, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12941,26 +10519,15 @@ var ZoneEraEurope_Zurich = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: HST
+	// EraIndex: 600
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneEurope_Zurich = zoneinfo.ZoneInfo{
-	ZoneID: 0x7d8195b9,
-	NameIndex: 490, // "Europe/Zurich"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraEurope_Zurich,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: HST
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraHST = []zoneinfo.ZoneEra{
 	// -10:00 - HST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 86, // "HST"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -12971,26 +10538,15 @@ var ZoneEraHST = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Indian/Chagos
+	// EraIndex: 601
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneHST = zoneinfo.ZoneInfo{
-	ZoneID: 0x0b87f034,
-	NameIndex: 498, // "HST"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraHST,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Indian/Chagos
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraIndian_Chagos = []zoneinfo.ZoneEra{
 	//             6:00    -    +06
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13001,26 +10557,15 @@ var ZoneEraIndian_Chagos = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Indian/Maldives
+	// EraIndex: 602
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneIndian_Chagos = zoneinfo.ZoneInfo{
-	ZoneID: 0x456f7c3c,
-	NameIndex: 502, // "Indian/Chagos"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraIndian_Chagos,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Indian/Maldives
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraIndian_Maldives = []zoneinfo.ZoneEra{
 	//             5:00    -    +05
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13031,26 +10576,15 @@ var ZoneEraIndian_Maldives = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Indian/Mauritius
+	// EraIndex: 603
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneIndian_Maldives = zoneinfo.ZoneInfo{
-	ZoneID: 0x9869681c,
-	NameIndex: 508, // "Indian/Maldives"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraIndian_Maldives,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Indian/Mauritius
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraIndian_Mauritius = []zoneinfo.ZoneEra{
 	//             4:00 Mauritius    +04/+05
 	{
-		ZonePolicy: &ZonePolicyMauritius,
+		PolicyIndex: 46, // PolicyName: Mauritius
 		FormatIndex: 10, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13061,26 +10595,15 @@ var ZoneEraIndian_Mauritius = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: MET
+	// EraIndex: 604
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneIndian_Mauritius = zoneinfo.ZoneInfo{
-	ZoneID: 0x7b09c02a,
-	NameIndex: 509, // "Indian/Mauritius"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraIndian_Mauritius,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: MET
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraMET = []zoneinfo.ZoneEra{
 	// 1:00 C-Eur ME%sT
 	{
-		ZonePolicy: &ZonePolicyC_Eur,
+		PolicyIndex: 14, // PolicyName: C-Eur
 		FormatIndex: 94, // "ME%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13091,26 +10614,15 @@ var ZoneEraMET = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: MST
+	// EraIndex: 605
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneMET = zoneinfo.ZoneInfo{
-	ZoneID: 0x0b8803ab,
-	NameIndex: 518, // "MET"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraMET,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: MST
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraMST = []zoneinfo.ZoneEra{
 	// -7:00 - MST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13121,26 +10633,15 @@ var ZoneEraMST = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: MST7MDT
+	// EraIndex: 606
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneMST = zoneinfo.ZoneInfo{
-	ZoneID: 0x0b880579,
-	NameIndex: 519, // "MST"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraMST,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: MST7MDT
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraMST7MDT = []zoneinfo.ZoneEra{
 	// -7:00 US M%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 93, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13151,26 +10652,15 @@ var ZoneEraMST7MDT = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: PST8PDT
+	// EraIndex: 607
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZoneMST7MDT = zoneinfo.ZoneInfo{
-	ZoneID: 0xf2af9375,
-	NameIndex: 520, // "MST7MDT"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraMST7MDT,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: PST8PDT
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPST8PDT = []zoneinfo.ZoneEra{
 	// -8:00 US P%sT
 	{
-		ZonePolicy: &ZonePolicyUS,
+		PolicyIndex: 78, // PolicyName: US
 		FormatIndex: 100, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13181,26 +10671,15 @@ var ZoneEraPST8PDT = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Apia
+	// EraIndex: 608
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZonePST8PDT = zoneinfo.ZoneInfo{
-	ZoneID: 0xd99ee2dc,
-	NameIndex: 528, // "PST8PDT"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPST8PDT,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Apia
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 	//             -11:00    WS    -11/-10    2011 Dec 29 24:00
 	{
-		ZonePolicy: &ZonePolicyWS,
+		PolicyIndex: 81, // PolicyName: WS
 		FormatIndex: 59, // "-11/-10"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13210,9 +10689,10 @@ var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 		UntilTimeCode: 96,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              13:00    WS    +13/+14
 	{
-		ZonePolicy: &ZonePolicyWS,
+		PolicyIndex: 81, // PolicyName: WS
 		FormatIndex: 36, // "+13/+14"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13223,26 +10703,15 @@ var ZoneEraPacific_Apia = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Auckland
+	// EraIndex: 610
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Apia = zoneinfo.ZoneInfo{
-	ZoneID: 0x23359b5e,
-	NameIndex: 529, // "Pacific/Apia"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Apia,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Auckland
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Auckland = []zoneinfo.ZoneEra{
 	//             12:00    NZ    NZ%sT
 	{
-		ZonePolicy: &ZonePolicyNZ,
+		PolicyIndex: 54, // PolicyName: NZ
 		FormatIndex: 99, // "NZ%T"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13253,26 +10722,15 @@ var ZoneEraPacific_Auckland = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Bougainville
+	// EraIndex: 611
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Auckland = zoneinfo.ZoneInfo{
-	ZoneID: 0x25062f86,
-	NameIndex: 530, // "Pacific/Auckland"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Auckland,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Bougainville
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Bougainville = []zoneinfo.ZoneEra{
 	//             10:00    -    +10    2014 Dec 28  2:00
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13282,9 +10740,10 @@ var ZoneEraPacific_Bougainville = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             11:00    -    +11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13295,26 +10754,15 @@ var ZoneEraPacific_Bougainville = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Chatham
+	// EraIndex: 613
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Bougainville = zoneinfo.ZoneInfo{
-	ZoneID: 0x5e10f7a4,
-	NameIndex: 531, // "Pacific/Bougainville"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Bougainville,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Chatham
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Chatham = []zoneinfo.ZoneEra{
 	//             12:45    Chatham    +1245/+1345
 	{
-		ZonePolicy: &ZonePolicyChatham,
+		PolicyIndex: 18, // PolicyName: Chatham
 		FormatIndex: 34, // "+1245/+1345"
 		OffsetCode: 51,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13325,26 +10773,15 @@ var ZoneEraPacific_Chatham = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Easter
+	// EraIndex: 614
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Chatham = zoneinfo.ZoneInfo{
-	ZoneID: 0x2f0de999,
-	NameIndex: 532, // "Pacific/Chatham"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Chatham,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Easter
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Easter = []zoneinfo.ZoneEra{
 	//             -6:00    Chile    -06/-05
 	{
-		ZonePolicy: &ZonePolicyChile,
+		PolicyIndex: 19, // PolicyName: Chile
 		FormatIndex: 51, // "-06/-05"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13355,26 +10792,15 @@ var ZoneEraPacific_Easter = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Efate
+	// EraIndex: 615
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Easter = zoneinfo.ZoneInfo{
-	ZoneID: 0xcf54f7e7,
-	NameIndex: 534, // "Pacific/Easter"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Easter,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Efate
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Efate = []zoneinfo.ZoneEra{
 	//             11:00    Vanuatu    +11/+12
 	{
-		ZonePolicy: &ZonePolicyVanuatu,
+		PolicyIndex: 80, // PolicyName: Vanuatu
 		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13385,26 +10811,15 @@ var ZoneEraPacific_Efate = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Fakaofo
+	// EraIndex: 616
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Efate = zoneinfo.ZoneInfo{
-	ZoneID: 0x8a2bce28,
-	NameIndex: 535, // "Pacific/Efate"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Efate,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Fakaofo
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Fakaofo = []zoneinfo.ZoneEra{
 	//             -11:00    -    -11    2011 Dec 30
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 58, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13414,9 +10829,10 @@ var ZoneEraPacific_Fakaofo = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             13:00    -    +13
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13427,26 +10843,15 @@ var ZoneEraPacific_Fakaofo = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Fiji
+	// EraIndex: 618
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Fakaofo = zoneinfo.ZoneInfo{
-	ZoneID: 0x06532bba,
-	NameIndex: 537, // "Pacific/Fakaofo"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Fakaofo,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Fiji
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Fiji = []zoneinfo.ZoneEra{
 	//             12:00    Fiji    +12/+13
 	{
-		ZonePolicy: &ZonePolicyFiji,
+		PolicyIndex: 30, // PolicyName: Fiji
 		FormatIndex: 33, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13457,26 +10862,15 @@ var ZoneEraPacific_Fiji = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Galapagos
+	// EraIndex: 619
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Fiji = zoneinfo.ZoneInfo{
-	ZoneID: 0x23383ba5,
-	NameIndex: 538, // "Pacific/Fiji"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Fiji,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Galapagos
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Galapagos = []zoneinfo.ZoneEra{
 	//             -6:00    Ecuador    -06/-05
 	{
-		ZonePolicy: &ZonePolicyEcuador,
+		PolicyIndex: 26, // PolicyName: Ecuador
 		FormatIndex: 51, // "-06/-05"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13487,26 +10881,15 @@ var ZoneEraPacific_Galapagos = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Gambier
+	// EraIndex: 620
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Galapagos = zoneinfo.ZoneInfo{
-	ZoneID: 0xa952f752,
-	NameIndex: 540, // "Pacific/Galapagos"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Galapagos,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Gambier
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Gambier = []zoneinfo.ZoneEra{
 	//              -9:00    -    -09
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 54, // "-09"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13517,26 +10900,15 @@ var ZoneEraPacific_Gambier = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Guadalcanal
+	// EraIndex: 621
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Gambier = zoneinfo.ZoneInfo{
-	ZoneID: 0x53720c3a,
-	NameIndex: 541, // "Pacific/Gambier"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Gambier,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Guadalcanal
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Guadalcanal = []zoneinfo.ZoneEra{
 	//             11:00    -    +11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13547,26 +10919,15 @@ var ZoneEraPacific_Guadalcanal = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Guam
+	// EraIndex: 622
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Guadalcanal = zoneinfo.ZoneInfo{
-	ZoneID: 0xf4dd25f0,
-	NameIndex: 542, // "Pacific/Guadalcanal"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Guadalcanal,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Guam
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Guam = []zoneinfo.ZoneEra{
 	//             10:00    Guam    G%sT    2000 Dec 23
 	{
-		ZonePolicy: &ZonePolicyGuam,
+		PolicyIndex: 31, // PolicyName: Guam
 		FormatIndex: 81, // "G%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13576,9 +10937,10 @@ var ZoneEraPacific_Guam = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             10:00    -    ChST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 74, // "ChST"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13589,26 +10951,15 @@ var ZoneEraPacific_Guam = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Honolulu
+	// EraIndex: 624
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Guam = zoneinfo.ZoneInfo{
-	ZoneID: 0x2338f9ed,
-	NameIndex: 543, // "Pacific/Guam"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Guam,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Honolulu
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Honolulu = []zoneinfo.ZoneEra{
 	//             -10:00    -    HST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 86, // "HST"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13619,26 +10970,15 @@ var ZoneEraPacific_Honolulu = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Kanton
+	// EraIndex: 625
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Honolulu = zoneinfo.ZoneInfo{
-	ZoneID: 0xe6e70af9,
-	NameIndex: 544, // "Pacific/Honolulu"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Honolulu,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Kanton
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Kanton = []zoneinfo.ZoneEra{
 	//              13:00    -    +13
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13649,26 +10989,15 @@ var ZoneEraPacific_Kanton = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Kiritimati
+	// EraIndex: 626
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Kanton = zoneinfo.ZoneInfo{
-	ZoneID: 0xdd512f0e,
-	NameIndex: 546, // "Pacific/Kanton"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Kanton,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Kiritimati
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Kiritimati = []zoneinfo.ZoneEra{
 	//              14:00    -    +14
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 37, // "+14"
 		OffsetCode: 56,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13679,26 +11008,15 @@ var ZoneEraPacific_Kiritimati = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Kosrae
+	// EraIndex: 627
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Kiritimati = zoneinfo.ZoneInfo{
-	ZoneID: 0x8305073a,
-	NameIndex: 547, // "Pacific/Kiritimati"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Kiritimati,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Kosrae
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Kosrae = []zoneinfo.ZoneEra{
 	//              12:00    -    +12    1999
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13708,9 +11026,10 @@ var ZoneEraPacific_Kosrae = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              11:00    -    +11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13721,26 +11040,15 @@ var ZoneEraPacific_Kosrae = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Kwajalein
+	// EraIndex: 629
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Kosrae = zoneinfo.ZoneInfo{
-	ZoneID: 0xde5139a8,
-	NameIndex: 548, // "Pacific/Kosrae"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Kosrae,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Kwajalein
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Kwajalein = []zoneinfo.ZoneEra{
 	//              12:00    -    +12
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13751,26 +11059,15 @@ var ZoneEraPacific_Kwajalein = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Marquesas
+	// EraIndex: 630
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Kwajalein = zoneinfo.ZoneInfo{
-	ZoneID: 0x8e216759,
-	NameIndex: 549, // "Pacific/Kwajalein"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Kwajalein,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Marquesas
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Marquesas = []zoneinfo.ZoneEra{
 	//              -9:30    -    -0930
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 55, // "-0930"
 		OffsetCode: -38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13781,26 +11078,15 @@ var ZoneEraPacific_Marquesas = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Nauru
+	// EraIndex: 631
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Marquesas = zoneinfo.ZoneInfo{
-	ZoneID: 0x57ca7135,
-	NameIndex: 551, // "Pacific/Marquesas"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Marquesas,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Nauru
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Nauru = []zoneinfo.ZoneEra{
 	//             12:00    -    +12
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13811,26 +11097,15 @@ var ZoneEraPacific_Nauru = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Niue
+	// EraIndex: 632
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Nauru = zoneinfo.ZoneInfo{
-	ZoneID: 0x8acc41ae,
-	NameIndex: 553, // "Pacific/Nauru"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Nauru,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Niue
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Niue = []zoneinfo.ZoneEra{
 	//             -11:00    -    -11
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 58, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13841,26 +11116,15 @@ var ZoneEraPacific_Niue = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Norfolk
+	// EraIndex: 633
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Niue = zoneinfo.ZoneInfo{
-	ZoneID: 0x233ca014,
-	NameIndex: 554, // "Pacific/Niue"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Niue,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Norfolk
-// Era count: 3
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Norfolk = []zoneinfo.ZoneEra{
 	//             11:30    -    +1130    2015 Oct  4 02:00s
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 31, // "+1130"
 		OffsetCode: 46,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13870,9 +11134,10 @@ var ZoneEraPacific_Norfolk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 8,
 		UntilTimeModifier: 16, // SuffixS + minute=0
 	},
+
 	//             11:00    -    +11    2019 Jul
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 29, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13882,9 +11147,10 @@ var ZoneEraPacific_Norfolk = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             11:00    AN    +11/+12
 	{
-		ZonePolicy: &ZonePolicyAN,
+		PolicyIndex: 1, // PolicyName: AN
 		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13895,26 +11161,15 @@ var ZoneEraPacific_Norfolk = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Noumea
+	// EraIndex: 636
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Norfolk = zoneinfo.ZoneInfo{
-	ZoneID: 0x8f4eb4be,
-	NameIndex: 555, // "Pacific/Norfolk"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Norfolk,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Noumea
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Noumea = []zoneinfo.ZoneEra{
 	//             11:00    NC    +11/+12
 	{
-		ZonePolicy: &ZonePolicyNC,
+		PolicyIndex: 52, // PolicyName: NC
 		FormatIndex: 30, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13925,26 +11180,15 @@ var ZoneEraPacific_Noumea = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Pago_Pago
+	// EraIndex: 637
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Noumea = zoneinfo.ZoneInfo{
-	ZoneID: 0xe551b788,
-	NameIndex: 556, // "Pacific/Noumea"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Noumea,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Pago_Pago
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Pago_Pago = []zoneinfo.ZoneEra{
 	//             -11:00    -    SST
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 104, // "SST"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13955,26 +11199,15 @@ var ZoneEraPacific_Pago_Pago = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Palau
+	// EraIndex: 638
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Pago_Pago = zoneinfo.ZoneInfo{
-	ZoneID: 0x603aebd0,
-	NameIndex: 557, // "Pacific/Pago_Pago"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Pago_Pago,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Palau
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Palau = []zoneinfo.ZoneEra{
 	//               9:00    -    +09
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 24, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -13985,26 +11218,15 @@ var ZoneEraPacific_Palau = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Pitcairn
+	// EraIndex: 639
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Palau = zoneinfo.ZoneInfo{
-	ZoneID: 0x8af04a36,
-	NameIndex: 558, // "Pacific/Palau"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Palau,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Pitcairn
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Pitcairn = []zoneinfo.ZoneEra{
 	//             -8:00    -    -08
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-08"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -14015,26 +11237,15 @@ var ZoneEraPacific_Pitcairn = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Port_Moresby
+	// EraIndex: 640
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Pitcairn = zoneinfo.ZoneInfo{
-	ZoneID: 0x8837d8bd,
-	NameIndex: 559, // "Pacific/Pitcairn"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Pitcairn,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Port_Moresby
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Port_Moresby = []zoneinfo.ZoneEra{
 	//             10:00    -    +10
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -14045,26 +11256,15 @@ var ZoneEraPacific_Port_Moresby = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Rarotonga
+	// EraIndex: 641
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Port_Moresby = zoneinfo.ZoneInfo{
-	ZoneID: 0xa7ba7f68,
-	NameIndex: 562, // "Pacific/Port_Moresby"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Port_Moresby,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Rarotonga
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Rarotonga = []zoneinfo.ZoneEra{
 	//             -10:00    Cook    -10/-0930
 	{
-		ZonePolicy: &ZonePolicyCook,
+		PolicyIndex: 20, // PolicyName: Cook
 		FormatIndex: 57, // "-10/-0930"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -14075,26 +11275,15 @@ var ZoneEraPacific_Rarotonga = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Tahiti
+	// EraIndex: 642
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Rarotonga = zoneinfo.ZoneInfo{
-	ZoneID: 0x9981a3b0,
-	NameIndex: 563, // "Pacific/Rarotonga"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Rarotonga,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Tahiti
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Tahiti = []zoneinfo.ZoneEra{
 	//             -10:00    -    -10
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-10"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -14105,26 +11294,15 @@ var ZoneEraPacific_Tahiti = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Tarawa
+	// EraIndex: 643
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Tahiti = zoneinfo.ZoneInfo{
-	ZoneID: 0xf24c2446,
-	NameIndex: 566, // "Pacific/Tahiti"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Tahiti,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Tarawa
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Tarawa = []zoneinfo.ZoneEra{
 	//              12:00    -    +12
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -14135,26 +11313,15 @@ var ZoneEraPacific_Tarawa = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: Pacific/Tongatapu
+	// EraIndex: 644
+	// EraCount: 2
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Tarawa = zoneinfo.ZoneInfo{
-	ZoneID: 0xf2517e63,
-	NameIndex: 567, // "Pacific/Tarawa"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Tarawa,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: Pacific/Tongatapu
-// Era count: 2
-// ---------------------------------------------------------------------------
-
-var ZoneEraPacific_Tongatapu = []zoneinfo.ZoneEra{
 	//             13:00    -    +13    1999
 	{
-		ZonePolicy: nil,
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -14164,9 +11331,10 @@ var ZoneEraPacific_Tongatapu = []zoneinfo.ZoneEra{
 		UntilTimeCode: 0,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//             13:00    Tonga    +13/+14
 	{
-		ZonePolicy: &ZonePolicyTonga,
+		PolicyIndex: 74, // PolicyName: Tonga
 		FormatIndex: 36, // "+13/+14"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -14177,26 +11345,15 @@ var ZoneEraPacific_Tongatapu = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
+	// ---------------------------------------------------------------------------
+	// ZoneName: WET
+	// EraIndex: 646
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
 
-var ZonePacific_Tongatapu = zoneinfo.ZoneInfo{
-	ZoneID: 0x262ca836,
-	NameIndex: 568, // "Pacific/Tongatapu"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraPacific_Tongatapu,
-	Target: nil,
-}
-
-// ---------------------------------------------------------------------------
-// Zone name: WET
-// Era count: 1
-// ---------------------------------------------------------------------------
-
-var ZoneEraWET = []zoneinfo.ZoneEra{
 	// 0:00 EU WE%sT
 	{
-		ZonePolicy: &ZonePolicyEU,
+		PolicyIndex: 24, // PolicyName: EU
 		FormatIndex: 107, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -14209,2471 +11366,5975 @@ var ZoneEraWET = []zoneinfo.ZoneEra{
 
 }
 
-var ZoneWET = zoneinfo.ZoneInfo{
-	ZoneID: 0x0b882e35,
-	NameIndex: 595, // "WET"
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: ZoneEraWET,
-	Target: nil,
-}
-
-
 
 // ---------------------------------------------------------------------------
-// Supported links: 245
+// ZoneInfos is an array of zoneinfo.ZoneInfo items concatenated together.
+//
+// Total: 596 (351 zones, 245 links)
 // ---------------------------------------------------------------------------
 
-// Link: Africa/Accra -> Africa/Abidjan
-var ZoneAfrica_Accra = zoneinfo.ZoneInfo{
-	NameIndex: 2, // "Africa/Accra"
-	ZoneID: 0x77d5b054,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
+var ZoneInfos = []zoneinfo.ZoneInfo{
+	// 0: Link GB -> Europe/London
+	{
+		ZoneID: 0x005973ae,
+		NameIndex: 491, // "GB"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 556,
+		EraCount: 1,
+		TargetIndex: 291, // Europe/London
+	},
+	// 1: Link NZ -> Pacific/Auckland
+	{
+		ZoneID: 0x005974ad,
+		NameIndex: 524, // "NZ"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 610,
+		EraCount: 1,
+		TargetIndex: 321, // Pacific/Auckland
+	},
+	// 2: Link Asia/Kuala_Lumpur -> Asia/Singapore
+	{
+		ZoneID: 0x014763c4,
+		NameIndex: 286, // "Asia/Kuala_Lumpur"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 435,
+		EraCount: 1,
+		TargetIndex: 205, // Asia/Singapore
+	},
+	// 3: Link Africa/Libreville -> Africa/Lagos
+	{
+		ZoneID: 0x01d96de4,
+		NameIndex: 33, // "Africa/Libreville"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 4: Link Indian/Cocos -> Asia/Yangon
+	{
+		ZoneID: 0x021e86de,
+		NameIndex: 504, // "Indian/Cocos"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 464,
+		EraCount: 1,
+		TargetIndex: 219, // Asia/Yangon
+	},
+	// 5: Link Australia/Victoria -> Australia/Melbourne
+	{
+		ZoneID: 0x0260d5db,
+		NameIndex: 367, // "Australia/Victoria"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 488,
+		EraCount: 1,
+		TargetIndex: 238, // Australia/Melbourne
+	},
+	// 6: Link Atlantic/Faeroe -> Atlantic/Faroe
+	{
+		ZoneID: 0x031ec516,
+		NameIndex: 339, // "Atlantic/Faeroe"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 474,
+		EraCount: 1,
+		TargetIndex: 226, // Atlantic/Faroe
+	},
+	// 7: Zone America/St_Johns
+	{
+		ZoneID: 0x04b14e6e,
+		NameIndex: 205, // "America/St_Johns"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 274,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 8: Link America/St_Kitts -> America/Puerto_Rico
+	{
+		ZoneID: 0x04c0507b,
+		NameIndex: 206, // "America/St_Kitts"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 9: Link Africa/Ouagadougou -> Africa/Abidjan
+	{
+		ZoneID: 0x04d7219a,
+		NameIndex: 48, // "Africa/Ouagadougou"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 10: Link America/St_Lucia -> America/Puerto_Rico
+	{
+		ZoneID: 0x04d8b3ba,
+		NameIndex: 207, // "America/St_Lucia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 11: Zone America/North_Dakota/New_Salem
+	{
+		ZoneID: 0x04f9958e,
+		NameIndex: 176, // "America/North_Dakota/New_Salem"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 232,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 12: Zone Asia/Jakarta
+	{
+		ZoneID: 0x0506ab50,
+		NameIndex: 274, // "Asia/Jakarta"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 378,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 13: Link Africa/Bujumbura -> Africa/Maputo
+	{
+		ZoneID: 0x05232a47,
+		NameIndex: 13, // "Africa/Bujumbura"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 17,
+		EraCount: 1,
+		TargetIndex: 11, // Africa/Maputo
+	},
+	// 14: Zone America/Mazatlan
+	{
+		ZoneID: 0x0532189e,
+		NameIndex: 157, // "America/Mazatlan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 207,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 15: Link America/St_Barthelemy -> America/Puerto_Rico
+	{
+		ZoneID: 0x054e6a79,
+		NameIndex: 204, // "America/St_Barthelemy"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 16: Link Africa/Addis_Ababa -> Africa/Nairobi
+	{
+		ZoneID: 0x05ae1e65,
+		NameIndex: 3, // "Africa/Addis_Ababa"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 17: Zone Pacific/Fakaofo
+	{
+		ZoneID: 0x06532bba,
+		NameIndex: 537, // "Pacific/Fakaofo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 616,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 18: Zone America/Hermosillo
+	{
+		ZoneID: 0x065d21c4,
+		NameIndex: 127, // "America/Hermosillo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 164,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 19: Link Mexico/BajaSur -> America/Mazatlan
+	{
+		ZoneID: 0x08ee3641,
+		NameIndex: 522, // "Mexico/BajaSur"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 207,
+		EraCount: 1,
+		TargetIndex: 94, // America/Mazatlan
+	},
+	// 20: Zone Asia/Tbilisi
+	{
+		ZoneID: 0x0903e442,
+		NameIndex: 317, // "Asia/Tbilisi"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 441,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 21: Zone America/Indiana/Tell_City
+	{
+		ZoneID: 0x09263612,
+		NameIndex: 132, // "America/Indiana/Tell_City"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 175,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 22: Link US/Hawaii -> Pacific/Honolulu
+	{
+		ZoneID: 0x09c8de2f,
+		NameIndex: 586, // "US/Hawaii"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 624,
+		EraCount: 1,
+		TargetIndex: 332, // Pacific/Honolulu
+	},
+	// 23: Zone America/Boa_Vista
+	{
+		ZoneID: 0x0a7b7efe,
+		NameIndex: 83, // "America/Boa_Vista"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 107,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 24: Zone Asia/Colombo
+	{
+		ZoneID: 0x0af0e91d,
+		NameIndex: 258, // "Asia/Colombo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 349,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 25: Zone CET
+	{
+		ZoneID: 0x0b87d921,
+		NameIndex: 374, // "CET"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 491,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 26: Zone EET
+	{
+		ZoneID: 0x0b87e1a3,
+		NameIndex: 387, // "EET"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 493,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 27: Zone EST
+	{
+		ZoneID: 0x0b87e371,
+		NameIndex: 388, // "EST"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 494,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 28: Link GMT -> Etc/GMT
+	{
+		ZoneID: 0x0b87eb2d,
+		NameIndex: 493, // "GMT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 29: Zone HST
+	{
+		ZoneID: 0x0b87f034,
+		NameIndex: 498, // "HST"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 600,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 30: Zone MET
+	{
+		ZoneID: 0x0b8803ab,
+		NameIndex: 518, // "MET"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 604,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 31: Zone MST
+	{
+		ZoneID: 0x0b880579,
+		NameIndex: 519, // "MST"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 605,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 32: Link PRC -> Asia/Shanghai
+	{
+		ZoneID: 0x0b88120a,
+		NameIndex: 527, // "PRC"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 434,
+		EraCount: 1,
+		TargetIndex: 204, // Asia/Shanghai
+	},
+	// 33: Link ROC -> Asia/Taipei
+	{
+		ZoneID: 0x0b881a29,
+		NameIndex: 575, // "ROC"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 439,
+		EraCount: 1,
+		TargetIndex: 207, // Asia/Taipei
+	},
+	// 34: Link ROK -> Asia/Seoul
+	{
+		ZoneID: 0x0b881a31,
+		NameIndex: 576, // "ROK"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 433,
+		EraCount: 1,
+		TargetIndex: 203, // Asia/Seoul
+	},
+	// 35: Link UCT -> Etc/UTC
+	{
+		ZoneID: 0x0b882571,
+		NameIndex: 579, // "UCT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 523,
+		EraCount: 1,
+		TargetIndex: 273, // Etc/UTC
+	},
+	// 36: Link UTC -> Etc/UTC
+	{
+		ZoneID: 0x0b882791,
+		NameIndex: 592, // "UTC"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 523,
+		EraCount: 1,
+		TargetIndex: 273, // Etc/UTC
+	},
+	// 37: Zone WET
+	{
+		ZoneID: 0x0b882e35,
+		NameIndex: 595, // "WET"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 646,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 38: Zone America/Guatemala
+	{
+		ZoneID: 0x0c8259f7,
+		NameIndex: 122, // "America/Guatemala"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 159,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 39: Link Europe/Mariehamn -> Europe/Helsinki
+	{
+		ZoneID: 0x0caa6496,
+		NameIndex: 458, // "Europe/Mariehamn"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 538,
+		EraCount: 1,
+		TargetIndex: 285, // Europe/Helsinki
+	},
+	// 40: Zone Africa/Monrovia
+	{
+		ZoneID: 0x0ce90385,
+		NameIndex: 43, // "Africa/Monrovia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 18,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 41: Link Egypt -> Africa/Cairo
+	{
+		ZoneID: 0x0d1a278e,
+		NameIndex: 390, // "Egypt"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 3,
+		EraCount: 1,
+		TargetIndex: 3, // Africa/Cairo
+	},
+	// 42: Link GMT+0 -> Etc/GMT
+	{
+		ZoneID: 0x0d2f7028,
+		NameIndex: 494, // "GMT+0"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 43: Link GMT-0 -> Etc/GMT
+	{
+		ZoneID: 0x0d2f706a,
+		NameIndex: 495, // "GMT-0"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 44: Link Japan -> Asia/Tokyo
+	{
+		ZoneID: 0x0d712f8f,
+		NameIndex: 515, // "Japan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 446,
+		EraCount: 1,
+		TargetIndex: 212, // Asia/Tokyo
+	},
+	// 45: Link Libya -> Africa/Tripoli
+	{
+		ZoneID: 0x0d998b16,
+		NameIndex: 517, // "Libya"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 24,
+		EraCount: 3,
+		TargetIndex: 16, // Africa/Tripoli
+	},
+	// 46: Link Kwajalein -> Pacific/Kwajalein
+	{
+		ZoneID: 0x0e57afbb,
+		NameIndex: 516, // "Kwajalein"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 629,
+		EraCount: 1,
+		TargetIndex: 336, // Pacific/Kwajalein
+	},
+	// 47: Zone Antarctica/Rothera
+	{
+		ZoneID: 0x0e86d203,
+		NameIndex: 230, // "Antarctica/Rothera"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 315,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 48: Zone America/Yellowknife
+	{
+		ZoneID: 0x0f76c76f,
+		NameIndex: 222, // "America/Yellowknife"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 290,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 49: Zone Australia/Melbourne
+	{
+		ZoneID: 0x0fe559a3,
+		NameIndex: 359, // "Australia/Melbourne"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 488,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 50: Zone America/Sao_Paulo
+	{
+		ZoneID: 0x1063bfc9,
+		NameIndex: 200, // "America/Sao_Paulo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 271,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 51: Link Europe/Amsterdam -> Europe/Brussels
+	{
+		ZoneID: 0x109395c2,
+		NameIndex: 427, // "Europe/Amsterdam"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 532,
+		EraCount: 1,
+		TargetIndex: 279, // Europe/Brussels
+	},
+	// 52: Zone America/Indiana/Vevay
+	{
+		ZoneID: 0x10aca054,
+		NameIndex: 133, // "America/Indiana/Vevay"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 177,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 53: Zone America/Scoresbysund
+	{
+		ZoneID: 0x123f8d2a,
+		NameIndex: 201, // "America/Scoresbysund"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 272,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 54: Zone Asia/Samarkand
+	{
+		ZoneID: 0x13ae5104,
+		NameIndex: 310, // "Asia/Samarkand"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 432,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 55: Zone Asia/Amman
+	{
+		ZoneID: 0x148d21bc,
+		NameIndex: 238, // "Asia/Amman"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 320,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 56: Zone Asia/Aqtau
+	{
+		ZoneID: 0x148f710e,
+		NameIndex: 240, // "Asia/Aqtau"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 325,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 57: Zone Asia/Chita
+	{
+		ZoneID: 0x14ae863b,
+		NameIndex: 254, // "Asia/Chita"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 343,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 58: Link Asia/Dacca -> Asia/Dhaka
+	{
+		ZoneID: 0x14bcac5e,
+		NameIndex: 259, // "Asia/Dacca"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 353,
+		EraCount: 2,
+		TargetIndex: 164, // Asia/Dhaka
+	},
+	// 59: Zone Asia/Dhaka
+	{
+		ZoneID: 0x14c07b8b,
+		NameIndex: 261, // "Asia/Dhaka"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 353,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 60: Zone Asia/Dubai
+	{
+		ZoneID: 0x14c79f77,
+		NameIndex: 263, // "Asia/Dubai"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 357,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 61: Zone America/Bahia_Banderas
+	{
+		ZoneID: 0x14f6329a,
+		NameIndex: 78, // "America/Bahia_Banderas"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 102,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 62: Zone Asia/Kabul
+	{
+		ZoneID: 0x153b5601,
+		NameIndex: 277, // "Asia/Kabul"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 381,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 63: Link Asia/Ashkhabad -> Asia/Ashgabat
+	{
+		ZoneID: 0x15454f09,
+		NameIndex: 243, // "Asia/Ashkhabad"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 329,
+		EraCount: 1,
+		TargetIndex: 152, // Asia/Ashgabat
+	},
+	// 64: Link Asia/Macao -> Asia/Macau
+	{
+		ZoneID: 0x155f88b3,
+		NameIndex: 289, // "Asia/Macao"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 397,
+		EraCount: 1,
+		TargetIndex: 186, // Asia/Macau
+	},
+	// 65: Zone Asia/Macau
+	{
+		ZoneID: 0x155f88b9,
+		NameIndex: 290, // "Asia/Macau"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 397,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 66: Zone Asia/Qatar
+	{
+		ZoneID: 0x15a8330b,
+		NameIndex: 303, // "Asia/Qatar"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 421,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 67: Zone Asia/Seoul
+	{
+		ZoneID: 0x15ce82da,
+		NameIndex: 311, // "Asia/Seoul"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 433,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 68: Zone Asia/Tokyo
+	{
+		ZoneID: 0x15e606a8,
+		NameIndex: 322, // "Asia/Tokyo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 446,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 69: Zone Asia/Tomsk
+	{
+		ZoneID: 0x15e60e60,
+		NameIndex: 323, // "Asia/Tomsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 447,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 70: Link Asia/Tel_Aviv -> Asia/Jerusalem
+	{
+		ZoneID: 0x166d7c2c,
+		NameIndex: 319, // "Asia/Tel_Aviv"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 380,
+		EraCount: 1,
+		TargetIndex: 177, // Asia/Jerusalem
+	},
+	// 71: Zone Asia/Thimphu
+	{
+		ZoneID: 0x170380d1,
+		NameIndex: 321, // "Asia/Thimphu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 445,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 72: Zone America/Guayaquil
+	{
+		ZoneID: 0x17e64958,
+		NameIndex: 123, // "America/Guayaquil"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 160,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 73: Link America/Montserrat -> America/Puerto_Rico
+	{
+		ZoneID: 0x199b0a35,
+		NameIndex: 168, // "America/Montserrat"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 74: Zone America/Kentucky/Louisville
+	{
+		ZoneID: 0x1a21024b,
+		NameIndex: 142, // "America/Kentucky/Louisville"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 191,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 75: Zone Asia/Pontianak
+	{
+		ZoneID: 0x1a76c057,
+		NameIndex: 301, // "Asia/Pontianak"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 417,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 76: Link Europe/Podgorica -> Europe/Belgrade
+	{
+		ZoneID: 0x1c1a499c,
+		NameIndex: 465, // "Europe/Podgorica"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 530,
+		EraCount: 1,
+		TargetIndex: 277, // Europe/Belgrade
+	},
+	// 77: Link Atlantic/Reykjavik -> Africa/Abidjan
+	{
+		ZoneID: 0x1c2b4f74,
+		NameIndex: 343, // "Atlantic/Reykjavik"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 78: Zone America/New_York
+	{
+		ZoneID: 0x1e2a7654,
+		NameIndex: 170, // "America/New_York"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 222,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 79: Link Europe/Luxembourg -> Europe/Brussels
+	{
+		ZoneID: 0x1f8bc6ce,
+		NameIndex: 455, // "Europe/Luxembourg"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 532,
+		EraCount: 1,
+		TargetIndex: 279, // Europe/Brussels
+	},
+	// 80: Link Asia/Aden -> Asia/Riyadh
+	{
+		ZoneID: 0x1fa7084a,
+		NameIndex: 236, // "Asia/Aden"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 427,
+		EraCount: 1,
+		TargetIndex: 200, // Asia/Riyadh
+	},
+	// 81: Zone Asia/Baku
+	{
+		ZoneID: 0x1fa788b5,
+		NameIndex: 247, // "Asia/Baku"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 334,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 82: Zone Asia/Dili
+	{
+		ZoneID: 0x1fa8c394,
+		NameIndex: 262, // "Asia/Dili"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 355,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 83: Zone Asia/Gaza
+	{
+		ZoneID: 0x1faa4875,
+		NameIndex: 266, // "Asia/Gaza"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 362,
+		EraCount: 8,
+		TargetIndex: 0,
+	},
+	// 84: Zone Asia/Hovd
+	{
+		ZoneID: 0x1fab0fe3,
+		NameIndex: 271, // "Asia/Hovd"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 374,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 85: Zone Asia/Omsk
+	{
+		ZoneID: 0x1faeddac,
+		NameIndex: 298, // "Asia/Omsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 412,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 86: Zone Asia/Oral
+	{
+		ZoneID: 0x1faef0a0,
+		NameIndex: 299, // "Asia/Oral"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 415,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 87: Link America/Montreal -> America/Toronto
+	{
+		ZoneID: 0x203a1ea8,
+		NameIndex: 167, // "America/Montreal"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 283,
+		EraCount: 1,
+		TargetIndex: 134, // America/Toronto
+	},
+	// 88: Zone Asia/Ho_Chi_Minh
+	{
+		ZoneID: 0x20f2d127,
+		NameIndex: 269, // "Asia/Ho_Chi_Minh"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 372,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 89: Zone Asia/Damascus
+	{
+		ZoneID: 0x20fbb063,
+		NameIndex: 260, // "Asia/Damascus"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 351,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 90: Link America/Argentina/ComodRivadavia -> America/Argentina/Catamarca
+	{
+		ZoneID: 0x22758877,
+		NameIndex: 62, // "America/Argentina/ComodRivadavia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 38,
+		EraCount: 6,
+		TargetIndex: 23, // America/Argentina/Catamarca
+	},
+	// 91: Zone Pacific/Apia
+	{
+		ZoneID: 0x23359b5e,
+		NameIndex: 529, // "Pacific/Apia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 608,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 92: Zone Pacific/Fiji
+	{
+		ZoneID: 0x23383ba5,
+		NameIndex: 538, // "Pacific/Fiji"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 618,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 93: Zone Pacific/Guam
+	{
+		ZoneID: 0x2338f9ed,
+		NameIndex: 543, // "Pacific/Guam"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 622,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 94: Zone Pacific/Niue
+	{
+		ZoneID: 0x233ca014,
+		NameIndex: 554, // "Pacific/Niue"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 632,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 95: Link Pacific/Truk -> Pacific/Port_Moresby
+	{
+		ZoneID: 0x234010a9,
+		NameIndex: 569, // "Pacific/Truk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 640,
+		EraCount: 1,
+		TargetIndex: 345, // Pacific/Port_Moresby
+	},
+	// 96: Link Pacific/Wake -> Pacific/Tarawa
+	{
+		ZoneID: 0x23416c2b,
+		NameIndex: 570, // "Pacific/Wake"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 643,
+		EraCount: 1,
+		TargetIndex: 348, // Pacific/Tarawa
+	},
+	// 97: Zone Australia/Adelaide
+	{
+		ZoneID: 0x2428e8a3,
+		NameIndex: 348, // "Australia/Adelaide"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 479,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 98: Zone Pacific/Auckland
+	{
+		ZoneID: 0x25062f86,
+		NameIndex: 530, // "Pacific/Auckland"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 610,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 99: Zone Pacific/Tongatapu
+	{
+		ZoneID: 0x262ca836,
+		NameIndex: 568, // "Pacific/Tongatapu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 644,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 100: Zone America/Monterrey
+	{
+		ZoneID: 0x269a1deb,
+		NameIndex: 165, // "America/Monterrey"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 220,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 101: Link Etc/Greenwich -> Etc/GMT
+	{
+		ZoneID: 0x26daa98c,
+		NameIndex: 422, // "Etc/Greenwich"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 102: Link Australia/Currie -> Australia/Hobart
+	{
+		ZoneID: 0x278b6a24,
+		NameIndex: 352, // "Australia/Currie"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 485,
+		EraCount: 1,
+		TargetIndex: 235, // Australia/Hobart
+	},
+	// 103: Zone Australia/Darwin
+	{
+		ZoneID: 0x2876bdff,
+		NameIndex: 353, // "Australia/Darwin"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 483,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 104: Link Pacific/Pohnpei -> Pacific/Guadalcanal
+	{
+		ZoneID: 0x28929f96,
+		NameIndex: 560, // "Pacific/Pohnpei"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 621,
+		EraCount: 1,
+		TargetIndex: 330, // Pacific/Guadalcanal
+	},
+	// 105: Zone Asia/Famagusta
+	{
+		ZoneID: 0x289b4f8b,
+		NameIndex: 265, // "Asia/Famagusta"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 359,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 106: Zone America/Indiana/Vincennes
+	{
+		ZoneID: 0x28a0b212,
+		NameIndex: 134, // "America/Indiana/Vincennes"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 179,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 107: Zone America/Indiana/Indianapolis
+	{
+		ZoneID: 0x28a669a4,
+		NameIndex: 128, // "America/Indiana/Indianapolis"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 166,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 108: Zone Asia/Vladivostok
+	{
+		ZoneID: 0x29de34a8,
+		NameIndex: 330, // "Asia/Vladivostok"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 458,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 109: Link Australia/Canberra -> Australia/Sydney
+	{
+		ZoneID: 0x2a09ae58,
+		NameIndex: 351, // "Australia/Canberra"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 490,
+		EraCount: 1,
+		TargetIndex: 240, // Australia/Sydney
+	},
+	// 110: Zone America/Fortaleza
+	{
+		ZoneID: 0x2ad018ee,
+		NameIndex: 115, // "America/Fortaleza"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 148,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 111: Zone America/Vancouver
+	{
+		ZoneID: 0x2c6f6b1f,
+		NameIndex: 217, // "America/Vancouver"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 284,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 112: Link America/Pangnirtung -> America/Iqaluit
+	{
+		ZoneID: 0x2d999193,
+		NameIndex: 180, // "America/Pangnirtung"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 186,
+		EraCount: 3,
+		TargetIndex: 81, // America/Iqaluit
+	},
+	// 113: Zone America/Iqaluit
+	{
+		ZoneID: 0x2de310bf,
+		NameIndex: 138, // "America/Iqaluit"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 186,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 114: Link Jamaica -> America/Jamaica
+	{
+		ZoneID: 0x2e44fdab,
+		NameIndex: 514, // "Jamaica"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 189,
+		EraCount: 1,
+		TargetIndex: 82, // America/Jamaica
+	},
+	// 115: Zone Pacific/Chatham
+	{
+		ZoneID: 0x2f0de999,
+		NameIndex: 532, // "Pacific/Chatham"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 613,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 116: Link Etc/Universal -> Etc/UTC
+	{
+		ZoneID: 0x2f8cb9a9,
+		NameIndex: 425, // "Etc/Universal"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 523,
+		EraCount: 1,
+		TargetIndex: 273, // Etc/UTC
+	},
+	// 117: Zone America/Indiana/Marengo
+	{
+		ZoneID: 0x2feeee72,
+		NameIndex: 130, // "America/Indiana/Marengo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 170,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 118: Zone Europe/Tallinn
+	{
+		ZoneID: 0x30c4e096,
+		NameIndex: 477, // "Europe/Tallinn"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 581,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 119: Link Africa/Djibouti -> Africa/Nairobi
+	{
+		ZoneID: 0x30ea01d4,
+		NameIndex: 20, // "Africa/Djibouti"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 120: Zone Asia/Ulaanbaatar
+	{
+		ZoneID: 0x30f0cc4e,
+		NameIndex: 325, // "Asia/Ulaanbaatar"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 452,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 121: Link Africa/Gaborone -> Africa/Maputo
+	{
+		ZoneID: 0x317c0aa7,
+		NameIndex: 24, // "Africa/Gaborone"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 17,
+		EraCount: 1,
+		TargetIndex: 11, // Africa/Maputo
+	},
+	// 122: Zone America/Argentina/Ushuaia
+	{
+		ZoneID: 0x320dcdde,
+		NameIndex: 72, // "America/Argentina/Ushuaia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 91,
+		EraCount: 6,
+		TargetIndex: 0,
+	},
+	// 123: Link Asia/Calcutta -> Asia/Kolkata
+	{
+		ZoneID: 0x328a44c3,
+		NameIndex: 253, // "Asia/Calcutta"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 392,
+		EraCount: 1,
+		TargetIndex: 183, // Asia/Kolkata
+	},
+	// 124: Zone Australia/Hobart
+	{
+		ZoneID: 0x32bf951a,
+		NameIndex: 355, // "Australia/Hobart"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 485,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 125: Zone Asia/Dushanbe
+	{
+		ZoneID: 0x32fc5c3c,
+		NameIndex: 264, // "Asia/Dushanbe"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 358,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 126: Zone Atlantic/South_Georgia
+	{
+		ZoneID: 0x33013174,
+		NameIndex: 344, // "Atlantic/South_Georgia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 476,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 127: Zone America/Phoenix
+	{
+		ZoneID: 0x34b5af01,
+		NameIndex: 182, // "America/Phoenix"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 242,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 128: Link Asia/Istanbul -> Europe/Istanbul
+	{
+		ZoneID: 0x382e7894,
+		NameIndex: 273, // "Asia/Istanbul"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 539,
+		EraCount: 9,
+		TargetIndex: 286, // Europe/Istanbul
+	},
+	// 129: Link Asia/Ulan_Bator -> Asia/Ulaanbaatar
+	{
+		ZoneID: 0x394db4d9,
+		NameIndex: 326, // "Asia/Ulan_Bator"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 452,
+		EraCount: 1,
+		TargetIndex: 214, // Asia/Ulaanbaatar
+	},
+	// 130: Zone Antarctica/Mawson
+	{
+		ZoneID: 0x399cd863,
+		NameIndex: 227, // "Antarctica/Mawson"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 311,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 131: Link Africa/Brazzaville -> Africa/Lagos
+	{
+		ZoneID: 0x39cda760,
+		NameIndex: 12, // "Africa/Brazzaville"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 132: Zone America/Caracas
+	{
+		ZoneID: 0x3be064f4,
+		NameIndex: 90, // "America/Caracas"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 120,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 133: Zone America/Cayenne
+	{
+		ZoneID: 0x3c617269,
+		NameIndex: 92, // "America/Cayenne"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 123,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 134: Link Africa/Porto-Novo -> Africa/Lagos
+	{
+		ZoneID: 0x3d1bf95d,
+		NameIndex: 49, // "Africa/Porto-Novo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 135: Zone Atlantic/Bermuda
+	{
+		ZoneID: 0x3d4bb1c4,
+		NameIndex: 336, // "Atlantic/Bermuda"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 471,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 136: Zone America/Managua
+	{
+		ZoneID: 0x3d5e7600,
+		NameIndex: 152, // "America/Managua"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 202,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 137: Link America/Marigot -> America/Puerto_Rico
+	{
+		ZoneID: 0x3dab3a59,
+		NameIndex: 154, // "America/Marigot"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 138: Link Europe/Guernsey -> Europe/London
+	{
+		ZoneID: 0x3db12c16,
+		NameIndex: 443, // "Europe/Guernsey"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 556,
+		EraCount: 1,
+		TargetIndex: 291, // Europe/London
+	},
+	// 139: Link Africa/Nouakchott -> Africa/Abidjan
+	{
+		ZoneID: 0x3dc49dba,
+		NameIndex: 47, // "Africa/Nouakchott"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 140: Link America/Louisville -> America/Kentucky/Louisville
+	{
+		ZoneID: 0x3dcb47ee,
+		NameIndex: 149, // "America/Louisville"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 191,
+		EraCount: 1,
+		TargetIndex: 84, // America/Kentucky/Louisville
+	},
+	// 141: Zone America/Argentina/San_Juan
+	{
+		ZoneID: 0x3e1009bd,
+		NameIndex: 69, // "America/Argentina/San_Juan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 73,
+		EraCount: 6,
+		TargetIndex: 0,
+	},
+	// 142: Zone America/Argentina/San_Luis
+	{
+		ZoneID: 0x3e11238c,
+		NameIndex: 70, // "America/Argentina/San_Luis"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 79,
+		EraCount: 7,
+		TargetIndex: 0,
+	},
+	// 143: Zone Europe/Volgograd
+	{
+		ZoneID: 0x3ed0f389,
+		NameIndex: 486, // "Europe/Volgograd"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 593,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 144: Zone America/Fort_Nelson
+	{
+		ZoneID: 0x3f437e0f,
+		NameIndex: 113, // "America/Fort_Nelson"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 146,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 145: Zone Etc/GMT+10
+	{
+		ZoneID: 0x3f8f1cc4,
+		NameIndex: 395, // "Etc/GMT+10"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 498,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 146: Zone Etc/GMT+11
+	{
+		ZoneID: 0x3f8f1cc5,
+		NameIndex: 396, // "Etc/GMT+11"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 499,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 147: Zone Etc/GMT+12
+	{
+		ZoneID: 0x3f8f1cc6,
+		NameIndex: 397, // "Etc/GMT+12"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 500,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 148: Zone Etc/GMT-10
+	{
+		ZoneID: 0x3f8f2546,
+		NameIndex: 408, // "Etc/GMT-10"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 510,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 149: Zone Etc/GMT-11
+	{
+		ZoneID: 0x3f8f2547,
+		NameIndex: 409, // "Etc/GMT-11"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 511,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 150: Zone Etc/GMT-12
+	{
+		ZoneID: 0x3f8f2548,
+		NameIndex: 410, // "Etc/GMT-12"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 512,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 151: Zone Etc/GMT-13
+	{
+		ZoneID: 0x3f8f2549,
+		NameIndex: 411, // "Etc/GMT-13"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 513,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 152: Zone Etc/GMT-14
+	{
+		ZoneID: 0x3f8f254a,
+		NameIndex: 412, // "Etc/GMT-14"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 514,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 153: Zone Antarctica/Palmer
+	{
+		ZoneID: 0x40962f4f,
+		NameIndex: 229, // "Antarctica/Palmer"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 313,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 154: Link Canada/Pacific -> America/Vancouver
+	{
+		ZoneID: 0x40fa3c7b,
+		NameIndex: 381, // "Canada/Pacific"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 284,
+		EraCount: 1,
+		TargetIndex: 135, // America/Vancouver
+	},
+	// 155: Zone Europe/Athens
+	{
+		ZoneID: 0x4318fa27,
+		NameIndex: 430, // "Europe/Athens"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 529,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 156: Link Indian/Kerguelen -> Indian/Maldives
+	{
+		ZoneID: 0x4351b389,
+		NameIndex: 506, // "Indian/Kerguelen"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 602,
+		EraCount: 1,
+		TargetIndex: 314, // Indian/Maldives
+	},
+	// 157: Zone America/Indiana/Winamac
+	{
+		ZoneID: 0x4413fa69,
+		NameIndex: 135, // "America/Indiana/Winamac"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 182,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 158: Zone Europe/Berlin
+	{
+		ZoneID: 0x44644c20,
+		NameIndex: 433, // "Europe/Berlin"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 531,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 159: Link Atlantic/St_Helena -> Africa/Abidjan
+	{
+		ZoneID: 0x451fc5f7,
+		NameIndex: 345, // "Atlantic/St_Helena"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 160: Zone Indian/Chagos
+	{
+		ZoneID: 0x456f7c3c,
+		NameIndex: 502, // "Indian/Chagos"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 601,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 161: Link Indian/Mahe -> Asia/Dubai
+	{
+		ZoneID: 0x45e725e2,
+		NameIndex: 507, // "Indian/Mahe"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 357,
+		EraCount: 1,
+		TargetIndex: 166, // Asia/Dubai
+	},
+	// 162: Link Indian/Comoro -> Africa/Nairobi
+	{
+		ZoneID: 0x45f4deb6,
+		NameIndex: 505, // "Indian/Comoro"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 163: Link America/Mendoza -> America/Argentina/Mendoza
+	{
+		ZoneID: 0x46b4e054,
+		NameIndex: 158, // "America/Mendoza"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 57,
+		EraCount: 6,
+		TargetIndex: 27, // America/Argentina/Mendoza
+	},
+	// 164: Zone Asia/Ust-Nera
+	{
+		ZoneID: 0x4785f921,
+		NameIndex: 328, // "Asia/Ust-Nera"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 454,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 165: Zone Europe/Dublin
+	{
+		ZoneID: 0x4a275f62,
+		NameIndex: 441, // "Europe/Dublin"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 536,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 166: Zone Asia/Nicosia
+	{
+		ZoneID: 0x4b0fcf78,
+		NameIndex: 295, // "Asia/Nicosia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 404,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 167: Zone America/Chicago
+	{
+		ZoneID: 0x4b92b5d4,
+		NameIndex: 94, // "America/Chicago"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 124,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 168: Zone Australia/Sydney
+	{
+		ZoneID: 0x4d1e9776,
+		NameIndex: 365, // "Australia/Sydney"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 490,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 169: Link NZ-CHAT -> Pacific/Chatham
+	{
+		ZoneID: 0x4d42afda,
+		NameIndex: 525, // "NZ-CHAT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 613,
+		EraCount: 1,
+		TargetIndex: 323, // Pacific/Chatham
+	},
+	// 170: Link US/Arizona -> America/Phoenix
+	{
+		ZoneID: 0x4ec52670,
+		NameIndex: 582, // "US/Arizona"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 242,
+		EraCount: 1,
+		TargetIndex: 113, // America/Phoenix
+	},
+	// 171: Link Antarctica/Vostok -> Asia/Urumqi
+	{
+		ZoneID: 0x4f966fd4,
+		NameIndex: 234, // "Antarctica/Vostok"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 453,
+		EraCount: 1,
+		TargetIndex: 215, // Asia/Urumqi
+	},
+	// 172: Link US/Aleutian -> America/Adak
+	{
+		ZoneID: 0x4fe013ef,
+		NameIndex: 581, // "US/Aleutian"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 29,
+		EraCount: 1,
+		TargetIndex: 19, // America/Adak
+	},
+	// 173: Zone Australia/Brisbane
+	{
+		ZoneID: 0x4fedc9c0,
+		NameIndex: 349, // "Australia/Brisbane"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 480,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 174: Link America/Catamarca -> America/Argentina/Catamarca
+	{
+		ZoneID: 0x5036e963,
+		NameIndex: 91, // "America/Catamarca"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 38,
+		EraCount: 6,
+		TargetIndex: 23, // America/Argentina/Catamarca
+	},
+	// 175: Zone America/Asuncion
+	{
+		ZoneID: 0x50ec79a6,
+		NameIndex: 74, // "America/Asuncion"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 97,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 176: Zone Asia/Karachi
+	{
+		ZoneID: 0x527f5245,
+		NameIndex: 279, // "Asia/Karachi"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 385,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 177: Link Asia/Kashgar -> Asia/Urumqi
+	{
+		ZoneID: 0x52955193,
+		NameIndex: 280, // "Asia/Kashgar"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 453,
+		EraCount: 1,
+		TargetIndex: 215, // Asia/Urumqi
+	},
+	// 178: Link Canada/Atlantic -> America/Halifax
+	{
+		ZoneID: 0x536b119c,
+		NameIndex: 376, // "Canada/Atlantic"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 162,
+		EraCount: 1,
+		TargetIndex: 69, // America/Halifax
+	},
+	// 179: Zone Pacific/Gambier
+	{
+		ZoneID: 0x53720c3a,
+		NameIndex: 541, // "Pacific/Gambier"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 620,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 180: Zone America/Whitehorse
+	{
+		ZoneID: 0x54e0e3e8,
+		NameIndex: 219, // "America/Whitehorse"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 285,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 181: Zone America/Martinique
+	{
+		ZoneID: 0x551e84c5,
+		NameIndex: 155, // "America/Martinique"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 204,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 182: Zone America/Jamaica
+	{
+		ZoneID: 0x565dad6c,
+		NameIndex: 139, // "America/Jamaica"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 189,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 183: Link US/Samoa -> Pacific/Pago_Pago
+	{
+		ZoneID: 0x566821cd,
+		NameIndex: 591, // "US/Samoa"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 637,
+		EraCount: 1,
+		TargetIndex: 342, // Pacific/Pago_Pago
+	},
+	// 184: Link Hongkong -> Asia/Hong_Kong
+	{
+		ZoneID: 0x56d36560,
+		NameIndex: 499, // "Hongkong"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 373,
+		EraCount: 1,
+		TargetIndex: 172, // Asia/Hong_Kong
+	},
+	// 185: Link Europe/Jersey -> Europe/London
+	{
+		ZoneID: 0x570dae76,
+		NameIndex: 447, // "Europe/Jersey"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 556,
+		EraCount: 1,
+		TargetIndex: 291, // Europe/London
+	},
+	// 186: Zone Asia/Hong_Kong
+	{
+		ZoneID: 0x577f28ac,
+		NameIndex: 270, // "Asia/Hong_Kong"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 373,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 187: Zone Pacific/Marquesas
+	{
+		ZoneID: 0x57ca7135,
+		NameIndex: 551, // "Pacific/Marquesas"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 630,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 188: Zone America/Miquelon
+	{
+		ZoneID: 0x59674330,
+		NameIndex: 163, // "America/Miquelon"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 217,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 189: Link Antarctica/DumontDUrville -> Pacific/Port_Moresby
+	{
+		ZoneID: 0x5a3c656c,
+		NameIndex: 225, // "Antarctica/DumontDUrville"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 640,
+		EraCount: 1,
+		TargetIndex: 345, // Pacific/Port_Moresby
+	},
+	// 190: Link Atlantic/Jan_Mayen -> Europe/Berlin
+	{
+		ZoneID: 0x5a7535b6,
+		NameIndex: 341, // "Atlantic/Jan_Mayen"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 531,
+		EraCount: 1,
+		TargetIndex: 278, // Europe/Berlin
+	},
+	// 191: Zone America/Anchorage
+	{
+		ZoneID: 0x5a79260e,
+		NameIndex: 56, // "America/Anchorage"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 30,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 192: Link US/Eastern -> America/New_York
+	{
+		ZoneID: 0x5bb7e78e,
+		NameIndex: 585, // "US/Eastern"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 222,
+		EraCount: 1,
+		TargetIndex: 103, // America/New_York
+	},
+	// 193: Zone Asia/Jerusalem
+	{
+		ZoneID: 0x5becd23a,
+		NameIndex: 276, // "Asia/Jerusalem"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 380,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 194: Link Europe/Stockholm -> Europe/Berlin
+	{
+		ZoneID: 0x5bf6fbb8,
+		NameIndex: 476, // "Europe/Stockholm"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 531,
+		EraCount: 1,
+		TargetIndex: 278, // Europe/Berlin
+	},
+	// 195: Zone Europe/Lisbon
+	{
+		ZoneID: 0x5c00a70b,
+		NameIndex: 452, // "Europe/Lisbon"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 555,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 196: Zone Atlantic/Cape_Verde
+	{
+		ZoneID: 0x5c5e1772,
+		NameIndex: 338, // "Atlantic/Cape_Verde"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 473,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 197: Zone Europe/London
+	{
+		ZoneID: 0x5c6a84ae,
+		NameIndex: 454, // "Europe/London"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 556,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 198: Link America/Cordoba -> America/Argentina/Cordoba
+	{
+		ZoneID: 0x5c8a7600,
+		NameIndex: 98, // "America/Cordoba"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 44,
+		EraCount: 3,
+		TargetIndex: 24, // America/Argentina/Cordoba
+	},
+	// 199: Link Asia/Ujung_Pandang -> Asia/Makassar
+	{
+		ZoneID: 0x5d001eb3,
+		NameIndex: 324, // "Asia/Ujung_Pandang"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 402,
+		EraCount: 1,
+		TargetIndex: 188, // Asia/Makassar
+	},
+	// 200: Link Africa/Mbabane -> Africa/Johannesburg
+	{
+		ZoneID: 0x5d3bdd40,
+		NameIndex: 41, // "Africa/Mbabane"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 9,
+		EraCount: 1,
+		TargetIndex: 7, // Africa/Johannesburg
+	},
+	// 201: Zone Europe/Madrid
+	{
+		ZoneID: 0x5dbd1535,
+		NameIndex: 456, // "Europe/Madrid"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 557,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 202: Zone America/Moncton
+	{
+		ZoneID: 0x5e07fe24,
+		NameIndex: 164, // "America/Moncton"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 218,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 203: Zone Pacific/Bougainville
+	{
+		ZoneID: 0x5e10f7a4,
+		NameIndex: 531, // "Pacific/Bougainville"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 611,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 204: Link Europe/Monaco -> Europe/Paris
+	{
+		ZoneID: 0x5ebf9f01,
+		NameIndex: 460, // "Europe/Monaco"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 564,
+		EraCount: 1,
+		TargetIndex: 296, // Europe/Paris
+	},
+	// 205: Zone Europe/Moscow
+	{
+		ZoneID: 0x5ec266fc,
+		NameIndex: 461, // "Europe/Moscow"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 561,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 206: Zone America/Argentina/Jujuy
+	{
+		ZoneID: 0x5f2f46c5,
+		NameIndex: 64, // "America/Argentina/Jujuy"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 47,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 207: Zone America/Argentina/Salta
+	{
+		ZoneID: 0x5fc73403,
+		NameIndex: 68, // "America/Argentina/Salta"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 69,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 208: Zone Pacific/Pago_Pago
+	{
+		ZoneID: 0x603aebd0,
+		NameIndex: 557, // "Pacific/Pago_Pago"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 637,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 209: Link Pacific/Enderbury -> Pacific/Kanton
+	{
+		ZoneID: 0x61599a93,
+		NameIndex: 536, // "Pacific/Enderbury"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 625,
+		EraCount: 1,
+		TargetIndex: 333, // Pacific/Kanton
+	},
+	// 210: Zone Africa/Sao_Tome
+	{
+		ZoneID: 0x61b319d1,
+		NameIndex: 50, // "Africa/Sao_Tome"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 21,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 211: Link Canada/Central -> America/Winnipeg
+	{
+		ZoneID: 0x626710f5,
+		NameIndex: 377, // "Canada/Central"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 287,
+		EraCount: 2,
+		TargetIndex: 137, // America/Winnipeg
+	},
+	// 212: Link America/Creston -> America/Phoenix
+	{
+		ZoneID: 0x62a70204,
+		NameIndex: 100, // "America/Creston"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 242,
+		EraCount: 1,
+		TargetIndex: 113, // America/Phoenix
+	},
+	// 213: Zone America/Costa_Rica
+	{
+		ZoneID: 0x63ff66be,
+		NameIndex: 99, // "America/Costa_Rica"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 131,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 214: Zone Asia/Qostanay
+	{
+		ZoneID: 0x654fe522,
+		NameIndex: 304, // "Asia/Qostanay"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 422,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 215: Zone America/Indiana/Knox
+	{
+		ZoneID: 0x6554adc9,
+		NameIndex: 129, // "America/Indiana/Knox"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 168,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 216: Zone Europe/Prague
+	{
+		ZoneID: 0x65ee5d48,
+		NameIndex: 466, // "Europe/Prague"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 565,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 217: Link Brazil/Acre -> America/Rio_Branco
+	{
+		ZoneID: 0x66934f93,
+		NameIndex: 370, // "Brazil/Acre"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 262,
+		EraCount: 3,
+		TargetIndex: 122, // America/Rio_Branco
+	},
+	// 218: Link Brazil/East -> America/Sao_Paulo
+	{
+		ZoneID: 0x669578c5,
+		NameIndex: 372, // "Brazil/East"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 271,
+		EraCount: 1,
+		TargetIndex: 126, // America/Sao_Paulo
+	},
+	// 219: Link Africa/Kinshasa -> Africa/Lagos
+	{
+		ZoneID: 0x6695d70c,
+		NameIndex: 31, // "Africa/Kinshasa"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 220: Link Brazil/West -> America/Manaus
+	{
+		ZoneID: 0x669f689b,
+		NameIndex: 373, // "Brazil/West"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 203,
+		EraCount: 1,
+		TargetIndex: 91, // America/Manaus
+	},
+	// 221: Link Africa/Mogadishu -> Africa/Nairobi
+	{
+		ZoneID: 0x66bc159b,
+		NameIndex: 42, // "Africa/Mogadishu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 222: Zone America/Puerto_Rico
+	{
+		ZoneID: 0x6752ca31,
+		NameIndex: 187, // "America/Puerto_Rico"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 223: Link US/Indiana-Starke -> America/Indiana/Knox
+	{
+		ZoneID: 0x67977be7,
+		NameIndex: 587, // "US/Indiana-Starke"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 168,
+		EraCount: 2,
+		TargetIndex: 73, // America/Indiana/Knox
+	},
+	// 224: Link America/Buenos_Aires -> America/Argentina/Buenos_Aires
+	{
+		ZoneID: 0x67d79a05,
+		NameIndex: 86, // "America/Buenos_Aires"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 35,
+		EraCount: 3,
+		TargetIndex: 22, // America/Argentina/Buenos_Aires
+	},
+	// 225: Link Africa/Freetown -> Africa/Abidjan
+	{
+		ZoneID: 0x6823dd64,
+		NameIndex: 23, // "Africa/Freetown"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 226: Link Indian/Christmas -> Asia/Bangkok
+	{
+		ZoneID: 0x68c207d5,
+		NameIndex: 503, // "Indian/Christmas"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 335,
+		EraCount: 1,
+		TargetIndex: 156, // Asia/Bangkok
+	},
+	// 227: Zone Asia/Novokuznetsk
+	{
+		ZoneID: 0x69264f93,
+		NameIndex: 296, // "Asia/Novokuznetsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 405,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 228: Link America/Indianapolis -> America/Indiana/Indianapolis
+	{
+		ZoneID: 0x6a009ae1,
+		NameIndex: 136, // "America/Indianapolis"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 166,
+		EraCount: 2,
+		TargetIndex: 72, // America/Indiana/Indianapolis
+	},
+	// 229: Link Europe/Sarajevo -> Europe/Belgrade
+	{
+		ZoneID: 0x6a576c3f,
+		NameIndex: 471, // "Europe/Sarajevo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 530,
+		EraCount: 1,
+		TargetIndex: 277, // Europe/Belgrade
+	},
+	// 230: Link America/Curacao -> America/Puerto_Rico
+	{
+		ZoneID: 0x6a879184,
+		NameIndex: 102, // "America/Curacao"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 231: Zone America/Tijuana
+	{
+		ZoneID: 0x6aa1df72,
+		NameIndex: 214, // "America/Tijuana"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 279,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 232: Zone Asia/Makassar
+	{
+		ZoneID: 0x6aa21c85,
+		NameIndex: 292, // "Asia/Makassar"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 402,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 233: Zone Europe/Helsinki
+	{
+		ZoneID: 0x6ab2975b,
+		NameIndex: 444, // "Europe/Helsinki"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 538,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 234: Link America/Lower_Princes -> America/Puerto_Rico
+	{
+		ZoneID: 0x6ae45b62,
+		NameIndex: 150, // "America/Lower_Princes"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 235: Zone America/Porto_Velho
+	{
+		ZoneID: 0x6b1aac77,
+		NameIndex: 186, // "America/Porto_Velho"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 244,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 236: Zone Europe/Samara
+	{
+		ZoneID: 0x6bc0b139,
+		NameIndex: 469, // "Europe/Samara"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 570,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 237: Link Europe/Skopje -> Europe/Belgrade
+	{
+		ZoneID: 0x6c76fdd0,
+		NameIndex: 474, // "Europe/Skopje"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 530,
+		EraCount: 1,
+		TargetIndex: 277, // Europe/Belgrade
+	},
+	// 238: Zone America/Edmonton
+	{
+		ZoneID: 0x6cb9484a,
+		NameIndex: 109, // "America/Edmonton"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 141,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 239: Zone America/Dawson_Creek
+	{
+		ZoneID: 0x6cf24e5b,
+		NameIndex: 105, // "America/Dawson_Creek"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 138,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 240: Link Asia/Rangoon -> Asia/Yangon
+	{
+		ZoneID: 0x6d1217c6,
+		NameIndex: 306, // "Asia/Rangoon"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 464,
+		EraCount: 1,
+		TargetIndex: 219, // Asia/Yangon
+	},
+	// 241: Link US/East-Indiana -> America/Indiana/Indianapolis
+	{
+		ZoneID: 0x6dcf558a,
+		NameIndex: 584, // "US/East-Indiana"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 166,
+		EraCount: 2,
+		TargetIndex: 72, // America/Indiana/Indianapolis
+	},
+	// 242: Zone America/Grand_Turk
+	{
+		ZoneID: 0x6e216197,
+		NameIndex: 119, // "America/Grand_Turk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 156,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 243: Link America/Blanc-Sablon -> America/Puerto_Rico
+	{
+		ZoneID: 0x6e299892,
+		NameIndex: 82, // "America/Blanc-Sablon"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 244: Zone Europe/Tirane
+	{
+		ZoneID: 0x6ea95b47,
+		NameIndex: 478, // "Europe/Tirane"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 584,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 245: Link US/Mountain -> America/Denver
+	{
+		ZoneID: 0x6eb88247,
+		NameIndex: 589, // "US/Mountain"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 139,
+		EraCount: 1,
+		TargetIndex: 56, // America/Denver
+	},
+	// 246: Link Antarctica/McMurdo -> Pacific/Auckland
+	{
+		ZoneID: 0x6eeb5585,
+		NameIndex: 228, // "Antarctica/McMurdo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 610,
+		EraCount: 1,
+		TargetIndex: 321, // Pacific/Auckland
+	},
+	// 247: Zone America/Araguaina
+	{
+		ZoneID: 0x6f9a3aef,
+		NameIndex: 59, // "America/Araguaina"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 31,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 248: Link Africa/Lubumbashi -> Africa/Maputo
+	{
+		ZoneID: 0x6fd88566,
+		NameIndex: 36, // "Africa/Lubumbashi"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 17,
+		EraCount: 1,
+		TargetIndex: 11, // Africa/Maputo
+	},
+	// 249: Link Indian/Reunion -> Asia/Dubai
+	{
+		ZoneID: 0x7076c047,
+		NameIndex: 511, // "Indian/Reunion"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 357,
+		EraCount: 1,
+		TargetIndex: 166, // Asia/Dubai
+	},
+	// 250: Zone Asia/Qyzylorda
+	{
+		ZoneID: 0x71282e81,
+		NameIndex: 305, // "Asia/Qyzylorda"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 424,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 251: Zone Asia/Kolkata
+	{
+		ZoneID: 0x72c06cd9,
+		NameIndex: 284, // "Asia/Kolkata"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 392,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 252: Zone America/Ciudad_Juarez
+	{
+		ZoneID: 0x7347fc60,
+		NameIndex: 96, // "America/Ciudad_Juarez"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 127,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 253: Zone Europe/Vienna
+	{
+		ZoneID: 0x734cc2e5,
+		NameIndex: 484, // "Europe/Vienna"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 589,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 254: Link Africa/Asmara -> Africa/Nairobi
+	{
+		ZoneID: 0x73b278ef,
+		NameIndex: 5, // "Africa/Asmara"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 255: Link Africa/Asmera -> Africa/Nairobi
+	{
+		ZoneID: 0x73b289f3,
+		NameIndex: 6, // "Africa/Asmera"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 256: Zone Asia/Kamchatka
+	{
+		ZoneID: 0x73baf9d7,
+		NameIndex: 278, // "Asia/Kamchatka"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 382,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 257: Zone America/Santarem
+	{
+		ZoneID: 0x740caec1,
+		NameIndex: 197, // "America/Santarem"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 265,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 258: Zone America/Santiago
+	{
+		ZoneID: 0x7410c9bc,
+		NameIndex: 198, // "America/Santiago"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 267,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 259: Link Africa/Bamako -> Africa/Abidjan
+	{
+		ZoneID: 0x74c1e7a5,
+		NameIndex: 7, // "Africa/Bamako"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 260: Link Africa/Bangui -> Africa/Lagos
+	{
+		ZoneID: 0x74c28ed0,
+		NameIndex: 8, // "Africa/Bangui"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 261: Link Africa/Banjul -> Africa/Abidjan
+	{
+		ZoneID: 0x74c29b96,
+		NameIndex: 9, // "Africa/Banjul"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 262: Link Europe/Nicosia -> Asia/Nicosia
+	{
+		ZoneID: 0x74efab8a,
+		NameIndex: 462, // "Europe/Nicosia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 404,
+		EraCount: 1,
+		TargetIndex: 190, // Asia/Nicosia
+	},
+	// 263: Zone Europe/Warsaw
+	{
+		ZoneID: 0x75185c19,
+		NameIndex: 487, // "Europe/Warsaw"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 598,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 264: Zone America/El_Salvador
+	{
+		ZoneID: 0x752ad652,
+		NameIndex: 111, // "America/El_Salvador"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 145,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 265: Zone Africa/Bissau
+	{
+		ZoneID: 0x75564141,
+		NameIndex: 10, // "Africa/Bissau"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 2,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 266: Zone America/Santo_Domingo
+	{
+		ZoneID: 0x75a0d177,
+		NameIndex: 199, // "America/Santo_Domingo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 268,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 267: Link US/Michigan -> America/Detroit
+	{
+		ZoneID: 0x766bb7bc,
+		NameIndex: 588, // "US/Michigan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 140,
+		EraCount: 1,
+		TargetIndex: 57, // America/Detroit
+	},
+	// 268: Link Canada/Saskatchewan -> America/Regina
+	{
+		ZoneID: 0x77311f49,
+		NameIndex: 382, // "Canada/Saskatchewan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 256,
+		EraCount: 1,
+		TargetIndex: 120, // America/Regina
+	},
+	// 269: Link Africa/Accra -> Africa/Abidjan
+	{
+		ZoneID: 0x77d5b054,
+		NameIndex: 2, // "Africa/Accra"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 270: Zone Africa/Cairo
+	{
+		ZoneID: 0x77f8e228,
+		NameIndex: 14, // "Africa/Cairo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 3,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 271: Zone Africa/Ceuta
+	{
+		ZoneID: 0x77fb46ec,
+		NameIndex: 16, // "Africa/Ceuta"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 6,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 272: Link Africa/Dakar -> Africa/Abidjan
+	{
+		ZoneID: 0x780b00fd,
+		NameIndex: 18, // "Africa/Dakar"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 273: Zone Africa/Lagos
+	{
+		ZoneID: 0x789bb5d0,
+		NameIndex: 32, // "Africa/Lagos"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 274: Zone Africa/Windhoek
+	{
+		ZoneID: 0x789c9bd3,
+		NameIndex: 54, // "Africa/Windhoek"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 28,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 275: Link Canada/Yukon -> America/Whitehorse
+	{
+		ZoneID: 0x78dd35c2,
+		NameIndex: 383, // "Canada/Yukon"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 285,
+		EraCount: 2,
+		TargetIndex: 136, // America/Whitehorse
+	},
+	// 276: Zone America/Toronto
+	{
+		ZoneID: 0x792e851b,
+		NameIndex: 215, // "America/Toronto"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 283,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 277: Link America/Tortola -> America/Puerto_Rico
+	{
+		ZoneID: 0x7931462b,
+		NameIndex: 216, // "America/Tortola"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 278: Zone Africa/Tunis
+	{
+		ZoneID: 0x79378e6d,
+		NameIndex: 53, // "Africa/Tunis"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 27,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 279: Link Africa/Douala -> Africa/Lagos
+	{
+		ZoneID: 0x7a6df310,
+		NameIndex: 21, // "Africa/Douala"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 280: Link Africa/Conakry -> Africa/Abidjan
+	{
+		ZoneID: 0x7ab36b31,
+		NameIndex: 17, // "Africa/Conakry"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 281: Zone Indian/Mauritius
+	{
+		ZoneID: 0x7b09c02a,
+		NameIndex: 509, // "Indian/Mauritius"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 603,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 282: Zone Atlantic/Stanley
+	{
+		ZoneID: 0x7bb3e1c4,
+		NameIndex: 346, // "Atlantic/Stanley"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 477,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 283: Link America/Ensenada -> America/Tijuana
+	{
+		ZoneID: 0x7bc95445,
+		NameIndex: 112, // "America/Ensenada"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 279,
+		EraCount: 4,
+		TargetIndex: 133, // America/Tijuana
+	},
+	// 284: Link Europe/Zagreb -> Europe/Belgrade
+	{
+		ZoneID: 0x7c11c9ff,
+		NameIndex: 488, // "Europe/Zagreb"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 530,
+		EraCount: 1,
+		TargetIndex: 277, // Europe/Belgrade
+	},
+	// 285: Link Cuba -> America/Havana
+	{
+		ZoneID: 0x7c83cba0,
+		NameIndex: 386, // "Cuba"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 163,
+		EraCount: 1,
+		TargetIndex: 70, // America/Havana
+	},
+	// 286: Link Eire -> Europe/Dublin
+	{
+		ZoneID: 0x7c84b36a,
+		NameIndex: 391, // "Eire"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 536,
+		EraCount: 1,
+		TargetIndex: 283, // Europe/Dublin
+	},
+	// 287: Link GMT0 -> Etc/GMT
+	{
+		ZoneID: 0x7c8550fd,
+		NameIndex: 496, // "GMT0"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 288: Link Iran -> Asia/Tehran
+	{
+		ZoneID: 0x7c87090f,
+		NameIndex: 512, // "Iran"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 444,
+		EraCount: 1,
+		TargetIndex: 210, // Asia/Tehran
+	},
+	// 289: Link W-SU -> Europe/Moscow
+	{
+		ZoneID: 0x7c8d8ef1,
+		NameIndex: 594, // "W-SU"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 561,
+		EraCount: 3,
+		TargetIndex: 295, // Europe/Moscow
+	},
+	// 290: Link Zulu -> Etc/UTC
+	{
+		ZoneID: 0x7c9069b5,
+		NameIndex: 596, // "Zulu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 523,
+		EraCount: 1,
+		TargetIndex: 273, // Etc/UTC
+	},
+	// 291: Zone Europe/Zurich
+	{
+		ZoneID: 0x7d8195b9,
+		NameIndex: 490, // "Europe/Zurich"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 599,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 292: Link Chile/Continental -> America/Santiago
+	{
+		ZoneID: 0x7e2bdb18,
+		NameIndex: 384, // "Chile/Continental"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 267,
+		EraCount: 1,
+		TargetIndex: 124, // America/Santiago
+	},
+	// 293: Link America/Fort_Wayne -> America/Indiana/Indianapolis
+	{
+		ZoneID: 0x7eaaaf24,
+		NameIndex: 114, // "America/Fort_Wayne"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 166,
+		EraCount: 2,
+		TargetIndex: 72, // America/Indiana/Indianapolis
+	},
+	// 294: Zone Asia/Kuching
+	{
+		ZoneID: 0x801b003b,
+		NameIndex: 287, // "Asia/Kuching"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 396,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 295: Zone Atlantic/Madeira
+	{
+		ZoneID: 0x81b5c037,
+		NameIndex: 342, // "Atlantic/Madeira"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 475,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 296: Link America/Atikokan -> America/Panama
+	{
+		ZoneID: 0x81b92098,
+		NameIndex: 75, // "America/Atikokan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 240,
+		EraCount: 1,
+		TargetIndex: 111, // America/Panama
+	},
+	// 297: Link Africa/Harare -> Africa/Maputo
+	{
+		ZoneID: 0x82c39a2d,
+		NameIndex: 25, // "Africa/Harare"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 17,
+		EraCount: 1,
+		TargetIndex: 11, // Africa/Maputo
+	},
+	// 298: Link America/Shiprock -> America/Denver
+	{
+		ZoneID: 0x82fb7049,
+		NameIndex: 202, // "America/Shiprock"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 139,
+		EraCount: 1,
+		TargetIndex: 56, // America/Denver
+	},
+	// 299: Zone Pacific/Kiritimati
+	{
+		ZoneID: 0x8305073a,
+		NameIndex: 547, // "Pacific/Kiritimati"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 626,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 300: Link America/St_Vincent -> America/Puerto_Rico
+	{
+		ZoneID: 0x8460e523,
+		NameIndex: 209, // "America/St_Vincent"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 301: Zone America/Metlakatla
+	{
+		ZoneID: 0x84de2686,
+		NameIndex: 161, // "America/Metlakatla"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 210,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 302: Zone Asia/Yakutsk
+	{
+		ZoneID: 0x87bb3a9e,
+		NameIndex: 331, // "Asia/Yakutsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 461,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 303: Zone America/Chihuahua
+	{
+		ZoneID: 0x8827d776,
+		NameIndex: 95, // "America/Chihuahua"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 125,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 304: Zone Pacific/Pitcairn
+	{
+		ZoneID: 0x8837d8bd,
+		NameIndex: 559, // "Pacific/Pitcairn"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 639,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 305: Link Asia/Vientiane -> Asia/Bangkok
+	{
+		ZoneID: 0x89d68d75,
+		NameIndex: 329, // "Asia/Vientiane"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 335,
+		EraCount: 1,
+		TargetIndex: 156, // Asia/Bangkok
+	},
+	// 306: Link Pacific/Chuuk -> Pacific/Port_Moresby
+	{
+		ZoneID: 0x8a090b23,
+		NameIndex: 533, // "Pacific/Chuuk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 640,
+		EraCount: 1,
+		TargetIndex: 345, // Pacific/Port_Moresby
+	},
+	// 307: Zone Pacific/Efate
+	{
+		ZoneID: 0x8a2bce28,
+		NameIndex: 535, // "Pacific/Efate"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 615,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 308: Link Africa/Kigali -> Africa/Maputo
+	{
+		ZoneID: 0x8a4dcf2b,
+		NameIndex: 30, // "Africa/Kigali"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 17,
+		EraCount: 1,
+		TargetIndex: 11, // Africa/Maputo
+	},
+	// 309: Link Australia/ACT -> Australia/Sydney
+	{
+		ZoneID: 0x8a970eb2,
+		NameIndex: 347, // "Australia/ACT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 490,
+		EraCount: 1,
+		TargetIndex: 240, // Australia/Sydney
+	},
+	// 310: Link Australia/LHI -> Australia/Lord_Howe
+	{
+		ZoneID: 0x8a973e17,
+		NameIndex: 356, // "Australia/LHI"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 487,
+		EraCount: 1,
+		TargetIndex: 237, // Australia/Lord_Howe
+	},
+	// 311: Link Australia/NSW -> Australia/Sydney
+	{
+		ZoneID: 0x8a974812,
+		NameIndex: 360, // "Australia/NSW"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 490,
+		EraCount: 1,
+		TargetIndex: 240, // Australia/Sydney
+	},
+	// 312: Zone Pacific/Nauru
+	{
+		ZoneID: 0x8acc41ae,
+		NameIndex: 553, // "Pacific/Nauru"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 631,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 313: Zone EST5EDT
+	{
+		ZoneID: 0x8adc72a3,
+		NameIndex: 389, // "EST5EDT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 495,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 314: Zone Pacific/Palau
+	{
+		ZoneID: 0x8af04a36,
+		NameIndex: 558, // "Pacific/Palau"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 638,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 315: Link Pacific/Samoa -> Pacific/Pago_Pago
+	{
+		ZoneID: 0x8b2699b4,
+		NameIndex: 565, // "Pacific/Samoa"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 637,
+		EraCount: 1,
+		TargetIndex: 342, // Pacific/Pago_Pago
+	},
+	// 316: Zone America/Winnipeg
+	{
+		ZoneID: 0x8c7dafc7,
+		NameIndex: 220, // "America/Winnipeg"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 287,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 317: Zone Australia/Eucla
+	{
+		ZoneID: 0x8cf99e44,
+		NameIndex: 354, // "Australia/Eucla"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 484,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 318: Zone America/Argentina/Catamarca
+	{
+		ZoneID: 0x8d40986b,
+		NameIndex: 61, // "America/Argentina/Catamarca"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 38,
+		EraCount: 6,
+		TargetIndex: 0,
+	},
+	// 319: Link Africa/Luanda -> Africa/Lagos
+	{
+		ZoneID: 0x8d7909cf,
+		NameIndex: 35, // "Africa/Luanda"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 320: Link Africa/Lusaka -> Africa/Maputo
+	{
+		ZoneID: 0x8d82b23b,
+		NameIndex: 37, // "Africa/Lusaka"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 17,
+		EraCount: 1,
+		TargetIndex: 11, // Africa/Maputo
+	},
+	// 321: Link Australia/North -> Australia/Darwin
+	{
+		ZoneID: 0x8d997165,
+		NameIndex: 361, // "Australia/North"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 483,
+		EraCount: 1,
+		TargetIndex: 233, // Australia/Darwin
+	},
+	// 322: Zone Australia/Perth
+	{
+		ZoneID: 0x8db8269d,
+		NameIndex: 362, // "Australia/Perth"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 489,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 323: Link Australia/South -> Australia/Adelaide
+	{
+		ZoneID: 0x8df3f8ad,
+		NameIndex: 364, // "Australia/South"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 479,
+		EraCount: 1,
+		TargetIndex: 230, // Australia/Adelaide
+	},
+	// 324: Zone Pacific/Kwajalein
+	{
+		ZoneID: 0x8e216759,
+		NameIndex: 549, // "Pacific/Kwajalein"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 629,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 325: Zone America/Port-au-Prince
+	{
+		ZoneID: 0x8e4a7bdc,
+		NameIndex: 183, // "America/Port-au-Prince"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 243,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 326: Link Africa/Malabo -> Africa/Lagos
+	{
+		ZoneID: 0x8e6a1906,
+		NameIndex: 38, // "Africa/Malabo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 327: Zone Africa/Maputo
+	{
+		ZoneID: 0x8e6ca1f0,
+		NameIndex: 39, // "Africa/Maputo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 17,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 328: Link Africa/Maseru -> Africa/Johannesburg
+	{
+		ZoneID: 0x8e6e02c7,
+		NameIndex: 40, // "Africa/Maseru"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 9,
+		EraCount: 1,
+		TargetIndex: 7, // Africa/Johannesburg
+	},
+	// 329: Zone Pacific/Norfolk
+	{
+		ZoneID: 0x8f4eb4be,
+		NameIndex: 555, // "Pacific/Norfolk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 633,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 330: Link America/Godthab -> America/Nuuk
+	{
+		ZoneID: 0x8f7eba1f,
+		NameIndex: 117, // "America/Godthab"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 234,
+		EraCount: 2,
+		TargetIndex: 109, // America/Nuuk
+	},
+	// 331: Link Australia/Yancowinna -> Australia/Broken_Hill
+	{
+		ZoneID: 0x90bac131,
+		NameIndex: 369, // "Australia/Yancowinna"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 481,
+		EraCount: 2,
+		TargetIndex: 232, // Australia/Broken_Hill
+	},
+	// 332: Link Africa/Niamey -> Africa/Lagos
+	{
+		ZoneID: 0x914a30fd,
+		NameIndex: 46, // "Africa/Niamey"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 16,
+		EraCount: 1,
+		TargetIndex: 10, // Africa/Lagos
+	},
+	// 333: Zone Asia/Yerevan
+	{
+		ZoneID: 0x9185c8cc,
+		NameIndex: 334, // "Asia/Yerevan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 468,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 334: Zone America/Detroit
+	{
+		ZoneID: 0x925cfbc1,
+		NameIndex: 107, // "America/Detroit"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 140,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 335: Zone Asia/Choibalsan
+	{
+		ZoneID: 0x928aa4a6,
+		NameIndex: 255, // "Asia/Choibalsan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 347,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 336: Zone Antarctica/Macquarie
+	{
+		ZoneID: 0x92f47626,
+		NameIndex: 226, // "Antarctica/Macquarie"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 308,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 337: Zone America/Belize
+	{
+		ZoneID: 0x93256c81,
+		NameIndex: 81, // "America/Belize"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 106,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 338: Link Mexico/General -> America/Mexico_City
+	{
+		ZoneID: 0x93711d57,
+		NameIndex: 523, // "Mexico/General"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 214,
+		EraCount: 3,
+		TargetIndex: 98, // America/Mexico_City
+	},
+	// 339: Zone America/Bogota
+	{
+		ZoneID: 0x93d7bc62,
+		NameIndex: 84, // "America/Bogota"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 110,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 340: Zone Asia/Pyongyang
+	{
+		ZoneID: 0x93ed1c8e,
+		NameIndex: 302, // "Asia/Pyongyang"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 418,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 341: Zone America/Indiana/Petersburg
+	{
+		ZoneID: 0x94ac7acc,
+		NameIndex: 131, // "America/Indiana/Petersburg"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 172,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 342: Zone America/Cancun
+	{
+		ZoneID: 0x953331be,
+		NameIndex: 89, // "America/Cancun"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 118,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 343: Link America/Cayman -> America/Panama
+	{
+		ZoneID: 0x953961df,
+		NameIndex: 93, // "America/Cayman"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 240,
+		EraCount: 1,
+		TargetIndex: 111, // America/Panama
+	},
+	// 344: Zone America/Glace_Bay
+	{
+		ZoneID: 0x9681f8dd,
+		NameIndex: 116, // "America/Glace_Bay"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 153,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 345: Zone Asia/Khandyga
+	{
+		ZoneID: 0x9685a4d9,
+		NameIndex: 283, // "Asia/Khandyga"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 387,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 346: Link America/Grenada -> America/Puerto_Rico
+	{
+		ZoneID: 0x968ce4d8,
+		NameIndex: 120, // "America/Grenada"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 347: Zone America/Cuiaba
+	{
+		ZoneID: 0x969a52eb,
+		NameIndex: 101, // "America/Cuiaba"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 132,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 348: Zone America/Dawson
+	{
+		ZoneID: 0x978d8d12,
+		NameIndex: 104, // "America/Dawson"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 136,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 349: Link America/Aruba -> America/Puerto_Rico
+	{
+		ZoneID: 0x97cf8651,
+		NameIndex: 73, // "America/Aruba"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 350: Zone America/Denver
+	{
+		ZoneID: 0x97d10b2a,
+		NameIndex: 106, // "America/Denver"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 139,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 351: Zone America/Bahia
+	{
+		ZoneID: 0x97d815fb,
+		NameIndex: 77, // "America/Bahia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 98,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 352: Zone America/Belem
+	{
+		ZoneID: 0x97da580b,
+		NameIndex: 80, // "America/Belem"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 105,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 353: Zone America/Boise
+	{
+		ZoneID: 0x97dfc8d8,
+		NameIndex: 85, // "America/Boise"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 111,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 354: Zone Europe/Andorra
+	{
+		ZoneID: 0x97f6764b,
+		NameIndex: 428, // "Europe/Andorra"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 524,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 355: Zone America/Adak
+	{
+		ZoneID: 0x97fe49d7,
+		NameIndex: 55, // "America/Adak"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 29,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 356: Link America/Atka -> America/Adak
+	{
+		ZoneID: 0x97fe8f27,
+		NameIndex: 76, // "America/Atka"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 29,
+		EraCount: 1,
+		TargetIndex: 19, // America/Adak
+	},
+	// 357: Zone America/Lima
+	{
+		ZoneID: 0x980468c9,
+		NameIndex: 147, // "America/Lima"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 195,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 358: Zone America/Nome
+	{
+		ZoneID: 0x98059b15,
+		NameIndex: 172, // "America/Nome"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 223,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 359: Zone America/Nuuk
+	{
+		ZoneID: 0x9805b5a9,
+		NameIndex: 177, // "America/Nuuk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 234,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 360: Zone Indian/Maldives
+	{
+		ZoneID: 0x9869681c,
+		NameIndex: 508, // "Indian/Maldives"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 602,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 361: Link America/Jujuy -> America/Argentina/Jujuy
+	{
+		ZoneID: 0x9873dbbd,
+		NameIndex: 140, // "America/Jujuy"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 47,
+		EraCount: 4,
+		TargetIndex: 25, // America/Argentina/Jujuy
+	},
+	// 362: Zone America/Sitka
+	{
+		ZoneID: 0x99104ce2,
+		NameIndex: 203, // "America/Sitka"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 273,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 363: Zone America/Thule
+	{
+		ZoneID: 0x9921dd68,
+		NameIndex: 212, // "America/Thule"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 278,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 364: Zone Pacific/Rarotonga
+	{
+		ZoneID: 0x9981a3b0,
+		NameIndex: 563, // "Pacific/Rarotonga"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 641,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 365: Zone Asia/Kathmandu
+	{
+		ZoneID: 0x9a96ce6f,
+		NameIndex: 281, // "Asia/Kathmandu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 386,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 366: Link Brazil/DeNoronha -> America/Noronha
+	{
+		ZoneID: 0x9b4cb496,
+		NameIndex: 371, // "Brazil/DeNoronha"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 224,
+		EraCount: 5,
+		TargetIndex: 105, // America/Noronha
+	},
+	// 367: Zone America/North_Dakota/Beulah
+	{
+		ZoneID: 0x9b52b384,
+		NameIndex: 174, // "America/North_Dakota/Beulah"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 229,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 368: Link America/Rainy_River -> America/Winnipeg
+	{
+		ZoneID: 0x9cd58a10,
+		NameIndex: 189, // "America/Rainy_River"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 287,
+		EraCount: 2,
+		TargetIndex: 137, // America/Winnipeg
+	},
+	// 369: Zone Europe/Budapest
+	{
+		ZoneID: 0x9ce0197c,
+		NameIndex: 437, // "Europe/Budapest"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 534,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 370: Zone Asia/Baghdad
+	{
+		ZoneID: 0x9ceffbed,
+		NameIndex: 245, // "Asia/Baghdad"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 333,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 371: Link Asia/Bahrain -> Asia/Qatar
+	{
+		ZoneID: 0x9d078487,
+		NameIndex: 246, // "Asia/Bahrain"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 421,
+		EraCount: 1,
+		TargetIndex: 197, // Asia/Qatar
+	},
+	// 372: Link Etc/GMT+0 -> Etc/GMT
+	{
+		ZoneID: 0x9d13da13,
+		NameIndex: 393, // "Etc/GMT+0"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 373: Zone Etc/GMT+1
+	{
+		ZoneID: 0x9d13da14,
+		NameIndex: 394, // "Etc/GMT+1"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 497,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 374: Zone Etc/GMT+2
+	{
+		ZoneID: 0x9d13da15,
+		NameIndex: 398, // "Etc/GMT+2"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 501,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 375: Zone Etc/GMT+3
+	{
+		ZoneID: 0x9d13da16,
+		NameIndex: 399, // "Etc/GMT+3"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 502,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 376: Zone Etc/GMT+4
+	{
+		ZoneID: 0x9d13da17,
+		NameIndex: 400, // "Etc/GMT+4"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 503,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 377: Zone Etc/GMT+5
+	{
+		ZoneID: 0x9d13da18,
+		NameIndex: 401, // "Etc/GMT+5"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 504,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 378: Zone Etc/GMT+6
+	{
+		ZoneID: 0x9d13da19,
+		NameIndex: 402, // "Etc/GMT+6"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 505,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 379: Zone Etc/GMT+7
+	{
+		ZoneID: 0x9d13da1a,
+		NameIndex: 403, // "Etc/GMT+7"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 506,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 380: Zone Etc/GMT+8
+	{
+		ZoneID: 0x9d13da1b,
+		NameIndex: 404, // "Etc/GMT+8"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 507,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 381: Zone Etc/GMT+9
+	{
+		ZoneID: 0x9d13da1c,
+		NameIndex: 405, // "Etc/GMT+9"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 508,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 382: Link Etc/GMT-0 -> Etc/GMT
+	{
+		ZoneID: 0x9d13da55,
+		NameIndex: 406, // "Etc/GMT-0"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 383: Zone Etc/GMT-1
+	{
+		ZoneID: 0x9d13da56,
+		NameIndex: 407, // "Etc/GMT-1"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 509,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 384: Zone Etc/GMT-2
+	{
+		ZoneID: 0x9d13da57,
+		NameIndex: 413, // "Etc/GMT-2"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 515,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 385: Zone Etc/GMT-3
+	{
+		ZoneID: 0x9d13da58,
+		NameIndex: 414, // "Etc/GMT-3"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 516,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 386: Zone Etc/GMT-4
+	{
+		ZoneID: 0x9d13da59,
+		NameIndex: 415, // "Etc/GMT-4"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 517,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 387: Zone Etc/GMT-5
+	{
+		ZoneID: 0x9d13da5a,
+		NameIndex: 416, // "Etc/GMT-5"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 518,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 388: Zone Etc/GMT-6
+	{
+		ZoneID: 0x9d13da5b,
+		NameIndex: 417, // "Etc/GMT-6"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 519,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 389: Zone Etc/GMT-7
+	{
+		ZoneID: 0x9d13da5c,
+		NameIndex: 418, // "Etc/GMT-7"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 520,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 390: Zone Etc/GMT-8
+	{
+		ZoneID: 0x9d13da5d,
+		NameIndex: 419, // "Etc/GMT-8"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 521,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 391: Zone Etc/GMT-9
+	{
+		ZoneID: 0x9d13da5e,
+		NameIndex: 420, // "Etc/GMT-9"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 522,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 392: Link America/Nipigon -> America/Toronto
+	{
+		ZoneID: 0x9d2a8b1a,
+		NameIndex: 171, // "America/Nipigon"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 283,
+		EraCount: 1,
+		TargetIndex: 134, // America/Toronto
+	},
+	// 393: Zone America/Rio_Branco
+	{
+		ZoneID: 0x9d352764,
+		NameIndex: 194, // "America/Rio_Branco"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 262,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 394: Zone Asia/Bangkok
+	{
+		ZoneID: 0x9d6e3aaf,
+		NameIndex: 248, // "Asia/Bangkok"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 335,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 395: Zone Africa/El_Aaiun
+	{
+		ZoneID: 0x9d6fb118,
+		NameIndex: 22, // "Africa/El_Aaiun"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 7,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 396: Zone America/North_Dakota/Center
+	{
+		ZoneID: 0x9da42814,
+		NameIndex: 175, // "America/North_Dakota/Center"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 231,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 397: Zone Asia/Barnaul
+	{
+		ZoneID: 0x9dba4997,
+		NameIndex: 249, // "Asia/Barnaul"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 336,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 398: Zone Africa/Tripoli
+	{
+		ZoneID: 0x9dfebd3d,
+		NameIndex: 52, // "Africa/Tripoli"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 24,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 399: Zone Europe/Istanbul
+	{
+		ZoneID: 0x9e09d6e6,
+		NameIndex: 446, // "Europe/Istanbul"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 539,
+		EraCount: 9,
+		TargetIndex: 0,
+	},
+	// 400: Link Indian/Antananarivo -> Africa/Nairobi
+	{
+		ZoneID: 0x9ebf5289,
+		NameIndex: 501, // "Indian/Antananarivo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 401: Zone Africa/Ndjamena
+	{
+		ZoneID: 0x9fe09898,
+		NameIndex: 45, // "Africa/Ndjamena"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 20,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 402: Zone America/Guyana
+	{
+		ZoneID: 0x9ff7bd0b,
+		NameIndex: 124, // "America/Guyana"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 161,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 403: Link Africa/Dar_es_Salaam -> Africa/Nairobi
+	{
+		ZoneID: 0xa04c47b6,
+		NameIndex: 19, // "Africa/Dar_es_Salaam"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 404: Zone America/Havana
+	{
+		ZoneID: 0xa0e15675,
+		NameIndex: 126, // "America/Havana"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 163,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 405: Zone Asia/Novosibirsk
+	{
+		ZoneID: 0xa2a435cb,
+		NameIndex: 297, // "Asia/Novosibirsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 408,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 406: Link Europe/Kiev -> Europe/Kyiv
+	{
+		ZoneID: 0xa2c19eb3,
+		NameIndex: 449, // "Europe/Kiev"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 554,
+		EraCount: 1,
+		TargetIndex: 289, // Europe/Kyiv
+	},
+	// 407: Zone Europe/Kyiv
+	{
+		ZoneID: 0xa2c1e347,
+		NameIndex: 451, // "Europe/Kyiv"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 554,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 408: Link Europe/Oslo -> Europe/Berlin
+	{
+		ZoneID: 0xa2c3fba1,
+		NameIndex: 463, // "Europe/Oslo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 531,
+		EraCount: 1,
+		TargetIndex: 278, // Europe/Berlin
+	},
+	// 409: Zone Europe/Riga
+	{
+		ZoneID: 0xa2c57587,
+		NameIndex: 467, // "Europe/Riga"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 566,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 410: Zone Europe/Rome
+	{
+		ZoneID: 0xa2c58fd7,
+		NameIndex: 468, // "Europe/Rome"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 569,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 411: Zone America/Inuvik
+	{
+		ZoneID: 0xa42189fc,
+		NameIndex: 137, // "America/Inuvik"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 185,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 412: Zone America/Argentina/La_Rioja
+	{
+		ZoneID: 0xa46b7eef,
+		NameIndex: 65, // "America/Argentina/La_Rioja"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 51,
+		EraCount: 6,
+		TargetIndex: 0,
+	},
+	// 413: Zone Asia/Almaty
+	{
+		ZoneID: 0xa61f41fa,
+		NameIndex: 237, // "Asia/Almaty"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 318,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 414: Zone Asia/Anadyr
+	{
+		ZoneID: 0xa63cebd1,
+		NameIndex: 239, // "Asia/Anadyr"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 322,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 415: Zone Asia/Aqtobe
+	{
+		ZoneID: 0xa67dcc4e,
+		NameIndex: 241, // "Asia/Aqtobe"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 327,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 416: Zone Asia/Atyrau
+	{
+		ZoneID: 0xa6b6e068,
+		NameIndex: 244, // "Asia/Atyrau"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 330,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 417: Zone America/Juneau
+	{
+		ZoneID: 0xa6f13e2e,
+		NameIndex: 141, // "America/Juneau"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 190,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 418: Zone Australia/Lord_Howe
+	{
+		ZoneID: 0xa748b67d,
+		NameIndex: 358, // "Australia/Lord_Howe"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 487,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 419: Zone Pacific/Port_Moresby
+	{
+		ZoneID: 0xa7ba7f68,
+		NameIndex: 562, // "Pacific/Port_Moresby"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 640,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 420: Link Asia/Katmandu -> Asia/Kathmandu
+	{
+		ZoneID: 0xa7ec12c7,
+		NameIndex: 282, // "Asia/Katmandu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 386,
+		EraCount: 1,
+		TargetIndex: 181, // Asia/Kathmandu
+	},
+	// 421: Zone Asia/Beirut
+	{
+		ZoneID: 0xa7f3d5fd,
+		NameIndex: 250, // "Asia/Beirut"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 340,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 422: Link Singapore -> Asia/Singapore
+	{
+		ZoneID: 0xa8598c8d,
+		NameIndex: 577, // "Singapore"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 435,
+		EraCount: 1,
+		TargetIndex: 205, // Asia/Singapore
+	},
+	// 423: Zone Africa/Nairobi
+	{
+		ZoneID: 0xa87ab57e,
+		NameIndex: 44, // "Africa/Nairobi"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 424: Link Asia/Brunei -> Asia/Kuching
+	{
+		ZoneID: 0xa8e595f7,
+		NameIndex: 252, // "Asia/Brunei"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 396,
+		EraCount: 1,
+		TargetIndex: 185, // Asia/Kuching
+	},
+	// 425: Link US/Pacific -> America/Los_Angeles
+	{
+		ZoneID: 0xa950f6ab,
+		NameIndex: 590, // "US/Pacific"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 196,
+		EraCount: 1,
+		TargetIndex: 88, // America/Los_Angeles
+	},
+	// 426: Zone Pacific/Galapagos
+	{
+		ZoneID: 0xa952f752,
+		NameIndex: 540, // "Pacific/Galapagos"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 619,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 427: Zone America/Argentina/Mendoza
+	{
+		ZoneID: 0xa9f72d5c,
+		NameIndex: 66, // "America/Argentina/Mendoza"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 57,
+		EraCount: 6,
+		TargetIndex: 0,
+	},
+	// 428: Zone America/La_Paz
+	{
+		ZoneID: 0xaa29125d,
+		NameIndex: 146, // "America/La_Paz"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 194,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 429: Zone America/Noronha
+	{
+		ZoneID: 0xab5116fb,
+		NameIndex: 173, // "America/Noronha"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 224,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 430: Link America/Coral_Harbour -> America/Panama
+	{
+		ZoneID: 0xabcb7569,
+		NameIndex: 97, // "America/Coral_Harbour"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 240,
+		EraCount: 1,
+		TargetIndex: 111, // America/Panama
+	},
+	// 431: Zone America/Maceio
+	{
+		ZoneID: 0xac80c6d4,
+		NameIndex: 151, // "America/Maceio"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 197,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 432: Zone America/Manaus
+	{
+		ZoneID: 0xac86bf8b,
+		NameIndex: 153, // "America/Manaus"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 203,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 433: Zone America/Merida
+	{
+		ZoneID: 0xacd172d8,
+		NameIndex: 160, // "America/Merida"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 209,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 434: Zone Europe/Chisinau
+	{
+		ZoneID: 0xad58aa18,
+		NameIndex: 439, // "Europe/Chisinau"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 535,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 435: Link America/Nassau -> America/Toronto
+	{
+		ZoneID: 0xaedef011,
+		NameIndex: 169, // "America/Nassau"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 283,
+		EraCount: 1,
+		TargetIndex: 134, // America/Toronto
+	},
+	// 436: Link America/Anguilla -> America/Puerto_Rico
+	{
+		ZoneID: 0xafe31333,
+		NameIndex: 57, // "America/Anguilla"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 437: Link Europe/Uzhgorod -> Europe/Kyiv
+	{
+		ZoneID: 0xb066f5d6,
+		NameIndex: 481, // "Europe/Uzhgorod"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 554,
+		EraCount: 1,
+		TargetIndex: 289, // Europe/Kyiv
+	},
+	// 438: Zone Australia/Broken_Hill
+	{
+		ZoneID: 0xb06eada3,
+		NameIndex: 350, // "Australia/Broken_Hill"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 481,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 439: Zone Asia/Bishkek
+	{
+		ZoneID: 0xb0728553,
+		NameIndex: 251, // "Asia/Bishkek"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 341,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 440: Link Chile/EasterIsland -> Pacific/Easter
+	{
+		ZoneID: 0xb0982af8,
+		NameIndex: 385, // "Chile/EasterIsland"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 614,
+		EraCount: 1,
+		TargetIndex: 324, // Pacific/Easter
+	},
+	// 441: Link Pacific/Johnston -> Pacific/Honolulu
+	{
+		ZoneID: 0xb15d7b36,
+		NameIndex: 545, // "Pacific/Johnston"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 624,
+		EraCount: 1,
+		TargetIndex: 332, // Pacific/Honolulu
+	},
+	// 442: Link Africa/Timbuktu -> Africa/Abidjan
+	{
+		ZoneID: 0xb164d56f,
+		NameIndex: 51, // "Africa/Timbuktu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 443: Link America/St_Thomas -> America/Puerto_Rico
+	{
+		ZoneID: 0xb1b3d778,
+		NameIndex: 208, // "America/St_Thomas"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 444: Zone America/Paramaribo
+	{
+		ZoneID: 0xb319e4c4,
+		NameIndex: 181, // "America/Paramaribo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 241,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 445: Zone America/Panama
+	{
+		ZoneID: 0xb3863854,
+		NameIndex: 179, // "America/Panama"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 240,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 446: Link Canada/Newfoundland -> America/St_Johns
+	{
+		ZoneID: 0xb396e991,
+		NameIndex: 380, // "Canada/Newfoundland"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 274,
+		EraCount: 2,
+		TargetIndex: 129, // America/St_Johns
+	},
+	// 447: Link Asia/Harbin -> Asia/Shanghai
+	{
+		ZoneID: 0xb5af1186,
+		NameIndex: 267, // "Asia/Harbin"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 434,
+		EraCount: 1,
+		TargetIndex: 204, // Asia/Shanghai
+	},
+	// 448: Zone Asia/Hebron
+	{
+		ZoneID: 0xb5eef250,
+		NameIndex: 268, // "Asia/Hebron"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 370,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 449: Zone America/Goose_Bay
+	{
+		ZoneID: 0xb649541e,
+		NameIndex: 118, // "America/Goose_Bay"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 154,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 450: Zone America/Los_Angeles
+	{
+		ZoneID: 0xb7f7e8f2,
+		NameIndex: 148, // "America/Los_Angeles"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 196,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 451: Zone America/Recife
+	{
+		ZoneID: 0xb8730494,
+		NameIndex: 191, // "America/Recife"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 251,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 452: Zone America/Regina
+	{
+		ZoneID: 0xb875371c,
+		NameIndex: 192, // "America/Regina"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 256,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 453: Zone Asia/Ashgabat
+	{
+		ZoneID: 0xba87598d,
+		NameIndex: 242, // "Asia/Ashgabat"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 329,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 454: Link Israel -> Asia/Jerusalem
+	{
+		ZoneID: 0xba88c9e5,
+		NameIndex: 513, // "Israel"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 380,
+		EraCount: 1,
+		TargetIndex: 177, // Asia/Jerusalem
+	},
+	// 455: Link Pacific/Yap -> Pacific/Port_Moresby
+	{
+		ZoneID: 0xbb40138d,
+		NameIndex: 572, // "Pacific/Yap"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 640,
+		EraCount: 1,
+		TargetIndex: 345, // Pacific/Port_Moresby
+	},
+	// 456: Zone America/Halifax
+	{
+		ZoneID: 0xbc5b7183,
+		NameIndex: 125, // "America/Halifax"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 162,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 457: Link Europe/Ljubljana -> Europe/Belgrade
+	{
+		ZoneID: 0xbd98cdb7,
+		NameIndex: 453, // "Europe/Ljubljana"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 530,
+		EraCount: 1,
+		TargetIndex: 277, // Europe/Belgrade
+	},
+	// 458: Link Asia/Kuwait -> Asia/Riyadh
+	{
+		ZoneID: 0xbe1b2f27,
+		NameIndex: 288, // "Asia/Kuwait"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 427,
+		EraCount: 1,
+		TargetIndex: 200, // Asia/Riyadh
+	},
+	// 459: Link Europe/Tiraspol -> Europe/Chisinau
+	{
+		ZoneID: 0xbe704472,
+		NameIndex: 479, // "Europe/Tiraspol"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 535,
+		EraCount: 1,
+		TargetIndex: 282, // Europe/Chisinau
+	},
+	// 460: Zone Asia/Srednekolymsk
+	{
+		ZoneID: 0xbf8e337d,
+		NameIndex: 314, // "Asia/Srednekolymsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 436,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 461: Zone America/Argentina/Cordoba
+	{
+		ZoneID: 0xbfccc308,
+		NameIndex: 63, // "America/Argentina/Cordoba"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 44,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 462: Zone America/Tegucigalpa
+	{
+		ZoneID: 0xbfd6fd4c,
+		NameIndex: 211, // "America/Tegucigalpa"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 277,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 463: Link America/Antigua -> America/Puerto_Rico
+	{
+		ZoneID: 0xc067a32f,
+		NameIndex: 58, // "America/Antigua"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 464: Link Europe/Busingen -> Europe/Zurich
+	{
+		ZoneID: 0xc06d2cdf,
+		NameIndex: 438, // "Europe/Busingen"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 599,
+		EraCount: 1,
+		TargetIndex: 311, // Europe/Zurich
+	},
+	// 465: Zone Asia/Manila
+	{
+		ZoneID: 0xc156c944,
+		NameIndex: 293, // "Asia/Manila"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 403,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 466: Link Africa/Kampala -> Africa/Nairobi
+	{
+		ZoneID: 0xc1d30e31,
+		NameIndex: 28, // "Africa/Kampala"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 467: Link America/Knox_IN -> America/Indiana/Knox
+	{
+		ZoneID: 0xc1db9a1c,
+		NameIndex: 144, // "America/Knox_IN"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 168,
+		EraCount: 2,
+		TargetIndex: 73, // America/Indiana/Knox
+	},
+	// 468: Zone Africa/Abidjan
+	{
+		ZoneID: 0xc21305a3,
+		NameIndex: 1, // "Africa/Abidjan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 469: Link America/Virgin -> America/Puerto_Rico
+	{
+		ZoneID: 0xc2183ab5,
+		NameIndex: 218, // "America/Virgin"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 470: Link Asia/Phnom_Penh -> Asia/Bangkok
+	{
+		ZoneID: 0xc224945e,
+		NameIndex: 300, // "Asia/Phnom_Penh"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 335,
+		EraCount: 1,
+		TargetIndex: 156, // Asia/Bangkok
+	},
+	// 471: Link Asia/Muscat -> Asia/Dubai
+	{
+		ZoneID: 0xc2c3565f,
+		NameIndex: 294, // "Asia/Muscat"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 357,
+		EraCount: 1,
+		TargetIndex: 166, // Asia/Dubai
+	},
+	// 472: Zone America/Punta_Arenas
+	{
+		ZoneID: 0xc2c3bce7,
+		NameIndex: 188, // "America/Punta_Arenas"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 246,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 473: Link Portugal -> Europe/Lisbon
+	{
+		ZoneID: 0xc3274593,
+		NameIndex: 574, // "Portugal"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 555,
+		EraCount: 1,
+		TargetIndex: 290, // Europe/Lisbon
+	},
+	// 474: Link Navajo -> America/Denver
+	{
+		ZoneID: 0xc4ef0e24,
+		NameIndex: 526, // "Navajo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 139,
+		EraCount: 1,
+		TargetIndex: 56, // America/Denver
+	},
+	// 475: Zone Africa/Casablanca
+	{
+		ZoneID: 0xc59f1b33,
+		NameIndex: 15, // "Africa/Casablanca"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 4,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 476: Zone America/Argentina/Rio_Gallegos
+	{
+		ZoneID: 0xc5b0f565,
+		NameIndex: 67, // "America/Argentina/Rio_Gallegos"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 63,
+		EraCount: 6,
+		TargetIndex: 0,
+	},
+	// 477: Zone Asia/Jayapura
+	{
+		ZoneID: 0xc6833c2f,
+		NameIndex: 275, // "Asia/Jayapura"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 379,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 478: Zone America/Resolute
+	{
+		ZoneID: 0xc7093459,
+		NameIndex: 193, // "America/Resolute"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 257,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 479: Link Asia/Chungking -> Asia/Shanghai
+	{
+		ZoneID: 0xc7121dd0,
+		NameIndex: 257, // "Asia/Chungking"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 434,
+		EraCount: 1,
+		TargetIndex: 204, // Asia/Shanghai
+	},
+	// 480: Link Greenwich -> Etc/GMT
+	{
+		ZoneID: 0xc84d4221,
+		NameIndex: 497, // "Greenwich"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 481: Zone America/Rankin_Inlet
+	{
+		ZoneID: 0xc8de4984,
+		NameIndex: 190, // "America/Rankin_Inlet"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 248,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 482: Link Poland -> Europe/Warsaw
+	{
+		ZoneID: 0xca913b23,
+		NameIndex: 573, // "Poland"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 598,
+		EraCount: 1,
+		TargetIndex: 310, // Europe/Warsaw
+	},
+	// 483: Link US/Central -> America/Chicago
+	{
+		ZoneID: 0xcabdcb25,
+		NameIndex: 583, // "US/Central"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 124,
+		EraCount: 1,
+		TargetIndex: 48, // America/Chicago
+	},
+	// 484: Link Europe/Vatican -> Europe/Rome
+	{
+		ZoneID: 0xcb485dca,
+		NameIndex: 483, // "Europe/Vatican"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 569,
+		EraCount: 1,
+		TargetIndex: 299, // Europe/Rome
+	},
+	// 485: Zone America/Barbados
+	{
+		ZoneID: 0xcbbc3b04,
+		NameIndex: 79, // "America/Barbados"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 104,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 486: Link America/Porto_Acre -> America/Rio_Branco
+	{
+		ZoneID: 0xcce5bf54,
+		NameIndex: 185, // "America/Porto_Acre"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 262,
+		EraCount: 3,
+		TargetIndex: 122, // America/Rio_Branco
+	},
+	// 487: Link America/Guadeloupe -> America/Puerto_Rico
+	{
+		ZoneID: 0xcd1f8a31,
+		NameIndex: 121, // "America/Guadeloupe"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 488: Link Antarctica/South_Pole -> Pacific/Auckland
+	{
+		ZoneID: 0xcd96b290,
+		NameIndex: 231, // "Antarctica/South_Pole"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 610,
+		EraCount: 1,
+		TargetIndex: 321, // Pacific/Auckland
+	},
+	// 489: Zone Asia/Riyadh
+	{
+		ZoneID: 0xcd973d93,
+		NameIndex: 307, // "Asia/Riyadh"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 427,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 490: Link America/Dominica -> America/Puerto_Rico
+	{
+		ZoneID: 0xcecb4c4a,
+		NameIndex: 108, // "America/Dominica"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 491: Link Europe/San_Marino -> Europe/Rome
+	{
+		ZoneID: 0xcef7724b,
+		NameIndex: 470, // "Europe/San_Marino"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 569,
+		EraCount: 1,
+		TargetIndex: 299, // Europe/Rome
+	},
+	// 492: Link Asia/Saigon -> Asia/Ho_Chi_Minh
+	{
+		ZoneID: 0xcf52f713,
+		NameIndex: 308, // "Asia/Saigon"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 372,
+		EraCount: 1,
+		TargetIndex: 171, // Asia/Ho_Chi_Minh
+	},
+	// 493: Zone Pacific/Easter
+	{
+		ZoneID: 0xcf54f7e7,
+		NameIndex: 534, // "Pacific/Easter"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 614,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 494: Zone Asia/Singapore
+	{
+		ZoneID: 0xcf8581fa,
+		NameIndex: 313, // "Asia/Singapore"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 435,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 495: Zone Asia/Krasnoyarsk
+	{
+		ZoneID: 0xd0376c6a,
+		NameIndex: 285, // "Asia/Krasnoyarsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 393,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 496: Link Europe/Belfast -> Europe/London
+	{
+		ZoneID: 0xd07dd1e5,
+		NameIndex: 431, // "Europe/Belfast"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 556,
+		EraCount: 1,
+		TargetIndex: 291, // Europe/London
+	},
+	// 497: Zone America/Mexico_City
+	{
+		ZoneID: 0xd0d93f43,
+		NameIndex: 162, // "America/Mexico_City"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 214,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 498: Link Universal -> Etc/UTC
+	{
+		ZoneID: 0xd0ff523e,
+		NameIndex: 593, // "Universal"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 523,
+		EraCount: 1,
+		TargetIndex: 273, // Etc/UTC
+	},
+	// 499: Zone Asia/Taipei
+	{
+		ZoneID: 0xd1a844ae,
+		NameIndex: 315, // "Asia/Taipei"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 439,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 500: Zone Asia/Tehran
+	{
+		ZoneID: 0xd1f02254,
+		NameIndex: 318, // "Asia/Tehran"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 444,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 501: Link Asia/Thimbu -> Asia/Thimphu
+	{
+		ZoneID: 0xd226e31b,
+		NameIndex: 320, // "Asia/Thimbu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 445,
+		EraCount: 1,
+		TargetIndex: 211, // Asia/Thimphu
+	},
+	// 502: Link Arctic/Longyearbyen -> Europe/Berlin
+	{
+		ZoneID: 0xd23e7859,
+		NameIndex: 235, // "Arctic/Longyearbyen"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 531,
+		EraCount: 1,
+		TargetIndex: 278, // Europe/Berlin
+	},
+	// 503: Link Australia/Queensland -> Australia/Brisbane
+	{
+		ZoneID: 0xd326ed0a,
+		NameIndex: 363, // "Australia/Queensland"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 480,
+		EraCount: 1,
+		TargetIndex: 231, // Australia/Brisbane
+	},
+	// 504: Zone Europe/Kaliningrad
+	{
+		ZoneID: 0xd33b2f28,
+		NameIndex: 448, // "Europe/Kaliningrad"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 548,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 505: Zone America/Argentina/Buenos_Aires
+	{
+		ZoneID: 0xd43b4c0d,
+		NameIndex: 60, // "America/Argentina/Buenos_Aires"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 35,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 506: Link Turkey -> Europe/Istanbul
+	{
+		ZoneID: 0xd455e469,
+		NameIndex: 578, // "Turkey"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 539,
+		EraCount: 9,
+		TargetIndex: 286, // Europe/Istanbul
+	},
+	// 507: Zone Africa/Juba
+	{
+		ZoneID: 0xd51b395c,
+		NameIndex: 27, // "Africa/Juba"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 10,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 508: Link Africa/Lome -> Africa/Abidjan
+	{
+		ZoneID: 0xd51c3a07,
+		NameIndex: 34, // "Africa/Lome"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 509: Zone Asia/Urumqi
+	{
+		ZoneID: 0xd5379735,
+		NameIndex: 327, // "Asia/Urumqi"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 453,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 510: Zone America/Cambridge_Bay
+	{
+		ZoneID: 0xd5a44aff,
+		NameIndex: 87, // "America/Cambridge_Bay"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 112,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 511: Zone Africa/Johannesburg
+	{
+		ZoneID: 0xd5d157a0,
+		NameIndex: 26, // "Africa/Johannesburg"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 9,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 512: Link America/Port_of_Spain -> America/Puerto_Rico
+	{
+		ZoneID: 0xd8b28d59,
+		NameIndex: 184, // "America/Port_of_Spain"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 513: Zone Etc/GMT
+	{
+		ZoneID: 0xd8e2de58,
+		NameIndex: 392, // "Etc/GMT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 514: Link Etc/UCT -> Etc/UTC
+	{
+		ZoneID: 0xd8e3189c,
+		NameIndex: 423, // "Etc/UCT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 523,
+		EraCount: 1,
+		TargetIndex: 273, // Etc/UTC
+	},
+	// 515: Zone Etc/UTC
+	{
+		ZoneID: 0xd8e31abc,
+		NameIndex: 424, // "Etc/UTC"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 523,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 516: Zone America/Yakutat
+	{
+		ZoneID: 0xd8ee31e9,
+		NameIndex: 221, // "America/Yakutat"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 289,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 517: Zone Africa/Algiers
+	{
+		ZoneID: 0xd94515c1,
+		NameIndex: 4, // "Africa/Algiers"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 1,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 518: Zone PST8PDT
+	{
+		ZoneID: 0xd99ee2dc,
+		NameIndex: 528, // "PST8PDT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 607,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 519: Link Europe/Bratislava -> Europe/Prague
+	{
+		ZoneID: 0xda493bed,
+		NameIndex: 434, // "Europe/Bratislava"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 565,
+		EraCount: 1,
+		TargetIndex: 297, // Europe/Prague
+	},
+	// 520: Zone Europe/Simferopol
+	{
+		ZoneID: 0xda9eb724,
+		NameIndex: 473, // "Europe/Simferopol"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 577,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 521: Link Pacific/Funafuti -> Pacific/Tarawa
+	{
+		ZoneID: 0xdb402d65,
+		NameIndex: 539, // "Pacific/Funafuti"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 643,
+		EraCount: 1,
+		TargetIndex: 348, // Pacific/Tarawa
+	},
+	// 522: Zone America/Matamoros
+	{
+		ZoneID: 0xdd1b0259,
+		NameIndex: 156, // "America/Matamoros"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 205,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 523: Zone Pacific/Kanton
+	{
+		ZoneID: 0xdd512f0e,
+		NameIndex: 546, // "Pacific/Kanton"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 625,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 524: Zone Asia/Yangon
+	{
+		ZoneID: 0xdd54a8be,
+		NameIndex: 332, // "Asia/Yangon"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 464,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 525: Zone Europe/Vilnius
+	{
+		ZoneID: 0xdd63b8ce,
+		NameIndex: 485, // "Europe/Vilnius"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 590,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 526: Link Australia/West -> Australia/Perth
+	{
+		ZoneID: 0xdd858a5d,
+		NameIndex: 368, // "Australia/West"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 489,
+		EraCount: 1,
+		TargetIndex: 239, // Australia/Perth
+	},
+	// 527: Zone Pacific/Kosrae
+	{
+		ZoneID: 0xde5139a8,
+		NameIndex: 548, // "Pacific/Kosrae"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 627,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 528: Zone America/Kentucky/Monticello
+	{
+		ZoneID: 0xde71c439,
+		NameIndex: 143, // "America/Kentucky/Monticello"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 192,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 529: Zone Europe/Brussels
+	{
+		ZoneID: 0xdee07337,
+		NameIndex: 435, // "Europe/Brussels"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 532,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 530: Zone America/Swift_Current
+	{
+		ZoneID: 0xdef98e55,
+		NameIndex: 210, // "America/Swift_Current"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 276,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 531: Link America/Rosario -> America/Argentina/Cordoba
+	{
+		ZoneID: 0xdf448665,
+		NameIndex: 195, // "America/Rosario"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 44,
+		EraCount: 3,
+		TargetIndex: 24, // America/Argentina/Cordoba
+	},
+	// 532: Zone Asia/Irkutsk
+	{
+		ZoneID: 0xdfbf213f,
+		NameIndex: 272, // "Asia/Irkutsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 375,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 533: Zone Europe/Ulyanovsk
+	{
+		ZoneID: 0xe03783d0,
+		NameIndex: 480, // "Europe/Ulyanovsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 585,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 534: Zone Australia/Lindeman
+	{
+		ZoneID: 0xe05029e2,
+		NameIndex: 357, // "Australia/Lindeman"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 486,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 535: Zone Europe/Belgrade
+	{
+		ZoneID: 0xe0532b3a,
+		NameIndex: 432, // "Europe/Belgrade"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 530,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 536: Link Africa/Blantyre -> Africa/Maputo
+	{
+		ZoneID: 0xe08d813b,
+		NameIndex: 11, // "Africa/Blantyre"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 17,
+		EraCount: 1,
+		TargetIndex: 11, // Africa/Maputo
+	},
+	// 537: Zone America/Menominee
+	{
+		ZoneID: 0xe0e9c583,
+		NameIndex: 159, // "America/Menominee"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 208,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 538: Link Europe/Copenhagen -> Europe/Berlin
+	{
+		ZoneID: 0xe0ed30bc,
+		NameIndex: 440, // "Europe/Copenhagen"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 531,
+		EraCount: 1,
+		TargetIndex: 278, // Europe/Berlin
+	},
+	// 539: Zone Atlantic/Faroe
+	{
+		ZoneID: 0xe110a971,
+		NameIndex: 340, // "Atlantic/Faroe"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 474,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 540: Link Pacific/Majuro -> Pacific/Tarawa
+	{
+		ZoneID: 0xe1f95371,
+		NameIndex: 550, // "Pacific/Majuro"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 643,
+		EraCount: 1,
+		TargetIndex: 348, // Pacific/Tarawa
+	},
+	// 541: Zone Antarctica/Casey
+	{
+		ZoneID: 0xe2022583,
+		NameIndex: 223, // "Antarctica/Casey"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 291,
+		EraCount: 12,
+		TargetIndex: 0,
+	},
+	// 542: Zone Antarctica/Davis
+	{
+		ZoneID: 0xe2144b45,
+		NameIndex: 224, // "Antarctica/Davis"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 303,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 543: Zone Europe/Astrakhan
+	{
+		ZoneID: 0xe22256e1,
+		NameIndex: 429, // "Europe/Astrakhan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 525,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 544: Link Pacific/Midway -> Pacific/Pago_Pago
+	{
+		ZoneID: 0xe286d38e,
+		NameIndex: 552, // "Pacific/Midway"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 637,
+		EraCount: 1,
+		TargetIndex: 342, // Pacific/Pago_Pago
+	},
+	// 545: Link Antarctica/Syowa -> Asia/Riyadh
+	{
+		ZoneID: 0xe330c7e1,
+		NameIndex: 232, // "Antarctica/Syowa"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 427,
+		EraCount: 1,
+		TargetIndex: 200, // Asia/Riyadh
+	},
+	// 546: Zone Antarctica/Troll
+	{
+		ZoneID: 0xe33f085b,
+		NameIndex: 233, // "Antarctica/Troll"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 316,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 547: Zone Europe/Saratov
+	{
+		ZoneID: 0xe4315da4,
+		NameIndex: 472, // "Europe/Saratov"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 573,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 548: Zone Pacific/Noumea
+	{
+		ZoneID: 0xe551b788,
+		NameIndex: 556, // "Pacific/Noumea"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 636,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 549: Link Iceland -> Africa/Abidjan
+	{
+		ZoneID: 0xe56a35b5,
+		NameIndex: 500, // "Iceland"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 0,
+		EraCount: 1,
+		TargetIndex: 0, // Africa/Abidjan
+	},
+	// 550: Link Indian/Mayotte -> Africa/Nairobi
+	{
+		ZoneID: 0xe6880bca,
+		NameIndex: 510, // "Indian/Mayotte"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 19,
+		EraCount: 1,
+		TargetIndex: 13, // Africa/Nairobi
+	},
+	// 551: Link Australia/Tasmania -> Australia/Hobart
+	{
+		ZoneID: 0xe6d76648,
+		NameIndex: 366, // "Australia/Tasmania"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 485,
+		EraCount: 1,
+		TargetIndex: 235, // Australia/Hobart
+	},
+	// 552: Zone Pacific/Honolulu
+	{
+		ZoneID: 0xe6e70af9,
+		NameIndex: 544, // "Pacific/Honolulu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 624,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 553: Link America/Kralendijk -> America/Puerto_Rico
+	{
+		ZoneID: 0xe7c456c5,
+		NameIndex: 145, // "America/Kralendijk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 245,
+		EraCount: 1,
+		TargetIndex: 116, // America/Puerto_Rico
+	},
+	// 554: Zone America/Argentina/Tucuman
+	{
+		ZoneID: 0xe96399eb,
+		NameIndex: 71, // "America/Argentina/Tucuman"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 86,
+		EraCount: 5,
+		TargetIndex: 0,
+	},
+	// 555: Link Pacific/Ponape -> Pacific/Guadalcanal
+	{
+		ZoneID: 0xe9f80086,
+		NameIndex: 561, // "Pacific/Ponape"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 621,
+		EraCount: 1,
+		TargetIndex: 330, // Pacific/Guadalcanal
+	},
+	// 556: Link Europe/Zaporozhye -> Europe/Kyiv
+	{
+		ZoneID: 0xeab9767f,
+		NameIndex: 489, // "Europe/Zaporozhye"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 554,
+		EraCount: 1,
+		TargetIndex: 289, // Europe/Kyiv
+	},
+	// 557: Link Europe/Isle_of_Man -> Europe/London
+	{
+		ZoneID: 0xeaf84580,
+		NameIndex: 445, // "Europe/Isle_of_Man"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 556,
+		EraCount: 1,
+		TargetIndex: 291, // Europe/London
+	},
+	// 558: Zone Asia/Magadan
+	{
+		ZoneID: 0xebacc19b,
+		NameIndex: 291, // "Asia/Magadan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 398,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 559: Zone America/Ojinaga
+	{
+		ZoneID: 0xebfde83f,
+		NameIndex: 178, // "America/Ojinaga"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 236,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 560: Link Pacific/Saipan -> Pacific/Guam
+	{
+		ZoneID: 0xeff7a35f,
+		NameIndex: 564, // "Pacific/Saipan"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 622,
+		EraCount: 2,
+		TargetIndex: 331, // Pacific/Guam
+	},
+	// 561: Zone CST6CDT
+	{
+		ZoneID: 0xf0e87d00,
+		NameIndex: 375, // "CST6CDT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 492,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 562: Zone Pacific/Tahiti
+	{
+		ZoneID: 0xf24c2446,
+		NameIndex: 566, // "Pacific/Tahiti"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 642,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 563: Zone Pacific/Tarawa
+	{
+		ZoneID: 0xf2517e63,
+		NameIndex: 567, // "Pacific/Tarawa"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 643,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 564: Zone MST7MDT
+	{
+		ZoneID: 0xf2af9375,
+		NameIndex: 520, // "MST7MDT"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 606,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 565: Link Canada/Eastern -> America/Toronto
+	{
+		ZoneID: 0xf3612d5e,
+		NameIndex: 378, // "Canada/Eastern"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 283,
+		EraCount: 1,
+		TargetIndex: 134, // America/Toronto
+	},
+	// 566: Zone Asia/Tashkent
+	{
+		ZoneID: 0xf3924254,
+		NameIndex: 316, // "Asia/Tashkent"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 440,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 567: Zone Asia/Sakhalin
+	{
+		ZoneID: 0xf4a1c9bd,
+		NameIndex: 309, // "Asia/Sakhalin"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 428,
+		EraCount: 4,
+		TargetIndex: 0,
+	},
+	// 568: Zone Pacific/Guadalcanal
+	{
+		ZoneID: 0xf4dd25f0,
+		NameIndex: 542, // "Pacific/Guadalcanal"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 621,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 569: Link Etc/GMT0 -> Etc/GMT
+	{
+		ZoneID: 0xf53ea988,
+		NameIndex: 421, // "Etc/GMT0"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 496,
+		EraCount: 1,
+		TargetIndex: 246, // Etc/GMT
+	},
+	// 570: Link Etc/Zulu -> Etc/UTC
+	{
+		ZoneID: 0xf549c240,
+		NameIndex: 426, // "Etc/Zulu"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 523,
+		EraCount: 1,
+		TargetIndex: 273, // Etc/UTC
+	},
+	// 571: Zone America/Danmarkshavn
+	{
+		ZoneID: 0xf554d204,
+		NameIndex: 103, // "America/Danmarkshavn"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 135,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 572: Zone Asia/Shanghai
+	{
+		ZoneID: 0xf895a7f5,
+		NameIndex: 312, // "Asia/Shanghai"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 434,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 573: Zone Europe/Gibraltar
+	{
+		ZoneID: 0xf8e325fc,
+		NameIndex: 442, // "Europe/Gibraltar"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 537,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 574: Link Asia/Chongqing -> Asia/Shanghai
+	{
+		ZoneID: 0xf937fb90,
+		NameIndex: 256, // "Asia/Chongqing"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 434,
+		EraCount: 1,
+		TargetIndex: 204, // Asia/Shanghai
+	},
+	// 575: Zone Atlantic/Azores
+	{
+		ZoneID: 0xf93ed918,
+		NameIndex: 335, // "Atlantic/Azores"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 470,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 576: Link Pacific/Wallis -> Pacific/Tarawa
+	{
+		ZoneID: 0xf94ddb0f,
+		NameIndex: 571, // "Pacific/Wallis"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 643,
+		EraCount: 1,
+		TargetIndex: 348, // Pacific/Tarawa
+	},
+	// 577: Link America/Thunder_Bay -> America/Toronto
+	{
+		ZoneID: 0xf962e71b,
+		NameIndex: 213, // "America/Thunder_Bay"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 283,
+		EraCount: 1,
+		TargetIndex: 134, // America/Toronto
+	},
+	// 578: Zone America/Eirunepe
+	{
+		ZoneID: 0xf9b29683,
+		NameIndex: 110, // "America/Eirunepe"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 142,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 579: Zone America/Montevideo
+	{
+		ZoneID: 0xfa214780,
+		NameIndex: 166, // "America/Montevideo"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 221,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 580: Link US/Alaska -> America/Anchorage
+	{
+		ZoneID: 0xfa300bc9,
+		NameIndex: 580, // "US/Alaska"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 30,
+		EraCount: 1,
+		TargetIndex: 20, // America/Anchorage
+	},
+	// 581: Link GB-Eire -> Europe/London
+	{
+		ZoneID: 0xfa70e300,
+		NameIndex: 492, // "GB-Eire"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 556,
+		EraCount: 1,
+		TargetIndex: 291, // Europe/London
+	},
+	// 582: Zone Europe/Kirov
+	{
+		ZoneID: 0xfaf5abef,
+		NameIndex: 450, // "Europe/Kirov"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 551,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 583: Zone Europe/Malta
+	{
+		ZoneID: 0xfb1560f3,
+		NameIndex: 457, // "Europe/Malta"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 558,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 584: Zone Europe/Minsk
+	{
+		ZoneID: 0xfb19cc66,
+		NameIndex: 459, // "Europe/Minsk"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 559,
+		EraCount: 2,
+		TargetIndex: 0,
+	},
+	// 585: Zone Europe/Bucharest
+	{
+		ZoneID: 0xfb349ec5,
+		NameIndex: 436, // "Europe/Bucharest"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 533,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 586: Zone Africa/Khartoum
+	{
+		ZoneID: 0xfb3d4205,
+		NameIndex: 29, // "Africa/Khartoum"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 13,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 587: Zone Europe/Paris
+	{
+		ZoneID: 0xfb4bc2a3,
+		NameIndex: 464, // "Europe/Paris"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 564,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 588: Zone Asia/Yekaterinburg
+	{
+		ZoneID: 0xfb544c6e,
+		NameIndex: 333, // "Asia/Yekaterinburg"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 465,
+		EraCount: 3,
+		TargetIndex: 0,
+	},
+	// 589: Zone Europe/Sofia
+	{
+		ZoneID: 0xfb898656,
+		NameIndex: 475, // "Europe/Sofia"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 580,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 590: Link Canada/Mountain -> America/Edmonton
+	{
+		ZoneID: 0xfb8a8217,
+		NameIndex: 379, // "Canada/Mountain"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 141,
+		EraCount: 1,
+		TargetIndex: 58, // America/Edmonton
+	},
+	// 591: Link Europe/Vaduz -> Europe/Zurich
+	{
+		ZoneID: 0xfbb81bae,
+		NameIndex: 482, // "Europe/Vaduz"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 599,
+		EraCount: 1,
+		TargetIndex: 311, // Europe/Zurich
+	},
+	// 592: Zone Atlantic/Canary
+	{
+		ZoneID: 0xfc23f2c2,
+		NameIndex: 337, // "Atlantic/Canary"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 472,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
+	// 593: Link Mexico/BajaNorte -> America/Tijuana
+	{
+		ZoneID: 0xfcf7150f,
+		NameIndex: 521, // "Mexico/BajaNorte"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 279,
+		EraCount: 4,
+		TargetIndex: 133, // America/Tijuana
+	},
+	// 594: Link America/Santa_Isabel -> America/Tijuana
+	{
+		ZoneID: 0xfd18a56c,
+		NameIndex: 196, // "America/Santa_Isabel"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 279,
+		EraCount: 4,
+		TargetIndex: 133, // America/Tijuana
+	},
+	// 595: Zone America/Campo_Grande
+	{
+		ZoneID: 0xfec3e7a6,
+		NameIndex: 88, // "America/Campo_Grande"
+		StartYear: 2000,
+		UntilYear: 10000,
+		EraIndex: 117,
+		EraCount: 1,
+		TargetIndex: 0,
+	},
 }
-
-// Link: Africa/Addis_Ababa -> Africa/Nairobi
-var ZoneAfrica_Addis_Ababa = zoneinfo.ZoneInfo{
-	NameIndex: 3, // "Africa/Addis_Ababa"
-	ZoneID: 0x05ae1e65,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Africa/Asmara -> Africa/Nairobi
-var ZoneAfrica_Asmara = zoneinfo.ZoneInfo{
-	NameIndex: 5, // "Africa/Asmara"
-	ZoneID: 0x73b278ef,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Africa/Asmera -> Africa/Nairobi
-var ZoneAfrica_Asmera = zoneinfo.ZoneInfo{
-	NameIndex: 6, // "Africa/Asmera"
-	ZoneID: 0x73b289f3,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Africa/Bamako -> Africa/Abidjan
-var ZoneAfrica_Bamako = zoneinfo.ZoneInfo{
-	NameIndex: 7, // "Africa/Bamako"
-	ZoneID: 0x74c1e7a5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Africa/Bangui -> Africa/Lagos
-var ZoneAfrica_Bangui = zoneinfo.ZoneInfo{
-	NameIndex: 8, // "Africa/Bangui"
-	ZoneID: 0x74c28ed0,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Banjul -> Africa/Abidjan
-var ZoneAfrica_Banjul = zoneinfo.ZoneInfo{
-	NameIndex: 9, // "Africa/Banjul"
-	ZoneID: 0x74c29b96,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Africa/Blantyre -> Africa/Maputo
-var ZoneAfrica_Blantyre = zoneinfo.ZoneInfo{
-	NameIndex: 11, // "Africa/Blantyre"
-	ZoneID: 0xe08d813b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Maputo,
-}
-
-// Link: Africa/Brazzaville -> Africa/Lagos
-var ZoneAfrica_Brazzaville = zoneinfo.ZoneInfo{
-	NameIndex: 12, // "Africa/Brazzaville"
-	ZoneID: 0x39cda760,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Bujumbura -> Africa/Maputo
-var ZoneAfrica_Bujumbura = zoneinfo.ZoneInfo{
-	NameIndex: 13, // "Africa/Bujumbura"
-	ZoneID: 0x05232a47,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Maputo,
-}
-
-// Link: Africa/Conakry -> Africa/Abidjan
-var ZoneAfrica_Conakry = zoneinfo.ZoneInfo{
-	NameIndex: 17, // "Africa/Conakry"
-	ZoneID: 0x7ab36b31,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Africa/Dakar -> Africa/Abidjan
-var ZoneAfrica_Dakar = zoneinfo.ZoneInfo{
-	NameIndex: 18, // "Africa/Dakar"
-	ZoneID: 0x780b00fd,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Africa/Dar_es_Salaam -> Africa/Nairobi
-var ZoneAfrica_Dar_es_Salaam = zoneinfo.ZoneInfo{
-	NameIndex: 19, // "Africa/Dar_es_Salaam"
-	ZoneID: 0xa04c47b6,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Africa/Djibouti -> Africa/Nairobi
-var ZoneAfrica_Djibouti = zoneinfo.ZoneInfo{
-	NameIndex: 20, // "Africa/Djibouti"
-	ZoneID: 0x30ea01d4,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Africa/Douala -> Africa/Lagos
-var ZoneAfrica_Douala = zoneinfo.ZoneInfo{
-	NameIndex: 21, // "Africa/Douala"
-	ZoneID: 0x7a6df310,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Freetown -> Africa/Abidjan
-var ZoneAfrica_Freetown = zoneinfo.ZoneInfo{
-	NameIndex: 23, // "Africa/Freetown"
-	ZoneID: 0x6823dd64,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Africa/Gaborone -> Africa/Maputo
-var ZoneAfrica_Gaborone = zoneinfo.ZoneInfo{
-	NameIndex: 24, // "Africa/Gaborone"
-	ZoneID: 0x317c0aa7,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Maputo,
-}
-
-// Link: Africa/Harare -> Africa/Maputo
-var ZoneAfrica_Harare = zoneinfo.ZoneInfo{
-	NameIndex: 25, // "Africa/Harare"
-	ZoneID: 0x82c39a2d,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Maputo,
-}
-
-// Link: Africa/Kampala -> Africa/Nairobi
-var ZoneAfrica_Kampala = zoneinfo.ZoneInfo{
-	NameIndex: 28, // "Africa/Kampala"
-	ZoneID: 0xc1d30e31,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Africa/Kigali -> Africa/Maputo
-var ZoneAfrica_Kigali = zoneinfo.ZoneInfo{
-	NameIndex: 30, // "Africa/Kigali"
-	ZoneID: 0x8a4dcf2b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Maputo,
-}
-
-// Link: Africa/Kinshasa -> Africa/Lagos
-var ZoneAfrica_Kinshasa = zoneinfo.ZoneInfo{
-	NameIndex: 31, // "Africa/Kinshasa"
-	ZoneID: 0x6695d70c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Libreville -> Africa/Lagos
-var ZoneAfrica_Libreville = zoneinfo.ZoneInfo{
-	NameIndex: 33, // "Africa/Libreville"
-	ZoneID: 0x01d96de4,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Lome -> Africa/Abidjan
-var ZoneAfrica_Lome = zoneinfo.ZoneInfo{
-	NameIndex: 34, // "Africa/Lome"
-	ZoneID: 0xd51c3a07,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Africa/Luanda -> Africa/Lagos
-var ZoneAfrica_Luanda = zoneinfo.ZoneInfo{
-	NameIndex: 35, // "Africa/Luanda"
-	ZoneID: 0x8d7909cf,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Lubumbashi -> Africa/Maputo
-var ZoneAfrica_Lubumbashi = zoneinfo.ZoneInfo{
-	NameIndex: 36, // "Africa/Lubumbashi"
-	ZoneID: 0x6fd88566,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Maputo,
-}
-
-// Link: Africa/Lusaka -> Africa/Maputo
-var ZoneAfrica_Lusaka = zoneinfo.ZoneInfo{
-	NameIndex: 37, // "Africa/Lusaka"
-	ZoneID: 0x8d82b23b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Maputo,
-}
-
-// Link: Africa/Malabo -> Africa/Lagos
-var ZoneAfrica_Malabo = zoneinfo.ZoneInfo{
-	NameIndex: 38, // "Africa/Malabo"
-	ZoneID: 0x8e6a1906,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Maseru -> Africa/Johannesburg
-var ZoneAfrica_Maseru = zoneinfo.ZoneInfo{
-	NameIndex: 40, // "Africa/Maseru"
-	ZoneID: 0x8e6e02c7,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Johannesburg,
-}
-
-// Link: Africa/Mbabane -> Africa/Johannesburg
-var ZoneAfrica_Mbabane = zoneinfo.ZoneInfo{
-	NameIndex: 41, // "Africa/Mbabane"
-	ZoneID: 0x5d3bdd40,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Johannesburg,
-}
-
-// Link: Africa/Mogadishu -> Africa/Nairobi
-var ZoneAfrica_Mogadishu = zoneinfo.ZoneInfo{
-	NameIndex: 42, // "Africa/Mogadishu"
-	ZoneID: 0x66bc159b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Africa/Niamey -> Africa/Lagos
-var ZoneAfrica_Niamey = zoneinfo.ZoneInfo{
-	NameIndex: 46, // "Africa/Niamey"
-	ZoneID: 0x914a30fd,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Nouakchott -> Africa/Abidjan
-var ZoneAfrica_Nouakchott = zoneinfo.ZoneInfo{
-	NameIndex: 47, // "Africa/Nouakchott"
-	ZoneID: 0x3dc49dba,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Africa/Ouagadougou -> Africa/Abidjan
-var ZoneAfrica_Ouagadougou = zoneinfo.ZoneInfo{
-	NameIndex: 48, // "Africa/Ouagadougou"
-	ZoneID: 0x04d7219a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Africa/Porto-Novo -> Africa/Lagos
-var ZoneAfrica_Porto_Novo = zoneinfo.ZoneInfo{
-	NameIndex: 49, // "Africa/Porto-Novo"
-	ZoneID: 0x3d1bf95d,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Lagos,
-}
-
-// Link: Africa/Timbuktu -> Africa/Abidjan
-var ZoneAfrica_Timbuktu = zoneinfo.ZoneInfo{
-	NameIndex: 51, // "Africa/Timbuktu"
-	ZoneID: 0xb164d56f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: America/Anguilla -> America/Puerto_Rico
-var ZoneAmerica_Anguilla = zoneinfo.ZoneInfo{
-	NameIndex: 57, // "America/Anguilla"
-	ZoneID: 0xafe31333,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Antigua -> America/Puerto_Rico
-var ZoneAmerica_Antigua = zoneinfo.ZoneInfo{
-	NameIndex: 58, // "America/Antigua"
-	ZoneID: 0xc067a32f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Argentina/ComodRivadavia -> America/Argentina/Catamarca
-var ZoneAmerica_Argentina_ComodRivadavia = zoneinfo.ZoneInfo{
-	NameIndex: 62, // "America/Argentina/ComodRivadavia"
-	ZoneID: 0x22758877,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Argentina_Catamarca,
-}
-
-// Link: America/Aruba -> America/Puerto_Rico
-var ZoneAmerica_Aruba = zoneinfo.ZoneInfo{
-	NameIndex: 73, // "America/Aruba"
-	ZoneID: 0x97cf8651,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Atikokan -> America/Panama
-var ZoneAmerica_Atikokan = zoneinfo.ZoneInfo{
-	NameIndex: 75, // "America/Atikokan"
-	ZoneID: 0x81b92098,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Panama,
-}
-
-// Link: America/Atka -> America/Adak
-var ZoneAmerica_Atka = zoneinfo.ZoneInfo{
-	NameIndex: 76, // "America/Atka"
-	ZoneID: 0x97fe8f27,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Adak,
-}
-
-// Link: America/Blanc-Sablon -> America/Puerto_Rico
-var ZoneAmerica_Blanc_Sablon = zoneinfo.ZoneInfo{
-	NameIndex: 82, // "America/Blanc-Sablon"
-	ZoneID: 0x6e299892,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Buenos_Aires -> America/Argentina/Buenos_Aires
-var ZoneAmerica_Buenos_Aires = zoneinfo.ZoneInfo{
-	NameIndex: 86, // "America/Buenos_Aires"
-	ZoneID: 0x67d79a05,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Argentina_Buenos_Aires,
-}
-
-// Link: America/Catamarca -> America/Argentina/Catamarca
-var ZoneAmerica_Catamarca = zoneinfo.ZoneInfo{
-	NameIndex: 91, // "America/Catamarca"
-	ZoneID: 0x5036e963,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Argentina_Catamarca,
-}
-
-// Link: America/Cayman -> America/Panama
-var ZoneAmerica_Cayman = zoneinfo.ZoneInfo{
-	NameIndex: 93, // "America/Cayman"
-	ZoneID: 0x953961df,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Panama,
-}
-
-// Link: America/Coral_Harbour -> America/Panama
-var ZoneAmerica_Coral_Harbour = zoneinfo.ZoneInfo{
-	NameIndex: 97, // "America/Coral_Harbour"
-	ZoneID: 0xabcb7569,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Panama,
-}
-
-// Link: America/Cordoba -> America/Argentina/Cordoba
-var ZoneAmerica_Cordoba = zoneinfo.ZoneInfo{
-	NameIndex: 98, // "America/Cordoba"
-	ZoneID: 0x5c8a7600,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Argentina_Cordoba,
-}
-
-// Link: America/Creston -> America/Phoenix
-var ZoneAmerica_Creston = zoneinfo.ZoneInfo{
-	NameIndex: 100, // "America/Creston"
-	ZoneID: 0x62a70204,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Phoenix,
-}
-
-// Link: America/Curacao -> America/Puerto_Rico
-var ZoneAmerica_Curacao = zoneinfo.ZoneInfo{
-	NameIndex: 102, // "America/Curacao"
-	ZoneID: 0x6a879184,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Dominica -> America/Puerto_Rico
-var ZoneAmerica_Dominica = zoneinfo.ZoneInfo{
-	NameIndex: 108, // "America/Dominica"
-	ZoneID: 0xcecb4c4a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Ensenada -> America/Tijuana
-var ZoneAmerica_Ensenada = zoneinfo.ZoneInfo{
-	NameIndex: 112, // "America/Ensenada"
-	ZoneID: 0x7bc95445,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Tijuana,
-}
-
-// Link: America/Fort_Wayne -> America/Indiana/Indianapolis
-var ZoneAmerica_Fort_Wayne = zoneinfo.ZoneInfo{
-	NameIndex: 114, // "America/Fort_Wayne"
-	ZoneID: 0x7eaaaf24,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Indiana_Indianapolis,
-}
-
-// Link: America/Godthab -> America/Nuuk
-var ZoneAmerica_Godthab = zoneinfo.ZoneInfo{
-	NameIndex: 117, // "America/Godthab"
-	ZoneID: 0x8f7eba1f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Nuuk,
-}
-
-// Link: America/Grenada -> America/Puerto_Rico
-var ZoneAmerica_Grenada = zoneinfo.ZoneInfo{
-	NameIndex: 120, // "America/Grenada"
-	ZoneID: 0x968ce4d8,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Guadeloupe -> America/Puerto_Rico
-var ZoneAmerica_Guadeloupe = zoneinfo.ZoneInfo{
-	NameIndex: 121, // "America/Guadeloupe"
-	ZoneID: 0xcd1f8a31,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Indianapolis -> America/Indiana/Indianapolis
-var ZoneAmerica_Indianapolis = zoneinfo.ZoneInfo{
-	NameIndex: 136, // "America/Indianapolis"
-	ZoneID: 0x6a009ae1,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Indiana_Indianapolis,
-}
-
-// Link: America/Jujuy -> America/Argentina/Jujuy
-var ZoneAmerica_Jujuy = zoneinfo.ZoneInfo{
-	NameIndex: 140, // "America/Jujuy"
-	ZoneID: 0x9873dbbd,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Argentina_Jujuy,
-}
-
-// Link: America/Knox_IN -> America/Indiana/Knox
-var ZoneAmerica_Knox_IN = zoneinfo.ZoneInfo{
-	NameIndex: 144, // "America/Knox_IN"
-	ZoneID: 0xc1db9a1c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Indiana_Knox,
-}
-
-// Link: America/Kralendijk -> America/Puerto_Rico
-var ZoneAmerica_Kralendijk = zoneinfo.ZoneInfo{
-	NameIndex: 145, // "America/Kralendijk"
-	ZoneID: 0xe7c456c5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Louisville -> America/Kentucky/Louisville
-var ZoneAmerica_Louisville = zoneinfo.ZoneInfo{
-	NameIndex: 149, // "America/Louisville"
-	ZoneID: 0x3dcb47ee,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Kentucky_Louisville,
-}
-
-// Link: America/Lower_Princes -> America/Puerto_Rico
-var ZoneAmerica_Lower_Princes = zoneinfo.ZoneInfo{
-	NameIndex: 150, // "America/Lower_Princes"
-	ZoneID: 0x6ae45b62,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Marigot -> America/Puerto_Rico
-var ZoneAmerica_Marigot = zoneinfo.ZoneInfo{
-	NameIndex: 154, // "America/Marigot"
-	ZoneID: 0x3dab3a59,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Mendoza -> America/Argentina/Mendoza
-var ZoneAmerica_Mendoza = zoneinfo.ZoneInfo{
-	NameIndex: 158, // "America/Mendoza"
-	ZoneID: 0x46b4e054,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Argentina_Mendoza,
-}
-
-// Link: America/Montreal -> America/Toronto
-var ZoneAmerica_Montreal = zoneinfo.ZoneInfo{
-	NameIndex: 167, // "America/Montreal"
-	ZoneID: 0x203a1ea8,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Toronto,
-}
-
-// Link: America/Montserrat -> America/Puerto_Rico
-var ZoneAmerica_Montserrat = zoneinfo.ZoneInfo{
-	NameIndex: 168, // "America/Montserrat"
-	ZoneID: 0x199b0a35,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Nassau -> America/Toronto
-var ZoneAmerica_Nassau = zoneinfo.ZoneInfo{
-	NameIndex: 169, // "America/Nassau"
-	ZoneID: 0xaedef011,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Toronto,
-}
-
-// Link: America/Nipigon -> America/Toronto
-var ZoneAmerica_Nipigon = zoneinfo.ZoneInfo{
-	NameIndex: 171, // "America/Nipigon"
-	ZoneID: 0x9d2a8b1a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Toronto,
-}
-
-// Link: America/Pangnirtung -> America/Iqaluit
-var ZoneAmerica_Pangnirtung = zoneinfo.ZoneInfo{
-	NameIndex: 180, // "America/Pangnirtung"
-	ZoneID: 0x2d999193,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Iqaluit,
-}
-
-// Link: America/Port_of_Spain -> America/Puerto_Rico
-var ZoneAmerica_Port_of_Spain = zoneinfo.ZoneInfo{
-	NameIndex: 184, // "America/Port_of_Spain"
-	ZoneID: 0xd8b28d59,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Porto_Acre -> America/Rio_Branco
-var ZoneAmerica_Porto_Acre = zoneinfo.ZoneInfo{
-	NameIndex: 185, // "America/Porto_Acre"
-	ZoneID: 0xcce5bf54,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Rio_Branco,
-}
-
-// Link: America/Rainy_River -> America/Winnipeg
-var ZoneAmerica_Rainy_River = zoneinfo.ZoneInfo{
-	NameIndex: 189, // "America/Rainy_River"
-	ZoneID: 0x9cd58a10,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Winnipeg,
-}
-
-// Link: America/Rosario -> America/Argentina/Cordoba
-var ZoneAmerica_Rosario = zoneinfo.ZoneInfo{
-	NameIndex: 195, // "America/Rosario"
-	ZoneID: 0xdf448665,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Argentina_Cordoba,
-}
-
-// Link: America/Santa_Isabel -> America/Tijuana
-var ZoneAmerica_Santa_Isabel = zoneinfo.ZoneInfo{
-	NameIndex: 196, // "America/Santa_Isabel"
-	ZoneID: 0xfd18a56c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Tijuana,
-}
-
-// Link: America/Shiprock -> America/Denver
-var ZoneAmerica_Shiprock = zoneinfo.ZoneInfo{
-	NameIndex: 202, // "America/Shiprock"
-	ZoneID: 0x82fb7049,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Denver,
-}
-
-// Link: America/St_Barthelemy -> America/Puerto_Rico
-var ZoneAmerica_St_Barthelemy = zoneinfo.ZoneInfo{
-	NameIndex: 204, // "America/St_Barthelemy"
-	ZoneID: 0x054e6a79,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/St_Kitts -> America/Puerto_Rico
-var ZoneAmerica_St_Kitts = zoneinfo.ZoneInfo{
-	NameIndex: 206, // "America/St_Kitts"
-	ZoneID: 0x04c0507b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/St_Lucia -> America/Puerto_Rico
-var ZoneAmerica_St_Lucia = zoneinfo.ZoneInfo{
-	NameIndex: 207, // "America/St_Lucia"
-	ZoneID: 0x04d8b3ba,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/St_Thomas -> America/Puerto_Rico
-var ZoneAmerica_St_Thomas = zoneinfo.ZoneInfo{
-	NameIndex: 208, // "America/St_Thomas"
-	ZoneID: 0xb1b3d778,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/St_Vincent -> America/Puerto_Rico
-var ZoneAmerica_St_Vincent = zoneinfo.ZoneInfo{
-	NameIndex: 209, // "America/St_Vincent"
-	ZoneID: 0x8460e523,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Thunder_Bay -> America/Toronto
-var ZoneAmerica_Thunder_Bay = zoneinfo.ZoneInfo{
-	NameIndex: 213, // "America/Thunder_Bay"
-	ZoneID: 0xf962e71b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Toronto,
-}
-
-// Link: America/Tortola -> America/Puerto_Rico
-var ZoneAmerica_Tortola = zoneinfo.ZoneInfo{
-	NameIndex: 216, // "America/Tortola"
-	ZoneID: 0x7931462b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: America/Virgin -> America/Puerto_Rico
-var ZoneAmerica_Virgin = zoneinfo.ZoneInfo{
-	NameIndex: 218, // "America/Virgin"
-	ZoneID: 0xc2183ab5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Puerto_Rico,
-}
-
-// Link: Antarctica/DumontDUrville -> Pacific/Port_Moresby
-var ZoneAntarctica_DumontDUrville = zoneinfo.ZoneInfo{
-	NameIndex: 225, // "Antarctica/DumontDUrville"
-	ZoneID: 0x5a3c656c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Port_Moresby,
-}
-
-// Link: Antarctica/McMurdo -> Pacific/Auckland
-var ZoneAntarctica_McMurdo = zoneinfo.ZoneInfo{
-	NameIndex: 228, // "Antarctica/McMurdo"
-	ZoneID: 0x6eeb5585,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Auckland,
-}
-
-// Link: Antarctica/South_Pole -> Pacific/Auckland
-var ZoneAntarctica_South_Pole = zoneinfo.ZoneInfo{
-	NameIndex: 231, // "Antarctica/South_Pole"
-	ZoneID: 0xcd96b290,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Auckland,
-}
-
-// Link: Antarctica/Syowa -> Asia/Riyadh
-var ZoneAntarctica_Syowa = zoneinfo.ZoneInfo{
-	NameIndex: 232, // "Antarctica/Syowa"
-	ZoneID: 0xe330c7e1,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Riyadh,
-}
-
-// Link: Antarctica/Vostok -> Asia/Urumqi
-var ZoneAntarctica_Vostok = zoneinfo.ZoneInfo{
-	NameIndex: 234, // "Antarctica/Vostok"
-	ZoneID: 0x4f966fd4,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Urumqi,
-}
-
-// Link: Arctic/Longyearbyen -> Europe/Berlin
-var ZoneArctic_Longyearbyen = zoneinfo.ZoneInfo{
-	NameIndex: 235, // "Arctic/Longyearbyen"
-	ZoneID: 0xd23e7859,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Berlin,
-}
-
-// Link: Asia/Aden -> Asia/Riyadh
-var ZoneAsia_Aden = zoneinfo.ZoneInfo{
-	NameIndex: 236, // "Asia/Aden"
-	ZoneID: 0x1fa7084a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Riyadh,
-}
-
-// Link: Asia/Ashkhabad -> Asia/Ashgabat
-var ZoneAsia_Ashkhabad = zoneinfo.ZoneInfo{
-	NameIndex: 243, // "Asia/Ashkhabad"
-	ZoneID: 0x15454f09,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Ashgabat,
-}
-
-// Link: Asia/Bahrain -> Asia/Qatar
-var ZoneAsia_Bahrain = zoneinfo.ZoneInfo{
-	NameIndex: 246, // "Asia/Bahrain"
-	ZoneID: 0x9d078487,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Qatar,
-}
-
-// Link: Asia/Brunei -> Asia/Kuching
-var ZoneAsia_Brunei = zoneinfo.ZoneInfo{
-	NameIndex: 252, // "Asia/Brunei"
-	ZoneID: 0xa8e595f7,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Kuching,
-}
-
-// Link: Asia/Calcutta -> Asia/Kolkata
-var ZoneAsia_Calcutta = zoneinfo.ZoneInfo{
-	NameIndex: 253, // "Asia/Calcutta"
-	ZoneID: 0x328a44c3,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Kolkata,
-}
-
-// Link: Asia/Chongqing -> Asia/Shanghai
-var ZoneAsia_Chongqing = zoneinfo.ZoneInfo{
-	NameIndex: 256, // "Asia/Chongqing"
-	ZoneID: 0xf937fb90,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Shanghai,
-}
-
-// Link: Asia/Chungking -> Asia/Shanghai
-var ZoneAsia_Chungking = zoneinfo.ZoneInfo{
-	NameIndex: 257, // "Asia/Chungking"
-	ZoneID: 0xc7121dd0,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Shanghai,
-}
-
-// Link: Asia/Dacca -> Asia/Dhaka
-var ZoneAsia_Dacca = zoneinfo.ZoneInfo{
-	NameIndex: 259, // "Asia/Dacca"
-	ZoneID: 0x14bcac5e,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Dhaka,
-}
-
-// Link: Asia/Harbin -> Asia/Shanghai
-var ZoneAsia_Harbin = zoneinfo.ZoneInfo{
-	NameIndex: 267, // "Asia/Harbin"
-	ZoneID: 0xb5af1186,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Shanghai,
-}
-
-// Link: Asia/Istanbul -> Europe/Istanbul
-var ZoneAsia_Istanbul = zoneinfo.ZoneInfo{
-	NameIndex: 273, // "Asia/Istanbul"
-	ZoneID: 0x382e7894,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Istanbul,
-}
-
-// Link: Asia/Kashgar -> Asia/Urumqi
-var ZoneAsia_Kashgar = zoneinfo.ZoneInfo{
-	NameIndex: 280, // "Asia/Kashgar"
-	ZoneID: 0x52955193,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Urumqi,
-}
-
-// Link: Asia/Katmandu -> Asia/Kathmandu
-var ZoneAsia_Katmandu = zoneinfo.ZoneInfo{
-	NameIndex: 282, // "Asia/Katmandu"
-	ZoneID: 0xa7ec12c7,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Kathmandu,
-}
-
-// Link: Asia/Kuala_Lumpur -> Asia/Singapore
-var ZoneAsia_Kuala_Lumpur = zoneinfo.ZoneInfo{
-	NameIndex: 286, // "Asia/Kuala_Lumpur"
-	ZoneID: 0x014763c4,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Singapore,
-}
-
-// Link: Asia/Kuwait -> Asia/Riyadh
-var ZoneAsia_Kuwait = zoneinfo.ZoneInfo{
-	NameIndex: 288, // "Asia/Kuwait"
-	ZoneID: 0xbe1b2f27,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Riyadh,
-}
-
-// Link: Asia/Macao -> Asia/Macau
-var ZoneAsia_Macao = zoneinfo.ZoneInfo{
-	NameIndex: 289, // "Asia/Macao"
-	ZoneID: 0x155f88b3,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Macau,
-}
-
-// Link: Asia/Muscat -> Asia/Dubai
-var ZoneAsia_Muscat = zoneinfo.ZoneInfo{
-	NameIndex: 294, // "Asia/Muscat"
-	ZoneID: 0xc2c3565f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Dubai,
-}
-
-// Link: Asia/Phnom_Penh -> Asia/Bangkok
-var ZoneAsia_Phnom_Penh = zoneinfo.ZoneInfo{
-	NameIndex: 300, // "Asia/Phnom_Penh"
-	ZoneID: 0xc224945e,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Bangkok,
-}
-
-// Link: Asia/Rangoon -> Asia/Yangon
-var ZoneAsia_Rangoon = zoneinfo.ZoneInfo{
-	NameIndex: 306, // "Asia/Rangoon"
-	ZoneID: 0x6d1217c6,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Yangon,
-}
-
-// Link: Asia/Saigon -> Asia/Ho_Chi_Minh
-var ZoneAsia_Saigon = zoneinfo.ZoneInfo{
-	NameIndex: 308, // "Asia/Saigon"
-	ZoneID: 0xcf52f713,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Ho_Chi_Minh,
-}
-
-// Link: Asia/Tel_Aviv -> Asia/Jerusalem
-var ZoneAsia_Tel_Aviv = zoneinfo.ZoneInfo{
-	NameIndex: 319, // "Asia/Tel_Aviv"
-	ZoneID: 0x166d7c2c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Jerusalem,
-}
-
-// Link: Asia/Thimbu -> Asia/Thimphu
-var ZoneAsia_Thimbu = zoneinfo.ZoneInfo{
-	NameIndex: 320, // "Asia/Thimbu"
-	ZoneID: 0xd226e31b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Thimphu,
-}
-
-// Link: Asia/Ujung_Pandang -> Asia/Makassar
-var ZoneAsia_Ujung_Pandang = zoneinfo.ZoneInfo{
-	NameIndex: 324, // "Asia/Ujung_Pandang"
-	ZoneID: 0x5d001eb3,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Makassar,
-}
-
-// Link: Asia/Ulan_Bator -> Asia/Ulaanbaatar
-var ZoneAsia_Ulan_Bator = zoneinfo.ZoneInfo{
-	NameIndex: 326, // "Asia/Ulan_Bator"
-	ZoneID: 0x394db4d9,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Ulaanbaatar,
-}
-
-// Link: Asia/Vientiane -> Asia/Bangkok
-var ZoneAsia_Vientiane = zoneinfo.ZoneInfo{
-	NameIndex: 329, // "Asia/Vientiane"
-	ZoneID: 0x89d68d75,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Bangkok,
-}
-
-// Link: Atlantic/Faeroe -> Atlantic/Faroe
-var ZoneAtlantic_Faeroe = zoneinfo.ZoneInfo{
-	NameIndex: 339, // "Atlantic/Faeroe"
-	ZoneID: 0x031ec516,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAtlantic_Faroe,
-}
-
-// Link: Atlantic/Jan_Mayen -> Europe/Berlin
-var ZoneAtlantic_Jan_Mayen = zoneinfo.ZoneInfo{
-	NameIndex: 341, // "Atlantic/Jan_Mayen"
-	ZoneID: 0x5a7535b6,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Berlin,
-}
-
-// Link: Atlantic/Reykjavik -> Africa/Abidjan
-var ZoneAtlantic_Reykjavik = zoneinfo.ZoneInfo{
-	NameIndex: 343, // "Atlantic/Reykjavik"
-	ZoneID: 0x1c2b4f74,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Atlantic/St_Helena -> Africa/Abidjan
-var ZoneAtlantic_St_Helena = zoneinfo.ZoneInfo{
-	NameIndex: 345, // "Atlantic/St_Helena"
-	ZoneID: 0x451fc5f7,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Australia/ACT -> Australia/Sydney
-var ZoneAustralia_ACT = zoneinfo.ZoneInfo{
-	NameIndex: 347, // "Australia/ACT"
-	ZoneID: 0x8a970eb2,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Sydney,
-}
-
-// Link: Australia/Canberra -> Australia/Sydney
-var ZoneAustralia_Canberra = zoneinfo.ZoneInfo{
-	NameIndex: 351, // "Australia/Canberra"
-	ZoneID: 0x2a09ae58,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Sydney,
-}
-
-// Link: Australia/Currie -> Australia/Hobart
-var ZoneAustralia_Currie = zoneinfo.ZoneInfo{
-	NameIndex: 352, // "Australia/Currie"
-	ZoneID: 0x278b6a24,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Hobart,
-}
-
-// Link: Australia/LHI -> Australia/Lord_Howe
-var ZoneAustralia_LHI = zoneinfo.ZoneInfo{
-	NameIndex: 356, // "Australia/LHI"
-	ZoneID: 0x8a973e17,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Lord_Howe,
-}
-
-// Link: Australia/NSW -> Australia/Sydney
-var ZoneAustralia_NSW = zoneinfo.ZoneInfo{
-	NameIndex: 360, // "Australia/NSW"
-	ZoneID: 0x8a974812,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Sydney,
-}
-
-// Link: Australia/North -> Australia/Darwin
-var ZoneAustralia_North = zoneinfo.ZoneInfo{
-	NameIndex: 361, // "Australia/North"
-	ZoneID: 0x8d997165,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Darwin,
-}
-
-// Link: Australia/Queensland -> Australia/Brisbane
-var ZoneAustralia_Queensland = zoneinfo.ZoneInfo{
-	NameIndex: 363, // "Australia/Queensland"
-	ZoneID: 0xd326ed0a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Brisbane,
-}
-
-// Link: Australia/South -> Australia/Adelaide
-var ZoneAustralia_South = zoneinfo.ZoneInfo{
-	NameIndex: 364, // "Australia/South"
-	ZoneID: 0x8df3f8ad,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Adelaide,
-}
-
-// Link: Australia/Tasmania -> Australia/Hobart
-var ZoneAustralia_Tasmania = zoneinfo.ZoneInfo{
-	NameIndex: 366, // "Australia/Tasmania"
-	ZoneID: 0xe6d76648,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Hobart,
-}
-
-// Link: Australia/Victoria -> Australia/Melbourne
-var ZoneAustralia_Victoria = zoneinfo.ZoneInfo{
-	NameIndex: 367, // "Australia/Victoria"
-	ZoneID: 0x0260d5db,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Melbourne,
-}
-
-// Link: Australia/West -> Australia/Perth
-var ZoneAustralia_West = zoneinfo.ZoneInfo{
-	NameIndex: 368, // "Australia/West"
-	ZoneID: 0xdd858a5d,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Perth,
-}
-
-// Link: Australia/Yancowinna -> Australia/Broken_Hill
-var ZoneAustralia_Yancowinna = zoneinfo.ZoneInfo{
-	NameIndex: 369, // "Australia/Yancowinna"
-	ZoneID: 0x90bac131,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAustralia_Broken_Hill,
-}
-
-// Link: Brazil/Acre -> America/Rio_Branco
-var ZoneBrazil_Acre = zoneinfo.ZoneInfo{
-	NameIndex: 370, // "Brazil/Acre"
-	ZoneID: 0x66934f93,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Rio_Branco,
-}
-
-// Link: Brazil/DeNoronha -> America/Noronha
-var ZoneBrazil_DeNoronha = zoneinfo.ZoneInfo{
-	NameIndex: 371, // "Brazil/DeNoronha"
-	ZoneID: 0x9b4cb496,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Noronha,
-}
-
-// Link: Brazil/East -> America/Sao_Paulo
-var ZoneBrazil_East = zoneinfo.ZoneInfo{
-	NameIndex: 372, // "Brazil/East"
-	ZoneID: 0x669578c5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Sao_Paulo,
-}
-
-// Link: Brazil/West -> America/Manaus
-var ZoneBrazil_West = zoneinfo.ZoneInfo{
-	NameIndex: 373, // "Brazil/West"
-	ZoneID: 0x669f689b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Manaus,
-}
-
-// Link: Canada/Atlantic -> America/Halifax
-var ZoneCanada_Atlantic = zoneinfo.ZoneInfo{
-	NameIndex: 376, // "Canada/Atlantic"
-	ZoneID: 0x536b119c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Halifax,
-}
-
-// Link: Canada/Central -> America/Winnipeg
-var ZoneCanada_Central = zoneinfo.ZoneInfo{
-	NameIndex: 377, // "Canada/Central"
-	ZoneID: 0x626710f5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Winnipeg,
-}
-
-// Link: Canada/Eastern -> America/Toronto
-var ZoneCanada_Eastern = zoneinfo.ZoneInfo{
-	NameIndex: 378, // "Canada/Eastern"
-	ZoneID: 0xf3612d5e,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Toronto,
-}
-
-// Link: Canada/Mountain -> America/Edmonton
-var ZoneCanada_Mountain = zoneinfo.ZoneInfo{
-	NameIndex: 379, // "Canada/Mountain"
-	ZoneID: 0xfb8a8217,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Edmonton,
-}
-
-// Link: Canada/Newfoundland -> America/St_Johns
-var ZoneCanada_Newfoundland = zoneinfo.ZoneInfo{
-	NameIndex: 380, // "Canada/Newfoundland"
-	ZoneID: 0xb396e991,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_St_Johns,
-}
-
-// Link: Canada/Pacific -> America/Vancouver
-var ZoneCanada_Pacific = zoneinfo.ZoneInfo{
-	NameIndex: 381, // "Canada/Pacific"
-	ZoneID: 0x40fa3c7b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Vancouver,
-}
-
-// Link: Canada/Saskatchewan -> America/Regina
-var ZoneCanada_Saskatchewan = zoneinfo.ZoneInfo{
-	NameIndex: 382, // "Canada/Saskatchewan"
-	ZoneID: 0x77311f49,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Regina,
-}
-
-// Link: Canada/Yukon -> America/Whitehorse
-var ZoneCanada_Yukon = zoneinfo.ZoneInfo{
-	NameIndex: 383, // "Canada/Yukon"
-	ZoneID: 0x78dd35c2,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Whitehorse,
-}
-
-// Link: Chile/Continental -> America/Santiago
-var ZoneChile_Continental = zoneinfo.ZoneInfo{
-	NameIndex: 384, // "Chile/Continental"
-	ZoneID: 0x7e2bdb18,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Santiago,
-}
-
-// Link: Chile/EasterIsland -> Pacific/Easter
-var ZoneChile_EasterIsland = zoneinfo.ZoneInfo{
-	NameIndex: 385, // "Chile/EasterIsland"
-	ZoneID: 0xb0982af8,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Easter,
-}
-
-// Link: Cuba -> America/Havana
-var ZoneCuba = zoneinfo.ZoneInfo{
-	NameIndex: 386, // "Cuba"
-	ZoneID: 0x7c83cba0,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Havana,
-}
-
-// Link: Egypt -> Africa/Cairo
-var ZoneEgypt = zoneinfo.ZoneInfo{
-	NameIndex: 390, // "Egypt"
-	ZoneID: 0x0d1a278e,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Cairo,
-}
-
-// Link: Eire -> Europe/Dublin
-var ZoneEire = zoneinfo.ZoneInfo{
-	NameIndex: 391, // "Eire"
-	ZoneID: 0x7c84b36a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Dublin,
-}
-
-// Link: Etc/GMT+0 -> Etc/GMT
-var ZoneEtc_GMT_PLUS_0 = zoneinfo.ZoneInfo{
-	NameIndex: 393, // "Etc/GMT+0"
-	ZoneID: 0x9d13da13,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: Etc/GMT-0 -> Etc/GMT
-var ZoneEtc_GMT_0 = zoneinfo.ZoneInfo{
-	NameIndex: 406, // "Etc/GMT-0"
-	ZoneID: 0x9d13da55,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: Etc/GMT0 -> Etc/GMT
-var ZoneEtc_GMT0 = zoneinfo.ZoneInfo{
-	NameIndex: 421, // "Etc/GMT0"
-	ZoneID: 0xf53ea988,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: Etc/Greenwich -> Etc/GMT
-var ZoneEtc_Greenwich = zoneinfo.ZoneInfo{
-	NameIndex: 422, // "Etc/Greenwich"
-	ZoneID: 0x26daa98c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: Etc/UCT -> Etc/UTC
-var ZoneEtc_UCT = zoneinfo.ZoneInfo{
-	NameIndex: 423, // "Etc/UCT"
-	ZoneID: 0xd8e3189c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_UTC,
-}
-
-// Link: Etc/Universal -> Etc/UTC
-var ZoneEtc_Universal = zoneinfo.ZoneInfo{
-	NameIndex: 425, // "Etc/Universal"
-	ZoneID: 0x2f8cb9a9,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_UTC,
-}
-
-// Link: Etc/Zulu -> Etc/UTC
-var ZoneEtc_Zulu = zoneinfo.ZoneInfo{
-	NameIndex: 426, // "Etc/Zulu"
-	ZoneID: 0xf549c240,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_UTC,
-}
-
-// Link: Europe/Amsterdam -> Europe/Brussels
-var ZoneEurope_Amsterdam = zoneinfo.ZoneInfo{
-	NameIndex: 427, // "Europe/Amsterdam"
-	ZoneID: 0x109395c2,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Brussels,
-}
-
-// Link: Europe/Belfast -> Europe/London
-var ZoneEurope_Belfast = zoneinfo.ZoneInfo{
-	NameIndex: 431, // "Europe/Belfast"
-	ZoneID: 0xd07dd1e5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_London,
-}
-
-// Link: Europe/Bratislava -> Europe/Prague
-var ZoneEurope_Bratislava = zoneinfo.ZoneInfo{
-	NameIndex: 434, // "Europe/Bratislava"
-	ZoneID: 0xda493bed,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Prague,
-}
-
-// Link: Europe/Busingen -> Europe/Zurich
-var ZoneEurope_Busingen = zoneinfo.ZoneInfo{
-	NameIndex: 438, // "Europe/Busingen"
-	ZoneID: 0xc06d2cdf,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Zurich,
-}
-
-// Link: Europe/Copenhagen -> Europe/Berlin
-var ZoneEurope_Copenhagen = zoneinfo.ZoneInfo{
-	NameIndex: 440, // "Europe/Copenhagen"
-	ZoneID: 0xe0ed30bc,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Berlin,
-}
-
-// Link: Europe/Guernsey -> Europe/London
-var ZoneEurope_Guernsey = zoneinfo.ZoneInfo{
-	NameIndex: 443, // "Europe/Guernsey"
-	ZoneID: 0x3db12c16,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_London,
-}
-
-// Link: Europe/Isle_of_Man -> Europe/London
-var ZoneEurope_Isle_of_Man = zoneinfo.ZoneInfo{
-	NameIndex: 445, // "Europe/Isle_of_Man"
-	ZoneID: 0xeaf84580,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_London,
-}
-
-// Link: Europe/Jersey -> Europe/London
-var ZoneEurope_Jersey = zoneinfo.ZoneInfo{
-	NameIndex: 447, // "Europe/Jersey"
-	ZoneID: 0x570dae76,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_London,
-}
-
-// Link: Europe/Kiev -> Europe/Kyiv
-var ZoneEurope_Kiev = zoneinfo.ZoneInfo{
-	NameIndex: 449, // "Europe/Kiev"
-	ZoneID: 0xa2c19eb3,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Kyiv,
-}
-
-// Link: Europe/Ljubljana -> Europe/Belgrade
-var ZoneEurope_Ljubljana = zoneinfo.ZoneInfo{
-	NameIndex: 453, // "Europe/Ljubljana"
-	ZoneID: 0xbd98cdb7,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Belgrade,
-}
-
-// Link: Europe/Luxembourg -> Europe/Brussels
-var ZoneEurope_Luxembourg = zoneinfo.ZoneInfo{
-	NameIndex: 455, // "Europe/Luxembourg"
-	ZoneID: 0x1f8bc6ce,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Brussels,
-}
-
-// Link: Europe/Mariehamn -> Europe/Helsinki
-var ZoneEurope_Mariehamn = zoneinfo.ZoneInfo{
-	NameIndex: 458, // "Europe/Mariehamn"
-	ZoneID: 0x0caa6496,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Helsinki,
-}
-
-// Link: Europe/Monaco -> Europe/Paris
-var ZoneEurope_Monaco = zoneinfo.ZoneInfo{
-	NameIndex: 460, // "Europe/Monaco"
-	ZoneID: 0x5ebf9f01,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Paris,
-}
-
-// Link: Europe/Nicosia -> Asia/Nicosia
-var ZoneEurope_Nicosia = zoneinfo.ZoneInfo{
-	NameIndex: 462, // "Europe/Nicosia"
-	ZoneID: 0x74efab8a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Nicosia,
-}
-
-// Link: Europe/Oslo -> Europe/Berlin
-var ZoneEurope_Oslo = zoneinfo.ZoneInfo{
-	NameIndex: 463, // "Europe/Oslo"
-	ZoneID: 0xa2c3fba1,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Berlin,
-}
-
-// Link: Europe/Podgorica -> Europe/Belgrade
-var ZoneEurope_Podgorica = zoneinfo.ZoneInfo{
-	NameIndex: 465, // "Europe/Podgorica"
-	ZoneID: 0x1c1a499c,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Belgrade,
-}
-
-// Link: Europe/San_Marino -> Europe/Rome
-var ZoneEurope_San_Marino = zoneinfo.ZoneInfo{
-	NameIndex: 470, // "Europe/San_Marino"
-	ZoneID: 0xcef7724b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Rome,
-}
-
-// Link: Europe/Sarajevo -> Europe/Belgrade
-var ZoneEurope_Sarajevo = zoneinfo.ZoneInfo{
-	NameIndex: 471, // "Europe/Sarajevo"
-	ZoneID: 0x6a576c3f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Belgrade,
-}
-
-// Link: Europe/Skopje -> Europe/Belgrade
-var ZoneEurope_Skopje = zoneinfo.ZoneInfo{
-	NameIndex: 474, // "Europe/Skopje"
-	ZoneID: 0x6c76fdd0,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Belgrade,
-}
-
-// Link: Europe/Stockholm -> Europe/Berlin
-var ZoneEurope_Stockholm = zoneinfo.ZoneInfo{
-	NameIndex: 476, // "Europe/Stockholm"
-	ZoneID: 0x5bf6fbb8,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Berlin,
-}
-
-// Link: Europe/Tiraspol -> Europe/Chisinau
-var ZoneEurope_Tiraspol = zoneinfo.ZoneInfo{
-	NameIndex: 479, // "Europe/Tiraspol"
-	ZoneID: 0xbe704472,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Chisinau,
-}
-
-// Link: Europe/Uzhgorod -> Europe/Kyiv
-var ZoneEurope_Uzhgorod = zoneinfo.ZoneInfo{
-	NameIndex: 481, // "Europe/Uzhgorod"
-	ZoneID: 0xb066f5d6,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Kyiv,
-}
-
-// Link: Europe/Vaduz -> Europe/Zurich
-var ZoneEurope_Vaduz = zoneinfo.ZoneInfo{
-	NameIndex: 482, // "Europe/Vaduz"
-	ZoneID: 0xfbb81bae,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Zurich,
-}
-
-// Link: Europe/Vatican -> Europe/Rome
-var ZoneEurope_Vatican = zoneinfo.ZoneInfo{
-	NameIndex: 483, // "Europe/Vatican"
-	ZoneID: 0xcb485dca,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Rome,
-}
-
-// Link: Europe/Zagreb -> Europe/Belgrade
-var ZoneEurope_Zagreb = zoneinfo.ZoneInfo{
-	NameIndex: 488, // "Europe/Zagreb"
-	ZoneID: 0x7c11c9ff,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Belgrade,
-}
-
-// Link: Europe/Zaporozhye -> Europe/Kyiv
-var ZoneEurope_Zaporozhye = zoneinfo.ZoneInfo{
-	NameIndex: 489, // "Europe/Zaporozhye"
-	ZoneID: 0xeab9767f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Kyiv,
-}
-
-// Link: GB -> Europe/London
-var ZoneGB = zoneinfo.ZoneInfo{
-	NameIndex: 491, // "GB"
-	ZoneID: 0x005973ae,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_London,
-}
-
-// Link: GB-Eire -> Europe/London
-var ZoneGB_Eire = zoneinfo.ZoneInfo{
-	NameIndex: 492, // "GB-Eire"
-	ZoneID: 0xfa70e300,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_London,
-}
-
-// Link: GMT -> Etc/GMT
-var ZoneGMT = zoneinfo.ZoneInfo{
-	NameIndex: 493, // "GMT"
-	ZoneID: 0x0b87eb2d,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: GMT+0 -> Etc/GMT
-var ZoneGMT_PLUS_0 = zoneinfo.ZoneInfo{
-	NameIndex: 494, // "GMT+0"
-	ZoneID: 0x0d2f7028,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: GMT-0 -> Etc/GMT
-var ZoneGMT_0 = zoneinfo.ZoneInfo{
-	NameIndex: 495, // "GMT-0"
-	ZoneID: 0x0d2f706a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: GMT0 -> Etc/GMT
-var ZoneGMT0 = zoneinfo.ZoneInfo{
-	NameIndex: 496, // "GMT0"
-	ZoneID: 0x7c8550fd,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: Greenwich -> Etc/GMT
-var ZoneGreenwich = zoneinfo.ZoneInfo{
-	NameIndex: 497, // "Greenwich"
-	ZoneID: 0xc84d4221,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_GMT,
-}
-
-// Link: Hongkong -> Asia/Hong_Kong
-var ZoneHongkong = zoneinfo.ZoneInfo{
-	NameIndex: 499, // "Hongkong"
-	ZoneID: 0x56d36560,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Hong_Kong,
-}
-
-// Link: Iceland -> Africa/Abidjan
-var ZoneIceland = zoneinfo.ZoneInfo{
-	NameIndex: 500, // "Iceland"
-	ZoneID: 0xe56a35b5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Abidjan,
-}
-
-// Link: Indian/Antananarivo -> Africa/Nairobi
-var ZoneIndian_Antananarivo = zoneinfo.ZoneInfo{
-	NameIndex: 501, // "Indian/Antananarivo"
-	ZoneID: 0x9ebf5289,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Indian/Christmas -> Asia/Bangkok
-var ZoneIndian_Christmas = zoneinfo.ZoneInfo{
-	NameIndex: 503, // "Indian/Christmas"
-	ZoneID: 0x68c207d5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Bangkok,
-}
-
-// Link: Indian/Cocos -> Asia/Yangon
-var ZoneIndian_Cocos = zoneinfo.ZoneInfo{
-	NameIndex: 504, // "Indian/Cocos"
-	ZoneID: 0x021e86de,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Yangon,
-}
-
-// Link: Indian/Comoro -> Africa/Nairobi
-var ZoneIndian_Comoro = zoneinfo.ZoneInfo{
-	NameIndex: 505, // "Indian/Comoro"
-	ZoneID: 0x45f4deb6,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Indian/Kerguelen -> Indian/Maldives
-var ZoneIndian_Kerguelen = zoneinfo.ZoneInfo{
-	NameIndex: 506, // "Indian/Kerguelen"
-	ZoneID: 0x4351b389,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneIndian_Maldives,
-}
-
-// Link: Indian/Mahe -> Asia/Dubai
-var ZoneIndian_Mahe = zoneinfo.ZoneInfo{
-	NameIndex: 507, // "Indian/Mahe"
-	ZoneID: 0x45e725e2,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Dubai,
-}
-
-// Link: Indian/Mayotte -> Africa/Nairobi
-var ZoneIndian_Mayotte = zoneinfo.ZoneInfo{
-	NameIndex: 510, // "Indian/Mayotte"
-	ZoneID: 0xe6880bca,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Nairobi,
-}
-
-// Link: Indian/Reunion -> Asia/Dubai
-var ZoneIndian_Reunion = zoneinfo.ZoneInfo{
-	NameIndex: 511, // "Indian/Reunion"
-	ZoneID: 0x7076c047,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Dubai,
-}
-
-// Link: Iran -> Asia/Tehran
-var ZoneIran = zoneinfo.ZoneInfo{
-	NameIndex: 512, // "Iran"
-	ZoneID: 0x7c87090f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Tehran,
-}
-
-// Link: Israel -> Asia/Jerusalem
-var ZoneIsrael = zoneinfo.ZoneInfo{
-	NameIndex: 513, // "Israel"
-	ZoneID: 0xba88c9e5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Jerusalem,
-}
-
-// Link: Jamaica -> America/Jamaica
-var ZoneJamaica = zoneinfo.ZoneInfo{
-	NameIndex: 514, // "Jamaica"
-	ZoneID: 0x2e44fdab,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Jamaica,
-}
-
-// Link: Japan -> Asia/Tokyo
-var ZoneJapan = zoneinfo.ZoneInfo{
-	NameIndex: 515, // "Japan"
-	ZoneID: 0x0d712f8f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Tokyo,
-}
-
-// Link: Kwajalein -> Pacific/Kwajalein
-var ZoneKwajalein = zoneinfo.ZoneInfo{
-	NameIndex: 516, // "Kwajalein"
-	ZoneID: 0x0e57afbb,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Kwajalein,
-}
-
-// Link: Libya -> Africa/Tripoli
-var ZoneLibya = zoneinfo.ZoneInfo{
-	NameIndex: 517, // "Libya"
-	ZoneID: 0x0d998b16,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAfrica_Tripoli,
-}
-
-// Link: Mexico/BajaNorte -> America/Tijuana
-var ZoneMexico_BajaNorte = zoneinfo.ZoneInfo{
-	NameIndex: 521, // "Mexico/BajaNorte"
-	ZoneID: 0xfcf7150f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Tijuana,
-}
-
-// Link: Mexico/BajaSur -> America/Mazatlan
-var ZoneMexico_BajaSur = zoneinfo.ZoneInfo{
-	NameIndex: 522, // "Mexico/BajaSur"
-	ZoneID: 0x08ee3641,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Mazatlan,
-}
-
-// Link: Mexico/General -> America/Mexico_City
-var ZoneMexico_General = zoneinfo.ZoneInfo{
-	NameIndex: 523, // "Mexico/General"
-	ZoneID: 0x93711d57,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Mexico_City,
-}
-
-// Link: NZ -> Pacific/Auckland
-var ZoneNZ = zoneinfo.ZoneInfo{
-	NameIndex: 524, // "NZ"
-	ZoneID: 0x005974ad,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Auckland,
-}
-
-// Link: NZ-CHAT -> Pacific/Chatham
-var ZoneNZ_CHAT = zoneinfo.ZoneInfo{
-	NameIndex: 525, // "NZ-CHAT"
-	ZoneID: 0x4d42afda,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Chatham,
-}
-
-// Link: Navajo -> America/Denver
-var ZoneNavajo = zoneinfo.ZoneInfo{
-	NameIndex: 526, // "Navajo"
-	ZoneID: 0xc4ef0e24,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Denver,
-}
-
-// Link: PRC -> Asia/Shanghai
-var ZonePRC = zoneinfo.ZoneInfo{
-	NameIndex: 527, // "PRC"
-	ZoneID: 0x0b88120a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Shanghai,
-}
-
-// Link: Pacific/Chuuk -> Pacific/Port_Moresby
-var ZonePacific_Chuuk = zoneinfo.ZoneInfo{
-	NameIndex: 533, // "Pacific/Chuuk"
-	ZoneID: 0x8a090b23,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Port_Moresby,
-}
-
-// Link: Pacific/Enderbury -> Pacific/Kanton
-var ZonePacific_Enderbury = zoneinfo.ZoneInfo{
-	NameIndex: 536, // "Pacific/Enderbury"
-	ZoneID: 0x61599a93,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Kanton,
-}
-
-// Link: Pacific/Funafuti -> Pacific/Tarawa
-var ZonePacific_Funafuti = zoneinfo.ZoneInfo{
-	NameIndex: 539, // "Pacific/Funafuti"
-	ZoneID: 0xdb402d65,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Tarawa,
-}
-
-// Link: Pacific/Johnston -> Pacific/Honolulu
-var ZonePacific_Johnston = zoneinfo.ZoneInfo{
-	NameIndex: 545, // "Pacific/Johnston"
-	ZoneID: 0xb15d7b36,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Honolulu,
-}
-
-// Link: Pacific/Majuro -> Pacific/Tarawa
-var ZonePacific_Majuro = zoneinfo.ZoneInfo{
-	NameIndex: 550, // "Pacific/Majuro"
-	ZoneID: 0xe1f95371,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Tarawa,
-}
-
-// Link: Pacific/Midway -> Pacific/Pago_Pago
-var ZonePacific_Midway = zoneinfo.ZoneInfo{
-	NameIndex: 552, // "Pacific/Midway"
-	ZoneID: 0xe286d38e,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Pago_Pago,
-}
-
-// Link: Pacific/Pohnpei -> Pacific/Guadalcanal
-var ZonePacific_Pohnpei = zoneinfo.ZoneInfo{
-	NameIndex: 560, // "Pacific/Pohnpei"
-	ZoneID: 0x28929f96,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Guadalcanal,
-}
-
-// Link: Pacific/Ponape -> Pacific/Guadalcanal
-var ZonePacific_Ponape = zoneinfo.ZoneInfo{
-	NameIndex: 561, // "Pacific/Ponape"
-	ZoneID: 0xe9f80086,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Guadalcanal,
-}
-
-// Link: Pacific/Saipan -> Pacific/Guam
-var ZonePacific_Saipan = zoneinfo.ZoneInfo{
-	NameIndex: 564, // "Pacific/Saipan"
-	ZoneID: 0xeff7a35f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Guam,
-}
-
-// Link: Pacific/Samoa -> Pacific/Pago_Pago
-var ZonePacific_Samoa = zoneinfo.ZoneInfo{
-	NameIndex: 565, // "Pacific/Samoa"
-	ZoneID: 0x8b2699b4,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Pago_Pago,
-}
-
-// Link: Pacific/Truk -> Pacific/Port_Moresby
-var ZonePacific_Truk = zoneinfo.ZoneInfo{
-	NameIndex: 569, // "Pacific/Truk"
-	ZoneID: 0x234010a9,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Port_Moresby,
-}
-
-// Link: Pacific/Wake -> Pacific/Tarawa
-var ZonePacific_Wake = zoneinfo.ZoneInfo{
-	NameIndex: 570, // "Pacific/Wake"
-	ZoneID: 0x23416c2b,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Tarawa,
-}
-
-// Link: Pacific/Wallis -> Pacific/Tarawa
-var ZonePacific_Wallis = zoneinfo.ZoneInfo{
-	NameIndex: 571, // "Pacific/Wallis"
-	ZoneID: 0xf94ddb0f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Tarawa,
-}
-
-// Link: Pacific/Yap -> Pacific/Port_Moresby
-var ZonePacific_Yap = zoneinfo.ZoneInfo{
-	NameIndex: 572, // "Pacific/Yap"
-	ZoneID: 0xbb40138d,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Port_Moresby,
-}
-
-// Link: Poland -> Europe/Warsaw
-var ZonePoland = zoneinfo.ZoneInfo{
-	NameIndex: 573, // "Poland"
-	ZoneID: 0xca913b23,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Warsaw,
-}
-
-// Link: Portugal -> Europe/Lisbon
-var ZonePortugal = zoneinfo.ZoneInfo{
-	NameIndex: 574, // "Portugal"
-	ZoneID: 0xc3274593,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Lisbon,
-}
-
-// Link: ROC -> Asia/Taipei
-var ZoneROC = zoneinfo.ZoneInfo{
-	NameIndex: 575, // "ROC"
-	ZoneID: 0x0b881a29,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Taipei,
-}
-
-// Link: ROK -> Asia/Seoul
-var ZoneROK = zoneinfo.ZoneInfo{
-	NameIndex: 576, // "ROK"
-	ZoneID: 0x0b881a31,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Seoul,
-}
-
-// Link: Singapore -> Asia/Singapore
-var ZoneSingapore = zoneinfo.ZoneInfo{
-	NameIndex: 577, // "Singapore"
-	ZoneID: 0xa8598c8d,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAsia_Singapore,
-}
-
-// Link: Turkey -> Europe/Istanbul
-var ZoneTurkey = zoneinfo.ZoneInfo{
-	NameIndex: 578, // "Turkey"
-	ZoneID: 0xd455e469,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Istanbul,
-}
-
-// Link: UCT -> Etc/UTC
-var ZoneUCT = zoneinfo.ZoneInfo{
-	NameIndex: 579, // "UCT"
-	ZoneID: 0x0b882571,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_UTC,
-}
-
-// Link: US/Alaska -> America/Anchorage
-var ZoneUS_Alaska = zoneinfo.ZoneInfo{
-	NameIndex: 580, // "US/Alaska"
-	ZoneID: 0xfa300bc9,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Anchorage,
-}
-
-// Link: US/Aleutian -> America/Adak
-var ZoneUS_Aleutian = zoneinfo.ZoneInfo{
-	NameIndex: 581, // "US/Aleutian"
-	ZoneID: 0x4fe013ef,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Adak,
-}
-
-// Link: US/Arizona -> America/Phoenix
-var ZoneUS_Arizona = zoneinfo.ZoneInfo{
-	NameIndex: 582, // "US/Arizona"
-	ZoneID: 0x4ec52670,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Phoenix,
-}
-
-// Link: US/Central -> America/Chicago
-var ZoneUS_Central = zoneinfo.ZoneInfo{
-	NameIndex: 583, // "US/Central"
-	ZoneID: 0xcabdcb25,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Chicago,
-}
-
-// Link: US/East-Indiana -> America/Indiana/Indianapolis
-var ZoneUS_East_Indiana = zoneinfo.ZoneInfo{
-	NameIndex: 584, // "US/East-Indiana"
-	ZoneID: 0x6dcf558a,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Indiana_Indianapolis,
-}
-
-// Link: US/Eastern -> America/New_York
-var ZoneUS_Eastern = zoneinfo.ZoneInfo{
-	NameIndex: 585, // "US/Eastern"
-	ZoneID: 0x5bb7e78e,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_New_York,
-}
-
-// Link: US/Hawaii -> Pacific/Honolulu
-var ZoneUS_Hawaii = zoneinfo.ZoneInfo{
-	NameIndex: 586, // "US/Hawaii"
-	ZoneID: 0x09c8de2f,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Honolulu,
-}
-
-// Link: US/Indiana-Starke -> America/Indiana/Knox
-var ZoneUS_Indiana_Starke = zoneinfo.ZoneInfo{
-	NameIndex: 587, // "US/Indiana-Starke"
-	ZoneID: 0x67977be7,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Indiana_Knox,
-}
-
-// Link: US/Michigan -> America/Detroit
-var ZoneUS_Michigan = zoneinfo.ZoneInfo{
-	NameIndex: 588, // "US/Michigan"
-	ZoneID: 0x766bb7bc,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Detroit,
-}
-
-// Link: US/Mountain -> America/Denver
-var ZoneUS_Mountain = zoneinfo.ZoneInfo{
-	NameIndex: 589, // "US/Mountain"
-	ZoneID: 0x6eb88247,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Denver,
-}
-
-// Link: US/Pacific -> America/Los_Angeles
-var ZoneUS_Pacific = zoneinfo.ZoneInfo{
-	NameIndex: 590, // "US/Pacific"
-	ZoneID: 0xa950f6ab,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneAmerica_Los_Angeles,
-}
-
-// Link: US/Samoa -> Pacific/Pago_Pago
-var ZoneUS_Samoa = zoneinfo.ZoneInfo{
-	NameIndex: 591, // "US/Samoa"
-	ZoneID: 0x566821cd,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZonePacific_Pago_Pago,
-}
-
-// Link: UTC -> Etc/UTC
-var ZoneUTC = zoneinfo.ZoneInfo{
-	NameIndex: 592, // "UTC"
-	ZoneID: 0x0b882791,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_UTC,
-}
-
-// Link: Universal -> Etc/UTC
-var ZoneUniversal = zoneinfo.ZoneInfo{
-	NameIndex: 593, // "Universal"
-	ZoneID: 0xd0ff523e,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_UTC,
-}
-
-// Link: W-SU -> Europe/Moscow
-var ZoneW_SU = zoneinfo.ZoneInfo{
-	NameIndex: 594, // "W-SU"
-	ZoneID: 0x7c8d8ef1,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEurope_Moscow,
-}
-
-// Link: Zulu -> Etc/UTC
-var ZoneZulu = zoneinfo.ZoneInfo{
-	NameIndex: 596, // "Zulu"
-	ZoneID: 0x7c9069b5,
-	StartYear: 2000,
-	UntilYear: 10000,
-	Eras: nil,
-	Target: &ZoneEtc_UTC,
-}
-
 
 
 // ---------------------------------------------------------------------------
