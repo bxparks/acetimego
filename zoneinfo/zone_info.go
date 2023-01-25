@@ -328,9 +328,11 @@ type ZoneInfo struct {
 	/** Full name of zone (e.g. "America/Los_Angeles"). */
 	NameIndex uint16
 
+	// TODO: Move to Context
 	/** Start year of the zone files. */
 	StartYear int16
 
+	// TODO: Move to Context
 	/** Until year of the zone files. */
 	UntilYear int16
 
