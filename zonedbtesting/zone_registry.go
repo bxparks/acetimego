@@ -62,10 +62,10 @@ var Context = zoneinfo.ZoneContext{
 // ---------------------------------------------------------------------------
 
 const (
+	ZoneIDAmerica_Los_Angeles uint32 = 0xb7f7e8f2 // America/Los_Angeles
 	ZoneIDAmerica_New_York uint32 = 0x1e2a7654 // America/New_York
+	ZoneIDEtc_UTC uint32 = 0xd8e31abc // Etc/UTC
 	ZoneIDPacific_Apia uint32 = 0x23359b5e // Pacific/Apia
 	ZoneIDUS_Pacific uint32 = 0xa950f6ab // US/Pacific
-	ZoneIDAmerica_Los_Angeles uint32 = 0xb7f7e8f2 // America/Los_Angeles
-	ZoneIDEtc_UTC uint32 = 0xd8e31abc // Etc/UTC
 
 )

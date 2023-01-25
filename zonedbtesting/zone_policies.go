@@ -40,7 +40,10 @@ import (
 
 const (
 	// All ZoneRule.Letter entries concatenated together.
-	LetterData = "DS~"
+	LetterData = "" +
+		"D" +
+		"S" +
+		"~"
 )
 
 var (
@@ -53,16 +56,20 @@ var (
 )
 
 // ---------------------------------------------------------------------------
+// ZoneRules is a concatenated array of zoneinfo.ZoneInfo objects from all
+// ZonePolicies.
+//
 // Supported zone policies: 2
 // numRules: 12
 // ---------------------------------------------------------------------------
 
 var ZoneRules = []zoneinfo.ZoneRule{
+	// ---------------------------------------------------------------------------
+	// PolicyName: US
+	// RuleIndex: 0
+	// RuleCount: 6
+	// ---------------------------------------------------------------------------
 
-	// ---------------------------------------------------------------------------
-	// Policy name: US
-	// Rule count: 6
-	// ---------------------------------------------------------------------------
 	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
 	{
 		FromYear: 1967,
@@ -137,8 +144,9 @@ var ZoneRules = []zoneinfo.ZoneRule{
 	},
 
 	// ---------------------------------------------------------------------------
-	// Policy name: WS
-	// Rule count: 6
+	// PolicyName: WS
+	// RuleIndex: 6
+	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
 	// Anchor: Rule    WS    2011    only    -    Apr    Sat>=1    4:00    0    -
@@ -218,14 +226,14 @@ var ZoneRules = []zoneinfo.ZoneRule{
 
 
 // ---------------------------------------------------------------------------
-// ZonePolicies are essentially indexes into ZoneRules (using RuleIndex and
-// RuleCount).
+// ZonePolicies are indexes into the ZoneRules.
+// Supported zone policies: 2
 // ---------------------------------------------------------------------------
 
 var ZonePolicies = []zoneinfo.ZonePolicy{
-	{0, 0}, // 0: None
-	{0, 6}, // 1: US
-	{6, 0}, // 2: WS
+	{RuleIndex: 0, RuleCount: 0}, // 0: PolicyName: (None)
+	{RuleIndex: 0, RuleCount: 6}, // 1: PolicyName: US
+	{RuleIndex: 6, RuleCount: 6}, // 2: PolicyName: WS
 }
 
 

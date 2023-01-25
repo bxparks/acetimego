@@ -40,10 +40,22 @@ import (
 
 const (
 	// All ZoneEra.Format entries concatenated together.
-	FormatData = "+13/+14-11/-10E%TP%TUTC~"
+	FormatData = "" +
+		"+13/+14" +
+		"-11/-10" +
+		"E%T" +
+		"P%T" +
+		"UTC" +
+		"~"
 
 	// All ZoneInfo.Name entries concatenated togther.
-	NameData = "America/Los_AngelesAmerica/New_YorkEtc/UTCPacific/ApiaUS/Pacific~"
+	NameData = "" +
+		"America/Los_Angeles" +
+		"America/New_York" +
+		"Etc/UTC" +
+		"Pacific/Apia" +
+		"US/Pacific" +
+		"~"
 )
 
 var (
@@ -52,7 +64,7 @@ var (
 	// `FormatData[FormatOffsets[i]:FormatOffsets[i+1]]`.
 	FormatOffsets = []uint16{
 		0, 0, 7, 14, 17, 20, 23,
-	}
+}
 
 	// Byte offset into NameData for each index. The actual Letter string
 	// at index `i` given by the `ZoneRule.Name` field is
@@ -63,20 +75,22 @@ var (
 )
 
 // ---------------------------------------------------------------------------
+// ZoneEras is an array of zoneinfo.ZoneEra items concatenated together.
+//
 // Supported zones: 4
 // numEras: 5
 // ---------------------------------------------------------------------------
 
 var ZoneEras = []zoneinfo.ZoneEra{
-
 	// ---------------------------------------------------------------------------
-	// Zone name: America/Los_Angeles
-	// Era count: 1 (#0)
+	// ZoneName: America/Los_Angeles
+	// EraIndex: 0
+	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -8:00    US    P%sT
 	{
-		PolicyIndex: 1, // Policy US
+		PolicyIndex: 1, // PolicyName: US
 		FormatIndex: 4, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -88,13 +102,14 @@ var ZoneEras = []zoneinfo.ZoneEra{
 	},
 
 	// ---------------------------------------------------------------------------
-	// Zone name: America/New_York
-	// Era count: 1 (#1)
+	// ZoneName: America/New_York
+	// EraIndex: 1
+	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 1, // Policy US
+		PolicyIndex: 1, // PolicyName: US
 		FormatIndex: 3, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -106,13 +121,14 @@ var ZoneEras = []zoneinfo.ZoneEra{
 	},
 
 	// ---------------------------------------------------------------------------
-	// Zone name: Etc/UTC
-	// Era count: 1 (#2)
+	// ZoneName: Etc/UTC
+	// EraIndex: 2
+	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 0 - UTC
 	{
-		PolicyIndex: 0, // Policy None
+		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 5, // "UTC"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -124,13 +140,14 @@ var ZoneEras = []zoneinfo.ZoneEra{
 	},
 
 	// ---------------------------------------------------------------------------
-	// Zone name: Pacific/Apia
-	// Era count: 2 (#3)
+	// ZoneName: Pacific/Apia
+	// EraIndex: 3
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -11:00    WS    -11/-10    2011 Dec 29 24:00
 	{
-		PolicyIndex: 2, // Policy WS
+		PolicyIndex: 2, // PolicyName: WS
 		FormatIndex: 2, // "-11/-10"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -140,9 +157,10 @@ var ZoneEras = []zoneinfo.ZoneEra{
 		UntilTimeCode: 96,
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
+
 	//              13:00    WS    +13/+14
 	{
-		PolicyIndex: 2, // Policy WS
+		PolicyIndex: 2, // PolicyName: WS
 		FormatIndex: 1, // "+13/+14"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -155,12 +173,15 @@ var ZoneEras = []zoneinfo.ZoneEra{
 
 }
 
+
 // ---------------------------------------------------------------------------
-// ZoneInfos are essentially indexes into ZoneEras (using EraIndex and
-// EraCount).
+// ZoneInfos is an array of zoneinfo.ZoneInfo items concatenated together.
+//
+// Total: 5 (4 zones, 1 links)
 // ---------------------------------------------------------------------------
 
 var ZoneInfos = []zoneinfo.ZoneInfo{
+	// 0: Zone America/New_York
 	{
 		ZoneID: 0x1e2a7654,
 		NameIndex: 2, // "America/New_York"
@@ -168,7 +189,7 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		EraCount: 1,
 		TargetIndex: 0,
 	},
-
+	// 1: Zone Pacific/Apia
 	{
 		ZoneID: 0x23359b5e,
 		NameIndex: 4, // "Pacific/Apia"
@@ -176,16 +197,15 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		EraCount: 2,
 		TargetIndex: 0,
 	},
-
-	// Link: US/Pacific -> America/Los_Angeles
+	// 2: Link US/Pacific -> America/Los_Angeles
 	{
-		NameIndex: 5, // "US/Pacific"
 		ZoneID: 0xa950f6ab,
+		NameIndex: 5, // "US/Pacific"
 		EraIndex: 0,
-		EraCount: 0,
-		TargetIndex: 3, // America/Los_Angeles
+		EraCount: 1,
+		TargetIndex: 0, // America/Los_Angeles
 	},
-
+	// 3: Zone America/Los_Angeles
 	{
 		ZoneID: 0xb7f7e8f2,
 		NameIndex: 1, // "America/Los_Angeles"
@@ -193,7 +213,7 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		EraCount: 1,
 		TargetIndex: 0,
 	},
-
+	// 4: Zone Etc/UTC
 	{
 		ZoneID: 0xd8e31abc,
 		NameIndex: 3, // "Etc/UTC"
@@ -203,16 +223,6 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	},
 }
 
-
-// ---------------------------------------------------------------------------
-
-const (
-	ZoneInfoIndexAmerica_New_York uint16 = 0 // America/New_York
-	ZoneInfoIndexPacific_Apia uint16 = 1 // Pacific/Apia
-	ZoneInfoIndexUS_Pacific uint16 = 2 // US/Pacific
-	ZoneInfoIndexAmerica_Los_Angeles uint16 = 3 // America/Los_Angeles
-	ZoneInfoIndexEtc_UTC uint16 = 4 // Etc/UTC
-)
 
 // ---------------------------------------------------------------------------
 // Unsuported zones: 347
