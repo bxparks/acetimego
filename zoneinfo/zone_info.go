@@ -24,6 +24,8 @@ const (
 
 type ZoneContext struct {
 	TzDatabaseVersion string
+	StartYear int16
+	UntilYear int16
 	LetterData string
 	LetterOffsets []uint8
 	FormatData string
@@ -327,14 +329,6 @@ type ZoneInfo struct {
 
 	/** Full name of zone (e.g. "America/Los_Angeles"). */
 	NameIndex uint16
-
-	// TODO: Move to Context
-	/** Start year of the zone files. */
-	StartYear int16
-
-	// TODO: Move to Context
-	/** Until year of the zone files. */
-	UntilYear int16
 
 	/**
 	 * A slice of ZoneEra instances. For a normal Zone, num(Eras) is greater than
