@@ -11364,8 +11364,8 @@ var ZoneEras = []zoneinfo.ZoneEra{
 		UntilTimeModifier: 0, // SuffixW + minute=0
 	},
 
-}
 
+}
 
 // ---------------------------------------------------------------------------
 // ZoneInfos is an array of zoneinfo.ZoneInfo items concatenated together.
@@ -16142,8 +16142,8 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 		EraCount: 1,
 		TargetIndex: 0,
 	},
-}
 
+}
 
 // ---------------------------------------------------------------------------
 // Unsuported zones: 0

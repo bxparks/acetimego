@@ -222,8 +222,8 @@ var ZoneRules = []zoneinfo.ZoneRule{
 		LetterIndex: 0, // ""
 	},
 
-}
 
+}
 
 // ---------------------------------------------------------------------------
 // ZonePolicies are indexes into the ZoneRules.
@@ -234,8 +234,8 @@ var ZonePolicies = []zoneinfo.ZonePolicy{
 	{RuleIndex: 0, RuleCount: 0}, // 0: PolicyName: (None)
 	{RuleIndex: 0, RuleCount: 6}, // 1: PolicyName: US
 	{RuleIndex: 6, RuleCount: 6}, // 2: PolicyName: WS
-}
 
+}
 
 // ---------------------------------------------------------------------------
 // Unsupported zone policies: 132
