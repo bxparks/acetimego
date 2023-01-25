@@ -164,8 +164,6 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x1e2a7654,
 		NameIndex: 2, // "America/New_York"
-		StartYear: 1980,
-		UntilYear: 10000,
 		EraIndex: 1,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -174,8 +172,6 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0x23359b5e,
 		NameIndex: 4, // "Pacific/Apia"
-		StartYear: 1980,
-		UntilYear: 10000,
 		EraIndex: 3,
 		EraCount: 2,
 		TargetIndex: 0,
@@ -185,8 +181,6 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		NameIndex: 5, // "US/Pacific"
 		ZoneID: 0xa950f6ab,
-		StartYear: 1980,
-		UntilYear: 10000,
 		EraIndex: 0,
 		EraCount: 0,
 		TargetIndex: 3, // America/Los_Angeles
@@ -195,8 +189,6 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xb7f7e8f2,
 		NameIndex: 1, // "America/Los_Angeles"
-		StartYear: 1980,
-		UntilYear: 10000,
 		EraIndex: 0,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -205,8 +197,6 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	{
 		ZoneID: 0xd8e31abc,
 		NameIndex: 3, // "Etc/UTC"
-		StartYear: 1980,
-		UntilYear: 10000,
 		EraIndex: 2,
 		EraCount: 1,
 		TargetIndex: 0,

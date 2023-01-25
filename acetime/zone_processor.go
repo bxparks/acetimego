@@ -70,7 +70,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	zp.isFilled = true
 	zp.numMatches = 0
 	zp.transitionStorage.Init()
-	if year < zp.zoneInfo.StartYear-1 || zp.zoneInfo.UntilYear < year {
+	if year < zp.zoneContext.StartYear-1 || zp.zoneContext.UntilYear < year {
 		return ErrGeneric
 	}
 
