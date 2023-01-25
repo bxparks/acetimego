@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   20351     304     633 |   20680     937 | (unknown)
+     25   20351      44     633 |   20420     677 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -22,26 +22,26 @@
       0     917       0       0 |     917       0 | Go reflect data
      49       0       0       0 |      49       0 | errors
   13007     241       0       0 |   13248       0 | fmt
-   8530      32       0       0 |    8562       0 | github.com/bxparks/AceTimeGo/acetime
-      0    8994   59722       0 |   68716   59722 | github.com/bxparks/AceTimeGo/zonedb
-    351       0       0       0 |     351       0 | github.com/bxparks/AceTimeGo/zoneinfo
-     84       0       0       0 |      84       0 | internal/bytealg
+   8614      32       0       0 |    8646       0 | github.com/bxparks/AceTimeGo/acetime
+      0    8994   26534       0 |   35528   26534 | github.com/bxparks/AceTimeGo/zonedb
+    548       0       0       0 |     548       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     80       0       0       0 |      80       0 | internal/bytealg
      79       0       0       0 |      79       0 | internal/fmtsort
     157       2       0       0 |     159       0 | internal/itoa
       0      38      32       0 |      70      32 | internal/oserror
     427      24       0      16 |     451      16 | internal/task
     353      25       0       0 |     378       0 | io/fs
-   1972     450       0       0 |    2422       0 | main
+   1984     450       0       0 |    2434       0 | main
      29       0       0       0 |      29       0 | math
     293     320       0       0 |     613       0 | math/bits
     137      16      48      24 |     201      72 | os
    3827     902       0       0 |    4729       0 | reflect
-   7564     217      12     119 |    7793     131 | runtime
+   7558     217      12     119 |    7787     131 | runtime
    9109   16670    1322       0 |   27101    1322 | strconv
-    638     124       0       0 |     762       0 | strings
+    605     124       0       0 |     729       0 | strings
     633     200       0       0 |     833       0 | sync
      80    2954       0       8 |    3034       8 | syscall
-  20796    1077     168     160 |   22041     328 | time
+  20795    1077     168     160 |   22040     328 | time
    1229     288       0       0 |    1517       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  75872   55970   61608    1016 |  193450   62624 | total
+  76121   55970   28160    1016 |  160251   29176 | total
