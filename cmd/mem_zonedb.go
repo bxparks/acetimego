@@ -17,7 +17,7 @@ func main() {
 	PrintMemUsage()
 
 	os.Stdout.WriteString("---- Create ZonedDateTime using zonedb\n")
-	zm := acetime.NewZoneManager(&zonedb.Context)
+	zm := acetime.NewZoneManager(&zonedb.DataContext)
 	name := "America/Los_Angeles"
 	tz := zm.NewTimeZoneFromName(name)
 	if tz.IsError() {

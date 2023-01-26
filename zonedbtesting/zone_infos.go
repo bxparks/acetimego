@@ -75,13 +75,14 @@ var (
 )
 
 // ---------------------------------------------------------------------------
-// ZoneEras is an array of zoneinfo.ZoneEra items concatenated together.
+// ZoneEraRecords is an array of zoneinfo.ZoneEraRecord items concatenated
+// together.
 //
 // Supported zones: 4
 // numEras: 5
 // ---------------------------------------------------------------------------
 
-var ZoneEras = []zoneinfo.ZoneEra{
+var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Los_Angeles
 	// EraIndex: 0
@@ -174,13 +175,25 @@ var ZoneEras = []zoneinfo.ZoneEra{
 
 }
 
+const ZoneEraCount = 5
+
+const ZoneEraChunkSize = 11
+
+// ZoneErasData contains the ZoneEraRecords data as a hex encoded string.
+const ZoneErasData = "\x04\x00\x01\xe0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x03\x00\x01\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x05\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x02\x00\x02\xd4\x04\xdb\x07\x0c\x1d\x60\x00" +
+		"\x01\x00\x02\x34\x04\x10\x27\x01\x01\x00\x00"
+
 // ---------------------------------------------------------------------------
-// ZoneInfos is an array of zoneinfo.ZoneInfo items concatenated together.
+// ZoneInfoRecords is an array of zoneinfo.ZoneInfoRecord items concatenated
+// together.
 //
 // Total: 5 (4 zones, 1 links)
 // ---------------------------------------------------------------------------
 
-var ZoneInfos = []zoneinfo.ZoneInfo{
+var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 0: Zone America/New_York
 	{
 		ZoneID: 0x1e2a7654,
@@ -223,6 +236,17 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 	},
 
 }
+
+const ZoneInfoCount = 5
+
+const ZoneInfoChunkSize = 12
+
+// ZoneInfosData contains the ZoneInfoRecords data as a hex encoded string.
+const ZoneInfosData = "\x54\x76\x2a\x1e\x02\x00\x01\x00\x01\x00\x00\x00" +
+		"\x5e\x9b\x35\x23\x04\x00\x03\x00\x02\x00\x00\x00" +
+		"\xab\xf6\x50\xa9\x05\x00\x00\x00\x00\x00\x03\x00" +
+		"\xf2\xe8\xf7\xb7\x01\x00\x00\x00\x01\x00\x00\x00" +
+		"\xbc\x1a\xe3\xd8\x03\x00\x02\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
 // Unsuported zones: 347

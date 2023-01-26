@@ -30,11 +30,10 @@ func NewTimeZoneUTC() TimeZone {
 	return TimeZone{TztypeUTC, nil}
 }
 
-func NewTimeZoneFromZoneInfo(
-	zoneContext *zoneinfo.ZoneContext, zoneInfo *zoneinfo.ZoneInfo) TimeZone {
+func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 
 	var zoneProcessor ZoneProcessor
-	zoneProcessor.InitForZoneInfo(zoneContext, zoneInfo)
+	zoneProcessor.InitForZoneInfo(zoneInfo)
 	return TimeZone{TztypeProcessor, &zoneProcessor}
 }
 

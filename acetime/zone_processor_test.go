@@ -60,20 +60,22 @@ func TestCalcStartDayOfMonth(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestZoneProcessorToString(t *testing.T) {
-	zoneInfo := &zonedbtesting.ZoneInfos[
-		zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles]
+	zoneManager := NewZoneManager(&zonedbtesting.DataContext)
+	zoneInfo := zoneManager.store.ZoneInfoByID(
+		zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	var zp ZoneProcessor
-	zp.InitForZoneInfo(&zonedbtesting.Context, zoneInfo)
+	zp.InitForZoneInfo(zoneInfo)
 	if !(zp.Name() == "America/Los_Angeles") {
 		t.Fatal(zp.Name(), zp)
 	}
 }
 
 func TestZoneProcessorInitForYear(t *testing.T) {
-	zoneInfo := &zonedbtesting.ZoneInfos[
-		zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles]
+	zoneManager := NewZoneManager(&zonedbtesting.DataContext)
+	zoneInfo := zoneManager.store.ZoneInfoByID(
+		zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	var zp ZoneProcessor
-	zp.InitForZoneInfo(&zonedbtesting.Context, zoneInfo);
+	zp.InitForZoneInfo(zoneInfo);
 	if zp.isFilled {
 		t.Fatal(zp)
 	}
@@ -153,14 +155,9 @@ func TestCreateMatchingEra(t *testing.T) {
 		UntilTimeModifier: zoneinfo.SuffixW,
 	}
 
-	// Fake format offsets, with only a single empty string, and terminating "~"
-	formatsOffset := []uint16{0, 0}
-	formatsData := "~"
-
 	// No previous matching era, so startDt is set to startYm.
 	var match1 MatchingEra
-	createMatchingEra(formatsOffset, formatsData,
-		&match1, nil, &era1, startYm, untilYm)
+	createMatchingEra(&match1, nil, &era1, startYm, untilYm)
 	if !(match1.startDt == DateTuple{2000, 12, 1, 60 * 0, zoneinfo.SuffixW}) {
 		t.Fatal("match1.startDt:", match1.startDt)
 	}
@@ -174,8 +171,7 @@ func TestCreateMatchingEra(t *testing.T) {
 	// startDt is set to the prevMatch.untilDt.
 	// untilDt is < untilYm, so is retained.
 	var match2 MatchingEra
-	createMatchingEra(formatsOffset, formatsData,
-		&match2, &match1, &era2, startYm, untilYm)
+	createMatchingEra(&match2, &match1, &era2, startYm, untilYm)
 	if !(match2.startDt == DateTuple{2000, 12, 2, 60 * 3, zoneinfo.SuffixW}) {
 		t.Fatal("match2.startDt:", match2.startDt)
 	}
@@ -189,8 +185,7 @@ func TestCreateMatchingEra(t *testing.T) {
 	// startDt is set to the prevMatch.untilDt.
 	// untilDt is > untilYm so truncated to untilYm.
 	var match3 MatchingEra
-	createMatchingEra(formatsOffset, formatsData,
-		&match3, &match2, &era3, startYm, untilYm)
+	createMatchingEra(&match3, &match2, &era3, startYm, untilYm)
 	if !(match3.startDt == DateTuple{2001, 2, 3, 60 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("match3.startDt: ", match3.startDt)
 	}
@@ -207,9 +202,14 @@ func TestCreateMatchingEra(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestGetTransitionTime(t *testing.T) {
+	manager := NewZoneManager(&zonedbtesting.DataContext)
+	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	era := &info.Eras[0]
+	policy := era.Policy
+
 	// Rule 5, [2007,9999]
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
-	rule := &zonedbtesting.ZoneRules[5]
+	rule := &policy.Rules[5]
 
 	// Nov 4 2018
 	dt := getTransitionTime(2018, rule)
@@ -225,15 +225,20 @@ func TestGetTransitionTime(t *testing.T) {
 }
 
 func TestCreateTransitionForYear(t *testing.T) {
+	manager := NewZoneManager(&zonedbtesting.DataContext)
+	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	era := &info.Eras[0]
+	policy := era.Policy
+
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &zonedbtesting.ZoneEras[0],
+		era:               era,
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
 	}
-	rule := &zonedbtesting.ZoneRules[5]
+	rule := &policy.Rules[5]
 
 	// Nov Sun>=1
 	var transition Transition
@@ -342,10 +347,14 @@ func TestGetMostRecentPriorYear(t *testing.T) {
 }
 
 func TestFindCandidateTransitions(t *testing.T) {
+	manager := NewZoneManager(&zonedbtesting.DataContext)
+	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	era := &info.Eras[0]
+
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &zonedbtesting.ZoneEras[0],
+		era:               era,
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
@@ -362,10 +371,7 @@ func TestFindCandidateTransitions(t *testing.T) {
 	//    * 2019 Nov Sun>=1 (3)
 	//    * 2020 Mar Sun>=8 (8)
 	ts.ResetCandidatePool()
-	findCandidateTransitions(
-		zonedbtesting.ZoneRules,
-		zonedbtesting.ZonePolicies,
-		&ts, &match)
+	findCandidateTransitions(&ts, &match)
 	candidates := ts.GetCandidates()
 	if !(5 == len(candidates)) {
 		t.Fatal()
@@ -400,8 +406,6 @@ func TestFindCandidateTransitions(t *testing.T) {
 func TestProcessTransitionMatchStatus(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
 	era := zoneinfo.ZoneEra{
-		PolicyIndex:       0,
-		FormatIndex:       0,
 		OffsetCode:        0,
 		DeltaCode:         0,
 		UntilYear:         2002,
@@ -494,10 +498,14 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestCreateTransitionsFromNamedMatch(t *testing.T) {
+	manager := NewZoneManager(&zonedbtesting.DataContext)
+	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	era := &info.Eras[0]
+
 	match := MatchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
-		era:               &zonedbtesting.ZoneEras[0],
+		era:               era,
 		prevMatch:         nil,
 		lastOffsetMinutes: 0,
 		lastDeltaMinutes:  0,
@@ -506,10 +514,7 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 	// Reserve storage for the Transitions
 	var ts TransitionStorage
 
-	createTransitionsFromNamedMatch(
-		zonedbtesting.ZoneRules,
-		zonedbtesting.ZonePolicies,
-		&ts, &match)
+	createTransitionsFromNamedMatch(&ts, &match)
 	if !(3 == ts.indexPrior) {
 		t.Fatal(ts.indexPrior)
 	}
@@ -534,18 +539,15 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
+	manager := NewZoneManager(&zonedbtesting.DataContext)
+	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+
 	// Step 1: America/Los_Angeles matches one era, which points to US policy.
 	var startYm = YearMonth{2017, 12}
 	var untilYm = YearMonth{2019, 2}
 	var matches [maxMatches]MatchingEra
 
-	numMatches := findMatches(
-		zonedbtesting.FormatOffsets,
-		zonedbtesting.FormatData,
-		zonedbtesting.ZoneEras,
-		zonedbtesting.ZoneInfos,
-		&zonedbtesting.ZoneInfos[zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles],
-		startYm, untilYm, matches[:])
+	numMatches := findMatches(info, startYm, untilYm, matches[:])
 	if !(1 == numMatches) {
 		t.Fatal(numMatches)
 	}
@@ -554,11 +556,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// Create a custom template instantiation to use a different SIZE than the
 	// pre-defined typedef in ExtendedZoneProcess::TransitionStorage.
 	var storage TransitionStorage
-	createTransitions(
-		zonedbtesting.ZoneRules,
-		zonedbtesting.ZonePolicies,
-		&storage,
-		matches[:numMatches])
+	createTransitions(&storage, matches[:numMatches])
 	transitions := storage.GetActives()
 	if !(len(transitions) == 3) {
 		t.Fatal(len(transitions))

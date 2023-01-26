@@ -40,7 +40,7 @@ import (
 
 const TzDatabaseVersion string = "2022g"
 
-var Context = zoneinfo.ZoneContext{
+var RecordContext = zoneinfo.ZoneRecordContext{
 	TzDatabaseVersion: TzDatabaseVersion,
 	StartYear: 1980,
 	UntilYear: 10000,
@@ -50,10 +50,34 @@ var Context = zoneinfo.ZoneContext{
 	FormatOffsets: FormatOffsets,
 	NameData: NameData,
 	NameOffsets: NameOffsets,
-	ZoneRules: ZoneRules,
-	ZonePolicies: ZonePolicies,
-	ZoneEras: ZoneEras,
-	ZoneInfos: ZoneInfos,
+	ZoneRuleRecords: ZoneRuleRecords,
+	ZonePolicyRecords: ZonePolicyRecords,
+	ZoneEraRecords: ZoneEraRecords,
+	ZoneInfoRecords: ZoneInfoRecords,
+}
+
+var DataContext = zoneinfo.ZoneDataContext{
+	TzDatabaseVersion: TzDatabaseVersion,
+	StartYear: 1980,
+	UntilYear: 10000,
+	LetterData: LetterData,
+	LetterOffsets: LetterOffsets,
+	FormatData: FormatData,
+	FormatOffsets: FormatOffsets,
+	NameData: NameData,
+	NameOffsets: NameOffsets,
+	ZoneRuleChunkSize: ZoneRuleChunkSize,
+	ZonePolicyChunkSize: ZonePolicyChunkSize,
+	ZoneEraChunkSize: ZoneEraChunkSize,
+	ZoneInfoChunkSize: ZoneInfoChunkSize,
+	ZoneRuleCount: ZoneRuleCount,
+	ZonePolicyCount: ZonePolicyCount,
+	ZoneEraCount: ZoneEraCount,
+	ZoneInfoCount: ZoneInfoCount,
+	ZoneRulesData: ZoneRulesData,
+	ZonePoliciesData: ZonePoliciesData,
+	ZoneErasData: ZoneErasData,
+	ZoneInfosData: ZoneInfosData,
 }
 
 // ---------------------------------------------------------------------------
@@ -75,7 +99,7 @@ const (
 )
 
 // ---------------------------------------------------------------------------
-// Zone Indexes. Index into the ZoneInfos array. Intended for unit tests
+// Zone Indexes. Index into the ZoneInfoRecords array. Intended for unit tests
 // which need direct access to the zoneinfo.ZoneInfo struct.
 //
 // Total: 5 (4 zones, 1 links)
