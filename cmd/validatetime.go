@@ -14,15 +14,12 @@ import (
 func main() {
 	fmt.Println("Validating from 2000 to 2100")
 
-	context := &zonedb.Context
+	context := &zonedb.DataContext
 	zm := acetime.NewZoneManager(context)
-	var index int
-	for i := range context.ZoneInfos {
-		zi := &context.ZoneInfos[i]
-		name := zi.Name(context.NameData, context.NameOffsets)
-		fmt.Printf("[%3d] Zone: %s\n", index, name)
+	names := zm.ZoneNames()
+	for i, name := range names {
+		fmt.Printf("[%3d] Zone: %s\n", i, name)
 		validateZoneName(&zm, name)
-		index++
 	}
 }
 
