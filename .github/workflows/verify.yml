@@ -16,8 +16,8 @@ jobs:
 
     - name: Tests
       run: |
-        cd acetime
-        go test
+        cd acetime; go test
+        cd zoneinfo; go test
 
     - name: Cmds
       run: |
