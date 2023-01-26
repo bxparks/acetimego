@@ -8,6 +8,10 @@ type ZoneRuleReader struct {
 	f DataIO
 }
 
+func NewZoneRuleReader(f DataIO) ZoneRuleReader {
+	return ZoneRuleReader{f}
+}
+
 func (r *ZoneRuleReader) Reset() {
 	r.f.Reset()
 }
@@ -37,6 +41,10 @@ type ZonePolicyReader struct {
 	f DataIO
 }
 
+func NewZonePolicyReader(f DataIO) ZonePolicyReader {
+	return ZonePolicyReader{f}
+}
+
 func (r *ZonePolicyReader) Reset() {
 	r.f.Reset()
 }
@@ -57,6 +65,10 @@ func (r *ZonePolicyReader) Read() ZonePolicyRecord {
 
 type ZoneEraReader struct {
 	f DataIO
+}
+
+func NewZoneEraReader(f DataIO) ZoneEraReader {
+	return ZoneEraReader{f}
 }
 
 func (r *ZoneEraReader) Reset() {
@@ -86,6 +98,10 @@ func (r *ZoneEraReader) Read() ZoneEraRecord {
 
 type ZoneInfoReader struct {
 	f DataIO
+}
+
+func NewZoneInfoReader(f DataIO) ZoneInfoReader {
+	return ZoneInfoReader{f}
 }
 
 func (r *ZoneInfoReader) Reset() {

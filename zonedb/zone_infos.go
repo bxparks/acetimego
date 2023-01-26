@@ -840,13 +840,14 @@ var (
 )
 
 // ---------------------------------------------------------------------------
-// ZoneEras is an array of zoneinfo.ZoneEra items concatenated together.
+// ZoneEraRecords is an array of zoneinfo.ZoneEraRecord items concatenated
+// together.
 //
 // Supported zones: 351
 // numEras: 647
 // ---------------------------------------------------------------------------
 
-var ZoneEras = []zoneinfo.ZoneEra{
+var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Abidjan
 	// EraIndex: 0
@@ -11367,10 +11368,11 @@ var ZoneEras = []zoneinfo.ZoneEra{
 
 }
 
-// ZoneErasChunkSize is the byte size of a single zoneinfo.ZoneEra item.
+const ZoneEraCount = 647
+
 const ZoneEraChunkSize = 11
 
-// ZoneErasData contains the ZoneEras data as a hex encoded string.
+// ZoneErasData contains the ZoneEraRecords data as a hex encoded string.
 const ZoneErasData = "\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
 		"\x48\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
 		"\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
@@ -12020,12 +12022,13 @@ const ZoneErasData = "\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
 		"\x6b\x00\x18\x00\x04\x10\x27\x01\x01\x00\x00"
 
 // ---------------------------------------------------------------------------
-// ZoneInfos is an array of zoneinfo.ZoneInfo items concatenated together.
+// ZoneInfoRecords is an array of zoneinfo.ZoneInfoRecord items concatenated
+// together.
 //
 // Total: 596 (351 zones, 245 links)
 // ---------------------------------------------------------------------------
 
-var ZoneInfos = []zoneinfo.ZoneInfo{
+var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 0: Link GB -> Europe/London
 	{
 		ZoneID: 0x005973ae,
@@ -16797,10 +16800,11 @@ var ZoneInfos = []zoneinfo.ZoneInfo{
 
 }
 
-// ZoneInfosChunkSize is the byte size of a single zoneinfo.ZoneInfo item.
+const ZoneInfoCount = 596
+
 const ZoneInfoChunkSize = 12
 
-// ZoneInfosData contains the ZoneInfos data as a hex encoded string.
+// ZoneInfosData contains the ZoneInfoRecords data as a hex encoded string.
 const ZoneInfosData = "\xae\x73\x59\x00\xeb\x01\x00\x00\x00\x00\xc5\x00" +
 		"\xad\x74\x59\x00\x0c\x02\x00\x00\x00\x00\x62\x00" +
 		"\xc4\x63\x47\x01\x1e\x01\x00\x00\x00\x00\xee\x01" +
