@@ -35,6 +35,18 @@ func TestStringIO8(t *testing.T) {
 	}
 }
 
+func TestStringIO8_Strings(t *testing.T){
+	f := StringIO8{letterData, letterOffsets}
+	ss := f.Strings()
+	if len(ss) != len(letterOffsets) - 1 {
+		t.Fatal(len(ss))
+	}
+	// Check a random element
+	if ss[1] != "D"{
+		t.Fatal(ss[1])
+	}
+}
+
 func TestStringIO16(t *testing.T) {
 	f := StringIO16{nameData, nameOffsets}
 	if f.StringAt(0) != "" {
@@ -45,5 +57,17 @@ func TestStringIO16(t *testing.T) {
 	}
 	if f.StringAt(5) != "US/Pacific" {
 		t.Fatal(f.StringAt(5))
+	}
+}
+
+func TestStringIO16_Strings(t *testing.T){
+	f := StringIO16{nameData, nameOffsets}
+	ss := f.Strings()
+	if len(ss) != len(nameOffsets) - 1 {
+		t.Fatal(len(ss))
+	}
+	// Check a random element
+	if ss[2] != "America/New_York" {
+		t.Fatal(ss[2])
 	}
 }

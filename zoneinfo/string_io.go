@@ -17,6 +17,16 @@ func (d *StringIO8) StringAt(i uint8) string {
 	return d.data[begin:end]
 }
 
+// Strings return an array of all substrings in the concatenated string.
+func (d *StringIO8) Strings() []string {
+	count := uint8(len(d.offsets) - 1)
+	ss := make([]string, count)
+	for i := uint8(0); i < count; i++ {
+		ss[i] = d.StringAt(i)
+	}
+	return ss
+}
+
 // StringIO16 holds multiple strings concatenated into a single string, and
 // provides the StringAt() function to extract a given substring. The offsets
 // must have a terminating sentinel entry which is just past the data string.
@@ -32,4 +42,14 @@ func (d *StringIO16) StringAt(i uint16) string {
 	begin := d.offsets[i]
 	end := d.offsets[i+1] // always exists because of terminating sentinel
 	return d.data[begin:end]
+}
+
+// Strings return an array of all substrings in the concatenated string.
+func (d *StringIO16) Strings() []string {
+	count := uint16(len(d.offsets) - 1)
+	ss := make([]string, count)
+	for i := uint16(0); i < count; i++ {
+		ss[i] = d.StringAt(i)
+	}
+	return ss
 }

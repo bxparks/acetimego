@@ -28,6 +28,23 @@ func NewZoneStore(c *ZoneDataContext) *ZoneStore {
 	}
 }
 
+// ZoneNames() returns an array of all zone names in the database.
+func (zs *ZoneStore) ZoneNames() []string {
+	return zs.nameIO.Strings()
+}
+
+// ZoneIDs() returns an array of all ZoneIDs in the database.
+func (zs *ZoneStore) ZoneIDs() []uint32 {
+	count := zs.context.ZoneInfoCount
+	ids := make([]uint32, count)
+	for i := uint16(0); i < count; i++ {
+		zs.infoReader.Seek(i)
+		record := zs.infoReader.Read()
+		ids[i] = record.ZoneID
+	}
+	return ids
+}
+
 // ZoneInfo retrieves the ZoneXxxRecords from the various ZoneXxxData strings,
 // then converts them into a fully populated ZoneInfo object.
 func (zs *ZoneStore) ZoneInfo(i uint16) *ZoneInfo {
