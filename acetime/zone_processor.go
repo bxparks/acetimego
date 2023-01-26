@@ -29,7 +29,6 @@ const (
 )
 
 type ZoneProcessor struct {
-	zoneContext       *zoneinfo.ZoneContext
 	zoneInfo          *zoneinfo.ZoneInfo
 	year              int16
 	isFilled          bool
@@ -43,11 +42,8 @@ func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
 }
 
 // InitForZoneInfo initializes the ZoneProcessor for the given zoneInfo.
-func (zp *ZoneProcessor) InitForZoneInfo(
-	zoneContext *zoneinfo.ZoneContext,
-	zoneInfo *zoneinfo.ZoneInfo) {
+func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
 
-	zp.zoneContext = zoneContext
 	zp.zoneInfo = zoneInfo
 	zp.isFilled = false
 }
@@ -70,7 +66,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	zp.isFilled = true
 	zp.numMatches = 0
 	zp.transitionStorage.Init()
-	if year < zp.zoneContext.StartYear-1 || zp.zoneContext.UntilYear < year {
+	if year < zp.zoneInfo.StartYear-1 || zp.zoneInfo.UntilYear < year {
 		return ErrGeneric
 	}
 
@@ -78,22 +74,13 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	untilYm := YearMonth{year + 1, 2}
 
 	// Step 1: Find matches.
-	zp.numMatches = findMatches(
-		zp.zoneContext.FormatOffsets,
-		zp.zoneContext.FormatData,
-		zp.zoneContext.ZoneEras,
-		zp.zoneContext.ZoneInfos,
-		zp.zoneInfo, startYm, untilYm, zp.matches[:])
+	zp.numMatches = findMatches(zp.zoneInfo, startYm, untilYm, zp.matches[:])
 	if zp.numMatches == 0 {
 		return ErrGeneric
 	}
 
 	// Step 2: Create Transitions.
-	createTransitions(
-		zp.zoneContext.ZoneRules,
-		zp.zoneContext.ZonePolicies,
-		&zp.transitionStorage,
-		zp.matches[:zp.numMatches])
+	createTransitions(&zp.transitionStorage, zp.matches[:zp.numMatches])
 
 	// Step 3: Fix transition times.
 	transitions := zp.transitionStorage.GetActives()
@@ -103,10 +90,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	generateStartUntilTimes(transitions)
 
 	// Step 5: Calc abbreviations.
-	calcAbbreviations(
-		zp.zoneContext.FormatOffsets, zp.zoneContext.FormatData,
-		zp.zoneContext.LetterOffsets, zp.zoneContext.LetterData,
-		transitions)
+	calcAbbreviations(transitions)
 
 	return ErrOk
 }
@@ -120,7 +104,7 @@ func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) Err {
 }
 
 func (zp *ZoneProcessor) Name() string {
-	return zp.zoneInfo.Name(zp.zoneContext.NameData, zp.zoneContext.NameOffsets)
+	return zp.zoneInfo.Name
 }
 
 //---------------------------------------------------------------------------
@@ -198,10 +182,6 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 //-----------------------------------------------------------------------------
 
 func findMatches(
-	formatsOffset []uint16,
-	formatsData string,
-	zoneEras []zoneinfo.ZoneEra,
-	zoneInfos []zoneinfo.ZoneInfo,
 	zoneInfo *zoneinfo.ZoneInfo,
 	startYm YearMonth,
 	untilYm YearMonth,
@@ -209,7 +189,7 @@ func findMatches(
 
 	var iMatch uint8 = 0
 	var prevMatch *MatchingEra = nil
-	var eras []zoneinfo.ZoneEra = zoneInfo.ErasActive(zoneEras, zoneInfos)
+	var eras []zoneinfo.ZoneEra = zoneInfo.ErasActive()
 
 	for iEra := range eras {
 		era := &eras[iEra]
@@ -219,9 +199,7 @@ func findMatches(
 		}
 		if eraOverlapsInterval(prevEra, era, startYm, untilYm) {
 			if iMatch < uint8(len(matches)) {
-				createMatchingEra(
-					formatsOffset, formatsData, &matches[iMatch], prevMatch, era,
-					startYm, untilYm)
+				createMatchingEra(&matches[iMatch], prevMatch, era, startYm, untilYm)
 				prevMatch = &matches[iMatch]
 				iMatch++
 			}
@@ -285,8 +263,6 @@ func compareEraToYearMonth(
  * needed to define the startDateTime of the current era.
  */
 func createMatchingEra(
-	formatsOffset []uint16,
-	formatsData string,
 	newMatch *MatchingEra,
 	prevMatch *MatchingEra,
 	era *zoneinfo.ZoneEra,
@@ -331,34 +307,28 @@ func createMatchingEra(
 	newMatch.prevMatch = prevMatch
 	newMatch.lastOffsetMinutes = 0
 	newMatch.lastDeltaMinutes = 0
-	newMatch.format = era.Format(formatsData, formatsOffset)
+	newMatch.format = era.Format
 }
 
 //-----------------------------------------------------------------------------
 // Step 2
 //-----------------------------------------------------------------------------
 
-func createTransitions(
-	zoneRules []zoneinfo.ZoneRule,
-	zonePolicies []zoneinfo.ZonePolicy,
-	ts *TransitionStorage, matches []MatchingEra) {
+func createTransitions(ts *TransitionStorage, matches []MatchingEra) {
 
 	for i := range matches {
-		createTransitionsForMatch(zoneRules, zonePolicies, ts, &matches[i])
+		createTransitionsForMatch(ts, &matches[i])
 	}
 }
 
-func createTransitionsForMatch(
-	zoneRules []zoneinfo.ZoneRule,
-	zonePolicies []zoneinfo.ZonePolicy,
-	ts *TransitionStorage, match *MatchingEra) {
+func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
 
 	if match.era.HasPolicy() {
 		// Step 2B
-		createTransitionsFromNamedMatch(zoneRules, zonePolicies, ts, match)
+		createTransitionsFromNamedMatch(ts, match)
 	} else {
 		// Step 2A
-		createTransitionsFromSimpleMatch(zoneRules, zonePolicies, ts, match)
+		createTransitionsFromSimpleMatch(ts, match)
 	}
 }
 
@@ -367,8 +337,6 @@ func createTransitionsForMatch(
 //-----------------------------------------------------------------------------
 
 func createTransitionsFromSimpleMatch(
-	zoneRules []zoneinfo.ZoneRule,
-	zonePolicies []zoneinfo.ZonePolicy,
 	ts *TransitionStorage, match *MatchingEra) {
 
 	freeAgent := ts.GetFreeAgent()
@@ -388,13 +356,13 @@ func createTransitionForYear(
 	if rule != nil {
 		t.transitionTime = getTransitionTime(year, rule)
 		t.deltaMinutes = rule.DstOffsetMinutes()
-		t.letterIndex = rule.LetterIndex
+		t.letter = rule.Letter
 	} else {
 		// Create a Transition using the MatchingEra for the transitionTime.
 		// Used for simple MatchingEra.
 		t.transitionTime = match.startDt
 		t.deltaMinutes = match.era.DstOffsetMinutes()
-		t.letterIndex = 0 // index 0 is the empty string ""
+		t.letter = ""
 	}
 }
 
@@ -415,14 +383,12 @@ func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) DateTuple {
 //-----------------------------------------------------------------------------
 
 func createTransitionsFromNamedMatch(
-	zoneRules []zoneinfo.ZoneRule,
-	zonePolicies []zoneinfo.ZonePolicy,
 	ts *TransitionStorage, match *MatchingEra) {
 
 	ts.ResetCandidatePool()
 
 	// Pass 1: Find candidate transitions using whole years.
-	findCandidateTransitions(zoneRules, zonePolicies, ts, match)
+	findCandidateTransitions(ts, match)
 
 	// Pass 2: Fix the transitions times, converting 's' and 'u' into 'w'
 	// uniformly.
@@ -438,18 +404,15 @@ func createTransitionsFromNamedMatch(
 }
 
 // Step 2B: Pass 1
-func findCandidateTransitions(
-	zoneRules []zoneinfo.ZoneRule,
-	zonePolicies []zoneinfo.ZonePolicy,
-	ts *TransitionStorage, match *MatchingEra) {
+func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
 
-	policy := match.era.ZonePolicy(zonePolicies)
+	policy := match.era.Policy
 	startYear := match.startDt.year
 	endYear := match.untilDt.year
 
 	prior := ts.ReservePrior()
 	prior.isValidPrior = false
-	rules := policy.Rules(zoneRules)
+	rules := policy.Rules
 	for ir := range rules {
 		rule := &rules[ir]
 
@@ -640,19 +603,14 @@ func generateStartUntilTimes(transitions []Transition) {
 // Step 5
 //-----------------------------------------------------------------------------
 
-func calcAbbreviations(
-	formatsOffset []uint16,
-	formatsData string,
-	lettersOffset []uint8,
-	lettersData string,
-	transitions []Transition) {
+func calcAbbreviations(transitions []Transition) {
 
 	for i := range transitions {
 		transition := &transitions[i]
 		transition.abbrev = createAbbreviation(
-			transition.match.era.Format(formatsData, formatsOffset),
+			transition.match.era.Format,
 			transition.deltaMinutes,
-			transition.Letter(lettersOffset, lettersData))
+			transition.letter)
 	}
 }
 

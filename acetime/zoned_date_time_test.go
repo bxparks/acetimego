@@ -22,7 +22,7 @@ func TestZonedDateTimeSize(t *testing.T) {
 }
 
 func TestZonedDateTimeToString(t *testing.T) {
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 	ldt := LocalDateTime{2023, 1, 19, 17, 3, 23, 0 /*Fold*/}
 	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
@@ -75,7 +75,7 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	var epochSeconds ATime = 0
@@ -96,7 +96,7 @@ func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 	var epochSeconds ATime = 0
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
@@ -116,7 +116,7 @@ func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("Etc/UTC")
 	var epochSeconds ATime = 1200798847
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
@@ -136,7 +136,7 @@ func TestNewZonedDateTimeFromEpochSeconds_Invalid(t *testing.T) {
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("Etc/UTC")
 	var epochSeconds ATime = InvalidEpochSeconds
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
@@ -153,7 +153,7 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
@@ -196,7 +196,7 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	// Start our sampling at 01:29:00-08:00, which is 31 minutes before the DST
@@ -231,7 +231,7 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	SetCurrentEpochYear(2000)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	ldt := LocalDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/}
@@ -267,7 +267,7 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	ldt := LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/}
@@ -303,7 +303,7 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	// 01:59 should resolve to 01:59-08:00
@@ -332,7 +332,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	// 02:01 doesn't exist.
@@ -368,7 +368,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	// 03:01 should resolve to 03:01-07:00.
@@ -397,7 +397,7 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	// 00:59 is an hour before the DST->STD transition, so should return
@@ -427,7 +427,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	// There were two instances of 01:01
@@ -457,7 +457,7 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
 
 	// 02:01 should resolve to 02:01-08:00
@@ -488,7 +488,7 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tzLosAngeles := zm.NewTimeZoneFromName("America/Los_Angeles")
 	tzNewYork := zm.NewTimeZoneFromName("America/New_York")
 
@@ -519,7 +519,7 @@ func TestZonedDateTimeForLink(t *testing.T) {
 	SetCurrentEpochYear(2050)
 	defer SetCurrentEpochYear(savedEpochYear)
 
-	zm := NewZoneManager(&zonedbtesting.Context)
+	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tzLosAngeles := zm.NewTimeZoneFromName("America/Los_Angeles")
 	tzPacific := zm.NewTimeZoneFromName("US/Pacific")
 
@@ -578,9 +578,8 @@ func TestZonedDateTimeFromUnixSeconds64(t *testing.T) {
 var epochSeconds ATime
 var zdt ZonedDateTime
 var ldt = LocalDateTime{2023, 1, 19, 22, 11, 0, 0 /*Fold*/}
-var zoneInfo = &zonedbtesting.Context.ZoneInfos[
-	zonedbtesting.ZoneInfoIndexAmerica_Los_Angeles]
-var tz = NewTimeZoneFromZoneInfo(&zonedbtesting.Context, zoneInfo)
+var zoneManager = NewZoneManager(&zonedbtesting.DataContext)
+var tz = zoneManager.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 func BenchmarkZonedDateTimeFromEpochSeconds_Cache(b *testing.B) {
 	for n := 0; n < b.N; n++ {

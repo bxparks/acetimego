@@ -56,14 +56,14 @@ var (
 )
 
 // ---------------------------------------------------------------------------
-// ZoneRules is a concatenated array of zoneinfo.ZoneInfo objects from all
-// ZonePolicies.
+// ZoneRuleRecords is a concatenated array of zoneinfo.ZoneInfoRecord objects
+// from all ZonePolicyRecords.
 //
 // Supported zone policies: 2
 // numRules: 12
 // ---------------------------------------------------------------------------
 
-var ZoneRules = []zoneinfo.ZoneRule{
+var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	// ---------------------------------------------------------------------------
 	// PolicyName: US
 	// RuleIndex: 0
@@ -225,10 +225,11 @@ var ZoneRules = []zoneinfo.ZoneRule{
 
 }
 
-// ZoneRulesChunkSize is the byte size of a single zoneinfo.ZoneRule item.
+const ZoneRuleCount = 12
+
 const ZoneRuleChunkSize = 11
 
-// ZoneRulesData contains the ZoneRules data as a hex encoded string.
+// ZoneRulesData contains the ZoneRuleRecords data as a hex encoded string.
 const ZoneRulesData = "\xaf\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x02" +
 		"\xb7\x07\xb7\x07\x02\x07\x00\x08\x00\x08\x01" +
 		"\xb8\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x01" +
@@ -243,21 +244,22 @@ const ZoneRulesData = "\xaf\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x02" +
 		"\xdc\x07\xe4\x07\x09\x07\x00\x0c\x00\x08\x00"
 
 // ---------------------------------------------------------------------------
-// ZonePolicies are indexes into the ZoneRules.
+// ZonePolicyRecords contain indexes into the ZoneRuleRecords.
 // Supported zone policies: 2
 // ---------------------------------------------------------------------------
 
-var ZonePolicies = []zoneinfo.ZonePolicy{
+var ZonePolicyRecords = []zoneinfo.ZonePolicyRecord{
 	{RuleIndex: 0, RuleCount: 0}, // 0: PolicyName: (None)
 	{RuleIndex: 0, RuleCount: 6}, // 1: PolicyName: US
 	{RuleIndex: 6, RuleCount: 6}, // 2: PolicyName: WS
 
 }
 
-// ZonePolicyChunkSize is the byte size of a single zoneinfo.ZoneRule item.
+const ZonePolicyCount = 3
+
 const ZonePolicyChunkSize = 4
 
-// ZonePoliciesData contains the ZonePolicies data as a hex encoded string.
+// ZonePoliciesData contains the ZonePolicyRecords data as a hex encoded string.
 const ZonePoliciesData = "\x00\x00\x00\x00" +
 		"\x00\x00\x06\x00" +
 		"\x06\x00\x06\x00"

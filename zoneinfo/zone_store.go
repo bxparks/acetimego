@@ -81,7 +81,11 @@ func (zs *ZoneStore) fillZoneEra(era *ZoneEra, record *ZoneEraRecord) {
 	era.UntilDay = record.UntilDay
 	era.UntilTimeCode = record.UntilTimeCode
 	era.UntilTimeModifier = record.UntilTimeModifier
-	era.Policy = zs.ZonePolicy(uint16(record.PolicyIndex))
+	if record.PolicyIndex == 0 {
+		era.Policy = nil
+	} else {
+		era.Policy = zs.ZonePolicy(uint16(record.PolicyIndex))
+	}
 }
 
 func (zs *ZoneStore) ZonePolicy(i uint16) *ZonePolicy {
@@ -121,7 +125,7 @@ func (zs *ZoneStore) fillZoneRule(rule *ZoneRule, record *ZoneRuleRecord) {
 }
 
 func (zs *ZoneStore) ZoneInfoByID(id uint32) *ZoneInfo {
-	i := zs.findByIDLinear(id)
+	i := zs.FindByIDLinear(id)
 	if i == InvalidIndex {
 		return nil
 	}
@@ -130,7 +134,7 @@ func (zs *ZoneStore) ZoneInfoByID(id uint32) *ZoneInfo {
 
 func (zs *ZoneStore) ZoneInfoByName(name string) *ZoneInfo {
 	id := ZoneNameHash(name)
-	i := zs.findByIDLinear(id)
+	i := zs.FindByIDLinear(id)
 	if i == InvalidIndex {
 		return nil
 	}
@@ -146,7 +150,7 @@ func (zs *ZoneStore) ZoneInfoByName(name string) *ZoneInfo {
 	return zs.ZoneInfo(i)
 }
 
-func (zs *ZoneStore) findByIDLinear(id uint32) uint16 {
+func (zs *ZoneStore) FindByIDLinear(id uint32) uint16 {
 	zs.infoReader.Reset()
 	for i := uint16(0); i < zs.context.ZoneInfoCount; i++ {
 		record := zs.infoReader.Read()
@@ -157,7 +161,8 @@ func (zs *ZoneStore) findByIDLinear(id uint32) uint16 {
 	return InvalidIndex
 }
 
-func (zs *ZoneStore) findByIDBinary(id uint32) uint16 {
+// TODO: Incorporate binary search.
+func (zs *ZoneStore) FindByIDBinary(id uint32) uint16 {
 	zs.infoReader.Reset()
 	var a uint16 = 0
 	var b uint16 = zs.context.ZoneInfoCount

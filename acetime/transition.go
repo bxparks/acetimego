@@ -272,8 +272,8 @@ type Transition struct {
 	/** The calculated effective time zone abbreviation, e.g. "PST" or "PDT". */
 	abbrev string
 
-	/** Index into LetterData representing the LETTER field. */
-	letterIndex uint8
+	/** letter field copied from matching rule if not null. */
+	letter string
 
 	/**
 	 * During findCandidateTransitions(), this flag indicates whether the
@@ -288,17 +288,6 @@ type Transition struct {
 	 * transition falls within the time interval of the MatchingEra.
 	 */
 	matchStatus uint8
-}
-
-// Letter returns the string identified by Transition.letterIndex which was
-// copied from Transition.rule.LetterIndex if the rule exists. Otherwise
-// letterIndex is 0 which maps to the empty string.
-func (transition *Transition) Letter(
-	lettersOffset []uint8, lettersData string) string {
-	index := transition.letterIndex
-	start := lettersOffset[index]
-	end := lettersOffset[index+1]
-	return lettersData[start:end]
 }
 
 func fixTransitionTimes(transitions []Transition) {

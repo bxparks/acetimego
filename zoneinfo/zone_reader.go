@@ -93,7 +93,7 @@ func (r *ZoneInfoReader) Reset() {
 }
 
 func (r *ZoneInfoReader) Seek(i uint16) {
-	r.Seek(i * 12)
+	r.f.Seek(i * 12)
 }
 
 func (r *ZoneInfoReader) Read() ZoneInfoRecord {

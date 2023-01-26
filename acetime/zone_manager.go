@@ -9,32 +9,25 @@ import (
 //-----------------------------------------------------------------------------
 
 type ZoneManager struct {
-	zoneContext   *zoneinfo.ZoneContext
-	zoneRegistrar *ZoneRegistrar
+	store *zoneinfo.ZoneStore
 }
 
-func NewZoneManager(context *zoneinfo.ZoneContext) ZoneManager {
-	registrar := NewZoneRegistrar(context)
-	manager := ZoneManager{
-		zoneContext:   context,
-		zoneRegistrar: &registrar,
-	}
-
-	return manager
+func NewZoneManager(context *zoneinfo.ZoneDataContext) ZoneManager {
+	return ZoneManager{zoneinfo.NewZoneStore(context)}
 }
 
 func (zm *ZoneManager) NewTimeZoneFromID(zoneID uint32) TimeZone {
-	zi := zm.zoneRegistrar.FindZoneInfoByID(zoneID)
+	zi := zm.store.ZoneInfoByID(zoneID)
 	if zi == nil {
 		return NewTimeZoneError()
 	}
-	return NewTimeZoneFromZoneInfo(zm.zoneContext, zi)
+	return NewTimeZoneFromZoneInfo(zi)
 }
 
 func (zm *ZoneManager) NewTimeZoneFromName(name string) TimeZone {
-	zi := zm.zoneRegistrar.FindZoneInfoByName(name)
+	zi := zm.store.ZoneInfoByName(name)
 	if zi == nil {
 		return NewTimeZoneError()
 	}
-	return NewTimeZoneFromZoneInfo(zm.zoneContext, zi)
+	return NewTimeZoneFromZoneInfo(zi)
 }
