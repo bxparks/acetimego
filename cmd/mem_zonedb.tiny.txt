@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25    4264      34     601 |    4323     635 | (unknown)
+     25    4560      26     601 |    4611     627 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -17,16 +17,16 @@
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     150       0       0      24 |     150      24 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
-   7681      29       0       0 |    7710       0 | github.com/bxparks/AceTimeGo/acetime
-      0    8994   24158       0 |   33152   24158 | github.com/bxparks/AceTimeGo/zonedb
-    544       0       0       0 |     544       0 | github.com/bxparks/AceTimeGo/zoneinfo
-     59       0       0       0 |      59       0 | internal/bytealg
+   6819      29       0       0 |    6848       0 | github.com/bxparks/AceTimeGo/acetime
+      0   30232    1654       0 |   31886    1654 | github.com/bxparks/AceTimeGo/zonedb
+   2203       0       0       0 |    2203       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     63       0       0       0 |      63       0 | internal/bytealg
       0      38      32       0 |      70      32 | internal/oserror
     305      24       0      16 |     329      16 | internal/task
-    252     158       0       0 |     410       0 | main
+    236     158       0       0 |     394       0 | main
      72      16       0      24 |      88      24 | os
-   2849     146       8     135 |    3003     143 | runtime
-    590     124       0       0 |     714       0 | strings
+   2829     146       8     135 |    2983     143 | runtime
+    629     124       0       0 |     753       0 | strings
       0       0       0       8 |       0       8 | syscall
 ------------------------------- | --------------- | -------
-  16469   13793   24232     808 |   54494   25040 | total
+  17273   35327    1720     808 |   54320    2528 | total
