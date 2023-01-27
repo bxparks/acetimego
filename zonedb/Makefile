@@ -16,7 +16,7 @@ all:
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 
-zonedb.json:
+zonedb.json: Makefile
 	$(TOOLS)/tzcompiler.sh \
 		--tag $(TZ_VERSION) \
 		--action zonedb \

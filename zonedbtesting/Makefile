@@ -6,7 +6,7 @@ TZ_VERSION := 2022g
 START_YEAR := 1980
 UNTIL_YEAR := 10000
 
-all:
+all: Makefile
 	$(TOOLS)/tzcompiler.sh \
 		--tag $(TZ_VERSION) \
 		--action zonedb \
@@ -17,13 +17,14 @@ all:
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 
-zonedb.json:
+zonedb.json: Makefile
 	$(TOOLS)/tzcompiler.sh \
 		--tag $(TZ_VERSION) \
 		--action zonedb \
 		--language json \
 		--scope extended \
 		--generate_int16_years \
+		--include_list include_list.txt \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 
