@@ -46,7 +46,7 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 				ldt := acetime.LocalDateTime{year, month, day, 2, 3, 4, 0 /*Fold*/}
 				zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &atz)
 				if zdt.IsError() {
-					fmt.Printf("ERROR: %s: Unable to create ZonedDateTime for %s\n",
+					fmt.Printf("ERROR: %s: Unable to create ZonedDateTime for %v\n",
 						name, ldt)
 					return
 				}

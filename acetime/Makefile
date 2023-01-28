@@ -1,4 +1,4 @@
-all:
+build:
 	go build
 
 test:

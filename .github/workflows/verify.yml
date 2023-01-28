@@ -21,4 +21,4 @@ jobs:
 
     - name: Cmds
       run: |
-        (cd cmd; make)
+        (cd cmd; make build)
