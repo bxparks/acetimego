@@ -6,32 +6,31 @@ package main
 
 import (
 	"github.com/bxparks/AceTimeGo/acetime"
-	"os"
 	"runtime"
 	"strings"
 	"time"
 )
 
 func main() {
-	os.Stdout.WriteString("---- Initial memory usage\n")
+	print("---- Initial memory usage\n")
 	PrintMemUsage()
 
-	os.Stdout.WriteString("---- Create America/Los_Angeles using time package\n")
+	print("---- Create America/Los_Angeles using time package\n")
 	name := "America/Los_Angeles"
 	tz, err := time.LoadLocation(name)
 	if err != nil {
-		os.Stdout.WriteString("ERROR: Zone not found: ")
-		os.Stdout.WriteString(name)
-		os.Stdout.WriteString("\n")
+		print("ERROR: Zone not found: ")
+		print(name)
+		print("\n")
 		return
 	}
 	t := time.Date(2023, 1, 19, 18, 36, 0, 0 /*nanos*/, tz)
-	os.Stdout.WriteString("t:")
-	os.Stdout.WriteString(t.String())
-	os.Stdout.WriteString("\n")
+	print("t:")
+	print(t.String())
+	print("\n")
 	PrintMemUsage()
 
-	os.Stdout.WriteString("---- Run GC()\n")
+	print("---- Run GC()\n")
 	runtime.GC()
 	PrintMemUsage()
 }
@@ -42,14 +41,14 @@ func PrintMemUsage() {
 	runtime.ReadMemStats(&m)
 
 	var b strings.Builder
-	os.Stdout.WriteString("TotalAlloc = ")
+	print("TotalAlloc = ")
 	acetime.WriteUint64(&b, m.TotalAlloc)
-	os.Stdout.WriteString(b.String())
-	os.Stdout.WriteString("\tSys = ")
+	print(b.String())
+	print("\tSys = ")
 	b.Reset()
 	acetime.WriteUint64(&b, m.Sys)
-	os.Stdout.WriteString(b.String())
-	os.Stdout.WriteString("\n")
+	print(b.String())
+	print("\n")
 
 	// These are not found on tinygo.
 	//fmt.Printf("Alloc = %v B", m.Alloc)
