@@ -18,7 +18,12 @@ mem_go_time.out: mem_go_time.go
 	go build -o $@ $<
 
 mem_go_time.tiny.out: mem_go_time.go
-	tinygo build $(TINY_TARGET) -size full -o $@ $<  > mem_go_time.tiny.txt
+	tinygo build $(TINY_TARGET) \
+		-size full \
+		-print-allocs=^time$ \
+		-o $@ $< \
+		> mem_go_time.size.txt \
+		2> mem_go_time.allocs.txt
 
 clean:
 	rm -f $(TARGETS) $(TARGETS_TINY)

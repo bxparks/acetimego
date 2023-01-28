@@ -18,7 +18,12 @@ validatetime.out: validatetime.go
 	go build -o $@ $<
 
 validatetime.tiny.out: validatetime.go
-	tinygo build $(TINY_TARGET) -size full -o $@ $< > validatetime.tiny.txt
+	tinygo build $(TINY_TARGET) \
+		-size full \
+		-print-allocs=acetime \
+		-o $@ $< \
+		> validatetime.size.txt \
+		2> validatetime.allocs.txt
 
 clean:
 	rm -f $(TARGETS) $(TARGETS_TINY)

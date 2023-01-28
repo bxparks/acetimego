@@ -18,7 +18,12 @@ mem_zonedb.out: mem_zonedb.go
 	go build -o $@ $<
 
 mem_zonedb.tiny.out: mem_zonedb.go
-	tinygo build $(TINY_TARGET) -size full -o $@ $< > mem_zonedb.tiny.txt
+	tinygo build $(TINY_TARGET) \
+		-size full \
+		-print-allocs=acetime \
+		-o $@ $< \
+		> mem_zonedb.size.txt \
+		2> mem_zonedb.allocs.txt
 
 clean:
 	rm -f $(TARGETS) $(TARGETS_TINY)
