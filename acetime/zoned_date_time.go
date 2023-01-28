@@ -30,7 +30,7 @@ func (zdt *ZonedDateTime) IsError() bool {
 	return zdt.Year == InvalidYear
 }
 
-func (zdt *ZonedDateTime) ToLocalDateTime() LocalDateTime {
+func (zdt *ZonedDateTime) LocalDateTime() LocalDateTime {
 	return LocalDateTime{
 		Year:   zdt.Year,
 		Month:  zdt.Month,
@@ -42,7 +42,7 @@ func (zdt *ZonedDateTime) ToLocalDateTime() LocalDateTime {
 	}
 }
 
-func (zdt *ZonedDateTime) ToEpochSeconds() ATime {
+func (zdt *ZonedDateTime) EpochSeconds() ATime {
 	if zdt.IsError() {
 		return InvalidEpochSeconds
 	}
@@ -55,7 +55,7 @@ func (zdt *ZonedDateTime) ToEpochSeconds() ATime {
 		Second:        zdt.Second,
 		Fold:          zdt.Fold,
 		OffsetMinutes: zdt.OffsetMinutes,
-	}).ToEpochSeconds()
+	}).EpochSeconds()
 }
 
 func NewZonedDateTimeFromEpochSeconds(
@@ -99,8 +99,8 @@ func NewZonedDateTimeFromUnixSeconds64(
 	}
 }
 
-func (zdt *ZonedDateTime) ToUnixSeconds64() int64 {
-	epochSeconds := zdt.ToEpochSeconds()
+func (zdt *ZonedDateTime) UnixSeconds64() int64 {
+	epochSeconds := zdt.EpochSeconds()
 	if epochSeconds == InvalidEpochSeconds {
 		return InvalidUnixSeconds64
 	}
@@ -128,7 +128,7 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 	if zdt.IsError() {
 		return NewZonedDateTimeError()
 	}
-	epochSeconds := zdt.ToEpochSeconds()
+	epochSeconds := zdt.EpochSeconds()
 	if epochSeconds == InvalidEpochSeconds {
 		return NewZonedDateTimeError()
 	}
@@ -142,7 +142,7 @@ func (zdt *ZonedDateTime) String() string {
 }
 
 func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
-	ldt := zdt.ToLocalDateTime()
+	ldt := zdt.LocalDateTime()
 	ldt.BuildString(b)
 
 	if zdt.Tz.IsUTC() {

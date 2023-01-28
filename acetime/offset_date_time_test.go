@@ -27,17 +27,17 @@ func TestNewOffsetDateTimeError(t *testing.T) {
 	}
 }
 
-func TestOffsetDateTimeToEpochSeconds(t *testing.T) {
+func TestOffsetDateTimeEpochSeconds(t *testing.T) {
 	odt := OffsetDateTime{2050, 1, 1, 0, 0, 0, 0, 0}
-	if !(odt.ToEpochSeconds() == 0) {
+	if !(odt.EpochSeconds() == 0) {
 		t.Fatal(odt)
 	}
 	odt = OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, 0}
-	if !(odt.ToEpochSeconds() == 1) {
+	if !(odt.EpochSeconds() == 1) {
 		t.Fatal(odt)
 	}
 	odt = OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, -1}
-	if !(odt.ToEpochSeconds() == 61) {
+	if !(odt.EpochSeconds() == 61) {
 		t.Fatal(odt)
 	}
 }

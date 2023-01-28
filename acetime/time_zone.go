@@ -126,7 +126,7 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	// OffsetDateTime using the target stdOffsetMinutes and
 	// dstOffsetMinutes.
 	if result.frtype == FindResultGap {
-		epochSeconds := odt.ToEpochSeconds()
+		epochSeconds := odt.EpochSeconds()
 		targetOffset := result.stdOffsetMinutes + result.dstOffsetMinutes
 		odt = NewOffsetDateTimeFromEpochSeconds(epochSeconds, targetOffset)
 	}

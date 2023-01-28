@@ -52,7 +52,7 @@ func TestZonedDateTimeFromUTC(t *testing.T) {
 
 	// Create the expected LocalDateTime.
 	expected := NewLocalDateTimeFromEpochSeconds(epochSeconds)
-	ldt := zdt.ToLocalDateTime()
+	ldt := zdt.LocalDateTime()
 	if !(expected == ldt) {
 		t.Fatal(expected, zdt)
 	}
@@ -86,7 +86,7 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 	if !(zdt == ZonedDateTime{1999, 12, 31, 16, 0, 0, 0, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
-	if !(epochSeconds == zdt.ToEpochSeconds()) {
+	if !(epochSeconds == zdt.EpochSeconds()) {
 		t.Fatal(zdt)
 	}
 }
@@ -106,7 +106,7 @@ func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 	if !(zdt == ZonedDateTime{2049, 12, 31, 16, 0, 0, 0, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
-	if !(epochSeconds == zdt.ToEpochSeconds()) {
+	if !(epochSeconds == zdt.EpochSeconds()) {
 		t.Fatal(zdt)
 	}
 }
@@ -126,7 +126,7 @@ func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 	if !(zdt == ZonedDateTime{2038, 1, 19, 3, 14, 7, 0, 0, &tz}) {
 		t.Fatal(zdt)
 	}
-	if !(epochSeconds == zdt.ToEpochSeconds()) {
+	if !(epochSeconds == zdt.EpochSeconds()) {
 		t.Fatal(zdt)
 	}
 }
@@ -143,7 +143,7 @@ func TestNewZonedDateTimeFromEpochSeconds_Invalid(t *testing.T) {
 	if !zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(epochSeconds == zdt.ToEpochSeconds()) {
+	if !(epochSeconds == zdt.EpochSeconds()) {
 		t.Fatal(zdt)
 	}
 }
@@ -159,7 +159,7 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back.
 	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 60}
-	epochSeconds := odt.ToEpochSeconds()
+	epochSeconds := odt.EpochSeconds()
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -202,7 +202,7 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	// Start our sampling at 01:29:00-08:00, which is 31 minutes before the DST
 	// spring forward.
 	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 60}
-	epochSeconds := odt.ToEpochSeconds()
+	epochSeconds := odt.EpochSeconds()
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -242,7 +242,7 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
-	epochSeconds := zdt.ToEpochSeconds()
+	epochSeconds := zdt.EpochSeconds()
 	if !(epochSeconds == 8*60*60) {
 		t.Fatal(epochSeconds)
 	}
@@ -256,7 +256,7 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
-	epochSeconds = zdt.ToEpochSeconds()
+	epochSeconds = zdt.EpochSeconds()
 	if !(epochSeconds == 8*60*60) {
 		t.Fatal(epochSeconds)
 	}
@@ -278,7 +278,7 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
-	epochSeconds := zdt.ToEpochSeconds()
+	epochSeconds := zdt.EpochSeconds()
 	if !(epochSeconds == 8*60*60) {
 		t.Fatal(epochSeconds)
 	}
@@ -292,7 +292,7 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60, &tz}) {
 		t.Fatal(zdt)
 	}
-	epochSeconds = zdt.ToEpochSeconds()
+	epochSeconds = zdt.EpochSeconds()
 	if !(epochSeconds == 8*60*60) {
 		t.Fatal(epochSeconds)
 	}
@@ -531,13 +531,13 @@ func TestZonedDateTimeForLink(t *testing.T) {
 	ladt := NewZonedDateTimeFromLocalDateTime(&ldt, &tzLosAngeles)
 	padt := NewZonedDateTimeFromLocalDateTime(&ldt, &tzPacific)
 
-	if !(ladt.ToEpochSeconds() == padt.ToEpochSeconds()) {
+	if !(ladt.EpochSeconds() == padt.EpochSeconds()) {
 		t.Fatal("epochSeconds not equal")
 	}
 }
 
 //-----------------------------------------------------------------------------
-// FromUnixSeconds64(), ToUnixSeconds64()
+// FromUnixSeconds64(), UnixSeconds64()
 //-----------------------------------------------------------------------------
 
 func TestZonedDateTimeFromUnixSeconds64(t *testing.T) {
@@ -556,14 +556,14 @@ func TestZonedDateTimeFromUnixSeconds64(t *testing.T) {
 	unixSeconds64 := int64(2524705445)
 	zdt = NewZonedDateTimeFromUnixSeconds64(unixSeconds64, &tz)
 	ldt := LocalDateTime{2050, 1, 2, 3, 4, 5, 0 /*Fold*/}
-	if !(ldt == zdt.ToLocalDateTime()) {
+	if !(ldt == zdt.LocalDateTime()) {
 		t.Fatal(zdt)
 	}
 
-	// Test ToUnixSeconds64(). Use +1 day after the previous ldt.
+	// Test UnixSeconds64(). Use +1 day after the previous ldt.
 	ldt.Day++
 	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
-	unixSeconds64 = zdt.ToUnixSeconds64()
+	unixSeconds64 = zdt.UnixSeconds64()
 	expected := int64(2524705445 + 24*60*60)
 	if !(expected == unixSeconds64) {
 		t.Fatal(unixSeconds64)
@@ -607,9 +607,9 @@ func BenchmarkZonedDateTimeFromLocalDateTime_NoCache(b *testing.B) {
 	}
 }
 
-func BenchmarkZonedDateTimeToEpochSeconds(b *testing.B) {
+func BenchmarkZonedDateTimeEpochSeconds(b *testing.B) {
 	zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
 	for n := 0; n < b.N; n++ {
-		epochSeconds = zdt.ToEpochSeconds()
+		epochSeconds = zdt.EpochSeconds()
 	}
 }

@@ -34,7 +34,7 @@ func (odt *OffsetDateTime) IsError() bool {
 	return odt.Year == InvalidYear
 }
 
-func (odt *OffsetDateTime) ToEpochSeconds() ATime {
+func (odt *OffsetDateTime) EpochSeconds() ATime {
 	if odt.IsError() {
 		return InvalidEpochSeconds
 	}
@@ -42,7 +42,7 @@ func (odt *OffsetDateTime) ToEpochSeconds() ATime {
 	epochSeconds := (&LocalDateTime{
 		odt.Year, odt.Month, odt.Day,
 		odt.Hour, odt.Minute, odt.Second, odt.Fold,
-	}).ToEpochSeconds()
+	}).EpochSeconds()
 	if epochSeconds == InvalidEpochSeconds {
 		return epochSeconds
 	}
@@ -64,7 +64,7 @@ func NewOffsetDateTimeFromEpochSeconds(
 		0 /*Fold*/, offsetMinutes}
 }
 
-func (odt *OffsetDateTime) ToLocalDateTime() LocalDateTime {
+func (odt *OffsetDateTime) LocalDateTime() LocalDateTime {
 	return LocalDateTime{
 		Year:   odt.Year,
 		Month:  odt.Month,
@@ -83,7 +83,7 @@ func (odt *OffsetDateTime) String() string {
 }
 
 func (odt *OffsetDateTime) BuildString(b *strings.Builder) {
-	ldt := odt.ToLocalDateTime()
+	ldt := odt.LocalDateTime()
 	ldt.BuildString(b)
 	BuildUTCOffset(b, odt.OffsetMinutes)
 }

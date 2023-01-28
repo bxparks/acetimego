@@ -28,7 +28,7 @@ func (ldt *LocalDateTime) IsError() bool {
 	return ldt.Year == InvalidYear
 }
 
-func (ldt *LocalDateTime) ToEpochSeconds() ATime {
+func (ldt *LocalDateTime) EpochSeconds() ATime {
 	if ldt.IsError() {
 		return InvalidEpochSeconds
 	}

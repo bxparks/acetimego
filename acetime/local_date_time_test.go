@@ -22,18 +22,18 @@ func TestLocalDateTimeIsError(t *testing.T) {
 	}
 }
 
-func TestLocalDateTimeToEpochSeconds(t *testing.T) {
-	if (&LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/}).ToEpochSeconds() != 0 {
-		t.Fatal("LocalDateTime{2050, 1, 1, 0, 0, 0}.ToEpochSeconds() should be 0")
+func TestLocalDateTimeEpochSeconds(t *testing.T) {
+	if (&LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/}).EpochSeconds() != 0 {
+		t.Fatal("LocalDateTime{2050, 1, 1, 0, 0, 0}.EpochSeconds() should be 0")
 	}
-	if (&LocalDateTime{2050, 1, 1, 0, 0, 1, 0 /*Fold*/}).ToEpochSeconds() != 1 {
-		t.Fatal("LocalDateTime{2050, 1, 1, 0, 0, 1}.ToEpochSeconds() should be 1")
+	if (&LocalDateTime{2050, 1, 1, 0, 0, 1, 0 /*Fold*/}).EpochSeconds() != 1 {
+		t.Fatal("LocalDateTime{2050, 1, 1, 0, 0, 1}.EpochSeconds() should be 1")
 	}
-	if (&LocalDateTime{2051, 1, 1, 0, 0, 1, 0 /*Fold*/}).ToEpochSeconds() !=
+	if (&LocalDateTime{2051, 1, 1, 0, 0, 1, 0 /*Fold*/}).EpochSeconds() !=
 		86400*365+1 {
 
 		t.Fatal(
-			"LocalDateTime{2051, 1, 1, 0, 0, 1}.ToEpochSeconds() should be 31536001")
+			"LocalDateTime{2051, 1, 1, 0, 0, 1}.EpochSeconds() should be 31536001")
 	}
 }
 

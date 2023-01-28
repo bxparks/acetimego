@@ -52,7 +52,7 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 				}
 
 				// Create time.Time
-				unixSeconds64 := zdt.ToUnixSeconds64()
+				unixSeconds64 := zdt.UnixSeconds64()
 				st := time.Unix(unixSeconds64, 0 /*nanos*/).In(stz)
 
 				// Validate components. The time.Time struct holds just a counter

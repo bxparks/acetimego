@@ -626,7 +626,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	}
 	odt := OffsetDateTime{
 		2017, 12, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60 /*offsetMinutes*/}
-	eps := odt.ToEpochSeconds()
+	eps := odt.EpochSeconds()
 	if !(eps == transition0.startEpochSeconds) {
 		t.Fatal(transition0.startEpochSeconds)
 	}
@@ -643,7 +643,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	}
 	odt = OffsetDateTime{
 		2018, 3, 11, 3, 0, 0, 0 /*Fold*/, -7 * 60 /*offsetMinutes*/}
-	eps = odt.ToEpochSeconds()
+	eps = odt.EpochSeconds()
 	if !(eps == transition1.startEpochSeconds) {
 		t.Fatal(transition1.startEpochSeconds)
 	}
@@ -660,7 +660,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	}
 	odt = OffsetDateTime{
 		2018, 11, 4, 1, 0, 0, 0 /*Fold*/, -8 * 60 /*offsetMinutes*/}
-	eps = odt.ToEpochSeconds()
+	eps = odt.EpochSeconds()
 	if !(eps == transition2.startEpochSeconds) {
 		t.Fatal(transition2.startEpochSeconds)
 	}
