@@ -1,22 +1,28 @@
 help:
 	@echo 'Usage: make (build | tiny | all | clean)'
 
-all: build tiny
+all: build
 
 build:
 	set -e; \
 	for i in */Makefile; do \
-		$(MAKE) -C $$(dirname $$i) build; \
+		$(MAKE) -C $$(dirname $$i) $@; \
 	done
 
 tiny:
 	set -e; \
 	for i in */Makefile; do \
-		$(MAKE) -C $$(dirname $$i) tiny; \
+		$(MAKE) -C $$(dirname $$i) $@; \
+	done
+
+tinyesp32:
+	set -e; \
+	for i in */Makefile; do \
+		$(MAKE) -C $$(dirname $$i) $@; \
 	done
 
 clean:
 	set -e; \
 	for i in */Makefile; do \
-		$(MAKE) -C $$(dirname $$i) clean; \
+		$(MAKE) -C $$(dirname $$i) $@; \
 	done

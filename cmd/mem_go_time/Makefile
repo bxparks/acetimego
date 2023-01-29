@@ -1,29 +1,48 @@
-TARGETS := mem_go_time.out
+CMD_NAME := mem_go_time
+TARGETS_UNIX := $(CMD_NAME).out
+TARGETS_TINY := $(CMD_NAME).tiny.out
+TARGETS_TINY_ESP32 := $(CMD_NAME).esp32.out
 
-TARGETS_TINY := mem_go_time.tiny.out
+.PHONY := build tiny tinyesp32 flashesp32 all clean help
 
-# Uncomment this to compile for an ESP32
-#TINY_TARGET := -target=esp32-coreboard-v2
+all: build
 
 help:
-	@echo 'Usage: make (build | tiny | clean | all)'
+	@echo 'Usage: make [all | build | tiny | tinyesp32 | flashesp32 | clean]'
 
-all: build tiny
-
-build: $(TARGETS)
+build: $(TARGETS_UNIX)
 
 tiny: $(TARGETS_TINY)
 
-mem_go_time.out: mem_go_time.go
-	go build -o $@ $<
+tinyesp32: $(TARGETS_TINY_ESP32)
 
-mem_go_time.tiny.out: mem_go_time.go
-	tinygo build $(TINY_TARGET) \
-		-size full \
-		-print-allocs=^time$ \
-		-o $@ $< \
-		> mem_go_time.size.txt \
-		2> mem_go_time.allocs.txt
+flashesp32:
+	tinygo flash -x -target=esp32-coreboard-v2
 
 clean:
-	rm -f $(TARGETS) $(TARGETS_TINY)
+	rm -f $(TARGETS_UNIX) $(TARGETS_TINY) $(TARGETS_TINY_ESP32)
+
+#------------------------------------------------------------------------------
+
+# Use normal Go to compile to native host (Linux).
+$(CMD_NAME).out: $(CMD_NAME).go
+	go build -o $@ $<
+
+# Use TinyGo to compile to native host (Linux).
+$(CMD_NAME).tiny.out: $(CMD_NAME).go
+	tinygo build \
+		-size full \
+		-print-allocs=acetime \
+		-o $@ $< \
+		> $(CMD_NAME).tiny.size.txt \
+		2> $(CMD_NAME).tiny.allocs.txt
+
+# Use TinyGo to compile to ESP32.
+$(CMD_NAME).esp32.out: $(CMD_NAME).go
+	tinygo build \
+		-size full \
+		-print-allocs=acetime \
+		-target=esp32-coreboard-v2 \
+		-o $@ $< \
+		> $(CMD_NAME).esp32.size.txt \
+		2> $(CMD_NAME).esp32.allocs.txt
