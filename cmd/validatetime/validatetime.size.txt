@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   20657      36     633 |   20718     669 | (unknown)
+     25   11892      22     629 |   11939     651 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -15,33 +15,24 @@
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/unistd
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/internal/task
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
-   1772    2128       0      56 |    3900      56 | /usr/local/go/src/syscall
+   1652    2128       0      56 |    3780      56 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
-    234       0       0       0 |     234       0 | Go interface assert
-    555       0       0       0 |     555       0 | Go interface method
-      0     917       0       0 |     917       0 | Go reflect data
-     49       0       0       0 |      49       0 | errors
-  13007     241       0       0 |   13248       0 | fmt
-   7626      32       0       0 |    7658       0 | github.com/bxparks/AceTimeGo/acetime
+     47       0       0       0 |      47       0 | Go interface assert
+     95       0       0       0 |      95       0 | Go interface method
+      0      53       0       0 |      53       0 | Go reflect data
+     42       0       0       0 |      42       0 | errors
+   7699      29       0       0 |    7728       0 | github.com/bxparks/AceTimeGo/acetime
       0   30232    1654       0 |   31886    1654 | github.com/bxparks/AceTimeGo/zonedb
-   2406       0       0       0 |    2406       0 | github.com/bxparks/AceTimeGo/zoneinfo
-     82       0       0       0 |      82       0 | internal/bytealg
-     79       0       0       0 |      79       0 | internal/fmtsort
+   2430       0       0       0 |    2430       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     85       0       0       0 |      85       0 | internal/bytealg
     157       2       0       0 |     159       0 | internal/itoa
-      0      38      32       0 |      70      32 | internal/oserror
-    427      24       0      16 |     451      16 | internal/task
-    353      25       0       0 |     378       0 | io/fs
-   1857     450       0       0 |    2307       0 | main
-     29       0       0       0 |      29       0 | math
-    293     320       0       0 |     613       0 | math/bits
-    137      16      48      24 |     201      72 | os
-   3827     902       0       0 |    4729       0 | reflect
-   7564     217      12     119 |    7793     131 | runtime
-   9109   16670    1322       0 |   27101    1322 | strconv
+    420      24       0      16 |     444      16 | internal/task
+   1238     253       0       0 |    1491       0 | main
+   3076     678       0       0 |    3754       0 | reflect
+   6679     202      12      91 |    6893     103 | runtime
     626     124       0       0 |     750       0 | strings
     633     200       0       0 |     833       0 | sync
-     80    2954       0       8 |    3034       8 | syscall
-  20838    1077     168     160 |   22083     328 | time
-   1229     288       0       0 |    1517       0 | unicode/utf8
+     80    2954       0       0 |    3034       0 | syscall
+  18664    1006     168     160 |   19838     328 | time
 ------------------------------- | --------------- | -------
-  76936   77514    3272    1016 |  157722    4288 | total
+  47590   49777    1856     952 |   99223    2808 | total

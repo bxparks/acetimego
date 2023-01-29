@@ -5,20 +5,19 @@
 package main
 
 import (
-	"fmt"
 	"github.com/bxparks/AceTimeGo/acetime"
 	"github.com/bxparks/AceTimeGo/zonedb"
 	"time"
 )
 
 func main() {
-	fmt.Println("Validating from 2000 to 2100")
+	println("Validating from 2000 to 2100")
 
 	context := &zonedb.DataContext
 	zm := acetime.NewZoneManager(context)
 	names := zm.ZoneNames()
 	for i, name := range names {
-		fmt.Printf("[%3d] Zone: %s\n", i, name)
+		println("[", i, "] Zone", name)
 		validateZoneName(&zm, name)
 	}
 }
@@ -26,13 +25,13 @@ func main() {
 func validateZoneName(zm *acetime.ZoneManager, name string) {
 	atz := zm.NewTimeZoneFromName(name)
 	if atz.IsError() {
-		fmt.Println("ERROR: acetime package: Zone", name, "not found")
+		println("ERROR: acetime package: Zone", name, "not found")
 		return
 	}
 
 	stz, err := time.LoadLocation(name)
 	if err != nil {
-		fmt.Println("ERROR: time package: Zone", name, "not found")
+		println("ERROR: time package: Zone", name, "not found")
 		return
 	}
 
@@ -46,8 +45,8 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 				ldt := acetime.LocalDateTime{year, month, day, 2, 3, 4, 0 /*Fold*/}
 				zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &atz)
 				if zdt.IsError() {
-					fmt.Printf("ERROR: %s: Unable to create ZonedDateTime for %v\n",
-						name, ldt)
+					println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
+						ldt.String())
 					return
 				}
 
@@ -64,33 +63,33 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 				// process. Each of the following if-statement causes the program to
 				// become slower and slower.
 				if int16(st.Year()) != zdt.Year {
-					fmt.Printf("ERROR: %s: %s: Year not equal: %s, %s\n",
-						name, st, st, zdt.String())
+					println("ERROR: ", name, ": Year not equal: ",
+						st.String(), zdt.String())
 					return
 				}
 				if uint8(st.Month()) != zdt.Month {
-					fmt.Printf("ERROR: %s: %s: Month not equal: %s, %s\n",
-						name, st, st, zdt.String())
+					println("ERROR: ", name, ": Month not equal: ",
+						st.String(), zdt.String())
 					return
 				}
 				if uint8(st.Day()) != zdt.Day {
-					fmt.Printf("ERROR: %s: %s: Day not equal: %s, %s\n",
-						name, st, st, zdt.String())
+					println("ERROR: ", name, ": Day not equal: ",
+						st.String(), zdt.String())
 					return
 				}
 				if uint8(st.Hour()) != zdt.Hour {
-					fmt.Printf("ERROR: %s: %s: Hour not equal: %s, %s\n",
-						name, st, st, zdt.String())
+					println("ERROR: ", name, ": Hour not equal: ",
+						st.String(), zdt.String())
 					return
 				}
 				if uint8(st.Minute()) != zdt.Minute {
-					fmt.Printf("ERROR: %s: %s: Minute not equal: %s, %s\n",
-						name, st, st, zdt.String())
+					println("ERROR: ", name, ": Minute not equal: ",
+						st.String(), zdt.String())
 					return
 				}
 				if uint8(st.Second()) != zdt.Second {
-					fmt.Printf("ERROR: %s: %s: Second not equal: %s, %s\n",
-						name, st, st, zdt.String())
+					println("ERROR: ", name, ": Second not equal: ",
+						st.String(), zdt.String())
 					return
 				}
 			}
