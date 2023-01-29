@@ -1,0 +1,10 @@
+# Include only these zones and links
+
+# ExtendedBrokerTest
+America/Los_Angeles
+America/New_York
+US/Pacific
+Etc/UTC
+
+# Add a zone with a different Policy for testing.
+Pacific/Apia
