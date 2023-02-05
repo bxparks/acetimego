@@ -10,8 +10,13 @@ import (
 	"time"
 )
 
+const (
+	startYear = 1974
+	untilYear = 2150
+)
+
 func main() {
-	println("Validating from 2000 to 2100")
+	println("Validating from", startYear, "until", untilYear)
 
 	context := &zonedb.DataContext
 	zm := acetime.NewZoneManager(context)
@@ -38,7 +43,7 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 	var year int16
 	var month uint8
 	var day uint8
-	for year = 2000; year < 2100; year++ {
+	for year = startYear; year < untilYear; year++ {
 		for month = 1; month <= 12; month++ {
 			for day = 1; day <= 28; day++ {
 				// Create acetime.ZonedDateTime
@@ -51,7 +56,7 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 				}
 
 				// Create time.Time
-				unixSeconds64 := zdt.UnixSeconds64()
+				unixSeconds64 := int64(zdt.EpochSeconds())
 				st := time.Unix(unixSeconds64, 0 /*nanos*/).In(stz)
 
 				// Validate components. The time.Time struct holds just a counter
