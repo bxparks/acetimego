@@ -8,7 +8,7 @@
 //     --language go
 //     --scope extended
 //     --db_namespace zonedb
-//     --start_year 2000
+//     --start_year 1974
 //     --until_year 10000
 //
 // using the TZ Database files
@@ -45,6 +45,7 @@ const (
 		"+01" +
 		"+01/+00" +
 		"+02" +
+		"+02/+03" +
 		"+03" +
 		"+03/+04" +
 		"+0330/+0430" +
@@ -60,6 +61,7 @@ const (
 		"+0630" +
 		"+07" +
 		"+07/+08" +
+		"+0730" +
 		"+08" +
 		"+08/+09" +
 		"+0845/+0945" +
@@ -68,11 +70,13 @@ const (
 		"+10" +
 		"+10/+11" +
 		"+1030/+11" +
+		"+1030/+1130" +
 		"+11" +
 		"+11/+12" +
 		"+1130" +
 		"+12" +
 		"+12/+13" +
+		"+1230" +
 		"+1245/+1345" +
 		"+13" +
 		"+13/+14" +
@@ -83,7 +87,11 @@ const (
 		"-02" +
 		"-02/-01" +
 		"-03" +
+		"-03/-0130" +
 		"-03/-02" +
+		"-03/-0230" +
+		"-0330" +
+		"-0345" +
 		"-04" +
 		"-04/-03" +
 		"-0430" +
@@ -92,24 +100,33 @@ const (
 		"-06" +
 		"-06/-05" +
 		"-07" +
+		"-07/-06" +
 		"-08" +
+		"-0830" +
 		"-09" +
 		"-0930" +
 		"-10" +
 		"-10/-0930" +
+		"-1030" +
+		"-1040" +
 		"-11" +
 		"-11/-10" +
 		"-12" +
 		"A%T" +
 		"AC%T" +
+		"ADT" +
 		"AE%T" +
 		"AEDT" +
+		"AEST" +
+		"AH%T" +
 		"AK%T" +
 		"AST" +
 		"AW%T" +
+		"B%T" +
 		"C%T" +
 		"CA%T" +
 		"CAT" +
+		"CDT" +
 		"CE%T" +
 		"CET" +
 		"CST" +
@@ -134,6 +151,7 @@ const (
 		"KST" +
 		"M%T" +
 		"ME%T" +
+		"MSD" +
 		"MSK" +
 		"MSK/MSD" +
 		"MST" +
@@ -145,16 +163,19 @@ const (
 		"SAST" +
 		"SST" +
 		"UTC" +
+		"WAST" +
 		"WAT" +
 		"WE%T" +
+		"WEST" +
+		"WET" +
 		"WIB" +
 		"WIT" +
 		"WITA" +
+		"Y%T" +
 		"~"
 
 	// All ZoneInfo.Name entries concatenated togther.
-	NameData = "" +
-		"Africa/Abidjan" +
+	NameData = "Africa/Abidjan" +
 		"Africa/Accra" +
 		"Africa/Addis_Ababa" +
 		"Africa/Algiers" +
@@ -758,84 +779,86 @@ var (
 	// at index `i` given by the `ZoneEra.Format` field is
 	// `FormatData[FormatOffsets[i]:FormatOffsets[i+1]]`.
 	FormatOffsets = []uint16{
-		0, 0, 1, 8, 11, 18, 21, 24, 31, 42,
-		45, 52, 57, 60, 67, 72, 77, 80, 87, 92,
-		95, 102, 105, 112, 123, 126, 133, 136, 143, 152,
-		155, 162, 167, 170, 177, 188, 191, 198, 201, 204,
-		207, 214, 217, 224, 227, 234, 237, 244, 249, 252,
-		259, 262, 269, 272, 275, 278, 283, 286, 295, 298,
-		305, 308, 311, 315, 319, 323, 327, 330, 334, 337,
-		341, 344, 348, 351, 354, 358, 361, 364, 368, 372,
-		375, 378, 381, 384, 391, 394, 398, 401, 404, 407,
-		414, 417, 420, 423, 426, 430, 433, 440, 443, 446,
-		450, 453, 457, 460, 464, 467, 470, 473, 477, 480,
-		483, 487,
+		0, 0, 1, 8, 11, 18, 21, 28, 31, 38,
+		49, 52, 59, 64, 67, 74, 79, 84, 87, 94,
+		99, 102, 109, 114, 117, 124, 135, 138, 145, 148,
+		155, 164, 175, 178, 185, 190, 193, 200, 205, 216,
+		219, 226, 229, 232, 235, 242, 245, 252, 255, 264,
+		271, 280, 285, 290, 293, 300, 305, 308, 315, 318,
+		325, 328, 335, 338, 343, 346, 351, 354, 363, 368,
+		373, 376, 383, 386, 389, 393, 396, 400, 404, 408,
+		412, 416, 419, 423, 426, 429, 433, 436, 439, 443,
+		446, 449, 453, 456, 459, 463, 467, 470, 473, 476,
+		479, 486, 489, 493, 496, 499, 502, 509, 512, 515,
+		518, 521, 525, 528, 531, 538, 541, 544, 548, 551,
+		555, 558, 562, 565, 568, 572, 575, 579, 583, 586,
+		589, 592, 596, 599,
 }
 
 	// Byte offset into NameData for each index. The actual Letter string
 	// at index `i` given by the `ZoneRule.Name` field is
 	// `NameData[NameOffsets[i]:NameOffsets[i+1]]`.
 	NameOffsets = []uint16{
-		0, 0, 14, 26, 44, 58, 71, 84, 97, 110,
-		123, 136, 151, 169, 185, 197, 214, 226, 240, 252,
-		272, 287, 300, 315, 330, 345, 358, 377, 388, 402,
-		417, 430, 445, 457, 474, 485, 498, 515, 528, 541,
-		554, 567, 581, 597, 612, 626, 641, 654, 671, 689,
-		706, 721, 736, 750, 762, 777, 789, 806, 822, 837,
-		854, 884, 911, 943, 968, 991, 1017, 1042, 1072, 1095,
-		1121, 1147, 1172, 1197, 1210, 1226, 1242, 1254, 1267, 1289,
-		1305, 1318, 1332, 1352, 1369, 1383, 1396, 1416, 1437, 1457,
-		1471, 1486, 1503, 1518, 1532, 1547, 1564, 1585, 1606, 1621,
-		1639, 1654, 1668, 1683, 1703, 1717, 1737, 1751, 1766, 1782,
-		1798, 1814, 1833, 1849, 1868, 1886, 1903, 1920, 1935, 1952,
-		1970, 1985, 2003, 2020, 2037, 2051, 2066, 2080, 2098, 2126,
-		2146, 2169, 2195, 2220, 2241, 2266, 2289, 2309, 2323, 2338,
-		2353, 2366, 2380, 2407, 2434, 2449, 2467, 2481, 2493, 2512,
-		2530, 2551, 2565, 2580, 2594, 2609, 2627, 2644, 2660, 2675,
-		2692, 2706, 2724, 2743, 2759, 2774, 2791, 2809, 2825, 2843,
-		2857, 2873, 2888, 2900, 2915, 2942, 2969, 2999, 3011, 3026,
-		3040, 3059, 3077, 3092, 3114, 3135, 3153, 3172, 3191, 3211,
-		3230, 3250, 3264, 3278, 3294, 3312, 3327, 3347, 3363, 3379,
-		3400, 3417, 3437, 3453, 3466, 3487, 3503, 3519, 3535, 3552,
-		3570, 3591, 3610, 3623, 3642, 3657, 3672, 3687, 3704, 3718,
-		3736, 3752, 3767, 3786, 3802, 3818, 3843, 3863, 3880, 3898,
-		3915, 3933, 3954, 3970, 3986, 4003, 4022, 4031, 4042, 4052,
-		4063, 4073, 4084, 4097, 4111, 4122, 4134, 4146, 4155, 4167,
-		4179, 4190, 4202, 4213, 4226, 4236, 4251, 4265, 4279, 4291,
-		4301, 4314, 4324, 4333, 4343, 4356, 4370, 4379, 4390, 4401,
-		4417, 4431, 4440, 4452, 4465, 4477, 4490, 4504, 4514, 4528,
-		4540, 4552, 4566, 4579, 4592, 4604, 4620, 4637, 4649, 4660,
-		4670, 4680, 4692, 4705, 4716, 4727, 4739, 4756, 4772, 4781,
-		4790, 4805, 4819, 4833, 4843, 4856, 4870, 4882, 4893, 4904,
-		4917, 4931, 4941, 4954, 4968, 4986, 4997, 5010, 5022, 5033,
-		5046, 5057, 5069, 5079, 5089, 5107, 5123, 5138, 5149, 5162,
-		5176, 5192, 5204, 5215, 5233, 5245, 5260, 5276, 5291, 5310,
-		5325, 5339, 5357, 5373, 5391, 5413, 5431, 5447, 5460, 5478,
-		5496, 5517, 5535, 5551, 5567, 5582, 5598, 5611, 5629, 5648,
-		5667, 5680, 5695, 5710, 5730, 5745, 5761, 5779, 5797, 5811,
-		5831, 5842, 5858, 5869, 5880, 5883, 5890, 5905, 5919, 5933,
-		5948, 5967, 5981, 6000, 6012, 6029, 6047, 6051, 6054, 6057,
-		6064, 6069, 6073, 6080, 6089, 6098, 6108, 6118, 6128, 6137,
-		6146, 6155, 6164, 6173, 6182, 6191, 6200, 6209, 6218, 6228,
-		6238, 6248, 6258, 6268, 6277, 6286, 6295, 6304, 6313, 6322,
-		6331, 6340, 6348, 6361, 6368, 6375, 6388, 6396, 6412, 6426,
-		6442, 6455, 6469, 6484, 6497, 6514, 6529, 6545, 6560, 6575,
-		6590, 6607, 6620, 6636, 6651, 6666, 6684, 6699, 6712, 6730,
-		6741, 6753, 6764, 6777, 6793, 6806, 6823, 6836, 6848, 6864,
-		6876, 6889, 6902, 6916, 6927, 6939, 6955, 6968, 6979, 6990,
-		7003, 7020, 7035, 7049, 7066, 7079, 7091, 7107, 7121, 7134,
-		7149, 7165, 7180, 7192, 7206, 7219, 7233, 7249, 7262, 7275,
-		7292, 7305, 7307, 7314, 7317, 7322, 7327, 7331, 7340, 7343,
-		7351, 7358, 7377, 7390, 7406, 7418, 7431, 7447, 7458, 7473,
-		7489, 7503, 7517, 7521, 7527, 7534, 7539, 7548, 7553, 7556,
-		7559, 7566, 7582, 7596, 7610, 7612, 7619, 7625, 7628, 7635,
-		7647, 7663, 7683, 7698, 7711, 7725, 7738, 7755, 7770, 7782,
-		7798, 7815, 7830, 7849, 7861, 7877, 7893, 7907, 7925, 7939,
-		7956, 7970, 7987, 8001, 8014, 8026, 8041, 8055, 8072, 8085,
-		8101, 8116, 8130, 8150, 8167, 8181, 8194, 8208, 8222, 8239,
-		8251, 8263, 8277, 8288, 8294, 8302, 8305, 8308, 8317, 8323,
-		8326, 8335, 8346, 8356, 8366, 8381, 8391, 8400, 8417, 8428,
-		8439, 8449, 8457, 8460, 8469, 8473, 8476, 8480,
+		0, 14, 26, 44, 58, 71, 84, 97, 110, 123,
+		136, 151, 169, 185, 197, 214, 226, 240, 252, 272,
+		287, 300, 315, 330, 345, 358, 377, 388, 402, 417,
+		430, 445, 457, 474, 485, 498, 515, 528, 541, 554,
+		567, 581, 597, 612, 626, 641, 654, 671, 689, 706,
+		721, 736, 750, 762, 777, 789, 806, 822, 837, 854,
+		884, 911, 943, 968, 991, 1017, 1042, 1072, 1095, 1121,
+		1147, 1172, 1197, 1210, 1226, 1242, 1254, 1267, 1289, 1305,
+		1318, 1332, 1352, 1369, 1383, 1396, 1416, 1437, 1457, 1471,
+		1486, 1503, 1518, 1532, 1547, 1564, 1585, 1606, 1621, 1639,
+		1654, 1668, 1683, 1703, 1717, 1737, 1751, 1766, 1782, 1798,
+		1814, 1833, 1849, 1868, 1886, 1903, 1920, 1935, 1952, 1970,
+		1985, 2003, 2020, 2037, 2051, 2066, 2080, 2098, 2126, 2146,
+		2169, 2195, 2220, 2241, 2266, 2289, 2309, 2323, 2338, 2353,
+		2366, 2380, 2407, 2434, 2449, 2467, 2481, 2493, 2512, 2530,
+		2551, 2565, 2580, 2594, 2609, 2627, 2644, 2660, 2675, 2692,
+		2706, 2724, 2743, 2759, 2774, 2791, 2809, 2825, 2843, 2857,
+		2873, 2888, 2900, 2915, 2942, 2969, 2999, 3011, 3026, 3040,
+		3059, 3077, 3092, 3114, 3135, 3153, 3172, 3191, 3211, 3230,
+		3250, 3264, 3278, 3294, 3312, 3327, 3347, 3363, 3379, 3400,
+		3417, 3437, 3453, 3466, 3487, 3503, 3519, 3535, 3552, 3570,
+		3591, 3610, 3623, 3642, 3657, 3672, 3687, 3704, 3718, 3736,
+		3752, 3767, 3786, 3802, 3818, 3843, 3863, 3880, 3898, 3915,
+		3933, 3954, 3970, 3986, 4003, 4022, 4031, 4042, 4052, 4063,
+		4073, 4084, 4097, 4111, 4122, 4134, 4146, 4155, 4167, 4179,
+		4190, 4202, 4213, 4226, 4236, 4251, 4265, 4279, 4291, 4301,
+		4314, 4324, 4333, 4343, 4356, 4370, 4379, 4390, 4401, 4417,
+		4431, 4440, 4452, 4465, 4477, 4490, 4504, 4514, 4528, 4540,
+		4552, 4566, 4579, 4592, 4604, 4620, 4637, 4649, 4660, 4670,
+		4680, 4692, 4705, 4716, 4727, 4739, 4756, 4772, 4781, 4790,
+		4805, 4819, 4833, 4843, 4856, 4870, 4882, 4893, 4904, 4917,
+		4931, 4941, 4954, 4968, 4986, 4997, 5010, 5022, 5033, 5046,
+		5057, 5069, 5079, 5089, 5107, 5123, 5138, 5149, 5162, 5176,
+		5192, 5204, 5215, 5233, 5245, 5260, 5276, 5291, 5310, 5325,
+		5339, 5357, 5373, 5391, 5413, 5431, 5447, 5460, 5478, 5496,
+		5517, 5535, 5551, 5567, 5582, 5598, 5611, 5629, 5648, 5667,
+		5680, 5695, 5710, 5730, 5745, 5761, 5779, 5797, 5811, 5831,
+		5842, 5858, 5869, 5880, 5883, 5890, 5905, 5919, 5933, 5948,
+		5967, 5981, 6000, 6012, 6029, 6047, 6051, 6054, 6057, 6064,
+		6069, 6073, 6080, 6089, 6098, 6108, 6118, 6128, 6137, 6146,
+		6155, 6164, 6173, 6182, 6191, 6200, 6209, 6218, 6228, 6238,
+		6248, 6258, 6268, 6277, 6286, 6295, 6304, 6313, 6322, 6331,
+		6340, 6348, 6361, 6368, 6375, 6388, 6396, 6412, 6426, 6442,
+		6455, 6469, 6484, 6497, 6514, 6529, 6545, 6560, 6575, 6590,
+		6607, 6620, 6636, 6651, 6666, 6684, 6699, 6712, 6730, 6741,
+		6753, 6764, 6777, 6793, 6806, 6823, 6836, 6848, 6864, 6876,
+		6889, 6902, 6916, 6927, 6939, 6955, 6968, 6979, 6990, 7003,
+		7020, 7035, 7049, 7066, 7079, 7091, 7107, 7121, 7134, 7149,
+		7165, 7180, 7192, 7206, 7219, 7233, 7249, 7262, 7275, 7292,
+		7305, 7307, 7314, 7317, 7322, 7327, 7331, 7340, 7343, 7351,
+		7358, 7377, 7390, 7406, 7418, 7431, 7447, 7458, 7473, 7489,
+		7503, 7517, 7521, 7527, 7534, 7539, 7548, 7553, 7556, 7559,
+		7566, 7582, 7596, 7610, 7612, 7619, 7625, 7628, 7635, 7647,
+		7663, 7683, 7698, 7711, 7725, 7738, 7755, 7770, 7782, 7798,
+		7815, 7830, 7849, 7861, 7877, 7893, 7907, 7925, 7939, 7956,
+		7970, 7987, 8001, 8014, 8026, 8041, 8055, 8072, 8085, 8101,
+		8116, 8130, 8150, 8167, 8181, 8194, 8208, 8222, 8239, 8251,
+		8263, 8277, 8288, 8294, 8302, 8305, 8308, 8317, 8323, 8326,
+		8335, 8346, 8356, 8366, 8381, 8391, 8400, 8417, 8428, 8439,
+		8449, 8457, 8460, 8469, 8473, 8476, 8480,
 	}
 )
 
@@ -844,7 +867,7 @@ var (
 // together.
 //
 // Supported zones: 351
-// numEras: 647
+// numEras: 1027
 // ---------------------------------------------------------------------------
 
 var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
@@ -857,7 +880,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "GMT"
+		FormatIndex: 99, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -870,13 +893,52 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Algiers
 	// EraIndex: 1
-	// EraCount: 1
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             0:00    Algeria    WE%sT    1977 Oct 21
+	{
+		PolicyIndex: 8, // PolicyName: Algeria
+		FormatIndex: 126, // "WE%T"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1977,
+		UntilMonth: 10,
+		UntilDay: 21,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             1:00    Algeria    CE%sT    1979 Oct 26
+	{
+		PolicyIndex: 8, // PolicyName: Algeria
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 10,
+		UntilDay: 26,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             0:00    Algeria    WE%sT    1981 May
+	{
+		PolicyIndex: 8, // PolicyName: Algeria
+		FormatIndex: 126, // "WE%T"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    -    CET
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 72, // "CET"
+		FormatIndex: 89, // "CET"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -888,14 +950,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Bissau
-	// EraIndex: 2
-	// EraCount: 1
+	// EraIndex: 5
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -1:00    -    -01    1975
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 43, // "-01"
+		OffsetCode: -4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1975,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "GMT"
+		FormatIndex: 99, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -907,14 +982,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Cairo
-	// EraIndex: 3
+	// EraIndex: 7
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             2:00    Egypt    EE%sT
 	{
-		PolicyIndex: 27, // PolicyName: Egypt
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 38, // PolicyName: Egypt
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -926,13 +1001,39 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Casablanca
-	// EraIndex: 4
-	// EraCount: 2
+	// EraIndex: 8
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//              0:00    Morocco    +00/+01    1984 Mar 16
+	{
+		PolicyIndex: 72, // PolicyName: Morocco
+		FormatIndex: 2, // "+00/+01"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1984,
+		UntilMonth: 3,
+		UntilDay: 16,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              1:00    -    +01    1986
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 3, // "+01"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1986,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              0:00    Morocco    +00/+01    2018 Oct 28  3:00
 	{
-		PolicyIndex: 51, // PolicyName: Morocco
+		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 2, // "+00/+01"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -945,7 +1046,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//              1:00    Morocco    +01/+00
 	{
-		PolicyIndex: 51, // PolicyName: Morocco
+		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 4, // "+01/+00"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -958,14 +1059,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Ceuta
-	// EraIndex: 6
-	// EraCount: 1
+	// EraIndex: 12
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//              0:00 SpainAfrica WE%sT    1984 Mar 16
+	{
+		PolicyIndex: 94, // PolicyName: SpainAfrica
+		FormatIndex: 126, // "WE%T"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1984,
+		UntilMonth: 3,
+		UntilDay: 16,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              1:00    -    CET    1986
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 89, // "CET"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1986,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -977,13 +1104,26 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/El_Aaiun
-	// EraIndex: 7
-	// EraCount: 2
+	// EraIndex: 15
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -1:00    -    -01    1976 Apr 14
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 43, // "-01"
+		OffsetCode: -4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1976,
+		UntilMonth: 4,
+		UntilDay: 14,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              0:00    Morocco    +00/+01    2018 Oct 28  3:00
 	{
-		PolicyIndex: 51, // PolicyName: Morocco
+		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 2, // "+00/+01"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -996,7 +1136,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//              1:00    Morocco    +01/+00
 	{
-		PolicyIndex: 51, // PolicyName: Morocco
+		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 4, // "+01/+00"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1009,14 +1149,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Johannesburg
-	// EraIndex: 9
+	// EraIndex: 18
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             2:00    SA    SAST
 	{
-		PolicyIndex: 66, // PolicyName: SA
-		FormatIndex: 103, // "SAST"
+		PolicyIndex: 90, // PolicyName: SA
+		FormatIndex: 121, // "SAST"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1028,14 +1168,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Juba
-	// EraIndex: 10
+	// EraIndex: 19
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             2:00    Sudan    CA%sT    2000 Jan 15 12:00
 	{
-		PolicyIndex: 70, // PolicyName: Sudan
-		FormatIndex: 69, // "CA%T"
+		PolicyIndex: 96, // PolicyName: Sudan
+		FormatIndex: 85, // "CA%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1048,7 +1188,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    EAT    2021 Feb  1 00:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 76, // "EAT"
+		FormatIndex: 93, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2021,
@@ -1061,7 +1201,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    CAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 70, // "CAT"
+		FormatIndex: 86, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1073,14 +1213,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Khartoum
-	// EraIndex: 13
+	// EraIndex: 22
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             2:00    Sudan    CA%sT    2000 Jan 15 12:00
 	{
-		PolicyIndex: 70, // PolicyName: Sudan
-		FormatIndex: 69, // "CA%T"
+		PolicyIndex: 96, // PolicyName: Sudan
+		FormatIndex: 85, // "CA%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1093,7 +1233,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    EAT    2017 Nov  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 76, // "EAT"
+		FormatIndex: 93, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2017,
@@ -1106,7 +1246,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    CAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 70, // "CAT"
+		FormatIndex: 86, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1118,14 +1258,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Lagos
-	// EraIndex: 16
+	// EraIndex: 25
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             1:00    -    WAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 106, // "WAT"
+		FormatIndex: 125, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1137,14 +1277,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Maputo
-	// EraIndex: 17
+	// EraIndex: 26
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             2:00    -    CAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 70, // "CAT"
+		FormatIndex: 86, // "CAT"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1156,14 +1296,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Monrovia
-	// EraIndex: 18
+	// EraIndex: 27
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//              0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "GMT"
+		FormatIndex: 99, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1175,14 +1315,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Nairobi
-	// EraIndex: 19
+	// EraIndex: 28
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             3:00    -    EAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 76, // "EAT"
+		FormatIndex: 93, // "EAT"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1194,14 +1334,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Ndjamena
-	// EraIndex: 20
-	// EraCount: 1
+	// EraIndex: 29
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             1:00    -    WAT    1979 Oct 14
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 125, // "WAT"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 10,
+		UntilDay: 14,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             1:00    1:00    WAST    1980 Mar  8
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 124, // "WAST"
+		OffsetCode: 4,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 3,
+		UntilDay: 8,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    -    WAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 106, // "WAT"
+		FormatIndex: 125, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1213,14 +1379,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Sao_Tome
-	// EraIndex: 21
+	// EraIndex: 32
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//              0:00    -    GMT    2018 Jan  1 01:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "GMT"
+		FormatIndex: 99, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -1233,7 +1399,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    -    WAT    2019 Jan  1 02:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 106, // "WAT"
+		FormatIndex: 125, // "WAT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -1246,7 +1412,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "GMT"
+		FormatIndex: 99, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1258,14 +1424,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Tripoli
-	// EraIndex: 24
-	// EraCount: 3
+	// EraIndex: 35
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             2:00    -    EET    1982
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 96, // "EET"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             1:00    Libya    CE%sT    1990 May  4
+	{
+		PolicyIndex: 64, // PolicyName: Libya
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 5,
+		UntilDay: 4,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    -    EET    1996 Sep 30
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 96, // "EET"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 9,
+		UntilDay: 30,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             1:00    Libya    CE%sT    1997 Oct  4
+	{
+		PolicyIndex: 64, // PolicyName: Libya
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 10,
+		UntilDay: 4,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    -    EET    2012 Nov 10  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -1277,8 +1495,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             1:00    Libya    CE%sT    2013 Oct 25  2:00
 	{
-		PolicyIndex: 44, // PolicyName: Libya
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 64, // PolicyName: Libya
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2013,
@@ -1291,7 +1509,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1303,14 +1521,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Tunis
-	// EraIndex: 27
+	// EraIndex: 42
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             1:00    Tunisia    CE%sT
 	{
-		PolicyIndex: 76, // PolicyName: Tunisia
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 104, // PolicyName: Tunisia
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1322,13 +1540,26 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Africa/Windhoek
-	// EraIndex: 28
-	// EraCount: 1
+	// EraIndex: 43
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             2:00    -    SAST    1990 Mar 21
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 121, // "SAST"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 3,
+		UntilDay: 21,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    Namibia    %s
 	{
-		PolicyIndex: 55, // PolicyName: Namibia
+		PolicyIndex: 76, // PolicyName: Namibia
 		FormatIndex: 1, // "%"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -1341,14 +1572,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Adak
-	// EraIndex: 29
-	// EraCount: 1
+	// EraIndex: 45
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -11:00    US    B%sT    1983 Oct 30  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 83, // "B%T"
+		OffsetCode: -44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 10,
+		UntilDay: 30,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -10:00    US    AH%sT    1983 Nov 30
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 79, // "AH%T"
+		OffsetCode: -40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 11,
+		UntilDay: 30,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -10:00    US    H%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 84, // "H%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 101, // "H%T"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1360,14 +1617,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Anchorage
-	// EraIndex: 30
-	// EraCount: 1
+	// EraIndex: 48
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -10:00    US    AH%sT    1983 Oct 30  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 79, // "AH%T"
+		OffsetCode: -40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 10,
+		UntilDay: 30,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              -9:00    US    Y%sT    1983 Nov 30
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 132, // "Y%T"
+		OffsetCode: -36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 11,
+		UntilDay: 30,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              -9:00    US    AK%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 65, // "AK%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 80, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1379,14 +1662,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Araguaina
-	// EraIndex: 31
-	// EraCount: 4
+	// EraIndex: 51
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Brazil    -03/-02    1990 Sep 17
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 9,
+		UntilDay: 17,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    -    -03    1995 Sep 14
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1995,
+		UntilMonth: 9,
+		UntilDay: 14,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Brazil    -03/-02    2003 Sep 24
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -1399,7 +1708,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2012 Oct 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -1411,8 +1720,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Brazil    -03/-02    2013 Sep
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2013,
@@ -1425,7 +1734,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1437,14 +1746,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Buenos_Aires
-	// EraIndex: 35
+	// EraIndex: 57
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1456,8 +1765,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1469,8 +1778,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1482,14 +1791,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Catamarca
-	// EraIndex: 38
-	// EraCount: 6
+	// EraIndex: 60
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1991 Mar  3
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 3,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 Oct 20
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 10,
+		UntilDay: 20,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1501,8 +1836,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1515,7 +1850,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2004 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1528,7 +1863,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Jun 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1540,8 +1875,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1554,7 +1889,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1566,14 +1901,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Cordoba
-	// EraIndex: 44
-	// EraCount: 3
+	// EraIndex: 68
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1991 Mar  3
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 3,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 Oct 20
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 10,
+		UntilDay: 20,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1585,8 +1946,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1598,8 +1959,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1611,14 +1972,79 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Jujuy
-	// EraIndex: 47
-	// EraCount: 4
+	// EraIndex: 73
+	// EraCount: 9
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1990 Mar  4
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 3,
+		UntilDay: 4,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1990 Oct 28
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 10,
+		UntilDay: 28,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    1:00    -03    1991 Mar 17
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -16,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 17,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 Oct  6
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 10,
+		UntilDay: 6,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    1:00    -02    1992
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 45, // "-02"
+		OffsetCode: -12,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1630,8 +2056,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1643,8 +2069,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1657,7 +2083,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1669,14 +2095,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/La_Rioja
-	// EraIndex: 51
-	// EraCount: 6
+	// EraIndex: 82
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1991 Mar  1
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 May  7
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 5,
+		UntilDay: 7,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1688,8 +2140,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1702,7 +2154,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2004 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1715,7 +2167,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Jun 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1727,8 +2179,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1741,7 +2193,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1753,14 +2205,92 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Mendoza
-	// EraIndex: 57
-	// EraCount: 6
+	// EraIndex: 90
+	// EraCount: 12
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1990 Mar  4
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 3,
+		UntilDay: 4,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1990 Oct 15
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 10,
+		UntilDay: 15,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    1:00    -03    1991 Mar  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -16,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 Oct 15
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 10,
+		UntilDay: 15,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    1:00    -03    1992 Mar  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -16,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1992 Oct 18
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 10,
+		UntilDay: 18,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1772,8 +2302,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1786,7 +2316,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2004 May 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1799,7 +2329,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Sep 26
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1811,8 +2341,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1825,7 +2355,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1837,14 +2367,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Rio_Gallegos
-	// EraIndex: 63
+	// EraIndex: 102
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1856,8 +2386,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1870,7 +2400,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2004 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1883,7 +2413,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Jun 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -1895,8 +2425,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1909,7 +2439,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1921,14 +2451,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Salta
-	// EraIndex: 69
-	// EraCount: 4
+	// EraIndex: 108
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1991 Mar  3
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 3,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 Oct 20
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 10,
+		UntilDay: 20,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1940,8 +2496,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -1953,8 +2509,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -1967,7 +2523,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -1979,14 +2535,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/San_Juan
-	// EraIndex: 73
-	// EraCount: 6
+	// EraIndex: 114
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1991 Mar  1
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 May  7
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 5,
+		UntilDay: 7,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -1998,8 +2580,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2012,7 +2594,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2004 May 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2025,7 +2607,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Jul 25
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2037,8 +2619,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -2051,7 +2633,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2063,14 +2645,79 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/San_Luis
-	// EraIndex: 79
-	// EraCount: 7
+	// EraIndex: 122
+	// EraCount: 12
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1990
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    1:00    -02    1990 Mar 14
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 45, // "-02"
+		OffsetCode: -12,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 3,
+		UntilDay: 14,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1990 Oct 15
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 10,
+		UntilDay: 15,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    1:00    -03    1991 Mar  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -16,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 Jun  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 6,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    -    -03    1999 Oct  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -2083,7 +2730,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    1:00    -03    2000 Mar  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -16,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
 		UntilYear: 2000,
@@ -2096,7 +2743,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2004 May 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2109,7 +2756,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Jul 25
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2121,8 +2768,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Jan 21
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -2134,8 +2781,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    SanLuis    -04/-03    2009 Oct 11
 	{
-		PolicyIndex: 68, // PolicyName: SanLuis
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 92, // PolicyName: SanLuis
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -2148,7 +2795,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2160,14 +2807,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Tucuman
-	// EraIndex: 86
-	// EraCount: 5
+	// EraIndex: 134
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1991 Mar  3
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 3,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1991 Oct 20
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 10,
+		UntilDay: 20,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -2179,8 +2852,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2193,7 +2866,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2004 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2206,7 +2879,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Jun 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2218,8 +2891,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2231,14 +2904,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Argentina/Ushuaia
-	// EraIndex: 91
+	// EraIndex: 141
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	//             -3:00    Arg    -03/-02    1999 Oct  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -2250,8 +2923,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Arg    -04/-03    2000 Mar  3
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2264,7 +2937,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2004 May 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2277,7 +2950,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Jun 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2289,8 +2962,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Arg    -03/-02    2008 Oct 18
 	{
-		PolicyIndex: 7, // PolicyName: Arg
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -2303,7 +2976,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2315,14 +2988,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Asuncion
-	// EraIndex: 97
-	// EraCount: 1
+	// EraIndex: 147
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    -    -03    1974 Apr
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    Para    -04/-03
 	{
-		PolicyIndex: 60, // PolicyName: Para
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 81, // PolicyName: Para
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2334,14 +3020,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Bahia
-	// EraIndex: 98
+	// EraIndex: 149
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	//             -3:00    Brazil    -03/-02    2003 Sep 24
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -2354,7 +3040,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2011 Oct 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -2366,8 +3052,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Brazil    -03/-02    2012 Oct 21
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -2380,7 +3066,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2392,14 +3078,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Bahia_Banderas
-	// EraIndex: 102
+	// EraIndex: 153
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    Mexico    M%sT    2010 Apr  4  2:00
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -2411,8 +3097,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    Mexico    C%sT
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2424,14 +3110,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Barbados
-	// EraIndex: 104
+	// EraIndex: 155
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    Barb    A%sT
 	{
-		PolicyIndex: 11, // PolicyName: Barb
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 14, // PolicyName: Barb
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2443,14 +3129,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Belem
-	// EraIndex: 105
-	// EraCount: 1
+	// EraIndex: 156
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Brazil    -03/-02    1988 Sep 12
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 9,
+		UntilDay: 12,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2462,13 +3161,13 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Belize
-	// EraIndex: 106
+	// EraIndex: 158
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    Belize    %s
 	{
-		PolicyIndex: 12, // PolicyName: Belize
+		PolicyIndex: 16, // PolicyName: Belize
 		FormatIndex: 1, // "%"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -2481,14 +3180,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Boa_Vista
-	// EraIndex: 107
-	// EraCount: 3
+	// EraIndex: 159
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Brazil    -04/-03    1988 Sep 12
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 9,
+		UntilDay: 12,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    -    -04    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -2500,8 +3212,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Brazil    -04/-03    2000 Oct 15
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2514,7 +3226,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2526,14 +3238,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Bogota
-	// EraIndex: 110
+	// EraIndex: 163
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    CO    -05/-04
 	{
-		PolicyIndex: 15, // PolicyName: CO
-		FormatIndex: 49, // "-05/-04"
+		PolicyIndex: 21, // PolicyName: CO
+		FormatIndex: 57, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2545,14 +3257,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Boise
-	// EraIndex: 111
-	// EraCount: 1
+	// EraIndex: 164
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -7:00    US    M%sT    1974
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
+		OffsetCode: -28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -7:00    -    MST    1974 Feb  3  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 115, // "MST"
+		OffsetCode: -28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 2,
+		UntilDay: 3,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -7:00    US    M%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2564,14 +3302,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Cambridge_Bay
-	// EraIndex: 112
+	// EraIndex: 167
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    NT_YK    M%sT    1999 Oct 31  2:00
 	{
-		PolicyIndex: 53, // PolicyName: NT_YK
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 74, // PolicyName: NT_YK
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -2583,8 +3321,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    Canada    C%sT    2000 Oct 29  2:00
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2597,7 +3335,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2000 Nov  5  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -2610,7 +3348,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    2001 Apr  1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 73, // "CST"
+		FormatIndex: 90, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -2622,8 +3360,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -7:00    Canada    M%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2635,14 +3373,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Campo_Grande
-	// EraIndex: 117
+	// EraIndex: 172
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    Brazil    -04/-03
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2654,14 +3392,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Cancun
-	// EraIndex: 118
-	// EraCount: 2
+	// EraIndex: 173
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    -    CST    1981 Dec 23
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 12,
+		UntilDay: 23,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    Mexico    E%sT    1998 Aug  2  2:00
+	{
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 92, // "E%T"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 8,
+		UntilDay: 2,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -6:00    Mexico    C%sT    2015 Feb  1  2:00
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -2674,7 +3438,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2686,14 +3450,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Caracas
-	// EraIndex: 120
+	// EraIndex: 177
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    -    -04    2007 Dec  9  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -2706,7 +3470,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:30    -    -0430    2016 May  1  2:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 47, // "-0430"
+		FormatIndex: 55, // "-0430"
 		OffsetCode: -18,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -2719,7 +3483,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2731,14 +3495,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Cayenne
-	// EraIndex: 123
+	// EraIndex: 180
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2750,14 +3514,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Chicago
-	// EraIndex: 124
+	// EraIndex: 181
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2769,14 +3533,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Chihuahua
-	// EraIndex: 125
-	// EraCount: 2
+	// EraIndex: 182
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    -    CST    1996
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    Mexico    C%sT    1998
+	{
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    -    CST    1998 Apr Sun>=1  3:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 4,
+		UntilDay: 5,
+		UntilTimeCode: 12,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -7:00    Mexico    M%sT    2022 Oct 30  2:00
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -2789,7 +3592,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 73, // "CST"
+		FormatIndex: 90, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2801,14 +3604,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Ciudad_Juarez
-	// EraIndex: 127
-	// EraCount: 4
+	// EraIndex: 187
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    -    CST    1996
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    Mexico    C%sT    1998
+	{
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    -    CST    1998 Apr Sun>=1  3:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 4,
+		UntilDay: 5,
+		UntilTimeCode: 12,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -7:00    Mexico    M%sT    2010
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -2820,8 +3662,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -7:00    US    M%sT    2022 Oct 30  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -2834,7 +3676,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    2022 Nov 30  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 73, // "CST"
+		FormatIndex: 90, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -2846,8 +3688,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -7:00    US    M%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2859,14 +3701,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Costa_Rica
-	// EraIndex: 131
+	// EraIndex: 194
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    CR    C%sT
 	{
-		PolicyIndex: 16, // PolicyName: CR
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 22, // PolicyName: CR
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2878,14 +3720,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Cuiaba
-	// EraIndex: 132
+	// EraIndex: 195
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    Brazil    -04/-03    2003 Sep 24
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -2898,7 +3740,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2004 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -2910,8 +3752,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Brazil    -04/-03
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2923,14 +3765,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Danmarkshavn
-	// EraIndex: 135
-	// EraCount: 1
+	// EraIndex: 198
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    -    -03    1980 Apr  6  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 4,
+		UntilDay: 6,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    EU    -03/-02    1996
+	{
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "GMT"
+		FormatIndex: 99, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2942,14 +3810,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Dawson
-	// EraIndex: 136
-	// EraCount: 2
+	// EraIndex: 201
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -9:00    Yukon    Y%sT    1973 Oct 28  0:00
+	{
+		PolicyIndex: 113, // PolicyName: Yukon
+		FormatIndex: 132, // "Y%T"
+		OffsetCode: -36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1973,
+		UntilMonth: 10,
+		UntilDay: 28,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -8:00    -    PST    1980
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 120, // "PST"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -8:00    Canada    P%sT    2020 Nov  1
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -2962,7 +3856,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "MST"
+		FormatIndex: 115, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2974,14 +3868,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Dawson_Creek
-	// EraIndex: 138
+	// EraIndex: 205
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "MST"
+		FormatIndex: 115, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -2993,14 +3887,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Denver
-	// EraIndex: 139
+	// EraIndex: 206
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    US    M%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3012,14 +3906,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Detroit
-	// EraIndex: 140
-	// EraCount: 1
+	// EraIndex: 207
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    -    EST    1973
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1973,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    US    E%sT    1975
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1975,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    -    EST    1975 Apr 27  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1975,
+		UntilMonth: 4,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3031,14 +3964,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Edmonton
-	// EraIndex: 141
-	// EraCount: 1
+	// EraIndex: 211
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -7:00    Edm    M%sT    1987
+	{
+		PolicyIndex: 37, // PolicyName: Edm
+		FormatIndex: 110, // "M%T"
+		OffsetCode: -28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1987,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -7:00    Canada    M%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3050,14 +3996,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Eirunepe
-	// EraIndex: 142
-	// EraCount: 3
+	// EraIndex: 213
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    Brazil    -05/-04    1988 Sep 12
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 57, // "-05/-04"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 9,
+		UntilDay: 12,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    -    -05    1993 Sep 28
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 56, // "-05"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1993,
+		UntilMonth: 9,
+		UntilDay: 28,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    Brazil    -05/-04    1994 Sep 22
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 57, // "-05/-04"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1994,
+		UntilMonth: 9,
+		UntilDay: 22,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    -    -05    2008 Jun 24  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 48, // "-05"
+		FormatIndex: 56, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -3070,7 +4055,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2013 Nov 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2013,
@@ -3083,7 +4068,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    -05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 48, // "-05"
+		FormatIndex: 56, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3095,14 +4080,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/El_Salvador
-	// EraIndex: 145
+	// EraIndex: 219
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    Salv    C%sT
 	{
-		PolicyIndex: 67, // PolicyName: Salv
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 91, // PolicyName: Salv
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3114,14 +4099,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Fort_Nelson
-	// EraIndex: 146
-	// EraCount: 2
+	// EraIndex: 220
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -8:00    Vanc    P%sT    1987
+	{
+		PolicyIndex: 108, // PolicyName: Vanc
+		FormatIndex: 118, // "P%T"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1987,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -8:00    Canada    P%sT    2015 Mar  8  2:00
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -3134,7 +4132,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "MST"
+		FormatIndex: 115, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3146,14 +4144,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Fortaleza
-	// EraIndex: 148
-	// EraCount: 5
+	// EraIndex: 223
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Brazil    -03/-02    1990 Sep 17
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 9,
+		UntilDay: 17,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    -    -03    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -3165,8 +4176,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Brazil    -03/-02    2000 Oct 22
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -3179,7 +4190,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2001 Sep 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -3191,8 +4202,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -3205,7 +4216,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3217,14 +4228,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Glace_Bay
-	// EraIndex: 153
-	// EraCount: 1
+	// EraIndex: 229
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Halifax    A%sT    1974
+	{
+		PolicyIndex: 51, // PolicyName: Halifax
+		FormatIndex: 73, // "A%T"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    Canada    A%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3236,14 +4260,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Goose_Bay
-	// EraIndex: 154
+	// EraIndex: 231
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    StJohns    A%sT    2011 Nov
 	{
-		PolicyIndex: 69, // PolicyName: StJohns
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 95, // PolicyName: StJohns
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -3255,8 +4279,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Canada    A%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3268,14 +4292,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Grand_Turk
-	// EraIndex: 156
-	// EraCount: 3
+	// EraIndex: 233
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    -    EST    1979
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    US    E%sT    2015 Mar  8  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -3288,7 +4325,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST    2018 Mar 11  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 66, // "AST"
+		FormatIndex: 81, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -3300,8 +4337,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3313,14 +4350,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Guatemala
-	// EraIndex: 159
+	// EraIndex: 237
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    Guat    C%sT
 	{
-		PolicyIndex: 32, // PolicyName: Guat
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 48, // PolicyName: Guat
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3332,14 +4369,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Guayaquil
-	// EraIndex: 160
+	// EraIndex: 238
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    Ecuador    -05/-04
 	{
-		PolicyIndex: 26, // PolicyName: Ecuador
-		FormatIndex: 49, // "-05/-04"
+		PolicyIndex: 36, // PolicyName: Ecuador
+		FormatIndex: 57, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3351,14 +4388,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Guyana
-	// EraIndex: 161
-	// EraCount: 1
+	// EraIndex: 239
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -3:45    -    -0345    1975 Aug  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 52, // "-0345"
+		OffsetCode: -15,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1975,
+		UntilMonth: 8,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    -    -03    1992 Mar 29  1:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    -    -04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3370,14 +4433,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Halifax
-	// EraIndex: 162
-	// EraCount: 1
+	// EraIndex: 242
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Halifax    A%sT    1974
+	{
+		PolicyIndex: 51, // PolicyName: Halifax
+		FormatIndex: 73, // "A%T"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    Canada    A%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3389,14 +4465,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Havana
-	// EraIndex: 163
+	// EraIndex: 244
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    Cuba    C%sT
 	{
-		PolicyIndex: 21, // PolicyName: Cuba
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 27, // PolicyName: Cuba
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3408,14 +4484,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Hermosillo
-	// EraIndex: 164
+	// EraIndex: 245
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    Mexico    M%sT    1999
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -3428,7 +4504,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "MST"
+		FormatIndex: 115, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3440,14 +4516,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Indiana/Indianapolis
-	// EraIndex: 166
+	// EraIndex: 247
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    -    EST    2006
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3459,8 +4535,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3472,14 +4548,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Indiana/Knox
-	// EraIndex: 168
-	// EraCount: 2
+	// EraIndex: 249
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    US    C%sT    1991 Oct 27  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 10,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3491,8 +4580,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3504,14 +4593,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Indiana/Marengo
-	// EraIndex: 170
-	// EraCount: 2
+	// EraIndex: 252
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    US    E%sT    1974 Jan  6  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 6,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    1:00    CDT    1974 Oct 27  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 87, // "CDT"
+		OffsetCode: -24,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 10,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    US    E%sT    1976
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1976,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    -    EST    2006
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3523,8 +4651,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3536,14 +4664,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Indiana/Petersburg
-	// EraIndex: 172
-	// EraCount: 3
+	// EraIndex: 257
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    US    C%sT    1977 Oct 30  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1977,
+		UntilMonth: 10,
+		UntilDay: 30,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3555,8 +4696,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT    2007 Nov  4  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -3568,8 +4709,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3581,14 +4722,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Indiana/Tell_City
-	// EraIndex: 175
+	// EraIndex: 261
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3600,8 +4741,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3613,14 +4754,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Indiana/Vevay
-	// EraIndex: 177
-	// EraCount: 2
+	// EraIndex: 263
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    US    E%sT    1973
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1973,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    -    EST    2006
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3632,8 +4786,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3645,14 +4799,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Indiana/Vincennes
-	// EraIndex: 179
+	// EraIndex: 266
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3664,8 +4818,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT    2007 Nov  4  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -3677,8 +4831,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3690,14 +4844,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Indiana/Winamac
-	// EraIndex: 182
+	// EraIndex: 269
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -3709,8 +4863,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT    2007 Mar 11  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -3722,8 +4876,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3735,14 +4889,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Inuvik
-	// EraIndex: 185
-	// EraCount: 1
+	// EraIndex: 272
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -8:00    NT_YK    P%sT    1979 Apr lastSun  2:00
+	{
+		PolicyIndex: 74, // PolicyName: NT_YK
+		FormatIndex: 118, // "P%T"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 4,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -7:00    NT_YK    M%sT    1980
+	{
+		PolicyIndex: 74, // PolicyName: NT_YK
+		FormatIndex: 110, // "M%T"
+		OffsetCode: -28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -7:00    Canada    M%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3754,14 +4934,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Iqaluit
-	// EraIndex: 186
+	// EraIndex: 275
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    NT_YK    E%sT    1999 Oct 31  2:00
 	{
-		PolicyIndex: 53, // PolicyName: NT_YK
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 74, // PolicyName: NT_YK
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -3773,8 +4953,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    Canada    C%sT    2000 Oct 29  2:00
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -3786,8 +4966,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    Canada    E%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3799,14 +4979,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Jamaica
-	// EraIndex: 189
-	// EraCount: 1
+	// EraIndex: 278
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    -    EST    1974
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    US    E%sT    1984
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1984,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    -    EST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3818,14 +5024,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Juneau
-	// EraIndex: 190
-	// EraCount: 1
+	// EraIndex: 281
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              -8:00    US    P%sT    1980 Apr 27  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 4,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              -9:00    US    Y%sT    1980 Oct 26  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 132, // "Y%T"
+		OffsetCode: -36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 10,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              -8:00    US    P%sT    1983 Oct 30  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 10,
+		UntilDay: 30,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              -9:00    US    Y%sT    1983 Nov 30
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 132, // "Y%T"
+		OffsetCode: -36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 11,
+		UntilDay: 30,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              -9:00    US    AK%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 65, // "AK%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 80, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3837,14 +5095,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Kentucky/Louisville
-	// EraIndex: 191
-	// EraCount: 1
+	// EraIndex: 286
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    US    E%sT    1974 Jan  6  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 6,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    1:00    CDT    1974 Oct 27  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 87, // "CDT"
+		OffsetCode: -24,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 10,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3856,14 +5140,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Kentucky/Monticello
-	// EraIndex: 192
+	// EraIndex: 289
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    US    C%sT    2000 Oct 29  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -3875,8 +5159,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3888,14 +5172,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/La_Paz
-	// EraIndex: 194
+	// EraIndex: 291
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    -    -04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3907,14 +5191,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Lima
-	// EraIndex: 195
+	// EraIndex: 292
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    Peru    -05/-04
 	{
-		PolicyIndex: 61, // PolicyName: Peru
-		FormatIndex: 49, // "-05/-04"
+		PolicyIndex: 82, // PolicyName: Peru
+		FormatIndex: 57, // "-05/-04"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3926,14 +5210,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Los_Angeles
-	// EraIndex: 196
+	// EraIndex: 293
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -8:00    US    P%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -3945,14 +5229,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Maceio
-	// EraIndex: 197
-	// EraCount: 5
+	// EraIndex: 294
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Brazil    -03/-02    1990 Sep 17
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 9,
+		UntilDay: 17,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    -    -03    1995 Oct 13
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1995,
+		UntilMonth: 10,
+		UntilDay: 13,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    Brazil    -03/-02    1996 Sep  4
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 9,
+		UntilDay: 4,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    -    -03    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -3964,8 +5287,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Brazil    -03/-02    2000 Oct 22
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -3978,7 +5301,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2001 Sep 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -3990,8 +5313,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -4004,7 +5327,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4016,14 +5339,92 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Managua
-	// EraIndex: 202
-	// EraCount: 1
+	// EraIndex: 302
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    -    CST    1973 May
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1973,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    -    EST    1975 Feb 16
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1975,
+		UntilMonth: 2,
+		UntilDay: 16,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    Nic    C%sT    1992 Jan  1  4:00
+	{
+		PolicyIndex: 77, // PolicyName: Nic
+		FormatIndex: 84, // "C%T"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 16,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    -    EST    1992 Sep 24
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 9,
+		UntilDay: 24,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    -    CST    1993
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1993,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    -    EST    1997
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -6:00    Nic    C%sT
 	{
-		PolicyIndex: 56, // PolicyName: Nic
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 77, // PolicyName: Nic
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4035,14 +5436,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Manaus
-	// EraIndex: 203
-	// EraCount: 1
+	// EraIndex: 309
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Brazil    -04/-03    1988 Sep 12
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 9,
+		UntilDay: 12,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    -    -04    1993 Sep 28
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 53, // "-04"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1993,
+		UntilMonth: 9,
+		UntilDay: 28,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    Brazil    -04/-03    1994 Sep 22
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1994,
+		UntilMonth: 9,
+		UntilDay: 22,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    -    -04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4054,14 +5494,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Martinique
-	// EraIndex: 204
-	// EraCount: 1
+	// EraIndex: 313
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    -    AST    1980 Apr  6
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 81, // "AST"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 4,
+		UntilDay: 6,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    1:00    ADT    1980 Sep 28
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 75, // "ADT"
+		OffsetCode: -16,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 9,
+		UntilDay: 28,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    -    AST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 66, // "AST"
+		FormatIndex: 81, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4073,14 +5539,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Matamoros
-	// EraIndex: 205
-	// EraCount: 2
+	// EraIndex: 316
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    -    CST    1988
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    US    C%sT    1989
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -6:00    Mexico    C%sT    2010
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -4092,8 +5584,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4105,14 +5597,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Mazatlan
-	// EraIndex: 207
+	// EraIndex: 320
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    Mexico    M%sT
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4124,14 +5616,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Menominee
-	// EraIndex: 208
-	// EraCount: 1
+	// EraIndex: 321
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    -    EST    1973 Apr 29  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1973,
+		UntilMonth: 4,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4143,14 +5648,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Merida
-	// EraIndex: 209
-	// EraCount: 1
+	// EraIndex: 323
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    -    CST    1981 Dec 23
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 12,
+		UntilDay: 23,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -5:00    -    EST    1982 Dec  2
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 97, // "EST"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 12,
+		UntilDay: 2,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -6:00    Mexico    C%sT
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4162,14 +5693,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Metlakatla
-	// EraIndex: 210
-	// EraCount: 4
+	// EraIndex: 326
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              -8:00    US    P%sT    1983 Oct 30  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 10,
+		UntilDay: 30,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              -8:00    -    PST    2015 Nov  1  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "PST"
+		FormatIndex: 120, // "PST"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -4181,8 +5725,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//              -9:00    US    AK%sT    2018 Nov  4  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 65, // "AK%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 80, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -4195,7 +5739,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    2019 Jan 20  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "PST"
+		FormatIndex: 120, // "PST"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -4207,8 +5751,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//              -9:00    US    AK%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 65, // "AK%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 80, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4220,14 +5764,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Mexico_City
-	// EraIndex: 214
+	// EraIndex: 331
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    Mexico    C%sT    2001 Sep 30  2:00
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -4240,7 +5784,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    2002 Feb 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 73, // "CST"
+		FormatIndex: 90, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -4252,8 +5796,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    Mexico    C%sT
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4265,14 +5809,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Miquelon
-	// EraIndex: 217
-	// EraCount: 1
+	// EraIndex: 334
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    -    AST    1980 May
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 81, // "AST"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    -    -03    1987
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1987,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Canada    -03/-02
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4284,14 +5854,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Moncton
-	// EraIndex: 218
-	// EraCount: 2
+	// EraIndex: 337
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Moncton    A%sT    1973
+	{
+		PolicyIndex: 70, // PolicyName: Moncton
+		FormatIndex: 73, // "A%T"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1973,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    Canada    A%sT    1993
+	{
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 73, // "A%T"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1993,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    Moncton    A%sT    2007
 	{
-		PolicyIndex: 49, // PolicyName: Moncton
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 70, // PolicyName: Moncton
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -4303,8 +5899,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -4:00    Canada    A%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4316,14 +5912,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Monterrey
-	// EraIndex: 220
-	// EraCount: 1
+	// EraIndex: 341
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    -    CST    1988
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    US    C%sT    1989
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -6:00    Mexico    C%sT
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4335,14 +5957,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Montevideo
-	// EraIndex: 221
-	// EraCount: 1
+	// EraIndex: 344
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Uruguay    -03/-02    1974
+	{
+		PolicyIndex: 107, // PolicyName: Uruguay
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    Uruguay    -03/-0130 1974 Mar 10
+	{
+		PolicyIndex: 107, // PolicyName: Uruguay
+		FormatIndex: 48, // "-03/-0130"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 3,
+		UntilDay: 10,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    Uruguay    -03/-0230 1974 Dec 22
+	{
+		PolicyIndex: 107, // PolicyName: Uruguay
+		FormatIndex: 50, // "-03/-0230"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 12,
+		UntilDay: 22,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    Uruguay    -03/-02
 	{
-		PolicyIndex: 79, // PolicyName: Uruguay
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 107, // PolicyName: Uruguay
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4354,14 +6015,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/New_York
-	// EraIndex: 222
+	// EraIndex: 348
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    US    E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4373,14 +6034,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Nome
-	// EraIndex: 223
-	// EraCount: 1
+	// EraIndex: 349
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -11:00    US    B%sT    1983 Oct 30  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 83, // "B%T"
+		OffsetCode: -44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 10,
+		UntilDay: 30,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              -9:00    US    Y%sT    1983 Nov 30
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 132, // "Y%T"
+		OffsetCode: -36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 11,
+		UntilDay: 30,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              -9:00    US    AK%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 65, // "AK%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 80, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4392,14 +6079,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Noronha
-	// EraIndex: 224
-	// EraCount: 5
+	// EraIndex: 352
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             -2:00    Brazil    -02/-01    1990 Sep 17
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 46, // "-02/-01"
+		OffsetCode: -8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 9,
+		UntilDay: 17,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -2:00    -    -02    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 41, // "-02"
+		FormatIndex: 45, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -4411,8 +6111,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -2:00    Brazil    -02/-01    2000 Oct 15
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 42, // "-02/-01"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 46, // "-02/-01"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -4425,7 +6125,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -2:00    -    -02    2001 Sep 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 41, // "-02"
+		FormatIndex: 45, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -4437,8 +6137,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -2:00    Brazil    -02/-01    2002 Oct  1
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 42, // "-02/-01"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 46, // "-02/-01"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -4451,7 +6151,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -2:00    -    -02
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 41, // "-02"
+		FormatIndex: 45, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4463,14 +6163,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/North_Dakota/Beulah
-	// EraIndex: 229
+	// EraIndex: 358
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    US    M%sT    2010 Nov  7  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -4482,8 +6182,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4495,14 +6195,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/North_Dakota/Center
-	// EraIndex: 231
-	// EraCount: 1
+	// EraIndex: 360
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -7:00    US    M%sT    1992 Oct 25  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
+		OffsetCode: -28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 10,
+		UntilDay: 25,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4514,14 +6227,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/North_Dakota/New_Salem
-	// EraIndex: 232
+	// EraIndex: 362
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    US    M%sT    2003 Oct 26  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -4533,8 +6246,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4546,14 +6259,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Nuuk
-	// EraIndex: 234
-	// EraCount: 2
+	// EraIndex: 364
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    -    -03    1980 Apr  6  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 47, // "-03"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 4,
+		UntilDay: 6,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    EU    -03/-02    2023 Mar 25 22:00
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2023,
@@ -4566,7 +6292,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -2:00    -    -02
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 41, // "-02"
+		FormatIndex: 45, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4578,14 +6304,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Ojinaga
-	// EraIndex: 236
-	// EraCount: 4
+	// EraIndex: 367
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             -6:00    -    CST    1996
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    Mexico    C%sT    1998
+	{
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 84, // "C%T"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -6:00    -    CST    1998 Apr Sun>=1  3:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 90, // "CST"
+		OffsetCode: -24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 4,
+		UntilDay: 5,
+		UntilTimeCode: 12,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -7:00    Mexico    M%sT    2010
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -4597,8 +6362,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -7:00    US    M%sT    2022 Oct 30  2:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -4611,7 +6376,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    2022 Nov 30  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 73, // "CST"
+		FormatIndex: 90, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -4623,8 +6388,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    US    C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4636,14 +6401,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Panama
-	// EraIndex: 240
+	// EraIndex: 374
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    -    EST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4655,14 +6420,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Paramaribo
-	// EraIndex: 241
-	// EraCount: 1
+	// EraIndex: 375
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -3:30    -    -0330    1984 Oct
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 51, // "-0330"
+		OffsetCode: -14,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1984,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4674,14 +6452,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Phoenix
-	// EraIndex: 242
+	// EraIndex: 377
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "MST"
+		FormatIndex: 115, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4693,14 +6471,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Port-au-Prince
-	// EraIndex: 243
+	// EraIndex: 378
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -5:00    Haiti    E%sT
 	{
-		PolicyIndex: 34, // PolicyName: Haiti
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 50, // PolicyName: Haiti
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4712,14 +6490,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Porto_Velho
-	// EraIndex: 244
-	// EraCount: 1
+	// EraIndex: 379
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Brazil    -04/-03    1988 Sep 12
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 9,
+		UntilDay: 12,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    -    -04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4731,14 +6522,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Puerto_Rico
-	// EraIndex: 245
+	// EraIndex: 381
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    -    AST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 66, // "AST"
+		FormatIndex: 81, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4750,14 +6541,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Punta_Arenas
-	// EraIndex: 246
+	// EraIndex: 382
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    Chile    -04/-03    2016 Dec  4
 	{
-		PolicyIndex: 19, // PolicyName: Chile
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 25, // PolicyName: Chile
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -4770,7 +6561,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4782,14 +6573,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Rankin_Inlet
-	// EraIndex: 248
+	// EraIndex: 384
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    NT_YK    C%sT    2000 Oct 29  2:00
 	{
-		PolicyIndex: 53, // PolicyName: NT_YK
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 74, // PolicyName: NT_YK
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -4802,7 +6593,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2001 Apr  1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -4814,8 +6605,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    Canada    C%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4827,14 +6618,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Recife
-	// EraIndex: 251
-	// EraCount: 5
+	// EraIndex: 387
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Brazil    -03/-02    1990 Sep 17
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 9,
+		UntilDay: 17,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    -    -03    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -4846,8 +6650,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Brazil    -03/-02    2000 Oct 15
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -4860,7 +6664,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03    2001 Sep 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -4872,8 +6676,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:00    Brazil    -03/-02    2002 Oct  1
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -4886,7 +6690,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4898,14 +6702,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Regina
-	// EraIndex: 256
+	// EraIndex: 393
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    -    CST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 73, // "CST"
+		FormatIndex: 90, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4917,14 +6721,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Resolute
-	// EraIndex: 257
+	// EraIndex: 394
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    NT_YK    C%sT    2000 Oct 29  2:00
 	{
-		PolicyIndex: 53, // PolicyName: NT_YK
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 74, // PolicyName: NT_YK
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -4937,7 +6741,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2001 Apr  1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -4949,8 +6753,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    Canada    C%sT    2006 Oct 29  2:00
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -4963,7 +6767,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2007 Mar 11  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -4975,8 +6779,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    Canada    C%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -4988,14 +6792,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Rio_Branco
-	// EraIndex: 262
-	// EraCount: 3
+	// EraIndex: 399
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    Brazil    -05/-04    1988 Sep 12
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 57, // "-05/-04"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 9,
+		UntilDay: 12,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    -    -05    2008 Jun 24  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 48, // "-05"
+		FormatIndex: 56, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -5008,7 +6825,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    -04    2013 Nov 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2013,
@@ -5021,7 +6838,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    -05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 48, // "-05"
+		FormatIndex: 56, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5033,14 +6850,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Santarem
-	// EraIndex: 265
-	// EraCount: 2
+	// EraIndex: 403
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Brazil    -04/-03    1988 Sep 12
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 54, // "-04/-03"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 9,
+		UntilDay: 12,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    -    -04    2008 Jun 24  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -5053,7 +6883,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5065,14 +6895,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Santiago
-	// EraIndex: 267
+	// EraIndex: 406
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    Chile    -04/-03
 	{
-		PolicyIndex: 19, // PolicyName: Chile
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 25, // PolicyName: Chile
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5084,14 +6914,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Santo_Domingo
-	// EraIndex: 268
-	// EraCount: 3
+	// EraIndex: 407
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    DR    %s    1974 Oct 27
+	{
+		PolicyIndex: 30, // PolicyName: DR
+		FormatIndex: 1, // "%"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 10,
+		UntilDay: 27,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    -    AST    2000 Oct 29  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 66, // "AST"
+		FormatIndex: 81, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -5103,8 +6946,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -5:00    US    E%sT    2000 Dec  3  1:00
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -5117,7 +6960,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 66, // "AST"
+		FormatIndex: 81, // "AST"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5129,14 +6972,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Sao_Paulo
-	// EraIndex: 271
+	// EraIndex: 411
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -3:00    Brazil    -03/-02
 	{
-		PolicyIndex: 13, // PolicyName: Brazil
-		FormatIndex: 44, // "-03/-02"
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 49, // "-03/-02"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5148,14 +6991,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Scoresbysund
-	// EraIndex: 272
-	// EraCount: 1
+	// EraIndex: 412
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -2:00    -    -02    1980 Apr  6  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 45, // "-02"
+		OffsetCode: -8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 4,
+		UntilDay: 6,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -2:00    C-Eur    -02/-01    1981 Mar 29
+	{
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 46, // "-02/-01"
+		OffsetCode: -8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -1:00    EU    -01/+00
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 40, // "-01/+00"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 44, // "-01/+00"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5167,14 +7036,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Sitka
-	// EraIndex: 273
-	// EraCount: 1
+	// EraIndex: 415
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//              -8:00    US    P%sT    1983 Oct 30  2:00
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 10,
+		UntilDay: 30,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              -9:00    US    Y%sT    1983 Nov 30
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 132, // "Y%T"
+		OffsetCode: -36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 11,
+		UntilDay: 30,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              -9:00    US    AK%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 65, // "AK%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 80, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5186,14 +7081,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/St_Johns
-	// EraIndex: 274
+	// EraIndex: 418
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -3:30    StJohns    N%sT    2011 Nov
 	{
-		PolicyIndex: 69, // PolicyName: StJohns
-		FormatIndex: 98, // "N%T"
+		PolicyIndex: 95, // PolicyName: StJohns
+		FormatIndex: 116, // "N%T"
 		OffsetCode: -14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -5205,8 +7100,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -3:30    Canada    N%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 98, // "N%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 116, // "N%T"
 		OffsetCode: -14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5218,14 +7113,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Swift_Current
-	// EraIndex: 276
+	// EraIndex: 420
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    -    CST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 73, // "CST"
+		FormatIndex: 90, // "CST"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5237,14 +7132,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Tegucigalpa
-	// EraIndex: 277
+	// EraIndex: 421
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    Hond    C%sT
 	{
-		PolicyIndex: 36, // PolicyName: Hond
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 53, // PolicyName: Hond
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5256,14 +7151,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Thule
-	// EraIndex: 278
+	// EraIndex: 422
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -4:00    Thule    A%sT
 	{
-		PolicyIndex: 73, // PolicyName: Thule
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 100, // PolicyName: Thule
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5275,14 +7170,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Tijuana
-	// EraIndex: 279
-	// EraCount: 4
+	// EraIndex: 423
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             -8:00    -    PST    1976
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 120, // "PST"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1976,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -8:00    US    P%sT    1996
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -8:00    Mexico    P%sT    2001
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -5294,8 +7215,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -8:00    US    P%sT    2002 Feb 20
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -5307,8 +7228,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -8:00    Mexico    P%sT    2010
 	{
-		PolicyIndex: 47, // PolicyName: Mexico
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 68, // PolicyName: Mexico
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -5320,8 +7241,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -8:00    US    P%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5333,14 +7254,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Toronto
-	// EraIndex: 283
-	// EraCount: 1
+	// EraIndex: 429
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    Toronto    E%sT    1974
+	{
+		PolicyIndex: 102, // PolicyName: Toronto
+		FormatIndex: 92, // "E%T"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -5:00    Canada    E%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5352,14 +7286,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Vancouver
-	// EraIndex: 284
-	// EraCount: 1
+	// EraIndex: 431
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -8:00    Vanc    P%sT    1987
+	{
+		PolicyIndex: 108, // PolicyName: Vanc
+		FormatIndex: 118, // "P%T"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1987,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -8:00    Canada    P%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5371,14 +7318,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Whitehorse
-	// EraIndex: 285
-	// EraCount: 2
+	// EraIndex: 433
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -8:00    -    PST    1980
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 120, // "PST"
+		OffsetCode: -32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -8:00    Canada    P%sT    2020 Nov  1
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -5391,7 +7351,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "MST"
+		FormatIndex: 115, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5403,14 +7363,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Winnipeg
-	// EraIndex: 287
+	// EraIndex: 436
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -6:00    Winn    C%sT    2006
 	{
-		PolicyIndex: 82, // PolicyName: Winn
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 112, // PolicyName: Winn
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -5422,8 +7382,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             -6:00    Canada    C%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5435,14 +7395,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Yakutat
-	// EraIndex: 289
-	// EraCount: 1
+	// EraIndex: 438
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//              -9:00    US    Y%sT    1983 Nov 30
+	{
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 132, // "Y%T"
+		OffsetCode: -36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 11,
+		UntilDay: 30,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              -9:00    US    AK%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 65, // "AK%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 80, // "AK%T"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5454,14 +7427,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Yellowknife
-	// EraIndex: 290
-	// EraCount: 1
+	// EraIndex: 440
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -7:00    NT_YK    M%sT    1980
+	{
+		PolicyIndex: 74, // PolicyName: NT_YK
+		FormatIndex: 110, // "M%T"
+		OffsetCode: -28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -7:00    Canada    M%sT
 	{
-		PolicyIndex: 17, // PolicyName: Canada
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5473,14 +7459,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Casey
-	// EraIndex: 291
+	// EraIndex: 442
 	// EraCount: 12
 	// ---------------------------------------------------------------------------
 
 	//              8:00    -    +08    2009 Oct 18  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -5493,7 +7479,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2010 Mar  5  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -5506,7 +7492,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    -    +08    2011 Oct 28  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -5519,7 +7505,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2012 Feb 21 17:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -5532,7 +7518,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    -    +08    2016 Oct 22
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -5545,7 +7531,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2018 Mar 11  4:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -5558,7 +7544,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    -    +08    2018 Oct  7  4:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -5571,7 +7557,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2019 Mar 17  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -5584,7 +7570,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    -    +08    2019 Oct  4  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -5597,7 +7583,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2020 Mar  8  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -5610,7 +7596,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    -    +08    2020 Oct  4  0:01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -5623,7 +7609,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5635,14 +7621,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Davis
-	// EraIndex: 303
+	// EraIndex: 454
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	//             7:00    -    +07    2009 Oct 18  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -5655,7 +7641,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00    -    +05    2010 Mar 10 20:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -5668,7 +7654,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             7:00    -    +07    2011 Oct 28  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -5681,7 +7667,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00    -    +05    2012 Feb 21 20:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -5694,7 +7680,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             7:00    -    +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5706,14 +7692,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Macquarie
-	// EraIndex: 308
+	// EraIndex: 459
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             10:00    AT    AE%sT    2010
 	{
 		PolicyIndex: 4, // PolicyName: AT
-		FormatIndex: 63, // "AE%T"
+		FormatIndex: 76, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -5726,7 +7712,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    1:00    AEDT    2011
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 64, // "AEDT"
+		FormatIndex: 77, // "AEDT"
 		OffsetCode: 40,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
 		UntilYear: 2011,
@@ -5739,7 +7725,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AT    AE%sT
 	{
 		PolicyIndex: 4, // PolicyName: AT
-		FormatIndex: 63, // "AE%T"
+		FormatIndex: 76, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5751,14 +7737,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Mawson
-	// EraIndex: 311
+	// EraIndex: 462
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             6:00    -    +06    2009 Oct 18  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -5771,7 +7757,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5783,14 +7769,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Palmer
-	// EraIndex: 313
-	// EraCount: 2
+	// EraIndex: 464
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -3:00    Arg    -03/-02    1982 May
+	{
+		PolicyIndex: 9, // PolicyName: Arg
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    Chile    -04/-03    2016 Dec  4
 	{
-		PolicyIndex: 19, // PolicyName: Chile
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 25, // PolicyName: Chile
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -5803,7 +7802,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5815,14 +7814,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Rothera
-	// EraIndex: 315
-	// EraCount: 1
+	// EraIndex: 467
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	// 0 - -00 1976 Dec 1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 42, // "-00"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1976,
+		UntilMonth: 12,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5834,14 +7846,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Troll
-	// EraIndex: 316
+	// EraIndex: 469
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 2005 Feb 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 38, // "-00"
+		FormatIndex: 42, // "-00"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2005,
@@ -5853,7 +7865,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             0:00    Troll    %s
 	{
-		PolicyIndex: 75, // PolicyName: Troll
+		PolicyIndex: 103, // PolicyName: Troll
 		FormatIndex: 1, // "%"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
@@ -5866,14 +7878,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Almaty
-	// EraIndex: 318
-	// EraCount: 2
+	// EraIndex: 471
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             6:00 RussiaAsia +06/+07    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             6:00 RussiaAsia    +06/+07    2004 Oct 31  2:00s
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 17, // "+06/+07"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 18, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -5886,7 +7924,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             6:00    -    +06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5898,14 +7936,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Amman
-	// EraIndex: 320
+	// EraIndex: 475
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             2:00    Jordan    EE%sT    2022 Oct 28 0:00s
 	{
-		PolicyIndex: 40, // PolicyName: Jordan
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 59, // PolicyName: Jordan
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -5918,7 +7956,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5930,14 +7968,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Anadyr
-	// EraIndex: 322
-	// EraCount: 3
+	// EraIndex: 477
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             13:00    Russia    +13/+14    1982 Apr  1  0:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 40, // "+13/+14"
+		OffsetCode: 52,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             12:00    Russia    +12/+13    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 36, // "+12/+13"
+		OffsetCode: 48,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             11:00    Russia    +11/+12    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
+		OffsetCode: 44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             12:00    Russia    +12/+13    2010 Mar 28  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 33, // "+12/+13"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 36, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -5949,8 +8026,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 30, // "+11/+12"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -5963,7 +8040,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             12:00    -    +12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -5975,14 +8052,79 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Aqtau
-	// EraIndex: 325
-	// EraCount: 2
+	// EraIndex: 483
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             5:00    -    +05    1981 Oct  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             6:00    -    +06    1982 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1994 Sep 25  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1994,
+		UntilMonth: 9,
+		UntilDay: 25,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -5995,7 +8137,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6007,14 +8149,79 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Aqtobe
-	// EraIndex: 327
-	// EraCount: 2
+	// EraIndex: 490
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             5:00    -    +05    1981 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00    1:00    +06    1981 Oct  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 20,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             6:00    -    +06    1982 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 13, // "+05/+06"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -6027,7 +8234,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6039,14 +8246,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ashgabat
-	// EraIndex: 329
-	// EraCount: 1
+	// EraIndex: 497
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6058,14 +8291,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Atyrau
-	// EraIndex: 330
-	// EraCount: 3
+	// EraIndex: 500
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             5:00    -    +05    1981 Oct  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             6:00    -    +06    1982 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             5:00 RussiaAsia    +05/+06    1999 Mar 28  2:00s
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 13, // "+05/+06"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -6077,8 +8362,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -6091,7 +8376,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6103,14 +8388,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Baghdad
-	// EraIndex: 333
-	// EraCount: 1
+	// EraIndex: 507
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             3:00    -    +03    1982 May
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 7, // "+03"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             3:00    Iraq    +03/+04
 	{
-		PolicyIndex: 38, // PolicyName: Iraq
-		FormatIndex: 7, // "+03/+04"
+		PolicyIndex: 56, // PolicyName: Iraq
+		FormatIndex: 8, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6122,14 +8420,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Baku
-	// EraIndex: 334
-	// EraCount: 1
+	// EraIndex: 509
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             4:00 RussiaAsia +04/+05    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             3:00 RussiaAsia    +03/+04    1992 Sep lastSun  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 9,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             4:00    -    +04    1996
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 10, // "+04"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             4:00    EUAsia    +04/+05    1997
+	{
+		PolicyIndex: 35, // PolicyName: EUAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             4:00    Azer    +04/+05
 	{
-		PolicyIndex: 10, // PolicyName: Azer
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 13, // PolicyName: Azer
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6141,14 +8491,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Bangkok
-	// EraIndex: 335
+	// EraIndex: 514
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             7:00    -    +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6160,14 +8510,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Barnaul
-	// EraIndex: 336
-	// EraCount: 4
+	// EraIndex: 515
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              7:00    Russia    +07/+08    1995 May 28
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1995,
+		UntilMonth: 5,
+		UntilDay: 28,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 17, // "+06/+07"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -6180,7 +8569,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -6193,7 +8582,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              6:00    -    +06    2016 Mar 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -6206,7 +8595,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6218,14 +8607,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Beirut
-	// EraIndex: 340
+	// EraIndex: 522
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             2:00    Lebanon    EE%sT
 	{
-		PolicyIndex: 43, // PolicyName: Lebanon
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 63, // PolicyName: Lebanon
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6237,14 +8626,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Bishkek
-	// EraIndex: 341
-	// EraCount: 2
+	// EraIndex: 523
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             6:00 RussiaAsia +06/+07    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1991 Aug 31  2:00
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 8,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             5:00    Kyrgyz    +05/+06    2005 Aug 12
 	{
-		PolicyIndex: 41, // PolicyName: Kyrgyz
-		FormatIndex: 13, // "+05/+06"
+		PolicyIndex: 60, // PolicyName: Kyrgyz
+		FormatIndex: 14, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2005,
@@ -6257,7 +8672,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             6:00    -    +06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6269,14 +8684,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Chita
-	// EraIndex: 343
-	// EraCount: 4
+	// EraIndex: 527
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//              9:00    Russia    +09/+10    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 27, // "+09/+10"
+		OffsetCode: 36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              8:00    Russia    +08/+09    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 24, // "+08/+09"
+		OffsetCode: 32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              9:00    Russia    +09/+10    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 25, // "+09/+10"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 27, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -6289,7 +8730,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -6302,7 +8743,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    -    +08    2016 Mar 27  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -6315,7 +8756,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              9:00    -    +09
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+09"
+		FormatIndex: 26, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6327,14 +8768,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Choibalsan
-	// EraIndex: 347
-	// EraCount: 2
+	// EraIndex: 533
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             7:00    -    +07    1978
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 20, // "+07"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1978,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             8:00    -    +08    1983 Apr
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 23, // "+08"
+		OffsetCode: 32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             9:00    Mongol    +09/+10    2008 Mar 31
 	{
-		PolicyIndex: 50, // PolicyName: Mongol
-		FormatIndex: 25, // "+09/+10"
+		PolicyIndex: 71, // PolicyName: Mongol
+		FormatIndex: 27, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -6346,8 +8813,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             8:00    Mongol    +08/+09
 	{
-		PolicyIndex: 50, // PolicyName: Mongol
-		FormatIndex: 22, // "+08/+09"
+		PolicyIndex: 71, // PolicyName: Mongol
+		FormatIndex: 24, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6359,14 +8826,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Colombo
-	// EraIndex: 349
-	// EraCount: 2
+	// EraIndex: 537
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             5:30    -    +0530    1996 May 25  0:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 15, // "+0530"
+		OffsetCode: 22,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 5,
+		UntilDay: 25,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             6:30    -    +0630    1996 Oct 26  0:30
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 19, // "+0630"
+		OffsetCode: 26,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 10,
+		UntilDay: 26,
+		UntilTimeCode: 2,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             6:00    -    +06    2006 Apr 15  0:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2006,
@@ -6379,7 +8872,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:30    -    +0530
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 14, // "+0530"
+		FormatIndex: 15, // "+0530"
 		OffsetCode: 22,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6391,14 +8884,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Damascus
-	// EraIndex: 351
+	// EraIndex: 541
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             2:00    Syria    EE%sT    2022 Oct 28 0:00
 	{
-		PolicyIndex: 71, // PolicyName: Syria
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 98, // PolicyName: Syria
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2022,
@@ -6411,7 +8904,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6423,14 +8916,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dhaka
-	// EraIndex: 353
+	// EraIndex: 543
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             6:00    -    +06    2009
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2009,
@@ -6442,8 +8935,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             6:00    Dhaka    +06/+07
 	{
-		PolicyIndex: 22, // PolicyName: Dhaka
-		FormatIndex: 17, // "+06/+07"
+		PolicyIndex: 31, // PolicyName: Dhaka
+		FormatIndex: 18, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6455,14 +8948,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dili
-	// EraIndex: 355
-	// EraCount: 2
+	// EraIndex: 545
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             9:00    -    +09    1976 May  3
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 26, // "+09"
+		OffsetCode: 36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1976,
+		UntilMonth: 5,
+		UntilDay: 3,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             8:00    -    +08    2000 Sep 17  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -6475,7 +8981,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    +09
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+09"
+		FormatIndex: 26, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6487,14 +8993,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dubai
-	// EraIndex: 357
+	// EraIndex: 548
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             4:00    -    +04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6506,14 +9012,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dushanbe
-	// EraIndex: 358
-	// EraCount: 1
+	// EraIndex: 549
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             6:00 RussiaAsia +06/+07    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             5:00    1:00    +06    1991 Sep  9  2:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 20,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 9,
+		UntilDay: 9,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6525,14 +9057,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Famagusta
-	// EraIndex: 359
-	// EraCount: 3
+	// EraIndex: 552
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             2:00    Cyprus    EE%sT    1998 Sep
+	{
+		PolicyIndex: 28, // PolicyName: Cyprus
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 9,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EUAsia    EE%sT    2016 Sep  8
 	{
-		PolicyIndex: 25, // PolicyName: EUAsia
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 35, // PolicyName: EUAsia
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -6545,7 +9090,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    +03    2017 Oct 29 1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2017,
@@ -6557,8 +9102,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00    EUAsia    EE%sT
 	{
-		PolicyIndex: 25, // PolicyName: EUAsia
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 35, // PolicyName: EUAsia
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6570,14 +9115,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Gaza
-	// EraIndex: 362
-	// EraCount: 8
+	// EraIndex: 556
+	// EraCount: 9
 	// ---------------------------------------------------------------------------
+
+	//             2:00    Zion    I%sT    1996
+	{
+		PolicyIndex: 114, // PolicyName: Zion
+		FormatIndex: 104, // "I%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    Jordan    EE%sT    1999
 	{
-		PolicyIndex: 40, // PolicyName: Jordan
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 59, // PolicyName: Jordan
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -6589,8 +9147,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00 Palestine    EE%sT    2008 Aug 29  0:00
 	{
-		PolicyIndex: 59, // PolicyName: Palestine
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 80, // PolicyName: Palestine
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -6603,7 +9161,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2008 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2008,
@@ -6615,8 +9173,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00 Palestine    EE%sT    2010
 	{
-		PolicyIndex: 59, // PolicyName: Palestine
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 80, // PolicyName: Palestine
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -6629,7 +9187,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2010 Mar 27  0:01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -6641,8 +9199,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00 Palestine    EE%sT    2011 Aug  1
 	{
-		PolicyIndex: 59, // PolicyName: Palestine
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 80, // PolicyName: Palestine
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -6655,7 +9213,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2012
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2012,
@@ -6667,8 +9225,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00 Palestine    EE%sT
 	{
-		PolicyIndex: 59, // PolicyName: Palestine
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 80, // PolicyName: Palestine
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6680,14 +9238,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hebron
-	// EraIndex: 370
-	// EraCount: 2
+	// EraIndex: 565
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             2:00    Zion    I%sT    1996
+	{
+		PolicyIndex: 114, // PolicyName: Zion
+		FormatIndex: 104, // "I%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    Jordan    EE%sT    1999
 	{
-		PolicyIndex: 40, // PolicyName: Jordan
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 59, // PolicyName: Jordan
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -6699,8 +9270,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00 Palestine    EE%sT
 	{
-		PolicyIndex: 59, // PolicyName: Palestine
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 80, // PolicyName: Palestine
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6712,14 +9283,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ho_Chi_Minh
-	// EraIndex: 372
-	// EraCount: 1
+	// EraIndex: 568
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             8:00    -    +08    1975 Jun 13
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 23, // "+08"
+		OffsetCode: 32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1975,
+		UntilMonth: 6,
+		UntilDay: 13,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             7:00    -    +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6731,14 +9315,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hong_Kong
-	// EraIndex: 373
+	// EraIndex: 570
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             8:00    HK    HK%sT
 	{
-		PolicyIndex: 33, // PolicyName: HK
-		FormatIndex: 85, // "HK%T"
+		PolicyIndex: 49, // PolicyName: HK
+		FormatIndex: 102, // "HK%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6750,14 +9334,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hovd
-	// EraIndex: 374
-	// EraCount: 1
+	// EraIndex: 571
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             6:00    -    +06    1978
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1978,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             7:00    Mongol    +07/+08
 	{
-		PolicyIndex: 50, // PolicyName: Mongol
-		FormatIndex: 20, // "+07/+08"
+		PolicyIndex: 71, // PolicyName: Mongol
+		FormatIndex: 21, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6769,14 +9366,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Irkutsk
-	// EraIndex: 375
-	// EraCount: 3
+	// EraIndex: 573
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              8:00    Russia    +08/+09    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 24, // "+08/+09"
+		OffsetCode: 32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              7:00    Russia    +07/+08    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              8:00    Russia    +08/+09    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 22, // "+08/+09"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 24, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -6789,7 +9412,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              9:00    -    +09    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+09"
+		FormatIndex: 26, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -6802,7 +9425,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    -    +08
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6814,14 +9437,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jakarta
-	// EraIndex: 378
+	// EraIndex: 578
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             7:00    -    WIB
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 108, // "WIB"
+		FormatIndex: 129, // "WIB"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6833,14 +9456,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jayapura
-	// EraIndex: 379
+	// EraIndex: 579
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             9:00    -    WIT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 109, // "WIT"
+		FormatIndex: 130, // "WIT"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6852,14 +9475,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jerusalem
-	// EraIndex: 380
+	// EraIndex: 580
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             2:00    Zion    I%sT
 	{
-		PolicyIndex: 83, // PolicyName: Zion
-		FormatIndex: 87, // "I%T"
+		PolicyIndex: 114, // PolicyName: Zion
+		FormatIndex: 104, // "I%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6871,14 +9494,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kabul
-	// EraIndex: 381
+	// EraIndex: 581
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             4:30    -    +0430
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 11, // "+0430"
+		FormatIndex: 12, // "+0430"
 		OffsetCode: 18,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6890,14 +9513,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kamchatka
-	// EraIndex: 382
-	// EraCount: 3
+	// EraIndex: 582
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             12:00    Russia    +12/+13    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 36, // "+12/+13"
+		OffsetCode: 48,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             11:00    Russia    +11/+12    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
+		OffsetCode: 44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             12:00    Russia    +12/+13    2010 Mar 28  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 33, // "+12/+13"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 36, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -6909,8 +9558,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 30, // "+11/+12"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -6923,7 +9572,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             12:00    -    +12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6935,14 +9584,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Karachi
-	// EraIndex: 385
+	// EraIndex: 587
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             5:00 Pakistan    PK%sT
 	{
-		PolicyIndex: 58, // PolicyName: Pakistan
-		FormatIndex: 101, // "PK%T"
+		PolicyIndex: 79, // PolicyName: Pakistan
+		FormatIndex: 119, // "PK%T"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6954,14 +9603,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kathmandu
-	// EraIndex: 386
-	// EraCount: 1
+	// EraIndex: 588
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             5:30    -    +0530    1986
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 15, // "+0530"
+		OffsetCode: 22,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1986,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             5:45    -    +0545
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+0545"
+		FormatIndex: 16, // "+0545"
 		OffsetCode: 23,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -6973,14 +9635,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Khandyga
-	// EraIndex: 387
-	// EraCount: 5
+	// EraIndex: 590
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              9:00    Russia    +09/+10    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 27, // "+09/+10"
+		OffsetCode: 36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              8:00    Russia    +08/+09    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 24, // "+08/+09"
+		OffsetCode: 32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              9:00    Russia    +09/+10    2004
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 25, // "+09/+10"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 27, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -6992,8 +9680,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 27, // "+10/+11"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 29, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7006,7 +9694,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2011 Sep 13  0:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7019,7 +9707,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7032,7 +9720,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              9:00    -    +09
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+09"
+		FormatIndex: 26, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7044,14 +9732,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kolkata
-	// EraIndex: 392
+	// EraIndex: 597
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             5:30    -    IST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 88, // "IST"
+		FormatIndex: 105, // "IST"
 		OffsetCode: 22,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7063,14 +9751,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Krasnoyarsk
-	// EraIndex: 393
-	// EraCount: 3
+	// EraIndex: 598
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              7:00    Russia    +07/+08    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 20, // "+07/+08"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7083,7 +9797,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    -    +08    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7096,7 +9810,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7108,14 +9822,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kuching
-	// EraIndex: 396
+	// EraIndex: 603
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             8:00    -    +08
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7127,14 +9841,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Macau
-	// EraIndex: 397
+	// EraIndex: 604
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             8:00    Macau    C%sT
 	{
-		PolicyIndex: 45, // PolicyName: Macau
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 65, // PolicyName: Macau
+		FormatIndex: 84, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7146,14 +9860,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Magadan
-	// EraIndex: 398
-	// EraCount: 4
+	// EraIndex: 605
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             11:00    Russia    +11/+12    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
+		OffsetCode: 44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             10:00    Russia    +10/+11    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 29, // "+10/+11"
+		OffsetCode: 40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 30, // "+11/+12"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7166,7 +9906,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             12:00    -    +12    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7179,7 +9919,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    +10    2016 Apr 24  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -7192,7 +9932,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7204,14 +9944,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Makassar
-	// EraIndex: 402
+	// EraIndex: 611
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             8:00    -    WITA
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 110, // "WITA"
+		FormatIndex: 131, // "WITA"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7223,14 +9963,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Manila
-	// EraIndex: 403
+	// EraIndex: 612
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             8:00    Phil    P%sT
 	{
-		PolicyIndex: 62, // PolicyName: Phil
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 83, // PolicyName: Phil
+		FormatIndex: 118, // "P%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7242,14 +9982,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Nicosia
-	// EraIndex: 404
-	// EraCount: 1
+	// EraIndex: 613
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             2:00    Cyprus    EE%sT    1998 Sep
+	{
+		PolicyIndex: 28, // PolicyName: Cyprus
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 9,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EUAsia    EE%sT
 	{
-		PolicyIndex: 25, // PolicyName: EUAsia
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 35, // PolicyName: EUAsia
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7261,14 +10014,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Novokuznetsk
-	// EraIndex: 405
-	// EraCount: 3
+	// EraIndex: 615
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              7:00    Russia    +07/+08    2010 Mar 28  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 20, // "+07/+08"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -7280,8 +10059,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 17, // "+06/+07"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7294,7 +10073,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7306,14 +10085,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Novosibirsk
-	// EraIndex: 408
-	// EraCount: 4
+	// EraIndex: 620
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              7:00    Russia    +07/+08    1993 May 23
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1993,
+		UntilMonth: 5,
+		UntilDay: 23,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 17, // "+06/+07"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7326,7 +10144,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7339,7 +10157,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              6:00    -    +06    2016 Jul 24  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -7352,7 +10170,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7364,14 +10182,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Omsk
-	// EraIndex: 412
-	// EraCount: 3
+	// EraIndex: 627
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              6:00    Russia    +06/+07    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              5:00    Russia    +05/+06    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 17, // "+06/+07"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7384,7 +10228,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7397,7 +10241,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              6:00    -    +06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7409,14 +10253,92 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Oral
-	// EraIndex: 415
-	// EraCount: 2
+	// EraIndex: 632
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
+
+	//             5:00    -    +05    1981 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00    1:00    +06    1981 Oct  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 20,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             6:00    -    +06    1982 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1989 Mar 26  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1992 Mar 29  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -7429,7 +10351,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7441,14 +10363,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Pontianak
-	// EraIndex: 417
-	// EraCount: 1
+	// EraIndex: 640
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             8:00    -    WITA    1988 Jan  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 131, // "WITA"
+		OffsetCode: 32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             7:00    -    WIB
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 108, // "WIB"
+		FormatIndex: 129, // "WIB"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7460,14 +10395,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Pyongyang
-	// EraIndex: 418
+	// EraIndex: 642
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             9:00    -    KST    2015 Aug 15 00:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 92, // "KST"
+		FormatIndex: 109, // "KST"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -7480,7 +10415,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:30    -    KST    2018 May  4 23:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 92, // "KST"
+		FormatIndex: 109, // "KST"
 		OffsetCode: 34,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -7493,7 +10428,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    KST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 92, // "KST"
+		FormatIndex: 109, // "KST"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7505,14 +10440,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qatar
-	// EraIndex: 421
+	// EraIndex: 645
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             3:00    -    +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7524,14 +10459,79 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qostanay
-	// EraIndex: 422
-	// EraCount: 2
+	// EraIndex: 646
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             5:00    -    +05    1981 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00    1:00    +06    1981 Oct  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 20,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             6:00    -    +06    1982 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 13, // "+05/+06"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -7544,7 +10544,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             6:00    -    +06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7556,14 +10556,105 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qyzylorda
-	// EraIndex: 424
-	// EraCount: 3
+	// EraIndex: 653
+	// EraCount: 10
 	// ---------------------------------------------------------------------------
+
+	//             5:00    -    +05    1981 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00    1:00    +06    1981 Oct  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 20,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             6:00    -    +06    1982 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             4:00 RussiaAsia    +04/+05    1991 Sep 29  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 9,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             6:00 RussiaAsia    +06/+07    1992 Mar 29  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 13, // "+05/+06"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -7576,7 +10667,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             6:00    -    +06    2018 Dec 21  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -7589,7 +10680,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7601,14 +10692,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Riyadh
-	// EraIndex: 427
+	// EraIndex: 663
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             3:00    -    +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7620,14 +10711,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Sakhalin
-	// EraIndex: 428
-	// EraCount: 4
+	// EraIndex: 664
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             11:00    Russia    +11/+12    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
+		OffsetCode: 44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             10:00    Russia    +10/+11    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 29, // "+10/+11"
+		OffsetCode: 40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             11:00    Russia    +11/+12    1997 Mar lastSun  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
+		OffsetCode: 44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 3,
+		UntilDay: 30,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 27, // "+10/+11"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 29, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7640,7 +10770,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7653,7 +10783,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    +10    2016 Mar 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -7666,7 +10796,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7678,14 +10808,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Samarkand
-	// EraIndex: 432
-	// EraCount: 1
+	// EraIndex: 671
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             5:00    -    +05    1981 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00    1:00    +06    1981 Oct  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 20,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             6:00    -    +06    1982 Apr  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 17, // "+06"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1992
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7697,14 +10879,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Seoul
-	// EraIndex: 433
+	// EraIndex: 676
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             9:00    ROK    K%sT
 	{
-		PolicyIndex: 63, // PolicyName: ROK
-		FormatIndex: 91, // "K%T"
+		PolicyIndex: 86, // PolicyName: ROK
+		FormatIndex: 108, // "K%T"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7716,14 +10898,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Shanghai
-	// EraIndex: 434
+	// EraIndex: 677
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             8:00    PRC    C%sT
 	{
-		PolicyIndex: 57, // PolicyName: PRC
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 78, // PolicyName: PRC
+		FormatIndex: 84, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7735,14 +10917,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Singapore
-	// EraIndex: 435
-	// EraCount: 1
+	// EraIndex: 678
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             7:30    -    +0730    1981 Dec 31 16:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 22, // "+0730"
+		OffsetCode: 30,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 12,
+		UntilDay: 31,
+		UntilTimeCode: 64,
+		UntilTimeModifier: 32, // SuffixU + minute=0
+	},
 
 	//             8:00    -    +08
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7754,14 +10949,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Srednekolymsk
-	// EraIndex: 436
-	// EraCount: 3
+	// EraIndex: 680
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             11:00    Russia    +11/+12    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
+		OffsetCode: 44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             10:00    Russia    +10/+11    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 29, // "+10/+11"
+		OffsetCode: 40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 30, // "+11/+12"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7774,7 +10995,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             12:00    -    +12    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7787,7 +11008,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7799,14 +11020,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Taipei
-	// EraIndex: 439
+	// EraIndex: 685
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             8:00    Taiwan    C%sT
 	{
-		PolicyIndex: 72, // PolicyName: Taiwan
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 99, // PolicyName: Taiwan
+		FormatIndex: 84, // "C%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7818,14 +11039,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tashkent
-	// EraIndex: 440
-	// EraCount: 1
+	// EraIndex: 686
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             6:00 RussiaAsia    +06/+07    1991 Mar 31  2:00
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             5:00 RussiaAsia    +05/+06    1992
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7837,14 +11084,79 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tbilisi
-	// EraIndex: 441
-	// EraCount: 3
+	// EraIndex: 689
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
+
+	//             4:00 RussiaAsia +04/+05    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             3:00 RussiaAsia +03/+04    1992
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             3:00 E-EurAsia    +03/+04    1994 Sep lastSun
+	{
+		PolicyIndex: 33, // PolicyName: E-EurAsia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1994,
+		UntilMonth: 9,
+		UntilDay: 25,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             4:00 E-EurAsia    +04/+05    1996 Oct lastSun
+	{
+		PolicyIndex: 33, // PolicyName: E-EurAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 10,
+		UntilDay: 27,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             4:00    1:00    +05    1997 Mar lastSun
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 16,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 3,
+		UntilDay: 30,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             4:00 E-EurAsia    +04/+05    2004 Jun 27
 	{
-		PolicyIndex: 23, // PolicyName: E-EurAsia
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 33, // PolicyName: E-EurAsia
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2004,
@@ -7856,8 +11168,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             3:00 RussiaAsia    +03/+04    2005 Mar lastSun  2:00
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 7, // "+03/+04"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 8, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2005,
@@ -7870,7 +11182,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             4:00    -    +04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7882,14 +11194,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tehran
-	// EraIndex: 444
-	// EraCount: 1
+	// EraIndex: 697
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             3:30    Iran    +0330/+0430 1977 Oct 20 24:00
+	{
+		PolicyIndex: 55, // PolicyName: Iran
+		FormatIndex: 9, // "+0330/+0430"
+		OffsetCode: 14,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1977,
+		UntilMonth: 10,
+		UntilDay: 20,
+		UntilTimeCode: 96,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             4:00    Iran    +04/+05    1979
+	{
+		PolicyIndex: 55, // PolicyName: Iran
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             3:30    Iran    +0330/+0430
 	{
-		PolicyIndex: 37, // PolicyName: Iran
-		FormatIndex: 8, // "+0330/+0430"
+		PolicyIndex: 55, // PolicyName: Iran
+		FormatIndex: 9, // "+0330/+0430"
 		OffsetCode: 14,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7901,14 +11239,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Thimphu
-	// EraIndex: 445
-	// EraCount: 1
+	// EraIndex: 700
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             5:30    -    +0530    1987 Oct
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 15, // "+0530"
+		OffsetCode: 22,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1987,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             6:00    -    +06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7920,14 +11271,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tokyo
-	// EraIndex: 446
+	// EraIndex: 702
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             9:00    Japan    J%sT
 	{
-		PolicyIndex: 39, // PolicyName: Japan
-		FormatIndex: 90, // "J%T"
+		PolicyIndex: 58, // PolicyName: Japan
+		FormatIndex: 107, // "J%T"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -7939,14 +11290,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tomsk
-	// EraIndex: 447
-	// EraCount: 5
+	// EraIndex: 703
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
+		OffsetCode: 24,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              7:00    Russia    +07/+08    2002 May  1  3:00
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 20, // "+07/+08"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 21, // "+07/+08"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -7958,8 +11335,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 17, // "+06/+07"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 18, // "+06/+07"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -7972,7 +11349,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -7985,7 +11362,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              6:00    -    +06    2016 May 29  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -7998,7 +11375,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              7:00    -    +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8010,14 +11387,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ulaanbaatar
-	// EraIndex: 452
-	// EraCount: 1
+	// EraIndex: 710
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             7:00    -    +07    1978
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 20, // "+07"
+		OffsetCode: 28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1978,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             8:00    Mongol    +08/+09
 	{
-		PolicyIndex: 50, // PolicyName: Mongol
-		FormatIndex: 22, // "+08/+09"
+		PolicyIndex: 71, // PolicyName: Mongol
+		FormatIndex: 24, // "+08/+09"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8029,14 +11419,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Urumqi
-	// EraIndex: 453
+	// EraIndex: 712
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             6:00    -    +06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8048,14 +11438,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ust-Nera
-	// EraIndex: 454
-	// EraCount: 4
+	// EraIndex: 713
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              9:00    Russia    +09/+10    1981 Apr  1
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 27, // "+09/+10"
+		OffsetCode: 36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             11:00    Russia    +11/+12    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
+		OffsetCode: 44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             10:00    Russia    +10/+11    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 29, // "+10/+11"
+		OffsetCode: 40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 30, // "+11/+12"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 33, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8068,7 +11497,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             12:00    -    +12    2011 Sep 13  0:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8081,7 +11510,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8094,7 +11523,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    +10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8106,14 +11535,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Vladivostok
-	// EraIndex: 458
-	// EraCount: 3
+	// EraIndex: 720
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             10:00    Russia    +10/+11    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 29, // "+10/+11"
+		OffsetCode: 40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              9:00    Russia    +09/+10    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 27, // "+09/+10"
+		OffsetCode: 36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 27, // "+10/+11"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 29, // "+10/+11"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8126,7 +11581,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8139,7 +11594,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    +10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8151,14 +11606,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yakutsk
-	// EraIndex: 461
-	// EraCount: 3
+	// EraIndex: 725
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              9:00    Russia    +09/+10    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 27, // "+09/+10"
+		OffsetCode: 36,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              8:00    Russia    +08/+09    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 24, // "+08/+09"
+		OffsetCode: 32,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              9:00    Russia    +09/+10    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 25, // "+09/+10"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 27, // "+09/+10"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8171,7 +11652,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    +10    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8184,7 +11665,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              9:00    -    +09
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+09"
+		FormatIndex: 26, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8196,14 +11677,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yangon
-	// EraIndex: 464
+	// EraIndex: 730
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             6:30    -    +0630
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+0630"
+		FormatIndex: 19, // "+0630"
 		OffsetCode: 26,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8215,14 +11696,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yekaterinburg
-	// EraIndex: 465
-	// EraCount: 3
+	// EraIndex: 731
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              5:00    Russia    +05/+06    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 14, // "+05/+06"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              4:00    Russia    +04/+05    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              5:00    Russia    +05/+06    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 13, // "+05/+06"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 14, // "+05/+06"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8235,7 +11742,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              6:00    -    +06    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -8248,7 +11755,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8260,14 +11767,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yerevan
-	// EraIndex: 468
-	// EraCount: 2
+	// EraIndex: 736
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             4:00 RussiaAsia +04/+05    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             3:00 RussiaAsia    +03/+04    1995 Sep 24  2:00s
+	{
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1995,
+		UntilMonth: 9,
+		UntilDay: 24,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             4:00    -    +04    1997
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 10, // "+04"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             4:00 RussiaAsia    +04/+05    2011
 	{
-		PolicyIndex: 65, // PolicyName: RussiaAsia
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 89, // PolicyName: RussiaAsia
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -8279,8 +11825,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             4:00    Armenia    +04/+05
 	{
-		PolicyIndex: 8, // PolicyName: Armenia
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 10, // PolicyName: Armenia
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8292,14 +11838,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Azores
-	// EraIndex: 470
-	// EraCount: 1
+	// EraIndex: 741
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -1:00    Port    -01/+00    1983 Sep 25  1:00s
+	{
+		PolicyIndex: 85, // PolicyName: Port
+		FormatIndex: 44, // "-01/+00"
+		OffsetCode: -4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 9,
+		UntilDay: 25,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             -1:00    W-Eur    -01/+00    1992 Sep 27  1:00s
+	{
+		PolicyIndex: 110, // PolicyName: W-Eur
+		FormatIndex: 44, // "-01/+00"
+		OffsetCode: -4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 9,
+		UntilDay: 27,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              0:00    EU    WE%sT    1993 Mar 28  1:00u
+	{
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 126, // "WE%T"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1993,
+		UntilMonth: 3,
+		UntilDay: 28,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 32, // SuffixU + minute=0
+	},
 
 	//             -1:00    EU    -01/+00
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 40, // "-01/+00"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 44, // "-01/+00"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8311,14 +11896,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Bermuda
-	// EraIndex: 471
-	// EraCount: 1
+	// EraIndex: 745
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Bermuda    A%sT    1974 Apr 28  2:00
+	{
+		PolicyIndex: 17, // PolicyName: Bermuda
+		FormatIndex: 73, // "A%T"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 4,
+		UntilDay: 28,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -4:00    Canada    A%sT    1976
+	{
+		PolicyIndex: 23, // PolicyName: Canada
+		FormatIndex: 73, // "A%T"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1976,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    US    A%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 61, // "A%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 73, // "A%T"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8330,14 +11941,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Canary
-	// EraIndex: 472
-	// EraCount: 1
+	// EraIndex: 748
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//              0:00    -    WET    1980 Apr  6  0:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 128, // "WET"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 4,
+		UntilDay: 6,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              0:00    1:00    WEST    1980 Sep 28  1:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 127, // "WEST"
+		OffsetCode: 0,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 9,
+		UntilDay: 28,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 32, // SuffixU + minute=0
+	},
 
 	//              0:00    EU    WE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 107, // "WE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 126, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8349,14 +11986,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Cape_Verde
-	// EraIndex: 473
-	// EraCount: 1
+	// EraIndex: 751
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -2:00    -    -02    1975 Nov 25  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 45, // "-02"
+		OffsetCode: -8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1975,
+		UntilMonth: 11,
+		UntilDay: 25,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -1:00    -    -01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 39, // "-01"
+		FormatIndex: 43, // "-01"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8368,14 +12018,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Faroe
-	// EraIndex: 474
-	// EraCount: 1
+	// EraIndex: 753
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//              0:00    -    WET    1981
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 128, // "WET"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              0:00    EU    WE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 107, // "WE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 126, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8387,14 +12050,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Madeira
-	// EraIndex: 475
-	// EraCount: 1
+	// EraIndex: 755
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//              0:00    Port    WE%sT    1983 Sep 25  1:00s
+	{
+		PolicyIndex: 85, // PolicyName: Port
+		FormatIndex: 126, // "WE%T"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 9,
+		UntilDay: 25,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              0:00    EU    WE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 107, // "WE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 126, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8406,14 +12082,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/South_Georgia
-	// EraIndex: 476
+	// EraIndex: 757
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -2:00    -    -02
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 41, // "-02"
+		FormatIndex: 45, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8425,14 +12101,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Stanley
-	// EraIndex: 477
-	// EraCount: 2
+	// EraIndex: 758
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             -4:00    Falk    -04/-03    1983 May
+	{
+		PolicyIndex: 40, // PolicyName: Falk
+		FormatIndex: 54, // "-04/-03"
+		OffsetCode: -16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -3:00    Falk    -03/-02    1985 Sep 15
+	{
+		PolicyIndex: 40, // PolicyName: Falk
+		FormatIndex: 49, // "-03/-02"
+		OffsetCode: -12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1985,
+		UntilMonth: 9,
+		UntilDay: 15,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -4:00    Falk    -04/-03    2010 Sep  5  2:00
 	{
-		PolicyIndex: 29, // PolicyName: Falk
-		FormatIndex: 46, // "-04/-03"
+		PolicyIndex: 40, // PolicyName: Falk
+		FormatIndex: 54, // "-04/-03"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -8445,7 +12147,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:00    -    -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8457,14 +12159,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Adelaide
-	// EraIndex: 479
+	// EraIndex: 762
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             9:30    AS    AC%sT
 	{
 		PolicyIndex: 3, // PolicyName: AS
-		FormatIndex: 62, // "AC%T"
+		FormatIndex: 74, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8476,14 +12178,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Brisbane
-	// EraIndex: 480
+	// EraIndex: 763
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             10:00    AQ    AE%sT
 	{
 		PolicyIndex: 2, // PolicyName: AQ
-		FormatIndex: 63, // "AE%T"
+		FormatIndex: 76, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8495,14 +12197,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Broken_Hill
-	// EraIndex: 481
+	// EraIndex: 764
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             9:30    AN    AC%sT    2000
 	{
 		PolicyIndex: 1, // PolicyName: AN
-		FormatIndex: 62, // "AC%T"
+		FormatIndex: 74, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -8515,7 +12217,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:30    AS    AC%sT
 	{
 		PolicyIndex: 3, // PolicyName: AS
-		FormatIndex: 62, // "AC%T"
+		FormatIndex: 74, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8527,14 +12229,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Darwin
-	// EraIndex: 483
+	// EraIndex: 766
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//              9:30    Aus    AC%sT
 	{
-		PolicyIndex: 9, // PolicyName: Aus
-		FormatIndex: 62, // "AC%T"
+		PolicyIndex: 11, // PolicyName: Aus
+		FormatIndex: 74, // "AC%T"
 		OffsetCode: 38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8546,14 +12248,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Eucla
-	// EraIndex: 484
+	// EraIndex: 767
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//              8:45    AW  +0845/+0945
 	{
 		PolicyIndex: 6, // PolicyName: AW
-		FormatIndex: 23, // "+0845/+0945"
+		FormatIndex: 25, // "+0845/+0945"
 		OffsetCode: 35,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8565,14 +12267,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Hobart
-	// EraIndex: 485
+	// EraIndex: 768
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             10:00    AT    AE%sT
 	{
 		PolicyIndex: 4, // PolicyName: AT
-		FormatIndex: 63, // "AE%T"
+		FormatIndex: 76, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8584,14 +12286,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Lindeman
-	// EraIndex: 486
-	// EraCount: 1
+	// EraIndex: 769
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             10:00    AQ    AE%sT    1992 Jul
+	{
+		PolicyIndex: 2, // PolicyName: AQ
+		FormatIndex: 76, // "AE%T"
+		OffsetCode: 40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 7,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             10:00    Holiday    AE%sT
 	{
-		PolicyIndex: 35, // PolicyName: Holiday
-		FormatIndex: 63, // "AE%T"
+		PolicyIndex: 52, // PolicyName: Holiday
+		FormatIndex: 76, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8603,14 +12318,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Lord_Howe
-	// EraIndex: 487
-	// EraCount: 1
+	// EraIndex: 771
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             10:00    -    AEST    1981 Mar
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 78, // "AEST"
+		OffsetCode: 40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 3,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             10:30    LH    +1030/+1130 1985 Jul
+	{
+		PolicyIndex: 61, // PolicyName: LH
+		FormatIndex: 31, // "+1030/+1130"
+		OffsetCode: 42,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1985,
+		UntilMonth: 7,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             10:30    LH    +1030/+11
 	{
-		PolicyIndex: 42, // PolicyName: LH
-		FormatIndex: 28, // "+1030/+11"
+		PolicyIndex: 61, // PolicyName: LH
+		FormatIndex: 30, // "+1030/+11"
 		OffsetCode: 42,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8622,14 +12363,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Melbourne
-	// EraIndex: 488
+	// EraIndex: 774
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             10:00    AV    AE%sT
 	{
 		PolicyIndex: 5, // PolicyName: AV
-		FormatIndex: 63, // "AE%T"
+		FormatIndex: 76, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8641,14 +12382,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Perth
-	// EraIndex: 489
+	// EraIndex: 775
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//              8:00    AW    AW%sT
 	{
 		PolicyIndex: 6, // PolicyName: AW
-		FormatIndex: 67, // "AW%T"
+		FormatIndex: 82, // "AW%T"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8660,14 +12401,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Sydney
-	// EraIndex: 490
+	// EraIndex: 776
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             10:00    AN    AE%sT
 	{
 		PolicyIndex: 1, // PolicyName: AN
-		FormatIndex: 63, // "AE%T"
+		FormatIndex: 76, // "AE%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8679,14 +12420,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: CET
-	// EraIndex: 491
+	// EraIndex: 777
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 1:00 C-Eur CE%sT
 	{
-		PolicyIndex: 14, // PolicyName: C-Eur
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8698,14 +12439,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: CST6CDT
-	// EraIndex: 492
+	// EraIndex: 778
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -6:00 US C%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 68, // "C%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 84, // "C%T"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8717,14 +12458,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: EET
-	// EraIndex: 493
+	// EraIndex: 779
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 2:00 EU EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8736,14 +12477,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: EST
-	// EraIndex: 494
+	// EraIndex: 780
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -5:00 - EST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "EST"
+		FormatIndex: 97, // "EST"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8755,14 +12496,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: EST5EDT
-	// EraIndex: 495
+	// EraIndex: 781
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -5:00 US E%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 75, // "E%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 92, // "E%T"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8774,14 +12515,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT
-	// EraIndex: 496
+	// EraIndex: 782
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 0 - GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "GMT"
+		FormatIndex: 99, // "GMT"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8793,14 +12534,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+1
-	// EraIndex: 497
+	// EraIndex: 783
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -1 - -01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 39, // "-01"
+		FormatIndex: 43, // "-01"
 		OffsetCode: -4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8812,14 +12553,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+10
-	// EraIndex: 498
+	// EraIndex: 784
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -10 - -10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-10"
+		FormatIndex: 66, // "-10"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8831,14 +12572,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+11
-	// EraIndex: 499
+	// EraIndex: 785
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -11 - -11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-11"
+		FormatIndex: 70, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8850,14 +12591,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+12
-	// EraIndex: 500
+	// EraIndex: 786
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -12 - -12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 60, // "-12"
+		FormatIndex: 72, // "-12"
 		OffsetCode: -48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8869,14 +12610,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+2
-	// EraIndex: 501
+	// EraIndex: 787
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -2 - -02
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 41, // "-02"
+		FormatIndex: 45, // "-02"
 		OffsetCode: -8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8888,14 +12629,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+3
-	// EraIndex: 502
+	// EraIndex: 788
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -3 - -03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "-03"
+		FormatIndex: 47, // "-03"
 		OffsetCode: -12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8907,14 +12648,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+4
-	// EraIndex: 503
+	// EraIndex: 789
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -4 - -04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 45, // "-04"
+		FormatIndex: 53, // "-04"
 		OffsetCode: -16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8926,14 +12667,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+5
-	// EraIndex: 504
+	// EraIndex: 790
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -5 - -05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 48, // "-05"
+		FormatIndex: 56, // "-05"
 		OffsetCode: -20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8945,14 +12686,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+6
-	// EraIndex: 505
+	// EraIndex: 791
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -6 - -06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 50, // "-06"
+		FormatIndex: 58, // "-06"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8964,14 +12705,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+7
-	// EraIndex: 506
+	// EraIndex: 792
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -7 - -07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 52, // "-07"
+		FormatIndex: 60, // "-07"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -8983,14 +12724,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+8
-	// EraIndex: 507
+	// EraIndex: 793
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -8 - -08
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-08"
+		FormatIndex: 62, // "-08"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9002,14 +12743,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+9
-	// EraIndex: 508
+	// EraIndex: 794
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -9 - -09
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 54, // "-09"
+		FormatIndex: 64, // "-09"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9021,7 +12762,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-1
-	// EraIndex: 509
+	// EraIndex: 795
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9040,14 +12781,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-10
-	// EraIndex: 510
+	// EraIndex: 796
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 10 - +10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9059,14 +12800,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-11
-	// EraIndex: 511
+	// EraIndex: 797
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 11 - +11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9078,14 +12819,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-12
-	// EraIndex: 512
+	// EraIndex: 798
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 12 - +12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9097,14 +12838,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-13
-	// EraIndex: 513
+	// EraIndex: 799
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 13 - +13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 35, // "+13"
+		FormatIndex: 39, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9116,14 +12857,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-14
-	// EraIndex: 514
+	// EraIndex: 800
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 14 - +14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 37, // "+14"
+		FormatIndex: 41, // "+14"
 		OffsetCode: 56,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9135,7 +12876,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-2
-	// EraIndex: 515
+	// EraIndex: 801
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9154,14 +12895,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-3
-	// EraIndex: 516
+	// EraIndex: 802
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 3 - +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9173,14 +12914,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-4
-	// EraIndex: 517
+	// EraIndex: 803
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 4 - +04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9192,14 +12933,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-5
-	// EraIndex: 518
+	// EraIndex: 804
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 5 - +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9211,14 +12952,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-6
-	// EraIndex: 519
+	// EraIndex: 805
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 6 - +06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9230,14 +12971,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-7
-	// EraIndex: 520
+	// EraIndex: 806
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 7 - +07
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 19, // "+07"
+		FormatIndex: 20, // "+07"
 		OffsetCode: 28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9249,14 +12990,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-8
-	// EraIndex: 521
+	// EraIndex: 807
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 8 - +08
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+08"
+		FormatIndex: 23, // "+08"
 		OffsetCode: 32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9268,14 +13009,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-9
-	// EraIndex: 522
+	// EraIndex: 808
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 9 - +09
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+09"
+		FormatIndex: 26, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9287,14 +13028,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/UTC
-	// EraIndex: 523
+	// EraIndex: 809
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 0 - UTC
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 105, // "UTC"
+		FormatIndex: 123, // "UTC"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9306,14 +13047,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Andorra
-	// EraIndex: 524
-	// EraCount: 1
+	// EraIndex: 810
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    -    CET    1985 Mar 31  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 89, // "CET"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1985,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9325,14 +13079,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Astrakhan
-	// EraIndex: 525
-	// EraCount: 4
+	// EraIndex: 812
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              4:00    Russia    +04/+05    1989 Mar 26  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              4:00    -    +04    1992 Mar 29  2:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 10, // "+04"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 7, // "+03/+04"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9345,7 +13138,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9358,7 +13151,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    +03    2016 Mar 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -9371,7 +13164,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9383,14 +13176,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Athens
-	// EraIndex: 529
-	// EraCount: 1
+	// EraIndex: 819
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             2:00    Greece    EE%sT    1981
+	{
+		PolicyIndex: 46, // PolicyName: Greece
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EU    EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9402,14 +13208,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Belgrade
-	// EraIndex: 530
-	// EraCount: 1
+	// EraIndex: 821
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    -    CET    1982 Nov 27
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 89, // "CET"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 11,
+		UntilDay: 27,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9421,14 +13240,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Berlin
-	// EraIndex: 531
-	// EraCount: 1
+	// EraIndex: 823
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Germany    CE%sT    1980
+	{
+		PolicyIndex: 45, // PolicyName: Germany
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9440,14 +13272,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Brussels
-	// EraIndex: 532
-	// EraCount: 1
+	// EraIndex: 825
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Belgium    CE%sT    1977
+	{
+		PolicyIndex: 15, // PolicyName: Belgium
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1977,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9459,14 +13304,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Bucharest
-	// EraIndex: 533
-	// EraCount: 1
+	// EraIndex: 827
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             2:00    Romania    EE%sT    1981 Mar 29  2:00s
+	{
+		PolicyIndex: 87, // PolicyName: Romania
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             2:00    C-Eur    EE%sT    1991
+	{
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    Romania    EE%sT    1994
+	{
+		PolicyIndex: 87, // PolicyName: Romania
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1994,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    E-Eur    EE%sT    1997
+	{
+		PolicyIndex: 32, // PolicyName: E-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EU    EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9478,14 +13375,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Budapest
-	// EraIndex: 534
-	// EraCount: 1
+	// EraIndex: 832
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Hungary    CE%sT    1984
+	{
+		PolicyIndex: 54, // PolicyName: Hungary
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1984,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9497,14 +13407,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Chisinau
-	// EraIndex: 535
-	// EraCount: 1
+	// EraIndex: 834
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             3:00    Russia    MSK/MSD    1990 May  6  2:00
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 5,
+		UntilDay: 6,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    Russia    EE%sT    1992
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    E-Eur    EE%sT    1997
+	{
+		PolicyIndex: 32, // PolicyName: E-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    Moldova    EE%sT
 	{
-		PolicyIndex: 48, // PolicyName: Moldova
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 69, // PolicyName: Moldova
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9516,14 +13465,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Dublin
-	// EraIndex: 536
+	// EraIndex: 838
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//              1:00    Eire    IST/GMT
 	{
-		PolicyIndex: 28, // PolicyName: Eire
-		FormatIndex: 89, // "IST/GMT"
+		PolicyIndex: 39, // PolicyName: Eire
+		FormatIndex: 106, // "IST/GMT"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9535,14 +13484,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Gibraltar
-	// EraIndex: 537
-	// EraCount: 1
+	// EraIndex: 839
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    -    CET    1982
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 89, // "CET"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9554,14 +13516,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Helsinki
-	// EraIndex: 538
-	// EraCount: 1
+	// EraIndex: 841
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             2:00    Finland    EE%sT    1983
+	{
+		PolicyIndex: 42, // PolicyName: Finland
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EU    EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9573,14 +13548,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Istanbul
-	// EraIndex: 539
-	// EraCount: 9
+	// EraIndex: 843
+	// EraCount: 11
 	// ---------------------------------------------------------------------------
+
+	//             2:00    Turkey    EE%sT    1978 Jun 29
+	{
+		PolicyIndex: 105, // PolicyName: Turkey
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1978,
+		UntilMonth: 6,
+		UntilDay: 29,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             3:00    Turkey    +03/+04    1984 Nov  1  2:00
+	{
+		PolicyIndex: 105, // PolicyName: Turkey
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1984,
+		UntilMonth: 11,
+		UntilDay: 1,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    Turkey    EE%sT    2007
 	{
-		PolicyIndex: 77, // PolicyName: Turkey
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 105, // PolicyName: Turkey
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2007,
@@ -9592,8 +13593,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00    EU    EE%sT    2011 Mar 27  1:00u
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9606,7 +13607,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2011 Mar 28  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9618,8 +13619,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00    EU    EE%sT    2014 Mar 30  1:00u
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9632,7 +13633,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2014 Mar 31  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9644,8 +13645,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00    EU    EE%sT    2015 Oct 25  1:00u
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -9658,7 +13659,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    1:00    EEST    2015 Nov  8  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 78, // "EEST"
+		FormatIndex: 95, // "EEST"
 		OffsetCode: 8,
 		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
 		UntilYear: 2015,
@@ -9670,8 +13671,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00    EU    EE%sT    2016 Sep  7
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -9684,7 +13685,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9696,14 +13697,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kaliningrad
-	// EraIndex: 548
-	// EraCount: 3
+	// EraIndex: 854
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//              3:00    Russia    MSK/MSD    1989 Mar 26  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              2:00    Russia    EE%sT    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9716,7 +13730,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    +03    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9729,7 +13743,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    -    EET
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9741,14 +13755,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kirov
-	// EraIndex: 551
-	// EraCount: 3
+	// EraIndex: 858
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//              4:00    Russia    +04/+05    1989 Mar 26  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              4:00    -    +04    1992 Mar 29  2:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 10, // "+04"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 7, // "+03/+04"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9761,7 +13814,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9774,7 +13827,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9786,14 +13839,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kyiv
-	// EraIndex: 554
-	// EraCount: 1
+	// EraIndex: 864
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             3:00    Russia    MSK/MSD    1990 Jul  1  2:00
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 7,
+		UntilDay: 1,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    1:00    EEST    1991 Sep 29  3:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 95, // "EEST"
+		OffsetCode: 8,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 9,
+		UntilDay: 29,
+		UntilTimeCode: 12,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    C-Eur    EE%sT    1996 May 13
+	{
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 5,
+		UntilDay: 13,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EU    EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9805,14 +13897,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Lisbon
-	// EraIndex: 555
-	// EraCount: 1
+	// EraIndex: 868
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              1:00    -    CET    1976 Sep 26  1:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 89, // "CET"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1976,
+		UntilMonth: 9,
+		UntilDay: 26,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              0:00    Port    WE%sT    1983 Sep 25  1:00s
+	{
+		PolicyIndex: 85, // PolicyName: Port
+		FormatIndex: 126, // "WE%T"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1983,
+		UntilMonth: 9,
+		UntilDay: 25,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              0:00    W-Eur    WE%sT    1992 Sep 27  1:00s
+	{
+		PolicyIndex: 110, // PolicyName: W-Eur
+		FormatIndex: 126, // "WE%T"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 9,
+		UntilDay: 27,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              1:00    EU    CE%sT    1996 Mar 31  1:00u
+	{
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 32, // SuffixU + minute=0
+	},
 
 	//              0:00    EU    WE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 107, // "WE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 126, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9824,14 +13968,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/London
-	// EraIndex: 556
-	// EraCount: 1
+	// EraIndex: 873
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//              0:00    GB-Eire    %s    1996
+	{
+		PolicyIndex: 44, // PolicyName: GB-Eire
+		FormatIndex: 1, // "%"
+		OffsetCode: 0,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              0:00    EU    GMT/BST
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 83, // "GMT/BST"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 100, // "GMT/BST"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9843,14 +14000,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Madrid
-	// EraIndex: 557
-	// EraCount: 1
+	// EraIndex: 875
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//              1:00    Spain    CE%sT    1979
+	{
+		PolicyIndex: 93, // PolicyName: Spain
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9862,14 +14032,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Malta
-	// EraIndex: 558
-	// EraCount: 1
+	// EraIndex: 877
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Italy    CE%sT    1973 Mar 31
+	{
+		PolicyIndex: 57, // PolicyName: Italy
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1973,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             1:00    Malta    CE%sT    1981
+	{
+		PolicyIndex: 66, // PolicyName: Malta
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9881,14 +14077,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Minsk
-	// EraIndex: 559
-	// EraCount: 2
+	// EraIndex: 880
+	// EraCount: 4
 	// ---------------------------------------------------------------------------
+
+	//             3:00    Russia    MSK/MSD    1990
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             3:00    -    MSK    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 113, // "MSK"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             2:00    Russia    EE%sT    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9901,7 +14123,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9913,14 +14135,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Moscow
-	// EraIndex: 561
-	// EraCount: 3
+	// EraIndex: 884
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//              3:00    Russia    MSK/MSD    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              2:00    Russia    EE%sT    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              3:00    Russia    MSK/MSD    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 96, // "MSK/MSD"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -9933,7 +14181,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 95, // "MSK"
+		FormatIndex: 113, // "MSK"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -9946,7 +14194,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 95, // "MSK"
+		FormatIndex: 113, // "MSK"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9958,14 +14206,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Paris
-	// EraIndex: 564
-	// EraCount: 1
+	// EraIndex: 889
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    France    CE%sT    1977
+	{
+		PolicyIndex: 43, // PolicyName: France
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1977,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9977,14 +14238,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Prague
-	// EraIndex: 565
-	// EraCount: 1
+	// EraIndex: 891
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Czech    CE%sT    1979
+	{
+		PolicyIndex: 29, // PolicyName: Czech
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -9996,14 +14270,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Riga
-	// EraIndex: 566
-	// EraCount: 3
+	// EraIndex: 893
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             3:00    Russia    MSK/MSD    1989 Mar lastSun  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             2:00    1:00    EEST    1989 Sep lastSun  2:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 95, // "EEST"
+		OffsetCode: 8,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 9,
+		UntilDay: 24,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             2:00    Latvia    EE%sT    1997 Jan 21
+	{
+		PolicyIndex: 62, // PolicyName: Latvia
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 1,
+		UntilDay: 21,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EU    EE%sT    2000 Feb 29
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -10016,7 +14329,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2001 Jan  2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2001,
@@ -10028,8 +14341,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00    EU    EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10041,14 +14354,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Rome
-	// EraIndex: 569
-	// EraCount: 1
+	// EraIndex: 899
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Italy    CE%sT    1980
+	{
+		PolicyIndex: 57, // PolicyName: Italy
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1980,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10060,14 +14386,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Samara
-	// EraIndex: 570
-	// EraCount: 3
+	// EraIndex: 901
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              4:00    Russia    +04/+05    1989 Mar 26  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              2:00    Russia    +02/+03    1991 Sep 29  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 6, // "+02/+03"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 9,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    -    +03    1991 Oct 20  3:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 7, // "+03"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 10,
+		UntilDay: 20,
+		UntilTimeCode: 12,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              4:00    Russia    +04/+05    2010 Mar 28  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2010,
@@ -10079,8 +14457,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 7, // "+03/+04"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -10093,7 +14471,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10105,14 +14483,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Saratov
-	// EraIndex: 573
-	// EraCount: 4
+	// EraIndex: 908
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              4:00    Russia    +04/+05    1988 Mar 27  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 3,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              4:00    -    +04    1992 Mar 29  2:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 10, // "+04"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 7, // "+03/+04"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -10125,7 +14542,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -10138,7 +14555,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    +03    2016 Dec  4  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -10151,7 +14568,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10163,14 +14580,105 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Simferopol
-	// EraIndex: 577
-	// EraCount: 3
+	// EraIndex: 915
+	// EraCount: 10
 	// ---------------------------------------------------------------------------
+
+	//              3:00    Russia    MSK/MSD    1990
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              3:00    -    MSK    1990 Jul  1  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 113, // "MSK"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1990,
+		UntilMonth: 7,
+		UntilDay: 1,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              2:00    -    EET    1992 Mar 20
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 96, // "EET"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 20,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              2:00    C-Eur    EE%sT    1994 May
+	{
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1994,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//              3:00    C-Eur    MSK/MSD    1996 Mar 31  0:00s
+	{
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    1:00    MSD    1996 Oct 27  3:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 112, // "MSD"
+		OffsetCode: 12,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 10,
+		UntilDay: 27,
+		UntilTimeCode: 12,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    -    MSK    1997 Mar lastSun  1:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 113, // "MSK"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 3,
+		UntilDay: 30,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 32, // SuffixU + minute=0
+	},
 
 	//              2:00    EU    EE%sT    2014 Mar 30  2:00
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -10183,7 +14691,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 95, // "MSK"
+		FormatIndex: 113, // "MSK"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -10196,7 +14704,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 95, // "MSK"
+		FormatIndex: 113, // "MSK"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10208,14 +14716,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Sofia
-	// EraIndex: 580
-	// EraCount: 1
+	// EraIndex: 925
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             2:00    -    EET    1979 Mar 31 23:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 96, // "EET"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 92,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    Bulg    EE%sT    1982 Sep 26  3:00
+	{
+		PolicyIndex: 19, // PolicyName: Bulg
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 9,
+		UntilDay: 26,
+		UntilTimeCode: 12,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    C-Eur    EE%sT    1991
+	{
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    E-Eur    EE%sT    1997
+	{
+		PolicyIndex: 32, // PolicyName: E-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1997,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EU    EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10227,14 +14787,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Tallinn
-	// EraIndex: 581
-	// EraCount: 3
+	// EraIndex: 930
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
+
+	//             3:00    Russia    MSK/MSD    1989 Mar 26  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             2:00    1:00    EEST    1989 Sep 24  2:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 95, // "EEST"
+		OffsetCode: 8,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 9,
+		UntilDay: 24,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             2:00    C-Eur    EE%sT    1998 Sep 22
+	{
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 9,
+		UntilDay: 22,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             2:00    EU    EE%sT    1999 Oct 31  4:00
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -10247,7 +14846,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2002 Feb 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2002,
@@ -10259,8 +14858,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00    EU    EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10272,14 +14871,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Tirane
-	// EraIndex: 584
-	// EraCount: 1
+	// EraIndex: 936
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Albania    CE%sT    1984 Jul
+	{
+		PolicyIndex: 7, // PolicyName: Albania
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1984,
+		UntilMonth: 7,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10291,14 +14903,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Ulyanovsk
-	// EraIndex: 585
-	// EraCount: 4
+	// EraIndex: 938
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//              4:00    Russia    +04/+05    1989 Mar 26  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              2:00    Russia    +02/+03    1992 Jan 19  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 6, // "+02/+03"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 1,
+		UntilDay: 19,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 7, // "+03/+04"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -10311,7 +14962,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -10324,7 +14975,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    +03    2016 Mar 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2016,
@@ -10337,7 +14988,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10349,14 +15000,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Vienna
-	// EraIndex: 589
-	// EraCount: 1
+	// EraIndex: 945
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Austria    CE%sT    1981
+	{
+		PolicyIndex: 12, // PolicyName: Austria
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10368,14 +15032,66 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Vilnius
-	// EraIndex: 590
-	// EraCount: 3
+	// EraIndex: 947
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
+
+	//             3:00    Russia    MSK/MSD    1989 Mar 26  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 114, // "MSK/MSD"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1989,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             2:00    Russia    EE%sT    1991 Sep 29  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 9,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             2:00    C-Eur    EE%sT    1998
+	{
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 94, // "EE%T"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             2:00    -    EET    1998 Mar 29  1:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 96, // "EET"
+		OffsetCode: 8,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 4,
+		UntilTimeModifier: 32, // SuffixU + minute=0
+	},
 
 	//             1:00    EU    CE%sT    1999 Oct 31  1:00u
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -10388,7 +15104,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2003 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 79, // "EET"
+		FormatIndex: 96, // "EET"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2003,
@@ -10400,8 +15116,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             2:00    EU    EE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 94, // "EE%T"
 		OffsetCode: 8,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10413,14 +15129,53 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Volgograd
-	// EraIndex: 593
-	// EraCount: 5
+	// EraIndex: 954
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
+
+	//              4:00    Russia    +04/+05    1988 Mar 27  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 11, // "+04/+05"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 3,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	{
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
+		OffsetCode: 12,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1991,
+		UntilMonth: 3,
+		UntilDay: 31,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//              4:00    -    +04    1992 Mar 29  2:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 10, // "+04"
+		OffsetCode: 16,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1992,
+		UntilMonth: 3,
+		UntilDay: 29,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
 	{
-		PolicyIndex: 64, // PolicyName: Russia
-		FormatIndex: 7, // "+03/+04"
+		PolicyIndex: 88, // PolicyName: Russia
+		FormatIndex: 8, // "+03/+04"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -10433,7 +15188,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -10446,7 +15201,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    +03    2018 Oct 28  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2018,
@@ -10459,7 +15214,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    +04    2020 Dec 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 9, // "+04"
+		FormatIndex: 10, // "+04"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2020,
@@ -10472,7 +15227,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    +03
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 6, // "+03"
+		FormatIndex: 7, // "+03"
 		OffsetCode: 12,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10484,14 +15239,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Warsaw
-	// EraIndex: 598
-	// EraCount: 1
+	// EraIndex: 962
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Poland    CE%sT    1977
+	{
+		PolicyIndex: 84, // PolicyName: Poland
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1977,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             1:00    W-Eur    CE%sT    1988
+	{
+		PolicyIndex: 110, // PolicyName: W-Eur
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1988,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10503,14 +15284,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Zurich
-	// EraIndex: 599
-	// EraCount: 1
+	// EraIndex: 965
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             1:00    Swiss    CE%sT    1981
+	{
+		PolicyIndex: 97, // PolicyName: Swiss
+		FormatIndex: 88, // "CE%T"
+		OffsetCode: 4,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1981,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             1:00    EU    CE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 88, // "CE%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10522,14 +15316,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: HST
-	// EraIndex: 600
+	// EraIndex: 967
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -10:00 - HST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 86, // "HST"
+		FormatIndex: 103, // "HST"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10541,14 +15335,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Chagos
-	// EraIndex: 601
-	// EraCount: 1
+	// EraIndex: 968
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             5:00    -    +05    1996
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 13, // "+05"
+		OffsetCode: 20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1996,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             6:00    -    +06
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 16, // "+06"
+		FormatIndex: 17, // "+06"
 		OffsetCode: 24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10560,14 +15367,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Maldives
-	// EraIndex: 602
+	// EraIndex: 970
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             5:00    -    +05
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+05"
+		FormatIndex: 13, // "+05"
 		OffsetCode: 20,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10579,14 +15386,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Mauritius
-	// EraIndex: 603
+	// EraIndex: 971
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             4:00 Mauritius    +04/+05
 	{
-		PolicyIndex: 46, // PolicyName: Mauritius
-		FormatIndex: 10, // "+04/+05"
+		PolicyIndex: 67, // PolicyName: Mauritius
+		FormatIndex: 11, // "+04/+05"
 		OffsetCode: 16,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10598,14 +15405,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: MET
-	// EraIndex: 604
+	// EraIndex: 972
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 1:00 C-Eur ME%sT
 	{
-		PolicyIndex: 14, // PolicyName: C-Eur
-		FormatIndex: 94, // "ME%T"
+		PolicyIndex: 20, // PolicyName: C-Eur
+		FormatIndex: 111, // "ME%T"
 		OffsetCode: 4,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10617,14 +15424,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: MST
-	// EraIndex: 605
+	// EraIndex: 973
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -7:00 - MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "MST"
+		FormatIndex: 115, // "MST"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10636,14 +15443,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: MST7MDT
-	// EraIndex: 606
+	// EraIndex: 974
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -7:00 US M%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 93, // "M%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 110, // "M%T"
 		OffsetCode: -28,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10655,14 +15462,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: PST8PDT
-	// EraIndex: 607
+	// EraIndex: 975
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// -8:00 US P%sT
 	{
-		PolicyIndex: 78, // PolicyName: US
-		FormatIndex: 100, // "P%T"
+		PolicyIndex: 106, // PolicyName: US
+		FormatIndex: 118, // "P%T"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10674,14 +15481,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Apia
-	// EraIndex: 608
+	// EraIndex: 976
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -11:00    WS    -11/-10    2011 Dec 29 24:00
 	{
-		PolicyIndex: 81, // PolicyName: WS
-		FormatIndex: 59, // "-11/-10"
+		PolicyIndex: 111, // PolicyName: WS
+		FormatIndex: 71, // "-11/-10"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -10693,8 +15500,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//              13:00    WS    +13/+14
 	{
-		PolicyIndex: 81, // PolicyName: WS
-		FormatIndex: 36, // "+13/+14"
+		PolicyIndex: 111, // PolicyName: WS
+		FormatIndex: 40, // "+13/+14"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10706,14 +15513,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Auckland
-	// EraIndex: 610
+	// EraIndex: 978
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             12:00    NZ    NZ%sT
 	{
-		PolicyIndex: 54, // PolicyName: NZ
-		FormatIndex: 99, // "NZ%T"
+		PolicyIndex: 75, // PolicyName: NZ
+		FormatIndex: 117, // "NZ%T"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10725,14 +15532,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Bougainville
-	// EraIndex: 611
+	// EraIndex: 979
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             10:00    -    +10    2014 Dec 28  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2014,
@@ -10745,7 +15552,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10757,14 +15564,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Chatham
-	// EraIndex: 613
+	// EraIndex: 981
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             12:45    Chatham    +1245/+1345
 	{
-		PolicyIndex: 18, // PolicyName: Chatham
-		FormatIndex: 34, // "+1245/+1345"
+		PolicyIndex: 24, // PolicyName: Chatham
+		FormatIndex: 38, // "+1245/+1345"
 		OffsetCode: 51,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10776,14 +15583,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Easter
-	// EraIndex: 614
-	// EraCount: 1
+	// EraIndex: 982
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -7:00    Chile    -07/-06    1982 Mar 14 3:00u
+	{
+		PolicyIndex: 25, // PolicyName: Chile
+		FormatIndex: 61, // "-07/-06"
+		OffsetCode: -28,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1982,
+		UntilMonth: 3,
+		UntilDay: 14,
+		UntilTimeCode: 12,
+		UntilTimeModifier: 32, // SuffixU + minute=0
+	},
 
 	//             -6:00    Chile    -06/-05
 	{
-		PolicyIndex: 19, // PolicyName: Chile
-		FormatIndex: 51, // "-06/-05"
+		PolicyIndex: 25, // PolicyName: Chile
+		FormatIndex: 59, // "-06/-05"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10795,14 +15615,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Efate
-	// EraIndex: 615
+	// EraIndex: 984
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             11:00    Vanuatu    +11/+12
 	{
-		PolicyIndex: 80, // PolicyName: Vanuatu
-		FormatIndex: 30, // "+11/+12"
+		PolicyIndex: 109, // PolicyName: Vanuatu
+		FormatIndex: 33, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10814,14 +15634,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Fakaofo
-	// EraIndex: 616
+	// EraIndex: 985
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             -11:00    -    -11    2011 Dec 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-11"
+		FormatIndex: 70, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2011,
@@ -10834,7 +15654,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             13:00    -    +13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 35, // "+13"
+		FormatIndex: 39, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10846,14 +15666,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Fiji
-	// EraIndex: 618
+	// EraIndex: 987
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             12:00    Fiji    +12/+13
 	{
-		PolicyIndex: 30, // PolicyName: Fiji
-		FormatIndex: 33, // "+12/+13"
+		PolicyIndex: 41, // PolicyName: Fiji
+		FormatIndex: 36, // "+12/+13"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10865,14 +15685,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Galapagos
-	// EraIndex: 619
-	// EraCount: 1
+	// EraIndex: 988
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -5:00    -    -05    1986
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 56, // "-05"
+		OffsetCode: -20,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1986,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -6:00    Ecuador    -06/-05
 	{
-		PolicyIndex: 26, // PolicyName: Ecuador
-		FormatIndex: 51, // "-06/-05"
+		PolicyIndex: 36, // PolicyName: Ecuador
+		FormatIndex: 59, // "-06/-05"
 		OffsetCode: -24,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10884,14 +15717,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Gambier
-	// EraIndex: 620
+	// EraIndex: 990
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//              -9:00    -    -09
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 54, // "-09"
+		FormatIndex: 64, // "-09"
 		OffsetCode: -36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10903,14 +15736,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Guadalcanal
-	// EraIndex: 621
+	// EraIndex: 991
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             11:00    -    +11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10922,14 +15755,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Guam
-	// EraIndex: 622
+	// EraIndex: 992
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             10:00    Guam    G%sT    2000 Dec 23
 	{
-		PolicyIndex: 31, // PolicyName: Guam
-		FormatIndex: 81, // "G%T"
+		PolicyIndex: 47, // PolicyName: Guam
+		FormatIndex: 98, // "G%T"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2000,
@@ -10942,7 +15775,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    ChST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 74, // "ChST"
+		FormatIndex: 91, // "ChST"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10954,14 +15787,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Honolulu
-	// EraIndex: 624
+	// EraIndex: 994
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -10:00    -    HST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 86, // "HST"
+		FormatIndex: 103, // "HST"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10973,14 +15806,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kanton
-	// EraIndex: 625
-	// EraCount: 1
+	// EraIndex: 995
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -12:00    -    -12    1979 Oct
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 72, // "-12"
+		OffsetCode: -48,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -11:00    -    -11    1994 Dec 31
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 70, // "-11"
+		OffsetCode: -44,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1994,
+		UntilMonth: 12,
+		UntilDay: 31,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              13:00    -    +13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 35, // "+13"
+		FormatIndex: 39, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -10992,14 +15851,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kiritimati
-	// EraIndex: 626
-	// EraCount: 1
+	// EraIndex: 998
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
+
+	//             -10:40    -    -1040    1979 Oct
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 69, // "-1040"
+		OffsetCode: -43,
+		DeltaCode: 84, // ((offset_minute=5) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
+
+	//             -10:00    -    -10    1994 Dec 31
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "-10"
+		OffsetCode: -40,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1994,
+		UntilMonth: 12,
+		UntilDay: 31,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              14:00    -    +14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 37, // "+14"
+		FormatIndex: 41, // "+14"
 		OffsetCode: 56,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11011,14 +15896,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kosrae
-	// EraIndex: 627
+	// EraIndex: 1001
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//              12:00    -    +12    1999
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -11031,7 +15916,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              11:00    -    +11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11043,14 +15928,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kwajalein
-	// EraIndex: 629
-	// EraCount: 1
+	// EraIndex: 1003
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -12:00    -    -12    1993 Aug 20 24:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 72, // "-12"
+		OffsetCode: -48,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1993,
+		UntilMonth: 8,
+		UntilDay: 20,
+		UntilTimeCode: 96,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//              12:00    -    +12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11062,14 +15960,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Marquesas
-	// EraIndex: 630
+	// EraIndex: 1005
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//              -9:30    -    -0930
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 55, // "-0930"
+		FormatIndex: 65, // "-0930"
 		OffsetCode: -38,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11081,14 +15979,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Nauru
-	// EraIndex: 631
-	// EraCount: 1
+	// EraIndex: 1006
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             11:30    -    +1130    1979 Feb 10  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 34, // "+1130"
+		OffsetCode: 46,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1979,
+		UntilMonth: 2,
+		UntilDay: 10,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             12:00    -    +12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11100,14 +16011,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Niue
-	// EraIndex: 632
+	// EraIndex: 1008
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -11:00    -    -11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-11"
+		FormatIndex: 70, // "-11"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11119,14 +16030,40 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Norfolk
-	// EraIndex: 633
-	// EraCount: 3
+	// EraIndex: 1009
+	// EraCount: 5
 	// ---------------------------------------------------------------------------
+
+	//             11:30    -    +1130    1974 Oct 27 02:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 34, // "+1130"
+		OffsetCode: 46,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1974,
+		UntilMonth: 10,
+		UntilDay: 27,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
+
+	//             11:30    1:00    +1230    1975 Mar  2 02:00s
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 37, // "+1230"
+		OffsetCode: 46,
+		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		UntilYear: 1975,
+		UntilMonth: 3,
+		UntilDay: 2,
+		UntilTimeCode: 8,
+		UntilTimeModifier: 16, // SuffixS + minute=0
+	},
 
 	//             11:30    -    +1130    2015 Oct  4 02:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 31, // "+1130"
+		FormatIndex: 34, // "+1130"
 		OffsetCode: 46,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2015,
@@ -11139,7 +16076,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    -    +11    2019 Jul
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+11"
+		FormatIndex: 32, // "+11"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 2019,
@@ -11152,7 +16089,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:00    AN    +11/+12
 	{
 		PolicyIndex: 1, // PolicyName: AN
-		FormatIndex: 30, // "+11/+12"
+		FormatIndex: 33, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11164,14 +16101,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Noumea
-	// EraIndex: 636
+	// EraIndex: 1014
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             11:00    NC    +11/+12
 	{
-		PolicyIndex: 52, // PolicyName: NC
-		FormatIndex: 30, // "+11/+12"
+		PolicyIndex: 73, // PolicyName: NC
+		FormatIndex: 33, // "+11/+12"
 		OffsetCode: 44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11183,14 +16120,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Pago_Pago
-	// EraIndex: 637
+	// EraIndex: 1015
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -11:00    -    SST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 104, // "SST"
+		FormatIndex: 122, // "SST"
 		OffsetCode: -44,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11202,14 +16139,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Palau
-	// EraIndex: 638
+	// EraIndex: 1016
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//               9:00    -    +09
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+09"
+		FormatIndex: 26, // "+09"
 		OffsetCode: 36,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11221,14 +16158,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Pitcairn
-	// EraIndex: 639
-	// EraCount: 1
+	// EraIndex: 1017
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -8:30    -    -0830    1998 Apr 27  0:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 63, // "-0830"
+		OffsetCode: -34,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1998,
+		UntilMonth: 4,
+		UntilDay: 27,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -8:00    -    -08
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-08"
+		FormatIndex: 62, // "-08"
 		OffsetCode: -32,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11240,14 +16190,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Port_Moresby
-	// EraIndex: 640
+	// EraIndex: 1019
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             10:00    -    +10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 26, // "+10"
+		FormatIndex: 28, // "+10"
 		OffsetCode: 40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11259,14 +16209,27 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Rarotonga
-	// EraIndex: 641
-	// EraCount: 1
+	// EraIndex: 1020
+	// EraCount: 2
 	// ---------------------------------------------------------------------------
+
+	//             -10:30    -    -1030    1978 Nov 12
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 68, // "-1030"
+		OffsetCode: -42,
+		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		UntilYear: 1978,
+		UntilMonth: 11,
+		UntilDay: 12,
+		UntilTimeCode: 0,
+		UntilTimeModifier: 0, // SuffixW + minute=0
+	},
 
 	//             -10:00    Cook    -10/-0930
 	{
-		PolicyIndex: 20, // PolicyName: Cook
-		FormatIndex: 57, // "-10/-0930"
+		PolicyIndex: 26, // PolicyName: Cook
+		FormatIndex: 67, // "-10/-0930"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11278,14 +16241,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tahiti
-	// EraIndex: 642
+	// EraIndex: 1022
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//             -10:00    -    -10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-10"
+		FormatIndex: 66, // "-10"
 		OffsetCode: -40,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11297,14 +16260,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tarawa
-	// EraIndex: 643
+	// EraIndex: 1023
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	//              12:00    -    +12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 32, // "+12"
+		FormatIndex: 35, // "+12"
 		OffsetCode: 48,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11316,14 +16279,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tongatapu
-	// EraIndex: 644
+	// EraIndex: 1024
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	//             13:00    -    +13    1999
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 35, // "+13"
+		FormatIndex: 39, // "+13"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 1999,
@@ -11335,8 +16298,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	//             13:00    Tonga    +13/+14
 	{
-		PolicyIndex: 74, // PolicyName: Tonga
-		FormatIndex: 36, // "+13/+14"
+		PolicyIndex: 101, // PolicyName: Tonga
+		FormatIndex: 40, // "+13/+14"
 		OffsetCode: 52,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11348,14 +16311,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: WET
-	// EraIndex: 646
+	// EraIndex: 1026
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 0:00 EU WE%sT
 	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 107, // "WE%T"
+		PolicyIndex: 34, // PolicyName: EU
+		FormatIndex: 126, // "WE%T"
 		OffsetCode: 0,
 		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
 		UntilYear: 10000,
@@ -11368,658 +16331,1038 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 }
 
-const ZoneEraCount = 647
+const ZoneEraCount = 1027
 
 const ZoneEraChunkSize = 11
 
 // ZoneErasData contains the ZoneEraRecords data as a hex encoded string.
-const ZoneErasData = "\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x48\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x1b\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x02\x00\x33\x00\x04\xe2\x07\x0a\x1c\x0c\x00" +
-		"\x04\x00\x33\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x02\x00\x33\x00\x04\xe2\x07\x0a\x1c\x0c\x00" +
-		"\x04\x00\x33\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x67\x00\x42\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x45\x00\x46\x08\x04\xd0\x07\x01\x0f\x30\x00" +
-		"\x4c\x00\x00\x0c\x04\xe5\x07\x02\x01\x00\x00" +
-		"\x46\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x45\x00\x46\x08\x04\xd0\x07\x01\x0f\x30\x00" +
-		"\x4c\x00\x00\x0c\x04\xe1\x07\x0b\x01\x00\x00" +
-		"\x46\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6a\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x46\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4c\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6a\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x52\x00\x00\x00\x04\xe2\x07\x01\x01\x04\x00" +
-		"\x6a\x00\x00\x04\x04\xe3\x07\x01\x01\x08\x00" +
-		"\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4f\x00\x00\x08\x04\xdc\x07\x0b\x0a\x08\x00" +
-		"\x47\x00\x2c\x04\x04\xdd\x07\x0a\x19\x08\x00" +
-		"\x4f\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x4c\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x01\x00\x37\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x4e\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x41\x00\x4e\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xd3\x07\x09\x18\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xdc\x07\x0a\x15\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xdd\x07\x09\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd4\x07\x05\x17\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x09\x1a\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd4\x07\x05\x1f\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x07\x19\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2b\x00\x00\xf0\x08\xd0\x07\x03\x03\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd4\x07\x05\x1f\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x07\x19\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x01\x15\x00\x00" +
-		"\x2e\x00\x44\xf0\x04\xd9\x07\x0a\x0b\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x06\x0d\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2e\x00\x07\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd4\x07\x05\x1e\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
-		"\x2c\x00\x07\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2e\x00\x3c\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xd3\x07\x09\x18\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xdb\x07\x0a\x10\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xdc\x07\x0a\x15\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x2f\xe4\x04\xda\x07\x04\x04\x08\x00" +
-		"\x44\x00\x2f\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3d\x00\x0b\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x01\x00\x0c\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x2e\x00\x0d\xf0\x04\xd0\x07\x0a\x0f\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x0f\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x4e\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x35\xe4\x04\xcf\x07\x0a\x1f\x08\x00" +
-		"\x44\x00\x11\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x50\x00\x00\xec\x04\xd0\x07\x0b\x05\x00\x00" +
-		"\x49\x00\x00\xe8\x04\xd1\x07\x04\x01\x0c\x00" +
-		"\x5d\x00\x11\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2e\x00\x0d\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x2f\xe8\x04\xdf\x07\x02\x01\x08\x00" +
-		"\x50\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd7\x07\x0c\x09\x0c\x00" +
-		"\x2f\x00\x00\xee\x04\xe0\x07\x05\x01\x0a\x00" +
-		"\x2d\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x2f\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
-		"\x49\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x2f\xe4\x04\xda\x07\x01\x01\x00\x00" +
-		"\x5d\x00\x4e\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
-		"\x49\x00\x00\xe8\x04\xe6\x07\x0b\x1e\x00\x00" +
-		"\x5d\x00\x4e\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x10\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2e\x00\x0d\xf0\x04\xd3\x07\x09\x18\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd4\x07\x0a\x01\x00\x00" +
-		"\x2e\x00\x0d\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x64\x00\x11\xe0\x04\xe4\x07\x0b\x01\x00\x00" +
-		"\x61\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x4e\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x11\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x30\x00\x00\xec\x04\xd8\x07\x06\x18\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xdd\x07\x0b\x0a\x00\x00" +
-		"\x30\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x43\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x64\x00\x11\xe0\x04\xdf\x07\x03\x08\x08\x00" +
-		"\x61\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xd0\x07\x0a\x16\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3d\x00\x11\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3d\x00\x45\xf0\x04\xdb\x07\x0b\x01\x00\x00" +
-		"\x3d\x00\x11\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4b\x00\x4e\xec\x04\xdf\x07\x03\x08\x08\x00" +
-		"\x42\x00\x00\xf0\x04\xe2\x07\x03\x0b\x0c\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x20\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x1a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3d\x00\x11\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x15\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x2f\xe4\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x61\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x44\x00\x4e\xe8\x04\xd7\x07\x0b\x04\x08\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x44\x00\x4e\xe8\x04\xd7\x07\x0b\x04\x08\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x44\x00\x4e\xe8\x04\xd7\x07\x03\x0b\x08\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x11\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4b\x00\x35\xec\x04\xcf\x07\x0a\x1f\x08\x00" +
-		"\x44\x00\x11\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x4b\x00\x11\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x41\x00\x4e\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x4e\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x3d\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x64\x00\x4e\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xd0\x07\x0a\x16\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x38\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x42\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x2f\xe8\x04\xda\x07\x01\x01\x00\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x2f\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x2f\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x66\x00\x00\xe0\x04\xdf\x07\x0b\x01\x08\x00" +
-		"\x41\x00\x4e\xdc\x04\xe2\x07\x0b\x04\x08\x00" +
-		"\x66\x00\x00\xe0\x04\xe3\x07\x01\x14\x08\x00" +
-		"\x41\x00\x4e\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x2f\xe8\x04\xd1\x07\x09\x1e\x08\x00" +
-		"\x49\x00\x00\xe8\x04\xd2\x07\x02\x14\x00\x00" +
-		"\x44\x00\x2f\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x11\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3d\x00\x31\xf0\x04\xd7\x07\x01\x01\x00\x00" +
-		"\x3d\x00\x11\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x2f\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x4f\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x41\x00\x4e\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x29\x00\x00\xf8\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x2a\x00\x0d\xf8\x04\xd0\x07\x0a\x0f\x00\x00" +
-		"\x29\x00\x00\xf8\x04\xd1\x07\x09\x0d\x00\x00" +
-		"\x2a\x00\x0d\xf8\x04\xd2\x07\x0a\x01\x00\x00" +
-		"\x29\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x4e\xe4\x04\xda\x07\x0b\x07\x08\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x4e\xe4\x04\xd3\x07\x0a\x1a\x08\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x18\xf4\x04\xe7\x07\x03\x19\x58\x00" +
-		"\x29\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x2f\xe4\x04\xda\x07\x01\x01\x00\x00" +
-		"\x5d\x00\x4e\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
-		"\x49\x00\x00\xe8\x04\xe6\x07\x0b\x1e\x00\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4b\x00\x22\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x42\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2e\x00\x13\xf0\x04\xe0\x07\x0c\x04\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x35\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x50\x00\x00\xec\x04\xd1\x07\x04\x01\x0c\x00" +
-		"\x44\x00\x11\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xd0\x07\x0a\x0f\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x35\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x50\x00\x00\xec\x04\xd1\x07\x04\x01\x0c\x00" +
-		"\x44\x00\x11\xe8\x04\xd6\x07\x0a\x1d\x08\x00" +
-		"\x50\x00\x00\xec\x04\xd7\x07\x03\x0b\x0c\x00" +
-		"\x44\x00\x11\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x30\x00\x00\xec\x04\xd8\x07\x06\x18\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xdd\x07\x0b\x0a\x00\x00" +
-		"\x30\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\xd8\x07\x06\x18\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2e\x00\x13\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x42\x00\x00\xf0\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x4b\x00\x4e\xec\x04\xd0\x07\x0c\x03\x04\x00" +
-		"\x42\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x0d\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x28\x00\x18\xfc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x41\x00\x4e\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x62\x00\x45\xf2\x04\xdb\x07\x0b\x01\x00\x00" +
-		"\x62\x00\x11\xf2\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x24\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3d\x00\x49\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x64\x00\x2f\xe0\x04\xd1\x07\x01\x01\x00\x00" +
-		"\x64\x00\x4e\xe0\x04\xd2\x07\x02\x14\x00\x00" +
-		"\x64\x00\x2f\xe0\x04\xda\x07\x01\x01\x00\x00" +
-		"\x64\x00\x4e\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4b\x00\x11\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x64\x00\x11\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x64\x00\x11\xe0\x04\xe4\x07\x0b\x01\x00\x00" +
-		"\x61\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x52\xe8\x04\xd6\x07\x01\x01\x00\x00" +
-		"\x44\x00\x11\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x41\x00\x4e\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x11\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x00\x20\x04\xd9\x07\x0a\x12\x08\x00" +
-		"\x1d\x00\x00\x2c\x04\xda\x07\x03\x05\x08\x00" +
-		"\x15\x00\x00\x20\x04\xdb\x07\x0a\x1c\x08\x00" +
-		"\x1d\x00\x00\x2c\x04\xdc\x07\x02\x15\x44\x20" +
-		"\x15\x00\x00\x20\x04\xe0\x07\x0a\x16\x00\x00" +
-		"\x1d\x00\x00\x2c\x04\xe2\x07\x03\x0b\x10\x00" +
-		"\x15\x00\x00\x20\x04\xe2\x07\x0a\x07\x10\x00" +
-		"\x1d\x00\x00\x2c\x04\xe3\x07\x03\x11\x0c\x00" +
-		"\x15\x00\x00\x20\x04\xe3\x07\x0a\x04\x0c\x00" +
-		"\x1d\x00\x00\x2c\x04\xe4\x07\x03\x08\x0c\x00" +
-		"\x15\x00\x00\x20\x04\xe4\x07\x0a\x04\x00\x01" +
-		"\x1d\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x13\x00\x00\x1c\x04\xd9\x07\x0a\x12\x08\x00" +
-		"\x0c\x00\x00\x14\x04\xda\x07\x03\x0a\x50\x20" +
-		"\x13\x00\x00\x1c\x04\xdb\x07\x0a\x1c\x08\x00" +
-		"\x0c\x00\x00\x14\x04\xdc\x07\x02\x15\x50\x20" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3f\x00\x04\x28\x04\xda\x07\x01\x01\x00\x00" +
-		"\x40\x00\x00\x28\x08\xdb\x07\x01\x01\x00\x00" +
-		"\x3f\x00\x04\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x10\x00\x00\x18\x04\xd9\x07\x0a\x12\x08\x00" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2e\x00\x13\xf0\x04\xe0\x07\x0c\x04\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x26\x00\x00\x00\x04\xd5\x07\x02\x0c\x00\x00" +
-		"\x01\x00\x4b\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x41\x18\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x10\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x28\x08\x04\xe6\x07\x0a\x1c\x00\x10" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x21\x00\x40\x30\x04\xda\x07\x03\x1c\x08\x10" +
-		"\x1e\x00\x40\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x41\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x41\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x41\x14\x04\xcf\x07\x03\x1c\x08\x10" +
-		"\x0a\x00\x41\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x26\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x0a\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x40\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x13\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x10\x00\x00\x18\x04\xe0\x07\x03\x1b\x08\x10" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x2b\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x29\x14\x04\xd5\x07\x08\x0c\x00\x00" +
-		"\x10\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x19\x00\x40\x24\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x1a\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x15\x00\x00\x20\x04\xe0\x07\x03\x1b\x08\x00" +
-		"\x18\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x19\x00\x32\x24\x04\xd8\x07\x03\x1f\x00\x00" +
-		"\x16\x00\x32\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x10\x00\x00\x18\x04\xd6\x07\x04\x0f\x02\x00" +
-		"\x0e\x00\x00\x16\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x47\x08\x04\xe6\x07\x0a\x1c\x00\x00" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x10\x00\x00\x18\x04\xd9\x07\x01\x01\x00\x00" +
-		"\x11\x00\x16\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x00\x20\x04\xd0\x07\x09\x11\x00\x00" +
-		"\x18\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x09\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x19\x08\x04\xe0\x07\x09\x08\x00\x00" +
-		"\x06\x00\x00\x0c\x04\xe1\x07\x0a\x1d\x04\x20" +
-		"\x4d\x00\x19\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x28\x08\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x4d\x00\x3b\x08\x04\xd8\x07\x08\x1d\x00\x00" +
-		"\x4f\x00\x00\x08\x04\xd8\x07\x09\x01\x00\x00" +
-		"\x4d\x00\x3b\x08\x04\xda\x07\x01\x01\x00\x00" +
-		"\x4f\x00\x00\x08\x04\xda\x07\x03\x1b\x00\x01" +
-		"\x4d\x00\x3b\x08\x04\xdb\x07\x08\x01\x00\x00" +
-		"\x4f\x00\x00\x08\x04\xdc\x07\x01\x01\x00\x00" +
-		"\x4d\x00\x3b\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x28\x08\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x4d\x00\x3b\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x55\x00\x21\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x32\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x16\x00\x40\x20\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x18\x00\x00\x24\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x15\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6c\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+const ZoneErasData = "\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x7e\x00\x08\x00\x04\xb9\x07\x0a\x15\x00\x00" +
+		"\x58\x00\x08\x04\x04\xbb\x07\x0a\x1a\x00\x00" +
+		"\x7e\x00\x08\x00\x04\xbd\x07\x05\x01\x00\x00" +
+		"\x59\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2b\x00\x00\xfc\x04\xb7\x07\x01\x01\x00\x00" +
+		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x26\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x02\x00\x48\x00\x04\xc0\x07\x03\x10\x00\x00" +
+		"\x03\x00\x00\x04\x04\xc2\x07\x01\x01\x00\x00" +
+		"\x02\x00\x48\x00\x04\xe2\x07\x0a\x1c\x0c\x00" +
+		"\x04\x00\x48\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x7e\x00\x5e\x00\x04\xc0\x07\x03\x10\x00\x00" +
+		"\x59\x00\x00\x04\x04\xc2\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2b\x00\x00\xfc\x04\xb8\x07\x04\x0e\x00\x00" +
+		"\x02\x00\x48\x00\x04\xe2\x07\x0a\x1c\x0c\x00" +
+		"\x04\x00\x48\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x79\x00\x5a\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x55\x00\x60\x08\x04\xd0\x07\x01\x0f\x30\x00" +
+		"\x5d\x00\x00\x0c\x04\xe5\x07\x02\x01\x00\x00" +
+		"\x56\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x55\x00\x60\x08\x04\xd0\x07\x01\x0f\x30\x00" +
+		"\x5d\x00\x00\x0c\x04\xe1\x07\x0b\x01\x00\x00" +
+		"\x56\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x7d\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x56\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5d\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x7d\x00\x00\x04\x04\xbb\x07\x0a\x0e\x00\x00" +
+		"\x7c\x00\x00\x04\x08\xbc\x07\x03\x08\x00\x00" +
+		"\x7d\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x63\x00\x00\x00\x04\xe2\x07\x01\x01\x04\x00" +
+		"\x7d\x00\x00\x04\x04\xe3\x07\x01\x01\x08\x00" +
+		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x60\x00\x00\x08\x04\xbe\x07\x01\x01\x00\x00" +
+		"\x58\x00\x40\x04\x04\xc6\x07\x05\x04\x00\x00" +
+		"\x60\x00\x00\x08\x04\xcc\x07\x09\x1e\x00\x00" +
+		"\x58\x00\x40\x04\x04\xcd\x07\x0a\x04\x00\x00" +
+		"\x60\x00\x00\x08\x04\xdc\x07\x0b\x0a\x08\x00" +
+		"\x58\x00\x40\x04\x04\xdd\x07\x0a\x19\x08\x00" +
+		"\x60\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x68\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x79\x00\x00\x08\x04\xc6\x07\x03\x15\x00\x00" +
+		"\x01\x00\x4c\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x53\x00\x6a\xd4\x04\xbf\x07\x0a\x1e\x08\x00" +
+		"\x4f\x00\x6a\xd8\x04\xbf\x07\x0b\x1e\x00\x00" +
+		"\x65\x00\x6a\xd8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4f\x00\x6a\xd8\x04\xbf\x07\x0a\x1e\x08\x00" +
+		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xc6\x07\x09\x11\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xcb\x07\x09\x0e\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xd3\x07\x09\x18\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xdc\x07\x0a\x15\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xdd\x07\x09\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x31\x00\x09\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x03\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x14\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x03\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x14\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x31\x00\x09\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc6\x07\x03\x04\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc6\x07\x0a\x1c\x00\x00" +
+		"\x2f\x00\x00\xf0\x08\xc7\x07\x03\x11\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x06\x00\x00" +
+		"\x2d\x00\x00\xf4\x08\xc8\x07\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x05\x07\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc6\x07\x03\x04\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc6\x07\x0a\x0f\x00\x00" +
+		"\x2f\x00\x00\xf0\x08\xc7\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x0f\x00\x00" +
+		"\x2f\x00\x00\xf0\x08\xc8\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc8\x07\x0a\x12\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd4\x07\x05\x17\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x09\x1a\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x03\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x14\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x05\x07\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd4\x07\x05\x1f\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x07\x19\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc6\x07\x01\x01\x00\x00" +
+		"\x2d\x00\x00\xf4\x08\xc6\x07\x03\x0e\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc6\x07\x0a\x0f\x00\x00" +
+		"\x2f\x00\x00\xf0\x08\xc7\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x06\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x2f\x00\x00\xf0\x08\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd4\x07\x05\x1f\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x07\x19\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x01\x15\x00\x00" +
+		"\x36\x00\x5c\xf0\x04\xd9\x07\x0a\x0b\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x03\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x14\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x0d\x00\x00" +
+		"\x31\x00\x09\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd4\x07\x05\x1e\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xb6\x07\x04\x01\x00\x00" +
+		"\x36\x00\x51\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xd3\x07\x09\x18\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xdb\x07\x0a\x10\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xdc\x07\x0a\x15\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x44\xe4\x04\xda\x07\x04\x04\x08\x00" +
+		"\x54\x00\x44\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x0e\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xc4\x07\x09\x0c\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x01\x00\x10\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\xf0\x04\xc4\x07\x09\x0c\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xcf\x07\x09\x1e\x00\x00" +
+		"\x36\x00\x12\xf0\x04\xd0\x07\x0a\x0f\x00\x00" +
+		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x15\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\xb6\x07\x01\x01\x00\x00" +
+		"\x73\x00\x00\xe4\x04\xb6\x07\x02\x03\x08\x00" +
+		"\x6e\x00\x6a\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x4a\xe4\x04\xcf\x07\x0a\x1f\x08\x00" +
+		"\x54\x00\x17\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
+		"\x61\x00\x00\xec\x04\xd0\x07\x0b\x05\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xd1\x07\x04\x01\x0c\x00" +
+		"\x6e\x00\x17\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xbd\x07\x0c\x17\x00\x00" +
+		"\x5c\x00\x44\xec\x04\xce\x07\x08\x02\x08\x00" +
+		"\x54\x00\x44\xe8\x04\xdf\x07\x02\x01\x08\x00" +
+		"\x61\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd7\x07\x0c\x09\x0c\x00" +
+		"\x37\x00\x00\xee\x04\xe0\x07\x05\x01\x0a\x00" +
+		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\xe8\x04\xce\x07\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xce\x07\x04\x05\x0c\x00" +
+		"\x6e\x00\x44\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
+		"\x5a\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\xe8\x04\xce\x07\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xce\x07\x04\x05\x0c\x00" +
+		"\x6e\x00\x44\xe4\x04\xda\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
+		"\x5a\x00\x00\xe8\x04\xe6\x07\x0b\x1e\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x16\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\xf0\x04\xd3\x07\x09\x18\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd4\x07\x0a\x01\x00\x00" +
+		"\x36\x00\x12\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xbc\x07\x04\x06\x08\x00" +
+		"\x31\x00\x22\xf4\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x84\x00\x71\xdc\x04\xb5\x07\x0a\x1c\x00\x00" +
+		"\x78\x00\x00\xe0\x04\xbc\x07\x01\x01\x00\x00" +
+		"\x76\x00\x17\xe0\x04\xe4\x07\x0b\x01\x00\x00" +
+		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xb5\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\xb7\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xb7\x07\x04\x1b\x08\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x25\xe4\x04\xc3\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x17\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x12\xec\x04\xc4\x07\x09\x0c\x00\x00" +
+		"\x38\x00\x00\xec\x04\xc9\x07\x09\x1c\x00\x00" +
+		"\x39\x00\x12\xec\x04\xca\x07\x09\x16\x00\x00" +
+		"\x38\x00\x00\xec\x04\xd8\x07\x06\x18\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xdd\x07\x0b\x0a\x00\x00" +
+		"\x38\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x5b\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6c\xe0\x04\xc3\x07\x01\x01\x00\x00" +
+		"\x76\x00\x17\xe0\x04\xdf\x07\x03\x08\x08\x00" +
+		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xc6\x07\x09\x11\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xd0\x07\x0a\x16\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x33\xf0\x04\xb6\x07\x01\x01\x00\x00" +
+		"\x49\x00\x17\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x5f\xf0\x04\xdb\x07\x0b\x01\x00\x00" +
+		"\x49\x00\x17\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xbb\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\xdf\x07\x03\x08\x08\x00" +
+		"\x51\x00\x00\xf0\x04\xe2\x07\x03\x0b\x0c\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x30\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x24\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x34\x00\x00\xf1\x04\xb7\x07\x08\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xc8\x07\x03\x1d\x04\x00" +
+		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x33\xf0\x04\xb6\x07\x01\x01\x00\x00" +
+		"\x49\x00\x17\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x1b\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x44\xe4\x04\xcf\x07\x01\x01\x00\x00" +
+		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\xc7\x07\x0a\x1b\x08\x00" +
+		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\xb6\x07\x01\x06\x08\x00" +
+		"\x57\x00\x00\xe8\x08\xb6\x07\x0a\x1b\x08\x00" +
+		"\x5c\x00\x6a\xec\x04\xb8\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\xb9\x07\x0a\x1e\x08\x00" +
+		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\xd7\x07\x0b\x04\x08\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\xb5\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\xd7\x07\x0b\x04\x08\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\xd7\x07\x03\x0b\x08\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x4a\xe0\x04\xbb\x07\x04\x1d\x08\x00" +
+		"\x6e\x00\x4a\xe4\x04\xbc\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x17\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x4a\xec\x04\xcf\x07\x0a\x1f\x08\x00" +
+		"\x54\x00\x17\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
+		"\x5c\x00\x17\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xb6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\xc0\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\xe0\x04\xbc\x07\x04\x1b\x08\x00" +
+		"\x84\x00\x6a\xdc\x04\xbc\x07\x0a\x1a\x08\x00" +
+		"\x76\x00\x6a\xe0\x04\xbf\x07\x0a\x1e\x08\x00" +
+		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\xb6\x07\x01\x06\x08\x00" +
+		"\x57\x00\x00\xe8\x08\xb6\x07\x0a\x1b\x08\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x52\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\xe0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xc6\x07\x09\x11\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xcb\x07\x0a\x0d\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xcc\x07\x09\x04\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xd0\x07\x0a\x16\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xb5\x07\x05\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xb7\x07\x02\x10\x00\x00" +
+		"\x54\x00\x4d\xe8\x04\xc8\x07\x01\x01\x10\x00" +
+		"\x61\x00\x00\xec\x04\xc8\x07\x09\x18\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xc9\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xcd\x07\x01\x01\x00\x00" +
+		"\x54\x00\x4d\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\xf0\x04\xc4\x07\x09\x0c\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xc9\x07\x09\x1c\x00\x00" +
+		"\x36\x00\x12\xf0\x04\xca\x07\x09\x16\x00\x00" +
+		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x51\x00\x00\xf0\x04\xbc\x07\x04\x06\x00\x00" +
+		"\x4b\x00\x00\xf0\x08\xbc\x07\x09\x1c\x00\x00" +
+		"\x51\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xc4\x07\x01\x01\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\xc5\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\xe8\x04\xda\x07\x01\x01\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x44\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\xb5\x07\x04\x1d\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xbd\x07\x0c\x17\x00\x00" +
+		"\x61\x00\x00\xec\x04\xbe\x07\x0c\x02\x00\x00" +
+		"\x54\x00\x44\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\xe0\x04\xbf\x07\x0a\x1e\x08\x00" +
+		"\x78\x00\x00\xe0\x04\xdf\x07\x0b\x01\x08\x00" +
+		"\x50\x00\x6a\xdc\x04\xe2\x07\x0b\x04\x08\x00" +
+		"\x78\x00\x00\xe0\x04\xe3\x07\x01\x14\x08\x00" +
+		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x44\xe8\x04\xd1\x07\x09\x1e\x08\x00" +
+		"\x5a\x00\x00\xe8\x04\xd2\x07\x02\x14\x00\x00" +
+		"\x54\x00\x44\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x51\x00\x00\xf0\x04\xbc\x07\x05\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xc3\x07\x01\x01\x00\x00" +
+		"\x31\x00\x17\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x46\xf0\x04\xb5\x07\x01\x01\x00\x00" +
+		"\x49\x00\x17\xf0\x04\xc9\x07\x01\x01\x00\x00" +
+		"\x49\x00\x46\xf0\x04\xd7\x07\x01\x01\x00\x00" +
+		"\x49\x00\x17\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xc4\x07\x01\x01\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\xc5\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x6b\xf4\x04\xb6\x07\x01\x01\x00\x00" +
+		"\x30\x00\x6b\xf4\x04\xb6\x07\x03\x0a\x00\x00" +
+		"\x32\x00\x6b\xf4\x04\xb6\x07\x0c\x16\x00\x00" +
+		"\x31\x00\x6b\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x53\x00\x6a\xd4\x04\xbf\x07\x0a\x1e\x08\x00" +
+		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2e\x00\x12\xf8\x04\xc6\x07\x09\x11\x00\x00" +
+		"\x2d\x00\x00\xf8\x04\xcf\x07\x09\x1e\x00\x00" +
+		"\x2e\x00\x12\xf8\x04\xd0\x07\x0a\x0f\x00\x00" +
+		"\x2d\x00\x00\xf8\x04\xd1\x07\x09\x0d\x00\x00" +
+		"\x2e\x00\x12\xf8\x04\xd2\x07\x0a\x01\x00\x00" +
+		"\x2d\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\xda\x07\x0b\x07\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\xc8\x07\x0a\x19\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\xd3\x07\x0a\x1a\x08\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xbc\x07\x04\x06\x08\x00" +
+		"\x31\x00\x22\xf4\x04\xe7\x07\x03\x19\x58\x00" +
+		"\x2d\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\xe8\x04\xce\x07\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\xce\x07\x04\x05\x0c\x00" +
+		"\x6e\x00\x44\xe4\x04\xda\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
+		"\x5a\x00\x00\xe8\x04\xe6\x07\x0b\x1e\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x33\x00\x00\xf2\x04\xc0\x07\x0a\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x32\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\xf0\x04\xc4\x07\x09\x0c\x00\x00" +
+		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x51\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x19\xf0\x04\xe0\x07\x0c\x04\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x4a\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
+		"\x61\x00\x00\xec\x04\xd1\x07\x04\x01\x0c\x00" +
+		"\x54\x00\x17\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xc6\x07\x09\x11\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xd0\x07\x0a\x0f\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
+		"\x31\x00\x12\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x4a\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
+		"\x61\x00\x00\xec\x04\xd1\x07\x04\x01\x0c\x00" +
+		"\x54\x00\x17\xe8\x04\xd6\x07\x0a\x1d\x08\x00" +
+		"\x61\x00\x00\xec\x04\xd7\x07\x03\x0b\x0c\x00" +
+		"\x54\x00\x17\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x12\xec\x04\xc4\x07\x09\x0c\x00\x00" +
+		"\x38\x00\x00\xec\x04\xd8\x07\x06\x18\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xdd\x07\x0b\x0a\x00\x00" +
+		"\x38\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\xf0\x04\xc4\x07\x09\x0c\x00\x00" +
+		"\x35\x00\x00\xf0\x04\xd8\x07\x06\x18\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x19\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x01\x00\x1e\xec\x04\xb6\x07\x0a\x1b\x00\x00" +
+		"\x51\x00\x00\xf0\x04\xd0\x07\x0a\x1d\x08\x00" +
+		"\x5c\x00\x6a\xec\x04\xd0\x07\x0c\x03\x04\x00" +
+		"\x51\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2d\x00\x00\xf8\x04\xbc\x07\x04\x06\x08\x00" +
+		"\x2e\x00\x14\xf8\x04\xbd\x07\x03\x1d\x00\x00" +
+		"\x2c\x00\x22\xfc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\xe0\x04\xbf\x07\x0a\x1e\x08\x00" +
+		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x74\x00\x5f\xf2\x04\xdb\x07\x0b\x01\x00\x00" +
+		"\x74\x00\x17\xf2\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x35\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x64\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x78\x00\x00\xe0\x04\xb8\x07\x01\x01\x00\x00" +
+		"\x76\x00\x6a\xe0\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x76\x00\x44\xe0\x04\xd1\x07\x01\x01\x00\x00" +
+		"\x76\x00\x6a\xe0\x04\xd2\x07\x02\x14\x00\x00" +
+		"\x76\x00\x44\xe0\x04\xda\x07\x01\x01\x00\x00" +
+		"\x76\x00\x6a\xe0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x66\xec\x04\xb6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x17\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6c\xe0\x04\xc3\x07\x01\x01\x00\x00" +
+		"\x76\x00\x17\xe0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x78\x00\x00\xe0\x04\xbc\x07\x01\x01\x00\x00" +
+		"\x76\x00\x17\xe0\x04\xe4\x07\x0b\x01\x00\x00" +
+		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x70\xe8\x04\xd6\x07\x01\x01\x00\x00" +
+		"\x54\x00\x17\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x4a\xe4\x04\xbc\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x17\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x17\x00\x00\x20\x04\xd9\x07\x0a\x12\x08\x00" +
+		"\x20\x00\x00\x2c\x04\xda\x07\x03\x05\x08\x00" +
+		"\x17\x00\x00\x20\x04\xdb\x07\x0a\x1c\x08\x00" +
+		"\x20\x00\x00\x2c\x04\xdc\x07\x02\x15\x44\x20" +
+		"\x17\x00\x00\x20\x04\xe0\x07\x0a\x16\x00\x00" +
+		"\x20\x00\x00\x2c\x04\xe2\x07\x03\x0b\x10\x00" +
+		"\x17\x00\x00\x20\x04\xe2\x07\x0a\x07\x10\x00" +
+		"\x20\x00\x00\x2c\x04\xe3\x07\x03\x11\x0c\x00" +
+		"\x17\x00\x00\x20\x04\xe3\x07\x0a\x04\x0c\x00" +
+		"\x20\x00\x00\x2c\x04\xe4\x07\x03\x08\x0c\x00" +
+		"\x17\x00\x00\x20\x04\xe4\x07\x0a\x04\x00\x01" +
+		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x1c\x04\xd9\x07\x0a\x12\x08\x00" +
+		"\x0d\x00\x00\x14\x04\xda\x07\x03\x0a\x50\x20" +
+		"\x14\x00\x00\x1c\x04\xdb\x07\x0a\x1c\x08\x00" +
+		"\x0d\x00\x00\x14\x04\xdc\x07\x02\x15\x50\x20" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x04\x28\x04\xda\x07\x01\x01\x00\x00" +
+		"\x4d\x00\x00\x28\x08\xdb\x07\x01\x01\x00\x00" +
+		"\x4c\x00\x04\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xd9\x07\x0a\x12\x08\x00" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\xf4\x04\xbe\x07\x05\x01\x00\x00" +
+		"\x36\x00\x19\xf0\x04\xe0\x07\x0c\x04\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2a\x00\x00\x00\x04\xb8\x07\x0c\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2a\x00\x00\x00\x04\xd5\x07\x02\x0c\x00\x00" +
+		"\x01\x00\x67\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x59\x18\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x12\x00\x59\x18\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x3b\x08\x04\xe6\x07\x0a\x1c\x00\x10" +
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x28\x00\x58\x34\x04\xbe\x07\x04\x01\x00\x10" +
+		"\x24\x00\x58\x30\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x21\x00\x58\x2c\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x24\x00\x58\x30\x04\xda\x07\x03\x1c\x08\x10" +
+		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xca\x07\x09\x19\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x00" +
+		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x00" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xcf\x07\x03\x1c\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x07\x00\x00\x0c\x04\xbe\x07\x05\x01\x00\x00" +
+		"\x08\x00\x38\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x59\x10\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x08\x00\x59\x0c\x04\xc8\x07\x09\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x0b\x00\x23\x10\x04\xcd\x07\x01\x01\x00\x00" +
+		"\x0b\x00\x0d\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x1c\x04\xcb\x07\x05\x1c\x00\x00" +
+		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x11\x00\x00\x18\x04\xe0\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x3f\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x59\x18\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xc7\x07\x08\x1f\x08\x00" +
+		"\x0e\x00\x3c\x14\x04\xd5\x07\x08\x0c\x00\x00" +
+		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1b\x00\x58\x24\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x18\x00\x58\x20\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x1b\x00\x58\x24\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x1c\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x17\x00\x00\x20\x04\xe0\x07\x03\x1b\x08\x00" +
+		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x1c\x04\xba\x07\x01\x01\x00\x00" +
+		"\x17\x00\x00\x20\x04\xbf\x07\x04\x01\x00\x00" +
+		"\x1b\x00\x47\x24\x04\xd8\x07\x03\x1f\x00\x00" +
+		"\x18\x00\x47\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0f\x00\x00\x16\x04\xcc\x07\x05\x19\x00\x00" +
+		"\x13\x00\x00\x1a\x04\xcc\x07\x0a\x1a\x02\x00" +
+		"\x11\x00\x00\x18\x04\xd6\x07\x04\x0f\x02\x00" +
+		"\x0f\x00\x00\x16\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x62\x08\x04\xe6\x07\x0a\x1c\x00\x00" +
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xd9\x07\x01\x01\x00\x00" +
+		"\x12\x00\x1f\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1a\x00\x00\x24\x04\xb8\x07\x05\x03\x00\x00" +
+		"\x17\x00\x00\x20\x04\xd0\x07\x09\x11\x00\x00" +
+		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x59\x18\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x11\x00\x00\x14\x08\xc7\x07\x09\x09\x08\x10" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x1c\x08\x04\xce\x07\x09\x01\x00\x00" +
+		"\x5e\x00\x23\x08\x04\xe0\x07\x09\x08\x00\x00" +
+		"\x07\x00\x00\x0c\x04\xe1\x07\x0a\x1d\x04\x20" +
+		"\x5e\x00\x23\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x68\x00\x72\x08\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x3b\x08\x04\xcf\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x50\x08\x04\xd8\x07\x08\x1d\x00\x00" +
+		"\x60\x00\x00\x08\x04\xd8\x07\x09\x01\x00\x00" +
+		"\x5e\x00\x50\x08\x04\xda\x07\x01\x01\x00\x00" +
+		"\x60\x00\x00\x08\x04\xda\x07\x03\x1b\x00\x01" +
+		"\x5e\x00\x50\x08\x04\xdb\x07\x08\x01\x00\x00" +
+		"\x60\x00\x00\x08\x04\xdc\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x50\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x68\x00\x72\x08\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x3b\x08\x04\xcf\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x50\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x17\x00\x00\x20\x04\xb7\x07\x06\x0d\x00\x00" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x66\x00\x31\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xba\x07\x01\x01\x00\x00" +
+		"\x15\x00\x47\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x18\x00\x58\x20\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x15\x00\x58\x1c\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x18\x00\x58\x20\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x1a\x00\x00\x24\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x17\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x81\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x82\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x68\x00\x72\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0c\x00\x00\x12\x04\x10\x27\x01\x01\x00\x00" +
+		"\x24\x00\x58\x30\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x21\x00\x58\x2c\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x24\x00\x58\x30\x04\xda\x07\x03\x1c\x08\x10" +
+		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
+		"\x77\x00\x4f\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0f\x00\x00\x16\x04\xc2\x07\x01\x01\x00\x00" +
+		"\x10\x00\x00\x17\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1b\x00\x58\x24\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x18\x00\x58\x20\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x1b\x00\x58\x24\x04\xd4\x07\x01\x01\x00\x00" +
+		"\x1d\x00\x58\x28\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x20\x00\x00\x2c\x04\xdb\x07\x09\x0d\x00\x10" +
+		"\x1c\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x69\x00\x00\x16\x04\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x1c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x17\x00\x00\x20\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x17\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x41\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x58\x2c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x1d\x00\x58\x28\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x30\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x1c\x00\x00\x28\x04\xe0\x07\x04\x18\x08\x10" +
+		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x83\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x53\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x1c\x08\x04\xce\x07\x09\x01\x00\x00" +
+		"\x5e\x00\x23\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x1c\x04\xda\x07\x03\x1c\x08\x10" +
+		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x1c\x04\xc9\x07\x05\x17\x00\x00" +
+		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x11\x00\x00\x18\x04\xe0\x07\x07\x18\x08\x10" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x58\x18\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0e\x00\x58\x14\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x14\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xc8\x07\x03\x1d\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x83\x00\x00\x20\x04\xc4\x07\x01\x01\x00\x00" +
+		"\x81\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6d\x00\x00\x24\x04\xdf\x07\x08\x0f\x00\x00" +
+		"\x6d\x00\x00\x22\x04\xe2\x07\x05\x04\x5e\x00" +
 		"\x6d\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x57\x00\x53\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x00\x12\x04\x10\x27\x01\x01\x00\x00" +
-		"\x21\x00\x40\x30\x04\xda\x07\x03\x1c\x08\x10" +
-		"\x1e\x00\x40\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x65\x00\x3a\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0f\x00\x00\x17\x04\x10\x27\x01\x01\x00\x00" +
-		"\x19\x00\x40\x24\x04\xd4\x07\x01\x01\x00\x00" +
-		"\x1b\x00\x40\x28\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x1d\x00\x00\x2c\x04\xdb\x07\x09\x0d\x00\x10" +
-		"\x1a\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x18\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x00\x16\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x40\x1c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x15\x00\x00\x20\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x2d\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1e\x00\x40\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x30\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1a\x00\x00\x28\x04\xe0\x07\x04\x18\x08\x10" +
-		"\x1d\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x64\x00\x3e\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x19\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x40\x1c\x04\xda\x07\x03\x1c\x08\x10" +
-		"\x11\x00\x40\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x40\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x13\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x10\x00\x00\x18\x04\xe0\x07\x07\x18\x08\x10" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x40\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x13\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x10\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x41\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6c\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x00\x24\x04\xdf\x07\x08\x0f\x00\x00" +
-		"\x5c\x00\x00\x22\x04\xe2\x07\x05\x04\x5e\x00" +
-		"\x5c\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x41\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x10\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x41\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x10\x00\x00\x18\x04\xe2\x07\x0c\x15\x00\x00" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1b\x00\x40\x28\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x1d\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1a\x00\x00\x28\x04\xe0\x07\x03\x1b\x08\x10" +
-		"\x1d\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5b\x00\x3f\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x39\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1e\x00\x40\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x30\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1d\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x48\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x17\x10\x04\xd4\x07\x06\x1b\x00\x00" +
-		"\x07\x00\x41\x0c\x04\xd5\x07\x03\x1b\x08\x00" +
-		"\x09\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x08\x00\x25\x0e\x04\x10\x27\x01\x01\x00\x00" +
-		"\x10\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x27\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x40\x1c\x04\xd2\x07\x05\x01\x0c\x00" +
-		"\x11\x00\x40\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x13\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x10\x00\x00\x18\x04\xe0\x07\x05\x1d\x08\x10" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x16\x00\x32\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x10\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1e\x00\x40\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x30\x04\xdb\x07\x09\x0d\x00\x10" +
-		"\x1d\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1a\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1b\x00\x40\x28\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x1d\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1a\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x19\x00\x40\x24\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x1a\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x18\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x12\x00\x00\x1a\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x40\x14\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x10\x00\x00\x18\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x41\x10\x04\xdb\x07\x01\x01\x00\x00" +
-		"\x0a\x00\x08\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x28\x00\x18\xfc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3d\x00\x4e\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6b\x00\x18\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x27\x00\x00\xfc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6b\x00\x18\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6b\x00\x18\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x29\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2e\x00\x1d\xf0\x04\xda\x07\x09\x05\x08\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3e\x00\x03\x26\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3f\x00\x02\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3e\x00\x01\x26\x04\xd0\x07\x01\x01\x00\x00" +
-		"\x3e\x00\x03\x26\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3e\x00\x09\x26\x04\x10\x27\x01\x01\x00\x00" +
-		"\x17\x00\x06\x23\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3f\x00\x04\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3f\x00\x23\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1c\x00\x2a\x2a\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3f\x00\x05\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x43\x00\x06\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3f\x00\x01\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x0e\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x4e\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x50\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4b\x00\x4e\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x52\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x27\x00\x00\xfc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x38\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3a\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3c\x00\x00\xd0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x29\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x30\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x32\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x34\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x35\x00\x00\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x00\xdc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x10\x04\xc7\x07\x09\x1d\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x12\x00\x59\x18\x04\xc8\x07\x03\x1d\x08\x10" +
+		"\x0e\x00\x59\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x11\x00\x00\x18\x04\xe2\x07\x0c\x15\x00\x00" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x58\x2c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x1d\x00\x58\x28\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x21\x00\x58\x2c\x04\xcd\x07\x03\x1e\x08\x10" +
+		"\x1d\x00\x58\x28\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x20\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x1c\x00\x00\x28\x04\xe0\x07\x03\x1b\x08\x10" +
+		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x14\x04\xc8\x07\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6c\x00\x56\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x4e\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x16\x00\x00\x1e\x04\xbd\x07\x0c\x1f\x40\x20" +
+		"\x17\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x58\x2c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x1d\x00\x58\x28\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x30\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x63\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x59\x18\x04\xc7\x07\x03\x1f\x08\x00" +
+		"\x0e\x00\x59\x14\x04\xc8\x07\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x59\x10\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x08\x00\x59\x0c\x04\xc8\x07\x01\x01\x00\x00" +
+		"\x08\x00\x21\x0c\x04\xca\x07\x09\x19\x00\x00" +
+		"\x0b\x00\x21\x10\x04\xcc\x07\x0a\x1b\x00\x00" +
+		"\x0d\x00\x00\x10\x08\xcd\x07\x03\x1e\x00\x00" +
+		"\x0b\x00\x21\x10\x04\xd4\x07\x06\x1b\x00\x00" +
+		"\x08\x00\x59\x0c\x04\xd5\x07\x03\x1b\x08\x00" +
+		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x09\x00\x37\x0e\x04\xb9\x07\x0a\x14\x60\x00" +
+		"\x0b\x00\x37\x10\x04\xbb\x07\x01\x01\x00\x00" +
+		"\x09\x00\x37\x0e\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0f\x00\x00\x16\x04\xc3\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6b\x00\x3a\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x1c\x04\xd2\x07\x05\x01\x0c\x00" +
+		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x11\x00\x00\x18\x04\xe0\x07\x05\x1d\x08\x10" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x1c\x04\xba\x07\x01\x01\x00\x00" +
+		"\x18\x00\x47\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1b\x00\x58\x24\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x21\x00\x58\x2c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x1d\x00\x58\x28\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x30\x04\xdb\x07\x09\x0d\x00\x10" +
+		"\x20\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x1c\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1d\x00\x58\x28\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x1b\x00\x58\x24\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x1d\x00\x58\x28\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x20\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x1c\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1b\x00\x58\x24\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x18\x00\x58\x20\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x1b\x00\x58\x24\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x1c\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x13\x00\x00\x1a\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0e\x00\x58\x14\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x58\x10\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x58\x14\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x11\x00\x00\x18\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x59\x10\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x08\x00\x59\x0c\x04\xcb\x07\x09\x18\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xcd\x07\x01\x01\x00\x00" +
+		"\x0b\x00\x59\x10\x04\xdb\x07\x01\x01\x00\x00" +
+		"\x0b\x00\x0a\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2c\x00\x55\xfc\x04\xbf\x07\x09\x19\x04\x10" +
+		"\x2c\x00\x6e\xfc\x04\xc8\x07\x09\x1b\x04\x10" +
+		"\x7e\x00\x22\x00\x04\xc9\x07\x03\x1c\x04\x20" +
+		"\x2c\x00\x22\xfc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x11\xf0\x04\xb6\x07\x04\x1c\x08\x00" +
+		"\x49\x00\x17\xf0\x04\xb8\x07\x01\x01\x00\x00" +
+		"\x49\x00\x6a\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x80\x00\x00\x00\x04\xbc\x07\x04\x06\x00\x10" +
+		"\x7f\x00\x00\x00\x08\xbc\x07\x09\x1c\x04\x20" +
+		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2d\x00\x00\xf8\x04\xb7\x07\x0b\x19\x08\x00" +
+		"\x2b\x00\x00\xfc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x80\x00\x00\x00\x04\xbd\x07\x01\x01\x00\x00" +
+		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x7e\x00\x55\x00\x04\xbf\x07\x09\x19\x04\x10" +
+		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2d\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x28\xf0\x04\xbf\x07\x05\x01\x00\x00" +
+		"\x31\x00\x28\xf4\x04\xc1\x07\x09\x0f\x00\x00" +
+		"\x36\x00\x28\xf0\x04\xda\x07\x09\x05\x08\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4a\x00\x03\x26\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x02\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4a\x00\x01\x26\x04\xd0\x07\x01\x01\x00\x00" +
+		"\x4a\x00\x03\x26\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4a\x00\x0b\x26\x04\x10\x27\x01\x01\x00\x00" +
+		"\x19\x00\x06\x23\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x04\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x02\x28\x04\xc8\x07\x07\x01\x00\x00" +
+		"\x4c\x00\x34\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4e\x00\x00\x28\x04\xbd\x07\x03\x01\x00\x00" +
+		"\x1f\x00\x3d\x2a\x04\xc1\x07\x07\x01\x00\x00" +
+		"\x1e\x00\x3d\x2a\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x05\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x52\x00\x06\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x01\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x14\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2b\x00\x00\xfc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x42\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x46\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x48\x00\x00\xd0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2d\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x38\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
+		"\x3a\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x3c\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x3e\x00\x00\xe0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x40\x00\x00\xdc\x04\x10\x27\x01\x01\x00\x00" +
 		"\x03\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1a\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1d\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x20\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x23\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x25\x00\x00\x38\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1c\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
+		"\x27\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
+		"\x29\x00\x00\x38\x04\x10\x27\x01\x01\x00\x00" +
 		"\x05\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x09\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x10\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x13\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x18\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x69\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x40\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x09\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x06\x00\x00\x0c\x04\xe0\x07\x03\x1b\x08\x10" +
-		"\x09\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x30\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x59\x00\x1c\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x4d\x08\x04\xd7\x07\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\xdb\x07\x03\x1b\x04\x20" +
-		"\x4f\x00\x00\x08\x04\xdb\x07\x03\x1c\x04\x20" +
-		"\x4d\x00\x18\x08\x04\xde\x07\x03\x1e\x04\x20" +
-		"\x4f\x00\x00\x08\x04\xde\x07\x03\x1f\x04\x20" +
-		"\x4d\x00\x18\x08\x04\xdf\x07\x0a\x19\x04\x20" +
-		"\x4e\x00\x00\x08\x08\xdf\x07\x0b\x08\x04\x20" +
-		"\x4d\x00\x18\x08\x04\xe0\x07\x09\x07\x00\x00" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x40\x08\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x06\x00\x00\x0c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x4f\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x40\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x09\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6b\x00\x18\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x53\x00\x18\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x40\x08\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x60\x00\x40\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x5f\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x5f\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\xd0\x07\x02\x1d\x00\x00" +
-		"\x4f\x00\x00\x08\x04\xd1\x07\x01\x02\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x40\x10\x04\xda\x07\x03\x1c\x08\x10" +
-		"\x07\x00\x40\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x09\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x40\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x09\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x06\x00\x00\x0c\x04\xe0\x07\x0c\x04\x08\x10" +
-		"\x09\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\xde\x07\x03\x1e\x08\x00" +
-		"\x5f\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x5f\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\xcf\x07\x0a\x1f\x10\x00" +
-		"\x4f\x00\x00\x08\x04\xd2\x07\x02\x15\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x40\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x09\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x06\x00\x00\x0c\x04\xe0\x07\x03\x1b\x08\x10" +
-		"\x09\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\xcf\x07\x0a\x1f\x04\x20" +
-		"\x4f\x00\x00\x08\x04\xd3\x07\x01\x01\x00\x00" +
-		"\x4d\x00\x18\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x40\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x09\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x06\x00\x00\x0c\x04\xe2\x07\x0a\x1c\x08\x10" +
-		"\x09\x00\x00\x10\x04\xe4\x07\x0c\x1b\x08\x10" +
-		"\x06\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x18\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x56\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x10\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0c\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x2e\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x0e\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x4e\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x64\x00\x4e\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3b\x00\x51\xd4\x04\xdb\x07\x0c\x1d\x60\x00" +
-		"\x24\x00\x51\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x63\x00\x36\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1a\x00\x00\x28\x04\xde\x07\x0c\x1c\x08\x00" +
-		"\x1d\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x22\x00\x12\x33\x04\x10\x27\x01\x01\x00\x00" +
-		"\x33\x00\x13\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1e\x00\x50\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3a\x00\x00\xd4\x04\xdb\x07\x0c\x1e\x00\x00" +
-		"\x23\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x21\x00\x1e\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x33\x00\x1a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x00\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1d\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x51\x00\x1f\x28\x04\xd0\x07\x0c\x17\x00\x00" +
-		"\x4a\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x56\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x23\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x25\x00\x00\x38\x04\x10\x27\x01\x01\x00\x00" +
-		"\x20\x00\x00\x30\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x1d\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x20\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x37\x00\x00\xda\x04\x10\x27\x01\x01\x00\x00" +
-		"\x20\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3a\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1f\x00\x00\x2e\x04\xdf\x07\x0a\x04\x08\x10" +
-		"\x1d\x00\x00\x2c\x04\xe3\x07\x07\x01\x00\x00" +
-		"\x1e\x00\x01\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1e\x00\x34\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x68\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x18\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x35\x00\x00\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1a\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x39\x00\x14\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x38\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x20\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x23\x00\x00\x34\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x24\x00\x4a\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6b\x00\x18\x00\x04\x10\x27\x01\x01\x00\x00"
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x17\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x7b\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x59\x00\x00\x04\x04\xc1\x07\x03\x1f\x08\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x10\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xc8\x07\x03\x1d\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x0c\x04\xe0\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x2e\x08\x04\xbd\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x59\x00\x00\x04\x04\xbe\x07\x0b\x1b\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x2d\x04\x04\xbc\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x0f\x04\x04\xb9\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x57\x08\x04\xbd\x07\x03\x1d\x08\x10" +
+		"\x5e\x00\x14\x08\x04\xc7\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x57\x08\x04\xca\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x20\x08\x04\xcd\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x36\x04\x04\xc0\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc6\x07\x05\x06\x08\x00" +
+		"\x5e\x00\x58\x08\x04\xc8\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x20\x08\x04\xcd\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x45\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6a\x00\x27\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x59\x00\x00\x04\x04\xbe\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x2a\x08\x04\xbf\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x69\x08\x04\xba\x07\x06\x1d\x00\x00" +
+		"\x08\x00\x69\x0c\x04\xc0\x07\x0b\x01\x08\x00" +
+		"\x5e\x00\x69\x08\x04\xd7\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x08\x04\xdb\x07\x03\x1b\x04\x20" +
+		"\x60\x00\x00\x08\x04\xdb\x07\x03\x1c\x04\x20" +
+		"\x5e\x00\x22\x08\x04\xde\x07\x03\x1e\x04\x20" +
+		"\x60\x00\x00\x08\x04\xde\x07\x03\x1f\x04\x20" +
+		"\x5e\x00\x22\x08\x04\xdf\x07\x0a\x19\x04\x20" +
+		"\x5f\x00\x00\x08\x08\xdf\x07\x0b\x08\x04\x20" +
+		"\x5e\x00\x22\x08\x04\xe0\x07\x09\x07\x00\x00" +
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x5e\x00\x58\x08\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x07\x00\x00\x0c\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x60\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x10\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xc8\x07\x03\x1d\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc6\x07\x07\x01\x08\x00" +
+		"\x5f\x00\x00\x08\x08\xc7\x07\x09\x1d\x0c\x00" +
+		"\x5e\x00\x14\x08\x04\xcc\x07\x05\x0d\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x59\x00\x00\x04\x04\xb8\x07\x09\x1a\x04\x00" +
+		"\x7e\x00\x55\x00\x04\xbf\x07\x09\x19\x04\x10" +
+		"\x7e\x00\x6e\x00\x04\xc8\x07\x09\x1b\x04\x10" +
+		"\x58\x00\x22\x04\x04\xcc\x07\x03\x1f\x04\x20" +
+		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x01\x00\x2c\x00\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x64\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x5d\x04\x04\xbb\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x39\x04\x04\xb5\x07\x03\x1f\x00\x00" +
+		"\x58\x00\x42\x04\x04\xbd\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc6\x07\x01\x01\x00\x00" +
+		"\x71\x00\x00\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x5e\x00\x58\x08\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x5e\x00\x58\x08\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x72\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x71\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x71\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x2b\x04\x04\xb9\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x1d\x04\x04\xbb\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x5f\x00\x00\x08\x08\xc5\x07\x09\x18\x08\x10" +
+		"\x5e\x00\x3e\x08\x04\xcd\x07\x01\x15\x00\x00" +
+		"\x5e\x00\x22\x08\x04\xd0\x07\x02\x1d\x00\x00" +
+		"\x60\x00\x00\x08\x04\xd1\x07\x01\x02\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x39\x04\x04\xbc\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x10\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x06\x00\x58\x08\x04\xc7\x07\x09\x1d\x08\x10" +
+		"\x07\x00\x00\x0c\x04\xc7\x07\x0a\x14\x0c\x00" +
+		"\x0b\x00\x58\x10\x04\xda\x07\x03\x1c\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x10\x04\xc4\x07\x03\x1b\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xc8\x07\x03\x1d\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x0c\x04\xe0\x07\x0c\x04\x08\x10" +
+		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc6\x07\x01\x01\x00\x00" +
+		"\x71\x00\x00\x0c\x04\xc6\x07\x07\x01\x08\x00" +
+		"\x60\x00\x00\x08\x04\xc8\x07\x03\x14\x00\x00" +
+		"\x5e\x00\x14\x08\x04\xca\x07\x05\x01\x00\x00" +
+		"\x72\x00\x14\x0c\x04\xcc\x07\x03\x1f\x00\x10" +
+		"\x70\x00\x00\x0c\x08\xcc\x07\x0a\x1b\x0c\x10" +
+		"\x71\x00\x00\x0c\x04\xcd\x07\x03\x1e\x04\x20" +
+		"\x5e\x00\x22\x08\x04\xde\x07\x03\x1e\x08\x00" +
+		"\x71\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x71\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x60\x00\x00\x08\x04\xbb\x07\x03\x1f\x5c\x00" +
+		"\x5e\x00\x13\x08\x04\xbe\x07\x09\x1a\x0c\x00" +
+		"\x5e\x00\x14\x08\x04\xc7\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x20\x08\x04\xcd\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x5f\x00\x00\x08\x08\xc5\x07\x09\x18\x08\x10" +
+		"\x5e\x00\x14\x08\x04\xce\x07\x09\x16\x00\x00" +
+		"\x5e\x00\x22\x08\x04\xcf\x07\x0a\x1f\x10\x00" +
+		"\x60\x00\x00\x08\x04\xd2\x07\x02\x15\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x07\x04\x04\xc0\x07\x07\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x10\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x06\x00\x58\x08\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x0c\x04\xe0\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x0c\x04\x04\xbd\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x0c\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x5e\x00\x58\x08\x04\xc7\x07\x09\x1d\x08\x10" +
+		"\x5e\x00\x14\x08\x04\xce\x07\x01\x01\x00\x00" +
+		"\x60\x00\x00\x08\x04\xce\x07\x03\x1d\x04\x20" +
+		"\x58\x00\x22\x04\x04\xcf\x07\x0a\x1f\x04\x20" +
+		"\x60\x00\x00\x08\x04\xd3\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x10\x04\xc4\x07\x03\x1b\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xc8\x07\x03\x1d\x08\x10" +
+		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x0c\x04\xe2\x07\x0a\x1c\x08\x10" +
+		"\x0a\x00\x00\x10\x04\xe4\x07\x0c\x1b\x08\x10" +
+		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x54\x04\x04\xb9\x07\x01\x01\x00\x00" +
+		"\x58\x00\x6e\x04\x04\xc4\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x61\x04\x04\xbd\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x67\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x43\x10\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6f\x00\x14\x04\x04\x10\x27\x01\x01\x00\x00" +
+		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\xe4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\xe0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x47\x00\x6f\xd4\x04\xdb\x07\x0c\x1d\x60\x00" +
+		"\x28\x00\x6f\x34\x04\x10\x27\x01\x01\x00\x00" +
+		"\x75\x00\x4b\x30\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1c\x00\x00\x28\x04\xde\x07\x0c\x1c\x08\x00" +
+		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x26\x00\x18\x33\x04\x10\x27\x01\x01\x00\x00" +
+		"\x3d\x00\x19\xe4\x04\xbe\x07\x03\x0e\x0c\x20" +
+		"\x3b\x00\x19\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x6d\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x46\x00\x00\xd4\x04\xdb\x07\x0c\x1e\x00\x00" +
+		"\x27\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
+		"\x24\x00\x29\x30\x04\x10\x27\x01\x01\x00\x00" +
+		"\x38\x00\x00\xec\x04\xc2\x07\x01\x01\x00\x00" +
+		"\x3b\x00\x24\xe8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x40\x00\x00\xdc\x04\x10\x27\x01\x01\x00\x00" +
+		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x62\x00\x2f\x28\x04\xd0\x07\x0c\x17\x00\x00" +
+		"\x5b\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x67\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x48\x00\x00\xd0\x04\xbb\x07\x0a\x01\x00\x00" +
+		"\x46\x00\x00\xd4\x04\xca\x07\x0c\x1f\x00\x00" +
+		"\x27\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
+		"\x45\x00\x00\xd5\x54\xbb\x07\x0a\x01\x00\x00" +
+		"\x42\x00\x00\xd8\x04\xca\x07\x0c\x1f\x00\x00" +
+		"\x29\x00\x00\x38\x04\x10\x27\x01\x01\x00\x00" +
+		"\x23\x00\x00\x30\x04\xcf\x07\x01\x01\x00\x00" +
+		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x48\x00\x00\xd0\x04\xc9\x07\x08\x14\x60\x00" +
+		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
+		"\x41\x00\x00\xda\x04\x10\x27\x01\x01\x00\x00" +
+		"\x22\x00\x00\x2e\x04\xbb\x07\x02\x0a\x08\x00" +
+		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
+		"\x46\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x22\x00\x00\x2e\x04\xb6\x07\x0a\x1b\x08\x10" +
+		"\x25\x00\x00\x2e\x08\xb7\x07\x03\x02\x08\x10" +
+		"\x22\x00\x00\x2e\x04\xdf\x07\x0a\x04\x08\x10" +
+		"\x20\x00\x00\x2c\x04\xe3\x07\x07\x01\x00\x00" +
+		"\x21\x00\x01\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x49\x2c\x04\x10\x27\x01\x01\x00\x00" +
+		"\x7a\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
+		"\x3f\x00\x00\xde\x04\xce\x07\x04\x1b\x00\x00" +
+		"\x3e\x00\x00\xe0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x1c\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
+		"\x44\x00\x00\xd6\x04\xba\x07\x0b\x0c\x00\x00" +
+		"\x43\x00\x1a\xd8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x42\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
+		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
+		"\x27\x00\x00\x34\x04\xcf\x07\x01\x01\x00\x00" +
+		"\x28\x00\x65\x34\x04\x10\x27\x01\x01\x00\x00" +
+		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00"
 
 // ---------------------------------------------------------------------------
 // ZoneInfoRecords is an array of zoneinfo.ZoneInfoRecord items concatenated
@@ -12032,7 +17375,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 0: Link GB -> Europe/London
 	{
 		ZoneID: 0x005973ae,
-		NameIndex: 491, // "GB"
+		NameIndex: 490, // "GB"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 197, // Europe/London
@@ -12040,7 +17383,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 1: Link NZ -> Pacific/Auckland
 	{
 		ZoneID: 0x005974ad,
-		NameIndex: 524, // "NZ"
+		NameIndex: 523, // "NZ"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 98, // Pacific/Auckland
@@ -12048,7 +17391,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 2: Link Asia/Kuala_Lumpur -> Asia/Singapore
 	{
 		ZoneID: 0x014763c4,
-		NameIndex: 286, // "Asia/Kuala_Lumpur"
+		NameIndex: 285, // "Asia/Kuala_Lumpur"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 494, // Asia/Singapore
@@ -12056,7 +17399,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 3: Link Africa/Libreville -> Africa/Lagos
 	{
 		ZoneID: 0x01d96de4,
-		NameIndex: 33, // "Africa/Libreville"
+		NameIndex: 32, // "Africa/Libreville"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -12064,7 +17407,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 4: Link Indian/Cocos -> Asia/Yangon
 	{
 		ZoneID: 0x021e86de,
-		NameIndex: 504, // "Indian/Cocos"
+		NameIndex: 503, // "Indian/Cocos"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 524, // Asia/Yangon
@@ -12072,7 +17415,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 5: Link Australia/Victoria -> Australia/Melbourne
 	{
 		ZoneID: 0x0260d5db,
-		NameIndex: 367, // "Australia/Victoria"
+		NameIndex: 366, // "Australia/Victoria"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 49, // Australia/Melbourne
@@ -12080,7 +17423,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 6: Link Atlantic/Faeroe -> Atlantic/Faroe
 	{
 		ZoneID: 0x031ec516,
-		NameIndex: 339, // "Atlantic/Faeroe"
+		NameIndex: 338, // "Atlantic/Faeroe"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 539, // Atlantic/Faroe
@@ -12088,15 +17431,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 7: Zone America/St_Johns
 	{
 		ZoneID: 0x04b14e6e,
-		NameIndex: 205, // "America/St_Johns"
-		EraIndex: 274,
+		NameIndex: 204, // "America/St_Johns"
+		EraIndex: 418,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 8: Link America/St_Kitts -> America/Puerto_Rico
 	{
 		ZoneID: 0x04c0507b,
-		NameIndex: 206, // "America/St_Kitts"
+		NameIndex: 205, // "America/St_Kitts"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -12104,7 +17447,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 9: Link Africa/Ouagadougou -> Africa/Abidjan
 	{
 		ZoneID: 0x04d7219a,
-		NameIndex: 48, // "Africa/Ouagadougou"
+		NameIndex: 47, // "Africa/Ouagadougou"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -12112,7 +17455,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 10: Link America/St_Lucia -> America/Puerto_Rico
 	{
 		ZoneID: 0x04d8b3ba,
-		NameIndex: 207, // "America/St_Lucia"
+		NameIndex: 206, // "America/St_Lucia"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -12120,23 +17463,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 11: Zone America/North_Dakota/New_Salem
 	{
 		ZoneID: 0x04f9958e,
-		NameIndex: 176, // "America/North_Dakota/New_Salem"
-		EraIndex: 232,
+		NameIndex: 175, // "America/North_Dakota/New_Salem"
+		EraIndex: 362,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 12: Zone Asia/Jakarta
 	{
 		ZoneID: 0x0506ab50,
-		NameIndex: 274, // "Asia/Jakarta"
-		EraIndex: 378,
+		NameIndex: 273, // "Asia/Jakarta"
+		EraIndex: 578,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 13: Link Africa/Bujumbura -> Africa/Maputo
 	{
 		ZoneID: 0x05232a47,
-		NameIndex: 13, // "Africa/Bujumbura"
+		NameIndex: 12, // "Africa/Bujumbura"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 327, // Africa/Maputo
@@ -12144,15 +17487,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 14: Zone America/Mazatlan
 	{
 		ZoneID: 0x0532189e,
-		NameIndex: 157, // "America/Mazatlan"
-		EraIndex: 207,
+		NameIndex: 156, // "America/Mazatlan"
+		EraIndex: 320,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 15: Link America/St_Barthelemy -> America/Puerto_Rico
 	{
 		ZoneID: 0x054e6a79,
-		NameIndex: 204, // "America/St_Barthelemy"
+		NameIndex: 203, // "America/St_Barthelemy"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -12160,7 +17503,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 16: Link Africa/Addis_Ababa -> Africa/Nairobi
 	{
 		ZoneID: 0x05ae1e65,
-		NameIndex: 3, // "Africa/Addis_Ababa"
+		NameIndex: 2, // "Africa/Addis_Ababa"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -12168,23 +17511,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 17: Zone Pacific/Fakaofo
 	{
 		ZoneID: 0x06532bba,
-		NameIndex: 537, // "Pacific/Fakaofo"
-		EraIndex: 616,
+		NameIndex: 536, // "Pacific/Fakaofo"
+		EraIndex: 985,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 18: Zone America/Hermosillo
 	{
 		ZoneID: 0x065d21c4,
-		NameIndex: 127, // "America/Hermosillo"
-		EraIndex: 164,
+		NameIndex: 126, // "America/Hermosillo"
+		EraIndex: 245,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 19: Link Mexico/BajaSur -> America/Mazatlan
 	{
 		ZoneID: 0x08ee3641,
-		NameIndex: 522, // "Mexico/BajaSur"
+		NameIndex: 521, // "Mexico/BajaSur"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 14, // America/Mazatlan
@@ -12192,23 +17535,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 20: Zone Asia/Tbilisi
 	{
 		ZoneID: 0x0903e442,
-		NameIndex: 317, // "Asia/Tbilisi"
-		EraIndex: 441,
-		EraCount: 3,
+		NameIndex: 316, // "Asia/Tbilisi"
+		EraIndex: 689,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 21: Zone America/Indiana/Tell_City
 	{
 		ZoneID: 0x09263612,
-		NameIndex: 132, // "America/Indiana/Tell_City"
-		EraIndex: 175,
+		NameIndex: 131, // "America/Indiana/Tell_City"
+		EraIndex: 261,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 22: Link US/Hawaii -> Pacific/Honolulu
 	{
 		ZoneID: 0x09c8de2f,
-		NameIndex: 586, // "US/Hawaii"
+		NameIndex: 585, // "US/Hawaii"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 552, // Pacific/Honolulu
@@ -12216,47 +17559,47 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 23: Zone America/Boa_Vista
 	{
 		ZoneID: 0x0a7b7efe,
-		NameIndex: 83, // "America/Boa_Vista"
-		EraIndex: 107,
-		EraCount: 3,
+		NameIndex: 82, // "America/Boa_Vista"
+		EraIndex: 159,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 24: Zone Asia/Colombo
 	{
 		ZoneID: 0x0af0e91d,
-		NameIndex: 258, // "Asia/Colombo"
-		EraIndex: 349,
-		EraCount: 2,
+		NameIndex: 257, // "Asia/Colombo"
+		EraIndex: 537,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 25: Zone CET
 	{
 		ZoneID: 0x0b87d921,
-		NameIndex: 374, // "CET"
-		EraIndex: 491,
+		NameIndex: 373, // "CET"
+		EraIndex: 777,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 26: Zone EET
 	{
 		ZoneID: 0x0b87e1a3,
-		NameIndex: 387, // "EET"
-		EraIndex: 493,
+		NameIndex: 386, // "EET"
+		EraIndex: 779,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 27: Zone EST
 	{
 		ZoneID: 0x0b87e371,
-		NameIndex: 388, // "EST"
-		EraIndex: 494,
+		NameIndex: 387, // "EST"
+		EraIndex: 780,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 28: Link GMT -> Etc/GMT
 	{
 		ZoneID: 0x0b87eb2d,
-		NameIndex: 493, // "GMT"
+		NameIndex: 492, // "GMT"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -12264,31 +17607,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 29: Zone HST
 	{
 		ZoneID: 0x0b87f034,
-		NameIndex: 498, // "HST"
-		EraIndex: 600,
+		NameIndex: 497, // "HST"
+		EraIndex: 967,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 30: Zone MET
 	{
 		ZoneID: 0x0b8803ab,
-		NameIndex: 518, // "MET"
-		EraIndex: 604,
+		NameIndex: 517, // "MET"
+		EraIndex: 972,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 31: Zone MST
 	{
 		ZoneID: 0x0b880579,
-		NameIndex: 519, // "MST"
-		EraIndex: 605,
+		NameIndex: 518, // "MST"
+		EraIndex: 973,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 32: Link PRC -> Asia/Shanghai
 	{
 		ZoneID: 0x0b88120a,
-		NameIndex: 527, // "PRC"
+		NameIndex: 526, // "PRC"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 572, // Asia/Shanghai
@@ -12296,7 +17639,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 33: Link ROC -> Asia/Taipei
 	{
 		ZoneID: 0x0b881a29,
-		NameIndex: 575, // "ROC"
+		NameIndex: 574, // "ROC"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 499, // Asia/Taipei
@@ -12304,7 +17647,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 34: Link ROK -> Asia/Seoul
 	{
 		ZoneID: 0x0b881a31,
-		NameIndex: 576, // "ROK"
+		NameIndex: 575, // "ROK"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 67, // Asia/Seoul
@@ -12312,7 +17655,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 35: Link UCT -> Etc/UTC
 	{
 		ZoneID: 0x0b882571,
-		NameIndex: 579, // "UCT"
+		NameIndex: 578, // "UCT"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 515, // Etc/UTC
@@ -12320,7 +17663,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 36: Link UTC -> Etc/UTC
 	{
 		ZoneID: 0x0b882791,
-		NameIndex: 592, // "UTC"
+		NameIndex: 591, // "UTC"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 515, // Etc/UTC
@@ -12328,23 +17671,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 37: Zone WET
 	{
 		ZoneID: 0x0b882e35,
-		NameIndex: 595, // "WET"
-		EraIndex: 646,
+		NameIndex: 594, // "WET"
+		EraIndex: 1026,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 38: Zone America/Guatemala
 	{
 		ZoneID: 0x0c8259f7,
-		NameIndex: 122, // "America/Guatemala"
-		EraIndex: 159,
+		NameIndex: 121, // "America/Guatemala"
+		EraIndex: 237,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 39: Link Europe/Mariehamn -> Europe/Helsinki
 	{
 		ZoneID: 0x0caa6496,
-		NameIndex: 458, // "Europe/Mariehamn"
+		NameIndex: 457, // "Europe/Mariehamn"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 233, // Europe/Helsinki
@@ -12352,15 +17695,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 40: Zone Africa/Monrovia
 	{
 		ZoneID: 0x0ce90385,
-		NameIndex: 43, // "Africa/Monrovia"
-		EraIndex: 18,
+		NameIndex: 42, // "Africa/Monrovia"
+		EraIndex: 27,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 41: Link Egypt -> Africa/Cairo
 	{
 		ZoneID: 0x0d1a278e,
-		NameIndex: 390, // "Egypt"
+		NameIndex: 389, // "Egypt"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 270, // Africa/Cairo
@@ -12368,7 +17711,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 42: Link GMT+0 -> Etc/GMT
 	{
 		ZoneID: 0x0d2f7028,
-		NameIndex: 494, // "GMT+0"
+		NameIndex: 493, // "GMT+0"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -12376,7 +17719,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 43: Link GMT-0 -> Etc/GMT
 	{
 		ZoneID: 0x0d2f706a,
-		NameIndex: 495, // "GMT-0"
+		NameIndex: 494, // "GMT-0"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -12384,7 +17727,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 44: Link Japan -> Asia/Tokyo
 	{
 		ZoneID: 0x0d712f8f,
-		NameIndex: 515, // "Japan"
+		NameIndex: 514, // "Japan"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 68, // Asia/Tokyo
@@ -12392,7 +17735,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 45: Link Libya -> Africa/Tripoli
 	{
 		ZoneID: 0x0d998b16,
-		NameIndex: 517, // "Libya"
+		NameIndex: 516, // "Libya"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 398, // Africa/Tripoli
@@ -12400,7 +17743,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 46: Link Kwajalein -> Pacific/Kwajalein
 	{
 		ZoneID: 0x0e57afbb,
-		NameIndex: 516, // "Kwajalein"
+		NameIndex: 515, // "Kwajalein"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 324, // Pacific/Kwajalein
@@ -12408,39 +17751,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 47: Zone Antarctica/Rothera
 	{
 		ZoneID: 0x0e86d203,
-		NameIndex: 230, // "Antarctica/Rothera"
-		EraIndex: 315,
-		EraCount: 1,
+		NameIndex: 229, // "Antarctica/Rothera"
+		EraIndex: 467,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 48: Zone America/Yellowknife
 	{
 		ZoneID: 0x0f76c76f,
-		NameIndex: 222, // "America/Yellowknife"
-		EraIndex: 290,
-		EraCount: 1,
+		NameIndex: 221, // "America/Yellowknife"
+		EraIndex: 440,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 49: Zone Australia/Melbourne
 	{
 		ZoneID: 0x0fe559a3,
-		NameIndex: 359, // "Australia/Melbourne"
-		EraIndex: 488,
+		NameIndex: 358, // "Australia/Melbourne"
+		EraIndex: 774,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 50: Zone America/Sao_Paulo
 	{
 		ZoneID: 0x1063bfc9,
-		NameIndex: 200, // "America/Sao_Paulo"
-		EraIndex: 271,
+		NameIndex: 199, // "America/Sao_Paulo"
+		EraIndex: 411,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 51: Link Europe/Amsterdam -> Europe/Brussels
 	{
 		ZoneID: 0x109395c2,
-		NameIndex: 427, // "Europe/Amsterdam"
+		NameIndex: 426, // "Europe/Amsterdam"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 529, // Europe/Brussels
@@ -12448,55 +17791,55 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 52: Zone America/Indiana/Vevay
 	{
 		ZoneID: 0x10aca054,
-		NameIndex: 133, // "America/Indiana/Vevay"
-		EraIndex: 177,
-		EraCount: 2,
+		NameIndex: 132, // "America/Indiana/Vevay"
+		EraIndex: 263,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 53: Zone America/Scoresbysund
 	{
 		ZoneID: 0x123f8d2a,
-		NameIndex: 201, // "America/Scoresbysund"
-		EraIndex: 272,
-		EraCount: 1,
+		NameIndex: 200, // "America/Scoresbysund"
+		EraIndex: 412,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 54: Zone Asia/Samarkand
 	{
 		ZoneID: 0x13ae5104,
-		NameIndex: 310, // "Asia/Samarkand"
-		EraIndex: 432,
-		EraCount: 1,
+		NameIndex: 309, // "Asia/Samarkand"
+		EraIndex: 671,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 55: Zone Asia/Amman
 	{
 		ZoneID: 0x148d21bc,
-		NameIndex: 238, // "Asia/Amman"
-		EraIndex: 320,
+		NameIndex: 237, // "Asia/Amman"
+		EraIndex: 475,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 56: Zone Asia/Aqtau
 	{
 		ZoneID: 0x148f710e,
-		NameIndex: 240, // "Asia/Aqtau"
-		EraIndex: 325,
-		EraCount: 2,
+		NameIndex: 239, // "Asia/Aqtau"
+		EraIndex: 483,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 57: Zone Asia/Chita
 	{
 		ZoneID: 0x14ae863b,
-		NameIndex: 254, // "Asia/Chita"
-		EraIndex: 343,
-		EraCount: 4,
+		NameIndex: 253, // "Asia/Chita"
+		EraIndex: 527,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 58: Link Asia/Dacca -> Asia/Dhaka
 	{
 		ZoneID: 0x14bcac5e,
-		NameIndex: 259, // "Asia/Dacca"
+		NameIndex: 258, // "Asia/Dacca"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 59, // Asia/Dhaka
@@ -12504,39 +17847,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 59: Zone Asia/Dhaka
 	{
 		ZoneID: 0x14c07b8b,
-		NameIndex: 261, // "Asia/Dhaka"
-		EraIndex: 353,
+		NameIndex: 260, // "Asia/Dhaka"
+		EraIndex: 543,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 60: Zone Asia/Dubai
 	{
 		ZoneID: 0x14c79f77,
-		NameIndex: 263, // "Asia/Dubai"
-		EraIndex: 357,
+		NameIndex: 262, // "Asia/Dubai"
+		EraIndex: 548,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 61: Zone America/Bahia_Banderas
 	{
 		ZoneID: 0x14f6329a,
-		NameIndex: 78, // "America/Bahia_Banderas"
-		EraIndex: 102,
+		NameIndex: 77, // "America/Bahia_Banderas"
+		EraIndex: 153,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 62: Zone Asia/Kabul
 	{
 		ZoneID: 0x153b5601,
-		NameIndex: 277, // "Asia/Kabul"
-		EraIndex: 381,
+		NameIndex: 276, // "Asia/Kabul"
+		EraIndex: 581,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 63: Link Asia/Ashkhabad -> Asia/Ashgabat
 	{
 		ZoneID: 0x15454f09,
-		NameIndex: 243, // "Asia/Ashkhabad"
+		NameIndex: 242, // "Asia/Ashkhabad"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 453, // Asia/Ashgabat
@@ -12544,7 +17887,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 64: Link Asia/Macao -> Asia/Macau
 	{
 		ZoneID: 0x155f88b3,
-		NameIndex: 289, // "Asia/Macao"
+		NameIndex: 288, // "Asia/Macao"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 65, // Asia/Macau
@@ -12552,47 +17895,47 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 65: Zone Asia/Macau
 	{
 		ZoneID: 0x155f88b9,
-		NameIndex: 290, // "Asia/Macau"
-		EraIndex: 397,
+		NameIndex: 289, // "Asia/Macau"
+		EraIndex: 604,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 66: Zone Asia/Qatar
 	{
 		ZoneID: 0x15a8330b,
-		NameIndex: 303, // "Asia/Qatar"
-		EraIndex: 421,
+		NameIndex: 302, // "Asia/Qatar"
+		EraIndex: 645,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 67: Zone Asia/Seoul
 	{
 		ZoneID: 0x15ce82da,
-		NameIndex: 311, // "Asia/Seoul"
-		EraIndex: 433,
+		NameIndex: 310, // "Asia/Seoul"
+		EraIndex: 676,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 68: Zone Asia/Tokyo
 	{
 		ZoneID: 0x15e606a8,
-		NameIndex: 322, // "Asia/Tokyo"
-		EraIndex: 446,
+		NameIndex: 321, // "Asia/Tokyo"
+		EraIndex: 702,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 69: Zone Asia/Tomsk
 	{
 		ZoneID: 0x15e60e60,
-		NameIndex: 323, // "Asia/Tomsk"
-		EraIndex: 447,
-		EraCount: 5,
+		NameIndex: 322, // "Asia/Tomsk"
+		EraIndex: 703,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 70: Link Asia/Tel_Aviv -> Asia/Jerusalem
 	{
 		ZoneID: 0x166d7c2c,
-		NameIndex: 319, // "Asia/Tel_Aviv"
+		NameIndex: 318, // "Asia/Tel_Aviv"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 193, // Asia/Jerusalem
@@ -12600,23 +17943,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 71: Zone Asia/Thimphu
 	{
 		ZoneID: 0x170380d1,
-		NameIndex: 321, // "Asia/Thimphu"
-		EraIndex: 445,
-		EraCount: 1,
+		NameIndex: 320, // "Asia/Thimphu"
+		EraIndex: 700,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 72: Zone America/Guayaquil
 	{
 		ZoneID: 0x17e64958,
-		NameIndex: 123, // "America/Guayaquil"
-		EraIndex: 160,
+		NameIndex: 122, // "America/Guayaquil"
+		EraIndex: 238,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 73: Link America/Montserrat -> America/Puerto_Rico
 	{
 		ZoneID: 0x199b0a35,
-		NameIndex: 168, // "America/Montserrat"
+		NameIndex: 167, // "America/Montserrat"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -12624,23 +17967,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 74: Zone America/Kentucky/Louisville
 	{
 		ZoneID: 0x1a21024b,
-		NameIndex: 142, // "America/Kentucky/Louisville"
-		EraIndex: 191,
-		EraCount: 1,
+		NameIndex: 141, // "America/Kentucky/Louisville"
+		EraIndex: 286,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 75: Zone Asia/Pontianak
 	{
 		ZoneID: 0x1a76c057,
-		NameIndex: 301, // "Asia/Pontianak"
-		EraIndex: 417,
-		EraCount: 1,
+		NameIndex: 300, // "Asia/Pontianak"
+		EraIndex: 640,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 76: Link Europe/Podgorica -> Europe/Belgrade
 	{
 		ZoneID: 0x1c1a499c,
-		NameIndex: 465, // "Europe/Podgorica"
+		NameIndex: 464, // "Europe/Podgorica"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 535, // Europe/Belgrade
@@ -12648,7 +17991,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 77: Link Atlantic/Reykjavik -> Africa/Abidjan
 	{
 		ZoneID: 0x1c2b4f74,
-		NameIndex: 343, // "Atlantic/Reykjavik"
+		NameIndex: 342, // "Atlantic/Reykjavik"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -12656,15 +17999,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 78: Zone America/New_York
 	{
 		ZoneID: 0x1e2a7654,
-		NameIndex: 170, // "America/New_York"
-		EraIndex: 222,
+		NameIndex: 169, // "America/New_York"
+		EraIndex: 348,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 79: Link Europe/Luxembourg -> Europe/Brussels
 	{
 		ZoneID: 0x1f8bc6ce,
-		NameIndex: 455, // "Europe/Luxembourg"
+		NameIndex: 454, // "Europe/Luxembourg"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 529, // Europe/Brussels
@@ -12672,7 +18015,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 80: Link Asia/Aden -> Asia/Riyadh
 	{
 		ZoneID: 0x1fa7084a,
-		NameIndex: 236, // "Asia/Aden"
+		NameIndex: 235, // "Asia/Aden"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 489, // Asia/Riyadh
@@ -12680,55 +18023,55 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 81: Zone Asia/Baku
 	{
 		ZoneID: 0x1fa788b5,
-		NameIndex: 247, // "Asia/Baku"
-		EraIndex: 334,
-		EraCount: 1,
+		NameIndex: 246, // "Asia/Baku"
+		EraIndex: 509,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 82: Zone Asia/Dili
 	{
 		ZoneID: 0x1fa8c394,
-		NameIndex: 262, // "Asia/Dili"
-		EraIndex: 355,
-		EraCount: 2,
+		NameIndex: 261, // "Asia/Dili"
+		EraIndex: 545,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 83: Zone Asia/Gaza
 	{
 		ZoneID: 0x1faa4875,
-		NameIndex: 266, // "Asia/Gaza"
-		EraIndex: 362,
-		EraCount: 8,
+		NameIndex: 265, // "Asia/Gaza"
+		EraIndex: 556,
+		EraCount: 9,
 		TargetIndex: 0,
 	},
 	// 84: Zone Asia/Hovd
 	{
 		ZoneID: 0x1fab0fe3,
-		NameIndex: 271, // "Asia/Hovd"
-		EraIndex: 374,
-		EraCount: 1,
+		NameIndex: 270, // "Asia/Hovd"
+		EraIndex: 571,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 85: Zone Asia/Omsk
 	{
 		ZoneID: 0x1faeddac,
-		NameIndex: 298, // "Asia/Omsk"
-		EraIndex: 412,
-		EraCount: 3,
+		NameIndex: 297, // "Asia/Omsk"
+		EraIndex: 627,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 86: Zone Asia/Oral
 	{
 		ZoneID: 0x1faef0a0,
-		NameIndex: 299, // "Asia/Oral"
-		EraIndex: 415,
-		EraCount: 2,
+		NameIndex: 298, // "Asia/Oral"
+		EraIndex: 632,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 87: Link America/Montreal -> America/Toronto
 	{
 		ZoneID: 0x203a1ea8,
-		NameIndex: 167, // "America/Montreal"
+		NameIndex: 166, // "America/Montreal"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 276, // America/Toronto
@@ -12736,23 +18079,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 88: Zone Asia/Ho_Chi_Minh
 	{
 		ZoneID: 0x20f2d127,
-		NameIndex: 269, // "Asia/Ho_Chi_Minh"
-		EraIndex: 372,
-		EraCount: 1,
+		NameIndex: 268, // "Asia/Ho_Chi_Minh"
+		EraIndex: 568,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 89: Zone Asia/Damascus
 	{
 		ZoneID: 0x20fbb063,
-		NameIndex: 260, // "Asia/Damascus"
-		EraIndex: 351,
+		NameIndex: 259, // "Asia/Damascus"
+		EraIndex: 541,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 90: Link America/Argentina/ComodRivadavia -> America/Argentina/Catamarca
 	{
 		ZoneID: 0x22758877,
-		NameIndex: 62, // "America/Argentina/ComodRivadavia"
+		NameIndex: 61, // "America/Argentina/ComodRivadavia"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 318, // America/Argentina/Catamarca
@@ -12760,39 +18103,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 91: Zone Pacific/Apia
 	{
 		ZoneID: 0x23359b5e,
-		NameIndex: 529, // "Pacific/Apia"
-		EraIndex: 608,
+		NameIndex: 528, // "Pacific/Apia"
+		EraIndex: 976,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 92: Zone Pacific/Fiji
 	{
 		ZoneID: 0x23383ba5,
-		NameIndex: 538, // "Pacific/Fiji"
-		EraIndex: 618,
+		NameIndex: 537, // "Pacific/Fiji"
+		EraIndex: 987,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 93: Zone Pacific/Guam
 	{
 		ZoneID: 0x2338f9ed,
-		NameIndex: 543, // "Pacific/Guam"
-		EraIndex: 622,
+		NameIndex: 542, // "Pacific/Guam"
+		EraIndex: 992,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 94: Zone Pacific/Niue
 	{
 		ZoneID: 0x233ca014,
-		NameIndex: 554, // "Pacific/Niue"
-		EraIndex: 632,
+		NameIndex: 553, // "Pacific/Niue"
+		EraIndex: 1008,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 95: Link Pacific/Truk -> Pacific/Port_Moresby
 	{
 		ZoneID: 0x234010a9,
-		NameIndex: 569, // "Pacific/Truk"
+		NameIndex: 568, // "Pacific/Truk"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 419, // Pacific/Port_Moresby
@@ -12800,7 +18143,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 96: Link Pacific/Wake -> Pacific/Tarawa
 	{
 		ZoneID: 0x23416c2b,
-		NameIndex: 570, // "Pacific/Wake"
+		NameIndex: 569, // "Pacific/Wake"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 563, // Pacific/Tarawa
@@ -12808,39 +18151,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 97: Zone Australia/Adelaide
 	{
 		ZoneID: 0x2428e8a3,
-		NameIndex: 348, // "Australia/Adelaide"
-		EraIndex: 479,
+		NameIndex: 347, // "Australia/Adelaide"
+		EraIndex: 762,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 98: Zone Pacific/Auckland
 	{
 		ZoneID: 0x25062f86,
-		NameIndex: 530, // "Pacific/Auckland"
-		EraIndex: 610,
+		NameIndex: 529, // "Pacific/Auckland"
+		EraIndex: 978,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 99: Zone Pacific/Tongatapu
 	{
 		ZoneID: 0x262ca836,
-		NameIndex: 568, // "Pacific/Tongatapu"
-		EraIndex: 644,
+		NameIndex: 567, // "Pacific/Tongatapu"
+		EraIndex: 1024,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 100: Zone America/Monterrey
 	{
 		ZoneID: 0x269a1deb,
-		NameIndex: 165, // "America/Monterrey"
-		EraIndex: 220,
-		EraCount: 1,
+		NameIndex: 164, // "America/Monterrey"
+		EraIndex: 341,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 101: Link Etc/Greenwich -> Etc/GMT
 	{
 		ZoneID: 0x26daa98c,
-		NameIndex: 422, // "Etc/Greenwich"
+		NameIndex: 421, // "Etc/Greenwich"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -12848,7 +18191,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 102: Link Australia/Currie -> Australia/Hobart
 	{
 		ZoneID: 0x278b6a24,
-		NameIndex: 352, // "Australia/Currie"
+		NameIndex: 351, // "Australia/Currie"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 124, // Australia/Hobart
@@ -12856,15 +18199,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 103: Zone Australia/Darwin
 	{
 		ZoneID: 0x2876bdff,
-		NameIndex: 353, // "Australia/Darwin"
-		EraIndex: 483,
+		NameIndex: 352, // "Australia/Darwin"
+		EraIndex: 766,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 104: Link Pacific/Pohnpei -> Pacific/Guadalcanal
 	{
 		ZoneID: 0x28929f96,
-		NameIndex: 560, // "Pacific/Pohnpei"
+		NameIndex: 559, // "Pacific/Pohnpei"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 568, // Pacific/Guadalcanal
@@ -12872,39 +18215,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 105: Zone Asia/Famagusta
 	{
 		ZoneID: 0x289b4f8b,
-		NameIndex: 265, // "Asia/Famagusta"
-		EraIndex: 359,
-		EraCount: 3,
+		NameIndex: 264, // "Asia/Famagusta"
+		EraIndex: 552,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 106: Zone America/Indiana/Vincennes
 	{
 		ZoneID: 0x28a0b212,
-		NameIndex: 134, // "America/Indiana/Vincennes"
-		EraIndex: 179,
+		NameIndex: 133, // "America/Indiana/Vincennes"
+		EraIndex: 266,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 107: Zone America/Indiana/Indianapolis
 	{
 		ZoneID: 0x28a669a4,
-		NameIndex: 128, // "America/Indiana/Indianapolis"
-		EraIndex: 166,
+		NameIndex: 127, // "America/Indiana/Indianapolis"
+		EraIndex: 247,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 108: Zone Asia/Vladivostok
 	{
 		ZoneID: 0x29de34a8,
-		NameIndex: 330, // "Asia/Vladivostok"
-		EraIndex: 458,
-		EraCount: 3,
+		NameIndex: 329, // "Asia/Vladivostok"
+		EraIndex: 720,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 109: Link Australia/Canberra -> Australia/Sydney
 	{
 		ZoneID: 0x2a09ae58,
-		NameIndex: 351, // "Australia/Canberra"
+		NameIndex: 350, // "Australia/Canberra"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 168, // Australia/Sydney
@@ -12912,23 +18255,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 110: Zone America/Fortaleza
 	{
 		ZoneID: 0x2ad018ee,
-		NameIndex: 115, // "America/Fortaleza"
-		EraIndex: 148,
-		EraCount: 5,
+		NameIndex: 114, // "America/Fortaleza"
+		EraIndex: 223,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 111: Zone America/Vancouver
 	{
 		ZoneID: 0x2c6f6b1f,
-		NameIndex: 217, // "America/Vancouver"
-		EraIndex: 284,
-		EraCount: 1,
+		NameIndex: 216, // "America/Vancouver"
+		EraIndex: 431,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 112: Link America/Pangnirtung -> America/Iqaluit
 	{
 		ZoneID: 0x2d999193,
-		NameIndex: 180, // "America/Pangnirtung"
+		NameIndex: 179, // "America/Pangnirtung"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 113, // America/Iqaluit
@@ -12936,15 +18279,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 113: Zone America/Iqaluit
 	{
 		ZoneID: 0x2de310bf,
-		NameIndex: 138, // "America/Iqaluit"
-		EraIndex: 186,
+		NameIndex: 137, // "America/Iqaluit"
+		EraIndex: 275,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 114: Link Jamaica -> America/Jamaica
 	{
 		ZoneID: 0x2e44fdab,
-		NameIndex: 514, // "Jamaica"
+		NameIndex: 513, // "Jamaica"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 182, // America/Jamaica
@@ -12952,15 +18295,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 115: Zone Pacific/Chatham
 	{
 		ZoneID: 0x2f0de999,
-		NameIndex: 532, // "Pacific/Chatham"
-		EraIndex: 613,
+		NameIndex: 531, // "Pacific/Chatham"
+		EraIndex: 981,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 116: Link Etc/Universal -> Etc/UTC
 	{
 		ZoneID: 0x2f8cb9a9,
-		NameIndex: 425, // "Etc/Universal"
+		NameIndex: 424, // "Etc/Universal"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 515, // Etc/UTC
@@ -12968,23 +18311,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 117: Zone America/Indiana/Marengo
 	{
 		ZoneID: 0x2feeee72,
-		NameIndex: 130, // "America/Indiana/Marengo"
-		EraIndex: 170,
-		EraCount: 2,
+		NameIndex: 129, // "America/Indiana/Marengo"
+		EraIndex: 252,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 118: Zone Europe/Tallinn
 	{
 		ZoneID: 0x30c4e096,
-		NameIndex: 477, // "Europe/Tallinn"
-		EraIndex: 581,
-		EraCount: 3,
+		NameIndex: 476, // "Europe/Tallinn"
+		EraIndex: 930,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 119: Link Africa/Djibouti -> Africa/Nairobi
 	{
 		ZoneID: 0x30ea01d4,
-		NameIndex: 20, // "Africa/Djibouti"
+		NameIndex: 19, // "Africa/Djibouti"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -12992,15 +18335,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 120: Zone Asia/Ulaanbaatar
 	{
 		ZoneID: 0x30f0cc4e,
-		NameIndex: 325, // "Asia/Ulaanbaatar"
-		EraIndex: 452,
-		EraCount: 1,
+		NameIndex: 324, // "Asia/Ulaanbaatar"
+		EraIndex: 710,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 121: Link Africa/Gaborone -> Africa/Maputo
 	{
 		ZoneID: 0x317c0aa7,
-		NameIndex: 24, // "Africa/Gaborone"
+		NameIndex: 23, // "Africa/Gaborone"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 327, // Africa/Maputo
@@ -13008,15 +18351,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 122: Zone America/Argentina/Ushuaia
 	{
 		ZoneID: 0x320dcdde,
-		NameIndex: 72, // "America/Argentina/Ushuaia"
-		EraIndex: 91,
+		NameIndex: 71, // "America/Argentina/Ushuaia"
+		EraIndex: 141,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 123: Link Asia/Calcutta -> Asia/Kolkata
 	{
 		ZoneID: 0x328a44c3,
-		NameIndex: 253, // "Asia/Calcutta"
+		NameIndex: 252, // "Asia/Calcutta"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 251, // Asia/Kolkata
@@ -13024,39 +18367,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 124: Zone Australia/Hobart
 	{
 		ZoneID: 0x32bf951a,
-		NameIndex: 355, // "Australia/Hobart"
-		EraIndex: 485,
+		NameIndex: 354, // "Australia/Hobart"
+		EraIndex: 768,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 125: Zone Asia/Dushanbe
 	{
 		ZoneID: 0x32fc5c3c,
-		NameIndex: 264, // "Asia/Dushanbe"
-		EraIndex: 358,
-		EraCount: 1,
+		NameIndex: 263, // "Asia/Dushanbe"
+		EraIndex: 549,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 126: Zone Atlantic/South_Georgia
 	{
 		ZoneID: 0x33013174,
-		NameIndex: 344, // "Atlantic/South_Georgia"
-		EraIndex: 476,
+		NameIndex: 343, // "Atlantic/South_Georgia"
+		EraIndex: 757,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 127: Zone America/Phoenix
 	{
 		ZoneID: 0x34b5af01,
-		NameIndex: 182, // "America/Phoenix"
-		EraIndex: 242,
+		NameIndex: 181, // "America/Phoenix"
+		EraIndex: 377,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 128: Link Asia/Istanbul -> Europe/Istanbul
 	{
 		ZoneID: 0x382e7894,
-		NameIndex: 273, // "Asia/Istanbul"
+		NameIndex: 272, // "Asia/Istanbul"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 399, // Europe/Istanbul
@@ -13064,7 +18407,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 129: Link Asia/Ulan_Bator -> Asia/Ulaanbaatar
 	{
 		ZoneID: 0x394db4d9,
-		NameIndex: 326, // "Asia/Ulan_Bator"
+		NameIndex: 325, // "Asia/Ulan_Bator"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 120, // Asia/Ulaanbaatar
@@ -13072,15 +18415,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 130: Zone Antarctica/Mawson
 	{
 		ZoneID: 0x399cd863,
-		NameIndex: 227, // "Antarctica/Mawson"
-		EraIndex: 311,
+		NameIndex: 226, // "Antarctica/Mawson"
+		EraIndex: 462,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 131: Link Africa/Brazzaville -> Africa/Lagos
 	{
 		ZoneID: 0x39cda760,
-		NameIndex: 12, // "Africa/Brazzaville"
+		NameIndex: 11, // "Africa/Brazzaville"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -13088,23 +18431,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 132: Zone America/Caracas
 	{
 		ZoneID: 0x3be064f4,
-		NameIndex: 90, // "America/Caracas"
-		EraIndex: 120,
+		NameIndex: 89, // "America/Caracas"
+		EraIndex: 177,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 133: Zone America/Cayenne
 	{
 		ZoneID: 0x3c617269,
-		NameIndex: 92, // "America/Cayenne"
-		EraIndex: 123,
+		NameIndex: 91, // "America/Cayenne"
+		EraIndex: 180,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 134: Link Africa/Porto-Novo -> Africa/Lagos
 	{
 		ZoneID: 0x3d1bf95d,
-		NameIndex: 49, // "Africa/Porto-Novo"
+		NameIndex: 48, // "Africa/Porto-Novo"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -13112,23 +18455,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 135: Zone Atlantic/Bermuda
 	{
 		ZoneID: 0x3d4bb1c4,
-		NameIndex: 336, // "Atlantic/Bermuda"
-		EraIndex: 471,
-		EraCount: 1,
+		NameIndex: 335, // "Atlantic/Bermuda"
+		EraIndex: 745,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 136: Zone America/Managua
 	{
 		ZoneID: 0x3d5e7600,
-		NameIndex: 152, // "America/Managua"
-		EraIndex: 202,
-		EraCount: 1,
+		NameIndex: 151, // "America/Managua"
+		EraIndex: 302,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 137: Link America/Marigot -> America/Puerto_Rico
 	{
 		ZoneID: 0x3dab3a59,
-		NameIndex: 154, // "America/Marigot"
+		NameIndex: 153, // "America/Marigot"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -13136,7 +18479,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 138: Link Europe/Guernsey -> Europe/London
 	{
 		ZoneID: 0x3db12c16,
-		NameIndex: 443, // "Europe/Guernsey"
+		NameIndex: 442, // "Europe/Guernsey"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 197, // Europe/London
@@ -13144,7 +18487,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 139: Link Africa/Nouakchott -> Africa/Abidjan
 	{
 		ZoneID: 0x3dc49dba,
-		NameIndex: 47, // "Africa/Nouakchott"
+		NameIndex: 46, // "Africa/Nouakchott"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -13152,7 +18495,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 140: Link America/Louisville -> America/Kentucky/Louisville
 	{
 		ZoneID: 0x3dcb47ee,
-		NameIndex: 149, // "America/Louisville"
+		NameIndex: 148, // "America/Louisville"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 74, // America/Kentucky/Louisville
@@ -13160,111 +18503,111 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 141: Zone America/Argentina/San_Juan
 	{
 		ZoneID: 0x3e1009bd,
-		NameIndex: 69, // "America/Argentina/San_Juan"
-		EraIndex: 73,
-		EraCount: 6,
+		NameIndex: 68, // "America/Argentina/San_Juan"
+		EraIndex: 114,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 142: Zone America/Argentina/San_Luis
 	{
 		ZoneID: 0x3e11238c,
-		NameIndex: 70, // "America/Argentina/San_Luis"
-		EraIndex: 79,
-		EraCount: 7,
+		NameIndex: 69, // "America/Argentina/San_Luis"
+		EraIndex: 122,
+		EraCount: 12,
 		TargetIndex: 0,
 	},
 	// 143: Zone Europe/Volgograd
 	{
 		ZoneID: 0x3ed0f389,
-		NameIndex: 486, // "Europe/Volgograd"
-		EraIndex: 593,
-		EraCount: 5,
+		NameIndex: 485, // "Europe/Volgograd"
+		EraIndex: 954,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 144: Zone America/Fort_Nelson
 	{
 		ZoneID: 0x3f437e0f,
-		NameIndex: 113, // "America/Fort_Nelson"
-		EraIndex: 146,
-		EraCount: 2,
+		NameIndex: 112, // "America/Fort_Nelson"
+		EraIndex: 220,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 145: Zone Etc/GMT+10
 	{
 		ZoneID: 0x3f8f1cc4,
-		NameIndex: 395, // "Etc/GMT+10"
-		EraIndex: 498,
+		NameIndex: 394, // "Etc/GMT+10"
+		EraIndex: 784,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 146: Zone Etc/GMT+11
 	{
 		ZoneID: 0x3f8f1cc5,
-		NameIndex: 396, // "Etc/GMT+11"
-		EraIndex: 499,
+		NameIndex: 395, // "Etc/GMT+11"
+		EraIndex: 785,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 147: Zone Etc/GMT+12
 	{
 		ZoneID: 0x3f8f1cc6,
-		NameIndex: 397, // "Etc/GMT+12"
-		EraIndex: 500,
+		NameIndex: 396, // "Etc/GMT+12"
+		EraIndex: 786,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 148: Zone Etc/GMT-10
 	{
 		ZoneID: 0x3f8f2546,
-		NameIndex: 408, // "Etc/GMT-10"
-		EraIndex: 510,
+		NameIndex: 407, // "Etc/GMT-10"
+		EraIndex: 796,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 149: Zone Etc/GMT-11
 	{
 		ZoneID: 0x3f8f2547,
-		NameIndex: 409, // "Etc/GMT-11"
-		EraIndex: 511,
+		NameIndex: 408, // "Etc/GMT-11"
+		EraIndex: 797,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 150: Zone Etc/GMT-12
 	{
 		ZoneID: 0x3f8f2548,
-		NameIndex: 410, // "Etc/GMT-12"
-		EraIndex: 512,
+		NameIndex: 409, // "Etc/GMT-12"
+		EraIndex: 798,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 151: Zone Etc/GMT-13
 	{
 		ZoneID: 0x3f8f2549,
-		NameIndex: 411, // "Etc/GMT-13"
-		EraIndex: 513,
+		NameIndex: 410, // "Etc/GMT-13"
+		EraIndex: 799,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 152: Zone Etc/GMT-14
 	{
 		ZoneID: 0x3f8f254a,
-		NameIndex: 412, // "Etc/GMT-14"
-		EraIndex: 514,
+		NameIndex: 411, // "Etc/GMT-14"
+		EraIndex: 800,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 153: Zone Antarctica/Palmer
 	{
 		ZoneID: 0x40962f4f,
-		NameIndex: 229, // "Antarctica/Palmer"
-		EraIndex: 313,
-		EraCount: 2,
+		NameIndex: 228, // "Antarctica/Palmer"
+		EraIndex: 464,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 154: Link Canada/Pacific -> America/Vancouver
 	{
 		ZoneID: 0x40fa3c7b,
-		NameIndex: 381, // "Canada/Pacific"
+		NameIndex: 380, // "Canada/Pacific"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 111, // America/Vancouver
@@ -13272,15 +18615,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 155: Zone Europe/Athens
 	{
 		ZoneID: 0x4318fa27,
-		NameIndex: 430, // "Europe/Athens"
-		EraIndex: 529,
-		EraCount: 1,
+		NameIndex: 429, // "Europe/Athens"
+		EraIndex: 819,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 156: Link Indian/Kerguelen -> Indian/Maldives
 	{
 		ZoneID: 0x4351b389,
-		NameIndex: 506, // "Indian/Kerguelen"
+		NameIndex: 505, // "Indian/Kerguelen"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 360, // Indian/Maldives
@@ -13288,23 +18631,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 157: Zone America/Indiana/Winamac
 	{
 		ZoneID: 0x4413fa69,
-		NameIndex: 135, // "America/Indiana/Winamac"
-		EraIndex: 182,
+		NameIndex: 134, // "America/Indiana/Winamac"
+		EraIndex: 269,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 158: Zone Europe/Berlin
 	{
 		ZoneID: 0x44644c20,
-		NameIndex: 433, // "Europe/Berlin"
-		EraIndex: 531,
-		EraCount: 1,
+		NameIndex: 432, // "Europe/Berlin"
+		EraIndex: 823,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 159: Link Atlantic/St_Helena -> Africa/Abidjan
 	{
 		ZoneID: 0x451fc5f7,
-		NameIndex: 345, // "Atlantic/St_Helena"
+		NameIndex: 344, // "Atlantic/St_Helena"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -13312,15 +18655,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 160: Zone Indian/Chagos
 	{
 		ZoneID: 0x456f7c3c,
-		NameIndex: 502, // "Indian/Chagos"
-		EraIndex: 601,
-		EraCount: 1,
+		NameIndex: 501, // "Indian/Chagos"
+		EraIndex: 968,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 161: Link Indian/Mahe -> Asia/Dubai
 	{
 		ZoneID: 0x45e725e2,
-		NameIndex: 507, // "Indian/Mahe"
+		NameIndex: 506, // "Indian/Mahe"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 60, // Asia/Dubai
@@ -13328,7 +18671,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 162: Link Indian/Comoro -> Africa/Nairobi
 	{
 		ZoneID: 0x45f4deb6,
-		NameIndex: 505, // "Indian/Comoro"
+		NameIndex: 504, // "Indian/Comoro"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -13336,7 +18679,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 163: Link America/Mendoza -> America/Argentina/Mendoza
 	{
 		ZoneID: 0x46b4e054,
-		NameIndex: 158, // "America/Mendoza"
+		NameIndex: 157, // "America/Mendoza"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 427, // America/Argentina/Mendoza
@@ -13344,47 +18687,47 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 164: Zone Asia/Ust-Nera
 	{
 		ZoneID: 0x4785f921,
-		NameIndex: 328, // "Asia/Ust-Nera"
-		EraIndex: 454,
-		EraCount: 4,
+		NameIndex: 327, // "Asia/Ust-Nera"
+		EraIndex: 713,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 165: Zone Europe/Dublin
 	{
 		ZoneID: 0x4a275f62,
-		NameIndex: 441, // "Europe/Dublin"
-		EraIndex: 536,
+		NameIndex: 440, // "Europe/Dublin"
+		EraIndex: 838,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 166: Zone Asia/Nicosia
 	{
 		ZoneID: 0x4b0fcf78,
-		NameIndex: 295, // "Asia/Nicosia"
-		EraIndex: 404,
-		EraCount: 1,
+		NameIndex: 294, // "Asia/Nicosia"
+		EraIndex: 613,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 167: Zone America/Chicago
 	{
 		ZoneID: 0x4b92b5d4,
-		NameIndex: 94, // "America/Chicago"
-		EraIndex: 124,
+		NameIndex: 93, // "America/Chicago"
+		EraIndex: 181,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 168: Zone Australia/Sydney
 	{
 		ZoneID: 0x4d1e9776,
-		NameIndex: 365, // "Australia/Sydney"
-		EraIndex: 490,
+		NameIndex: 364, // "Australia/Sydney"
+		EraIndex: 776,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 169: Link NZ-CHAT -> Pacific/Chatham
 	{
 		ZoneID: 0x4d42afda,
-		NameIndex: 525, // "NZ-CHAT"
+		NameIndex: 524, // "NZ-CHAT"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 115, // Pacific/Chatham
@@ -13392,7 +18735,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 170: Link US/Arizona -> America/Phoenix
 	{
 		ZoneID: 0x4ec52670,
-		NameIndex: 582, // "US/Arizona"
+		NameIndex: 581, // "US/Arizona"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 127, // America/Phoenix
@@ -13400,7 +18743,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 171: Link Antarctica/Vostok -> Asia/Urumqi
 	{
 		ZoneID: 0x4f966fd4,
-		NameIndex: 234, // "Antarctica/Vostok"
+		NameIndex: 233, // "Antarctica/Vostok"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 509, // Asia/Urumqi
@@ -13408,7 +18751,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 172: Link US/Aleutian -> America/Adak
 	{
 		ZoneID: 0x4fe013ef,
-		NameIndex: 581, // "US/Aleutian"
+		NameIndex: 580, // "US/Aleutian"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 355, // America/Adak
@@ -13416,15 +18759,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 173: Zone Australia/Brisbane
 	{
 		ZoneID: 0x4fedc9c0,
-		NameIndex: 349, // "Australia/Brisbane"
-		EraIndex: 480,
+		NameIndex: 348, // "Australia/Brisbane"
+		EraIndex: 763,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 174: Link America/Catamarca -> America/Argentina/Catamarca
 	{
 		ZoneID: 0x5036e963,
-		NameIndex: 91, // "America/Catamarca"
+		NameIndex: 90, // "America/Catamarca"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 318, // America/Argentina/Catamarca
@@ -13432,23 +18775,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 175: Zone America/Asuncion
 	{
 		ZoneID: 0x50ec79a6,
-		NameIndex: 74, // "America/Asuncion"
-		EraIndex: 97,
-		EraCount: 1,
+		NameIndex: 73, // "America/Asuncion"
+		EraIndex: 147,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 176: Zone Asia/Karachi
 	{
 		ZoneID: 0x527f5245,
-		NameIndex: 279, // "Asia/Karachi"
-		EraIndex: 385,
+		NameIndex: 278, // "Asia/Karachi"
+		EraIndex: 587,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 177: Link Asia/Kashgar -> Asia/Urumqi
 	{
 		ZoneID: 0x52955193,
-		NameIndex: 280, // "Asia/Kashgar"
+		NameIndex: 279, // "Asia/Kashgar"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 509, // Asia/Urumqi
@@ -13456,7 +18799,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 178: Link Canada/Atlantic -> America/Halifax
 	{
 		ZoneID: 0x536b119c,
-		NameIndex: 376, // "Canada/Atlantic"
+		NameIndex: 375, // "Canada/Atlantic"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 456, // America/Halifax
@@ -13464,39 +18807,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 179: Zone Pacific/Gambier
 	{
 		ZoneID: 0x53720c3a,
-		NameIndex: 541, // "Pacific/Gambier"
-		EraIndex: 620,
+		NameIndex: 540, // "Pacific/Gambier"
+		EraIndex: 990,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 180: Zone America/Whitehorse
 	{
 		ZoneID: 0x54e0e3e8,
-		NameIndex: 219, // "America/Whitehorse"
-		EraIndex: 285,
-		EraCount: 2,
+		NameIndex: 218, // "America/Whitehorse"
+		EraIndex: 433,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 181: Zone America/Martinique
 	{
 		ZoneID: 0x551e84c5,
-		NameIndex: 155, // "America/Martinique"
-		EraIndex: 204,
-		EraCount: 1,
+		NameIndex: 154, // "America/Martinique"
+		EraIndex: 313,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 182: Zone America/Jamaica
 	{
 		ZoneID: 0x565dad6c,
-		NameIndex: 139, // "America/Jamaica"
-		EraIndex: 189,
-		EraCount: 1,
+		NameIndex: 138, // "America/Jamaica"
+		EraIndex: 278,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 183: Link US/Samoa -> Pacific/Pago_Pago
 	{
 		ZoneID: 0x566821cd,
-		NameIndex: 591, // "US/Samoa"
+		NameIndex: 590, // "US/Samoa"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 208, // Pacific/Pago_Pago
@@ -13504,7 +18847,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 184: Link Hongkong -> Asia/Hong_Kong
 	{
 		ZoneID: 0x56d36560,
-		NameIndex: 499, // "Hongkong"
+		NameIndex: 498, // "Hongkong"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 186, // Asia/Hong_Kong
@@ -13512,7 +18855,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 185: Link Europe/Jersey -> Europe/London
 	{
 		ZoneID: 0x570dae76,
-		NameIndex: 447, // "Europe/Jersey"
+		NameIndex: 446, // "Europe/Jersey"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 197, // Europe/London
@@ -13520,31 +18863,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 186: Zone Asia/Hong_Kong
 	{
 		ZoneID: 0x577f28ac,
-		NameIndex: 270, // "Asia/Hong_Kong"
-		EraIndex: 373,
+		NameIndex: 269, // "Asia/Hong_Kong"
+		EraIndex: 570,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 187: Zone Pacific/Marquesas
 	{
 		ZoneID: 0x57ca7135,
-		NameIndex: 551, // "Pacific/Marquesas"
-		EraIndex: 630,
+		NameIndex: 550, // "Pacific/Marquesas"
+		EraIndex: 1005,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 188: Zone America/Miquelon
 	{
 		ZoneID: 0x59674330,
-		NameIndex: 163, // "America/Miquelon"
-		EraIndex: 217,
-		EraCount: 1,
+		NameIndex: 162, // "America/Miquelon"
+		EraIndex: 334,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 189: Link Antarctica/DumontDUrville -> Pacific/Port_Moresby
 	{
 		ZoneID: 0x5a3c656c,
-		NameIndex: 225, // "Antarctica/DumontDUrville"
+		NameIndex: 224, // "Antarctica/DumontDUrville"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 419, // Pacific/Port_Moresby
@@ -13552,7 +18895,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 190: Link Atlantic/Jan_Mayen -> Europe/Berlin
 	{
 		ZoneID: 0x5a7535b6,
-		NameIndex: 341, // "Atlantic/Jan_Mayen"
+		NameIndex: 340, // "Atlantic/Jan_Mayen"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 158, // Europe/Berlin
@@ -13560,15 +18903,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 191: Zone America/Anchorage
 	{
 		ZoneID: 0x5a79260e,
-		NameIndex: 56, // "America/Anchorage"
-		EraIndex: 30,
-		EraCount: 1,
+		NameIndex: 55, // "America/Anchorage"
+		EraIndex: 48,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 192: Link US/Eastern -> America/New_York
 	{
 		ZoneID: 0x5bb7e78e,
-		NameIndex: 585, // "US/Eastern"
+		NameIndex: 584, // "US/Eastern"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 78, // America/New_York
@@ -13576,15 +18919,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 193: Zone Asia/Jerusalem
 	{
 		ZoneID: 0x5becd23a,
-		NameIndex: 276, // "Asia/Jerusalem"
-		EraIndex: 380,
+		NameIndex: 275, // "Asia/Jerusalem"
+		EraIndex: 580,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 194: Link Europe/Stockholm -> Europe/Berlin
 	{
 		ZoneID: 0x5bf6fbb8,
-		NameIndex: 476, // "Europe/Stockholm"
+		NameIndex: 475, // "Europe/Stockholm"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 158, // Europe/Berlin
@@ -13592,31 +18935,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 195: Zone Europe/Lisbon
 	{
 		ZoneID: 0x5c00a70b,
-		NameIndex: 452, // "Europe/Lisbon"
-		EraIndex: 555,
-		EraCount: 1,
+		NameIndex: 451, // "Europe/Lisbon"
+		EraIndex: 868,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 196: Zone Atlantic/Cape_Verde
 	{
 		ZoneID: 0x5c5e1772,
-		NameIndex: 338, // "Atlantic/Cape_Verde"
-		EraIndex: 473,
-		EraCount: 1,
+		NameIndex: 337, // "Atlantic/Cape_Verde"
+		EraIndex: 751,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 197: Zone Europe/London
 	{
 		ZoneID: 0x5c6a84ae,
-		NameIndex: 454, // "Europe/London"
-		EraIndex: 556,
-		EraCount: 1,
+		NameIndex: 453, // "Europe/London"
+		EraIndex: 873,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 198: Link America/Cordoba -> America/Argentina/Cordoba
 	{
 		ZoneID: 0x5c8a7600,
-		NameIndex: 98, // "America/Cordoba"
+		NameIndex: 97, // "America/Cordoba"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 461, // America/Argentina/Cordoba
@@ -13624,7 +18967,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 199: Link Asia/Ujung_Pandang -> Asia/Makassar
 	{
 		ZoneID: 0x5d001eb3,
-		NameIndex: 324, // "Asia/Ujung_Pandang"
+		NameIndex: 323, // "Asia/Ujung_Pandang"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 232, // Asia/Makassar
@@ -13632,7 +18975,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 200: Link Africa/Mbabane -> Africa/Johannesburg
 	{
 		ZoneID: 0x5d3bdd40,
-		NameIndex: 41, // "Africa/Mbabane"
+		NameIndex: 40, // "Africa/Mbabane"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 511, // Africa/Johannesburg
@@ -13640,31 +18983,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 201: Zone Europe/Madrid
 	{
 		ZoneID: 0x5dbd1535,
-		NameIndex: 456, // "Europe/Madrid"
-		EraIndex: 557,
-		EraCount: 1,
+		NameIndex: 455, // "Europe/Madrid"
+		EraIndex: 875,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 202: Zone America/Moncton
 	{
 		ZoneID: 0x5e07fe24,
-		NameIndex: 164, // "America/Moncton"
-		EraIndex: 218,
-		EraCount: 2,
+		NameIndex: 163, // "America/Moncton"
+		EraIndex: 337,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 203: Zone Pacific/Bougainville
 	{
 		ZoneID: 0x5e10f7a4,
-		NameIndex: 531, // "Pacific/Bougainville"
-		EraIndex: 611,
+		NameIndex: 530, // "Pacific/Bougainville"
+		EraIndex: 979,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 204: Link Europe/Monaco -> Europe/Paris
 	{
 		ZoneID: 0x5ebf9f01,
-		NameIndex: 460, // "Europe/Monaco"
+		NameIndex: 459, // "Europe/Monaco"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 587, // Europe/Paris
@@ -13672,39 +19015,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 205: Zone Europe/Moscow
 	{
 		ZoneID: 0x5ec266fc,
-		NameIndex: 461, // "Europe/Moscow"
-		EraIndex: 561,
-		EraCount: 3,
+		NameIndex: 460, // "Europe/Moscow"
+		EraIndex: 884,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 206: Zone America/Argentina/Jujuy
 	{
 		ZoneID: 0x5f2f46c5,
-		NameIndex: 64, // "America/Argentina/Jujuy"
-		EraIndex: 47,
-		EraCount: 4,
+		NameIndex: 63, // "America/Argentina/Jujuy"
+		EraIndex: 73,
+		EraCount: 9,
 		TargetIndex: 0,
 	},
 	// 207: Zone America/Argentina/Salta
 	{
 		ZoneID: 0x5fc73403,
-		NameIndex: 68, // "America/Argentina/Salta"
-		EraIndex: 69,
-		EraCount: 4,
+		NameIndex: 67, // "America/Argentina/Salta"
+		EraIndex: 108,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 208: Zone Pacific/Pago_Pago
 	{
 		ZoneID: 0x603aebd0,
-		NameIndex: 557, // "Pacific/Pago_Pago"
-		EraIndex: 637,
+		NameIndex: 556, // "Pacific/Pago_Pago"
+		EraIndex: 1015,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 209: Link Pacific/Enderbury -> Pacific/Kanton
 	{
 		ZoneID: 0x61599a93,
-		NameIndex: 536, // "Pacific/Enderbury"
+		NameIndex: 535, // "Pacific/Enderbury"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 523, // Pacific/Kanton
@@ -13712,15 +19055,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 210: Zone Africa/Sao_Tome
 	{
 		ZoneID: 0x61b319d1,
-		NameIndex: 50, // "Africa/Sao_Tome"
-		EraIndex: 21,
+		NameIndex: 49, // "Africa/Sao_Tome"
+		EraIndex: 32,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 211: Link Canada/Central -> America/Winnipeg
 	{
 		ZoneID: 0x626710f5,
-		NameIndex: 377, // "Canada/Central"
+		NameIndex: 376, // "Canada/Central"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 316, // America/Winnipeg
@@ -13728,7 +19071,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 212: Link America/Creston -> America/Phoenix
 	{
 		ZoneID: 0x62a70204,
-		NameIndex: 100, // "America/Creston"
+		NameIndex: 99, // "America/Creston"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 127, // America/Phoenix
@@ -13736,39 +19079,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 213: Zone America/Costa_Rica
 	{
 		ZoneID: 0x63ff66be,
-		NameIndex: 99, // "America/Costa_Rica"
-		EraIndex: 131,
+		NameIndex: 98, // "America/Costa_Rica"
+		EraIndex: 194,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 214: Zone Asia/Qostanay
 	{
 		ZoneID: 0x654fe522,
-		NameIndex: 304, // "Asia/Qostanay"
-		EraIndex: 422,
-		EraCount: 2,
+		NameIndex: 303, // "Asia/Qostanay"
+		EraIndex: 646,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 215: Zone America/Indiana/Knox
 	{
 		ZoneID: 0x6554adc9,
-		NameIndex: 129, // "America/Indiana/Knox"
-		EraIndex: 168,
-		EraCount: 2,
+		NameIndex: 128, // "America/Indiana/Knox"
+		EraIndex: 249,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 216: Zone Europe/Prague
 	{
 		ZoneID: 0x65ee5d48,
-		NameIndex: 466, // "Europe/Prague"
-		EraIndex: 565,
-		EraCount: 1,
+		NameIndex: 465, // "Europe/Prague"
+		EraIndex: 891,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 217: Link Brazil/Acre -> America/Rio_Branco
 	{
 		ZoneID: 0x66934f93,
-		NameIndex: 370, // "Brazil/Acre"
+		NameIndex: 369, // "Brazil/Acre"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 393, // America/Rio_Branco
@@ -13776,7 +19119,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 218: Link Brazil/East -> America/Sao_Paulo
 	{
 		ZoneID: 0x669578c5,
-		NameIndex: 372, // "Brazil/East"
+		NameIndex: 371, // "Brazil/East"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 50, // America/Sao_Paulo
@@ -13784,7 +19127,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 219: Link Africa/Kinshasa -> Africa/Lagos
 	{
 		ZoneID: 0x6695d70c,
-		NameIndex: 31, // "Africa/Kinshasa"
+		NameIndex: 30, // "Africa/Kinshasa"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -13792,7 +19135,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 220: Link Brazil/West -> America/Manaus
 	{
 		ZoneID: 0x669f689b,
-		NameIndex: 373, // "Brazil/West"
+		NameIndex: 372, // "Brazil/West"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 432, // America/Manaus
@@ -13800,7 +19143,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 221: Link Africa/Mogadishu -> Africa/Nairobi
 	{
 		ZoneID: 0x66bc159b,
-		NameIndex: 42, // "Africa/Mogadishu"
+		NameIndex: 41, // "Africa/Mogadishu"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -13808,15 +19151,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 222: Zone America/Puerto_Rico
 	{
 		ZoneID: 0x6752ca31,
-		NameIndex: 187, // "America/Puerto_Rico"
-		EraIndex: 245,
+		NameIndex: 186, // "America/Puerto_Rico"
+		EraIndex: 381,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 223: Link US/Indiana-Starke -> America/Indiana/Knox
 	{
 		ZoneID: 0x67977be7,
-		NameIndex: 587, // "US/Indiana-Starke"
+		NameIndex: 586, // "US/Indiana-Starke"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 215, // America/Indiana/Knox
@@ -13824,7 +19167,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 224: Link America/Buenos_Aires -> America/Argentina/Buenos_Aires
 	{
 		ZoneID: 0x67d79a05,
-		NameIndex: 86, // "America/Buenos_Aires"
+		NameIndex: 85, // "America/Buenos_Aires"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 505, // America/Argentina/Buenos_Aires
@@ -13832,7 +19175,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 225: Link Africa/Freetown -> Africa/Abidjan
 	{
 		ZoneID: 0x6823dd64,
-		NameIndex: 23, // "Africa/Freetown"
+		NameIndex: 22, // "Africa/Freetown"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -13840,7 +19183,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 226: Link Indian/Christmas -> Asia/Bangkok
 	{
 		ZoneID: 0x68c207d5,
-		NameIndex: 503, // "Indian/Christmas"
+		NameIndex: 502, // "Indian/Christmas"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 394, // Asia/Bangkok
@@ -13848,15 +19191,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 227: Zone Asia/Novokuznetsk
 	{
 		ZoneID: 0x69264f93,
-		NameIndex: 296, // "Asia/Novokuznetsk"
-		EraIndex: 405,
-		EraCount: 3,
+		NameIndex: 295, // "Asia/Novokuznetsk"
+		EraIndex: 615,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 228: Link America/Indianapolis -> America/Indiana/Indianapolis
 	{
 		ZoneID: 0x6a009ae1,
-		NameIndex: 136, // "America/Indianapolis"
+		NameIndex: 135, // "America/Indianapolis"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 107, // America/Indiana/Indianapolis
@@ -13864,7 +19207,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 229: Link Europe/Sarajevo -> Europe/Belgrade
 	{
 		ZoneID: 0x6a576c3f,
-		NameIndex: 471, // "Europe/Sarajevo"
+		NameIndex: 470, // "Europe/Sarajevo"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 535, // Europe/Belgrade
@@ -13872,7 +19215,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 230: Link America/Curacao -> America/Puerto_Rico
 	{
 		ZoneID: 0x6a879184,
-		NameIndex: 102, // "America/Curacao"
+		NameIndex: 101, // "America/Curacao"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -13880,31 +19223,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 231: Zone America/Tijuana
 	{
 		ZoneID: 0x6aa1df72,
-		NameIndex: 214, // "America/Tijuana"
-		EraIndex: 279,
-		EraCount: 4,
+		NameIndex: 213, // "America/Tijuana"
+		EraIndex: 423,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 232: Zone Asia/Makassar
 	{
 		ZoneID: 0x6aa21c85,
-		NameIndex: 292, // "Asia/Makassar"
-		EraIndex: 402,
+		NameIndex: 291, // "Asia/Makassar"
+		EraIndex: 611,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 233: Zone Europe/Helsinki
 	{
 		ZoneID: 0x6ab2975b,
-		NameIndex: 444, // "Europe/Helsinki"
-		EraIndex: 538,
-		EraCount: 1,
+		NameIndex: 443, // "Europe/Helsinki"
+		EraIndex: 841,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 234: Link America/Lower_Princes -> America/Puerto_Rico
 	{
 		ZoneID: 0x6ae45b62,
-		NameIndex: 150, // "America/Lower_Princes"
+		NameIndex: 149, // "America/Lower_Princes"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -13912,23 +19255,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 235: Zone America/Porto_Velho
 	{
 		ZoneID: 0x6b1aac77,
-		NameIndex: 186, // "America/Porto_Velho"
-		EraIndex: 244,
-		EraCount: 1,
+		NameIndex: 185, // "America/Porto_Velho"
+		EraIndex: 379,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 236: Zone Europe/Samara
 	{
 		ZoneID: 0x6bc0b139,
-		NameIndex: 469, // "Europe/Samara"
-		EraIndex: 570,
-		EraCount: 3,
+		NameIndex: 468, // "Europe/Samara"
+		EraIndex: 901,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 237: Link Europe/Skopje -> Europe/Belgrade
 	{
 		ZoneID: 0x6c76fdd0,
-		NameIndex: 474, // "Europe/Skopje"
+		NameIndex: 473, // "Europe/Skopje"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 535, // Europe/Belgrade
@@ -13936,23 +19279,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 238: Zone America/Edmonton
 	{
 		ZoneID: 0x6cb9484a,
-		NameIndex: 109, // "America/Edmonton"
-		EraIndex: 141,
-		EraCount: 1,
+		NameIndex: 108, // "America/Edmonton"
+		EraIndex: 211,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 239: Zone America/Dawson_Creek
 	{
 		ZoneID: 0x6cf24e5b,
-		NameIndex: 105, // "America/Dawson_Creek"
-		EraIndex: 138,
+		NameIndex: 104, // "America/Dawson_Creek"
+		EraIndex: 205,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 240: Link Asia/Rangoon -> Asia/Yangon
 	{
 		ZoneID: 0x6d1217c6,
-		NameIndex: 306, // "Asia/Rangoon"
+		NameIndex: 305, // "Asia/Rangoon"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 524, // Asia/Yangon
@@ -13960,7 +19303,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 241: Link US/East-Indiana -> America/Indiana/Indianapolis
 	{
 		ZoneID: 0x6dcf558a,
-		NameIndex: 584, // "US/East-Indiana"
+		NameIndex: 583, // "US/East-Indiana"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 107, // America/Indiana/Indianapolis
@@ -13968,15 +19311,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 242: Zone America/Grand_Turk
 	{
 		ZoneID: 0x6e216197,
-		NameIndex: 119, // "America/Grand_Turk"
-		EraIndex: 156,
-		EraCount: 3,
+		NameIndex: 118, // "America/Grand_Turk"
+		EraIndex: 233,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 243: Link America/Blanc-Sablon -> America/Puerto_Rico
 	{
 		ZoneID: 0x6e299892,
-		NameIndex: 82, // "America/Blanc-Sablon"
+		NameIndex: 81, // "America/Blanc-Sablon"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -13984,15 +19327,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 244: Zone Europe/Tirane
 	{
 		ZoneID: 0x6ea95b47,
-		NameIndex: 478, // "Europe/Tirane"
-		EraIndex: 584,
-		EraCount: 1,
+		NameIndex: 477, // "Europe/Tirane"
+		EraIndex: 936,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 245: Link US/Mountain -> America/Denver
 	{
 		ZoneID: 0x6eb88247,
-		NameIndex: 589, // "US/Mountain"
+		NameIndex: 588, // "US/Mountain"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 350, // America/Denver
@@ -14000,7 +19343,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 246: Link Antarctica/McMurdo -> Pacific/Auckland
 	{
 		ZoneID: 0x6eeb5585,
-		NameIndex: 228, // "Antarctica/McMurdo"
+		NameIndex: 227, // "Antarctica/McMurdo"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 98, // Pacific/Auckland
@@ -14008,15 +19351,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 247: Zone America/Araguaina
 	{
 		ZoneID: 0x6f9a3aef,
-		NameIndex: 59, // "America/Araguaina"
-		EraIndex: 31,
-		EraCount: 4,
+		NameIndex: 58, // "America/Araguaina"
+		EraIndex: 51,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 248: Link Africa/Lubumbashi -> Africa/Maputo
 	{
 		ZoneID: 0x6fd88566,
-		NameIndex: 36, // "Africa/Lubumbashi"
+		NameIndex: 35, // "Africa/Lubumbashi"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 327, // Africa/Maputo
@@ -14024,7 +19367,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 249: Link Indian/Reunion -> Asia/Dubai
 	{
 		ZoneID: 0x7076c047,
-		NameIndex: 511, // "Indian/Reunion"
+		NameIndex: 510, // "Indian/Reunion"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 60, // Asia/Dubai
@@ -14032,39 +19375,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 250: Zone Asia/Qyzylorda
 	{
 		ZoneID: 0x71282e81,
-		NameIndex: 305, // "Asia/Qyzylorda"
-		EraIndex: 424,
-		EraCount: 3,
+		NameIndex: 304, // "Asia/Qyzylorda"
+		EraIndex: 653,
+		EraCount: 10,
 		TargetIndex: 0,
 	},
 	// 251: Zone Asia/Kolkata
 	{
 		ZoneID: 0x72c06cd9,
-		NameIndex: 284, // "Asia/Kolkata"
-		EraIndex: 392,
+		NameIndex: 283, // "Asia/Kolkata"
+		EraIndex: 597,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 252: Zone America/Ciudad_Juarez
 	{
 		ZoneID: 0x7347fc60,
-		NameIndex: 96, // "America/Ciudad_Juarez"
-		EraIndex: 127,
-		EraCount: 4,
+		NameIndex: 95, // "America/Ciudad_Juarez"
+		EraIndex: 187,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 253: Zone Europe/Vienna
 	{
 		ZoneID: 0x734cc2e5,
-		NameIndex: 484, // "Europe/Vienna"
-		EraIndex: 589,
-		EraCount: 1,
+		NameIndex: 483, // "Europe/Vienna"
+		EraIndex: 945,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 254: Link Africa/Asmara -> Africa/Nairobi
 	{
 		ZoneID: 0x73b278ef,
-		NameIndex: 5, // "Africa/Asmara"
+		NameIndex: 4, // "Africa/Asmara"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -14072,7 +19415,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 255: Link Africa/Asmera -> Africa/Nairobi
 	{
 		ZoneID: 0x73b289f3,
-		NameIndex: 6, // "Africa/Asmera"
+		NameIndex: 5, // "Africa/Asmera"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -14080,31 +19423,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 256: Zone Asia/Kamchatka
 	{
 		ZoneID: 0x73baf9d7,
-		NameIndex: 278, // "Asia/Kamchatka"
-		EraIndex: 382,
-		EraCount: 3,
+		NameIndex: 277, // "Asia/Kamchatka"
+		EraIndex: 582,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 257: Zone America/Santarem
 	{
 		ZoneID: 0x740caec1,
-		NameIndex: 197, // "America/Santarem"
-		EraIndex: 265,
-		EraCount: 2,
+		NameIndex: 196, // "America/Santarem"
+		EraIndex: 403,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 258: Zone America/Santiago
 	{
 		ZoneID: 0x7410c9bc,
-		NameIndex: 198, // "America/Santiago"
-		EraIndex: 267,
+		NameIndex: 197, // "America/Santiago"
+		EraIndex: 406,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 259: Link Africa/Bamako -> Africa/Abidjan
 	{
 		ZoneID: 0x74c1e7a5,
-		NameIndex: 7, // "Africa/Bamako"
+		NameIndex: 6, // "Africa/Bamako"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -14112,7 +19455,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 260: Link Africa/Bangui -> Africa/Lagos
 	{
 		ZoneID: 0x74c28ed0,
-		NameIndex: 8, // "Africa/Bangui"
+		NameIndex: 7, // "Africa/Bangui"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -14120,7 +19463,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 261: Link Africa/Banjul -> Africa/Abidjan
 	{
 		ZoneID: 0x74c29b96,
-		NameIndex: 9, // "Africa/Banjul"
+		NameIndex: 8, // "Africa/Banjul"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -14128,7 +19471,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 262: Link Europe/Nicosia -> Asia/Nicosia
 	{
 		ZoneID: 0x74efab8a,
-		NameIndex: 462, // "Europe/Nicosia"
+		NameIndex: 461, // "Europe/Nicosia"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 166, // Asia/Nicosia
@@ -14136,39 +19479,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 263: Zone Europe/Warsaw
 	{
 		ZoneID: 0x75185c19,
-		NameIndex: 487, // "Europe/Warsaw"
-		EraIndex: 598,
-		EraCount: 1,
+		NameIndex: 486, // "Europe/Warsaw"
+		EraIndex: 962,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 264: Zone America/El_Salvador
 	{
 		ZoneID: 0x752ad652,
-		NameIndex: 111, // "America/El_Salvador"
-		EraIndex: 145,
+		NameIndex: 110, // "America/El_Salvador"
+		EraIndex: 219,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 265: Zone Africa/Bissau
 	{
 		ZoneID: 0x75564141,
-		NameIndex: 10, // "Africa/Bissau"
-		EraIndex: 2,
-		EraCount: 1,
+		NameIndex: 9, // "Africa/Bissau"
+		EraIndex: 5,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 266: Zone America/Santo_Domingo
 	{
 		ZoneID: 0x75a0d177,
-		NameIndex: 199, // "America/Santo_Domingo"
-		EraIndex: 268,
-		EraCount: 3,
+		NameIndex: 198, // "America/Santo_Domingo"
+		EraIndex: 407,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 267: Link US/Michigan -> America/Detroit
 	{
 		ZoneID: 0x766bb7bc,
-		NameIndex: 588, // "US/Michigan"
+		NameIndex: 587, // "US/Michigan"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 334, // America/Detroit
@@ -14176,7 +19519,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 268: Link Canada/Saskatchewan -> America/Regina
 	{
 		ZoneID: 0x77311f49,
-		NameIndex: 382, // "Canada/Saskatchewan"
+		NameIndex: 381, // "Canada/Saskatchewan"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 452, // America/Regina
@@ -14184,7 +19527,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 269: Link Africa/Accra -> Africa/Abidjan
 	{
 		ZoneID: 0x77d5b054,
-		NameIndex: 2, // "Africa/Accra"
+		NameIndex: 1, // "Africa/Accra"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -14192,23 +19535,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 270: Zone Africa/Cairo
 	{
 		ZoneID: 0x77f8e228,
-		NameIndex: 14, // "Africa/Cairo"
-		EraIndex: 3,
+		NameIndex: 13, // "Africa/Cairo"
+		EraIndex: 7,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 271: Zone Africa/Ceuta
 	{
 		ZoneID: 0x77fb46ec,
-		NameIndex: 16, // "Africa/Ceuta"
-		EraIndex: 6,
-		EraCount: 1,
+		NameIndex: 15, // "Africa/Ceuta"
+		EraIndex: 12,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 272: Link Africa/Dakar -> Africa/Abidjan
 	{
 		ZoneID: 0x780b00fd,
-		NameIndex: 18, // "Africa/Dakar"
+		NameIndex: 17, // "Africa/Dakar"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -14216,23 +19559,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 273: Zone Africa/Lagos
 	{
 		ZoneID: 0x789bb5d0,
-		NameIndex: 32, // "Africa/Lagos"
-		EraIndex: 16,
+		NameIndex: 31, // "Africa/Lagos"
+		EraIndex: 25,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 274: Zone Africa/Windhoek
 	{
 		ZoneID: 0x789c9bd3,
-		NameIndex: 54, // "Africa/Windhoek"
-		EraIndex: 28,
-		EraCount: 1,
+		NameIndex: 53, // "Africa/Windhoek"
+		EraIndex: 43,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 275: Link Canada/Yukon -> America/Whitehorse
 	{
 		ZoneID: 0x78dd35c2,
-		NameIndex: 383, // "Canada/Yukon"
+		NameIndex: 382, // "Canada/Yukon"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 180, // America/Whitehorse
@@ -14240,15 +19583,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 276: Zone America/Toronto
 	{
 		ZoneID: 0x792e851b,
-		NameIndex: 215, // "America/Toronto"
-		EraIndex: 283,
-		EraCount: 1,
+		NameIndex: 214, // "America/Toronto"
+		EraIndex: 429,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 277: Link America/Tortola -> America/Puerto_Rico
 	{
 		ZoneID: 0x7931462b,
-		NameIndex: 216, // "America/Tortola"
+		NameIndex: 215, // "America/Tortola"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -14256,15 +19599,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 278: Zone Africa/Tunis
 	{
 		ZoneID: 0x79378e6d,
-		NameIndex: 53, // "Africa/Tunis"
-		EraIndex: 27,
+		NameIndex: 52, // "Africa/Tunis"
+		EraIndex: 42,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 279: Link Africa/Douala -> Africa/Lagos
 	{
 		ZoneID: 0x7a6df310,
-		NameIndex: 21, // "Africa/Douala"
+		NameIndex: 20, // "Africa/Douala"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -14272,7 +19615,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 280: Link Africa/Conakry -> Africa/Abidjan
 	{
 		ZoneID: 0x7ab36b31,
-		NameIndex: 17, // "Africa/Conakry"
+		NameIndex: 16, // "Africa/Conakry"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -14280,23 +19623,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 281: Zone Indian/Mauritius
 	{
 		ZoneID: 0x7b09c02a,
-		NameIndex: 509, // "Indian/Mauritius"
-		EraIndex: 603,
+		NameIndex: 508, // "Indian/Mauritius"
+		EraIndex: 971,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 282: Zone Atlantic/Stanley
 	{
 		ZoneID: 0x7bb3e1c4,
-		NameIndex: 346, // "Atlantic/Stanley"
-		EraIndex: 477,
-		EraCount: 2,
+		NameIndex: 345, // "Atlantic/Stanley"
+		EraIndex: 758,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 283: Link America/Ensenada -> America/Tijuana
 	{
 		ZoneID: 0x7bc95445,
-		NameIndex: 112, // "America/Ensenada"
+		NameIndex: 111, // "America/Ensenada"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 231, // America/Tijuana
@@ -14304,7 +19647,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 284: Link Europe/Zagreb -> Europe/Belgrade
 	{
 		ZoneID: 0x7c11c9ff,
-		NameIndex: 488, // "Europe/Zagreb"
+		NameIndex: 487, // "Europe/Zagreb"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 535, // Europe/Belgrade
@@ -14312,7 +19655,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 285: Link Cuba -> America/Havana
 	{
 		ZoneID: 0x7c83cba0,
-		NameIndex: 386, // "Cuba"
+		NameIndex: 385, // "Cuba"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 404, // America/Havana
@@ -14320,7 +19663,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 286: Link Eire -> Europe/Dublin
 	{
 		ZoneID: 0x7c84b36a,
-		NameIndex: 391, // "Eire"
+		NameIndex: 390, // "Eire"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 165, // Europe/Dublin
@@ -14328,7 +19671,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 287: Link GMT0 -> Etc/GMT
 	{
 		ZoneID: 0x7c8550fd,
-		NameIndex: 496, // "GMT0"
+		NameIndex: 495, // "GMT0"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -14336,7 +19679,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 288: Link Iran -> Asia/Tehran
 	{
 		ZoneID: 0x7c87090f,
-		NameIndex: 512, // "Iran"
+		NameIndex: 511, // "Iran"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 500, // Asia/Tehran
@@ -14344,7 +19687,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 289: Link W-SU -> Europe/Moscow
 	{
 		ZoneID: 0x7c8d8ef1,
-		NameIndex: 594, // "W-SU"
+		NameIndex: 593, // "W-SU"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 205, // Europe/Moscow
@@ -14352,7 +19695,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 290: Link Zulu -> Etc/UTC
 	{
 		ZoneID: 0x7c9069b5,
-		NameIndex: 596, // "Zulu"
+		NameIndex: 595, // "Zulu"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 515, // Etc/UTC
@@ -14360,15 +19703,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 291: Zone Europe/Zurich
 	{
 		ZoneID: 0x7d8195b9,
-		NameIndex: 490, // "Europe/Zurich"
-		EraIndex: 599,
-		EraCount: 1,
+		NameIndex: 489, // "Europe/Zurich"
+		EraIndex: 965,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 292: Link Chile/Continental -> America/Santiago
 	{
 		ZoneID: 0x7e2bdb18,
-		NameIndex: 384, // "Chile/Continental"
+		NameIndex: 383, // "Chile/Continental"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 258, // America/Santiago
@@ -14376,7 +19719,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 293: Link America/Fort_Wayne -> America/Indiana/Indianapolis
 	{
 		ZoneID: 0x7eaaaf24,
-		NameIndex: 114, // "America/Fort_Wayne"
+		NameIndex: 113, // "America/Fort_Wayne"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 107, // America/Indiana/Indianapolis
@@ -14384,23 +19727,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 294: Zone Asia/Kuching
 	{
 		ZoneID: 0x801b003b,
-		NameIndex: 287, // "Asia/Kuching"
-		EraIndex: 396,
+		NameIndex: 286, // "Asia/Kuching"
+		EraIndex: 603,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 295: Zone Atlantic/Madeira
 	{
 		ZoneID: 0x81b5c037,
-		NameIndex: 342, // "Atlantic/Madeira"
-		EraIndex: 475,
-		EraCount: 1,
+		NameIndex: 341, // "Atlantic/Madeira"
+		EraIndex: 755,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 296: Link America/Atikokan -> America/Panama
 	{
 		ZoneID: 0x81b92098,
-		NameIndex: 75, // "America/Atikokan"
+		NameIndex: 74, // "America/Atikokan"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 445, // America/Panama
@@ -14408,7 +19751,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 297: Link Africa/Harare -> Africa/Maputo
 	{
 		ZoneID: 0x82c39a2d,
-		NameIndex: 25, // "Africa/Harare"
+		NameIndex: 24, // "Africa/Harare"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 327, // Africa/Maputo
@@ -14416,7 +19759,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 298: Link America/Shiprock -> America/Denver
 	{
 		ZoneID: 0x82fb7049,
-		NameIndex: 202, // "America/Shiprock"
+		NameIndex: 201, // "America/Shiprock"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 350, // America/Denver
@@ -14424,15 +19767,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 299: Zone Pacific/Kiritimati
 	{
 		ZoneID: 0x8305073a,
-		NameIndex: 547, // "Pacific/Kiritimati"
-		EraIndex: 626,
-		EraCount: 1,
+		NameIndex: 546, // "Pacific/Kiritimati"
+		EraIndex: 998,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 300: Link America/St_Vincent -> America/Puerto_Rico
 	{
 		ZoneID: 0x8460e523,
-		NameIndex: 209, // "America/St_Vincent"
+		NameIndex: 208, // "America/St_Vincent"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -14440,39 +19783,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 301: Zone America/Metlakatla
 	{
 		ZoneID: 0x84de2686,
-		NameIndex: 161, // "America/Metlakatla"
-		EraIndex: 210,
-		EraCount: 4,
+		NameIndex: 160, // "America/Metlakatla"
+		EraIndex: 326,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 302: Zone Asia/Yakutsk
 	{
 		ZoneID: 0x87bb3a9e,
-		NameIndex: 331, // "Asia/Yakutsk"
-		EraIndex: 461,
-		EraCount: 3,
+		NameIndex: 330, // "Asia/Yakutsk"
+		EraIndex: 725,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 303: Zone America/Chihuahua
 	{
 		ZoneID: 0x8827d776,
-		NameIndex: 95, // "America/Chihuahua"
-		EraIndex: 125,
-		EraCount: 2,
+		NameIndex: 94, // "America/Chihuahua"
+		EraIndex: 182,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 304: Zone Pacific/Pitcairn
 	{
 		ZoneID: 0x8837d8bd,
-		NameIndex: 559, // "Pacific/Pitcairn"
-		EraIndex: 639,
-		EraCount: 1,
+		NameIndex: 558, // "Pacific/Pitcairn"
+		EraIndex: 1017,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 305: Link Asia/Vientiane -> Asia/Bangkok
 	{
 		ZoneID: 0x89d68d75,
-		NameIndex: 329, // "Asia/Vientiane"
+		NameIndex: 328, // "Asia/Vientiane"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 394, // Asia/Bangkok
@@ -14480,7 +19823,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 306: Link Pacific/Chuuk -> Pacific/Port_Moresby
 	{
 		ZoneID: 0x8a090b23,
-		NameIndex: 533, // "Pacific/Chuuk"
+		NameIndex: 532, // "Pacific/Chuuk"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 419, // Pacific/Port_Moresby
@@ -14488,15 +19831,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 307: Zone Pacific/Efate
 	{
 		ZoneID: 0x8a2bce28,
-		NameIndex: 535, // "Pacific/Efate"
-		EraIndex: 615,
+		NameIndex: 534, // "Pacific/Efate"
+		EraIndex: 984,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 308: Link Africa/Kigali -> Africa/Maputo
 	{
 		ZoneID: 0x8a4dcf2b,
-		NameIndex: 30, // "Africa/Kigali"
+		NameIndex: 29, // "Africa/Kigali"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 327, // Africa/Maputo
@@ -14504,7 +19847,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 309: Link Australia/ACT -> Australia/Sydney
 	{
 		ZoneID: 0x8a970eb2,
-		NameIndex: 347, // "Australia/ACT"
+		NameIndex: 346, // "Australia/ACT"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 168, // Australia/Sydney
@@ -14512,7 +19855,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 310: Link Australia/LHI -> Australia/Lord_Howe
 	{
 		ZoneID: 0x8a973e17,
-		NameIndex: 356, // "Australia/LHI"
+		NameIndex: 355, // "Australia/LHI"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 418, // Australia/Lord_Howe
@@ -14520,7 +19863,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 311: Link Australia/NSW -> Australia/Sydney
 	{
 		ZoneID: 0x8a974812,
-		NameIndex: 360, // "Australia/NSW"
+		NameIndex: 359, // "Australia/NSW"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 168, // Australia/Sydney
@@ -14528,31 +19871,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 312: Zone Pacific/Nauru
 	{
 		ZoneID: 0x8acc41ae,
-		NameIndex: 553, // "Pacific/Nauru"
-		EraIndex: 631,
-		EraCount: 1,
+		NameIndex: 552, // "Pacific/Nauru"
+		EraIndex: 1006,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 313: Zone EST5EDT
 	{
 		ZoneID: 0x8adc72a3,
-		NameIndex: 389, // "EST5EDT"
-		EraIndex: 495,
+		NameIndex: 388, // "EST5EDT"
+		EraIndex: 781,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 314: Zone Pacific/Palau
 	{
 		ZoneID: 0x8af04a36,
-		NameIndex: 558, // "Pacific/Palau"
-		EraIndex: 638,
+		NameIndex: 557, // "Pacific/Palau"
+		EraIndex: 1016,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 315: Link Pacific/Samoa -> Pacific/Pago_Pago
 	{
 		ZoneID: 0x8b2699b4,
-		NameIndex: 565, // "Pacific/Samoa"
+		NameIndex: 564, // "Pacific/Samoa"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 208, // Pacific/Pago_Pago
@@ -14560,31 +19903,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 316: Zone America/Winnipeg
 	{
 		ZoneID: 0x8c7dafc7,
-		NameIndex: 220, // "America/Winnipeg"
-		EraIndex: 287,
+		NameIndex: 219, // "America/Winnipeg"
+		EraIndex: 436,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 317: Zone Australia/Eucla
 	{
 		ZoneID: 0x8cf99e44,
-		NameIndex: 354, // "Australia/Eucla"
-		EraIndex: 484,
+		NameIndex: 353, // "Australia/Eucla"
+		EraIndex: 767,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 318: Zone America/Argentina/Catamarca
 	{
 		ZoneID: 0x8d40986b,
-		NameIndex: 61, // "America/Argentina/Catamarca"
-		EraIndex: 38,
-		EraCount: 6,
+		NameIndex: 60, // "America/Argentina/Catamarca"
+		EraIndex: 60,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 319: Link Africa/Luanda -> Africa/Lagos
 	{
 		ZoneID: 0x8d7909cf,
-		NameIndex: 35, // "Africa/Luanda"
+		NameIndex: 34, // "Africa/Luanda"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -14592,7 +19935,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 320: Link Africa/Lusaka -> Africa/Maputo
 	{
 		ZoneID: 0x8d82b23b,
-		NameIndex: 37, // "Africa/Lusaka"
+		NameIndex: 36, // "Africa/Lusaka"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 327, // Africa/Maputo
@@ -14600,7 +19943,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 321: Link Australia/North -> Australia/Darwin
 	{
 		ZoneID: 0x8d997165,
-		NameIndex: 361, // "Australia/North"
+		NameIndex: 360, // "Australia/North"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 103, // Australia/Darwin
@@ -14608,15 +19951,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 322: Zone Australia/Perth
 	{
 		ZoneID: 0x8db8269d,
-		NameIndex: 362, // "Australia/Perth"
-		EraIndex: 489,
+		NameIndex: 361, // "Australia/Perth"
+		EraIndex: 775,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 323: Link Australia/South -> Australia/Adelaide
 	{
 		ZoneID: 0x8df3f8ad,
-		NameIndex: 364, // "Australia/South"
+		NameIndex: 363, // "Australia/South"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 97, // Australia/Adelaide
@@ -14624,23 +19967,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 324: Zone Pacific/Kwajalein
 	{
 		ZoneID: 0x8e216759,
-		NameIndex: 549, // "Pacific/Kwajalein"
-		EraIndex: 629,
-		EraCount: 1,
+		NameIndex: 548, // "Pacific/Kwajalein"
+		EraIndex: 1003,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 325: Zone America/Port-au-Prince
 	{
 		ZoneID: 0x8e4a7bdc,
-		NameIndex: 183, // "America/Port-au-Prince"
-		EraIndex: 243,
+		NameIndex: 182, // "America/Port-au-Prince"
+		EraIndex: 378,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 326: Link Africa/Malabo -> Africa/Lagos
 	{
 		ZoneID: 0x8e6a1906,
-		NameIndex: 38, // "Africa/Malabo"
+		NameIndex: 37, // "Africa/Malabo"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -14648,15 +19991,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 327: Zone Africa/Maputo
 	{
 		ZoneID: 0x8e6ca1f0,
-		NameIndex: 39, // "Africa/Maputo"
-		EraIndex: 17,
+		NameIndex: 38, // "Africa/Maputo"
+		EraIndex: 26,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 328: Link Africa/Maseru -> Africa/Johannesburg
 	{
 		ZoneID: 0x8e6e02c7,
-		NameIndex: 40, // "Africa/Maseru"
+		NameIndex: 39, // "Africa/Maseru"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 511, // Africa/Johannesburg
@@ -14664,15 +20007,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 329: Zone Pacific/Norfolk
 	{
 		ZoneID: 0x8f4eb4be,
-		NameIndex: 555, // "Pacific/Norfolk"
-		EraIndex: 633,
-		EraCount: 3,
+		NameIndex: 554, // "Pacific/Norfolk"
+		EraIndex: 1009,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 330: Link America/Godthab -> America/Nuuk
 	{
 		ZoneID: 0x8f7eba1f,
-		NameIndex: 117, // "America/Godthab"
+		NameIndex: 116, // "America/Godthab"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 359, // America/Nuuk
@@ -14680,7 +20023,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 331: Link Australia/Yancowinna -> Australia/Broken_Hill
 	{
 		ZoneID: 0x90bac131,
-		NameIndex: 369, // "Australia/Yancowinna"
+		NameIndex: 368, // "Australia/Yancowinna"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 438, // Australia/Broken_Hill
@@ -14688,7 +20031,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 332: Link Africa/Niamey -> Africa/Lagos
 	{
 		ZoneID: 0x914a30fd,
-		NameIndex: 46, // "Africa/Niamey"
+		NameIndex: 45, // "Africa/Niamey"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 273, // Africa/Lagos
@@ -14696,47 +20039,47 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 333: Zone Asia/Yerevan
 	{
 		ZoneID: 0x9185c8cc,
-		NameIndex: 334, // "Asia/Yerevan"
-		EraIndex: 468,
-		EraCount: 2,
+		NameIndex: 333, // "Asia/Yerevan"
+		EraIndex: 736,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 334: Zone America/Detroit
 	{
 		ZoneID: 0x925cfbc1,
-		NameIndex: 107, // "America/Detroit"
-		EraIndex: 140,
-		EraCount: 1,
+		NameIndex: 106, // "America/Detroit"
+		EraIndex: 207,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 335: Zone Asia/Choibalsan
 	{
 		ZoneID: 0x928aa4a6,
-		NameIndex: 255, // "Asia/Choibalsan"
-		EraIndex: 347,
-		EraCount: 2,
+		NameIndex: 254, // "Asia/Choibalsan"
+		EraIndex: 533,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 336: Zone Antarctica/Macquarie
 	{
 		ZoneID: 0x92f47626,
-		NameIndex: 226, // "Antarctica/Macquarie"
-		EraIndex: 308,
+		NameIndex: 225, // "Antarctica/Macquarie"
+		EraIndex: 459,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 337: Zone America/Belize
 	{
 		ZoneID: 0x93256c81,
-		NameIndex: 81, // "America/Belize"
-		EraIndex: 106,
+		NameIndex: 80, // "America/Belize"
+		EraIndex: 158,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 338: Link Mexico/General -> America/Mexico_City
 	{
 		ZoneID: 0x93711d57,
-		NameIndex: 523, // "Mexico/General"
+		NameIndex: 522, // "Mexico/General"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 497, // America/Mexico_City
@@ -14744,39 +20087,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 339: Zone America/Bogota
 	{
 		ZoneID: 0x93d7bc62,
-		NameIndex: 84, // "America/Bogota"
-		EraIndex: 110,
+		NameIndex: 83, // "America/Bogota"
+		EraIndex: 163,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 340: Zone Asia/Pyongyang
 	{
 		ZoneID: 0x93ed1c8e,
-		NameIndex: 302, // "Asia/Pyongyang"
-		EraIndex: 418,
+		NameIndex: 301, // "Asia/Pyongyang"
+		EraIndex: 642,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 341: Zone America/Indiana/Petersburg
 	{
 		ZoneID: 0x94ac7acc,
-		NameIndex: 131, // "America/Indiana/Petersburg"
-		EraIndex: 172,
-		EraCount: 3,
+		NameIndex: 130, // "America/Indiana/Petersburg"
+		EraIndex: 257,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 342: Zone America/Cancun
 	{
 		ZoneID: 0x953331be,
-		NameIndex: 89, // "America/Cancun"
-		EraIndex: 118,
-		EraCount: 2,
+		NameIndex: 88, // "America/Cancun"
+		EraIndex: 173,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 343: Link America/Cayman -> America/Panama
 	{
 		ZoneID: 0x953961df,
-		NameIndex: 93, // "America/Cayman"
+		NameIndex: 92, // "America/Cayman"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 445, // America/Panama
@@ -14784,23 +20127,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 344: Zone America/Glace_Bay
 	{
 		ZoneID: 0x9681f8dd,
-		NameIndex: 116, // "America/Glace_Bay"
-		EraIndex: 153,
-		EraCount: 1,
+		NameIndex: 115, // "America/Glace_Bay"
+		EraIndex: 229,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 345: Zone Asia/Khandyga
 	{
 		ZoneID: 0x9685a4d9,
-		NameIndex: 283, // "Asia/Khandyga"
-		EraIndex: 387,
-		EraCount: 5,
+		NameIndex: 282, // "Asia/Khandyga"
+		EraIndex: 590,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 346: Link America/Grenada -> America/Puerto_Rico
 	{
 		ZoneID: 0x968ce4d8,
-		NameIndex: 120, // "America/Grenada"
+		NameIndex: 119, // "America/Grenada"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -14808,23 +20151,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 347: Zone America/Cuiaba
 	{
 		ZoneID: 0x969a52eb,
-		NameIndex: 101, // "America/Cuiaba"
-		EraIndex: 132,
+		NameIndex: 100, // "America/Cuiaba"
+		EraIndex: 195,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 348: Zone America/Dawson
 	{
 		ZoneID: 0x978d8d12,
-		NameIndex: 104, // "America/Dawson"
-		EraIndex: 136,
-		EraCount: 2,
+		NameIndex: 103, // "America/Dawson"
+		EraIndex: 201,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 349: Link America/Aruba -> America/Puerto_Rico
 	{
 		ZoneID: 0x97cf8651,
-		NameIndex: 73, // "America/Aruba"
+		NameIndex: 72, // "America/Aruba"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -14832,55 +20175,55 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 350: Zone America/Denver
 	{
 		ZoneID: 0x97d10b2a,
-		NameIndex: 106, // "America/Denver"
-		EraIndex: 139,
+		NameIndex: 105, // "America/Denver"
+		EraIndex: 206,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 351: Zone America/Bahia
 	{
 		ZoneID: 0x97d815fb,
-		NameIndex: 77, // "America/Bahia"
-		EraIndex: 98,
+		NameIndex: 76, // "America/Bahia"
+		EraIndex: 149,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 352: Zone America/Belem
 	{
 		ZoneID: 0x97da580b,
-		NameIndex: 80, // "America/Belem"
-		EraIndex: 105,
-		EraCount: 1,
+		NameIndex: 79, // "America/Belem"
+		EraIndex: 156,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 353: Zone America/Boise
 	{
 		ZoneID: 0x97dfc8d8,
-		NameIndex: 85, // "America/Boise"
-		EraIndex: 111,
-		EraCount: 1,
+		NameIndex: 84, // "America/Boise"
+		EraIndex: 164,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 354: Zone Europe/Andorra
 	{
 		ZoneID: 0x97f6764b,
-		NameIndex: 428, // "Europe/Andorra"
-		EraIndex: 524,
-		EraCount: 1,
+		NameIndex: 427, // "Europe/Andorra"
+		EraIndex: 810,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 355: Zone America/Adak
 	{
 		ZoneID: 0x97fe49d7,
-		NameIndex: 55, // "America/Adak"
-		EraIndex: 29,
-		EraCount: 1,
+		NameIndex: 54, // "America/Adak"
+		EraIndex: 45,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 356: Link America/Atka -> America/Adak
 	{
 		ZoneID: 0x97fe8f27,
-		NameIndex: 76, // "America/Atka"
+		NameIndex: 75, // "America/Atka"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 355, // America/Adak
@@ -14888,39 +20231,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 357: Zone America/Lima
 	{
 		ZoneID: 0x980468c9,
-		NameIndex: 147, // "America/Lima"
-		EraIndex: 195,
+		NameIndex: 146, // "America/Lima"
+		EraIndex: 292,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 358: Zone America/Nome
 	{
 		ZoneID: 0x98059b15,
-		NameIndex: 172, // "America/Nome"
-		EraIndex: 223,
-		EraCount: 1,
+		NameIndex: 171, // "America/Nome"
+		EraIndex: 349,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 359: Zone America/Nuuk
 	{
 		ZoneID: 0x9805b5a9,
-		NameIndex: 177, // "America/Nuuk"
-		EraIndex: 234,
-		EraCount: 2,
+		NameIndex: 176, // "America/Nuuk"
+		EraIndex: 364,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 360: Zone Indian/Maldives
 	{
 		ZoneID: 0x9869681c,
-		NameIndex: 508, // "Indian/Maldives"
-		EraIndex: 602,
+		NameIndex: 507, // "Indian/Maldives"
+		EraIndex: 970,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 361: Link America/Jujuy -> America/Argentina/Jujuy
 	{
 		ZoneID: 0x9873dbbd,
-		NameIndex: 140, // "America/Jujuy"
+		NameIndex: 139, // "America/Jujuy"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 206, // America/Argentina/Jujuy
@@ -14928,39 +20271,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 362: Zone America/Sitka
 	{
 		ZoneID: 0x99104ce2,
-		NameIndex: 203, // "America/Sitka"
-		EraIndex: 273,
-		EraCount: 1,
+		NameIndex: 202, // "America/Sitka"
+		EraIndex: 415,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 363: Zone America/Thule
 	{
 		ZoneID: 0x9921dd68,
-		NameIndex: 212, // "America/Thule"
-		EraIndex: 278,
+		NameIndex: 211, // "America/Thule"
+		EraIndex: 422,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 364: Zone Pacific/Rarotonga
 	{
 		ZoneID: 0x9981a3b0,
-		NameIndex: 563, // "Pacific/Rarotonga"
-		EraIndex: 641,
-		EraCount: 1,
+		NameIndex: 562, // "Pacific/Rarotonga"
+		EraIndex: 1020,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 365: Zone Asia/Kathmandu
 	{
 		ZoneID: 0x9a96ce6f,
-		NameIndex: 281, // "Asia/Kathmandu"
-		EraIndex: 386,
-		EraCount: 1,
+		NameIndex: 280, // "Asia/Kathmandu"
+		EraIndex: 588,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 366: Link Brazil/DeNoronha -> America/Noronha
 	{
 		ZoneID: 0x9b4cb496,
-		NameIndex: 371, // "Brazil/DeNoronha"
+		NameIndex: 370, // "Brazil/DeNoronha"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 429, // America/Noronha
@@ -14968,15 +20311,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 367: Zone America/North_Dakota/Beulah
 	{
 		ZoneID: 0x9b52b384,
-		NameIndex: 174, // "America/North_Dakota/Beulah"
-		EraIndex: 229,
+		NameIndex: 173, // "America/North_Dakota/Beulah"
+		EraIndex: 358,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 368: Link America/Rainy_River -> America/Winnipeg
 	{
 		ZoneID: 0x9cd58a10,
-		NameIndex: 189, // "America/Rainy_River"
+		NameIndex: 188, // "America/Rainy_River"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 316, // America/Winnipeg
@@ -14984,23 +20327,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 369: Zone Europe/Budapest
 	{
 		ZoneID: 0x9ce0197c,
-		NameIndex: 437, // "Europe/Budapest"
-		EraIndex: 534,
-		EraCount: 1,
+		NameIndex: 436, // "Europe/Budapest"
+		EraIndex: 832,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 370: Zone Asia/Baghdad
 	{
 		ZoneID: 0x9ceffbed,
-		NameIndex: 245, // "Asia/Baghdad"
-		EraIndex: 333,
-		EraCount: 1,
+		NameIndex: 244, // "Asia/Baghdad"
+		EraIndex: 507,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 371: Link Asia/Bahrain -> Asia/Qatar
 	{
 		ZoneID: 0x9d078487,
-		NameIndex: 246, // "Asia/Bahrain"
+		NameIndex: 245, // "Asia/Bahrain"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 66, // Asia/Qatar
@@ -15008,7 +20351,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 372: Link Etc/GMT+0 -> Etc/GMT
 	{
 		ZoneID: 0x9d13da13,
-		NameIndex: 393, // "Etc/GMT+0"
+		NameIndex: 392, // "Etc/GMT+0"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -15016,79 +20359,79 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 373: Zone Etc/GMT+1
 	{
 		ZoneID: 0x9d13da14,
-		NameIndex: 394, // "Etc/GMT+1"
-		EraIndex: 497,
+		NameIndex: 393, // "Etc/GMT+1"
+		EraIndex: 783,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 374: Zone Etc/GMT+2
 	{
 		ZoneID: 0x9d13da15,
-		NameIndex: 398, // "Etc/GMT+2"
-		EraIndex: 501,
+		NameIndex: 397, // "Etc/GMT+2"
+		EraIndex: 787,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 375: Zone Etc/GMT+3
 	{
 		ZoneID: 0x9d13da16,
-		NameIndex: 399, // "Etc/GMT+3"
-		EraIndex: 502,
+		NameIndex: 398, // "Etc/GMT+3"
+		EraIndex: 788,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 376: Zone Etc/GMT+4
 	{
 		ZoneID: 0x9d13da17,
-		NameIndex: 400, // "Etc/GMT+4"
-		EraIndex: 503,
+		NameIndex: 399, // "Etc/GMT+4"
+		EraIndex: 789,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 377: Zone Etc/GMT+5
 	{
 		ZoneID: 0x9d13da18,
-		NameIndex: 401, // "Etc/GMT+5"
-		EraIndex: 504,
+		NameIndex: 400, // "Etc/GMT+5"
+		EraIndex: 790,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 378: Zone Etc/GMT+6
 	{
 		ZoneID: 0x9d13da19,
-		NameIndex: 402, // "Etc/GMT+6"
-		EraIndex: 505,
+		NameIndex: 401, // "Etc/GMT+6"
+		EraIndex: 791,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 379: Zone Etc/GMT+7
 	{
 		ZoneID: 0x9d13da1a,
-		NameIndex: 403, // "Etc/GMT+7"
-		EraIndex: 506,
+		NameIndex: 402, // "Etc/GMT+7"
+		EraIndex: 792,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 380: Zone Etc/GMT+8
 	{
 		ZoneID: 0x9d13da1b,
-		NameIndex: 404, // "Etc/GMT+8"
-		EraIndex: 507,
+		NameIndex: 403, // "Etc/GMT+8"
+		EraIndex: 793,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 381: Zone Etc/GMT+9
 	{
 		ZoneID: 0x9d13da1c,
-		NameIndex: 405, // "Etc/GMT+9"
-		EraIndex: 508,
+		NameIndex: 404, // "Etc/GMT+9"
+		EraIndex: 794,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 382: Link Etc/GMT-0 -> Etc/GMT
 	{
 		ZoneID: 0x9d13da55,
-		NameIndex: 406, // "Etc/GMT-0"
+		NameIndex: 405, // "Etc/GMT-0"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -15096,79 +20439,79 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 383: Zone Etc/GMT-1
 	{
 		ZoneID: 0x9d13da56,
-		NameIndex: 407, // "Etc/GMT-1"
-		EraIndex: 509,
+		NameIndex: 406, // "Etc/GMT-1"
+		EraIndex: 795,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 384: Zone Etc/GMT-2
 	{
 		ZoneID: 0x9d13da57,
-		NameIndex: 413, // "Etc/GMT-2"
-		EraIndex: 515,
+		NameIndex: 412, // "Etc/GMT-2"
+		EraIndex: 801,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 385: Zone Etc/GMT-3
 	{
 		ZoneID: 0x9d13da58,
-		NameIndex: 414, // "Etc/GMT-3"
-		EraIndex: 516,
+		NameIndex: 413, // "Etc/GMT-3"
+		EraIndex: 802,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 386: Zone Etc/GMT-4
 	{
 		ZoneID: 0x9d13da59,
-		NameIndex: 415, // "Etc/GMT-4"
-		EraIndex: 517,
+		NameIndex: 414, // "Etc/GMT-4"
+		EraIndex: 803,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 387: Zone Etc/GMT-5
 	{
 		ZoneID: 0x9d13da5a,
-		NameIndex: 416, // "Etc/GMT-5"
-		EraIndex: 518,
+		NameIndex: 415, // "Etc/GMT-5"
+		EraIndex: 804,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 388: Zone Etc/GMT-6
 	{
 		ZoneID: 0x9d13da5b,
-		NameIndex: 417, // "Etc/GMT-6"
-		EraIndex: 519,
+		NameIndex: 416, // "Etc/GMT-6"
+		EraIndex: 805,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 389: Zone Etc/GMT-7
 	{
 		ZoneID: 0x9d13da5c,
-		NameIndex: 418, // "Etc/GMT-7"
-		EraIndex: 520,
+		NameIndex: 417, // "Etc/GMT-7"
+		EraIndex: 806,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 390: Zone Etc/GMT-8
 	{
 		ZoneID: 0x9d13da5d,
-		NameIndex: 419, // "Etc/GMT-8"
-		EraIndex: 521,
+		NameIndex: 418, // "Etc/GMT-8"
+		EraIndex: 807,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 391: Zone Etc/GMT-9
 	{
 		ZoneID: 0x9d13da5e,
-		NameIndex: 420, // "Etc/GMT-9"
-		EraIndex: 522,
+		NameIndex: 419, // "Etc/GMT-9"
+		EraIndex: 808,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 392: Link America/Nipigon -> America/Toronto
 	{
 		ZoneID: 0x9d2a8b1a,
-		NameIndex: 171, // "America/Nipigon"
+		NameIndex: 170, // "America/Nipigon"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 276, // America/Toronto
@@ -15176,63 +20519,63 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 393: Zone America/Rio_Branco
 	{
 		ZoneID: 0x9d352764,
-		NameIndex: 194, // "America/Rio_Branco"
-		EraIndex: 262,
-		EraCount: 3,
+		NameIndex: 193, // "America/Rio_Branco"
+		EraIndex: 399,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 394: Zone Asia/Bangkok
 	{
 		ZoneID: 0x9d6e3aaf,
-		NameIndex: 248, // "Asia/Bangkok"
-		EraIndex: 335,
+		NameIndex: 247, // "Asia/Bangkok"
+		EraIndex: 514,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 395: Zone Africa/El_Aaiun
 	{
 		ZoneID: 0x9d6fb118,
-		NameIndex: 22, // "Africa/El_Aaiun"
-		EraIndex: 7,
-		EraCount: 2,
+		NameIndex: 21, // "Africa/El_Aaiun"
+		EraIndex: 15,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 396: Zone America/North_Dakota/Center
 	{
 		ZoneID: 0x9da42814,
-		NameIndex: 175, // "America/North_Dakota/Center"
-		EraIndex: 231,
-		EraCount: 1,
+		NameIndex: 174, // "America/North_Dakota/Center"
+		EraIndex: 360,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 397: Zone Asia/Barnaul
 	{
 		ZoneID: 0x9dba4997,
-		NameIndex: 249, // "Asia/Barnaul"
-		EraIndex: 336,
-		EraCount: 4,
+		NameIndex: 248, // "Asia/Barnaul"
+		EraIndex: 515,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 398: Zone Africa/Tripoli
 	{
 		ZoneID: 0x9dfebd3d,
-		NameIndex: 52, // "Africa/Tripoli"
-		EraIndex: 24,
-		EraCount: 3,
+		NameIndex: 51, // "Africa/Tripoli"
+		EraIndex: 35,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 399: Zone Europe/Istanbul
 	{
 		ZoneID: 0x9e09d6e6,
-		NameIndex: 446, // "Europe/Istanbul"
-		EraIndex: 539,
-		EraCount: 9,
+		NameIndex: 445, // "Europe/Istanbul"
+		EraIndex: 843,
+		EraCount: 11,
 		TargetIndex: 0,
 	},
 	// 400: Link Indian/Antananarivo -> Africa/Nairobi
 	{
 		ZoneID: 0x9ebf5289,
-		NameIndex: 501, // "Indian/Antananarivo"
+		NameIndex: 500, // "Indian/Antananarivo"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -15240,23 +20583,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 401: Zone Africa/Ndjamena
 	{
 		ZoneID: 0x9fe09898,
-		NameIndex: 45, // "Africa/Ndjamena"
-		EraIndex: 20,
-		EraCount: 1,
+		NameIndex: 44, // "Africa/Ndjamena"
+		EraIndex: 29,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 402: Zone America/Guyana
 	{
 		ZoneID: 0x9ff7bd0b,
-		NameIndex: 124, // "America/Guyana"
-		EraIndex: 161,
-		EraCount: 1,
+		NameIndex: 123, // "America/Guyana"
+		EraIndex: 239,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 403: Link Africa/Dar_es_Salaam -> Africa/Nairobi
 	{
 		ZoneID: 0xa04c47b6,
-		NameIndex: 19, // "Africa/Dar_es_Salaam"
+		NameIndex: 18, // "Africa/Dar_es_Salaam"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -15264,23 +20607,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 404: Zone America/Havana
 	{
 		ZoneID: 0xa0e15675,
-		NameIndex: 126, // "America/Havana"
-		EraIndex: 163,
+		NameIndex: 125, // "America/Havana"
+		EraIndex: 244,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 405: Zone Asia/Novosibirsk
 	{
 		ZoneID: 0xa2a435cb,
-		NameIndex: 297, // "Asia/Novosibirsk"
-		EraIndex: 408,
-		EraCount: 4,
+		NameIndex: 296, // "Asia/Novosibirsk"
+		EraIndex: 620,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 406: Link Europe/Kiev -> Europe/Kyiv
 	{
 		ZoneID: 0xa2c19eb3,
-		NameIndex: 449, // "Europe/Kiev"
+		NameIndex: 448, // "Europe/Kiev"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 407, // Europe/Kyiv
@@ -15288,15 +20631,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 407: Zone Europe/Kyiv
 	{
 		ZoneID: 0xa2c1e347,
-		NameIndex: 451, // "Europe/Kyiv"
-		EraIndex: 554,
-		EraCount: 1,
+		NameIndex: 450, // "Europe/Kyiv"
+		EraIndex: 864,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 408: Link Europe/Oslo -> Europe/Berlin
 	{
 		ZoneID: 0xa2c3fba1,
-		NameIndex: 463, // "Europe/Oslo"
+		NameIndex: 462, // "Europe/Oslo"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 158, // Europe/Berlin
@@ -15304,95 +20647,95 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 409: Zone Europe/Riga
 	{
 		ZoneID: 0xa2c57587,
-		NameIndex: 467, // "Europe/Riga"
-		EraIndex: 566,
-		EraCount: 3,
+		NameIndex: 466, // "Europe/Riga"
+		EraIndex: 893,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 410: Zone Europe/Rome
 	{
 		ZoneID: 0xa2c58fd7,
-		NameIndex: 468, // "Europe/Rome"
-		EraIndex: 569,
-		EraCount: 1,
+		NameIndex: 467, // "Europe/Rome"
+		EraIndex: 899,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 411: Zone America/Inuvik
 	{
 		ZoneID: 0xa42189fc,
-		NameIndex: 137, // "America/Inuvik"
-		EraIndex: 185,
-		EraCount: 1,
+		NameIndex: 136, // "America/Inuvik"
+		EraIndex: 272,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 412: Zone America/Argentina/La_Rioja
 	{
 		ZoneID: 0xa46b7eef,
-		NameIndex: 65, // "America/Argentina/La_Rioja"
-		EraIndex: 51,
-		EraCount: 6,
+		NameIndex: 64, // "America/Argentina/La_Rioja"
+		EraIndex: 82,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 413: Zone Asia/Almaty
 	{
 		ZoneID: 0xa61f41fa,
-		NameIndex: 237, // "Asia/Almaty"
-		EraIndex: 318,
-		EraCount: 2,
+		NameIndex: 236, // "Asia/Almaty"
+		EraIndex: 471,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 414: Zone Asia/Anadyr
 	{
 		ZoneID: 0xa63cebd1,
-		NameIndex: 239, // "Asia/Anadyr"
-		EraIndex: 322,
-		EraCount: 3,
+		NameIndex: 238, // "Asia/Anadyr"
+		EraIndex: 477,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 415: Zone Asia/Aqtobe
 	{
 		ZoneID: 0xa67dcc4e,
-		NameIndex: 241, // "Asia/Aqtobe"
-		EraIndex: 327,
-		EraCount: 2,
+		NameIndex: 240, // "Asia/Aqtobe"
+		EraIndex: 490,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 416: Zone Asia/Atyrau
 	{
 		ZoneID: 0xa6b6e068,
-		NameIndex: 244, // "Asia/Atyrau"
-		EraIndex: 330,
-		EraCount: 3,
+		NameIndex: 243, // "Asia/Atyrau"
+		EraIndex: 500,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 417: Zone America/Juneau
 	{
 		ZoneID: 0xa6f13e2e,
-		NameIndex: 141, // "America/Juneau"
-		EraIndex: 190,
-		EraCount: 1,
+		NameIndex: 140, // "America/Juneau"
+		EraIndex: 281,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 418: Zone Australia/Lord_Howe
 	{
 		ZoneID: 0xa748b67d,
-		NameIndex: 358, // "Australia/Lord_Howe"
-		EraIndex: 487,
-		EraCount: 1,
+		NameIndex: 357, // "Australia/Lord_Howe"
+		EraIndex: 771,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 419: Zone Pacific/Port_Moresby
 	{
 		ZoneID: 0xa7ba7f68,
-		NameIndex: 562, // "Pacific/Port_Moresby"
-		EraIndex: 640,
+		NameIndex: 561, // "Pacific/Port_Moresby"
+		EraIndex: 1019,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 420: Link Asia/Katmandu -> Asia/Kathmandu
 	{
 		ZoneID: 0xa7ec12c7,
-		NameIndex: 282, // "Asia/Katmandu"
+		NameIndex: 281, // "Asia/Katmandu"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 365, // Asia/Kathmandu
@@ -15400,15 +20743,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 421: Zone Asia/Beirut
 	{
 		ZoneID: 0xa7f3d5fd,
-		NameIndex: 250, // "Asia/Beirut"
-		EraIndex: 340,
+		NameIndex: 249, // "Asia/Beirut"
+		EraIndex: 522,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 422: Link Singapore -> Asia/Singapore
 	{
 		ZoneID: 0xa8598c8d,
-		NameIndex: 577, // "Singapore"
+		NameIndex: 576, // "Singapore"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 494, // Asia/Singapore
@@ -15416,15 +20759,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 423: Zone Africa/Nairobi
 	{
 		ZoneID: 0xa87ab57e,
-		NameIndex: 44, // "Africa/Nairobi"
-		EraIndex: 19,
+		NameIndex: 43, // "Africa/Nairobi"
+		EraIndex: 28,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 424: Link Asia/Brunei -> Asia/Kuching
 	{
 		ZoneID: 0xa8e595f7,
-		NameIndex: 252, // "Asia/Brunei"
+		NameIndex: 251, // "Asia/Brunei"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 294, // Asia/Kuching
@@ -15432,7 +20775,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 425: Link US/Pacific -> America/Los_Angeles
 	{
 		ZoneID: 0xa950f6ab,
-		NameIndex: 590, // "US/Pacific"
+		NameIndex: 589, // "US/Pacific"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 450, // America/Los_Angeles
@@ -15440,39 +20783,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 426: Zone Pacific/Galapagos
 	{
 		ZoneID: 0xa952f752,
-		NameIndex: 540, // "Pacific/Galapagos"
-		EraIndex: 619,
-		EraCount: 1,
+		NameIndex: 539, // "Pacific/Galapagos"
+		EraIndex: 988,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 427: Zone America/Argentina/Mendoza
 	{
 		ZoneID: 0xa9f72d5c,
-		NameIndex: 66, // "America/Argentina/Mendoza"
-		EraIndex: 57,
-		EraCount: 6,
+		NameIndex: 65, // "America/Argentina/Mendoza"
+		EraIndex: 90,
+		EraCount: 12,
 		TargetIndex: 0,
 	},
 	// 428: Zone America/La_Paz
 	{
 		ZoneID: 0xaa29125d,
-		NameIndex: 146, // "America/La_Paz"
-		EraIndex: 194,
+		NameIndex: 145, // "America/La_Paz"
+		EraIndex: 291,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 429: Zone America/Noronha
 	{
 		ZoneID: 0xab5116fb,
-		NameIndex: 173, // "America/Noronha"
-		EraIndex: 224,
-		EraCount: 5,
+		NameIndex: 172, // "America/Noronha"
+		EraIndex: 352,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 430: Link America/Coral_Harbour -> America/Panama
 	{
 		ZoneID: 0xabcb7569,
-		NameIndex: 97, // "America/Coral_Harbour"
+		NameIndex: 96, // "America/Coral_Harbour"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 445, // America/Panama
@@ -15480,39 +20823,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 431: Zone America/Maceio
 	{
 		ZoneID: 0xac80c6d4,
-		NameIndex: 151, // "America/Maceio"
-		EraIndex: 197,
-		EraCount: 5,
+		NameIndex: 150, // "America/Maceio"
+		EraIndex: 294,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 432: Zone America/Manaus
 	{
 		ZoneID: 0xac86bf8b,
-		NameIndex: 153, // "America/Manaus"
-		EraIndex: 203,
-		EraCount: 1,
+		NameIndex: 152, // "America/Manaus"
+		EraIndex: 309,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 433: Zone America/Merida
 	{
 		ZoneID: 0xacd172d8,
-		NameIndex: 160, // "America/Merida"
-		EraIndex: 209,
-		EraCount: 1,
+		NameIndex: 159, // "America/Merida"
+		EraIndex: 323,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 434: Zone Europe/Chisinau
 	{
 		ZoneID: 0xad58aa18,
-		NameIndex: 439, // "Europe/Chisinau"
-		EraIndex: 535,
-		EraCount: 1,
+		NameIndex: 438, // "Europe/Chisinau"
+		EraIndex: 834,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 435: Link America/Nassau -> America/Toronto
 	{
 		ZoneID: 0xaedef011,
-		NameIndex: 169, // "America/Nassau"
+		NameIndex: 168, // "America/Nassau"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 276, // America/Toronto
@@ -15520,7 +20863,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 436: Link America/Anguilla -> America/Puerto_Rico
 	{
 		ZoneID: 0xafe31333,
-		NameIndex: 57, // "America/Anguilla"
+		NameIndex: 56, // "America/Anguilla"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -15528,7 +20871,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 437: Link Europe/Uzhgorod -> Europe/Kyiv
 	{
 		ZoneID: 0xb066f5d6,
-		NameIndex: 481, // "Europe/Uzhgorod"
+		NameIndex: 480, // "Europe/Uzhgorod"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 407, // Europe/Kyiv
@@ -15536,23 +20879,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 438: Zone Australia/Broken_Hill
 	{
 		ZoneID: 0xb06eada3,
-		NameIndex: 350, // "Australia/Broken_Hill"
-		EraIndex: 481,
+		NameIndex: 349, // "Australia/Broken_Hill"
+		EraIndex: 764,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 439: Zone Asia/Bishkek
 	{
 		ZoneID: 0xb0728553,
-		NameIndex: 251, // "Asia/Bishkek"
-		EraIndex: 341,
-		EraCount: 2,
+		NameIndex: 250, // "Asia/Bishkek"
+		EraIndex: 523,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 440: Link Chile/EasterIsland -> Pacific/Easter
 	{
 		ZoneID: 0xb0982af8,
-		NameIndex: 385, // "Chile/EasterIsland"
+		NameIndex: 384, // "Chile/EasterIsland"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 493, // Pacific/Easter
@@ -15560,7 +20903,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 441: Link Pacific/Johnston -> Pacific/Honolulu
 	{
 		ZoneID: 0xb15d7b36,
-		NameIndex: 545, // "Pacific/Johnston"
+		NameIndex: 544, // "Pacific/Johnston"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 552, // Pacific/Honolulu
@@ -15568,7 +20911,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 442: Link Africa/Timbuktu -> Africa/Abidjan
 	{
 		ZoneID: 0xb164d56f,
-		NameIndex: 51, // "Africa/Timbuktu"
+		NameIndex: 50, // "Africa/Timbuktu"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -15576,7 +20919,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 443: Link America/St_Thomas -> America/Puerto_Rico
 	{
 		ZoneID: 0xb1b3d778,
-		NameIndex: 208, // "America/St_Thomas"
+		NameIndex: 207, // "America/St_Thomas"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -15584,23 +20927,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 444: Zone America/Paramaribo
 	{
 		ZoneID: 0xb319e4c4,
-		NameIndex: 181, // "America/Paramaribo"
-		EraIndex: 241,
-		EraCount: 1,
+		NameIndex: 180, // "America/Paramaribo"
+		EraIndex: 375,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 445: Zone America/Panama
 	{
 		ZoneID: 0xb3863854,
-		NameIndex: 179, // "America/Panama"
-		EraIndex: 240,
+		NameIndex: 178, // "America/Panama"
+		EraIndex: 374,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 446: Link Canada/Newfoundland -> America/St_Johns
 	{
 		ZoneID: 0xb396e991,
-		NameIndex: 380, // "Canada/Newfoundland"
+		NameIndex: 379, // "Canada/Newfoundland"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 7, // America/St_Johns
@@ -15608,7 +20951,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 447: Link Asia/Harbin -> Asia/Shanghai
 	{
 		ZoneID: 0xb5af1186,
-		NameIndex: 267, // "Asia/Harbin"
+		NameIndex: 266, // "Asia/Harbin"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 572, // Asia/Shanghai
@@ -15616,55 +20959,55 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 448: Zone Asia/Hebron
 	{
 		ZoneID: 0xb5eef250,
-		NameIndex: 268, // "Asia/Hebron"
-		EraIndex: 370,
-		EraCount: 2,
+		NameIndex: 267, // "Asia/Hebron"
+		EraIndex: 565,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 449: Zone America/Goose_Bay
 	{
 		ZoneID: 0xb649541e,
-		NameIndex: 118, // "America/Goose_Bay"
-		EraIndex: 154,
+		NameIndex: 117, // "America/Goose_Bay"
+		EraIndex: 231,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 450: Zone America/Los_Angeles
 	{
 		ZoneID: 0xb7f7e8f2,
-		NameIndex: 148, // "America/Los_Angeles"
-		EraIndex: 196,
+		NameIndex: 147, // "America/Los_Angeles"
+		EraIndex: 293,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 451: Zone America/Recife
 	{
 		ZoneID: 0xb8730494,
-		NameIndex: 191, // "America/Recife"
-		EraIndex: 251,
-		EraCount: 5,
+		NameIndex: 190, // "America/Recife"
+		EraIndex: 387,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 452: Zone America/Regina
 	{
 		ZoneID: 0xb875371c,
-		NameIndex: 192, // "America/Regina"
-		EraIndex: 256,
+		NameIndex: 191, // "America/Regina"
+		EraIndex: 393,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 453: Zone Asia/Ashgabat
 	{
 		ZoneID: 0xba87598d,
-		NameIndex: 242, // "Asia/Ashgabat"
-		EraIndex: 329,
-		EraCount: 1,
+		NameIndex: 241, // "Asia/Ashgabat"
+		EraIndex: 497,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 454: Link Israel -> Asia/Jerusalem
 	{
 		ZoneID: 0xba88c9e5,
-		NameIndex: 513, // "Israel"
+		NameIndex: 512, // "Israel"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 193, // Asia/Jerusalem
@@ -15672,7 +21015,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 455: Link Pacific/Yap -> Pacific/Port_Moresby
 	{
 		ZoneID: 0xbb40138d,
-		NameIndex: 572, // "Pacific/Yap"
+		NameIndex: 571, // "Pacific/Yap"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 419, // Pacific/Port_Moresby
@@ -15680,15 +21023,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 456: Zone America/Halifax
 	{
 		ZoneID: 0xbc5b7183,
-		NameIndex: 125, // "America/Halifax"
-		EraIndex: 162,
-		EraCount: 1,
+		NameIndex: 124, // "America/Halifax"
+		EraIndex: 242,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 457: Link Europe/Ljubljana -> Europe/Belgrade
 	{
 		ZoneID: 0xbd98cdb7,
-		NameIndex: 453, // "Europe/Ljubljana"
+		NameIndex: 452, // "Europe/Ljubljana"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 535, // Europe/Belgrade
@@ -15696,7 +21039,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 458: Link Asia/Kuwait -> Asia/Riyadh
 	{
 		ZoneID: 0xbe1b2f27,
-		NameIndex: 288, // "Asia/Kuwait"
+		NameIndex: 287, // "Asia/Kuwait"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 489, // Asia/Riyadh
@@ -15704,7 +21047,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 459: Link Europe/Tiraspol -> Europe/Chisinau
 	{
 		ZoneID: 0xbe704472,
-		NameIndex: 479, // "Europe/Tiraspol"
+		NameIndex: 478, // "Europe/Tiraspol"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 434, // Europe/Chisinau
@@ -15712,31 +21055,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 460: Zone Asia/Srednekolymsk
 	{
 		ZoneID: 0xbf8e337d,
-		NameIndex: 314, // "Asia/Srednekolymsk"
-		EraIndex: 436,
-		EraCount: 3,
+		NameIndex: 313, // "Asia/Srednekolymsk"
+		EraIndex: 680,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 461: Zone America/Argentina/Cordoba
 	{
 		ZoneID: 0xbfccc308,
-		NameIndex: 63, // "America/Argentina/Cordoba"
-		EraIndex: 44,
-		EraCount: 3,
+		NameIndex: 62, // "America/Argentina/Cordoba"
+		EraIndex: 68,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 462: Zone America/Tegucigalpa
 	{
 		ZoneID: 0xbfd6fd4c,
-		NameIndex: 211, // "America/Tegucigalpa"
-		EraIndex: 277,
+		NameIndex: 210, // "America/Tegucigalpa"
+		EraIndex: 421,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 463: Link America/Antigua -> America/Puerto_Rico
 	{
 		ZoneID: 0xc067a32f,
-		NameIndex: 58, // "America/Antigua"
+		NameIndex: 57, // "America/Antigua"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -15744,7 +21087,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 464: Link Europe/Busingen -> Europe/Zurich
 	{
 		ZoneID: 0xc06d2cdf,
-		NameIndex: 438, // "Europe/Busingen"
+		NameIndex: 437, // "Europe/Busingen"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 291, // Europe/Zurich
@@ -15752,15 +21095,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 465: Zone Asia/Manila
 	{
 		ZoneID: 0xc156c944,
-		NameIndex: 293, // "Asia/Manila"
-		EraIndex: 403,
+		NameIndex: 292, // "Asia/Manila"
+		EraIndex: 612,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 466: Link Africa/Kampala -> Africa/Nairobi
 	{
 		ZoneID: 0xc1d30e31,
-		NameIndex: 28, // "Africa/Kampala"
+		NameIndex: 27, // "Africa/Kampala"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -15768,7 +21111,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 467: Link America/Knox_IN -> America/Indiana/Knox
 	{
 		ZoneID: 0xc1db9a1c,
-		NameIndex: 144, // "America/Knox_IN"
+		NameIndex: 143, // "America/Knox_IN"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 215, // America/Indiana/Knox
@@ -15776,7 +21119,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 468: Zone Africa/Abidjan
 	{
 		ZoneID: 0xc21305a3,
-		NameIndex: 1, // "Africa/Abidjan"
+		NameIndex: 0, // "Africa/Abidjan"
 		EraIndex: 0,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -15784,7 +21127,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 469: Link America/Virgin -> America/Puerto_Rico
 	{
 		ZoneID: 0xc2183ab5,
-		NameIndex: 218, // "America/Virgin"
+		NameIndex: 217, // "America/Virgin"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -15792,7 +21135,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 470: Link Asia/Phnom_Penh -> Asia/Bangkok
 	{
 		ZoneID: 0xc224945e,
-		NameIndex: 300, // "Asia/Phnom_Penh"
+		NameIndex: 299, // "Asia/Phnom_Penh"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 394, // Asia/Bangkok
@@ -15800,7 +21143,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 471: Link Asia/Muscat -> Asia/Dubai
 	{
 		ZoneID: 0xc2c3565f,
-		NameIndex: 294, // "Asia/Muscat"
+		NameIndex: 293, // "Asia/Muscat"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 60, // Asia/Dubai
@@ -15808,15 +21151,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 472: Zone America/Punta_Arenas
 	{
 		ZoneID: 0xc2c3bce7,
-		NameIndex: 188, // "America/Punta_Arenas"
-		EraIndex: 246,
+		NameIndex: 187, // "America/Punta_Arenas"
+		EraIndex: 382,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 473: Link Portugal -> Europe/Lisbon
 	{
 		ZoneID: 0xc3274593,
-		NameIndex: 574, // "Portugal"
+		NameIndex: 573, // "Portugal"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 195, // Europe/Lisbon
@@ -15824,7 +21167,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 474: Link Navajo -> America/Denver
 	{
 		ZoneID: 0xc4ef0e24,
-		NameIndex: 526, // "Navajo"
+		NameIndex: 525, // "Navajo"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 350, // America/Denver
@@ -15832,39 +21175,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 475: Zone Africa/Casablanca
 	{
 		ZoneID: 0xc59f1b33,
-		NameIndex: 15, // "Africa/Casablanca"
-		EraIndex: 4,
-		EraCount: 2,
+		NameIndex: 14, // "Africa/Casablanca"
+		EraIndex: 8,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 476: Zone America/Argentina/Rio_Gallegos
 	{
 		ZoneID: 0xc5b0f565,
-		NameIndex: 67, // "America/Argentina/Rio_Gallegos"
-		EraIndex: 63,
+		NameIndex: 66, // "America/Argentina/Rio_Gallegos"
+		EraIndex: 102,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 477: Zone Asia/Jayapura
 	{
 		ZoneID: 0xc6833c2f,
-		NameIndex: 275, // "Asia/Jayapura"
-		EraIndex: 379,
+		NameIndex: 274, // "Asia/Jayapura"
+		EraIndex: 579,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 478: Zone America/Resolute
 	{
 		ZoneID: 0xc7093459,
-		NameIndex: 193, // "America/Resolute"
-		EraIndex: 257,
+		NameIndex: 192, // "America/Resolute"
+		EraIndex: 394,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 479: Link Asia/Chungking -> Asia/Shanghai
 	{
 		ZoneID: 0xc7121dd0,
-		NameIndex: 257, // "Asia/Chungking"
+		NameIndex: 256, // "Asia/Chungking"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 572, // Asia/Shanghai
@@ -15872,7 +21215,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 480: Link Greenwich -> Etc/GMT
 	{
 		ZoneID: 0xc84d4221,
-		NameIndex: 497, // "Greenwich"
+		NameIndex: 496, // "Greenwich"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -15880,15 +21223,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 481: Zone America/Rankin_Inlet
 	{
 		ZoneID: 0xc8de4984,
-		NameIndex: 190, // "America/Rankin_Inlet"
-		EraIndex: 248,
+		NameIndex: 189, // "America/Rankin_Inlet"
+		EraIndex: 384,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 482: Link Poland -> Europe/Warsaw
 	{
 		ZoneID: 0xca913b23,
-		NameIndex: 573, // "Poland"
+		NameIndex: 572, // "Poland"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 263, // Europe/Warsaw
@@ -15896,7 +21239,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 483: Link US/Central -> America/Chicago
 	{
 		ZoneID: 0xcabdcb25,
-		NameIndex: 583, // "US/Central"
+		NameIndex: 582, // "US/Central"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 167, // America/Chicago
@@ -15904,7 +21247,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 484: Link Europe/Vatican -> Europe/Rome
 	{
 		ZoneID: 0xcb485dca,
-		NameIndex: 483, // "Europe/Vatican"
+		NameIndex: 482, // "Europe/Vatican"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 410, // Europe/Rome
@@ -15912,15 +21255,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 485: Zone America/Barbados
 	{
 		ZoneID: 0xcbbc3b04,
-		NameIndex: 79, // "America/Barbados"
-		EraIndex: 104,
+		NameIndex: 78, // "America/Barbados"
+		EraIndex: 155,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 486: Link America/Porto_Acre -> America/Rio_Branco
 	{
 		ZoneID: 0xcce5bf54,
-		NameIndex: 185, // "America/Porto_Acre"
+		NameIndex: 184, // "America/Porto_Acre"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 393, // America/Rio_Branco
@@ -15928,7 +21271,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 487: Link America/Guadeloupe -> America/Puerto_Rico
 	{
 		ZoneID: 0xcd1f8a31,
-		NameIndex: 121, // "America/Guadeloupe"
+		NameIndex: 120, // "America/Guadeloupe"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -15936,7 +21279,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 488: Link Antarctica/South_Pole -> Pacific/Auckland
 	{
 		ZoneID: 0xcd96b290,
-		NameIndex: 231, // "Antarctica/South_Pole"
+		NameIndex: 230, // "Antarctica/South_Pole"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 98, // Pacific/Auckland
@@ -15944,15 +21287,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 489: Zone Asia/Riyadh
 	{
 		ZoneID: 0xcd973d93,
-		NameIndex: 307, // "Asia/Riyadh"
-		EraIndex: 427,
+		NameIndex: 306, // "Asia/Riyadh"
+		EraIndex: 663,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 490: Link America/Dominica -> America/Puerto_Rico
 	{
 		ZoneID: 0xcecb4c4a,
-		NameIndex: 108, // "America/Dominica"
+		NameIndex: 107, // "America/Dominica"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -15960,7 +21303,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 491: Link Europe/San_Marino -> Europe/Rome
 	{
 		ZoneID: 0xcef7724b,
-		NameIndex: 470, // "Europe/San_Marino"
+		NameIndex: 469, // "Europe/San_Marino"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 410, // Europe/Rome
@@ -15968,7 +21311,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 492: Link Asia/Saigon -> Asia/Ho_Chi_Minh
 	{
 		ZoneID: 0xcf52f713,
-		NameIndex: 308, // "Asia/Saigon"
+		NameIndex: 307, // "Asia/Saigon"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 88, // Asia/Ho_Chi_Minh
@@ -15976,31 +21319,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 493: Zone Pacific/Easter
 	{
 		ZoneID: 0xcf54f7e7,
-		NameIndex: 534, // "Pacific/Easter"
-		EraIndex: 614,
-		EraCount: 1,
+		NameIndex: 533, // "Pacific/Easter"
+		EraIndex: 982,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 494: Zone Asia/Singapore
 	{
 		ZoneID: 0xcf8581fa,
-		NameIndex: 313, // "Asia/Singapore"
-		EraIndex: 435,
-		EraCount: 1,
+		NameIndex: 312, // "Asia/Singapore"
+		EraIndex: 678,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 495: Zone Asia/Krasnoyarsk
 	{
 		ZoneID: 0xd0376c6a,
-		NameIndex: 285, // "Asia/Krasnoyarsk"
-		EraIndex: 393,
-		EraCount: 3,
+		NameIndex: 284, // "Asia/Krasnoyarsk"
+		EraIndex: 598,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 496: Link Europe/Belfast -> Europe/London
 	{
 		ZoneID: 0xd07dd1e5,
-		NameIndex: 431, // "Europe/Belfast"
+		NameIndex: 430, // "Europe/Belfast"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 197, // Europe/London
@@ -16008,15 +21351,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 497: Zone America/Mexico_City
 	{
 		ZoneID: 0xd0d93f43,
-		NameIndex: 162, // "America/Mexico_City"
-		EraIndex: 214,
+		NameIndex: 161, // "America/Mexico_City"
+		EraIndex: 331,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 498: Link Universal -> Etc/UTC
 	{
 		ZoneID: 0xd0ff523e,
-		NameIndex: 593, // "Universal"
+		NameIndex: 592, // "Universal"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 515, // Etc/UTC
@@ -16024,23 +21367,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 499: Zone Asia/Taipei
 	{
 		ZoneID: 0xd1a844ae,
-		NameIndex: 315, // "Asia/Taipei"
-		EraIndex: 439,
+		NameIndex: 314, // "Asia/Taipei"
+		EraIndex: 685,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 500: Zone Asia/Tehran
 	{
 		ZoneID: 0xd1f02254,
-		NameIndex: 318, // "Asia/Tehran"
-		EraIndex: 444,
-		EraCount: 1,
+		NameIndex: 317, // "Asia/Tehran"
+		EraIndex: 697,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 501: Link Asia/Thimbu -> Asia/Thimphu
 	{
 		ZoneID: 0xd226e31b,
-		NameIndex: 320, // "Asia/Thimbu"
+		NameIndex: 319, // "Asia/Thimbu"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 71, // Asia/Thimphu
@@ -16048,7 +21391,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 502: Link Arctic/Longyearbyen -> Europe/Berlin
 	{
 		ZoneID: 0xd23e7859,
-		NameIndex: 235, // "Arctic/Longyearbyen"
+		NameIndex: 234, // "Arctic/Longyearbyen"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 158, // Europe/Berlin
@@ -16056,7 +21399,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 503: Link Australia/Queensland -> Australia/Brisbane
 	{
 		ZoneID: 0xd326ed0a,
-		NameIndex: 363, // "Australia/Queensland"
+		NameIndex: 362, // "Australia/Queensland"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 173, // Australia/Brisbane
@@ -16064,23 +21407,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 504: Zone Europe/Kaliningrad
 	{
 		ZoneID: 0xd33b2f28,
-		NameIndex: 448, // "Europe/Kaliningrad"
-		EraIndex: 548,
-		EraCount: 3,
+		NameIndex: 447, // "Europe/Kaliningrad"
+		EraIndex: 854,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 505: Zone America/Argentina/Buenos_Aires
 	{
 		ZoneID: 0xd43b4c0d,
-		NameIndex: 60, // "America/Argentina/Buenos_Aires"
-		EraIndex: 35,
+		NameIndex: 59, // "America/Argentina/Buenos_Aires"
+		EraIndex: 57,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 506: Link Turkey -> Europe/Istanbul
 	{
 		ZoneID: 0xd455e469,
-		NameIndex: 578, // "Turkey"
+		NameIndex: 577, // "Turkey"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 399, // Europe/Istanbul
@@ -16088,15 +21431,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 507: Zone Africa/Juba
 	{
 		ZoneID: 0xd51b395c,
-		NameIndex: 27, // "Africa/Juba"
-		EraIndex: 10,
+		NameIndex: 26, // "Africa/Juba"
+		EraIndex: 19,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 508: Link Africa/Lome -> Africa/Abidjan
 	{
 		ZoneID: 0xd51c3a07,
-		NameIndex: 34, // "Africa/Lome"
+		NameIndex: 33, // "Africa/Lome"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -16104,31 +21447,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 509: Zone Asia/Urumqi
 	{
 		ZoneID: 0xd5379735,
-		NameIndex: 327, // "Asia/Urumqi"
-		EraIndex: 453,
+		NameIndex: 326, // "Asia/Urumqi"
+		EraIndex: 712,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 510: Zone America/Cambridge_Bay
 	{
 		ZoneID: 0xd5a44aff,
-		NameIndex: 87, // "America/Cambridge_Bay"
-		EraIndex: 112,
+		NameIndex: 86, // "America/Cambridge_Bay"
+		EraIndex: 167,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 511: Zone Africa/Johannesburg
 	{
 		ZoneID: 0xd5d157a0,
-		NameIndex: 26, // "Africa/Johannesburg"
-		EraIndex: 9,
+		NameIndex: 25, // "Africa/Johannesburg"
+		EraIndex: 18,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 512: Link America/Port_of_Spain -> America/Puerto_Rico
 	{
 		ZoneID: 0xd8b28d59,
-		NameIndex: 184, // "America/Port_of_Spain"
+		NameIndex: 183, // "America/Port_of_Spain"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -16136,15 +21479,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 513: Zone Etc/GMT
 	{
 		ZoneID: 0xd8e2de58,
-		NameIndex: 392, // "Etc/GMT"
-		EraIndex: 496,
+		NameIndex: 391, // "Etc/GMT"
+		EraIndex: 782,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 514: Link Etc/UCT -> Etc/UTC
 	{
 		ZoneID: 0xd8e3189c,
-		NameIndex: 423, // "Etc/UCT"
+		NameIndex: 422, // "Etc/UCT"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 515, // Etc/UTC
@@ -16152,39 +21495,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 515: Zone Etc/UTC
 	{
 		ZoneID: 0xd8e31abc,
-		NameIndex: 424, // "Etc/UTC"
-		EraIndex: 523,
+		NameIndex: 423, // "Etc/UTC"
+		EraIndex: 809,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 516: Zone America/Yakutat
 	{
 		ZoneID: 0xd8ee31e9,
-		NameIndex: 221, // "America/Yakutat"
-		EraIndex: 289,
-		EraCount: 1,
+		NameIndex: 220, // "America/Yakutat"
+		EraIndex: 438,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 517: Zone Africa/Algiers
 	{
 		ZoneID: 0xd94515c1,
-		NameIndex: 4, // "Africa/Algiers"
+		NameIndex: 3, // "Africa/Algiers"
 		EraIndex: 1,
-		EraCount: 1,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 518: Zone PST8PDT
 	{
 		ZoneID: 0xd99ee2dc,
-		NameIndex: 528, // "PST8PDT"
-		EraIndex: 607,
+		NameIndex: 527, // "PST8PDT"
+		EraIndex: 975,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 519: Link Europe/Bratislava -> Europe/Prague
 	{
 		ZoneID: 0xda493bed,
-		NameIndex: 434, // "Europe/Bratislava"
+		NameIndex: 433, // "Europe/Bratislava"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 216, // Europe/Prague
@@ -16192,15 +21535,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 520: Zone Europe/Simferopol
 	{
 		ZoneID: 0xda9eb724,
-		NameIndex: 473, // "Europe/Simferopol"
-		EraIndex: 577,
-		EraCount: 3,
+		NameIndex: 472, // "Europe/Simferopol"
+		EraIndex: 915,
+		EraCount: 10,
 		TargetIndex: 0,
 	},
 	// 521: Link Pacific/Funafuti -> Pacific/Tarawa
 	{
 		ZoneID: 0xdb402d65,
-		NameIndex: 539, // "Pacific/Funafuti"
+		NameIndex: 538, // "Pacific/Funafuti"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 563, // Pacific/Tarawa
@@ -16208,39 +21551,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 522: Zone America/Matamoros
 	{
 		ZoneID: 0xdd1b0259,
-		NameIndex: 156, // "America/Matamoros"
-		EraIndex: 205,
-		EraCount: 2,
+		NameIndex: 155, // "America/Matamoros"
+		EraIndex: 316,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 523: Zone Pacific/Kanton
 	{
 		ZoneID: 0xdd512f0e,
-		NameIndex: 546, // "Pacific/Kanton"
-		EraIndex: 625,
-		EraCount: 1,
+		NameIndex: 545, // "Pacific/Kanton"
+		EraIndex: 995,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 524: Zone Asia/Yangon
 	{
 		ZoneID: 0xdd54a8be,
-		NameIndex: 332, // "Asia/Yangon"
-		EraIndex: 464,
+		NameIndex: 331, // "Asia/Yangon"
+		EraIndex: 730,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 525: Zone Europe/Vilnius
 	{
 		ZoneID: 0xdd63b8ce,
-		NameIndex: 485, // "Europe/Vilnius"
-		EraIndex: 590,
-		EraCount: 3,
+		NameIndex: 484, // "Europe/Vilnius"
+		EraIndex: 947,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 526: Link Australia/West -> Australia/Perth
 	{
 		ZoneID: 0xdd858a5d,
-		NameIndex: 368, // "Australia/West"
+		NameIndex: 367, // "Australia/West"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 322, // Australia/Perth
@@ -16248,39 +21591,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 527: Zone Pacific/Kosrae
 	{
 		ZoneID: 0xde5139a8,
-		NameIndex: 548, // "Pacific/Kosrae"
-		EraIndex: 627,
+		NameIndex: 547, // "Pacific/Kosrae"
+		EraIndex: 1001,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 528: Zone America/Kentucky/Monticello
 	{
 		ZoneID: 0xde71c439,
-		NameIndex: 143, // "America/Kentucky/Monticello"
-		EraIndex: 192,
+		NameIndex: 142, // "America/Kentucky/Monticello"
+		EraIndex: 289,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 529: Zone Europe/Brussels
 	{
 		ZoneID: 0xdee07337,
-		NameIndex: 435, // "Europe/Brussels"
-		EraIndex: 532,
-		EraCount: 1,
+		NameIndex: 434, // "Europe/Brussels"
+		EraIndex: 825,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 530: Zone America/Swift_Current
 	{
 		ZoneID: 0xdef98e55,
-		NameIndex: 210, // "America/Swift_Current"
-		EraIndex: 276,
+		NameIndex: 209, // "America/Swift_Current"
+		EraIndex: 420,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 531: Link America/Rosario -> America/Argentina/Cordoba
 	{
 		ZoneID: 0xdf448665,
-		NameIndex: 195, // "America/Rosario"
+		NameIndex: 194, // "America/Rosario"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 461, // America/Argentina/Cordoba
@@ -16288,39 +21631,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 532: Zone Asia/Irkutsk
 	{
 		ZoneID: 0xdfbf213f,
-		NameIndex: 272, // "Asia/Irkutsk"
-		EraIndex: 375,
-		EraCount: 3,
+		NameIndex: 271, // "Asia/Irkutsk"
+		EraIndex: 573,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 533: Zone Europe/Ulyanovsk
 	{
 		ZoneID: 0xe03783d0,
-		NameIndex: 480, // "Europe/Ulyanovsk"
-		EraIndex: 585,
-		EraCount: 4,
+		NameIndex: 479, // "Europe/Ulyanovsk"
+		EraIndex: 938,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 534: Zone Australia/Lindeman
 	{
 		ZoneID: 0xe05029e2,
-		NameIndex: 357, // "Australia/Lindeman"
-		EraIndex: 486,
-		EraCount: 1,
+		NameIndex: 356, // "Australia/Lindeman"
+		EraIndex: 769,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 535: Zone Europe/Belgrade
 	{
 		ZoneID: 0xe0532b3a,
-		NameIndex: 432, // "Europe/Belgrade"
-		EraIndex: 530,
-		EraCount: 1,
+		NameIndex: 431, // "Europe/Belgrade"
+		EraIndex: 821,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 536: Link Africa/Blantyre -> Africa/Maputo
 	{
 		ZoneID: 0xe08d813b,
-		NameIndex: 11, // "Africa/Blantyre"
+		NameIndex: 10, // "Africa/Blantyre"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 327, // Africa/Maputo
@@ -16328,15 +21671,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 537: Zone America/Menominee
 	{
 		ZoneID: 0xe0e9c583,
-		NameIndex: 159, // "America/Menominee"
-		EraIndex: 208,
-		EraCount: 1,
+		NameIndex: 158, // "America/Menominee"
+		EraIndex: 321,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 538: Link Europe/Copenhagen -> Europe/Berlin
 	{
 		ZoneID: 0xe0ed30bc,
-		NameIndex: 440, // "Europe/Copenhagen"
+		NameIndex: 439, // "Europe/Copenhagen"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 158, // Europe/Berlin
@@ -16344,15 +21687,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 539: Zone Atlantic/Faroe
 	{
 		ZoneID: 0xe110a971,
-		NameIndex: 340, // "Atlantic/Faroe"
-		EraIndex: 474,
-		EraCount: 1,
+		NameIndex: 339, // "Atlantic/Faroe"
+		EraIndex: 753,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 540: Link Pacific/Majuro -> Pacific/Tarawa
 	{
 		ZoneID: 0xe1f95371,
-		NameIndex: 550, // "Pacific/Majuro"
+		NameIndex: 549, // "Pacific/Majuro"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 563, // Pacific/Tarawa
@@ -16360,31 +21703,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 541: Zone Antarctica/Casey
 	{
 		ZoneID: 0xe2022583,
-		NameIndex: 223, // "Antarctica/Casey"
-		EraIndex: 291,
+		NameIndex: 222, // "Antarctica/Casey"
+		EraIndex: 442,
 		EraCount: 12,
 		TargetIndex: 0,
 	},
 	// 542: Zone Antarctica/Davis
 	{
 		ZoneID: 0xe2144b45,
-		NameIndex: 224, // "Antarctica/Davis"
-		EraIndex: 303,
+		NameIndex: 223, // "Antarctica/Davis"
+		EraIndex: 454,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 543: Zone Europe/Astrakhan
 	{
 		ZoneID: 0xe22256e1,
-		NameIndex: 429, // "Europe/Astrakhan"
-		EraIndex: 525,
-		EraCount: 4,
+		NameIndex: 428, // "Europe/Astrakhan"
+		EraIndex: 812,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 544: Link Pacific/Midway -> Pacific/Pago_Pago
 	{
 		ZoneID: 0xe286d38e,
-		NameIndex: 552, // "Pacific/Midway"
+		NameIndex: 551, // "Pacific/Midway"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 208, // Pacific/Pago_Pago
@@ -16392,7 +21735,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 545: Link Antarctica/Syowa -> Asia/Riyadh
 	{
 		ZoneID: 0xe330c7e1,
-		NameIndex: 232, // "Antarctica/Syowa"
+		NameIndex: 231, // "Antarctica/Syowa"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 489, // Asia/Riyadh
@@ -16400,31 +21743,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 546: Zone Antarctica/Troll
 	{
 		ZoneID: 0xe33f085b,
-		NameIndex: 233, // "Antarctica/Troll"
-		EraIndex: 316,
+		NameIndex: 232, // "Antarctica/Troll"
+		EraIndex: 469,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 547: Zone Europe/Saratov
 	{
 		ZoneID: 0xe4315da4,
-		NameIndex: 472, // "Europe/Saratov"
-		EraIndex: 573,
-		EraCount: 4,
+		NameIndex: 471, // "Europe/Saratov"
+		EraIndex: 908,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 548: Zone Pacific/Noumea
 	{
 		ZoneID: 0xe551b788,
-		NameIndex: 556, // "Pacific/Noumea"
-		EraIndex: 636,
+		NameIndex: 555, // "Pacific/Noumea"
+		EraIndex: 1014,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 549: Link Iceland -> Africa/Abidjan
 	{
 		ZoneID: 0xe56a35b5,
-		NameIndex: 500, // "Iceland"
+		NameIndex: 499, // "Iceland"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 468, // Africa/Abidjan
@@ -16432,7 +21775,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 550: Link Indian/Mayotte -> Africa/Nairobi
 	{
 		ZoneID: 0xe6880bca,
-		NameIndex: 510, // "Indian/Mayotte"
+		NameIndex: 509, // "Indian/Mayotte"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 423, // Africa/Nairobi
@@ -16440,7 +21783,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 551: Link Australia/Tasmania -> Australia/Hobart
 	{
 		ZoneID: 0xe6d76648,
-		NameIndex: 366, // "Australia/Tasmania"
+		NameIndex: 365, // "Australia/Tasmania"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 124, // Australia/Hobart
@@ -16448,15 +21791,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 552: Zone Pacific/Honolulu
 	{
 		ZoneID: 0xe6e70af9,
-		NameIndex: 544, // "Pacific/Honolulu"
-		EraIndex: 624,
+		NameIndex: 543, // "Pacific/Honolulu"
+		EraIndex: 994,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 553: Link America/Kralendijk -> America/Puerto_Rico
 	{
 		ZoneID: 0xe7c456c5,
-		NameIndex: 145, // "America/Kralendijk"
+		NameIndex: 144, // "America/Kralendijk"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 222, // America/Puerto_Rico
@@ -16464,15 +21807,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 554: Zone America/Argentina/Tucuman
 	{
 		ZoneID: 0xe96399eb,
-		NameIndex: 71, // "America/Argentina/Tucuman"
-		EraIndex: 86,
-		EraCount: 5,
+		NameIndex: 70, // "America/Argentina/Tucuman"
+		EraIndex: 134,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 555: Link Pacific/Ponape -> Pacific/Guadalcanal
 	{
 		ZoneID: 0xe9f80086,
-		NameIndex: 561, // "Pacific/Ponape"
+		NameIndex: 560, // "Pacific/Ponape"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 568, // Pacific/Guadalcanal
@@ -16480,7 +21823,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 556: Link Europe/Zaporozhye -> Europe/Kyiv
 	{
 		ZoneID: 0xeab9767f,
-		NameIndex: 489, // "Europe/Zaporozhye"
+		NameIndex: 488, // "Europe/Zaporozhye"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 407, // Europe/Kyiv
@@ -16488,7 +21831,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 557: Link Europe/Isle_of_Man -> Europe/London
 	{
 		ZoneID: 0xeaf84580,
-		NameIndex: 445, // "Europe/Isle_of_Man"
+		NameIndex: 444, // "Europe/Isle_of_Man"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 197, // Europe/London
@@ -16496,23 +21839,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 558: Zone Asia/Magadan
 	{
 		ZoneID: 0xebacc19b,
-		NameIndex: 291, // "Asia/Magadan"
-		EraIndex: 398,
-		EraCount: 4,
+		NameIndex: 290, // "Asia/Magadan"
+		EraIndex: 605,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 559: Zone America/Ojinaga
 	{
 		ZoneID: 0xebfde83f,
-		NameIndex: 178, // "America/Ojinaga"
-		EraIndex: 236,
-		EraCount: 4,
+		NameIndex: 177, // "America/Ojinaga"
+		EraIndex: 367,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 560: Link Pacific/Saipan -> Pacific/Guam
 	{
 		ZoneID: 0xeff7a35f,
-		NameIndex: 564, // "Pacific/Saipan"
+		NameIndex: 563, // "Pacific/Saipan"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 93, // Pacific/Guam
@@ -16520,39 +21863,39 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 561: Zone CST6CDT
 	{
 		ZoneID: 0xf0e87d00,
-		NameIndex: 375, // "CST6CDT"
-		EraIndex: 492,
+		NameIndex: 374, // "CST6CDT"
+		EraIndex: 778,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 562: Zone Pacific/Tahiti
 	{
 		ZoneID: 0xf24c2446,
-		NameIndex: 566, // "Pacific/Tahiti"
-		EraIndex: 642,
+		NameIndex: 565, // "Pacific/Tahiti"
+		EraIndex: 1022,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 563: Zone Pacific/Tarawa
 	{
 		ZoneID: 0xf2517e63,
-		NameIndex: 567, // "Pacific/Tarawa"
-		EraIndex: 643,
+		NameIndex: 566, // "Pacific/Tarawa"
+		EraIndex: 1023,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 564: Zone MST7MDT
 	{
 		ZoneID: 0xf2af9375,
-		NameIndex: 520, // "MST7MDT"
-		EraIndex: 606,
+		NameIndex: 519, // "MST7MDT"
+		EraIndex: 974,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 565: Link Canada/Eastern -> America/Toronto
 	{
 		ZoneID: 0xf3612d5e,
-		NameIndex: 378, // "Canada/Eastern"
+		NameIndex: 377, // "Canada/Eastern"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 276, // America/Toronto
@@ -16560,31 +21903,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 566: Zone Asia/Tashkent
 	{
 		ZoneID: 0xf3924254,
-		NameIndex: 316, // "Asia/Tashkent"
-		EraIndex: 440,
-		EraCount: 1,
+		NameIndex: 315, // "Asia/Tashkent"
+		EraIndex: 686,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 567: Zone Asia/Sakhalin
 	{
 		ZoneID: 0xf4a1c9bd,
-		NameIndex: 309, // "Asia/Sakhalin"
-		EraIndex: 428,
-		EraCount: 4,
+		NameIndex: 308, // "Asia/Sakhalin"
+		EraIndex: 664,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 568: Zone Pacific/Guadalcanal
 	{
 		ZoneID: 0xf4dd25f0,
-		NameIndex: 542, // "Pacific/Guadalcanal"
-		EraIndex: 621,
+		NameIndex: 541, // "Pacific/Guadalcanal"
+		EraIndex: 991,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 569: Link Etc/GMT0 -> Etc/GMT
 	{
 		ZoneID: 0xf53ea988,
-		NameIndex: 421, // "Etc/GMT0"
+		NameIndex: 420, // "Etc/GMT0"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
@@ -16592,7 +21935,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 570: Link Etc/Zulu -> Etc/UTC
 	{
 		ZoneID: 0xf549c240,
-		NameIndex: 426, // "Etc/Zulu"
+		NameIndex: 425, // "Etc/Zulu"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 515, // Etc/UTC
@@ -16600,31 +21943,31 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 571: Zone America/Danmarkshavn
 	{
 		ZoneID: 0xf554d204,
-		NameIndex: 103, // "America/Danmarkshavn"
-		EraIndex: 135,
-		EraCount: 1,
+		NameIndex: 102, // "America/Danmarkshavn"
+		EraIndex: 198,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 572: Zone Asia/Shanghai
 	{
 		ZoneID: 0xf895a7f5,
-		NameIndex: 312, // "Asia/Shanghai"
-		EraIndex: 434,
+		NameIndex: 311, // "Asia/Shanghai"
+		EraIndex: 677,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
 	// 573: Zone Europe/Gibraltar
 	{
 		ZoneID: 0xf8e325fc,
-		NameIndex: 442, // "Europe/Gibraltar"
-		EraIndex: 537,
-		EraCount: 1,
+		NameIndex: 441, // "Europe/Gibraltar"
+		EraIndex: 839,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 574: Link Asia/Chongqing -> Asia/Shanghai
 	{
 		ZoneID: 0xf937fb90,
-		NameIndex: 256, // "Asia/Chongqing"
+		NameIndex: 255, // "Asia/Chongqing"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 572, // Asia/Shanghai
@@ -16632,15 +21975,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 575: Zone Atlantic/Azores
 	{
 		ZoneID: 0xf93ed918,
-		NameIndex: 335, // "Atlantic/Azores"
-		EraIndex: 470,
-		EraCount: 1,
+		NameIndex: 334, // "Atlantic/Azores"
+		EraIndex: 741,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 576: Link Pacific/Wallis -> Pacific/Tarawa
 	{
 		ZoneID: 0xf94ddb0f,
-		NameIndex: 571, // "Pacific/Wallis"
+		NameIndex: 570, // "Pacific/Wallis"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 563, // Pacific/Tarawa
@@ -16648,7 +21991,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 577: Link America/Thunder_Bay -> America/Toronto
 	{
 		ZoneID: 0xf962e71b,
-		NameIndex: 213, // "America/Thunder_Bay"
+		NameIndex: 212, // "America/Thunder_Bay"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 276, // America/Toronto
@@ -16656,23 +21999,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 578: Zone America/Eirunepe
 	{
 		ZoneID: 0xf9b29683,
-		NameIndex: 110, // "America/Eirunepe"
-		EraIndex: 142,
-		EraCount: 3,
+		NameIndex: 109, // "America/Eirunepe"
+		EraIndex: 213,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 579: Zone America/Montevideo
 	{
 		ZoneID: 0xfa214780,
-		NameIndex: 166, // "America/Montevideo"
-		EraIndex: 221,
-		EraCount: 1,
+		NameIndex: 165, // "America/Montevideo"
+		EraIndex: 344,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 580: Link US/Alaska -> America/Anchorage
 	{
 		ZoneID: 0xfa300bc9,
-		NameIndex: 580, // "US/Alaska"
+		NameIndex: 579, // "US/Alaska"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 191, // America/Anchorage
@@ -16680,7 +22023,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 581: Link GB-Eire -> Europe/London
 	{
 		ZoneID: 0xfa70e300,
-		NameIndex: 492, // "GB-Eire"
+		NameIndex: 491, // "GB-Eire"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 197, // Europe/London
@@ -16688,71 +22031,71 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 582: Zone Europe/Kirov
 	{
 		ZoneID: 0xfaf5abef,
-		NameIndex: 450, // "Europe/Kirov"
-		EraIndex: 551,
-		EraCount: 3,
+		NameIndex: 449, // "Europe/Kirov"
+		EraIndex: 858,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 583: Zone Europe/Malta
 	{
 		ZoneID: 0xfb1560f3,
-		NameIndex: 457, // "Europe/Malta"
-		EraIndex: 558,
-		EraCount: 1,
+		NameIndex: 456, // "Europe/Malta"
+		EraIndex: 877,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 584: Zone Europe/Minsk
 	{
 		ZoneID: 0xfb19cc66,
-		NameIndex: 459, // "Europe/Minsk"
-		EraIndex: 559,
-		EraCount: 2,
+		NameIndex: 458, // "Europe/Minsk"
+		EraIndex: 880,
+		EraCount: 4,
 		TargetIndex: 0,
 	},
 	// 585: Zone Europe/Bucharest
 	{
 		ZoneID: 0xfb349ec5,
-		NameIndex: 436, // "Europe/Bucharest"
-		EraIndex: 533,
-		EraCount: 1,
+		NameIndex: 435, // "Europe/Bucharest"
+		EraIndex: 827,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 586: Zone Africa/Khartoum
 	{
 		ZoneID: 0xfb3d4205,
-		NameIndex: 29, // "Africa/Khartoum"
-		EraIndex: 13,
+		NameIndex: 28, // "Africa/Khartoum"
+		EraIndex: 22,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 587: Zone Europe/Paris
 	{
 		ZoneID: 0xfb4bc2a3,
-		NameIndex: 464, // "Europe/Paris"
-		EraIndex: 564,
-		EraCount: 1,
+		NameIndex: 463, // "Europe/Paris"
+		EraIndex: 889,
+		EraCount: 2,
 		TargetIndex: 0,
 	},
 	// 588: Zone Asia/Yekaterinburg
 	{
 		ZoneID: 0xfb544c6e,
-		NameIndex: 333, // "Asia/Yekaterinburg"
-		EraIndex: 465,
-		EraCount: 3,
+		NameIndex: 332, // "Asia/Yekaterinburg"
+		EraIndex: 731,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 589: Zone Europe/Sofia
 	{
 		ZoneID: 0xfb898656,
-		NameIndex: 475, // "Europe/Sofia"
-		EraIndex: 580,
-		EraCount: 1,
+		NameIndex: 474, // "Europe/Sofia"
+		EraIndex: 925,
+		EraCount: 5,
 		TargetIndex: 0,
 	},
 	// 590: Link Canada/Mountain -> America/Edmonton
 	{
 		ZoneID: 0xfb8a8217,
-		NameIndex: 379, // "Canada/Mountain"
+		NameIndex: 378, // "Canada/Mountain"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 238, // America/Edmonton
@@ -16760,7 +22103,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 591: Link Europe/Vaduz -> Europe/Zurich
 	{
 		ZoneID: 0xfbb81bae,
-		NameIndex: 482, // "Europe/Vaduz"
+		NameIndex: 481, // "Europe/Vaduz"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 291, // Europe/Zurich
@@ -16768,15 +22111,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 592: Zone Atlantic/Canary
 	{
 		ZoneID: 0xfc23f2c2,
-		NameIndex: 337, // "Atlantic/Canary"
-		EraIndex: 472,
-		EraCount: 1,
+		NameIndex: 336, // "Atlantic/Canary"
+		EraIndex: 748,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 593: Link Mexico/BajaNorte -> America/Tijuana
 	{
 		ZoneID: 0xfcf7150f,
-		NameIndex: 521, // "Mexico/BajaNorte"
+		NameIndex: 520, // "Mexico/BajaNorte"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 231, // America/Tijuana
@@ -16784,7 +22127,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 594: Link America/Santa_Isabel -> America/Tijuana
 	{
 		ZoneID: 0xfd18a56c,
-		NameIndex: 196, // "America/Santa_Isabel"
+		NameIndex: 195, // "America/Santa_Isabel"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 231, // America/Tijuana
@@ -16792,8 +22135,8 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 595: Zone America/Campo_Grande
 	{
 		ZoneID: 0xfec3e7a6,
-		NameIndex: 88, // "America/Campo_Grande"
-		EraIndex: 117,
+		NameIndex: 87, // "America/Campo_Grande"
+		EraIndex: 172,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -16805,602 +22148,602 @@ const ZoneInfoCount = 596
 const ZoneInfoChunkSize = 12
 
 // ZoneInfosData contains the ZoneInfoRecords data as a hex encoded string.
-const ZoneInfosData = "\xae\x73\x59\x00\xeb\x01\x00\x00\x00\x00\xc5\x00" +
-		"\xad\x74\x59\x00\x0c\x02\x00\x00\x00\x00\x62\x00" +
-		"\xc4\x63\x47\x01\x1e\x01\x00\x00\x00\x00\xee\x01" +
-		"\xe4\x6d\xd9\x01\x21\x00\x00\x00\x00\x00\x11\x01" +
-		"\xde\x86\x1e\x02\xf8\x01\x00\x00\x00\x00\x0c\x02" +
-		"\xdb\xd5\x60\x02\x6f\x01\x00\x00\x00\x00\x31\x00" +
-		"\x16\xc5\x1e\x03\x53\x01\x00\x00\x00\x00\x1b\x02" +
-		"\x6e\x4e\xb1\x04\xcd\x00\x12\x01\x02\x00\x00\x00" +
-		"\x7b\x50\xc0\x04\xce\x00\x00\x00\x00\x00\xde\x00" +
-		"\x9a\x21\xd7\x04\x30\x00\x00\x00\x00\x00\xd4\x01" +
-		"\xba\xb3\xd8\x04\xcf\x00\x00\x00\x00\x00\xde\x00" +
-		"\x8e\x95\xf9\x04\xb0\x00\xe8\x00\x02\x00\x00\x00" +
-		"\x50\xab\x06\x05\x12\x01\x7a\x01\x01\x00\x00\x00" +
-		"\x47\x2a\x23\x05\x0d\x00\x00\x00\x00\x00\x47\x01" +
-		"\x9e\x18\x32\x05\x9d\x00\xcf\x00\x01\x00\x00\x00" +
-		"\x79\x6a\x4e\x05\xcc\x00\x00\x00\x00\x00\xde\x00" +
-		"\x65\x1e\xae\x05\x03\x00\x00\x00\x00\x00\xa7\x01" +
-		"\xba\x2b\x53\x06\x19\x02\x68\x02\x02\x00\x00\x00" +
-		"\xc4\x21\x5d\x06\x7f\x00\xa4\x00\x02\x00\x00\x00" +
-		"\x41\x36\xee\x08\x0a\x02\x00\x00\x00\x00\x0e\x00" +
-		"\x42\xe4\x03\x09\x3d\x01\xb9\x01\x03\x00\x00\x00" +
-		"\x12\x36\x26\x09\x84\x00\xaf\x00\x02\x00\x00\x00" +
-		"\x2f\xde\xc8\x09\x4a\x02\x00\x00\x00\x00\x28\x02" +
-		"\xfe\x7e\x7b\x0a\x53\x00\x6b\x00\x03\x00\x00\x00" +
-		"\x1d\xe9\xf0\x0a\x02\x01\x5d\x01\x02\x00\x00\x00" +
-		"\x21\xd9\x87\x0b\x76\x01\xeb\x01\x01\x00\x00\x00" +
-		"\xa3\xe1\x87\x0b\x83\x01\xed\x01\x01\x00\x00\x00" +
-		"\x71\xe3\x87\x0b\x84\x01\xee\x01\x01\x00\x00\x00" +
-		"\x2d\xeb\x87\x0b\xed\x01\x00\x00\x00\x00\x01\x02" +
-		"\x34\xf0\x87\x0b\xf2\x01\x58\x02\x01\x00\x00\x00" +
-		"\xab\x03\x88\x0b\x06\x02\x5c\x02\x01\x00\x00\x00" +
-		"\x79\x05\x88\x0b\x07\x02\x5d\x02\x01\x00\x00\x00" +
-		"\x0a\x12\x88\x0b\x0f\x02\x00\x00\x00\x00\x3c\x02" +
-		"\x29\x1a\x88\x0b\x3f\x02\x00\x00\x00\x00\xf3\x01" +
-		"\x31\x1a\x88\x0b\x40\x02\x00\x00\x00\x00\x43\x00" +
-		"\x71\x25\x88\x0b\x43\x02\x00\x00\x00\x00\x03\x02" +
-		"\x91\x27\x88\x0b\x50\x02\x00\x00\x00\x00\x03\x02" +
-		"\x35\x2e\x88\x0b\x53\x02\x86\x02\x01\x00\x00\x00" +
-		"\xf7\x59\x82\x0c\x7a\x00\x9f\x00\x01\x00\x00\x00" +
-		"\x96\x64\xaa\x0c\xca\x01\x00\x00\x00\x00\xe9\x00" +
-		"\x85\x03\xe9\x0c\x2b\x00\x12\x00\x01\x00\x00\x00" +
-		"\x8e\x27\x1a\x0d\x86\x01\x00\x00\x00\x00\x0e\x01" +
-		"\x28\x70\x2f\x0d\xee\x01\x00\x00\x00\x00\x01\x02" +
-		"\x6a\x70\x2f\x0d\xef\x01\x00\x00\x00\x00\x01\x02" +
-		"\x8f\x2f\x71\x0d\x03\x02\x00\x00\x00\x00\x44\x00" +
-		"\x16\x8b\x99\x0d\x05\x02\x00\x00\x00\x00\x8e\x01" +
-		"\xbb\xaf\x57\x0e\x04\x02\x00\x00\x00\x00\x44\x01" +
-		"\x03\xd2\x86\x0e\xe6\x00\x3b\x01\x01\x00\x00\x00" +
-		"\x6f\xc7\x76\x0f\xde\x00\x22\x01\x01\x00\x00\x00" +
-		"\xa3\x59\xe5\x0f\x67\x01\xe8\x01\x01\x00\x00\x00" +
-		"\xc9\xbf\x63\x10\xc8\x00\x0f\x01\x01\x00\x00\x00" +
-		"\xc2\x95\x93\x10\xab\x01\x00\x00\x00\x00\x11\x02" +
-		"\x54\xa0\xac\x10\x85\x00\xb1\x00\x02\x00\x00\x00" +
-		"\x2a\x8d\x3f\x12\xc9\x00\x10\x01\x01\x00\x00\x00" +
-		"\x04\x51\xae\x13\x36\x01\xb0\x01\x01\x00\x00\x00" +
-		"\xbc\x21\x8d\x14\xee\x00\x40\x01\x02\x00\x00\x00" +
-		"\x0e\x71\x8f\x14\xf0\x00\x45\x01\x02\x00\x00\x00" +
-		"\x3b\x86\xae\x14\xfe\x00\x57\x01\x04\x00\x00\x00" +
-		"\x5e\xac\xbc\x14\x03\x01\x00\x00\x00\x00\x3b\x00" +
-		"\x8b\x7b\xc0\x14\x05\x01\x61\x01\x02\x00\x00\x00" +
-		"\x77\x9f\xc7\x14\x07\x01\x65\x01\x01\x00\x00\x00" +
-		"\x9a\x32\xf6\x14\x4e\x00\x66\x00\x02\x00\x00\x00" +
-		"\x01\x56\x3b\x15\x15\x01\x7d\x01\x01\x00\x00\x00" +
-		"\x09\x4f\x45\x15\xf3\x00\x00\x00\x00\x00\xc5\x01" +
-		"\xb3\x88\x5f\x15\x21\x01\x00\x00\x00\x00\x41\x00" +
-		"\xb9\x88\x5f\x15\x22\x01\x8d\x01\x01\x00\x00\x00" +
-		"\x0b\x33\xa8\x15\x2f\x01\xa5\x01\x01\x00\x00\x00" +
-		"\xda\x82\xce\x15\x37\x01\xb1\x01\x01\x00\x00\x00" +
-		"\xa8\x06\xe6\x15\x42\x01\xbe\x01\x01\x00\x00\x00" +
-		"\x60\x0e\xe6\x15\x43\x01\xbf\x01\x05\x00\x00\x00" +
-		"\x2c\x7c\x6d\x16\x3f\x01\x00\x00\x00\x00\xc1\x00" +
-		"\xd1\x80\x03\x17\x41\x01\xbd\x01\x01\x00\x00\x00" +
-		"\x58\x49\xe6\x17\x7b\x00\xa0\x00\x01\x00\x00\x00" +
-		"\x35\x0a\x9b\x19\xa8\x00\x00\x00\x00\x00\xde\x00" +
-		"\x4b\x02\x21\x1a\x8e\x00\xbf\x00\x01\x00\x00\x00" +
-		"\x57\xc0\x76\x1a\x2d\x01\xa1\x01\x01\x00\x00\x00" +
-		"\x9c\x49\x1a\x1c\xd1\x01\x00\x00\x00\x00\x17\x02" +
-		"\x74\x4f\x2b\x1c\x57\x01\x00\x00\x00\x00\xd4\x01" +
-		"\x54\x76\x2a\x1e\xaa\x00\xde\x00\x01\x00\x00\x00" +
-		"\xce\xc6\x8b\x1f\xc7\x01\x00\x00\x00\x00\x11\x02" +
-		"\x4a\x08\xa7\x1f\xec\x00\x00\x00\x00\x00\xe9\x01" +
-		"\xb5\x88\xa7\x1f\xf7\x00\x4e\x01\x01\x00\x00\x00" +
-		"\x94\xc3\xa8\x1f\x06\x01\x63\x01\x02\x00\x00\x00" +
-		"\x75\x48\xaa\x1f\x0a\x01\x6a\x01\x08\x00\x00\x00" +
-		"\xe3\x0f\xab\x1f\x0f\x01\x76\x01\x01\x00\x00\x00" +
-		"\xac\xdd\xae\x1f\x2a\x01\x9c\x01\x03\x00\x00\x00" +
-		"\xa0\xf0\xae\x1f\x2b\x01\x9f\x01\x02\x00\x00\x00" +
-		"\xa8\x1e\x3a\x20\xa7\x00\x00\x00\x00\x00\x14\x01" +
-		"\x27\xd1\xf2\x20\x0d\x01\x74\x01\x01\x00\x00\x00" +
-		"\x63\xb0\xfb\x20\x04\x01\x5f\x01\x02\x00\x00\x00" +
-		"\x77\x88\x75\x22\x3e\x00\x00\x00\x00\x00\x3e\x01" +
-		"\x5e\x9b\x35\x23\x11\x02\x60\x02\x02\x00\x00\x00" +
-		"\xa5\x3b\x38\x23\x1a\x02\x6a\x02\x01\x00\x00\x00" +
-		"\xed\xf9\x38\x23\x1f\x02\x6e\x02\x02\x00\x00\x00" +
-		"\x14\xa0\x3c\x23\x2a\x02\x78\x02\x01\x00\x00\x00" +
-		"\xa9\x10\x40\x23\x39\x02\x00\x00\x00\x00\xa3\x01" +
-		"\x2b\x6c\x41\x23\x3a\x02\x00\x00\x00\x00\x33\x02" +
-		"\xa3\xe8\x28\x24\x5c\x01\xdf\x01\x01\x00\x00\x00" +
-		"\x86\x2f\x06\x25\x12\x02\x62\x02\x01\x00\x00\x00" +
-		"\x36\xa8\x2c\x26\x38\x02\x84\x02\x02\x00\x00\x00" +
-		"\xeb\x1d\x9a\x26\xa5\x00\xdc\x00\x01\x00\x00\x00" +
-		"\x8c\xa9\xda\x26\xa6\x01\x00\x00\x00\x00\x01\x02" +
-		"\x24\x6a\x8b\x27\x60\x01\x00\x00\x00\x00\x7c\x00" +
-		"\xff\xbd\x76\x28\x61\x01\xe3\x01\x01\x00\x00\x00" +
-		"\x96\x9f\x92\x28\x30\x02\x00\x00\x00\x00\x38\x02" +
-		"\x8b\x4f\x9b\x28\x09\x01\x67\x01\x03\x00\x00\x00" +
-		"\x12\xb2\xa0\x28\x86\x00\xb3\x00\x03\x00\x00\x00" +
-		"\xa4\x69\xa6\x28\x80\x00\xa6\x00\x02\x00\x00\x00" +
-		"\xa8\x34\xde\x29\x4a\x01\xca\x01\x03\x00\x00\x00" +
-		"\x58\xae\x09\x2a\x5f\x01\x00\x00\x00\x00\xa8\x00" +
-		"\xee\x18\xd0\x2a\x73\x00\x94\x00\x05\x00\x00\x00" +
-		"\x1f\x6b\x6f\x2c\xd9\x00\x1c\x01\x01\x00\x00\x00" +
-		"\x93\x91\x99\x2d\xb4\x00\x00\x00\x00\x00\x71\x00" +
-		"\xbf\x10\xe3\x2d\x8a\x00\xba\x00\x03\x00\x00\x00" +
-		"\xab\xfd\x44\x2e\x02\x02\x00\x00\x00\x00\xb6\x00" +
-		"\x99\xe9\x0d\x2f\x14\x02\x65\x02\x01\x00\x00\x00" +
-		"\xa9\xb9\x8c\x2f\xa9\x01\x00\x00\x00\x00\x03\x02" +
-		"\x72\xee\xee\x2f\x82\x00\xaa\x00\x02\x00\x00\x00" +
-		"\x96\xe0\xc4\x30\xdd\x01\x45\x02\x03\x00\x00\x00" +
-		"\xd4\x01\xea\x30\x14\x00\x00\x00\x00\x00\xa7\x01" +
-		"\x4e\xcc\xf0\x30\x45\x01\xc4\x01\x01\x00\x00\x00" +
-		"\xa7\x0a\x7c\x31\x18\x00\x00\x00\x00\x00\x47\x01" +
-		"\xde\xcd\x0d\x32\x48\x00\x5b\x00\x06\x00\x00\x00" +
-		"\xc3\x44\x8a\x32\xfd\x00\x00\x00\x00\x00\xfb\x00" +
-		"\x1a\x95\xbf\x32\x63\x01\xe5\x01\x01\x00\x00\x00" +
-		"\x3c\x5c\xfc\x32\x08\x01\x66\x01\x01\x00\x00\x00" +
-		"\x74\x31\x01\x33\x58\x01\xdc\x01\x01\x00\x00\x00" +
-		"\x01\xaf\xb5\x34\xb6\x00\xf2\x00\x01\x00\x00\x00" +
-		"\x94\x78\x2e\x38\x11\x01\x00\x00\x00\x00\x8f\x01" +
-		"\xd9\xb4\x4d\x39\x46\x01\x00\x00\x00\x00\x78\x00" +
-		"\x63\xd8\x9c\x39\xe3\x00\x37\x01\x02\x00\x00\x00" +
-		"\x60\xa7\xcd\x39\x0c\x00\x00\x00\x00\x00\x11\x01" +
-		"\xf4\x64\xe0\x3b\x5a\x00\x78\x00\x03\x00\x00\x00" +
-		"\x69\x72\x61\x3c\x5c\x00\x7b\x00\x01\x00\x00\x00" +
-		"\x5d\xf9\x1b\x3d\x31\x00\x00\x00\x00\x00\x11\x01" +
-		"\xc4\xb1\x4b\x3d\x50\x01\xd7\x01\x01\x00\x00\x00" +
-		"\x00\x76\x5e\x3d\x98\x00\xca\x00\x01\x00\x00\x00" +
-		"\x59\x3a\xab\x3d\x9a\x00\x00\x00\x00\x00\xde\x00" +
-		"\x16\x2c\xb1\x3d\xbb\x01\x00\x00\x00\x00\xc5\x00" +
-		"\xba\x9d\xc4\x3d\x2f\x00\x00\x00\x00\x00\xd4\x01" +
-		"\xee\x47\xcb\x3d\x95\x00\x00\x00\x00\x00\x4a\x00" +
-		"\xbd\x09\x10\x3e\x45\x00\x49\x00\x06\x00\x00\x00" +
-		"\x8c\x23\x11\x3e\x46\x00\x4f\x00\x07\x00\x00\x00" +
-		"\x89\xf3\xd0\x3e\xe6\x01\x51\x02\x05\x00\x00\x00" +
-		"\x0f\x7e\x43\x3f\x71\x00\x92\x00\x02\x00\x00\x00" +
-		"\xc4\x1c\x8f\x3f\x8b\x01\xf2\x01\x01\x00\x00\x00" +
-		"\xc5\x1c\x8f\x3f\x8c\x01\xf3\x01\x01\x00\x00\x00" +
-		"\xc6\x1c\x8f\x3f\x8d\x01\xf4\x01\x01\x00\x00\x00" +
-		"\x46\x25\x8f\x3f\x98\x01\xfe\x01\x01\x00\x00\x00" +
-		"\x47\x25\x8f\x3f\x99\x01\xff\x01\x01\x00\x00\x00" +
-		"\x48\x25\x8f\x3f\x9a\x01\x00\x02\x01\x00\x00\x00" +
-		"\x49\x25\x8f\x3f\x9b\x01\x01\x02\x01\x00\x00\x00" +
-		"\x4a\x25\x8f\x3f\x9c\x01\x02\x02\x01\x00\x00\x00" +
-		"\x4f\x2f\x96\x40\xe5\x00\x39\x01\x02\x00\x00\x00" +
-		"\x7b\x3c\xfa\x40\x7d\x01\x00\x00\x00\x00\x6f\x00" +
-		"\x27\xfa\x18\x43\xae\x01\x11\x02\x01\x00\x00\x00" +
-		"\x89\xb3\x51\x43\xfa\x01\x00\x00\x00\x00\x68\x01" +
-		"\x69\xfa\x13\x44\x87\x00\xb6\x00\x03\x00\x00\x00" +
-		"\x20\x4c\x64\x44\xb1\x01\x13\x02\x01\x00\x00\x00" +
-		"\xf7\xc5\x1f\x45\x59\x01\x00\x00\x00\x00\xd4\x01" +
-		"\x3c\x7c\x6f\x45\xf6\x01\x59\x02\x01\x00\x00\x00" +
-		"\xe2\x25\xe7\x45\xfb\x01\x00\x00\x00\x00\x3c\x00" +
-		"\xb6\xde\xf4\x45\xf9\x01\x00\x00\x00\x00\xa7\x01" +
-		"\x54\xe0\xb4\x46\x9e\x00\x00\x00\x00\x00\xab\x01" +
-		"\x21\xf9\x85\x47\x48\x01\xc6\x01\x04\x00\x00\x00" +
-		"\x62\x5f\x27\x4a\xb9\x01\x18\x02\x01\x00\x00\x00" +
-		"\x78\xcf\x0f\x4b\x27\x01\x94\x01\x01\x00\x00\x00" +
-		"\xd4\xb5\x92\x4b\x5e\x00\x7c\x00\x01\x00\x00\x00" +
-		"\x76\x97\x1e\x4d\x6d\x01\xea\x01\x01\x00\x00\x00" +
-		"\xda\xaf\x42\x4d\x0d\x02\x00\x00\x00\x00\x73\x00" +
-		"\x70\x26\xc5\x4e\x46\x02\x00\x00\x00\x00\x7f\x00" +
-		"\xd4\x6f\x96\x4f\xea\x00\x00\x00\x00\x00\xfd\x01" +
-		"\xef\x13\xe0\x4f\x45\x02\x00\x00\x00\x00\x63\x01" +
-		"\xc0\xc9\xed\x4f\x5d\x01\xe0\x01\x01\x00\x00\x00" +
-		"\x63\xe9\x36\x50\x5b\x00\x00\x00\x00\x00\x3e\x01" +
-		"\xa6\x79\xec\x50\x4a\x00\x61\x00\x01\x00\x00\x00" +
-		"\x45\x52\x7f\x52\x17\x01\x81\x01\x01\x00\x00\x00" +
-		"\x93\x51\x95\x52\x18\x01\x00\x00\x00\x00\xfd\x01" +
-		"\x9c\x11\x6b\x53\x78\x01\x00\x00\x00\x00\xc8\x01" +
-		"\x3a\x0c\x72\x53\x1d\x02\x6c\x02\x01\x00\x00\x00" +
-		"\xe8\xe3\xe0\x54\xdb\x00\x1d\x01\x02\x00\x00\x00" +
-		"\xc5\x84\x1e\x55\x9b\x00\xcc\x00\x01\x00\x00\x00" +
-		"\x6c\xad\x5d\x56\x8b\x00\xbd\x00\x01\x00\x00\x00" +
-		"\xcd\x21\x68\x56\x4f\x02\x00\x00\x00\x00\xd0\x00" +
-		"\x60\x65\xd3\x56\xf3\x01\x00\x00\x00\x00\xba\x00" +
-		"\x76\xae\x0d\x57\xbf\x01\x00\x00\x00\x00\xc5\x00" +
-		"\xac\x28\x7f\x57\x0e\x01\x75\x01\x01\x00\x00\x00" +
-		"\x35\x71\xca\x57\x27\x02\x76\x02\x01\x00\x00\x00" +
-		"\x30\x43\x67\x59\xa3\x00\xd9\x00\x01\x00\x00\x00" +
-		"\x6c\x65\x3c\x5a\xe1\x00\x00\x00\x00\x00\xa3\x01" +
-		"\xb6\x35\x75\x5a\x55\x01\x00\x00\x00\x00\x9e\x00" +
-		"\x0e\x26\x79\x5a\x38\x00\x1e\x00\x01\x00\x00\x00" +
-		"\x8e\xe7\xb7\x5b\x49\x02\x00\x00\x00\x00\x4e\x00" +
-		"\x3a\xd2\xec\x5b\x14\x01\x7c\x01\x01\x00\x00\x00" +
-		"\xb8\xfb\xf6\x5b\xdc\x01\x00\x00\x00\x00\x9e\x00" +
-		"\x0b\xa7\x00\x5c\xc4\x01\x2b\x02\x01\x00\x00\x00" +
-		"\x72\x17\x5e\x5c\x52\x01\xd9\x01\x01\x00\x00\x00" +
-		"\xae\x84\x6a\x5c\xc6\x01\x2c\x02\x01\x00\x00\x00" +
-		"\x00\x76\x8a\x5c\x62\x00\x00\x00\x00\x00\xcd\x01" +
-		"\xb3\x1e\x00\x5d\x44\x01\x00\x00\x00\x00\xe8\x00" +
-		"\x40\xdd\x3b\x5d\x29\x00\x00\x00\x00\x00\xff\x01" +
-		"\x35\x15\xbd\x5d\xc8\x01\x2d\x02\x01\x00\x00\x00" +
-		"\x24\xfe\x07\x5e\xa4\x00\xda\x00\x02\x00\x00\x00" +
-		"\xa4\xf7\x10\x5e\x13\x02\x63\x02\x02\x00\x00\x00" +
-		"\x01\x9f\xbf\x5e\xcc\x01\x00\x00\x00\x00\x4b\x02" +
-		"\xfc\x66\xc2\x5e\xcd\x01\x31\x02\x03\x00\x00\x00" +
-		"\xc5\x46\x2f\x5f\x40\x00\x2f\x00\x04\x00\x00\x00" +
-		"\x03\x34\xc7\x5f\x44\x00\x45\x00\x04\x00\x00\x00" +
-		"\xd0\xeb\x3a\x60\x2d\x02\x7d\x02\x01\x00\x00\x00" +
-		"\x93\x9a\x59\x61\x18\x02\x00\x00\x00\x00\x0b\x02" +
-		"\xd1\x19\xb3\x61\x32\x00\x15\x00\x03\x00\x00\x00" +
-		"\xf5\x10\x67\x62\x79\x01\x00\x00\x00\x00\x3c\x01" +
-		"\x04\x02\xa7\x62\x64\x00\x00\x00\x00\x00\x7f\x00" +
-		"\xbe\x66\xff\x63\x63\x00\x83\x00\x01\x00\x00\x00" +
-		"\x22\xe5\x4f\x65\x30\x01\xa6\x01\x02\x00\x00\x00" +
-		"\xc9\xad\x54\x65\x81\x00\xa8\x00\x02\x00\x00\x00" +
-		"\x48\x5d\xee\x65\xd2\x01\x35\x02\x01\x00\x00\x00" +
-		"\x93\x4f\x93\x66\x72\x01\x00\x00\x00\x00\x89\x01" +
-		"\xc5\x78\x95\x66\x74\x01\x00\x00\x00\x00\x32\x00" +
-		"\x0c\xd7\x95\x66\x1f\x00\x00\x00\x00\x00\x11\x01" +
-		"\x9b\x68\x9f\x66\x75\x01\x00\x00\x00\x00\xb0\x01" +
-		"\x9b\x15\xbc\x66\x2a\x00\x00\x00\x00\x00\xa7\x01" +
-		"\x31\xca\x52\x67\xbb\x00\xf5\x00\x01\x00\x00\x00" +
-		"\xe7\x7b\x97\x67\x4b\x02\x00\x00\x00\x00\xd7\x00" +
-		"\x05\x9a\xd7\x67\x56\x00\x00\x00\x00\x00\xf9\x01" +
-		"\x64\xdd\x23\x68\x17\x00\x00\x00\x00\x00\xd4\x01" +
-		"\xd5\x07\xc2\x68\xf7\x01\x00\x00\x00\x00\x8a\x01" +
-		"\x93\x4f\x26\x69\x28\x01\x95\x01\x03\x00\x00\x00" +
-		"\xe1\x9a\x00\x6a\x88\x00\x00\x00\x00\x00\x6b\x00" +
-		"\x3f\x6c\x57\x6a\xd7\x01\x00\x00\x00\x00\x17\x02" +
-		"\x84\x91\x87\x6a\x66\x00\x00\x00\x00\x00\xde\x00" +
-		"\x72\xdf\xa1\x6a\xd6\x00\x17\x01\x04\x00\x00\x00" +
-		"\x85\x1c\xa2\x6a\x24\x01\x92\x01\x01\x00\x00\x00" +
-		"\x5b\x97\xb2\x6a\xbc\x01\x1a\x02\x01\x00\x00\x00" +
-		"\x62\x5b\xe4\x6a\x96\x00\x00\x00\x00\x00\xde\x00" +
-		"\x77\xac\x1a\x6b\xba\x00\xf4\x00\x01\x00\x00\x00" +
-		"\x39\xb1\xc0\x6b\xd5\x01\x3a\x02\x03\x00\x00\x00" +
-		"\xd0\xfd\x76\x6c\xda\x01\x00\x00\x00\x00\x17\x02" +
-		"\x4a\x48\xb9\x6c\x6d\x00\x8d\x00\x01\x00\x00\x00" +
-		"\x5b\x4e\xf2\x6c\x69\x00\x8a\x00\x01\x00\x00\x00" +
-		"\xc6\x17\x12\x6d\x32\x01\x00\x00\x00\x00\x0c\x02" +
-		"\x8a\x55\xcf\x6d\x48\x02\x00\x00\x00\x00\x6b\x00" +
-		"\x97\x61\x21\x6e\x77\x00\x9c\x00\x03\x00\x00\x00" +
-		"\x92\x98\x29\x6e\x52\x00\x00\x00\x00\x00\xde\x00" +
-		"\x47\x5b\xa9\x6e\xde\x01\x48\x02\x01\x00\x00\x00" +
-		"\x47\x82\xb8\x6e\x4d\x02\x00\x00\x00\x00\x5e\x01" +
-		"\x85\x55\xeb\x6e\xe4\x00\x00\x00\x00\x00\x62\x00" +
-		"\xef\x3a\x9a\x6f\x3b\x00\x1f\x00\x04\x00\x00\x00" +
-		"\x66\x85\xd8\x6f\x24\x00\x00\x00\x00\x00\x47\x01" +
-		"\x47\xc0\x76\x70\xff\x01\x00\x00\x00\x00\x3c\x00" +
-		"\x81\x2e\x28\x71\x31\x01\xa8\x01\x03\x00\x00\x00" +
-		"\xd9\x6c\xc0\x72\x1c\x01\x88\x01\x01\x00\x00\x00" +
-		"\x60\xfc\x47\x73\x60\x00\x7f\x00\x04\x00\x00\x00" +
-		"\xe5\xc2\x4c\x73\xe4\x01\x4d\x02\x01\x00\x00\x00" +
-		"\xef\x78\xb2\x73\x05\x00\x00\x00\x00\x00\xa7\x01" +
-		"\xf3\x89\xb2\x73\x06\x00\x00\x00\x00\x00\xa7\x01" +
-		"\xd7\xf9\xba\x73\x16\x01\x7e\x01\x03\x00\x00\x00" +
-		"\xc1\xae\x0c\x74\xc5\x00\x09\x01\x02\x00\x00\x00" +
-		"\xbc\xc9\x10\x74\xc6\x00\x0b\x01\x01\x00\x00\x00" +
-		"\xa5\xe7\xc1\x74\x07\x00\x00\x00\x00\x00\xd4\x01" +
-		"\xd0\x8e\xc2\x74\x08\x00\x00\x00\x00\x00\x11\x01" +
-		"\x96\x9b\xc2\x74\x09\x00\x00\x00\x00\x00\xd4\x01" +
-		"\x8a\xab\xef\x74\xce\x01\x00\x00\x00\x00\xa6\x00" +
-		"\x19\x5c\x18\x75\xe7\x01\x56\x02\x01\x00\x00\x00" +
-		"\x52\xd6\x2a\x75\x6f\x00\x91\x00\x01\x00\x00\x00" +
-		"\x41\x41\x56\x75\x0a\x00\x02\x00\x01\x00\x00\x00" +
-		"\x77\xd1\xa0\x75\xc7\x00\x0c\x01\x03\x00\x00\x00" +
-		"\xbc\xb7\x6b\x76\x4c\x02\x00\x00\x00\x00\x4e\x01" +
-		"\x49\x1f\x31\x77\x7e\x01\x00\x00\x00\x00\xc4\x01" +
-		"\x54\xb0\xd5\x77\x02\x00\x00\x00\x00\x00\xd4\x01" +
-		"\x28\xe2\xf8\x77\x0e\x00\x03\x00\x01\x00\x00\x00" +
-		"\xec\x46\xfb\x77\x10\x00\x06\x00\x01\x00\x00\x00" +
-		"\xfd\x00\x0b\x78\x12\x00\x00\x00\x00\x00\xd4\x01" +
-		"\xd0\xb5\x9b\x78\x20\x00\x10\x00\x01\x00\x00\x00" +
-		"\xd3\x9b\x9c\x78\x36\x00\x1c\x00\x01\x00\x00\x00" +
-		"\xc2\x35\xdd\x78\x7f\x01\x00\x00\x00\x00\xb4\x00" +
-		"\x1b\x85\x2e\x79\xd7\x00\x1b\x01\x01\x00\x00\x00" +
-		"\x2b\x46\x31\x79\xd8\x00\x00\x00\x00\x00\xde\x00" +
-		"\x6d\x8e\x37\x79\x35\x00\x1b\x00\x01\x00\x00\x00" +
-		"\x10\xf3\x6d\x7a\x15\x00\x00\x00\x00\x00\x11\x01" +
-		"\x31\x6b\xb3\x7a\x11\x00\x00\x00\x00\x00\xd4\x01" +
-		"\x2a\xc0\x09\x7b\xfd\x01\x5b\x02\x01\x00\x00\x00" +
-		"\xc4\xe1\xb3\x7b\x5a\x01\xdd\x01\x02\x00\x00\x00" +
-		"\x45\x54\xc9\x7b\x70\x00\x00\x00\x00\x00\xe7\x00" +
-		"\xff\xc9\x11\x7c\xe8\x01\x00\x00\x00\x00\x17\x02" +
-		"\xa0\xcb\x83\x7c\x82\x01\x00\x00\x00\x00\x94\x01" +
-		"\x6a\xb3\x84\x7c\x87\x01\x00\x00\x00\x00\xa5\x00" +
-		"\xfd\x50\x85\x7c\xf0\x01\x00\x00\x00\x00\x01\x02" +
-		"\x0f\x09\x87\x7c\x00\x02\x00\x00\x00\x00\xf4\x01" +
-		"\xf1\x8e\x8d\x7c\x52\x02\x00\x00\x00\x00\xcd\x00" +
-		"\xb5\x69\x90\x7c\x54\x02\x00\x00\x00\x00\x03\x02" +
-		"\xb9\x95\x81\x7d\xea\x01\x57\x02\x01\x00\x00\x00" +
-		"\x18\xdb\x2b\x7e\x80\x01\x00\x00\x00\x00\x02\x01" +
-		"\x24\xaf\xaa\x7e\x72\x00\x00\x00\x00\x00\x6b\x00" +
-		"\x3b\x00\x1b\x80\x1f\x01\x8c\x01\x01\x00\x00\x00" +
-		"\x37\xc0\xb5\x81\x56\x01\xdb\x01\x01\x00\x00\x00" +
-		"\x98\x20\xb9\x81\x4b\x00\x00\x00\x00\x00\xbd\x01" +
-		"\x2d\x9a\xc3\x82\x19\x00\x00\x00\x00\x00\x47\x01" +
-		"\x49\x70\xfb\x82\xca\x00\x00\x00\x00\x00\x5e\x01" +
-		"\x3a\x07\x05\x83\x23\x02\x72\x02\x01\x00\x00\x00" +
-		"\x23\xe5\x60\x84\xd1\x00\x00\x00\x00\x00\xde\x00" +
-		"\x86\x26\xde\x84\xa1\x00\xd2\x00\x04\x00\x00\x00" +
-		"\x9e\x3a\xbb\x87\x4b\x01\xcd\x01\x03\x00\x00\x00" +
-		"\x76\xd7\x27\x88\x5f\x00\x7d\x00\x02\x00\x00\x00" +
-		"\xbd\xd8\x37\x88\x2f\x02\x7f\x02\x01\x00\x00\x00" +
-		"\x75\x8d\xd6\x89\x49\x01\x00\x00\x00\x00\x8a\x01" +
-		"\x23\x0b\x09\x8a\x15\x02\x00\x00\x00\x00\xa3\x01" +
-		"\x28\xce\x2b\x8a\x17\x02\x67\x02\x01\x00\x00\x00" +
-		"\x2b\xcf\x4d\x8a\x1e\x00\x00\x00\x00\x00\x47\x01" +
-		"\xb2\x0e\x97\x8a\x5b\x01\x00\x00\x00\x00\xa8\x00" +
-		"\x17\x3e\x97\x8a\x64\x01\x00\x00\x00\x00\xa2\x01" +
-		"\x12\x48\x97\x8a\x68\x01\x00\x00\x00\x00\xa8\x00" +
-		"\xae\x41\xcc\x8a\x29\x02\x77\x02\x01\x00\x00\x00" +
-		"\xa3\x72\xdc\x8a\x85\x01\xef\x01\x01\x00\x00\x00" +
-		"\x36\x4a\xf0\x8a\x2e\x02\x7e\x02\x01\x00\x00\x00" +
-		"\xb4\x99\x26\x8b\x35\x02\x00\x00\x00\x00\xd0\x00" +
-		"\xc7\xaf\x7d\x8c\xdc\x00\x1f\x01\x02\x00\x00\x00" +
-		"\x44\x9e\xf9\x8c\x62\x01\xe4\x01\x01\x00\x00\x00" +
-		"\x6b\x98\x40\x8d\x3d\x00\x26\x00\x06\x00\x00\x00" +
-		"\xcf\x09\x79\x8d\x23\x00\x00\x00\x00\x00\x11\x01" +
-		"\x3b\xb2\x82\x8d\x25\x00\x00\x00\x00\x00\x47\x01" +
-		"\x65\x71\x99\x8d\x69\x01\x00\x00\x00\x00\x67\x00" +
-		"\x9d\x26\xb8\x8d\x6a\x01\xe9\x01\x01\x00\x00\x00" +
-		"\xad\xf8\xf3\x8d\x6c\x01\x00\x00\x00\x00\x61\x00" +
-		"\x59\x67\x21\x8e\x25\x02\x75\x02\x01\x00\x00\x00" +
-		"\xdc\x7b\x4a\x8e\xb7\x00\xf3\x00\x01\x00\x00\x00" +
-		"\x06\x19\x6a\x8e\x26\x00\x00\x00\x00\x00\x11\x01" +
-		"\xf0\xa1\x6c\x8e\x27\x00\x11\x00\x01\x00\x00\x00" +
-		"\xc7\x02\x6e\x8e\x28\x00\x00\x00\x00\x00\xff\x01" +
-		"\xbe\xb4\x4e\x8f\x2b\x02\x79\x02\x03\x00\x00\x00" +
-		"\x1f\xba\x7e\x8f\x75\x00\x00\x00\x00\x00\x67\x01" +
-		"\x31\xc1\xba\x90\x71\x01\x00\x00\x00\x00\xb6\x01" +
-		"\xfd\x30\x4a\x91\x2e\x00\x00\x00\x00\x00\x11\x01" +
-		"\xcc\xc8\x85\x91\x4e\x01\xd4\x01\x02\x00\x00\x00" +
-		"\xc1\xfb\x5c\x92\x6b\x00\x8c\x00\x01\x00\x00\x00" +
-		"\xa6\xa4\x8a\x92\xff\x00\x5b\x01\x02\x00\x00\x00" +
-		"\x26\x76\xf4\x92\xe2\x00\x34\x01\x03\x00\x00\x00" +
-		"\x81\x6c\x25\x93\x51\x00\x6a\x00\x01\x00\x00\x00" +
-		"\x57\x1d\x71\x93\x0b\x02\x00\x00\x00\x00\xf1\x01" +
-		"\x62\xbc\xd7\x93\x54\x00\x6e\x00\x01\x00\x00\x00" +
-		"\x8e\x1c\xed\x93\x2e\x01\xa2\x01\x03\x00\x00\x00" +
-		"\xcc\x7a\xac\x94\x83\x00\xac\x00\x03\x00\x00\x00" +
-		"\xbe\x31\x33\x95\x59\x00\x76\x00\x02\x00\x00\x00" +
-		"\xdf\x61\x39\x95\x5d\x00\x00\x00\x00\x00\xbd\x01" +
-		"\xdd\xf8\x81\x96\x74\x00\x99\x00\x01\x00\x00\x00" +
-		"\xd9\xa4\x85\x96\x1b\x01\x83\x01\x05\x00\x00\x00" +
-		"\xd8\xe4\x8c\x96\x78\x00\x00\x00\x00\x00\xde\x00" +
-		"\xeb\x52\x9a\x96\x65\x00\x84\x00\x03\x00\x00\x00" +
-		"\x12\x8d\x8d\x97\x68\x00\x88\x00\x02\x00\x00\x00" +
-		"\x51\x86\xcf\x97\x49\x00\x00\x00\x00\x00\xde\x00" +
-		"\x2a\x0b\xd1\x97\x6a\x00\x8b\x00\x01\x00\x00\x00" +
-		"\xfb\x15\xd8\x97\x4d\x00\x62\x00\x04\x00\x00\x00" +
-		"\x0b\x58\xda\x97\x50\x00\x69\x00\x01\x00\x00\x00" +
-		"\xd8\xc8\xdf\x97\x55\x00\x6f\x00\x01\x00\x00\x00" +
-		"\x4b\x76\xf6\x97\xac\x01\x0c\x02\x01\x00\x00\x00" +
-		"\xd7\x49\xfe\x97\x37\x00\x1d\x00\x01\x00\x00\x00" +
-		"\x27\x8f\xfe\x97\x4c\x00\x00\x00\x00\x00\x63\x01" +
-		"\xc9\x68\x04\x98\x93\x00\xc3\x00\x01\x00\x00\x00" +
-		"\x15\x9b\x05\x98\xac\x00\xdf\x00\x01\x00\x00\x00" +
-		"\xa9\xb5\x05\x98\xb1\x00\xea\x00\x02\x00\x00\x00" +
-		"\x1c\x68\x69\x98\xfc\x01\x5a\x02\x01\x00\x00\x00" +
-		"\xbd\xdb\x73\x98\x8c\x00\x00\x00\x00\x00\xce\x00" +
-		"\xe2\x4c\x10\x99\xcb\x00\x11\x01\x01\x00\x00\x00" +
-		"\x68\xdd\x21\x99\xd4\x00\x16\x01\x01\x00\x00\x00" +
-		"\xb0\xa3\x81\x99\x33\x02\x81\x02\x01\x00\x00\x00" +
-		"\x6f\xce\x96\x9a\x19\x01\x82\x01\x01\x00\x00\x00" +
-		"\x96\xb4\x4c\x9b\x73\x01\x00\x00\x00\x00\xad\x01" +
-		"\x84\xb3\x52\x9b\xae\x00\xe5\x00\x02\x00\x00\x00" +
-		"\x10\x8a\xd5\x9c\xbd\x00\x00\x00\x00\x00\x3c\x01" +
-		"\x7c\x19\xe0\x9c\xb5\x01\x16\x02\x01\x00\x00\x00" +
-		"\xed\xfb\xef\x9c\xf5\x00\x4d\x01\x01\x00\x00\x00" +
-		"\x87\x84\x07\x9d\xf6\x00\x00\x00\x00\x00\x42\x00" +
-		"\x13\xda\x13\x9d\x89\x01\x00\x00\x00\x00\x01\x02" +
-		"\x14\xda\x13\x9d\x8a\x01\xf1\x01\x01\x00\x00\x00" +
-		"\x15\xda\x13\x9d\x8e\x01\xf5\x01\x01\x00\x00\x00" +
-		"\x16\xda\x13\x9d\x8f\x01\xf6\x01\x01\x00\x00\x00" +
-		"\x17\xda\x13\x9d\x90\x01\xf7\x01\x01\x00\x00\x00" +
-		"\x18\xda\x13\x9d\x91\x01\xf8\x01\x01\x00\x00\x00" +
-		"\x19\xda\x13\x9d\x92\x01\xf9\x01\x01\x00\x00\x00" +
-		"\x1a\xda\x13\x9d\x93\x01\xfa\x01\x01\x00\x00\x00" +
-		"\x1b\xda\x13\x9d\x94\x01\xfb\x01\x01\x00\x00\x00" +
-		"\x1c\xda\x13\x9d\x95\x01\xfc\x01\x01\x00\x00\x00" +
-		"\x55\xda\x13\x9d\x96\x01\x00\x00\x00\x00\x01\x02" +
-		"\x56\xda\x13\x9d\x97\x01\xfd\x01\x01\x00\x00\x00" +
-		"\x57\xda\x13\x9d\x9d\x01\x03\x02\x01\x00\x00\x00" +
-		"\x58\xda\x13\x9d\x9e\x01\x04\x02\x01\x00\x00\x00" +
-		"\x59\xda\x13\x9d\x9f\x01\x05\x02\x01\x00\x00\x00" +
-		"\x5a\xda\x13\x9d\xa0\x01\x06\x02\x01\x00\x00\x00" +
-		"\x5b\xda\x13\x9d\xa1\x01\x07\x02\x01\x00\x00\x00" +
-		"\x5c\xda\x13\x9d\xa2\x01\x08\x02\x01\x00\x00\x00" +
-		"\x5d\xda\x13\x9d\xa3\x01\x09\x02\x01\x00\x00\x00" +
-		"\x5e\xda\x13\x9d\xa4\x01\x0a\x02\x01\x00\x00\x00" +
-		"\x1a\x8b\x2a\x9d\xab\x00\x00\x00\x00\x00\x14\x01" +
-		"\x64\x27\x35\x9d\xc2\x00\x06\x01\x03\x00\x00\x00" +
-		"\xaf\x3a\x6e\x9d\xf8\x00\x4f\x01\x01\x00\x00\x00" +
-		"\x18\xb1\x6f\x9d\x16\x00\x07\x00\x02\x00\x00\x00" +
-		"\x14\x28\xa4\x9d\xaf\x00\xe7\x00\x01\x00\x00\x00" +
-		"\x97\x49\xba\x9d\xf9\x00\x50\x01\x04\x00\x00\x00" +
-		"\x3d\xbd\xfe\x9d\x34\x00\x18\x00\x03\x00\x00\x00" +
-		"\xe6\xd6\x09\x9e\xbe\x01\x1b\x02\x09\x00\x00\x00" +
-		"\x89\x52\xbf\x9e\xf5\x01\x00\x00\x00\x00\xa7\x01" +
-		"\x98\x98\xe0\x9f\x2d\x00\x14\x00\x01\x00\x00\x00" +
-		"\x0b\xbd\xf7\x9f\x7c\x00\xa1\x00\x01\x00\x00\x00" +
-		"\xb6\x47\x4c\xa0\x13\x00\x00\x00\x00\x00\xa7\x01" +
-		"\x75\x56\xe1\xa0\x7e\x00\xa3\x00\x01\x00\x00\x00" +
-		"\xcb\x35\xa4\xa2\x29\x01\x98\x01\x04\x00\x00\x00" +
-		"\xb3\x9e\xc1\xa2\xc1\x01\x00\x00\x00\x00\x97\x01" +
-		"\x47\xe3\xc1\xa2\xc3\x01\x2a\x02\x01\x00\x00\x00" +
-		"\xa1\xfb\xc3\xa2\xcf\x01\x00\x00\x00\x00\x9e\x00" +
-		"\x87\x75\xc5\xa2\xd3\x01\x36\x02\x03\x00\x00\x00" +
-		"\xd7\x8f\xc5\xa2\xd4\x01\x39\x02\x01\x00\x00\x00" +
-		"\xfc\x89\x21\xa4\x89\x00\xb9\x00\x01\x00\x00\x00" +
-		"\xef\x7e\x6b\xa4\x41\x00\x33\x00\x06\x00\x00\x00" +
-		"\xfa\x41\x1f\xa6\xed\x00\x3e\x01\x02\x00\x00\x00" +
-		"\xd1\xeb\x3c\xa6\xef\x00\x42\x01\x03\x00\x00\x00" +
-		"\x4e\xcc\x7d\xa6\xf1\x00\x47\x01\x02\x00\x00\x00" +
-		"\x68\xe0\xb6\xa6\xf4\x00\x4a\x01\x03\x00\x00\x00" +
-		"\x2e\x3e\xf1\xa6\x8d\x00\xbe\x00\x01\x00\x00\x00" +
-		"\x7d\xb6\x48\xa7\x66\x01\xe7\x01\x01\x00\x00\x00" +
-		"\x68\x7f\xba\xa7\x32\x02\x80\x02\x01\x00\x00\x00" +
-		"\xc7\x12\xec\xa7\x1a\x01\x00\x00\x00\x00\x6d\x01" +
-		"\xfd\xd5\xf3\xa7\xfa\x00\x54\x01\x01\x00\x00\x00" +
-		"\x8d\x8c\x59\xa8\x41\x02\x00\x00\x00\x00\xee\x01" +
-		"\x7e\xb5\x7a\xa8\x2c\x00\x13\x00\x01\x00\x00\x00" +
-		"\xf7\x95\xe5\xa8\xfc\x00\x00\x00\x00\x00\x26\x01" +
-		"\xab\xf6\x50\xa9\x4e\x02\x00\x00\x00\x00\xc2\x01" +
-		"\x52\xf7\x52\xa9\x1c\x02\x6b\x02\x01\x00\x00\x00" +
-		"\x5c\x2d\xf7\xa9\x42\x00\x39\x00\x06\x00\x00\x00" +
-		"\x5d\x12\x29\xaa\x92\x00\xc2\x00\x01\x00\x00\x00" +
-		"\xfb\x16\x51\xab\xad\x00\xe0\x00\x05\x00\x00\x00" +
-		"\x69\x75\xcb\xab\x61\x00\x00\x00\x00\x00\xbd\x01" +
-		"\xd4\xc6\x80\xac\x97\x00\xc5\x00\x05\x00\x00\x00" +
-		"\x8b\xbf\x86\xac\x99\x00\xcb\x00\x01\x00\x00\x00" +
-		"\xd8\x72\xd1\xac\xa0\x00\xd1\x00\x01\x00\x00\x00" +
-		"\x18\xaa\x58\xad\xb7\x01\x17\x02\x01\x00\x00\x00" +
-		"\x11\xf0\xde\xae\xa9\x00\x00\x00\x00\x00\x14\x01" +
-		"\x33\x13\xe3\xaf\x39\x00\x00\x00\x00\x00\xde\x00" +
-		"\xd6\xf5\x66\xb0\xe1\x01\x00\x00\x00\x00\x97\x01" +
-		"\xa3\xad\x6e\xb0\x5e\x01\xe1\x01\x02\x00\x00\x00" +
-		"\x53\x85\x72\xb0\xfb\x00\x55\x01\x02\x00\x00\x00" +
-		"\xf8\x2a\x98\xb0\x81\x01\x00\x00\x00\x00\xed\x01" +
-		"\x36\x7b\x5d\xb1\x21\x02\x00\x00\x00\x00\x28\x02" +
-		"\x6f\xd5\x64\xb1\x33\x00\x00\x00\x00\x00\xd4\x01" +
-		"\x78\xd7\xb3\xb1\xd0\x00\x00\x00\x00\x00\xde\x00" +
-		"\xc4\xe4\x19\xb3\xb5\x00\xf1\x00\x01\x00\x00\x00" +
-		"\x54\x38\x86\xb3\xb3\x00\xf0\x00\x01\x00\x00\x00" +
-		"\x91\xe9\x96\xb3\x7c\x01\x00\x00\x00\x00\x07\x00" +
-		"\x86\x11\xaf\xb5\x0b\x01\x00\x00\x00\x00\x3c\x02" +
-		"\x50\xf2\xee\xb5\x0c\x01\x72\x01\x02\x00\x00\x00" +
-		"\x1e\x54\x49\xb6\x76\x00\x9a\x00\x02\x00\x00\x00" +
-		"\xf2\xe8\xf7\xb7\x94\x00\xc4\x00\x01\x00\x00\x00" +
-		"\x94\x04\x73\xb8\xbf\x00\xfb\x00\x05\x00\x00\x00" +
-		"\x1c\x37\x75\xb8\xc0\x00\x00\x01\x01\x00\x00\x00" +
-		"\x8d\x59\x87\xba\xf2\x00\x49\x01\x01\x00\x00\x00" +
-		"\xe5\xc9\x88\xba\x01\x02\x00\x00\x00\x00\xc1\x00" +
-		"\x8d\x13\x40\xbb\x3c\x02\x00\x00\x00\x00\xa3\x01" +
-		"\x83\x71\x5b\xbc\x7d\x00\xa2\x00\x01\x00\x00\x00" +
-		"\xb7\xcd\x98\xbd\xc5\x01\x00\x00\x00\x00\x17\x02" +
-		"\x27\x2f\x1b\xbe\x20\x01\x00\x00\x00\x00\xe9\x01" +
-		"\x72\x44\x70\xbe\xdf\x01\x00\x00\x00\x00\xb2\x01" +
-		"\x7d\x33\x8e\xbf\x3a\x01\xb4\x01\x03\x00\x00\x00" +
-		"\x08\xc3\xcc\xbf\x3f\x00\x2c\x00\x03\x00\x00\x00" +
-		"\x4c\xfd\xd6\xbf\xd3\x00\x15\x01\x01\x00\x00\x00" +
-		"\x2f\xa3\x67\xc0\x3a\x00\x00\x00\x00\x00\xde\x00" +
-		"\xdf\x2c\x6d\xc0\xb6\x01\x00\x00\x00\x00\x23\x01" +
-		"\x44\xc9\x56\xc1\x25\x01\x93\x01\x01\x00\x00\x00" +
-		"\x31\x0e\xd3\xc1\x1c\x00\x00\x00\x00\x00\xa7\x01" +
-		"\x1c\x9a\xdb\xc1\x90\x00\x00\x00\x00\x00\xd7\x00" +
-		"\xa3\x05\x13\xc2\x01\x00\x00\x00\x01\x00\x00\x00" +
-		"\xb5\x3a\x18\xc2\xda\x00\x00\x00\x00\x00\xde\x00" +
-		"\x5e\x94\x24\xc2\x2c\x01\x00\x00\x00\x00\x8a\x01" +
-		"\x5f\x56\xc3\xc2\x26\x01\x00\x00\x00\x00\x3c\x00" +
-		"\xe7\xbc\xc3\xc2\xbc\x00\xf6\x00\x02\x00\x00\x00" +
-		"\x93\x45\x27\xc3\x3e\x02\x00\x00\x00\x00\xc3\x00" +
-		"\x24\x0e\xef\xc4\x0e\x02\x00\x00\x00\x00\x5e\x01" +
-		"\x33\x1b\x9f\xc5\x0f\x00\x04\x00\x02\x00\x00\x00" +
-		"\x65\xf5\xb0\xc5\x43\x00\x3f\x00\x06\x00\x00\x00" +
-		"\x2f\x3c\x83\xc6\x13\x01\x7b\x01\x01\x00\x00\x00" +
-		"\x59\x34\x09\xc7\xc1\x00\x01\x01\x05\x00\x00\x00" +
-		"\xd0\x1d\x12\xc7\x01\x01\x00\x00\x00\x00\x3c\x02" +
-		"\x21\x42\x4d\xc8\xf1\x01\x00\x00\x00\x00\x01\x02" +
-		"\x84\x49\xde\xc8\xbe\x00\xf8\x00\x03\x00\x00\x00" +
-		"\x23\x3b\x91\xca\x3d\x02\x00\x00\x00\x00\x07\x01" +
-		"\x25\xcb\xbd\xca\x47\x02\x00\x00\x00\x00\xa7\x00" +
-		"\xca\x5d\x48\xcb\xe3\x01\x00\x00\x00\x00\x9a\x01" +
-		"\x04\x3b\xbc\xcb\x4f\x00\x68\x00\x01\x00\x00\x00" +
-		"\x54\xbf\xe5\xcc\xb9\x00\x00\x00\x00\x00\x89\x01" +
-		"\x31\x8a\x1f\xcd\x79\x00\x00\x00\x00\x00\xde\x00" +
-		"\x90\xb2\x96\xcd\xe7\x00\x00\x00\x00\x00\x62\x00" +
-		"\x93\x3d\x97\xcd\x33\x01\xab\x01\x01\x00\x00\x00" +
-		"\x4a\x4c\xcb\xce\x6c\x00\x00\x00\x00\x00\xde\x00" +
-		"\x4b\x72\xf7\xce\xd6\x01\x00\x00\x00\x00\x9a\x01" +
-		"\x13\xf7\x52\xcf\x34\x01\x00\x00\x00\x00\x58\x00" +
-		"\xe7\xf7\x54\xcf\x16\x02\x66\x02\x01\x00\x00\x00" +
-		"\xfa\x81\x85\xcf\x39\x01\xb3\x01\x01\x00\x00\x00" +
-		"\x6a\x6c\x37\xd0\x1d\x01\x89\x01\x03\x00\x00\x00" +
-		"\xe5\xd1\x7d\xd0\xaf\x01\x00\x00\x00\x00\xc5\x00" +
-		"\x43\x3f\xd9\xd0\xa2\x00\xd6\x00\x03\x00\x00\x00" +
-		"\x3e\x52\xff\xd0\x51\x02\x00\x00\x00\x00\x03\x02" +
-		"\xae\x44\xa8\xd1\x3b\x01\xb7\x01\x01\x00\x00\x00" +
-		"\x54\x22\xf0\xd1\x3e\x01\xbc\x01\x01\x00\x00\x00" +
-		"\x1b\xe3\x26\xd2\x40\x01\x00\x00\x00\x00\x47\x00" +
-		"\x59\x78\x3e\xd2\xeb\x00\x00\x00\x00\x00\x9e\x00" +
-		"\x0a\xed\x26\xd3\x6b\x01\x00\x00\x00\x00\xad\x00" +
-		"\x28\x2f\x3b\xd3\xc0\x01\x24\x02\x03\x00\x00\x00" +
-		"\x0d\x4c\x3b\xd4\x3c\x00\x23\x00\x03\x00\x00\x00" +
-		"\x69\xe4\x55\xd4\x42\x02\x00\x00\x00\x00\x8f\x01" +
-		"\x5c\x39\x1b\xd5\x1b\x00\x0a\x00\x03\x00\x00\x00" +
-		"\x07\x3a\x1c\xd5\x22\x00\x00\x00\x00\x00\xd4\x01" +
-		"\x35\x97\x37\xd5\x47\x01\xc5\x01\x01\x00\x00\x00" +
-		"\xff\x4a\xa4\xd5\x57\x00\x70\x00\x05\x00\x00\x00" +
-		"\xa0\x57\xd1\xd5\x1a\x00\x09\x00\x01\x00\x00\x00" +
-		"\x59\x8d\xb2\xd8\xb8\x00\x00\x00\x00\x00\xde\x00" +
-		"\x58\xde\xe2\xd8\x88\x01\xf0\x01\x01\x00\x00\x00" +
-		"\x9c\x18\xe3\xd8\xa7\x01\x00\x00\x00\x00\x03\x02" +
-		"\xbc\x1a\xe3\xd8\xa8\x01\x0b\x02\x01\x00\x00\x00" +
-		"\xe9\x31\xee\xd8\xdd\x00\x21\x01\x01\x00\x00\x00" +
-		"\xc1\x15\x45\xd9\x04\x00\x01\x00\x01\x00\x00\x00" +
-		"\xdc\xe2\x9e\xd9\x10\x02\x5f\x02\x01\x00\x00\x00" +
-		"\xed\x3b\x49\xda\xb2\x01\x00\x00\x00\x00\xd8\x00" +
-		"\x24\xb7\x9e\xda\xd9\x01\x41\x02\x03\x00\x00\x00" +
-		"\x65\x2d\x40\xdb\x1b\x02\x00\x00\x00\x00\x33\x02" +
-		"\x59\x02\x1b\xdd\x9c\x00\xcd\x00\x02\x00\x00\x00" +
-		"\x0e\x2f\x51\xdd\x22\x02\x71\x02\x01\x00\x00\x00" +
-		"\xbe\xa8\x54\xdd\x4c\x01\xd0\x01\x01\x00\x00\x00" +
-		"\xce\xb8\x63\xdd\xe5\x01\x4e\x02\x03\x00\x00\x00" +
-		"\x5d\x8a\x85\xdd\x70\x01\x00\x00\x00\x00\x42\x01" +
-		"\xa8\x39\x51\xde\x24\x02\x73\x02\x02\x00\x00\x00" +
-		"\x39\xc4\x71\xde\x8f\x00\xc0\x00\x02\x00\x00\x00" +
-		"\x37\x73\xe0\xde\xb3\x01\x14\x02\x01\x00\x00\x00" +
-		"\x55\x8e\xf9\xde\xd2\x00\x14\x01\x01\x00\x00\x00" +
-		"\x65\x86\x44\xdf\xc3\x00\x00\x00\x00\x00\xcd\x01" +
-		"\x3f\x21\xbf\xdf\x10\x01\x77\x01\x03\x00\x00\x00" +
-		"\xd0\x83\x37\xe0\xe0\x01\x49\x02\x04\x00\x00\x00" +
-		"\xe2\x29\x50\xe0\x65\x01\xe6\x01\x01\x00\x00\x00" +
-		"\x3a\x2b\x53\xe0\xb0\x01\x12\x02\x01\x00\x00\x00" +
-		"\x3b\x81\x8d\xe0\x0b\x00\x00\x00\x00\x00\x47\x01" +
-		"\x83\xc5\xe9\xe0\x9f\x00\xd0\x00\x01\x00\x00\x00" +
-		"\xbc\x30\xed\xe0\xb8\x01\x00\x00\x00\x00\x9e\x00" +
-		"\x71\xa9\x10\xe1\x54\x01\xda\x01\x01\x00\x00\x00" +
-		"\x71\x53\xf9\xe1\x26\x02\x00\x00\x00\x00\x33\x02" +
-		"\x83\x25\x02\xe2\xdf\x00\x23\x01\x0c\x00\x00\x00" +
-		"\x45\x4b\x14\xe2\xe0\x00\x2f\x01\x05\x00\x00\x00" +
-		"\xe1\x56\x22\xe2\xad\x01\x0d\x02\x04\x00\x00\x00" +
-		"\x8e\xd3\x86\xe2\x28\x02\x00\x00\x00\x00\xd0\x00" +
-		"\xe1\xc7\x30\xe3\xe8\x00\x00\x00\x00\x00\xe9\x01" +
-		"\x5b\x08\x3f\xe3\xe9\x00\x3c\x01\x02\x00\x00\x00" +
-		"\xa4\x5d\x31\xe4\xd8\x01\x3d\x02\x04\x00\x00\x00" +
-		"\x88\xb7\x51\xe5\x2c\x02\x7c\x02\x01\x00\x00\x00" +
-		"\xb5\x35\x6a\xe5\xf4\x01\x00\x00\x00\x00\xd4\x01" +
-		"\xca\x0b\x88\xe6\xfe\x01\x00\x00\x00\x00\xa7\x01" +
-		"\x48\x66\xd7\xe6\x6e\x01\x00\x00\x00\x00\x7c\x00" +
-		"\xf9\x0a\xe7\xe6\x20\x02\x70\x02\x01\x00\x00\x00" +
-		"\xc5\x56\xc4\xe7\x91\x00\x00\x00\x00\x00\xde\x00" +
-		"\xeb\x99\x63\xe9\x47\x00\x56\x00\x05\x00\x00\x00" +
-		"\x86\x00\xf8\xe9\x31\x02\x00\x00\x00\x00\x38\x02" +
-		"\x7f\x76\xb9\xea\xe9\x01\x00\x00\x00\x00\x97\x01" +
-		"\x80\x45\xf8\xea\xbd\x01\x00\x00\x00\x00\xc5\x00" +
-		"\x9b\xc1\xac\xeb\x23\x01\x8e\x01\x04\x00\x00\x00" +
-		"\x3f\xe8\xfd\xeb\xb2\x00\xec\x00\x04\x00\x00\x00" +
-		"\x5f\xa3\xf7\xef\x34\x02\x00\x00\x00\x00\x5d\x00" +
-		"\x00\x7d\xe8\xf0\x77\x01\xec\x01\x01\x00\x00\x00" +
-		"\x46\x24\x4c\xf2\x36\x02\x82\x02\x01\x00\x00\x00" +
-		"\x63\x7e\x51\xf2\x37\x02\x83\x02\x01\x00\x00\x00" +
-		"\x75\x93\xaf\xf2\x08\x02\x5e\x02\x01\x00\x00\x00" +
-		"\x5e\x2d\x61\xf3\x7a\x01\x00\x00\x00\x00\x14\x01" +
-		"\x54\x42\x92\xf3\x3c\x01\xb8\x01\x01\x00\x00\x00" +
-		"\xbd\xc9\xa1\xf4\x35\x01\xac\x01\x04\x00\x00\x00" +
-		"\xf0\x25\xdd\xf4\x1e\x02\x6d\x02\x01\x00\x00\x00" +
-		"\x88\xa9\x3e\xf5\xa5\x01\x00\x00\x00\x00\x01\x02" +
-		"\x40\xc2\x49\xf5\xaa\x01\x00\x00\x00\x00\x03\x02" +
-		"\x04\xd2\x54\xf5\x67\x00\x87\x00\x01\x00\x00\x00" +
-		"\xf5\xa7\x95\xf8\x38\x01\xb2\x01\x01\x00\x00\x00" +
-		"\xfc\x25\xe3\xf8\xba\x01\x19\x02\x01\x00\x00\x00" +
-		"\x90\xfb\x37\xf9\x00\x01\x00\x00\x00\x00\x3c\x02" +
-		"\x18\xd9\x3e\xf9\x4f\x01\xd6\x01\x01\x00\x00\x00" +
-		"\x0f\xdb\x4d\xf9\x3b\x02\x00\x00\x00\x00\x33\x02" +
-		"\x1b\xe7\x62\xf9\xd5\x00\x00\x00\x00\x00\x14\x01" +
-		"\x83\x96\xb2\xf9\x6e\x00\x8e\x00\x03\x00\x00\x00" +
-		"\x80\x47\x21\xfa\xa6\x00\xdd\x00\x01\x00\x00\x00" +
-		"\xc9\x0b\x30\xfa\x44\x02\x00\x00\x00\x00\xbf\x00" +
-		"\x00\xe3\x70\xfa\xec\x01\x00\x00\x00\x00\xc5\x00" +
-		"\xef\xab\xf5\xfa\xc2\x01\x27\x02\x03\x00\x00\x00" +
-		"\xf3\x60\x15\xfb\xc9\x01\x2e\x02\x01\x00\x00\x00" +
-		"\x66\xcc\x19\xfb\xcb\x01\x2f\x02\x02\x00\x00\x00" +
-		"\xc5\x9e\x34\xfb\xb4\x01\x15\x02\x01\x00\x00\x00" +
-		"\x05\x42\x3d\xfb\x1d\x00\x0d\x00\x03\x00\x00\x00" +
-		"\xa3\xc2\x4b\xfb\xd0\x01\x34\x02\x01\x00\x00\x00" +
-		"\x6e\x4c\x54\xfb\x4d\x01\xd1\x01\x03\x00\x00\x00" +
-		"\x56\x86\x89\xfb\xdb\x01\x44\x02\x01\x00\x00\x00" +
-		"\x17\x82\x8a\xfb\x7b\x01\x00\x00\x00\x00\xee\x00" +
-		"\xae\x1b\xb8\xfb\xe2\x01\x00\x00\x00\x00\x23\x01" +
-		"\xc2\xf2\x23\xfc\x51\x01\xd8\x01\x01\x00\x00\x00" +
-		"\x0f\x15\xf7\xfc\x09\x02\x00\x00\x00\x00\xe7\x00" +
-		"\x6c\xa5\x18\xfd\xc4\x00\x00\x00\x00\x00\xe7\x00" +
-		"\xa6\xe7\xc3\xfe\x58\x00\x75\x00\x01\x00\x00\x00"
+const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
+		"\xad\x74\x59\x00\x0b\x02\x00\x00\x00\x00\x62\x00" +
+		"\xc4\x63\x47\x01\x1d\x01\x00\x00\x00\x00\xee\x01" +
+		"\xe4\x6d\xd9\x01\x20\x00\x00\x00\x00\x00\x11\x01" +
+		"\xde\x86\x1e\x02\xf7\x01\x00\x00\x00\x00\x0c\x02" +
+		"\xdb\xd5\x60\x02\x6e\x01\x00\x00\x00\x00\x31\x00" +
+		"\x16\xc5\x1e\x03\x52\x01\x00\x00\x00\x00\x1b\x02" +
+		"\x6e\x4e\xb1\x04\xcc\x00\xa2\x01\x02\x00\x00\x00" +
+		"\x7b\x50\xc0\x04\xcd\x00\x00\x00\x00\x00\xde\x00" +
+		"\x9a\x21\xd7\x04\x2f\x00\x00\x00\x00\x00\xd4\x01" +
+		"\xba\xb3\xd8\x04\xce\x00\x00\x00\x00\x00\xde\x00" +
+		"\x8e\x95\xf9\x04\xaf\x00\x6a\x01\x02\x00\x00\x00" +
+		"\x50\xab\x06\x05\x11\x01\x42\x02\x01\x00\x00\x00" +
+		"\x47\x2a\x23\x05\x0c\x00\x00\x00\x00\x00\x47\x01" +
+		"\x9e\x18\x32\x05\x9c\x00\x40\x01\x01\x00\x00\x00" +
+		"\x79\x6a\x4e\x05\xcb\x00\x00\x00\x00\x00\xde\x00" +
+		"\x65\x1e\xae\x05\x02\x00\x00\x00\x00\x00\xa7\x01" +
+		"\xba\x2b\x53\x06\x18\x02\xd9\x03\x02\x00\x00\x00" +
+		"\xc4\x21\x5d\x06\x7e\x00\xf5\x00\x02\x00\x00\x00" +
+		"\x41\x36\xee\x08\x09\x02\x00\x00\x00\x00\x0e\x00" +
+		"\x42\xe4\x03\x09\x3c\x01\xb1\x02\x08\x00\x00\x00" +
+		"\x12\x36\x26\x09\x83\x00\x05\x01\x02\x00\x00\x00" +
+		"\x2f\xde\xc8\x09\x49\x02\x00\x00\x00\x00\x28\x02" +
+		"\xfe\x7e\x7b\x0a\x52\x00\x9f\x00\x04\x00\x00\x00" +
+		"\x1d\xe9\xf0\x0a\x01\x01\x19\x02\x04\x00\x00\x00" +
+		"\x21\xd9\x87\x0b\x75\x01\x09\x03\x01\x00\x00\x00" +
+		"\xa3\xe1\x87\x0b\x82\x01\x0b\x03\x01\x00\x00\x00" +
+		"\x71\xe3\x87\x0b\x83\x01\x0c\x03\x01\x00\x00\x00" +
+		"\x2d\xeb\x87\x0b\xec\x01\x00\x00\x00\x00\x01\x02" +
+		"\x34\xf0\x87\x0b\xf1\x01\xc7\x03\x01\x00\x00\x00" +
+		"\xab\x03\x88\x0b\x05\x02\xcc\x03\x01\x00\x00\x00" +
+		"\x79\x05\x88\x0b\x06\x02\xcd\x03\x01\x00\x00\x00" +
+		"\x0a\x12\x88\x0b\x0e\x02\x00\x00\x00\x00\x3c\x02" +
+		"\x29\x1a\x88\x0b\x3e\x02\x00\x00\x00\x00\xf3\x01" +
+		"\x31\x1a\x88\x0b\x3f\x02\x00\x00\x00\x00\x43\x00" +
+		"\x71\x25\x88\x0b\x42\x02\x00\x00\x00\x00\x03\x02" +
+		"\x91\x27\x88\x0b\x4f\x02\x00\x00\x00\x00\x03\x02" +
+		"\x35\x2e\x88\x0b\x52\x02\x02\x04\x01\x00\x00\x00" +
+		"\xf7\x59\x82\x0c\x79\x00\xed\x00\x01\x00\x00\x00" +
+		"\x96\x64\xaa\x0c\xc9\x01\x00\x00\x00\x00\xe9\x00" +
+		"\x85\x03\xe9\x0c\x2a\x00\x1b\x00\x01\x00\x00\x00" +
+		"\x8e\x27\x1a\x0d\x85\x01\x00\x00\x00\x00\x0e\x01" +
+		"\x28\x70\x2f\x0d\xed\x01\x00\x00\x00\x00\x01\x02" +
+		"\x6a\x70\x2f\x0d\xee\x01\x00\x00\x00\x00\x01\x02" +
+		"\x8f\x2f\x71\x0d\x02\x02\x00\x00\x00\x00\x44\x00" +
+		"\x16\x8b\x99\x0d\x04\x02\x00\x00\x00\x00\x8e\x01" +
+		"\xbb\xaf\x57\x0e\x03\x02\x00\x00\x00\x00\x44\x01" +
+		"\x03\xd2\x86\x0e\xe5\x00\xd3\x01\x02\x00\x00\x00" +
+		"\x6f\xc7\x76\x0f\xdd\x00\xb8\x01\x02\x00\x00\x00" +
+		"\xa3\x59\xe5\x0f\x66\x01\x06\x03\x01\x00\x00\x00" +
+		"\xc9\xbf\x63\x10\xc7\x00\x9b\x01\x01\x00\x00\x00" +
+		"\xc2\x95\x93\x10\xaa\x01\x00\x00\x00\x00\x11\x02" +
+		"\x54\xa0\xac\x10\x84\x00\x07\x01\x03\x00\x00\x00" +
+		"\x2a\x8d\x3f\x12\xc8\x00\x9c\x01\x03\x00\x00\x00" +
+		"\x04\x51\xae\x13\x35\x01\x9f\x02\x05\x00\x00\x00" +
+		"\xbc\x21\x8d\x14\xed\x00\xdb\x01\x02\x00\x00\x00" +
+		"\x0e\x71\x8f\x14\xef\x00\xe3\x01\x07\x00\x00\x00" +
+		"\x3b\x86\xae\x14\xfd\x00\x0f\x02\x06\x00\x00\x00" +
+		"\x5e\xac\xbc\x14\x02\x01\x00\x00\x00\x00\x3b\x00" +
+		"\x8b\x7b\xc0\x14\x04\x01\x1f\x02\x02\x00\x00\x00" +
+		"\x77\x9f\xc7\x14\x06\x01\x24\x02\x01\x00\x00\x00" +
+		"\x9a\x32\xf6\x14\x4d\x00\x99\x00\x02\x00\x00\x00" +
+		"\x01\x56\x3b\x15\x14\x01\x45\x02\x01\x00\x00\x00" +
+		"\x09\x4f\x45\x15\xf2\x00\x00\x00\x00\x00\xc5\x01" +
+		"\xb3\x88\x5f\x15\x20\x01\x00\x00\x00\x00\x41\x00" +
+		"\xb9\x88\x5f\x15\x21\x01\x5c\x02\x01\x00\x00\x00" +
+		"\x0b\x33\xa8\x15\x2e\x01\x85\x02\x01\x00\x00\x00" +
+		"\xda\x82\xce\x15\x36\x01\xa4\x02\x01\x00\x00\x00" +
+		"\xa8\x06\xe6\x15\x41\x01\xbe\x02\x01\x00\x00\x00" +
+		"\x60\x0e\xe6\x15\x42\x01\xbf\x02\x07\x00\x00\x00" +
+		"\x2c\x7c\x6d\x16\x3e\x01\x00\x00\x00\x00\xc1\x00" +
+		"\xd1\x80\x03\x17\x40\x01\xbc\x02\x02\x00\x00\x00" +
+		"\x58\x49\xe6\x17\x7a\x00\xee\x00\x01\x00\x00\x00" +
+		"\x35\x0a\x9b\x19\xa7\x00\x00\x00\x00\x00\xde\x00" +
+		"\x4b\x02\x21\x1a\x8d\x00\x1e\x01\x03\x00\x00\x00" +
+		"\x57\xc0\x76\x1a\x2c\x01\x80\x02\x02\x00\x00\x00" +
+		"\x9c\x49\x1a\x1c\xd0\x01\x00\x00\x00\x00\x17\x02" +
+		"\x74\x4f\x2b\x1c\x56\x01\x00\x00\x00\x00\xd4\x01" +
+		"\x54\x76\x2a\x1e\xa9\x00\x5c\x01\x01\x00\x00\x00" +
+		"\xce\xc6\x8b\x1f\xc6\x01\x00\x00\x00\x00\x11\x02" +
+		"\x4a\x08\xa7\x1f\xeb\x00\x00\x00\x00\x00\xe9\x01" +
+		"\xb5\x88\xa7\x1f\xf6\x00\xfd\x01\x05\x00\x00\x00" +
+		"\x94\xc3\xa8\x1f\x05\x01\x21\x02\x03\x00\x00\x00" +
+		"\x75\x48\xaa\x1f\x09\x01\x2c\x02\x09\x00\x00\x00" +
+		"\xe3\x0f\xab\x1f\x0e\x01\x3b\x02\x02\x00\x00\x00" +
+		"\xac\xdd\xae\x1f\x29\x01\x73\x02\x05\x00\x00\x00" +
+		"\xa0\xf0\xae\x1f\x2a\x01\x78\x02\x08\x00\x00\x00" +
+		"\xa8\x1e\x3a\x20\xa6\x00\x00\x00\x00\x00\x14\x01" +
+		"\x27\xd1\xf2\x20\x0c\x01\x38\x02\x02\x00\x00\x00" +
+		"\x63\xb0\xfb\x20\x03\x01\x1d\x02\x02\x00\x00\x00" +
+		"\x77\x88\x75\x22\x3d\x00\x00\x00\x00\x00\x3e\x01" +
+		"\x5e\x9b\x35\x23\x10\x02\xd0\x03\x02\x00\x00\x00" +
+		"\xa5\x3b\x38\x23\x19\x02\xdb\x03\x01\x00\x00\x00" +
+		"\xed\xf9\x38\x23\x1e\x02\xe0\x03\x02\x00\x00\x00" +
+		"\x14\xa0\x3c\x23\x29\x02\xf0\x03\x01\x00\x00\x00" +
+		"\xa9\x10\x40\x23\x38\x02\x00\x00\x00\x00\xa3\x01" +
+		"\x2b\x6c\x41\x23\x39\x02\x00\x00\x00\x00\x33\x02" +
+		"\xa3\xe8\x28\x24\x5b\x01\xfa\x02\x01\x00\x00\x00" +
+		"\x86\x2f\x06\x25\x11\x02\xd2\x03\x01\x00\x00\x00" +
+		"\x36\xa8\x2c\x26\x37\x02\x00\x04\x02\x00\x00\x00" +
+		"\xeb\x1d\x9a\x26\xa4\x00\x55\x01\x03\x00\x00\x00" +
+		"\x8c\xa9\xda\x26\xa5\x01\x00\x00\x00\x00\x01\x02" +
+		"\x24\x6a\x8b\x27\x5f\x01\x00\x00\x00\x00\x7c\x00" +
+		"\xff\xbd\x76\x28\x60\x01\xfe\x02\x01\x00\x00\x00" +
+		"\x96\x9f\x92\x28\x2f\x02\x00\x00\x00\x00\x38\x02" +
+		"\x8b\x4f\x9b\x28\x08\x01\x28\x02\x04\x00\x00\x00" +
+		"\x12\xb2\xa0\x28\x85\x00\x0a\x01\x03\x00\x00\x00" +
+		"\xa4\x69\xa6\x28\x7f\x00\xf7\x00\x02\x00\x00\x00" +
+		"\xa8\x34\xde\x29\x49\x01\xd0\x02\x05\x00\x00\x00" +
+		"\x58\xae\x09\x2a\x5e\x01\x00\x00\x00\x00\xa8\x00" +
+		"\xee\x18\xd0\x2a\x72\x00\xdf\x00\x06\x00\x00\x00" +
+		"\x1f\x6b\x6f\x2c\xd8\x00\xaf\x01\x02\x00\x00\x00" +
+		"\x93\x91\x99\x2d\xb3\x00\x00\x00\x00\x00\x71\x00" +
+		"\xbf\x10\xe3\x2d\x89\x00\x13\x01\x03\x00\x00\x00" +
+		"\xab\xfd\x44\x2e\x01\x02\x00\x00\x00\x00\xb6\x00" +
+		"\x99\xe9\x0d\x2f\x13\x02\xd5\x03\x01\x00\x00\x00" +
+		"\xa9\xb9\x8c\x2f\xa8\x01\x00\x00\x00\x00\x03\x02" +
+		"\x72\xee\xee\x2f\x81\x00\xfc\x00\x05\x00\x00\x00" +
+		"\x96\xe0\xc4\x30\xdc\x01\xa2\x03\x06\x00\x00\x00" +
+		"\xd4\x01\xea\x30\x13\x00\x00\x00\x00\x00\xa7\x01" +
+		"\x4e\xcc\xf0\x30\x44\x01\xc6\x02\x02\x00\x00\x00" +
+		"\xa7\x0a\x7c\x31\x17\x00\x00\x00\x00\x00\x47\x01" +
+		"\xde\xcd\x0d\x32\x47\x00\x8d\x00\x06\x00\x00\x00" +
+		"\xc3\x44\x8a\x32\xfc\x00\x00\x00\x00\x00\xfb\x00" +
+		"\x1a\x95\xbf\x32\x62\x01\x00\x03\x01\x00\x00\x00" +
+		"\x3c\x5c\xfc\x32\x07\x01\x25\x02\x03\x00\x00\x00" +
+		"\x74\x31\x01\x33\x57\x01\xf5\x02\x01\x00\x00\x00" +
+		"\x01\xaf\xb5\x34\xb5\x00\x79\x01\x01\x00\x00\x00" +
+		"\x94\x78\x2e\x38\x10\x01\x00\x00\x00\x00\x8f\x01" +
+		"\xd9\xb4\x4d\x39\x45\x01\x00\x00\x00\x00\x78\x00" +
+		"\x63\xd8\x9c\x39\xe2\x00\xce\x01\x02\x00\x00\x00" +
+		"\x60\xa7\xcd\x39\x0b\x00\x00\x00\x00\x00\x11\x01" +
+		"\xf4\x64\xe0\x3b\x59\x00\xb1\x00\x03\x00\x00\x00" +
+		"\x69\x72\x61\x3c\x5b\x00\xb4\x00\x01\x00\x00\x00" +
+		"\x5d\xf9\x1b\x3d\x30\x00\x00\x00\x00\x00\x11\x01" +
+		"\xc4\xb1\x4b\x3d\x4f\x01\xe9\x02\x03\x00\x00\x00" +
+		"\x00\x76\x5e\x3d\x97\x00\x2e\x01\x07\x00\x00\x00" +
+		"\x59\x3a\xab\x3d\x99\x00\x00\x00\x00\x00\xde\x00" +
+		"\x16\x2c\xb1\x3d\xba\x01\x00\x00\x00\x00\xc5\x00" +
+		"\xba\x9d\xc4\x3d\x2e\x00\x00\x00\x00\x00\xd4\x01" +
+		"\xee\x47\xcb\x3d\x94\x00\x00\x00\x00\x00\x4a\x00" +
+		"\xbd\x09\x10\x3e\x44\x00\x72\x00\x08\x00\x00\x00" +
+		"\x8c\x23\x11\x3e\x45\x00\x7a\x00\x0c\x00\x00\x00" +
+		"\x89\xf3\xd0\x3e\xe5\x01\xba\x03\x08\x00\x00\x00" +
+		"\x0f\x7e\x43\x3f\x70\x00\xdc\x00\x03\x00\x00\x00" +
+		"\xc4\x1c\x8f\x3f\x8a\x01\x10\x03\x01\x00\x00\x00" +
+		"\xc5\x1c\x8f\x3f\x8b\x01\x11\x03\x01\x00\x00\x00" +
+		"\xc6\x1c\x8f\x3f\x8c\x01\x12\x03\x01\x00\x00\x00" +
+		"\x46\x25\x8f\x3f\x97\x01\x1c\x03\x01\x00\x00\x00" +
+		"\x47\x25\x8f\x3f\x98\x01\x1d\x03\x01\x00\x00\x00" +
+		"\x48\x25\x8f\x3f\x99\x01\x1e\x03\x01\x00\x00\x00" +
+		"\x49\x25\x8f\x3f\x9a\x01\x1f\x03\x01\x00\x00\x00" +
+		"\x4a\x25\x8f\x3f\x9b\x01\x20\x03\x01\x00\x00\x00" +
+		"\x4f\x2f\x96\x40\xe4\x00\xd0\x01\x03\x00\x00\x00" +
+		"\x7b\x3c\xfa\x40\x7c\x01\x00\x00\x00\x00\x6f\x00" +
+		"\x27\xfa\x18\x43\xad\x01\x33\x03\x02\x00\x00\x00" +
+		"\x89\xb3\x51\x43\xf9\x01\x00\x00\x00\x00\x68\x01" +
+		"\x69\xfa\x13\x44\x86\x00\x0d\x01\x03\x00\x00\x00" +
+		"\x20\x4c\x64\x44\xb0\x01\x37\x03\x02\x00\x00\x00" +
+		"\xf7\xc5\x1f\x45\x58\x01\x00\x00\x00\x00\xd4\x01" +
+		"\x3c\x7c\x6f\x45\xf5\x01\xc8\x03\x02\x00\x00\x00" +
+		"\xe2\x25\xe7\x45\xfa\x01\x00\x00\x00\x00\x3c\x00" +
+		"\xb6\xde\xf4\x45\xf8\x01\x00\x00\x00\x00\xa7\x01" +
+		"\x54\xe0\xb4\x46\x9d\x00\x00\x00\x00\x00\xab\x01" +
+		"\x21\xf9\x85\x47\x47\x01\xc9\x02\x07\x00\x00\x00" +
+		"\x62\x5f\x27\x4a\xb8\x01\x46\x03\x01\x00\x00\x00" +
+		"\x78\xcf\x0f\x4b\x26\x01\x65\x02\x02\x00\x00\x00" +
+		"\xd4\xb5\x92\x4b\x5d\x00\xb5\x00\x01\x00\x00\x00" +
+		"\x76\x97\x1e\x4d\x6c\x01\x08\x03\x01\x00\x00\x00" +
+		"\xda\xaf\x42\x4d\x0c\x02\x00\x00\x00\x00\x73\x00" +
+		"\x70\x26\xc5\x4e\x45\x02\x00\x00\x00\x00\x7f\x00" +
+		"\xd4\x6f\x96\x4f\xe9\x00\x00\x00\x00\x00\xfd\x01" +
+		"\xef\x13\xe0\x4f\x44\x02\x00\x00\x00\x00\x63\x01" +
+		"\xc0\xc9\xed\x4f\x5c\x01\xfb\x02\x01\x00\x00\x00" +
+		"\x63\xe9\x36\x50\x5a\x00\x00\x00\x00\x00\x3e\x01" +
+		"\xa6\x79\xec\x50\x49\x00\x93\x00\x02\x00\x00\x00" +
+		"\x45\x52\x7f\x52\x16\x01\x4b\x02\x01\x00\x00\x00" +
+		"\x93\x51\x95\x52\x17\x01\x00\x00\x00\x00\xfd\x01" +
+		"\x9c\x11\x6b\x53\x77\x01\x00\x00\x00\x00\xc8\x01" +
+		"\x3a\x0c\x72\x53\x1c\x02\xde\x03\x01\x00\x00\x00" +
+		"\xe8\xe3\xe0\x54\xda\x00\xb1\x01\x03\x00\x00\x00" +
+		"\xc5\x84\x1e\x55\x9a\x00\x39\x01\x03\x00\x00\x00" +
+		"\x6c\xad\x5d\x56\x8a\x00\x16\x01\x03\x00\x00\x00" +
+		"\xcd\x21\x68\x56\x4e\x02\x00\x00\x00\x00\xd0\x00" +
+		"\x60\x65\xd3\x56\xf2\x01\x00\x00\x00\x00\xba\x00" +
+		"\x76\xae\x0d\x57\xbe\x01\x00\x00\x00\x00\xc5\x00" +
+		"\xac\x28\x7f\x57\x0d\x01\x3a\x02\x01\x00\x00\x00" +
+		"\x35\x71\xca\x57\x26\x02\xed\x03\x01\x00\x00\x00" +
+		"\x30\x43\x67\x59\xa2\x00\x4e\x01\x03\x00\x00\x00" +
+		"\x6c\x65\x3c\x5a\xe0\x00\x00\x00\x00\x00\xa3\x01" +
+		"\xb6\x35\x75\x5a\x54\x01\x00\x00\x00\x00\x9e\x00" +
+		"\x0e\x26\x79\x5a\x37\x00\x30\x00\x03\x00\x00\x00" +
+		"\x8e\xe7\xb7\x5b\x48\x02\x00\x00\x00\x00\x4e\x00" +
+		"\x3a\xd2\xec\x5b\x13\x01\x44\x02\x01\x00\x00\x00" +
+		"\xb8\xfb\xf6\x5b\xdb\x01\x00\x00\x00\x00\x9e\x00" +
+		"\x0b\xa7\x00\x5c\xc3\x01\x64\x03\x05\x00\x00\x00" +
+		"\x72\x17\x5e\x5c\x51\x01\xef\x02\x02\x00\x00\x00" +
+		"\xae\x84\x6a\x5c\xc5\x01\x69\x03\x02\x00\x00\x00" +
+		"\x00\x76\x8a\x5c\x61\x00\x00\x00\x00\x00\xcd\x01" +
+		"\xb3\x1e\x00\x5d\x43\x01\x00\x00\x00\x00\xe8\x00" +
+		"\x40\xdd\x3b\x5d\x28\x00\x00\x00\x00\x00\xff\x01" +
+		"\x35\x15\xbd\x5d\xc7\x01\x6b\x03\x02\x00\x00\x00" +
+		"\x24\xfe\x07\x5e\xa3\x00\x51\x01\x04\x00\x00\x00" +
+		"\xa4\xf7\x10\x5e\x12\x02\xd3\x03\x02\x00\x00\x00" +
+		"\x01\x9f\xbf\x5e\xcb\x01\x00\x00\x00\x00\x4b\x02" +
+		"\xfc\x66\xc2\x5e\xcc\x01\x74\x03\x05\x00\x00\x00" +
+		"\xc5\x46\x2f\x5f\x3f\x00\x49\x00\x09\x00\x00\x00" +
+		"\x03\x34\xc7\x5f\x43\x00\x6c\x00\x06\x00\x00\x00" +
+		"\xd0\xeb\x3a\x60\x2c\x02\xf7\x03\x01\x00\x00\x00" +
+		"\x93\x9a\x59\x61\x17\x02\x00\x00\x00\x00\x0b\x02" +
+		"\xd1\x19\xb3\x61\x31\x00\x20\x00\x03\x00\x00\x00" +
+		"\xf5\x10\x67\x62\x78\x01\x00\x00\x00\x00\x3c\x01" +
+		"\x04\x02\xa7\x62\x63\x00\x00\x00\x00\x00\x7f\x00" +
+		"\xbe\x66\xff\x63\x62\x00\xc2\x00\x01\x00\x00\x00" +
+		"\x22\xe5\x4f\x65\x2f\x01\x86\x02\x07\x00\x00\x00" +
+		"\xc9\xad\x54\x65\x80\x00\xf9\x00\x03\x00\x00\x00" +
+		"\x48\x5d\xee\x65\xd1\x01\x7b\x03\x02\x00\x00\x00" +
+		"\x93\x4f\x93\x66\x71\x01\x00\x00\x00\x00\x89\x01" +
+		"\xc5\x78\x95\x66\x73\x01\x00\x00\x00\x00\x32\x00" +
+		"\x0c\xd7\x95\x66\x1e\x00\x00\x00\x00\x00\x11\x01" +
+		"\x9b\x68\x9f\x66\x74\x01\x00\x00\x00\x00\xb0\x01" +
+		"\x9b\x15\xbc\x66\x29\x00\x00\x00\x00\x00\xa7\x01" +
+		"\x31\xca\x52\x67\xba\x00\x7d\x01\x01\x00\x00\x00" +
+		"\xe7\x7b\x97\x67\x4a\x02\x00\x00\x00\x00\xd7\x00" +
+		"\x05\x9a\xd7\x67\x55\x00\x00\x00\x00\x00\xf9\x01" +
+		"\x64\xdd\x23\x68\x16\x00\x00\x00\x00\x00\xd4\x01" +
+		"\xd5\x07\xc2\x68\xf6\x01\x00\x00\x00\x00\x8a\x01" +
+		"\x93\x4f\x26\x69\x27\x01\x67\x02\x05\x00\x00\x00" +
+		"\xe1\x9a\x00\x6a\x87\x00\x00\x00\x00\x00\x6b\x00" +
+		"\x3f\x6c\x57\x6a\xd6\x01\x00\x00\x00\x00\x17\x02" +
+		"\x84\x91\x87\x6a\x65\x00\x00\x00\x00\x00\xde\x00" +
+		"\x72\xdf\xa1\x6a\xd5\x00\xa7\x01\x06\x00\x00\x00" +
+		"\x85\x1c\xa2\x6a\x23\x01\x63\x02\x01\x00\x00\x00" +
+		"\x5b\x97\xb2\x6a\xbb\x01\x49\x03\x02\x00\x00\x00" +
+		"\x62\x5b\xe4\x6a\x95\x00\x00\x00\x00\x00\xde\x00" +
+		"\x77\xac\x1a\x6b\xb9\x00\x7b\x01\x02\x00\x00\x00" +
+		"\x39\xb1\xc0\x6b\xd4\x01\x85\x03\x07\x00\x00\x00" +
+		"\xd0\xfd\x76\x6c\xd9\x01\x00\x00\x00\x00\x17\x02" +
+		"\x4a\x48\xb9\x6c\x6c\x00\xd3\x00\x02\x00\x00\x00" +
+		"\x5b\x4e\xf2\x6c\x68\x00\xcd\x00\x01\x00\x00\x00" +
+		"\xc6\x17\x12\x6d\x31\x01\x00\x00\x00\x00\x0c\x02" +
+		"\x8a\x55\xcf\x6d\x47\x02\x00\x00\x00\x00\x6b\x00" +
+		"\x97\x61\x21\x6e\x76\x00\xe9\x00\x04\x00\x00\x00" +
+		"\x92\x98\x29\x6e\x51\x00\x00\x00\x00\x00\xde\x00" +
+		"\x47\x5b\xa9\x6e\xdd\x01\xa8\x03\x02\x00\x00\x00" +
+		"\x47\x82\xb8\x6e\x4c\x02\x00\x00\x00\x00\x5e\x01" +
+		"\x85\x55\xeb\x6e\xe3\x00\x00\x00\x00\x00\x62\x00" +
+		"\xef\x3a\x9a\x6f\x3a\x00\x33\x00\x06\x00\x00\x00" +
+		"\x66\x85\xd8\x6f\x23\x00\x00\x00\x00\x00\x47\x01" +
+		"\x47\xc0\x76\x70\xfe\x01\x00\x00\x00\x00\x3c\x00" +
+		"\x81\x2e\x28\x71\x30\x01\x8d\x02\x0a\x00\x00\x00" +
+		"\xd9\x6c\xc0\x72\x1b\x01\x55\x02\x01\x00\x00\x00" +
+		"\x60\xfc\x47\x73\x5f\x00\xbb\x00\x07\x00\x00\x00" +
+		"\xe5\xc2\x4c\x73\xe3\x01\xb1\x03\x02\x00\x00\x00" +
+		"\xef\x78\xb2\x73\x04\x00\x00\x00\x00\x00\xa7\x01" +
+		"\xf3\x89\xb2\x73\x05\x00\x00\x00\x00\x00\xa7\x01" +
+		"\xd7\xf9\xba\x73\x15\x01\x46\x02\x05\x00\x00\x00" +
+		"\xc1\xae\x0c\x74\xc4\x00\x93\x01\x03\x00\x00\x00" +
+		"\xbc\xc9\x10\x74\xc5\x00\x96\x01\x01\x00\x00\x00" +
+		"\xa5\xe7\xc1\x74\x06\x00\x00\x00\x00\x00\xd4\x01" +
+		"\xd0\x8e\xc2\x74\x07\x00\x00\x00\x00\x00\x11\x01" +
+		"\x96\x9b\xc2\x74\x08\x00\x00\x00\x00\x00\xd4\x01" +
+		"\x8a\xab\xef\x74\xcd\x01\x00\x00\x00\x00\xa6\x00" +
+		"\x19\x5c\x18\x75\xe6\x01\xc2\x03\x03\x00\x00\x00" +
+		"\x52\xd6\x2a\x75\x6e\x00\xdb\x00\x01\x00\x00\x00" +
+		"\x41\x41\x56\x75\x09\x00\x05\x00\x02\x00\x00\x00" +
+		"\x77\xd1\xa0\x75\xc6\x00\x97\x01\x04\x00\x00\x00" +
+		"\xbc\xb7\x6b\x76\x4b\x02\x00\x00\x00\x00\x4e\x01" +
+		"\x49\x1f\x31\x77\x7d\x01\x00\x00\x00\x00\xc4\x01" +
+		"\x54\xb0\xd5\x77\x01\x00\x00\x00\x00\x00\xd4\x01" +
+		"\x28\xe2\xf8\x77\x0d\x00\x07\x00\x01\x00\x00\x00" +
+		"\xec\x46\xfb\x77\x0f\x00\x0c\x00\x03\x00\x00\x00" +
+		"\xfd\x00\x0b\x78\x11\x00\x00\x00\x00\x00\xd4\x01" +
+		"\xd0\xb5\x9b\x78\x1f\x00\x19\x00\x01\x00\x00\x00" +
+		"\xd3\x9b\x9c\x78\x35\x00\x2b\x00\x02\x00\x00\x00" +
+		"\xc2\x35\xdd\x78\x7e\x01\x00\x00\x00\x00\xb4\x00" +
+		"\x1b\x85\x2e\x79\xd6\x00\xad\x01\x02\x00\x00\x00" +
+		"\x2b\x46\x31\x79\xd7\x00\x00\x00\x00\x00\xde\x00" +
+		"\x6d\x8e\x37\x79\x34\x00\x2a\x00\x01\x00\x00\x00" +
+		"\x10\xf3\x6d\x7a\x14\x00\x00\x00\x00\x00\x11\x01" +
+		"\x31\x6b\xb3\x7a\x10\x00\x00\x00\x00\x00\xd4\x01" +
+		"\x2a\xc0\x09\x7b\xfc\x01\xcb\x03\x01\x00\x00\x00" +
+		"\xc4\xe1\xb3\x7b\x59\x01\xf6\x02\x04\x00\x00\x00" +
+		"\x45\x54\xc9\x7b\x6f\x00\x00\x00\x00\x00\xe7\x00" +
+		"\xff\xc9\x11\x7c\xe7\x01\x00\x00\x00\x00\x17\x02" +
+		"\xa0\xcb\x83\x7c\x81\x01\x00\x00\x00\x00\x94\x01" +
+		"\x6a\xb3\x84\x7c\x86\x01\x00\x00\x00\x00\xa5\x00" +
+		"\xfd\x50\x85\x7c\xef\x01\x00\x00\x00\x00\x01\x02" +
+		"\x0f\x09\x87\x7c\xff\x01\x00\x00\x00\x00\xf4\x01" +
+		"\xf1\x8e\x8d\x7c\x51\x02\x00\x00\x00\x00\xcd\x00" +
+		"\xb5\x69\x90\x7c\x53\x02\x00\x00\x00\x00\x03\x02" +
+		"\xb9\x95\x81\x7d\xe9\x01\xc5\x03\x02\x00\x00\x00" +
+		"\x18\xdb\x2b\x7e\x7f\x01\x00\x00\x00\x00\x02\x01" +
+		"\x24\xaf\xaa\x7e\x71\x00\x00\x00\x00\x00\x6b\x00" +
+		"\x3b\x00\x1b\x80\x1e\x01\x5b\x02\x01\x00\x00\x00" +
+		"\x37\xc0\xb5\x81\x55\x01\xf3\x02\x02\x00\x00\x00" +
+		"\x98\x20\xb9\x81\x4a\x00\x00\x00\x00\x00\xbd\x01" +
+		"\x2d\x9a\xc3\x82\x18\x00\x00\x00\x00\x00\x47\x01" +
+		"\x49\x70\xfb\x82\xc9\x00\x00\x00\x00\x00\x5e\x01" +
+		"\x3a\x07\x05\x83\x22\x02\xe6\x03\x03\x00\x00\x00" +
+		"\x23\xe5\x60\x84\xd0\x00\x00\x00\x00\x00\xde\x00" +
+		"\x86\x26\xde\x84\xa0\x00\x46\x01\x05\x00\x00\x00" +
+		"\x9e\x3a\xbb\x87\x4a\x01\xd5\x02\x05\x00\x00\x00" +
+		"\x76\xd7\x27\x88\x5e\x00\xb6\x00\x05\x00\x00\x00" +
+		"\xbd\xd8\x37\x88\x2e\x02\xf9\x03\x02\x00\x00\x00" +
+		"\x75\x8d\xd6\x89\x48\x01\x00\x00\x00\x00\x8a\x01" +
+		"\x23\x0b\x09\x8a\x14\x02\x00\x00\x00\x00\xa3\x01" +
+		"\x28\xce\x2b\x8a\x16\x02\xd8\x03\x01\x00\x00\x00" +
+		"\x2b\xcf\x4d\x8a\x1d\x00\x00\x00\x00\x00\x47\x01" +
+		"\xb2\x0e\x97\x8a\x5a\x01\x00\x00\x00\x00\xa8\x00" +
+		"\x17\x3e\x97\x8a\x63\x01\x00\x00\x00\x00\xa2\x01" +
+		"\x12\x48\x97\x8a\x67\x01\x00\x00\x00\x00\xa8\x00" +
+		"\xae\x41\xcc\x8a\x28\x02\xee\x03\x02\x00\x00\x00" +
+		"\xa3\x72\xdc\x8a\x84\x01\x0d\x03\x01\x00\x00\x00" +
+		"\x36\x4a\xf0\x8a\x2d\x02\xf8\x03\x01\x00\x00\x00" +
+		"\xb4\x99\x26\x8b\x34\x02\x00\x00\x00\x00\xd0\x00" +
+		"\xc7\xaf\x7d\x8c\xdb\x00\xb4\x01\x02\x00\x00\x00" +
+		"\x44\x9e\xf9\x8c\x61\x01\xff\x02\x01\x00\x00\x00" +
+		"\x6b\x98\x40\x8d\x3c\x00\x3c\x00\x08\x00\x00\x00" +
+		"\xcf\x09\x79\x8d\x22\x00\x00\x00\x00\x00\x11\x01" +
+		"\x3b\xb2\x82\x8d\x24\x00\x00\x00\x00\x00\x47\x01" +
+		"\x65\x71\x99\x8d\x68\x01\x00\x00\x00\x00\x67\x00" +
+		"\x9d\x26\xb8\x8d\x69\x01\x07\x03\x01\x00\x00\x00" +
+		"\xad\xf8\xf3\x8d\x6b\x01\x00\x00\x00\x00\x61\x00" +
+		"\x59\x67\x21\x8e\x24\x02\xeb\x03\x02\x00\x00\x00" +
+		"\xdc\x7b\x4a\x8e\xb6\x00\x7a\x01\x01\x00\x00\x00" +
+		"\x06\x19\x6a\x8e\x25\x00\x00\x00\x00\x00\x11\x01" +
+		"\xf0\xa1\x6c\x8e\x26\x00\x1a\x00\x01\x00\x00\x00" +
+		"\xc7\x02\x6e\x8e\x27\x00\x00\x00\x00\x00\xff\x01" +
+		"\xbe\xb4\x4e\x8f\x2a\x02\xf1\x03\x05\x00\x00\x00" +
+		"\x1f\xba\x7e\x8f\x74\x00\x00\x00\x00\x00\x67\x01" +
+		"\x31\xc1\xba\x90\x70\x01\x00\x00\x00\x00\xb6\x01" +
+		"\xfd\x30\x4a\x91\x2d\x00\x00\x00\x00\x00\x11\x01" +
+		"\xcc\xc8\x85\x91\x4d\x01\xe0\x02\x05\x00\x00\x00" +
+		"\xc1\xfb\x5c\x92\x6a\x00\xcf\x00\x04\x00\x00\x00" +
+		"\xa6\xa4\x8a\x92\xfe\x00\x15\x02\x04\x00\x00\x00" +
+		"\x26\x76\xf4\x92\xe1\x00\xcb\x01\x03\x00\x00\x00" +
+		"\x81\x6c\x25\x93\x50\x00\x9e\x00\x01\x00\x00\x00" +
+		"\x57\x1d\x71\x93\x0a\x02\x00\x00\x00\x00\xf1\x01" +
+		"\x62\xbc\xd7\x93\x53\x00\xa3\x00\x01\x00\x00\x00" +
+		"\x8e\x1c\xed\x93\x2d\x01\x82\x02\x03\x00\x00\x00" +
+		"\xcc\x7a\xac\x94\x82\x00\x01\x01\x04\x00\x00\x00" +
+		"\xbe\x31\x33\x95\x58\x00\xad\x00\x04\x00\x00\x00" +
+		"\xdf\x61\x39\x95\x5c\x00\x00\x00\x00\x00\xbd\x01" +
+		"\xdd\xf8\x81\x96\x73\x00\xe5\x00\x02\x00\x00\x00" +
+		"\xd9\xa4\x85\x96\x1a\x01\x4e\x02\x07\x00\x00\x00" +
+		"\xd8\xe4\x8c\x96\x77\x00\x00\x00\x00\x00\xde\x00" +
+		"\xeb\x52\x9a\x96\x64\x00\xc3\x00\x03\x00\x00\x00" +
+		"\x12\x8d\x8d\x97\x67\x00\xc9\x00\x04\x00\x00\x00" +
+		"\x51\x86\xcf\x97\x48\x00\x00\x00\x00\x00\xde\x00" +
+		"\x2a\x0b\xd1\x97\x69\x00\xce\x00\x01\x00\x00\x00" +
+		"\xfb\x15\xd8\x97\x4c\x00\x95\x00\x04\x00\x00\x00" +
+		"\x0b\x58\xda\x97\x4f\x00\x9c\x00\x02\x00\x00\x00" +
+		"\xd8\xc8\xdf\x97\x54\x00\xa4\x00\x03\x00\x00\x00" +
+		"\x4b\x76\xf6\x97\xab\x01\x2a\x03\x02\x00\x00\x00" +
+		"\xd7\x49\xfe\x97\x36\x00\x2d\x00\x03\x00\x00\x00" +
+		"\x27\x8f\xfe\x97\x4b\x00\x00\x00\x00\x00\x63\x01" +
+		"\xc9\x68\x04\x98\x92\x00\x24\x01\x01\x00\x00\x00" +
+		"\x15\x9b\x05\x98\xab\x00\x5d\x01\x03\x00\x00\x00" +
+		"\xa9\xb5\x05\x98\xb0\x00\x6c\x01\x03\x00\x00\x00" +
+		"\x1c\x68\x69\x98\xfb\x01\xca\x03\x01\x00\x00\x00" +
+		"\xbd\xdb\x73\x98\x8b\x00\x00\x00\x00\x00\xce\x00" +
+		"\xe2\x4c\x10\x99\xca\x00\x9f\x01\x03\x00\x00\x00" +
+		"\x68\xdd\x21\x99\xd3\x00\xa6\x01\x01\x00\x00\x00" +
+		"\xb0\xa3\x81\x99\x32\x02\xfc\x03\x02\x00\x00\x00" +
+		"\x6f\xce\x96\x9a\x18\x01\x4c\x02\x02\x00\x00\x00" +
+		"\x96\xb4\x4c\x9b\x72\x01\x00\x00\x00\x00\xad\x01" +
+		"\x84\xb3\x52\x9b\xad\x00\x66\x01\x02\x00\x00\x00" +
+		"\x10\x8a\xd5\x9c\xbc\x00\x00\x00\x00\x00\x3c\x01" +
+		"\x7c\x19\xe0\x9c\xb4\x01\x40\x03\x02\x00\x00\x00" +
+		"\xed\xfb\xef\x9c\xf4\x00\xfb\x01\x02\x00\x00\x00" +
+		"\x87\x84\x07\x9d\xf5\x00\x00\x00\x00\x00\x42\x00" +
+		"\x13\xda\x13\x9d\x88\x01\x00\x00\x00\x00\x01\x02" +
+		"\x14\xda\x13\x9d\x89\x01\x0f\x03\x01\x00\x00\x00" +
+		"\x15\xda\x13\x9d\x8d\x01\x13\x03\x01\x00\x00\x00" +
+		"\x16\xda\x13\x9d\x8e\x01\x14\x03\x01\x00\x00\x00" +
+		"\x17\xda\x13\x9d\x8f\x01\x15\x03\x01\x00\x00\x00" +
+		"\x18\xda\x13\x9d\x90\x01\x16\x03\x01\x00\x00\x00" +
+		"\x19\xda\x13\x9d\x91\x01\x17\x03\x01\x00\x00\x00" +
+		"\x1a\xda\x13\x9d\x92\x01\x18\x03\x01\x00\x00\x00" +
+		"\x1b\xda\x13\x9d\x93\x01\x19\x03\x01\x00\x00\x00" +
+		"\x1c\xda\x13\x9d\x94\x01\x1a\x03\x01\x00\x00\x00" +
+		"\x55\xda\x13\x9d\x95\x01\x00\x00\x00\x00\x01\x02" +
+		"\x56\xda\x13\x9d\x96\x01\x1b\x03\x01\x00\x00\x00" +
+		"\x57\xda\x13\x9d\x9c\x01\x21\x03\x01\x00\x00\x00" +
+		"\x58\xda\x13\x9d\x9d\x01\x22\x03\x01\x00\x00\x00" +
+		"\x59\xda\x13\x9d\x9e\x01\x23\x03\x01\x00\x00\x00" +
+		"\x5a\xda\x13\x9d\x9f\x01\x24\x03\x01\x00\x00\x00" +
+		"\x5b\xda\x13\x9d\xa0\x01\x25\x03\x01\x00\x00\x00" +
+		"\x5c\xda\x13\x9d\xa1\x01\x26\x03\x01\x00\x00\x00" +
+		"\x5d\xda\x13\x9d\xa2\x01\x27\x03\x01\x00\x00\x00" +
+		"\x5e\xda\x13\x9d\xa3\x01\x28\x03\x01\x00\x00\x00" +
+		"\x1a\x8b\x2a\x9d\xaa\x00\x00\x00\x00\x00\x14\x01" +
+		"\x64\x27\x35\x9d\xc1\x00\x8f\x01\x04\x00\x00\x00" +
+		"\xaf\x3a\x6e\x9d\xf7\x00\x02\x02\x01\x00\x00\x00" +
+		"\x18\xb1\x6f\x9d\x15\x00\x0f\x00\x03\x00\x00\x00" +
+		"\x14\x28\xa4\x9d\xae\x00\x68\x01\x02\x00\x00\x00" +
+		"\x97\x49\xba\x9d\xf8\x00\x03\x02\x07\x00\x00\x00" +
+		"\x3d\xbd\xfe\x9d\x33\x00\x23\x00\x07\x00\x00\x00" +
+		"\xe6\xd6\x09\x9e\xbd\x01\x4b\x03\x0b\x00\x00\x00" +
+		"\x89\x52\xbf\x9e\xf4\x01\x00\x00\x00\x00\xa7\x01" +
+		"\x98\x98\xe0\x9f\x2c\x00\x1d\x00\x03\x00\x00\x00" +
+		"\x0b\xbd\xf7\x9f\x7b\x00\xef\x00\x03\x00\x00\x00" +
+		"\xb6\x47\x4c\xa0\x12\x00\x00\x00\x00\x00\xa7\x01" +
+		"\x75\x56\xe1\xa0\x7d\x00\xf4\x00\x01\x00\x00\x00" +
+		"\xcb\x35\xa4\xa2\x28\x01\x6c\x02\x07\x00\x00\x00" +
+		"\xb3\x9e\xc1\xa2\xc0\x01\x00\x00\x00\x00\x97\x01" +
+		"\x47\xe3\xc1\xa2\xc2\x01\x60\x03\x04\x00\x00\x00" +
+		"\xa1\xfb\xc3\xa2\xce\x01\x00\x00\x00\x00\x9e\x00" +
+		"\x87\x75\xc5\xa2\xd2\x01\x7d\x03\x06\x00\x00\x00" +
+		"\xd7\x8f\xc5\xa2\xd3\x01\x83\x03\x02\x00\x00\x00" +
+		"\xfc\x89\x21\xa4\x88\x00\x10\x01\x03\x00\x00\x00" +
+		"\xef\x7e\x6b\xa4\x40\x00\x52\x00\x08\x00\x00\x00" +
+		"\xfa\x41\x1f\xa6\xec\x00\xd7\x01\x04\x00\x00\x00" +
+		"\xd1\xeb\x3c\xa6\xee\x00\xdd\x01\x06\x00\x00\x00" +
+		"\x4e\xcc\x7d\xa6\xf0\x00\xea\x01\x07\x00\x00\x00" +
+		"\x68\xe0\xb6\xa6\xf3\x00\xf4\x01\x07\x00\x00\x00" +
+		"\x2e\x3e\xf1\xa6\x8c\x00\x19\x01\x05\x00\x00\x00" +
+		"\x7d\xb6\x48\xa7\x65\x01\x03\x03\x03\x00\x00\x00" +
+		"\x68\x7f\xba\xa7\x31\x02\xfb\x03\x01\x00\x00\x00" +
+		"\xc7\x12\xec\xa7\x19\x01\x00\x00\x00\x00\x6d\x01" +
+		"\xfd\xd5\xf3\xa7\xf9\x00\x0a\x02\x01\x00\x00\x00" +
+		"\x8d\x8c\x59\xa8\x40\x02\x00\x00\x00\x00\xee\x01" +
+		"\x7e\xb5\x7a\xa8\x2b\x00\x1c\x00\x01\x00\x00\x00" +
+		"\xf7\x95\xe5\xa8\xfb\x00\x00\x00\x00\x00\x26\x01" +
+		"\xab\xf6\x50\xa9\x4d\x02\x00\x00\x00\x00\xc2\x01" +
+		"\x52\xf7\x52\xa9\x1b\x02\xdc\x03\x02\x00\x00\x00" +
+		"\x5c\x2d\xf7\xa9\x41\x00\x5a\x00\x0c\x00\x00\x00" +
+		"\x5d\x12\x29\xaa\x91\x00\x23\x01\x01\x00\x00\x00" +
+		"\xfb\x16\x51\xab\xac\x00\x60\x01\x06\x00\x00\x00" +
+		"\x69\x75\xcb\xab\x60\x00\x00\x00\x00\x00\xbd\x01" +
+		"\xd4\xc6\x80\xac\x96\x00\x26\x01\x08\x00\x00\x00" +
+		"\x8b\xbf\x86\xac\x98\x00\x35\x01\x04\x00\x00\x00" +
+		"\xd8\x72\xd1\xac\x9f\x00\x43\x01\x03\x00\x00\x00" +
+		"\x18\xaa\x58\xad\xb6\x01\x42\x03\x04\x00\x00\x00" +
+		"\x11\xf0\xde\xae\xa8\x00\x00\x00\x00\x00\x14\x01" +
+		"\x33\x13\xe3\xaf\x38\x00\x00\x00\x00\x00\xde\x00" +
+		"\xd6\xf5\x66\xb0\xe0\x01\x00\x00\x00\x00\x97\x01" +
+		"\xa3\xad\x6e\xb0\x5d\x01\xfc\x02\x02\x00\x00\x00" +
+		"\x53\x85\x72\xb0\xfa\x00\x0b\x02\x04\x00\x00\x00" +
+		"\xf8\x2a\x98\xb0\x80\x01\x00\x00\x00\x00\xed\x01" +
+		"\x36\x7b\x5d\xb1\x20\x02\x00\x00\x00\x00\x28\x02" +
+		"\x6f\xd5\x64\xb1\x32\x00\x00\x00\x00\x00\xd4\x01" +
+		"\x78\xd7\xb3\xb1\xcf\x00\x00\x00\x00\x00\xde\x00" +
+		"\xc4\xe4\x19\xb3\xb4\x00\x77\x01\x02\x00\x00\x00" +
+		"\x54\x38\x86\xb3\xb2\x00\x76\x01\x01\x00\x00\x00" +
+		"\x91\xe9\x96\xb3\x7b\x01\x00\x00\x00\x00\x07\x00" +
+		"\x86\x11\xaf\xb5\x0a\x01\x00\x00\x00\x00\x3c\x02" +
+		"\x50\xf2\xee\xb5\x0b\x01\x35\x02\x03\x00\x00\x00" +
+		"\x1e\x54\x49\xb6\x75\x00\xe7\x00\x02\x00\x00\x00" +
+		"\xf2\xe8\xf7\xb7\x93\x00\x25\x01\x01\x00\x00\x00" +
+		"\x94\x04\x73\xb8\xbe\x00\x83\x01\x06\x00\x00\x00" +
+		"\x1c\x37\x75\xb8\xbf\x00\x89\x01\x01\x00\x00\x00" +
+		"\x8d\x59\x87\xba\xf1\x00\xf1\x01\x03\x00\x00\x00" +
+		"\xe5\xc9\x88\xba\x00\x02\x00\x00\x00\x00\xc1\x00" +
+		"\x8d\x13\x40\xbb\x3b\x02\x00\x00\x00\x00\xa3\x01" +
+		"\x83\x71\x5b\xbc\x7c\x00\xf2\x00\x02\x00\x00\x00" +
+		"\xb7\xcd\x98\xbd\xc4\x01\x00\x00\x00\x00\x17\x02" +
+		"\x27\x2f\x1b\xbe\x1f\x01\x00\x00\x00\x00\xe9\x01" +
+		"\x72\x44\x70\xbe\xde\x01\x00\x00\x00\x00\xb2\x01" +
+		"\x7d\x33\x8e\xbf\x39\x01\xa8\x02\x05\x00\x00\x00" +
+		"\x08\xc3\xcc\xbf\x3e\x00\x44\x00\x05\x00\x00\x00" +
+		"\x4c\xfd\xd6\xbf\xd2\x00\xa5\x01\x01\x00\x00\x00" +
+		"\x2f\xa3\x67\xc0\x39\x00\x00\x00\x00\x00\xde\x00" +
+		"\xdf\x2c\x6d\xc0\xb5\x01\x00\x00\x00\x00\x23\x01" +
+		"\x44\xc9\x56\xc1\x24\x01\x64\x02\x01\x00\x00\x00" +
+		"\x31\x0e\xd3\xc1\x1b\x00\x00\x00\x00\x00\xa7\x01" +
+		"\x1c\x9a\xdb\xc1\x8f\x00\x00\x00\x00\x00\xd7\x00" +
+		"\xa3\x05\x13\xc2\x00\x00\x00\x00\x01\x00\x00\x00" +
+		"\xb5\x3a\x18\xc2\xd9\x00\x00\x00\x00\x00\xde\x00" +
+		"\x5e\x94\x24\xc2\x2b\x01\x00\x00\x00\x00\x8a\x01" +
+		"\x5f\x56\xc3\xc2\x25\x01\x00\x00\x00\x00\x3c\x00" +
+		"\xe7\xbc\xc3\xc2\xbb\x00\x7e\x01\x02\x00\x00\x00" +
+		"\x93\x45\x27\xc3\x3d\x02\x00\x00\x00\x00\xc3\x00" +
+		"\x24\x0e\xef\xc4\x0d\x02\x00\x00\x00\x00\x5e\x01" +
+		"\x33\x1b\x9f\xc5\x0e\x00\x08\x00\x04\x00\x00\x00" +
+		"\x65\xf5\xb0\xc5\x42\x00\x66\x00\x06\x00\x00\x00" +
+		"\x2f\x3c\x83\xc6\x12\x01\x43\x02\x01\x00\x00\x00" +
+		"\x59\x34\x09\xc7\xc0\x00\x8a\x01\x05\x00\x00\x00" +
+		"\xd0\x1d\x12\xc7\x00\x01\x00\x00\x00\x00\x3c\x02" +
+		"\x21\x42\x4d\xc8\xf0\x01\x00\x00\x00\x00\x01\x02" +
+		"\x84\x49\xde\xc8\xbd\x00\x80\x01\x03\x00\x00\x00" +
+		"\x23\x3b\x91\xca\x3c\x02\x00\x00\x00\x00\x07\x01" +
+		"\x25\xcb\xbd\xca\x46\x02\x00\x00\x00\x00\xa7\x00" +
+		"\xca\x5d\x48\xcb\xe2\x01\x00\x00\x00\x00\x9a\x01" +
+		"\x04\x3b\xbc\xcb\x4e\x00\x9b\x00\x01\x00\x00\x00" +
+		"\x54\xbf\xe5\xcc\xb8\x00\x00\x00\x00\x00\x89\x01" +
+		"\x31\x8a\x1f\xcd\x78\x00\x00\x00\x00\x00\xde\x00" +
+		"\x90\xb2\x96\xcd\xe6\x00\x00\x00\x00\x00\x62\x00" +
+		"\x93\x3d\x97\xcd\x32\x01\x97\x02\x01\x00\x00\x00" +
+		"\x4a\x4c\xcb\xce\x6b\x00\x00\x00\x00\x00\xde\x00" +
+		"\x4b\x72\xf7\xce\xd5\x01\x00\x00\x00\x00\x9a\x01" +
+		"\x13\xf7\x52\xcf\x33\x01\x00\x00\x00\x00\x58\x00" +
+		"\xe7\xf7\x54\xcf\x15\x02\xd6\x03\x02\x00\x00\x00" +
+		"\xfa\x81\x85\xcf\x38\x01\xa6\x02\x02\x00\x00\x00" +
+		"\x6a\x6c\x37\xd0\x1c\x01\x56\x02\x05\x00\x00\x00" +
+		"\xe5\xd1\x7d\xd0\xae\x01\x00\x00\x00\x00\xc5\x00" +
+		"\x43\x3f\xd9\xd0\xa1\x00\x4b\x01\x03\x00\x00\x00" +
+		"\x3e\x52\xff\xd0\x50\x02\x00\x00\x00\x00\x03\x02" +
+		"\xae\x44\xa8\xd1\x3a\x01\xad\x02\x01\x00\x00\x00" +
+		"\x54\x22\xf0\xd1\x3d\x01\xb9\x02\x03\x00\x00\x00" +
+		"\x1b\xe3\x26\xd2\x3f\x01\x00\x00\x00\x00\x47\x00" +
+		"\x59\x78\x3e\xd2\xea\x00\x00\x00\x00\x00\x9e\x00" +
+		"\x0a\xed\x26\xd3\x6a\x01\x00\x00\x00\x00\xad\x00" +
+		"\x28\x2f\x3b\xd3\xbf\x01\x56\x03\x04\x00\x00\x00" +
+		"\x0d\x4c\x3b\xd4\x3b\x00\x39\x00\x03\x00\x00\x00" +
+		"\x69\xe4\x55\xd4\x41\x02\x00\x00\x00\x00\x8f\x01" +
+		"\x5c\x39\x1b\xd5\x1a\x00\x13\x00\x03\x00\x00\x00" +
+		"\x07\x3a\x1c\xd5\x21\x00\x00\x00\x00\x00\xd4\x01" +
+		"\x35\x97\x37\xd5\x46\x01\xc8\x02\x01\x00\x00\x00" +
+		"\xff\x4a\xa4\xd5\x56\x00\xa7\x00\x05\x00\x00\x00" +
+		"\xa0\x57\xd1\xd5\x19\x00\x12\x00\x01\x00\x00\x00" +
+		"\x59\x8d\xb2\xd8\xb7\x00\x00\x00\x00\x00\xde\x00" +
+		"\x58\xde\xe2\xd8\x87\x01\x0e\x03\x01\x00\x00\x00" +
+		"\x9c\x18\xe3\xd8\xa6\x01\x00\x00\x00\x00\x03\x02" +
+		"\xbc\x1a\xe3\xd8\xa7\x01\x29\x03\x01\x00\x00\x00" +
+		"\xe9\x31\xee\xd8\xdc\x00\xb6\x01\x02\x00\x00\x00" +
+		"\xc1\x15\x45\xd9\x03\x00\x01\x00\x04\x00\x00\x00" +
+		"\xdc\xe2\x9e\xd9\x0f\x02\xcf\x03\x01\x00\x00\x00" +
+		"\xed\x3b\x49\xda\xb1\x01\x00\x00\x00\x00\xd8\x00" +
+		"\x24\xb7\x9e\xda\xd8\x01\x93\x03\x0a\x00\x00\x00" +
+		"\x65\x2d\x40\xdb\x1a\x02\x00\x00\x00\x00\x33\x02" +
+		"\x59\x02\x1b\xdd\x9b\x00\x3c\x01\x04\x00\x00\x00" +
+		"\x0e\x2f\x51\xdd\x21\x02\xe3\x03\x03\x00\x00\x00" +
+		"\xbe\xa8\x54\xdd\x4b\x01\xda\x02\x01\x00\x00\x00" +
+		"\xce\xb8\x63\xdd\xe4\x01\xb3\x03\x07\x00\x00\x00" +
+		"\x5d\x8a\x85\xdd\x6f\x01\x00\x00\x00\x00\x42\x01" +
+		"\xa8\x39\x51\xde\x23\x02\xe9\x03\x02\x00\x00\x00" +
+		"\x39\xc4\x71\xde\x8e\x00\x21\x01\x02\x00\x00\x00" +
+		"\x37\x73\xe0\xde\xb2\x01\x39\x03\x02\x00\x00\x00" +
+		"\x55\x8e\xf9\xde\xd1\x00\xa4\x01\x01\x00\x00\x00" +
+		"\x65\x86\x44\xdf\xc2\x00\x00\x00\x00\x00\xcd\x01" +
+		"\x3f\x21\xbf\xdf\x0f\x01\x3d\x02\x05\x00\x00\x00" +
+		"\xd0\x83\x37\xe0\xdf\x01\xaa\x03\x07\x00\x00\x00" +
+		"\xe2\x29\x50\xe0\x64\x01\x01\x03\x02\x00\x00\x00" +
+		"\x3a\x2b\x53\xe0\xaf\x01\x35\x03\x02\x00\x00\x00" +
+		"\x3b\x81\x8d\xe0\x0a\x00\x00\x00\x00\x00\x47\x01" +
+		"\x83\xc5\xe9\xe0\x9e\x00\x41\x01\x02\x00\x00\x00" +
+		"\xbc\x30\xed\xe0\xb7\x01\x00\x00\x00\x00\x9e\x00" +
+		"\x71\xa9\x10\xe1\x53\x01\xf1\x02\x02\x00\x00\x00" +
+		"\x71\x53\xf9\xe1\x25\x02\x00\x00\x00\x00\x33\x02" +
+		"\x83\x25\x02\xe2\xde\x00\xba\x01\x0c\x00\x00\x00" +
+		"\x45\x4b\x14\xe2\xdf\x00\xc6\x01\x05\x00\x00\x00" +
+		"\xe1\x56\x22\xe2\xac\x01\x2c\x03\x07\x00\x00\x00" +
+		"\x8e\xd3\x86\xe2\x27\x02\x00\x00\x00\x00\xd0\x00" +
+		"\xe1\xc7\x30\xe3\xe7\x00\x00\x00\x00\x00\xe9\x01" +
+		"\x5b\x08\x3f\xe3\xe8\x00\xd5\x01\x02\x00\x00\x00" +
+		"\xa4\x5d\x31\xe4\xd7\x01\x8c\x03\x07\x00\x00\x00" +
+		"\x88\xb7\x51\xe5\x2b\x02\xf6\x03\x01\x00\x00\x00" +
+		"\xb5\x35\x6a\xe5\xf3\x01\x00\x00\x00\x00\xd4\x01" +
+		"\xca\x0b\x88\xe6\xfd\x01\x00\x00\x00\x00\xa7\x01" +
+		"\x48\x66\xd7\xe6\x6d\x01\x00\x00\x00\x00\x7c\x00" +
+		"\xf9\x0a\xe7\xe6\x1f\x02\xe2\x03\x01\x00\x00\x00" +
+		"\xc5\x56\xc4\xe7\x90\x00\x00\x00\x00\x00\xde\x00" +
+		"\xeb\x99\x63\xe9\x46\x00\x86\x00\x07\x00\x00\x00" +
+		"\x86\x00\xf8\xe9\x30\x02\x00\x00\x00\x00\x38\x02" +
+		"\x7f\x76\xb9\xea\xe8\x01\x00\x00\x00\x00\x97\x01" +
+		"\x80\x45\xf8\xea\xbc\x01\x00\x00\x00\x00\xc5\x00" +
+		"\x9b\xc1\xac\xeb\x22\x01\x5d\x02\x06\x00\x00\x00" +
+		"\x3f\xe8\xfd\xeb\xb1\x00\x6f\x01\x07\x00\x00\x00" +
+		"\x5f\xa3\xf7\xef\x33\x02\x00\x00\x00\x00\x5d\x00" +
+		"\x00\x7d\xe8\xf0\x76\x01\x0a\x03\x01\x00\x00\x00" +
+		"\x46\x24\x4c\xf2\x35\x02\xfe\x03\x01\x00\x00\x00" +
+		"\x63\x7e\x51\xf2\x36\x02\xff\x03\x01\x00\x00\x00" +
+		"\x75\x93\xaf\xf2\x07\x02\xce\x03\x01\x00\x00\x00" +
+		"\x5e\x2d\x61\xf3\x79\x01\x00\x00\x00\x00\x14\x01" +
+		"\x54\x42\x92\xf3\x3b\x01\xae\x02\x03\x00\x00\x00" +
+		"\xbd\xc9\xa1\xf4\x34\x01\x98\x02\x07\x00\x00\x00" +
+		"\xf0\x25\xdd\xf4\x1d\x02\xdf\x03\x01\x00\x00\x00" +
+		"\x88\xa9\x3e\xf5\xa4\x01\x00\x00\x00\x00\x01\x02" +
+		"\x40\xc2\x49\xf5\xa9\x01\x00\x00\x00\x00\x03\x02" +
+		"\x04\xd2\x54\xf5\x66\x00\xc6\x00\x03\x00\x00\x00" +
+		"\xf5\xa7\x95\xf8\x37\x01\xa5\x02\x01\x00\x00\x00" +
+		"\xfc\x25\xe3\xf8\xb9\x01\x47\x03\x02\x00\x00\x00" +
+		"\x90\xfb\x37\xf9\xff\x00\x00\x00\x00\x00\x3c\x02" +
+		"\x18\xd9\x3e\xf9\x4e\x01\xe5\x02\x04\x00\x00\x00" +
+		"\x0f\xdb\x4d\xf9\x3a\x02\x00\x00\x00\x00\x33\x02" +
+		"\x1b\xe7\x62\xf9\xd4\x00\x00\x00\x00\x00\x14\x01" +
+		"\x83\x96\xb2\xf9\x6d\x00\xd5\x00\x06\x00\x00\x00" +
+		"\x80\x47\x21\xfa\xa5\x00\x58\x01\x04\x00\x00\x00" +
+		"\xc9\x0b\x30\xfa\x43\x02\x00\x00\x00\x00\xbf\x00" +
+		"\x00\xe3\x70\xfa\xeb\x01\x00\x00\x00\x00\xc5\x00" +
+		"\xef\xab\xf5\xfa\xc1\x01\x5a\x03\x06\x00\x00\x00" +
+		"\xf3\x60\x15\xfb\xc8\x01\x6d\x03\x03\x00\x00\x00" +
+		"\x66\xcc\x19\xfb\xca\x01\x70\x03\x04\x00\x00\x00" +
+		"\xc5\x9e\x34\xfb\xb3\x01\x3b\x03\x05\x00\x00\x00" +
+		"\x05\x42\x3d\xfb\x1c\x00\x16\x00\x03\x00\x00\x00" +
+		"\xa3\xc2\x4b\xfb\xcf\x01\x79\x03\x02\x00\x00\x00" +
+		"\x6e\x4c\x54\xfb\x4c\x01\xdb\x02\x05\x00\x00\x00" +
+		"\x56\x86\x89\xfb\xda\x01\x9d\x03\x05\x00\x00\x00" +
+		"\x17\x82\x8a\xfb\x7a\x01\x00\x00\x00\x00\xee\x00" +
+		"\xae\x1b\xb8\xfb\xe1\x01\x00\x00\x00\x00\x23\x01" +
+		"\xc2\xf2\x23\xfc\x50\x01\xec\x02\x03\x00\x00\x00" +
+		"\x0f\x15\xf7\xfc\x08\x02\x00\x00\x00\x00\xe7\x00" +
+		"\x6c\xa5\x18\xfd\xc3\x00\x00\x00\x00\x00\xe7\x00" +
+		"\xa6\xe7\xc3\xfe\x57\x00\xac\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
 // Unsuported zones: 0
@@ -17409,11 +22752,14 @@ const ZoneInfosData = "\xae\x73\x59\x00\xeb\x01\x00\x00\x00\x00\xc5\x00" +
 
 
 // ---------------------------------------------------------------------------
-// Notable zones: 6
+// Notable zones: 8
 // ---------------------------------------------------------------------------
 
 // Africa/Casablanca {
 //   Morocco {SAVE (delta_offset) '-1:00' different from 1:00}
+// }
+// Africa/Ceuta {
+//   EU {Added anchor rule at year 0}
 // }
 // Africa/El_Aaiun {
 //   Morocco {SAVE (delta_offset) '-1:00' different from 1:00}
@@ -17421,6 +22767,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xeb\x01\x00\x00\x00\x00\xc5\x00" +
 // Africa/Johannesburg {RULES not fixed but FORMAT is missing '%' or '/'}
 // Africa/Windhoek {
 //   Namibia {
+//     Added anchor rule at year 0,
 //     LETTER 'CAT' not single character,
 //     LETTER 'WAT' not single character,
 //     SAVE (delta_offset) '-1:00' different from 1:00,
@@ -17429,8 +22776,26 @@ const ZoneInfosData = "\xae\x73\x59\x00\xeb\x01\x00\x00\x00\x00\xc5\x00" +
 // America/Argentina/San_Luis {
 //   SanLuis {Added anchor rule at year 0}
 // }
+// America/Asuncion {
+//   Para {Added anchor rule at year 0}
+// }
 // America/Belize {
-//   Belize {LETTER 'CST' not single character}
+//   Belize {
+//     LETTER 'CDT' not single character,
+//     LETTER 'CST' not single character,
+//   }
+// }
+// America/Bogota {
+//   CO {Added anchor rule at year 0}
+// }
+// America/Costa_Rica {
+//   CR {Added anchor rule at year 0}
+// }
+// America/Danmarkshavn {
+//   EU {Added anchor rule at year 0}
+// }
+// America/El_Salvador {
+//   Salv {Added anchor rule at year 0}
 // }
 // America/Goose_Bay {
 //   StJohns {
@@ -17439,8 +22804,40 @@ const ZoneInfosData = "\xae\x73\x59\x00\xeb\x01\x00\x00\x00\x00\xc5\x00" +
 //     SAVE (delta_offset) '2:00' different from 1:00,
 //   }
 // }
+// America/Guatemala {
+//   Guat {Added anchor rule at year 0}
+// }
+// America/Guayaquil {
+//   Ecuador {Added anchor rule at year 0}
+// }
+// America/Guyana {STDOFF (-3:45) not at :00 or :30 mark}
+// America/Managua {
+//   Nic {Added anchor rule at year 0}
+// }
 // America/Moncton {
 //   Moncton {AT '0:01' not on 15-minute boundary}
+// }
+// America/Montevideo {
+//   Uruguay {
+//     SAVE (delta_offset) '0:30' different from 1:00,
+//     SAVE (delta_offset) '1:30' different from 1:00,
+//   }
+// }
+// America/Nuuk {
+//   EU {Added anchor rule at year 0}
+// }
+// America/Port-au-Prince {
+//   Haiti {Added anchor rule at year 0}
+// }
+// America/Santo_Domingo {
+//   DR {
+//     LETTER '-0430' not single character,
+//     LETTER 'EST' not single character,
+//     SAVE (delta_offset) '0:30' different from 1:00,
+//   }
+// }
+// America/Scoresbysund {
+//   EU {Added anchor rule at year 0}
 // }
 // America/St_Johns {
 //   StJohns {
@@ -17448,6 +22845,12 @@ const ZoneInfosData = "\xae\x73\x59\x00\xeb\x01\x00\x00\x00\x00\xc5\x00" +
 //     LETTER 'DD' not single character,
 //     SAVE (delta_offset) '2:00' different from 1:00,
 //   }
+// }
+// America/Tegucigalpa {
+//   Hond {Added anchor rule at year 0}
+// }
+// America/Thule {
+//   Thule {Added anchor rule at year 0}
 // }
 // Antarctica/Casey {UNTIL '0:01' not on 15-minute boundary}
 // Antarctica/Troll {
@@ -17458,42 +22861,275 @@ const ZoneInfosData = "\xae\x73\x59\x00\xeb\x01\x00\x00\x00\x00\xc5\x00" +
 //     SAVE (delta_offset) '2:00' different from 1:00,
 //   }
 // }
+// Asia/Almaty {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Amman {
+//   Jordan {Added anchor rule at year 0}
+// }
+// Asia/Aqtau {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Aqtobe {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Ashgabat {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Atyrau {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Baghdad {
+//   Iraq {Added anchor rule at year 0}
+// }
+// Asia/Baku {
+//   Azer {Added anchor rule at year 0}
+//   EUAsia {Added anchor rule at year 0}
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Bishkek {
+//   Kyrgyz {Added anchor rule at year 0}
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Choibalsan {
+//   Mongol {Added anchor rule at year 0}
+// }
 // Asia/Dhaka {
 //   Dhaka {Added anchor rule at year 0}
 // }
+// Asia/Dushanbe {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Famagusta {
+//   Cyprus {Added anchor rule at year 0}
+//   EUAsia {Added anchor rule at year 0}
+// }
 // Asia/Gaza {
 //   UNTIL '0:01' not on 15-minute boundary,
+//   Jordan {Added anchor rule at year 0}
 //   Palestine {
 //     AT '0:01' not on 15-minute boundary,
 //     Added anchor rule at year 0,
 //   }
 // }
 // Asia/Hebron {
+//   Jordan {Added anchor rule at year 0}
 //   Palestine {
 //     AT '0:01' not on 15-minute boundary,
 //     Added anchor rule at year 0,
 //   }
 // }
+// Asia/Hovd {
+//   Mongol {Added anchor rule at year 0}
+// }
 // Asia/Karachi {
 //   Pakistan {Added anchor rule at year 0}
 // }
 // Asia/Kathmandu {STDOFF (5:45) not at :00 or :30 mark}
+// Asia/Nicosia {
+//   Cyprus {Added anchor rule at year 0}
+//   EUAsia {Added anchor rule at year 0}
+// }
+// Asia/Oral {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Qostanay {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Qyzylorda {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Samarkand {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Shanghai {
+//   PRC {Added anchor rule at year 0}
+// }
+// Asia/Tashkent {
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Tbilisi {
+//   E-EurAsia {Added anchor rule at year 0}
+//   RussiaAsia {Added anchor rule at year 0}
+// }
+// Asia/Ulaanbaatar {
+//   Mongol {Added anchor rule at year 0}
+// }
 // Asia/Yerevan {
 //   Armenia {Added anchor rule at year 0}
+//   RussiaAsia {Added anchor rule at year 0}
 // }
-// Australia/Eucla {STDOFF (8:45) not at :00 or :30 mark}
+// Atlantic/Azores {
+//   EU {Added anchor rule at year 0}
+//   W-Eur {Added anchor rule at year 0}
+// }
+// Atlantic/Canary {
+//   EU {Added anchor rule at year 0}
+// }
+// Atlantic/Faroe {
+//   EU {Added anchor rule at year 0}
+// }
+// Atlantic/Madeira {
+//   EU {Added anchor rule at year 0}
+// }
+// Australia/Eucla {
+//   STDOFF (8:45) not at :00 or :30 mark,
+//   AW {Added anchor rule at year 0}
+// }
+// Australia/Lindeman {
+//   Holiday {Added anchor rule at year 0}
+// }
 // Australia/Lord_Howe {
-//   LH {SAVE (delta_offset) '0:30' different from 1:00}
+//   LH {
+//     Added anchor rule at year 0,
+//     SAVE (delta_offset) '0:30' different from 1:00,
+//   }
+// }
+// Australia/Perth {
+//   AW {Added anchor rule at year 0}
+// }
+// EET {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Andorra {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Athens {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Belgrade {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Berlin {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Brussels {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Bucharest {
+//   E-Eur {Added anchor rule at year 0}
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Budapest {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Chisinau {
+//   E-Eur {Added anchor rule at year 0}
+//   Moldova {Added anchor rule at year 0}
 // }
 // Europe/Dublin {
 //   Eire {SAVE (delta_offset) '-1:00' different from 1:00}
 // }
+// Europe/Gibraltar {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Helsinki {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Istanbul {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Kyiv {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Lisbon {
+//   EU {Added anchor rule at year 0}
+//   W-Eur {Added anchor rule at year 0}
+// }
+// Europe/London {
+//   EU {Added anchor rule at year 0}
+//   GB-Eire {
+//     LETTER 'BST' not single character,
+//     LETTER 'GMT' not single character,
+//   }
+// }
+// Europe/Madrid {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Malta {
+//   EU {Added anchor rule at year 0}
+//   Malta {Added anchor rule at year 0}
+// }
+// Europe/Paris {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Prague {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Riga {
+//   EU {Added anchor rule at year 0}
+//   Latvia {Added anchor rule at year 0}
+// }
+// Europe/Rome {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Simferopol {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Sofia {
+//   Bulg {Added anchor rule at year 0}
+//   E-Eur {Added anchor rule at year 0}
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Tallinn {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Tirane {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Vienna {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Vilnius {
+//   EU {Added anchor rule at year 0}
+// }
+// Europe/Warsaw {
+//   EU {Added anchor rule at year 0}
+//   W-Eur {Added anchor rule at year 0}
+// }
+// Europe/Zurich {
+//   EU {Added anchor rule at year 0}
+// }
+// Indian/Mauritius {
+//   Mauritius {Added anchor rule at year 0}
+// }
 // Pacific/Apia {
 //   WS {Added anchor rule at year 0}
 // }
-// Pacific/Chatham {STDOFF (12:45) not at :00 or :30 mark}
+// Pacific/Chatham {
+//   STDOFF (12:45) not at :00 or :30 mark,
+//   Chatham {Added anchor rule at year 0}
+// }
+// Pacific/Efate {
+//   Vanuatu {Added anchor rule at year 0}
+// }
+// Pacific/Fiji {
+//   Fiji {Added anchor rule at year 0}
+// }
+// Pacific/Galapagos {
+//   Ecuador {Added anchor rule at year 0}
+// }
+// Pacific/Guam {
+//   Guam {AT '2:01' not on 15-minute boundary}
+// }
+// Pacific/Kiritimati {
+//   STDOFF '-10:40' not on 15-minute boundary,
+//   STDOFF (-10:40) not at :00 or :30 mark,
+// }
+// Pacific/Noumea {
+//   NC {Added anchor rule at year 0}
+// }
+// Pacific/Rarotonga {
+//   Cook {
+//     Added anchor rule at year 0,
+//     SAVE (delta_offset) '0:30' different from 1:00,
+//   }
+// }
 // Pacific/Tongatapu {
 //   Tonga {Added anchor rule at year 0}
+// }
+// WET {
+//   EU {Added anchor rule at year 0}
 // }
 
 
