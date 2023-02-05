@@ -31,10 +31,6 @@ func TestZonedExtraTypeConstantsMatch(t *testing.T) {
 }
 
 func TestZonedExtraFromEpochSeconds(t *testing.T) {
-	savedEpochYear := GetCurrentEpochYear()
-	SetCurrentEpochYear(2000)
-	defer SetCurrentEpochYear(savedEpochYear)
-
 	manager := NewZoneManager(&zonedbtesting.DataContext)
 	tz := manager.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
@@ -45,10 +41,6 @@ func TestZonedExtraFromEpochSeconds(t *testing.T) {
 }
 
 func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
-	savedEpochYear := GetCurrentEpochYear()
-	SetCurrentEpochYear(2050)
-	defer SetCurrentEpochYear(savedEpochYear)
-
 	manager := NewZoneManager(&zonedbtesting.DataContext)
 	tz := manager.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
@@ -94,10 +86,6 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 }
 
 func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
-	savedEpochYear := GetCurrentEpochYear()
-	SetCurrentEpochYear(2050)
-	defer SetCurrentEpochYear(savedEpochYear)
-
 	manager := NewZoneManager(&zonedbtesting.DataContext)
 	tz := manager.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 

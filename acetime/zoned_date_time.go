@@ -75,38 +75,6 @@ func NewZonedDateTimeFromEpochSeconds(
 	}
 }
 
-func NewZonedDateTimeFromUnixSeconds64(
-	unixSeconds64 int64, tz *TimeZone) ZonedDateTime {
-
-	if unixSeconds64 == InvalidUnixSeconds64 {
-		return NewZonedDateTimeError()
-	}
-
-	epochSeconds := ATime(unixSeconds64 -
-		GetSecondsToCurrentEpochFromUnixEpoch64())
-
-	odt := tz.OffsetDateTimeFromEpochSeconds(epochSeconds)
-	return ZonedDateTime{
-		Year:          odt.Year,
-		Month:         odt.Month,
-		Day:           odt.Day,
-		Hour:          odt.Hour,
-		Minute:        odt.Minute,
-		Second:        odt.Second,
-		Fold:          odt.Fold,
-		OffsetMinutes: odt.OffsetMinutes,
-		Tz:            tz,
-	}
-}
-
-func (zdt *ZonedDateTime) UnixSeconds64() int64 {
-	epochSeconds := zdt.EpochSeconds()
-	if epochSeconds == InvalidEpochSeconds {
-		return InvalidUnixSeconds64
-	}
-	return int64(epochSeconds) + GetSecondsToCurrentEpochFromUnixEpoch64()
-}
-
 func NewZonedDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedDateTime {
 
