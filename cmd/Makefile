@@ -1,5 +1,5 @@
 help:
-	@echo 'Usage: make (build | tiny | all | clean)'
+	@echo 'Usage: make (build | tiny | tinyesp32 | clean)'
 
 all: build
 
