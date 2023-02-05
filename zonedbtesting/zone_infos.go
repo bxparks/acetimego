@@ -49,8 +49,7 @@ const (
 		"~"
 
 	// All ZoneInfo.Name entries concatenated togther.
-	NameData = "" +
-		"America/Los_Angeles" +
+	NameData = "America/Los_Angeles" +
 		"America/New_York" +
 		"Etc/UTC" +
 		"Pacific/Apia" +
@@ -70,7 +69,7 @@ var (
 	// at index `i` given by the `ZoneRule.Name` field is
 	// `NameData[NameOffsets[i]:NameOffsets[i+1]]`.
 	NameOffsets = []uint16{
-		0, 0, 19, 35, 42, 54, 64,
+		0, 19, 35, 42, 54, 64,
 	}
 )
 
@@ -197,7 +196,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 0: Zone America/New_York
 	{
 		ZoneID: 0x1e2a7654,
-		NameIndex: 2, // "America/New_York"
+		NameIndex: 1, // "America/New_York"
 		EraIndex: 1,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -205,7 +204,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 1: Zone Pacific/Apia
 	{
 		ZoneID: 0x23359b5e,
-		NameIndex: 4, // "Pacific/Apia"
+		NameIndex: 3, // "Pacific/Apia"
 		EraIndex: 3,
 		EraCount: 2,
 		TargetIndex: 0,
@@ -213,7 +212,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 2: Link US/Pacific -> America/Los_Angeles
 	{
 		ZoneID: 0xa950f6ab,
-		NameIndex: 5, // "US/Pacific"
+		NameIndex: 4, // "US/Pacific"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 3, // America/Los_Angeles
@@ -221,7 +220,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 3: Zone America/Los_Angeles
 	{
 		ZoneID: 0xb7f7e8f2,
-		NameIndex: 1, // "America/Los_Angeles"
+		NameIndex: 0, // "America/Los_Angeles"
 		EraIndex: 0,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -229,7 +228,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 4: Zone Etc/UTC
 	{
 		ZoneID: 0xd8e31abc,
-		NameIndex: 3, // "Etc/UTC"
+		NameIndex: 2, // "Etc/UTC"
 		EraIndex: 2,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -242,11 +241,11 @@ const ZoneInfoCount = 5
 const ZoneInfoChunkSize = 12
 
 // ZoneInfosData contains the ZoneInfoRecords data as a hex encoded string.
-const ZoneInfosData = "\x54\x76\x2a\x1e\x02\x00\x01\x00\x01\x00\x00\x00" +
-		"\x5e\x9b\x35\x23\x04\x00\x03\x00\x02\x00\x00\x00" +
-		"\xab\xf6\x50\xa9\x05\x00\x00\x00\x00\x00\x03\x00" +
-		"\xf2\xe8\xf7\xb7\x01\x00\x00\x00\x01\x00\x00\x00" +
-		"\xbc\x1a\xe3\xd8\x03\x00\x02\x00\x01\x00\x00\x00"
+const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
+		"\x5e\x9b\x35\x23\x03\x00\x03\x00\x02\x00\x00\x00" +
+		"\xab\xf6\x50\xa9\x04\x00\x00\x00\x00\x00\x03\x00" +
+		"\xf2\xe8\xf7\xb7\x00\x00\x00\x00\x01\x00\x00\x00" +
+		"\xbc\x1a\xe3\xd8\x02\x00\x02\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
 // Unsuported zones: 347
