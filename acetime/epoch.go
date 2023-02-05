@@ -12,7 +12,7 @@ package acetime
 // Furthermore, the epoch of the AceTimeGo library is adjustable at runtime. The
 // functions in this library will produce valid results within at least +/- 50
 // years (and probably +/- 60 years) from the epoch year.
-type ATime int32
+type ATime int64
 
 const (
 	// The base epoch year used by the ConvertToDays() and ConvertFromDays()
