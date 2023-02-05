@@ -8,7 +8,7 @@
 //     --language go
 //     --scope extended
 //     --db_namespace zonedb
-//     --start_year 2000
+//     --start_year 1974
 //     --until_year 10000
 //
 // using the TZ Database files
@@ -41,7 +41,7 @@ const TzDatabaseVersion string = "2022g"
 
 var RecordContext = zoneinfo.ZoneRecordContext{
 	TzDatabaseVersion: TzDatabaseVersion,
-	StartYear: 2000,
+	StartYear: 1974,
 	UntilYear: 10000,
 	LetterData: LetterData,
 	LetterOffsets: LetterOffsets,
@@ -57,7 +57,7 @@ var RecordContext = zoneinfo.ZoneRecordContext{
 
 var DataContext = zoneinfo.ZoneDataContext{
 	TzDatabaseVersion: TzDatabaseVersion,
-	StartYear: 2000,
+	StartYear: 1974,
 	UntilYear: 10000,
 	LetterData: LetterData,
 	LetterOffsets: LetterOffsets,

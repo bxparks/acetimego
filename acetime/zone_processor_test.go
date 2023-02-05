@@ -75,7 +75,7 @@ func TestZoneProcessorInitForYear(t *testing.T) {
 	zoneInfo := zoneManager.store.ZoneInfoByID(
 		zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	var zp ZoneProcessor
-	zp.InitForZoneInfo(zoneInfo);
+	zp.InitForZoneInfo(zoneInfo)
 	if zp.isFilled {
 		t.Fatal(zp)
 	}

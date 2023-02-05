@@ -15,7 +15,7 @@
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/internal/task
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     233       0       0       0 |     233       0 | C musl
-   6818      29       0       0 |    6847       0 | github.com/bxparks/AceTimeGo/acetime
+   6850      29       0       0 |    6879       0 | github.com/bxparks/AceTimeGo/acetime
       0     356     256       0 |     612     256 | github.com/bxparks/AceTimeGo/zonedbtesting
    2198       0       0       0 |    2198       0 | github.com/bxparks/AceTimeGo/zoneinfo
      64       0       0       0 |      64       0 | internal/bytealg
@@ -24,4 +24,4 @@
    2298     128       8     107 |    2434     115 | runtime
     618     124       0       0 |     742       0 | strings
 ------------------------------- | --------------- | -------
-  15660    4946     280     713 |   20886     993 | total
+  15692    4946     280     713 |   20918     993 | total

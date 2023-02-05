@@ -28,15 +28,15 @@ func TestNewOffsetDateTimeError(t *testing.T) {
 }
 
 func TestOffsetDateTimeEpochSeconds(t *testing.T) {
-	odt := OffsetDateTime{2050, 1, 1, 0, 0, 0, 0, 0}
+	odt := OffsetDateTime{1970, 1, 1, 0, 0, 0, 0, 0}
 	if !(odt.EpochSeconds() == 0) {
 		t.Fatal(odt)
 	}
-	odt = OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, 0}
+	odt = OffsetDateTime{1970, 1, 1, 0, 0, 1, 0, 0}
 	if !(odt.EpochSeconds() == 1) {
 		t.Fatal(odt)
 	}
-	odt = OffsetDateTime{2050, 1, 1, 0, 0, 1, 0, -1}
+	odt = OffsetDateTime{1970, 1, 1, 0, 0, 1, 0, -1}
 	if !(odt.EpochSeconds() == 61) {
 		t.Fatal(odt)
 	}
@@ -44,25 +44,25 @@ func TestOffsetDateTimeEpochSeconds(t *testing.T) {
 
 func TestNewOffsetDateTimeFromEpochSeconds(t *testing.T) {
 	odt := NewOffsetDateTimeFromEpochSeconds(0, 0)
-	if odt.Year != 2050 || odt.Month != 1 || odt.Day != 1 ||
+	if odt.Year != 1970 || odt.Month != 1 || odt.Day != 1 ||
 		odt.Hour != 0 || odt.Minute != 0 || odt.Second != 0 ||
 		odt.OffsetMinutes != 0 {
 		t.Fatalf("NewOffsetDateTimeFromEpochSeconds(0, 0) " +
-			"should be (2050, 1, 1, 0, 0, 0, 0, 0)")
+			"should be (1970, 1, 1, 0, 0, 0, 0, 0)")
 	}
 	odt = NewOffsetDateTimeFromEpochSeconds(0, 60)
-	if odt.Year != 2050 || odt.Month != 1 || odt.Day != 1 ||
+	if odt.Year != 1970 || odt.Month != 1 || odt.Day != 1 ||
 		odt.Hour != 1 || odt.Minute != 0 || odt.Second != 0 ||
 		odt.OffsetMinutes != 60 {
 		t.Fatalf("NewOffsetDateTimeFromEpochSeconds(0, 60) " +
-			"should be (2050, 1, 1, 1, 0, 0, 0, 60)")
+			"should be (1970, 1, 1, 1, 0, 0, 0, 60)")
 	}
 	odt = NewOffsetDateTimeFromEpochSeconds(-3600, 60)
-	if odt.Year != 2050 || odt.Month != 1 || odt.Day != 1 ||
+	if odt.Year != 1970 || odt.Month != 1 || odt.Day != 1 ||
 		odt.Hour != 0 || odt.Minute != 0 || odt.Second != 0 ||
 		odt.OffsetMinutes != 60 {
 		t.Fatalf("NewOffsetDateTimeFromEpochSeconds(-3600, 60) " +
-			"should be (2050, 1, 1, 0, 0, 0, 0, 60)")
+			"should be (1970, 1, 1, 0, 0, 0, 0, 60)")
 	}
 }
 

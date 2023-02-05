@@ -8,7 +8,7 @@
 //     --language go
 //     --scope extended
 //     --db_namespace zonedb
-//     --start_year 2000
+//     --start_year 1974
 //     --until_year 10000
 //
 // using the TZ Database files
@@ -42,10 +42,15 @@ const (
 	LetterData = "" +
 		"+00" +
 		"+02" +
+		"-0430" +
+		"BST" +
 		"CAT" +
+		"CDT" +
 		"CST" +
 		"D" +
 		"DD" +
+		"EST" +
+		"GMT" +
 		"S" +
 		"WAT" +
 		"~"
@@ -56,7 +61,8 @@ var (
 	// at index `i` given by the `ZoneRule.Letter` field is
 	// `LetterData[LetterOffsets[i]:LetterOffsets[i+1]]`.
 	LetterOffsets = []uint8{
-		0, 0, 3, 6, 9, 12, 13, 15, 16, 19,
+		0, 0, 3, 6, 11, 14, 17, 20, 23, 24,
+		26, 29, 32, 33, 36,
 	}
 )
 
@@ -64,17 +70,101 @@ var (
 // ZoneRuleRecords is a concatenated array of zoneinfo.ZoneInfoRecord objects
 // from all ZonePolicyRecords.
 //
-// Supported zone policies: 83
-// numRules: 603
+// Supported zone policies: 114
+// numRules: 1193
 // ---------------------------------------------------------------------------
 
 var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	// ---------------------------------------------------------------------------
 	// PolicyName: AN
 	// RuleIndex: 0
-	// RuleCount: 9
+	// RuleCount: 16
 	// ---------------------------------------------------------------------------
 
+	// Rule    AN    1971    1985    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1971,
+		ToYear: 1985,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    AN    1972    only    -    Feb    27    2:00s    0    S
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AN    1973    1981    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1973,
+		ToYear: 1981,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AN    1982    only    -    Apr    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1982,
+		ToYear: 1982,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AN    1983    1985    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1983,
+		ToYear: 1985,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AN    1986    1989    -    Mar    Sun>=15    2:00s    0    S
+	{
+		FromYear: 1986,
+		ToYear: 1989,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AN    1986    only    -    Oct    19    2:00s    1:00    D
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 19,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    AN    1987    1999    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1987,
@@ -85,7 +175,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AN    1990    1995    -    Mar    Sun>=1    2:00s    0    S
 	{
@@ -97,7 +187,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AN    1996    2005    -    Mar    lastSun    2:00s    0    S
 	{
@@ -109,7 +199,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AN    2000    only    -    Aug    lastSun    2:00s    1:00    D
 	{
@@ -121,7 +211,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AN    2001    2007    -    Oct    lastSun    2:00s    1:00    D
 	{
@@ -133,7 +223,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AN    2006    only    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -145,7 +235,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AN    2007    only    -    Mar    lastSun    2:00s    0    S
 	{
@@ -157,7 +247,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AN    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -169,7 +259,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AN    2008    max    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -181,15 +271,39 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AQ
-	// RuleIndex: 9
-	// RuleCount: 1
+	// RuleIndex: 16
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Rule    AQ    1972    only    -    Feb    lastSun    2:00s    0    S
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AQ    1989    1991    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1989,
+		ToYear: 1991,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    AQ    1990    1992    -    Mar    Sun>=1    2:00s    0    S
 	{
 		FromYear: 1990,
@@ -200,15 +314,39 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AS
-	// RuleIndex: 10
-	// RuleCount: 7
+	// RuleIndex: 19
+	// RuleCount: 15
 	// ---------------------------------------------------------------------------
 
+	// Rule    AS    1971    1985    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1971,
+		ToYear: 1985,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    AS    1986    only    -    Oct    19    2:00s    1:00    D
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 19,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    AS    1987    2007    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1987,
@@ -219,7 +357,79 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
+	},
+	// Rule    AS    1972    only    -    Feb    27    2:00s    0    S
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AS    1973    1985    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1973,
+		ToYear: 1985,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AS    1986    1990    -    Mar    Sun>=15    2:00s    0    S
+	{
+		FromYear: 1986,
+		ToYear: 1990,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AS    1991    only    -    Mar    3    2:00s    0    S
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AS    1992    only    -    Mar    22    2:00s    0    S
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AS    1993    only    -    Mar    7    2:00s    0    S
+	{
+		FromYear: 1993,
+		ToYear: 1993,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 7,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AS    1994    only    -    Mar    20    2:00s    0    S
 	{
@@ -231,7 +441,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AS    1995    2005    -    Mar    lastSun    2:00s    0    S
 	{
@@ -243,7 +453,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AS    2006    only    -    Apr    2    2:00s    0    S
 	{
@@ -255,7 +465,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AS    2007    only    -    Mar    lastSun    2:00s    0    S
 	{
@@ -267,7 +477,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AS    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -279,7 +489,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AS    2008    max    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -291,15 +501,111 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AT
-	// RuleIndex: 17
-	// RuleCount: 8
+	// RuleIndex: 34
+	// RuleCount: 16
 	// ---------------------------------------------------------------------------
 
+	// Rule    AT    1968    1985    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1968,
+		ToYear: 1985,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    AT    1972    only    -    Feb    lastSun    2:00s    0    S
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AT    1973    1981    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1973,
+		ToYear: 1981,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AT    1982    1983    -    Mar    lastSun    2:00s    0    S
+	{
+		FromYear: 1982,
+		ToYear: 1983,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AT    1984    1986    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1984,
+		ToYear: 1986,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AT    1986    only    -    Oct    Sun>=15    2:00s    1:00    D
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    AT    1987    1990    -    Mar    Sun>=15    2:00s    0    S
+	{
+		FromYear: 1987,
+		ToYear: 1990,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AT    1987    only    -    Oct    Sun>=22    2:00s    1:00    D
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 22,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    AT    1988    1990    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1988,
@@ -310,7 +616,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AT    1991    1999    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -322,7 +628,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AT    1991    2005    -    Mar    lastSun    2:00s    0    S
 	{
@@ -334,7 +640,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AT    2000    only    -    Aug    lastSun    2:00s    1:00    D
 	{
@@ -346,7 +652,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AT    2001    max    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -358,7 +664,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AT    2006    only    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -370,7 +676,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AT    2007    only    -    Mar    lastSun    2:00s    0    S
 	{
@@ -382,7 +688,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AT    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -394,15 +700,75 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AV
-	// RuleIndex: 25
-	// RuleCount: 9
+	// RuleIndex: 50
+	// RuleCount: 14
 	// ---------------------------------------------------------------------------
 
+	// Rule    AV    1971    1985    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1971,
+		ToYear: 1985,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    AV    1972    only    -    Feb    lastSun    2:00s    0    S
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AV    1973    1985    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1973,
+		ToYear: 1985,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AV    1986    1990    -    Mar    Sun>=15    2:00s    0    S
+	{
+		FromYear: 1986,
+		ToYear: 1990,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AV    1986    1987    -    Oct    Sun>=15    2:00s    1:00    D
+	{
+		FromYear: 1986,
+		ToYear: 1987,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    AV    1988    1999    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1988,
@@ -413,7 +779,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AV    1991    1994    -    Mar    Sun>=1    2:00s    0    S
 	{
@@ -425,7 +791,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AV    1995    2005    -    Mar    lastSun    2:00s    0    S
 	{
@@ -437,7 +803,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AV    2000    only    -    Aug    lastSun    2:00s    1:00    D
 	{
@@ -449,7 +815,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AV    2001    2007    -    Oct    lastSun    2:00s    1:00    D
 	{
@@ -461,7 +827,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AV    2006    only    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -473,7 +839,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AV    2007    only    -    Mar    lastSun    2:00s    0    S
 	{
@@ -485,7 +851,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AV    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -497,7 +863,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AV    2008    max    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -509,15 +875,87 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AW
-	// RuleIndex: 34
-	// RuleCount: 4
+	// RuleIndex: 64
+	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    AW    1975    only    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AW    1974    only    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    AW    1975    only    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AW    1983    only    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    AW    1984    only    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1984,
+		ToYear: 1984,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AW    1991    only    -    Nov    17    2:00s    1:00    D
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 17,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    AW    1992    only    -    Mar    Sun>=1    2:00s    0    S
 	{
 		FromYear: 1992,
@@ -528,7 +966,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AW    2006    only    -    Dec     3    2:00s    1:00    D
 	{
@@ -540,7 +978,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    AW    2007    2009    -    Mar    lastSun    2:00s    0    S
 	{
@@ -552,7 +990,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AW    2007    2008    -    Oct    lastSun    2:00s    1:00    D
 	{
@@ -564,15 +1002,425 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Albania
+	// RuleIndex: 74
+	// RuleCount: 22
+	// ---------------------------------------------------------------------------
+
+	// Rule    Albania    1943    only    -    Apr    10    3:00    0    -
+	{
+		FromYear: 1943,
+		ToYear: 1943,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtTimeCode: 12,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1974    only    -    May     4    0:00    1:00    S
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1974    only    -    Oct     2    0:00    0    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1975    only    -    May     1    0:00    1:00    S
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1975    only    -    Oct     2    0:00    0    -
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1976    only    -    May     2    0:00    1:00    S
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1976    only    -    Oct     3    0:00    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1977    only    -    May     8    0:00    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 8,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1977    only    -    Oct     2    0:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1978    only    -    May     6    0:00    1:00    S
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1978    only    -    Oct     1    0:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1979    only    -    May     5    0:00    1:00    S
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1979    only    -    Sep    30    0:00    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1980    only    -    May     3    0:00    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1980    only    -    Oct     4    0:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1981    only    -    Apr    26    0:00    1:00    S
+	{
+		FromYear: 1981,
+		ToYear: 1981,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1981    only    -    Sep    27    0:00    0    -
+	{
+		FromYear: 1981,
+		ToYear: 1981,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1982    only    -    May     2    0:00    1:00    S
+	{
+		FromYear: 1982,
+		ToYear: 1982,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1982    only    -    Oct     3    0:00    0    -
+	{
+		FromYear: 1982,
+		ToYear: 1982,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1983    only    -    Apr    18    0:00    1:00    S
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 18,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Albania    1983    only    -    Oct     1    0:00    0    -
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Albania    1984    only    -    Apr     1    0:00    1:00    S
+	{
+		FromYear: 1984,
+		ToYear: 1984,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Algeria
+	// RuleIndex: 96
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
+
+	// Rule    Algeria    1971    only    -    Sep    26    23:00s    0    -
+	{
+		FromYear: 1971,
+		ToYear: 1971,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 92,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Algeria    1977    only    -    May     6     0:00    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Algeria    1977    only    -    Oct    21     0:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Algeria    1978    only    -    Mar    24     1:00    1:00    S
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Algeria    1978    only    -    Sep    22     3:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 12,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Algeria    1980    only    -    Apr    25     0:00    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Algeria    1980    only    -    Oct    31     2:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Arg
-	// RuleIndex: 38
-	// RuleCount: 6
+	// RuleIndex: 103
+	// RuleCount: 11
 	// ---------------------------------------------------------------------------
 
+	// Rule    Arg    1968    1969    -    Apr    Sun>=1    0:00    0    -
+	{
+		FromYear: 1968,
+		ToYear: 1969,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Arg    1974    only    -    Jan    23    0:00    1:00    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 23,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Arg    1974    only    -    May     1    0:00    0    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Arg    1988    only    -    Dec     1    0:00    1:00    -
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Arg    1989    1993    -    Mar    Sun>=1    0:00    0    -
 	{
 		FromYear: 1989,
@@ -583,6 +1431,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Arg    1989    1992    -    Oct    Sun>=15    0:00    1:00    -
+	{
+		FromYear: 1989,
+		ToYear: 1992,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
 		LetterIndex: 0, // ""
 	},
 	// Rule    Arg    1999    only    -    Oct    Sun>=1    0:00    1:00    -
@@ -648,7 +1508,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Armenia
-	// RuleIndex: 44
+	// RuleIndex: 114
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -691,7 +1551,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Aus
-	// RuleIndex: 47
+	// RuleIndex: 117
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -705,15 +1565,70 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Austria
+	// RuleIndex: 118
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
+
+	// Rule    Austria    1947    1948    -    Oct    Sun>=1    2:00s    0    -
+	{
+		FromYear: 1947,
+		ToYear: 1948,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Austria    1980    only    -    Apr     6    0:00    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Austria    1980    only    -    Sep    28    0:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Azer
-	// RuleIndex: 48
-	// RuleCount: 2
+	// RuleIndex: 121
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Azer    1997    2015    -    Oct    lastSun     5:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Azer    1997    2015    -    Mar    lastSun     4:00    1:00    -
 	{
 		FromYear: 1997,
@@ -741,10 +1656,70 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Barb
-	// RuleIndex: 50
-	// RuleCount: 1
+	// RuleIndex: 124
+	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
+	// Rule    Barb    1944    only    -    Sep    10    6:00u    0    S
+	{
+		FromYear: 1944,
+		ToYear: 1944,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtTimeCode: 24,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Barb    1977    only    -    Jun    12    2:00    1:00    D
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Barb    1977    1978    -    Oct    Sun>=1    2:00    0    S
+	{
+		FromYear: 1977,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Barb    1978    1980    -    Apr    Sun>=15    2:00    1:00    D
+	{
+		FromYear: 1978,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Barb    1979    only    -    Sep    30    2:00    0    S
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Barb    1980    only    -    Sep    25    2:00    0    S
 	{
 		FromYear: 1980,
@@ -755,15 +1730,82 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Belgium
+	// RuleIndex: 130
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
+
+	// Rule    Belgium    1946    only    -    Oct     7     2:00s    0    -
+	{
+		FromYear: 1946,
+		ToYear: 1946,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 7,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Belize
-	// RuleIndex: 51
-	// RuleCount: 1
+	// RuleIndex: 131
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Rule    Belize    1948    1968    -    Feb    Sat>=8    24:00    0    CST
+	{
+		FromYear: 1948,
+		ToYear: 1968,
+		InMonth: 2,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 8,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 7, // "CST"
+	},
+	// Rule    Belize    1973    only    -    Dec     5    0:00    1:00    CDT
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 6, // "CDT"
+	},
+	// Rule    Belize    1974    only    -    Feb     9    0:00    0    CST
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 9,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 7, // "CST"
+	},
+	// Rule    Belize    1982    only    -    Dec    18    0:00    1:00    CDT
+	{
+		FromYear: 1982,
+		ToYear: 1982,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 18,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 6, // "CDT"
+	},
 	// Rule    Belize    1983    only    -    Feb    12    0:00    0    CST
 	{
 		FromYear: 1983,
@@ -774,15 +1816,322 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 4, // "CST"
+		LetterIndex: 7, // "CST"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Bermuda
+	// RuleIndex: 136
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
+
+	// Rule    Bermuda    1956    only    -    Oct    lastSun     2:00    0    S
+	{
+		FromYear: 1956,
+		ToYear: 1956,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Brazil
-	// RuleIndex: 52
-	// RuleCount: 20
+	// RuleIndex: 137
+	// RuleCount: 44
 	// ---------------------------------------------------------------------------
 
+	// Rule    Brazil    1966    1968    -    Mar     1     0:00    0    -
+	{
+		FromYear: 1966,
+		ToYear: 1968,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1985    only    -    Nov     2     0:00    1:00    -
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1986    only    -    Mar    15     0:00    0    -
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1986    only    -    Oct    25     0:00    1:00    -
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1987    only    -    Feb    14     0:00    0    -
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 14,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1987    only    -    Oct    25     0:00    1:00    -
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1988    only    -    Feb     7     0:00    0    -
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 7,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1988    only    -    Oct    16     0:00    1:00    -
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1989    only    -    Jan    29     0:00    0    -
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1989    only    -    Oct    15     0:00    1:00    -
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1990    only    -    Feb    11     0:00    0    -
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 11,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1990    only    -    Oct    21     0:00    1:00    -
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1991    only    -    Feb    17     0:00    0    -
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 17,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1991    only    -    Oct    20     0:00    1:00    -
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1992    only    -    Feb     9     0:00    0    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 9,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1992    only    -    Oct    25     0:00    1:00    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1993    only    -    Jan    31     0:00    0    -
+	{
+		FromYear: 1993,
+		ToYear: 1993,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1993    1995    -    Oct    Sun>=11     0:00    1:00    -
+	{
+		FromYear: 1993,
+		ToYear: 1995,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 11,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1994    1995    -    Feb    Sun>=15     0:00    0    -
+	{
+		FromYear: 1994,
+		ToYear: 1995,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1996    only    -    Feb    11     0:00    0    -
+	{
+		FromYear: 1996,
+		ToYear: 1996,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 11,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1996    only    -    Oct     6     0:00    1:00    -
+	{
+		FromYear: 1996,
+		ToYear: 1996,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1997    only    -    Feb    16     0:00    0    -
+	{
+		FromYear: 1997,
+		ToYear: 1997,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1997    only    -    Oct     6     0:00    1:00    -
+	{
+		FromYear: 1997,
+		ToYear: 1997,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Brazil    1998    only    -    Mar     1     0:00    0    -
+	{
+		FromYear: 1998,
+		ToYear: 1998,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Brazil    1998    only    -    Oct    11     0:00    1:00    -
 	{
 		FromYear: 1998,
@@ -1025,11 +2374,138 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// PolicyName: C-Eur
-	// RuleIndex: 72
-	// RuleCount: 3
+	// PolicyName: Bulg
+	// RuleIndex: 181
+	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Bulg    1979    only    -    Oct     1     1:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Bulg    1979    only    -    Mar    31    23:00    1:00    S
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 92,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Bulg    1979    only    -    Oct     1     1:00    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Bulg    1980    1982    -    Apr    Sat>=1    23:00    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1982,
+		InMonth: 4,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 1,
+		AtTimeCode: 92,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Bulg    1980    only    -    Sep    29     1:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Bulg    1981    only    -    Sep    27     2:00    0    -
+	{
+		FromYear: 1981,
+		ToYear: 1981,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: C-Eur
+	// RuleIndex: 187
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
+
+	// Rule    C-Eur    1945    only    -    Sep    16     2:00s    0    -
+	{
+		FromYear: 1945,
+		ToYear: 1945,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    C-Eur    1977    1980    -    Apr    Sun>=1     2:00s    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    C-Eur    1977    only    -    Sep    lastSun     2:00s    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    C-Eur    1978    only    -    Oct     1     2:00s    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    C-Eur    1979    1995    -    Sep    lastSun     2:00s    0    -
 	{
 		FromYear: 1979,
@@ -1052,7 +2528,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    C-Eur    1996    max    -    Oct    lastSun     2:00s    0    -
 	{
@@ -1069,10 +2545,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: CO
-	// RuleIndex: 75
-	// RuleCount: 1
+	// RuleIndex: 194
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    CO    1993    only    -    Feb     6    24:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    CO    1992    only    -    May     3     0:00    1:00    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    CO    1993    only    -    Feb     6    24:00    0    -
 	{
 		FromYear: 1993,
@@ -1088,10 +2588,70 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: CR
-	// RuleIndex: 76
-	// RuleCount: 1
+	// RuleIndex: 197
+	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    CR    1979    1980    -    Jun    Sun>=1    0:00    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    CR    1979    1980    -    Feb    lastSun    0:00    1:00    D
+	{
+		FromYear: 1979,
+		ToYear: 1980,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    CR    1979    1980    -    Jun    Sun>=1    0:00    0    S
+	{
+		FromYear: 1979,
+		ToYear: 1980,
+		InMonth: 6,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    CR    1991    1992    -    Jan    Sat>=15    0:00    1:00    D
+	{
+		FromYear: 1991,
+		ToYear: 1992,
+		InMonth: 1,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 15,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    CR    1991    only    -    Jul     1    0:00    0    S
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    CR    1992    only    -    Mar    15    0:00    0    S
 	{
 		FromYear: 1992,
@@ -1102,15 +2662,27 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Canada
-	// RuleIndex: 77
-	// RuleCount: 5
+	// RuleIndex: 203
+	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
+	// Rule    Canada    1945    only    -    Sep    30    2:00    0    S
+	{
+		FromYear: 1945,
+		ToYear: 1945,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Canada    1974    1986    -    Apr    lastSun    2:00    1:00    D
 	{
 		FromYear: 1974,
@@ -1121,7 +2693,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Canada    1974    2006    -    Oct    lastSun    2:00    0    S
 	{
@@ -1133,7 +2705,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Canada    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -1145,7 +2717,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Canada    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -1157,7 +2729,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Canada    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -1169,15 +2741,75 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Chatham
-	// RuleIndex: 82
-	// RuleCount: 5
+	// RuleIndex: 209
+	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Chatham    1975    only    -    Feb    lastSun    2:45s    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chatham    1974    only    -    Nov    Sun>=1    2:45s    1:00    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 11,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 11,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chatham    1975    only    -    Feb    lastSun    2:45s    0    -
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 11,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chatham    1975    1988    -    Oct    lastSun    2:45s    1:00    -
+	{
+		FromYear: 1975,
+		ToYear: 1988,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 11,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chatham    1976    1989    -    Mar    Sun>=1    2:45s    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1989,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 11,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Chatham    1989    only    -    Oct    Sun>=8    2:45s    1:00    -
 	{
 		FromYear: 1989,
@@ -1241,10 +2873,154 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Chile
-	// RuleIndex: 87
-	// RuleCount: 17
+	// RuleIndex: 219
+	// RuleCount: 29
 	// ---------------------------------------------------------------------------
 
+	// Rule    Chile    1970    1972    -    Oct    Sun>=9    4:00u    1:00    -
+	{
+		FromYear: 1970,
+		ToYear: 1972,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 9,
+		AtTimeCode: 16,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1972    1986    -    Mar    Sun>=9    3:00u    0    -
+	{
+		FromYear: 1972,
+		ToYear: 1986,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 9,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1973    only    -    Sep    30    4:00u    1:00    -
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 16,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1974    1987    -    Oct    Sun>=9    4:00u    1:00    -
+	{
+		FromYear: 1974,
+		ToYear: 1987,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 9,
+		AtTimeCode: 16,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1987    only    -    Apr    12    3:00u    0    -
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1988    1990    -    Mar    Sun>=9    3:00u    0    -
+	{
+		FromYear: 1988,
+		ToYear: 1990,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 9,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1988    1989    -    Oct    Sun>=9    4:00u    1:00    -
+	{
+		FromYear: 1988,
+		ToYear: 1989,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 9,
+		AtTimeCode: 16,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1990    only    -    Sep    16    4:00u    1:00    -
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 16,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1991    1996    -    Mar    Sun>=9    3:00u    0    -
+	{
+		FromYear: 1991,
+		ToYear: 1996,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 9,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1991    1997    -    Oct    Sun>=9    4:00u    1:00    -
+	{
+		FromYear: 1991,
+		ToYear: 1997,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 9,
+		AtTimeCode: 16,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1997    only    -    Mar    30    3:00u    0    -
+	{
+		FromYear: 1997,
+		ToYear: 1997,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1998    only    -    Mar    Sun>=9    3:00u    0    -
+	{
+		FromYear: 1998,
+		ToYear: 1998,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 9,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Chile    1998    only    -    Sep    27    4:00u    1:00    -
 	{
 		FromYear: 1998,
@@ -1452,10 +3228,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Cook
-	// RuleIndex: 104
-	// RuleCount: 1
+	// RuleIndex: 248
+	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Cook    1979    1991    -    Mar    Sun>=1    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Cook    1978    only    -    Nov    12    0:00    0:30    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 6, // (delta_minutes=30)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Cook    1979    1991    -    Mar    Sun>=1    0:00    0    -
 	{
 		FromYear: 1979,
@@ -1468,13 +3268,169 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
 		LetterIndex: 0, // ""
 	},
+	// Rule    Cook    1979    1990    -    Oct    lastSun    0:00    0:30    -
+	{
+		FromYear: 1979,
+		ToYear: 1990,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 6, // (delta_minutes=30)/15 + 4
+		LetterIndex: 0, // ""
+	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Cuba
-	// RuleIndex: 105
-	// RuleCount: 14
+	// RuleIndex: 252
+	// RuleCount: 26
 	// ---------------------------------------------------------------------------
 
+	// Rule    Cuba    1969    1977    -    Apr    lastSun    0:00    1:00    D
+	{
+		FromYear: 1969,
+		ToYear: 1977,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Cuba    1969    1971    -    Oct    lastSun    0:00    0    S
+	{
+		FromYear: 1969,
+		ToYear: 1971,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Cuba    1972    1974    -    Oct    8    0:00    0    S
+	{
+		FromYear: 1972,
+		ToYear: 1974,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 8,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Cuba    1975    1977    -    Oct    lastSun    0:00    0    S
+	{
+		FromYear: 1975,
+		ToYear: 1977,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Cuba    1978    only    -    May    7    0:00    1:00    D
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 7,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Cuba    1978    1990    -    Oct    Sun>=8    0:00    0    S
+	{
+		FromYear: 1978,
+		ToYear: 1990,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 8,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Cuba    1979    1980    -    Mar    Sun>=15    0:00    1:00    D
+	{
+		FromYear: 1979,
+		ToYear: 1980,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Cuba    1981    1985    -    May    Sun>=5    0:00    1:00    D
+	{
+		FromYear: 1981,
+		ToYear: 1985,
+		InMonth: 5,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 5,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Cuba    1986    1989    -    Mar    Sun>=14    0:00    1:00    D
+	{
+		FromYear: 1986,
+		ToYear: 1989,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 14,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Cuba    1990    1997    -    Apr    Sun>=1    0:00    1:00    D
+	{
+		FromYear: 1990,
+		ToYear: 1997,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Cuba    1991    1995    -    Oct    Sun>=8    0:00s    0    S
+	{
+		FromYear: 1991,
+		ToYear: 1995,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 8,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Cuba    1996    only    -    Oct     6    0:00s    0    S
+	{
+		FromYear: 1996,
+		ToYear: 1996,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Cuba    1997    only    -    Oct    12    0:00s    0    S
 	{
 		FromYear: 1997,
@@ -1485,7 +3441,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Cuba    1998    1999    -    Mar    lastSun    0:00s    1:00    D
 	{
@@ -1497,7 +3453,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Cuba    1998    2003    -    Oct    lastSun    0:00s    0    S
 	{
@@ -1509,7 +3465,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Cuba    2000    2003    -    Apr    Sun>=1    0:00s    1:00    D
 	{
@@ -1521,7 +3477,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Cuba    2004    only    -    Mar    lastSun    0:00s    1:00    D
 	{
@@ -1533,7 +3489,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Cuba    2006    2010    -    Oct    lastSun    0:00s    0    S
 	{
@@ -1545,7 +3501,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Cuba    2007    only    -    Mar    Sun>=8    0:00s    1:00    D
 	{
@@ -1557,7 +3513,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Cuba    2008    only    -    Mar    Sun>=15    0:00s    1:00    D
 	{
@@ -1569,7 +3525,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Cuba    2009    2010    -    Mar    Sun>=8    0:00s    1:00    D
 	{
@@ -1581,7 +3537,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Cuba    2011    only    -    Mar    Sun>=15    0:00s    1:00    D
 	{
@@ -1593,7 +3549,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Cuba    2011    only    -    Nov    13    0:00s    0    S
 	{
@@ -1605,7 +3561,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Cuba    2012    only    -    Apr    1    0:00s    1:00    D
 	{
@@ -1617,7 +3573,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Cuba    2012    max    -    Nov    Sun>=1    0:00s    0    S
 	{
@@ -1629,7 +3585,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Cuba    2013    max    -    Mar    Sun>=8    0:00s    1:00    D
 	{
@@ -1641,12 +3597,201 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Cyprus
+	// RuleIndex: 278
+	// RuleCount: 10
+	// ---------------------------------------------------------------------------
+
+	// Anchor: Rule    Cyprus    1975    only    -    Oct    12    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Cyprus    1975    only    -    Apr    13    0:00    1:00    S
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Cyprus    1975    only    -    Oct    12    0:00    0    -
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Cyprus    1976    only    -    May    15    0:00    1:00    S
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Cyprus    1976    only    -    Oct    11    0:00    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 11,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Cyprus    1977    1980    -    Apr    Sun>=1    0:00    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Cyprus    1977    only    -    Sep    25    0:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Cyprus    1978    only    -    Oct    2    0:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Cyprus    1979    1997    -    Sep    lastSun    0:00    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1997,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Cyprus    1981    1998    -    Mar    lastSun    0:00    1:00    S
+	{
+		FromYear: 1981,
+		ToYear: 1998,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Czech
+	// RuleIndex: 288
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
+
+	// Rule    Czech    1946    1949    -    Oct    Sun>=1    2:00s    0    -
+	{
+		FromYear: 1946,
+		ToYear: 1949,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: DR
+	// RuleIndex: 289
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
+
+	// Rule    DR    1969    1973    -    Oct    lastSun    0:00    0:30    -0430
+	{
+		FromYear: 1969,
+		ToYear: 1973,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 6, // (delta_minutes=30)/15 + 4
+		LetterIndex: 3, // "-0430"
+	},
+	// Rule    DR    1971    only    -    Jan    20    0:00    0    EST
+	{
+		FromYear: 1971,
+		ToYear: 1971,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 10, // "EST"
+	},
+	// Rule    DR    1972    1974    -    Jan    21    0:00    0    EST
+	{
+		FromYear: 1972,
+		ToYear: 1974,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 10, // "EST"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Dhaka
-	// RuleIndex: 119
+	// RuleIndex: 292
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -1688,11 +3833,90 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// PolicyName: E-EurAsia
-	// RuleIndex: 122
-	// RuleCount: 3
+	// PolicyName: E-Eur
+	// RuleIndex: 295
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    E-Eur    1979    1995    -    Sep    lastSun     0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    E-Eur    1977    1980    -    Apr    Sun>=1     0:00    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    E-Eur    1979    1995    -    Sep    lastSun     0:00    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1995,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    E-Eur    1981    max    -    Mar    lastSun     0:00    1:00    S
+	{
+		FromYear: 1981,
+		ToYear: 9999,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    E-Eur    1996    max    -    Oct    lastSun     0:00    0    -
+	{
+		FromYear: 1996,
+		ToYear: 9999,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: E-EurAsia
+	// RuleIndex: 300
+	// RuleCount: 4
+	// ---------------------------------------------------------------------------
+
+	// Anchor: Rule E-EurAsia    1979    1995    -    Sep    lastSun     0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule E-EurAsia    1981    max    -    Mar    lastSun     0:00    1:00    -
 	{
 		FromYear: 1981,
@@ -1732,10 +3956,58 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: EU
-	// RuleIndex: 125
-	// RuleCount: 3
+	// RuleIndex: 304
+	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    EU    1977    only    -    Sep    lastSun     1:00u    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    EU    1977    1980    -    Apr    Sun>=1     1:00u    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    EU    1977    only    -    Sep    lastSun     1:00u    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    EU    1978    only    -    Oct     1     1:00u    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    EU    1979    1995    -    Sep    lastSun     1:00u    0    -
 	{
 		FromYear: 1979,
@@ -1758,7 +4030,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    EU    1996    max    -    Oct    lastSun     1:00u    0    -
 	{
@@ -1775,10 +4047,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: EUAsia
-	// RuleIndex: 128
-	// RuleCount: 3
+	// RuleIndex: 311
+	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    EUAsia    1979    1995    -    Sep    lastSun     1:00u    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    EUAsia    1981    max    -    Mar    lastSun     1:00u    1:00    S
 	{
 		FromYear: 1981,
@@ -1789,7 +4073,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    EUAsia    1979    1995    -    Sep    lastSun     1:00u    0    -
 	{
@@ -1818,10 +4102,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Ecuador
-	// RuleIndex: 131
-	// RuleCount: 1
+	// RuleIndex: 315
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Ecuador    1993    only    -    Feb     5    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Ecuador    1992    only    -    Nov    28    0:00    1:00    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Ecuador    1993    only    -    Feb     5    0:00    0    -
 	{
 		FromYear: 1993,
@@ -1836,11 +4144,78 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// PolicyName: Egypt
-	// RuleIndex: 132
-	// RuleCount: 14
+	// PolicyName: Edm
+	// RuleIndex: 318
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Rule    Edm    1947    only    -    Sep    lastSun    2:00    0    S
+	{
+		FromYear: 1947,
+		ToYear: 1947,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Edm    1972    1986    -    Apr    lastSun    2:00    1:00    D
+	{
+		FromYear: 1972,
+		ToYear: 1986,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Edm    1972    2006    -    Oct    lastSun    2:00    0    S
+	{
+		FromYear: 1972,
+		ToYear: 2006,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Egypt
+	// RuleIndex: 321
+	// RuleCount: 21
+	// ---------------------------------------------------------------------------
+
+	// Rule    Egypt    1959    1981    -    May     1    1:00    1:00    S
+	{
+		FromYear: 1959,
+		ToYear: 1981,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Egypt    1959    1965    -    Sep    30    3:00    0    -
+	{
+		FromYear: 1959,
+		ToYear: 1965,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 12,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Egypt    1966    1994    -    Oct     1    3:00    0    -
 	{
 		FromYear: 1966,
@@ -1853,6 +4228,66 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
 		LetterIndex: 0, // ""
 	},
+	// Rule    Egypt    1982    only    -    Jul    25    1:00    1:00    S
+	{
+		FromYear: 1982,
+		ToYear: 1982,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Egypt    1983    only    -    Jul    12    1:00    1:00    S
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Egypt    1984    1988    -    May     1    1:00    1:00    S
+	{
+		FromYear: 1984,
+		ToYear: 1988,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Egypt    1989    only    -    May     6    1:00    1:00    S
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Egypt    1990    1994    -    May     1    1:00    1:00    S
+	{
+		FromYear: 1990,
+		ToYear: 1994,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Egypt    1995    2010    -    Apr    lastFri     0:00s    1:00    S
 	{
 		FromYear: 1995,
@@ -1863,7 +4298,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Egypt    1995    2005    -    Sep    lastThu    24:00    0    -
 	{
@@ -1947,7 +4382,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Egypt    2010    only    -    Sep    lastThu    24:00    0    -
 	{
@@ -1971,7 +4406,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Egypt    2014    only    -    Jun    26    24:00    0    -
 	{
@@ -1995,7 +4430,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Egypt    2014    only    -    Sep    lastThu    24:00    0    -
 	{
@@ -2012,10 +4447,46 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Eire
-	// RuleIndex: 146
-	// RuleCount: 3
+	// RuleIndex: 342
+	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
+	// Rule    Eire    1971    only    -    Oct    31     2:00u    -1:00    -
+	{
+		FromYear: 1971,
+		ToYear: 1971,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Eire    1972    1980    -    Mar    Sun>=16     2:00u    0    -
+	{
+		FromYear: 1972,
+		ToYear: 1980,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 8,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Eire    1972    1980    -    Oct    Sun>=23     2:00u    -1:00    -
+	{
+		FromYear: 1972,
+		ToYear: 1980,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 23,
+		AtTimeCode: 8,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Eire    1981    max    -    Mar    lastSun     1:00u    0    -
 	{
 		FromYear: 1981,
@@ -2026,6 +4497,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 32, // SuffixU + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Eire    1981    1989    -    Oct    Sun>=23     1:00u    -1:00    -
+	{
+		FromYear: 1981,
+		ToYear: 1989,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 23,
+		AtTimeCode: 4,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
 		LetterIndex: 0, // ""
 	},
 	// Rule    Eire    1990    1995    -    Oct    Sun>=22     1:00u    -1:00    -
@@ -2055,10 +4538,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Falk
-	// RuleIndex: 149
-	// RuleCount: 5
+	// RuleIndex: 349
+	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
+	// Rule    Falk    1943    only    -    Jan    1    0:00    0    -
+	{
+		FromYear: 1943,
+		ToYear: 1943,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Falk    1983    only    -    Sep    lastSun    0:00    1:00    -
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Falk    1984    1985    -    Apr    lastSun    0:00    0    -
 	{
 		FromYear: 1984,
@@ -2069,6 +4576,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Falk    1984    only    -    Sep    16    0:00    1:00    -
+	{
+		FromYear: 1984,
+		ToYear: 1984,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
 		LetterIndex: 0, // ""
 	},
 	// Rule    Falk    1985    2000    -    Sep    Sun>=9    0:00    1:00    -
@@ -2122,10 +4641,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Fiji
-	// RuleIndex: 154
-	// RuleCount: 12
+	// RuleIndex: 357
+	// RuleCount: 13
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Fiji    1999    2000    -    Feb    lastSun    3:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Fiji    1998    1999    -    Nov    Sun>=1    2:00    1:00    -
 	{
 		FromYear: 1998,
@@ -2272,11 +4803,418 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// PolicyName: Guam
-	// RuleIndex: 166
+	// PolicyName: Finland
+	// RuleIndex: 370
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
+
+	// Rule    Finland    1942    only    -    Oct    4    1:00    0    -
+	{
+		FromYear: 1942,
+		ToYear: 1942,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Finland    1981    1982    -    Mar    lastSun    2:00    1:00    S
+	{
+		FromYear: 1981,
+		ToYear: 1982,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Finland    1981    1982    -    Sep    lastSun    3:00    0    -
+	{
+		FromYear: 1981,
+		ToYear: 1982,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 12,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: France
+	// RuleIndex: 373
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
+
+	// Rule    France    1945    only    -    Sep    16     3:00    0    -
+	{
+		FromYear: 1945,
+		ToYear: 1945,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 12,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    France    1976    only    -    Mar    28     1:00    1:00    S
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    France    1976    only    -    Sep    26     1:00    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: GB-Eire
+	// RuleIndex: 376
+	// RuleCount: 6
+	// ---------------------------------------------------------------------------
+
+	// Rule    GB-Eire    1961    1968    -    Oct    Sun>=23    2:00s    0    GMT
+	{
+		FromYear: 1961,
+		ToYear: 1968,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 23,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 11, // "GMT"
+	},
+	// Rule    GB-Eire    1972    1980    -    Mar    Sun>=16    2:00s    1:00    BST
+	{
+		FromYear: 1972,
+		ToYear: 1980,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 4, // "BST"
+	},
+	// Rule    GB-Eire    1972    1980    -    Oct    Sun>=23    2:00s    0    GMT
+	{
+		FromYear: 1972,
+		ToYear: 1980,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 23,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 11, // "GMT"
+	},
+	// Rule    GB-Eire    1981    1995    -    Mar    lastSun    1:00u    1:00    BST
+	{
+		FromYear: 1981,
+		ToYear: 1995,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 4, // "BST"
+	},
+	// Rule    GB-Eire 1981    1989    -    Oct    Sun>=23    1:00u    0    GMT
+	{
+		FromYear: 1981,
+		ToYear: 1989,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 23,
+		AtTimeCode: 4,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 11, // "GMT"
+	},
+	// Rule    GB-Eire 1990    1995    -    Oct    Sun>=22    1:00u    0    GMT
+	{
+		FromYear: 1990,
+		ToYear: 1995,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 22,
+		AtTimeCode: 4,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 11, // "GMT"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Germany
+	// RuleIndex: 382
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
+	// Rule    Germany    1947    1949    -    Oct    Sun>=1    2:00s    0    -
+	{
+		FromYear: 1947,
+		ToYear: 1949,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Greece
+	// RuleIndex: 383
+	// RuleCount: 12
+	// ---------------------------------------------------------------------------
+
+	// Rule    Greece    1952    only    -    Nov     2    0:00    0    -
+	{
+		FromYear: 1952,
+		ToYear: 1952,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Greece    1975    only    -    Apr    12    0:00s    1:00    S
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Greece    1975    only    -    Nov    26    0:00s    0    -
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Greece    1976    only    -    Apr    11    2:00s    1:00    S
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 11,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Greece    1976    only    -    Oct    10    2:00s    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Greece    1977    1978    -    Apr    Sun>=1    2:00s    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1978,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Greece    1977    only    -    Sep    26    2:00s    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Greece    1978    only    -    Sep    24    4:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 16,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Greece    1979    only    -    Apr     1    9:00    1:00    S
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 36,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Greece    1979    only    -    Sep    29    2:00    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Greece    1980    only    -    Apr     1    0:00    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Greece    1980    only    -    Sep    28    0:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Guam
+	// RuleIndex: 395
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
+
+	// Rule    Guam    1970    1971    -    Sep    Sun>=1    2:00    0    S
+	{
+		FromYear: 1970,
+		ToYear: 1971,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Guam    1973    only    -    Dec    16    2:00    1:00    D
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Guam    1974    only    -    Feb    24    2:00    0    S
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Guam    1976    only    -    May    26    2:00    1:00    D
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Guam    1976    only    -    Aug    22    2:01    0    S
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 8,
+		AtTimeModifier: 1, // SuffixW + minute=1
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Guam    1977    only    -    Apr    24    2:00    1:00    D
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Guam    1977    only    -    Aug    28    2:00    0    S
 	{
 		FromYear: 1977,
@@ -2287,15 +5225,87 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Guat
-	// RuleIndex: 167
-	// RuleCount: 3
+	// RuleIndex: 402
+	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Guat    1974    only    -    Feb    24    0:00    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Guat    1973    only    -    Nov    25    0:00    1:00    D
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Guat    1974    only    -    Feb    24    0:00    0    S
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Guat    1983    only    -    May    21    0:00    1:00    D
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Guat    1983    only    -    Sep    22    0:00    0    S
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Guat    1991    only    -    Mar    23    0:00    1:00    D
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 23,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Guat    1991    only    -    Sep     7    0:00    0    S
 	{
 		FromYear: 1991,
@@ -2306,7 +5316,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Guat    2006    only    -    Apr    30    0:00    1:00    D
 	{
@@ -2318,7 +5328,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Guat    2006    only    -    Oct     1    0:00    0    S
 	{
@@ -2330,15 +5340,75 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: HK
-	// RuleIndex: 170
-	// RuleCount: 1
+	// RuleIndex: 411
+	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
+	// Rule    HK    1953    1964    -    Oct    Sun>=31    3:30    0    -
+	{
+		FromYear: 1953,
+		ToYear: 1964,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 31,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    HK    1965    1976    -    Apr    Sun>=16    3:30    1:00    S
+	{
+		FromYear: 1965,
+		ToYear: 1976,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    HK    1965    1976    -    Oct    Sun>=16    3:30    0    -
+	{
+		FromYear: 1965,
+		ToYear: 1976,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    HK    1973    only    -    Dec    30    3:30    1:00    S
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    HK    1979    only    -    May    13    3:30    1:00    S
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    HK    1979    only    -    Oct    21    3:30    0    -
 	{
 		FromYear: 1979,
@@ -2354,10 +5424,70 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Haiti
-	// RuleIndex: 171
-	// RuleCount: 7
+	// RuleIndex: 417
+	// RuleCount: 12
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Haiti    1983    1987    -    Oct    lastSun    0:00    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Haiti    1983    only    -    May    8    0:00    1:00    D
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 8,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Haiti    1984    1987    -    Apr    lastSun    0:00    1:00    D
+	{
+		FromYear: 1984,
+		ToYear: 1987,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Haiti    1983    1987    -    Oct    lastSun    0:00    0    S
+	{
+		FromYear: 1983,
+		ToYear: 1987,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Haiti    1988    1997    -    Apr    Sun>=1    1:00s    1:00    D
+	{
+		FromYear: 1988,
+		ToYear: 1997,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Haiti    1988    1997    -    Oct    lastSun    1:00s    0    S
 	{
 		FromYear: 1988,
@@ -2368,7 +5498,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Haiti    2005    2006    -    Apr    Sun>=1    0:00    1:00    D
 	{
@@ -2380,7 +5510,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Haiti    2005    2006    -    Oct    lastSun    0:00    0    S
 	{
@@ -2392,7 +5522,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Haiti    2012    2015    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -2404,7 +5534,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Haiti    2012    2015    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -2416,7 +5546,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Haiti    2017    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -2428,7 +5558,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Haiti    2017    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -2440,15 +5570,82 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Halifax
+	// RuleIndex: 429
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
+
+	// Rule    Halifax    1956    1959    -    Sep    lastSun    2:00    0    S
+	{
+		FromYear: 1956,
+		ToYear: 1959,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Halifax    1962    1973    -    Apr    lastSun    2:00    1:00    D
+	{
+		FromYear: 1962,
+		ToYear: 1973,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Halifax    1962    1973    -    Oct    lastSun    2:00    0    S
+	{
+		FromYear: 1962,
+		ToYear: 1973,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Holiday
-	// RuleIndex: 178
-	// RuleCount: 1
+	// RuleIndex: 432
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Holiday    1993    1994    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Holiday    1992    1993    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1992,
+		ToYear: 1993,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Holiday    1993    1994    -    Mar    Sun>=1    2:00s    0    S
 	{
 		FromYear: 1993,
@@ -2459,15 +5656,39 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Hond
-	// RuleIndex: 179
-	// RuleCount: 3
+	// RuleIndex: 435
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Hond    1987    1988    -    Sep    lastSun    0:00    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Hond    1987    1988    -    May    Sun>=1    0:00    1:00    D
+	{
+		FromYear: 1987,
+		ToYear: 1988,
+		InMonth: 5,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Hond    1987    1988    -    Sep    lastSun    0:00    0    S
 	{
 		FromYear: 1987,
@@ -2478,7 +5699,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Hond    2006    only    -    May    Sun>=1    0:00    1:00    D
 	{
@@ -2490,7 +5711,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Hond    2006    only    -    Aug    Mon>=1    0:00    0    S
 	{
@@ -2502,15 +5723,238 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Hungary
+	// RuleIndex: 440
+	// RuleCount: 5
+	// ---------------------------------------------------------------------------
+
+	// Rule    Hungary    1956    1957    -    Sep    lastSun     3:00    0    -
+	{
+		FromYear: 1956,
+		ToYear: 1957,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 12,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Hungary    1980    only    -    Apr     6     0:00    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Hungary    1980    only    -    Sep    28     1:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Hungary    1981    1983    -    Mar    lastSun     0:00    1:00    S
+	{
+		FromYear: 1981,
+		ToYear: 1983,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Hungary    1981    1983    -    Sep    lastSun     1:00    0    -
+	{
+		FromYear: 1981,
+		ToYear: 1983,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Iran
-	// RuleIndex: 182
-	// RuleCount: 27
+	// RuleIndex: 445
+	// RuleCount: 40
 	// ---------------------------------------------------------------------------
 
+	// Rule    Iran    1910    only    -    Jan     1    00:00    0    -
+	{
+		FromYear: 1910,
+		ToYear: 1910,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1977    only    -    Mar    21    23:00    1:00    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 92,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1977    only    -    Oct    20    24:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1978    only    -    Mar    24    24:00    1:00    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1978    only    -    Aug     5    01:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1979    only    -    May    26    24:00    1:00    -
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1979    only    -    Sep    18    24:00    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 18,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1980    only    -    Mar    20    24:00    1:00    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1980    only    -    Sep    22    24:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1991    only    -    May     2    24:00    1:00    -
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1992    1995    -    Mar    21    24:00    1:00    -
+	{
+		FromYear: 1992,
+		ToYear: 1995,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1991    1995    -    Sep    21    24:00    0    -
+	{
+		FromYear: 1991,
+		ToYear: 1995,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iran    1996    only    -    Mar    20    24:00    1:00    -
+	{
+		FromYear: 1996,
+		ToYear: 1996,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Iran    1996    only    -    Sep    20    24:00    0    -
 	{
 		FromYear: 1996,
@@ -2838,10 +6282,70 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Iraq
-	// RuleIndex: 209
-	// RuleCount: 3
+	// RuleIndex: 485
+	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Iraq    1982    1984    -    Oct    1    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iraq    1982    only    -    May    1    0:00    1:00    -
+	{
+		FromYear: 1982,
+		ToYear: 1982,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iraq    1982    1984    -    Oct    1    0:00    0    -
+	{
+		FromYear: 1982,
+		ToYear: 1984,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iraq    1983    only    -    Mar    31    0:00    1:00    -
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iraq    1984    1985    -    Apr    1    0:00    1:00    -
+	{
+		FromYear: 1984,
+		ToYear: 1985,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Iraq    1985    1990    -    Sep    lastSun    1:00s    0    -
 	{
 		FromYear: 1985,
@@ -2852,6 +6356,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Iraq    1986    1990    -    Mar    lastSun    1:00s    1:00    -
+	{
+		FromYear: 1986,
+		ToYear: 1990,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
 		LetterIndex: 0, // ""
 	},
 	// Rule    Iraq    1991    2007    -    Apr     1    3:00s    1:00    -
@@ -2880,8 +6396,135 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
+	// PolicyName: Italy
+	// RuleIndex: 494
+	// RuleCount: 10
+	// ---------------------------------------------------------------------------
+
+	// Rule    Italy    1972    only    -    Oct     1     0:00s    0    -
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Italy    1973    only    -    Jun     3     0:00s    1:00    S
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1973    1974    -    Sep    lastSun     0:00s    0    -
+	{
+		FromYear: 1973,
+		ToYear: 1974,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Italy    1974    only    -    May    26     0:00s    1:00    S
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1975    only    -    Jun     1     0:00s    1:00    S
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1975    1977    -    Sep    lastSun     0:00s    0    -
+	{
+		FromYear: 1975,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Italy    1976    only    -    May    30     0:00s    1:00    S
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1977    1979    -    May    Sun>=22     0:00s    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1979,
+		InMonth: 5,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1978    only    -    Oct     1     0:00s    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Italy    1979    only    -    Sep    30     0:00s    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
 	// PolicyName: Japan
-	// RuleIndex: 212
+	// RuleIndex: 504
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -2895,15 +6538,255 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 100,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Jordan
-	// RuleIndex: 213
-	// RuleCount: 13
+	// RuleIndex: 505
+	// RuleCount: 33
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Jordan    1973    1975    -    Oct    1    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1973    only    -    Jun    6    0:00    1:00    S
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1973    1975    -    Oct    1    0:00    0    -
+	{
+		FromYear: 1973,
+		ToYear: 1975,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1974    1977    -    May    1    0:00    1:00    S
+	{
+		FromYear: 1974,
+		ToYear: 1977,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1976    only    -    Nov    1    0:00    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1977    only    -    Oct    1    0:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1978    only    -    Apr    30    0:00    1:00    S
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1978    only    -    Sep    30    0:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1985    only    -    Apr    1    0:00    1:00    S
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1985    only    -    Oct    1    0:00    0    -
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1986    1988    -    Apr    Fri>=1    0:00    1:00    S
+	{
+		FromYear: 1986,
+		ToYear: 1988,
+		InMonth: 4,
+		OnDayOfWeek: 5,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1986    1990    -    Oct    Fri>=1    0:00    0    -
+	{
+		FromYear: 1986,
+		ToYear: 1990,
+		InMonth: 10,
+		OnDayOfWeek: 5,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1989    only    -    May    8    0:00    1:00    S
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 8,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1990    only    -    Apr    27    0:00    1:00    S
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1991    only    -    Apr    17    0:00    1:00    S
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 17,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1991    only    -    Sep    27    0:00    0    -
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1992    only    -    Apr    10    0:00    1:00    S
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1992    1993    -    Oct    Fri>=1    0:00    0    -
+	{
+		FromYear: 1992,
+		ToYear: 1993,
+		InMonth: 10,
+		OnDayOfWeek: 5,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Jordan    1993    1998    -    Apr    Fri>=1    0:00    1:00    S
+	{
+		FromYear: 1993,
+		ToYear: 1998,
+		InMonth: 4,
+		OnDayOfWeek: 5,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Jordan    1994    only    -    Sep    Fri>=15    0:00    0    -
+	{
+		FromYear: 1994,
+		ToYear: 1994,
+		InMonth: 9,
+		OnDayOfWeek: 5,
+		OnDayOfMonth: 15,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Jordan    1995    1998    -    Sep    Fri>=15    0:00s    0    -
 	{
 		FromYear: 1995,
@@ -2926,7 +6809,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Jordan    1999    2002    -    Sep    lastFri    0:00s    0    -
 	{
@@ -2950,7 +6833,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Jordan    2002    2012    -    Mar    lastThu    24:00    1:00    S
 	{
@@ -2962,7 +6845,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Jordan    2003    only    -    Oct    24    0:00s    0    -
 	{
@@ -3034,7 +6917,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Jordan    2014    2022    -    Oct    lastFri    0:00s    0    -
 	{
@@ -3058,15 +6941,39 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Kyrgyz
-	// RuleIndex: 226
-	// RuleCount: 3
+	// RuleIndex: 538
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Kyrgyz    1992    1996    -    Sep    lastSun    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Kyrgyz    1992    1996    -    Apr    Sun>=7    0:00s    1:00    -
+	{
+		FromYear: 1992,
+		ToYear: 1996,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 7,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Kyrgyz    1992    1996    -    Sep    lastSun    0:00    0    -
 	{
 		FromYear: 1992,
@@ -3106,10 +7013,82 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: LH
-	// RuleIndex: 229
-	// RuleCount: 9
+	// RuleIndex: 543
+	// RuleCount: 15
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    LH    1982    1985    -    Mar    Sun>=1    2:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    LH    1981    1984    -    Oct    lastSun    2:00    1:00    -
+	{
+		FromYear: 1981,
+		ToYear: 1984,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    LH    1982    1985    -    Mar    Sun>=1    2:00    0    -
+	{
+		FromYear: 1982,
+		ToYear: 1985,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    LH    1985    only    -    Oct    lastSun    2:00    0:30    -
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 6, // (delta_minutes=30)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    LH    1986    1989    -    Mar    Sun>=15    2:00    0    -
+	{
+		FromYear: 1986,
+		ToYear: 1989,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    LH    1986    only    -    Oct    19    2:00    0:30    -
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 19,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 6, // (delta_minutes=30)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    LH    1987    1999    -    Oct    lastSun    2:00    0:30    -
 	{
 		FromYear: 1987,
@@ -3220,11 +7199,186 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// PolicyName: Lebanon
-	// RuleIndex: 238
+	// PolicyName: Latvia
+	// RuleIndex: 558
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Latvia    1989    1996    -    Sep    lastSun     2:00s    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Latvia    1989    1996    -    Mar    lastSun     2:00s    1:00    S
+	{
+		FromYear: 1989,
+		ToYear: 1996,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Latvia    1989    1996    -    Sep    lastSun     2:00s    0    -
+	{
+		FromYear: 1989,
+		ToYear: 1996,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Lebanon
+	// RuleIndex: 561
+	// RuleCount: 14
+	// ---------------------------------------------------------------------------
+
+	// Rule    Lebanon    1972    only    -    Jun    22    0:00    1:00    S
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Lebanon    1972    1977    -    Oct    1    0:00    0    -
+	{
+		FromYear: 1972,
+		ToYear: 1977,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Lebanon    1973    1977    -    May    1    0:00    1:00    S
+	{
+		FromYear: 1973,
+		ToYear: 1977,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Lebanon    1978    only    -    Apr    30    0:00    1:00    S
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Lebanon    1978    only    -    Sep    30    0:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Lebanon    1984    1987    -    May    1    0:00    1:00    S
+	{
+		FromYear: 1984,
+		ToYear: 1987,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Lebanon    1984    1991    -    Oct    16    0:00    0    -
+	{
+		FromYear: 1984,
+		ToYear: 1991,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Lebanon    1988    only    -    Jun    1    0:00    1:00    S
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Lebanon    1989    only    -    May    10    0:00    1:00    S
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Lebanon    1990    1992    -    May    1    0:00    1:00    S
+	{
+		FromYear: 1990,
+		ToYear: 1992,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Lebanon    1992    only    -    Oct    4    0:00    0    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Lebanon    1993    max    -    Mar    lastSun    0:00    1:00    S
 	{
 		FromYear: 1993,
@@ -3235,7 +7389,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Lebanon    1993    1998    -    Sep    lastSun    0:00    0    -
 	{
@@ -3264,10 +7418,118 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Libya
-	// RuleIndex: 241
-	// RuleCount: 3
+	// RuleIndex: 575
+	// RuleCount: 12
 	// ---------------------------------------------------------------------------
 
+	// Rule    Libya    1956    only    -    Jan     1    0:00    0    -
+	{
+		FromYear: 1956,
+		ToYear: 1956,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Libya    1982    1984    -    Apr     1    0:00    1:00    S
+	{
+		FromYear: 1982,
+		ToYear: 1984,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Libya    1982    1985    -    Oct     1    0:00    0    -
+	{
+		FromYear: 1982,
+		ToYear: 1985,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Libya    1985    only    -    Apr     6    0:00    1:00    S
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Libya    1986    only    -    Apr     4    0:00    1:00    S
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Libya    1986    only    -    Oct     3    0:00    0    -
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Libya    1987    1989    -    Apr     1    0:00    1:00    S
+	{
+		FromYear: 1987,
+		ToYear: 1989,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Libya    1987    1989    -    Oct     1    0:00    0    -
+	{
+		FromYear: 1987,
+		ToYear: 1989,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Libya    1997    only    -    Apr     4    0:00    1:00    S
+	{
+		FromYear: 1997,
+		ToYear: 1997,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Libya    1997    only    -    Oct     4    0:00    0    -
 	{
 		FromYear: 1997,
@@ -3290,7 +7552,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Libya    2013    only    -    Oct    lastFri    2:00    0    -
 	{
@@ -3307,10 +7569,82 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Macau
-	// RuleIndex: 244
-	// RuleCount: 1
+	// RuleIndex: 587
+	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
+	// Rule    Macau    1965    1973    -    Apr    Sun>=16    03:30    1:00    D
+	{
+		FromYear: 1965,
+		ToYear: 1973,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Macau    1965    1966    -    Oct    Sun>=16    02:30    0    S
+	{
+		FromYear: 1965,
+		ToYear: 1966,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 10,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Macau    1967    1976    -    Oct    Sun>=16    03:30    0    S
+	{
+		FromYear: 1967,
+		ToYear: 1976,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Macau    1973    only    -    Dec    30    03:30    1:00    D
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Macau    1975    1976    -    Apr    Sun>=16    03:30    1:00    D
+	{
+		FromYear: 1975,
+		ToYear: 1976,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Macau    1979    only    -    May    13    03:30    1:00    D
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtTimeCode: 14,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Macau    1979    only    -    Oct    Sun>=16    03:30    0    S
 	{
 		FromYear: 1979,
@@ -3321,15 +7655,142 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 14,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Malta
+	// RuleIndex: 594
+	// RuleCount: 8
+	// ---------------------------------------------------------------------------
+
+	// Anchor: Rule    Malta    1973    only    -    Sep    29    0:00s    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Malta    1973    only    -    Mar    31    0:00s    1:00    S
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Malta    1973    only    -    Sep    29    0:00s    0    -
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Malta    1974    only    -    Apr    21    0:00s    1:00    S
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Malta    1974    only    -    Sep    16    0:00s    0    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Malta    1975    1979    -    Apr    Sun>=15    2:00    1:00    S
+	{
+		FromYear: 1975,
+		ToYear: 1979,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Malta    1975    1980    -    Sep    Sun>=15    2:00    0    -
+	{
+		FromYear: 1975,
+		ToYear: 1980,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Malta    1980    only    -    Mar    31    2:00    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Mauritius
-	// RuleIndex: 245
-	// RuleCount: 3
+	// RuleIndex: 602
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule Mauritius    1983    only    -    Mar    21    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule Mauritius    1982    only    -    Oct    10    0:00    1:00    -
+	{
+		FromYear: 1982,
+		ToYear: 1982,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule Mauritius    1983    only    -    Mar    21    0:00    0    -
 	{
 		FromYear: 1983,
@@ -3369,7 +7830,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Mexico
-	// RuleIndex: 248
+	// RuleIndex: 607
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -3383,7 +7844,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Mexico    1996    2000    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -3395,7 +7856,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Mexico    1996    2000    -    Oct    lastSun    2:00    0    S
 	{
@@ -3407,7 +7868,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Mexico    2001    only    -    May    Sun>=1    2:00    1:00    D
 	{
@@ -3419,7 +7880,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Mexico    2001    only    -    Sep    lastSun    2:00    0    S
 	{
@@ -3431,7 +7892,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Mexico    2002    2022    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -3443,7 +7904,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Mexico    2002    2022    -    Oct    lastSun    2:00    0    S
 	{
@@ -3455,15 +7916,27 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Moldova
-	// RuleIndex: 255
-	// RuleCount: 2
+	// RuleIndex: 614
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Moldova    1997    max    -    Oct    lastSun     3:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Moldova    1997    max    -    Mar    lastSun     2:00    1:00    S
 	{
 		FromYear: 1997,
@@ -3474,7 +7947,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Moldova    1997    max    -    Oct    lastSun     3:00    0    -
 	{
@@ -3491,7 +7964,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Moncton
-	// RuleIndex: 257
+	// RuleIndex: 617
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -3505,7 +7978,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Moncton    1993    2006    -    Apr    Sun>=1    0:01    1:00    D
 	{
@@ -3517,7 +7990,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Moncton    1993    2006    -    Oct    lastSun    0:01    0    S
 	{
@@ -3529,15 +8002,63 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Mongol
-	// RuleIndex: 260
-	// RuleCount: 6
+	// RuleIndex: 620
+	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Mongol    1983    only    -    Oct    1    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Mongol    1983    1984    -    Apr    1    0:00    1:00    -
+	{
+		FromYear: 1983,
+		ToYear: 1984,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Mongol    1983    only    -    Oct    1    0:00    0    -
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Mongol    1985    1998    -    Mar    lastSun    0:00    1:00    -
+	{
+		FromYear: 1985,
+		ToYear: 1998,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Mongol    1984    1998    -    Sep    lastSun    0:00    0    -
 	{
 		FromYear: 1984,
@@ -3613,10 +8134,94 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Morocco
-	// RuleIndex: 266
-	// RuleCount: 169
+	// RuleIndex: 630
+	// RuleCount: 176
 	// ---------------------------------------------------------------------------
 
+	// Rule    Morocco    1967    only    -    Oct     1     0:00    0    -
+	{
+		FromYear: 1967,
+		ToYear: 1967,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Morocco    1974    only    -    Jun    24     0:00    1:00    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Morocco    1974    only    -    Sep     1     0:00    0    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Morocco    1976    1977    -    May     1     0:00    1:00    -
+	{
+		FromYear: 1976,
+		ToYear: 1977,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Morocco    1976    only    -    Aug     1     0:00    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Morocco    1977    only    -    Sep    28     0:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Morocco    1978    only    -    Jun     1     0:00    1:00    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Morocco    1978    only    -    Aug     4     0:00    0    -
 	{
 		FromYear: 1978,
@@ -5648,10 +10253,58 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NC
-	// RuleIndex: 435
-	// RuleCount: 1
+	// RuleIndex: 806
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    NC    1978    1979    -    Feb    27    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    NC    1977    1978    -    Dec    Sun>=1    0:00    1:00    -
+	{
+		FromYear: 1977,
+		ToYear: 1978,
+		InMonth: 12,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    NC    1978    1979    -    Feb    27    0:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1979,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    NC    1996    only    -    Dec     1    2:00s    1:00    -
+	{
+		FromYear: 1996,
+		ToYear: 1996,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    NC    1997    only    -    Mar     2    2:00s    0    -
 	{
 		FromYear: 1997,
@@ -5667,10 +10320,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NT_YK
-	// RuleIndex: 436
-	// RuleCount: 3
+	// RuleIndex: 811
+	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
+	// Rule    NT_YK    1945    only    -    Sep    30    2:00    0    S
+	{
+		FromYear: 1945,
+		ToYear: 1945,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    NT_YK    1972    1986    -    Apr    lastSun    2:00    1:00    D
 	{
 		FromYear: 1972,
@@ -5681,7 +10346,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    NT_YK    1972    2006    -    Oct    lastSun    2:00    0    S
 	{
@@ -5693,7 +10358,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    NT_YK    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -5705,15 +10370,75 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NZ
-	// RuleIndex: 439
-	// RuleCount: 5
+	// RuleIndex: 815
+	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
+	// Rule    NZ    1946    only    -    Jan     1    0:00    0    S
+	{
+		FromYear: 1946,
+		ToYear: 1946,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    NZ    1974    only    -    Nov    Sun>=1    2:00s    1:00    D
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 11,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    NZ    1975    only    -    Feb    lastSun    2:00s    0    S
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    NZ    1975    1988    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1975,
+		ToYear: 1988,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    NZ    1976    1989    -    Mar    Sun>=1    2:00s    0    S
+	{
+		FromYear: 1976,
+		ToYear: 1989,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    NZ    1989    only    -    Oct    Sun>=8    2:00s    1:00    D
 	{
 		FromYear: 1989,
@@ -5724,7 +10449,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    NZ    1990    2006    -    Oct    Sun>=1    2:00s    1:00    D
 	{
@@ -5736,7 +10461,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    NZ    1990    2007    -    Mar    Sun>=15    2:00s    0    S
 	{
@@ -5748,7 +10473,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    NZ    2007    max    -    Sep    lastSun    2:00s    1:00    D
 	{
@@ -5760,7 +10485,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    NZ    2008    max    -    Apr    Sun>=1    2:00s    0    S
 	{
@@ -5772,15 +10497,27 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Namibia
-	// RuleIndex: 444
-	// RuleCount: 3
+	// RuleIndex: 825
+	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Namibia    1994    2017    -    Sep    Sun>=1    2:00    0    CAT
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 5, // "CAT"
+	},
 	// Rule    Namibia    1994    only    -    Mar    21    0:00    -1:00    WAT
 	{
 		FromYear: 1994,
@@ -5791,7 +10528,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		LetterIndex: 8, // "WAT"
+		LetterIndex: 13, // "WAT"
 	},
 	// Rule    Namibia    1994    2017    -    Sep    Sun>=1    2:00    0    CAT
 	{
@@ -5803,7 +10540,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 3, // "CAT"
+		LetterIndex: 5, // "CAT"
 	},
 	// Rule    Namibia    1995    2017    -    Apr    Sun>=1    2:00    -1:00    WAT
 	{
@@ -5815,15 +10552,39 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 0, // (delta_minutes=-60)/15 + 4
-		LetterIndex: 8, // "WAT"
+		LetterIndex: 13, // "WAT"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Nic
-	// RuleIndex: 447
-	// RuleCount: 5
+	// RuleIndex: 829
+	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Nic    1979    1980    -    Jun    Mon>=23    0:00    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Nic    1979    1980    -    Mar    Sun>=16    0:00    1:00    D
+	{
+		FromYear: 1979,
+		ToYear: 1980,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Nic    1979    1980    -    Jun    Mon>=23    0:00    0    S
 	{
 		FromYear: 1979,
@@ -5834,7 +10595,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Nic    2005    only    -    Apr    10    0:00    1:00    D
 	{
@@ -5846,7 +10607,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Nic    2005    only    -    Oct    Sun>=1    0:00    0    S
 	{
@@ -5858,7 +10619,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Nic    2006    only    -    Apr    30    2:00    1:00    D
 	{
@@ -5870,7 +10631,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Nic    2006    only    -    Oct    Sun>=1    1:00    0    S
 	{
@@ -5882,15 +10643,39 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: PRC
-	// RuleIndex: 452
-	// RuleCount: 1
+	// RuleIndex: 836
+	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    PRC    1986    1991    -    Sep    Sun>=11     2:00    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    PRC    1986    only    -    May     4     2:00    1:00    D
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    PRC    1986    1991    -    Sep    Sun>=11     2:00    0    S
 	{
 		FromYear: 1986,
@@ -5901,12 +10686,24 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+	// Rule    PRC    1987    1991    -    Apr    Sun>=11     2:00    1:00    D
+	{
+		FromYear: 1987,
+		ToYear: 1991,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 11,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Pakistan
-	// RuleIndex: 453
+	// RuleIndex: 840
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -5932,7 +10729,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Pakistan    2002    only    -    Oct    Sun>=2    0:00    0    -
 	{
@@ -5956,7 +10753,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Pakistan    2008    2009    -    Nov    1    0:00    0    -
 	{
@@ -5980,12 +10777,12 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Palestine
-	// RuleIndex: 459
+	// RuleIndex: 846
 	// RuleCount: 33
 	// ---------------------------------------------------------------------------
 
@@ -6011,7 +10808,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    1999    2003    -    Oct    Fri>=15    0:00    0    -
 	{
@@ -6059,7 +10856,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2006    only    -    Sep    22    0:00    0    -
 	{
@@ -6095,7 +10892,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2008    only    -    Sep     1    0:00    0    -
 	{
@@ -6131,7 +10928,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2010    only    -    Aug    11    0:00    0    -
 	{
@@ -6155,7 +10952,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2011    only    -    Aug     1    0:00    0    -
 	{
@@ -6179,7 +10976,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2011    only    -    Sep    30    0:00    0    -
 	{
@@ -6203,7 +11000,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 96,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2012    only    -    Sep    21    1:00    0    -
 	{
@@ -6251,7 +11048,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2015    only    -    Oct    23    1:00    0    -
 	{
@@ -6275,7 +11072,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2016    2018    -    Oct    Sat<=30    1:00    0    -
 	{
@@ -6299,7 +11096,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2019    only    -    Oct    Sat<=30    0:00    0    -
 	{
@@ -6323,7 +11120,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2020    only    -    Oct    24    1:00    0    -
 	{
@@ -6359,7 +11156,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule Palestine    2022    max    -    Oct    Sat<=30    2:00    0    -
 	{
@@ -6383,15 +11180,171 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Para
-	// RuleIndex: 492
-	// RuleCount: 10
+	// RuleIndex: 879
+	// RuleCount: 23
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Para    1975    1978    -    Mar     1    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1975    1988    -    Oct     1    0:00    1:00    -
+	{
+		FromYear: 1975,
+		ToYear: 1988,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1975    1978    -    Mar     1    0:00    0    -
+	{
+		FromYear: 1975,
+		ToYear: 1978,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1979    1991    -    Apr     1    0:00    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1991,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1989    only    -    Oct    22    0:00    1:00    -
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1990    only    -    Oct     1    0:00    1:00    -
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1991    only    -    Oct     6    0:00    1:00    -
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1992    only    -    Mar     1    0:00    0    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1992    only    -    Oct     5    0:00    1:00    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1993    only    -    Mar    31    0:00    0    -
+	{
+		FromYear: 1993,
+		ToYear: 1993,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1993    1995    -    Oct     1    0:00    1:00    -
+	{
+		FromYear: 1993,
+		ToYear: 1995,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1994    1995    -    Feb    lastSun    0:00    0    -
+	{
+		FromYear: 1994,
+		ToYear: 1995,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Para    1996    only    -    Mar     1    0:00    0    -
+	{
+		FromYear: 1996,
+		ToYear: 1996,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Para    1996    2001    -    Oct    Sun>=1    0:00    1:00    -
 	{
 		FromYear: 1996,
@@ -6515,10 +11468,82 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Peru
-	// RuleIndex: 502
-	// RuleCount: 1
+	// RuleIndex: 902
+	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
+	// Rule    Peru    1939    1940    -    Mar    Sun>=24    0:00    0    -
+	{
+		FromYear: 1939,
+		ToYear: 1940,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 24,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Peru    1986    1987    -    Jan     1    0:00    1:00    -
+	{
+		FromYear: 1986,
+		ToYear: 1987,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Peru    1986    1987    -    Apr     1    0:00    0    -
+	{
+		FromYear: 1986,
+		ToYear: 1987,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Peru    1990    only    -    Jan     1    0:00    1:00    -
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Peru    1990    only    -    Apr     1    0:00    0    -
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Peru    1994    only    -    Jan     1    0:00    1:00    -
+	{
+		FromYear: 1994,
+		ToYear: 1994,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Peru    1994    only    -    Apr     1    0:00    0    -
 	{
 		FromYear: 1994,
@@ -6534,10 +11559,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Phil
-	// RuleIndex: 503
-	// RuleCount: 1
+	// RuleIndex: 909
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Rule    Phil    1954    only    -    Jul    1    0:00    0    S
+	{
+		FromYear: 1954,
+		ToYear: 1954,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Phil    1978    only    -    Mar    22    0:00    1:00    D
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Phil    1978    only    -    Sep    21    0:00    0    S
 	{
 		FromYear: 1978,
@@ -6548,15 +11597,173 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Poland
+	// RuleIndex: 912
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
+
+	// Rule    Poland    1962    1964    -    Sep    lastSun    1:00s    0    -
+	{
+		FromYear: 1962,
+		ToYear: 1964,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Port
+	// RuleIndex: 913
+	// RuleCount: 9
+	// ---------------------------------------------------------------------------
+
+	// Rule    Port    1947    1965    -    Oct    Sun>=1     2:00s    0    -
+	{
+		FromYear: 1947,
+		ToYear: 1965,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Port    1977    only    -    Mar    27     0:00s    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Port    1977    only    -    Sep    25     0:00s    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Port    1978    1979    -    Apr    Sun>=1     0:00s    1:00    S
+	{
+		FromYear: 1978,
+		ToYear: 1979,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Port    1978    only    -    Oct     1     0:00s    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Port    1979    1982    -    Sep    lastSun     1:00s    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1982,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Port    1980    only    -    Mar    lastSun     0:00s    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Port    1981    1982    -    Mar    lastSun     1:00s    1:00    S
+	{
+		FromYear: 1981,
+		ToYear: 1982,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Port    1983    only    -    Mar    lastSun     2:00s    1:00    S
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: ROK
-	// RuleIndex: 504
-	// RuleCount: 1
+	// RuleIndex: 922
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Rule    ROK    1957    1960    -    Sep    Sat>=17    24:00    0    S
+	{
+		FromYear: 1957,
+		ToYear: 1960,
+		InMonth: 9,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 17,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    ROK    1987    1988    -    May    Sun>=8     2:00    1:00    D
+	{
+		FromYear: 1987,
+		ToYear: 1988,
+		InMonth: 5,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 8,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    ROK    1987    1988    -    Oct    Sun>=8     3:00    0    S
 	{
 		FromYear: 1987,
@@ -6567,15 +11774,142 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 12,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Romania
+	// RuleIndex: 925
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
+
+	// Rule    Romania    1932    1939    -    Oct    Sun>=1     0:00s    0    -
+	{
+		FromYear: 1932,
+		ToYear: 1939,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Romania    1979    only    -    May    27     0:00    1:00    S
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Romania    1979    only    -    Sep    lastSun     0:00    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Romania    1980    only    -    Apr     5    23:00    1:00    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 92,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Romania    1980    only    -    Sep    lastSun     1:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Romania    1991    1993    -    Mar    lastSun     0:00s    1:00    S
+	{
+		FromYear: 1991,
+		ToYear: 1993,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Romania    1991    1993    -    Sep    lastSun     0:00s    0    -
+	{
+		FromYear: 1991,
+		ToYear: 1993,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Russia
-	// RuleIndex: 505
-	// RuleCount: 3
+	// RuleIndex: 932
+	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
+	// Rule    Russia    1921    only    -    Oct     1     0:00    0    -
+	{
+		FromYear: 1921,
+		ToYear: 1921,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Russia    1981    1984    -    Apr     1     0:00    1:00    S
+	{
+		FromYear: 1981,
+		ToYear: 1984,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Russia    1981    1983    -    Oct     1     0:00    0    -
+	{
+		FromYear: 1981,
+		ToYear: 1983,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Russia    1984    1995    -    Sep    lastSun     2:00s    0    -
 	{
 		FromYear: 1984,
@@ -6598,7 +11932,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Russia    1996    2010    -    Oct    lastSun     2:00s    0    -
 	{
@@ -6615,10 +11949,46 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: RussiaAsia
-	// RuleIndex: 508
-	// RuleCount: 3
+	// RuleIndex: 938
+	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule RussiaAsia    1981    1983    -    Oct    1     0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule RussiaAsia    1981    1984    -    Apr    1     0:00    1:00    -
+	{
+		FromYear: 1981,
+		ToYear: 1984,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule RussiaAsia    1981    1983    -    Oct    1     0:00    0    -
+	{
+		FromYear: 1981,
+		ToYear: 1983,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule RussiaAsia    1984    1995    -    Sep    lastSun     2:00s    0    -
 	{
 		FromYear: 1984,
@@ -6658,7 +12028,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SA
-	// RuleIndex: 511
+	// RuleIndex: 944
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6677,10 +12047,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Salv
-	// RuleIndex: 512
-	// RuleCount: 1
+	// RuleIndex: 945
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Salv    1987    1988    -    Sep    lastSun    0:00    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Salv    1987    1988    -    May    Sun>=1    0:00    1:00    D
+	{
+		FromYear: 1987,
+		ToYear: 1988,
+		InMonth: 5,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Salv    1987    1988    -    Sep    lastSun    0:00    0    S
 	{
 		FromYear: 1987,
@@ -6691,12 +12085,12 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SanLuis
-	// RuleIndex: 513
+	// RuleIndex: 948
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -6738,11 +12132,265 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// PolicyName: StJohns
-	// RuleIndex: 516
-	// RuleCount: 5
+	// PolicyName: Spain
+	// RuleIndex: 951
+	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
+	// Rule    Spain    1949    only    -    Oct     2     1:00    0    -
+	{
+		FromYear: 1949,
+		ToYear: 1949,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Spain    1974    1975    -    Apr    Sat>=12    23:00    1:00    S
+	{
+		FromYear: 1974,
+		ToYear: 1975,
+		InMonth: 4,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 12,
+		AtTimeCode: 92,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Spain    1974    1975    -    Oct    Sun>=1     1:00    0    -
+	{
+		FromYear: 1974,
+		ToYear: 1975,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Spain    1976    only    -    Mar    27    23:00    1:00    S
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtTimeCode: 92,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Spain    1976    1977    -    Sep    lastSun     1:00    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Spain    1977    only    -    Apr     2    23:00    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 92,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Spain    1978    only    -    Apr     2     2:00s    1:00    S
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Spain    1978    only    -    Oct     1     2:00s    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: SpainAfrica
+	// RuleIndex: 959
+	// RuleCount: 8
+	// ---------------------------------------------------------------------------
+
+	// Rule SpainAfrica 1967    only    -    Oct     1     0:00    0    -
+	{
+		FromYear: 1967,
+		ToYear: 1967,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule SpainAfrica 1974    only    -    Jun    24     0:00    1:00    S
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule SpainAfrica 1974    only    -    Sep     1     0:00    0    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule SpainAfrica 1976    1977    -    May     1     0:00    1:00    S
+	{
+		FromYear: 1976,
+		ToYear: 1977,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule SpainAfrica 1976    only    -    Aug     1     0:00    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule SpainAfrica 1977    only    -    Sep    28     0:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule SpainAfrica 1978    only    -    Jun     1     0:00    1:00    S
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule SpainAfrica 1978    only    -    Aug     4     0:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: StJohns
+	// RuleIndex: 967
+	// RuleCount: 9
+	// ---------------------------------------------------------------------------
+
+	// Rule    StJohns    1951    1986    -    Apr    lastSun    2:00    1:00    D
+	{
+		FromYear: 1951,
+		ToYear: 1986,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    StJohns    1951    1959    -    Sep    lastSun    2:00    0    S
+	{
+		FromYear: 1951,
+		ToYear: 1959,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    StJohns    1960    1986    -    Oct    lastSun    2:00    0    S
+	{
+		FromYear: 1960,
+		ToYear: 1986,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    StJohns    1987    only    -    Apr    Sun>=1    0:01    1:00    D
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 1, // SuffixW + minute=1
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    StJohns    1987    2006    -    Oct    lastSun    0:01    0    S
 	{
 		FromYear: 1987,
@@ -6753,7 +12401,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    StJohns    1988    only    -    Apr    Sun>=1    0:01    2:00    DD
 	{
@@ -6765,7 +12413,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 12, // (delta_minutes=120)/15 + 4
-		LetterIndex: 6, // "DD"
+		LetterIndex: 9, // "DD"
 	},
 	// Rule    StJohns    1989    2006    -    Apr    Sun>=1    0:01    1:00    D
 	{
@@ -6777,7 +12425,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    StJohns    2007    2011    -    Mar    Sun>=8    0:01    1:00    D
 	{
@@ -6789,7 +12437,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    StJohns    2007    2010    -    Nov    Sun>=1    0:01    0    S
 	{
@@ -6801,13 +12449,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 1, // SuffixW + minute=1
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Sudan
-	// RuleIndex: 521
-	// RuleCount: 1
+	// RuleIndex: 976
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
 	// Rule    Sudan    1970    1985    -    Oct    15    0:00    0    -
@@ -6822,13 +12470,308 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
 		LetterIndex: 0, // ""
 	},
+	// Rule    Sudan    1971    only    -    Apr    30    0:00    1:00    S
+	{
+		FromYear: 1971,
+		ToYear: 1971,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Sudan    1972    1985    -    Apr    lastSun    0:00    1:00    S
+	{
+		FromYear: 1972,
+		ToYear: 1985,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Swiss
+	// RuleIndex: 979
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
+
+	// Rule    Swiss    1941    1942    -    Oct    Mon>=1    2:00    0    -
+	{
+		FromYear: 1941,
+		ToYear: 1942,
+		InMonth: 10,
+		OnDayOfWeek: 1,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Syria
-	// RuleIndex: 522
-	// RuleCount: 12
+	// RuleIndex: 980
+	// RuleCount: 33
 	// ---------------------------------------------------------------------------
 
+	// Rule    Syria    1966    only    -    Apr    24    2:00    1:00    S
+	{
+		FromYear: 1966,
+		ToYear: 1966,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1966    1976    -    Oct    1    2:00    0    -
+	{
+		FromYear: 1966,
+		ToYear: 1976,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1967    1978    -    May    1    2:00    1:00    S
+	{
+		FromYear: 1967,
+		ToYear: 1978,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1977    1978    -    Sep    1    2:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1978,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1983    1984    -    Apr    9    2:00    1:00    S
+	{
+		FromYear: 1983,
+		ToYear: 1984,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 9,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1983    1984    -    Oct    1    2:00    0    -
+	{
+		FromYear: 1983,
+		ToYear: 1984,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1986    only    -    Feb    16    2:00    1:00    S
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1986    only    -    Oct    9    2:00    0    -
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 9,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1987    only    -    Mar    1    2:00    1:00    S
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1987    1988    -    Oct    31    2:00    0    -
+	{
+		FromYear: 1987,
+		ToYear: 1988,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1988    only    -    Mar    15    2:00    1:00    S
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1989    only    -    Mar    31    2:00    1:00    S
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1989    only    -    Oct    1    2:00    0    -
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1990    only    -    Apr    1    2:00    1:00    S
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1990    only    -    Sep    30    2:00    0    -
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1991    only    -    Apr     1    0:00    1:00    S
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1991    1992    -    Oct     1    0:00    0    -
+	{
+		FromYear: 1991,
+		ToYear: 1992,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1992    only    -    Apr     8    0:00    1:00    S
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 8,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1993    only    -    Mar    26    0:00    1:00    S
+	{
+		FromYear: 1993,
+		ToYear: 1993,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Syria    1993    only    -    Sep    25    0:00    0    -
+	{
+		FromYear: 1993,
+		ToYear: 1993,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Syria    1994    1996    -    Apr     1    0:00    1:00    S
+	{
+		FromYear: 1994,
+		ToYear: 1996,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Syria    1994    2005    -    Oct     1    0:00    0    -
 	{
 		FromYear: 1994,
@@ -6851,7 +12794,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Syria    1999    2006    -    Apr     1    0:00    1:00    S
 	{
@@ -6863,7 +12806,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Syria    2006    only    -    Sep    22    0:00    0    -
 	{
@@ -6887,7 +12830,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Syria    2007    only    -    Nov     Fri>=1    0:00    0    -
 	{
@@ -6911,7 +12854,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Syria    2008    only    -    Nov    1    0:00    0    -
 	{
@@ -6935,7 +12878,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Syria    2010    2011    -    Apr    Fri>=1    0:00    1:00    S
 	{
@@ -6947,7 +12890,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Syria    2012    2022    -    Mar    lastFri    0:00    1:00    S
 	{
@@ -6959,7 +12902,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Syria    2009    2022    -    Oct    lastFri    0:00    0    -
 	{
@@ -6976,10 +12919,58 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Taiwan
-	// RuleIndex: 534
-	// RuleCount: 1
+	// RuleIndex: 1013
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Rule    Taiwan    1955    1961    -    Oct    1    0:00    0    S
+	{
+		FromYear: 1955,
+		ToYear: 1961,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Taiwan    1974    1975    -    Apr    1    0:00    1:00    D
+	{
+		FromYear: 1974,
+		ToYear: 1975,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Taiwan    1974    1975    -    Oct    1    0:00    0    S
+	{
+		FromYear: 1974,
+		ToYear: 1975,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Taiwan    1979    only    -    Jul    1    0:00    1:00    D
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Taiwan    1979    only    -    Oct    1    0:00    0    S
 	{
 		FromYear: 1979,
@@ -6990,15 +12981,39 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Thule
-	// RuleIndex: 535
-	// RuleCount: 5
+	// RuleIndex: 1018
+	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Thule    1991    1992    -    Sep    lastSun    2:00    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Thule    1991    1992    -    Mar    lastSun    2:00    1:00    D
+	{
+		FromYear: 1991,
+		ToYear: 1992,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Thule    1991    1992    -    Sep    lastSun    2:00    0    S
 	{
 		FromYear: 1991,
@@ -7009,7 +13024,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Thule    1993    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -7021,7 +13036,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Thule    1993    2006    -    Oct    lastSun    2:00    0    S
 	{
@@ -7033,7 +13048,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Thule    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -7045,7 +13060,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Thule    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -7057,12 +13072,12 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Tonga
-	// RuleIndex: 540
+	// RuleIndex: 1025
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -7152,8 +13167,51 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
+	// PolicyName: Toronto
+	// RuleIndex: 1032
+	// RuleCount: 3
+	// ---------------------------------------------------------------------------
+
+	// Rule    Toronto    1950    1973    -    Apr    lastSun    2:00    1:00    D
+	{
+		FromYear: 1950,
+		ToYear: 1973,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Toronto    1951    1956    -    Sep    lastSun    2:00    0    S
+	{
+		FromYear: 1951,
+		ToYear: 1956,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Toronto    1957    1973    -    Oct    lastSun    2:00    0    S
+	{
+		FromYear: 1957,
+		ToYear: 1973,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
 	// PolicyName: Troll
-	// RuleIndex: 547
+	// RuleIndex: 1035
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7196,10 +13254,82 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Tunisia
-	// RuleIndex: 550
-	// RuleCount: 5
+	// RuleIndex: 1038
+	// RuleCount: 13
 	// ---------------------------------------------------------------------------
 
+	// Rule    Tunisia    1945    only    -    Sep    16     0:00    0    -
+	{
+		FromYear: 1945,
+		ToYear: 1945,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Tunisia    1977    only    -    Apr    30     0:00s    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Tunisia    1977    only    -    Sep    24     0:00s    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Tunisia    1978    only    -    May     1     0:00s    1:00    S
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Tunisia    1978    only    -    Oct     1     0:00s    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Tunisia    1988    only    -    Jun     1     0:00s    1:00    S
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Tunisia    1988    1990    -    Sep    lastSun     0:00s    0    -
 	{
 		FromYear: 1988,
@@ -7212,6 +13342,30 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
 		LetterIndex: 0, // ""
 	},
+	// Rule    Tunisia    1989    only    -    Mar    26     0:00s    1:00    S
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Tunisia    1990    only    -    May     1     0:00s    1:00    S
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Tunisia    2005    only    -    May     1     0:00s    1:00    S
 	{
 		FromYear: 2005,
@@ -7222,7 +13376,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Tunisia    2005    only    -    Sep    30     1:00s    0    -
 	{
@@ -7246,7 +13400,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Tunisia    2006    2008    -    Oct    lastSun     2:00s    0    -
 	{
@@ -7263,10 +13417,178 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Turkey
-	// RuleIndex: 555
-	// RuleCount: 3
+	// RuleIndex: 1051
+	// RuleCount: 18
 	// ---------------------------------------------------------------------------
 
+	// Rule    Turkey    1964    only    -    Oct     1    0:00    0    -
+	{
+		FromYear: 1964,
+		ToYear: 1964,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Turkey    1973    only    -    Jun     3    1:00    1:00    S
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Turkey    1973    1976    -    Oct    Sun>=31    2:00    0    -
+	{
+		FromYear: 1973,
+		ToYear: 1976,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Turkey    1974    only    -    Mar    31    2:00    1:00    S
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Turkey    1975    only    -    Mar    22    2:00    1:00    S
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Turkey    1976    only    -    Mar    21    2:00    1:00    S
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Turkey    1977    1978    -    Apr    Sun>=1    2:00    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1978,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Turkey    1977    1978    -    Oct    Sun>=15    2:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 15,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Turkey    1978    only    -    Jun    29    0:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Turkey    1983    only    -    Jul    31    2:00    1:00    S
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Turkey    1983    only    -    Oct     2    2:00    0    -
+	{
+		FromYear: 1983,
+		ToYear: 1983,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Turkey    1985    only    -    Apr    20    1:00s    1:00    S
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Turkey    1985    only    -    Sep    28    1:00s    0    -
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Turkey    1986    1993    -    Mar    lastSun    1:00s    1:00    S
+	{
+		FromYear: 1986,
+		ToYear: 1993,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Turkey    1986    1995    -    Sep    lastSun    1:00s    0    -
 	{
 		FromYear: 1986,
@@ -7279,6 +13601,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
 		LetterIndex: 0, // ""
 	},
+	// Rule    Turkey    1994    only    -    Mar    20    1:00s    1:00    S
+	{
+		FromYear: 1994,
+		ToYear: 1994,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Turkey    1995    2006    -    Mar    lastSun    1:00s    1:00    S
 	{
 		FromYear: 1995,
@@ -7289,7 +13623,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Turkey    1996    2006    -    Oct    lastSun    1:00s    0    -
 	{
@@ -7306,10 +13640,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: US
-	// RuleIndex: 558
-	// RuleCount: 5
+	// RuleIndex: 1069
+	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
+	// Rule    US    1945    only    -    Sep    30    2:00    0    S
+	{
+		FromYear: 1945,
+		ToYear: 1945,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
 	{
 		FromYear: 1967,
@@ -7320,7 +13666,43 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
+	},
+	// Rule    US    1967    1973    -    Apr    lastSun    2:00    1:00    D
+	{
+		FromYear: 1967,
+		ToYear: 1973,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    US    1974    only    -    Jan    6    2:00    1:00    D
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    US    1975    only    -    Feb    lastSun    2:00    1:00    D
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 2,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
 	},
 	// Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
 	{
@@ -7332,7 +13714,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    US    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
 	{
@@ -7344,7 +13726,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
@@ -7356,7 +13738,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
@@ -7368,15 +13750,279 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Uruguay
-	// RuleIndex: 563
-	// RuleCount: 6
+	// RuleIndex: 1078
+	// RuleCount: 28
 	// ---------------------------------------------------------------------------
 
+	// Rule    Uruguay    1972    only    -    Jul    16     0:00    0    -
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1974    only    -    Jan    13     0:00    1:30    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 10, // (delta_minutes=90)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1974    only    -    Mar    10     0:00    0:30    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 6, // (delta_minutes=30)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1974    only    -    Sep     1     0:00    0    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1974    only    -    Dec    22     0:00    1:00    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1975    only    -    Mar    30     0:00    0    -
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1976    only    -    Dec    19     0:00    1:00    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 19,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1977    only    -    Mar     6     0:00    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1977    only    -    Dec     4     0:00    1:00    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1978    1979    -    Mar    Sun>=1     0:00    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1979,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1978    only    -    Dec    17     0:00    1:00    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 17,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1979    only    -    Apr    29     0:00    1:00    -
+	{
+		FromYear: 1979,
+		ToYear: 1979,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1980    only    -    Mar    16     0:00    0    -
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1987    only    -    Dec    14     0:00    1:00    -
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 14,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1988    only    -    Feb    28     0:00    0    -
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1988    only    -    Dec    11     0:00    1:00    -
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 11,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1989    only    -    Mar     5     0:00    0    -
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1989    only    -    Oct    29     0:00    1:00    -
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1990    only    -    Feb    25     0:00    0    -
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1990    1991    -    Oct    Sun>=21     0:00    1:00    -
+	{
+		FromYear: 1990,
+		ToYear: 1991,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 21,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1991    1992    -    Mar    Sun>=1     0:00    0    -
+	{
+		FromYear: 1991,
+		ToYear: 1992,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1992    only    -    Oct    18     0:00    1:00    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 18,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Uruguay    1993    only    -    Feb    28     0:00    0    -
 	{
 		FromYear: 1993,
@@ -7451,11 +14097,114 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// PolicyName: Vanuatu
-	// RuleIndex: 569
-	// RuleCount: 1
+	// PolicyName: Vanc
+	// RuleIndex: 1106
+	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
+	// Rule    Vanc    1946    1986    -    Apr    lastSun    2:00    1:00    D
+	{
+		FromYear: 1946,
+		ToYear: 1986,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Vanc    1947    1961    -    Sep    lastSun    2:00    0    S
+	{
+		FromYear: 1947,
+		ToYear: 1961,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Vanc    1962    2006    -    Oct    lastSun    2:00    0    S
+	{
+		FromYear: 1962,
+		ToYear: 2006,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Vanuatu
+	// RuleIndex: 1109
+	// RuleCount: 7
+	// ---------------------------------------------------------------------------
+
+	// Anchor: Rule    Vanuatu    1974    only    -    Mar    30    12:00u    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Vanuatu    1973    only    -    Dec    22    12:00u    1:00    -
+	{
+		FromYear: 1973,
+		ToYear: 1973,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 48,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Vanuatu    1974    only    -    Mar    30    12:00u    0    -
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 48,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Vanuatu    1983    1991    -    Sep    Sat>=22    24:00    1:00    -
+	{
+		FromYear: 1983,
+		ToYear: 1991,
+		InMonth: 9,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 22,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Vanuatu    1984    1991    -    Mar    Sat>=22    24:00    0    -
+	{
+		FromYear: 1984,
+		ToYear: 1991,
+		InMonth: 3,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 22,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Vanuatu    1992    1993    -    Jan    Sat>=22    24:00    0    -
 	{
 		FromYear: 1992,
@@ -7468,10 +14217,101 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
 		LetterIndex: 0, // ""
 	},
+	// Rule    Vanuatu    1992    only    -    Oct    Sat>=22    24:00    1:00    -
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 10,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: 22,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: W-Eur
+	// RuleIndex: 1116
+	// RuleCount: 6
+	// ---------------------------------------------------------------------------
+
+	// Anchor: Rule    W-Eur    1977    only    -    Sep    lastSun     1:00s    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    W-Eur    1977    1980    -    Apr    Sun>=1     1:00s    1:00    S
+	{
+		FromYear: 1977,
+		ToYear: 1980,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    W-Eur    1977    only    -    Sep    lastSun     1:00s    0    -
+	{
+		FromYear: 1977,
+		ToYear: 1977,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    W-Eur    1978    only    -    Oct     1     1:00s    0    -
+	{
+		FromYear: 1978,
+		ToYear: 1978,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    W-Eur    1979    1995    -    Sep    lastSun     1:00s    0    -
+	{
+		FromYear: 1979,
+		ToYear: 1995,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    W-Eur    1981    max    -    Mar    lastSun     1:00s    1:00    S
+	{
+		FromYear: 1981,
+		ToYear: 9999,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 4,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: WS
-	// RuleIndex: 570
+	// RuleIndex: 1122
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -7550,10 +14390,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Winn
-	// RuleIndex: 576
-	// RuleCount: 3
+	// RuleIndex: 1128
+	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
+	// Rule    Winn    1963    only    -    Sep    22    2:00    0    S
+	{
+		FromYear: 1963,
+		ToYear: 1963,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Winn    1966    1986    -    Apr    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1966,
@@ -7564,7 +14416,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Winn    1966    2005    -    Oct    lastSun    2:00s    0    S
 	{
@@ -7576,7 +14428,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Winn    1987    2005    -    Apr    Sun>=1    2:00s    1:00    D
 	{
@@ -7588,15 +14440,466 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
+	},
+
+	// ---------------------------------------------------------------------------
+	// PolicyName: Yukon
+	// RuleIndex: 1132
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
+
+	// Rule    Yukon    1965    only    -    Oct    lastSun    2:00    0    S
+	{
+		FromYear: 1965,
+		ToYear: 1965,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Zion
-	// RuleIndex: 579
-	// RuleCount: 24
+	// RuleIndex: 1133
+	// RuleCount: 60
 	// ---------------------------------------------------------------------------
 
+	// Rule    Zion    1957    only    -    Sep    21    24:00u    0    S
+	{
+		FromYear: 1957,
+		ToYear: 1957,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 96,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1974    only    -    Jul     6    24:00    1:00    D
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1974    only    -    Oct    12    24:00    0    S
+	{
+		FromYear: 1974,
+		ToYear: 1974,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1975    only    -    Apr    19    24:00    1:00    D
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 19,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1975    only    -    Aug    30    24:00    0    S
+	{
+		FromYear: 1975,
+		ToYear: 1975,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1980    only    -    Aug     2    24:00s    1:00    D
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 96,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1980    only    -    Sep    13    24:00s    0    S
+	{
+		FromYear: 1980,
+		ToYear: 1980,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtTimeCode: 96,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1984    only    -    May     5    24:00s    1:00    D
+	{
+		FromYear: 1984,
+		ToYear: 1984,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 96,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1984    only    -    Aug    25    24:00s    0    S
+	{
+		FromYear: 1984,
+		ToYear: 1984,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 96,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1985    only    -    Apr    13    24:00    1:00    D
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1985    only    -    Aug    31    24:00    0    S
+	{
+		FromYear: 1985,
+		ToYear: 1985,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1986    only    -    May    17    24:00    1:00    D
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 17,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1986    only    -    Sep     6    24:00    0    S
+	{
+		FromYear: 1986,
+		ToYear: 1986,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1987    only    -    Apr    14    24:00    1:00    D
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 14,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1987    only    -    Sep    12    24:00    0    S
+	{
+		FromYear: 1987,
+		ToYear: 1987,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1988    only    -    Apr     9    24:00    1:00    D
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 9,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1988    only    -    Sep     3    24:00    0    S
+	{
+		FromYear: 1988,
+		ToYear: 1988,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1989    only    -    Apr    29    24:00    1:00    D
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1989    only    -    Sep     2    24:00    0    S
+	{
+		FromYear: 1989,
+		ToYear: 1989,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1990    only    -    Mar    24    24:00    1:00    D
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1990    only    -    Aug    25    24:00    0    S
+	{
+		FromYear: 1990,
+		ToYear: 1990,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1991    only    -    Mar    23    24:00    1:00    D
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 23,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1991    only    -    Aug    31    24:00    0    S
+	{
+		FromYear: 1991,
+		ToYear: 1991,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1992    only    -    Mar    28    24:00    1:00    D
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1992    only    -    Sep     5    24:00    0    S
+	{
+		FromYear: 1992,
+		ToYear: 1992,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1993    only    -    Apr     2    0:00    1:00    D
+	{
+		FromYear: 1993,
+		ToYear: 1993,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1993    only    -    Sep     5    0:00    0    S
+	{
+		FromYear: 1993,
+		ToYear: 1993,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1994    only    -    Apr     1    0:00    1:00    D
+	{
+		FromYear: 1994,
+		ToYear: 1994,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1994    only    -    Aug    28    0:00    0    S
+	{
+		FromYear: 1994,
+		ToYear: 1994,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1995    only    -    Mar    31    0:00    1:00    D
+	{
+		FromYear: 1995,
+		ToYear: 1995,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1995    only    -    Sep     3    0:00    0    S
+	{
+		FromYear: 1995,
+		ToYear: 1995,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1996    only    -    Mar    14    24:00    1:00    D
+	{
+		FromYear: 1996,
+		ToYear: 1996,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 14,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1996    only    -    Sep    15    24:00    0    S
+	{
+		FromYear: 1996,
+		ToYear: 1996,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1997    only    -    Mar    20    24:00    1:00    D
+	{
+		FromYear: 1997,
+		ToYear: 1997,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Zion    1997    only    -    Sep    13    24:00    0    S
+	{
+		FromYear: 1997,
+		ToYear: 1997,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtTimeCode: 96,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Zion    1998    only    -    Mar    20    0:00    1:00    D
+	{
+		FromYear: 1998,
+		ToYear: 1998,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Zion    1998    only    -    Sep     6    0:00    0    S
 	{
 		FromYear: 1998,
@@ -7607,7 +14910,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 0,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    1999    only    -    Apr     2    2:00    1:00    D
 	{
@@ -7619,7 +14922,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Zion    1999    only    -    Sep     3    2:00    0    S
 	{
@@ -7631,7 +14934,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2000    only    -    Apr    14    2:00    1:00    D
 	{
@@ -7643,7 +14946,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Zion    2000    only    -    Oct     6    1:00    0    S
 	{
@@ -7655,7 +14958,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2001    only    -    Apr     9    1:00    1:00    D
 	{
@@ -7667,7 +14970,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Zion    2001    only    -    Sep    24    1:00    0    S
 	{
@@ -7679,7 +14982,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2002    only    -    Mar    29    1:00    1:00    D
 	{
@@ -7691,7 +14994,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Zion    2002    only    -    Oct     7    1:00    0    S
 	{
@@ -7703,7 +15006,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2003    only    -    Mar    28    1:00    1:00    D
 	{
@@ -7715,7 +15018,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Zion    2003    only    -    Oct     3    1:00    0    S
 	{
@@ -7727,7 +15030,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2004    only    -    Apr     7    1:00    1:00    D
 	{
@@ -7739,7 +15042,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Zion    2004    only    -    Sep    22    1:00    0    S
 	{
@@ -7751,7 +15054,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 4,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2005    2012    -    Apr    Fri<=1    2:00    1:00    D
 	{
@@ -7763,7 +15066,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Zion    2005    only    -    Oct     9    2:00    0    S
 	{
@@ -7775,7 +15078,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2006    only    -    Oct     1    2:00    0    S
 	{
@@ -7787,7 +15090,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2007    only    -    Sep    16    2:00    0    S
 	{
@@ -7799,7 +15102,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2008    only    -    Oct     5    2:00    0    S
 	{
@@ -7811,7 +15114,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2009    only    -    Sep    27    2:00    0    S
 	{
@@ -7823,7 +15126,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2010    only    -    Sep    12    2:00    0    S
 	{
@@ -7835,7 +15138,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2011    only    -    Oct     2    2:00    0    S
 	{
@@ -7847,7 +15150,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2012    only    -    Sep    23    2:00    0    S
 	{
@@ -7859,7 +15162,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 	// Rule    Zion    2013    max    -    Mar    Fri>=23    2:00    1:00    D
 	{
@@ -7871,7 +15174,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
-		LetterIndex: 5, // "D"
+		LetterIndex: 8, // "D"
 	},
 	// Rule    Zion    2013    max    -    Oct    lastSun    2:00    0    S
 	{
@@ -7883,56 +15186,126 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeCode: 8,
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 4, // (delta_minutes=0)/15 + 4
-		LetterIndex: 7, // "S"
+		LetterIndex: 12, // "S"
 	},
 
 
 }
 
-const ZoneRuleCount = 603
+const ZoneRuleCount = 1193
 
 const ZoneRuleChunkSize = 11
 
 // ZoneRulesData contains the ZoneRuleRecords data as a hex encoded string.
-const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
-		"\xc6\x07\xcb\x07\x03\x07\x01\x08\x10\x04\x07" +
-		"\xcc\x07\xd5\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd0\x07\xd0\x07\x08\x07\x00\x08\x10\x08\x05" +
-		"\xd1\x07\xd7\x07\x0a\x07\x00\x08\x10\x08\x05" +
-		"\xd6\x07\xd6\x07\x04\x07\x01\x08\x10\x04\x07" +
-		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x07" +
-		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x05" +
-		"\xc6\x07\xc8\x07\x03\x07\x01\x08\x10\x04\x07" +
-		"\xc3\x07\xd7\x07\x0a\x07\x00\x08\x10\x08\x05" +
-		"\xca\x07\xca\x07\x03\x00\x14\x08\x10\x04\x07" +
-		"\xcb\x07\xd5\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd6\x07\xd6\x07\x04\x00\x02\x08\x10\x04\x07" +
-		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x07" +
-		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x05" +
-		"\xc4\x07\xc6\x07\x0a\x07\x00\x08\x10\x08\x05" +
-		"\xc7\x07\xcf\x07\x0a\x07\x01\x08\x10\x08\x05" +
-		"\xc7\x07\xd5\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd0\x07\xd0\x07\x08\x07\x00\x08\x10\x08\x05" +
-		"\xd1\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x05" +
-		"\xd6\x07\xd6\x07\x04\x07\x01\x08\x10\x04\x07" +
-		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x07" +
-		"\xc4\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
-		"\xc7\x07\xca\x07\x03\x07\x01\x08\x10\x04\x07" +
-		"\xcb\x07\xd5\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd0\x07\xd0\x07\x08\x07\x00\x08\x10\x08\x05" +
-		"\xd1\x07\xd7\x07\x0a\x07\x00\x08\x10\x08\x05" +
-		"\xd6\x07\xd6\x07\x04\x07\x01\x08\x10\x04\x07" +
-		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x07" +
-		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x05" +
-		"\xc8\x07\xc8\x07\x03\x07\x01\x08\x10\x04\x07" +
-		"\xd6\x07\xd6\x07\x0c\x00\x03\x08\x10\x08\x05" +
-		"\xd7\x07\xd9\x07\x03\x07\x00\x08\x10\x04\x07" +
-		"\xd7\x07\xd8\x07\x0a\x07\x00\x08\x10\x08\x05" +
+const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xb4\x07\xb4\x07\x02\x00\x1b\x08\x10\x04\x0c" +
+		"\xb5\x07\xbd\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xbe\x07\xbe\x07\x04\x07\x01\x08\x10\x04\x0c" +
+		"\xbf\x07\xc1\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xc2\x07\xc5\x07\x03\x07\x0f\x08\x10\x04\x0c" +
+		"\xc2\x07\xc2\x07\x0a\x00\x13\x08\x10\x08\x08" +
+		"\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xc6\x07\xcb\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xcc\x07\xd5\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd0\x07\xd0\x07\x08\x07\x00\x08\x10\x08\x08" +
+		"\xd1\x07\xd7\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xd6\x07\xd6\x07\x04\x07\x01\x08\x10\x04\x0c" +
+		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x0c" +
+		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x08" +
+		"\xb4\x07\xb4\x07\x02\x07\x00\x08\x10\x04\x0c" +
+		"\xc5\x07\xc7\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xc6\x07\xc8\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xc2\x07\xc2\x07\x0a\x00\x13\x08\x10\x08\x08" +
+		"\xc3\x07\xd7\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xb4\x07\xb4\x07\x02\x00\x1b\x08\x10\x04\x0c" +
+		"\xb5\x07\xc1\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xc2\x07\xc6\x07\x03\x07\x0f\x08\x10\x04\x0c" +
+		"\xc7\x07\xc7\x07\x03\x00\x03\x08\x10\x04\x0c" +
+		"\xc8\x07\xc8\x07\x03\x00\x16\x08\x10\x04\x0c" +
+		"\xc9\x07\xc9\x07\x03\x00\x07\x08\x10\x04\x0c" +
+		"\xca\x07\xca\x07\x03\x00\x14\x08\x10\x04\x0c" +
+		"\xcb\x07\xd5\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd6\x07\xd6\x07\x04\x00\x02\x08\x10\x04\x0c" +
+		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x0c" +
+		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x08" +
+		"\xb0\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xb4\x07\xb4\x07\x02\x07\x00\x08\x10\x04\x0c" +
+		"\xb5\x07\xbd\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xbe\x07\xbf\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xc0\x07\xc2\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xc2\x07\xc2\x07\x0a\x07\x0f\x08\x10\x08\x08" +
+		"\xc3\x07\xc6\x07\x03\x07\x0f\x08\x10\x04\x0c" +
+		"\xc3\x07\xc3\x07\x0a\x07\x16\x08\x10\x08\x08" +
+		"\xc4\x07\xc6\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xc7\x07\xcf\x07\x0a\x07\x01\x08\x10\x08\x08" +
+		"\xc7\x07\xd5\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd0\x07\xd0\x07\x08\x07\x00\x08\x10\x08\x08" +
+		"\xd1\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x08" +
+		"\xd6\x07\xd6\x07\x04\x07\x01\x08\x10\x04\x0c" +
+		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x0c" +
+		"\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xb4\x07\xb4\x07\x02\x07\x00\x08\x10\x04\x0c" +
+		"\xb5\x07\xc1\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xc2\x07\xc6\x07\x03\x07\x0f\x08\x10\x04\x0c" +
+		"\xc2\x07\xc3\x07\x0a\x07\x0f\x08\x10\x08\x08" +
+		"\xc4\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xc7\x07\xca\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xcb\x07\xd5\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd0\x07\xd0\x07\x08\x07\x00\x08\x10\x08\x08" +
+		"\xd1\x07\xd7\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xd6\x07\xd6\x07\x04\x07\x01\x08\x10\x04\x0c" +
+		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x0c" +
+		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x08" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xb6\x07\xb6\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xb7\x07\xb7\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xbf\x07\xbf\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xc0\x07\xc0\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xc7\x07\xc7\x07\x0b\x00\x11\x08\x10\x08\x08" +
+		"\xc8\x07\xc8\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xd6\x07\xd6\x07\x0c\x00\x03\x08\x10\x08\x08" +
+		"\xd7\x07\xd9\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\xd7\x07\xd8\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\x97\x07\x97\x07\x04\x00\x0a\x0c\x00\x04\x00" +
+		"\xb6\x07\xb6\x07\x05\x00\x04\x00\x00\x08\x0c" +
+		"\xb6\x07\xb6\x07\x0a\x00\x02\x00\x00\x04\x00" +
+		"\xb7\x07\xb7\x07\x05\x00\x01\x00\x00\x08\x0c" +
+		"\xb7\x07\xb7\x07\x0a\x00\x02\x00\x00\x04\x00" +
+		"\xb8\x07\xb8\x07\x05\x00\x02\x00\x00\x08\x0c" +
+		"\xb8\x07\xb8\x07\x0a\x00\x03\x00\x00\x04\x00" +
+		"\xb9\x07\xb9\x07\x05\x00\x08\x00\x00\x08\x0c" +
+		"\xb9\x07\xb9\x07\x0a\x00\x02\x00\x00\x04\x00" +
+		"\xba\x07\xba\x07\x05\x00\x06\x00\x00\x08\x0c" +
+		"\xba\x07\xba\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xbb\x07\xbb\x07\x05\x00\x05\x00\x00\x08\x0c" +
+		"\xbb\x07\xbb\x07\x09\x00\x1e\x00\x00\x04\x00" +
+		"\xbc\x07\xbc\x07\x05\x00\x03\x00\x00\x08\x0c" +
+		"\xbc\x07\xbc\x07\x0a\x00\x04\x00\x00\x04\x00" +
+		"\xbd\x07\xbd\x07\x04\x00\x1a\x00\x00\x08\x0c" +
+		"\xbd\x07\xbd\x07\x09\x00\x1b\x00\x00\x04\x00" +
+		"\xbe\x07\xbe\x07\x05\x00\x02\x00\x00\x08\x0c" +
+		"\xbe\x07\xbe\x07\x0a\x00\x03\x00\x00\x04\x00" +
+		"\xbf\x07\xbf\x07\x04\x00\x12\x00\x00\x08\x0c" +
+		"\xbf\x07\xbf\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xc0\x07\xc0\x07\x04\x00\x01\x00\x00\x08\x0c" +
+		"\xb3\x07\xb3\x07\x09\x00\x1a\x5c\x10\x04\x00" +
+		"\xb9\x07\xb9\x07\x05\x00\x06\x00\x00\x08\x0c" +
+		"\xb9\x07\xb9\x07\x0a\x00\x15\x00\x00\x04\x00" +
+		"\xba\x07\xba\x07\x03\x00\x18\x04\x00\x08\x0c" +
+		"\xba\x07\xba\x07\x09\x00\x16\x0c\x00\x04\x00" +
+		"\xbc\x07\xbc\x07\x04\x00\x19\x00\x00\x08\x0c" +
+		"\xbc\x07\xbc\x07\x0a\x00\x1f\x08\x00\x04\x00" +
+		"\xb0\x07\xb1\x07\x04\x07\x01\x00\x00\x04\x00" +
+		"\xb6\x07\xb6\x07\x01\x00\x17\x00\x00\x08\x00" +
+		"\xb6\x07\xb6\x07\x05\x00\x01\x00\x00\x04\x00" +
+		"\xc4\x07\xc4\x07\x0c\x00\x01\x00\x00\x08\x00" +
 		"\xc5\x07\xc9\x07\x03\x07\x01\x00\x00\x04\x00" +
+		"\xc5\x07\xc8\x07\x0a\x07\x0f\x00\x00\x08\x00" +
 		"\xcf\x07\xcf\x07\x0a\x07\x01\x00\x00\x08\x00" +
 		"\xd0\x07\xd0\x07\x03\x00\x03\x00\x00\x04\x00" +
 		"\xd7\x07\xd7\x07\x0c\x00\x1e\x00\x00\x08\x00" +
@@ -7941,11 +15314,50 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xdb\x07\xdb\x07\x03\x07\x00\x08\x10\x08\x00" +
 		"\xdb\x07\xdb\x07\x0a\x07\x00\x08\x10\x04\x00" +
-		"\x97\x07\x98\x07\x03\x07\x00\x08\x10\x04\x07" +
+		"\x97\x07\x98\x07\x03\x07\x00\x08\x10\x04\x0c" +
+		"\x9b\x07\x9c\x07\x0a\x07\x01\x08\x10\x04\x00" +
+		"\xbc\x07\xbc\x07\x04\x00\x06\x00\x00\x08\x0c" +
+		"\xbc\x07\xbc\x07\x09\x00\x1c\x00\x00\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xcd\x07\xdf\x07\x03\x07\x00\x10\x00\x08\x00" +
 		"\xcd\x07\xdf\x07\x0a\x07\x00\x14\x00\x04\x00" +
-		"\xbc\x07\xbc\x07\x09\x00\x19\x08\x00\x04\x07" +
-		"\xbf\x07\xbf\x07\x02\x00\x0c\x00\x00\x04\x04" +
+		"\x98\x07\x98\x07\x09\x00\x0a\x18\x20\x04\x0c" +
+		"\xb9\x07\xb9\x07\x06\x00\x0c\x08\x00\x08\x08" +
+		"\xb9\x07\xba\x07\x0a\x07\x01\x08\x00\x04\x0c" +
+		"\xba\x07\xbc\x07\x04\x07\x0f\x08\x00\x08\x08" +
+		"\xbb\x07\xbb\x07\x09\x00\x1e\x08\x00\x04\x0c" +
+		"\xbc\x07\xbc\x07\x09\x00\x19\x08\x00\x04\x0c" +
+		"\x9a\x07\x9a\x07\x0a\x00\x07\x08\x10\x04\x00" +
+		"\x9c\x07\xb0\x07\x02\x06\x08\x60\x00\x04\x07" +
+		"\xb5\x07\xb5\x07\x0c\x00\x05\x00\x00\x08\x06" +
+		"\xb6\x07\xb6\x07\x02\x00\x09\x00\x00\x04\x07" +
+		"\xbe\x07\xbe\x07\x0c\x00\x12\x00\x00\x08\x06" +
+		"\xbf\x07\xbf\x07\x02\x00\x0c\x00\x00\x04\x07" +
+		"\xa4\x07\xa4\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xae\x07\xb0\x07\x03\x00\x01\x00\x00\x04\x00" +
+		"\xc1\x07\xc1\x07\x0b\x00\x02\x00\x00\x08\x00" +
+		"\xc2\x07\xc2\x07\x03\x00\x0f\x00\x00\x04\x00" +
+		"\xc2\x07\xc2\x07\x0a\x00\x19\x00\x00\x08\x00" +
+		"\xc3\x07\xc3\x07\x02\x00\x0e\x00\x00\x04\x00" +
+		"\xc3\x07\xc3\x07\x0a\x00\x19\x00\x00\x08\x00" +
+		"\xc4\x07\xc4\x07\x02\x00\x07\x00\x00\x04\x00" +
+		"\xc4\x07\xc4\x07\x0a\x00\x10\x00\x00\x08\x00" +
+		"\xc5\x07\xc5\x07\x01\x00\x1d\x00\x00\x04\x00" +
+		"\xc5\x07\xc5\x07\x0a\x00\x0f\x00\x00\x08\x00" +
+		"\xc6\x07\xc6\x07\x02\x00\x0b\x00\x00\x04\x00" +
+		"\xc6\x07\xc6\x07\x0a\x00\x15\x00\x00\x08\x00" +
+		"\xc7\x07\xc7\x07\x02\x00\x11\x00\x00\x04\x00" +
+		"\xc7\x07\xc7\x07\x0a\x00\x14\x00\x00\x08\x00" +
+		"\xc8\x07\xc8\x07\x02\x00\x09\x00\x00\x04\x00" +
+		"\xc8\x07\xc8\x07\x0a\x00\x19\x00\x00\x08\x00" +
+		"\xc9\x07\xc9\x07\x01\x00\x1f\x00\x00\x04\x00" +
+		"\xc9\x07\xcb\x07\x0a\x07\x0b\x00\x00\x08\x00" +
+		"\xca\x07\xcb\x07\x02\x07\x0f\x00\x00\x04\x00" +
+		"\xcc\x07\xcc\x07\x02\x00\x0b\x00\x00\x04\x00" +
+		"\xcc\x07\xcc\x07\x0a\x00\x06\x00\x00\x08\x00" +
+		"\xcd\x07\xcd\x07\x02\x00\x10\x00\x00\x04\x00" +
+		"\xcd\x07\xcd\x07\x0a\x00\x06\x00\x00\x08\x00" +
+		"\xce\x07\xce\x07\x03\x00\x01\x00\x00\x04\x00" +
 		"\xce\x07\xce\x07\x0a\x00\x0b\x00\x00\x08\x00" +
 		"\xcf\x07\xcf\x07\x02\x00\x15\x00\x00\x04\x00" +
 		"\xcf\x07\xcf\x07\x0a\x00\x03\x00\x00\x08\x00" +
@@ -7966,21 +15378,56 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\xdf\x07\xdf\x07\x02\x07\x16\x00\x00\x04\x00" +
 		"\xe0\x07\xe3\x07\x02\x07\x0f\x00\x00\x04\x00" +
 		"\xe2\x07\xe2\x07\x0b\x07\x01\x00\x00\x08\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbb\x07\xbb\x07\x03\x00\x1f\x5c\x00\x08\x0c" +
+		"\xbb\x07\xbb\x07\x0a\x00\x01\x04\x00\x04\x00" +
+		"\xbc\x07\xbe\x07\x04\x06\x01\x5c\x00\x08\x0c" +
+		"\xbc\x07\xbc\x07\x09\x00\x1d\x04\x00\x04\x00" +
+		"\xbd\x07\xbd\x07\x09\x00\x1b\x08\x00\x04\x00" +
+		"\x99\x07\x99\x07\x09\x00\x10\x08\x10\x04\x00" +
+		"\xb9\x07\xbc\x07\x04\x07\x01\x08\x10\x08\x0c" +
+		"\xb9\x07\xb9\x07\x09\x07\x00\x08\x10\x04\x00" +
+		"\xba\x07\xba\x07\x0a\x00\x01\x08\x10\x04\x00" +
 		"\xbb\x07\xcb\x07\x09\x07\x00\x08\x10\x04\x00" +
-		"\xbd\x07\x0f\x27\x03\x07\x00\x08\x10\x08\x07" +
+		"\xbd\x07\x0f\x27\x03\x07\x00\x08\x10\x08\x0c" +
 		"\xcc\x07\x0f\x27\x0a\x07\x00\x08\x10\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xc8\x07\xc8\x07\x05\x00\x03\x00\x00\x08\x00" +
 		"\xc9\x07\xc9\x07\x02\x00\x06\x60\x00\x04\x00" +
-		"\xc8\x07\xc8\x07\x03\x00\x0f\x00\x00\x04\x07" +
-		"\xb6\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x05" +
-		"\xb6\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x07" +
-		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x05" +
-		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x05" +
-		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x07" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xbb\x07\xbc\x07\x02\x07\x00\x00\x00\x08\x08" +
+		"\xbb\x07\xbc\x07\x06\x07\x01\x00\x00\x04\x0c" +
+		"\xc7\x07\xc8\x07\x01\x06\x0f\x00\x00\x08\x08" +
+		"\xc7\x07\xc7\x07\x07\x00\x01\x00\x00\x04\x0c" +
+		"\xc8\x07\xc8\x07\x03\x00\x0f\x00\x00\x04\x0c" +
+		"\x99\x07\x99\x07\x09\x00\x1e\x08\x00\x04\x0c" +
+		"\xb6\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\xb6\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x08" +
+		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x08" +
+		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb6\x07\xb6\x07\x0b\x07\x01\x0b\x10\x08\x00" +
+		"\xb7\x07\xb7\x07\x02\x07\x00\x0b\x10\x04\x00" +
+		"\xb7\x07\xc4\x07\x0a\x07\x00\x0b\x10\x08\x00" +
+		"\xb8\x07\xc5\x07\x03\x07\x01\x0b\x10\x04\x00" +
 		"\xc5\x07\xc5\x07\x0a\x07\x08\x0b\x10\x08\x00" +
 		"\xc6\x07\xd6\x07\x0a\x07\x01\x0b\x10\x08\x00" +
 		"\xc6\x07\xd7\x07\x03\x07\x0f\x0b\x10\x04\x00" +
 		"\xd7\x07\x0f\x27\x09\x07\x00\x0b\x10\x08\x00" +
 		"\xd8\x07\x0f\x27\x04\x07\x01\x0b\x10\x04\x00" +
+		"\xb2\x07\xb4\x07\x0a\x07\x09\x10\x20\x08\x00" +
+		"\xb4\x07\xc2\x07\x03\x07\x09\x0c\x20\x04\x00" +
+		"\xb5\x07\xb5\x07\x09\x00\x1e\x10\x20\x08\x00" +
+		"\xb6\x07\xc3\x07\x0a\x07\x09\x10\x20\x08\x00" +
+		"\xc3\x07\xc3\x07\x04\x00\x0c\x0c\x20\x04\x00" +
+		"\xc4\x07\xc6\x07\x03\x07\x09\x0c\x20\x04\x00" +
+		"\xc4\x07\xc5\x07\x0a\x07\x09\x10\x20\x08\x00" +
+		"\xc6\x07\xc6\x07\x09\x00\x10\x10\x20\x08\x00" +
+		"\xc7\x07\xcc\x07\x03\x07\x09\x0c\x20\x04\x00" +
+		"\xc7\x07\xcd\x07\x0a\x07\x09\x10\x20\x08\x00" +
+		"\xcd\x07\xcd\x07\x03\x00\x1e\x0c\x20\x04\x00" +
+		"\xce\x07\xce\x07\x03\x07\x09\x0c\x20\x04\x00" +
 		"\xce\x07\xce\x07\x09\x00\x1b\x10\x20\x08\x00" +
 		"\xcf\x07\xcf\x07\x04\x00\x04\x0c\x20\x04\x00" +
 		"\xcf\x07\xda\x07\x0a\x07\x09\x10\x20\x08\x00" +
@@ -7998,56 +15445,116 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\xe3\x07\xe5\x07\x09\x07\x02\x10\x20\x08\x00" +
 		"\xe6\x07\xe6\x07\x09\x07\x09\x10\x20\x08\x00" +
 		"\xe7\x07\x0f\x27\x09\x07\x02\x10\x20\x08\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xba\x07\xba\x07\x0b\x00\x0c\x00\x00\x06\x00" +
 		"\xbb\x07\xc7\x07\x03\x07\x01\x00\x00\x04\x00" +
-		"\xcd\x07\xcd\x07\x0a\x00\x0c\x00\x10\x04\x07" +
-		"\xce\x07\xcf\x07\x03\x07\x00\x00\x10\x08\x05" +
-		"\xce\x07\xd3\x07\x0a\x07\x00\x00\x10\x04\x07" +
-		"\xd0\x07\xd3\x07\x04\x07\x01\x00\x10\x08\x05" +
-		"\xd4\x07\xd4\x07\x03\x07\x00\x00\x10\x08\x05" +
-		"\xd6\x07\xda\x07\x0a\x07\x00\x00\x10\x04\x07" +
-		"\xd7\x07\xd7\x07\x03\x07\x08\x00\x10\x08\x05" +
-		"\xd8\x07\xd8\x07\x03\x07\x0f\x00\x10\x08\x05" +
-		"\xd9\x07\xda\x07\x03\x07\x08\x00\x10\x08\x05" +
-		"\xdb\x07\xdb\x07\x03\x07\x0f\x00\x10\x08\x05" +
-		"\xdb\x07\xdb\x07\x0b\x00\x0d\x00\x10\x04\x07" +
-		"\xdc\x07\xdc\x07\x04\x00\x01\x00\x10\x08\x05" +
-		"\xdc\x07\x0f\x27\x0b\x07\x01\x00\x10\x04\x07" +
-		"\xdd\x07\x0f\x27\x03\x07\x08\x00\x10\x08\x05" +
+		"\xbb\x07\xc6\x07\x0a\x07\x00\x00\x00\x06\x00" +
+		"\xb1\x07\xb9\x07\x04\x07\x00\x00\x00\x08\x08" +
+		"\xb1\x07\xb3\x07\x0a\x07\x00\x00\x00\x04\x0c" +
+		"\xb4\x07\xb6\x07\x0a\x00\x08\x00\x00\x04\x0c" +
+		"\xb7\x07\xb9\x07\x0a\x07\x00\x00\x00\x04\x0c" +
+		"\xba\x07\xba\x07\x05\x00\x07\x00\x00\x08\x08" +
+		"\xba\x07\xc6\x07\x0a\x07\x08\x00\x00\x04\x0c" +
+		"\xbb\x07\xbc\x07\x03\x07\x0f\x00\x00\x08\x08" +
+		"\xbd\x07\xc1\x07\x05\x07\x05\x00\x00\x08\x08" +
+		"\xc2\x07\xc5\x07\x03\x07\x0e\x00\x00\x08\x08" +
+		"\xc6\x07\xcd\x07\x04\x07\x01\x00\x00\x08\x08" +
+		"\xc7\x07\xcb\x07\x0a\x07\x08\x00\x10\x04\x0c" +
+		"\xcc\x07\xcc\x07\x0a\x00\x06\x00\x10\x04\x0c" +
+		"\xcd\x07\xcd\x07\x0a\x00\x0c\x00\x10\x04\x0c" +
+		"\xce\x07\xcf\x07\x03\x07\x00\x00\x10\x08\x08" +
+		"\xce\x07\xd3\x07\x0a\x07\x00\x00\x10\x04\x0c" +
+		"\xd0\x07\xd3\x07\x04\x07\x01\x00\x10\x08\x08" +
+		"\xd4\x07\xd4\x07\x03\x07\x00\x00\x10\x08\x08" +
+		"\xd6\x07\xda\x07\x0a\x07\x00\x00\x10\x04\x0c" +
+		"\xd7\x07\xd7\x07\x03\x07\x08\x00\x10\x08\x08" +
+		"\xd8\x07\xd8\x07\x03\x07\x0f\x00\x10\x08\x08" +
+		"\xd9\x07\xda\x07\x03\x07\x08\x00\x10\x08\x08" +
+		"\xdb\x07\xdb\x07\x03\x07\x0f\x00\x10\x08\x08" +
+		"\xdb\x07\xdb\x07\x0b\x00\x0d\x00\x10\x04\x0c" +
+		"\xdc\x07\xdc\x07\x04\x00\x01\x00\x10\x08\x08" +
+		"\xdc\x07\x0f\x27\x0b\x07\x01\x00\x10\x04\x0c" +
+		"\xdd\x07\x0f\x27\x03\x07\x08\x00\x10\x08\x08" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb7\x07\xb7\x07\x04\x00\x0d\x00\x00\x08\x0c" +
+		"\xb7\x07\xb7\x07\x0a\x00\x0c\x00\x00\x04\x00" +
+		"\xb8\x07\xb8\x07\x05\x00\x0f\x00\x00\x08\x0c" +
+		"\xb8\x07\xb8\x07\x0a\x00\x0b\x00\x00\x04\x00" +
+		"\xb9\x07\xbc\x07\x04\x07\x01\x00\x00\x08\x0c" +
+		"\xb9\x07\xb9\x07\x09\x00\x19\x00\x00\x04\x00" +
+		"\xba\x07\xba\x07\x0a\x00\x02\x00\x00\x04\x00" +
+		"\xbb\x07\xcd\x07\x09\x07\x00\x00\x00\x04\x00" +
+		"\xbd\x07\xce\x07\x03\x07\x00\x00\x00\x08\x0c" +
+		"\x9a\x07\x9d\x07\x0a\x07\x01\x08\x10\x04\x00" +
+		"\xb1\x07\xb5\x07\x0a\x07\x00\x00\x00\x06\x03" +
+		"\xb3\x07\xb3\x07\x01\x00\x14\x00\x00\x04\x0a" +
+		"\xb4\x07\xb6\x07\x01\x00\x15\x00\x00\x04\x0a" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xd9\x07\xd9\x07\x06\x00\x13\x5c\x00\x08\x00" +
 		"\xd9\x07\xd9\x07\x0c\x00\x1f\x60\x00\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb9\x07\xbc\x07\x04\x07\x01\x00\x00\x08\x0c" +
+		"\xbb\x07\xcb\x07\x09\x07\x00\x00\x00\x04\x00" +
+		"\xbd\x07\x0f\x27\x03\x07\x00\x00\x00\x08\x0c" +
+		"\xcc\x07\x0f\x27\x0a\x07\x00\x00\x00\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xbd\x07\x0f\x27\x03\x07\x00\x00\x00\x08\x00" +
 		"\xbb\x07\xcb\x07\x09\x07\x00\x00\x00\x04\x00" +
 		"\xcc\x07\x0f\x27\x0a\x07\x00\x00\x00\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb9\x07\xbc\x07\x04\x07\x01\x04\x20\x08\x0c" +
+		"\xb9\x07\xb9\x07\x09\x07\x00\x04\x20\x04\x00" +
+		"\xba\x07\xba\x07\x0a\x00\x01\x04\x20\x04\x00" +
 		"\xbb\x07\xcb\x07\x09\x07\x00\x04\x20\x04\x00" +
-		"\xbd\x07\x0f\x27\x03\x07\x00\x04\x20\x08\x07" +
+		"\xbd\x07\x0f\x27\x03\x07\x00\x04\x20\x08\x0c" +
 		"\xcc\x07\x0f\x27\x0a\x07\x00\x04\x20\x04\x00" +
-		"\xbd\x07\x0f\x27\x03\x07\x00\x04\x20\x08\x07" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbd\x07\x0f\x27\x03\x07\x00\x04\x20\x08\x0c" +
 		"\xbb\x07\xcb\x07\x09\x07\x00\x04\x20\x04\x00" +
 		"\xcc\x07\x0f\x27\x0a\x07\x00\x04\x20\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xc8\x07\xc8\x07\x0b\x00\x1c\x00\x00\x08\x00" +
 		"\xc9\x07\xc9\x07\x02\x00\x05\x00\x00\x04\x00" +
+		"\x9b\x07\x9b\x07\x09\x07\x00\x08\x00\x04\x0c" +
+		"\xb4\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\xb4\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xa7\x07\xbd\x07\x05\x00\x01\x04\x00\x08\x0c" +
+		"\xa7\x07\xad\x07\x09\x00\x1e\x0c\x00\x04\x00" +
 		"\xae\x07\xca\x07\x0a\x00\x01\x0c\x00\x04\x00" +
-		"\xcb\x07\xda\x07\x04\x05\x00\x00\x10\x08\x07" +
+		"\xbe\x07\xbe\x07\x07\x00\x19\x04\x00\x08\x0c" +
+		"\xbf\x07\xbf\x07\x07\x00\x0c\x04\x00\x08\x0c" +
+		"\xc0\x07\xc4\x07\x05\x00\x01\x04\x00\x08\x0c" +
+		"\xc5\x07\xc5\x07\x05\x00\x06\x04\x00\x08\x0c" +
+		"\xc6\x07\xca\x07\x05\x00\x01\x04\x00\x08\x0c" +
+		"\xcb\x07\xda\x07\x04\x05\x00\x00\x10\x08\x0c" +
 		"\xcb\x07\xd5\x07\x09\x04\x00\x60\x00\x04\x00" +
 		"\xd6\x07\xd6\x07\x09\x00\x15\x60\x00\x04\x00" +
 		"\xd7\x07\xd7\x07\x09\x04\x01\x60\x00\x04\x00" +
 		"\xd8\x07\xd8\x07\x08\x04\x00\x60\x00\x04\x00" +
 		"\xd9\x07\xd9\x07\x08\x00\x14\x60\x00\x04\x00" +
 		"\xda\x07\xda\x07\x08\x00\x0a\x60\x00\x04\x00" +
-		"\xda\x07\xda\x07\x09\x00\x09\x60\x00\x08\x07" +
+		"\xda\x07\xda\x07\x09\x00\x09\x60\x00\x08\x0c" +
 		"\xda\x07\xda\x07\x09\x04\x00\x60\x00\x04\x00" +
-		"\xde\x07\xde\x07\x05\x00\x0f\x60\x00\x08\x07" +
+		"\xde\x07\xde\x07\x05\x00\x0f\x60\x00\x08\x0c" +
 		"\xde\x07\xde\x07\x06\x00\x1a\x60\x00\x04\x00" +
-		"\xde\x07\xde\x07\x07\x00\x1f\x60\x00\x08\x07" +
+		"\xde\x07\xde\x07\x07\x00\x1f\x60\x00\x08\x0c" +
 		"\xde\x07\xde\x07\x09\x04\x00\x60\x00\x04\x00" +
+		"\xb3\x07\xb3\x07\x0a\x00\x1f\x08\x20\x00\x00" +
+		"\xb4\x07\xbc\x07\x03\x07\x10\x08\x20\x04\x00" +
+		"\xb4\x07\xbc\x07\x0a\x07\x17\x08\x20\x00\x00" +
 		"\xbd\x07\x0f\x27\x03\x07\x00\x04\x20\x04\x00" +
+		"\xbd\x07\xc5\x07\x0a\x07\x17\x04\x20\x00\x00" +
 		"\xc6\x07\xcb\x07\x0a\x07\x16\x04\x20\x00\x00" +
 		"\xcc\x07\x0f\x27\x0a\x07\x00\x04\x20\x00\x00" +
+		"\x97\x07\x97\x07\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbf\x07\xbf\x07\x09\x07\x00\x00\x00\x08\x00" +
 		"\xc0\x07\xc1\x07\x04\x07\x00\x00\x00\x04\x00" +
+		"\xc0\x07\xc0\x07\x09\x00\x10\x00\x00\x08\x00" +
 		"\xc1\x07\xd0\x07\x09\x07\x09\x00\x00\x08\x00" +
 		"\xc2\x07\xd0\x07\x04\x07\x10\x00\x00\x04\x00" +
 		"\xd1\x07\xda\x07\x04\x07\x0f\x08\x00\x04\x00" +
 		"\xd1\x07\xda\x07\x09\x07\x01\x08\x00\x08\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xce\x07\xcf\x07\x0b\x07\x01\x08\x00\x08\x00" +
 		"\xcf\x07\xd0\x07\x02\x07\x00\x0c\x00\x04\x00" +
 		"\xd9\x07\xd9\x07\x0b\x00\x1d\x08\x00\x08\x00" +
@@ -8060,22 +15567,94 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\xdf\x07\xe5\x07\x01\x07\x0c\x0c\x00\x04\x00" +
 		"\xe3\x07\xe3\x07\x0b\x07\x08\x08\x00\x08\x00" +
 		"\xe4\x07\xe4\x07\x0c\x00\x14\x08\x00\x08\x00" +
-		"\xb9\x07\xb9\x07\x08\x00\x1c\x08\x00\x04\x07" +
-		"\xc7\x07\xc7\x07\x09\x00\x07\x00\x00\x04\x07" +
-		"\xd6\x07\xd6\x07\x04\x00\x1e\x00\x00\x08\x05" +
-		"\xd6\x07\xd6\x07\x0a\x00\x01\x00\x00\x04\x07" +
+		"\x96\x07\x96\x07\x0a\x00\x04\x04\x00\x04\x00" +
+		"\xbd\x07\xbe\x07\x03\x07\x00\x08\x00\x08\x0c" +
+		"\xbd\x07\xbe\x07\x09\x07\x00\x0c\x00\x04\x00" +
+		"\x99\x07\x99\x07\x09\x00\x10\x0c\x00\x04\x00" +
+		"\xb8\x07\xb8\x07\x03\x00\x1c\x04\x00\x08\x0c" +
+		"\xb8\x07\xb8\x07\x09\x00\x1a\x04\x00\x04\x00" +
+		"\xa9\x07\xb0\x07\x0a\x07\x17\x08\x10\x04\x0b" +
+		"\xb4\x07\xbc\x07\x03\x07\x10\x08\x10\x08\x04" +
+		"\xb4\x07\xbc\x07\x0a\x07\x17\x08\x10\x04\x0b" +
+		"\xbd\x07\xcb\x07\x03\x07\x00\x04\x20\x08\x04" +
+		"\xbd\x07\xc5\x07\x0a\x07\x17\x04\x20\x04\x0b" +
+		"\xc6\x07\xcb\x07\x0a\x07\x16\x04\x20\x04\x0b" +
+		"\x9b\x07\x9d\x07\x0a\x07\x01\x08\x10\x04\x00" +
+		"\xa0\x07\xa0\x07\x0b\x00\x02\x00\x00\x04\x00" +
+		"\xb7\x07\xb7\x07\x04\x00\x0c\x00\x10\x08\x0c" +
+		"\xb7\x07\xb7\x07\x0b\x00\x1a\x00\x10\x04\x00" +
+		"\xb8\x07\xb8\x07\x04\x00\x0b\x08\x10\x08\x0c" +
+		"\xb8\x07\xb8\x07\x0a\x00\x0a\x08\x10\x04\x00" +
+		"\xb9\x07\xba\x07\x04\x07\x01\x08\x10\x08\x0c" +
+		"\xb9\x07\xb9\x07\x09\x00\x1a\x08\x10\x04\x00" +
+		"\xba\x07\xba\x07\x09\x00\x18\x10\x00\x04\x00" +
+		"\xbb\x07\xbb\x07\x04\x00\x01\x24\x00\x08\x0c" +
+		"\xbb\x07\xbb\x07\x09\x00\x1d\x08\x00\x04\x00" +
+		"\xbc\x07\xbc\x07\x04\x00\x01\x00\x00\x08\x0c" +
+		"\xbc\x07\xbc\x07\x09\x00\x1c\x00\x00\x04\x00" +
+		"\xb2\x07\xb3\x07\x09\x07\x01\x08\x00\x04\x0c" +
+		"\xb5\x07\xb5\x07\x0c\x00\x10\x08\x00\x08\x08" +
+		"\xb6\x07\xb6\x07\x02\x00\x18\x08\x00\x04\x0c" +
+		"\xb8\x07\xb8\x07\x05\x00\x1a\x08\x00\x08\x08" +
+		"\xb8\x07\xb8\x07\x08\x00\x16\x08\x01\x04\x0c" +
+		"\xb9\x07\xb9\x07\x04\x00\x18\x08\x00\x08\x08" +
+		"\xb9\x07\xb9\x07\x08\x00\x1c\x08\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xb5\x07\xb5\x07\x0b\x00\x19\x00\x00\x08\x08" +
+		"\xb6\x07\xb6\x07\x02\x00\x18\x00\x00\x04\x0c" +
+		"\xbf\x07\xbf\x07\x05\x00\x15\x00\x00\x08\x08" +
+		"\xbf\x07\xbf\x07\x09\x00\x16\x00\x00\x04\x0c" +
+		"\xc7\x07\xc7\x07\x03\x00\x17\x00\x00\x08\x08" +
+		"\xc7\x07\xc7\x07\x09\x00\x07\x00\x00\x04\x0c" +
+		"\xd6\x07\xd6\x07\x04\x00\x1e\x00\x00\x08\x08" +
+		"\xd6\x07\xd6\x07\x0a\x00\x01\x00\x00\x04\x0c" +
+		"\xa1\x07\xac\x07\x0a\x07\x1f\x0e\x00\x04\x00" +
+		"\xad\x07\xb8\x07\x04\x07\x10\x0e\x00\x08\x0c" +
+		"\xad\x07\xb8\x07\x0a\x07\x10\x0e\x00\x04\x00" +
+		"\xb5\x07\xb5\x07\x0c\x00\x1e\x0e\x00\x08\x0c" +
+		"\xbb\x07\xbb\x07\x05\x00\x0d\x0e\x00\x08\x0c" +
 		"\xbb\x07\xbb\x07\x0a\x00\x15\x0e\x00\x04\x00" +
-		"\xc4\x07\xcd\x07\x0a\x07\x00\x04\x10\x04\x07" +
-		"\xd5\x07\xd6\x07\x04\x07\x01\x00\x00\x08\x05" +
-		"\xd5\x07\xd6\x07\x0a\x07\x00\x00\x00\x04\x07" +
-		"\xdc\x07\xdf\x07\x03\x07\x08\x08\x00\x08\x05" +
-		"\xdc\x07\xdf\x07\x0b\x07\x01\x08\x00\x04\x07" +
-		"\xe1\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x05" +
-		"\xe1\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x07" +
-		"\xc9\x07\xca\x07\x03\x07\x01\x08\x10\x04\x07" +
-		"\xc3\x07\xc4\x07\x09\x07\x00\x00\x00\x04\x07" +
-		"\xd6\x07\xd6\x07\x05\x07\x01\x00\x00\x08\x05" +
-		"\xd6\x07\xd6\x07\x08\x01\x01\x00\x00\x04\x07" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xbf\x07\xbf\x07\x05\x00\x08\x00\x00\x08\x08" +
+		"\xc0\x07\xc3\x07\x04\x07\x00\x00\x00\x08\x08" +
+		"\xbf\x07\xc3\x07\x0a\x07\x00\x00\x00\x04\x0c" +
+		"\xc4\x07\xcd\x07\x04\x07\x01\x04\x10\x08\x08" +
+		"\xc4\x07\xcd\x07\x0a\x07\x00\x04\x10\x04\x0c" +
+		"\xd5\x07\xd6\x07\x04\x07\x01\x00\x00\x08\x08" +
+		"\xd5\x07\xd6\x07\x0a\x07\x00\x00\x00\x04\x0c" +
+		"\xdc\x07\xdf\x07\x03\x07\x08\x08\x00\x08\x08" +
+		"\xdc\x07\xdf\x07\x0b\x07\x01\x08\x00\x04\x0c" +
+		"\xe1\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x08" +
+		"\xe1\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x0c" +
+		"\xa4\x07\xa7\x07\x09\x07\x00\x08\x00\x04\x0c" +
+		"\xaa\x07\xb5\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\xaa\x07\xb5\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xc8\x07\xc9\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xc9\x07\xca\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xc3\x07\xc4\x07\x05\x07\x01\x00\x00\x08\x08" +
+		"\xc3\x07\xc4\x07\x09\x07\x00\x00\x00\x04\x0c" +
+		"\xd6\x07\xd6\x07\x05\x07\x01\x00\x00\x08\x08" +
+		"\xd6\x07\xd6\x07\x08\x01\x01\x00\x00\x04\x0c" +
+		"\xa4\x07\xa5\x07\x09\x07\x00\x0c\x00\x04\x00" +
+		"\xbc\x07\xbc\x07\x04\x00\x06\x00\x00\x08\x0c" +
+		"\xbc\x07\xbc\x07\x09\x00\x1c\x04\x00\x04\x00" +
+		"\xbd\x07\xbf\x07\x03\x07\x00\x00\x00\x08\x0c" +
+		"\xbd\x07\xbf\x07\x09\x07\x00\x04\x00\x04\x00" +
+		"\x76\x07\x76\x07\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb9\x07\xb9\x07\x03\x00\x15\x5c\x00\x08\x00" +
+		"\xb9\x07\xb9\x07\x0a\x00\x14\x60\x00\x04\x00" +
+		"\xba\x07\xba\x07\x03\x00\x18\x60\x00\x08\x00" +
+		"\xba\x07\xba\x07\x08\x00\x05\x04\x00\x04\x00" +
+		"\xbb\x07\xbb\x07\x05\x00\x1a\x60\x00\x08\x00" +
+		"\xbb\x07\xbb\x07\x09\x00\x12\x60\x00\x04\x00" +
+		"\xbc\x07\xbc\x07\x03\x00\x14\x60\x00\x08\x00" +
+		"\xbc\x07\xbc\x07\x09\x00\x16\x60\x00\x04\x00" +
+		"\xc7\x07\xc7\x07\x05\x00\x02\x60\x00\x08\x00" +
+		"\xc8\x07\xcb\x07\x03\x00\x15\x60\x00\x08\x00" +
+		"\xc7\x07\xcb\x07\x09\x00\x15\x60\x00\x04\x00" +
+		"\xcc\x07\xcc\x07\x03\x00\x14\x60\x00\x08\x00" +
 		"\xcc\x07\xcc\x07\x09\x00\x14\x60\x00\x04\x00" +
 		"\xcd\x07\xcf\x07\x03\x00\x15\x60\x00\x08\x00" +
 		"\xcd\x07\xcf\x07\x09\x00\x15\x60\x00\x04\x00" +
@@ -8103,26 +15682,70 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\xe4\x07\xe4\x07\x09\x00\x14\x60\x00\x04\x00" +
 		"\xe5\x07\xe6\x07\x03\x00\x15\x60\x00\x08\x00" +
 		"\xe5\x07\xe6\x07\x09\x00\x15\x60\x00\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbe\x07\xbe\x07\x05\x00\x01\x00\x00\x08\x00" +
+		"\xbe\x07\xc0\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xbf\x07\xbf\x07\x03\x00\x1f\x00\x00\x08\x00" +
+		"\xc0\x07\xc1\x07\x04\x00\x01\x00\x00\x08\x00" +
 		"\xc1\x07\xc6\x07\x09\x07\x00\x04\x10\x04\x00" +
+		"\xc2\x07\xc6\x07\x03\x07\x00\x04\x10\x08\x00" +
 		"\xc7\x07\xd7\x07\x04\x00\x01\x0c\x10\x08\x00" +
 		"\xc7\x07\xd7\x07\x0a\x00\x01\x0c\x10\x04\x00" +
-		"\x9c\x07\x9f\x07\x09\x06\x08\x64\x00\x04\x07" +
+		"\xb4\x07\xb4\x07\x0a\x00\x01\x00\x10\x04\x00" +
+		"\xb5\x07\xb5\x07\x06\x00\x03\x00\x10\x08\x0c" +
+		"\xb5\x07\xb6\x07\x09\x07\x00\x00\x10\x04\x00" +
+		"\xb6\x07\xb6\x07\x05\x00\x1a\x00\x10\x08\x0c" +
+		"\xb7\x07\xb7\x07\x06\x00\x01\x00\x10\x08\x0c" +
+		"\xb7\x07\xb9\x07\x09\x07\x00\x00\x10\x04\x00" +
+		"\xb8\x07\xb8\x07\x05\x00\x1e\x00\x10\x08\x0c" +
+		"\xb9\x07\xbb\x07\x05\x07\x16\x00\x10\x08\x0c" +
+		"\xba\x07\xba\x07\x0a\x00\x01\x00\x10\x04\x00" +
+		"\xbb\x07\xbb\x07\x09\x00\x1e\x00\x10\x04\x00" +
+		"\x9c\x07\x9f\x07\x09\x06\x08\x64\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb5\x07\xb5\x07\x06\x00\x06\x00\x00\x08\x0c" +
+		"\xb5\x07\xb7\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xb6\x07\xb9\x07\x05\x00\x01\x00\x00\x08\x0c" +
+		"\xb8\x07\xb8\x07\x0b\x00\x01\x00\x00\x04\x00" +
+		"\xb9\x07\xb9\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xba\x07\xba\x07\x04\x00\x1e\x00\x00\x08\x0c" +
+		"\xba\x07\xba\x07\x09\x00\x1e\x00\x00\x04\x00" +
+		"\xc1\x07\xc1\x07\x04\x00\x01\x00\x00\x08\x0c" +
+		"\xc1\x07\xc1\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xc2\x07\xc4\x07\x04\x05\x01\x00\x00\x08\x0c" +
+		"\xc2\x07\xc6\x07\x0a\x05\x01\x00\x00\x04\x00" +
+		"\xc5\x07\xc5\x07\x05\x00\x08\x00\x00\x08\x0c" +
+		"\xc6\x07\xc6\x07\x04\x00\x1b\x00\x00\x08\x0c" +
+		"\xc7\x07\xc7\x07\x04\x00\x11\x00\x00\x08\x0c" +
+		"\xc7\x07\xc7\x07\x09\x00\x1b\x00\x00\x04\x00" +
+		"\xc8\x07\xc8\x07\x04\x00\x0a\x00\x00\x08\x0c" +
+		"\xc8\x07\xc9\x07\x0a\x05\x01\x00\x00\x04\x00" +
+		"\xc9\x07\xce\x07\x04\x05\x01\x00\x00\x08\x0c" +
+		"\xca\x07\xca\x07\x09\x05\x0f\x00\x00\x04\x00" +
 		"\xcb\x07\xce\x07\x09\x05\x0f\x00\x10\x04\x00" +
-		"\xcf\x07\xcf\x07\x07\x00\x01\x00\x10\x08\x07" +
+		"\xcf\x07\xcf\x07\x07\x00\x01\x00\x10\x08\x0c" +
 		"\xcf\x07\xd2\x07\x09\x05\x00\x00\x10\x04\x00" +
-		"\xd0\x07\xd1\x07\x03\x04\x00\x00\x10\x08\x07" +
-		"\xd2\x07\xdc\x07\x03\x04\x00\x60\x00\x08\x07" +
+		"\xd0\x07\xd1\x07\x03\x04\x00\x00\x10\x08\x0c" +
+		"\xd2\x07\xdc\x07\x03\x04\x00\x60\x00\x08\x0c" +
 		"\xd3\x07\xd3\x07\x0a\x00\x18\x00\x10\x04\x00" +
 		"\xd4\x07\xd4\x07\x0a\x00\x0f\x00\x10\x04\x00" +
 		"\xd5\x07\xd5\x07\x09\x05\x00\x00\x10\x04\x00" +
 		"\xd6\x07\xdb\x07\x0a\x05\x00\x00\x10\x04\x00" +
 		"\xdd\x07\xdd\x07\x0c\x00\x14\x00\x00\x04\x00" +
-		"\xde\x07\xe5\x07\x03\x04\x00\x60\x00\x08\x07" +
+		"\xde\x07\xe5\x07\x03\x04\x00\x60\x00\x08\x0c" +
 		"\xde\x07\xe6\x07\x0a\x05\x00\x00\x10\x04\x00" +
-		"\xe6\x07\xe6\x07\x02\x04\x00\x60\x00\x08\x07" +
+		"\xe6\x07\xe6\x07\x02\x04\x00\x60\x00\x08\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xc8\x07\xcc\x07\x04\x07\x07\x00\x10\x08\x00" +
 		"\xc8\x07\xcc\x07\x09\x07\x00\x00\x00\x04\x00" +
 		"\xcd\x07\xd5\x07\x03\x07\x00\x0a\x00\x08\x00" +
 		"\xcd\x07\xd4\x07\x0a\x07\x00\x0a\x00\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbd\x07\xc0\x07\x0a\x07\x00\x08\x00\x08\x00" +
+		"\xbe\x07\xc1\x07\x03\x07\x01\x08\x00\x04\x00" +
+		"\xc1\x07\xc1\x07\x0a\x07\x00\x08\x00\x06\x00" +
+		"\xc2\x07\xc5\x07\x03\x07\x0f\x08\x00\x04\x00" +
+		"\xc2\x07\xc2\x07\x0a\x00\x13\x08\x00\x06\x00" +
 		"\xc3\x07\xcf\x07\x0a\x07\x00\x08\x00\x06\x00" +
 		"\xc6\x07\xcb\x07\x03\x07\x01\x08\x00\x04\x00" +
 		"\xcc\x07\xd5\x07\x03\x07\x00\x08\x00\x04\x00" +
@@ -8132,34 +15755,85 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x00\x04\x00" +
 		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x00\x04\x00" +
 		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x00\x06\x00" +
-		"\xc9\x07\x0f\x27\x03\x07\x00\x00\x00\x08\x07" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xc5\x07\xcc\x07\x03\x07\x00\x08\x10\x08\x0c" +
+		"\xc5\x07\xcc\x07\x09\x07\x00\x08\x10\x04\x00" +
+		"\xb4\x07\xb4\x07\x06\x00\x16\x00\x00\x08\x0c" +
+		"\xb4\x07\xb9\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xb5\x07\xb9\x07\x05\x00\x01\x00\x00\x08\x0c" +
+		"\xba\x07\xba\x07\x04\x00\x1e\x00\x00\x08\x0c" +
+		"\xba\x07\xba\x07\x09\x00\x1e\x00\x00\x04\x00" +
+		"\xc0\x07\xc3\x07\x05\x00\x01\x00\x00\x08\x0c" +
+		"\xc0\x07\xc7\x07\x0a\x00\x10\x00\x00\x04\x00" +
+		"\xc4\x07\xc4\x07\x06\x00\x01\x00\x00\x08\x0c" +
+		"\xc5\x07\xc5\x07\x05\x00\x0a\x00\x00\x08\x0c" +
+		"\xc6\x07\xc8\x07\x05\x00\x01\x00\x00\x08\x0c" +
+		"\xc8\x07\xc8\x07\x0a\x00\x04\x00\x00\x04\x00" +
+		"\xc9\x07\x0f\x27\x03\x07\x00\x00\x00\x08\x0c" +
 		"\xc9\x07\xce\x07\x09\x07\x00\x00\x00\x04\x00" +
 		"\xcf\x07\x0f\x27\x0a\x07\x00\x00\x00\x04\x00" +
+		"\xa4\x07\xa4\x07\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbe\x07\xc0\x07\x04\x00\x01\x00\x00\x08\x0c" +
+		"\xbe\x07\xc1\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xc1\x07\xc1\x07\x04\x00\x06\x00\x00\x08\x0c" +
+		"\xc2\x07\xc2\x07\x04\x00\x04\x00\x00\x08\x0c" +
+		"\xc2\x07\xc2\x07\x0a\x00\x03\x00\x00\x04\x00" +
+		"\xc3\x07\xc5\x07\x04\x00\x01\x00\x00\x08\x0c" +
+		"\xc3\x07\xc5\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xcd\x07\xcd\x07\x04\x00\x04\x00\x00\x08\x0c" +
 		"\xcd\x07\xcd\x07\x0a\x00\x04\x00\x00\x04\x00" +
-		"\xdd\x07\xdd\x07\x03\x05\x00\x04\x00\x08\x07" +
+		"\xdd\x07\xdd\x07\x03\x05\x00\x04\x00\x08\x0c" +
 		"\xdd\x07\xdd\x07\x0a\x05\x00\x08\x00\x04\x00" +
-		"\xbb\x07\xbb\x07\x0a\x07\x10\x0e\x00\x04\x07" +
+		"\xad\x07\xb5\x07\x04\x07\x10\x0e\x00\x08\x08" +
+		"\xad\x07\xae\x07\x0a\x07\x10\x0a\x00\x04\x0c" +
+		"\xaf\x07\xb8\x07\x0a\x07\x10\x0e\x00\x04\x0c" +
+		"\xb5\x07\xb5\x07\x0c\x00\x1e\x0e\x00\x08\x08" +
+		"\xb7\x07\xb8\x07\x04\x07\x10\x0e\x00\x08\x08" +
+		"\xbb\x07\xbb\x07\x05\x00\x0d\x0e\x00\x08\x08" +
+		"\xbb\x07\xbb\x07\x0a\x07\x10\x0e\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb5\x07\xb5\x07\x03\x00\x1f\x00\x10\x08\x0c" +
+		"\xb5\x07\xb5\x07\x09\x00\x1d\x00\x10\x04\x00" +
+		"\xb6\x07\xb6\x07\x04\x00\x15\x00\x10\x08\x0c" +
+		"\xb6\x07\xb6\x07\x09\x00\x10\x00\x10\x04\x00" +
+		"\xb7\x07\xbb\x07\x04\x07\x0f\x08\x00\x08\x0c" +
+		"\xb7\x07\xbc\x07\x09\x07\x0f\x08\x00\x04\x00" +
+		"\xbc\x07\xbc\x07\x03\x00\x1f\x08\x00\x08\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbe\x07\xbe\x07\x0a\x00\x0a\x00\x00\x08\x00" +
 		"\xbf\x07\xbf\x07\x03\x00\x15\x00\x00\x04\x00" +
 		"\xd8\x07\xd8\x07\x0a\x07\x00\x08\x00\x08\x00" +
 		"\xd9\x07\xd9\x07\x03\x07\x00\x08\x00\x04\x00" +
-		"\x9e\x07\x9e\x07\x07\x00\x1e\x00\x00\x04\x07" +
-		"\xcc\x07\xd0\x07\x04\x07\x01\x08\x00\x08\x05" +
-		"\xcc\x07\xd0\x07\x0a\x07\x00\x08\x00\x04\x07" +
-		"\xd1\x07\xd1\x07\x05\x07\x01\x08\x00\x08\x05" +
-		"\xd1\x07\xd1\x07\x09\x07\x00\x08\x00\x04\x07" +
-		"\xd2\x07\xe6\x07\x04\x07\x01\x08\x00\x08\x05" +
-		"\xd2\x07\xe6\x07\x0a\x07\x00\x08\x00\x04\x07" +
-		"\xcd\x07\x0f\x27\x03\x07\x00\x08\x00\x08\x07" +
+		"\x9e\x07\x9e\x07\x07\x00\x1e\x00\x00\x04\x0c" +
+		"\xcc\x07\xd0\x07\x04\x07\x01\x08\x00\x08\x08" +
+		"\xcc\x07\xd0\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xd1\x07\xd1\x07\x05\x07\x01\x08\x00\x08\x08" +
+		"\xd1\x07\xd1\x07\x09\x07\x00\x08\x00\x04\x0c" +
+		"\xd2\x07\xe6\x07\x04\x07\x01\x08\x00\x08\x08" +
+		"\xd2\x07\xe6\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xcd\x07\x0f\x27\x03\x07\x00\x08\x00\x08\x0c" +
 		"\xcd\x07\x0f\x27\x0a\x07\x00\x0c\x00\x04\x00" +
-		"\xa5\x07\xb4\x07\x0a\x07\x00\x08\x00\x04\x07" +
-		"\xc9\x07\xd6\x07\x04\x07\x01\x00\x01\x08\x05" +
-		"\xc9\x07\xd6\x07\x0a\x07\x00\x00\x01\x04\x07" +
+		"\xa5\x07\xb4\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xc9\x07\xd6\x07\x04\x07\x01\x00\x01\x08\x08" +
+		"\xc9\x07\xd6\x07\x0a\x07\x00\x00\x01\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbf\x07\xc0\x07\x04\x00\x01\x00\x00\x08\x00" +
+		"\xbf\x07\xbf\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xc1\x07\xce\x07\x03\x07\x00\x00\x00\x08\x00" +
 		"\xc0\x07\xce\x07\x09\x07\x00\x00\x00\x04\x00" +
 		"\xd1\x07\xd1\x07\x04\x06\x00\x08\x00\x08\x00" +
 		"\xd1\x07\xd6\x07\x09\x06\x00\x08\x00\x04\x00" +
 		"\xd2\x07\xd6\x07\x03\x06\x00\x08\x00\x08\x00" +
 		"\xdf\x07\xe0\x07\x03\x06\x00\x08\x00\x08\x00" +
 		"\xdf\x07\xe0\x07\x09\x06\x00\x00\x00\x04\x00" +
+		"\xaf\x07\xaf\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xb6\x07\xb6\x07\x06\x00\x18\x00\x00\x08\x00" +
+		"\xb6\x07\xb6\x07\x09\x00\x01\x00\x00\x04\x00" +
+		"\xb8\x07\xb9\x07\x05\x00\x01\x00\x00\x08\x00" +
+		"\xb8\x07\xb8\x07\x08\x00\x01\x00\x00\x04\x00" +
+		"\xb9\x07\xb9\x07\x09\x00\x1c\x00\x00\x04\x00" +
+		"\xba\x07\xba\x07\x06\x00\x01\x00\x00\x08\x00" +
 		"\xba\x07\xba\x07\x08\x00\x04\x00\x00\x04\x00" +
 		"\xd8\x07\xd8\x07\x06\x00\x01\x00\x00\x08\x00" +
 		"\xd8\x07\xd8\x07\x09\x00\x01\x00\x00\x04\x00" +
@@ -8329,63 +16003,92 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\x26\x08\x26\x08\x05\x00\x13\x08\x00\x04\x00" +
 		"\x27\x08\x27\x08\x03\x00\x1e\x0c\x00\x00\x00" +
 		"\x27\x08\x27\x08\x05\x00\x0b\x08\x00\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb9\x07\xba\x07\x0c\x07\x01\x00\x00\x08\x00" +
+		"\xba\x07\xbb\x07\x02\x00\x1b\x00\x00\x04\x00" +
+		"\xcc\x07\xcc\x07\x0c\x00\x01\x08\x10\x08\x00" +
 		"\xcd\x07\xcd\x07\x03\x00\x02\x08\x10\x04\x00" +
-		"\xb4\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x05" +
-		"\xb4\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x07" +
-		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x05" +
-		"\xc5\x07\xc5\x07\x0a\x07\x08\x08\x10\x08\x05" +
-		"\xc6\x07\xd6\x07\x0a\x07\x01\x08\x10\x08\x05" +
-		"\xc6\x07\xd7\x07\x03\x07\x0f\x08\x10\x04\x07" +
-		"\xd7\x07\x0f\x27\x09\x07\x00\x08\x10\x08\x05" +
-		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x07" +
-		"\xca\x07\xca\x07\x03\x00\x15\x00\x00\x00\x08" +
-		"\xca\x07\xe1\x07\x09\x07\x01\x08\x00\x04\x03" +
-		"\xcb\x07\xe1\x07\x04\x07\x01\x08\x00\x00\x08" +
-		"\xbb\x07\xbc\x07\x06\x01\x17\x00\x00\x04\x07" +
-		"\xd5\x07\xd5\x07\x04\x00\x0a\x00\x00\x08\x05" +
-		"\xd5\x07\xd5\x07\x0a\x07\x01\x00\x00\x04\x07" +
-		"\xd6\x07\xd6\x07\x04\x00\x1e\x08\x00\x08\x05" +
-		"\xd6\x07\xd6\x07\x0a\x07\x01\x04\x00\x04\x07" +
-		"\xc2\x07\xc7\x07\x09\x07\x0b\x08\x00\x04\x07" +
+		"\x99\x07\x99\x07\x09\x00\x1e\x08\x00\x04\x0c" +
+		"\xb4\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\xb4\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x08" +
+		"\x9a\x07\x9a\x07\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xb6\x07\xb6\x07\x0b\x07\x01\x08\x10\x08\x08" +
+		"\xb7\x07\xb7\x07\x02\x07\x00\x08\x10\x04\x0c" +
+		"\xb7\x07\xc4\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xb8\x07\xc5\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\xc5\x07\xc5\x07\x0a\x07\x08\x08\x10\x08\x08" +
+		"\xc6\x07\xd6\x07\x0a\x07\x01\x08\x10\x08\x08" +
+		"\xc6\x07\xd7\x07\x03\x07\x0f\x08\x10\x04\x0c" +
+		"\xd7\x07\x0f\x27\x09\x07\x00\x08\x10\x08\x08" +
+		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x05" +
+		"\xca\x07\xca\x07\x03\x00\x15\x00\x00\x00\x0d" +
+		"\xca\x07\xe1\x07\x09\x07\x01\x08\x00\x04\x05" +
+		"\xcb\x07\xe1\x07\x04\x07\x01\x08\x00\x00\x0d" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xbb\x07\xbc\x07\x03\x07\x10\x00\x00\x08\x08" +
+		"\xbb\x07\xbc\x07\x06\x01\x17\x00\x00\x04\x0c" +
+		"\xd5\x07\xd5\x07\x04\x00\x0a\x00\x00\x08\x08" +
+		"\xd5\x07\xd5\x07\x0a\x07\x01\x00\x00\x04\x0c" +
+		"\xd6\x07\xd6\x07\x04\x00\x1e\x08\x00\x08\x08" +
+		"\xd6\x07\xd6\x07\x0a\x07\x01\x04\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xc2\x07\xc2\x07\x05\x00\x04\x08\x00\x08\x08" +
+		"\xc2\x07\xc7\x07\x09\x07\x0b\x08\x00\x04\x0c" +
+		"\xc3\x07\xc7\x07\x04\x07\x0b\x08\x00\x08\x08" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
-		"\xd2\x07\xd2\x07\x04\x07\x02\x00\x00\x08\x07" +
+		"\xd2\x07\xd2\x07\x04\x07\x02\x00\x00\x08\x0c" +
 		"\xd2\x07\xd2\x07\x0a\x07\x02\x00\x00\x04\x00" +
-		"\xd8\x07\xd8\x07\x06\x00\x01\x00\x00\x08\x07" +
+		"\xd8\x07\xd8\x07\x06\x00\x01\x00\x00\x08\x0c" +
 		"\xd8\x07\xd9\x07\x0b\x00\x01\x00\x00\x04\x00" +
-		"\xd9\x07\xd9\x07\x04\x00\x0f\x00\x00\x08\x07" +
+		"\xd9\x07\xd9\x07\x04\x00\x0f\x00\x00\x08\x0c" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
-		"\xcf\x07\xd5\x07\x04\x05\x0f\x00\x00\x08\x07" +
+		"\xcf\x07\xd5\x07\x04\x05\x0f\x00\x00\x08\x0c" +
 		"\xcf\x07\xd3\x07\x0a\x05\x0f\x00\x00\x04\x00" +
 		"\xd4\x07\xd4\x07\x0a\x00\x01\x04\x00\x04\x00" +
 		"\xd5\x07\xd5\x07\x0a\x00\x04\x08\x00\x04\x00" +
-		"\xd6\x07\xd7\x07\x04\x00\x01\x00\x00\x08\x07" +
+		"\xd6\x07\xd7\x07\x04\x00\x01\x00\x00\x08\x0c" +
 		"\xd6\x07\xd6\x07\x09\x00\x16\x00\x00\x04\x00" +
 		"\xd7\x07\xd7\x07\x09\x00\x0d\x08\x00\x04\x00" +
-		"\xd8\x07\xd9\x07\x03\x05\x00\x00\x00\x08\x07" +
+		"\xd8\x07\xd9\x07\x03\x05\x00\x00\x00\x08\x0c" +
 		"\xd8\x07\xd8\x07\x09\x00\x01\x00\x00\x04\x00" +
 		"\xd9\x07\xd9\x07\x09\x00\x04\x04\x00\x04\x00" +
-		"\xda\x07\xda\x07\x03\x00\x1a\x00\x00\x08\x07" +
+		"\xda\x07\xda\x07\x03\x00\x1a\x00\x00\x08\x0c" +
 		"\xda\x07\xda\x07\x08\x00\x0b\x00\x00\x04\x00" +
-		"\xdb\x07\xdb\x07\x04\x00\x01\x00\x01\x08\x07" +
+		"\xdb\x07\xdb\x07\x04\x00\x01\x00\x01\x08\x0c" +
 		"\xdb\x07\xdb\x07\x08\x00\x01\x00\x00\x04\x00" +
-		"\xdb\x07\xdb\x07\x08\x00\x1e\x00\x00\x08\x07" +
+		"\xdb\x07\xdb\x07\x08\x00\x1e\x00\x00\x08\x0c" +
 		"\xdb\x07\xdb\x07\x09\x00\x1e\x00\x00\x04\x00" +
-		"\xdc\x07\xde\x07\x03\x04\x00\x60\x00\x08\x07" +
+		"\xdc\x07\xde\x07\x03\x04\x00\x60\x00\x08\x0c" +
 		"\xdc\x07\xdc\x07\x09\x00\x15\x04\x00\x04\x00" +
 		"\xdd\x07\xdd\x07\x09\x00\x1b\x00\x00\x04\x00" +
 		"\xde\x07\xde\x07\x0a\x00\x18\x00\x00\x04\x00" +
-		"\xdf\x07\xdf\x07\x03\x00\x1c\x00\x00\x08\x07" +
+		"\xdf\x07\xdf\x07\x03\x00\x1c\x00\x00\x08\x0c" +
 		"\xdf\x07\xdf\x07\x0a\x00\x17\x04\x00\x04\x00" +
-		"\xe0\x07\xe2\x07\x03\x06\xe2\x04\x00\x08\x07" +
+		"\xe0\x07\xe2\x07\x03\x06\xe2\x04\x00\x08\x0c" +
 		"\xe0\x07\xe2\x07\x0a\x06\xe2\x04\x00\x04\x00" +
-		"\xe3\x07\xe3\x07\x03\x00\x1d\x00\x00\x08\x07" +
+		"\xe3\x07\xe3\x07\x03\x00\x1d\x00\x00\x08\x0c" +
 		"\xe3\x07\xe3\x07\x0a\x06\xe2\x00\x00\x04\x00" +
-		"\xe4\x07\xe5\x07\x03\x06\xe2\x00\x00\x08\x07" +
+		"\xe4\x07\xe5\x07\x03\x06\xe2\x00\x00\x08\x0c" +
 		"\xe4\x07\xe4\x07\x0a\x00\x18\x04\x00\x04\x00" +
 		"\xe5\x07\xe5\x07\x0a\x00\x1d\x04\x00\x04\x00" +
-		"\xe6\x07\xe6\x07\x03\x00\x1b\x00\x00\x08\x07" +
+		"\xe6\x07\xe6\x07\x03\x00\x1b\x00\x00\x08\x0c" +
 		"\xe6\x07\x0f\x27\x0a\x06\xe2\x08\x00\x04\x00" +
-		"\xe7\x07\x0f\x27\x03\x06\xe2\x08\x00\x08\x07" +
+		"\xe7\x07\x0f\x27\x03\x06\xe2\x08\x00\x08\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb7\x07\xc4\x07\x0a\x00\x01\x00\x00\x08\x00" +
+		"\xb7\x07\xba\x07\x03\x00\x01\x00\x00\x04\x00" +
+		"\xbb\x07\xc7\x07\x04\x00\x01\x00\x00\x04\x00" +
+		"\xc5\x07\xc5\x07\x0a\x00\x16\x00\x00\x08\x00" +
+		"\xc6\x07\xc6\x07\x0a\x00\x01\x00\x00\x08\x00" +
+		"\xc7\x07\xc7\x07\x0a\x00\x06\x00\x00\x08\x00" +
+		"\xc8\x07\xc8\x07\x03\x00\x01\x00\x00\x04\x00" +
+		"\xc8\x07\xc8\x07\x0a\x00\x05\x00\x00\x08\x00" +
+		"\xc9\x07\xc9\x07\x03\x00\x1f\x00\x00\x04\x00" +
+		"\xc9\x07\xcb\x07\x0a\x00\x01\x00\x00\x08\x00" +
+		"\xca\x07\xcb\x07\x02\x07\x00\x00\x00\x04\x00" +
+		"\xcc\x07\xcc\x07\x03\x00\x01\x00\x00\x04\x00" +
 		"\xcc\x07\xd1\x07\x0a\x07\x01\x00\x00\x08\x00" +
 		"\xcd\x07\xcd\x07\x02\x07\x00\x00\x00\x04\x00" +
 		"\xce\x07\xd1\x07\x03\x07\x01\x00\x00\x04\x00" +
@@ -8396,44 +16099,129 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\xda\x07\x0f\x27\x0a\x07\x01\x00\x00\x08\x00" +
 		"\xda\x07\xdc\x07\x04\x07\x08\x00\x00\x04\x00" +
 		"\xdd\x07\x0f\x27\x03\x07\x16\x00\x00\x04\x00" +
+		"\x93\x07\x94\x07\x03\x07\x18\x00\x00\x04\x00" +
+		"\xc2\x07\xc3\x07\x01\x00\x01\x00\x00\x08\x00" +
+		"\xc2\x07\xc3\x07\x04\x00\x01\x00\x00\x04\x00" +
+		"\xc6\x07\xc6\x07\x01\x00\x01\x00\x00\x08\x00" +
+		"\xc6\x07\xc6\x07\x04\x00\x01\x00\x00\x04\x00" +
+		"\xca\x07\xca\x07\x01\x00\x01\x00\x00\x08\x00" +
 		"\xca\x07\xca\x07\x04\x00\x01\x00\x00\x04\x00" +
-		"\xba\x07\xba\x07\x09\x00\x15\x00\x00\x04\x07" +
-		"\xc3\x07\xc4\x07\x0a\x07\x08\x0c\x00\x04\x07" +
+		"\xa2\x07\xa2\x07\x07\x00\x01\x00\x00\x04\x0c" +
+		"\xba\x07\xba\x07\x03\x00\x16\x00\x00\x08\x08" +
+		"\xba\x07\xba\x07\x09\x00\x15\x00\x00\x04\x0c" +
+		"\xaa\x07\xac\x07\x09\x07\x00\x04\x10\x04\x00" +
+		"\x9b\x07\xad\x07\x0a\x07\x01\x08\x10\x04\x00" +
+		"\xb9\x07\xb9\x07\x03\x00\x1b\x00\x10\x08\x0c" +
+		"\xb9\x07\xb9\x07\x09\x00\x19\x00\x10\x04\x00" +
+		"\xba\x07\xbb\x07\x04\x07\x01\x00\x10\x08\x0c" +
+		"\xba\x07\xba\x07\x0a\x00\x01\x00\x10\x04\x00" +
+		"\xbb\x07\xbe\x07\x09\x07\x00\x04\x10\x04\x00" +
+		"\xbc\x07\xbc\x07\x03\x07\x00\x00\x10\x08\x0c" +
+		"\xbd\x07\xbe\x07\x03\x07\x00\x04\x10\x08\x0c" +
+		"\xbf\x07\xbf\x07\x03\x07\x00\x08\x10\x08\x0c" +
+		"\xa5\x07\xa8\x07\x09\x06\x11\x60\x00\x04\x0c" +
+		"\xc3\x07\xc4\x07\x05\x07\x08\x08\x00\x08\x08" +
+		"\xc3\x07\xc4\x07\x0a\x07\x08\x0c\x00\x04\x0c" +
+		"\x8c\x07\x93\x07\x0a\x07\x01\x00\x10\x04\x00" +
+		"\xbb\x07\xbb\x07\x05\x00\x1b\x00\x00\x08\x0c" +
+		"\xbb\x07\xbb\x07\x09\x07\x00\x00\x00\x04\x00" +
+		"\xbc\x07\xbc\x07\x04\x00\x05\x5c\x00\x08\x0c" +
+		"\xbc\x07\xbc\x07\x09\x07\x00\x04\x00\x04\x00" +
+		"\xc7\x07\xc9\x07\x03\x07\x00\x00\x10\x08\x0c" +
+		"\xc7\x07\xc9\x07\x09\x07\x00\x00\x10\x04\x00" +
+		"\x81\x07\x81\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xbd\x07\xc0\x07\x04\x00\x01\x00\x00\x08\x0c" +
+		"\xbd\x07\xbf\x07\x0a\x00\x01\x00\x00\x04\x00" +
 		"\xc0\x07\xcb\x07\x09\x07\x00\x08\x10\x04\x00" +
-		"\xc1\x07\xda\x07\x03\x07\x00\x08\x10\x08\x07" +
+		"\xc1\x07\xda\x07\x03\x07\x00\x08\x10\x08\x0c" +
 		"\xcc\x07\xda\x07\x0a\x07\x00\x08\x10\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xbd\x07\xc0\x07\x04\x00\x01\x00\x00\x08\x00" +
+		"\xbd\x07\xbf\x07\x0a\x00\x01\x00\x00\x04\x00" +
 		"\xc0\x07\xcb\x07\x09\x07\x00\x08\x10\x04\x00" +
 		"\xc1\x07\xda\x07\x03\x07\x00\x08\x10\x08\x00" +
 		"\xcc\x07\xda\x07\x0a\x07\x00\x08\x10\x04\x00" +
 		"\x97\x07\x98\x07\x03\x07\x0f\x08\x00\x04\x00" +
-		"\xc3\x07\xc4\x07\x09\x07\x00\x00\x00\x04\x07" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xc3\x07\xc4\x07\x05\x07\x01\x00\x00\x08\x08" +
+		"\xc3\x07\xc4\x07\x09\x07\x00\x00\x00\x04\x0c" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xd8\x07\xd9\x07\x03\x07\x08\x00\x00\x04\x00" +
 		"\xd7\x07\xd8\x07\x0a\x07\x08\x00\x00\x08\x00" +
-		"\xc3\x07\xd6\x07\x0a\x07\x00\x00\x01\x04\x07" +
-		"\xc4\x07\xc4\x07\x04\x07\x01\x00\x01\x0c\x06" +
-		"\xc5\x07\xd6\x07\x04\x07\x01\x00\x01\x08\x05" +
-		"\xd7\x07\xdb\x07\x03\x07\x08\x00\x01\x08\x05" +
-		"\xd7\x07\xda\x07\x0b\x07\x01\x00\x01\x04\x07" +
+		"\x9d\x07\x9d\x07\x0a\x00\x02\x04\x00\x04\x00" +
+		"\xb6\x07\xb7\x07\x04\x06\x0c\x5c\x00\x08\x0c" +
+		"\xb6\x07\xb7\x07\x0a\x07\x01\x04\x00\x04\x00" +
+		"\xb8\x07\xb8\x07\x03\x00\x1b\x5c\x00\x08\x0c" +
+		"\xb8\x07\xb9\x07\x09\x07\x00\x04\x00\x04\x00" +
+		"\xb9\x07\xb9\x07\x04\x00\x02\x5c\x00\x08\x0c" +
+		"\xba\x07\xba\x07\x04\x00\x02\x08\x10\x08\x0c" +
+		"\xba\x07\xba\x07\x0a\x00\x01\x08\x10\x04\x00" +
+		"\xaf\x07\xaf\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xb6\x07\xb6\x07\x06\x00\x18\x00\x00\x08\x0c" +
+		"\xb6\x07\xb6\x07\x09\x00\x01\x00\x00\x04\x00" +
+		"\xb8\x07\xb9\x07\x05\x00\x01\x00\x00\x08\x0c" +
+		"\xb8\x07\xb8\x07\x08\x00\x01\x00\x00\x04\x00" +
+		"\xb9\x07\xb9\x07\x09\x00\x1c\x00\x00\x04\x00" +
+		"\xba\x07\xba\x07\x06\x00\x01\x00\x00\x08\x0c" +
+		"\xba\x07\xba\x07\x08\x00\x04\x00\x00\x04\x00" +
+		"\x9f\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\x9f\x07\xa7\x07\x09\x07\x00\x08\x00\x04\x0c" +
+		"\xa8\x07\xc2\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xc3\x07\xc3\x07\x04\x07\x01\x00\x01\x08\x08" +
+		"\xc3\x07\xd6\x07\x0a\x07\x00\x00\x01\x04\x0c" +
+		"\xc4\x07\xc4\x07\x04\x07\x01\x00\x01\x0c\x09" +
+		"\xc5\x07\xd6\x07\x04\x07\x01\x00\x01\x08\x08" +
+		"\xd7\x07\xdb\x07\x03\x07\x08\x00\x01\x08\x08" +
+		"\xd7\x07\xda\x07\x0b\x07\x01\x00\x01\x04\x0c" +
 		"\xb2\x07\xc1\x07\x0a\x00\x0f\x00\x00\x04\x00" +
+		"\xb3\x07\xb3\x07\x04\x00\x1e\x00\x00\x08\x0c" +
+		"\xb4\x07\xc1\x07\x04\x07\x00\x00\x00\x08\x0c" +
+		"\x95\x07\x96\x07\x0a\x01\x01\x08\x00\x04\x00" +
+		"\xae\x07\xae\x07\x04\x00\x18\x08\x00\x08\x0c" +
+		"\xae\x07\xb8\x07\x0a\x00\x01\x08\x00\x04\x00" +
+		"\xaf\x07\xba\x07\x05\x00\x01\x08\x00\x08\x0c" +
+		"\xb9\x07\xba\x07\x09\x00\x01\x08\x00\x04\x00" +
+		"\xbf\x07\xc0\x07\x04\x00\x09\x08\x00\x08\x0c" +
+		"\xbf\x07\xc0\x07\x0a\x00\x01\x08\x00\x04\x00" +
+		"\xc2\x07\xc2\x07\x02\x00\x10\x08\x00\x08\x0c" +
+		"\xc2\x07\xc2\x07\x0a\x00\x09\x08\x00\x04\x00" +
+		"\xc3\x07\xc3\x07\x03\x00\x01\x08\x00\x08\x0c" +
+		"\xc3\x07\xc4\x07\x0a\x00\x1f\x08\x00\x04\x00" +
+		"\xc4\x07\xc4\x07\x03\x00\x0f\x08\x00\x08\x0c" +
+		"\xc5\x07\xc5\x07\x03\x00\x1f\x08\x00\x08\x0c" +
+		"\xc5\x07\xc5\x07\x0a\x00\x01\x08\x00\x04\x00" +
+		"\xc6\x07\xc6\x07\x04\x00\x01\x08\x00\x08\x0c" +
+		"\xc6\x07\xc6\x07\x09\x00\x1e\x08\x00\x04\x00" +
+		"\xc7\x07\xc7\x07\x04\x00\x01\x00\x00\x08\x0c" +
+		"\xc7\x07\xc8\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xc8\x07\xc8\x07\x04\x00\x08\x00\x00\x08\x0c" +
+		"\xc9\x07\xc9\x07\x03\x00\x1a\x00\x00\x08\x0c" +
+		"\xc9\x07\xc9\x07\x09\x00\x19\x00\x00\x04\x00" +
+		"\xca\x07\xcc\x07\x04\x00\x01\x00\x00\x08\x0c" +
 		"\xca\x07\xd5\x07\x0a\x00\x01\x00\x00\x04\x00" +
-		"\xcd\x07\xce\x07\x03\x01\x00\x00\x00\x08\x07" +
-		"\xcf\x07\xd6\x07\x04\x00\x01\x00\x00\x08\x07" +
+		"\xcd\x07\xce\x07\x03\x01\x00\x00\x00\x08\x0c" +
+		"\xcf\x07\xd6\x07\x04\x00\x01\x00\x00\x08\x0c" +
 		"\xd6\x07\xd6\x07\x09\x00\x16\x00\x00\x04\x00" +
-		"\xd7\x07\xd7\x07\x03\x05\x00\x00\x00\x08\x07" +
+		"\xd7\x07\xd7\x07\x03\x05\x00\x00\x00\x08\x0c" +
 		"\xd7\x07\xd7\x07\x0b\x05\x01\x00\x00\x04\x00" +
-		"\xd8\x07\xd8\x07\x04\x05\x01\x00\x00\x08\x07" +
+		"\xd8\x07\xd8\x07\x04\x05\x01\x00\x00\x08\x0c" +
 		"\xd8\x07\xd8\x07\x0b\x00\x01\x00\x00\x04\x00" +
-		"\xd9\x07\xd9\x07\x03\x05\x00\x00\x00\x08\x07" +
-		"\xda\x07\xdb\x07\x04\x05\x01\x00\x00\x08\x07" +
-		"\xdc\x07\xe6\x07\x03\x05\x00\x00\x00\x08\x07" +
+		"\xd9\x07\xd9\x07\x03\x05\x00\x00\x00\x08\x0c" +
+		"\xda\x07\xdb\x07\x04\x05\x01\x00\x00\x08\x0c" +
+		"\xdc\x07\xe6\x07\x03\x05\x00\x00\x00\x08\x0c" +
 		"\xd9\x07\xe6\x07\x0a\x05\x00\x00\x00\x04\x00" +
-		"\xbb\x07\xbb\x07\x0a\x00\x01\x00\x00\x04\x07" +
-		"\xc7\x07\xc8\x07\x09\x07\x00\x08\x00\x04\x07" +
-		"\xc9\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x05" +
-		"\xc9\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x07" +
-		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x05" +
-		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x07" +
+		"\xa3\x07\xa9\x07\x0a\x00\x01\x00\x00\x04\x0c" +
+		"\xb6\x07\xb7\x07\x04\x00\x01\x00\x00\x08\x08" +
+		"\xb6\x07\xb7\x07\x0a\x00\x01\x00\x00\x04\x0c" +
+		"\xbb\x07\xbb\x07\x07\x00\x01\x00\x00\x08\x08" +
+		"\xbb\x07\xbb\x07\x0a\x00\x01\x00\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xc7\x07\xc8\x07\x03\x07\x00\x08\x00\x08\x08" +
+		"\xc7\x07\xc8\x07\x09\x07\x00\x08\x00\x04\x0c" +
+		"\xc9\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x08" +
+		"\xc9\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x08" +
+		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x0c" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xcf\x07\xcf\x07\x0a\x00\x07\x08\x10\x08\x00" +
 		"\xd0\x07\xd0\x07\x03\x00\x13\x08\x10\x04\x00" +
@@ -8441,330 +16229,519 @@ const ZoneRulesData = "\xc3\x07\xcf\x07\x0a\x07\x00\x08\x10\x08\x05" +
 		"\xd1\x07\xd2\x07\x01\x07\x00\x08\x00\x04\x00" +
 		"\xe0\x07\xe0\x07\x0b\x07\x01\x08\x00\x08\x00" +
 		"\xe1\x07\xe1\x07\x01\x07\x0f\x0c\x00\x04\x00" +
+		"\x9e\x07\xb5\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\x9f\x07\xa4\x07\x09\x07\x00\x08\x00\x04\x0c" +
+		"\xa5\x07\xb5\x07\x0a\x07\x00\x08\x00\x04\x0c" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x01" +
 		"\xd5\x07\x0f\x27\x03\x07\x00\x04\x20\x0c\x02" +
 		"\xd4\x07\x0f\x27\x0a\x07\x00\x04\x20\x04\x01" +
+		"\x99\x07\x99\x07\x09\x00\x10\x00\x00\x04\x00" +
+		"\xb9\x07\xb9\x07\x04\x00\x1e\x00\x10\x08\x0c" +
+		"\xb9\x07\xb9\x07\x09\x00\x18\x00\x10\x04\x00" +
+		"\xba\x07\xba\x07\x05\x00\x01\x00\x10\x08\x0c" +
+		"\xba\x07\xba\x07\x0a\x00\x01\x00\x10\x04\x00" +
+		"\xc4\x07\xc4\x07\x06\x00\x01\x00\x10\x08\x0c" +
 		"\xc4\x07\xc6\x07\x09\x07\x00\x00\x10\x04\x00" +
-		"\xd5\x07\xd5\x07\x05\x00\x01\x00\x10\x08\x07" +
+		"\xc5\x07\xc5\x07\x03\x00\x1a\x00\x10\x08\x0c" +
+		"\xc6\x07\xc6\x07\x05\x00\x01\x00\x10\x08\x0c" +
+		"\xd5\x07\xd5\x07\x05\x00\x01\x00\x10\x08\x0c" +
 		"\xd5\x07\xd5\x07\x09\x00\x1e\x04\x10\x04\x00" +
-		"\xd6\x07\xd8\x07\x03\x07\x00\x08\x10\x08\x07" +
+		"\xd6\x07\xd8\x07\x03\x07\x00\x08\x10\x08\x0c" +
 		"\xd6\x07\xd8\x07\x0a\x07\x00\x08\x10\x04\x00" +
+		"\xac\x07\xac\x07\x0a\x00\x01\x00\x00\x04\x00" +
+		"\xb5\x07\xb5\x07\x06\x00\x03\x04\x00\x08\x0c" +
+		"\xb5\x07\xb8\x07\x0a\x07\x1f\x08\x00\x04\x00" +
+		"\xb6\x07\xb6\x07\x03\x00\x1f\x08\x00\x08\x0c" +
+		"\xb7\x07\xb7\x07\x03\x00\x16\x08\x00\x08\x0c" +
+		"\xb8\x07\xb8\x07\x03\x00\x15\x08\x00\x08\x0c" +
+		"\xb9\x07\xba\x07\x04\x07\x01\x08\x00\x08\x0c" +
+		"\xb9\x07\xba\x07\x0a\x07\x0f\x08\x00\x04\x00" +
+		"\xba\x07\xba\x07\x06\x00\x1d\x00\x00\x04\x00" +
+		"\xbf\x07\xbf\x07\x07\x00\x1f\x08\x00\x08\x0c" +
+		"\xbf\x07\xbf\x07\x0a\x00\x02\x08\x00\x04\x00" +
+		"\xc1\x07\xc1\x07\x04\x00\x14\x04\x10\x08\x0c" +
+		"\xc1\x07\xc1\x07\x09\x00\x1c\x04\x10\x04\x00" +
+		"\xc2\x07\xc9\x07\x03\x07\x00\x04\x10\x08\x0c" +
 		"\xc2\x07\xcb\x07\x09\x07\x00\x04\x10\x04\x00" +
-		"\xcb\x07\xd6\x07\x03\x07\x00\x04\x10\x08\x07" +
+		"\xca\x07\xca\x07\x03\x00\x14\x04\x10\x08\x0c" +
+		"\xcb\x07\xd6\x07\x03\x07\x00\x04\x10\x08\x0c" +
 		"\xcc\x07\xd6\x07\x0a\x07\x00\x04\x10\x04\x00" +
-		"\xaf\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x07" +
-		"\xb8\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x05" +
-		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x05" +
-		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x05" +
-		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x07" +
+		"\x99\x07\x99\x07\x09\x00\x1e\x08\x00\x04\x0c" +
+		"\xaf\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xaf\x07\xb5\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\xb6\x07\xb6\x07\x01\x00\x06\x08\x00\x08\x08" +
+		"\xb7\x07\xb7\x07\x02\x07\x00\x08\x00\x08\x08" +
+		"\xb8\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x08" +
+		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x08" +
+		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x0c" +
+		"\xb4\x07\xb4\x07\x07\x00\x10\x00\x00\x04\x00" +
+		"\xb6\x07\xb6\x07\x01\x00\x0d\x00\x00\x0a\x00" +
+		"\xb6\x07\xb6\x07\x03\x00\x0a\x00\x00\x06\x00" +
+		"\xb6\x07\xb6\x07\x09\x00\x01\x00\x00\x04\x00" +
+		"\xb6\x07\xb6\x07\x0c\x00\x16\x00\x00\x08\x00" +
+		"\xb7\x07\xb7\x07\x03\x00\x1e\x00\x00\x04\x00" +
+		"\xb8\x07\xb8\x07\x0c\x00\x13\x00\x00\x08\x00" +
+		"\xb9\x07\xb9\x07\x03\x00\x06\x00\x00\x04\x00" +
+		"\xb9\x07\xb9\x07\x0c\x00\x04\x00\x00\x08\x00" +
+		"\xba\x07\xbb\x07\x03\x07\x01\x00\x00\x04\x00" +
+		"\xba\x07\xba\x07\x0c\x00\x11\x00\x00\x08\x00" +
+		"\xbb\x07\xbb\x07\x04\x00\x1d\x00\x00\x08\x00" +
+		"\xbc\x07\xbc\x07\x03\x00\x10\x00\x00\x04\x00" +
+		"\xc3\x07\xc3\x07\x0c\x00\x0e\x00\x00\x08\x00" +
+		"\xc4\x07\xc4\x07\x02\x00\x1c\x00\x00\x04\x00" +
+		"\xc4\x07\xc4\x07\x0c\x00\x0b\x00\x00\x08\x00" +
+		"\xc5\x07\xc5\x07\x03\x00\x05\x00\x00\x04\x00" +
+		"\xc5\x07\xc5\x07\x0a\x00\x1d\x00\x00\x08\x00" +
+		"\xc6\x07\xc6\x07\x02\x00\x19\x00\x00\x04\x00" +
+		"\xc6\x07\xc7\x07\x0a\x07\x15\x00\x00\x08\x00" +
+		"\xc7\x07\xc8\x07\x03\x07\x01\x00\x00\x04\x00" +
+		"\xc8\x07\xc8\x07\x0a\x00\x12\x00\x00\x08\x00" +
 		"\xc9\x07\xc9\x07\x02\x00\x1c\x00\x00\x04\x00" +
 		"\xd4\x07\xd4\x07\x09\x00\x13\x00\x00\x08\x00" +
 		"\xd5\x07\xd5\x07\x03\x00\x1b\x08\x00\x04\x00" +
 		"\xd5\x07\xd5\x07\x0a\x00\x09\x08\x00\x08\x00" +
 		"\xd6\x07\xdf\x07\x03\x07\x08\x08\x00\x04\x00" +
 		"\xd6\x07\xde\x07\x0a\x07\x01\x08\x00\x08\x00" +
+		"\x9a\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\x9b\x07\xa9\x07\x09\x07\x00\x08\x00\x04\x0c" +
+		"\xaa\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb5\x07\xb5\x07\x0c\x00\x16\x30\x20\x08\x00" +
+		"\xb6\x07\xb6\x07\x03\x00\x1e\x30\x20\x04\x00" +
+		"\xbf\x07\xc7\x07\x09\x06\x16\x60\x00\x08\x00" +
+		"\xc0\x07\xc7\x07\x03\x06\x16\x60\x00\x04\x00" +
 		"\xc8\x07\xc9\x07\x01\x06\x16\x60\x00\x04\x00" +
+		"\xc8\x07\xc8\x07\x0a\x06\x16\x60\x00\x08\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb9\x07\xbc\x07\x04\x07\x01\x04\x10\x08\x0c" +
+		"\xb9\x07\xb9\x07\x09\x07\x00\x04\x10\x04\x00" +
+		"\xba\x07\xba\x07\x0a\x00\x01\x04\x10\x04\x00" +
+		"\xbb\x07\xcb\x07\x09\x07\x00\x04\x10\x04\x00" +
+		"\xbd\x07\x0f\x27\x03\x07\x00\x04\x10\x08\x0c" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xda\x07\xda\x07\x09\x07\x00\x00\x00\x08\x00" +
 		"\xdb\x07\xdb\x07\x04\x06\x01\x10\x00\x04\x00" +
 		"\xdb\x07\xdb\x07\x09\x06\x00\x0c\x00\x08\x00" +
 		"\xdc\x07\xe5\x07\x04\x07\x01\x10\x00\x04\x00" +
 		"\xdc\x07\xe4\x07\x09\x07\x00\x0c\x00\x08\x00" +
-		"\xae\x07\xc2\x07\x04\x07\x00\x08\x10\x08\x05" +
-		"\xae\x07\xd5\x07\x0a\x07\x00\x08\x10\x04\x07" +
-		"\xc3\x07\xd5\x07\x04\x07\x01\x08\x10\x08\x05" +
-		"\xce\x07\xce\x07\x09\x00\x06\x00\x00\x04\x07" +
-		"\xcf\x07\xcf\x07\x04\x00\x02\x08\x00\x08\x05" +
-		"\xcf\x07\xcf\x07\x09\x00\x03\x08\x00\x04\x07" +
-		"\xd0\x07\xd0\x07\x04\x00\x0e\x08\x00\x08\x05" +
-		"\xd0\x07\xd0\x07\x0a\x00\x06\x04\x00\x04\x07" +
-		"\xd1\x07\xd1\x07\x04\x00\x09\x04\x00\x08\x05" +
-		"\xd1\x07\xd1\x07\x09\x00\x18\x04\x00\x04\x07" +
-		"\xd2\x07\xd2\x07\x03\x00\x1d\x04\x00\x08\x05" +
-		"\xd2\x07\xd2\x07\x0a\x00\x07\x04\x00\x04\x07" +
-		"\xd3\x07\xd3\x07\x03\x00\x1c\x04\x00\x08\x05" +
-		"\xd3\x07\xd3\x07\x0a\x00\x03\x04\x00\x04\x07" +
-		"\xd4\x07\xd4\x07\x04\x00\x07\x04\x00\x08\x05" +
-		"\xd4\x07\xd4\x07\x09\x00\x16\x04\x00\x04\x07" +
-		"\xd5\x07\xdc\x07\x04\x05\xff\x08\x00\x08\x05" +
-		"\xd5\x07\xd5\x07\x0a\x00\x09\x08\x00\x04\x07" +
-		"\xd6\x07\xd6\x07\x0a\x00\x01\x08\x00\x04\x07" +
-		"\xd7\x07\xd7\x07\x09\x00\x10\x08\x00\x04\x07" +
-		"\xd8\x07\xd8\x07\x0a\x00\x05\x08\x00\x04\x07" +
-		"\xd9\x07\xd9\x07\x09\x00\x1b\x08\x00\x04\x07" +
-		"\xda\x07\xda\x07\x09\x00\x0c\x08\x00\x04\x07" +
-		"\xdb\x07\xdb\x07\x0a\x00\x02\x08\x00\x04\x07" +
-		"\xdc\x07\xdc\x07\x09\x00\x17\x08\x00\x04\x07" +
-		"\xdd\x07\x0f\x27\x03\x05\x17\x08\x00\x08\x05" +
-		"\xdd\x07\x0f\x27\x0a\x07\x00\x08\x00\x04\x07"
+		"\xab\x07\xab\x07\x09\x00\x16\x08\x00\x04\x0c" +
+		"\xae\x07\xc2\x07\x04\x07\x00\x08\x10\x08\x08" +
+		"\xae\x07\xd5\x07\x0a\x07\x00\x08\x10\x04\x0c" +
+		"\xc3\x07\xd5\x07\x04\x07\x01\x08\x10\x08\x08" +
+		"\xad\x07\xad\x07\x0a\x07\x00\x08\x00\x04\x0c" +
+		"\xa5\x07\xa5\x07\x09\x00\x15\x60\x20\x04\x0c" +
+		"\xb6\x07\xb6\x07\x07\x00\x06\x60\x00\x08\x08" +
+		"\xb6\x07\xb6\x07\x0a\x00\x0c\x60\x00\x04\x0c" +
+		"\xb7\x07\xb7\x07\x04\x00\x13\x60\x00\x08\x08" +
+		"\xb7\x07\xb7\x07\x08\x00\x1e\x60\x00\x04\x0c" +
+		"\xbc\x07\xbc\x07\x08\x00\x02\x60\x10\x08\x08" +
+		"\xbc\x07\xbc\x07\x09\x00\x0d\x60\x10\x04\x0c" +
+		"\xc0\x07\xc0\x07\x05\x00\x05\x60\x10\x08\x08" +
+		"\xc0\x07\xc0\x07\x08\x00\x19\x60\x10\x04\x0c" +
+		"\xc1\x07\xc1\x07\x04\x00\x0d\x60\x00\x08\x08" +
+		"\xc1\x07\xc1\x07\x08\x00\x1f\x60\x00\x04\x0c" +
+		"\xc2\x07\xc2\x07\x05\x00\x11\x60\x00\x08\x08" +
+		"\xc2\x07\xc2\x07\x09\x00\x06\x60\x00\x04\x0c" +
+		"\xc3\x07\xc3\x07\x04\x00\x0e\x60\x00\x08\x08" +
+		"\xc3\x07\xc3\x07\x09\x00\x0c\x60\x00\x04\x0c" +
+		"\xc4\x07\xc4\x07\x04\x00\x09\x60\x00\x08\x08" +
+		"\xc4\x07\xc4\x07\x09\x00\x03\x60\x00\x04\x0c" +
+		"\xc5\x07\xc5\x07\x04\x00\x1d\x60\x00\x08\x08" +
+		"\xc5\x07\xc5\x07\x09\x00\x02\x60\x00\x04\x0c" +
+		"\xc6\x07\xc6\x07\x03\x00\x18\x60\x00\x08\x08" +
+		"\xc6\x07\xc6\x07\x08\x00\x19\x60\x00\x04\x0c" +
+		"\xc7\x07\xc7\x07\x03\x00\x17\x60\x00\x08\x08" +
+		"\xc7\x07\xc7\x07\x08\x00\x1f\x60\x00\x04\x0c" +
+		"\xc8\x07\xc8\x07\x03\x00\x1c\x60\x00\x08\x08" +
+		"\xc8\x07\xc8\x07\x09\x00\x05\x60\x00\x04\x0c" +
+		"\xc9\x07\xc9\x07\x04\x00\x02\x00\x00\x08\x08" +
+		"\xc9\x07\xc9\x07\x09\x00\x05\x00\x00\x04\x0c" +
+		"\xca\x07\xca\x07\x04\x00\x01\x00\x00\x08\x08" +
+		"\xca\x07\xca\x07\x08\x00\x1c\x00\x00\x04\x0c" +
+		"\xcb\x07\xcb\x07\x03\x00\x1f\x00\x00\x08\x08" +
+		"\xcb\x07\xcb\x07\x09\x00\x03\x00\x00\x04\x0c" +
+		"\xcc\x07\xcc\x07\x03\x00\x0e\x60\x00\x08\x08" +
+		"\xcc\x07\xcc\x07\x09\x00\x0f\x60\x00\x04\x0c" +
+		"\xcd\x07\xcd\x07\x03\x00\x14\x60\x00\x08\x08" +
+		"\xcd\x07\xcd\x07\x09\x00\x0d\x60\x00\x04\x0c" +
+		"\xce\x07\xce\x07\x03\x00\x14\x00\x00\x08\x08" +
+		"\xce\x07\xce\x07\x09\x00\x06\x00\x00\x04\x0c" +
+		"\xcf\x07\xcf\x07\x04\x00\x02\x08\x00\x08\x08" +
+		"\xcf\x07\xcf\x07\x09\x00\x03\x08\x00\x04\x0c" +
+		"\xd0\x07\xd0\x07\x04\x00\x0e\x08\x00\x08\x08" +
+		"\xd0\x07\xd0\x07\x0a\x00\x06\x04\x00\x04\x0c" +
+		"\xd1\x07\xd1\x07\x04\x00\x09\x04\x00\x08\x08" +
+		"\xd1\x07\xd1\x07\x09\x00\x18\x04\x00\x04\x0c" +
+		"\xd2\x07\xd2\x07\x03\x00\x1d\x04\x00\x08\x08" +
+		"\xd2\x07\xd2\x07\x0a\x00\x07\x04\x00\x04\x0c" +
+		"\xd3\x07\xd3\x07\x03\x00\x1c\x04\x00\x08\x08" +
+		"\xd3\x07\xd3\x07\x0a\x00\x03\x04\x00\x04\x0c" +
+		"\xd4\x07\xd4\x07\x04\x00\x07\x04\x00\x08\x08" +
+		"\xd4\x07\xd4\x07\x09\x00\x16\x04\x00\x04\x0c" +
+		"\xd5\x07\xdc\x07\x04\x05\xff\x08\x00\x08\x08" +
+		"\xd5\x07\xd5\x07\x0a\x00\x09\x08\x00\x04\x0c" +
+		"\xd6\x07\xd6\x07\x0a\x00\x01\x08\x00\x04\x0c" +
+		"\xd7\x07\xd7\x07\x09\x00\x10\x08\x00\x04\x0c" +
+		"\xd8\x07\xd8\x07\x0a\x00\x05\x08\x00\x04\x0c" +
+		"\xd9\x07\xd9\x07\x09\x00\x1b\x08\x00\x04\x0c" +
+		"\xda\x07\xda\x07\x09\x00\x0c\x08\x00\x04\x0c" +
+		"\xdb\x07\xdb\x07\x0a\x00\x02\x08\x00\x04\x0c" +
+		"\xdc\x07\xdc\x07\x09\x00\x17\x08\x00\x04\x0c" +
+		"\xdd\x07\x0f\x27\x03\x05\x17\x08\x00\x08\x08" +
+		"\xdd\x07\x0f\x27\x0a\x07\x00\x08\x00\x04\x0c"
 
 // ---------------------------------------------------------------------------
 // ZonePolicyRecords contain indexes into the ZoneRuleRecords.
-// Supported zone policies: 83
+// Supported zone policies: 114
 // ---------------------------------------------------------------------------
 
 var ZonePolicyRecords = []zoneinfo.ZonePolicyRecord{
 	{RuleIndex: 0, RuleCount: 0}, // 0: PolicyName: (None)
-	{RuleIndex: 0, RuleCount: 9}, // 1: PolicyName: AN
-	{RuleIndex: 9, RuleCount: 1}, // 2: PolicyName: AQ
-	{RuleIndex: 10, RuleCount: 7}, // 3: PolicyName: AS
-	{RuleIndex: 17, RuleCount: 8}, // 4: PolicyName: AT
-	{RuleIndex: 25, RuleCount: 9}, // 5: PolicyName: AV
-	{RuleIndex: 34, RuleCount: 4}, // 6: PolicyName: AW
-	{RuleIndex: 38, RuleCount: 6}, // 7: PolicyName: Arg
-	{RuleIndex: 44, RuleCount: 3}, // 8: PolicyName: Armenia
-	{RuleIndex: 47, RuleCount: 1}, // 9: PolicyName: Aus
-	{RuleIndex: 48, RuleCount: 2}, // 10: PolicyName: Azer
-	{RuleIndex: 50, RuleCount: 1}, // 11: PolicyName: Barb
-	{RuleIndex: 51, RuleCount: 1}, // 12: PolicyName: Belize
-	{RuleIndex: 52, RuleCount: 20}, // 13: PolicyName: Brazil
-	{RuleIndex: 72, RuleCount: 3}, // 14: PolicyName: C-Eur
-	{RuleIndex: 75, RuleCount: 1}, // 15: PolicyName: CO
-	{RuleIndex: 76, RuleCount: 1}, // 16: PolicyName: CR
-	{RuleIndex: 77, RuleCount: 5}, // 17: PolicyName: Canada
-	{RuleIndex: 82, RuleCount: 5}, // 18: PolicyName: Chatham
-	{RuleIndex: 87, RuleCount: 17}, // 19: PolicyName: Chile
-	{RuleIndex: 104, RuleCount: 1}, // 20: PolicyName: Cook
-	{RuleIndex: 105, RuleCount: 14}, // 21: PolicyName: Cuba
-	{RuleIndex: 119, RuleCount: 3}, // 22: PolicyName: Dhaka
-	{RuleIndex: 122, RuleCount: 3}, // 23: PolicyName: E-EurAsia
-	{RuleIndex: 125, RuleCount: 3}, // 24: PolicyName: EU
-	{RuleIndex: 128, RuleCount: 3}, // 25: PolicyName: EUAsia
-	{RuleIndex: 131, RuleCount: 1}, // 26: PolicyName: Ecuador
-	{RuleIndex: 132, RuleCount: 14}, // 27: PolicyName: Egypt
-	{RuleIndex: 146, RuleCount: 3}, // 28: PolicyName: Eire
-	{RuleIndex: 149, RuleCount: 5}, // 29: PolicyName: Falk
-	{RuleIndex: 154, RuleCount: 12}, // 30: PolicyName: Fiji
-	{RuleIndex: 166, RuleCount: 1}, // 31: PolicyName: Guam
-	{RuleIndex: 167, RuleCount: 3}, // 32: PolicyName: Guat
-	{RuleIndex: 170, RuleCount: 1}, // 33: PolicyName: HK
-	{RuleIndex: 171, RuleCount: 7}, // 34: PolicyName: Haiti
-	{RuleIndex: 178, RuleCount: 1}, // 35: PolicyName: Holiday
-	{RuleIndex: 179, RuleCount: 3}, // 36: PolicyName: Hond
-	{RuleIndex: 182, RuleCount: 27}, // 37: PolicyName: Iran
-	{RuleIndex: 209, RuleCount: 3}, // 38: PolicyName: Iraq
-	{RuleIndex: 212, RuleCount: 1}, // 39: PolicyName: Japan
-	{RuleIndex: 213, RuleCount: 13}, // 40: PolicyName: Jordan
-	{RuleIndex: 226, RuleCount: 3}, // 41: PolicyName: Kyrgyz
-	{RuleIndex: 229, RuleCount: 9}, // 42: PolicyName: LH
-	{RuleIndex: 238, RuleCount: 3}, // 43: PolicyName: Lebanon
-	{RuleIndex: 241, RuleCount: 3}, // 44: PolicyName: Libya
-	{RuleIndex: 244, RuleCount: 1}, // 45: PolicyName: Macau
-	{RuleIndex: 245, RuleCount: 3}, // 46: PolicyName: Mauritius
-	{RuleIndex: 248, RuleCount: 7}, // 47: PolicyName: Mexico
-	{RuleIndex: 255, RuleCount: 2}, // 48: PolicyName: Moldova
-	{RuleIndex: 257, RuleCount: 3}, // 49: PolicyName: Moncton
-	{RuleIndex: 260, RuleCount: 6}, // 50: PolicyName: Mongol
-	{RuleIndex: 266, RuleCount: 169}, // 51: PolicyName: Morocco
-	{RuleIndex: 435, RuleCount: 1}, // 52: PolicyName: NC
-	{RuleIndex: 436, RuleCount: 3}, // 53: PolicyName: NT_YK
-	{RuleIndex: 439, RuleCount: 5}, // 54: PolicyName: NZ
-	{RuleIndex: 444, RuleCount: 3}, // 55: PolicyName: Namibia
-	{RuleIndex: 447, RuleCount: 5}, // 56: PolicyName: Nic
-	{RuleIndex: 452, RuleCount: 1}, // 57: PolicyName: PRC
-	{RuleIndex: 453, RuleCount: 6}, // 58: PolicyName: Pakistan
-	{RuleIndex: 459, RuleCount: 33}, // 59: PolicyName: Palestine
-	{RuleIndex: 492, RuleCount: 10}, // 60: PolicyName: Para
-	{RuleIndex: 502, RuleCount: 1}, // 61: PolicyName: Peru
-	{RuleIndex: 503, RuleCount: 1}, // 62: PolicyName: Phil
-	{RuleIndex: 504, RuleCount: 1}, // 63: PolicyName: ROK
-	{RuleIndex: 505, RuleCount: 3}, // 64: PolicyName: Russia
-	{RuleIndex: 508, RuleCount: 3}, // 65: PolicyName: RussiaAsia
-	{RuleIndex: 511, RuleCount: 1}, // 66: PolicyName: SA
-	{RuleIndex: 512, RuleCount: 1}, // 67: PolicyName: Salv
-	{RuleIndex: 513, RuleCount: 3}, // 68: PolicyName: SanLuis
-	{RuleIndex: 516, RuleCount: 5}, // 69: PolicyName: StJohns
-	{RuleIndex: 521, RuleCount: 1}, // 70: PolicyName: Sudan
-	{RuleIndex: 522, RuleCount: 12}, // 71: PolicyName: Syria
-	{RuleIndex: 534, RuleCount: 1}, // 72: PolicyName: Taiwan
-	{RuleIndex: 535, RuleCount: 5}, // 73: PolicyName: Thule
-	{RuleIndex: 540, RuleCount: 7}, // 74: PolicyName: Tonga
-	{RuleIndex: 547, RuleCount: 3}, // 75: PolicyName: Troll
-	{RuleIndex: 550, RuleCount: 5}, // 76: PolicyName: Tunisia
-	{RuleIndex: 555, RuleCount: 3}, // 77: PolicyName: Turkey
-	{RuleIndex: 558, RuleCount: 5}, // 78: PolicyName: US
-	{RuleIndex: 563, RuleCount: 6}, // 79: PolicyName: Uruguay
-	{RuleIndex: 569, RuleCount: 1}, // 80: PolicyName: Vanuatu
-	{RuleIndex: 570, RuleCount: 6}, // 81: PolicyName: WS
-	{RuleIndex: 576, RuleCount: 3}, // 82: PolicyName: Winn
-	{RuleIndex: 579, RuleCount: 24}, // 83: PolicyName: Zion
+	{RuleIndex: 0, RuleCount: 16}, // 1: PolicyName: AN
+	{RuleIndex: 16, RuleCount: 3}, // 2: PolicyName: AQ
+	{RuleIndex: 19, RuleCount: 15}, // 3: PolicyName: AS
+	{RuleIndex: 34, RuleCount: 16}, // 4: PolicyName: AT
+	{RuleIndex: 50, RuleCount: 14}, // 5: PolicyName: AV
+	{RuleIndex: 64, RuleCount: 10}, // 6: PolicyName: AW
+	{RuleIndex: 74, RuleCount: 22}, // 7: PolicyName: Albania
+	{RuleIndex: 96, RuleCount: 7}, // 8: PolicyName: Algeria
+	{RuleIndex: 103, RuleCount: 11}, // 9: PolicyName: Arg
+	{RuleIndex: 114, RuleCount: 3}, // 10: PolicyName: Armenia
+	{RuleIndex: 117, RuleCount: 1}, // 11: PolicyName: Aus
+	{RuleIndex: 118, RuleCount: 3}, // 12: PolicyName: Austria
+	{RuleIndex: 121, RuleCount: 3}, // 13: PolicyName: Azer
+	{RuleIndex: 124, RuleCount: 6}, // 14: PolicyName: Barb
+	{RuleIndex: 130, RuleCount: 1}, // 15: PolicyName: Belgium
+	{RuleIndex: 131, RuleCount: 5}, // 16: PolicyName: Belize
+	{RuleIndex: 136, RuleCount: 1}, // 17: PolicyName: Bermuda
+	{RuleIndex: 137, RuleCount: 44}, // 18: PolicyName: Brazil
+	{RuleIndex: 181, RuleCount: 6}, // 19: PolicyName: Bulg
+	{RuleIndex: 187, RuleCount: 7}, // 20: PolicyName: C-Eur
+	{RuleIndex: 194, RuleCount: 3}, // 21: PolicyName: CO
+	{RuleIndex: 197, RuleCount: 6}, // 22: PolicyName: CR
+	{RuleIndex: 203, RuleCount: 6}, // 23: PolicyName: Canada
+	{RuleIndex: 209, RuleCount: 10}, // 24: PolicyName: Chatham
+	{RuleIndex: 219, RuleCount: 29}, // 25: PolicyName: Chile
+	{RuleIndex: 248, RuleCount: 4}, // 26: PolicyName: Cook
+	{RuleIndex: 252, RuleCount: 26}, // 27: PolicyName: Cuba
+	{RuleIndex: 278, RuleCount: 10}, // 28: PolicyName: Cyprus
+	{RuleIndex: 288, RuleCount: 1}, // 29: PolicyName: Czech
+	{RuleIndex: 289, RuleCount: 3}, // 30: PolicyName: DR
+	{RuleIndex: 292, RuleCount: 3}, // 31: PolicyName: Dhaka
+	{RuleIndex: 295, RuleCount: 5}, // 32: PolicyName: E-Eur
+	{RuleIndex: 300, RuleCount: 4}, // 33: PolicyName: E-EurAsia
+	{RuleIndex: 304, RuleCount: 7}, // 34: PolicyName: EU
+	{RuleIndex: 311, RuleCount: 4}, // 35: PolicyName: EUAsia
+	{RuleIndex: 315, RuleCount: 3}, // 36: PolicyName: Ecuador
+	{RuleIndex: 318, RuleCount: 3}, // 37: PolicyName: Edm
+	{RuleIndex: 321, RuleCount: 21}, // 38: PolicyName: Egypt
+	{RuleIndex: 342, RuleCount: 7}, // 39: PolicyName: Eire
+	{RuleIndex: 349, RuleCount: 8}, // 40: PolicyName: Falk
+	{RuleIndex: 357, RuleCount: 13}, // 41: PolicyName: Fiji
+	{RuleIndex: 370, RuleCount: 3}, // 42: PolicyName: Finland
+	{RuleIndex: 373, RuleCount: 3}, // 43: PolicyName: France
+	{RuleIndex: 376, RuleCount: 6}, // 44: PolicyName: GB-Eire
+	{RuleIndex: 382, RuleCount: 1}, // 45: PolicyName: Germany
+	{RuleIndex: 383, RuleCount: 12}, // 46: PolicyName: Greece
+	{RuleIndex: 395, RuleCount: 7}, // 47: PolicyName: Guam
+	{RuleIndex: 402, RuleCount: 9}, // 48: PolicyName: Guat
+	{RuleIndex: 411, RuleCount: 6}, // 49: PolicyName: HK
+	{RuleIndex: 417, RuleCount: 12}, // 50: PolicyName: Haiti
+	{RuleIndex: 429, RuleCount: 3}, // 51: PolicyName: Halifax
+	{RuleIndex: 432, RuleCount: 3}, // 52: PolicyName: Holiday
+	{RuleIndex: 435, RuleCount: 5}, // 53: PolicyName: Hond
+	{RuleIndex: 440, RuleCount: 5}, // 54: PolicyName: Hungary
+	{RuleIndex: 445, RuleCount: 40}, // 55: PolicyName: Iran
+	{RuleIndex: 485, RuleCount: 9}, // 56: PolicyName: Iraq
+	{RuleIndex: 494, RuleCount: 10}, // 57: PolicyName: Italy
+	{RuleIndex: 504, RuleCount: 1}, // 58: PolicyName: Japan
+	{RuleIndex: 505, RuleCount: 33}, // 59: PolicyName: Jordan
+	{RuleIndex: 538, RuleCount: 5}, // 60: PolicyName: Kyrgyz
+	{RuleIndex: 543, RuleCount: 15}, // 61: PolicyName: LH
+	{RuleIndex: 558, RuleCount: 3}, // 62: PolicyName: Latvia
+	{RuleIndex: 561, RuleCount: 14}, // 63: PolicyName: Lebanon
+	{RuleIndex: 575, RuleCount: 12}, // 64: PolicyName: Libya
+	{RuleIndex: 587, RuleCount: 7}, // 65: PolicyName: Macau
+	{RuleIndex: 594, RuleCount: 8}, // 66: PolicyName: Malta
+	{RuleIndex: 602, RuleCount: 5}, // 67: PolicyName: Mauritius
+	{RuleIndex: 607, RuleCount: 7}, // 68: PolicyName: Mexico
+	{RuleIndex: 614, RuleCount: 3}, // 69: PolicyName: Moldova
+	{RuleIndex: 617, RuleCount: 3}, // 70: PolicyName: Moncton
+	{RuleIndex: 620, RuleCount: 10}, // 71: PolicyName: Mongol
+	{RuleIndex: 630, RuleCount: 176}, // 72: PolicyName: Morocco
+	{RuleIndex: 806, RuleCount: 5}, // 73: PolicyName: NC
+	{RuleIndex: 811, RuleCount: 4}, // 74: PolicyName: NT_YK
+	{RuleIndex: 815, RuleCount: 10}, // 75: PolicyName: NZ
+	{RuleIndex: 825, RuleCount: 4}, // 76: PolicyName: Namibia
+	{RuleIndex: 829, RuleCount: 7}, // 77: PolicyName: Nic
+	{RuleIndex: 836, RuleCount: 4}, // 78: PolicyName: PRC
+	{RuleIndex: 840, RuleCount: 6}, // 79: PolicyName: Pakistan
+	{RuleIndex: 846, RuleCount: 33}, // 80: PolicyName: Palestine
+	{RuleIndex: 879, RuleCount: 23}, // 81: PolicyName: Para
+	{RuleIndex: 902, RuleCount: 7}, // 82: PolicyName: Peru
+	{RuleIndex: 909, RuleCount: 3}, // 83: PolicyName: Phil
+	{RuleIndex: 912, RuleCount: 1}, // 84: PolicyName: Poland
+	{RuleIndex: 913, RuleCount: 9}, // 85: PolicyName: Port
+	{RuleIndex: 922, RuleCount: 3}, // 86: PolicyName: ROK
+	{RuleIndex: 925, RuleCount: 7}, // 87: PolicyName: Romania
+	{RuleIndex: 932, RuleCount: 6}, // 88: PolicyName: Russia
+	{RuleIndex: 938, RuleCount: 6}, // 89: PolicyName: RussiaAsia
+	{RuleIndex: 944, RuleCount: 1}, // 90: PolicyName: SA
+	{RuleIndex: 945, RuleCount: 3}, // 91: PolicyName: Salv
+	{RuleIndex: 948, RuleCount: 3}, // 92: PolicyName: SanLuis
+	{RuleIndex: 951, RuleCount: 8}, // 93: PolicyName: Spain
+	{RuleIndex: 959, RuleCount: 8}, // 94: PolicyName: SpainAfrica
+	{RuleIndex: 967, RuleCount: 9}, // 95: PolicyName: StJohns
+	{RuleIndex: 976, RuleCount: 3}, // 96: PolicyName: Sudan
+	{RuleIndex: 979, RuleCount: 1}, // 97: PolicyName: Swiss
+	{RuleIndex: 980, RuleCount: 33}, // 98: PolicyName: Syria
+	{RuleIndex: 1013, RuleCount: 5}, // 99: PolicyName: Taiwan
+	{RuleIndex: 1018, RuleCount: 7}, // 100: PolicyName: Thule
+	{RuleIndex: 1025, RuleCount: 7}, // 101: PolicyName: Tonga
+	{RuleIndex: 1032, RuleCount: 3}, // 102: PolicyName: Toronto
+	{RuleIndex: 1035, RuleCount: 3}, // 103: PolicyName: Troll
+	{RuleIndex: 1038, RuleCount: 13}, // 104: PolicyName: Tunisia
+	{RuleIndex: 1051, RuleCount: 18}, // 105: PolicyName: Turkey
+	{RuleIndex: 1069, RuleCount: 9}, // 106: PolicyName: US
+	{RuleIndex: 1078, RuleCount: 28}, // 107: PolicyName: Uruguay
+	{RuleIndex: 1106, RuleCount: 3}, // 108: PolicyName: Vanc
+	{RuleIndex: 1109, RuleCount: 7}, // 109: PolicyName: Vanuatu
+	{RuleIndex: 1116, RuleCount: 6}, // 110: PolicyName: W-Eur
+	{RuleIndex: 1122, RuleCount: 6}, // 111: PolicyName: WS
+	{RuleIndex: 1128, RuleCount: 4}, // 112: PolicyName: Winn
+	{RuleIndex: 1132, RuleCount: 1}, // 113: PolicyName: Yukon
+	{RuleIndex: 1133, RuleCount: 60}, // 114: PolicyName: Zion
 
 }
 
-const ZonePolicyCount = 84
+const ZonePolicyCount = 115
 
 const ZonePolicyChunkSize = 4
 
 // ZonePoliciesData contains the ZonePolicyRecords data as a hex encoded string.
 const ZonePoliciesData = "\x00\x00\x00\x00" +
-		"\x00\x00\x09\x00" +
-		"\x09\x00\x01\x00" +
-		"\x0a\x00\x07\x00" +
-		"\x11\x00\x08\x00" +
-		"\x19\x00\x09\x00" +
-		"\x22\x00\x04\x00" +
-		"\x26\x00\x06\x00" +
-		"\x2c\x00\x03\x00" +
-		"\x2f\x00\x01\x00" +
-		"\x30\x00\x02\x00" +
-		"\x32\x00\x01\x00" +
-		"\x33\x00\x01\x00" +
-		"\x34\x00\x14\x00" +
-		"\x48\x00\x03\x00" +
-		"\x4b\x00\x01\x00" +
-		"\x4c\x00\x01\x00" +
-		"\x4d\x00\x05\x00" +
-		"\x52\x00\x05\x00" +
-		"\x57\x00\x11\x00" +
-		"\x68\x00\x01\x00" +
-		"\x69\x00\x0e\x00" +
-		"\x77\x00\x03\x00" +
-		"\x7a\x00\x03\x00" +
-		"\x7d\x00\x03\x00" +
-		"\x80\x00\x03\x00" +
-		"\x83\x00\x01\x00" +
-		"\x84\x00\x0e\x00" +
-		"\x92\x00\x03\x00" +
-		"\x95\x00\x05\x00" +
-		"\x9a\x00\x0c\x00" +
-		"\xa6\x00\x01\x00" +
-		"\xa7\x00\x03\x00" +
-		"\xaa\x00\x01\x00" +
-		"\xab\x00\x07\x00" +
-		"\xb2\x00\x01\x00" +
-		"\xb3\x00\x03\x00" +
-		"\xb6\x00\x1b\x00" +
-		"\xd1\x00\x03\x00" +
-		"\xd4\x00\x01\x00" +
-		"\xd5\x00\x0d\x00" +
-		"\xe2\x00\x03\x00" +
-		"\xe5\x00\x09\x00" +
-		"\xee\x00\x03\x00" +
-		"\xf1\x00\x03\x00" +
-		"\xf4\x00\x01\x00" +
-		"\xf5\x00\x03\x00" +
-		"\xf8\x00\x07\x00" +
-		"\xff\x00\x02\x00" +
-		"\x01\x01\x03\x00" +
-		"\x04\x01\x06\x00" +
-		"\x0a\x01\xa9\x00" +
-		"\xb3\x01\x01\x00" +
-		"\xb4\x01\x03\x00" +
-		"\xb7\x01\x05\x00" +
-		"\xbc\x01\x03\x00" +
-		"\xbf\x01\x05\x00" +
-		"\xc4\x01\x01\x00" +
-		"\xc5\x01\x06\x00" +
-		"\xcb\x01\x21\x00" +
-		"\xec\x01\x0a\x00" +
-		"\xf6\x01\x01\x00" +
-		"\xf7\x01\x01\x00" +
+		"\x00\x00\x10\x00" +
+		"\x10\x00\x03\x00" +
+		"\x13\x00\x0f\x00" +
+		"\x22\x00\x10\x00" +
+		"\x32\x00\x0e\x00" +
+		"\x40\x00\x0a\x00" +
+		"\x4a\x00\x16\x00" +
+		"\x60\x00\x07\x00" +
+		"\x67\x00\x0b\x00" +
+		"\x72\x00\x03\x00" +
+		"\x75\x00\x01\x00" +
+		"\x76\x00\x03\x00" +
+		"\x79\x00\x03\x00" +
+		"\x7c\x00\x06\x00" +
+		"\x82\x00\x01\x00" +
+		"\x83\x00\x05\x00" +
+		"\x88\x00\x01\x00" +
+		"\x89\x00\x2c\x00" +
+		"\xb5\x00\x06\x00" +
+		"\xbb\x00\x07\x00" +
+		"\xc2\x00\x03\x00" +
+		"\xc5\x00\x06\x00" +
+		"\xcb\x00\x06\x00" +
+		"\xd1\x00\x0a\x00" +
+		"\xdb\x00\x1d\x00" +
+		"\xf8\x00\x04\x00" +
+		"\xfc\x00\x1a\x00" +
+		"\x16\x01\x0a\x00" +
+		"\x20\x01\x01\x00" +
+		"\x21\x01\x03\x00" +
+		"\x24\x01\x03\x00" +
+		"\x27\x01\x05\x00" +
+		"\x2c\x01\x04\x00" +
+		"\x30\x01\x07\x00" +
+		"\x37\x01\x04\x00" +
+		"\x3b\x01\x03\x00" +
+		"\x3e\x01\x03\x00" +
+		"\x41\x01\x15\x00" +
+		"\x56\x01\x07\x00" +
+		"\x5d\x01\x08\x00" +
+		"\x65\x01\x0d\x00" +
+		"\x72\x01\x03\x00" +
+		"\x75\x01\x03\x00" +
+		"\x78\x01\x06\x00" +
+		"\x7e\x01\x01\x00" +
+		"\x7f\x01\x0c\x00" +
+		"\x8b\x01\x07\x00" +
+		"\x92\x01\x09\x00" +
+		"\x9b\x01\x06\x00" +
+		"\xa1\x01\x0c\x00" +
+		"\xad\x01\x03\x00" +
+		"\xb0\x01\x03\x00" +
+		"\xb3\x01\x05\x00" +
+		"\xb8\x01\x05\x00" +
+		"\xbd\x01\x28\x00" +
+		"\xe5\x01\x09\x00" +
+		"\xee\x01\x0a\x00" +
 		"\xf8\x01\x01\x00" +
-		"\xf9\x01\x03\x00" +
-		"\xfc\x01\x03\x00" +
-		"\xff\x01\x01\x00" +
-		"\x00\x02\x01\x00" +
-		"\x01\x02\x03\x00" +
-		"\x04\x02\x05\x00" +
-		"\x09\x02\x01\x00" +
-		"\x0a\x02\x0c\x00" +
-		"\x16\x02\x01\x00" +
-		"\x17\x02\x05\x00" +
-		"\x1c\x02\x07\x00" +
-		"\x23\x02\x03\x00" +
-		"\x26\x02\x05\x00" +
-		"\x2b\x02\x03\x00" +
-		"\x2e\x02\x05\x00" +
-		"\x33\x02\x06\x00" +
-		"\x39\x02\x01\x00" +
-		"\x3a\x02\x06\x00" +
-		"\x40\x02\x03\x00" +
-		"\x43\x02\x18\x00"
+		"\xf9\x01\x21\x00" +
+		"\x1a\x02\x05\x00" +
+		"\x1f\x02\x0f\x00" +
+		"\x2e\x02\x03\x00" +
+		"\x31\x02\x0e\x00" +
+		"\x3f\x02\x0c\x00" +
+		"\x4b\x02\x07\x00" +
+		"\x52\x02\x08\x00" +
+		"\x5a\x02\x05\x00" +
+		"\x5f\x02\x07\x00" +
+		"\x66\x02\x03\x00" +
+		"\x69\x02\x03\x00" +
+		"\x6c\x02\x0a\x00" +
+		"\x76\x02\xb0\x00" +
+		"\x26\x03\x05\x00" +
+		"\x2b\x03\x04\x00" +
+		"\x2f\x03\x0a\x00" +
+		"\x39\x03\x04\x00" +
+		"\x3d\x03\x07\x00" +
+		"\x44\x03\x04\x00" +
+		"\x48\x03\x06\x00" +
+		"\x4e\x03\x21\x00" +
+		"\x6f\x03\x17\x00" +
+		"\x86\x03\x07\x00" +
+		"\x8d\x03\x03\x00" +
+		"\x90\x03\x01\x00" +
+		"\x91\x03\x09\x00" +
+		"\x9a\x03\x03\x00" +
+		"\x9d\x03\x07\x00" +
+		"\xa4\x03\x06\x00" +
+		"\xaa\x03\x06\x00" +
+		"\xb0\x03\x01\x00" +
+		"\xb1\x03\x03\x00" +
+		"\xb4\x03\x03\x00" +
+		"\xb7\x03\x08\x00" +
+		"\xbf\x03\x08\x00" +
+		"\xc7\x03\x09\x00" +
+		"\xd0\x03\x03\x00" +
+		"\xd3\x03\x01\x00" +
+		"\xd4\x03\x21\x00" +
+		"\xf5\x03\x05\x00" +
+		"\xfa\x03\x07\x00" +
+		"\x01\x04\x07\x00" +
+		"\x08\x04\x03\x00" +
+		"\x0b\x04\x03\x00" +
+		"\x0e\x04\x0d\x00" +
+		"\x1b\x04\x12\x00" +
+		"\x2d\x04\x09\x00" +
+		"\x36\x04\x1c\x00" +
+		"\x52\x04\x03\x00" +
+		"\x55\x04\x07\x00" +
+		"\x5c\x04\x06\x00" +
+		"\x62\x04\x06\x00" +
+		"\x68\x04\x04\x00" +
+		"\x6c\x04\x01\x00" +
+		"\x6d\x04\x3c\x00"
 
 // ---------------------------------------------------------------------------
-// Unsupported zone policies: 51
+// Unsupported zone policies: 20
 // ---------------------------------------------------------------------------
 
-// Albania {unused}
-// Algeria {unused}
-// Austria {unused}
-// Belgium {unused}
-// Bermuda {unused}
-// Bulg {unused}
 // CA {unused}
 // Chicago {unused}
-// Cyprus {unused}
-// Czech {unused}
-// DR {unused}
 // Denver {unused}
 // Detroit {unused}
-// E-Eur {unused}
-// Edm {unused}
 // EgyptAsia {unused}
-// Finland {unused}
-// France {unused}
-// GB-Eire {unused}
-// Germany {unused}
-// Greece {unused}
-// Halifax {unused}
-// Hungary {unused}
 // Indianapolis {unused}
-// Italy {unused}
-// Latvia {unused}
 // Louisville {unused}
-// Malta {unused}
 // Marengo {unused}
 // Menominee {unused}
 // NBorneo {unused}
 // NYC {unused}
 // Perry {unused}
 // Pike {unused}
-// Poland {unused}
-// Port {unused}
 // Pulaski {unused}
 // Regina {unused}
-// Romania {unused}
 // Shang {unused}
 // SovietZone {unused}
-// Spain {unused}
-// SpainAfrica {unused}
 // Starke {unused}
 // Swift {unused}
-// Swiss {unused}
-// Toronto {unused}
-// Vanc {unused}
 // Vincennes {unused}
-// W-Eur {unused}
-// Yukon {unused}
 
 
 // ---------------------------------------------------------------------------
-// Notable zone policies: 15
+// Notable zone policies: 54
 // ---------------------------------------------------------------------------
 
+// AW {Added anchor rule at year 0}
 // Armenia {Added anchor rule at year 0}
-// Belize {LETTER 'CST' not single character}
+// Azer {Added anchor rule at year 0}
+// Belize {
+//   LETTER 'CDT' not single character,
+//   LETTER 'CST' not single character,
+// }
+// Bulg {Added anchor rule at year 0}
+// CO {Added anchor rule at year 0}
+// CR {Added anchor rule at year 0}
+// Chatham {Added anchor rule at year 0}
+// Cook {
+//   Added anchor rule at year 0,
+//   SAVE (delta_offset) '0:30' different from 1:00,
+// }
+// Cyprus {Added anchor rule at year 0}
+// DR {
+//   LETTER '-0430' not single character,
+//   LETTER 'EST' not single character,
+//   SAVE (delta_offset) '0:30' different from 1:00,
+// }
 // Dhaka {Added anchor rule at year 0}
+// E-Eur {Added anchor rule at year 0}
+// E-EurAsia {Added anchor rule at year 0}
+// EU {Added anchor rule at year 0}
+// EUAsia {Added anchor rule at year 0}
+// Ecuador {Added anchor rule at year 0}
 // Eire {SAVE (delta_offset) '-1:00' different from 1:00}
-// LH {SAVE (delta_offset) '0:30' different from 1:00}
+// Fiji {Added anchor rule at year 0}
+// GB-Eire {
+//   LETTER 'BST' not single character,
+//   LETTER 'GMT' not single character,
+// }
+// Guam {AT '2:01' not on 15-minute boundary}
+// Guat {Added anchor rule at year 0}
+// Haiti {Added anchor rule at year 0}
+// Holiday {Added anchor rule at year 0}
+// Hond {Added anchor rule at year 0}
+// Iraq {Added anchor rule at year 0}
+// Jordan {Added anchor rule at year 0}
+// Kyrgyz {Added anchor rule at year 0}
+// LH {
+//   Added anchor rule at year 0,
+//   SAVE (delta_offset) '0:30' different from 1:00,
+// }
+// Latvia {Added anchor rule at year 0}
+// Malta {Added anchor rule at year 0}
+// Mauritius {Added anchor rule at year 0}
+// Moldova {Added anchor rule at year 0}
 // Moncton {AT '0:01' not on 15-minute boundary}
+// Mongol {Added anchor rule at year 0}
 // Morocco {SAVE (delta_offset) '-1:00' different from 1:00}
+// NC {Added anchor rule at year 0}
 // Namibia {
+//   Added anchor rule at year 0,
 //   LETTER 'CAT' not single character,
 //   LETTER 'WAT' not single character,
 //   SAVE (delta_offset) '-1:00' different from 1:00,
 // }
+// Nic {Added anchor rule at year 0}
+// PRC {Added anchor rule at year 0}
 // Pakistan {Added anchor rule at year 0}
 // Palestine {
 //   AT '0:01' not on 15-minute boundary,
 //   Added anchor rule at year 0,
 // }
+// Para {Added anchor rule at year 0}
+// RussiaAsia {Added anchor rule at year 0}
+// Salv {Added anchor rule at year 0}
 // SanLuis {Added anchor rule at year 0}
 // StJohns {
 //   AT '0:01' not on 15-minute boundary,
 //   LETTER 'DD' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
+// Thule {Added anchor rule at year 0}
 // Tonga {Added anchor rule at year 0}
 // Troll {
 //   Added anchor rule at year 0,
@@ -8772,6 +16749,12 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 //   LETTER '+02' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
+// Uruguay {
+//   SAVE (delta_offset) '0:30' different from 1:00,
+//   SAVE (delta_offset) '1:30' different from 1:00,
+// }
+// Vanuatu {Added anchor rule at year 0}
+// W-Eur {Added anchor rule at year 0}
 // WS {Added anchor rule at year 0}
 
 

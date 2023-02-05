@@ -96,7 +96,7 @@ func DayOfWeek(year int16, month uint8, day uint8) uint8 {
 
 // LocalDateFromEpochDays converts epoch days to (y, m, d).
 func LocalDateFromEpochDays(days int32) (year int16, month uint8, day uint8) {
-	days += GetDaysToCurrentEpochFromConverterEpoch()
+	days -= daysToConverterEpochFromUnixEpoch
 	year, month, day = ConvertFromDays(days)
 	return
 }
@@ -104,7 +104,7 @@ func LocalDateFromEpochDays(days int32) (year int16, month uint8, day uint8) {
 // LocalDateToEpochDays converts (y, m, d) to epoch days.
 func LocalDateToEpochDays(year int16, month uint8, day uint8) int32 {
 	converterDays := ConvertToDays(year, month, day)
-	return converterDays - GetDaysToCurrentEpochFromConverterEpoch()
+	return converterDays + daysToConverterEpochFromUnixEpoch
 }
 
 // LocalDateIncrementOneDay returns the given (year, month, day) incremented by

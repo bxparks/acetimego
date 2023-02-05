@@ -6,8 +6,7 @@ import (
 )
 
 const (
-	InvalidEpochSeconds  ATime = math.MinInt32
-	InvalidUnixSeconds64 int64 = math.MinInt64
+	InvalidEpochSeconds ATime = math.MinInt64
 )
 
 type LocalDateTime struct {
@@ -35,7 +34,7 @@ func (ldt *LocalDateTime) EpochSeconds() ATime {
 
 	days := LocalDateToEpochDays(ldt.Year, ldt.Month, ldt.Day)
 	seconds := LocalTimeToSeconds(ldt.Hour, ldt.Minute, ldt.Second)
-	return ATime(days*86400 + seconds)
+	return ATime(days)*86400 + ATime(seconds)
 }
 
 func NewLocalDateTimeFromEpochSeconds(epochSeconds ATime) LocalDateTime {
@@ -44,14 +43,14 @@ func NewLocalDateTimeFromEpochSeconds(epochSeconds ATime) LocalDateTime {
 	}
 
 	// Integer floor-division towards -infinity
-	eps := int32(epochSeconds)
+	eps := int64(epochSeconds)
 	var days int32
 	if eps < 0 {
-		days = (eps+1)/86400 - 1
+		days = int32((eps+1)/86400) - 1
 	} else {
-		days = eps / 86400
+		days = int32(eps / 86400)
 	}
-	seconds := eps - 86400*days
+	seconds := int32(eps - 86400*int64(days))
 
 	year, month, day := LocalDateFromEpochDays(days)
 	hour, minute, second := LocalTimeFromSeconds(seconds)

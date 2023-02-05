@@ -1,13 +1,14 @@
 TARGETS := zone_infos.go zone_policies.go zone_registry.go
 
 TOOLS := $(abspath ../../AceTimeTools)
-
+TZ_REPO := $(abspath ../../tz)
 TZ_VERSION := 2022g
-START_YEAR := 2000
+START_YEAR := 1974
 UNTIL_YEAR := 10000
 
 all:
 	$(TOOLS)/tzcompiler.sh \
+		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
 		--action zonedb \
 		--language go \
@@ -18,6 +19,7 @@ all:
 
 zonedb.json: Makefile
 	$(TOOLS)/tzcompiler.sh \
+		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
 		--action zonedb \
 		--language json \
