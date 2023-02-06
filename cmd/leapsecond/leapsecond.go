@@ -26,7 +26,6 @@ package main
 
 import (
 	"github.com/bxparks/AceTimeGo/acetime"
-	"github.com/bxparks/AceTimeGo/zonedb"
 	"time"
 )
 
@@ -42,13 +41,7 @@ func main() {
 
 func leapAceTime() {
 	println("==== 2016 Leap second by acetime package")
-	context := &zonedb.DataContext
-	zm := acetime.NewZoneManager(context)
-	atz := zm.NewTimeZoneFromName(name)
-	if atz.IsError() {
-		println("ERROR: acetime package: Zone", name, "not found")
-		return
-	}
+	atz := acetime.NewTimeZoneUTC()
 
 	ldt := acetime.LocalDateTime{2016, 12, 31, 23, 59, 59, 0 /*Fold*/}
 	zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &atz)
@@ -84,21 +77,15 @@ func leapAceTime() {
 func leapGoTime() {
 	println("==== 2016 Leap second by Go time package")
 
-	gotz, err := time.LoadLocation(name)
-	if err != nil {
-		println("ERROR: time package: Zone", name, "not found")
-		return
-	}
-
-	gotime := time.Date(2016, 12, 31, 23, 59, 59, 0, gotz)
+	gotime := time.Date(2016, 12, 31, 23, 59, 59, 0, time.UTC)
 	seconds := gotime.Unix()
 	println(gotime.String(), "; seconds=", seconds)
 
-	gotime = time.Date(2016, 12, 31, 23, 59, 60, 0, gotz)
+	gotime = time.Date(2016, 12, 31, 23, 59, 60, 0, time.UTC)
 	seconds = gotime.Unix()
 	println(gotime.String(), "; seconds=", seconds)
 
-	gotime = time.Date(2017, 1, 1, 0, 0, 0, 0, gotz)
+	gotime = time.Date(2017, 1, 1, 0, 0, 0, 0, time.UTC)
 	seconds = gotime.Unix()
 	println(gotime.String(), "; seconds=", seconds)
 }

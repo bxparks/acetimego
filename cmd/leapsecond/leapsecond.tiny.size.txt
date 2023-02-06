@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   12173      31     629 |   12229     660 | (unknown)
+     25   11460      20     629 |   11505     649 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -15,24 +15,23 @@
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/unistd
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/internal/task
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
-   1652    2128       0      56 |    3780      56 | /usr/local/go/src/syscall
+   1638    2128       0      56 |    3766      56 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
      47       0       0       0 |      47       0 | Go interface assert
      95       0       0       0 |      95       0 | Go interface method
       0      53       0       0 |      53       0 | Go reflect data
      42       0       0       0 |      42       0 | errors
-   7648      29       0       0 |    7677       0 | github.com/bxparks/AceTimeGo/acetime
-      0   41155    1701       0 |   42856    1701 | github.com/bxparks/AceTimeGo/zonedb
-   2245       0       0       0 |    2245       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   7616      29       0       0 |    7645       0 | github.com/bxparks/AceTimeGo/acetime
+    260       0       0       0 |     260       0 | github.com/bxparks/AceTimeGo/zoneinfo
      85       0       0       0 |      85       0 | internal/bytealg
     157       2       0       0 |     159       0 | internal/itoa
     420      24       0      16 |     444      16 | internal/task
-    948     199       0       0 |    1147       0 | main
+    801     137       0       0 |     938       0 | main
    3076     678       0       0 |    3754       0 | reflect
-   6706     202      12      91 |    6920     103 | runtime
+   6700     202      12      91 |    6914     103 | runtime
     623     124       0       0 |     747       0 | strings
-    633     200       0       0 |     833       0 | sync
+    623     200       0       0 |     823       0 | sync
      80    2954       0       0 |    3034       0 | syscall
-  18706    1000     168     160 |   19874     328 | time
+  17730     938     168     128 |   18836     296 | time
 ------------------------------- | --------------- | -------
-  47130   60921    1912     952 |  109963    2864 | total
+  43960   18929     200     920 |   63089    1120 | total
