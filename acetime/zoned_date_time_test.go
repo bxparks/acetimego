@@ -38,7 +38,7 @@ func TestZonedDateTimeToString(t *testing.T) {
 
 func TestZonedDateTimeFromUTC(t *testing.T) {
 	// A UTC timezone
-	tz := NewTimeZoneUTC()
+	tz := TimeZoneUTC
 	if !(tz.Name() == "UTC") {
 		t.Fatal(tz)
 	}

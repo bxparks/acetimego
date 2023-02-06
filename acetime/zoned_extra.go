@@ -13,6 +13,10 @@ const (
 	ZonedExtraOverlap
 )
 
+var (
+	ZonedExtraError = ZonedExtra{Zetype: ZonedExtraErr}
+)
+
 type ZonedExtra struct {
 	Zetype              uint8  // type of match (e.g. gap, overlap)
 	StdOffsetMinutes    int16  // STD offset
@@ -22,15 +26,11 @@ type ZonedExtra struct {
 	Abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
-func NewZonedExtraError() ZonedExtra {
-	return ZonedExtra{Zetype: ZonedExtraErr}
-}
-
 func NewZonedExtraFromEpochSeconds(
 	epochSeconds ATime, tz *TimeZone) ZonedExtra {
 
 	if epochSeconds == InvalidEpochSeconds {
-		return NewZonedExtraError()
+		return ZonedExtraError
 	}
 	return tz.ZonedExtraFromEpochSeconds(epochSeconds)
 }
@@ -39,7 +39,7 @@ func NewZonedExtraFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedExtra {
 
 	if ldt.IsError() {
-		return NewZonedExtraError()
+		return ZonedExtraError
 	}
 	return tz.ZonedExtraFromLocalDateTime(ldt)
 }

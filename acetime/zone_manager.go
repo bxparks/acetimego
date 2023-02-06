@@ -19,7 +19,7 @@ func NewZoneManager(context *zoneinfo.ZoneDataContext) ZoneManager {
 func (zm *ZoneManager) NewTimeZoneFromID(zoneID uint32) TimeZone {
 	zi := zm.store.ZoneInfoByID(zoneID)
 	if zi == nil {
-		return NewTimeZoneError()
+		return TimeZoneError
 	}
 	return NewTimeZoneFromZoneInfo(zi)
 }
@@ -27,7 +27,7 @@ func (zm *ZoneManager) NewTimeZoneFromID(zoneID uint32) TimeZone {
 func (zm *ZoneManager) NewTimeZoneFromName(name string) TimeZone {
 	zi := zm.store.ZoneInfoByName(name)
 	if zi == nil {
-		return NewTimeZoneError()
+		return TimeZoneError
 	}
 	return NewTimeZoneFromZoneInfo(zi)
 }

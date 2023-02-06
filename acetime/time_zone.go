@@ -21,14 +21,10 @@ type TimeZone struct {
 	zoneProcessor *ZoneProcessor
 }
 
-func NewTimeZoneError() TimeZone {
-	return TimeZone{TztypeError, nil}
-}
-
-// NewTimeZoneUTC returns a TimeZone instance that represents the UTC timezone.
-func NewTimeZoneUTC() TimeZone {
-	return TimeZone{TztypeUTC, nil}
-}
+var (
+	TimeZoneUTC = TimeZone{TztypeUTC, nil}
+	TimeZoneError = TimeZone{TztypeError, nil}
+)
 
 func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 
@@ -73,12 +69,12 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 
 	err := tz.zoneProcessor.InitForEpochSeconds(epochSeconds)
 	if err != ErrOk {
-		return NewOffsetDateTimeError()
+		return OffsetDateTimeError
 	}
 
 	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
 	if result.frtype == FindResultNotFound {
-		return NewOffsetDateTimeError()
+		return OffsetDateTimeError
 	}
 
 	totalOffsetMinutes := result.stdOffsetMinutes + result.dstOffsetMinutes
@@ -105,7 +101,7 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 
 	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
 	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
-		return NewOffsetDateTimeError()
+		return OffsetDateTimeError
 	}
 
 	// Convert FindResult into OffsetDateTime using the request offset, and the
@@ -148,7 +144,7 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 
 	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
 	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
-		return NewZonedExtraError()
+		return ZonedExtraError
 	}
 
 	return ZonedExtra{
@@ -177,7 +173,7 @@ func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 
 	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
 	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
-		return NewZonedExtraError()
+		return ZonedExtraError
 	}
 
 	return ZonedExtra{

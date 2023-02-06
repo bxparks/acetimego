@@ -20,13 +20,6 @@ func TestOffsetDateTimeIsError(t *testing.T) {
 	}
 }
 
-func TestNewOffsetDateTimeError(t *testing.T) {
-	odt := NewOffsetDateTimeError()
-	if !odt.IsError() {
-		t.Fatal(odt)
-	}
-}
-
 func TestOffsetDateTimeEpochSeconds(t *testing.T) {
 	odt := OffsetDateTime{1970, 1, 1, 0, 0, 0, 0, 0}
 	if !(odt.EpochSeconds() == 0) {

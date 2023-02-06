@@ -8,6 +8,10 @@ import (
 // ZonedDateTime represents a date/time stamp with its associated TimeZone.
 //-----------------------------------------------------------------------------
 
+var (
+	ZonedDateTimeError = ZonedDateTime{Year: InvalidYear}
+)
+
 type ZonedDateTime struct {
 	Year          int16
 	Month         uint8
@@ -18,12 +22,6 @@ type ZonedDateTime struct {
 	Fold          uint8
 	OffsetMinutes int16
 	Tz            *TimeZone
-}
-
-// NewZonedDateTimeError returns an instance of ZonedDateTime that indicates
-// an error condition such that IsError() returns true.
-func NewZonedDateTimeError() ZonedDateTime {
-	return ZonedDateTime{Year: InvalidYear}
 }
 
 func (zdt *ZonedDateTime) IsError() bool {
@@ -94,11 +92,11 @@ func NewZonedDateTimeFromLocalDateTime(
 
 func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 	if zdt.IsError() {
-		return NewZonedDateTimeError()
+		return ZonedDateTimeError
 	}
 	epochSeconds := zdt.EpochSeconds()
 	if epochSeconds == InvalidEpochSeconds {
-		return NewZonedDateTimeError()
+		return ZonedDateTimeError
 	}
 	return NewZonedDateTimeFromEpochSeconds(epochSeconds, tz)
 }

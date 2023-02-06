@@ -41,7 +41,7 @@ func main() {
 
 func leapAceTime() {
 	println("==== 2016 Leap second by acetime package")
-	atz := acetime.NewTimeZoneUTC()
+	atz := acetime.TimeZoneUTC
 
 	ldt := acetime.LocalDateTime{2016, 12, 31, 23, 59, 59, 0 /*Fold*/}
 	zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &atz)

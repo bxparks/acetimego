@@ -4,6 +4,10 @@ import (
 	"strings"
 )
 
+var (
+	OffsetDateTimeError = OffsetDateTime{Year: InvalidYear}
+)
+
 type OffsetDateTime struct {
 	Year          int16
 	Month         uint8
@@ -13,12 +17,6 @@ type OffsetDateTime struct {
 	Second        uint8
 	Fold          uint8
 	OffsetMinutes int16
-}
-
-// NewOffsetDateTimeError returns an instance of OffsetDateTime that indicates
-// an error condition such that IsError() returns true.
-func NewOffsetDateTimeError() OffsetDateTime {
-	return OffsetDateTime{Year: InvalidYear}
 }
 
 func NewOffsetDateTimeFromLocalDateTime(
@@ -53,7 +51,7 @@ func NewOffsetDateTimeFromEpochSeconds(
 	epochSeconds ATime, offsetMinutes int16) OffsetDateTime {
 
 	if epochSeconds == InvalidEpochSeconds {
-		return NewOffsetDateTimeError()
+		return OffsetDateTimeError
 	}
 
 	epochSeconds += ATime(offsetMinutes) * 60
