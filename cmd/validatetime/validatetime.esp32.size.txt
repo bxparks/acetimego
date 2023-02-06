@@ -1,27 +1,29 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-   1775     702      16       9 |    2493      25 | (unknown)
+   2117     753      23       9 |    2893      32 | (unknown)
      66       0       0       0 |      66       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/device/esp
      57       0       0       0 |      57       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/internal/task
       0       0       0    4096 |       0    4096 | C stack
-    114       0       0       0 |     114       0 | Go interface method
-      0      61       0       0 |      61       0 | Go reflect data
-     17       0       0       0 |      17       0 | errors
-   6667      29       0       0 |    6696       0 | github.com/bxparks/AceTimeGo/acetime
-      0   30232    1546       0 |   31778    1546 | github.com/bxparks/AceTimeGo/zonedb
-   1885       0       0       0 |    1885       0 | github.com/bxparks/AceTimeGo/zoneinfo
-     54       0       0       0 |      54       0 | internal/bytealg
+    137       0       0       0 |     137       0 | Go interface method
+      0      92       0       0 |      92       0 | Go reflect data
+     21       0       0       0 |      21       0 | errors
+   6538      29       0       0 |    6567       0 | github.com/bxparks/AceTimeGo/acetime
+      0   41155    1593       0 |   42748    1593 | github.com/bxparks/AceTimeGo/zonedb
+   1832       0       0       0 |    1832       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     57       0       0       0 |      57       0 | internal/bytealg
     132       2       0       0 |     134       0 | internal/itoa
     282      24       0       8 |     306       8 | internal/task
      25       0       0       0 |      25       0 | machine
-   1118     253       0       0 |    1371       0 | main
-   2659     622       0       0 |    3281       0 | reflect
-   3158     172       0      47 |    3330      47 | runtime
+   2530     305       0       0 |    2835       0 | main
+   2651     622       0       0 |    3273       0 | reflect
+   3338     172       0      47 |    3510      47 | runtime
      87       0       0       0 |      87       0 | runtime/interrupt
      92       0       0       0 |      92       0 | runtime/volatile
-    439     108       0       0 |     547       0 | strings
+   1409    1944    1330       0 |    4683    1330 | strconv
+    444     108       0       0 |     552       0 | strings
     143      38       0       0 |     181       0 | sync
-     28       6       0       0 |      34       0 | syscall
-  11537     769     104      92 |   12410     196 | time
+     25       6       0       0 |      31       0 | syscall
+  14505     809     104      92 |   15418     196 | time
+    577     288       0       0 |     865       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  30335   33018    1666    4252 |   65019    5918 | total
+  37065   46347    3050    4252 |   86462    7302 | total
