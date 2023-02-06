@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   11892      22     629 |   11939     651 | (unknown)
+     25   11889      31     629 |   11945     660 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -21,18 +21,18 @@
      95       0       0       0 |      95       0 | Go interface method
       0      53       0       0 |      53       0 | Go reflect data
      42       0       0       0 |      42       0 | errors
-   7695      29       0       0 |    7724       0 | github.com/bxparks/AceTimeGo/acetime
-      0   30232    1654       0 |   31886    1654 | github.com/bxparks/AceTimeGo/zonedb
+   7731      29       0       0 |    7760       0 | github.com/bxparks/AceTimeGo/acetime
+      0   41155    1701       0 |   42856    1701 | github.com/bxparks/AceTimeGo/zonedb
    2427       0       0       0 |    2427       0 | github.com/bxparks/AceTimeGo/zoneinfo
      86       0       0       0 |      86       0 | internal/bytealg
     157       2       0       0 |     159       0 | internal/itoa
     420      24       0      16 |     444      16 | internal/task
-   1236     253       0       0 |    1489       0 | main
+   1264     245       0       0 |    1509       0 | main
    3076     678       0       0 |    3754       0 | reflect
-   6679     202      12      91 |    6893     103 | runtime
+   6699     202      12      91 |    6913     103 | runtime
     613     124       0       0 |     737       0 | strings
     633     200       0       0 |     833       0 | sync
      80    2954       0       0 |    3034       0 | syscall
-  18664    1006     168     160 |   19838     328 | time
+  18621    1006     168     160 |   19795     328 | time
 ------------------------------- | --------------- | -------
-  47569   49777    1856     952 |   99202    2808 | total
+  47610   60689    1912     952 |  110211    2864 | total
