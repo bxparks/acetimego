@@ -22,8 +22,10 @@ func TestZoneInfoReader(t *testing.T) {
 func verifyZoneInfoReader(
 	t *testing.T, c *zoneinfo.ZoneDataContext, cc *zoneinfo.ZoneRecordContext) {
 
-	reader := zoneinfo.NewZoneInfoReader(zoneinfo.NewDataIO(c.ZoneInfosData))
+	reader := zoneinfo.NewZoneInfoReader(
+		zoneinfo.NewDataIO(c.ZoneInfosData), c.ZoneInfoChunkSize)
 	for i := uint16(0); i < c.ZoneInfoCount; i++ {
+		reader.Seek(i) // Use random Seek() to verify the chunk size
 		record := reader.Read()
 		expected := &cc.ZoneInfoRecords[i]
 		if record.ZoneID != expected.ZoneID {
@@ -55,36 +57,38 @@ func TestZoneEraReader(t *testing.T) {
 func verifyZoneEraReader(
 	t *testing.T, c *zoneinfo.ZoneDataContext, cc *zoneinfo.ZoneRecordContext) {
 
-	reader := zoneinfo.NewZoneEraReader(zoneinfo.NewDataIO(c.ZoneErasData))
+	reader := zoneinfo.NewZoneEraReader(
+		zoneinfo.NewDataIO(c.ZoneErasData), c.ZoneEraChunkSize)
 	for i := uint16(0); i < c.ZoneEraCount; i++ {
+		reader.Seek(i) // Use random Seek() to verify the chunk size
 		record := reader.Read()
 		expected := &cc.ZoneEraRecords[i]
 		if record.FormatIndex != expected.FormatIndex {
-			t.Fatal(i, record.FormatIndex)
+			t.Fatal(i, record.FormatIndex, expected.FormatIndex)
 		}
 		if record.PolicyIndex != expected.PolicyIndex {
-			t.Fatal(i, record.PolicyIndex)
+			t.Fatal(i, record.PolicyIndex, expected.PolicyIndex)
 		}
-		if record.OffsetCode != expected.OffsetCode {
-			t.Fatal(i, record.OffsetCode)
+		if record.OffsetSecondsCode != expected.OffsetSecondsCode {
+			t.Fatal(i, record.OffsetSecondsCode, expected.OffsetSecondsCode)
 		}
 		if record.DeltaCode != expected.DeltaCode {
-			t.Fatal(i, record.DeltaCode)
+			t.Fatal(i, record.DeltaCode, expected.DeltaCode)
 		}
 		if record.UntilYear != expected.UntilYear {
-			t.Fatal(i, record.UntilYear)
+			t.Fatal(i, record.UntilYear, expected.UntilYear)
 		}
 		if record.UntilMonth != expected.UntilMonth {
-			t.Fatal(i, record.UntilMonth)
+			t.Fatal(i, record.UntilMonth, expected.UntilMonth)
 		}
 		if record.UntilDay != expected.UntilDay {
-			t.Fatal(i, record.UntilDay)
+			t.Fatal(i, record.UntilDay, expected.UntilDay)
 		}
 		if record.UntilTimeCode != expected.UntilTimeCode {
-			t.Fatal(i, record.UntilTimeCode)
+			t.Fatal(i, record.UntilTimeCode, expected.UntilTimeCode)
 		}
 		if record.UntilTimeModifier != expected.UntilTimeModifier {
-			t.Fatal(i, record.UntilTimeModifier)
+			t.Fatal(i, record.UntilTimeModifier, expected.UntilTimeModifier)
 		}
 	}
 }
@@ -100,8 +104,10 @@ func TestZonePolicyReader(t *testing.T) {
 func verifyZonePolicyReader(
 	t *testing.T, c *zoneinfo.ZoneDataContext, cc *zoneinfo.ZoneRecordContext) {
 
-	reader := zoneinfo.NewZonePolicyReader(zoneinfo.NewDataIO(c.ZonePoliciesData))
+	reader := zoneinfo.NewZonePolicyReader(
+		zoneinfo.NewDataIO(c.ZonePoliciesData), c.ZonePolicyChunkSize)
 	for i := uint16(0); i < c.ZonePolicyCount; i++ {
+		reader.Seek(i) // Use random Seek() to verify the chunk size
 		record := reader.Read()
 		expected := &cc.ZonePolicyRecords[i]
 		if record.RuleIndex != expected.RuleIndex {
@@ -124,8 +130,10 @@ func TestZoneRuleReader(t *testing.T) {
 func verifyZoneRuleReader(
 	t *testing.T, c *zoneinfo.ZoneDataContext, cc *zoneinfo.ZoneRecordContext) {
 
-	reader := zoneinfo.NewZoneRuleReader(zoneinfo.NewDataIO(c.ZoneRulesData))
+	reader := zoneinfo.NewZoneRuleReader(
+		zoneinfo.NewDataIO(c.ZoneRulesData), c.ZoneRuleChunkSize)
 	for i := uint16(0); i < c.ZoneRuleCount; i++ {
+		reader.Seek(i) // Use random Seek() to verify the chunk size
 		record := reader.Read()
 		expected := &cc.ZoneRuleRecords[i]
 		if record.FromYear != expected.FromYear {

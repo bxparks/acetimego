@@ -16,16 +16,16 @@ type OffsetDateTime struct {
 	Minute        uint8
 	Second        uint8
 	Fold          uint8
-	OffsetMinutes int16
+	OffsetSeconds int32
 }
 
 func NewOffsetDateTimeFromLocalDateTime(
-	ldt *LocalDateTime, offsetMinutes int16) OffsetDateTime {
+	ldt *LocalDateTime, offsetSeconds int32) OffsetDateTime {
 
 	return OffsetDateTime{
 		ldt.Year, ldt.Month, ldt.Day,
 		ldt.Hour, ldt.Minute, ldt.Second,
-		ldt.Fold, offsetMinutes}
+		ldt.Fold, offsetSeconds}
 }
 
 func (odt *OffsetDateTime) IsError() bool {
@@ -44,22 +44,22 @@ func (odt *OffsetDateTime) EpochSeconds() ATime {
 	if epochSeconds == InvalidEpochSeconds {
 		return epochSeconds
 	}
-	return epochSeconds - ATime(odt.OffsetMinutes)*60
+	return epochSeconds - ATime(odt.OffsetSeconds)
 }
 
 func NewOffsetDateTimeFromEpochSeconds(
-	epochSeconds ATime, offsetMinutes int16) OffsetDateTime {
+	epochSeconds ATime, offsetSeconds int32) OffsetDateTime {
 
 	if epochSeconds == InvalidEpochSeconds {
 		return OffsetDateTimeError
 	}
 
-	epochSeconds += ATime(offsetMinutes) * 60
+	epochSeconds += ATime(offsetSeconds)
 	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	return OffsetDateTime{
 		ldt.Year, ldt.Month, ldt.Day,
 		ldt.Hour, ldt.Minute, ldt.Second,
-		0 /*Fold*/, offsetMinutes}
+		0 /*Fold*/, offsetSeconds}
 }
 
 func (odt *OffsetDateTime) LocalDateTime() LocalDateTime {
@@ -83,12 +83,14 @@ func (odt *OffsetDateTime) String() string {
 func (odt *OffsetDateTime) BuildString(b *strings.Builder) {
 	ldt := odt.LocalDateTime()
 	ldt.BuildString(b)
-	BuildUTCOffset(b, odt.OffsetMinutes)
+	BuildUTCOffset(b, odt.OffsetSeconds)
 }
 
-// Extract the UTC offset as +/-hh:mm
-func BuildUTCOffset(b *strings.Builder, offsetMinutes int16) {
-	s, h, m := minutesToHM(offsetMinutes)
+// Extract the UTC offset as +/-hh:mm. Ignore the seconds field for time zones
+// before Jan 7, 1972 (Africa/Monrovia was the last one) whose UTC Offset is
+// shifted in units of seconds instead of whole minutes.
+func BuildUTCOffset(b *strings.Builder, offsetSeconds int32) {
+	s, h, m, _ := secondsToHMS(offsetSeconds)
 	var c byte
 	if s < 0 {
 		c = '-'
@@ -102,14 +104,18 @@ func BuildUTCOffset(b *strings.Builder, offsetMinutes int16) {
 	WriteUint8Pad2(b, m, '0')
 }
 
-func minutesToHM(minutes int16) (sign int8, h uint8, m uint8) {
-	if minutes < 0 {
+func secondsToHMS(seconds int32) (sign int8, h uint8, m uint8, s uint8) {
+	if seconds < 0 {
 		sign = -1
-		minutes = -minutes
+		seconds = -seconds
 	} else {
 		sign = 1
 	}
-	h = uint8(minutes / 60)
+	s = uint8(seconds % 60)
+	minutes := seconds / 60
 	m = uint8(minutes % 60)
+	hours := uint8(minutes / 60)
+	h = hours
+
 	return
 }

@@ -14,7 +14,7 @@ import (
 //-----------------------------------------------------------------------------
 
 func TestZonedDateTimeSize(t *testing.T) {
-	zdt := ZonedDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/, -8 * 60, nil}
+	zdt := ZonedDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/, -8 * 3600, nil}
 	size := unsafe.Sizeof(zdt)
 	if !(size == 24) { // assumes 64-bit alignment for *TimeZone pointer
 		t.Fatal("Sizeof(ZonedDateTime): ", size)
@@ -79,7 +79,7 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{1999, 12, 31, 16, 0, 0, 0, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{1999, 12, 31, 16, 0, 0, 0, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 	if !(epochSeconds == zdt.EpochSeconds()) {
@@ -95,7 +95,7 @@ func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2049, 12, 31, 16, 0, 0, 0, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2049, 12, 31, 16, 0, 0, 0, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 	if !(epochSeconds == zdt.EpochSeconds()) {
@@ -138,13 +138,15 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back.
-	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 60}
+	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600}
 	epochSeconds := odt.EpochSeconds()
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 
@@ -155,7 +157,9 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2022, 11, 6, 1, 29, 0, 1 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2022, 11, 6, 1, 29, 0, 1 /*Fold*/, -8 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 
@@ -166,7 +170,9 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2022, 11, 6, 2, 29, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2022, 11, 6, 2, 29, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 }
@@ -177,13 +183,15 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 
 	// Start our sampling at 01:29:00-08:00, which is 31 minutes before the DST
 	// spring forward.
-	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 60}
+	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600}
 	epochSeconds := odt.EpochSeconds()
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 
@@ -193,7 +201,9 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2022, 3, 13, 3, 29, 0, 0 /*Fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2022, 3, 13, 3, 29, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 }
@@ -211,7 +221,7 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 	epochSeconds := zdt.EpochSeconds()
@@ -225,7 +235,7 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 	epochSeconds = zdt.EpochSeconds()
@@ -243,7 +253,7 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 	epochSeconds := zdt.EpochSeconds()
@@ -257,7 +267,7 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 	epochSeconds = zdt.EpochSeconds()
@@ -276,7 +286,9 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 
@@ -286,7 +298,9 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 }
@@ -305,7 +319,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 		t.Fatal(zdt)
 	}
 	// fold == 0 to indicate only one match
-	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 
@@ -318,7 +332,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 		t.Fatal(zdt)
 	}
 	// fold == 0 to indicate the 1st transition
-	if !(zdt == ZonedDateTime{2018, 3, 11, 1, 1, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 3, 11, 1, 1, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 }
@@ -333,7 +347,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 
@@ -343,7 +357,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 }
@@ -359,7 +373,9 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 
@@ -369,7 +385,9 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{
+		2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
+
 		t.Fatal(zdt)
 	}
 }
@@ -385,7 +403,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 1, 1, 0, 0 /*Fold*/, -7 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 11, 4, 1, 1, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 
@@ -395,7 +413,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 1, 1, 0, 1 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 11, 4, 1, 1, 0, 1 /*Fold*/, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 }
@@ -410,7 +428,7 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 
@@ -420,7 +438,7 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 60, &tz}) {
+	if !(zdt == ZonedDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
 		t.Fatal(zdt)
 	}
 }
@@ -445,7 +463,7 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 		t.Fatal(nydt)
 	}
 	if !(nydt == ZonedDateTime{
-		2022, 8, 30, 23, 0, 0, 0 /*Fold*/, -4 * 60, &tzNewYork}) {
+		2022, 8, 30, 23, 0, 0, 0 /*Fold*/, -4 * 3600, &tzNewYork}) {
 		t.Fatal(nydt)
 	}
 }

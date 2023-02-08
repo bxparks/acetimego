@@ -22,7 +22,7 @@ type TimeZone struct {
 }
 
 var (
-	TimeZoneUTC = TimeZone{TztypeUTC, nil}
+	TimeZoneUTC   = TimeZone{TztypeUTC, nil}
 	TimeZoneError = TimeZone{TztypeError, nil}
 )
 
@@ -77,8 +77,8 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 		return OffsetDateTimeError
 	}
 
-	totalOffsetMinutes := result.stdOffsetMinutes + result.dstOffsetMinutes
-	odt := NewOffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetMinutes)
+	totalOffsetSeconds := result.stdOffsetSeconds + result.dstOffsetSeconds
+	odt := NewOffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetSeconds)
 	if !odt.IsError() {
 		odt.Fold = result.fold
 	}
@@ -113,18 +113,18 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 		Hour:          ldt.Hour,
 		Minute:        ldt.Minute,
 		Second:        ldt.Second,
-		OffsetMinutes: result.reqStdOffsetMinutes + result.reqDstOffsetMinutes,
+		OffsetSeconds: result.reqStdOffsetSeconds + result.reqDstOffsetSeconds,
 		Fold:          result.fold,
 	}
 
 	// Special processor for kAtcFindResultGap: Convert to epochSeconds using the
-	// reqStdOffsetMinutes and reqDstOffsetMinutes, then convert back to
-	// OffsetDateTime using the target stdOffsetMinutes and
-	// dstOffsetMinutes.
+	// reqStdOffsetSeconds and reqDstOffsetSeconds, then convert back to
+	// OffsetDateTime using the target stdOffsetSeconds and
+	// dstOffsetSeconds.
 	if result.frtype == FindResultGap {
 		epochSeconds := odt.EpochSeconds()
-		targetOffset := result.stdOffsetMinutes + result.dstOffsetMinutes
-		odt = NewOffsetDateTimeFromEpochSeconds(epochSeconds, targetOffset)
+		targetOffsetSeconds := result.stdOffsetSeconds + result.dstOffsetSeconds
+		odt = NewOffsetDateTimeFromEpochSeconds(epochSeconds, targetOffsetSeconds)
 	}
 
 	return odt
@@ -134,10 +134,10 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 	if tz.zoneProcessor == nil {
 		return ZonedExtra{
 			Zetype:              ZonedExtraExact,
-			StdOffsetMinutes:    0,
-			DstOffsetMinutes:    0,
-			ReqStdOffsetMinutes: 0,
-			ReqDstOffsetMinutes: 0,
+			StdOffsetSeconds:    0,
+			DstOffsetSeconds:    0,
+			ReqStdOffsetSeconds: 0,
+			ReqDstOffsetSeconds: 0,
 			Abbrev:              "UTC",
 		}
 	}
@@ -149,10 +149,10 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 
 	return ZonedExtra{
 		Zetype:              result.frtype,
-		StdOffsetMinutes:    result.stdOffsetMinutes,
-		DstOffsetMinutes:    result.dstOffsetMinutes,
-		ReqStdOffsetMinutes: result.reqStdOffsetMinutes,
-		ReqDstOffsetMinutes: result.reqDstOffsetMinutes,
+		StdOffsetSeconds:    result.stdOffsetSeconds,
+		DstOffsetSeconds:    result.dstOffsetSeconds,
+		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,
+		ReqDstOffsetSeconds: result.reqDstOffsetSeconds,
 		Abbrev:              result.abbrev,
 	}
 }
@@ -163,10 +163,10 @@ func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 	if tz.zoneProcessor == nil {
 		return ZonedExtra{
 			Zetype:              ZonedExtraExact,
-			StdOffsetMinutes:    0,
-			DstOffsetMinutes:    0,
-			ReqStdOffsetMinutes: 0,
-			ReqDstOffsetMinutes: 0,
+			StdOffsetSeconds:    0,
+			DstOffsetSeconds:    0,
+			ReqStdOffsetSeconds: 0,
+			ReqDstOffsetSeconds: 0,
 			Abbrev:              "UTC",
 		}
 	}
@@ -178,10 +178,10 @@ func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 
 	return ZonedExtra{
 		Zetype:              result.frtype,
-		StdOffsetMinutes:    result.stdOffsetMinutes,
-		DstOffsetMinutes:    result.dstOffsetMinutes,
-		ReqStdOffsetMinutes: result.reqStdOffsetMinutes,
-		ReqDstOffsetMinutes: result.reqDstOffsetMinutes,
+		StdOffsetSeconds:    result.stdOffsetSeconds,
+		DstOffsetSeconds:    result.dstOffsetSeconds,
+		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,
+		ReqDstOffsetSeconds: result.reqDstOffsetSeconds,
 		Abbrev:              result.abbrev,
 	}
 }

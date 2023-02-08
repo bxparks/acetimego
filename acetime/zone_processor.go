@@ -275,13 +275,13 @@ func createMatchingEra(
 		startDate.year = InvalidYear
 		startDate.month = 1
 		startDate.day = 1
-		startDate.minutes = 0
+		startDate.seconds = 0
 		startDate.suffix = zoneinfo.SuffixW
 	} else {
 		startDate.year = prevMatch.era.UntilYear
 		startDate.month = prevMatch.era.UntilMonth
 		startDate.day = prevMatch.era.UntilDay
-		startDate.minutes = prevMatch.era.UntilMinutes()
+		startDate.seconds = prevMatch.era.UntilSeconds()
 		startDate.suffix = prevMatch.era.UntilSuffix()
 	}
 	lowerBound := DateTuple{startYm.year, startYm.month, 1, 0, zoneinfo.SuffixW}
@@ -293,7 +293,7 @@ func createMatchingEra(
 		era.UntilYear,
 		era.UntilMonth,
 		era.UntilDay,
-		era.UntilMinutes(),
+		era.UntilSeconds(),
 		era.UntilSuffix(),
 	}
 	upperBound := DateTuple{untilYm.year, untilYm.month, 1, 0, zoneinfo.SuffixW}
@@ -305,8 +305,8 @@ func createMatchingEra(
 	newMatch.untilDt = untilDate
 	newMatch.era = era
 	newMatch.prevMatch = prevMatch
-	newMatch.lastOffsetMinutes = 0
-	newMatch.lastDeltaMinutes = 0
+	newMatch.lastOffsetSeconds = 0
+	newMatch.lastDeltaSeconds = 0
 	newMatch.format = era.Format
 }
 
@@ -342,8 +342,8 @@ func createTransitionsFromSimpleMatch(
 	freeAgent := ts.GetFreeAgent()
 	createTransitionForYear(freeAgent, 0, nil, match)
 	freeAgent.matchStatus = matchStatusExactMatch
-	match.lastOffsetMinutes = freeAgent.offsetMinutes
-	match.lastDeltaMinutes = freeAgent.deltaMinutes
+	match.lastOffsetSeconds = freeAgent.offsetSeconds
+	match.lastDeltaSeconds = freeAgent.deltaSeconds
 	ts.AddFreeAgentToActivePool()
 }
 
@@ -351,17 +351,17 @@ func createTransitionForYear(
 	t *Transition, year int16, rule *zoneinfo.ZoneRule, match *MatchingEra) {
 
 	t.match = match
-	t.offsetMinutes = match.era.StdOffsetMinutes()
+	t.offsetSeconds = match.era.StdOffsetSeconds()
 
 	if rule != nil {
 		t.transitionTime = getTransitionTime(year, rule)
-		t.deltaMinutes = rule.DstOffsetMinutes()
+		t.deltaSeconds = rule.DstOffsetSeconds()
 		t.letter = rule.Letter
 	} else {
 		// Create a Transition using the MatchingEra for the transitionTime.
 		// Used for simple MatchingEra.
 		t.transitionTime = match.startDt
-		t.deltaMinutes = match.era.DstOffsetMinutes()
+		t.deltaSeconds = match.era.DstOffsetSeconds()
 		t.letter = ""
 	}
 }
@@ -373,7 +373,7 @@ func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) DateTuple {
 		year:    year,
 		month:   md.month,
 		day:     md.day,
-		minutes: rule.AtMinutes(),
+		seconds: rule.AtSeconds(),
 		suffix:  rule.AtSuffix(),
 	}
 }
@@ -399,8 +399,8 @@ func createTransitionsFromNamedMatch(
 	// start and until times of the MatchingEra.
 	selectActiveTransitions(transitions)
 	lastTransition := ts.AddActiveCandidatesToActivePool()
-	match.lastOffsetMinutes = lastTransition.offsetMinutes
-	match.lastDeltaMinutes = lastTransition.deltaMinutes
+	match.lastOffsetSeconds = lastTransition.offsetSeconds
+	match.lastDeltaSeconds = lastTransition.deltaSeconds
 }
 
 // Step 2B: Pass 1
@@ -552,15 +552,15 @@ func generateStartUntilTimes(transitions []Transition) {
 		// 2) Calculate the current startDateTime by shifting the
 		// transitionTime (represented in the UTC offset of the previous
 		// transition) into the UTC offset of the *current* transition.
-		var minutes int16 = tt.minutes +
-			transition.offsetMinutes +
-			transition.deltaMinutes -
-			prev.offsetMinutes -
-			prev.deltaMinutes
+		seconds := tt.seconds +
+			transition.offsetSeconds +
+			transition.deltaSeconds -
+			prev.offsetSeconds -
+			prev.deltaSeconds
 		transition.startDt.year = tt.year
 		transition.startDt.month = tt.month
 		transition.startDt.day = tt.day
-		transition.startDt.minutes = minutes
+		transition.startDt.seconds = seconds
 		transition.startDt.suffix = tt.suffix
 		dateTupleNormalize(&transition.startDt)
 
@@ -575,8 +575,8 @@ func generateStartUntilTimes(transitions []Transition) {
 		// hasn't been clobbered by 'untilDateTime' yet. Not sure if this saves
 		// any CPU time though, since we still need to mutiply by 900.
 		st := &transition.startDt
-		offsetSeconds := 60 * ATime(st.minutes-
-			(transition.offsetMinutes+transition.deltaMinutes))
+		offsetSeconds := ATime(st.seconds -
+			(transition.offsetSeconds + transition.deltaSeconds))
 		epochSeconds := 86400 * ATime(
 			LocalDateToEpochDays(st.year, st.month, st.day))
 		transition.startEpochSeconds = epochSeconds + offsetSeconds
@@ -591,8 +591,8 @@ func generateStartUntilTimes(transitions []Transition) {
 	var untilTimeU DateTuple
 	dateTupleExpand(
 		&prev.match.untilDt,
-		prev.offsetMinutes,
-		prev.deltaMinutes,
+		prev.offsetSeconds,
+		prev.deltaSeconds,
 		&untilTimeW,
 		&untilTimeS,
 		&untilTimeU)
@@ -609,13 +609,13 @@ func calcAbbreviations(transitions []Transition) {
 		transition := &transitions[i]
 		transition.abbrev = createAbbreviation(
 			transition.match.era.Format,
-			transition.deltaMinutes,
+			transition.deltaSeconds,
 			transition.letter)
 	}
 }
 
 func createAbbreviation(
-	format string, deltaMinutes int16, letter string) string {
+	format string, deltaSeconds int32, letter string) string {
 
 	// Check if FORMAT contains a '%'.
 	if strings.IndexByte(format, '%') >= 0 {
@@ -627,13 +627,13 @@ func createAbbreviation(
 		// Check if FORMAT contains a '/'.
 		slashIndex := strings.IndexByte(format, '/')
 		if slashIndex != -1 {
-			if deltaMinutes == 0 {
+			if deltaSeconds == 0 {
 				return format[:slashIndex]
 			} else {
 				return format[slashIndex+1:]
 			}
 		} else {
-			// Just return FORMAT disregarding deltaMinutes and Letter.
+			// Just return FORMAT disregarding deltaSeconds and Letter.
 			return format
 		}
 	}
@@ -659,10 +659,10 @@ var (
 type FindResult struct {
 	frtype              uint8
 	fold                uint8
-	stdOffsetMinutes    int16  // STD offset
-	dstOffsetMinutes    int16  // DST offset
-	reqStdOffsetMinutes int16  // request STD offset
-	reqDstOffsetMinutes int16  // request DST offset
+	stdOffsetSeconds    int32  // STD offset
+	dstOffsetSeconds    int32  // DST offset
+	reqStdOffsetSeconds int32  // request STD offset
+	reqDstOffsetSeconds int32  // request DST offset
 	abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
@@ -692,10 +692,10 @@ func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) FindResult {
 	return FindResult{
 		frtype:              frtype,
 		fold:                tfs.fold,
-		stdOffsetMinutes:    transition.offsetMinutes,
-		dstOffsetMinutes:    transition.deltaMinutes,
-		reqStdOffsetMinutes: transition.offsetMinutes,
-		reqDstOffsetMinutes: transition.deltaMinutes,
+		stdOffsetSeconds:    transition.offsetSeconds,
+		dstOffsetSeconds:    transition.deltaSeconds,
+		reqStdOffsetSeconds: transition.offsetSeconds,
+		reqDstOffsetSeconds: transition.deltaSeconds,
 		abbrev:              transition.abbrev,
 	}
 }
@@ -722,8 +722,8 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 		transition = tfd.curr
 		result.frtype = FindResultExact
 		result.fold = 0
-		result.reqStdOffsetMinutes = transition.offsetMinutes
-		result.reqDstOffsetMinutes = transition.deltaMinutes
+		result.reqStdOffsetSeconds = transition.offsetSeconds
+		result.reqDstOffsetSeconds = transition.deltaSeconds
 	} else { // num = 0 or 2
 		if tfd.prev == nil || tfd.curr == nil {
 			// ldt was far past or far future, and didn't match anything.
@@ -737,16 +737,16 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 				if ldt.Fold == 0 {
 					// ldt wants to use the 'prev' transition to convert to
 					// epochSeconds.
-					result.reqStdOffsetMinutes = tfd.prev.offsetMinutes
-					result.reqDstOffsetMinutes = tfd.prev.deltaMinutes
+					result.reqStdOffsetSeconds = tfd.prev.offsetSeconds
+					result.reqDstOffsetSeconds = tfd.prev.deltaSeconds
 					// But after normalization, it will be shifted into the curr
 					// transition, so select 'curr' as the target transition.
 					transition = tfd.curr
 				} else {
 					// ldt wants to use the 'curr' transition to convert to
 					// epochSeconds.
-					result.reqStdOffsetMinutes = tfd.curr.offsetMinutes
-					result.reqDstOffsetMinutes = tfd.curr.deltaMinutes
+					result.reqStdOffsetSeconds = tfd.curr.offsetSeconds
+					result.reqDstOffsetSeconds = tfd.curr.deltaSeconds
 					// But after normalization, it will be shifted into the prev
 					// transition, so select 'prev' as the target transition.
 					transition = tfd.prev
@@ -759,8 +759,8 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 				}
 				result.frtype = FindResultOverlap
 				result.fold = ldt.Fold
-				result.reqStdOffsetMinutes = transition.offsetMinutes
-				result.reqDstOffsetMinutes = transition.deltaMinutes
+				result.reqStdOffsetSeconds = transition.offsetSeconds
+				result.reqDstOffsetSeconds = transition.deltaSeconds
 			}
 		}
 	}
@@ -769,8 +769,8 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 		return FindResultError
 	}
 
-	result.stdOffsetMinutes = transition.offsetMinutes
-	result.dstOffsetMinutes = transition.deltaMinutes
+	result.stdOffsetSeconds = transition.offsetSeconds
+	result.dstOffsetSeconds = transition.deltaSeconds
 	result.abbrev = transition.abbrev
 	return result
 }
