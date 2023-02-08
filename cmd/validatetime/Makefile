@@ -5,12 +5,12 @@ TARGETS_TINY_ESP32 := $(CMD_NAME).esp32.out
 
 .PHONY := build tiny tinyesp32 flashesp32 all clean help
 
+build: $(TARGETS_UNIX)
+
 all: build tiny tinyesp32
 
 help:
 	@echo 'Usage: make [all | build | tiny | tinyesp32 | flashesp32 | clean]'
-
-build: $(TARGETS_UNIX)
 
 tiny: $(TARGETS_TINY)
 

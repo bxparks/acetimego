@@ -23,7 +23,7 @@ func main() {
 	zm := acetime.NewZoneManager(context)
 	names := zm.ZoneNames()
 	for i, name := range names {
-		println("[", i, "] Zone", name)
+		print("[", i, "] Zone ", name, ": ")
 		validateZoneName(&zm, name)
 	}
 }
@@ -47,7 +47,6 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 		validateAtTime(transition.before, &atz)
 		validateAtTime(transition.after, &atz)
 	}
-	println("\tNum Transitions:", len(transitions))
 
 	// Validate some samples
 	samples := 0
@@ -60,7 +59,8 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 			}
 		}
 	}
-	println("\tNum Samples:", samples)
+
+	println("Transitions:", len(transitions), "; Samples:", samples)
 }
 
 func validateAtTime(t time.Time, atz *acetime.TimeZone) {
