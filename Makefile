@@ -1,6 +1,8 @@
 help:
 	@echo 'Usage: make (build | tiny | test | all | clean)'
 
+.PHONY: all build tiny test clean
+
 all: build tiny test
 
 build:
