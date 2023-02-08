@@ -15,8 +15,13 @@ tiny:
 		$(MAKE) -C $$(dirname $$i) tiny; \
 	done
 
+# If we use 'go test ./...', the subdirectory is not recognized by vim so the
+# direct navigation in quickfix mode does not work. Use a for-loop instead.
 test:
-	go test ./...
+	set -e; \
+	for i in */Makefile; do \
+		$(MAKE) -C $$(dirname $$i) test; \
+	done
 
 clean:
 	set -e; \

@@ -3,6 +3,9 @@ help:
 
 all: build
 
+# Dummy target to support recursive 'test' target in ../Makefile.
+test:
+
 build:
 	set -e; \
 	for i in */Makefile; do \
