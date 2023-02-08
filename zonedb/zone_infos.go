@@ -881,8 +881,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 99, // "GMT"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -900,8 +900,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 8, // PolicyName: Algeria
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1977,
 		UntilMonth: 10,
 		UntilDay: 21,
@@ -913,8 +913,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 8, // PolicyName: Algeria
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1979,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -926,8 +926,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 8, // PolicyName: Algeria
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1981,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -939,8 +939,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 89, // "CET"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -958,8 +958,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-01"
-		OffsetCode: -4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -240, // (offset_seconds=-3600)/15
 		UntilYear: 1975,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -971,8 +971,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 99, // "GMT"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -990,8 +990,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 38, // PolicyName: Egypt
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1009,8 +1009,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 2, // "+00/+01"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1984,
 		UntilMonth: 3,
 		UntilDay: 16,
@@ -1022,8 +1022,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 3, // "+01"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1986,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1035,8 +1035,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 2, // "+00/+01"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 2018,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -1048,8 +1048,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 4, // "+01/+00"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1067,8 +1067,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 94, // PolicyName: SpainAfrica
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1984,
 		UntilMonth: 3,
 		UntilDay: 16,
@@ -1080,8 +1080,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 89, // "CET"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1986,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1093,8 +1093,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1112,8 +1112,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-01"
-		OffsetCode: -4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -240, // (offset_seconds=-3600)/15
 		UntilYear: 1976,
 		UntilMonth: 4,
 		UntilDay: 14,
@@ -1125,8 +1125,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 2, // "+00/+01"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 2018,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -1138,8 +1138,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 72, // PolicyName: Morocco
 		FormatIndex: 4, // "+01/+00"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1157,8 +1157,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 90, // PolicyName: SA
 		FormatIndex: 121, // "SAST"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1176,8 +1176,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 96, // PolicyName: Sudan
 		FormatIndex: 85, // "CA%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2000,
 		UntilMonth: 1,
 		UntilDay: 15,
@@ -1189,8 +1189,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 93, // "EAT"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2021,
 		UntilMonth: 2,
 		UntilDay: 1,
@@ -1202,8 +1202,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 86, // "CAT"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1221,8 +1221,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 96, // PolicyName: Sudan
 		FormatIndex: 85, // "CA%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2000,
 		UntilMonth: 1,
 		UntilDay: 15,
@@ -1234,8 +1234,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 93, // "EAT"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2017,
 		UntilMonth: 11,
 		UntilDay: 1,
@@ -1247,8 +1247,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 86, // "CAT"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1266,8 +1266,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 125, // "WAT"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1285,8 +1285,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 86, // "CAT"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1304,8 +1304,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 99, // "GMT"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1323,8 +1323,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 93, // "EAT"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1342,8 +1342,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 125, // "WAT"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1979,
 		UntilMonth: 10,
 		UntilDay: 14,
@@ -1355,8 +1355,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 124, // "WAST"
-		OffsetCode: 4,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1980,
 		UntilMonth: 3,
 		UntilDay: 8,
@@ -1368,8 +1368,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 125, // "WAT"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1387,8 +1387,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 99, // "GMT"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 2018,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1400,8 +1400,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 125, // "WAT"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 2019,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1413,8 +1413,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 99, // "GMT"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1432,8 +1432,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1982,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1445,8 +1445,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 64, // PolicyName: Libya
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1990,
 		UntilMonth: 5,
 		UntilDay: 4,
@@ -1458,8 +1458,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1996,
 		UntilMonth: 9,
 		UntilDay: 30,
@@ -1471,8 +1471,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 64, // PolicyName: Libya
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1997,
 		UntilMonth: 10,
 		UntilDay: 4,
@@ -1484,8 +1484,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2012,
 		UntilMonth: 11,
 		UntilDay: 10,
@@ -1497,8 +1497,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 64, // PolicyName: Libya
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 2013,
 		UntilMonth: 10,
 		UntilDay: 25,
@@ -1510,8 +1510,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1529,8 +1529,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 104, // PolicyName: Tunisia
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1548,8 +1548,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 121, // "SAST"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1990,
 		UntilMonth: 3,
 		UntilDay: 21,
@@ -1561,8 +1561,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 76, // PolicyName: Namibia
 		FormatIndex: 1, // "%"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1580,8 +1580,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 83, // "B%T"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
 		UntilYear: 1983,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -1593,8 +1593,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 79, // "AH%T"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 1983,
 		UntilMonth: 11,
 		UntilDay: 30,
@@ -1606,8 +1606,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 101, // "H%T"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1625,8 +1625,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 79, // "AH%T"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 1983,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -1638,8 +1638,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 132, // "Y%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 1983,
 		UntilMonth: 11,
 		UntilDay: 30,
@@ -1651,8 +1651,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 80, // "AK%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1670,8 +1670,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1990,
 		UntilMonth: 9,
 		UntilDay: 17,
@@ -1683,8 +1683,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1995,
 		UntilMonth: 9,
 		UntilDay: 14,
@@ -1696,8 +1696,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2003,
 		UntilMonth: 9,
 		UntilDay: 24,
@@ -1709,8 +1709,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2012,
 		UntilMonth: 10,
 		UntilDay: 21,
@@ -1722,8 +1722,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2013,
 		UntilMonth: 9,
 		UntilDay: 1,
@@ -1735,8 +1735,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1754,8 +1754,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -1767,8 +1767,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -1780,8 +1780,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1799,8 +1799,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -1812,8 +1812,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 10,
 		UntilDay: 20,
@@ -1825,8 +1825,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -1838,8 +1838,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -1851,8 +1851,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 1,
@@ -1864,8 +1864,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 20,
@@ -1877,8 +1877,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -1890,8 +1890,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1909,8 +1909,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -1922,8 +1922,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 10,
 		UntilDay: 20,
@@ -1935,8 +1935,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -1948,8 +1948,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -1961,8 +1961,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -1980,8 +1980,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1990,
 		UntilMonth: 3,
 		UntilDay: 4,
@@ -1993,8 +1993,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1990,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -2006,8 +2006,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -16,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 17,
@@ -2019,8 +2019,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 10,
 		UntilDay: 6,
@@ -2032,8 +2032,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -12,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2045,8 +2045,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2058,8 +2058,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2071,8 +2071,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -2084,8 +2084,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2103,8 +2103,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 1,
@@ -2116,8 +2116,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 5,
 		UntilDay: 7,
@@ -2129,8 +2129,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2142,8 +2142,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2155,8 +2155,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 1,
@@ -2168,8 +2168,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 20,
@@ -2181,8 +2181,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -2194,8 +2194,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2213,8 +2213,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1990,
 		UntilMonth: 3,
 		UntilDay: 4,
@@ -2226,8 +2226,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1990,
 		UntilMonth: 10,
 		UntilDay: 15,
@@ -2239,8 +2239,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -16,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 1,
@@ -2252,8 +2252,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 10,
 		UntilDay: 15,
@@ -2265,8 +2265,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -16,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 1,
@@ -2278,8 +2278,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1992,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -2291,8 +2291,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2304,8 +2304,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2317,8 +2317,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2004,
 		UntilMonth: 5,
 		UntilDay: 23,
@@ -2330,8 +2330,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 9,
 		UntilDay: 26,
@@ -2343,8 +2343,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -2356,8 +2356,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2375,8 +2375,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2388,8 +2388,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2401,8 +2401,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 1,
@@ -2414,8 +2414,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 20,
@@ -2427,8 +2427,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -2440,8 +2440,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2459,8 +2459,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2472,8 +2472,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 10,
 		UntilDay: 20,
@@ -2485,8 +2485,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2498,8 +2498,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2511,8 +2511,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -2524,8 +2524,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2543,8 +2543,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 1,
@@ -2556,8 +2556,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 5,
 		UntilDay: 7,
@@ -2569,8 +2569,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2582,8 +2582,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2595,8 +2595,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2004,
 		UntilMonth: 5,
 		UntilDay: 31,
@@ -2608,8 +2608,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 7,
 		UntilDay: 25,
@@ -2621,8 +2621,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -2634,8 +2634,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2653,8 +2653,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1990,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2666,8 +2666,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -12,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1990,
 		UntilMonth: 3,
 		UntilDay: 14,
@@ -2679,8 +2679,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1990,
 		UntilMonth: 10,
 		UntilDay: 15,
@@ -2692,8 +2692,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -16,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 1,
@@ -2705,8 +2705,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 6,
 		UntilDay: 1,
@@ -2718,8 +2718,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2731,8 +2731,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -16,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2744,8 +2744,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2004,
 		UntilMonth: 5,
 		UntilDay: 31,
@@ -2757,8 +2757,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 7,
 		UntilDay: 25,
@@ -2770,8 +2770,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 1,
 		UntilDay: 21,
@@ -2783,8 +2783,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 92, // PolicyName: SanLuis
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2009,
 		UntilMonth: 10,
 		UntilDay: 11,
@@ -2796,8 +2796,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2815,8 +2815,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2828,8 +2828,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1991,
 		UntilMonth: 10,
 		UntilDay: 20,
@@ -2841,8 +2841,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2854,8 +2854,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2867,8 +2867,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 1,
@@ -2880,8 +2880,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 13,
@@ -2893,8 +2893,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2912,8 +2912,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 3,
@@ -2925,8 +2925,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 3,
 		UntilDay: 3,
@@ -2938,8 +2938,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2004,
 		UntilMonth: 5,
 		UntilDay: 30,
@@ -2951,8 +2951,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 20,
@@ -2964,8 +2964,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2008,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -2977,8 +2977,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -2996,8 +2996,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1974,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -3009,8 +3009,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 81, // PolicyName: Para
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3028,8 +3028,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2003,
 		UntilMonth: 9,
 		UntilDay: 24,
@@ -3041,8 +3041,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2011,
 		UntilMonth: 10,
 		UntilDay: 16,
@@ -3054,8 +3054,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2012,
 		UntilMonth: 10,
 		UntilDay: 21,
@@ -3067,8 +3067,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3086,8 +3086,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 2010,
 		UntilMonth: 4,
 		UntilDay: 4,
@@ -3099,8 +3099,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3118,8 +3118,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 14, // PolicyName: Barb
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3137,8 +3137,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1988,
 		UntilMonth: 9,
 		UntilDay: 12,
@@ -3150,8 +3150,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3169,8 +3169,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 16, // PolicyName: Belize
 		FormatIndex: 1, // "%"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3188,8 +3188,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1988,
 		UntilMonth: 9,
 		UntilDay: 12,
@@ -3201,8 +3201,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1999,
 		UntilMonth: 9,
 		UntilDay: 30,
@@ -3214,8 +3214,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 15,
@@ -3227,8 +3227,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3246,8 +3246,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 21, // PolicyName: CO
 		FormatIndex: 57, // "-05/-04"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3265,8 +3265,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1974,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3278,8 +3278,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 115, // "MST"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1974,
 		UntilMonth: 2,
 		UntilDay: 3,
@@ -3291,8 +3291,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3310,8 +3310,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 74, // PolicyName: NT_YK
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -3323,8 +3323,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 29,
@@ -3336,8 +3336,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2000,
 		UntilMonth: 11,
 		UntilDay: 5,
@@ -3349,8 +3349,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2001,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -3362,8 +3362,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3381,8 +3381,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3400,8 +3400,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1981,
 		UntilMonth: 12,
 		UntilDay: 23,
@@ -3413,8 +3413,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1998,
 		UntilMonth: 8,
 		UntilDay: 2,
@@ -3426,8 +3426,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2015,
 		UntilMonth: 2,
 		UntilDay: 1,
@@ -3439,8 +3439,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3458,8 +3458,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2007,
 		UntilMonth: 12,
 		UntilDay: 9,
@@ -3471,8 +3471,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 55, // "-0430"
-		OffsetCode: -18,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1080, // (offset_seconds=-16200)/15
 		UntilYear: 2016,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -3484,8 +3484,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3503,8 +3503,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3522,8 +3522,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3541,8 +3541,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3554,8 +3554,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1998,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3567,8 +3567,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1998,
 		UntilMonth: 4,
 		UntilDay: 5,
@@ -3580,8 +3580,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 2022,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -3593,8 +3593,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3612,8 +3612,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3625,8 +3625,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1998,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3638,8 +3638,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1998,
 		UntilMonth: 4,
 		UntilDay: 5,
@@ -3651,8 +3651,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 2010,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3664,8 +3664,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 2022,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -3677,8 +3677,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2022,
 		UntilMonth: 11,
 		UntilDay: 30,
@@ -3690,8 +3690,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3709,8 +3709,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 22, // PolicyName: CR
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3728,8 +3728,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2003,
 		UntilMonth: 9,
 		UntilDay: 24,
@@ -3741,8 +3741,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2004,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -3754,8 +3754,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3773,8 +3773,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1980,
 		UntilMonth: 4,
 		UntilDay: 6,
@@ -3786,8 +3786,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3799,8 +3799,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 99, // "GMT"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3818,8 +3818,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 113, // PolicyName: Yukon
 		FormatIndex: 132, // "Y%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 1973,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -3831,8 +3831,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 120, // "PST"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1980,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3844,8 +3844,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 2020,
 		UntilMonth: 11,
 		UntilDay: 1,
@@ -3857,8 +3857,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 115, // "MST"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3876,8 +3876,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 115, // "MST"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3895,8 +3895,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3914,8 +3914,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1973,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3927,8 +3927,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1975,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3940,8 +3940,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1975,
 		UntilMonth: 4,
 		UntilDay: 27,
@@ -3953,8 +3953,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3972,8 +3972,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 37, // PolicyName: Edm
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1987,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -3985,8 +3985,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4004,8 +4004,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 57, // "-05/-04"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1988,
 		UntilMonth: 9,
 		UntilDay: 12,
@@ -4017,8 +4017,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-05"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1993,
 		UntilMonth: 9,
 		UntilDay: 28,
@@ -4030,8 +4030,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 57, // "-05/-04"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1994,
 		UntilMonth: 9,
 		UntilDay: 22,
@@ -4043,8 +4043,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-05"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2008,
 		UntilMonth: 6,
 		UntilDay: 24,
@@ -4056,8 +4056,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2013,
 		UntilMonth: 11,
 		UntilDay: 10,
@@ -4069,8 +4069,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-05"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4088,8 +4088,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 91, // PolicyName: Salv
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4107,8 +4107,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 108, // PolicyName: Vanc
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1987,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4120,8 +4120,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 2015,
 		UntilMonth: 3,
 		UntilDay: 8,
@@ -4133,8 +4133,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 115, // "MST"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4152,8 +4152,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1990,
 		UntilMonth: 9,
 		UntilDay: 17,
@@ -4165,8 +4165,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 9,
 		UntilDay: 30,
@@ -4178,8 +4178,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 22,
@@ -4191,8 +4191,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2001,
 		UntilMonth: 9,
 		UntilDay: 13,
@@ -4204,8 +4204,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2002,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -4217,8 +4217,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4236,8 +4236,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 51, // PolicyName: Halifax
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1974,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4249,8 +4249,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4268,8 +4268,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 95, // PolicyName: StJohns
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2011,
 		UntilMonth: 11,
 		UntilDay: 1,
@@ -4281,8 +4281,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4300,8 +4300,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1979,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4313,8 +4313,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2015,
 		UntilMonth: 3,
 		UntilDay: 8,
@@ -4326,8 +4326,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 81, // "AST"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2018,
 		UntilMonth: 3,
 		UntilDay: 11,
@@ -4339,8 +4339,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4358,8 +4358,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 48, // PolicyName: Guat
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4377,8 +4377,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 36, // PolicyName: Ecuador
 		FormatIndex: 57, // "-05/-04"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4396,8 +4396,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 52, // "-0345"
-		OffsetCode: -15,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -900, // (offset_seconds=-13500)/15
 		UntilYear: 1975,
 		UntilMonth: 8,
 		UntilDay: 1,
@@ -4409,8 +4409,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -4422,8 +4422,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4441,8 +4441,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 51, // PolicyName: Halifax
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1974,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4454,8 +4454,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4473,8 +4473,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 27, // PolicyName: Cuba
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4492,8 +4492,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1999,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4505,8 +4505,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 115, // "MST"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4524,8 +4524,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2006,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4537,8 +4537,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4556,8 +4556,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1991,
 		UntilMonth: 10,
 		UntilDay: 27,
@@ -4569,8 +4569,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2006,
 		UntilMonth: 4,
 		UntilDay: 2,
@@ -4582,8 +4582,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4601,8 +4601,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1974,
 		UntilMonth: 1,
 		UntilDay: 6,
@@ -4614,8 +4614,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 87, // "CDT"
-		OffsetCode: -24,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1974,
 		UntilMonth: 10,
 		UntilDay: 27,
@@ -4627,8 +4627,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1976,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4640,8 +4640,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2006,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4653,8 +4653,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4672,8 +4672,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1977,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -4685,8 +4685,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2006,
 		UntilMonth: 4,
 		UntilDay: 2,
@@ -4698,8 +4698,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2007,
 		UntilMonth: 11,
 		UntilDay: 4,
@@ -4711,8 +4711,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4730,8 +4730,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2006,
 		UntilMonth: 4,
 		UntilDay: 2,
@@ -4743,8 +4743,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4762,8 +4762,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1973,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4775,8 +4775,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2006,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4788,8 +4788,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4807,8 +4807,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2006,
 		UntilMonth: 4,
 		UntilDay: 2,
@@ -4820,8 +4820,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2007,
 		UntilMonth: 11,
 		UntilDay: 4,
@@ -4833,8 +4833,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4852,8 +4852,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2006,
 		UntilMonth: 4,
 		UntilDay: 2,
@@ -4865,8 +4865,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2007,
 		UntilMonth: 3,
 		UntilDay: 11,
@@ -4878,8 +4878,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4897,8 +4897,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 74, // PolicyName: NT_YK
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1979,
 		UntilMonth: 4,
 		UntilDay: 29,
@@ -4910,8 +4910,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 74, // PolicyName: NT_YK
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1980,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4923,8 +4923,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4942,8 +4942,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 74, // PolicyName: NT_YK
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -4955,8 +4955,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 29,
@@ -4968,8 +4968,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -4987,8 +4987,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1974,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5000,8 +5000,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1984,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5013,8 +5013,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5032,8 +5032,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1980,
 		UntilMonth: 4,
 		UntilDay: 27,
@@ -5045,8 +5045,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 132, // "Y%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 1980,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -5058,8 +5058,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1983,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -5071,8 +5071,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 132, // "Y%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 1983,
 		UntilMonth: 11,
 		UntilDay: 30,
@@ -5084,8 +5084,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 80, // "AK%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5103,8 +5103,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1974,
 		UntilMonth: 1,
 		UntilDay: 6,
@@ -5116,8 +5116,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 87, // "CDT"
-		OffsetCode: -24,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1974,
 		UntilMonth: 10,
 		UntilDay: 27,
@@ -5129,8 +5129,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5148,8 +5148,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 29,
@@ -5161,8 +5161,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5180,8 +5180,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5199,8 +5199,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 82, // PolicyName: Peru
 		FormatIndex: 57, // "-05/-04"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5218,8 +5218,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5237,8 +5237,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1990,
 		UntilMonth: 9,
 		UntilDay: 17,
@@ -5250,8 +5250,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1995,
 		UntilMonth: 10,
 		UntilDay: 13,
@@ -5263,8 +5263,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1996,
 		UntilMonth: 9,
 		UntilDay: 4,
@@ -5276,8 +5276,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 9,
 		UntilDay: 30,
@@ -5289,8 +5289,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 22,
@@ -5302,8 +5302,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2001,
 		UntilMonth: 9,
 		UntilDay: 13,
@@ -5315,8 +5315,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2002,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -5328,8 +5328,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5347,8 +5347,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1973,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -5360,8 +5360,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1975,
 		UntilMonth: 2,
 		UntilDay: 16,
@@ -5373,8 +5373,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 77, // PolicyName: Nic
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5386,8 +5386,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1992,
 		UntilMonth: 9,
 		UntilDay: 24,
@@ -5399,8 +5399,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1993,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5412,8 +5412,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1997,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5425,8 +5425,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 77, // PolicyName: Nic
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5444,8 +5444,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1988,
 		UntilMonth: 9,
 		UntilDay: 12,
@@ -5457,8 +5457,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1993,
 		UntilMonth: 9,
 		UntilDay: 28,
@@ -5470,8 +5470,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1994,
 		UntilMonth: 9,
 		UntilDay: 22,
@@ -5483,8 +5483,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5502,8 +5502,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 81, // "AST"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1980,
 		UntilMonth: 4,
 		UntilDay: 6,
@@ -5515,8 +5515,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 75, // "ADT"
-		OffsetCode: -16,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1980,
 		UntilMonth: 9,
 		UntilDay: 28,
@@ -5528,8 +5528,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 81, // "AST"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5547,8 +5547,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1988,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5560,8 +5560,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1989,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5573,8 +5573,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2010,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5586,8 +5586,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5605,8 +5605,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5624,8 +5624,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1973,
 		UntilMonth: 4,
 		UntilDay: 29,
@@ -5637,8 +5637,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5656,8 +5656,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1981,
 		UntilMonth: 12,
 		UntilDay: 23,
@@ -5669,8 +5669,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1982,
 		UntilMonth: 12,
 		UntilDay: 2,
@@ -5682,8 +5682,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5701,8 +5701,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1983,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -5714,8 +5714,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 120, // "PST"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 2015,
 		UntilMonth: 11,
 		UntilDay: 1,
@@ -5727,8 +5727,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 80, // "AK%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 2018,
 		UntilMonth: 11,
 		UntilDay: 4,
@@ -5740,8 +5740,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 120, // "PST"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 2019,
 		UntilMonth: 1,
 		UntilDay: 20,
@@ -5753,8 +5753,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 80, // "AK%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5772,8 +5772,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2001,
 		UntilMonth: 9,
 		UntilDay: 30,
@@ -5785,8 +5785,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2002,
 		UntilMonth: 2,
 		UntilDay: 20,
@@ -5798,8 +5798,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5817,8 +5817,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 81, // "AST"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1980,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -5830,8 +5830,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1987,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5843,8 +5843,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5862,8 +5862,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 70, // PolicyName: Moncton
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1973,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5875,8 +5875,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1993,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5888,8 +5888,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 70, // PolicyName: Moncton
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2007,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5901,8 +5901,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5920,8 +5920,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1988,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5933,8 +5933,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1989,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5946,8 +5946,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5965,8 +5965,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 107, // PolicyName: Uruguay
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1974,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -5978,8 +5978,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 107, // PolicyName: Uruguay
 		FormatIndex: 48, // "-03/-0130"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1974,
 		UntilMonth: 3,
 		UntilDay: 10,
@@ -5991,8 +5991,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 107, // PolicyName: Uruguay
 		FormatIndex: 50, // "-03/-0230"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1974,
 		UntilMonth: 12,
 		UntilDay: 22,
@@ -6004,8 +6004,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 107, // PolicyName: Uruguay
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6023,8 +6023,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6042,8 +6042,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 83, // "B%T"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
 		UntilYear: 1983,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -6055,8 +6055,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 132, // "Y%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 1983,
 		UntilMonth: 11,
 		UntilDay: 30,
@@ -6068,8 +6068,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 80, // "AK%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6087,8 +6087,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 46, // "-02/-01"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 1990,
 		UntilMonth: 9,
 		UntilDay: 17,
@@ -6100,8 +6100,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 1999,
 		UntilMonth: 9,
 		UntilDay: 30,
@@ -6113,8 +6113,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 46, // "-02/-01"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 15,
@@ -6126,8 +6126,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 2001,
 		UntilMonth: 9,
 		UntilDay: 13,
@@ -6139,8 +6139,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 46, // "-02/-01"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 2002,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -6152,8 +6152,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6171,8 +6171,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 2010,
 		UntilMonth: 11,
 		UntilDay: 7,
@@ -6184,8 +6184,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6203,8 +6203,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1992,
 		UntilMonth: 10,
 		UntilDay: 25,
@@ -6216,8 +6216,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6235,8 +6235,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 2003,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -6248,8 +6248,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6267,8 +6267,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1980,
 		UntilMonth: 4,
 		UntilDay: 6,
@@ -6280,8 +6280,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2023,
 		UntilMonth: 3,
 		UntilDay: 25,
@@ -6293,8 +6293,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6312,8 +6312,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6325,8 +6325,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1998,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6338,8 +6338,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 1998,
 		UntilMonth: 4,
 		UntilDay: 5,
@@ -6351,8 +6351,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 2010,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6364,8 +6364,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 2022,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -6377,8 +6377,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2022,
 		UntilMonth: 11,
 		UntilDay: 30,
@@ -6390,8 +6390,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6409,8 +6409,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6428,8 +6428,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 51, // "-0330"
-		OffsetCode: -14,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -840, // (offset_seconds=-12600)/15
 		UntilYear: 1984,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -6441,8 +6441,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6460,8 +6460,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 115, // "MST"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6479,8 +6479,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 50, // PolicyName: Haiti
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6498,8 +6498,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1988,
 		UntilMonth: 9,
 		UntilDay: 12,
@@ -6511,8 +6511,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6530,8 +6530,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 81, // "AST"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6549,8 +6549,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 25, // PolicyName: Chile
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2016,
 		UntilMonth: 12,
 		UntilDay: 4,
@@ -6562,8 +6562,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6581,8 +6581,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 74, // PolicyName: NT_YK
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 29,
@@ -6594,8 +6594,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2001,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -6607,8 +6607,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6626,8 +6626,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1990,
 		UntilMonth: 9,
 		UntilDay: 17,
@@ -6639,8 +6639,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1999,
 		UntilMonth: 9,
 		UntilDay: 30,
@@ -6652,8 +6652,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 15,
@@ -6665,8 +6665,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2001,
 		UntilMonth: 9,
 		UntilDay: 13,
@@ -6678,8 +6678,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 2002,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -6691,8 +6691,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6710,8 +6710,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6729,8 +6729,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 74, // PolicyName: NT_YK
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 29,
@@ -6742,8 +6742,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2001,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -6755,8 +6755,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2006,
 		UntilMonth: 10,
 		UntilDay: 29,
@@ -6768,8 +6768,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2007,
 		UntilMonth: 3,
 		UntilDay: 11,
@@ -6781,8 +6781,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6800,8 +6800,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 57, // "-05/-04"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1988,
 		UntilMonth: 9,
 		UntilDay: 12,
@@ -6813,8 +6813,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-05"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2008,
 		UntilMonth: 6,
 		UntilDay: 24,
@@ -6826,8 +6826,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2013,
 		UntilMonth: 11,
 		UntilDay: 10,
@@ -6839,8 +6839,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-05"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6858,8 +6858,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1988,
 		UntilMonth: 9,
 		UntilDay: 12,
@@ -6871,8 +6871,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2008,
 		UntilMonth: 6,
 		UntilDay: 24,
@@ -6884,8 +6884,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6903,8 +6903,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 25, // PolicyName: Chile
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6922,8 +6922,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 30, // PolicyName: DR
 		FormatIndex: 1, // "%"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1974,
 		UntilMonth: 10,
 		UntilDay: 27,
@@ -6935,8 +6935,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 81, // "AST"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2000,
 		UntilMonth: 10,
 		UntilDay: 29,
@@ -6948,8 +6948,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 2000,
 		UntilMonth: 12,
 		UntilDay: 3,
@@ -6961,8 +6961,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 81, // "AST"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6980,8 +6980,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -6999,8 +6999,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 1980,
 		UntilMonth: 4,
 		UntilDay: 6,
@@ -7012,8 +7012,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 46, // "-02/-01"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 1981,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -7025,8 +7025,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 44, // "-01/+00"
-		OffsetCode: -4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -240, // (offset_seconds=-3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7044,8 +7044,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1983,
 		UntilMonth: 10,
 		UntilDay: 30,
@@ -7057,8 +7057,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 132, // "Y%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 1983,
 		UntilMonth: 11,
 		UntilDay: 30,
@@ -7070,8 +7070,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 80, // "AK%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7089,8 +7089,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 95, // PolicyName: StJohns
 		FormatIndex: 116, // "N%T"
-		OffsetCode: -14,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -840, // (offset_seconds=-12600)/15
 		UntilYear: 2011,
 		UntilMonth: 11,
 		UntilDay: 1,
@@ -7102,8 +7102,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 116, // "N%T"
-		OffsetCode: -14,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -840, // (offset_seconds=-12600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7121,8 +7121,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 90, // "CST"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7140,8 +7140,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 53, // PolicyName: Hond
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7159,8 +7159,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 100, // PolicyName: Thule
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7178,8 +7178,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 120, // "PST"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1976,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7191,8 +7191,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7204,8 +7204,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 2001,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7217,8 +7217,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 2002,
 		UntilMonth: 2,
 		UntilDay: 20,
@@ -7230,8 +7230,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 68, // PolicyName: Mexico
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 2010,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7243,8 +7243,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7262,8 +7262,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 102, // PolicyName: Toronto
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1974,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7275,8 +7275,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7294,8 +7294,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 108, // PolicyName: Vanc
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1987,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7307,8 +7307,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7326,8 +7326,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 120, // "PST"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 1980,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7339,8 +7339,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 2020,
 		UntilMonth: 11,
 		UntilDay: 1,
@@ -7352,8 +7352,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 115, // "MST"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7371,8 +7371,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 112, // PolicyName: Winn
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 2006,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7384,8 +7384,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7403,8 +7403,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 132, // "Y%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 1983,
 		UntilMonth: 11,
 		UntilDay: 30,
@@ -7416,8 +7416,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 80, // "AK%T"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7435,8 +7435,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 74, // PolicyName: NT_YK
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1980,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7448,8 +7448,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7467,8 +7467,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2009,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -7480,8 +7480,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2010,
 		UntilMonth: 3,
 		UntilDay: 5,
@@ -7493,8 +7493,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2011,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -7506,8 +7506,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2012,
 		UntilMonth: 2,
 		UntilDay: 21,
@@ -7519,8 +7519,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2016,
 		UntilMonth: 10,
 		UntilDay: 22,
@@ -7532,8 +7532,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2018,
 		UntilMonth: 3,
 		UntilDay: 11,
@@ -7545,8 +7545,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2018,
 		UntilMonth: 10,
 		UntilDay: 7,
@@ -7558,8 +7558,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2019,
 		UntilMonth: 3,
 		UntilDay: 17,
@@ -7571,8 +7571,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2019,
 		UntilMonth: 10,
 		UntilDay: 4,
@@ -7584,8 +7584,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2020,
 		UntilMonth: 3,
 		UntilDay: 8,
@@ -7597,8 +7597,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2020,
 		UntilMonth: 10,
 		UntilDay: 4,
@@ -7610,8 +7610,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7629,8 +7629,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2009,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -7642,8 +7642,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 2010,
 		UntilMonth: 3,
 		UntilDay: 10,
@@ -7655,8 +7655,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2011,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -7668,8 +7668,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 2012,
 		UntilMonth: 2,
 		UntilDay: 21,
@@ -7681,8 +7681,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7700,8 +7700,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 4, // PolicyName: AT
 		FormatIndex: 76, // "AE%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2010,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7713,8 +7713,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 77, // "AEDT"
-		OffsetCode: 40,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2011,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7726,8 +7726,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 4, // PolicyName: AT
 		FormatIndex: 76, // "AE%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7745,8 +7745,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2009,
 		UntilMonth: 10,
 		UntilDay: 18,
@@ -7758,8 +7758,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7777,8 +7777,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 9, // PolicyName: Arg
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1982,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -7790,8 +7790,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 25, // PolicyName: Chile
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2016,
 		UntilMonth: 12,
 		UntilDay: 4,
@@ -7803,8 +7803,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7822,8 +7822,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 42, // "-00"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1976,
 		UntilMonth: 12,
 		UntilDay: 1,
@@ -7835,8 +7835,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7854,8 +7854,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 42, // "-00"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 2005,
 		UntilMonth: 2,
 		UntilDay: 12,
@@ -7867,8 +7867,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 103, // PolicyName: Troll
 		FormatIndex: 1, // "%"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7886,8 +7886,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -7899,8 +7899,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -7912,8 +7912,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2004,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -7925,8 +7925,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7944,8 +7944,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 59, // PolicyName: Jordan
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2022,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -7957,8 +7957,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -7976,8 +7976,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 40, // "+13/+14"
-		OffsetCode: 52,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3120, // (offset_seconds=46800)/15
 		UntilYear: 1982,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -7989,8 +7989,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 36, // "+12/+13"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8002,8 +8002,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -8015,8 +8015,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 36, // "+12/+13"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 2010,
 		UntilMonth: 3,
 		UntilDay: 28,
@@ -8028,8 +8028,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -8041,8 +8041,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8060,8 +8060,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -8073,8 +8073,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1982,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -8086,8 +8086,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8099,8 +8099,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -8112,8 +8112,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1994,
 		UntilMonth: 9,
 		UntilDay: 25,
@@ -8125,8 +8125,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2004,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -8138,8 +8138,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8157,8 +8157,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -8170,8 +8170,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 20,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -8183,8 +8183,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1982,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -8196,8 +8196,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8209,8 +8209,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -8222,8 +8222,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 2004,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -8235,8 +8235,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8254,8 +8254,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8267,8 +8267,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -8280,8 +8280,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8299,8 +8299,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -8312,8 +8312,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1982,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -8325,8 +8325,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8338,8 +8338,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -8351,8 +8351,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1999,
 		UntilMonth: 3,
 		UntilDay: 28,
@@ -8364,8 +8364,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2004,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -8377,8 +8377,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8396,8 +8396,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1982,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -8409,8 +8409,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 56, // PolicyName: Iraq
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8428,8 +8428,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8441,8 +8441,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1992,
 		UntilMonth: 9,
 		UntilDay: 27,
@@ -8454,8 +8454,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8467,8 +8467,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 35, // PolicyName: EUAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1997,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8480,8 +8480,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 13, // PolicyName: Azer
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8499,8 +8499,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8518,8 +8518,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8531,8 +8531,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -8544,8 +8544,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1995,
 		UntilMonth: 5,
 		UntilDay: 28,
@@ -8557,8 +8557,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -8570,8 +8570,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -8583,8 +8583,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2016,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -8596,8 +8596,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8615,8 +8615,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 63, // PolicyName: Lebanon
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8634,8 +8634,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8647,8 +8647,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 8,
 		UntilDay: 31,
@@ -8660,8 +8660,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 60, // PolicyName: Kyrgyz
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 2005,
 		UntilMonth: 8,
 		UntilDay: 12,
@@ -8673,8 +8673,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8692,8 +8692,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8705,8 +8705,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 24, // "+08/+09"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -8718,8 +8718,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -8731,8 +8731,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -8744,8 +8744,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2016,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -8757,8 +8757,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+09"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8776,8 +8776,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1978,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8789,8 +8789,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 1983,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -8802,8 +8802,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 71, // PolicyName: Mongol
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 2008,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -8815,8 +8815,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 71, // PolicyName: Mongol
 		FormatIndex: 24, // "+08/+09"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8834,8 +8834,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 15, // "+0530"
-		OffsetCode: 22,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1320, // (offset_seconds=19800)/15
 		UntilYear: 1996,
 		UntilMonth: 5,
 		UntilDay: 25,
@@ -8847,8 +8847,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+0630"
-		OffsetCode: 26,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1560, // (offset_seconds=23400)/15
 		UntilYear: 1996,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -8860,8 +8860,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2006,
 		UntilMonth: 4,
 		UntilDay: 15,
@@ -8873,8 +8873,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 15, // "+0530"
-		OffsetCode: 22,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1320, // (offset_seconds=19800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8892,8 +8892,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 98, // PolicyName: Syria
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2022,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -8905,8 +8905,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8924,8 +8924,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2009,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8937,8 +8937,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 31, // PolicyName: Dhaka
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -8956,8 +8956,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+09"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 1976,
 		UntilMonth: 5,
 		UntilDay: 3,
@@ -8969,8 +8969,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2000,
 		UntilMonth: 9,
 		UntilDay: 17,
@@ -8982,8 +8982,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+09"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9001,8 +9001,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9020,8 +9020,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -9033,8 +9033,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 20,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 9,
 		UntilDay: 9,
@@ -9046,8 +9046,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9065,8 +9065,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 28, // PolicyName: Cyprus
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1998,
 		UntilMonth: 9,
 		UntilDay: 1,
@@ -9078,8 +9078,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 35, // PolicyName: EUAsia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2016,
 		UntilMonth: 9,
 		UntilDay: 8,
@@ -9091,8 +9091,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2017,
 		UntilMonth: 10,
 		UntilDay: 29,
@@ -9104,8 +9104,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 35, // PolicyName: EUAsia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9123,8 +9123,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 114, // PolicyName: Zion
 		FormatIndex: 104, // "I%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9136,8 +9136,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 59, // PolicyName: Jordan
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1999,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9149,8 +9149,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 80, // PolicyName: Palestine
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2008,
 		UntilMonth: 8,
 		UntilDay: 29,
@@ -9162,8 +9162,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2008,
 		UntilMonth: 9,
 		UntilDay: 1,
@@ -9175,8 +9175,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 80, // PolicyName: Palestine
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2010,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9188,8 +9188,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2010,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -9201,8 +9201,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 80, // PolicyName: Palestine
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2011,
 		UntilMonth: 8,
 		UntilDay: 1,
@@ -9214,8 +9214,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2012,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9227,8 +9227,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 80, // PolicyName: Palestine
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9246,8 +9246,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 114, // PolicyName: Zion
 		FormatIndex: 104, // "I%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9259,8 +9259,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 59, // PolicyName: Jordan
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1999,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9272,8 +9272,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 80, // PolicyName: Palestine
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9291,8 +9291,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 1975,
 		UntilMonth: 6,
 		UntilDay: 13,
@@ -9304,8 +9304,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9323,8 +9323,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 49, // PolicyName: HK
 		FormatIndex: 102, // "HK%T"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9342,8 +9342,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1978,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9355,8 +9355,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 71, // PolicyName: Mongol
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9374,8 +9374,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 24, // "+08/+09"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -9387,8 +9387,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -9400,8 +9400,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 24, // "+08/+09"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -9413,8 +9413,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+09"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -9426,8 +9426,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9445,8 +9445,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 129, // "WIB"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9464,8 +9464,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 130, // "WIT"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9483,8 +9483,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 114, // PolicyName: Zion
 		FormatIndex: 104, // "I%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9502,8 +9502,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 12, // "+0430"
-		OffsetCode: 18,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1080, // (offset_seconds=16200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9521,8 +9521,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 36, // "+12/+13"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -9534,8 +9534,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -9547,8 +9547,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 36, // "+12/+13"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 2010,
 		UntilMonth: 3,
 		UntilDay: 28,
@@ -9560,8 +9560,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -9573,8 +9573,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9592,8 +9592,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 79, // PolicyName: Pakistan
 		FormatIndex: 119, // "PK%T"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9611,8 +9611,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 15, // "+0530"
-		OffsetCode: 22,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1320, // (offset_seconds=19800)/15
 		UntilYear: 1986,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9624,8 +9624,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+0545"
-		OffsetCode: 23,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1380, // (offset_seconds=20700)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9643,8 +9643,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -9656,8 +9656,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 24, // "+08/+09"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -9669,8 +9669,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 2004,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9682,8 +9682,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 29, // "+10/+11"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -9695,8 +9695,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2011,
 		UntilMonth: 9,
 		UntilDay: 13,
@@ -9708,8 +9708,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -9721,8 +9721,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+09"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9740,8 +9740,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 105, // "IST"
-		OffsetCode: 22,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1320, // (offset_seconds=19800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9759,8 +9759,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -9772,8 +9772,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -9785,8 +9785,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -9798,8 +9798,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -9811,8 +9811,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9830,8 +9830,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9849,8 +9849,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 65, // PolicyName: Macau
 		FormatIndex: 84, // "C%T"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9868,8 +9868,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -9881,8 +9881,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 29, // "+10/+11"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -9894,8 +9894,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -9907,8 +9907,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -9920,8 +9920,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2016,
 		UntilMonth: 4,
 		UntilDay: 24,
@@ -9933,8 +9933,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9952,8 +9952,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 131, // "WITA"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9971,8 +9971,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 83, // PolicyName: Phil
 		FormatIndex: 118, // "P%T"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -9990,8 +9990,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 28, // PolicyName: Cyprus
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1998,
 		UntilMonth: 9,
 		UntilDay: 1,
@@ -10003,8 +10003,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 35, // PolicyName: EUAsia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10022,8 +10022,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -10035,8 +10035,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -10048,8 +10048,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2010,
 		UntilMonth: 3,
 		UntilDay: 28,
@@ -10061,8 +10061,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -10074,8 +10074,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10093,8 +10093,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -10106,8 +10106,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -10119,8 +10119,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1993,
 		UntilMonth: 5,
 		UntilDay: 23,
@@ -10132,8 +10132,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -10145,8 +10145,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -10158,8 +10158,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2016,
 		UntilMonth: 7,
 		UntilDay: 24,
@@ -10171,8 +10171,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10190,8 +10190,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -10203,8 +10203,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -10216,8 +10216,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -10229,8 +10229,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -10242,8 +10242,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10261,8 +10261,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -10274,8 +10274,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 20,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -10287,8 +10287,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1982,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -10300,8 +10300,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -10313,8 +10313,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -10326,8 +10326,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -10339,8 +10339,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2004,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -10352,8 +10352,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10371,8 +10371,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 131, // "WITA"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 1988,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10384,8 +10384,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 129, // "WIB"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10403,8 +10403,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 109, // "KST"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 2015,
 		UntilMonth: 8,
 		UntilDay: 15,
@@ -10416,8 +10416,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 109, // "KST"
-		OffsetCode: 34,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2040, // (offset_seconds=30600)/15
 		UntilYear: 2018,
 		UntilMonth: 5,
 		UntilDay: 4,
@@ -10429,8 +10429,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 109, // "KST"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10448,8 +10448,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10467,8 +10467,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -10480,8 +10480,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 20,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -10493,8 +10493,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1982,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -10506,8 +10506,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -10519,8 +10519,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -10532,8 +10532,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 2004,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -10545,8 +10545,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10564,8 +10564,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -10577,8 +10577,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 20,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -10590,8 +10590,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1982,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -10603,8 +10603,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -10616,8 +10616,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1991,
 		UntilMonth: 9,
 		UntilDay: 29,
@@ -10629,8 +10629,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -10642,8 +10642,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -10655,8 +10655,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 2004,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -10668,8 +10668,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2018,
 		UntilMonth: 12,
 		UntilDay: 21,
@@ -10681,8 +10681,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10700,8 +10700,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10719,8 +10719,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -10732,8 +10732,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 29, // "+10/+11"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -10745,8 +10745,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 1997,
 		UntilMonth: 3,
 		UntilDay: 30,
@@ -10758,8 +10758,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 29, // "+10/+11"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -10771,8 +10771,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -10784,8 +10784,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2016,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -10797,8 +10797,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10816,8 +10816,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -10829,8 +10829,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 20,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1981,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -10842,8 +10842,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1982,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -10855,8 +10855,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10868,8 +10868,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10887,8 +10887,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 86, // PolicyName: ROK
 		FormatIndex: 108, // "K%T"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10906,8 +10906,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 78, // PolicyName: PRC
 		FormatIndex: 84, // "C%T"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10925,8 +10925,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 22, // "+0730"
-		OffsetCode: 30,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1800, // (offset_seconds=27000)/15
 		UntilYear: 1981,
 		UntilMonth: 12,
 		UntilDay: 31,
@@ -10938,8 +10938,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -10957,8 +10957,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -10970,8 +10970,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 29, // "+10/+11"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -10983,8 +10983,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -10996,8 +10996,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -11009,8 +11009,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11028,8 +11028,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 99, // PolicyName: Taiwan
 		FormatIndex: 84, // "C%T"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11047,8 +11047,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -11060,8 +11060,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11073,8 +11073,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11092,8 +11092,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -11105,8 +11105,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11118,8 +11118,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 33, // PolicyName: E-EurAsia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1994,
 		UntilMonth: 9,
 		UntilDay: 25,
@@ -11131,8 +11131,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 33, // PolicyName: E-EurAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1996,
 		UntilMonth: 10,
 		UntilDay: 27,
@@ -11144,8 +11144,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 16,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1997,
 		UntilMonth: 3,
 		UntilDay: 30,
@@ -11157,8 +11157,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 33, // PolicyName: E-EurAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2004,
 		UntilMonth: 6,
 		UntilDay: 27,
@@ -11170,8 +11170,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2005,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -11183,8 +11183,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11202,8 +11202,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 55, // PolicyName: Iran
 		FormatIndex: 9, // "+0330/+0430"
-		OffsetCode: 14,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 840, // (offset_seconds=12600)/15
 		UntilYear: 1977,
 		UntilMonth: 10,
 		UntilDay: 20,
@@ -11215,8 +11215,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 55, // PolicyName: Iran
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1979,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11228,8 +11228,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 55, // PolicyName: Iran
 		FormatIndex: 9, // "+0330/+0430"
-		OffsetCode: 14,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 840, // (offset_seconds=12600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11247,8 +11247,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 15, // "+0530"
-		OffsetCode: 22,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1320, // (offset_seconds=19800)/15
 		UntilYear: 1987,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -11260,8 +11260,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11279,8 +11279,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 58, // PolicyName: Japan
 		FormatIndex: 107, // "J%T"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11298,8 +11298,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -11311,8 +11311,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -11324,8 +11324,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 21, // "+07/+08"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2002,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -11337,8 +11337,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 18, // "+06/+07"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -11350,8 +11350,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -11363,8 +11363,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2016,
 		UntilMonth: 5,
 		UntilDay: 29,
@@ -11376,8 +11376,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11395,8 +11395,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 1978,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11408,8 +11408,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 71, // PolicyName: Mongol
 		FormatIndex: 24, // "+08/+09"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11427,8 +11427,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11446,8 +11446,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 1981,
 		UntilMonth: 4,
 		UntilDay: 1,
@@ -11459,8 +11459,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -11472,8 +11472,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 29, // "+10/+11"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -11485,8 +11485,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -11498,8 +11498,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 2011,
 		UntilMonth: 9,
 		UntilDay: 13,
@@ -11511,8 +11511,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -11524,8 +11524,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11543,8 +11543,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 29, // "+10/+11"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -11556,8 +11556,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -11569,8 +11569,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 29, // "+10/+11"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -11582,8 +11582,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -11595,8 +11595,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11614,8 +11614,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -11627,8 +11627,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 24, // "+08/+09"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -11640,8 +11640,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 27, // "+09/+10"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -11653,8 +11653,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -11666,8 +11666,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+09"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11685,8 +11685,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 19, // "+0630"
-		OffsetCode: 26,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1560, // (offset_seconds=23400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11704,8 +11704,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -11717,8 +11717,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -11730,8 +11730,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 14, // "+05/+06"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -11743,8 +11743,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -11756,8 +11756,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11775,8 +11775,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -11788,8 +11788,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1995,
 		UntilMonth: 9,
 		UntilDay: 24,
@@ -11801,8 +11801,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1997,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11814,8 +11814,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 89, // PolicyName: RussiaAsia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2011,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11827,8 +11827,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 10, // PolicyName: Armenia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11846,8 +11846,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 85, // PolicyName: Port
 		FormatIndex: 44, // "-01/+00"
-		OffsetCode: -4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -240, // (offset_seconds=-3600)/15
 		UntilYear: 1983,
 		UntilMonth: 9,
 		UntilDay: 25,
@@ -11859,8 +11859,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 110, // PolicyName: W-Eur
 		FormatIndex: 44, // "-01/+00"
-		OffsetCode: -4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -240, // (offset_seconds=-3600)/15
 		UntilYear: 1992,
 		UntilMonth: 9,
 		UntilDay: 27,
@@ -11872,8 +11872,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1993,
 		UntilMonth: 3,
 		UntilDay: 28,
@@ -11885,8 +11885,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 44, // "-01/+00"
-		OffsetCode: -4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -240, // (offset_seconds=-3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11904,8 +11904,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 17, // PolicyName: Bermuda
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1974,
 		UntilMonth: 4,
 		UntilDay: 28,
@@ -11917,8 +11917,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 23, // PolicyName: Canada
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1976,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11930,8 +11930,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 73, // "A%T"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11949,8 +11949,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 128, // "WET"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1980,
 		UntilMonth: 4,
 		UntilDay: 6,
@@ -11962,8 +11962,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 127, // "WEST"
-		OffsetCode: 0,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1980,
 		UntilMonth: 9,
 		UntilDay: 28,
@@ -11975,8 +11975,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -11994,8 +11994,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 1975,
 		UntilMonth: 11,
 		UntilDay: 25,
@@ -12007,8 +12007,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-01"
-		OffsetCode: -4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -240, // (offset_seconds=-3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12026,8 +12026,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 128, // "WET"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1981,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12039,8 +12039,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12058,8 +12058,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 85, // PolicyName: Port
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1983,
 		UntilMonth: 9,
 		UntilDay: 25,
@@ -12071,8 +12071,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12090,8 +12090,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12109,8 +12109,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 40, // PolicyName: Falk
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 1983,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -12122,8 +12122,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 40, // PolicyName: Falk
 		FormatIndex: 49, // "-03/-02"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 1985,
 		UntilMonth: 9,
 		UntilDay: 15,
@@ -12135,8 +12135,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 40, // PolicyName: Falk
 		FormatIndex: 54, // "-04/-03"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 2010,
 		UntilMonth: 9,
 		UntilDay: 5,
@@ -12148,8 +12148,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12167,8 +12167,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 3, // PolicyName: AS
 		FormatIndex: 74, // "AC%T"
-		OffsetCode: 38,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2280, // (offset_seconds=34200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12186,8 +12186,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 2, // PolicyName: AQ
 		FormatIndex: 76, // "AE%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12205,8 +12205,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 1, // PolicyName: AN
 		FormatIndex: 74, // "AC%T"
-		OffsetCode: 38,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2280, // (offset_seconds=34200)/15
 		UntilYear: 2000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12218,8 +12218,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 3, // PolicyName: AS
 		FormatIndex: 74, // "AC%T"
-		OffsetCode: 38,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2280, // (offset_seconds=34200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12237,8 +12237,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 11, // PolicyName: Aus
 		FormatIndex: 74, // "AC%T"
-		OffsetCode: 38,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2280, // (offset_seconds=34200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12256,8 +12256,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 6, // PolicyName: AW
 		FormatIndex: 25, // "+0845/+0945"
-		OffsetCode: 35,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2100, // (offset_seconds=31500)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12275,8 +12275,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 4, // PolicyName: AT
 		FormatIndex: 76, // "AE%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12294,8 +12294,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 2, // PolicyName: AQ
 		FormatIndex: 76, // "AE%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 1992,
 		UntilMonth: 7,
 		UntilDay: 1,
@@ -12307,8 +12307,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 52, // PolicyName: Holiday
 		FormatIndex: 76, // "AE%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12326,8 +12326,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 78, // "AEST"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 1981,
 		UntilMonth: 3,
 		UntilDay: 1,
@@ -12339,8 +12339,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 61, // PolicyName: LH
 		FormatIndex: 31, // "+1030/+1130"
-		OffsetCode: 42,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2520, // (offset_seconds=37800)/15
 		UntilYear: 1985,
 		UntilMonth: 7,
 		UntilDay: 1,
@@ -12352,8 +12352,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 61, // PolicyName: LH
 		FormatIndex: 30, // "+1030/+11"
-		OffsetCode: 42,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2520, // (offset_seconds=37800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12371,8 +12371,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 5, // PolicyName: AV
 		FormatIndex: 76, // "AE%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12390,8 +12390,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 6, // PolicyName: AW
 		FormatIndex: 82, // "AW%T"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12409,8 +12409,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 1, // PolicyName: AN
 		FormatIndex: 76, // "AE%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12428,8 +12428,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12447,8 +12447,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 84, // "C%T"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12466,8 +12466,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12485,8 +12485,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 97, // "EST"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12504,8 +12504,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 92, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12523,8 +12523,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 99, // "GMT"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12542,8 +12542,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 43, // "-01"
-		OffsetCode: -4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -240, // (offset_seconds=-3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12561,8 +12561,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 66, // "-10"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12580,8 +12580,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 70, // "-11"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12599,8 +12599,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 72, // "-12"
-		OffsetCode: -48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2880, // (offset_seconds=-43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12618,8 +12618,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 45, // "-02"
-		OffsetCode: -8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -480, // (offset_seconds=-7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12637,8 +12637,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 47, // "-03"
-		OffsetCode: -12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -720, // (offset_seconds=-10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12656,8 +12656,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 53, // "-04"
-		OffsetCode: -16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -960, // (offset_seconds=-14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12675,8 +12675,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-05"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12694,8 +12694,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 58, // "-06"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12713,8 +12713,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 60, // "-07"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12732,8 +12732,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 62, // "-08"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12751,8 +12751,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 64, // "-09"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12770,8 +12770,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 3, // "+01"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12789,8 +12789,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12808,8 +12808,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12827,8 +12827,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12846,8 +12846,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 39, // "+13"
-		OffsetCode: 52,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3120, // (offset_seconds=46800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12865,8 +12865,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 41, // "+14"
-		OffsetCode: 56,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3360, // (offset_seconds=50400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12884,8 +12884,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 5, // "+02"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12903,8 +12903,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12922,8 +12922,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12941,8 +12941,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12960,8 +12960,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12979,8 +12979,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 20, // "+07"
-		OffsetCode: 28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1680, // (offset_seconds=25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -12998,8 +12998,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 23, // "+08"
-		OffsetCode: 32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1920, // (offset_seconds=28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13017,8 +13017,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+09"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13036,8 +13036,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 123, // "UTC"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13055,8 +13055,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 89, // "CET"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1985,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -13068,8 +13068,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13087,8 +13087,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -13100,8 +13100,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -13113,8 +13113,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -13126,8 +13126,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -13139,8 +13139,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -13152,8 +13152,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2016,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -13165,8 +13165,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13184,8 +13184,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 46, // PolicyName: Greece
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1981,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13197,8 +13197,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13216,8 +13216,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 89, // "CET"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1982,
 		UntilMonth: 11,
 		UntilDay: 27,
@@ -13229,8 +13229,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13248,8 +13248,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 45, // PolicyName: Germany
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1980,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13261,8 +13261,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13280,8 +13280,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 15, // PolicyName: Belgium
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1977,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13293,8 +13293,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13312,8 +13312,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 87, // PolicyName: Romania
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1981,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -13325,8 +13325,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1991,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13338,8 +13338,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 87, // PolicyName: Romania
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1994,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13351,8 +13351,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 32, // PolicyName: E-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1997,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13364,8 +13364,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13383,8 +13383,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 54, // PolicyName: Hungary
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1984,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13396,8 +13396,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13415,8 +13415,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1990,
 		UntilMonth: 5,
 		UntilDay: 6,
@@ -13428,8 +13428,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13441,8 +13441,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 32, // PolicyName: E-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1997,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13454,8 +13454,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 69, // PolicyName: Moldova
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13473,8 +13473,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 39, // PolicyName: Eire
 		FormatIndex: 106, // "IST/GMT"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13492,8 +13492,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 89, // "CET"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1982,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13505,8 +13505,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13524,8 +13524,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 42, // PolicyName: Finland
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1983,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13537,8 +13537,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13556,8 +13556,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 105, // PolicyName: Turkey
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1978,
 		UntilMonth: 6,
 		UntilDay: 29,
@@ -13569,8 +13569,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 105, // PolicyName: Turkey
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1984,
 		UntilMonth: 11,
 		UntilDay: 1,
@@ -13582,8 +13582,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 105, // PolicyName: Turkey
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2007,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13595,8 +13595,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -13608,8 +13608,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 28,
@@ -13621,8 +13621,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2014,
 		UntilMonth: 3,
 		UntilDay: 30,
@@ -13634,8 +13634,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2014,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -13647,8 +13647,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2015,
 		UntilMonth: 10,
 		UntilDay: 25,
@@ -13660,8 +13660,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 95, // "EEST"
-		OffsetCode: 8,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2015,
 		UntilMonth: 11,
 		UntilDay: 8,
@@ -13673,8 +13673,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2016,
 		UntilMonth: 9,
 		UntilDay: 7,
@@ -13686,8 +13686,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13705,8 +13705,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -13718,8 +13718,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -13731,8 +13731,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -13744,8 +13744,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13763,8 +13763,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -13776,8 +13776,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -13789,8 +13789,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -13802,8 +13802,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -13815,8 +13815,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -13828,8 +13828,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13847,8 +13847,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1990,
 		UntilMonth: 7,
 		UntilDay: 1,
@@ -13860,8 +13860,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 95, // "EEST"
-		OffsetCode: 8,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1991,
 		UntilMonth: 9,
 		UntilDay: 29,
@@ -13873,8 +13873,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1996,
 		UntilMonth: 5,
 		UntilDay: 13,
@@ -13886,8 +13886,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13905,8 +13905,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 89, // "CET"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1976,
 		UntilMonth: 9,
 		UntilDay: 26,
@@ -13918,8 +13918,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 85, // PolicyName: Port
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1983,
 		UntilMonth: 9,
 		UntilDay: 25,
@@ -13931,8 +13931,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 110, // PolicyName: W-Eur
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1992,
 		UntilMonth: 9,
 		UntilDay: 27,
@@ -13944,8 +13944,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1996,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -13957,8 +13957,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13976,8 +13976,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 44, // PolicyName: GB-Eire
 		FormatIndex: 1, // "%"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -13989,8 +13989,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 100, // "GMT/BST"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14008,8 +14008,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 93, // PolicyName: Spain
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1979,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14021,8 +14021,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14040,8 +14040,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 57, // PolicyName: Italy
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1973,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -14053,8 +14053,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 66, // PolicyName: Malta
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1981,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14066,8 +14066,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14085,8 +14085,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1990,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14098,8 +14098,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 113, // "MSK"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -14111,8 +14111,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -14124,8 +14124,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14143,8 +14143,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -14156,8 +14156,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -14169,8 +14169,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -14182,8 +14182,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 113, // "MSK"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -14195,8 +14195,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 113, // "MSK"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14214,8 +14214,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 43, // PolicyName: France
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1977,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14227,8 +14227,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14246,8 +14246,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 29, // PolicyName: Czech
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1979,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14259,8 +14259,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14278,8 +14278,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -14291,8 +14291,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 95, // "EEST"
-		OffsetCode: 8,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1989,
 		UntilMonth: 9,
 		UntilDay: 24,
@@ -14304,8 +14304,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 62, // PolicyName: Latvia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1997,
 		UntilMonth: 1,
 		UntilDay: 21,
@@ -14317,8 +14317,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2000,
 		UntilMonth: 2,
 		UntilDay: 29,
@@ -14330,8 +14330,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2001,
 		UntilMonth: 1,
 		UntilDay: 2,
@@ -14343,8 +14343,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14362,8 +14362,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 57, // PolicyName: Italy
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1980,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14375,8 +14375,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14394,8 +14394,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -14407,8 +14407,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -14420,8 +14420,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 6, // "+02/+03"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1991,
 		UntilMonth: 9,
 		UntilDay: 29,
@@ -14433,8 +14433,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 10,
 		UntilDay: 20,
@@ -14446,8 +14446,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2010,
 		UntilMonth: 3,
 		UntilDay: 28,
@@ -14459,8 +14459,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -14472,8 +14472,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14491,8 +14491,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1988,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -14504,8 +14504,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -14517,8 +14517,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -14530,8 +14530,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -14543,8 +14543,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -14556,8 +14556,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2016,
 		UntilMonth: 12,
 		UntilDay: 4,
@@ -14569,8 +14569,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14588,8 +14588,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1990,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14601,8 +14601,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 113, // "MSK"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1990,
 		UntilMonth: 7,
 		UntilDay: 1,
@@ -14614,8 +14614,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 20,
@@ -14627,8 +14627,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1994,
 		UntilMonth: 5,
 		UntilDay: 1,
@@ -14640,8 +14640,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1996,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -14653,8 +14653,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 112, // "MSD"
-		OffsetCode: 12,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1996,
 		UntilMonth: 10,
 		UntilDay: 27,
@@ -14666,8 +14666,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 113, // "MSK"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1997,
 		UntilMonth: 3,
 		UntilDay: 30,
@@ -14679,8 +14679,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2014,
 		UntilMonth: 3,
 		UntilDay: 30,
@@ -14692,8 +14692,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 113, // "MSK"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -14705,8 +14705,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 113, // "MSK"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14724,8 +14724,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1979,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -14737,8 +14737,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 19, // PolicyName: Bulg
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1982,
 		UntilMonth: 9,
 		UntilDay: 26,
@@ -14750,8 +14750,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1991,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14763,8 +14763,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 32, // PolicyName: E-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1997,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14776,8 +14776,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14795,8 +14795,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -14808,8 +14808,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 95, // "EEST"
-		OffsetCode: 8,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1989,
 		UntilMonth: 9,
 		UntilDay: 24,
@@ -14821,8 +14821,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1998,
 		UntilMonth: 9,
 		UntilDay: 22,
@@ -14834,8 +14834,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -14847,8 +14847,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2002,
 		UntilMonth: 2,
 		UntilDay: 21,
@@ -14860,8 +14860,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14879,8 +14879,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 7, // PolicyName: Albania
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1984,
 		UntilMonth: 7,
 		UntilDay: 1,
@@ -14892,8 +14892,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -14911,8 +14911,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -14924,8 +14924,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -14937,8 +14937,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 6, // "+02/+03"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1992,
 		UntilMonth: 1,
 		UntilDay: 19,
@@ -14950,8 +14950,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -14963,8 +14963,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -14976,8 +14976,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2016,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -14989,8 +14989,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15008,8 +15008,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 12, // PolicyName: Austria
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1981,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15021,8 +15021,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15040,8 +15040,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 114, // "MSK/MSD"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1989,
 		UntilMonth: 3,
 		UntilDay: 26,
@@ -15053,8 +15053,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1991,
 		UntilMonth: 9,
 		UntilDay: 29,
@@ -15066,8 +15066,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1998,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15079,8 +15079,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 1998,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -15092,8 +15092,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1999,
 		UntilMonth: 10,
 		UntilDay: 31,
@@ -15105,8 +15105,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 96, // "EET"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 2003,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15118,8 +15118,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 94, // "EE%T"
-		OffsetCode: 8,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 480, // (offset_seconds=7200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15137,8 +15137,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1988,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -15150,8 +15150,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 1991,
 		UntilMonth: 3,
 		UntilDay: 31,
@@ -15163,8 +15163,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 1992,
 		UntilMonth: 3,
 		UntilDay: 29,
@@ -15176,8 +15176,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 88, // PolicyName: Russia
 		FormatIndex: 8, // "+03/+04"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2011,
 		UntilMonth: 3,
 		UntilDay: 27,
@@ -15189,8 +15189,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2014,
 		UntilMonth: 10,
 		UntilDay: 26,
@@ -15202,8 +15202,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 2018,
 		UntilMonth: 10,
 		UntilDay: 28,
@@ -15215,8 +15215,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 10, // "+04"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 2020,
 		UntilMonth: 12,
 		UntilDay: 27,
@@ -15228,8 +15228,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 7, // "+03"
-		OffsetCode: 12,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 720, // (offset_seconds=10800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15247,8 +15247,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 84, // PolicyName: Poland
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1977,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15260,8 +15260,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 110, // PolicyName: W-Eur
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1988,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15273,8 +15273,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15292,8 +15292,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 97, // PolicyName: Swiss
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 1981,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15305,8 +15305,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 88, // "CE%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15324,8 +15324,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 103, // "HST"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15343,8 +15343,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15356,8 +15356,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 17, // "+06"
-		OffsetCode: 24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1440, // (offset_seconds=21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15375,8 +15375,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 13, // "+05"
-		OffsetCode: 20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 1200, // (offset_seconds=18000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15394,8 +15394,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 67, // PolicyName: Mauritius
 		FormatIndex: 11, // "+04/+05"
-		OffsetCode: 16,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 960, // (offset_seconds=14400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15413,8 +15413,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
 		FormatIndex: 111, // "ME%T"
-		OffsetCode: 4,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 240, // (offset_seconds=3600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15432,8 +15432,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 115, // "MST"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15451,8 +15451,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 110, // "M%T"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15470,8 +15470,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 106, // PolicyName: US
 		FormatIndex: 118, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15489,8 +15489,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 111, // PolicyName: WS
 		FormatIndex: 71, // "-11/-10"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
 		UntilYear: 2011,
 		UntilMonth: 12,
 		UntilDay: 29,
@@ -15502,8 +15502,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 111, // PolicyName: WS
 		FormatIndex: 40, // "+13/+14"
-		OffsetCode: 52,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3120, // (offset_seconds=46800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15521,8 +15521,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 75, // PolicyName: NZ
 		FormatIndex: 117, // "NZ%T"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15540,8 +15540,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2014,
 		UntilMonth: 12,
 		UntilDay: 28,
@@ -15553,8 +15553,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15572,8 +15572,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 24, // PolicyName: Chatham
 		FormatIndex: 38, // "+1245/+1345"
-		OffsetCode: 51,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3060, // (offset_seconds=45900)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15591,8 +15591,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 25, // PolicyName: Chile
 		FormatIndex: 61, // "-07/-06"
-		OffsetCode: -28,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1680, // (offset_seconds=-25200)/15
 		UntilYear: 1982,
 		UntilMonth: 3,
 		UntilDay: 14,
@@ -15604,8 +15604,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 25, // PolicyName: Chile
 		FormatIndex: 59, // "-06/-05"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15623,8 +15623,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 109, // PolicyName: Vanuatu
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15642,8 +15642,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 70, // "-11"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
 		UntilYear: 2011,
 		UntilMonth: 12,
 		UntilDay: 30,
@@ -15655,8 +15655,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 39, // "+13"
-		OffsetCode: 52,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3120, // (offset_seconds=46800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15674,8 +15674,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 41, // PolicyName: Fiji
 		FormatIndex: 36, // "+12/+13"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15693,8 +15693,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 56, // "-05"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
 		UntilYear: 1986,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15706,8 +15706,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 36, // PolicyName: Ecuador
 		FormatIndex: 59, // "-06/-05"
-		OffsetCode: -24,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1440, // (offset_seconds=-21600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15725,8 +15725,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 64, // "-09"
-		OffsetCode: -36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2160, // (offset_seconds=-32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15744,8 +15744,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15763,8 +15763,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 47, // PolicyName: Guam
 		FormatIndex: 98, // "G%T"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 2000,
 		UntilMonth: 12,
 		UntilDay: 23,
@@ -15776,8 +15776,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 91, // "ChST"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15795,8 +15795,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 103, // "HST"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15814,8 +15814,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 72, // "-12"
-		OffsetCode: -48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2880, // (offset_seconds=-43200)/15
 		UntilYear: 1979,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -15827,8 +15827,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 70, // "-11"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
 		UntilYear: 1994,
 		UntilMonth: 12,
 		UntilDay: 31,
@@ -15840,8 +15840,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 39, // "+13"
-		OffsetCode: 52,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3120, // (offset_seconds=46800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15859,8 +15859,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 69, // "-1040"
-		OffsetCode: -43,
-		DeltaCode: 84, // ((offset_minute=5) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2560, // (offset_seconds=-38400)/15
 		UntilYear: 1979,
 		UntilMonth: 10,
 		UntilDay: 1,
@@ -15872,8 +15872,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 66, // "-10"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 1994,
 		UntilMonth: 12,
 		UntilDay: 31,
@@ -15885,8 +15885,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 41, // "+14"
-		OffsetCode: 56,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3360, // (offset_seconds=50400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15904,8 +15904,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 1999,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15917,8 +15917,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15936,8 +15936,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 72, // "-12"
-		OffsetCode: -48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2880, // (offset_seconds=-43200)/15
 		UntilYear: 1993,
 		UntilMonth: 8,
 		UntilDay: 20,
@@ -15949,8 +15949,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15968,8 +15968,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 65, // "-0930"
-		OffsetCode: -38,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2280, // (offset_seconds=-34200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -15987,8 +15987,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 34, // "+1130"
-		OffsetCode: 46,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2760, // (offset_seconds=41400)/15
 		UntilYear: 1979,
 		UntilMonth: 2,
 		UntilDay: 10,
@@ -16000,8 +16000,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16019,8 +16019,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 70, // "-11"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16038,8 +16038,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 34, // "+1130"
-		OffsetCode: 46,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2760, // (offset_seconds=41400)/15
 		UntilYear: 1974,
 		UntilMonth: 10,
 		UntilDay: 27,
@@ -16051,8 +16051,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 37, // "+1230"
-		OffsetCode: 46,
-		DeltaCode: 8, // ((offset_minute=0) << 4) + ((delta_minutes=60)/15 + 4)
+		DeltaCode: 8, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=60)/15 + 4)
+		OffsetSecondsCode: 2760, // (offset_seconds=41400)/15
 		UntilYear: 1975,
 		UntilMonth: 3,
 		UntilDay: 2,
@@ -16064,8 +16064,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 34, // "+1130"
-		OffsetCode: 46,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2760, // (offset_seconds=41400)/15
 		UntilYear: 2015,
 		UntilMonth: 10,
 		UntilDay: 4,
@@ -16077,8 +16077,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 32, // "+11"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 2019,
 		UntilMonth: 7,
 		UntilDay: 1,
@@ -16090,8 +16090,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 1, // PolicyName: AN
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16109,8 +16109,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 73, // PolicyName: NC
 		FormatIndex: 33, // "+11/+12"
-		OffsetCode: 44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2640, // (offset_seconds=39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16128,8 +16128,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 122, // "SST"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16147,8 +16147,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 26, // "+09"
-		OffsetCode: 36,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2160, // (offset_seconds=32400)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16166,8 +16166,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 63, // "-0830"
-		OffsetCode: -34,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2040, // (offset_seconds=-30600)/15
 		UntilYear: 1998,
 		UntilMonth: 4,
 		UntilDay: 27,
@@ -16179,8 +16179,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 62, // "-08"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16198,8 +16198,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 28, // "+10"
-		OffsetCode: 40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2400, // (offset_seconds=36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16217,8 +16217,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 68, // "-1030"
-		OffsetCode: -42,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2520, // (offset_seconds=-37800)/15
 		UntilYear: 1978,
 		UntilMonth: 11,
 		UntilDay: 12,
@@ -16230,8 +16230,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 26, // PolicyName: Cook
 		FormatIndex: 67, // "-10/-0930"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16249,8 +16249,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 66, // "-10"
-		OffsetCode: -40,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: -2400, // (offset_seconds=-36000)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16268,8 +16268,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 35, // "+12"
-		OffsetCode: 48,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 2880, // (offset_seconds=43200)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16287,8 +16287,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 39, // "+13"
-		OffsetCode: 52,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3120, // (offset_seconds=46800)/15
 		UntilYear: 1999,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16300,8 +16300,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 101, // PolicyName: Tonga
 		FormatIndex: 40, // "+13/+14"
-		OffsetCode: 52,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 3120, // (offset_seconds=46800)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16319,8 +16319,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 34, // PolicyName: EU
 		FormatIndex: 126, // "WE%T"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
+		OffsetSecondsCode: 0, // (offset_seconds=0)/15
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
@@ -16333,1036 +16333,1036 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 const ZoneEraCount = 1027
 
-const ZoneEraChunkSize = 11
+const ZoneEraChunkSize = 12
 
 // ZoneErasData contains the ZoneEraRecords data as a hex encoded string.
-const ZoneErasData = "\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x7e\x00\x08\x00\x04\xb9\x07\x0a\x15\x00\x00" +
-		"\x58\x00\x08\x04\x04\xbb\x07\x0a\x1a\x00\x00" +
-		"\x7e\x00\x08\x00\x04\xbd\x07\x05\x01\x00\x00" +
-		"\x59\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xfc\x04\xb7\x07\x01\x01\x00\x00" +
-		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x26\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x02\x00\x48\x00\x04\xc0\x07\x03\x10\x00\x00" +
-		"\x03\x00\x00\x04\x04\xc2\x07\x01\x01\x00\x00" +
-		"\x02\x00\x48\x00\x04\xe2\x07\x0a\x1c\x0c\x00" +
-		"\x04\x00\x48\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x7e\x00\x5e\x00\x04\xc0\x07\x03\x10\x00\x00" +
-		"\x59\x00\x00\x04\x04\xc2\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xfc\x04\xb8\x07\x04\x0e\x00\x00" +
-		"\x02\x00\x48\x00\x04\xe2\x07\x0a\x1c\x0c\x00" +
-		"\x04\x00\x48\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x79\x00\x5a\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x55\x00\x60\x08\x04\xd0\x07\x01\x0f\x30\x00" +
-		"\x5d\x00\x00\x0c\x04\xe5\x07\x02\x01\x00\x00" +
-		"\x56\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x55\x00\x60\x08\x04\xd0\x07\x01\x0f\x30\x00" +
-		"\x5d\x00\x00\x0c\x04\xe1\x07\x0b\x01\x00\x00" +
-		"\x56\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x7d\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x56\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5d\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x7d\x00\x00\x04\x04\xbb\x07\x0a\x0e\x00\x00" +
-		"\x7c\x00\x00\x04\x08\xbc\x07\x03\x08\x00\x00" +
-		"\x7d\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x63\x00\x00\x00\x04\xe2\x07\x01\x01\x04\x00" +
-		"\x7d\x00\x00\x04\x04\xe3\x07\x01\x01\x08\x00" +
-		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x60\x00\x00\x08\x04\xbe\x07\x01\x01\x00\x00" +
-		"\x58\x00\x40\x04\x04\xc6\x07\x05\x04\x00\x00" +
-		"\x60\x00\x00\x08\x04\xcc\x07\x09\x1e\x00\x00" +
-		"\x58\x00\x40\x04\x04\xcd\x07\x0a\x04\x00\x00" +
-		"\x60\x00\x00\x08\x04\xdc\x07\x0b\x0a\x08\x00" +
-		"\x58\x00\x40\x04\x04\xdd\x07\x0a\x19\x08\x00" +
-		"\x60\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x68\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x79\x00\x00\x08\x04\xc6\x07\x03\x15\x00\x00" +
-		"\x01\x00\x4c\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x53\x00\x6a\xd4\x04\xbf\x07\x0a\x1e\x08\x00" +
-		"\x4f\x00\x6a\xd8\x04\xbf\x07\x0b\x1e\x00\x00" +
-		"\x65\x00\x6a\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4f\x00\x6a\xd8\x04\xbf\x07\x0a\x1e\x08\x00" +
-		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
-		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xc6\x07\x09\x11\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xcb\x07\x09\x0e\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xd3\x07\x09\x18\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xdc\x07\x0a\x15\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xdd\x07\x09\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x31\x00\x09\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x03\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x14\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x03\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x14\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x31\x00\x09\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc6\x07\x03\x04\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc6\x07\x0a\x1c\x00\x00" +
-		"\x2f\x00\x00\xf0\x08\xc7\x07\x03\x11\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x06\x00\x00" +
-		"\x2d\x00\x00\xf4\x08\xc8\x07\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x05\x07\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc6\x07\x03\x04\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc6\x07\x0a\x0f\x00\x00" +
-		"\x2f\x00\x00\xf0\x08\xc7\x07\x03\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x0f\x00\x00" +
-		"\x2f\x00\x00\xf0\x08\xc8\x07\x03\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc8\x07\x0a\x12\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd4\x07\x05\x17\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x09\x1a\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x03\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x14\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x05\x07\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd4\x07\x05\x1f\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x07\x19\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc6\x07\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf4\x08\xc6\x07\x03\x0e\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc6\x07\x0a\x0f\x00\x00" +
-		"\x2f\x00\x00\xf0\x08\xc7\x07\x03\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x06\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x2f\x00\x00\xf0\x08\xd0\x07\x03\x03\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd4\x07\x05\x1f\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x07\x19\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x01\x15\x00\x00" +
-		"\x36\x00\x5c\xf0\x04\xd9\x07\x0a\x0b\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xc7\x07\x03\x03\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc7\x07\x0a\x14\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd4\x07\x06\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x0d\x00\x00" +
-		"\x31\x00\x09\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xcf\x07\x0a\x03\x00\x00" +
-		"\x36\x00\x09\xf0\x04\xd0\x07\x03\x03\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd4\x07\x05\x1e\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x06\x14\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xd8\x07\x0a\x12\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xb6\x07\x04\x01\x00\x00" +
-		"\x36\x00\x51\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xd3\x07\x09\x18\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xdb\x07\x0a\x10\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xdc\x07\x0a\x15\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x44\xe4\x04\xda\x07\x04\x04\x08\x00" +
-		"\x54\x00\x44\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x0e\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xc4\x07\x09\x0c\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x01\x00\x10\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x12\xf0\x04\xc4\x07\x09\x0c\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x36\x00\x12\xf0\x04\xd0\x07\x0a\x0f\x00\x00" +
-		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x39\x00\x15\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\xb6\x07\x01\x01\x00\x00" +
-		"\x73\x00\x00\xe4\x04\xb6\x07\x02\x03\x08\x00" +
-		"\x6e\x00\x6a\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x4a\xe4\x04\xcf\x07\x0a\x1f\x08\x00" +
-		"\x54\x00\x17\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x61\x00\x00\xec\x04\xd0\x07\x0b\x05\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xd1\x07\x04\x01\x0c\x00" +
-		"\x6e\x00\x17\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x12\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xbd\x07\x0c\x17\x00\x00" +
-		"\x5c\x00\x44\xec\x04\xce\x07\x08\x02\x08\x00" +
-		"\x54\x00\x44\xe8\x04\xdf\x07\x02\x01\x08\x00" +
-		"\x61\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd7\x07\x0c\x09\x0c\x00" +
-		"\x37\x00\x00\xee\x04\xe0\x07\x05\x01\x0a\x00" +
-		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x54\x00\x44\xe8\x04\xce\x07\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xce\x07\x04\x05\x0c\x00" +
-		"\x6e\x00\x44\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
-		"\x5a\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x54\x00\x44\xe8\x04\xce\x07\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xce\x07\x04\x05\x0c\x00" +
-		"\x6e\x00\x44\xe4\x04\xda\x07\x01\x01\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
-		"\x5a\x00\x00\xe8\x04\xe6\x07\x0b\x1e\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x16\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x12\xf0\x04\xd3\x07\x09\x18\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd4\x07\x0a\x01\x00\x00" +
-		"\x36\x00\x12\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xbc\x07\x04\x06\x08\x00" +
-		"\x31\x00\x22\xf4\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x84\x00\x71\xdc\x04\xb5\x07\x0a\x1c\x00\x00" +
-		"\x78\x00\x00\xe0\x04\xbc\x07\x01\x01\x00\x00" +
-		"\x76\x00\x17\xe0\x04\xe4\x07\x0b\x01\x00\x00" +
-		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xb5\x07\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\xb7\x07\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xb7\x07\x04\x1b\x08\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x25\xe4\x04\xc3\x07\x01\x01\x00\x00" +
-		"\x6e\x00\x17\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x39\x00\x12\xec\x04\xc4\x07\x09\x0c\x00\x00" +
-		"\x38\x00\x00\xec\x04\xc9\x07\x09\x1c\x00\x00" +
-		"\x39\x00\x12\xec\x04\xca\x07\x09\x16\x00\x00" +
-		"\x38\x00\x00\xec\x04\xd8\x07\x06\x18\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xdd\x07\x0b\x0a\x00\x00" +
-		"\x38\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x5b\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x6c\xe0\x04\xc3\x07\x01\x01\x00\x00" +
-		"\x76\x00\x17\xe0\x04\xdf\x07\x03\x08\x08\x00" +
-		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xc6\x07\x09\x11\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xd0\x07\x0a\x16\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x33\xf0\x04\xb6\x07\x01\x01\x00\x00" +
-		"\x49\x00\x17\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x5f\xf0\x04\xdb\x07\x0b\x01\x00\x00" +
-		"\x49\x00\x17\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xbb\x07\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\xdf\x07\x03\x08\x08\x00" +
-		"\x51\x00\x00\xf0\x04\xe2\x07\x03\x0b\x0c\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x30\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x39\x00\x24\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x34\x00\x00\xf1\x04\xb7\x07\x08\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xc8\x07\x03\x1d\x04\x00" +
-		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x33\xf0\x04\xb6\x07\x01\x01\x00\x00" +
-		"\x49\x00\x17\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x1b\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x44\xe4\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\xc7\x07\x0a\x1b\x08\x00" +
-		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\xb6\x07\x01\x06\x08\x00" +
-		"\x57\x00\x00\xe8\x08\xb6\x07\x0a\x1b\x08\x00" +
-		"\x5c\x00\x6a\xec\x04\xb8\x07\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\xb9\x07\x0a\x1e\x08\x00" +
-		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\xd7\x07\x0b\x04\x08\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\xb5\x07\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xd6\x07\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\xd7\x07\x0b\x04\x08\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xd6\x07\x04\x02\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\xd7\x07\x03\x0b\x08\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x4a\xe0\x04\xbb\x07\x04\x1d\x08\x00" +
-		"\x6e\x00\x4a\xe4\x04\xbc\x07\x01\x01\x00\x00" +
-		"\x6e\x00\x17\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x4a\xec\x04\xcf\x07\x0a\x1f\x08\x00" +
-		"\x54\x00\x17\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x5c\x00\x17\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xb6\x07\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\xc0\x07\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x6a\xe0\x04\xbc\x07\x04\x1b\x08\x00" +
-		"\x84\x00\x6a\xdc\x04\xbc\x07\x0a\x1a\x08\x00" +
-		"\x76\x00\x6a\xe0\x04\xbf\x07\x0a\x1e\x08\x00" +
-		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
-		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\xb6\x07\x01\x06\x08\x00" +
-		"\x57\x00\x00\xe8\x08\xb6\x07\x0a\x1b\x08\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x39\x00\x52\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x6a\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xc6\x07\x09\x11\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xcb\x07\x0a\x0d\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xcc\x07\x09\x04\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xd0\x07\x0a\x16\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xb5\x07\x05\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xb7\x07\x02\x10\x00\x00" +
-		"\x54\x00\x4d\xe8\x04\xc8\x07\x01\x01\x10\x00" +
-		"\x61\x00\x00\xec\x04\xc8\x07\x09\x18\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xc9\x07\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xcd\x07\x01\x01\x00\x00" +
-		"\x54\x00\x4d\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x12\xf0\x04\xc4\x07\x09\x0c\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xc9\x07\x09\x1c\x00\x00" +
-		"\x36\x00\x12\xf0\x04\xca\x07\x09\x16\x00\x00" +
-		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x51\x00\x00\xf0\x04\xbc\x07\x04\x06\x00\x00" +
-		"\x4b\x00\x00\xf0\x08\xbc\x07\x09\x1c\x00\x00" +
-		"\x51\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xc4\x07\x01\x01\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\xc5\x07\x01\x01\x00\x00" +
-		"\x54\x00\x44\xe8\x04\xda\x07\x01\x01\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x44\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\xb5\x07\x04\x1d\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xbd\x07\x0c\x17\x00\x00" +
-		"\x61\x00\x00\xec\x04\xbe\x07\x0c\x02\x00\x00" +
-		"\x54\x00\x44\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x6a\xe0\x04\xbf\x07\x0a\x1e\x08\x00" +
-		"\x78\x00\x00\xe0\x04\xdf\x07\x0b\x01\x08\x00" +
-		"\x50\x00\x6a\xdc\x04\xe2\x07\x0b\x04\x08\x00" +
-		"\x78\x00\x00\xe0\x04\xe3\x07\x01\x14\x08\x00" +
-		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x44\xe8\x04\xd1\x07\x09\x1e\x08\x00" +
-		"\x5a\x00\x00\xe8\x04\xd2\x07\x02\x14\x00\x00" +
-		"\x54\x00\x44\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x51\x00\x00\xf0\x04\xbc\x07\x05\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xc3\x07\x01\x01\x00\x00" +
-		"\x31\x00\x17\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x46\xf0\x04\xb5\x07\x01\x01\x00\x00" +
-		"\x49\x00\x17\xf0\x04\xc9\x07\x01\x01\x00\x00" +
-		"\x49\x00\x46\xf0\x04\xd7\x07\x01\x01\x00\x00" +
-		"\x49\x00\x17\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xc4\x07\x01\x01\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\xc5\x07\x01\x01\x00\x00" +
-		"\x54\x00\x44\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x6b\xf4\x04\xb6\x07\x01\x01\x00\x00" +
-		"\x30\x00\x6b\xf4\x04\xb6\x07\x03\x0a\x00\x00" +
-		"\x32\x00\x6b\xf4\x04\xb6\x07\x0c\x16\x00\x00" +
-		"\x31\x00\x6b\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x53\x00\x6a\xd4\x04\xbf\x07\x0a\x1e\x08\x00" +
-		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
-		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2e\x00\x12\xf8\x04\xc6\x07\x09\x11\x00\x00" +
-		"\x2d\x00\x00\xf8\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x2e\x00\x12\xf8\x04\xd0\x07\x0a\x0f\x00\x00" +
-		"\x2d\x00\x00\xf8\x04\xd1\x07\x09\x0d\x00\x00" +
-		"\x2e\x00\x12\xf8\x04\xd2\x07\x0a\x01\x00\x00" +
-		"\x2d\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\xda\x07\x0b\x07\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\xc8\x07\x0a\x19\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\xd3\x07\x0a\x1a\x08\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xbc\x07\x04\x06\x08\x00" +
-		"\x31\x00\x22\xf4\x04\xe7\x07\x03\x19\x58\x00" +
-		"\x2d\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x54\x00\x44\xe8\x04\xce\x07\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\xce\x07\x04\x05\x0c\x00" +
-		"\x6e\x00\x44\xe4\x04\xda\x07\x01\x01\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\xe6\x07\x0a\x1e\x08\x00" +
-		"\x5a\x00\x00\xe8\x04\xe6\x07\x0b\x1e\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x33\x00\x00\xf2\x04\xc0\x07\x0a\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x32\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x12\xf0\x04\xc4\x07\x09\x0c\x00\x00" +
-		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x51\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x19\xf0\x04\xe0\x07\x0c\x04\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x4a\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x61\x00\x00\xec\x04\xd1\x07\x04\x01\x0c\x00" +
-		"\x54\x00\x17\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xc6\x07\x09\x11\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xcf\x07\x09\x1e\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xd0\x07\x0a\x0f\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\xd1\x07\x09\x0d\x00\x00" +
-		"\x31\x00\x12\xf4\x04\xd2\x07\x0a\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x4a\xe8\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x61\x00\x00\xec\x04\xd1\x07\x04\x01\x0c\x00" +
-		"\x54\x00\x17\xe8\x04\xd6\x07\x0a\x1d\x08\x00" +
-		"\x61\x00\x00\xec\x04\xd7\x07\x03\x0b\x0c\x00" +
-		"\x54\x00\x17\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x39\x00\x12\xec\x04\xc4\x07\x09\x0c\x00\x00" +
-		"\x38\x00\x00\xec\x04\xd8\x07\x06\x18\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xdd\x07\x0b\x0a\x00\x00" +
-		"\x38\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x12\xf0\x04\xc4\x07\x09\x0c\x00\x00" +
-		"\x35\x00\x00\xf0\x04\xd8\x07\x06\x18\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x19\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x01\x00\x1e\xec\x04\xb6\x07\x0a\x1b\x00\x00" +
-		"\x51\x00\x00\xf0\x04\xd0\x07\x0a\x1d\x08\x00" +
-		"\x5c\x00\x6a\xec\x04\xd0\x07\x0c\x03\x04\x00" +
-		"\x51\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x12\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf8\x04\xbc\x07\x04\x06\x08\x00" +
-		"\x2e\x00\x14\xf8\x04\xbd\x07\x03\x1d\x00\x00" +
-		"\x2c\x00\x22\xfc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x6a\xe0\x04\xbf\x07\x0a\x1e\x08\x00" +
-		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
-		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x74\x00\x5f\xf2\x04\xdb\x07\x0b\x01\x00\x00" +
-		"\x74\x00\x17\xf2\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5a\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x35\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x64\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x78\x00\x00\xe0\x04\xb8\x07\x01\x01\x00\x00" +
-		"\x76\x00\x6a\xe0\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x76\x00\x44\xe0\x04\xd1\x07\x01\x01\x00\x00" +
-		"\x76\x00\x6a\xe0\x04\xd2\x07\x02\x14\x00\x00" +
-		"\x76\x00\x44\xe0\x04\xda\x07\x01\x01\x00\x00" +
-		"\x76\x00\x6a\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x66\xec\x04\xb6\x07\x01\x01\x00\x00" +
-		"\x5c\x00\x17\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x6c\xe0\x04\xc3\x07\x01\x01\x00\x00" +
-		"\x76\x00\x17\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x78\x00\x00\xe0\x04\xbc\x07\x01\x01\x00\x00" +
-		"\x76\x00\x17\xe0\x04\xe4\x07\x0b\x01\x00\x00" +
-		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x70\xe8\x04\xd6\x07\x01\x01\x00\x00" +
-		"\x54\x00\x17\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x84\x00\x6a\xdc\x04\xbf\x07\x0b\x1e\x00\x00" +
-		"\x50\x00\x6a\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x4a\xe4\x04\xbc\x07\x01\x01\x00\x00" +
-		"\x6e\x00\x17\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x17\x00\x00\x20\x04\xd9\x07\x0a\x12\x08\x00" +
-		"\x20\x00\x00\x2c\x04\xda\x07\x03\x05\x08\x00" +
-		"\x17\x00\x00\x20\x04\xdb\x07\x0a\x1c\x08\x00" +
-		"\x20\x00\x00\x2c\x04\xdc\x07\x02\x15\x44\x20" +
-		"\x17\x00\x00\x20\x04\xe0\x07\x0a\x16\x00\x00" +
-		"\x20\x00\x00\x2c\x04\xe2\x07\x03\x0b\x10\x00" +
-		"\x17\x00\x00\x20\x04\xe2\x07\x0a\x07\x10\x00" +
-		"\x20\x00\x00\x2c\x04\xe3\x07\x03\x11\x0c\x00" +
-		"\x17\x00\x00\x20\x04\xe3\x07\x0a\x04\x0c\x00" +
-		"\x20\x00\x00\x2c\x04\xe4\x07\x03\x08\x0c\x00" +
-		"\x17\x00\x00\x20\x04\xe4\x07\x0a\x04\x00\x01" +
-		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x00\x1c\x04\xd9\x07\x0a\x12\x08\x00" +
-		"\x0d\x00\x00\x14\x04\xda\x07\x03\x0a\x50\x20" +
-		"\x14\x00\x00\x1c\x04\xdb\x07\x0a\x1c\x08\x00" +
-		"\x0d\x00\x00\x14\x04\xdc\x07\x02\x15\x50\x20" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4c\x00\x04\x28\x04\xda\x07\x01\x01\x00\x00" +
-		"\x4d\x00\x00\x28\x08\xdb\x07\x01\x01\x00\x00" +
-		"\x4c\x00\x04\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xd9\x07\x0a\x12\x08\x00" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x31\x00\x09\xf4\x04\xbe\x07\x05\x01\x00\x00" +
-		"\x36\x00\x19\xf0\x04\xe0\x07\x0c\x04\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2a\x00\x00\x00\x04\xb8\x07\x0c\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2a\x00\x00\x00\x04\xd5\x07\x02\x0c\x00\x00" +
-		"\x01\x00\x67\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x12\x00\x59\x18\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x12\x00\x59\x18\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x3b\x08\x04\xe6\x07\x0a\x1c\x00\x10" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x28\x00\x58\x34\x04\xbe\x07\x04\x01\x00\x10" +
-		"\x24\x00\x58\x30\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x21\x00\x58\x2c\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x24\x00\x58\x30\x04\xda\x07\x03\x1c\x08\x10" +
-		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\xbd\x07\x0a\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
-		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xca\x07\x09\x19\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
-		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
-		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x00" +
-		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x00" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\xbd\x07\x0a\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
-		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xcf\x07\x03\x1c\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x00\x0c\x04\xbe\x07\x05\x01\x00\x00" +
-		"\x08\x00\x38\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x59\x10\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x08\x00\x59\x0c\x04\xc8\x07\x09\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x0b\x00\x23\x10\x04\xcd\x07\x01\x01\x00\x00" +
-		"\x0b\x00\x0d\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x15\x00\x58\x1c\x04\xcb\x07\x05\x1c\x00\x00" +
-		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x14\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x11\x00\x00\x18\x04\xe0\x07\x03\x1b\x08\x10" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x3f\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x12\x00\x59\x18\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xc7\x07\x08\x1f\x08\x00" +
-		"\x0e\x00\x3c\x14\x04\xd5\x07\x08\x0c\x00\x00" +
-		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1b\x00\x58\x24\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x18\x00\x58\x20\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x1b\x00\x58\x24\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x1c\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x17\x00\x00\x20\x04\xe0\x07\x03\x1b\x08\x00" +
-		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x00\x1c\x04\xba\x07\x01\x01\x00\x00" +
-		"\x17\x00\x00\x20\x04\xbf\x07\x04\x01\x00\x00" +
-		"\x1b\x00\x47\x24\x04\xd8\x07\x03\x1f\x00\x00" +
-		"\x18\x00\x47\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0f\x00\x00\x16\x04\xcc\x07\x05\x19\x00\x00" +
-		"\x13\x00\x00\x1a\x04\xcc\x07\x0a\x1a\x02\x00" +
-		"\x11\x00\x00\x18\x04\xd6\x07\x04\x0f\x02\x00" +
-		"\x0f\x00\x00\x16\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x62\x08\x04\xe6\x07\x0a\x1c\x00\x00" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xd9\x07\x01\x01\x00\x00" +
-		"\x12\x00\x1f\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1a\x00\x00\x24\x04\xb8\x07\x05\x03\x00\x00" +
-		"\x17\x00\x00\x20\x04\xd0\x07\x09\x11\x00\x00" +
-		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x12\x00\x59\x18\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x11\x00\x00\x14\x08\xc7\x07\x09\x09\x08\x10" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x1c\x08\x04\xce\x07\x09\x01\x00\x00" +
-		"\x5e\x00\x23\x08\x04\xe0\x07\x09\x08\x00\x00" +
-		"\x07\x00\x00\x0c\x04\xe1\x07\x0a\x1d\x04\x20" +
-		"\x5e\x00\x23\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x68\x00\x72\x08\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x3b\x08\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x50\x08\x04\xd8\x07\x08\x1d\x00\x00" +
-		"\x60\x00\x00\x08\x04\xd8\x07\x09\x01\x00\x00" +
-		"\x5e\x00\x50\x08\x04\xda\x07\x01\x01\x00\x00" +
-		"\x60\x00\x00\x08\x04\xda\x07\x03\x1b\x00\x01" +
-		"\x5e\x00\x50\x08\x04\xdb\x07\x08\x01\x00\x00" +
-		"\x60\x00\x00\x08\x04\xdc\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x50\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x68\x00\x72\x08\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x3b\x08\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x50\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x17\x00\x00\x20\x04\xb7\x07\x06\x0d\x00\x00" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x66\x00\x31\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xba\x07\x01\x01\x00\x00" +
-		"\x15\x00\x47\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x18\x00\x58\x20\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x15\x00\x58\x1c\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x18\x00\x58\x20\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x1a\x00\x00\x24\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x17\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x81\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x82\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x68\x00\x72\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0c\x00\x00\x12\x04\x10\x27\x01\x01\x00\x00" +
-		"\x24\x00\x58\x30\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x21\x00\x58\x2c\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x24\x00\x58\x30\x04\xda\x07\x03\x1c\x08\x10" +
-		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x77\x00\x4f\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0f\x00\x00\x16\x04\xc2\x07\x01\x01\x00\x00" +
-		"\x10\x00\x00\x17\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1b\x00\x58\x24\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x18\x00\x58\x20\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x1b\x00\x58\x24\x04\xd4\x07\x01\x01\x00\x00" +
-		"\x1d\x00\x58\x28\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x2c\x04\xdb\x07\x09\x0d\x00\x10" +
-		"\x1c\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x69\x00\x00\x16\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x15\x00\x58\x1c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x17\x00\x00\x20\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x17\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x41\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x21\x00\x58\x2c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x1d\x00\x58\x28\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x23\x00\x00\x30\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1c\x00\x00\x28\x04\xe0\x07\x04\x18\x08\x10" +
-		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x83\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x53\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x1c\x08\x04\xce\x07\x09\x01\x00\x00" +
-		"\x5e\x00\x23\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x15\x00\x58\x1c\x04\xda\x07\x03\x1c\x08\x10" +
-		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x15\x00\x58\x1c\x04\xc9\x07\x05\x17\x00\x00" +
-		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x14\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x11\x00\x00\x18\x04\xe0\x07\x07\x18\x08\x10" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x12\x00\x58\x18\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0e\x00\x58\x14\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x14\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
-		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
-		"\x0e\x00\x59\x14\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xc8\x07\x03\x1d\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x83\x00\x00\x20\x04\xc4\x07\x01\x01\x00\x00" +
-		"\x81\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6d\x00\x00\x24\x04\xdf\x07\x08\x0f\x00\x00" +
-		"\x6d\x00\x00\x22\x04\xe2\x07\x05\x04\x5e\x00" +
-		"\x6d\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
-		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
-		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
-		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
-		"\x0e\x00\x59\x14\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0b\x00\x59\x10\x04\xc7\x07\x09\x1d\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x12\x00\x59\x18\x04\xc8\x07\x03\x1d\x08\x10" +
-		"\x0e\x00\x59\x14\x04\xd4\x07\x0a\x1f\x08\x10" +
-		"\x11\x00\x00\x18\x04\xe2\x07\x0c\x15\x00\x00" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x21\x00\x58\x2c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x1d\x00\x58\x28\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x21\x00\x58\x2c\x04\xcd\x07\x03\x1e\x08\x10" +
-		"\x1d\x00\x58\x28\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1c\x00\x00\x28\x04\xe0\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\xbd\x07\x04\x01\x00\x00" +
-		"\x11\x00\x00\x14\x08\xbd\x07\x0a\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\xbe\x07\x04\x01\x00\x00" +
-		"\x0e\x00\x59\x14\x04\xc8\x07\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6c\x00\x56\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x4e\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x16\x00\x00\x1e\x04\xbd\x07\x0c\x1f\x40\x20" +
-		"\x17\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x21\x00\x58\x2c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x1d\x00\x58\x28\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x23\x00\x00\x30\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x63\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x12\x00\x59\x18\x04\xc7\x07\x03\x1f\x08\x00" +
-		"\x0e\x00\x59\x14\x04\xc8\x07\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x59\x10\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x08\x00\x59\x0c\x04\xc8\x07\x01\x01\x00\x00" +
-		"\x08\x00\x21\x0c\x04\xca\x07\x09\x19\x00\x00" +
-		"\x0b\x00\x21\x10\x04\xcc\x07\x0a\x1b\x00\x00" +
-		"\x0d\x00\x00\x10\x08\xcd\x07\x03\x1e\x00\x00" +
-		"\x0b\x00\x21\x10\x04\xd4\x07\x06\x1b\x00\x00" +
-		"\x08\x00\x59\x0c\x04\xd5\x07\x03\x1b\x08\x00" +
-		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x09\x00\x37\x0e\x04\xb9\x07\x0a\x14\x60\x00" +
-		"\x0b\x00\x37\x10\x04\xbb\x07\x01\x01\x00\x00" +
-		"\x09\x00\x37\x0e\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0f\x00\x00\x16\x04\xc3\x07\x0a\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6b\x00\x3a\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x15\x00\x58\x1c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x12\x00\x58\x18\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x15\x00\x58\x1c\x04\xd2\x07\x05\x01\x0c\x00" +
-		"\x12\x00\x58\x18\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x14\x00\x00\x1c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x11\x00\x00\x18\x04\xe0\x07\x05\x1d\x08\x10" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x00\x1c\x04\xba\x07\x01\x01\x00\x00" +
-		"\x18\x00\x47\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1b\x00\x58\x24\x04\xbd\x07\x04\x01\x00\x00" +
-		"\x21\x00\x58\x2c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x1d\x00\x58\x28\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x21\x00\x58\x2c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x23\x00\x00\x30\x04\xdb\x07\x09\x0d\x00\x10" +
-		"\x20\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1c\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1d\x00\x58\x28\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x1b\x00\x58\x24\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x1d\x00\x58\x28\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x20\x00\x00\x2c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1c\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1b\x00\x58\x24\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x18\x00\x58\x20\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x1b\x00\x58\x24\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x1c\x00\x00\x28\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x13\x00\x00\x1a\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0e\x00\x58\x14\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0b\x00\x58\x10\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x0e\x00\x58\x14\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x11\x00\x00\x18\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x59\x10\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x08\x00\x59\x0c\x04\xcb\x07\x09\x18\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xcd\x07\x01\x01\x00\x00" +
-		"\x0b\x00\x59\x10\x04\xdb\x07\x01\x01\x00\x00" +
-		"\x0b\x00\x0a\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2c\x00\x55\xfc\x04\xbf\x07\x09\x19\x04\x10" +
-		"\x2c\x00\x6e\xfc\x04\xc8\x07\x09\x1b\x04\x10" +
-		"\x7e\x00\x22\x00\x04\xc9\x07\x03\x1c\x04\x20" +
-		"\x2c\x00\x22\xfc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x49\x00\x11\xf0\x04\xb6\x07\x04\x1c\x08\x00" +
-		"\x49\x00\x17\xf0\x04\xb8\x07\x01\x01\x00\x00" +
-		"\x49\x00\x6a\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x80\x00\x00\x00\x04\xbc\x07\x04\x06\x00\x10" +
-		"\x7f\x00\x00\x00\x08\xbc\x07\x09\x1c\x04\x20" +
-		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf8\x04\xb7\x07\x0b\x19\x08\x00" +
-		"\x2b\x00\x00\xfc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x80\x00\x00\x00\x04\xbd\x07\x01\x01\x00\x00" +
-		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x7e\x00\x55\x00\x04\xbf\x07\x09\x19\x04\x10" +
-		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x36\x00\x28\xf0\x04\xbf\x07\x05\x01\x00\x00" +
-		"\x31\x00\x28\xf4\x04\xc1\x07\x09\x0f\x00\x00" +
-		"\x36\x00\x28\xf0\x04\xda\x07\x09\x05\x08\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4a\x00\x03\x26\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4c\x00\x02\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4a\x00\x01\x26\x04\xd0\x07\x01\x01\x00\x00" +
-		"\x4a\x00\x03\x26\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4a\x00\x0b\x26\x04\x10\x27\x01\x01\x00\x00" +
-		"\x19\x00\x06\x23\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4c\x00\x04\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4c\x00\x02\x28\x04\xc8\x07\x07\x01\x00\x00" +
-		"\x4c\x00\x34\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4e\x00\x00\x28\x04\xbd\x07\x03\x01\x00\x00" +
-		"\x1f\x00\x3d\x2a\x04\xc1\x07\x07\x01\x00\x00" +
-		"\x1e\x00\x3d\x2a\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4c\x00\x05\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x52\x00\x06\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x4c\x00\x01\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x14\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x54\x00\x6a\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x61\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5c\x00\x6a\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x63\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2b\x00\x00\xfc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x42\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x46\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x48\x00\x00\xd0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2d\x00\x00\xf8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x2f\x00\x00\xf4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x35\x00\x00\xf0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x38\x00\x00\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3a\x00\x00\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3c\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3e\x00\x00\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x40\x00\x00\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x03\x00\x00\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1c\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x27\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x29\x00\x00\x38\x04\x10\x27\x01\x01\x00\x00" +
-		"\x05\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x14\x00\x00\x1c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x17\x00\x00\x20\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x7b\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x59\x00\x00\x04\x04\xc1\x07\x03\x1f\x08\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x58\x10\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xc8\x07\x03\x1d\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x07\x00\x00\x0c\x04\xe0\x07\x03\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x2e\x08\x04\xbd\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x59\x00\x00\x04\x04\xbe\x07\x0b\x1b\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x2d\x04\x04\xbc\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x0f\x04\x04\xb9\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x57\x08\x04\xbd\x07\x03\x1d\x08\x10" +
-		"\x5e\x00\x14\x08\x04\xc7\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x57\x08\x04\xca\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x20\x08\x04\xcd\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x36\x04\x04\xc0\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc6\x07\x05\x06\x08\x00" +
-		"\x5e\x00\x58\x08\x04\xc8\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x20\x08\x04\xcd\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x45\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6a\x00\x27\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x59\x00\x00\x04\x04\xbe\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x2a\x08\x04\xbf\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x5e\x00\x69\x08\x04\xba\x07\x06\x1d\x00\x00" +
-		"\x08\x00\x69\x0c\x04\xc0\x07\x0b\x01\x08\x00" +
-		"\x5e\x00\x69\x08\x04\xd7\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x22\x08\x04\xdb\x07\x03\x1b\x04\x20" +
-		"\x60\x00\x00\x08\x04\xdb\x07\x03\x1c\x04\x20" +
-		"\x5e\x00\x22\x08\x04\xde\x07\x03\x1e\x04\x20" +
-		"\x60\x00\x00\x08\x04\xde\x07\x03\x1f\x04\x20" +
-		"\x5e\x00\x22\x08\x04\xdf\x07\x0a\x19\x04\x20" +
-		"\x5f\x00\x00\x08\x08\xdf\x07\x0b\x08\x04\x20" +
-		"\x5e\x00\x22\x08\x04\xe0\x07\x09\x07\x00\x00" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x5e\x00\x58\x08\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x07\x00\x00\x0c\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x60\x00\x00\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x58\x10\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xc8\x07\x03\x1d\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc6\x07\x07\x01\x08\x00" +
-		"\x5f\x00\x00\x08\x08\xc7\x07\x09\x1d\x0c\x00" +
-		"\x5e\x00\x14\x08\x04\xcc\x07\x05\x0d\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x59\x00\x00\x04\x04\xb8\x07\x09\x1a\x04\x00" +
-		"\x7e\x00\x55\x00\x04\xbf\x07\x09\x19\x04\x10" +
-		"\x7e\x00\x6e\x00\x04\xc8\x07\x09\x1b\x04\x10" +
-		"\x58\x00\x22\x04\x04\xcc\x07\x03\x1f\x04\x20" +
-		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x01\x00\x2c\x00\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x64\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x5d\x04\x04\xbb\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x39\x04\x04\xb5\x07\x03\x1f\x00\x00" +
-		"\x58\x00\x42\x04\x04\xbd\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc6\x07\x01\x01\x00\x00" +
-		"\x71\x00\x00\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x5e\x00\x58\x08\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x5e\x00\x58\x08\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x72\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x71\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x71\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x2b\x04\x04\xb9\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x1d\x04\x04\xbb\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x5f\x00\x00\x08\x08\xc5\x07\x09\x18\x08\x10" +
-		"\x5e\x00\x3e\x08\x04\xcd\x07\x01\x15\x00\x00" +
-		"\x5e\x00\x22\x08\x04\xd0\x07\x02\x1d\x00\x00" +
-		"\x60\x00\x00\x08\x04\xd1\x07\x01\x02\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x39\x04\x04\xbc\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x58\x10\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x06\x00\x58\x08\x04\xc7\x07\x09\x1d\x08\x10" +
-		"\x07\x00\x00\x0c\x04\xc7\x07\x0a\x14\x0c\x00" +
-		"\x0b\x00\x58\x10\x04\xda\x07\x03\x1c\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x58\x10\x04\xc4\x07\x03\x1b\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xc8\x07\x03\x1d\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x07\x00\x00\x0c\x04\xe0\x07\x0c\x04\x08\x10" +
-		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc6\x07\x01\x01\x00\x00" +
-		"\x71\x00\x00\x0c\x04\xc6\x07\x07\x01\x08\x00" +
-		"\x60\x00\x00\x08\x04\xc8\x07\x03\x14\x00\x00" +
-		"\x5e\x00\x14\x08\x04\xca\x07\x05\x01\x00\x00" +
-		"\x72\x00\x14\x0c\x04\xcc\x07\x03\x1f\x00\x10" +
-		"\x70\x00\x00\x0c\x08\xcc\x07\x0a\x1b\x0c\x10" +
-		"\x71\x00\x00\x0c\x04\xcd\x07\x03\x1e\x04\x20" +
-		"\x5e\x00\x22\x08\x04\xde\x07\x03\x1e\x08\x00" +
-		"\x71\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x71\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x60\x00\x00\x08\x04\xbb\x07\x03\x1f\x5c\x00" +
-		"\x5e\x00\x13\x08\x04\xbe\x07\x09\x1a\x0c\x00" +
-		"\x5e\x00\x14\x08\x04\xc7\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x20\x08\x04\xcd\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x5f\x00\x00\x08\x08\xc5\x07\x09\x18\x08\x10" +
-		"\x5e\x00\x14\x08\x04\xce\x07\x09\x16\x00\x00" +
-		"\x5e\x00\x22\x08\x04\xcf\x07\x0a\x1f\x10\x00" +
-		"\x60\x00\x00\x08\x04\xd2\x07\x02\x15\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x07\x04\x04\xc0\x07\x07\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x58\x10\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x06\x00\x58\x08\x04\xc8\x07\x01\x13\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x07\x00\x00\x0c\x04\xe0\x07\x03\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x0c\x04\x04\xbd\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x72\x00\x58\x0c\x04\xc5\x07\x03\x1a\x08\x10" +
-		"\x5e\x00\x58\x08\x04\xc7\x07\x09\x1d\x08\x10" +
-		"\x5e\x00\x14\x08\x04\xce\x07\x01\x01\x00\x00" +
-		"\x60\x00\x00\x08\x04\xce\x07\x03\x1d\x04\x20" +
-		"\x58\x00\x22\x04\x04\xcf\x07\x0a\x1f\x04\x20" +
-		"\x60\x00\x00\x08\x04\xd3\x07\x01\x01\x00\x00" +
-		"\x5e\x00\x22\x08\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x58\x10\x04\xc4\x07\x03\x1b\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xc7\x07\x03\x1f\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xc8\x07\x03\x1d\x08\x10" +
-		"\x08\x00\x58\x0c\x04\xdb\x07\x03\x1b\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xde\x07\x0a\x1a\x08\x10" +
-		"\x07\x00\x00\x0c\x04\xe2\x07\x0a\x1c\x08\x10" +
-		"\x0a\x00\x00\x10\x04\xe4\x07\x0c\x1b\x08\x10" +
-		"\x07\x00\x00\x0c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x54\x04\x04\xb9\x07\x01\x01\x00\x00" +
-		"\x58\x00\x6e\x04\x04\xc4\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x58\x00\x61\x04\x04\xbd\x07\x01\x01\x00\x00" +
-		"\x58\x00\x22\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x67\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\xcc\x07\x01\x01\x00\x00" +
-		"\x11\x00\x00\x18\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0d\x00\x00\x14\x04\x10\x27\x01\x01\x00\x00" +
-		"\x0b\x00\x43\x10\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6f\x00\x14\x04\x04\x10\x27\x01\x01\x00\x00" +
-		"\x73\x00\x00\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x6e\x00\x6a\xe4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x76\x00\x6a\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x47\x00\x6f\xd4\x04\xdb\x07\x0c\x1d\x60\x00" +
-		"\x28\x00\x6f\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x75\x00\x4b\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1c\x00\x00\x28\x04\xde\x07\x0c\x1c\x08\x00" +
-		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x26\x00\x18\x33\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3d\x00\x19\xe4\x04\xbe\x07\x03\x0e\x0c\x20" +
-		"\x3b\x00\x19\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x21\x00\x6d\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x46\x00\x00\xd4\x04\xdb\x07\x0c\x1e\x00\x00" +
-		"\x27\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x24\x00\x29\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x38\x00\x00\xec\x04\xc2\x07\x01\x01\x00\x00" +
-		"\x3b\x00\x24\xe8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x40\x00\x00\xdc\x04\x10\x27\x01\x01\x00\x00" +
-		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x62\x00\x2f\x28\x04\xd0\x07\x0c\x17\x00\x00" +
-		"\x5b\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x67\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x48\x00\x00\xd0\x04\xbb\x07\x0a\x01\x00\x00" +
-		"\x46\x00\x00\xd4\x04\xca\x07\x0c\x1f\x00\x00" +
-		"\x27\x00\x00\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x45\x00\x00\xd5\x54\xbb\x07\x0a\x01\x00\x00" +
-		"\x42\x00\x00\xd8\x04\xca\x07\x0c\x1f\x00\x00" +
-		"\x29\x00\x00\x38\x04\x10\x27\x01\x01\x00\x00" +
-		"\x23\x00\x00\x30\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x20\x00\x00\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x48\x00\x00\xd0\x04\xc9\x07\x08\x14\x60\x00" +
-		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x41\x00\x00\xda\x04\x10\x27\x01\x01\x00\x00" +
-		"\x22\x00\x00\x2e\x04\xbb\x07\x02\x0a\x08\x00" +
-		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x46\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x22\x00\x00\x2e\x04\xb6\x07\x0a\x1b\x08\x10" +
-		"\x25\x00\x00\x2e\x08\xb7\x07\x03\x02\x08\x10" +
-		"\x22\x00\x00\x2e\x04\xdf\x07\x0a\x04\x08\x10" +
-		"\x20\x00\x00\x2c\x04\xe3\x07\x07\x01\x00\x00" +
-		"\x21\x00\x01\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x21\x00\x49\x2c\x04\x10\x27\x01\x01\x00\x00" +
-		"\x7a\x00\x00\xd4\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1a\x00\x00\x24\x04\x10\x27\x01\x01\x00\x00" +
-		"\x3f\x00\x00\xde\x04\xce\x07\x04\x1b\x00\x00" +
-		"\x3e\x00\x00\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x1c\x00\x00\x28\x04\x10\x27\x01\x01\x00\x00" +
-		"\x44\x00\x00\xd6\x04\xba\x07\x0b\x0c\x00\x00" +
-		"\x43\x00\x1a\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x42\x00\x00\xd8\x04\x10\x27\x01\x01\x00\x00" +
-		"\x23\x00\x00\x30\x04\x10\x27\x01\x01\x00\x00" +
-		"\x27\x00\x00\x34\x04\xcf\x07\x01\x01\x00\x00" +
-		"\x28\x00\x65\x34\x04\x10\x27\x01\x01\x00\x00" +
-		"\x7e\x00\x22\x00\x04\x10\x27\x01\x01\x00\x00"
+const ZoneErasData = "\x63\x00\x00\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x7e\x00\x08\x04\x00\x00\xb9\x07\x0a\x15\x00\x00" +
+		"\x58\x00\x08\x04\xf0\x00\xbb\x07\x0a\x1a\x00\x00" +
+		"\x7e\x00\x08\x04\x00\x00\xbd\x07\x05\x01\x00\x00" +
+		"\x59\x00\x00\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x2b\x00\x00\x04\x10\xff\xb7\x07\x01\x01\x00\x00" +
+		"\x63\x00\x00\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x26\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x02\x00\x48\x04\x00\x00\xc0\x07\x03\x10\x00\x00" +
+		"\x03\x00\x00\x04\xf0\x00\xc2\x07\x01\x01\x00\x00" +
+		"\x02\x00\x48\x04\x00\x00\xe2\x07\x0a\x1c\x0c\x00" +
+		"\x04\x00\x48\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x7e\x00\x5e\x04\x00\x00\xc0\x07\x03\x10\x00\x00" +
+		"\x59\x00\x00\x04\xf0\x00\xc2\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x2b\x00\x00\x04\x10\xff\xb8\x07\x04\x0e\x00\x00" +
+		"\x02\x00\x48\x04\x00\x00\xe2\x07\x0a\x1c\x0c\x00" +
+		"\x04\x00\x48\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x79\x00\x5a\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x55\x00\x60\x04\xe0\x01\xd0\x07\x01\x0f\x30\x00" +
+		"\x5d\x00\x00\x04\xd0\x02\xe5\x07\x02\x01\x00\x00" +
+		"\x56\x00\x00\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x55\x00\x60\x04\xe0\x01\xd0\x07\x01\x0f\x30\x00" +
+		"\x5d\x00\x00\x04\xd0\x02\xe1\x07\x0b\x01\x00\x00" +
+		"\x56\x00\x00\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x7d\x00\x00\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x56\x00\x00\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x63\x00\x00\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x5d\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x7d\x00\x00\x04\xf0\x00\xbb\x07\x0a\x0e\x00\x00" +
+		"\x7c\x00\x00\x08\xf0\x00\xbc\x07\x03\x08\x00\x00" +
+		"\x7d\x00\x00\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x63\x00\x00\x04\x00\x00\xe2\x07\x01\x01\x04\x00" +
+		"\x7d\x00\x00\x04\xf0\x00\xe3\x07\x01\x01\x08\x00" +
+		"\x63\x00\x00\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xbe\x07\x01\x01\x00\x00" +
+		"\x58\x00\x40\x04\xf0\x00\xc6\x07\x05\x04\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xcc\x07\x09\x1e\x00\x00" +
+		"\x58\x00\x40\x04\xf0\x00\xcd\x07\x0a\x04\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xdc\x07\x0b\x0a\x08\x00" +
+		"\x58\x00\x40\x04\xf0\x00\xdd\x07\x0a\x19\x08\x00" +
+		"\x60\x00\x00\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x68\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x79\x00\x00\x04\xe0\x01\xc6\x07\x03\x15\x00\x00" +
+		"\x01\x00\x4c\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x53\x00\x6a\x04\xb0\xf5\xbf\x07\x0a\x1e\x08\x00" +
+		"\x4f\x00\x6a\x04\xa0\xf6\xbf\x07\x0b\x1e\x00\x00" +
+		"\x65\x00\x6a\x04\xa0\xf6\x10\x27\x01\x01\x00\x00" +
+		"\x4f\x00\x6a\x04\xa0\xf6\xbf\x07\x0a\x1e\x08\x00" +
+		"\x84\x00\x6a\x04\x90\xf7\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\x04\x90\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xc6\x07\x09\x11\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xcb\x07\x09\x0e\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xd3\x07\x09\x18\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xdc\x07\x0a\x15\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xdd\x07\x09\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc7\x07\x03\x03\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x0a\x14\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd4\x07\x06\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x06\x14\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc7\x07\x03\x03\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x0a\x14\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc6\x07\x03\x04\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc6\x07\x0a\x1c\x00\x00" +
+		"\x2f\x00\x00\x08\x40\xfc\xc7\x07\x03\x11\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x0a\x06\x00\x00" +
+		"\x2d\x00\x00\x08\x30\xfd\xc8\x07\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc7\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x05\x07\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd4\x07\x06\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x06\x14\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc6\x07\x03\x04\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc6\x07\x0a\x0f\x00\x00" +
+		"\x2f\x00\x00\x08\x40\xfc\xc7\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x0a\x0f\x00\x00" +
+		"\x2f\x00\x00\x08\x40\xfc\xc8\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc8\x07\x0a\x12\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd4\x07\x05\x17\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x09\x1a\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd4\x07\x06\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x06\x14\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc7\x07\x03\x03\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x0a\x14\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc7\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x05\x07\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd4\x07\x05\x1f\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x07\x19\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc6\x07\x01\x01\x00\x00" +
+		"\x2d\x00\x00\x08\x30\xfd\xc6\x07\x03\x0e\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc6\x07\x0a\x0f\x00\x00" +
+		"\x2f\x00\x00\x08\x40\xfc\xc7\x07\x03\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x06\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x2f\x00\x00\x08\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd4\x07\x05\x1f\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x07\x19\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x01\x15\x00\x00" +
+		"\x36\x00\x5c\x04\x40\xfc\xd9\x07\x0a\x0b\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xc7\x07\x03\x03\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc7\x07\x0a\x14\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd4\x07\x06\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x06\x0d\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xcf\x07\x0a\x03\x00\x00" +
+		"\x36\x00\x09\x04\x40\xfc\xd0\x07\x03\x03\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd4\x07\x05\x1e\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x06\x14\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xd8\x07\x0a\x12\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xb6\x07\x04\x01\x00\x00" +
+		"\x36\x00\x51\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xd3\x07\x09\x18\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xdb\x07\x0a\x10\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xdc\x07\x0a\x15\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x44\x04\x70\xf9\xda\x07\x04\x04\x08\x00" +
+		"\x54\x00\x44\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x0e\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xc4\x07\x09\x0c\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x01\x00\x10\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\xc4\x07\x09\x0c\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xcf\x07\x09\x1e\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\xd0\x07\x0a\x0f\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x15\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\xb6\x07\x01\x01\x00\x00" +
+		"\x73\x00\x00\x04\x70\xf9\xb6\x07\x02\x03\x08\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x4a\x04\x70\xf9\xcf\x07\x0a\x1f\x08\x00" +
+		"\x54\x00\x17\x04\x60\xfa\xd0\x07\x0a\x1d\x08\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd0\x07\x0b\x05\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xd1\x07\x04\x01\x0c\x00" +
+		"\x6e\x00\x17\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xbd\x07\x0c\x17\x00\x00" +
+		"\x5c\x00\x44\x04\x50\xfb\xce\x07\x08\x02\x08\x00" +
+		"\x54\x00\x44\x04\x60\xfa\xdf\x07\x02\x01\x08\x00" +
+		"\x61\x00\x00\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd7\x07\x0c\x09\x0c\x00" +
+		"\x37\x00\x00\x04\xc8\xfb\xe0\x07\x05\x01\x0a\x00" +
+		"\x35\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xcc\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\x04\x60\xfa\xce\x07\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xce\x07\x04\x05\x0c\x00" +
+		"\x6e\x00\x44\x04\x70\xf9\xe6\x07\x0a\x1e\x08\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xcc\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\x04\x60\xfa\xce\x07\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xce\x07\x04\x05\x0c\x00" +
+		"\x6e\x00\x44\x04\x70\xf9\xda\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\xe6\x07\x0a\x1e\x08\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xe6\x07\x0b\x1e\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x16\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\xd3\x07\x09\x18\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd4\x07\x0a\x01\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xbc\x07\x04\x06\x08\x00" +
+		"\x31\x00\x22\x04\x30\xfd\xcc\x07\x01\x01\x00\x00" +
+		"\x63\x00\x00\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x84\x00\x71\x04\x90\xf7\xb5\x07\x0a\x1c\x00\x00" +
+		"\x78\x00\x00\x04\x80\xf8\xbc\x07\x01\x01\x00\x00" +
+		"\x76\x00\x17\x04\x80\xf8\xe4\x07\x0b\x01\x00\x00" +
+		"\x73\x00\x00\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x73\x00\x00\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xb5\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\xb7\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xb7\x07\x04\x1b\x08\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x25\x04\x70\xf9\xc3\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x17\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x12\x04\x50\xfb\xc4\x07\x09\x0c\x00\x00" +
+		"\x38\x00\x00\x04\x50\xfb\xc9\x07\x09\x1c\x00\x00" +
+		"\x39\x00\x12\x04\x50\xfb\xca\x07\x09\x16\x00\x00" +
+		"\x38\x00\x00\x04\x50\xfb\xd8\x07\x06\x18\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xdd\x07\x0b\x0a\x00\x00" +
+		"\x38\x00\x00\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x5b\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6c\x04\x80\xf8\xc3\x07\x01\x01\x00\x00" +
+		"\x76\x00\x17\x04\x80\xf8\xdf\x07\x03\x08\x08\x00" +
+		"\x73\x00\x00\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xc6\x07\x09\x11\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xcf\x07\x09\x1e\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xd0\x07\x0a\x16\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd1\x07\x09\x0d\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xd2\x07\x0a\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x33\x04\x40\xfc\xb6\x07\x01\x01\x00\x00" +
+		"\x49\x00\x17\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x5f\x04\x40\xfc\xdb\x07\x0b\x01\x00\x00" +
+		"\x49\x00\x17\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xbb\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\xdf\x07\x03\x08\x08\x00" +
+		"\x51\x00\x00\x04\x40\xfc\xe2\x07\x03\x0b\x0c\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x30\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x24\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x34\x00\x00\x04\x7c\xfc\xb7\x07\x08\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xc8\x07\x03\x1d\x04\x00" +
+		"\x35\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x33\x04\x40\xfc\xb6\x07\x01\x01\x00\x00" +
+		"\x49\x00\x17\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x1b\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x44\x04\x70\xf9\xcf\x07\x01\x01\x00\x00" +
+		"\x73\x00\x00\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\xc7\x07\x0a\x1b\x08\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\xb6\x07\x01\x06\x08\x00" +
+		"\x57\x00\x00\x08\x60\xfa\xb6\x07\x0a\x1b\x08\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\xb8\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\xb9\x07\x0a\x1e\x08\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\xd7\x07\x0b\x04\x08\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\xb5\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\xd7\x07\x0b\x04\x08\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd6\x07\x04\x02\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\xd7\x07\x03\x0b\x08\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x4a\x04\x80\xf8\xbb\x07\x04\x1d\x08\x00" +
+		"\x6e\x00\x4a\x04\x70\xf9\xbc\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x17\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x4a\x04\x50\xfb\xcf\x07\x0a\x1f\x08\x00" +
+		"\x54\x00\x17\x04\x60\xfa\xd0\x07\x0a\x1d\x08\x00" +
+		"\x5c\x00\x17\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xb6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\xc0\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\xbc\x07\x04\x1b\x08\x00" +
+		"\x84\x00\x6a\x04\x90\xf7\xbc\x07\x0a\x1a\x08\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\xbf\x07\x0a\x1e\x08\x00" +
+		"\x84\x00\x6a\x04\x90\xf7\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\x04\x90\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\xb6\x07\x01\x06\x08\x00" +
+		"\x57\x00\x00\x08\x60\xfa\xb6\x07\x0a\x1b\x08\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\xd0\x07\x0a\x1d\x08\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x52\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xc6\x07\x09\x11\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xcb\x07\x0a\x0d\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xcc\x07\x09\x04\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xcf\x07\x09\x1e\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xd0\x07\x0a\x16\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd1\x07\x09\x0d\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xd2\x07\x0a\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xb5\x07\x05\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xb7\x07\x02\x10\x00\x00" +
+		"\x54\x00\x4d\x04\x60\xfa\xc8\x07\x01\x01\x10\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xc8\x07\x09\x18\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xc9\x07\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xcd\x07\x01\x01\x00\x00" +
+		"\x54\x00\x4d\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\xc4\x07\x09\x0c\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xc9\x07\x09\x1c\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\xca\x07\x09\x16\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x51\x00\x00\x04\x40\xfc\xbc\x07\x04\x06\x00\x00" +
+		"\x4b\x00\x00\x08\x40\xfc\xbc\x07\x09\x1c\x00\x00" +
+		"\x51\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xc4\x07\x01\x01\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\xc5\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\x04\x60\xfa\xda\x07\x01\x01\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x44\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xb5\x07\x04\x1d\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xbd\x07\x0c\x17\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xbe\x07\x0c\x02\x00\x00" +
+		"\x54\x00\x44\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\xbf\x07\x0a\x1e\x08\x00" +
+		"\x78\x00\x00\x04\x80\xf8\xdf\x07\x0b\x01\x08\x00" +
+		"\x50\x00\x6a\x04\x90\xf7\xe2\x07\x0b\x04\x08\x00" +
+		"\x78\x00\x00\x04\x80\xf8\xe3\x07\x01\x14\x08\x00" +
+		"\x50\x00\x6a\x04\x90\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x44\x04\x60\xfa\xd1\x07\x09\x1e\x08\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xd2\x07\x02\x14\x00\x00" +
+		"\x54\x00\x44\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x51\x00\x00\x04\x40\xfc\xbc\x07\x05\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xc3\x07\x01\x01\x00\x00" +
+		"\x31\x00\x17\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x46\x04\x40\xfc\xb5\x07\x01\x01\x00\x00" +
+		"\x49\x00\x17\x04\x40\xfc\xc9\x07\x01\x01\x00\x00" +
+		"\x49\x00\x46\x04\x40\xfc\xd7\x07\x01\x01\x00\x00" +
+		"\x49\x00\x17\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xc4\x07\x01\x01\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\xc5\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x6b\x04\x30\xfd\xb6\x07\x01\x01\x00\x00" +
+		"\x30\x00\x6b\x04\x30\xfd\xb6\x07\x03\x0a\x00\x00" +
+		"\x32\x00\x6b\x04\x30\xfd\xb6\x07\x0c\x16\x00\x00" +
+		"\x31\x00\x6b\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x53\x00\x6a\x04\xb0\xf5\xbf\x07\x0a\x1e\x08\x00" +
+		"\x84\x00\x6a\x04\x90\xf7\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\x04\x90\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x2e\x00\x12\x04\x20\xfe\xc6\x07\x09\x11\x00\x00" +
+		"\x2d\x00\x00\x04\x20\xfe\xcf\x07\x09\x1e\x00\x00" +
+		"\x2e\x00\x12\x04\x20\xfe\xd0\x07\x0a\x0f\x00\x00" +
+		"\x2d\x00\x00\x04\x20\xfe\xd1\x07\x09\x0d\x00\x00" +
+		"\x2e\x00\x12\x04\x20\xfe\xd2\x07\x0a\x01\x00\x00" +
+		"\x2d\x00\x00\x04\x20\xfe\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\xda\x07\x0b\x07\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\xc8\x07\x0a\x19\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\xd3\x07\x0a\x1a\x08\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xbc\x07\x04\x06\x08\x00" +
+		"\x31\x00\x22\x04\x30\xfd\xe7\x07\x03\x19\x58\x00" +
+		"\x2d\x00\x00\x04\x20\xfe\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xcc\x07\x01\x01\x00\x00" +
+		"\x54\x00\x44\x04\x60\xfa\xce\x07\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xce\x07\x04\x05\x0c\x00" +
+		"\x6e\x00\x44\x04\x70\xf9\xda\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\xe6\x07\x0a\x1e\x08\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\xe6\x07\x0b\x1e\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x33\x00\x00\x04\xb8\xfc\xc0\x07\x0a\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x73\x00\x00\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x32\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\xc4\x07\x09\x0c\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x51\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x19\x04\x40\xfc\xe0\x07\x0c\x04\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x4a\x04\x60\xfa\xd0\x07\x0a\x1d\x08\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd1\x07\x04\x01\x0c\x00" +
+		"\x54\x00\x17\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xc6\x07\x09\x11\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xcf\x07\x09\x1e\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xd0\x07\x0a\x0f\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\xd1\x07\x09\x0d\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\xd2\x07\x0a\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x4a\x04\x60\xfa\xd0\x07\x0a\x1d\x08\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd1\x07\x04\x01\x0c\x00" +
+		"\x54\x00\x17\x04\x60\xfa\xd6\x07\x0a\x1d\x08\x00" +
+		"\x61\x00\x00\x04\x50\xfb\xd7\x07\x03\x0b\x0c\x00" +
+		"\x54\x00\x17\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x39\x00\x12\x04\x50\xfb\xc4\x07\x09\x0c\x00\x00" +
+		"\x38\x00\x00\x04\x50\xfb\xd8\x07\x06\x18\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xdd\x07\x0b\x0a\x00\x00" +
+		"\x38\x00\x00\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x12\x04\x40\xfc\xc4\x07\x09\x0c\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\xd8\x07\x06\x18\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x19\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x01\x00\x1e\x04\x50\xfb\xb6\x07\x0a\x1b\x00\x00" +
+		"\x51\x00\x00\x04\x40\xfc\xd0\x07\x0a\x1d\x08\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\xd0\x07\x0c\x03\x04\x00" +
+		"\x51\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x12\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x2d\x00\x00\x04\x20\xfe\xbc\x07\x04\x06\x08\x00" +
+		"\x2e\x00\x14\x04\x20\xfe\xbd\x07\x03\x1d\x00\x00" +
+		"\x2c\x00\x22\x04\x10\xff\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\xbf\x07\x0a\x1e\x08\x00" +
+		"\x84\x00\x6a\x04\x90\xf7\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\x04\x90\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x74\x00\x5f\x04\xb8\xfc\xdb\x07\x0b\x01\x00\x00" +
+		"\x74\x00\x17\x04\xb8\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x5a\x00\x00\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x35\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x64\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x78\x00\x00\x04\x80\xf8\xb8\x07\x01\x01\x00\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\xcc\x07\x01\x01\x00\x00" +
+		"\x76\x00\x44\x04\x80\xf8\xd1\x07\x01\x01\x00\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\xd2\x07\x02\x14\x00\x00" +
+		"\x76\x00\x44\x04\x80\xf8\xda\x07\x01\x01\x00\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x66\x04\x50\xfb\xb6\x07\x01\x01\x00\x00" +
+		"\x5c\x00\x17\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6c\x04\x80\xf8\xc3\x07\x01\x01\x00\x00" +
+		"\x76\x00\x17\x04\x80\xf8\x10\x27\x01\x01\x00\x00" +
+		"\x78\x00\x00\x04\x80\xf8\xbc\x07\x01\x01\x00\x00" +
+		"\x76\x00\x17\x04\x80\xf8\xe4\x07\x0b\x01\x00\x00" +
+		"\x73\x00\x00\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x70\x04\x60\xfa\xd6\x07\x01\x01\x00\x00" +
+		"\x54\x00\x17\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x84\x00\x6a\x04\x90\xf7\xbf\x07\x0b\x1e\x00\x00" +
+		"\x50\x00\x6a\x04\x90\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x4a\x04\x70\xf9\xbc\x07\x01\x01\x00\x00" +
+		"\x6e\x00\x17\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x17\x00\x00\x04\x80\x07\xd9\x07\x0a\x12\x08\x00" +
+		"\x20\x00\x00\x04\x50\x0a\xda\x07\x03\x05\x08\x00" +
+		"\x17\x00\x00\x04\x80\x07\xdb\x07\x0a\x1c\x08\x00" +
+		"\x20\x00\x00\x04\x50\x0a\xdc\x07\x02\x15\x44\x20" +
+		"\x17\x00\x00\x04\x80\x07\xe0\x07\x0a\x16\x00\x00" +
+		"\x20\x00\x00\x04\x50\x0a\xe2\x07\x03\x0b\x10\x00" +
+		"\x17\x00\x00\x04\x80\x07\xe2\x07\x0a\x07\x10\x00" +
+		"\x20\x00\x00\x04\x50\x0a\xe3\x07\x03\x11\x0c\x00" +
+		"\x17\x00\x00\x04\x80\x07\xe3\x07\x0a\x04\x0c\x00" +
+		"\x20\x00\x00\x04\x50\x0a\xe4\x07\x03\x08\x0c\x00" +
+		"\x17\x00\x00\x04\x80\x07\xe4\x07\x0a\x04\x00\x01" +
+		"\x20\x00\x00\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x04\x90\x06\xd9\x07\x0a\x12\x08\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xda\x07\x03\x0a\x50\x20" +
+		"\x14\x00\x00\x04\x90\x06\xdb\x07\x0a\x1c\x08\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xdc\x07\x02\x15\x50\x20" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x04\x04\x60\x09\xda\x07\x01\x01\x00\x00" +
+		"\x4d\x00\x00\x08\x60\x09\xdb\x07\x01\x01\x00\x00" +
+		"\x4c\x00\x04\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xd9\x07\x0a\x12\x08\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x31\x00\x09\x04\x30\xfd\xbe\x07\x05\x01\x00\x00" +
+		"\x36\x00\x19\x04\x40\xfc\xe0\x07\x0c\x04\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x2a\x00\x00\x04\x00\x00\xb8\x07\x0c\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x2a\x00\x00\x04\x00\x00\xd5\x07\x02\x0c\x00\x00" +
+		"\x01\x00\x67\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x59\x04\xa0\x05\xc7\x07\x03\x1f\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x12\x00\x59\x04\xa0\x05\xd4\x07\x0a\x1f\x08\x10" +
+		"\x11\x00\x00\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x3b\x04\xe0\x01\xe6\x07\x0a\x1c\x00\x10" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x28\x00\x58\x04\x30\x0c\xbe\x07\x04\x01\x00\x10" +
+		"\x24\x00\x58\x04\x40\x0b\xc7\x07\x03\x1f\x08\x10" +
+		"\x21\x00\x58\x04\x50\x0a\xc8\x07\x01\x13\x08\x10" +
+		"\x24\x00\x58\x04\x40\x0b\xda\x07\x03\x1c\x08\x10" +
+		"\x21\x00\x58\x04\x50\x0a\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x04\x40\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xca\x07\x09\x19\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xd4\x07\x0a\x1f\x08\x10" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x08\xb0\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc7\x07\x03\x1f\x08\x00" +
+		"\x0b\x00\x59\x04\xc0\x03\xc8\x07\x01\x13\x08\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xcf\x07\x03\x1c\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xd4\x07\x0a\x1f\x08\x10" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x07\x00\x00\x04\xd0\x02\xbe\x07\x05\x01\x00\x00" +
+		"\x08\x00\x38\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x59\x04\xc0\x03\xc7\x07\x03\x1f\x08\x10" +
+		"\x08\x00\x59\x04\xd0\x02\xc8\x07\x09\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xcc\x07\x01\x01\x00\x00" +
+		"\x0b\x00\x23\x04\xc0\x03\xcd\x07\x01\x01\x00\x00" +
+		"\x0b\x00\x0d\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x04\x90\x06\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x04\xa0\x05\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x04\x90\x06\xcb\x07\x05\x1c\x00\x00" +
+		"\x12\x00\x58\x04\xa0\x05\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\xde\x07\x0a\x1a\x08\x10" +
+		"\x11\x00\x00\x04\xa0\x05\xe0\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x3f\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x59\x04\xa0\x05\xc7\x07\x03\x1f\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xc7\x07\x08\x1f\x08\x00" +
+		"\x0e\x00\x3c\x04\xb0\x04\xd5\x07\x08\x0c\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x1b\x00\x58\x04\x70\x08\xc7\x07\x03\x1f\x08\x10" +
+		"\x18\x00\x58\x04\x80\x07\xc8\x07\x01\x13\x08\x10" +
+		"\x1b\x00\x58\x04\x70\x08\xdb\x07\x03\x1b\x08\x10" +
+		"\x1c\x00\x00\x04\x60\x09\xde\x07\x0a\x1a\x08\x10" +
+		"\x17\x00\x00\x04\x80\x07\xe0\x07\x03\x1b\x08\x00" +
+		"\x1a\x00\x00\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x04\x90\x06\xba\x07\x01\x01\x00\x00" +
+		"\x17\x00\x00\x04\x80\x07\xbf\x07\x04\x01\x00\x00" +
+		"\x1b\x00\x47\x04\x70\x08\xd8\x07\x03\x1f\x00\x00" +
+		"\x18\x00\x47\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x0f\x00\x00\x04\x28\x05\xcc\x07\x05\x19\x00\x00" +
+		"\x13\x00\x00\x04\x18\x06\xcc\x07\x0a\x1a\x02\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xd6\x07\x04\x0f\x02\x00" +
+		"\x0f\x00\x00\x04\x28\x05\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x62\x04\xe0\x01\xe6\x07\x0a\x1c\x00\x00" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xd9\x07\x01\x01\x00\x00" +
+		"\x12\x00\x1f\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x1a\x00\x00\x04\x70\x08\xb8\x07\x05\x03\x00\x00" +
+		"\x17\x00\x00\x04\x80\x07\xd0\x07\x09\x11\x00\x00" +
+		"\x1a\x00\x00\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x0a\x00\x00\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x59\x04\xa0\x05\xc7\x07\x03\x1f\x08\x10" +
+		"\x11\x00\x00\x08\xb0\x04\xc7\x07\x09\x09\x08\x10" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x1c\x04\xe0\x01\xce\x07\x09\x01\x00\x00" +
+		"\x5e\x00\x23\x04\xe0\x01\xe0\x07\x09\x08\x00\x00" +
+		"\x07\x00\x00\x04\xd0\x02\xe1\x07\x0a\x1d\x04\x20" +
+		"\x5e\x00\x23\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x68\x00\x72\x04\xe0\x01\xcc\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x3b\x04\xe0\x01\xcf\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x50\x04\xe0\x01\xd8\x07\x08\x1d\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xd8\x07\x09\x01\x00\x00" +
+		"\x5e\x00\x50\x04\xe0\x01\xda\x07\x01\x01\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xda\x07\x03\x1b\x00\x01" +
+		"\x5e\x00\x50\x04\xe0\x01\xdb\x07\x08\x01\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xdc\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x50\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x68\x00\x72\x04\xe0\x01\xcc\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x3b\x04\xe0\x01\xcf\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x50\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x17\x00\x00\x04\x80\x07\xb7\x07\x06\x0d\x00\x00" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x66\x00\x31\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xba\x07\x01\x01\x00\x00" +
+		"\x15\x00\x47\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x18\x00\x58\x04\x80\x07\xc7\x07\x03\x1f\x08\x10" +
+		"\x15\x00\x58\x04\x90\x06\xc8\x07\x01\x13\x08\x10" +
+		"\x18\x00\x58\x04\x80\x07\xdb\x07\x03\x1b\x08\x10" +
+		"\x1a\x00\x00\x04\x70\x08\xde\x07\x0a\x1a\x08\x10" +
+		"\x17\x00\x00\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x81\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x82\x00\x00\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x68\x00\x72\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x0c\x00\x00\x04\x38\x04\x10\x27\x01\x01\x00\x00" +
+		"\x24\x00\x58\x04\x40\x0b\xc7\x07\x03\x1f\x08\x10" +
+		"\x21\x00\x58\x04\x50\x0a\xc8\x07\x01\x13\x08\x10" +
+		"\x24\x00\x58\x04\x40\x0b\xda\x07\x03\x1c\x08\x10" +
+		"\x21\x00\x58\x04\x50\x0a\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x04\x40\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x77\x00\x4f\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0f\x00\x00\x04\x28\x05\xc2\x07\x01\x01\x00\x00" +
+		"\x10\x00\x00\x04\x64\x05\x10\x27\x01\x01\x00\x00" +
+		"\x1b\x00\x58\x04\x70\x08\xc7\x07\x03\x1f\x08\x10" +
+		"\x18\x00\x58\x04\x80\x07\xc8\x07\x01\x13\x08\x10" +
+		"\x1b\x00\x58\x04\x70\x08\xd4\x07\x01\x01\x00\x00" +
+		"\x1d\x00\x58\x04\x60\x09\xdb\x07\x03\x1b\x08\x10" +
+		"\x20\x00\x00\x04\x50\x0a\xdb\x07\x09\x0d\x00\x10" +
+		"\x1c\x00\x00\x04\x60\x09\xde\x07\x0a\x1a\x08\x10" +
+		"\x1a\x00\x00\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x69\x00\x00\x04\x28\x05\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x04\x90\x06\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x04\xa0\x05\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x04\x90\x06\xdb\x07\x03\x1b\x08\x10" +
+		"\x17\x00\x00\x04\x80\x07\xde\x07\x0a\x1a\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x17\x00\x00\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x41\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x58\x04\x50\x0a\xc7\x07\x03\x1f\x08\x10" +
+		"\x1d\x00\x58\x04\x60\x09\xc8\x07\x01\x13\x08\x10" +
+		"\x21\x00\x58\x04\x50\x0a\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x04\x40\x0b\xde\x07\x0a\x1a\x08\x10" +
+		"\x1c\x00\x00\x04\x60\x09\xe0\x07\x04\x18\x08\x10" +
+		"\x20\x00\x00\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x83\x00\x00\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x53\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x1c\x04\xe0\x01\xce\x07\x09\x01\x00\x00" +
+		"\x5e\x00\x23\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x04\x90\x06\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x04\xa0\x05\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x04\x90\x06\xda\x07\x03\x1c\x08\x10" +
+		"\x12\x00\x58\x04\xa0\x05\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x04\x90\x06\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x04\xa0\x05\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x04\x90\x06\xc9\x07\x05\x17\x00\x00" +
+		"\x12\x00\x58\x04\xa0\x05\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\xde\x07\x0a\x1a\x08\x10" +
+		"\x11\x00\x00\x04\xa0\x05\xe0\x07\x07\x18\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x58\x04\xa0\x05\xc7\x07\x03\x1f\x08\x10" +
+		"\x0e\x00\x58\x04\xb0\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x12\x00\x58\x04\xa0\x05\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\xde\x07\x0a\x1a\x08\x10" +
+		"\x11\x00\x00\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x08\xb0\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc5\x07\x03\x1a\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xc8\x07\x03\x1d\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xd4\x07\x0a\x1f\x08\x10" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x83\x00\x00\x04\x80\x07\xc4\x07\x01\x01\x00\x00" +
+		"\x81\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x6d\x00\x00\x04\x70\x08\xdf\x07\x08\x0f\x00\x00" +
+		"\x6d\x00\x00\x04\xf8\x07\xe2\x07\x05\x04\x5e\x00" +
+		"\x6d\x00\x00\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x08\xb0\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x11\x00\x00\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x08\xb0\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x59\x04\xc0\x03\xc7\x07\x09\x1d\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xc8\x07\x01\x13\x08\x10" +
+		"\x12\x00\x59\x04\xa0\x05\xc8\x07\x03\x1d\x08\x10" +
+		"\x0e\x00\x59\x04\xb0\x04\xd4\x07\x0a\x1f\x08\x10" +
+		"\x11\x00\x00\x04\xa0\x05\xe2\x07\x0c\x15\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x58\x04\x50\x0a\xc7\x07\x03\x1f\x08\x10" +
+		"\x1d\x00\x58\x04\x60\x09\xc8\x07\x01\x13\x08\x10" +
+		"\x21\x00\x58\x04\x50\x0a\xcd\x07\x03\x1e\x08\x10" +
+		"\x1d\x00\x58\x04\x60\x09\xdb\x07\x03\x1b\x08\x10" +
+		"\x20\x00\x00\x04\x50\x0a\xde\x07\x0a\x1a\x08\x10" +
+		"\x1c\x00\x00\x04\x60\x09\xe0\x07\x03\x1b\x08\x10" +
+		"\x20\x00\x00\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xbd\x07\x04\x01\x00\x00" +
+		"\x11\x00\x00\x08\xb0\x04\xbd\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\xbe\x07\x04\x01\x00\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc8\x07\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x6c\x00\x56\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x4e\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x16\x00\x00\x04\x08\x07\xbd\x07\x0c\x1f\x40\x20" +
+		"\x17\x00\x00\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x58\x04\x50\x0a\xc7\x07\x03\x1f\x08\x10" +
+		"\x1d\x00\x58\x04\x60\x09\xc8\x07\x01\x13\x08\x10" +
+		"\x21\x00\x58\x04\x50\x0a\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x04\x40\x0b\xde\x07\x0a\x1a\x08\x10" +
+		"\x20\x00\x00\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x63\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x12\x00\x59\x04\xa0\x05\xc7\x07\x03\x1f\x08\x00" +
+		"\x0e\x00\x59\x04\xb0\x04\xc8\x07\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x59\x04\xc0\x03\xc7\x07\x03\x1f\x08\x10" +
+		"\x08\x00\x59\x04\xd0\x02\xc8\x07\x01\x01\x00\x00" +
+		"\x08\x00\x21\x04\xd0\x02\xca\x07\x09\x19\x00\x00" +
+		"\x0b\x00\x21\x04\xc0\x03\xcc\x07\x0a\x1b\x00\x00" +
+		"\x0d\x00\x00\x08\xc0\x03\xcd\x07\x03\x1e\x00\x00" +
+		"\x0b\x00\x21\x04\xc0\x03\xd4\x07\x06\x1b\x00\x00" +
+		"\x08\x00\x59\x04\xd0\x02\xd5\x07\x03\x1b\x08\x00" +
+		"\x0a\x00\x00\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x09\x00\x37\x04\x48\x03\xb9\x07\x0a\x14\x60\x00" +
+		"\x0b\x00\x37\x04\xc0\x03\xbb\x07\x01\x01\x00\x00" +
+		"\x09\x00\x37\x04\x48\x03\x10\x27\x01\x01\x00\x00" +
+		"\x0f\x00\x00\x04\x28\x05\xc3\x07\x0a\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x6b\x00\x3a\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x15\x00\x58\x04\x90\x06\xc7\x07\x03\x1f\x08\x10" +
+		"\x12\x00\x58\x04\xa0\x05\xc8\x07\x01\x13\x08\x10" +
+		"\x15\x00\x58\x04\x90\x06\xd2\x07\x05\x01\x0c\x00" +
+		"\x12\x00\x58\x04\xa0\x05\xdb\x07\x03\x1b\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\xde\x07\x0a\x1a\x08\x10" +
+		"\x11\x00\x00\x04\xa0\x05\xe0\x07\x05\x1d\x08\x10" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x04\x90\x06\xba\x07\x01\x01\x00\x00" +
+		"\x18\x00\x47\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x1b\x00\x58\x04\x70\x08\xbd\x07\x04\x01\x00\x00" +
+		"\x21\x00\x58\x04\x50\x0a\xc7\x07\x03\x1f\x08\x10" +
+		"\x1d\x00\x58\x04\x60\x09\xc8\x07\x01\x13\x08\x10" +
+		"\x21\x00\x58\x04\x50\x0a\xdb\x07\x03\x1b\x08\x10" +
+		"\x23\x00\x00\x04\x40\x0b\xdb\x07\x09\x0d\x00\x10" +
+		"\x20\x00\x00\x04\x50\x0a\xde\x07\x0a\x1a\x08\x10" +
+		"\x1c\x00\x00\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x1d\x00\x58\x04\x60\x09\xc7\x07\x03\x1f\x08\x10" +
+		"\x1b\x00\x58\x04\x70\x08\xc8\x07\x01\x13\x08\x10" +
+		"\x1d\x00\x58\x04\x60\x09\xdb\x07\x03\x1b\x08\x10" +
+		"\x20\x00\x00\x04\x50\x0a\xde\x07\x0a\x1a\x08\x10" +
+		"\x1c\x00\x00\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x1b\x00\x58\x04\x70\x08\xc7\x07\x03\x1f\x08\x10" +
+		"\x18\x00\x58\x04\x80\x07\xc8\x07\x01\x13\x08\x10" +
+		"\x1b\x00\x58\x04\x70\x08\xdb\x07\x03\x1b\x08\x10" +
+		"\x1c\x00\x00\x04\x60\x09\xde\x07\x0a\x1a\x08\x10" +
+		"\x1a\x00\x00\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x13\x00\x00\x04\x18\x06\x10\x27\x01\x01\x00\x00" +
+		"\x0e\x00\x58\x04\xb0\x04\xc7\x07\x03\x1f\x08\x10" +
+		"\x0b\x00\x58\x04\xc0\x03\xc8\x07\x01\x13\x08\x10" +
+		"\x0e\x00\x58\x04\xb0\x04\xdb\x07\x03\x1b\x08\x10" +
+		"\x11\x00\x00\x04\xa0\x05\xde\x07\x0a\x1a\x08\x10" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x59\x04\xc0\x03\xc7\x07\x03\x1f\x08\x10" +
+		"\x08\x00\x59\x04\xd0\x02\xcb\x07\x09\x18\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xcd\x07\x01\x01\x00\x00" +
+		"\x0b\x00\x59\x04\xc0\x03\xdb\x07\x01\x01\x00\x00" +
+		"\x0b\x00\x0a\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x2c\x00\x55\x04\x10\xff\xbf\x07\x09\x19\x04\x10" +
+		"\x2c\x00\x6e\x04\x10\xff\xc8\x07\x09\x1b\x04\x10" +
+		"\x7e\x00\x22\x04\x00\x00\xc9\x07\x03\x1c\x04\x20" +
+		"\x2c\x00\x22\x04\x10\xff\x10\x27\x01\x01\x00\x00" +
+		"\x49\x00\x11\x04\x40\xfc\xb6\x07\x04\x1c\x08\x00" +
+		"\x49\x00\x17\x04\x40\xfc\xb8\x07\x01\x01\x00\x00" +
+		"\x49\x00\x6a\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x80\x00\x00\x04\x00\x00\xbc\x07\x04\x06\x00\x10" +
+		"\x7f\x00\x00\x08\x00\x00\xbc\x07\x09\x1c\x04\x20" +
+		"\x7e\x00\x22\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x2d\x00\x00\x04\x20\xfe\xb7\x07\x0b\x19\x08\x00" +
+		"\x2b\x00\x00\x04\x10\xff\x10\x27\x01\x01\x00\x00" +
+		"\x80\x00\x00\x04\x00\x00\xbd\x07\x01\x01\x00\x00" +
+		"\x7e\x00\x22\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x7e\x00\x55\x04\x00\x00\xbf\x07\x09\x19\x04\x10" +
+		"\x7e\x00\x22\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x2d\x00\x00\x04\x20\xfe\x10\x27\x01\x01\x00\x00" +
+		"\x36\x00\x28\x04\x40\xfc\xbf\x07\x05\x01\x00\x00" +
+		"\x31\x00\x28\x04\x30\xfd\xc1\x07\x09\x0f\x00\x00" +
+		"\x36\x00\x28\x04\x40\xfc\xda\x07\x09\x05\x08\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x4a\x00\x03\x04\xe8\x08\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x02\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x4a\x00\x01\x04\xe8\x08\xd0\x07\x01\x01\x00\x00" +
+		"\x4a\x00\x03\x04\xe8\x08\x10\x27\x01\x01\x00\x00" +
+		"\x4a\x00\x0b\x04\xe8\x08\x10\x27\x01\x01\x00\x00" +
+		"\x19\x00\x06\x04\x34\x08\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x04\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x02\x04\x60\x09\xc8\x07\x07\x01\x00\x00" +
+		"\x4c\x00\x34\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x4e\x00\x00\x04\x60\x09\xbd\x07\x03\x01\x00\x00" +
+		"\x1f\x00\x3d\x04\xd8\x09\xc1\x07\x07\x01\x00\x00" +
+		"\x1e\x00\x3d\x04\xd8\x09\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x05\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x52\x00\x06\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x4c\x00\x01\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x14\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x54\x00\x6a\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x61\x00\x00\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x5c\x00\x6a\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x63\x00\x00\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x2b\x00\x00\x04\x10\xff\x10\x27\x01\x01\x00\x00" +
+		"\x42\x00\x00\x04\xa0\xf6\x10\x27\x01\x01\x00\x00" +
+		"\x46\x00\x00\x04\xb0\xf5\x10\x27\x01\x01\x00\x00" +
+		"\x48\x00\x00\x04\xc0\xf4\x10\x27\x01\x01\x00\x00" +
+		"\x2d\x00\x00\x04\x20\xfe\x10\x27\x01\x01\x00\x00" +
+		"\x2f\x00\x00\x04\x30\xfd\x10\x27\x01\x01\x00\x00" +
+		"\x35\x00\x00\x04\x40\xfc\x10\x27\x01\x01\x00\x00" +
+		"\x38\x00\x00\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
+		"\x3a\x00\x00\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x3c\x00\x00\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x3e\x00\x00\x04\x80\xf8\x10\x27\x01\x01\x00\x00" +
+		"\x40\x00\x00\x04\x90\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x03\x00\x00\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x1c\x00\x00\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x20\x00\x00\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x23\x00\x00\x04\x40\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x27\x00\x00\x04\x30\x0c\x10\x27\x01\x01\x00\x00" +
+		"\x29\x00\x00\x04\x20\x0d\x10\x27\x01\x01\x00\x00" +
+		"\x05\x00\x00\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x0a\x00\x00\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x14\x00\x00\x04\x90\x06\x10\x27\x01\x01\x00\x00" +
+		"\x17\x00\x00\x04\x80\x07\x10\x27\x01\x01\x00\x00" +
+		"\x1a\x00\x00\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x7b\x00\x00\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x59\x00\x00\x04\xf0\x00\xc1\x07\x03\x1f\x08\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x04\xc0\x03\xc5\x07\x03\x1a\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xc7\x07\x03\x1f\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xc8\x07\x03\x1d\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\xe0\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x2e\x04\xe0\x01\xbd\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x59\x00\x00\x04\xf0\x00\xbe\x07\x0b\x1b\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x2d\x04\xf0\x00\xbc\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x0f\x04\xf0\x00\xb9\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x57\x04\xe0\x01\xbd\x07\x03\x1d\x08\x10" +
+		"\x5e\x00\x14\x04\xe0\x01\xc7\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x57\x04\xe0\x01\xca\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x20\x04\xe0\x01\xcd\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x36\x04\xf0\x00\xc0\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc6\x07\x05\x06\x08\x00" +
+		"\x5e\x00\x58\x04\xe0\x01\xc8\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x20\x04\xe0\x01\xcd\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x45\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x6a\x00\x27\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x59\x00\x00\x04\xf0\x00\xbe\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x2a\x04\xe0\x01\xbf\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x5e\x00\x69\x04\xe0\x01\xba\x07\x06\x1d\x00\x00" +
+		"\x08\x00\x69\x04\xd0\x02\xc0\x07\x0b\x01\x08\x00" +
+		"\x5e\x00\x69\x04\xe0\x01\xd7\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\xdb\x07\x03\x1b\x04\x20" +
+		"\x60\x00\x00\x04\xe0\x01\xdb\x07\x03\x1c\x04\x20" +
+		"\x5e\x00\x22\x04\xe0\x01\xde\x07\x03\x1e\x04\x20" +
+		"\x60\x00\x00\x04\xe0\x01\xde\x07\x03\x1f\x04\x20" +
+		"\x5e\x00\x22\x04\xe0\x01\xdf\x07\x0a\x19\x04\x20" +
+		"\x5f\x00\x00\x08\xe0\x01\xdf\x07\x0b\x08\x04\x20" +
+		"\x5e\x00\x22\x04\xe0\x01\xe0\x07\x09\x07\x00\x00" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc5\x07\x03\x1a\x08\x10" +
+		"\x5e\x00\x58\x04\xe0\x01\xdb\x07\x03\x1b\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\xde\x07\x0a\x1a\x08\x10" +
+		"\x60\x00\x00\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x04\xc0\x03\xc5\x07\x03\x1a\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xc7\x07\x03\x1f\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xc8\x07\x03\x1d\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc6\x07\x07\x01\x08\x00" +
+		"\x5f\x00\x00\x08\xe0\x01\xc7\x07\x09\x1d\x0c\x00" +
+		"\x5e\x00\x14\x04\xe0\x01\xcc\x07\x05\x0d\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x59\x00\x00\x04\xf0\x00\xb8\x07\x09\x1a\x04\x00" +
+		"\x7e\x00\x55\x04\x00\x00\xbf\x07\x09\x19\x04\x10" +
+		"\x7e\x00\x6e\x04\x00\x00\xc8\x07\x09\x1b\x04\x10" +
+		"\x58\x00\x22\x04\xf0\x00\xcc\x07\x03\x1f\x04\x20" +
+		"\x7e\x00\x22\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x01\x00\x2c\x04\x00\x00\xcc\x07\x01\x01\x00\x00" +
+		"\x64\x00\x22\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x5d\x04\xf0\x00\xbb\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x39\x04\xf0\x00\xb5\x07\x03\x1f\x00\x00" +
+		"\x58\x00\x42\x04\xf0\x00\xbd\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc6\x07\x01\x01\x00\x00" +
+		"\x71\x00\x00\x04\xd0\x02\xc7\x07\x03\x1f\x08\x10" +
+		"\x5e\x00\x58\x04\xe0\x01\xdb\x07\x03\x1b\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc7\x07\x03\x1f\x08\x10" +
+		"\x5e\x00\x58\x04\xe0\x01\xc8\x07\x01\x13\x08\x10" +
+		"\x72\x00\x58\x04\xd0\x02\xdb\x07\x03\x1b\x08\x10" +
+		"\x71\x00\x00\x04\xc0\x03\xde\x07\x0a\x1a\x08\x10" +
+		"\x71\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x2b\x04\xf0\x00\xb9\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x1d\x04\xf0\x00\xbb\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc5\x07\x03\x1a\x08\x10" +
+		"\x5f\x00\x00\x08\xe0\x01\xc5\x07\x09\x18\x08\x10" +
+		"\x5e\x00\x3e\x04\xe0\x01\xcd\x07\x01\x15\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\xd0\x07\x02\x1d\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xd1\x07\x01\x02\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x39\x04\xf0\x00\xbc\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x04\xc0\x03\xc5\x07\x03\x1a\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xc7\x07\x03\x1f\x08\x10" +
+		"\x06\x00\x58\x04\xe0\x01\xc7\x07\x09\x1d\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\xc7\x07\x0a\x14\x0c\x00" +
+		"\x0b\x00\x58\x04\xc0\x03\xda\x07\x03\x1c\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x04\xc0\x03\xc4\x07\x03\x1b\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xc7\x07\x03\x1f\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xc8\x07\x03\x1d\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\xe0\x07\x0c\x04\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc6\x07\x01\x01\x00\x00" +
+		"\x71\x00\x00\x04\xd0\x02\xc6\x07\x07\x01\x08\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xc8\x07\x03\x14\x00\x00" +
+		"\x5e\x00\x14\x04\xe0\x01\xca\x07\x05\x01\x00\x00" +
+		"\x72\x00\x14\x04\xd0\x02\xcc\x07\x03\x1f\x00\x10" +
+		"\x70\x00\x00\x08\xd0\x02\xcc\x07\x0a\x1b\x0c\x10" +
+		"\x71\x00\x00\x04\xd0\x02\xcd\x07\x03\x1e\x04\x20" +
+		"\x5e\x00\x22\x04\xe0\x01\xde\x07\x03\x1e\x08\x00" +
+		"\x71\x00\x00\x04\xc0\x03\xde\x07\x0a\x1a\x08\x10" +
+		"\x71\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xbb\x07\x03\x1f\x5c\x00" +
+		"\x5e\x00\x13\x04\xe0\x01\xbe\x07\x09\x1a\x0c\x00" +
+		"\x5e\x00\x14\x04\xe0\x01\xc7\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x20\x04\xe0\x01\xcd\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc5\x07\x03\x1a\x08\x10" +
+		"\x5f\x00\x00\x08\xe0\x01\xc5\x07\x09\x18\x08\x10" +
+		"\x5e\x00\x14\x04\xe0\x01\xce\x07\x09\x16\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\xcf\x07\x0a\x1f\x10\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xd2\x07\x02\x15\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x07\x04\xf0\x00\xc0\x07\x07\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x04\xc0\x03\xc5\x07\x03\x1a\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xc7\x07\x03\x1f\x08\x10" +
+		"\x06\x00\x58\x04\xe0\x01\xc8\x07\x01\x13\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\xe0\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x0c\x04\xf0\x00\xbd\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x72\x00\x58\x04\xd0\x02\xc5\x07\x03\x1a\x08\x10" +
+		"\x5e\x00\x58\x04\xe0\x01\xc7\x07\x09\x1d\x08\x10" +
+		"\x5e\x00\x14\x04\xe0\x01\xce\x07\x01\x01\x00\x00" +
+		"\x60\x00\x00\x04\xe0\x01\xce\x07\x03\x1d\x04\x20" +
+		"\x58\x00\x22\x04\xf0\x00\xcf\x07\x0a\x1f\x04\x20" +
+		"\x60\x00\x00\x04\xe0\x01\xd3\x07\x01\x01\x00\x00" +
+		"\x5e\x00\x22\x04\xe0\x01\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x58\x04\xc0\x03\xc4\x07\x03\x1b\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xc7\x07\x03\x1f\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xc8\x07\x03\x1d\x08\x10" +
+		"\x08\x00\x58\x04\xd0\x02\xdb\x07\x03\x1b\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xde\x07\x0a\x1a\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\xe2\x07\x0a\x1c\x08\x10" +
+		"\x0a\x00\x00\x04\xc0\x03\xe4\x07\x0c\x1b\x08\x10" +
+		"\x07\x00\x00\x04\xd0\x02\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x54\x04\xf0\x00\xb9\x07\x01\x01\x00\x00" +
+		"\x58\x00\x6e\x04\xf0\x00\xc4\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x58\x00\x61\x04\xf0\x00\xbd\x07\x01\x01\x00\x00" +
+		"\x58\x00\x22\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x67\x00\x00\x04\xa0\xf6\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\xcc\x07\x01\x01\x00\x00" +
+		"\x11\x00\x00\x04\xa0\x05\x10\x27\x01\x01\x00\x00" +
+		"\x0d\x00\x00\x04\xb0\x04\x10\x27\x01\x01\x00\x00" +
+		"\x0b\x00\x43\x04\xc0\x03\x10\x27\x01\x01\x00\x00" +
+		"\x6f\x00\x14\x04\xf0\x00\x10\x27\x01\x01\x00\x00" +
+		"\x73\x00\x00\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x6e\x00\x6a\x04\x70\xf9\x10\x27\x01\x01\x00\x00" +
+		"\x76\x00\x6a\x04\x80\xf8\x10\x27\x01\x01\x00\x00" +
+		"\x47\x00\x6f\x04\xb0\xf5\xdb\x07\x0c\x1d\x60\x00" +
+		"\x28\x00\x6f\x04\x30\x0c\x10\x27\x01\x01\x00\x00" +
+		"\x75\x00\x4b\x04\x40\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x1c\x00\x00\x04\x60\x09\xde\x07\x0c\x1c\x08\x00" +
+		"\x20\x00\x00\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x26\x00\x18\x04\xf4\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x3d\x00\x19\x04\x70\xf9\xbe\x07\x03\x0e\x0c\x20" +
+		"\x3b\x00\x19\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x6d\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x46\x00\x00\x04\xb0\xf5\xdb\x07\x0c\x1e\x00\x00" +
+		"\x27\x00\x00\x04\x30\x0c\x10\x27\x01\x01\x00\x00" +
+		"\x24\x00\x29\x04\x40\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x38\x00\x00\x04\x50\xfb\xc2\x07\x01\x01\x00\x00" +
+		"\x3b\x00\x24\x04\x60\xfa\x10\x27\x01\x01\x00\x00" +
+		"\x40\x00\x00\x04\x90\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x20\x00\x00\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x62\x00\x2f\x04\x60\x09\xd0\x07\x0c\x17\x00\x00" +
+		"\x5b\x00\x00\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x67\x00\x00\x04\xa0\xf6\x10\x27\x01\x01\x00\x00" +
+		"\x48\x00\x00\x04\xc0\xf4\xbb\x07\x0a\x01\x00\x00" +
+		"\x46\x00\x00\x04\xb0\xf5\xca\x07\x0c\x1f\x00\x00" +
+		"\x27\x00\x00\x04\x30\x0c\x10\x27\x01\x01\x00\x00" +
+		"\x45\x00\x00\x04\x00\xf6\xbb\x07\x0a\x01\x00\x00" +
+		"\x42\x00\x00\x04\xa0\xf6\xca\x07\x0c\x1f\x00\x00" +
+		"\x29\x00\x00\x04\x20\x0d\x10\x27\x01\x01\x00\x00" +
+		"\x23\x00\x00\x04\x40\x0b\xcf\x07\x01\x01\x00\x00" +
+		"\x20\x00\x00\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x48\x00\x00\x04\xc0\xf4\xc9\x07\x08\x14\x60\x00" +
+		"\x23\x00\x00\x04\x40\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x41\x00\x00\x04\x18\xf7\x10\x27\x01\x01\x00\x00" +
+		"\x22\x00\x00\x04\xc8\x0a\xbb\x07\x02\x0a\x08\x00" +
+		"\x23\x00\x00\x04\x40\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x46\x00\x00\x04\xb0\xf5\x10\x27\x01\x01\x00\x00" +
+		"\x22\x00\x00\x04\xc8\x0a\xb6\x07\x0a\x1b\x08\x10" +
+		"\x25\x00\x00\x08\xc8\x0a\xb7\x07\x03\x02\x08\x10" +
+		"\x22\x00\x00\x04\xc8\x0a\xdf\x07\x0a\x04\x08\x10" +
+		"\x20\x00\x00\x04\x50\x0a\xe3\x07\x07\x01\x00\x00" +
+		"\x21\x00\x01\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x21\x00\x49\x04\x50\x0a\x10\x27\x01\x01\x00\x00" +
+		"\x7a\x00\x00\x04\xb0\xf5\x10\x27\x01\x01\x00\x00" +
+		"\x1a\x00\x00\x04\x70\x08\x10\x27\x01\x01\x00\x00" +
+		"\x3f\x00\x00\x04\x08\xf8\xce\x07\x04\x1b\x00\x00" +
+		"\x3e\x00\x00\x04\x80\xf8\x10\x27\x01\x01\x00\x00" +
+		"\x1c\x00\x00\x04\x60\x09\x10\x27\x01\x01\x00\x00" +
+		"\x44\x00\x00\x04\x28\xf6\xba\x07\x0b\x0c\x00\x00" +
+		"\x43\x00\x1a\x04\xa0\xf6\x10\x27\x01\x01\x00\x00" +
+		"\x42\x00\x00\x04\xa0\xf6\x10\x27\x01\x01\x00\x00" +
+		"\x23\x00\x00\x04\x40\x0b\x10\x27\x01\x01\x00\x00" +
+		"\x27\x00\x00\x04\x30\x0c\xcf\x07\x01\x01\x00\x00" +
+		"\x28\x00\x65\x04\x30\x0c\x10\x27\x01\x01\x00\x00" +
+		"\x7e\x00\x22\x04\x00\x00\x10\x27\x01\x01\x00\x00"
 
 // ---------------------------------------------------------------------------
 // ZoneInfoRecords is an array of zoneinfo.ZoneInfoRecord items concatenated
@@ -22746,7 +22746,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 		"\xa6\xe7\xc3\xfe\x57\x00\xac\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
-// Unsuported zones: 0
+// Unsupported zones: 0
 // ---------------------------------------------------------------------------
 
 
