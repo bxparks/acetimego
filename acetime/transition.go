@@ -258,13 +258,13 @@ type Transition struct {
 	startEpochSeconds ATime
 
 	/**
-	 * The base offset minutes, not the total effective UTC offset. Note that
+	 * The base offset seconds, not the total effective UTC offset. Note that
 	 * this is different than basic::Transition::offsetMinutes used by
 	 * BasicZoneProcessor which is the total effective offsetMinutes. (It may be
 	 * possible to make this into an effective offsetMinutes (i.e. offsetMinutes
 	 * + deltaMinutes) but it does not seem worth making that change right now.)
 	 */
-	offsetMinutes int16
+	offsetSeconds int32
 
 	/** The DST delta minutes. */
 	deltaMinutes int16
