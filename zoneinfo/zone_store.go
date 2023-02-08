@@ -5,26 +5,27 @@ package zoneinfo
 const InvalidIndex = 1<<16 - 1
 
 type ZoneStore struct {
-	context *ZoneDataContext
-	nameIO StringIO16
-	formatIO StringIO16
-	letterIO StringIO8
-	infoReader ZoneInfoReader
-	eraReader ZoneEraReader
+	context      *ZoneDataContext
+	nameIO       StringIO16
+	formatIO     StringIO16
+	letterIO     StringIO8
+	infoReader   ZoneInfoReader
+	eraReader    ZoneEraReader
 	policyReader ZonePolicyReader
-	ruleReader ZoneRuleReader
+	ruleReader   ZoneRuleReader
 }
 
 func NewZoneStore(c *ZoneDataContext) *ZoneStore {
 	return &ZoneStore{
-		context: c,
-		nameIO: StringIO16{c.NameData, c.NameOffsets},
-		formatIO: StringIO16{c.FormatData, c.FormatOffsets},
-		letterIO: StringIO8{c.LetterData, c.LetterOffsets},
-		infoReader: ZoneInfoReader{NewDataIO(c.ZoneInfosData)},
-		eraReader: ZoneEraReader{NewDataIO(c.ZoneErasData)},
-		policyReader: ZonePolicyReader{NewDataIO(c.ZonePoliciesData)},
-		ruleReader: ZoneRuleReader{NewDataIO(c.ZoneRulesData)},
+		context:    c,
+		nameIO:     StringIO16{c.NameData, c.NameOffsets},
+		formatIO:   StringIO16{c.FormatData, c.FormatOffsets},
+		letterIO:   StringIO8{c.LetterData, c.LetterOffsets},
+		infoReader: ZoneInfoReader{NewDataIO(c.ZoneInfosData), c.ZoneInfoChunkSize},
+		eraReader:  ZoneEraReader{NewDataIO(c.ZoneErasData), c.ZoneEraChunkSize},
+		policyReader: ZonePolicyReader{
+			NewDataIO(c.ZonePoliciesData), c.ZonePolicyChunkSize},
+		ruleReader: ZoneRuleReader{NewDataIO(c.ZoneRulesData), c.ZoneRuleChunkSize},
 	}
 }
 
@@ -91,7 +92,7 @@ func (zs *ZoneStore) ZoneEras(i uint16, count uint16) []ZoneEra {
 
 func (zs *ZoneStore) fillZoneEra(era *ZoneEra, record *ZoneEraRecord) {
 	era.Format = zs.formatIO.StringAt(record.FormatIndex)
-	era.OffsetCode = record.OffsetCode
+	era.OffsetSecondsCode = record.OffsetSecondsCode
 	era.DeltaCode = record.DeltaCode
 	era.UntilYear = record.UntilYear
 	era.UntilMonth = record.UntilMonth
@@ -142,6 +143,7 @@ func (zs *ZoneStore) fillZoneRule(rule *ZoneRule, record *ZoneRuleRecord) {
 }
 
 func (zs *ZoneStore) ZoneInfoByID(id uint32) *ZoneInfo {
+	// TODO: Incorporate binary search.
 	i := zs.FindByIDLinear(id)
 	if i == InvalidIndex {
 		return nil
@@ -151,6 +153,7 @@ func (zs *ZoneStore) ZoneInfoByID(id uint32) *ZoneInfo {
 
 func (zs *ZoneStore) ZoneInfoByName(name string) *ZoneInfo {
 	id := ZoneNameHash(name)
+	// TODO: Incorporate binary search.
 	i := zs.FindByIDLinear(id)
 	if i == InvalidIndex {
 		return nil
@@ -178,7 +181,6 @@ func (zs *ZoneStore) FindByIDLinear(id uint32) uint16 {
 	return InvalidIndex
 }
 
-// TODO: Incorporate binary search.
 func (zs *ZoneStore) FindByIDBinary(id uint32) uint16 {
 	zs.infoReader.Reset()
 	var a uint16 = 0

@@ -124,7 +124,7 @@ type ZoneRule struct {
 	 * slightly modified value of offsetCode equal to (originalDeltaCode + 4).
 	 * This allows the 4-bits to represent DST offsets from -1:00 to 2:45 in
 	 * 15-minute increments. This is the same algorithm used by
-	 * ZoneEra::DeltaCode field for consistency. The DeltaOffsetMinutes() method
+	 * ZoneEra::DeltaCode field for consistency. The DeltaOffsetSeconds() method
 	 * knows how to convert this field into minutes.
 	 */
 	DeltaCode int8
@@ -146,16 +146,16 @@ type ZoneRule struct {
 	Letter string
 }
 
-func (rule *ZoneRule) AtMinutes() int16 {
-	return int16(rule.AtTimeCode)*15 + int16(rule.AtTimeModifier&0x0f)
+func (rule *ZoneRule) AtSeconds() int32 {
+	return (int32(rule.AtTimeCode)*15 + int32(rule.AtTimeModifier&0x0f)) * 60
 }
 
 func (rule *ZoneRule) AtSuffix() uint8 {
 	return rule.AtTimeModifier & 0xf0
 }
 
-func (rule *ZoneRule) DstOffsetMinutes() int16 {
-	return (int16(uint8(rule.DeltaCode)&0x0f) - 4) * 15
+func (rule *ZoneRule) DstOffsetSeconds() int32 {
+	return (int32(uint8(rule.DeltaCode)&0x0f) - 4) * 15 * 60
 }
 
 //-----------------------------------------------------------------------------
@@ -272,8 +272,24 @@ type ZoneEra struct {
 	 */
 	Format string
 
-	/** UTC offset in 15 min increments. Determined by the STDOFF column. */
-	OffsetCode int8
+	/**
+	 * UTC offset for the zone in standard time, as determined by the STDOFF
+	 * column in the TZ database. This field is in units of 15-seconds. Any
+	 * remaining seconds are encoded into the DeltaCode field.
+	 *
+	 * All zones after about 1974 uses STDOFF which are in units of 15 minute
+	 * increments. But zones before 1974 use STDOFF in increments of one second.
+	 * We need a range of about -10h to +14h in one second increments, which
+	 * corresponds to about 17 bits of information. Instead of wasting an entire
+	 * int32, we can use 16-bits in this field, representing the offset in 15
+	 * *second* increments, then store the the 15 second in the upper 4-bit of the
+	 * DeltaCode field. The range of this field is [-32768,32767], which
+	 * corresponds to [-8192m,+8191m45s], or [-136h32m,+136h31m45s] which is far
+	 * more than necessary for the TZDB entries.
+	 *
+	 * TODO: Move this after DeltaCode to pack the ZoneEra memory layout tighter.
+	 */
+	OffsetSecondsCode int16
 
 	/**
 	 * If ZonePolicy is nil, then this indicates the DST offset in 15 minute
@@ -284,13 +300,13 @@ type ZoneEra struct {
 	 * should be interpreted as a uint8_t field, composed of two 4-bit fields:
 	 *
 	 *    * The upper 4-bits is an unsigned integer from 0 to 14 that represents
-	 *    the one-minute remainder from the OffsetCode. This allows us to capture
-	 *    STDOFF offsets in 1-minute resolution.
+	 *    the one-second remainder from the OffsetSecondsCode. This allows us to
+	 *    capture STDOFF offsets in 1-second resolution.
 	 *    * The lower 4-bits is an unsigned integer that holds (originalDeltaCode
 	 *    + 4). This allows us to represent DST offsets from -1:00 to +2:45, in
 	 *    15-minute increments.
 	 *
-	 * The StdOffsetMinutes() and DstOffsetMinutes() functions know how to convert
+	 * The StdOffsetSeconds() and DstOffsetSeconds() functions know how to convert
 	 * OffsetCode and DeltaCode into the appropriate minutes.
 	 */
 	DeltaCode uint8
@@ -333,16 +349,16 @@ func (era *ZoneEra) HasPolicy() bool {
 	return era.Policy != nil
 }
 
-func (era *ZoneEra) StdOffsetMinutes() int16 {
-	return int16(era.OffsetCode)*15 + int16((era.DeltaCode&0xf0)>>4)
+func (era *ZoneEra) StdOffsetSeconds() int32 {
+	return int32(era.OffsetSecondsCode)*15 + int32((era.DeltaCode&0xf0)>>4)
 }
 
-func (era *ZoneEra) DstOffsetMinutes() int16 {
-	return int16((int8(era.DeltaCode&0x0f) - 4) * 15)
+func (era *ZoneEra) DstOffsetSeconds() int32 {
+	return int32((int8(era.DeltaCode&0x0f) - 4)) * 15 * 60
 }
 
-func (era *ZoneEra) UntilMinutes() int16 {
-	return int16(era.UntilTimeCode)*15 + int16(era.UntilTimeModifier&0x0f)
+func (era *ZoneEra) UntilSeconds() int32 {
+	return (int32(era.UntilTimeCode)*15 + int32(era.UntilTimeModifier&0x0f)) * 60
 }
 
 func (era *ZoneEra) UntilSuffix() uint8 {
@@ -356,8 +372,8 @@ func (era *ZoneEra) UntilSuffix() uint8 {
 type ZoneEraRecord struct {
 	FormatIndex       uint16 // index into FormatData
 	PolicyIndex       uint8  // index into ZonePoliciesData
-	OffsetCode        int8
-	DeltaCode         uint8
+	DeltaCode         uint8  // Placed before OffsetSecondsCode for packing
+	OffsetSecondsCode int16  // STDOFF units of 15-sec, [-720,840], [-12h, +14h]
 	UntilYear         int16
 	UntilMonth        uint8
 	UntilDay          uint8

@@ -19,7 +19,7 @@ type DateTuple struct {
 	day uint8
 
 	/** negative values allowed */
-	minutes int16
+	seconds int32
 
 	/** zoneinfo.SuffixS, zoneinfo.SuffixW, zoneinfo.SuffixU */
 	suffix uint8
@@ -46,10 +46,10 @@ func dateTupleCompare(a *DateTuple, b *DateTuple) int8 {
 	if a.day > b.day {
 		return 1
 	}
-	if a.minutes < b.minutes {
+	if a.seconds < b.seconds {
 		return -1
 	}
-	if a.minutes > b.minutes {
+	if a.seconds > b.seconds {
 		return 1
 	}
 	return 0
@@ -60,32 +60,32 @@ func dateTupleSubtract(a *DateTuple, b *DateTuple) ATime {
 	da := LocalDateToEpochDays(a.year, a.month, a.day)
 	db := LocalDateToEpochDays(b.year, b.month, b.day)
 
-	return ATime(da-db)*86400 + ATime(a.minutes-b.minutes)*60
+	return ATime(da-db)*86400 + ATime(a.seconds-b.seconds)
 }
 
 func dateTupleNormalize(dt *DateTuple) {
-	const oneDayAsMinutes = 60 * 24
+	const oneDayAsSeconds = 60 * 60 * 24
 
-	if dt.minutes <= -oneDayAsMinutes {
+	if dt.seconds <= -oneDayAsSeconds {
 		dt.year, dt.month, dt.day = LocalDateDecrementOneDay(
 			dt.year, dt.month, dt.day)
-		dt.minutes += oneDayAsMinutes
-	} else if oneDayAsMinutes <= dt.minutes {
+		dt.seconds += oneDayAsSeconds
+	} else if oneDayAsSeconds <= dt.seconds {
 		dt.year, dt.month, dt.day = LocalDateIncrementOneDay(
 			dt.year, dt.month, dt.day)
-		dt.minutes -= oneDayAsMinutes
+		dt.seconds -= oneDayAsSeconds
 	} else {
 		// do nothing
 	}
 }
 
-// dateTupleExpand converts the given 'tt', offsetMinutes, and deltaMinutes into
+// dateTupleExpand converts the given 'tt', offsetSeconds, and deltaSeconds into
 // the 'w', 's' and 'u' versions of the DateTuple. It is allowed for 'ttw' to
 // be an alias of 'tt'.
 func dateTupleExpand(
 	tt *DateTuple,
-	offsetMinutes int16,
-	deltaMinutes int16,
+	offsetSeconds int32,
+	deltaSeconds int32,
 	ttw *DateTuple,
 	tts *DateTuple,
 	ttu *DateTuple) {
@@ -96,13 +96,13 @@ func dateTupleExpand(
 		ttu.year = tt.year
 		ttu.month = tt.month
 		ttu.day = tt.day
-		ttu.minutes = tt.minutes - offsetMinutes
+		ttu.seconds = tt.seconds - offsetSeconds
 		ttu.suffix = zoneinfo.SuffixU
 
 		ttw.year = tt.year
 		ttw.month = tt.month
 		ttw.day = tt.day
-		ttw.minutes = tt.minutes + deltaMinutes
+		ttw.seconds = tt.seconds + deltaSeconds
 		ttw.suffix = zoneinfo.SuffixW
 	} else if tt.suffix == zoneinfo.SuffixU {
 		*ttu = *tt
@@ -110,13 +110,13 @@ func dateTupleExpand(
 		tts.year = tt.year
 		tts.month = tt.month
 		tts.day = tt.day
-		tts.minutes = tt.minutes + offsetMinutes
+		tts.seconds = tt.seconds + offsetSeconds
 		tts.suffix = zoneinfo.SuffixS
 
 		ttw.year = tt.year
 		ttw.month = tt.month
 		ttw.day = tt.day
-		ttw.minutes = tt.minutes + (offsetMinutes + deltaMinutes)
+		ttw.seconds = tt.seconds + (offsetSeconds + deltaSeconds)
 		ttw.suffix = zoneinfo.SuffixW
 	} else {
 		// Explicit set the suffix to 'w' in case it was something else.
@@ -126,13 +126,13 @@ func dateTupleExpand(
 		tts.year = tt.year
 		tts.month = tt.month
 		tts.day = tt.day
-		tts.minutes = tt.minutes - deltaMinutes
+		tts.seconds = tt.seconds - deltaSeconds
 		tts.suffix = zoneinfo.SuffixS
 
 		ttu.year = tt.year
 		ttu.month = tt.month
 		ttu.day = tt.day
-		ttu.minutes = tt.minutes - (deltaMinutes + offsetMinutes)
+		ttu.seconds = tt.seconds - (deltaSeconds + offsetSeconds)
 		ttu.suffix = zoneinfo.SuffixU
 	}
 
@@ -199,10 +199,10 @@ type MatchingEra struct {
 	prevMatch *MatchingEra
 
 	/** The STD offset of the last Transition in this MatchingEra. */
-	lastOffsetMinutes int16
+	lastOffsetSeconds int32
 
 	/** The DST offset of the last Transition in this MatchingEra. */
-	lastDeltaMinutes int16
+	lastDeltaSeconds int32
 
 	/** The format string from era.FormatIndex */
 	format string
@@ -257,17 +257,11 @@ type Transition struct {
 	/** The calculated transition time of the given rule. */
 	startEpochSeconds ATime
 
-	/**
-	 * The base offset minutes, not the total effective UTC offset. Note that
-	 * this is different than basic::Transition::offsetMinutes used by
-	 * BasicZoneProcessor which is the total effective offsetMinutes. (It may be
-	 * possible to make this into an effective offsetMinutes (i.e. offsetMinutes
-	 * + deltaMinutes) but it does not seem worth making that change right now.)
-	 */
-	offsetMinutes int16
+	/** The base offset seconds, not the total effective UTC offset. */
+	offsetSeconds int32
 
-	/** The DST delta minutes. */
-	deltaMinutes int16
+	/** The DST delta seconds. */
+	deltaSeconds int32
 
 	/** The calculated effective time zone abbreviation, e.g. "PST" or "PDT". */
 	abbrev string
@@ -300,8 +294,8 @@ func fixTransitionTimes(transitions []Transition) {
 		curr := &transitions[i]
 		dateTupleExpand(
 			&curr.transitionTime,
-			prev.offsetMinutes,
-			prev.deltaMinutes,
+			prev.offsetSeconds,
+			prev.deltaSeconds,
 			&curr.transitionTime,
 			&curr.transitionTimeS,
 			&curr.transitionTimeU)
@@ -605,7 +599,7 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 		ldt.Year,
 		ldt.Month,
 		ldt.Day,
-		int16(ldt.Hour*60 + ldt.Minute),
+		int32(ldt.Hour)*60*60 + int32(ldt.Minute)*60,
 		zoneinfo.SuffixW,
 	}
 
@@ -657,14 +651,14 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 
 func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 	// Find the previous Match offsets.
-	var prevMatchOffsetMinutes int16
-	var prevMatchDeltaMinutes int16
+	var prevMatchOffsetSeconds int32
+	var prevMatchDeltaSeconds int32
 	if match.prevMatch != nil {
-		prevMatchOffsetMinutes = match.prevMatch.lastOffsetMinutes
-		prevMatchDeltaMinutes = match.prevMatch.lastDeltaMinutes
+		prevMatchOffsetSeconds = match.prevMatch.lastOffsetSeconds
+		prevMatchDeltaSeconds = match.prevMatch.lastDeltaSeconds
 	} else {
-		prevMatchOffsetMinutes = match.era.StdOffsetMinutes()
-		prevMatchDeltaMinutes = 0
+		prevMatchOffsetSeconds = match.era.StdOffsetSeconds()
+		prevMatchDeltaSeconds = 0
 	}
 
 	// Expand start times.
@@ -673,8 +667,8 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 	var stu DateTuple
 	dateTupleExpand(
 		&match.startDt,
-		prevMatchOffsetMinutes,
-		prevMatchDeltaMinutes,
+		prevMatchOffsetSeconds,
+		prevMatchDeltaSeconds,
 		&stw,
 		&sts,
 		&stu)

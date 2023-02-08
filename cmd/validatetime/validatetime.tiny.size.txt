@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   13499      37     629 |   13561     666 | (unknown)
+     25   13488      37     629 |   13550     666 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -21,20 +21,20 @@
     265       0       0       0 |     265       0 | Go interface method
       0      92       0       0 |      92       0 | Go reflect data
      57       0       0       0 |      57       0 | errors
-   7405      29       0       0 |    7434       0 | github.com/bxparks/AceTimeGo/acetime
-      0   41155    1701       0 |   42856    1701 | github.com/bxparks/AceTimeGo/zonedb
-   2410       0       0       0 |    2410       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   7208      29       0       0 |    7237       0 | github.com/bxparks/AceTimeGo/acetime
+      0   42182    1701       0 |   43883    1701 | github.com/bxparks/AceTimeGo/zonedb
+   2503       0       0       0 |    2503       0 | github.com/bxparks/AceTimeGo/zoneinfo
      81       0       0       0 |      81       0 | internal/bytealg
     157       2       0       0 |     159       0 | internal/itoa
     420      24       0      16 |     444      16 | internal/task
-   2475     300       0       0 |    2775       0 | main
+   2518     300       0       0 |    2818       0 | main
    3102     678       0       0 |    3780       0 | reflect
    6824     202      12      91 |    7038     103 | runtime
    1714    1942    1338       0 |    4994    1338 | strconv
-    557     124       0       0 |     681       0 | strings
+    562     124       0       0 |     686       0 | strings
     633     200       0       0 |     833       0 | sync
      80    2954       0       0 |    3034       0 | syscall
-  21403    1054     168     160 |   22625     328 | time
+  21405    1054     168     160 |   22627     328 | time
     481     288       0       0 |     769       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  53727   64671    3256     952 |  121654    4208 | total
+  53673   65687    3256     952 |  122616    4208 | total

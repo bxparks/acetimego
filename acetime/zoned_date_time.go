@@ -20,7 +20,7 @@ type ZonedDateTime struct {
 	Minute        uint8
 	Second        uint8
 	Fold          uint8
-	OffsetMinutes int16
+	OffsetSeconds int32
 	Tz            *TimeZone
 }
 
@@ -52,7 +52,7 @@ func (zdt *ZonedDateTime) EpochSeconds() ATime {
 		Minute:        zdt.Minute,
 		Second:        zdt.Second,
 		Fold:          zdt.Fold,
-		OffsetMinutes: zdt.OffsetMinutes,
+		OffsetSeconds: zdt.OffsetSeconds,
 	}).EpochSeconds()
 }
 
@@ -68,7 +68,7 @@ func NewZonedDateTimeFromEpochSeconds(
 		Minute:        odt.Minute,
 		Second:        odt.Second,
 		Fold:          odt.Fold,
-		OffsetMinutes: odt.OffsetMinutes,
+		OffsetSeconds: odt.OffsetSeconds,
 		Tz:            tz,
 	}
 }
@@ -85,7 +85,7 @@ func NewZonedDateTimeFromLocalDateTime(
 		Minute:        odt.Minute,
 		Second:        odt.Second,
 		Fold:          odt.Fold,
-		OffsetMinutes: odt.OffsetMinutes,
+		OffsetSeconds: odt.OffsetSeconds,
 		Tz:            tz,
 	}
 }
@@ -116,7 +116,7 @@ func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
 		b.WriteString(" UTC")
 	} else {
 		// Append the "+/-hh:mm[tz]"
-		BuildUTCOffset(b, zdt.OffsetMinutes)
+		BuildUTCOffset(b, zdt.OffsetSeconds)
 		b.WriteByte('[')
 		b.WriteString(zdt.Tz.Name())
 		b.WriteByte(']')

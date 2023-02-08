@@ -1,29 +1,29 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-   2116     760      23       9 |    2899      32 | (unknown)
+   2104     757      23       9 |    2884      32 | (unknown)
      66       0       0       0 |      66       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/device/esp
      57       0       0       0 |      57       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/internal/task
       0       0       0    4096 |       0    4096 | C stack
     137       0       0       0 |     137       0 | Go interface method
       0      92       0       0 |      92       0 | Go reflect data
      21       0       0       0 |      21       0 | errors
-   6541      29       0       0 |    6570       0 | github.com/bxparks/AceTimeGo/acetime
-      0   41155    1593       0 |   42748    1593 | github.com/bxparks/AceTimeGo/zonedb
-   1843       0       0       0 |    1843       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   6518      29       0       0 |    6547       0 | github.com/bxparks/AceTimeGo/acetime
+      0   42182    1593       0 |   43775    1593 | github.com/bxparks/AceTimeGo/zonedb
+   1912       0       0       0 |    1912       0 | github.com/bxparks/AceTimeGo/zoneinfo
      57       0       0       0 |      57       0 | internal/bytealg
     132       2       0       0 |     134       0 | internal/itoa
     282      24       0       8 |     306       8 | internal/task
      25       0       0       0 |      25       0 | machine
-   2511     300       0       0 |    2811       0 | main
+   2461     300       0       0 |    2761       0 | main
    2651     622       0       0 |    3273       0 | reflect
    3337     172       0      47 |    3509      47 | runtime
      87       0       0       0 |      87       0 | runtime/interrupt
      92       0       0       0 |      92       0 | runtime/volatile
    1409    1942    1330       0 |    4681    1330 | strconv
-    444     108       0       0 |     552       0 | strings
+    441     108       0       0 |     549       0 | strings
     143      38       0       0 |     181       0 | sync
      25       6       0       0 |      31       0 | syscall
-  14504     809     104      92 |   15417     196 | time
+  14495     809     104      92 |   15408     196 | time
     577     288       0       0 |     865       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  37057   46347    3050    4252 |   86454    7302 | total
+  37029   47371    3050    4252 |   87450    7302 | total

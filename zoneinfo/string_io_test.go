@@ -35,14 +35,14 @@ func TestStringIO8(t *testing.T) {
 	}
 }
 
-func TestStringIO8_Strings(t *testing.T){
+func TestStringIO8_Strings(t *testing.T) {
 	f := StringIO8{letterData, letterOffsets}
 	ss := f.Strings()
-	if len(ss) != len(letterOffsets) - 1 {
+	if len(ss) != len(letterOffsets)-1 {
 		t.Fatal(len(ss))
 	}
 	// Check a random element
-	if ss[1] != "D"{
+	if ss[1] != "D" {
 		t.Fatal(ss[1])
 	}
 }
@@ -60,10 +60,10 @@ func TestStringIO16(t *testing.T) {
 	}
 }
 
-func TestStringIO16_Strings(t *testing.T){
+func TestStringIO16_Strings(t *testing.T) {
 	f := StringIO16{nameData, nameOffsets}
 	ss := f.Strings()
-	if len(ss) != len(nameOffsets) - 1 {
+	if len(ss) != len(nameOffsets)-1 {
 		t.Fatal(len(ss))
 	}
 	// Check a random element

@@ -19,10 +19,10 @@ var (
 
 type ZonedExtra struct {
 	Zetype              uint8  // type of match (e.g. gap, overlap)
-	StdOffsetMinutes    int16  // STD offset
-	DstOffsetMinutes    int16  // DST offset
-	ReqStdOffsetMinutes int16  // request STD offset
-	ReqDstOffsetMinutes int16  // request DST offset
+	StdOffsetSeconds    int32  // STD offset
+	DstOffsetSeconds    int32  // DST offset
+	ReqStdOffsetSeconds int32  // request STD offset
+	ReqDstOffsetSeconds int32  // request DST offset
 	Abbrev              string // abbreviation (e.g. PST, PDT)
 }
 

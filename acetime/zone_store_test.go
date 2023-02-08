@@ -14,7 +14,7 @@ import (
 	"testing"
 )
 
-func TestFindByID_Found(t *testing.T) {
+func TestZoneStoreFindByID_Found(t *testing.T) {
 	context := &zonedbtesting.DataContext
 	store := zoneinfo.NewZoneStore(context)
 	zoneID := zonedbtesting.ZoneIDAmerica_Los_Angeles
@@ -31,7 +31,7 @@ func TestFindByID_Found(t *testing.T) {
 	}
 }
 
-func TestFindByID_Link(t *testing.T) {
+func TestZoneStoreFindByID_Link(t *testing.T) {
 	context := &zonedbtesting.DataContext
 	store := zoneinfo.NewZoneStore(context)
 	zoneID := zonedbtesting.ZoneIDUS_Pacific
@@ -56,7 +56,7 @@ func TestFindByID_Link(t *testing.T) {
 	}
 }
 
-func TestFindByID_NotFound(t *testing.T) {
+func TestZoneStoreFindByID_NotFound(t *testing.T) {
 	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
 	zoneInfo := store.ZoneInfoByID(0)
 	if zoneInfo != nil {
@@ -64,7 +64,7 @@ func TestFindByID_NotFound(t *testing.T) {
 	}
 }
 
-func TestFindByName_Found(t *testing.T) {
+func TestZoneStoreFindByName_Found(t *testing.T) {
 	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
 	zoneInfo := store.ZoneInfoByName("America/Los_Angeles")
 	if zoneInfo == nil {
@@ -76,7 +76,7 @@ func TestFindByName_Found(t *testing.T) {
 	}
 }
 
-func TestFindByName_NotFound(t *testing.T) {
+func TestZoneStoreFindByName_NotFound(t *testing.T) {
 	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
 	zoneInfo := store.ZoneInfoByName("America/DoesNotExist")
 	if zoneInfo != nil {
@@ -84,7 +84,7 @@ func TestFindByName_NotFound(t *testing.T) {
 	}
 }
 
-func TestIsSorted(t *testing.T) {
+func TestZoneStoreIsSorted(t *testing.T) {
 	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
 	if !store.IsSorted() {
 		t.Fatal("zonedbtesting should be sorted")
