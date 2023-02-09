@@ -25,6 +25,9 @@
 //
 // from https://github.com/eggert/tz/releases/tag/2022g
 //
+// Supported Zones: 596 (351 zones, 245 links)
+// Unsupported Zones: 0 (0 zones, 0 links)
+//
 // DO NOT EDIT
 
 package zonedb
