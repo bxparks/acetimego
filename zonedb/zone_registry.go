@@ -7,8 +7,11 @@
 //     --action zonedb
 //     --language go
 //     --scope extended
+//     --offset_granularity 1
+//     --delta_granularity 900
+//     --until_at_granularity 60
 //     --db_namespace zonedb
-//     --start_year 1974
+//     --start_year 1970
 //     --until_year 10000
 //
 // using the TZ Database files
@@ -27,6 +30,8 @@
 //
 // Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
+// Earliest Year (Original): 1844
+// Earliest Year (Generated): 1910
 //
 // DO NOT EDIT
 
@@ -52,7 +57,7 @@ const TzDatabaseVersion string = "2022g"
 // be read back and reconstructed to be identical to the XxxRecord objects.
 var RecordContext = zoneinfo.ZoneRecordContext{
 	TzDatabaseVersion: TzDatabaseVersion,
-	StartYear: 1974,
+	StartYear: 1970,
 	UntilYear: 10000,
 	LetterData: LetterData,
 	LetterOffsets: LetterOffsets,
@@ -75,7 +80,7 @@ var RecordContext = zoneinfo.ZoneRecordContext{
 // flash memory, saving tremendous amounts of random memory.
 var DataContext = zoneinfo.ZoneDataContext{
 	TzDatabaseVersion: TzDatabaseVersion,
-	StartYear: 1974,
+	StartYear: 1970,
 	UntilYear: 10000,
 	LetterData: LetterData,
 	LetterOffsets: LetterOffsets,

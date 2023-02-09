@@ -7,8 +7,11 @@
 //     --action zonedb
 //     --language go
 //     --scope extended
+//     --offset_granularity 1
+//     --delta_granularity 900
+//     --until_at_granularity 60
 //     --db_namespace zonedb
-//     --start_year 1974
+//     --start_year 1970
 //     --until_year 10000
 //
 // using the TZ Database files
@@ -27,6 +30,8 @@
 //
 // Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
+// Earliest Year (Original): 1844
+// Earliest Year (Generated): 1910
 //
 // DO NOT EDIT
 
@@ -73,17 +78,29 @@ var (
 // ZoneRuleRecords is a concatenated array of zoneinfo.ZoneInfoRecord objects
 // from all ZonePolicyRecords.
 //
-// Supported zone policies: 114
-// numRules: 1193
+// Supported zone policies: 116
+// numRules: 1235
 // ---------------------------------------------------------------------------
 
 var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	// ---------------------------------------------------------------------------
 	// PolicyName: AN
 	// RuleIndex: 0
-	// RuleCount: 16
+	// RuleCount: 17
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    AN    1972    only    -    Feb    27    2:00s    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    AN    1971    1985    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1971,
@@ -279,10 +296,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AQ
-	// RuleIndex: 16
-	// RuleCount: 3
+	// RuleIndex: 17
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    AQ    1972    only    -    Feb    lastSun    2:00s    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    AQ    1971    only    -    Oct    lastSun    2:00s    1:00    D
+	{
+		FromYear: 1971,
+		ToYear: 1971,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    AQ    1972    only    -    Feb    lastSun    2:00s    0    S
 	{
 		FromYear: 1972,
@@ -322,10 +363,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AS
-	// RuleIndex: 19
-	// RuleCount: 15
+	// RuleIndex: 22
+	// RuleCount: 16
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    AS    1972    only    -    Feb    27    2:00s    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    AS    1971    1985    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1971,
@@ -509,10 +562,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AT
-	// RuleIndex: 34
-	// RuleCount: 16
+	// RuleIndex: 38
+	// RuleCount: 18
 	// ---------------------------------------------------------------------------
 
+	// Rule    AT    1968    only    -    Mar    Sun>=29    2:00s    0    S
+	{
+		FromYear: 1968,
+		ToYear: 1968,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 29,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    AT    1968    1985    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1968,
@@ -524,6 +589,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeModifier: 16, // SuffixS + minute=0
 		DeltaCode: 8, // (delta_minutes=60)/15 + 4
 		LetterIndex: 8, // "D"
+	},
+	// Rule    AT    1969    1971    -    Mar    Sun>=8    2:00s    0    S
+	{
+		FromYear: 1969,
+		ToYear: 1971,
+		InMonth: 3,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 8,
+		AtTimeCode: 8,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
 	},
 	// Rule    AT    1972    only    -    Feb    lastSun    2:00s    0    S
 	{
@@ -708,10 +785,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AV
-	// RuleIndex: 50
-	// RuleCount: 14
+	// RuleIndex: 56
+	// RuleCount: 15
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    AV    1972    only    -    Feb    lastSun    2:00s    0    S
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    AV    1971    1985    -    Oct    lastSun    2:00s    1:00    D
 	{
 		FromYear: 1971,
@@ -883,7 +972,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: AW
-	// RuleIndex: 64
+	// RuleIndex: 71
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -1010,7 +1099,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Albania
-	// RuleIndex: 74
+	// RuleIndex: 81
 	// RuleCount: 22
 	// ---------------------------------------------------------------------------
 
@@ -1281,10 +1370,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Algeria
-	// RuleIndex: 96
-	// RuleCount: 7
+	// RuleIndex: 103
+	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
+	// Rule    Algeria    1945    only    -    Sep    16     1:00    0    -
+	{
+		FromYear: 1945,
+		ToYear: 1945,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtTimeCode: 4,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Algeria    1971    only    -    Apr    25    23:00s    1:00    S
+	{
+		FromYear: 1971,
+		ToYear: 1971,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 92,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Algeria    1971    only    -    Sep    26    23:00s    0    -
 	{
 		FromYear: 1971,
@@ -1372,10 +1485,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Arg
-	// RuleIndex: 103
-	// RuleCount: 11
+	// RuleIndex: 112
+	// RuleCount: 12
 	// ---------------------------------------------------------------------------
 
+	// Rule    Arg    1967    1968    -    Oct    Sun>=1    0:00    1:00    -
+	{
+		FromYear: 1967,
+		ToYear: 1968,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Arg    1968    1969    -    Apr    Sun>=1    0:00    0    -
 	{
 		FromYear: 1968,
@@ -1511,7 +1636,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Armenia
-	// RuleIndex: 114
+	// RuleIndex: 124
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -1554,7 +1679,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Aus
-	// RuleIndex: 117
+	// RuleIndex: 127
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -1573,7 +1698,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Austria
-	// RuleIndex: 118
+	// RuleIndex: 128
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -1616,7 +1741,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Azer
-	// RuleIndex: 121
+	// RuleIndex: 131
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -1659,7 +1784,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Barb
-	// RuleIndex: 124
+	// RuleIndex: 134
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -1738,7 +1863,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Belgium
-	// RuleIndex: 130
+	// RuleIndex: 140
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -1757,7 +1882,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Belize
-	// RuleIndex: 131
+	// RuleIndex: 141
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -1824,7 +1949,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Bermuda
-	// RuleIndex: 136
+	// RuleIndex: 146
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -1843,7 +1968,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Brazil
-	// RuleIndex: 137
+	// RuleIndex: 147
 	// RuleCount: 44
 	// ---------------------------------------------------------------------------
 
@@ -2378,7 +2503,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Bulg
-	// RuleIndex: 181
+	// RuleIndex: 191
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -2457,7 +2582,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: C-Eur
-	// RuleIndex: 187
+	// RuleIndex: 197
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -2548,7 +2673,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: CO
-	// RuleIndex: 194
+	// RuleIndex: 204
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -2591,7 +2716,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: CR
-	// RuleIndex: 197
+	// RuleIndex: 207
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -2670,7 +2795,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Canada
-	// RuleIndex: 203
+	// RuleIndex: 213
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -2749,7 +2874,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Chatham
-	// RuleIndex: 209
+	// RuleIndex: 219
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -2876,10 +3001,70 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Chile
-	// RuleIndex: 219
-	// RuleCount: 29
+	// RuleIndex: 229
+	// RuleCount: 34
 	// ---------------------------------------------------------------------------
 
+	// Rule    Chile    1968    only    -    Nov     3    4:00u    1:00    -
+	{
+		FromYear: 1968,
+		ToYear: 1968,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtTimeCode: 16,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1969    only    -    Mar    30    3:00u    0    -
+	{
+		FromYear: 1969,
+		ToYear: 1969,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1969    only    -    Nov    23    4:00u    1:00    -
+	{
+		FromYear: 1969,
+		ToYear: 1969,
+		InMonth: 11,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 23,
+		AtTimeCode: 16,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1970    only    -    Mar    29    3:00u    0    -
+	{
+		FromYear: 1970,
+		ToYear: 1970,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Chile    1971    only    -    Mar    14    3:00u    0    -
+	{
+		FromYear: 1971,
+		ToYear: 1971,
+		InMonth: 3,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 14,
+		AtTimeCode: 12,
+		AtTimeModifier: 32, // SuffixU + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Chile    1970    1972    -    Oct    Sun>=9    4:00u    1:00    -
 	{
 		FromYear: 1970,
@@ -3231,7 +3416,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Cook
-	// RuleIndex: 248
+	// RuleIndex: 263
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -3286,10 +3471,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Cuba
-	// RuleIndex: 252
-	// RuleCount: 26
+	// RuleIndex: 267
+	// RuleCount: 27
 	// ---------------------------------------------------------------------------
 
+	// Rule    Cuba    1967    1968    -    Sep    Sun>=8    0:00    0    S
+	{
+		FromYear: 1967,
+		ToYear: 1968,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 8,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Cuba    1969    1977    -    Apr    lastSun    0:00    1:00    D
 	{
 		FromYear: 1969,
@@ -3605,7 +3802,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Cyprus
-	// RuleIndex: 278
+	// RuleIndex: 294
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -3732,7 +3929,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Czech
-	// RuleIndex: 288
+	// RuleIndex: 304
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -3751,10 +3948,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: DR
-	// RuleIndex: 289
-	// RuleCount: 3
+	// RuleIndex: 305
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Rule    DR    1967    only    -    Feb    28    0:00    0    EST
+	{
+		FromYear: 1967,
+		ToYear: 1967,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 10, // "EST"
+	},
 	// Rule    DR    1969    1973    -    Oct    lastSun    0:00    0:30    -0430
 	{
 		FromYear: 1969,
@@ -3766,6 +3975,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtTimeModifier: 0, // SuffixW + minute=0
 		DeltaCode: 6, // (delta_minutes=30)/15 + 4
 		LetterIndex: 3, // "-0430"
+	},
+	// Rule    DR    1970    only    -    Feb    21    0:00    0    EST
+	{
+		FromYear: 1970,
+		ToYear: 1970,
+		InMonth: 2,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 10, // "EST"
 	},
 	// Rule    DR    1971    only    -    Jan    20    0:00    0    EST
 	{
@@ -3794,7 +4015,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Dhaka
-	// RuleIndex: 292
+	// RuleIndex: 310
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -3837,7 +4058,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: E-Eur
-	// RuleIndex: 295
+	// RuleIndex: 313
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -3904,7 +4125,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: E-EurAsia
-	// RuleIndex: 300
+	// RuleIndex: 318
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -3959,7 +4180,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: EU
-	// RuleIndex: 304
+	// RuleIndex: 322
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -4050,7 +4271,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: EUAsia
-	// RuleIndex: 311
+	// RuleIndex: 329
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -4105,7 +4326,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Ecuador
-	// RuleIndex: 315
+	// RuleIndex: 333
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -4148,7 +4369,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Edm
-	// RuleIndex: 318
+	// RuleIndex: 336
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -4191,7 +4412,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Egypt
-	// RuleIndex: 321
+	// RuleIndex: 339
 	// RuleCount: 21
 	// ---------------------------------------------------------------------------
 
@@ -4450,10 +4671,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Eire
-	// RuleIndex: 342
-	// RuleCount: 7
+	// RuleIndex: 360
+	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Eire    1972    1980    -    Mar    Sun>=16     2:00u    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Eire    1971    only    -    Oct    31     2:00u    -1:00    -
 	{
 		FromYear: 1971,
@@ -4541,7 +4774,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Falk
-	// RuleIndex: 349
+	// RuleIndex: 368
 	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
@@ -4644,7 +4877,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Fiji
-	// RuleIndex: 357
+	// RuleIndex: 376
 	// RuleCount: 13
 	// ---------------------------------------------------------------------------
 
@@ -4807,7 +5040,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Finland
-	// RuleIndex: 370
+	// RuleIndex: 389
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -4850,7 +5083,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: France
-	// RuleIndex: 373
+	// RuleIndex: 392
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -4893,7 +5126,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: GB-Eire
-	// RuleIndex: 376
+	// RuleIndex: 395
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -4972,7 +5205,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Germany
-	// RuleIndex: 382
+	// RuleIndex: 401
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -4991,7 +5224,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Greece
-	// RuleIndex: 383
+	// RuleIndex: 402
 	// RuleCount: 12
 	// ---------------------------------------------------------------------------
 
@@ -5142,10 +5375,70 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Guam
-	// RuleIndex: 395
-	// RuleCount: 7
+	// RuleIndex: 414
+	// RuleCount: 12
 	// ---------------------------------------------------------------------------
 
+	// Rule    Guam    1967    only    -    Sep     1    2:00    1:00    D
+	{
+		FromYear: 1967,
+		ToYear: 1967,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Guam    1969    only    -    Jan    26    0:01    0    S
+	{
+		FromYear: 1969,
+		ToYear: 1969,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 26,
+		AtTimeCode: 0,
+		AtTimeModifier: 1, // SuffixW + minute=1
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Guam    1969    only    -    Jun    22    2:00    1:00    D
+	{
+		FromYear: 1969,
+		ToYear: 1969,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Guam    1969    only    -    Aug    31    2:00    0    S
+	{
+		FromYear: 1969,
+		ToYear: 1969,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Guam    1970    1971    -    Apr    lastSun    2:00    1:00    D
+	{
+		FromYear: 1970,
+		ToYear: 1971,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
 	// Rule    Guam    1970    1971    -    Sep    Sun>=1    2:00    0    S
 	{
 		FromYear: 1970,
@@ -5233,7 +5526,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Guat
-	// RuleIndex: 402
+	// RuleIndex: 426
 	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
@@ -5348,7 +5641,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: HK
-	// RuleIndex: 411
+	// RuleIndex: 435
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -5427,7 +5720,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Haiti
-	// RuleIndex: 417
+	// RuleIndex: 441
 	// RuleCount: 12
 	// ---------------------------------------------------------------------------
 
@@ -5578,7 +5871,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Halifax
-	// RuleIndex: 429
+	// RuleIndex: 453
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -5621,7 +5914,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Holiday
-	// RuleIndex: 432
+	// RuleIndex: 456
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -5664,7 +5957,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Hond
-	// RuleIndex: 435
+	// RuleIndex: 459
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -5731,7 +6024,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Hungary
-	// RuleIndex: 440
+	// RuleIndex: 464
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -5798,7 +6091,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Iran
-	// RuleIndex: 445
+	// RuleIndex: 469
 	// RuleCount: 40
 	// ---------------------------------------------------------------------------
 
@@ -6285,7 +6578,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Iraq
-	// RuleIndex: 485
+	// RuleIndex: 509
 	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
@@ -6400,10 +6693,94 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Italy
-	// RuleIndex: 494
-	// RuleCount: 10
+	// RuleIndex: 518
+	// RuleCount: 17
 	// ---------------------------------------------------------------------------
 
+	// Rule    Italy    1966    1968    -    May    Sun>=22     0:00s    1:00    S
+	{
+		FromYear: 1966,
+		ToYear: 1968,
+		InMonth: 5,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1967    1969    -    Sep    Sun>=22     0:00s    0    -
+	{
+		FromYear: 1967,
+		ToYear: 1969,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Italy    1969    only    -    Jun     1     0:00s    1:00    S
+	{
+		FromYear: 1969,
+		ToYear: 1969,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1970    only    -    May    31     0:00s    1:00    S
+	{
+		FromYear: 1970,
+		ToYear: 1970,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 31,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1970    only    -    Sep    lastSun     0:00s    0    -
+	{
+		FromYear: 1970,
+		ToYear: 1970,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Italy    1971    1972    -    May    Sun>=22     0:00s    1:00    S
+	{
+		FromYear: 1971,
+		ToYear: 1972,
+		InMonth: 5,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 22,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+	// Rule    Italy    1971    only    -    Sep    lastSun     0:00s    0    -
+	{
+		FromYear: 1971,
+		ToYear: 1971,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 0,
+		AtTimeModifier: 16, // SuffixS + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Italy    1972    only    -    Oct     1     0:00s    0    -
 	{
 		FromYear: 1972,
@@ -6527,7 +6904,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Japan
-	// RuleIndex: 504
+	// RuleIndex: 535
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6546,7 +6923,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Jordan
-	// RuleIndex: 505
+	// RuleIndex: 536
 	// RuleCount: 33
 	// ---------------------------------------------------------------------------
 
@@ -6949,7 +7326,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Kyrgyz
-	// RuleIndex: 538
+	// RuleIndex: 569
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -7016,7 +7393,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: LH
-	// RuleIndex: 543
+	// RuleIndex: 574
 	// RuleCount: 15
 	// ---------------------------------------------------------------------------
 
@@ -7203,7 +7580,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Latvia
-	// RuleIndex: 558
+	// RuleIndex: 589
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7246,10 +7623,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Lebanon
-	// RuleIndex: 561
-	// RuleCount: 14
+	// RuleIndex: 592
+	// RuleCount: 15
 	// ---------------------------------------------------------------------------
 
+	// Rule    Lebanon    1957    1961    -    Oct    1    0:00    0    -
+	{
+		FromYear: 1957,
+		ToYear: 1961,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Lebanon    1972    only    -    Jun    22    0:00    1:00    S
 	{
 		FromYear: 1972,
@@ -7421,7 +7810,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Libya
-	// RuleIndex: 575
+	// RuleIndex: 607
 	// RuleCount: 12
 	// ---------------------------------------------------------------------------
 
@@ -7572,7 +7961,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Macau
-	// RuleIndex: 587
+	// RuleIndex: 619
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -7663,7 +8052,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Malta
-	// RuleIndex: 594
+	// RuleIndex: 626
 	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
@@ -7766,7 +8155,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Mauritius
-	// RuleIndex: 602
+	// RuleIndex: 634
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -7832,8 +8221,27 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
+	// PolicyName: Menominee
+	// RuleIndex: 639
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
+
+	// Rule Menominee    1966    only    -    Oct    lastSun    2:00    0    S
+	{
+		FromYear: 1966,
+		ToYear: 1966,
+		InMonth: 10,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
 	// PolicyName: Mexico
-	// RuleIndex: 607
+	// RuleIndex: 640
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -7924,7 +8332,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Moldova
-	// RuleIndex: 614
+	// RuleIndex: 647
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7967,10 +8375,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Moncton
-	// RuleIndex: 617
-	// RuleCount: 3
+	// RuleIndex: 650
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Rule    Moncton    1946    1972    -    Apr    lastSun    2:00    1:00    D
+	{
+		FromYear: 1946,
+		ToYear: 1972,
+		InMonth: 4,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 8, // "D"
+	},
+	// Rule    Moncton    1946    1956    -    Sep    lastSun    2:00    0    S
+	{
+		FromYear: 1946,
+		ToYear: 1956,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Moncton    1957    1972    -    Oct    lastSun    2:00    0    S
 	{
 		FromYear: 1957,
@@ -8010,7 +8442,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Mongol
-	// RuleIndex: 620
+	// RuleIndex: 655
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -8137,7 +8569,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Morocco
-	// RuleIndex: 630
+	// RuleIndex: 665
 	// RuleCount: 176
 	// ---------------------------------------------------------------------------
 
@@ -10256,7 +10688,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NC
-	// RuleIndex: 806
+	// RuleIndex: 841
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -10323,7 +10755,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NT_YK
-	// RuleIndex: 811
+	// RuleIndex: 846
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -10378,7 +10810,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NZ
-	// RuleIndex: 815
+	// RuleIndex: 850
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -10505,7 +10937,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Namibia
-	// RuleIndex: 825
+	// RuleIndex: 860
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -10560,7 +10992,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Nic
-	// RuleIndex: 829
+	// RuleIndex: 864
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -10651,7 +11083,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: PRC
-	// RuleIndex: 836
+	// RuleIndex: 871
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -10706,7 +11138,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Pakistan
-	// RuleIndex: 840
+	// RuleIndex: 875
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -10785,7 +11217,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Palestine
-	// RuleIndex: 846
+	// RuleIndex: 881
 	// RuleCount: 33
 	// ---------------------------------------------------------------------------
 
@@ -11188,7 +11620,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Para
-	// RuleIndex: 879
+	// RuleIndex: 914
 	// RuleCount: 23
 	// ---------------------------------------------------------------------------
 
@@ -11471,7 +11903,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Peru
-	// RuleIndex: 902
+	// RuleIndex: 937
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -11562,7 +11994,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Phil
-	// RuleIndex: 909
+	// RuleIndex: 944
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -11605,7 +12037,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Poland
-	// RuleIndex: 912
+	// RuleIndex: 947
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11624,7 +12056,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Port
-	// RuleIndex: 913
+	// RuleIndex: 948
 	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
@@ -11739,7 +12171,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: ROK
-	// RuleIndex: 922
+	// RuleIndex: 957
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -11782,7 +12214,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Romania
-	// RuleIndex: 925
+	// RuleIndex: 960
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -11873,7 +12305,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Russia
-	// RuleIndex: 932
+	// RuleIndex: 967
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -11952,7 +12384,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: RussiaAsia
-	// RuleIndex: 938
+	// RuleIndex: 973
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -12031,7 +12463,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SA
-	// RuleIndex: 944
+	// RuleIndex: 979
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -12050,7 +12482,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Salv
-	// RuleIndex: 945
+	// RuleIndex: 980
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -12093,7 +12525,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SanLuis
-	// RuleIndex: 948
+	// RuleIndex: 983
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -12136,7 +12568,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Spain
-	// RuleIndex: 951
+	// RuleIndex: 986
 	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
@@ -12239,7 +12671,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SpainAfrica
-	// RuleIndex: 959
+	// RuleIndex: 994
 	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
@@ -12342,7 +12774,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: StJohns
-	// RuleIndex: 967
+	// RuleIndex: 1002
 	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
@@ -12457,10 +12889,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Sudan
-	// RuleIndex: 976
-	// RuleCount: 3
+	// RuleIndex: 1011
+	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    Sudan    1970    1985    -    Oct    15    0:00    0    -
+	{
+		FromYear: 0,
+		ToYear: 0,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Sudan    1970    only    -    May     1    0:00    1:00    S
+	{
+		FromYear: 1970,
+		ToYear: 1970,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 12, // "S"
+	},
 	// Rule    Sudan    1970    1985    -    Oct    15    0:00    0    -
 	{
 		FromYear: 1970,
@@ -12499,8 +12955,27 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	},
 
 	// ---------------------------------------------------------------------------
+	// PolicyName: Swift
+	// RuleIndex: 1016
+	// RuleCount: 1
+	// ---------------------------------------------------------------------------
+
+	// Rule    Swift    1960    1961    -    Sep    lastSun    2:00    0    S
+	{
+		FromYear: 1960,
+		ToYear: 1961,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtTimeCode: 8,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 12, // "S"
+	},
+
+	// ---------------------------------------------------------------------------
 	// PolicyName: Swiss
-	// RuleIndex: 979
+	// RuleIndex: 1017
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -12519,7 +12994,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Syria
-	// RuleIndex: 980
+	// RuleIndex: 1018
 	// RuleCount: 33
 	// ---------------------------------------------------------------------------
 
@@ -12922,7 +13397,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Taiwan
-	// RuleIndex: 1013
+	// RuleIndex: 1051
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -12989,7 +13464,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Thule
-	// RuleIndex: 1018
+	// RuleIndex: 1056
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -13080,7 +13555,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Tonga
-	// RuleIndex: 1025
+	// RuleIndex: 1063
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -13171,7 +13646,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Toronto
-	// RuleIndex: 1032
+	// RuleIndex: 1070
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -13214,7 +13689,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Troll
-	// RuleIndex: 1035
+	// RuleIndex: 1073
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -13257,7 +13732,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Tunisia
-	// RuleIndex: 1038
+	// RuleIndex: 1076
 	// RuleCount: 13
 	// ---------------------------------------------------------------------------
 
@@ -13420,7 +13895,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Turkey
-	// RuleIndex: 1051
+	// RuleIndex: 1089
 	// RuleCount: 18
 	// ---------------------------------------------------------------------------
 
@@ -13643,7 +14118,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: US
-	// RuleIndex: 1069
+	// RuleIndex: 1107
 	// RuleCount: 9
 	// ---------------------------------------------------------------------------
 
@@ -13758,10 +14233,58 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Uruguay
-	// RuleIndex: 1078
-	// RuleCount: 28
+	// RuleIndex: 1116
+	// RuleCount: 32
 	// ---------------------------------------------------------------------------
 
+	// Rule    Uruguay    1968    only    -    Dec     1     0:00    0    -
+	{
+		FromYear: 1968,
+		ToYear: 1968,
+		InMonth: 12,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1970    only    -    Apr    25     0:00    1:00    -
+	{
+		FromYear: 1970,
+		ToYear: 1970,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1970    only    -    Jun    14     0:00    0    -
+	{
+		FromYear: 1970,
+		ToYear: 1970,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 14,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		LetterIndex: 0, // ""
+	},
+	// Rule    Uruguay    1972    only    -    Apr    23     0:00    1:00    -
+	{
+		FromYear: 1972,
+		ToYear: 1972,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 23,
+		AtTimeCode: 0,
+		AtTimeModifier: 0, // SuffixW + minute=0
+		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		LetterIndex: 0, // ""
+	},
 	// Rule    Uruguay    1972    only    -    Jul    16     0:00    0    -
 	{
 		FromYear: 1972,
@@ -14101,7 +14624,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Vanc
-	// RuleIndex: 1106
+	// RuleIndex: 1148
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -14144,7 +14667,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Vanuatu
-	// RuleIndex: 1109
+	// RuleIndex: 1151
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -14235,7 +14758,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: W-Eur
-	// RuleIndex: 1116
+	// RuleIndex: 1158
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -14314,7 +14837,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: WS
-	// RuleIndex: 1122
+	// RuleIndex: 1164
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -14393,7 +14916,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Winn
-	// RuleIndex: 1128
+	// RuleIndex: 1170
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -14448,7 +14971,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Yukon
-	// RuleIndex: 1132
+	// RuleIndex: 1174
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -14467,7 +14990,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Zion
-	// RuleIndex: 1133
+	// RuleIndex: 1175
 	// RuleCount: 60
 	// ---------------------------------------------------------------------------
 
@@ -15195,12 +15718,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 }
 
-const ZoneRuleCount = 1193
+const ZoneRuleCount = 1235
 
 const ZoneRuleChunkSize = 11
 
 // ZoneRulesData contains the ZoneRuleRecords data as a hex encoded string.
-const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
+const ZoneRulesData = "\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xb4\x07\xb4\x07\x02\x00\x1b\x08\x10\x04\x0c" +
 		"\xb5\x07\xbd\x07\x03\x07\x01\x08\x10\x04\x0c" +
 		"\xbe\x07\xbe\x07\x04\x07\x01\x08\x10\x04\x0c" +
@@ -15216,9 +15740,12 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x0c" +
 		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x0c" +
 		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x08" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
+		"\xb3\x07\xb3\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xb4\x07\xb4\x07\x02\x07\x00\x08\x10\x04\x0c" +
 		"\xc5\x07\xc7\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xc6\x07\xc8\x07\x03\x07\x01\x08\x10\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
 		"\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xc2\x07\xc2\x07\x0a\x00\x13\x08\x10\x08\x08" +
 		"\xc3\x07\xd7\x07\x0a\x07\x00\x08\x10\x08\x08" +
@@ -15234,7 +15761,9 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x0c" +
 		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x0c" +
 		"\xd8\x07\x0f\x27\x0a\x07\x01\x08\x10\x08\x08" +
+		"\xb0\x07\xb0\x07\x03\x07\x1d\x08\x10\x04\x0c" +
 		"\xb0\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
+		"\xb1\x07\xb3\x07\x03\x07\x08\x08\x10\x04\x0c" +
 		"\xb4\x07\xb4\x07\x02\x07\x00\x08\x10\x04\x0c" +
 		"\xb5\x07\xbd\x07\x03\x07\x01\x08\x10\x04\x0c" +
 		"\xbe\x07\xbf\x07\x03\x07\x00\x08\x10\x04\x0c" +
@@ -15250,6 +15779,7 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xd6\x07\xd6\x07\x04\x07\x01\x08\x10\x04\x0c" +
 		"\xd7\x07\xd7\x07\x03\x07\x00\x08\x10\x04\x0c" +
 		"\xd8\x07\x0f\x27\x04\x07\x01\x08\x10\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x0c" +
 		"\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xb4\x07\xb4\x07\x02\x07\x00\x08\x10\x04\x0c" +
 		"\xb5\x07\xc1\x07\x03\x07\x01\x08\x10\x04\x0c" +
@@ -15296,6 +15826,8 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xbf\x07\xbf\x07\x04\x00\x12\x00\x00\x08\x0c" +
 		"\xbf\x07\xbf\x07\x0a\x00\x01\x00\x00\x04\x00" +
 		"\xc0\x07\xc0\x07\x04\x00\x01\x00\x00\x08\x0c" +
+		"\x99\x07\x99\x07\x09\x00\x10\x04\x00\x04\x00" +
+		"\xb3\x07\xb3\x07\x04\x00\x19\x5c\x10\x08\x0c" +
 		"\xb3\x07\xb3\x07\x09\x00\x1a\x5c\x10\x04\x00" +
 		"\xb9\x07\xb9\x07\x05\x00\x06\x00\x00\x08\x0c" +
 		"\xb9\x07\xb9\x07\x0a\x00\x15\x00\x00\x04\x00" +
@@ -15303,6 +15835,7 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xba\x07\xba\x07\x09\x00\x16\x0c\x00\x04\x00" +
 		"\xbc\x07\xbc\x07\x04\x00\x19\x00\x00\x08\x0c" +
 		"\xbc\x07\xbc\x07\x0a\x00\x1f\x08\x00\x04\x00" +
+		"\xaf\x07\xb0\x07\x0a\x07\x01\x00\x00\x08\x00" +
 		"\xb0\x07\xb1\x07\x04\x07\x01\x00\x00\x04\x00" +
 		"\xb6\x07\xb6\x07\x01\x00\x17\x00\x00\x08\x00" +
 		"\xb6\x07\xb6\x07\x05\x00\x01\x00\x00\x04\x00" +
@@ -15419,6 +15952,11 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xc6\x07\xd7\x07\x03\x07\x0f\x0b\x10\x04\x00" +
 		"\xd7\x07\x0f\x27\x09\x07\x00\x0b\x10\x08\x00" +
 		"\xd8\x07\x0f\x27\x04\x07\x01\x0b\x10\x04\x00" +
+		"\xb0\x07\xb0\x07\x0b\x00\x03\x10\x20\x08\x00" +
+		"\xb1\x07\xb1\x07\x03\x00\x1e\x0c\x20\x04\x00" +
+		"\xb1\x07\xb1\x07\x0b\x00\x17\x10\x20\x08\x00" +
+		"\xb2\x07\xb2\x07\x03\x00\x1d\x0c\x20\x04\x00" +
+		"\xb3\x07\xb3\x07\x03\x00\x0e\x0c\x20\x04\x00" +
 		"\xb2\x07\xb4\x07\x0a\x07\x09\x10\x20\x08\x00" +
 		"\xb4\x07\xc2\x07\x03\x07\x09\x0c\x20\x04\x00" +
 		"\xb5\x07\xb5\x07\x09\x00\x1e\x10\x20\x08\x00" +
@@ -15452,6 +15990,7 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xba\x07\xba\x07\x0b\x00\x0c\x00\x00\x06\x00" +
 		"\xbb\x07\xc7\x07\x03\x07\x01\x00\x00\x04\x00" +
 		"\xbb\x07\xc6\x07\x0a\x07\x00\x00\x00\x06\x00" +
+		"\xaf\x07\xb0\x07\x09\x07\x08\x00\x00\x04\x0c" +
 		"\xb1\x07\xb9\x07\x04\x07\x00\x00\x00\x08\x08" +
 		"\xb1\x07\xb3\x07\x0a\x07\x00\x00\x00\x04\x0c" +
 		"\xb4\x07\xb6\x07\x0a\x00\x08\x00\x00\x04\x0c" +
@@ -15489,7 +16028,9 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xbb\x07\xcd\x07\x09\x07\x00\x00\x00\x04\x00" +
 		"\xbd\x07\xce\x07\x03\x07\x00\x00\x00\x08\x0c" +
 		"\x9a\x07\x9d\x07\x0a\x07\x01\x08\x10\x04\x00" +
+		"\xaf\x07\xaf\x07\x02\x00\x1c\x00\x00\x04\x0a" +
 		"\xb1\x07\xb5\x07\x0a\x07\x00\x00\x00\x06\x03" +
+		"\xb2\x07\xb2\x07\x02\x00\x15\x00\x00\x04\x0a" +
 		"\xb3\x07\xb3\x07\x01\x00\x14\x00\x00\x04\x0a" +
 		"\xb4\x07\xb6\x07\x01\x00\x15\x00\x00\x04\x0a" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
@@ -15542,6 +16083,7 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xde\x07\xde\x07\x06\x00\x1a\x60\x00\x04\x00" +
 		"\xde\x07\xde\x07\x07\x00\x1f\x60\x00\x08\x0c" +
 		"\xde\x07\xde\x07\x09\x04\x00\x60\x00\x04\x00" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xb3\x07\xb3\x07\x0a\x00\x1f\x08\x20\x00\x00" +
 		"\xb4\x07\xbc\x07\x03\x07\x10\x08\x20\x04\x00" +
 		"\xb4\x07\xbc\x07\x0a\x07\x17\x08\x20\x00\x00" +
@@ -15595,6 +16137,11 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xbb\x07\xbb\x07\x09\x00\x1d\x08\x00\x04\x00" +
 		"\xbc\x07\xbc\x07\x04\x00\x01\x00\x00\x08\x0c" +
 		"\xbc\x07\xbc\x07\x09\x00\x1c\x00\x00\x04\x00" +
+		"\xaf\x07\xaf\x07\x09\x00\x01\x08\x00\x08\x08" +
+		"\xb1\x07\xb1\x07\x01\x00\x1a\x00\x01\x04\x0c" +
+		"\xb1\x07\xb1\x07\x06\x00\x16\x08\x00\x08\x08" +
+		"\xb1\x07\xb1\x07\x08\x00\x1f\x08\x00\x04\x0c" +
+		"\xb2\x07\xb3\x07\x04\x07\x00\x08\x00\x08\x08" +
 		"\xb2\x07\xb3\x07\x09\x07\x01\x08\x00\x04\x0c" +
 		"\xb5\x07\xb5\x07\x0c\x00\x10\x08\x00\x08\x08" +
 		"\xb6\x07\xb6\x07\x02\x00\x18\x08\x00\x04\x0c" +
@@ -15694,6 +16241,13 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xc2\x07\xc6\x07\x03\x07\x00\x04\x10\x08\x00" +
 		"\xc7\x07\xd7\x07\x04\x00\x01\x0c\x10\x08\x00" +
 		"\xc7\x07\xd7\x07\x0a\x00\x01\x0c\x10\x04\x00" +
+		"\xae\x07\xb0\x07\x05\x07\x16\x00\x10\x08\x0c" +
+		"\xaf\x07\xb1\x07\x09\x07\x16\x00\x10\x04\x00" +
+		"\xb1\x07\xb1\x07\x06\x00\x01\x00\x10\x08\x0c" +
+		"\xb2\x07\xb2\x07\x05\x00\x1f\x00\x10\x08\x0c" +
+		"\xb2\x07\xb2\x07\x09\x07\x00\x00\x10\x04\x00" +
+		"\xb3\x07\xb4\x07\x05\x07\x16\x00\x10\x08\x0c" +
+		"\xb3\x07\xb3\x07\x09\x07\x00\x00\x10\x04\x00" +
 		"\xb4\x07\xb4\x07\x0a\x00\x01\x00\x10\x04\x00" +
 		"\xb5\x07\xb5\x07\x06\x00\x03\x00\x10\x08\x0c" +
 		"\xb5\x07\xb6\x07\x09\x07\x00\x00\x10\x04\x00" +
@@ -15761,6 +16315,7 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xc5\x07\xcc\x07\x03\x07\x00\x08\x10\x08\x0c" +
 		"\xc5\x07\xcc\x07\x09\x07\x00\x08\x10\x04\x00" +
+		"\xa5\x07\xa9\x07\x0a\x00\x01\x00\x00\x04\x00" +
 		"\xb4\x07\xb4\x07\x06\x00\x16\x00\x00\x08\x0c" +
 		"\xb4\x07\xb9\x07\x0a\x00\x01\x00\x00\x04\x00" +
 		"\xb5\x07\xb9\x07\x05\x00\x01\x00\x00\x08\x0c" +
@@ -15807,6 +16362,7 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xbf\x07\xbf\x07\x03\x00\x15\x00\x00\x04\x00" +
 		"\xd8\x07\xd8\x07\x0a\x07\x00\x08\x00\x08\x00" +
 		"\xd9\x07\xd9\x07\x03\x07\x00\x08\x00\x04\x00" +
+		"\xae\x07\xae\x07\x0a\x07\x00\x08\x00\x04\x0c" +
 		"\x9e\x07\x9e\x07\x07\x00\x1e\x00\x00\x04\x0c" +
 		"\xcc\x07\xd0\x07\x04\x07\x01\x08\x00\x08\x08" +
 		"\xcc\x07\xd0\x07\x0a\x07\x00\x08\x00\x04\x0c" +
@@ -15817,6 +16373,8 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
 		"\xcd\x07\x0f\x27\x03\x07\x00\x08\x00\x08\x0c" +
 		"\xcd\x07\x0f\x27\x0a\x07\x00\x0c\x00\x04\x00" +
+		"\x9a\x07\xb4\x07\x04\x07\x00\x08\x00\x08\x08" +
+		"\x9a\x07\xa4\x07\x09\x07\x00\x08\x00\x04\x0c" +
 		"\xa5\x07\xb4\x07\x0a\x07\x00\x08\x00\x04\x0c" +
 		"\xc9\x07\xd6\x07\x04\x07\x01\x00\x01\x08\x08" +
 		"\xc9\x07\xd6\x07\x0a\x07\x00\x00\x01\x04\x0c" +
@@ -16176,9 +16734,12 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xc5\x07\xd6\x07\x04\x07\x01\x00\x01\x08\x08" +
 		"\xd7\x07\xdb\x07\x03\x07\x08\x00\x01\x08\x08" +
 		"\xd7\x07\xda\x07\x0b\x07\x01\x00\x01\x04\x0c" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
+		"\xb2\x07\xb2\x07\x05\x00\x01\x00\x00\x08\x0c" +
 		"\xb2\x07\xc1\x07\x0a\x00\x0f\x00\x00\x04\x00" +
 		"\xb3\x07\xb3\x07\x04\x00\x1e\x00\x00\x08\x0c" +
 		"\xb4\x07\xc1\x07\x04\x07\x00\x00\x00\x08\x0c" +
+		"\xa8\x07\xa9\x07\x09\x07\x00\x08\x00\x04\x0c" +
 		"\x95\x07\x96\x07\x0a\x01\x01\x08\x00\x04\x00" +
 		"\xae\x07\xae\x07\x04\x00\x18\x08\x00\x08\x0c" +
 		"\xae\x07\xb8\x07\x0a\x00\x01\x08\x00\x04\x00" +
@@ -16278,6 +16839,10 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x08" +
 		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x08" +
 		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x0c" +
+		"\xb0\x07\xb0\x07\x0c\x00\x01\x00\x00\x04\x00" +
+		"\xb2\x07\xb2\x07\x04\x00\x19\x00\x00\x08\x00" +
+		"\xb2\x07\xb2\x07\x06\x00\x0e\x00\x00\x04\x00" +
+		"\xb4\x07\xb4\x07\x04\x00\x17\x00\x00\x08\x00" +
 		"\xb4\x07\xb4\x07\x07\x00\x10\x00\x00\x04\x00" +
 		"\xb6\x07\xb6\x07\x01\x00\x0d\x00\x00\x0a\x00" +
 		"\xb6\x07\xb6\x07\x03\x00\x0a\x00\x00\x06\x00" +
@@ -16396,251 +16961,255 @@ const ZoneRulesData = "\xb3\x07\xc1\x07\x0a\x07\x00\x08\x10\x08\x08" +
 
 // ---------------------------------------------------------------------------
 // ZonePolicyRecords contain indexes into the ZoneRuleRecords.
-// Supported zone policies: 114
+// Supported zone policies: 116
 // ---------------------------------------------------------------------------
 
 var ZonePolicyRecords = []zoneinfo.ZonePolicyRecord{
 	{RuleIndex: 0, RuleCount: 0}, // 0: PolicyName: (None)
-	{RuleIndex: 0, RuleCount: 16}, // 1: PolicyName: AN
-	{RuleIndex: 16, RuleCount: 3}, // 2: PolicyName: AQ
-	{RuleIndex: 19, RuleCount: 15}, // 3: PolicyName: AS
-	{RuleIndex: 34, RuleCount: 16}, // 4: PolicyName: AT
-	{RuleIndex: 50, RuleCount: 14}, // 5: PolicyName: AV
-	{RuleIndex: 64, RuleCount: 10}, // 6: PolicyName: AW
-	{RuleIndex: 74, RuleCount: 22}, // 7: PolicyName: Albania
-	{RuleIndex: 96, RuleCount: 7}, // 8: PolicyName: Algeria
-	{RuleIndex: 103, RuleCount: 11}, // 9: PolicyName: Arg
-	{RuleIndex: 114, RuleCount: 3}, // 10: PolicyName: Armenia
-	{RuleIndex: 117, RuleCount: 1}, // 11: PolicyName: Aus
-	{RuleIndex: 118, RuleCount: 3}, // 12: PolicyName: Austria
-	{RuleIndex: 121, RuleCount: 3}, // 13: PolicyName: Azer
-	{RuleIndex: 124, RuleCount: 6}, // 14: PolicyName: Barb
-	{RuleIndex: 130, RuleCount: 1}, // 15: PolicyName: Belgium
-	{RuleIndex: 131, RuleCount: 5}, // 16: PolicyName: Belize
-	{RuleIndex: 136, RuleCount: 1}, // 17: PolicyName: Bermuda
-	{RuleIndex: 137, RuleCount: 44}, // 18: PolicyName: Brazil
-	{RuleIndex: 181, RuleCount: 6}, // 19: PolicyName: Bulg
-	{RuleIndex: 187, RuleCount: 7}, // 20: PolicyName: C-Eur
-	{RuleIndex: 194, RuleCount: 3}, // 21: PolicyName: CO
-	{RuleIndex: 197, RuleCount: 6}, // 22: PolicyName: CR
-	{RuleIndex: 203, RuleCount: 6}, // 23: PolicyName: Canada
-	{RuleIndex: 209, RuleCount: 10}, // 24: PolicyName: Chatham
-	{RuleIndex: 219, RuleCount: 29}, // 25: PolicyName: Chile
-	{RuleIndex: 248, RuleCount: 4}, // 26: PolicyName: Cook
-	{RuleIndex: 252, RuleCount: 26}, // 27: PolicyName: Cuba
-	{RuleIndex: 278, RuleCount: 10}, // 28: PolicyName: Cyprus
-	{RuleIndex: 288, RuleCount: 1}, // 29: PolicyName: Czech
-	{RuleIndex: 289, RuleCount: 3}, // 30: PolicyName: DR
-	{RuleIndex: 292, RuleCount: 3}, // 31: PolicyName: Dhaka
-	{RuleIndex: 295, RuleCount: 5}, // 32: PolicyName: E-Eur
-	{RuleIndex: 300, RuleCount: 4}, // 33: PolicyName: E-EurAsia
-	{RuleIndex: 304, RuleCount: 7}, // 34: PolicyName: EU
-	{RuleIndex: 311, RuleCount: 4}, // 35: PolicyName: EUAsia
-	{RuleIndex: 315, RuleCount: 3}, // 36: PolicyName: Ecuador
-	{RuleIndex: 318, RuleCount: 3}, // 37: PolicyName: Edm
-	{RuleIndex: 321, RuleCount: 21}, // 38: PolicyName: Egypt
-	{RuleIndex: 342, RuleCount: 7}, // 39: PolicyName: Eire
-	{RuleIndex: 349, RuleCount: 8}, // 40: PolicyName: Falk
-	{RuleIndex: 357, RuleCount: 13}, // 41: PolicyName: Fiji
-	{RuleIndex: 370, RuleCount: 3}, // 42: PolicyName: Finland
-	{RuleIndex: 373, RuleCount: 3}, // 43: PolicyName: France
-	{RuleIndex: 376, RuleCount: 6}, // 44: PolicyName: GB-Eire
-	{RuleIndex: 382, RuleCount: 1}, // 45: PolicyName: Germany
-	{RuleIndex: 383, RuleCount: 12}, // 46: PolicyName: Greece
-	{RuleIndex: 395, RuleCount: 7}, // 47: PolicyName: Guam
-	{RuleIndex: 402, RuleCount: 9}, // 48: PolicyName: Guat
-	{RuleIndex: 411, RuleCount: 6}, // 49: PolicyName: HK
-	{RuleIndex: 417, RuleCount: 12}, // 50: PolicyName: Haiti
-	{RuleIndex: 429, RuleCount: 3}, // 51: PolicyName: Halifax
-	{RuleIndex: 432, RuleCount: 3}, // 52: PolicyName: Holiday
-	{RuleIndex: 435, RuleCount: 5}, // 53: PolicyName: Hond
-	{RuleIndex: 440, RuleCount: 5}, // 54: PolicyName: Hungary
-	{RuleIndex: 445, RuleCount: 40}, // 55: PolicyName: Iran
-	{RuleIndex: 485, RuleCount: 9}, // 56: PolicyName: Iraq
-	{RuleIndex: 494, RuleCount: 10}, // 57: PolicyName: Italy
-	{RuleIndex: 504, RuleCount: 1}, // 58: PolicyName: Japan
-	{RuleIndex: 505, RuleCount: 33}, // 59: PolicyName: Jordan
-	{RuleIndex: 538, RuleCount: 5}, // 60: PolicyName: Kyrgyz
-	{RuleIndex: 543, RuleCount: 15}, // 61: PolicyName: LH
-	{RuleIndex: 558, RuleCount: 3}, // 62: PolicyName: Latvia
-	{RuleIndex: 561, RuleCount: 14}, // 63: PolicyName: Lebanon
-	{RuleIndex: 575, RuleCount: 12}, // 64: PolicyName: Libya
-	{RuleIndex: 587, RuleCount: 7}, // 65: PolicyName: Macau
-	{RuleIndex: 594, RuleCount: 8}, // 66: PolicyName: Malta
-	{RuleIndex: 602, RuleCount: 5}, // 67: PolicyName: Mauritius
-	{RuleIndex: 607, RuleCount: 7}, // 68: PolicyName: Mexico
-	{RuleIndex: 614, RuleCount: 3}, // 69: PolicyName: Moldova
-	{RuleIndex: 617, RuleCount: 3}, // 70: PolicyName: Moncton
-	{RuleIndex: 620, RuleCount: 10}, // 71: PolicyName: Mongol
-	{RuleIndex: 630, RuleCount: 176}, // 72: PolicyName: Morocco
-	{RuleIndex: 806, RuleCount: 5}, // 73: PolicyName: NC
-	{RuleIndex: 811, RuleCount: 4}, // 74: PolicyName: NT_YK
-	{RuleIndex: 815, RuleCount: 10}, // 75: PolicyName: NZ
-	{RuleIndex: 825, RuleCount: 4}, // 76: PolicyName: Namibia
-	{RuleIndex: 829, RuleCount: 7}, // 77: PolicyName: Nic
-	{RuleIndex: 836, RuleCount: 4}, // 78: PolicyName: PRC
-	{RuleIndex: 840, RuleCount: 6}, // 79: PolicyName: Pakistan
-	{RuleIndex: 846, RuleCount: 33}, // 80: PolicyName: Palestine
-	{RuleIndex: 879, RuleCount: 23}, // 81: PolicyName: Para
-	{RuleIndex: 902, RuleCount: 7}, // 82: PolicyName: Peru
-	{RuleIndex: 909, RuleCount: 3}, // 83: PolicyName: Phil
-	{RuleIndex: 912, RuleCount: 1}, // 84: PolicyName: Poland
-	{RuleIndex: 913, RuleCount: 9}, // 85: PolicyName: Port
-	{RuleIndex: 922, RuleCount: 3}, // 86: PolicyName: ROK
-	{RuleIndex: 925, RuleCount: 7}, // 87: PolicyName: Romania
-	{RuleIndex: 932, RuleCount: 6}, // 88: PolicyName: Russia
-	{RuleIndex: 938, RuleCount: 6}, // 89: PolicyName: RussiaAsia
-	{RuleIndex: 944, RuleCount: 1}, // 90: PolicyName: SA
-	{RuleIndex: 945, RuleCount: 3}, // 91: PolicyName: Salv
-	{RuleIndex: 948, RuleCount: 3}, // 92: PolicyName: SanLuis
-	{RuleIndex: 951, RuleCount: 8}, // 93: PolicyName: Spain
-	{RuleIndex: 959, RuleCount: 8}, // 94: PolicyName: SpainAfrica
-	{RuleIndex: 967, RuleCount: 9}, // 95: PolicyName: StJohns
-	{RuleIndex: 976, RuleCount: 3}, // 96: PolicyName: Sudan
-	{RuleIndex: 979, RuleCount: 1}, // 97: PolicyName: Swiss
-	{RuleIndex: 980, RuleCount: 33}, // 98: PolicyName: Syria
-	{RuleIndex: 1013, RuleCount: 5}, // 99: PolicyName: Taiwan
-	{RuleIndex: 1018, RuleCount: 7}, // 100: PolicyName: Thule
-	{RuleIndex: 1025, RuleCount: 7}, // 101: PolicyName: Tonga
-	{RuleIndex: 1032, RuleCount: 3}, // 102: PolicyName: Toronto
-	{RuleIndex: 1035, RuleCount: 3}, // 103: PolicyName: Troll
-	{RuleIndex: 1038, RuleCount: 13}, // 104: PolicyName: Tunisia
-	{RuleIndex: 1051, RuleCount: 18}, // 105: PolicyName: Turkey
-	{RuleIndex: 1069, RuleCount: 9}, // 106: PolicyName: US
-	{RuleIndex: 1078, RuleCount: 28}, // 107: PolicyName: Uruguay
-	{RuleIndex: 1106, RuleCount: 3}, // 108: PolicyName: Vanc
-	{RuleIndex: 1109, RuleCount: 7}, // 109: PolicyName: Vanuatu
-	{RuleIndex: 1116, RuleCount: 6}, // 110: PolicyName: W-Eur
-	{RuleIndex: 1122, RuleCount: 6}, // 111: PolicyName: WS
-	{RuleIndex: 1128, RuleCount: 4}, // 112: PolicyName: Winn
-	{RuleIndex: 1132, RuleCount: 1}, // 113: PolicyName: Yukon
-	{RuleIndex: 1133, RuleCount: 60}, // 114: PolicyName: Zion
+	{RuleIndex: 0, RuleCount: 17}, // 1: PolicyName: AN
+	{RuleIndex: 17, RuleCount: 5}, // 2: PolicyName: AQ
+	{RuleIndex: 22, RuleCount: 16}, // 3: PolicyName: AS
+	{RuleIndex: 38, RuleCount: 18}, // 4: PolicyName: AT
+	{RuleIndex: 56, RuleCount: 15}, // 5: PolicyName: AV
+	{RuleIndex: 71, RuleCount: 10}, // 6: PolicyName: AW
+	{RuleIndex: 81, RuleCount: 22}, // 7: PolicyName: Albania
+	{RuleIndex: 103, RuleCount: 9}, // 8: PolicyName: Algeria
+	{RuleIndex: 112, RuleCount: 12}, // 9: PolicyName: Arg
+	{RuleIndex: 124, RuleCount: 3}, // 10: PolicyName: Armenia
+	{RuleIndex: 127, RuleCount: 1}, // 11: PolicyName: Aus
+	{RuleIndex: 128, RuleCount: 3}, // 12: PolicyName: Austria
+	{RuleIndex: 131, RuleCount: 3}, // 13: PolicyName: Azer
+	{RuleIndex: 134, RuleCount: 6}, // 14: PolicyName: Barb
+	{RuleIndex: 140, RuleCount: 1}, // 15: PolicyName: Belgium
+	{RuleIndex: 141, RuleCount: 5}, // 16: PolicyName: Belize
+	{RuleIndex: 146, RuleCount: 1}, // 17: PolicyName: Bermuda
+	{RuleIndex: 147, RuleCount: 44}, // 18: PolicyName: Brazil
+	{RuleIndex: 191, RuleCount: 6}, // 19: PolicyName: Bulg
+	{RuleIndex: 197, RuleCount: 7}, // 20: PolicyName: C-Eur
+	{RuleIndex: 204, RuleCount: 3}, // 21: PolicyName: CO
+	{RuleIndex: 207, RuleCount: 6}, // 22: PolicyName: CR
+	{RuleIndex: 213, RuleCount: 6}, // 23: PolicyName: Canada
+	{RuleIndex: 219, RuleCount: 10}, // 24: PolicyName: Chatham
+	{RuleIndex: 229, RuleCount: 34}, // 25: PolicyName: Chile
+	{RuleIndex: 263, RuleCount: 4}, // 26: PolicyName: Cook
+	{RuleIndex: 267, RuleCount: 27}, // 27: PolicyName: Cuba
+	{RuleIndex: 294, RuleCount: 10}, // 28: PolicyName: Cyprus
+	{RuleIndex: 304, RuleCount: 1}, // 29: PolicyName: Czech
+	{RuleIndex: 305, RuleCount: 5}, // 30: PolicyName: DR
+	{RuleIndex: 310, RuleCount: 3}, // 31: PolicyName: Dhaka
+	{RuleIndex: 313, RuleCount: 5}, // 32: PolicyName: E-Eur
+	{RuleIndex: 318, RuleCount: 4}, // 33: PolicyName: E-EurAsia
+	{RuleIndex: 322, RuleCount: 7}, // 34: PolicyName: EU
+	{RuleIndex: 329, RuleCount: 4}, // 35: PolicyName: EUAsia
+	{RuleIndex: 333, RuleCount: 3}, // 36: PolicyName: Ecuador
+	{RuleIndex: 336, RuleCount: 3}, // 37: PolicyName: Edm
+	{RuleIndex: 339, RuleCount: 21}, // 38: PolicyName: Egypt
+	{RuleIndex: 360, RuleCount: 8}, // 39: PolicyName: Eire
+	{RuleIndex: 368, RuleCount: 8}, // 40: PolicyName: Falk
+	{RuleIndex: 376, RuleCount: 13}, // 41: PolicyName: Fiji
+	{RuleIndex: 389, RuleCount: 3}, // 42: PolicyName: Finland
+	{RuleIndex: 392, RuleCount: 3}, // 43: PolicyName: France
+	{RuleIndex: 395, RuleCount: 6}, // 44: PolicyName: GB-Eire
+	{RuleIndex: 401, RuleCount: 1}, // 45: PolicyName: Germany
+	{RuleIndex: 402, RuleCount: 12}, // 46: PolicyName: Greece
+	{RuleIndex: 414, RuleCount: 12}, // 47: PolicyName: Guam
+	{RuleIndex: 426, RuleCount: 9}, // 48: PolicyName: Guat
+	{RuleIndex: 435, RuleCount: 6}, // 49: PolicyName: HK
+	{RuleIndex: 441, RuleCount: 12}, // 50: PolicyName: Haiti
+	{RuleIndex: 453, RuleCount: 3}, // 51: PolicyName: Halifax
+	{RuleIndex: 456, RuleCount: 3}, // 52: PolicyName: Holiday
+	{RuleIndex: 459, RuleCount: 5}, // 53: PolicyName: Hond
+	{RuleIndex: 464, RuleCount: 5}, // 54: PolicyName: Hungary
+	{RuleIndex: 469, RuleCount: 40}, // 55: PolicyName: Iran
+	{RuleIndex: 509, RuleCount: 9}, // 56: PolicyName: Iraq
+	{RuleIndex: 518, RuleCount: 17}, // 57: PolicyName: Italy
+	{RuleIndex: 535, RuleCount: 1}, // 58: PolicyName: Japan
+	{RuleIndex: 536, RuleCount: 33}, // 59: PolicyName: Jordan
+	{RuleIndex: 569, RuleCount: 5}, // 60: PolicyName: Kyrgyz
+	{RuleIndex: 574, RuleCount: 15}, // 61: PolicyName: LH
+	{RuleIndex: 589, RuleCount: 3}, // 62: PolicyName: Latvia
+	{RuleIndex: 592, RuleCount: 15}, // 63: PolicyName: Lebanon
+	{RuleIndex: 607, RuleCount: 12}, // 64: PolicyName: Libya
+	{RuleIndex: 619, RuleCount: 7}, // 65: PolicyName: Macau
+	{RuleIndex: 626, RuleCount: 8}, // 66: PolicyName: Malta
+	{RuleIndex: 634, RuleCount: 5}, // 67: PolicyName: Mauritius
+	{RuleIndex: 639, RuleCount: 1}, // 68: PolicyName: Menominee
+	{RuleIndex: 640, RuleCount: 7}, // 69: PolicyName: Mexico
+	{RuleIndex: 647, RuleCount: 3}, // 70: PolicyName: Moldova
+	{RuleIndex: 650, RuleCount: 5}, // 71: PolicyName: Moncton
+	{RuleIndex: 655, RuleCount: 10}, // 72: PolicyName: Mongol
+	{RuleIndex: 665, RuleCount: 176}, // 73: PolicyName: Morocco
+	{RuleIndex: 841, RuleCount: 5}, // 74: PolicyName: NC
+	{RuleIndex: 846, RuleCount: 4}, // 75: PolicyName: NT_YK
+	{RuleIndex: 850, RuleCount: 10}, // 76: PolicyName: NZ
+	{RuleIndex: 860, RuleCount: 4}, // 77: PolicyName: Namibia
+	{RuleIndex: 864, RuleCount: 7}, // 78: PolicyName: Nic
+	{RuleIndex: 871, RuleCount: 4}, // 79: PolicyName: PRC
+	{RuleIndex: 875, RuleCount: 6}, // 80: PolicyName: Pakistan
+	{RuleIndex: 881, RuleCount: 33}, // 81: PolicyName: Palestine
+	{RuleIndex: 914, RuleCount: 23}, // 82: PolicyName: Para
+	{RuleIndex: 937, RuleCount: 7}, // 83: PolicyName: Peru
+	{RuleIndex: 944, RuleCount: 3}, // 84: PolicyName: Phil
+	{RuleIndex: 947, RuleCount: 1}, // 85: PolicyName: Poland
+	{RuleIndex: 948, RuleCount: 9}, // 86: PolicyName: Port
+	{RuleIndex: 957, RuleCount: 3}, // 87: PolicyName: ROK
+	{RuleIndex: 960, RuleCount: 7}, // 88: PolicyName: Romania
+	{RuleIndex: 967, RuleCount: 6}, // 89: PolicyName: Russia
+	{RuleIndex: 973, RuleCount: 6}, // 90: PolicyName: RussiaAsia
+	{RuleIndex: 979, RuleCount: 1}, // 91: PolicyName: SA
+	{RuleIndex: 980, RuleCount: 3}, // 92: PolicyName: Salv
+	{RuleIndex: 983, RuleCount: 3}, // 93: PolicyName: SanLuis
+	{RuleIndex: 986, RuleCount: 8}, // 94: PolicyName: Spain
+	{RuleIndex: 994, RuleCount: 8}, // 95: PolicyName: SpainAfrica
+	{RuleIndex: 1002, RuleCount: 9}, // 96: PolicyName: StJohns
+	{RuleIndex: 1011, RuleCount: 5}, // 97: PolicyName: Sudan
+	{RuleIndex: 1016, RuleCount: 1}, // 98: PolicyName: Swift
+	{RuleIndex: 1017, RuleCount: 1}, // 99: PolicyName: Swiss
+	{RuleIndex: 1018, RuleCount: 33}, // 100: PolicyName: Syria
+	{RuleIndex: 1051, RuleCount: 5}, // 101: PolicyName: Taiwan
+	{RuleIndex: 1056, RuleCount: 7}, // 102: PolicyName: Thule
+	{RuleIndex: 1063, RuleCount: 7}, // 103: PolicyName: Tonga
+	{RuleIndex: 1070, RuleCount: 3}, // 104: PolicyName: Toronto
+	{RuleIndex: 1073, RuleCount: 3}, // 105: PolicyName: Troll
+	{RuleIndex: 1076, RuleCount: 13}, // 106: PolicyName: Tunisia
+	{RuleIndex: 1089, RuleCount: 18}, // 107: PolicyName: Turkey
+	{RuleIndex: 1107, RuleCount: 9}, // 108: PolicyName: US
+	{RuleIndex: 1116, RuleCount: 32}, // 109: PolicyName: Uruguay
+	{RuleIndex: 1148, RuleCount: 3}, // 110: PolicyName: Vanc
+	{RuleIndex: 1151, RuleCount: 7}, // 111: PolicyName: Vanuatu
+	{RuleIndex: 1158, RuleCount: 6}, // 112: PolicyName: W-Eur
+	{RuleIndex: 1164, RuleCount: 6}, // 113: PolicyName: WS
+	{RuleIndex: 1170, RuleCount: 4}, // 114: PolicyName: Winn
+	{RuleIndex: 1174, RuleCount: 1}, // 115: PolicyName: Yukon
+	{RuleIndex: 1175, RuleCount: 60}, // 116: PolicyName: Zion
 
 }
 
-const ZonePolicyCount = 115
+const ZonePolicyCount = 117
 
 const ZonePolicyChunkSize = 4
 
 // ZonePoliciesData contains the ZonePolicyRecords data as a hex encoded string.
 const ZonePoliciesData = "\x00\x00\x00\x00" +
-		"\x00\x00\x10\x00" +
-		"\x10\x00\x03\x00" +
-		"\x13\x00\x0f\x00" +
-		"\x22\x00\x10\x00" +
-		"\x32\x00\x0e\x00" +
-		"\x40\x00\x0a\x00" +
-		"\x4a\x00\x16\x00" +
-		"\x60\x00\x07\x00" +
-		"\x67\x00\x0b\x00" +
-		"\x72\x00\x03\x00" +
-		"\x75\x00\x01\x00" +
-		"\x76\x00\x03\x00" +
-		"\x79\x00\x03\x00" +
-		"\x7c\x00\x06\x00" +
-		"\x82\x00\x01\x00" +
-		"\x83\x00\x05\x00" +
-		"\x88\x00\x01\x00" +
-		"\x89\x00\x2c\x00" +
-		"\xb5\x00\x06\x00" +
-		"\xbb\x00\x07\x00" +
-		"\xc2\x00\x03\x00" +
-		"\xc5\x00\x06\x00" +
-		"\xcb\x00\x06\x00" +
-		"\xd1\x00\x0a\x00" +
-		"\xdb\x00\x1d\x00" +
-		"\xf8\x00\x04\x00" +
-		"\xfc\x00\x1a\x00" +
-		"\x16\x01\x0a\x00" +
-		"\x20\x01\x01\x00" +
-		"\x21\x01\x03\x00" +
-		"\x24\x01\x03\x00" +
-		"\x27\x01\x05\x00" +
-		"\x2c\x01\x04\x00" +
-		"\x30\x01\x07\x00" +
-		"\x37\x01\x04\x00" +
-		"\x3b\x01\x03\x00" +
-		"\x3e\x01\x03\x00" +
-		"\x41\x01\x15\x00" +
-		"\x56\x01\x07\x00" +
-		"\x5d\x01\x08\x00" +
-		"\x65\x01\x0d\x00" +
-		"\x72\x01\x03\x00" +
-		"\x75\x01\x03\x00" +
-		"\x78\x01\x06\x00" +
-		"\x7e\x01\x01\x00" +
-		"\x7f\x01\x0c\x00" +
-		"\x8b\x01\x07\x00" +
-		"\x92\x01\x09\x00" +
-		"\x9b\x01\x06\x00" +
-		"\xa1\x01\x0c\x00" +
-		"\xad\x01\x03\x00" +
-		"\xb0\x01\x03\x00" +
-		"\xb3\x01\x05\x00" +
-		"\xb8\x01\x05\x00" +
-		"\xbd\x01\x28\x00" +
-		"\xe5\x01\x09\x00" +
-		"\xee\x01\x0a\x00" +
-		"\xf8\x01\x01\x00" +
-		"\xf9\x01\x21\x00" +
-		"\x1a\x02\x05\x00" +
-		"\x1f\x02\x0f\x00" +
-		"\x2e\x02\x03\x00" +
-		"\x31\x02\x0e\x00" +
-		"\x3f\x02\x0c\x00" +
-		"\x4b\x02\x07\x00" +
-		"\x52\x02\x08\x00" +
-		"\x5a\x02\x05\x00" +
-		"\x5f\x02\x07\x00" +
-		"\x66\x02\x03\x00" +
-		"\x69\x02\x03\x00" +
-		"\x6c\x02\x0a\x00" +
-		"\x76\x02\xb0\x00" +
-		"\x26\x03\x05\x00" +
-		"\x2b\x03\x04\x00" +
-		"\x2f\x03\x0a\x00" +
-		"\x39\x03\x04\x00" +
-		"\x3d\x03\x07\x00" +
-		"\x44\x03\x04\x00" +
-		"\x48\x03\x06\x00" +
-		"\x4e\x03\x21\x00" +
-		"\x6f\x03\x17\x00" +
-		"\x86\x03\x07\x00" +
-		"\x8d\x03\x03\x00" +
-		"\x90\x03\x01\x00" +
-		"\x91\x03\x09\x00" +
-		"\x9a\x03\x03\x00" +
-		"\x9d\x03\x07\x00" +
-		"\xa4\x03\x06\x00" +
-		"\xaa\x03\x06\x00" +
-		"\xb0\x03\x01\x00" +
-		"\xb1\x03\x03\x00" +
-		"\xb4\x03\x03\x00" +
-		"\xb7\x03\x08\x00" +
-		"\xbf\x03\x08\x00" +
-		"\xc7\x03\x09\x00" +
-		"\xd0\x03\x03\x00" +
+		"\x00\x00\x11\x00" +
+		"\x11\x00\x05\x00" +
+		"\x16\x00\x10\x00" +
+		"\x26\x00\x12\x00" +
+		"\x38\x00\x0f\x00" +
+		"\x47\x00\x0a\x00" +
+		"\x51\x00\x16\x00" +
+		"\x67\x00\x09\x00" +
+		"\x70\x00\x0c\x00" +
+		"\x7c\x00\x03\x00" +
+		"\x7f\x00\x01\x00" +
+		"\x80\x00\x03\x00" +
+		"\x83\x00\x03\x00" +
+		"\x86\x00\x06\x00" +
+		"\x8c\x00\x01\x00" +
+		"\x8d\x00\x05\x00" +
+		"\x92\x00\x01\x00" +
+		"\x93\x00\x2c\x00" +
+		"\xbf\x00\x06\x00" +
+		"\xc5\x00\x07\x00" +
+		"\xcc\x00\x03\x00" +
+		"\xcf\x00\x06\x00" +
+		"\xd5\x00\x06\x00" +
+		"\xdb\x00\x0a\x00" +
+		"\xe5\x00\x22\x00" +
+		"\x07\x01\x04\x00" +
+		"\x0b\x01\x1b\x00" +
+		"\x26\x01\x0a\x00" +
+		"\x30\x01\x01\x00" +
+		"\x31\x01\x05\x00" +
+		"\x36\x01\x03\x00" +
+		"\x39\x01\x05\x00" +
+		"\x3e\x01\x04\x00" +
+		"\x42\x01\x07\x00" +
+		"\x49\x01\x04\x00" +
+		"\x4d\x01\x03\x00" +
+		"\x50\x01\x03\x00" +
+		"\x53\x01\x15\x00" +
+		"\x68\x01\x08\x00" +
+		"\x70\x01\x08\x00" +
+		"\x78\x01\x0d\x00" +
+		"\x85\x01\x03\x00" +
+		"\x88\x01\x03\x00" +
+		"\x8b\x01\x06\x00" +
+		"\x91\x01\x01\x00" +
+		"\x92\x01\x0c\x00" +
+		"\x9e\x01\x0c\x00" +
+		"\xaa\x01\x09\x00" +
+		"\xb3\x01\x06\x00" +
+		"\xb9\x01\x0c\x00" +
+		"\xc5\x01\x03\x00" +
+		"\xc8\x01\x03\x00" +
+		"\xcb\x01\x05\x00" +
+		"\xd0\x01\x05\x00" +
+		"\xd5\x01\x28\x00" +
+		"\xfd\x01\x09\x00" +
+		"\x06\x02\x11\x00" +
+		"\x17\x02\x01\x00" +
+		"\x18\x02\x21\x00" +
+		"\x39\x02\x05\x00" +
+		"\x3e\x02\x0f\x00" +
+		"\x4d\x02\x03\x00" +
+		"\x50\x02\x0f\x00" +
+		"\x5f\x02\x0c\x00" +
+		"\x6b\x02\x07\x00" +
+		"\x72\x02\x08\x00" +
+		"\x7a\x02\x05\x00" +
+		"\x7f\x02\x01\x00" +
+		"\x80\x02\x07\x00" +
+		"\x87\x02\x03\x00" +
+		"\x8a\x02\x05\x00" +
+		"\x8f\x02\x0a\x00" +
+		"\x99\x02\xb0\x00" +
+		"\x49\x03\x05\x00" +
+		"\x4e\x03\x04\x00" +
+		"\x52\x03\x0a\x00" +
+		"\x5c\x03\x04\x00" +
+		"\x60\x03\x07\x00" +
+		"\x67\x03\x04\x00" +
+		"\x6b\x03\x06\x00" +
+		"\x71\x03\x21\x00" +
+		"\x92\x03\x17\x00" +
+		"\xa9\x03\x07\x00" +
+		"\xb0\x03\x03\x00" +
+		"\xb3\x03\x01\x00" +
+		"\xb4\x03\x09\x00" +
+		"\xbd\x03\x03\x00" +
+		"\xc0\x03\x07\x00" +
+		"\xc7\x03\x06\x00" +
+		"\xcd\x03\x06\x00" +
 		"\xd3\x03\x01\x00" +
-		"\xd4\x03\x21\x00" +
-		"\xf5\x03\x05\x00" +
-		"\xfa\x03\x07\x00" +
-		"\x01\x04\x07\x00" +
-		"\x08\x04\x03\x00" +
-		"\x0b\x04\x03\x00" +
-		"\x0e\x04\x0d\x00" +
-		"\x1b\x04\x12\x00" +
-		"\x2d\x04\x09\x00" +
-		"\x36\x04\x1c\x00" +
-		"\x52\x04\x03\x00" +
-		"\x55\x04\x07\x00" +
-		"\x5c\x04\x06\x00" +
-		"\x62\x04\x06\x00" +
-		"\x68\x04\x04\x00" +
-		"\x6c\x04\x01\x00" +
-		"\x6d\x04\x3c\x00"
+		"\xd4\x03\x03\x00" +
+		"\xd7\x03\x03\x00" +
+		"\xda\x03\x08\x00" +
+		"\xe2\x03\x08\x00" +
+		"\xea\x03\x09\x00" +
+		"\xf3\x03\x05\x00" +
+		"\xf8\x03\x01\x00" +
+		"\xf9\x03\x01\x00" +
+		"\xfa\x03\x21\x00" +
+		"\x1b\x04\x05\x00" +
+		"\x20\x04\x07\x00" +
+		"\x27\x04\x07\x00" +
+		"\x2e\x04\x03\x00" +
+		"\x31\x04\x03\x00" +
+		"\x34\x04\x0d\x00" +
+		"\x41\x04\x12\x00" +
+		"\x53\x04\x09\x00" +
+		"\x5c\x04\x20\x00" +
+		"\x7c\x04\x03\x00" +
+		"\x7f\x04\x07\x00" +
+		"\x86\x04\x06\x00" +
+		"\x8c\x04\x06\x00" +
+		"\x92\x04\x04\x00" +
+		"\x96\x04\x01\x00" +
+		"\x97\x04\x3c\x00"
 
 // ---------------------------------------------------------------------------
-// Unsupported zone policies: 20
+// Unsupported zone policies: 18
 // ---------------------------------------------------------------------------
 
 // CA {unused}
@@ -16651,7 +17220,6 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Indianapolis {unused}
 // Louisville {unused}
 // Marengo {unused}
-// Menominee {unused}
 // NBorneo {unused}
 // NYC {unused}
 // Perry {unused}
@@ -16661,14 +17229,17 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Shang {unused}
 // SovietZone {unused}
 // Starke {unused}
-// Swift {unused}
 // Vincennes {unused}
 
 
 // ---------------------------------------------------------------------------
-// Notable zone policies: 54
+// Notable zone policies: 59
 // ---------------------------------------------------------------------------
 
+// AN {Added anchor rule at year 0}
+// AQ {Added anchor rule at year 0}
+// AS {Added anchor rule at year 0}
+// AV {Added anchor rule at year 0}
 // AW {Added anchor rule at year 0}
 // Armenia {Added anchor rule at year 0}
 // Azer {Added anchor rule at year 0}
@@ -16696,13 +17267,19 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // EU {Added anchor rule at year 0}
 // EUAsia {Added anchor rule at year 0}
 // Ecuador {Added anchor rule at year 0}
-// Eire {SAVE (delta_offset) '-1:00' different from 1:00}
+// Eire {
+//   Added anchor rule at year 0,
+//   SAVE (delta_offset) '-1:00' different from 1:00,
+// }
 // Fiji {Added anchor rule at year 0}
 // GB-Eire {
 //   LETTER 'BST' not single character,
 //   LETTER 'GMT' not single character,
 // }
-// Guam {AT '2:01' not on 15-minute boundary}
+// Guam {
+//   AT '0:01' not on 15-minute boundary,
+//   AT '2:01' not on 15-minute boundary,
+// }
 // Guat {Added anchor rule at year 0}
 // Haiti {Added anchor rule at year 0}
 // Holiday {Added anchor rule at year 0}
@@ -16744,6 +17321,7 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 //   LETTER 'DD' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
+// Sudan {Added anchor rule at year 0}
 // Thule {Added anchor rule at year 0}
 // Tonga {Added anchor rule at year 0}
 // Troll {
