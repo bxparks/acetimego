@@ -29,6 +29,11 @@ func NewZoneStore(c *ZoneDataContext) *ZoneStore {
 	}
 }
 
+// ZoneCount() returns the number of zones in this database
+func (zs *ZoneStore) ZoneCount() uint16 {
+	return zs.context.ZoneInfoCount
+}
+
 // ZoneNames() returns an array of all zone names in the database.
 func (zs *ZoneStore) ZoneNames() []string {
 	return zs.nameIO.Strings()

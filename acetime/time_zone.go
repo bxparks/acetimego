@@ -46,7 +46,9 @@ func (tz *TimeZone) IsLink() bool {
 }
 
 func (tz *TimeZone) Name() string {
-	if tz.zoneProcessor == nil {
+	if tz.tztype == TztypeError {
+		return "<Error>"
+	} else if tz.tztype == TztypeUTC {
 		return "UTC"
 	} else {
 		return tz.zoneProcessor.Name()
@@ -94,7 +96,7 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime) OffsetDateTime {
 
-	// UTC
+	// UTC (or Error)
 	if tz.zoneProcessor == nil {
 		return NewOffsetDateTimeFromLocalDateTime(ldt, 0)
 	}

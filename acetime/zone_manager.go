@@ -32,14 +32,26 @@ func (zm *ZoneManager) NewTimeZoneFromName(name string) TimeZone {
 	return NewTimeZoneFromZoneInfo(zi)
 }
 
+func (zm *ZoneManager) NewTimeZoneFromIndex(index uint16) TimeZone {
+	if index >= zm.ZoneCount() {
+		return TimeZoneError
+	}
+	return NewTimeZoneFromZoneInfo(zm.store.ZoneInfo(index))
+}
+
+// ZoneCount returns the number of zones (Zones and Links) in the database.
+func (zm *ZoneManager) ZoneCount() uint16 {
+	return zm.store.ZoneCount()
+}
+
 // ZoneNames returns the list of zone names in the database. The list will
-// likely be sorted but that is not guaranteeded.
+// probably be *not* sorted.
 func (zm *ZoneManager) ZoneNames() []string {
 	return zm.store.ZoneNames()
 }
 
-// ZoneNames returns a list of ZoneIDsin the database. The list will likely be
-// sorted but that is not guaranteeded.
+// ZoneIds returns a list of ZoneIDsin the database. The list will likely be
+// sorted but that is not guaranteed.
 func (zm *ZoneManager) ZoneIDs() []uint32 {
 	return zm.store.ZoneIDs()
 }
