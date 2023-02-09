@@ -11,8 +11,22 @@ import (
 )
 
 const (
-	startYear = 1974
-	untilYear = 2150
+	// A handful of zones during the 1930's had a DSTOFF of 00h20m, instead of
+	// being multiples of 15 minutes. This cannot be handled by AceTimeGo at this
+	// current time.
+	//
+	// * Asia/Brunei : Minute not equal:  1935-09-14 00:20:00 +0820 +0820
+	// 1935-09-14T00:15:00+08:15[Asia/Brunei]
+	// * Asia/Kuala_Lumpur : Minute not equal:  1933-01-01 00:20:00 +0720 +0720
+	// 1933-01-01T00:15:00+07:15[Asia/Kuala_Lumpur]
+	// * Asia/Kuching : Minute not equal:  1935-09-14 00:20:00 +0820 +0820 //
+	// 1935-09-14T00:15:00+08:15[Asia/Kuching]
+	// * Asia/Singapore : Minute not equal:  1933-01-01 00:20:00 +0720 +0720
+	// * 1933-01-01T00:15:00+07:15[Asia/Singapore]
+	// * Singapore: :  Singapore : Minute not equal:  1933-01-01 00:20:00 +0720
+	// +0720
+	startYear = 1970
+	untilYear = 2100
 	samplingInterval = 22 // hours
 )
 
