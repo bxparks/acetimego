@@ -96,19 +96,20 @@ func (zs *ZoneStore) ZoneEras(i uint16, count uint16) []ZoneEra {
 }
 
 func (zs *ZoneStore) fillZoneEra(era *ZoneEra, record *ZoneEraRecord) {
-	era.Format = zs.formatIO.StringAt(record.FormatIndex)
-	era.OffsetSecondsCode = record.OffsetSecondsCode
-	era.DeltaCode = record.DeltaCode
-	era.UntilYear = record.UntilYear
-	era.UntilMonth = record.UntilMonth
-	era.UntilDay = record.UntilDay
-	era.UntilTimeCode = record.UntilTimeCode
-	era.UntilTimeModifier = record.UntilTimeModifier
 	if record.PolicyIndex == 0 {
 		era.Policy = nil
 	} else {
 		era.Policy = zs.ZonePolicy(uint16(record.PolicyIndex))
 	}
+	era.Format = zs.formatIO.StringAt(record.FormatIndex)
+	era.OffsetSecondsRemainder = record.OffsetSecondsRemainder
+	era.OffsetSecondsCode = record.OffsetSecondsCode
+	era.DeltaMinutes = record.DeltaMinutes
+	era.UntilYear = record.UntilYear
+	era.UntilMonth = record.UntilMonth
+	era.UntilDay = record.UntilDay
+	era.UntilSecondsCode = record.UntilSecondsCode
+	era.UntilSecondsModifier = record.UntilSecondsModifier
 }
 
 func (zs *ZoneStore) ZonePolicy(i uint16) *ZonePolicy {
@@ -141,9 +142,9 @@ func (zs *ZoneStore) fillZoneRule(rule *ZoneRule, record *ZoneRuleRecord) {
 	rule.InMonth = record.InMonth
 	rule.OnDayOfWeek = record.OnDayOfWeek
 	rule.OnDayOfMonth = record.OnDayOfMonth
-	rule.AtTimeCode = record.AtTimeCode
-	rule.AtTimeModifier = record.AtTimeModifier
-	rule.DeltaCode = record.DeltaCode
+	rule.AtSecondsCode = record.AtSecondsCode
+	rule.AtSecondsModifier = record.AtSecondsModifier
+	rule.DeltaMinutes = record.DeltaMinutes
 	rule.Letter = zs.letterIO.StringAt(record.LetterIndex)
 }
 

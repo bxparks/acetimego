@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   11460      20     629 |   11505     649 | (unknown)
+     25   11453      20     629 |   11498     649 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -21,17 +21,17 @@
      95       0       0       0 |      95       0 | Go interface method
       0      53       0       0 |      53       0 | Go reflect data
      42       0       0       0 |      42       0 | errors
-   7403      29       0       0 |    7432       0 | github.com/bxparks/AceTimeGo/acetime
-    280       0       0       0 |     280       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   7441      36       0       0 |    7477       0 | github.com/bxparks/AceTimeGo/acetime
+    261       0       0       0 |     261       0 | github.com/bxparks/AceTimeGo/zoneinfo
      80       0       0       0 |      80       0 | internal/bytealg
     157       2       0       0 |     159       0 | internal/itoa
     420      24       0      16 |     444      16 | internal/task
     845     137       0       0 |     982       0 | main
    3076     678       0       0 |    3754       0 | reflect
    6700     202      12      91 |    6914     103 | runtime
-    574     124       0       0 |     698       0 | strings
+    575     124       0       0 |     699       0 | strings
     623     200       0       0 |     823       0 | sync
      80    2954       0       0 |    3034       0 | syscall
   17730     938     168     128 |   18836     296 | time
 ------------------------------- | --------------- | -------
-  43757   18929     200     920 |   62886    1120 | total
+  43777   18929     200     920 |   62906    1120 | total

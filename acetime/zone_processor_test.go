@@ -90,12 +90,13 @@ func TestZoneProcessorInitForYear(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestCompareEraToYearMonth(t *testing.T) {
+	// 2000-01-02 03:00
 	era := zoneinfo.ZoneEra{
-		UntilYear:         2000,
-		UntilMonth:        1,
-		UntilDay:          2,
-		UntilTimeCode:     12,
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2000,
+		UntilMonth:           1,
+		UntilDay:             2,
+		UntilSecondsCode:     3 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	if !(1 == compareEraToYearMonth(&era, 2000, 1)) {
@@ -111,12 +112,13 @@ func TestCompareEraToYearMonth(t *testing.T) {
 		t.Fatal("fatal")
 	}
 
+	// 2000-01-01 00:00
 	era2 := zoneinfo.ZoneEra{
-		UntilYear:         2000,
-		UntilMonth:        1,
-		UntilDay:          0,
-		UntilTimeCode:     0,
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2000,
+		UntilMonth:           1,
+		UntilDay:             1,
+		UntilSecondsCode:     0,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 	if !(0 == compareEraToYearMonth(&era2, 2000, 1)) {
 		t.Fatal("fatal")
@@ -130,29 +132,29 @@ func TestCreateMatchingEra(t *testing.T) {
 
 	// UNTIL = 2000-12-02 3:00
 	era1 := zoneinfo.ZoneEra{
-		UntilYear:         2000,
-		UntilMonth:        12,
-		UntilDay:          2,
-		UntilTimeCode:     3 * (60 / 15),
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2000,
+		UntilMonth:           12,
+		UntilDay:             2,
+		UntilSecondsCode:     3 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	// UNTIL = 2001-02-03 4:00
 	era2 := zoneinfo.ZoneEra{
-		UntilYear:         2001,
-		UntilMonth:        2,
-		UntilDay:          3,
-		UntilTimeCode:     4 * (60 / 15),
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2001,
+		UntilMonth:           2,
+		UntilDay:             3,
+		UntilSecondsCode:     4 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	// UNTIL = 2002-10-11 4:00
 	era3 := zoneinfo.ZoneEra{
-		UntilYear:         2002,
-		UntilMonth:        10,
-		UntilDay:          11,
-		UntilTimeCode:     4 * (60 / 15),
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2002,
+		UntilMonth:           10,
+		UntilDay:             11,
+		UntilSecondsCode:     4 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	// No previous matching era, so startDt is set to startYm.
@@ -406,13 +408,13 @@ func TestFindCandidateTransitions(t *testing.T) {
 func TestProcessTransitionMatchStatus(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
 	era := zoneinfo.ZoneEra{
-		OffsetSecondsCode: 0,
-		DeltaCode:         0,
-		UntilYear:         2002,
-		UntilMonth:        1,
-		UntilDay:          2,
-		UntilTimeCode:     3 * (60 / 15),
-		UntilTimeModifier: zoneinfo.SuffixW,
+		OffsetSecondsCode:    0,
+		DeltaMinutes:         0,
+		UntilYear:            2002,
+		UntilMonth:           1,
+		UntilDay:             2,
+		UntilSecondsCode:     3 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	// [2000-01-01, 2001-01-01)

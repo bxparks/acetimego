@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     26    4120      18     590 |    4164     608 | (unknown)
+     26    4136      18     590 |    4180     608 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -15,13 +15,13 @@
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/internal/task
      36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     233       0       0       0 |     233       0 | C musl
-   6788      29       0       0 |    6817       0 | github.com/bxparks/AceTimeGo/acetime
-      0     361     254       0 |     615     254 | github.com/bxparks/AceTimeGo/zonedbtesting
-   2285       0       0       0 |    2285       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   6806      39       0       0 |    6845       0 | github.com/bxparks/AceTimeGo/acetime
+      0     383     254       0 |     637     254 | github.com/bxparks/AceTimeGo/zonedbtesting
+   2322       0       0       0 |    2322       0 | github.com/bxparks/AceTimeGo/zoneinfo
      59       0       0       0 |      59       0 | internal/bytealg
     305      24       0      16 |     329      16 | internal/task
     236     165       0       0 |     401       0 | main
    2305     128       8     107 |    2441     115 | runtime
     581     124       0       0 |     705       0 | strings
 ------------------------------- | --------------- | -------
-  15682    4951     280     713 |   20913     993 | total
+  15737    4999     280     713 |   21016     993 | total

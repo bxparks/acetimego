@@ -99,35 +99,27 @@ type ZoneRule struct {
 	OnDayOfMonth int8
 
 	/**
-	 * Determined by the AT column in units of 15-minutes from 00:00. The range
-	 * is (0 - 100) corresponding to 00:00 to 25:00.
-	 */
-	AtTimeCode uint8
-
-	/**
-	 * The AtTimeModifier is a packed field containing 2 pieces of info:
+	 * The AtSecondsModifier is a packed field containing 2 pieces of info:
 	 *
 	 * * The upper 4 bits represent the AT time suffix: 'w', 's' or 'u',
 	 *   represented by SuffixW, SuffixS and SuffixU.
-	 * * The lower 4 bits represent the remaining 0-14 minutes of the AT field
-	 *   after truncation into AtTimeCode. In other words, the full AT field in
-	 *   one-minute resolution is (15 * AtTimeCode + (AtTimeModifier & 0x0f)).
+	 * * The lower 4 bits represent the remaining 0-14 seconds of the AT field
+	 *   after truncation into AtSecondsCode. In other words, the full AT field
+	 *   is (15 * AtSecondsCode + (AtSecondsModifier & 0x0f)).
 	 */
-	AtTimeModifier uint8
+	AtSecondsModifier uint8
+
+	/**
+	 * Determined by the AT column in units of 15-seconds, [00:00:00,25:00:00]
+	 * which corresponds to [0, 90000].
+	 */
+	AtSecondsCode uint16
 
 	/**
 	 * Determined by the SAVE column, containing the offset from UTC, in 15-min
-	 * increments.
-	 *
-	 * If the '--scope extended' flag is given to tzcompiler.py, this field
-	 * should be interpreted as an uint8_t field, whose lower 4-bits hold a
-	 * slightly modified value of offsetCode equal to (originalDeltaCode + 4).
-	 * This allows the 4-bits to represent DST offsets from -1:00 to 2:45 in
-	 * 15-minute increments. This is the same algorithm used by
-	 * ZoneEra::DeltaCode field for consistency. The DeltaOffsetSeconds() method
-	 * knows how to convert this field into minutes.
+	 * increments. [-128,+127].
 	 */
-	DeltaCode int8
+	DeltaMinutes int8
 
 	/**
 	 * Determined by the LETTER column. Determines the substitution into the '%s'
@@ -147,15 +139,15 @@ type ZoneRule struct {
 }
 
 func (rule *ZoneRule) AtSeconds() int32 {
-	return (int32(rule.AtTimeCode)*15 + int32(rule.AtTimeModifier&0x0f)) * 60
+	return int32(rule.AtSecondsCode)*15 + int32(rule.AtSecondsModifier&0x0f)
 }
 
 func (rule *ZoneRule) AtSuffix() uint8 {
-	return rule.AtTimeModifier & 0xf0
+	return rule.AtSecondsModifier & 0xf0
 }
 
 func (rule *ZoneRule) DstOffsetSeconds() int32 {
-	return (int32(uint8(rule.DeltaCode)&0x0f) - 4) * 15 * 60
+	return int32(rule.DeltaMinutes) * 60
 }
 
 //-----------------------------------------------------------------------------
@@ -163,15 +155,15 @@ func (rule *ZoneRule) DstOffsetSeconds() int32 {
 // ZoneRuleRecord is the distilled version of ZoneRule which can be persisted
 // in a file or a hex encoded string.
 type ZoneRuleRecord struct {
-	FromYear       int16
-	ToYear         int16
-	InMonth        uint8
-	OnDayOfWeek    uint8
-	OnDayOfMonth   int8
-	AtTimeCode     uint8
-	AtTimeModifier uint8
-	DeltaCode      int8
-	LetterIndex    uint8 // index into LetterData
+	FromYear          int16
+	ToYear            int16
+	InMonth           uint8
+	OnDayOfWeek       uint8
+	OnDayOfMonth      int8
+	AtSecondsModifier uint8  // AT time, remainder seconds [0,14]
+	AtSecondsCode     uint16 // AT time, units of 15 seconds, [0h,25h]
+	DeltaMinutes      int8
+	LetterIndex       uint8 // index into LetterData
 }
 
 //-----------------------------------------------------------------------------
@@ -272,49 +264,37 @@ type ZoneEra struct {
 	 */
 	Format string
 
+	/** The remainder seconds [0-14] from OffsetSecondsCode. */
+	OffsetSecondsRemainder uint8
+
 	/**
 	 * UTC offset for the zone in standard time, as determined by the STDOFF
 	 * column in the TZ database. This field is in units of 15-seconds. Any
 	 * remaining seconds are encoded into the DeltaCode field.
 	 *
 	 * All zones after about 1974 uses STDOFF which are in units of 15 minute
-	 * increments. But zones before 1974 use STDOFF in increments of one second.
-	 * We need a range of about -10h to +14h in one second increments, which
-	 * corresponds to about 17 bits of information. Instead of wasting an entire
-	 * int32, we can use 16-bits in this field, representing the offset in 15
-	 * *second* increments, then store the the 15 second in the upper 4-bit of the
-	 * DeltaCode field. The range of this field is [-32768,32767], which
-	 * corresponds to [-8192m,+8191m45s], or [-136h32m,+136h31m45s] which is far
-	 * more than necessary for the TZDB entries.
+	 * increments. But some zones before 1974 use STDOFF in increments of one
+	 * second. We need a range of about -10h to +14h in one second increments,
+	 * 90000 seconds, which corresponds to about 17 bits of seconds.
 	 *
-	 * TODO: Move this after DeltaCode to pack the ZoneEra memory layout tighter.
+	 * Instead of wasting an entire int32, we can use 16-bits in this field,
+	 * representing the offset in 15 *second* increments, then store any remainder
+	 * 15 seconds in the 8-bit OffsetSecondsRemainder field.
 	 */
 	OffsetSecondsCode int16
-
-	/**
-	 * If ZonePolicy is nil, then this indicates the DST offset in 15 minute
-	 * increments as defined by the RULES column in 'hh:mm' format. If the
-	 * 'RULES' column is '-', then the DeltaCode is 0.
-	 *
-	 * If the '--scope extended' flag is given to tzcompiler.py, the 'DeltaCode`
-	 * should be interpreted as a uint8_t field, composed of two 4-bit fields:
-	 *
-	 *    * The upper 4-bits is an unsigned integer from 0 to 14 that represents
-	 *    the one-second remainder from the OffsetSecondsCode. This allows us to
-	 *    capture STDOFF offsets in 1-second resolution.
-	 *    * The lower 4-bits is an unsigned integer that holds (originalDeltaCode
-	 *    + 4). This allows us to represent DST offsets from -1:00 to +2:45, in
-	 *    15-minute increments.
-	 *
-	 * The StdOffsetSeconds() and DstOffsetSeconds() functions know how to convert
-	 * OffsetCode and DeltaCode into the appropriate minutes.
-	 */
-	DeltaCode uint8
 
 	/**
 	 * Era is valid until currentTime < UntilYear. Comes from the UNTIL column.
 	 */
 	UntilYear int16
+
+	/**
+	 * The DSTOFF during DST phase. If ZonePolicy is nil, then the DST offsets are
+	 * defined by the RULES column in 'hh:mm' format, so this is set to 0.
+	 * Otherwise, the hh:mm is converted into minutes and stored here. Range is
+	 * [-128,127], so this handles [-02:00,+02:00].
+	 */
+	DeltaMinutes int8
 
 	/** The month field in UNTIL (1-12). Will never be 0. */
 	UntilMonth uint8
@@ -327,22 +307,33 @@ type ZoneEra struct {
 	UntilDay uint8
 
 	/**
-	 * The time field of UNTIL field in 15-minute increments. A range of 00:00 to
-	 * 25:00 corresponds to 0-100.
+	 * The time field of UNTIL field in 15-second increments. A range of 00:00:00
+	 * 25:00:00, which is [0,90000] seconds, which means we need 17-bits to store
+	 * this information. The remainder secondes [0-14] are stored in
+	 * UntilSecondsModifier.
+	 *
+	 * A number of zones before 1970 have UNTIL fields in one-second resolution:
+	 *
+	 *	* America/Adak {UNTIL time '12:44:35'}
+	 * 	* America/Anchorage {UNTIL time '14:31:37'}
+	 * 	* America/Juneau {UNTIL time '15:33:32'}
+	 * 	* America/Metlakatla {UNTIL time '15:44:55'}
+	 * 	* America/Nome {UNTIL time '13:29:35'}
+	 * 	* America/Yakutat {UNTIL time '15:12:18'}
+	 * 	* Europe/Brussels {UNTIL time '00:17:30'}
 	 */
-	UntilTimeCode uint8
+	UntilSecondsCode uint16
 
 	/**
-	 * The UntilTimeModifier is a packed field containing 2 pieces of info:
+	 * The UntilSecondsModifier is a packed field containing 2 pieces of info:
 	 *
 	 *    * The upper 4 bits represent the UNTIL time suffix: 'w', 's' or 'u',
 	 *    represented by SuffixW, SuffixS and SuffixU.
-	 *    * The lower 4 bits represent the remaining 0-14 minutes of the UNTIL
-	 *    field after truncation into UntilTimeCode. In other words, the full
-	 *    UNTIL field in one-minute resolution is (15 * UntilTimeCode +
-	 *    (UntilTimeModifier & 0x0f)).
+	 *    * The lower 4 bits represent the remaining 0-14 seconds of the UNTIL
+	 *    field after truncation into UntilSecondsCode. In other words, the full
+	 *    UNTIL field is (15 * UntilSecondsCode + (UntilSecondsModifier & 0x0f)).
 	 */
-	UntilTimeModifier uint8
+	UntilSecondsModifier uint8
 }
 
 func (era *ZoneEra) HasPolicy() bool {
@@ -350,19 +341,19 @@ func (era *ZoneEra) HasPolicy() bool {
 }
 
 func (era *ZoneEra) StdOffsetSeconds() int32 {
-	return int32(era.OffsetSecondsCode)*15 + int32((era.DeltaCode&0xf0)>>4)
+	return int32(era.OffsetSecondsCode)*15 + int32(era.OffsetSecondsRemainder)
 }
 
 func (era *ZoneEra) DstOffsetSeconds() int32 {
-	return int32((int8(era.DeltaCode&0x0f) - 4)) * 15 * 60
+	return int32(era.DeltaMinutes) * 60
 }
 
 func (era *ZoneEra) UntilSeconds() int32 {
-	return (int32(era.UntilTimeCode)*15 + int32(era.UntilTimeModifier&0x0f)) * 60
+	return int32(era.UntilSecondsCode)*15 + int32(era.UntilSecondsModifier&0x0f)
 }
 
 func (era *ZoneEra) UntilSuffix() uint8 {
-	return era.UntilTimeModifier & 0xf0
+	return era.UntilSecondsModifier & 0xf0
 }
 
 //-----------------------------------------------------------------------------
@@ -370,15 +361,16 @@ func (era *ZoneEra) UntilSuffix() uint8 {
 // ZoneEraRecord is a version of ZoneEra suitable for persisted in a file or hex
 // encoded string.
 type ZoneEraRecord struct {
-	FormatIndex       uint16 // index into FormatData
-	PolicyIndex       uint8  // index into ZonePoliciesData
-	DeltaCode         uint8  // Placed before OffsetSecondsCode for packing
-	OffsetSecondsCode int16  // STDOFF units of 15-sec, [-720,840], [-12h, +14h]
-	UntilYear         int16
-	UntilMonth        uint8
-	UntilDay          uint8
-	UntilTimeCode     uint8
-	UntilTimeModifier uint8
+	FormatIndex            uint16 // index into FormatData
+	PolicyIndex            uint8  // index into ZonePoliciesData
+	OffsetSecondsRemainder uint8  // remainder OffsetSeconds [0,14]
+	OffsetSecondsCode      int16  // STDOFF units of 15 seconds, [-12h,+14h]
+	UntilYear              int16
+	DeltaMinutes           int8 // DSTOFF in units of 1 minute [-128,+127]
+	UntilMonth             uint8
+	UntilDay               uint8
+	UntilSecondsModifier   uint8  // remainder UNTIL seconds, and w, s, u suffix
+	UntilSecondsCode       uint16 // UNTIL units of 15 seconds, [0h,25h]
 }
 
 //-----------------------------------------------------------------------------

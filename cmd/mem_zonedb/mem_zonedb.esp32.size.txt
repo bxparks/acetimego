@@ -1,12 +1,12 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-    731       4      17       5 |     752      22 | (unknown)
+    724       4      21       5 |     749      26 | (unknown)
      66       0       0       0 |      66       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/device/esp
      57       0       0       0 |      57       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/internal/task
       0       0       0    4096 |       0    4096 | C stack
-   6066      29       0       0 |    6095       0 | github.com/bxparks/AceTimeGo/acetime
-      0   42182    1593       0 |   43775    1593 | github.com/bxparks/AceTimeGo/zonedb
-   1804       0       0       0 |    1804       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   6060      39       0       0 |    6099       0 | github.com/bxparks/AceTimeGo/acetime
+      0   70237    1725       0 |   71962    1725 | github.com/bxparks/AceTimeGo/zonedb
+   1805       0       0       0 |    1805       0 | github.com/bxparks/AceTimeGo/zoneinfo
      54       0       0       0 |      54       0 | internal/bytealg
     232      24       0       8 |     256       8 | internal/task
      20       0       0       0 |      20       0 | machine
@@ -16,4 +16,4 @@
      67       0       0       0 |      67       0 | runtime/volatile
     464     108       0       0 |     572       0 | strings
 ------------------------------- | --------------- | -------
-  11639   42633    1610    4156 |   55882    5766 | total
+  11627   70698    1746    4156 |   84071    5902 | total
