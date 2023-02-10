@@ -69,15 +69,15 @@ func (ldt *LocalDateTime) String() string {
 }
 
 func (ldt *LocalDateTime) BuildString(b *strings.Builder) {
-	WriteUint16Pad4(b, uint16(ldt.Year), '0')
+	BuildUint16Pad4(b, uint16(ldt.Year), '0')
 	b.WriteByte('-')
-	WriteUint8Pad2(b, ldt.Month, '0')
+	BuildUint8Pad2(b, ldt.Month, '0')
 	b.WriteByte('-')
-	WriteUint8Pad2(b, ldt.Day, '0')
+	BuildUint8Pad2(b, ldt.Day, '0')
 	b.WriteByte('T')
-	WriteUint8Pad2(b, ldt.Hour, '0')
+	BuildUint8Pad2(b, ldt.Hour, '0')
 	b.WriteByte(':')
-	WriteUint8Pad2(b, ldt.Minute, '0')
+	BuildUint8Pad2(b, ldt.Minute, '0')
 	b.WriteByte(':')
-	WriteUint8Pad2(b, ldt.Second, '0')
+	BuildUint8Pad2(b, ldt.Second, '0')
 }

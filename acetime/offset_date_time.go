@@ -103,9 +103,9 @@ func BuildUTCOffset(b *strings.Builder, offsetSeconds int32) {
 	}
 
 	b.WriteByte(c)
-	WriteUint8Pad2(b, h, '0')
+	BuildUint8Pad2(b, h, '0')
 	b.WriteByte(':')
-	WriteUint8Pad2(b, m, '0')
+	BuildUint8Pad2(b, m, '0')
 }
 
 func secondsToHMS(seconds int32) (sign int8, h uint8, m uint8, s uint8) {
