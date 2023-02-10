@@ -509,7 +509,7 @@ func BenchmarkZonedDateTimeFromEpochSeconds_Cache(b *testing.B) {
 
 func BenchmarkZonedDateTimeFromEpochSeconds_NoCache(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		tz.zoneProcessor.Reset()
+		tz.zoneProcessor.reset()
 		zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
 	}
 }
@@ -522,7 +522,7 @@ func BenchmarkZonedDateTimeFromLocalDateTime_Cache(b *testing.B) {
 
 func BenchmarkZonedDateTimeFromLocalDateTime_NoCache(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		tz.zoneProcessor.Reset()
+		tz.zoneProcessor.reset()
 		zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	}
 }

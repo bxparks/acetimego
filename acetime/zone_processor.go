@@ -48,8 +48,8 @@ func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
 	zp.isFilled = false
 }
 
-// Clear cache
-func (zp *ZoneProcessor) Reset() {
+// Clear cache, used only for tests.
+func (zp *ZoneProcessor) reset() {
 	zp.isFilled = false
 }
 
