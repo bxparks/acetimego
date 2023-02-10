@@ -249,8 +249,8 @@ func compareEraToYearMonth(
 	if era.UntilDay > 1 {
 		return 1
 	}
-	//if era.until_time_minutes < 0 { return -1; // never possible
-	if era.UntilTimeCode > 0 {
+	//if era.UntilSeconds() < 0 return -1; // never possible
+	if era.UntilSeconds() > 0 {
 		return 1
 	}
 	return 0
