@@ -97,13 +97,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 1, // PolicyName: US
 		FormatIndex: 4, // "P%T"
-		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
-		OffsetSecondsCode: -1920, // (offset_seconds=-28800)/15
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1920, // -28800 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
-		UntilTimeCode: 0,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	// ---------------------------------------------------------------------------
@@ -116,13 +117,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 1, // PolicyName: US
 		FormatIndex: 3, // "E%T"
-		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
-		OffsetSecondsCode: -1200, // (offset_seconds=-18000)/15
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1200, // -18000 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
-		UntilTimeCode: 0,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	// ---------------------------------------------------------------------------
@@ -135,13 +137,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 5, // "UTC"
-		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
-		OffsetSecondsCode: 0, // (offset_seconds=0)/15
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 0, // 0 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
-		UntilTimeCode: 0,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	// ---------------------------------------------------------------------------
@@ -154,26 +157,28 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 2, // PolicyName: WS
 		FormatIndex: 2, // "-11/-10"
-		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
-		OffsetSecondsCode: -2640, // (offset_seconds=-39600)/15
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2640, // -39600 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 2011,
 		UntilMonth: 12,
 		UntilDay: 29,
-		UntilTimeCode: 96,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 5760, // 86400 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//              13:00    WS    +13/+14
 	{
 		PolicyIndex: 2, // PolicyName: WS
 		FormatIndex: 1, // "+13/+14"
-		DeltaCode: 4, // ((offset_seconds_remainder=0) << 4) + ((delta_minutes=0)/15 + 4)
-		OffsetSecondsCode: 3120, // (offset_seconds=46800)/15
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 3120, // 46800 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
-		UntilTimeCode: 0,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 
@@ -181,14 +186,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 const ZoneEraCount = 5
 
-const ZoneEraChunkSize = 12
+const ZoneEraChunkSize = 14
 
 // ZoneErasData contains the ZoneEraRecords data as a hex encoded string.
-const ZoneErasData = "\x04\x00\x01\x04\x80\xf8\x10\x27\x01\x01\x00\x00" +
-		"\x03\x00\x01\x04\x50\xfb\x10\x27\x01\x01\x00\x00" +
-		"\x05\x00\x00\x04\x00\x00\x10\x27\x01\x01\x00\x00" +
-		"\x02\x00\x02\x04\xb0\xf5\xdb\x07\x0c\x1d\x60\x00" +
-		"\x01\x00\x02\x04\x30\x0c\x10\x27\x01\x01\x00\x00"
+const ZoneErasData = "\x04\x00\x01\x00\x80\xf8\x10\x27\x00\x01\x01\x00\x00\x00" +
+		"\x03\x00\x01\x00\x50\xfb\x10\x27\x00\x01\x01\x00\x00\x00" +
+		"\x05\x00\x00\x00\x00\x00\x10\x27\x00\x01\x01\x00\x00\x00" +
+		"\x02\x00\x02\x00\xb0\xf5\xdb\x07\x00\x0c\x1d\x00\x80\x16" +
+		"\x01\x00\x02\x00\x30\x0c\x10\x27\x00\x01\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
 // ZoneInfoRecords is an array of zoneinfo.ZoneInfoRecord items concatenated

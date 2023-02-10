@@ -82,9 +82,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 10,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 0,
-		AtTimeCode: 8,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
 		LetterIndex: 2, // "S"
 	},
 	// Rule    US    1975    only    -    Feb    lastSun    2:00    1:00    D
@@ -94,9 +94,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 2,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 0,
-		AtTimeCode: 8,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
 		LetterIndex: 1, // "D"
 	},
 	// Rule    US    1976    1986    -    Apr    lastSun    2:00    1:00    D
@@ -106,9 +106,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 4,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 0,
-		AtTimeCode: 8,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
 		LetterIndex: 1, // "D"
 	},
 	// Rule    US    1987    2006    -    Apr    Sun>=1    2:00    1:00    D
@@ -118,9 +118,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 4,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 1,
-		AtTimeCode: 8,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
 		LetterIndex: 1, // "D"
 	},
 	// Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
@@ -130,9 +130,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 3,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 8,
-		AtTimeCode: 8,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
 		LetterIndex: 1, // "D"
 	},
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
@@ -142,9 +142,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 11,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 1,
-		AtTimeCode: 8,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
 		LetterIndex: 2, // "S"
 	},
 
@@ -161,9 +161,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 1,
 		OnDayOfWeek: 0,
 		OnDayOfMonth: 1,
-		AtTimeCode: 0,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		AtSecondsCode: 0, // 0 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2010    only    -    Sep    lastSun    0:00    1    -
@@ -173,9 +173,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 9,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 0,
-		AtTimeCode: 0,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		AtSecondsCode: 0, // 0 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
 		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2011    only    -    Apr    Sat>=1    4:00    0    -
@@ -185,9 +185,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 4,
 		OnDayOfWeek: 6,
 		OnDayOfMonth: 1,
-		AtTimeCode: 16,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		AtSecondsCode: 960, // 14400 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2011    only    -    Sep    lastSat    3:00    1    -
@@ -197,9 +197,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 9,
 		OnDayOfWeek: 6,
 		OnDayOfMonth: 0,
-		AtTimeCode: 12,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		AtSecondsCode: 720, // 10800 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
 		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2012    2021    -    Apr    Sun>=1    4:00    0    -
@@ -209,9 +209,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 4,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 1,
-		AtTimeCode: 16,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 4, // (delta_minutes=0)/15 + 4
+		AtSecondsCode: 960, // 14400 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
 	// Rule    WS    2012    2020    -    Sep    lastSun    3:00    1    -
@@ -221,9 +221,9 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		InMonth: 9,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 0,
-		AtTimeCode: 12,
-		AtTimeModifier: 0, // SuffixW + minute=0
-		DeltaCode: 8, // (delta_minutes=60)/15 + 4
+		AtSecondsCode: 720, // 10800 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
 		LetterIndex: 0, // ""
 	},
 
@@ -232,21 +232,21 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 const ZoneRuleCount = 12
 
-const ZoneRuleChunkSize = 11
+const ZoneRuleChunkSize = 12
 
 // ZoneRulesData contains the ZoneRuleRecords data as a hex encoded string.
-const ZoneRulesData = "\xaf\x07\xd6\x07\x0a\x07\x00\x08\x00\x04\x02" +
-		"\xb7\x07\xb7\x07\x02\x07\x00\x08\x00\x08\x01" +
-		"\xb8\x07\xc2\x07\x04\x07\x00\x08\x00\x08\x01" +
-		"\xc3\x07\xd6\x07\x04\x07\x01\x08\x00\x08\x01" +
-		"\xd7\x07\x0f\x27\x03\x07\x08\x08\x00\x08\x01" +
-		"\xd7\x07\x0f\x27\x0b\x07\x01\x08\x00\x04\x02" +
-		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x04\x00" +
-		"\xda\x07\xda\x07\x09\x07\x00\x00\x00\x08\x00" +
-		"\xdb\x07\xdb\x07\x04\x06\x01\x10\x00\x04\x00" +
-		"\xdb\x07\xdb\x07\x09\x06\x00\x0c\x00\x08\x00" +
-		"\xdc\x07\xe5\x07\x04\x07\x01\x10\x00\x04\x00" +
-		"\xdc\x07\xe4\x07\x09\x07\x00\x0c\x00\x08\x00"
+const ZoneRulesData = "\xaf\x07\xd6\x07\x0a\x07\x00\x00\xe0\x01\x00\x02" +
+		"\xb7\x07\xb7\x07\x02\x07\x00\x00\xe0\x01\x3c\x01" +
+		"\xb8\x07\xc2\x07\x04\x07\x00\x00\xe0\x01\x3c\x01" +
+		"\xc3\x07\xd6\x07\x04\x07\x01\x00\xe0\x01\x3c\x01" +
+		"\xd7\x07\x0f\x27\x03\x07\x08\x00\xe0\x01\x3c\x01" +
+		"\xd7\x07\x0f\x27\x0b\x07\x01\x00\xe0\x01\x00\x02" +
+		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\x00" +
+		"\xda\x07\xda\x07\x09\x07\x00\x00\x00\x00\x3c\x00" +
+		"\xdb\x07\xdb\x07\x04\x06\x01\x00\xc0\x03\x00\x00" +
+		"\xdb\x07\xdb\x07\x09\x06\x00\x00\xd0\x02\x3c\x00" +
+		"\xdc\x07\xe5\x07\x04\x07\x01\x00\xc0\x03\x00\x00" +
+		"\xdc\x07\xe4\x07\x09\x07\x00\x00\xd0\x02\x3c\x00"
 
 // ---------------------------------------------------------------------------
 // ZonePolicyRecords contain indexes into the ZoneRuleRecords.
