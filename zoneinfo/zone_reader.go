@@ -28,9 +28,9 @@ func (r *ZoneRuleReader) Read() ZoneRuleRecord {
 	record.InMonth = r.f.ReadU8()
 	record.OnDayOfWeek = r.f.ReadU8()
 	record.OnDayOfMonth = int8(r.f.ReadU8())
-	record.AtTimeCode = r.f.ReadU8()
-	record.AtTimeModifier = r.f.ReadU8()
-	record.DeltaCode = int8(r.f.ReadU8())
+	record.AtSecondsModifier = r.f.ReadU8()
+	record.AtSecondsCode = r.f.ReadU16()
+	record.DeltaMinutes = int8(r.f.ReadU8())
 	record.LetterIndex = r.f.ReadU8()
 	// TODO: Check f.err for errors
 	return record
@@ -86,13 +86,14 @@ func (r *ZoneEraReader) Read() ZoneEraRecord {
 	var record ZoneEraRecord
 	record.FormatIndex = r.f.ReadU16()
 	record.PolicyIndex = r.f.ReadU8()
-	record.DeltaCode = r.f.ReadU8()
+	record.OffsetSecondsRemainder = r.f.ReadU8()
 	record.OffsetSecondsCode = int16(r.f.ReadU16())
 	record.UntilYear = int16(r.f.ReadU16())
+	record.DeltaMinutes = int8(r.f.ReadU8())
 	record.UntilMonth = r.f.ReadU8()
 	record.UntilDay = r.f.ReadU8()
-	record.UntilTimeCode = r.f.ReadU8()
-	record.UntilTimeModifier = r.f.ReadU8()
+	record.UntilSecondsModifier = r.f.ReadU8()
+	record.UntilSecondsCode = r.f.ReadU16()
 	// TODO: Check r.f.err for errors
 	return record
 }
