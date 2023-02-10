@@ -1,11 +1,25 @@
 # Changelog
 
 * Unreleased
-    * Use one-second resolution for STDOFF and DSTOFF instead of one-minute.
+    * Support one-second resolution for Zone.STDOFF field, instead of
+      one-minute.
         * Increases zonedb by about ~1kB on ESP32.
         * Increases RAM usage of ZoneProcessor by ~200 bytes on ESP32.
         * Decreases flash size of `acetime` package on ESP32.
     * Change `ATime` type from `int32` to `int64`.
         * Very little change in flash size of `acetime`.
+    * Support one-second resolution for Zone.UNTIL and Rule.AT fields.
+        * Allows the library to support all zones before ~1972.
+    * Support one-minute resolution for Zone.DSTOFF (i.e. Zone.RULES) and
+      Rule.SAVE fields.
+        * Handles a few zones around ~1930 whose DSTOFF is a 00:20 minutes,
+          instead of a multiple of 00:15 minutes.
+    * Extend `zonedb` year interval.
+        * The earliest year for TZDB is 1844.
+        * Regenerate the zonedb for years `[1800,2100)`.
+        * Increases zonedb flash size for ESP32 from 44kB to 72kB.
+    * `cmd/validatetime/`
+        * AceTimeGo and the standard `time` library match perfectly,
+          for all zones, from `[1800,2100)`.
 * 0.1.0 (2023-01-29, TZDB 2022g)
     * First internal release.
