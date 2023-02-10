@@ -9,39 +9,99 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/zonedb"
 	"github.com/bxparks/AceTimeGo/zonedbtesting"
 	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"testing"
 )
 
+func TestZoneStoreZoneCount(t *testing.T) {
+	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
+	if !(store.ZoneCount() == zonedbtesting.DataContext.ZoneInfoCount) {
+		t.Fatal(store.ZoneCount(), zonedbtesting.DataContext.ZoneInfoCount)
+	}
+
+	store = zoneinfo.NewZoneStore(&zonedb.DataContext)
+	if !(store.ZoneCount() == zonedb.DataContext.ZoneInfoCount) {
+		t.Fatal(store.ZoneCount(), zonedb.DataContext.ZoneInfoCount)
+	}
+}
+
+func TestZoneStoreIsSorted(t *testing.T) {
+	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
+	if !store.IsSorted() {
+		t.Fatal("zonedbtesting should be sorted")
+	}
+
+	store = zoneinfo.NewZoneStore(&zonedb.DataContext)
+	if !store.IsSorted() {
+		t.Fatal("zonedb should be sorted")
+	}
+}
+
 func TestZoneStoreFindByID_Found(t *testing.T) {
-	context := &zonedbtesting.DataContext
-	store := zoneinfo.NewZoneStore(context)
+	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
 	zoneID := zonedbtesting.ZoneIDAmerica_Los_Angeles
+	idL := store.FindByIDLinear(zoneID)
+	idB := store.FindByIDBinary(zoneID)
+	id := store.FindByID(zoneID)
+
+	if !(idL == idB) {
+		t.Fatal(idL, idB)
+	}
+	if !(idL == id) {
+		t.Fatal(idL, id)
+	}
+}
+
+func TestZoneStoreFindByID_NotFound(t *testing.T) {
+	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
+
+	index := store.FindByIDLinear(0)
+	if index != zoneinfo.InvalidIndex {
+		t.Fatal("FindByIDLinear() should have returned InvalidIndex")
+	}
+
+	index = store.FindByIDBinary(0)
+	if index != zoneinfo.InvalidIndex {
+		t.Fatal("FindByIDBinary() should have returned InvalidIndex")
+	}
+
+	index = store.FindByID(0)
+	if index != zoneinfo.InvalidIndex {
+		t.Fatal("FindByID() should have returned InvalidIndex")
+	}
+}
+
+func TestZoneStoreZoneInfoByID_Zone(t *testing.T) {
+	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
+	zoneID := zonedbtesting.ZoneIDAmerica_Los_Angeles
+
 	zoneInfo := store.ZoneInfoByID(zoneID)
 	if zoneInfo == nil {
 		t.Fatalf("%d not found", zoneID)
 	}
-	zoneName := zoneInfo.Name
-	if !(zoneName == "America/Los_Angeles") {
-		t.Fatal(zoneName)
+	if !(zoneInfo.Name == "America/Los_Angeles") {
+		t.Fatal(zoneInfo.Name)
 	}
 	if !(zoneInfo.ZoneID == zoneID) {
 		t.Fatal(zoneInfo.ZoneID)
 	}
+	if zoneInfo.IsLink() {
+		t.Fatal("Should not be a Link")
+	}
 }
 
-func TestZoneStoreFindByID_Link(t *testing.T) {
-	context := &zonedbtesting.DataContext
-	store := zoneinfo.NewZoneStore(context)
+func TestZoneStoreZoneInfoByID_Link(t *testing.T) {
+	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
 	zoneID := zonedbtesting.ZoneIDUS_Pacific
+
 	zoneInfo := store.ZoneInfoByID(zoneID)
 	if zoneInfo == nil {
 		t.Fatalf("%d not found", zoneID)
 	}
-	zoneName := zoneInfo.Name
-	if !(zoneName == "US/Pacific") {
-		t.Fatal(zoneName)
+	if !(zoneInfo.Name == "US/Pacific") {
+		t.Fatal(zoneInfo.Name)
 	}
 	if !(zoneInfo.ZoneID == zoneID) {
 		t.Fatal(zoneInfo.ZoneID)
@@ -56,37 +116,21 @@ func TestZoneStoreFindByID_Link(t *testing.T) {
 	}
 }
 
-func TestZoneStoreFindByID_NotFound(t *testing.T) {
-	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
-	zoneInfo := store.ZoneInfoByID(0)
-	if zoneInfo != nil {
-		t.Fatal("Should have returned nil")
-	}
-}
-
-func TestZoneStoreFindByName_Found(t *testing.T) {
+func TestZoneStoreZoneInfoByName_Found(t *testing.T) {
 	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
 	zoneInfo := store.ZoneInfoByName("America/Los_Angeles")
 	if zoneInfo == nil {
 		t.Fatal("Not found")
 	}
-	zoneName := zoneInfo.Name
-	if !(zoneName == "America/Los_Angeles") {
-		t.Fatal(zoneName)
+	if !(zoneInfo.Name == "America/Los_Angeles") {
+		t.Fatal(zoneInfo.Name)
 	}
 }
 
-func TestZoneStoreFindByName_NotFound(t *testing.T) {
+func TestZoneStoreZoneInfoByName_NotFound(t *testing.T) {
 	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
 	zoneInfo := store.ZoneInfoByName("America/DoesNotExist")
 	if zoneInfo != nil {
 		t.Fatal("Should have returned nil")
-	}
-}
-
-func TestZoneStoreIsSorted(t *testing.T) {
-	store := zoneinfo.NewZoneStore(&zonedbtesting.DataContext)
-	if !store.IsSorted() {
-		t.Fatal("zonedbtesting should be sorted")
 	}
 }

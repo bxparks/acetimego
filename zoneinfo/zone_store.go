@@ -13,10 +13,11 @@ type ZoneStore struct {
 	eraReader    ZoneEraReader
 	policyReader ZonePolicyReader
 	ruleReader   ZoneRuleReader
+	isSorted     bool
 }
 
 func NewZoneStore(c *ZoneDataContext) *ZoneStore {
-	return &ZoneStore{
+	store := ZoneStore{
 		context:    c,
 		nameIO:     StringIO16{c.NameData, c.NameOffsets},
 		formatIO:   StringIO16{c.FormatData, c.FormatOffsets},
@@ -27,25 +28,27 @@ func NewZoneStore(c *ZoneDataContext) *ZoneStore {
 			NewDataIO(c.ZonePoliciesData), c.ZonePolicyChunkSize},
 		ruleReader: ZoneRuleReader{NewDataIO(c.ZoneRulesData), c.ZoneRuleChunkSize},
 	}
+	store.isSorted = store.IsSorted()
+	return &store
 }
 
 // ZoneCount() returns the number of zones in this database
-func (zs *ZoneStore) ZoneCount() uint16 {
-	return zs.context.ZoneInfoCount
+func (store *ZoneStore) ZoneCount() uint16 {
+	return store.context.ZoneInfoCount
 }
 
 // ZoneNames() returns an array of all zone names in the database.
-func (zs *ZoneStore) ZoneNames() []string {
-	return zs.nameIO.Strings()
+func (store *ZoneStore) ZoneNames() []string {
+	return store.nameIO.Strings()
 }
 
 // ZoneIDs() returns an array of all ZoneIDs in the database.
-func (zs *ZoneStore) ZoneIDs() []uint32 {
-	count := zs.context.ZoneInfoCount
+func (store *ZoneStore) ZoneIDs() []uint32 {
+	count := store.context.ZoneInfoCount
 	ids := make([]uint32, count)
 	for i := uint16(0); i < count; i++ {
-		zs.infoReader.Seek(i)
-		record := zs.infoReader.Read()
+		store.infoReader.Seek(i)
+		record := store.infoReader.Read()
 		ids[i] = record.ZoneID
 	}
 	return ids
@@ -53,55 +56,55 @@ func (zs *ZoneStore) ZoneIDs() []uint32 {
 
 // ZoneInfo retrieves the ZoneXxxRecords from the various ZoneXxxData strings,
 // then converts them into a fully populated ZoneInfo object.
-func (zs *ZoneStore) ZoneInfo(i uint16) *ZoneInfo {
+func (store *ZoneStore) ZoneInfo(i uint16) *ZoneInfo {
 	// Retrieve the ZoneInfoRecord and follow the graph of objects indicated by
 	// the various XxxIndex foreign keys.
-	zs.infoReader.Seek(i)
-	record := zs.infoReader.Read()
+	store.infoReader.Seek(i)
+	record := store.infoReader.Read()
 
 	var info ZoneInfo
-	zs.fillZoneInfo(&info, &record)
+	store.fillZoneInfo(&info, &record)
 	return &info
 }
 
-func (zs *ZoneStore) fillZoneInfo(info *ZoneInfo, record *ZoneInfoRecord) {
-	name := zs.nameIO.StringAt(record.NameIndex)
+func (store *ZoneStore) fillZoneInfo(info *ZoneInfo, record *ZoneInfoRecord) {
+	name := store.nameIO.StringAt(record.NameIndex)
 	var eras []ZoneEra
 	var target *ZoneInfo
 
 	if record.EraCount == 0 { // Link, so recursively resolve the target ZoneInfo
 		eras = nil
-		target = zs.ZoneInfo(record.TargetIndex)
+		target = store.ZoneInfo(record.TargetIndex)
 	} else { // Zone
-		eras = zs.ZoneEras(record.EraIndex, record.EraCount)
+		eras = store.ZoneEras(record.EraIndex, record.EraCount)
 		target = nil
 	}
 
 	info.Name = name
 	info.ZoneID = record.ZoneID
-	info.StartYear = zs.context.StartYear
-	info.UntilYear = zs.context.UntilYear
+	info.StartYear = store.context.StartYear
+	info.UntilYear = store.context.UntilYear
 	info.Eras = eras
 	info.Target = target
 }
 
-func (zs *ZoneStore) ZoneEras(i uint16, count uint16) []ZoneEra {
+func (store *ZoneStore) ZoneEras(i uint16, count uint16) []ZoneEra {
 	eras := make([]ZoneEra, count)
-	zs.eraReader.Seek(i)
+	store.eraReader.Seek(i)
 	for j := uint16(0); j < count; j++ {
-		record := zs.eraReader.Read()
-		zs.fillZoneEra(&eras[j], &record)
+		record := store.eraReader.Read()
+		store.fillZoneEra(&eras[j], &record)
 	}
 	return eras
 }
 
-func (zs *ZoneStore) fillZoneEra(era *ZoneEra, record *ZoneEraRecord) {
+func (store *ZoneStore) fillZoneEra(era *ZoneEra, record *ZoneEraRecord) {
 	if record.PolicyIndex == 0 {
 		era.Policy = nil
 	} else {
-		era.Policy = zs.ZonePolicy(uint16(record.PolicyIndex))
+		era.Policy = store.ZonePolicy(uint16(record.PolicyIndex))
 	}
-	era.Format = zs.formatIO.StringAt(record.FormatIndex)
+	era.Format = store.formatIO.StringAt(record.FormatIndex)
 	era.OffsetSecondsRemainder = record.OffsetSecondsRemainder
 	era.OffsetSecondsCode = record.OffsetSecondsCode
 	era.DeltaMinutes = record.DeltaMinutes
@@ -112,31 +115,31 @@ func (zs *ZoneStore) fillZoneEra(era *ZoneEra, record *ZoneEraRecord) {
 	era.UntilSecondsModifier = record.UntilSecondsModifier
 }
 
-func (zs *ZoneStore) ZonePolicy(i uint16) *ZonePolicy {
-	zs.policyReader.Seek(i)
-	record := zs.policyReader.Read()
+func (store *ZoneStore) ZonePolicy(i uint16) *ZonePolicy {
+	store.policyReader.Seek(i)
+	record := store.policyReader.Read()
 	var policy ZonePolicy
-	zs.fillZonePolicy(&policy, &record)
+	store.fillZonePolicy(&policy, &record)
 	return &policy
 }
 
-func (zs *ZoneStore) fillZonePolicy(
+func (store *ZoneStore) fillZonePolicy(
 	policy *ZonePolicy, record *ZonePolicyRecord) {
 
-	policy.Rules = zs.ZoneRules(record.RuleIndex, record.RuleCount)
+	policy.Rules = store.ZoneRules(record.RuleIndex, record.RuleCount)
 }
 
-func (zs *ZoneStore) ZoneRules(i uint16, count uint16) []ZoneRule {
+func (store *ZoneStore) ZoneRules(i uint16, count uint16) []ZoneRule {
 	rules := make([]ZoneRule, count)
-	zs.ruleReader.Seek(i)
+	store.ruleReader.Seek(i)
 	for j := uint16(0); j < count; j++ {
-		record := zs.ruleReader.Read()
-		zs.fillZoneRule(&rules[j], &record)
+		record := store.ruleReader.Read()
+		store.fillZoneRule(&rules[j], &record)
 	}
 	return rules
 }
 
-func (zs *ZoneStore) fillZoneRule(rule *ZoneRule, record *ZoneRuleRecord) {
+func (store *ZoneStore) fillZoneRule(rule *ZoneRule, record *ZoneRuleRecord) {
 	rule.FromYear = record.FromYear
 	rule.ToYear = record.ToYear
 	rule.InMonth = record.InMonth
@@ -145,41 +148,47 @@ func (zs *ZoneStore) fillZoneRule(rule *ZoneRule, record *ZoneRuleRecord) {
 	rule.AtSecondsCode = record.AtSecondsCode
 	rule.AtSecondsModifier = record.AtSecondsModifier
 	rule.DeltaMinutes = record.DeltaMinutes
-	rule.Letter = zs.letterIO.StringAt(record.LetterIndex)
+	rule.Letter = store.letterIO.StringAt(record.LetterIndex)
 }
 
-func (zs *ZoneStore) ZoneInfoByID(id uint32) *ZoneInfo {
-	// TODO: Incorporate binary search.
-	i := zs.FindByIDLinear(id)
+func (store *ZoneStore) ZoneInfoByID(id uint32) *ZoneInfo {
+	i := store.FindByID(id)
 	if i == InvalidIndex {
 		return nil
 	}
-	return zs.ZoneInfo(i)
+	return store.ZoneInfo(i)
 }
 
-func (zs *ZoneStore) ZoneInfoByName(name string) *ZoneInfo {
+func (store *ZoneStore) ZoneInfoByName(name string) *ZoneInfo {
 	id := ZoneNameHash(name)
-	// TODO: Incorporate binary search.
-	i := zs.FindByIDLinear(id)
+	i := store.FindByID(id)
 	if i == InvalidIndex {
 		return nil
 	}
 
 	// Check for hash collision
-	zs.infoReader.Seek(i)
-	record := zs.infoReader.Read()
-	recordName := zs.nameIO.StringAt(record.NameIndex)
+	store.infoReader.Seek(i)
+	record := store.infoReader.Read()
+	recordName := store.nameIO.StringAt(record.NameIndex)
 	if recordName != name {
 		return nil
 	}
 
-	return zs.ZoneInfo(i)
+	return store.ZoneInfo(i)
 }
 
-func (zs *ZoneStore) FindByIDLinear(id uint32) uint16 {
-	zs.infoReader.Reset()
-	for i := uint16(0); i < zs.context.ZoneInfoCount; i++ {
-		record := zs.infoReader.Read()
+func (store *ZoneStore) FindByID(id uint32) uint16 {
+	if store.isSorted {
+		return store.FindByIDBinary(id)
+	} else {
+		return store.FindByIDLinear(id)
+	}
+}
+
+func (store *ZoneStore) FindByIDLinear(id uint32) uint16 {
+	store.infoReader.Reset()
+	for i := uint16(0); i < store.context.ZoneInfoCount; i++ {
+		record := store.infoReader.Read()
 		if record.ZoneID == id {
 			return i
 		}
@@ -187,19 +196,19 @@ func (zs *ZoneStore) FindByIDLinear(id uint32) uint16 {
 	return InvalidIndex
 }
 
-func (zs *ZoneStore) FindByIDBinary(id uint32) uint16 {
-	zs.infoReader.Reset()
+func (store *ZoneStore) FindByIDBinary(id uint32) uint16 {
+	store.infoReader.Reset()
 	var a uint16 = 0
-	var b uint16 = zs.context.ZoneInfoCount
+	var b uint16 = store.context.ZoneInfoCount
 	for {
 		diff := b - a
 		if diff == 0 {
 			break
 		}
 
-		c := a + diff/2
-		zs.infoReader.Seek(c)
-		zi := zs.infoReader.Read()
+		c := a + diff/2 // avoids overflow of uint16
+		store.infoReader.Seek(c)
+		zi := store.infoReader.Read()
 		current := zi.ZoneID
 		if id == current {
 			return c
@@ -213,11 +222,11 @@ func (zs *ZoneStore) FindByIDBinary(id uint32) uint16 {
 	return InvalidIndex
 }
 
-func (zs *ZoneStore) IsSorted() bool {
+func (store *ZoneStore) IsSorted() bool {
 	var prevID uint32 = 0
-	zs.infoReader.Reset()
-	for i := uint16(0); i < zs.context.ZoneInfoCount; i++ {
-		record := zs.infoReader.Read()
+	store.infoReader.Reset()
+	for i := uint16(0); i < store.context.ZoneInfoCount; i++ {
+		record := store.infoReader.Read()
 		id := record.ZoneID
 		if id < prevID {
 			return false
