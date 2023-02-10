@@ -18,7 +18,7 @@ func main() {
 	print("---- Create ZonedDateTime using zonedb\n")
 	zm := acetime.NewZoneManager(&zonedb.DataContext)
 	name := "America/Los_Angeles"
-	tz := zm.NewTimeZoneFromName(name)
+	tz := zm.TimeZoneFromName(name)
 	if tz.IsError() {
 		print("ERROR: Could not find TimeZone for ")
 		print(name)
@@ -43,11 +43,11 @@ func PrintMemUsage() {
 
 	var b strings.Builder
 	print("TotalAlloc = ")
-	acetime.WriteUint64(&b, m.TotalAlloc)
+	acetime.BuildUint64(&b, m.TotalAlloc)
 	print(b.String())
 	print("\tSys = ")
 	b.Reset()
-	acetime.WriteUint64(&b, m.Sys)
+	acetime.BuildUint64(&b, m.Sys)
 	print(b.String())
 	print("\n")
 

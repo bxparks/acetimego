@@ -17,11 +17,11 @@
     233       0       0       0 |     233       0 | C musl
    6806      39       0       0 |    6845       0 | github.com/bxparks/AceTimeGo/acetime
       0     383     254       0 |     637     254 | github.com/bxparks/AceTimeGo/zonedbtesting
-   2322       0       0       0 |    2322       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   2543       0       0       0 |    2543       0 | github.com/bxparks/AceTimeGo/zoneinfo
      59       0       0       0 |      59       0 | internal/bytealg
     305      24       0      16 |     329      16 | internal/task
-    236     165       0       0 |     401       0 | main
+    249     165       0       0 |     414       0 | main
    2305     128       8     107 |    2441     115 | runtime
     581     124       0       0 |     705       0 | strings
 ------------------------------- | --------------- | -------
-  15737    4999     280     713 |   21016     993 | total
+  15971    4999     280     713 |   21250     993 | total

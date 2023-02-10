@@ -1,7 +1,7 @@
 help:
-	@echo 'Usage: make (build | tiny | tinyesp32 | clean)'
+	@echo 'Usage: make (build | tiny | tinyesp32 | all | clean)'
 
-all: build
+all: build tiny tinyesp32
 
 # Dummy target to support recursive 'test' target in ../Makefile.
 test:

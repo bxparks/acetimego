@@ -31,7 +31,7 @@ func main() {
 }
 
 func validateZoneName(zm *acetime.ZoneManager, name string) {
-	atz := zm.NewTimeZoneFromName(name)
+	atz := zm.TimeZoneFromName(name)
 	if atz.IsError() {
 		println("ERROR: acetime package: Zone", name, "not found")
 		return
