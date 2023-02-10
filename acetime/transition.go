@@ -308,32 +308,32 @@ type TransitionStorage struct {
 	transitions [transitionStorageSize]Transition
 }
 
-func (ts *TransitionStorage) Init() {
+func (ts *TransitionStorage) init() {
 	ts.indexPrior = 0
 	ts.indexCandidate = 0
 	ts.indexFree = 0
 	ts.allocSize = 0
 }
 
-// GetActives returns the active transitions in the interval [0,indexPrior).
-func (ts *TransitionStorage) GetActives() []Transition {
+// getActives returns the active transitions in the interval [0,indexPrior).
+func (ts *TransitionStorage) getActives() []Transition {
 	return ts.transitions[0:ts.indexPrior]
 }
 
-// GetCandidates returns the candidate transitions in the interval
+// getCandidates returns the candidate transitions in the interval
 // [indexCandidate,indexFree).
-func (ts *TransitionStorage) GetCandidates() []Transition {
+func (ts *TransitionStorage) getCandidates() []Transition {
 	return ts.transitions[ts.indexCandidate:ts.indexFree]
 }
 
-// ResetCandidatePool deletes the candidate pool by collapsing it into the prior
+// resetCandidatePool deletes the candidate pool by collapsing it into the prior
 // pool.
-func (ts *TransitionStorage) ResetCandidatePool() {
+func (ts *TransitionStorage) resetCandidatePool() {
 	ts.indexCandidate = ts.indexPrior
 	ts.indexFree = ts.indexPrior
 }
 
-func (ts *TransitionStorage) GetFreeAgent() *Transition {
+func (ts *TransitionStorage) getFreeAgent() *Transition {
 	if ts.indexFree < transitionStorageSize {
 		if ts.indexFree >= ts.allocSize {
 			ts.allocSize = ts.indexFree + 1
@@ -344,7 +344,7 @@ func (ts *TransitionStorage) GetFreeAgent() *Transition {
 	}
 }
 
-func (ts *TransitionStorage) AddFreeAgentToActivePool() {
+func (ts *TransitionStorage) addFreeAgentToActivePool() {
 	if ts.indexFree >= transitionStorageSize {
 		return
 	}
@@ -353,14 +353,14 @@ func (ts *TransitionStorage) AddFreeAgentToActivePool() {
 	ts.indexCandidate = ts.indexFree
 }
 
-func (ts *TransitionStorage) ReservePrior() *Transition {
-	ts.GetFreeAgent()
+func (ts *TransitionStorage) reservePrior() *Transition {
+	ts.getFreeAgent()
 	ts.indexCandidate++
 	ts.indexFree++
 	return &ts.transitions[ts.indexPrior]
 }
 
-func (ts *TransitionStorage) SetFreeAgentAsPriorIfValid() {
+func (ts *TransitionStorage) setFreeAgentAsPriorIfValid() {
 	ft := &ts.transitions[ts.indexFree]
 	prior := &ts.transitions[ts.indexPrior]
 	if (prior.isValidPrior && dateTupleCompare(
@@ -375,13 +375,13 @@ func (ts *TransitionStorage) SetFreeAgentAsPriorIfValid() {
 	}
 }
 
-func (ts *TransitionStorage) AddPriorToCandidatePool() {
+func (ts *TransitionStorage) addPriorToCandidatePool() {
 	// This simple decrement works because there is only one prior, and it is
 	// allocated just before the candidate pool.
 	ts.indexCandidate--
 }
 
-func (ts *TransitionStorage) AddFreeAgentToCandidatePool() {
+func (ts *TransitionStorage) addFreeAgentToCandidatePool() {
 	if ts.indexFree >= transitionStorageSize {
 		return
 	}
@@ -409,9 +409,9 @@ func isMatchStatusActive(status uint8) bool {
 //		ts.indexPrior, ts.indexCandidate, ts.indexFree, ts.allocSize)
 //}
 
-// AddActiveCandidatesToActivePool adds the candidate transitions to the active
+// addActiveCandidatesToActivePool adds the candidate transitions to the active
 // pool, and returns the last active transition added.
-func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
+func (ts *TransitionStorage) addActiveCandidatesToActivePool() *Transition {
 	// Shift active candidates to the left into the Active pool.
 	iActive := ts.indexPrior
 	iCandidate := ts.indexCandidate
@@ -448,7 +448,6 @@ type TransitionForSeconds struct {
 	num uint8
 }
 
-// TODO: Rename to FindTransitionForSeconds().
 func (ts *TransitionStorage) findTransitionForSeconds(
 	epochSeconds ATime) TransitionForSeconds {
 
@@ -456,7 +455,7 @@ func (ts *TransitionStorage) findTransitionForSeconds(
 	var curr *Transition = nil
 	var next *Transition = nil
 
-	transitions := ts.GetActives()
+	transitions := ts.getActives()
 	for i := range transitions {
 		next = &transitions[i] // do not use := here (bitten twice by this bug)
 		if next.startEpochSeconds > epochSeconds {
@@ -561,7 +560,6 @@ type TransitionForDateTime struct {
 	num uint8
 }
 
-// TODO: Rename to FindTransitionForDateTime().
 func (ts *TransitionStorage) findTransitionForDateTime(
 	ldt *LocalDateTime) TransitionForDateTime {
 
@@ -579,7 +577,7 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 	var prev *Transition = nil
 	var curr *Transition = nil
 	var num uint8 = 0
-	transitions := ts.GetActives()
+	transitions := ts.getActives()
 	for i := range transitions {
 		curr = &ts.transitions[i]
 
