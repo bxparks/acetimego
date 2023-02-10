@@ -1,15 +1,15 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-   2104     757      23       9 |    2884      32 | (unknown)
+   2098     759      27       9 |    2884      36 | (unknown)
      66       0       0       0 |      66       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/device/esp
      57       0       0       0 |      57       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/internal/task
       0       0       0    4096 |       0    4096 | C stack
     137       0       0       0 |     137       0 | Go interface method
       0      92       0       0 |      92       0 | Go reflect data
      21       0       0       0 |      21       0 | errors
-   6518      29       0       0 |    6547       0 | github.com/bxparks/AceTimeGo/acetime
-      0   42182    1593       0 |   43775    1593 | github.com/bxparks/AceTimeGo/zonedb
-   1912       0       0       0 |    1912       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   6499      36       0       0 |    6535       0 | github.com/bxparks/AceTimeGo/acetime
+      0   70237    1725       0 |   71962    1725 | github.com/bxparks/AceTimeGo/zonedb
+   1917       0       0       0 |    1917       0 | github.com/bxparks/AceTimeGo/zoneinfo
      57       0       0       0 |      57       0 | internal/bytealg
     132       2       0       0 |     134       0 | internal/itoa
     282      24       0       8 |     306       8 | internal/task
@@ -26,4 +26,4 @@
   14495     809     104      92 |   15408     196 | time
     577     288       0       0 |     865       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  37029   47371    3050    4252 |   87450    7302 | total
+  37009   75435    3186    4252 |  115630    7438 | total
