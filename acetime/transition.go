@@ -5,24 +5,15 @@ import (
 )
 
 //-----------------------------------------------------------------------------
-// DateTuple
-//-----------------------------------------------------------------------------
 
+// A DateTuple is an internal version of [LocalDateTime] which also tracks the
+// `s`, `w` or `u` suffixes given in the TZ database files.
 type DateTuple struct {
-	/** [0,10000] */
-	year int16
-
-	/** [1-12] */
-	month uint8
-
-	/** [1-31] */
-	day uint8
-
-	/** negative values allowed */
-	seconds int32
-
-	/** zoneinfo.SuffixS, zoneinfo.SuffixW, zoneinfo.SuffixU */
-	suffix uint8
+	year    int16 // [0,10000]
+	month   uint8 // [1-12]
+	day     uint8 // [1-31]
+	seconds int32 // negative values allowed
+	suffix  uint8 // zoneinfo.SuffixS, zoneinfo.SuffixW, zoneinfo.SuffixU
 }
 
 // dateTupleCompare compare 2 DateTuple instances (a, b) and returns -1, 0, 1
@@ -183,28 +174,26 @@ func dateTupleCompareFuzzy(
 //-----------------------------------------------------------------------------
 
 type MatchingEra struct {
-	/**
-	 * The effective start time of the matching ZoneEra, which uses the
-	 * UTC offsets of the previous matching era.
-	 */
+	// The effective start time of the matching ZoneEra, which uses the
+	// UTC offsets of the previous matching era.
 	startDt DateTuple
 
-	/** The effective until time of the matching ZoneEra. */
+	// The effective until time of the matching ZoneEra.
 	untilDt DateTuple
 
-	/** The ZoneEra that matched the given year. NonNullable. */
+	// The ZoneEra that matched the given year. NonNullable.
 	era *zoneinfo.ZoneEra
 
-	/** The previous MatchingEra, needed to interpret startDt.  */
+	// The previous MatchingEra, needed to interpret startDt.
 	prevMatch *MatchingEra
 
-	/** The STD offset of the last Transition in this MatchingEra. */
+	// The STD offset of the last Transition in this MatchingEra.
 	lastOffsetSeconds int32
 
-	/** The DST offset of the last Transition in this MatchingEra. */
+	// The DST offset of the last Transition in this MatchingEra.
 	lastDeltaSeconds int32
 
-	/** The format string from era.FormatIndex */
+	// The format string from era.FormatIndex
 	format string
 }
 
@@ -213,74 +202,64 @@ type MatchingEra struct {
 //-----------------------------------------------------------------------------
 
 type Transition struct {
-	/** The MatchingEra which generated this Transition. */
+	// The MatchingEra which generated this Transition.
 	match *MatchingEra
 
-	/**
-	 * The original transition time, usually 'w' but sometimes 's' or 'u'. After
-	 * expandDateTuple() is called, this field will definitely be a 'w'. We must
-	 * remember that the transitionTime* fields are expressed using the UTC
-	 * offset of the *previous* Transition.
-	 */
+	// The original transition time, usually 'w' but sometimes 's' or 'u'. After
+	// expandDateTuple() is called, this field will definitely be a 'w'. We must
+	// remember that the transitionTime* fields are expressed using the UTC
+	// offset of the *previous* Transition.
 	transitionTime DateTuple
 
 	//union {
-	/**
-	* Version of transitionTime in 's' mode, using the UTC offset of the
-	* *previous* Transition. Valid before
-	* ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	 */
+
+	// Version of transitionTime in 's' mode, using the UTC offset of the
+	// *previous* Transition. Valid before
+	// ExtendedZoneProcessor::generateStartUntilTimes() is called.
 	transitionTimeS DateTuple
 
-	/**
-	* Start time expressed using the UTC offset of the current Transition.
-	* Valid after ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	 */
+	// Start time expressed using the UTC offset of the current Transition.
+	// Valid after ExtendedZoneProcessor::generateStartUntilTimes() is called.
 	startDt DateTuple
+
 	//}
 
 	//union {
-	/**
-	* Version of transitionTime in 'u' mode, using the UTC offset of the
-	* *previous* transition. Valid before
-	* ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	 */
+
+	// Version of transitionTime in 'u' mode, using the UTC offset of the
+	// *previous* transition. Valid before
+	// ExtendedZoneProcessor::generateStartUntilTimes() is called.
 	transitionTimeU DateTuple
 
-	/**
-	* Until time expressed using the UTC offset of the current Transition.
-	* Valid after ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	 */
+	// Until time expressed using the UTC offset of the current Transition.
+	// Valid after ExtendedZoneProcessor::generateStartUntilTimes() is called.
 	untilDt DateTuple
+
 	//}
 
-	/** The calculated transition time of the given rule. */
+	// The calculated transition time of the given rule.
 	startEpochSeconds ATime
 
-	/** The base offset seconds, not the total effective UTC offset. */
+	// The base offset seconds, not the total effective UTC offset.
 	offsetSeconds int32
 
-	/** The DST delta seconds. */
+	// The DST delta seconds.
 	deltaSeconds int32
 
-	/** The calculated effective time zone abbreviation, e.g. "PST" or "PDT". */
+	// The calculated effective time zone abbreviation, e.g. "PST" or "PDT".
 	abbrev string
 
-	/** letter field copied from matching rule if not null. */
+	// letter field copied from matching rule if not null.
 	letter string
 
-	/**
-	 * During findCandidateTransitions(), this flag indicates whether the
-	 * current transition is a valid "prior" transition that occurs before other
-	 * transitions. It is set by setFreeAgentAsPriorIfValid() if the transition
-	 * is a prior transition.
-	 */
+	// During findCandidateTransitions(), this flag indicates whether the
+	// current transition is a valid "prior" transition that occurs before other
+	// transitions. It is set by setFreeAgentAsPriorIfValid() if the transition
+	// is a prior transition.
 	isValidPrior bool
 
-	/**
-	 * During processTransitionMatchStatus(), this flag indicates how the
-	 * transition falls within the time interval of the MatchingEra.
-	 */
+	// During processTransitionMatchStatus(), this flag indicates how the
+	// transition falls within the time interval of the MatchingEra.
 	matchStatus uint8
 }
 
@@ -304,32 +283,28 @@ func fixTransitionTimes(transitions []Transition) {
 }
 
 //-----------------------------------------------------------------------------
-// TransitionStorage
-//
-// There are 4 pools indicated by the following half-open (inclusive to
-// exclusive) index ranges:
-//
-// 1) Active pool: [0, indexPrior)
-// 2) Prior pool: [indexPrior, indexCandidate), either 0 or 1 element
-// 3) Candidate pool: [indexCandidate, indexFree)
-// 4) Free agent pool: [indexFree, allocSize), 0 or 1 element
-//-----------------------------------------------------------------------------
 
 const (
 	transitionStorageSize = 8
 )
 
+// TransitionStorage holds 4 pools of Transitions indicated by the following
+// half-open (inclusive to exclusive) index ranges:
+//
+//  1. Active pool: [0, indexPrior)
+//  2. Prior pool: [indexPrior, indexCandidate), either 0 or 1 element
+//  3. Candidate pool: [indexCandidate, indexFree)
+//  4. Free agent pool: [indexFree, allocSize), 0 or 1 element
 type TransitionStorage struct {
-	/** Index of the most recent prior transition [0,kTransitionStorageSize) */
+	// Index of the most recent prior transition [0,kTransitionStorageSize)
 	indexPrior uint8
-	/** Index of the candidate pool [0,kTransitionStorageSize) */
+	// Index of the candidate pool [0,kTransitionStorageSize)
 	indexCandidate uint8
-	/** Index of the free agent transition [0, kTransitionStorageSize) */
+	// Index of the free agent transition [0, kTransitionStorageSize)
 	indexFree uint8
-	/** Number of allocated transitions. */
+	// Number of allocated transitions.
 	allocSize uint8
-
-	/** Pool of Transition objects. */
+	// Pool of Transition objects.
 	transitions [transitionStorageSize]Transition
 }
 
@@ -460,18 +435,16 @@ func (ts *TransitionStorage) AddActiveCandidatesToActivePool() *Transition {
 //-----------------------------------------------------------------------------
 
 type TransitionForSeconds struct {
-	/** The matching Transition, nil if not found. */
+	// The matching Transition, nil if not found.
 	curr *Transition
 
-	/** 0 for the first or exact transition; 1 for the second transition */
+	// 0 for the first or exact transition; 1 for the second transition
 	fold uint8
 
-	/**
-	 * Number of occurrences of the resulting LocalDateTime: 0, 1, or 2. This is
-	 * needed because a fold=0 can mean that the LocalDateTime occurs exactly
-	 * once, or that the first of two occurrences of LocalDateTime was selected by
-	 * the epochSeconds.
-	 */
+	// Number of occurrences of the resulting LocalDateTime: 0, 1, or 2. This is
+	// needed because a fold=0 can mean that the LocalDateTime occurs exactly
+	// once, or that the first of two occurrences of LocalDateTime was selected by
+	// the epochSeconds.
 	num uint8
 }
 
@@ -566,27 +539,25 @@ func calculateFoldAndOverlap(
 
 //-----------------------------------------------------------------------------
 
-/**
- * The result returned by findTransitionForDateTime(). There are 5
- * possibilities:
- *
- *  * num=0, prev==NULL, curr=curr: datetime is far past
- *  * num=1, prev==prev, curr=prev: exact match to datetime
- *  * num=2, prev==prev, curr=curr: datetime in overlap
- *  * num=0, prev==prev, curr=curr: datetime in gap
- *  * num=0, prev==prev, curr=NULL: datetime is far future
- *
- * Adapted from TransitionForDateTime in Transition.h of the AceTime library,
- * and transition.h from the AceTimeC library.
- */
+// The result returned by findTransitionForDateTime(). There are 5
+// possibilities:
+//
+//   - num=0, prev==NULL, curr=curr: datetime is far past
+//   - num=1, prev==prev, curr=prev: exact match to datetime
+//   - num=2, prev==prev, curr=curr: datetime in overlap
+//   - num=0, prev==prev, curr=curr: datetime in gap
+//   - num=0, prev==prev, curr=NULL: datetime is far future
+//
+// Adapted from TransitionForDateTime in Transition.h of the AceTime library,
+// and transition.h from the AceTimeC library.
 type TransitionForDateTime struct {
-	/** The previous transition, or null if the first transition matches. */
+	// The previous transition, or null if the first transition matches.
 	prev *Transition
 
-	/** The matching transition or null if not found. */
+	// The matching transition or null if not found.
 	curr *Transition
 
-	/** Number of matches for given LocalDateTime: 0, 1, or 2. */
+	// Number of matches for given LocalDateTime: 0, 1, or 2.
 	num uint8
 }
 

@@ -1,10 +1,5 @@
 package acetime
 
-//-----------------------------------------------------------------------------
-// ZonedExtra contains additional information about a specific instant
-// in time (either at a specific epochSeconds or a specific LocalDateTime{}.
-//-----------------------------------------------------------------------------
-
 const (
 	ZonedExtraErr = iota
 	ZonedExtraNotFound
@@ -17,6 +12,9 @@ var (
 	ZonedExtraError = ZonedExtra{Zetype: ZonedExtraErr}
 )
 
+// ZonedExtra contains information about a specific instant in time (either at a
+// specific epochSeconds or a specific LocalDateTime) which are not fully
+// captured by the ZonedDateTime instance.
 type ZonedExtra struct {
 	Zetype              uint8  // type of match (e.g. gap, overlap)
 	StdOffsetSeconds    int32  // STD offset

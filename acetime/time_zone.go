@@ -4,25 +4,26 @@ import (
 	"github.com/bxparks/AceTimeGo/zoneinfo"
 )
 
-//-----------------------------------------------------------------------------
-// TimeZone represents one of the IANA TZ time zones. This is a reference type,
-// and meant to be passed around as a pointer and garbage collected when it is
-// no longer used.
-//-----------------------------------------------------------------------------
-
 const (
 	TztypeError = iota
 	TztypeUTC
 	TztypeProcessor
 )
 
+// A TimeZone represents one of the IANA TZ time zones. It has reference
+// semantics meaning that a copy of this will point to same underlying
+// ZoneProcessor ands its cache. A TimeZone can be passed around by value or by
+// pointer because it is a light-weight object.
 type TimeZone struct {
 	tztype        uint8
 	zoneProcessor *ZoneProcessor
 }
 
 var (
-	TimeZoneUTC   = TimeZone{TztypeUTC, nil}
+	// TimeZoneUTC is a predefined instance that represents UTC time zone
+	TimeZoneUTC = TimeZone{TztypeUTC, nil}
+
+	// TimeZoneError is a predefined instance that represents an error
 	TimeZoneError = TimeZone{TztypeError, nil}
 )
 

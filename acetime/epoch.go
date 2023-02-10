@@ -1,7 +1,7 @@
 package acetime
 
 // The type of the "seconds from epoch" in this library. This type is the
-// equivalent of C lang 'time_t', or the Go lang 'time.Time'.
+// equivalent of C lang `time_t`, or the Go lang [time.Time].
 //
 // Other versions of AceTimeXXX uses a 32-bit integer for the `ATime` type
 // because they want to support small 8-bit microcontrollers. For TinyGo, we

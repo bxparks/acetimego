@@ -4,14 +4,11 @@ import (
 	"strings"
 )
 
-//-----------------------------------------------------------------------------
-// ZonedDateTime represents a date/time stamp with its associated TimeZone.
-//-----------------------------------------------------------------------------
-
 var (
 	ZonedDateTimeError = ZonedDateTime{Year: InvalidYear}
 )
 
+// ZonedDateTime represents a date/time with its associated TimeZone.
 type ZonedDateTime struct {
 	Year          int16
 	Month         uint8

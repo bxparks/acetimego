@@ -13,6 +13,10 @@ var (
 	LocalDateTimeError = LocalDateTime{Year: InvalidYear}
 )
 
+// A LocalDateTime represents a datetime without regards to the [TimeZone] or
+// offset from UTC. Sometimes this is used to hold a localized datetime in the
+// current implicitly-defined time zone. Sometimes this is used to represent a
+// datetime in UTC.
 type LocalDateTime struct {
 	Year   int16
 	Month  uint8

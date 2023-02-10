@@ -8,6 +8,10 @@ var (
 	OffsetDateTimeError = OffsetDateTime{Year: InvalidYear}
 )
 
+// An OffsetDateTime represents a [LocalDateTime] with a fixed OffsetSeconds
+// relative to UTC. This is mostly useful for the implementation of
+// [ZonedDateTime], but it may be useful for end-user applications which need to
+// represent a datetime with fixed offsets.
 type OffsetDateTime struct {
 	Year          int16
 	Month         uint8

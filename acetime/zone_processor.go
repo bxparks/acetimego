@@ -10,9 +10,9 @@ import (
 //-----------------------------------------------------------------------------
 
 type YearMonth struct {
-	/** year [0,10000] */
+	// year [0,10000]
 	year int16
-	/** month [1,12] */
+	// month [1,12]
 	month uint8
 }
 
@@ -111,13 +111,11 @@ func (zp *ZoneProcessor) Name() string {
 // MonthDay
 //-----------------------------------------------------------------------------
 
-/** A tuple of month and day. */
+// MonthDay is a tuple of month and day.
 type MonthDay struct {
-	/** month [1,12] */
-	month uint8
+	month uint8 // [1,12]
 
-	/** day [1,31] */
-	day uint8
+	day uint8 // [1,31]
 }
 
 // calcStartDayOfMonth Extracts the actual (month, day) pair from the expression
@@ -208,17 +206,15 @@ func findMatches(
 	return iMatch
 }
 
-/**
- * Determines if era overlaps the interval [startYm, untilYm). This does
- * not need to be exact since the startYm and untilYm are created to have
- * some slop of about one month at the low and high end, so we can ignore
- * the day, time and timeSuffix fields of the era. The start date of the
- * current era is represented by the UNTIL fields of the previous era, so
- * the interval of the current era is [era.start=prev.UNTIL,
- * era.until=era.UNTIL). Overlap happens if (era.start < untilYm) and
- * (era.until > startYm). If prev.isNull(), then interpret prev as the
- * earliest ZoneEra.
- */
+// Determines if era overlaps the interval [startYm, untilYm). This does
+// not need to be exact since the startYm and untilYm are created to have
+// some slop of about one month at the low and high end, so we can ignore
+// the day, time and timeSuffix fields of the era. The start date of the
+// current era is represented by the UNTIL fields of the previous era, so
+// the interval of the current era is [era.start=prev.UNTIL,
+// era.until=era.UNTIL). Overlap happens if (era.start < untilYm) and
+// (era.until > startYm). If prev.isNull(), then interpret prev as the
+// earliest ZoneEra.
 func eraOverlapsInterval(
 	prevEra *zoneinfo.ZoneEra,
 	era *zoneinfo.ZoneEra,
@@ -230,7 +226,7 @@ func eraOverlapsInterval(
 		compareEraToYearMonth(era, startYm.year, startYm.month) > 0
 }
 
-/** Return (1, 0, -1) depending on how era compares to (year, month). */
+// Return (1, 0, -1) depending on how era compares to (year, month).
 func compareEraToYearMonth(
 	era *zoneinfo.ZoneEra, year int16, month uint8) int8 {
 
@@ -256,12 +252,10 @@ func compareEraToYearMonth(
 	return 0
 }
 
-/**
- * Create a new MatchingEra object around the 'era' which intersects the
- * half-open [startYm, untilYm) interval. The interval is assumed to overlap
- * the ZoneEra using the eraOverlapsInterval() method. The 'prev' ZoneEra is
- * needed to define the startDateTime of the current era.
- */
+// Create a new MatchingEra object around the 'era' which intersects the
+// half-open [startYm, untilYm) interval. The interval is assumed to overlap
+// the ZoneEra using the eraOverlapsInterval() method. The 'prev' ZoneEra is
+// needed to define the startDateTime of the current era.
 func createMatchingEra(
 	newMatch *MatchingEra,
 	prevMatch *MatchingEra,
