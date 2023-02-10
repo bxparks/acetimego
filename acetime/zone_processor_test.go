@@ -372,9 +372,9 @@ func TestFindCandidateTransitions(t *testing.T) {
 	//    * 2019 Mar Sun>=8 (Mar 10)
 	//    * 2019 Nov Sun>=1 (Nov 3)
 	//    * 2020 Mar Sun>=8 (Mar 8)
-	ts.ResetCandidatePool()
+	ts.resetCandidatePool()
 	findCandidateTransitions(&ts, &match)
-	candidates := ts.GetCandidates()
+	candidates := ts.getCandidates()
 	if !(5 == len(candidates)) {
 		t.Fatal()
 	}
@@ -559,7 +559,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// pre-defined typedef in ExtendedZoneProcess::TransitionStorage.
 	var storage TransitionStorage
 	createTransitions(&storage, matches[:numMatches])
-	transitions := storage.GetActives()
+	transitions := storage.getActives()
 	if !(len(transitions) == 3) {
 		t.Fatal(len(transitions))
 	}

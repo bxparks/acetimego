@@ -8,6 +8,10 @@ var (
 	OffsetDateTimeError = OffsetDateTime{Year: InvalidYear}
 )
 
+// An OffsetDateTime represents a [LocalDateTime] with a fixed OffsetSeconds
+// relative to UTC. This is mostly useful for the implementation of
+// [ZonedDateTime], but it may be useful for end-user applications which need to
+// represent a datetime with fixed offsets.
 type OffsetDateTime struct {
 	Year          int16
 	Month         uint8
@@ -99,9 +103,9 @@ func BuildUTCOffset(b *strings.Builder, offsetSeconds int32) {
 	}
 
 	b.WriteByte(c)
-	WriteUint8Pad2(b, h, '0')
+	BuildUint8Pad2(b, h, '0')
 	b.WriteByte(':')
-	WriteUint8Pad2(b, m, '0')
+	BuildUint8Pad2(b, m, '0')
 }
 
 func secondsToHMS(seconds int32) (sign int8, h uint8, m uint8, s uint8) {

@@ -10,9 +10,9 @@ import (
 //-----------------------------------------------------------------------------
 
 type YearMonth struct {
-	/** year [0,10000] */
+	// year [0,10000]
 	year int16
-	/** month [1,12] */
+	// month [1,12]
 	month uint8
 }
 
@@ -48,8 +48,8 @@ func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
 	zp.isFilled = false
 }
 
-// Clear cache
-func (zp *ZoneProcessor) Reset() {
+// Clear cache, used only for tests.
+func (zp *ZoneProcessor) reset() {
 	zp.isFilled = false
 }
 
@@ -65,7 +65,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	zp.year = year
 	zp.isFilled = true
 	zp.numMatches = 0
-	zp.transitionStorage.Init()
+	zp.transitionStorage.init()
 	if year < zp.zoneInfo.StartYear-1 || zp.zoneInfo.UntilYear < year {
 		return ErrGeneric
 	}
@@ -83,7 +83,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	createTransitions(&zp.transitionStorage, zp.matches[:zp.numMatches])
 
 	// Step 3: Fix transition times.
-	transitions := zp.transitionStorage.GetActives()
+	transitions := zp.transitionStorage.getActives()
 	fixTransitionTimes(transitions)
 
 	// Step 4: Generate start and until times.
@@ -111,13 +111,11 @@ func (zp *ZoneProcessor) Name() string {
 // MonthDay
 //-----------------------------------------------------------------------------
 
-/** A tuple of month and day. */
+// MonthDay is a tuple of month and day.
 type MonthDay struct {
-	/** month [1,12] */
-	month uint8
+	month uint8 // [1,12]
 
-	/** day [1,31] */
-	day uint8
+	day uint8 // [1,31]
 }
 
 // calcStartDayOfMonth Extracts the actual (month, day) pair from the expression
@@ -208,17 +206,15 @@ func findMatches(
 	return iMatch
 }
 
-/**
- * Determines if era overlaps the interval [startYm, untilYm). This does
- * not need to be exact since the startYm and untilYm are created to have
- * some slop of about one month at the low and high end, so we can ignore
- * the day, time and timeSuffix fields of the era. The start date of the
- * current era is represented by the UNTIL fields of the previous era, so
- * the interval of the current era is [era.start=prev.UNTIL,
- * era.until=era.UNTIL). Overlap happens if (era.start < untilYm) and
- * (era.until > startYm). If prev.isNull(), then interpret prev as the
- * earliest ZoneEra.
- */
+// Determines if era overlaps the interval [startYm, untilYm). This does
+// not need to be exact since the startYm and untilYm are created to have
+// some slop of about one month at the low and high end, so we can ignore
+// the day, time and timeSuffix fields of the era. The start date of the
+// current era is represented by the UNTIL fields of the previous era, so
+// the interval of the current era is [era.start=prev.UNTIL,
+// era.until=era.UNTIL). Overlap happens if (era.start < untilYm) and
+// (era.until > startYm). If prev.isNull(), then interpret prev as the
+// earliest ZoneEra.
 func eraOverlapsInterval(
 	prevEra *zoneinfo.ZoneEra,
 	era *zoneinfo.ZoneEra,
@@ -230,7 +226,7 @@ func eraOverlapsInterval(
 		compareEraToYearMonth(era, startYm.year, startYm.month) > 0
 }
 
-/** Return (1, 0, -1) depending on how era compares to (year, month). */
+// Return (1, 0, -1) depending on how era compares to (year, month).
 func compareEraToYearMonth(
 	era *zoneinfo.ZoneEra, year int16, month uint8) int8 {
 
@@ -256,12 +252,10 @@ func compareEraToYearMonth(
 	return 0
 }
 
-/**
- * Create a new MatchingEra object around the 'era' which intersects the
- * half-open [startYm, untilYm) interval. The interval is assumed to overlap
- * the ZoneEra using the eraOverlapsInterval() method. The 'prev' ZoneEra is
- * needed to define the startDateTime of the current era.
- */
+// Create a new MatchingEra object around the 'era' which intersects the
+// half-open [startYm, untilYm) interval. The interval is assumed to overlap
+// the ZoneEra using the eraOverlapsInterval() method. The 'prev' ZoneEra is
+// needed to define the startDateTime of the current era.
 func createMatchingEra(
 	newMatch *MatchingEra,
 	prevMatch *MatchingEra,
@@ -339,12 +333,12 @@ func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
 func createTransitionsFromSimpleMatch(
 	ts *TransitionStorage, match *MatchingEra) {
 
-	freeAgent := ts.GetFreeAgent()
+	freeAgent := ts.getFreeAgent()
 	createTransitionForYear(freeAgent, 0, nil, match)
 	freeAgent.matchStatus = matchStatusExactMatch
 	match.lastOffsetSeconds = freeAgent.offsetSeconds
 	match.lastDeltaSeconds = freeAgent.deltaSeconds
-	ts.AddFreeAgentToActivePool()
+	ts.addFreeAgentToActivePool()
 }
 
 func createTransitionForYear(
@@ -385,20 +379,20 @@ func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) DateTuple {
 func createTransitionsFromNamedMatch(
 	ts *TransitionStorage, match *MatchingEra) {
 
-	ts.ResetCandidatePool()
+	ts.resetCandidatePool()
 
 	// Pass 1: Find candidate transitions using whole years.
 	findCandidateTransitions(ts, match)
 
 	// Pass 2: Fix the transitions times, converting 's' and 'u' into 'w'
 	// uniformly.
-	transitions := ts.GetCandidates()
+	transitions := ts.getCandidates()
 	fixTransitionTimes(transitions)
 
 	// Pass 3: Select only those Transitions which overlap with the actual
 	// start and until times of the MatchingEra.
 	selectActiveTransitions(transitions)
-	lastTransition := ts.AddActiveCandidatesToActivePool()
+	lastTransition := ts.addActiveCandidatesToActivePool()
 	match.lastOffsetSeconds = lastTransition.offsetSeconds
 	match.lastDeltaSeconds = lastTransition.deltaSeconds
 }
@@ -410,7 +404,7 @@ func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
 	startYear := match.startDt.year
 	endYear := match.untilDt.year
 
-	prior := ts.ReservePrior()
+	prior := ts.reservePrior()
 	prior.isValidPrior = false
 	rules := policy.Rules
 	for ir := range rules {
@@ -422,13 +416,13 @@ func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
 			interiorYears[:], rule.FromYear, rule.ToYear, startYear, endYear)
 		for iy := uint8(0); iy < numYears; iy++ {
 			year := interiorYears[iy]
-			t := ts.GetFreeAgent()
+			t := ts.getFreeAgent()
 			createTransitionForYear(t, year, rule, match)
 			status := compareTransitionToMatchFuzzy(t, match)
 			if status == matchStatusPrior {
-				ts.SetFreeAgentAsPriorIfValid()
+				ts.setFreeAgentAsPriorIfValid()
 			} else if status == matchStatusWithinMatch {
-				ts.AddFreeAgentToCandidatePool()
+				ts.addFreeAgentToCandidatePool()
 			} else {
 				// Must be kFarFuture.
 				// Do nothing, allowing the free agent to be reused.
@@ -438,16 +432,16 @@ func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
 		// Add Transition for prior year
 		priorYear := getMostRecentPriorYear(rule.FromYear, rule.ToYear, startYear)
 		if priorYear != InvalidYear {
-			t := ts.GetFreeAgent()
+			t := ts.getFreeAgent()
 			createTransitionForYear(t, priorYear, rule, match)
-			ts.SetFreeAgentAsPriorIfValid()
+			ts.setFreeAgentAsPriorIfValid()
 		}
 	}
 
 	// Add the reserved prior into the Candidate pool only if 'isValidPrior' is
 	// true.
 	if prior.isValidPrior {
-		ts.AddPriorToCandidatePool()
+		ts.addPriorToCandidatePool()
 	}
 }
 

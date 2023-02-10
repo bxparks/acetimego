@@ -4,10 +4,7 @@ import (
 	"github.com/bxparks/AceTimeGo/zoneinfo"
 )
 
-//-----------------------------------------------------------------------------
 // ZoneManager creates TimeZone objects from its ZoneID or its Zone Name.
-//-----------------------------------------------------------------------------
-
 type ZoneManager struct {
 	store *zoneinfo.ZoneStore
 }
@@ -16,23 +13,23 @@ func NewZoneManager(context *zoneinfo.ZoneDataContext) ZoneManager {
 	return ZoneManager{zoneinfo.NewZoneStore(context)}
 }
 
-func (zm *ZoneManager) NewTimeZoneFromID(zoneID uint32) TimeZone {
-	zi := zm.store.ZoneInfoByID(zoneID)
-	if zi == nil {
+func (zm *ZoneManager) TimeZoneFromID(zoneID uint32) TimeZone {
+	info := zm.store.ZoneInfoByID(zoneID)
+	if info == nil {
 		return TimeZoneError
 	}
-	return NewTimeZoneFromZoneInfo(zi)
+	return NewTimeZoneFromZoneInfo(info)
 }
 
-func (zm *ZoneManager) NewTimeZoneFromName(name string) TimeZone {
-	zi := zm.store.ZoneInfoByName(name)
-	if zi == nil {
+func (zm *ZoneManager) TimeZoneFromName(name string) TimeZone {
+	info := zm.store.ZoneInfoByName(name)
+	if info == nil {
 		return TimeZoneError
 	}
-	return NewTimeZoneFromZoneInfo(zi)
+	return NewTimeZoneFromZoneInfo(info)
 }
 
-func (zm *ZoneManager) NewTimeZoneFromIndex(index uint16) TimeZone {
+func (zm *ZoneManager) TimeZoneFromIndex(index uint16) TimeZone {
 	if index >= zm.ZoneCount() {
 		return TimeZoneError
 	}

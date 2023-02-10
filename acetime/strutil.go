@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func WriteUint8Pad2(b *strings.Builder, n uint8, pad byte) {
+func BuildUint8Pad2(b *strings.Builder, n uint8, pad byte) {
 	if n >= 100 {
 		b.WriteByte('*')
 		b.WriteByte('*')
@@ -27,7 +27,7 @@ func WriteUint8Pad2(b *strings.Builder, n uint8, pad byte) {
 	b.WriteByte(c0)
 }
 
-func WriteUint16Pad4(b *strings.Builder, n uint16, pad byte) {
+func BuildUint16Pad4(b *strings.Builder, n uint16, pad byte) {
 	if n >= 10000 {
 		b.WriteByte('*')
 		b.WriteByte('*')
@@ -44,13 +44,13 @@ func WriteUint16Pad4(b *strings.Builder, n uint16, pad byte) {
 		b.WriteByte(pad)
 		d10pad = pad
 	} else {
-		WriteUint8Pad2(b, d32, pad)
+		BuildUint8Pad2(b, d32, pad)
 		d10pad = '0'
 	}
-	WriteUint8Pad2(b, d10, d10pad)
+	BuildUint8Pad2(b, d10, d10pad)
 }
 
-func WriteUint64(b *strings.Builder, n uint64) {
+func BuildUint64(b *strings.Builder, n uint64) {
 	// max uint64 is 1.8447e19, so 20 digits should be enough.
 	var buf [20]uint8
 	var i uint8

@@ -30,7 +30,7 @@ func TestZoneManagerZoneNames(t *testing.T) {
 
 func TestZoneManagerNewTimeZoneFromID(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zm.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := zm.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	if !(tz.Name() == "America/Los_Angeles") {
 		t.Fatal(tz.Name())
 	}
@@ -38,7 +38,7 @@ func TestZoneManagerNewTimeZoneFromID(t *testing.T) {
 
 func TestZoneManagerNewTimeZoneFromID_Error(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zm.NewTimeZoneFromID(0 /*should not exist*/)
+	tz := zm.TimeZoneFromID(0 /*should not exist*/)
 	if !(tz.IsError()) {
 		t.Fatal(tz)
 	}
@@ -46,7 +46,7 @@ func TestZoneManagerNewTimeZoneFromID_Error(t *testing.T) {
 
 func TestZoneManagerNewTimeZoneFromName(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zm.NewTimeZoneFromName("America/Los_Angeles")
+	tz := zm.TimeZoneFromName("America/Los_Angeles")
 	if !(tz.Name() == "America/Los_Angeles") {
 		t.Fatal(tz.Name())
 	}
@@ -54,7 +54,7 @@ func TestZoneManagerNewTimeZoneFromName(t *testing.T) {
 
 func TestZoneManagerNewTimeZoneFromName_Error(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zm.NewTimeZoneFromName("ShouldNotExist")
+	tz := zm.TimeZoneFromName("ShouldNotExist")
 	if !(tz.IsError()) {
 		t.Fatal(tz)
 	}
@@ -62,7 +62,7 @@ func TestZoneManagerNewTimeZoneFromName_Error(t *testing.T) {
 
 func TestZoneManagerNewTimeZoneFromIndex_Error(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zm.NewTimeZoneFromIndex(zm.ZoneCount()) // one past the end
+	tz := zm.TimeZoneFromIndex(zm.ZoneCount()) // one past the end
 	if !(tz.IsError()) {
 		t.Fatal(tz)
 	}

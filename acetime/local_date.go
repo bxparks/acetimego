@@ -29,9 +29,9 @@ const (
 //
 // For example:
 //
-//   - atc_days_of_week[3] is 3 because April (index=3) 1st is shifted by 3
+//   - daysOfWeek[3] is 3 because April (index=3) 1st is shifted by 3
 //     days because March has 31 days (28 + 3).
-//   - atc_days_of_week[4] is 5 because May (index=4) 1st is shifted by 2
+//   - daysOfWeek[4] is 5 because May (index=4) 1st is shifted by 2
 //     additional days from April, because April has 30 days (28 + 2).
 var daysOfWeek = [12]uint8{
 	5, /*Jan=31*/
@@ -48,6 +48,7 @@ var daysOfWeek = [12]uint8{
 	2, /*Dec=31*/
 }
 
+// Number of days in each month in a non-leap year. 0=Jan, 11=Dec.
 var daysInMonth = [12]uint8{
 	31, /*Jan=31*/
 	28, /*Feb=28*/
@@ -63,10 +64,13 @@ var daysInMonth = [12]uint8{
 	31, /*Dec=31*/
 }
 
+// IsLeapYear returns true if the given year is a leap year, false otherwise.
 func IsLeapYear(year int16) bool {
 	return ((year%4 == 0) && (year%100 != 0)) || (year%400 == 0)
 }
 
+// DaysInYearMonth returns the number of days in the given (year, month) pair,
+// properly accounting for leap years.
 func DaysInYearMonth(year int16, month uint8) uint8 {
 	days := daysInMonth[month-1]
 	if month == 2 && IsLeapYear(year) {
@@ -76,6 +80,8 @@ func DaysInYearMonth(year int16, month uint8) uint8 {
 	}
 }
 
+// DayOfWeek returns the ISO week number (Monday=1, Sunday=7) of the given
+// (year, month, day).
 func DayOfWeek(year int16, month uint8, day uint8) uint8 {
 	// The "y" starts in March to shift leap year calculation to end.
 	var y int16 = year
