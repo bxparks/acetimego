@@ -1,11 +1,7 @@
 package acetime
 
-import (
-	"math"
-)
-
 const (
-	InvalidYear int16 = math.MinInt16
+	InvalidYear = int16(-(1<<15)) // math.MinInt16
 )
 
 const (

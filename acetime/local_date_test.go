@@ -1,8 +1,16 @@
 package acetime
 
 import (
+	"math"
 	"testing"
 )
+
+// Verify my understanding of Golang's integer arithematics.
+func TestInvalidYear(t *testing.T) {
+	if InvalidYear != math.MinInt16 {
+		t.Fatal(InvalidYear)
+	}
+}
 
 func TestIsLeapYear(t *testing.T) {
 	if !IsLeapYear(2000) {

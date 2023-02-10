@@ -1,9 +1,17 @@
 package acetime
 
 import (
+	"math"
 	"testing"
 	"unsafe"
 )
+
+// Verify my understanding of Golang's integer arithematics.
+func TestInvalidEpochSeconds(t *testing.T) {
+	if InvalidEpochSeconds != math.MinInt64 {
+		t.Fatal(InvalidYear)
+	}
+}
 
 func TestLocalDateTimeSize(t *testing.T) {
 	ldt := LocalDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/}

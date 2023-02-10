@@ -1,12 +1,11 @@
 package acetime
 
 import (
-	"math"
 	"strings"
 )
 
 const (
-	InvalidEpochSeconds ATime = math.MinInt64
+	InvalidEpochSeconds = ATime(-(1<<63)) // math.MinInt64
 )
 
 var (
