@@ -7,7 +7,7 @@ import (
 
 func TestTimeZoneToString(t *testing.T) {
 	zoneManager := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zoneManager.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := zoneManager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	if !(tz.Name() == "America/Los_Angeles") {
 		t.Fatal(tz)
 	}
