@@ -28,8 +28,8 @@
 //
 // Supported Zones: 5 (4 zones, 1 links)
 // Unsupported Zones: 591 (347 zones, 244 links)
-// Earliest Year (Original): 1844
-// Earliest Year (Generated): 1967
+// Original Years: [1844,2087]
+// Generated Years: [1967,2012]
 //
 // DO NOT EDIT
 
