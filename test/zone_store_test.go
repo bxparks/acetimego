@@ -6,7 +6,7 @@
 // solution that I can think of right now is to move this test file into the
 // `acetime` package.
 
-package acetime
+package test
 
 import (
 	"github.com/bxparks/AceTimeGo/zonedb"

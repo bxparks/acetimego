@@ -2,7 +2,7 @@
 // directory. Unfortunately this has a dependency to the `zonedbtesting` and
 // `zonedb` packages, which has a circular dependency to the `zoneinfo` package.
 
-package acetime
+package test
 
 import (
 	"github.com/bxparks/AceTimeGo/zonedb"
