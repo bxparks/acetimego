@@ -203,7 +203,7 @@ func TestDateTupleCompareFuzzy(t *testing.T) {
 		&DateTuple{2000, 10, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2002, 2, 1, 1, 0})
-	if !(matchStatusPrior == status) {
+	if !(compareStatusPrior == status) {
 		t.Fatal(status)
 	}
 
@@ -211,7 +211,7 @@ func TestDateTupleCompareFuzzy(t *testing.T) {
 		&DateTuple{2000, 11, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2002, 2, 1, 1, 0})
-	if !(matchStatusWithinMatch == status) {
+	if !(compareStatusWithinMatch == status) {
 		t.Fatal(status)
 	}
 
@@ -219,7 +219,7 @@ func TestDateTupleCompareFuzzy(t *testing.T) {
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2002, 2, 1, 1, 0})
-	if !(matchStatusWithinMatch == status) {
+	if !(compareStatusWithinMatch == status) {
 		t.Fatal(status)
 	}
 
@@ -227,7 +227,7 @@ func TestDateTupleCompareFuzzy(t *testing.T) {
 		&DateTuple{2002, 2, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2002, 2, 1, 1, 0})
-	if !(matchStatusWithinMatch == status) {
+	if !(compareStatusWithinMatch == status) {
 		t.Fatal(status)
 	}
 
@@ -235,7 +235,7 @@ func TestDateTupleCompareFuzzy(t *testing.T) {
 		&DateTuple{2002, 3, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2002, 2, 1, 1, 0})
-	if !(matchStatusWithinMatch == status) {
+	if !(compareStatusWithinMatch == status) {
 		t.Fatal(status)
 	}
 
@@ -243,7 +243,7 @@ func TestDateTupleCompareFuzzy(t *testing.T) {
 		&DateTuple{2002, 4, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2002, 2, 1, 1, 0})
-	if !(matchStatusFarFuture == status) {
+	if !(compareStatusFarFuture == status) {
 		t.Fatal(status)
 	}
 
@@ -253,14 +253,14 @@ func TestDateTupleCompareFuzzy(t *testing.T) {
 		&DateTuple{5000, 4, 1, 1, 0},
 		&DateTuple{2000, 12, 1, 1, 0},
 		&DateTuple{2002, 2, 1, 1, 0})
-	if !(matchStatusFarFuture == status) {
+	if !(compareStatusFarFuture == status) {
 		t.Fatal(status)
 	}
 	status = dateTupleCompareFuzzy(
 		&DateTuple{1000, 4, 1, 1, 0},
 		&DateTuple{4000, 12, 1, 1, 0},
 		&DateTuple{4002, 2, 1, 1, 0})
-	if !(matchStatusPrior == status) {
+	if !(compareStatusPrior == status) {
 		t.Fatal(status)
 	}
 }

@@ -131,11 +131,11 @@ func dateTupleExpand(
 }
 
 const (
-	matchStatusFarPast     = iota // 0
-	matchStatusPrior              // 1
-	matchStatusExactMatch         // 2
-	matchStatusWithinMatch        // 3
-	matchStatusFarFuture          // 4
+	compareStatusFarPast     = iota // 0
+	compareStatusPrior              // 1
+	compareStatusExactMatch         // 2
+	compareStatusWithinMatch        // 3
+	compareStatusFarFuture          // 4
 )
 
 // dateTupleCompareFuzzy compares the given 't' with the interval defined by
@@ -144,12 +144,12 @@ const (
 //
 // The following values are returned:
 //
-//   - matchStatusPrior if 't' is less than 'start' by at least one month,
-//   - matchStatusFarFuture if 't' is greater than 'until' by at least one
+//   - compareStatusPrior if 't' is less than 'start' by at least one month,
+//   - compareStatusFarFuture if 't' is greater than 'until' by at least one
 //     month,
-//   - matchStatusWithinMatch if 't' is within [start, until) with a one
+//   - compareStatusWithinMatch if 't' is within [start, until) with a one
 //     month slop,
-//   - matchStatusExactMatch is never returned.
+//   - compareStatusExactMatch is never returned.
 func dateTupleCompareFuzzy(
 	t *DateTuple, start *DateTuple, until *DateTuple) uint8 {
 
@@ -158,11 +158,11 @@ func dateTupleCompareFuzzy(
 	var tMonths int32 = int32(t.year)*12 + int32(t.month)
 	var startMonths int32 = int32(start.year)*12 + int32(start.month)
 	if tMonths < startMonths-1 {
-		return matchStatusPrior
+		return compareStatusPrior
 	}
 	var untilMonths int32 = int32(until.year)*12 + int32(until.month)
 	if untilMonths+1 < tMonths {
-		return matchStatusFarFuture
+		return compareStatusFarFuture
 	}
-	return matchStatusWithinMatch
+	return compareStatusWithinMatch
 }

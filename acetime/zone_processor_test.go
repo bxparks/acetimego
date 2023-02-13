@@ -463,32 +463,32 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 	fixTransitionTimes(transitions)
 
 	prior = processTransitionMatchStatus(transition0, prior)
-	if !(matchStatusPrior == transition0.matchStatus) {
-		t.Fatal(transition0.matchStatus)
+	if !(compareStatusPrior == transition0.compareStatus) {
+		t.Fatal(transition0.compareStatus)
 	}
 	if !(prior == transition0) {
 		t.Fatal(transition0)
 	}
 
 	prior = processTransitionMatchStatus(transition1, prior)
-	if !(matchStatusExactMatch == transition1.matchStatus) {
-		t.Fatal(transition1.matchStatus)
+	if !(compareStatusExactMatch == transition1.compareStatus) {
+		t.Fatal(transition1.compareStatus)
 	}
 	if !(prior == transition1) {
 		t.Fatal(transition1)
 	}
 
 	prior = processTransitionMatchStatus(transition2, prior)
-	if !(matchStatusWithinMatch == transition2.matchStatus) {
-		t.Fatal(transition2.matchStatus)
+	if !(compareStatusWithinMatch == transition2.compareStatus) {
+		t.Fatal(transition2.compareStatus)
 	}
 	if !(prior == transition1) {
 		t.Fatal(transition1)
 	}
 
 	prior = processTransitionMatchStatus(transition3, prior)
-	if !(matchStatusFarFuture == transition3.matchStatus) {
-		t.Fatal(transition3.matchStatus)
+	if !(compareStatusFarFuture == transition3.compareStatus) {
+		t.Fatal(transition3.compareStatus)
 	}
 	if !(prior == transition1) {
 		t.Fatal(transition1)

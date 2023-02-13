@@ -95,7 +95,7 @@ type Transition struct {
 
 	// During processTransitionMatchStatus(), this flag indicates how the
 	// transition falls within the time interval of the MatchingEra.
-	matchStatus uint8
+	compareStatus uint8
 }
 
 func fixTransitionTimes(transitions []Transition) {
@@ -232,9 +232,9 @@ func (ts *TransitionStorage) addFreeAgentToCandidatePool() {
 }
 
 func isMatchStatusActive(status uint8) bool {
-	return status == matchStatusExactMatch ||
-		status == matchStatusWithinMatch ||
-		status == matchStatusPrior
+	return status == compareStatusExactMatch ||
+		status == compareStatusWithinMatch ||
+		status == compareStatusPrior
 }
 
 // Useful for debugging, commented out instead of deleting.
@@ -251,7 +251,7 @@ func (ts *TransitionStorage) addActiveCandidatesToActivePool() *Transition {
 	iActive := ts.indexPrior
 	iCandidate := ts.indexCandidate
 	for ; iCandidate < ts.indexFree; iCandidate++ {
-		if isMatchStatusActive(ts.transitions[iCandidate].matchStatus) {
+		if isMatchStatusActive(ts.transitions[iCandidate].compareStatus) {
 			if iActive != iCandidate {
 				// Shift candidate into active slot
 				ts.transitions[iActive] = ts.transitions[iCandidate]
@@ -488,11 +488,11 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 	if dateTupleCompare(ttw, &stw) == 0 ||
 		dateTupleCompare(tts, &sts) == 0 ||
 		dateTupleCompare(ttu, &stu) == 0 {
-		return matchStatusExactMatch
+		return compareStatusExactMatch
 	}
 
 	if dateTupleCompare(ttu, &stu) < 0 {
-		return matchStatusPrior
+		return compareStatusPrior
 	}
 
 	// Now check if the transition occurs after the given match. The
@@ -510,10 +510,10 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 		transitionTime = ttw
 	}
 	if dateTupleCompare(transitionTime, matchUntil) < 0 {
-		return matchStatusWithinMatch
+		return compareStatusWithinMatch
 	}
 
-	return matchStatusFarFuture
+	return compareStatusFarFuture
 }
 
 func compareTransitionToMatchFuzzy(t *Transition, m *MatchingEra) uint8 {

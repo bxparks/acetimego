@@ -16,7 +16,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 		transitionTime: DateTuple{1999, 11, 1, 0, zoneinfo.SuffixW},
 	}
 	status := compareTransitionToMatchFuzzy(&transition, &match)
-	if !(status == matchStatusPrior) {
+	if !(status == compareStatusPrior) {
 		t.Fatal("fatal")
 	}
 
@@ -25,7 +25,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 		transitionTime: DateTuple{1999, 12, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
-	if !(status == matchStatusWithinMatch) {
+	if !(status == compareStatusWithinMatch) {
 		t.Fatal("fatal")
 	}
 
@@ -34,7 +34,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 		transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
-	if !(status == matchStatusWithinMatch) {
+	if !(status == compareStatusWithinMatch) {
 		t.Fatal("fatal")
 	}
 
@@ -43,7 +43,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 		transitionTime: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
-	if !(status == matchStatusWithinMatch) {
+	if !(status == compareStatusWithinMatch) {
 		t.Fatal("fatal")
 	}
 
@@ -52,7 +52,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 		transitionTime: DateTuple{2001, 3, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&transition, &match)
-	if !(status == matchStatusFarFuture) {
+	if !(status == compareStatusFarFuture) {
 		t.Fatal("fatal")
 	}
 }
@@ -110,22 +110,22 @@ func TestCompareTransitionToMatch(t *testing.T) {
 	fixTransitionTimes(transitions)
 
 	status := compareTransitionToMatch(transition0, &match)
-	if !(status == matchStatusPrior) {
+	if !(status == compareStatusPrior) {
 		t.Fatal("tt:", transition0.transitionTime, "; status:", status)
 	}
 
 	status = compareTransitionToMatch(transition1, &match)
-	if !(status == matchStatusExactMatch) {
+	if !(status == compareStatusExactMatch) {
 		t.Fatal("tt:", transition1.transitionTime, "; status:", status)
 	}
 
 	status = compareTransitionToMatch(transition2, &match)
-	if !(status == matchStatusWithinMatch) {
+	if !(status == compareStatusWithinMatch) {
 		t.Fatal("tt:", transition2.transitionTime, "; status:", status)
 	}
 
 	status = compareTransitionToMatch(transition3, &match)
-	if !(status == matchStatusFarFuture) {
+	if !(status == compareStatusFarFuture) {
 		t.Fatal("tt:", transition3.transitionTime, "; status:", status)
 	}
 }

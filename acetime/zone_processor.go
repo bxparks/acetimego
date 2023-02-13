@@ -335,7 +335,7 @@ func createTransitionsFromSimpleMatch(
 
 	freeAgent := ts.getFreeAgent()
 	createTransitionForYear(freeAgent, 0, nil, match)
-	freeAgent.matchStatus = matchStatusExactMatch
+	freeAgent.compareStatus = compareStatusExactMatch
 	match.lastOffsetSeconds = freeAgent.offsetSeconds
 	match.lastDeltaSeconds = freeAgent.deltaSeconds
 	ts.addFreeAgentToActivePool()
@@ -419,9 +419,9 @@ func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
 			t := ts.getFreeAgent()
 			createTransitionForYear(t, year, rule, match)
 			status := compareTransitionToMatchFuzzy(t, match)
-			if status == matchStatusPrior {
+			if status == compareStatusPrior {
 				ts.setFreeAgentAsPriorIfValid()
-			} else if status == matchStatusWithinMatch {
+			} else if status == compareStatusWithinMatch {
 				ts.addFreeAgentToCandidatePool()
 			} else {
 				// Must be kFarFuture.
@@ -501,22 +501,22 @@ func processTransitionMatchStatus(
 	transition *Transition, prior *Transition) *Transition {
 
 	status := compareTransitionToMatch(transition, transition.match)
-	transition.matchStatus = status
+	transition.compareStatus = status
 
-	if status == matchStatusExactMatch {
+	if status == compareStatusExactMatch {
 		if prior != nil {
-			prior.matchStatus = matchStatusFarPast
+			prior.compareStatus = compareStatusFarPast
 		}
 		prior = transition
-	} else if status == matchStatusPrior {
+	} else if status == compareStatusPrior {
 		if prior != nil {
 			if dateTupleCompare(
 				&prior.transitionTimeU, &transition.transitionTimeU) <= 0 {
 
-				prior.matchStatus = matchStatusFarPast
+				prior.compareStatus = compareStatusFarPast
 				prior = transition
 			} else {
-				transition.matchStatus = matchStatusFarPast
+				transition.compareStatus = compareStatusFarPast
 			}
 		} else {
 			prior = transition
