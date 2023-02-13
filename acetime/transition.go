@@ -93,7 +93,7 @@ type Transition struct {
 	// is a prior transition.
 	isValidPrior bool
 
-	// During processTransitionMatchStatus(), this flag indicates how the
+	// During processTransitionCompareStatus(), this flag indicates how the
 	// transition falls within the time interval of the MatchingEra.
 	compareStatus uint8
 }
@@ -231,7 +231,7 @@ func (ts *TransitionStorage) addFreeAgentToCandidatePool() {
 	ts.indexFree++
 }
 
-func isMatchStatusActive(status uint8) bool {
+func isCompareStatusActive(status uint8) bool {
 	return status == compareStatusExactMatch ||
 		status == compareStatusWithinMatch ||
 		status == compareStatusPrior
@@ -251,7 +251,7 @@ func (ts *TransitionStorage) addActiveCandidatesToActivePool() *Transition {
 	iActive := ts.indexPrior
 	iCandidate := ts.indexCandidate
 	for ; iCandidate < ts.indexFree; iCandidate++ {
-		if isMatchStatusActive(ts.transitions[iCandidate].compareStatus) {
+		if isCompareStatusActive(ts.transitions[iCandidate].compareStatus) {
 			if iActive != iCandidate {
 				// Shift candidate into active slot
 				ts.transitions[iActive] = ts.transitions[iCandidate]

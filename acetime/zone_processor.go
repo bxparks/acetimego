@@ -487,7 +487,7 @@ func selectActiveTransitions(transitions []Transition) {
 	var prior *Transition = nil
 	for i := range transitions {
 		transition := &transitions[i]
-		prior = processTransitionMatchStatus(transition, prior)
+		prior = processTransitionCompareStatus(transition, prior)
 	}
 
 	// If the latest prior transition is found, shift it to start at the
@@ -497,7 +497,7 @@ func selectActiveTransitions(transitions []Transition) {
 	}
 }
 
-func processTransitionMatchStatus(
+func processTransitionCompareStatus(
 	transition *Transition, prior *Transition) *Transition {
 
 	status := compareTransitionToMatch(transition, transition.match)

@@ -405,7 +405,7 @@ func TestFindCandidateTransitions(t *testing.T) {
 // Step 2B Pass 3
 //-----------------------------------------------------------------------------
 
-func TestProcessTransitionMatchStatus(t *testing.T) {
+func TestProcessTransitionCompareStatus(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
 	era := zoneinfo.ZoneEra{
 		OffsetSecondsCode:    0,
@@ -462,7 +462,7 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 	var prior *Transition = nil
 	fixTransitionTimes(transitions)
 
-	prior = processTransitionMatchStatus(transition0, prior)
+	prior = processTransitionCompareStatus(transition0, prior)
 	if !(compareStatusPrior == transition0.compareStatus) {
 		t.Fatal(transition0.compareStatus)
 	}
@@ -470,7 +470,7 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 		t.Fatal(transition0)
 	}
 
-	prior = processTransitionMatchStatus(transition1, prior)
+	prior = processTransitionCompareStatus(transition1, prior)
 	if !(compareStatusExactMatch == transition1.compareStatus) {
 		t.Fatal(transition1.compareStatus)
 	}
@@ -478,7 +478,7 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 		t.Fatal(transition1)
 	}
 
-	prior = processTransitionMatchStatus(transition2, prior)
+	prior = processTransitionCompareStatus(transition2, prior)
 	if !(compareStatusWithinMatch == transition2.compareStatus) {
 		t.Fatal(transition2.compareStatus)
 	}
@@ -486,7 +486,7 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 		t.Fatal(transition1)
 	}
 
-	prior = processTransitionMatchStatus(transition3, prior)
+	prior = processTransitionCompareStatus(transition3, prior)
 	if !(compareStatusFarFuture == transition3.compareStatus) {
 		t.Fatal(transition3.compareStatus)
 	}

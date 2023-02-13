@@ -1,5 +1,5 @@
 build:
-	go build
+	# do nothing
 
 test:
 	go test
