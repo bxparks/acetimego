@@ -1,7 +1,7 @@
 package acetime
 
 const (
-	InvalidYear = int16(-(1<<15)) // math.MinInt16
+	InvalidYear = int16(-(1 << 15)) // math.MinInt16
 )
 
 const (

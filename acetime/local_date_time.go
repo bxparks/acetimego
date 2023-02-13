@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	InvalidEpochSeconds = ATime(-(1<<63)) // math.MinInt64
+	InvalidEpochSeconds = ATime(-(1 << 63)) // math.MinInt64
 )
 
 var (
