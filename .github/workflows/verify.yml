@@ -8,9 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout AceTimeGo
     - uses: actions/checkout@v3
 
-    - uses: actions/setup-go@v3
+    - name: Checkout Go language
+      uses: actions/setup-go@v3
       with:
         go-version: 'stable'
 
@@ -20,4 +22,4 @@ jobs:
 
     - name: Cmds
       run: |
-        (cd cmd; make build)
+        make -C cmd build
