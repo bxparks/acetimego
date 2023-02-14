@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     26    4136      18     590 |    4180     608 | (unknown)
+     26    4286      18     606 |    4330     624 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -12,16 +12,14 @@
     106       0       0       0 |     106       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread
      16       0       0       0 |      16       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread/x86_64
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/unistd
-     38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/internal/task
-     36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     233       0       0       0 |     233       0 | C musl
-   6806      39       0       0 |    6845       0 | github.com/bxparks/AceTimeGo/acetime
+   6950      71       0       0 |    7021       0 | github.com/bxparks/AceTimeGo/acetime
       0     383     254       0 |     637     254 | github.com/bxparks/AceTimeGo/zonedbtesting
-   2543       0       0       0 |    2543       0 | github.com/bxparks/AceTimeGo/zoneinfo
-     59       0       0       0 |      59       0 | internal/bytealg
-    305      24       0      16 |     329      16 | internal/task
-    249     165       0       0 |     414       0 | main
-   2305     128       8     107 |    2441     115 | runtime
-    581     124       0       0 |     705       0 | strings
+   2444       0       0       0 |    2444       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     63       0       0       0 |      63       0 | internal/bytealg
+    365      24       0      16 |     389      16 | internal/task
+    282     165       0       0 |     447       0 | main
+   3256     128       8      91 |    3392      99 | runtime
+    603     124       0       0 |     727       0 | strings
 ------------------------------- | --------------- | -------
-  15971    4999     280     713 |   21250     993 | total
+  17012    5181     280     713 |   22473     993 | total

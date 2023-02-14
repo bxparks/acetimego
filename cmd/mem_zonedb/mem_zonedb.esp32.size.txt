@@ -1,19 +1,18 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-    730       4      21       5 |     755      26 | (unknown)
-     66       0       0       0 |      66       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/device/esp
-     57       0       0       0 |      57       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/internal/task
+   1213       4       7       5 |    1224      12 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
-   6080      39       0       0 |    6119       0 | github.com/bxparks/AceTimeGo/acetime
+     66       0       0       0 |      66       0 | device/esp
+   6084      39       0       0 |    6123       0 | github.com/bxparks/AceTimeGo/acetime
       0   70237    1725       0 |   71962    1725 | github.com/bxparks/AceTimeGo/zonedb
-   1999       0       0       0 |    1999       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   1959       0       0       0 |    1959       0 | github.com/bxparks/AceTimeGo/zoneinfo
      54       0       0       0 |      54       0 | internal/bytealg
-    232      24       0       8 |     256       8 | internal/task
-     20       0       0       0 |      20       0 | machine
-    209     158       0       0 |     367       0 | main
-   1805     128       0      47 |    1933      47 | runtime
-     69       0       0       0 |      69       0 | runtime/interrupt
-     67       0       0       0 |      67       0 | runtime/volatile
-    463     108       0       0 |     571       0 | strings
+    302      24       0       8 |     326       8 | internal/task
+      9       0       0       0 |       9       0 | machine
+    242     158       0       0 |     400       0 | main
+   2060     128       0      47 |    2188      47 | runtime
+     56       0       0       0 |      56       0 | runtime/interrupt
+    101       0       0       0 |     101       0 | runtime/volatile
+    445     108       0       0 |     553       0 | strings
 ------------------------------- | --------------- | -------
-  11851   70698    1746    4156 |   84295    5902 | total
+  12591   70698    1732    4156 |   85021    5888 | total
