@@ -111,13 +111,13 @@ type ZoneRule struct {
 
 	/**
 	 * Determined by the AT column in units of 15-seconds, [00:00:00,25:00:00]
-	 * which corresponds to [0, 90000].
+	 * which corresponds to [0,6000] in 15-second units.
 	 */
 	AtSecondsCode uint16
 
 	/**
-	 * Determined by the SAVE column, containing the offset from UTC, in 15-min
-	 * increments. [-128,+127].
+	 * Determined by the SAVE column, containing the offset from UTC in minutes,
+	 * in the range of [-128,+127].
 	 */
 	DeltaMinutes int8
 
