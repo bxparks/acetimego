@@ -1,8 +1,16 @@
 package acetime
 
 import (
+	"math"
 	"testing"
 )
+
+// Verify my understanding of Golang's integer arithematics.
+func TestInvalidYear(t *testing.T) {
+	if InvalidYear != math.MinInt16 {
+		t.Fatal(InvalidYear)
+	}
+}
 
 func TestIsLeapYear(t *testing.T) {
 	if !IsLeapYear(2000) {
@@ -63,45 +71,45 @@ func TestDayOfWeeek(t *testing.T) {
 
 func TestLocalDateFromEpochDays(t *testing.T) {
 	y, m, d := LocalDateFromEpochDays(0)
-	if y != 2050 || m != 1 || d != 1 {
-		t.Fatalf(`LocalDateFromEpochDays(0) should be (2050, 1, 1)`)
+	if y != 1970 || m != 1 || d != 1 {
+		t.Fatalf(`LocalDateFromEpochDays(0) should be (1970, 1, 1)`)
 	}
 
 	y, m, d = LocalDateFromEpochDays(1)
-	if y != 2050 || m != 1 || d != 2 {
-		t.Fatalf(`LocalDateFromEpochDays(0) should be (2050, 1, 2)`)
+	if y != 1970 || m != 1 || d != 2 {
+		t.Fatalf(`LocalDateFromEpochDays(0) should be (1970, 1, 2)`)
 	}
 
 	y, m, d = LocalDateFromEpochDays(-1)
-	if y != 2049 || m != 12 || d != 31 {
-		t.Fatalf(`LocalDateFromEpochDays(0) should be (2049, 12, 31)`)
+	if y != 1969 || m != 12 || d != 31 {
+		t.Fatalf(`LocalDateFromEpochDays(0) should be (1969, 12, 31)`)
 	}
 
 	y, m, d = LocalDateFromEpochDays(365)
-	if y != 2051 || m != 1 || d != 1 {
-		t.Fatalf(`LocalDateFromEpochDays(0) should be (2051, 1, 1)`)
+	if y != 1971 || m != 1 || d != 1 {
+		t.Fatalf(`LocalDateFromEpochDays(0) should be (1971, 1, 1)`)
 	}
 }
 
 func TestLocalDateToEpochDays(t *testing.T) {
-	days := LocalDateToEpochDays(2050, 1, 1)
+	days := LocalDateToEpochDays(1970, 1, 1)
 	if days != 0 {
-		t.Fatalf("LocalDateToEpochDays(2050, 1, 1) should be 0")
+		t.Fatalf("LocalDateToEpochDays(1970, 1, 1) should be 0")
 	}
 
-	days = LocalDateToEpochDays(2050, 1, 2)
+	days = LocalDateToEpochDays(1970, 1, 2)
 	if days != 1 {
-		t.Fatalf("LocalDateToEpochDays(2050, 1, 2) should be 1")
+		t.Fatalf("LocalDateToEpochDays(1970, 1, 2) should be 1")
 	}
 
-	days = LocalDateToEpochDays(2049, 12, 31)
+	days = LocalDateToEpochDays(1969, 12, 31)
 	if days != -1 {
-		t.Fatalf("LocalDateToEpochDays(2049, 12, 31) should be -1")
+		t.Fatalf("LocalDateToEpochDays(1969, 12, 31) should be -1")
 	}
 
-	days = LocalDateToEpochDays(2051, 1, 1)
+	days = LocalDateToEpochDays(1971, 1, 1)
 	if days != 365 {
-		t.Fatalf("LocalDateToEpochDays(2051, 1, 1) should be 365")
+		t.Fatalf("LocalDateToEpochDays(1971, 1, 1) should be 365")
 	}
 }
 
@@ -110,19 +118,19 @@ func TestLocalDateIncrementOneDay(t *testing.T) {
 	var month uint8
 	var day uint8
 
-	year, month, day = LocalDateIncrementOneDay(2050, 1, 1)
-	if year != 2050 || month != 1 || day != 2 {
-		t.Fatalf("LocalDateIncrementOneDay(2050, 1, 1) should be (2050, 1, 2)")
+	year, month, day = LocalDateIncrementOneDay(1970, 1, 1)
+	if year != 1970 || month != 1 || day != 2 {
+		t.Fatalf("LocalDateIncrementOneDay(1970, 1, 1) should be (1970, 1, 2)")
 	}
 
-	year, month, day = LocalDateIncrementOneDay(2050, 2, 28)
-	if year != 2050 || month != 3 || day != 1 {
-		t.Fatalf("LocalDateIncrementOneDay(2050, 2, 28) should be (2050, 3, 1)")
+	year, month, day = LocalDateIncrementOneDay(1970, 2, 28)
+	if year != 1970 || month != 3 || day != 1 {
+		t.Fatalf("LocalDateIncrementOneDay(1970, 2, 28) should be (1970, 3, 1)")
 	}
 
-	year, month, day = LocalDateIncrementOneDay(2050, 12, 31)
-	if year != 2051 || month != 1 || day != 1 {
-		t.Fatalf("LocalDateIncrementOneDay(2050, 12, 31) should be (2051, 1, 1)")
+	year, month, day = LocalDateIncrementOneDay(1970, 12, 31)
+	if year != 1971 || month != 1 || day != 1 {
+		t.Fatalf("LocalDateIncrementOneDay(1970, 12, 31) should be (1971, 1, 1)")
 	}
 }
 
@@ -131,18 +139,18 @@ func TestLocalDateDecrementOneDay(t *testing.T) {
 	var month uint8
 	var day uint8
 
-	year, month, day = LocalDateDecrementOneDay(2050, 1, 1)
-	if year != 2049 || month != 12 || day != 31 {
-		t.Fatalf("LocalDateDecrementOneDay(2050, 1, 1) should be (2049, 12, 31)")
+	year, month, day = LocalDateDecrementOneDay(1970, 1, 1)
+	if year != 1969 || month != 12 || day != 31 {
+		t.Fatalf("LocalDateDecrementOneDay(1970, 1, 1) should be (1969, 12, 31)")
 	}
 
-	year, month, day = LocalDateDecrementOneDay(2052, 3, 1)
-	if year != 2052 || month != 2 || day != 29 {
-		t.Fatalf("LocalDateDecrementOneDay(2052, 3, 1) should be (2052, 2, 29)")
+	year, month, day = LocalDateDecrementOneDay(1972, 3, 1)
+	if year != 1972 || month != 2 || day != 29 {
+		t.Fatalf("LocalDateDecrementOneDay(1972, 3, 1) should be (1972, 2, 29)")
 	}
 
-	year, month, day = LocalDateDecrementOneDay(2050, 2, 1)
-	if year != 2050 || month != 1 || day != 31 {
-		t.Fatalf("LocalDateDecrementOneDay(2050, 2, 1) should be (2050, 1, 31)")
+	year, month, day = LocalDateDecrementOneDay(1970, 2, 1)
+	if year != 1970 || month != 1 || day != 31 {
+		t.Fatalf("LocalDateDecrementOneDay(1970, 2, 1) should be (1970, 1, 31)")
 	}
 }

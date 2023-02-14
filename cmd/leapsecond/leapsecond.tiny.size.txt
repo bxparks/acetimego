@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   10297      20     629 |   10342     649 | (unknown)
+     25   11645      20     629 |   11690     649 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -13,21 +13,22 @@
      16       0       0       0 |      16       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread/x86_64
     152       0       0       0 |     152       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/time
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/unistd
-   1537    2128       0      56 |    3665      56 | /usr/local/go/src/syscall
+   1519    2128       0      56 |    3647      56 | /usr/local/go/src/syscall
     274       0       0       0 |     274       0 | C musl
-     86       0       0       0 |      86       0 | Go interface method
+     75       0       0       0 |      75       0 | Go interface method
       0      53       0       0 |      53       0 | Go reflect data
      47       0       0       0 |      47       0 | errors
-    161       0       0       0 |     161       0 | github.com/bxparks/AceTimeGo/acetime
-     26       0       0       0 |      26       0 | internal/bytealg
+   7478      36       0       0 |    7514       0 | github.com/bxparks/AceTimeGo/acetime
+    186       0       0       0 |     186       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     80       0       0       0 |      80       0 | internal/bytealg
     162       2       0       0 |     164       0 | internal/itoa
     479      24       0      16 |     503      16 | internal/task
-    246     156       0       0 |     402       0 | main
-   3084     678       0       0 |    3762       0 | reflect
-   6708     202      12      91 |    6922     103 | runtime
-    106      72       0       0 |     178       0 | strings
-    630     200       0       0 |     830       0 | sync
-    180    2954       0       0 |    3134       0 | syscall
-  18364    1003     168     160 |   19535     328 | time
+    850     137       0       0 |     987       0 | main
+   3081     678       0       0 |    3759       0 | reflect
+   6704     202      12      91 |    6918     103 | runtime
+    577     124       0       0 |     701       0 | strings
+    620     200       0       0 |     820       0 | sync
+    189    2954       0       0 |    3143       0 | syscall
+  17836     938     168     128 |   18942     296 | time
 ------------------------------- | --------------- | -------
-  35709   17769     200     952 |   53678    1152 | total
+  43776   19121     200     920 |   63097    1120 | total

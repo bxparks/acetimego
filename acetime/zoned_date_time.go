@@ -4,10 +4,11 @@ import (
 	"strings"
 )
 
-//-----------------------------------------------------------------------------
-// ZonedDateTime represents a date/time stamp with its associated TimeZone.
-//-----------------------------------------------------------------------------
+var (
+	ZonedDateTimeError = ZonedDateTime{Year: InvalidYear}
+)
 
+// ZonedDateTime represents a date/time with its associated TimeZone.
 type ZonedDateTime struct {
 	Year          int16
 	Month         uint8
@@ -16,14 +17,8 @@ type ZonedDateTime struct {
 	Minute        uint8
 	Second        uint8
 	Fold          uint8
-	OffsetMinutes int16
+	OffsetSeconds int32
 	Tz            *TimeZone
-}
-
-// NewZonedDateTimeError returns an instance of ZonedDateTime that indicates
-// an error condition such that IsError() returns true.
-func NewZonedDateTimeError() ZonedDateTime {
-	return ZonedDateTime{Year: InvalidYear}
 }
 
 func (zdt *ZonedDateTime) IsError() bool {
@@ -54,7 +49,7 @@ func (zdt *ZonedDateTime) EpochSeconds() ATime {
 		Minute:        zdt.Minute,
 		Second:        zdt.Second,
 		Fold:          zdt.Fold,
-		OffsetMinutes: zdt.OffsetMinutes,
+		OffsetSeconds: zdt.OffsetSeconds,
 	}).EpochSeconds()
 }
 
@@ -70,41 +65,9 @@ func NewZonedDateTimeFromEpochSeconds(
 		Minute:        odt.Minute,
 		Second:        odt.Second,
 		Fold:          odt.Fold,
-		OffsetMinutes: odt.OffsetMinutes,
+		OffsetSeconds: odt.OffsetSeconds,
 		Tz:            tz,
 	}
-}
-
-func NewZonedDateTimeFromUnixSeconds64(
-	unixSeconds64 int64, tz *TimeZone) ZonedDateTime {
-
-	if unixSeconds64 == InvalidUnixSeconds64 {
-		return NewZonedDateTimeError()
-	}
-
-	epochSeconds := ATime(unixSeconds64 -
-		GetSecondsToCurrentEpochFromUnixEpoch64())
-
-	odt := tz.OffsetDateTimeFromEpochSeconds(epochSeconds)
-	return ZonedDateTime{
-		Year:          odt.Year,
-		Month:         odt.Month,
-		Day:           odt.Day,
-		Hour:          odt.Hour,
-		Minute:        odt.Minute,
-		Second:        odt.Second,
-		Fold:          odt.Fold,
-		OffsetMinutes: odt.OffsetMinutes,
-		Tz:            tz,
-	}
-}
-
-func (zdt *ZonedDateTime) UnixSeconds64() int64 {
-	epochSeconds := zdt.EpochSeconds()
-	if epochSeconds == InvalidEpochSeconds {
-		return InvalidUnixSeconds64
-	}
-	return int64(epochSeconds) + GetSecondsToCurrentEpochFromUnixEpoch64()
 }
 
 func NewZonedDateTimeFromLocalDateTime(
@@ -119,18 +82,18 @@ func NewZonedDateTimeFromLocalDateTime(
 		Minute:        odt.Minute,
 		Second:        odt.Second,
 		Fold:          odt.Fold,
-		OffsetMinutes: odt.OffsetMinutes,
+		OffsetSeconds: odt.OffsetSeconds,
 		Tz:            tz,
 	}
 }
 
 func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 	if zdt.IsError() {
-		return NewZonedDateTimeError()
+		return ZonedDateTimeError
 	}
 	epochSeconds := zdt.EpochSeconds()
 	if epochSeconds == InvalidEpochSeconds {
-		return NewZonedDateTimeError()
+		return ZonedDateTimeError
 	}
 	return NewZonedDateTimeFromEpochSeconds(epochSeconds, tz)
 }
@@ -150,7 +113,7 @@ func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
 		b.WriteString(" UTC")
 	} else {
 		// Append the "+/-hh:mm[tz]"
-		BuildUTCOffset(b, zdt.OffsetMinutes)
+		BuildUTCOffset(b, zdt.OffsetSeconds)
 		b.WriteByte('[')
 		b.WriteString(zdt.Tz.Name())
 		b.WriteByte(']')

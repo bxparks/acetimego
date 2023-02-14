@@ -42,11 +42,11 @@ func PrintMemUsage() {
 
 	var b strings.Builder
 	print("TotalAlloc = ")
-	acetime.WriteUint64(&b, m.TotalAlloc)
+	acetime.BuildUint64(&b, m.TotalAlloc)
 	print(b.String())
 	print("\tSys = ")
 	b.Reset()
-	acetime.WriteUint64(&b, m.Sys)
+	acetime.BuildUint64(&b, m.Sys)
 	print(b.String())
 	print("\n")
 

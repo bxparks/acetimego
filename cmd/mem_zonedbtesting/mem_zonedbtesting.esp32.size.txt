@@ -1,19 +1,18 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-    707       4      22       5 |     733      27 | (unknown)
-     66       0       0       0 |      66       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/device/esp
-     57       0       0       0 |      57       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/internal/task
+   1213       4       2       5 |    1219       7 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
-   5979      29       0       0 |    6008       0 | github.com/bxparks/AceTimeGo/acetime
-      0     356     148       0 |     504     148 | github.com/bxparks/AceTimeGo/zonedbtesting
-   1724       0       0       0 |    1724       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     66       0       0       0 |      66       0 | device/esp
+   6084      39       0       0 |    6123       0 | github.com/bxparks/AceTimeGo/acetime
+      0     383     146       0 |     529     146 | github.com/bxparks/AceTimeGo/zonedbtesting
+   1959       0       0       0 |    1959       0 | github.com/bxparks/AceTimeGo/zoneinfo
      54       0       0       0 |      54       0 | internal/bytealg
-    232      24       0       8 |     256       8 | internal/task
-     20       0       0       0 |      20       0 | machine
-    214     165       0       0 |     379       0 | main
-   1789     128       0      47 |    1917      47 | runtime
-     69       0       0       0 |      69       0 | runtime/interrupt
-     67       0       0       0 |      67       0 | runtime/volatile
-    437     108       0       0 |     545       0 | strings
+    302      24       0       8 |     326       8 | internal/task
+      9       0       0       0 |       9       0 | machine
+    242     165       0       0 |     407       0 | main
+   2060     128       0      47 |    2188      47 | runtime
+     56       0       0       0 |      56       0 | runtime/interrupt
+    101       0       0       0 |     101       0 | runtime/volatile
+    445     108       0       0 |     553       0 | strings
 ------------------------------- | --------------- | -------
-  11415     814     170    4156 |   12399    4326 | total
+  12591     851     148    4156 |   13590    4304 | total

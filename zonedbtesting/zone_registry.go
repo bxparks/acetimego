@@ -26,6 +26,11 @@
 //
 // from https://github.com/eggert/tz/releases/tag/2022g
 //
+// Supported Zones: 5 (4 zones, 1 links)
+// Unsupported Zones: 591 (347 zones, 244 links)
+// Original Years: [1844,2087]
+// Generated Years: [1967,2012]
+//
 // DO NOT EDIT
 
 package zonedbtesting
@@ -40,6 +45,14 @@ import (
 
 const TzDatabaseVersion string = "2022g"
 
+// RecordContext contains references to the various arrays of ZoneRuleRecord,
+// ZonePolicyRecord, ZoneEraRecord, and ZoneInfoRecord objects, as well as the
+// strings used by those objects.
+//
+// The `acetime` package uses the encoded XxxData objects, not the XxxRecord
+// objects referenced here. These XxxRecord objects are used only for testing
+// purposes, to verify that the XxxData objects were properly generated, and can
+// be read back and reconstructed to be identical to the XxxRecord objects.
 var RecordContext = zoneinfo.ZoneRecordContext{
 	TzDatabaseVersion: TzDatabaseVersion,
 	StartYear: 1980,
@@ -56,6 +69,13 @@ var RecordContext = zoneinfo.ZoneRecordContext{
 	ZoneInfoRecords: ZoneInfoRecords,
 }
 
+// DataContext contains references to various XxxData objects and strings. These
+// are the binary encoded versions of the various XxxRecord objects. This object
+// is passed to the ZoneManager.
+//
+// The encoding to a binary string is performed because the Go language is able
+// to treat strings as constants, and the TinyGo compiler can place them in
+// flash memory, saving tremendous amounts of random memory.
 var DataContext = zoneinfo.ZoneDataContext{
 	TzDatabaseVersion: TzDatabaseVersion,
 	StartYear: 1980,

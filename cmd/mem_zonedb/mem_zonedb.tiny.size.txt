@@ -1,6 +1,6 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     26    4120      18     590 |    4164     608 | (unknown)
+     26    4286      23     606 |    4335     629 | (unknown)
      30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
    1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
       5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
@@ -12,16 +12,14 @@
     106       0       0       0 |     106       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread
      16       0       0       0 |      16       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread/x86_64
      38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/unistd
-     38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/internal/task
-     36       0       0       0 |      36       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/src/runtime
     233       0       0       0 |     233       0 | C musl
-   6818      29       0       0 |    6847       0 | github.com/bxparks/AceTimeGo/acetime
-      0   30232    1654       0 |   31886    1654 | github.com/bxparks/AceTimeGo/zonedb
-   2198       0       0       0 |    2198       0 | github.com/bxparks/AceTimeGo/zoneinfo
-     64       0       0       0 |      64       0 | internal/bytealg
-    305      24       0      16 |     329      16 | internal/task
-    236     158       0       0 |     394       0 | main
-   2298     128       8     107 |    2434     115 | runtime
-    618     124       0       0 |     742       0 | strings
+   6950      71       0       0 |    7021       0 | github.com/bxparks/AceTimeGo/acetime
+      0   70237    1833       0 |   72070    1833 | github.com/bxparks/AceTimeGo/zonedb
+   2444       0       0       0 |    2444       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     63       0       0       0 |      63       0 | internal/bytealg
+    365      24       0      16 |     389      16 | internal/task
+    282     158       0       0 |     440       0 | main
+   3256     128       8      91 |    3392      99 | runtime
+    603     124       0       0 |     727       0 | strings
 ------------------------------- | --------------- | -------
-  15660   34815    1680     713 |   52155    2393 | total
+  17012   75028    1864     713 |   93904    2577 | total

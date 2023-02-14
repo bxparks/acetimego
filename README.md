@@ -6,12 +6,13 @@ A date, time, and timezone library in Go lang targeting bare-metal
 microcontroller environments supported by the
 [TinyGo](https://github.com/tinygo-org/tinygo) compiler. All ~600 timezones
 defined by the [IANA TZ database](https://github.com/eggert/tz) are supported
-from the year 2000 until the year 2100. The library is self-contained and does
+from the year ~3 until the year 10000. The library is self-contained and does
 not depend on external files from the OS.
 
 To reduce RAM memory consumption, the TZDB is parsed and compiled as binary data
-into `const string` variables consuming approximately 35 kB of flash memory. To
-further reduce flash memory consumption, the library does not depend on the
+into `const string` variables consuming approximately 35 kB of flash memory for
+the years `[2000,10000)` and about 72 kB for the entire TZDB from `[1844,2087]`.
+To further reduce flash memory consumption, the library does not depend on the
 standard [time](https://pkg.go.dev/time) package nor the
 [fmt](https://pkg.go.dev/fmt) package.
 
@@ -20,7 +21,7 @@ This library implements the algorithms from the
 [AceTimePython](https://github.com/bxparks/AceTimePython), and
 [AceTimeC](https://github.com/bxparks/AceTimeC) libraries.
 
-**Version**: 0.1.0 (2023-01-29, TZDB version 2022g)
+**Version**: 0.2.0 (2023-02-13, TZDB version 2022g)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 

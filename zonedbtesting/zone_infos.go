@@ -26,6 +26,11 @@
 //
 // from https://github.com/eggert/tz/releases/tag/2022g
 //
+// Supported Zones: 5 (4 zones, 1 links)
+// Unsupported Zones: 591 (347 zones, 244 links)
+// Original Years: [1844,2087]
+// Generated Years: [1967,2012]
+//
 // DO NOT EDIT
 
 package zonedbtesting
@@ -49,8 +54,7 @@ const (
 		"~"
 
 	// All ZoneInfo.Name entries concatenated togther.
-	NameData = "" +
-		"America/Los_Angeles" +
+	NameData = "America/Los_Angeles" +
 		"America/New_York" +
 		"Etc/UTC" +
 		"Pacific/Apia" +
@@ -70,7 +74,7 @@ var (
 	// at index `i` given by the `ZoneRule.Name` field is
 	// `NameData[NameOffsets[i]:NameOffsets[i+1]]`.
 	NameOffsets = []uint16{
-		0, 0, 19, 35, 42, 54, 64,
+		0, 19, 35, 42, 54, 64,
 	}
 )
 
@@ -93,13 +97,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 1, // PolicyName: US
 		FormatIndex: 4, // "P%T"
-		OffsetCode: -32,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1920, // -28800 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
-		UntilTimeCode: 0,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	// ---------------------------------------------------------------------------
@@ -112,13 +117,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 1, // PolicyName: US
 		FormatIndex: 3, // "E%T"
-		OffsetCode: -20,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1200, // -18000 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
-		UntilTimeCode: 0,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	// ---------------------------------------------------------------------------
@@ -131,13 +137,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 5, // "UTC"
-		OffsetCode: 0,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 0, // 0 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
-		UntilTimeCode: 0,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	// ---------------------------------------------------------------------------
@@ -150,26 +157,28 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	{
 		PolicyIndex: 2, // PolicyName: WS
 		FormatIndex: 2, // "-11/-10"
-		OffsetCode: -44,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2640, // -39600 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 2011,
 		UntilMonth: 12,
 		UntilDay: 29,
-		UntilTimeCode: 96,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 5760, // 86400 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//              13:00    WS    +13/+14
 	{
 		PolicyIndex: 2, // PolicyName: WS
 		FormatIndex: 1, // "+13/+14"
-		OffsetCode: 52,
-		DeltaCode: 4, // ((offset_minute=0) << 4) + ((delta_minutes=0)/15 + 4)
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 3120, // 46800 / 15
+		OffsetSecondsRemainder: 0,
 		UntilYear: 10000,
 		UntilMonth: 1,
 		UntilDay: 1,
-		UntilTimeCode: 0,
-		UntilTimeModifier: 0, // SuffixW + minute=0
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 
@@ -177,14 +186,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 const ZoneEraCount = 5
 
-const ZoneEraChunkSize = 11
+const ZoneEraChunkSize = 14
 
 // ZoneErasData contains the ZoneEraRecords data as a hex encoded string.
-const ZoneErasData = "\x04\x00\x01\xe0\x04\x10\x27\x01\x01\x00\x00" +
-		"\x03\x00\x01\xec\x04\x10\x27\x01\x01\x00\x00" +
-		"\x05\x00\x00\x00\x04\x10\x27\x01\x01\x00\x00" +
-		"\x02\x00\x02\xd4\x04\xdb\x07\x0c\x1d\x60\x00" +
-		"\x01\x00\x02\x34\x04\x10\x27\x01\x01\x00\x00"
+const ZoneErasData = "\x04\x00\x01\x00\x80\xf8\x10\x27\x00\x01\x01\x00\x00\x00" +
+		"\x03\x00\x01\x00\x50\xfb\x10\x27\x00\x01\x01\x00\x00\x00" +
+		"\x05\x00\x00\x00\x00\x00\x10\x27\x00\x01\x01\x00\x00\x00" +
+		"\x02\x00\x02\x00\xb0\xf5\xdb\x07\x00\x0c\x1d\x00\x80\x16" +
+		"\x01\x00\x02\x00\x30\x0c\x10\x27\x00\x01\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
 // ZoneInfoRecords is an array of zoneinfo.ZoneInfoRecord items concatenated
@@ -197,7 +206,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 0: Zone America/New_York
 	{
 		ZoneID: 0x1e2a7654,
-		NameIndex: 2, // "America/New_York"
+		NameIndex: 1, // "America/New_York"
 		EraIndex: 1,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -205,7 +214,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 1: Zone Pacific/Apia
 	{
 		ZoneID: 0x23359b5e,
-		NameIndex: 4, // "Pacific/Apia"
+		NameIndex: 3, // "Pacific/Apia"
 		EraIndex: 3,
 		EraCount: 2,
 		TargetIndex: 0,
@@ -213,7 +222,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 2: Link US/Pacific -> America/Los_Angeles
 	{
 		ZoneID: 0xa950f6ab,
-		NameIndex: 5, // "US/Pacific"
+		NameIndex: 4, // "US/Pacific"
 		EraIndex: 0,
 		EraCount: 0, // IsLink=true
 		TargetIndex: 3, // America/Los_Angeles
@@ -221,7 +230,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 3: Zone America/Los_Angeles
 	{
 		ZoneID: 0xb7f7e8f2,
-		NameIndex: 1, // "America/Los_Angeles"
+		NameIndex: 0, // "America/Los_Angeles"
 		EraIndex: 0,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -229,7 +238,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	// 4: Zone Etc/UTC
 	{
 		ZoneID: 0xd8e31abc,
-		NameIndex: 3, // "Etc/UTC"
+		NameIndex: 2, // "Etc/UTC"
 		EraIndex: 2,
 		EraCount: 1,
 		TargetIndex: 0,
@@ -242,14 +251,14 @@ const ZoneInfoCount = 5
 const ZoneInfoChunkSize = 12
 
 // ZoneInfosData contains the ZoneInfoRecords data as a hex encoded string.
-const ZoneInfosData = "\x54\x76\x2a\x1e\x02\x00\x01\x00\x01\x00\x00\x00" +
-		"\x5e\x9b\x35\x23\x04\x00\x03\x00\x02\x00\x00\x00" +
-		"\xab\xf6\x50\xa9\x05\x00\x00\x00\x00\x00\x03\x00" +
-		"\xf2\xe8\xf7\xb7\x01\x00\x00\x00\x01\x00\x00\x00" +
-		"\xbc\x1a\xe3\xd8\x03\x00\x02\x00\x01\x00\x00\x00"
+const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
+		"\x5e\x9b\x35\x23\x03\x00\x03\x00\x02\x00\x00\x00" +
+		"\xab\xf6\x50\xa9\x04\x00\x00\x00\x00\x00\x03\x00" +
+		"\xf2\xe8\xf7\xb7\x00\x00\x00\x00\x01\x00\x00\x00" +
+		"\xbc\x1a\xe3\xd8\x02\x00\x02\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
-// Unsuported zones: 347
+// Unsupported zones: 347
 // ---------------------------------------------------------------------------
 
 // Africa/Abidjan {Zone missing from include list}

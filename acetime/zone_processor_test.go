@@ -75,7 +75,7 @@ func TestZoneProcessorInitForYear(t *testing.T) {
 	zoneInfo := zoneManager.store.ZoneInfoByID(
 		zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	var zp ZoneProcessor
-	zp.InitForZoneInfo(zoneInfo);
+	zp.InitForZoneInfo(zoneInfo)
 	if zp.isFilled {
 		t.Fatal(zp)
 	}
@@ -90,12 +90,13 @@ func TestZoneProcessorInitForYear(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestCompareEraToYearMonth(t *testing.T) {
+	// 2000-01-02 03:00
 	era := zoneinfo.ZoneEra{
-		UntilYear:         2000,
-		UntilMonth:        1,
-		UntilDay:          2,
-		UntilTimeCode:     12,
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2000,
+		UntilMonth:           1,
+		UntilDay:             2,
+		UntilSecondsCode:     3 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	if !(1 == compareEraToYearMonth(&era, 2000, 1)) {
@@ -111,12 +112,13 @@ func TestCompareEraToYearMonth(t *testing.T) {
 		t.Fatal("fatal")
 	}
 
+	// 2000-01-01 00:00
 	era2 := zoneinfo.ZoneEra{
-		UntilYear:         2000,
-		UntilMonth:        1,
-		UntilDay:          0,
-		UntilTimeCode:     0,
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2000,
+		UntilMonth:           1,
+		UntilDay:             1,
+		UntilSecondsCode:     0,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 	if !(0 == compareEraToYearMonth(&era2, 2000, 1)) {
 		t.Fatal("fatal")
@@ -130,38 +132,38 @@ func TestCreateMatchingEra(t *testing.T) {
 
 	// UNTIL = 2000-12-02 3:00
 	era1 := zoneinfo.ZoneEra{
-		UntilYear:         2000,
-		UntilMonth:        12,
-		UntilDay:          2,
-		UntilTimeCode:     3 * (60 / 15),
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2000,
+		UntilMonth:           12,
+		UntilDay:             2,
+		UntilSecondsCode:     3 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	// UNTIL = 2001-02-03 4:00
 	era2 := zoneinfo.ZoneEra{
-		UntilYear:         2001,
-		UntilMonth:        2,
-		UntilDay:          3,
-		UntilTimeCode:     4 * (60 / 15),
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2001,
+		UntilMonth:           2,
+		UntilDay:             3,
+		UntilSecondsCode:     4 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	// UNTIL = 2002-10-11 4:00
 	era3 := zoneinfo.ZoneEra{
-		UntilYear:         2002,
-		UntilMonth:        10,
-		UntilDay:          11,
-		UntilTimeCode:     4 * (60 / 15),
-		UntilTimeModifier: zoneinfo.SuffixW,
+		UntilYear:            2002,
+		UntilMonth:           10,
+		UntilDay:             11,
+		UntilSecondsCode:     4 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	// No previous matching era, so startDt is set to startYm.
 	var match1 MatchingEra
 	createMatchingEra(&match1, nil, &era1, startYm, untilYm)
-	if !(match1.startDt == DateTuple{2000, 12, 1, 60 * 0, zoneinfo.SuffixW}) {
+	if !(match1.startDt == DateTuple{2000, 12, 1, 3600 * 0, zoneinfo.SuffixW}) {
 		t.Fatal("match1.startDt:", match1.startDt)
 	}
-	if !(match1.untilDt == DateTuple{2000, 12, 2, 60 * 3, zoneinfo.SuffixW}) {
+	if !(match1.untilDt == DateTuple{2000, 12, 2, 3600 * 3, zoneinfo.SuffixW}) {
 		t.Fatal("match1.startDt:", match1.startDt)
 	}
 	if !(match1.era == &era1) {
@@ -172,10 +174,10 @@ func TestCreateMatchingEra(t *testing.T) {
 	// untilDt is < untilYm, so is retained.
 	var match2 MatchingEra
 	createMatchingEra(&match2, &match1, &era2, startYm, untilYm)
-	if !(match2.startDt == DateTuple{2000, 12, 2, 60 * 3, zoneinfo.SuffixW}) {
+	if !(match2.startDt == DateTuple{2000, 12, 2, 3600 * 3, zoneinfo.SuffixW}) {
 		t.Fatal("match2.startDt:", match2.startDt)
 	}
-	if !(match2.untilDt == DateTuple{2001, 2, 3, 60 * 4, zoneinfo.SuffixW}) {
+	if !(match2.untilDt == DateTuple{2001, 2, 3, 3600 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("match2.startDt:", match2.startDt)
 	}
 	if !(match2.era == &era2) {
@@ -186,10 +188,10 @@ func TestCreateMatchingEra(t *testing.T) {
 	// untilDt is > untilYm so truncated to untilYm.
 	var match3 MatchingEra
 	createMatchingEra(&match3, &match2, &era3, startYm, untilYm)
-	if !(match3.startDt == DateTuple{2001, 2, 3, 60 * 4, zoneinfo.SuffixW}) {
+	if !(match3.startDt == DateTuple{2001, 2, 3, 3600 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("match3.startDt: ", match3.startDt)
 	}
-	if !(match3.untilDt == DateTuple{2002, 2, 1, 60 * 0, zoneinfo.SuffixW}) {
+	if !(match3.untilDt == DateTuple{2002, 2, 1, 3600 * 0, zoneinfo.SuffixW}) {
 		t.Fatal("match3.startDt: ", match3.startDt)
 	}
 	if !(match3.era == &era3) {
@@ -213,13 +215,13 @@ func TestGetTransitionTime(t *testing.T) {
 
 	// Nov 4 2018
 	dt := getTransitionTime(2018, rule)
-	if !(dt == DateTuple{2018, 11, 4, 15 * 8, zoneinfo.SuffixW}) {
+	if !(dt == DateTuple{2018, 11, 4, 2 * 3600, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 
 	// Nov 3 2019
 	dt = getTransitionTime(2019, rule)
-	if !(dt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
+	if !(dt == DateTuple{2019, 11, 3, 2 * 3600, zoneinfo.SuffixW}) {
 		t.Fatal(dt)
 	}
 }
@@ -235,22 +237,22 @@ func TestCreateTransitionForYear(t *testing.T) {
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               era,
 		prevMatch:         nil,
-		lastOffsetMinutes: 0,
-		lastDeltaMinutes:  0,
+		lastOffsetSeconds: 0,
+		lastDeltaSeconds:  0,
 	}
 	rule := &policy.Rules[5]
 
 	// Nov Sun>=1
 	var transition Transition
 	createTransitionForYear(&transition, 2019, rule, &match)
-	if !(transition.offsetMinutes == -15*32) {
-		t.Fatal(transition.offsetMinutes)
+	if !(transition.offsetSeconds == -3600*8) {
+		t.Fatal(transition.offsetSeconds)
 	}
-	if !(transition.deltaMinutes == 0) {
-		t.Fatal(transition.deltaMinutes)
+	if !(transition.deltaSeconds == 0) {
+		t.Fatal(transition.deltaSeconds)
 	}
 	tt := &transition.transitionTime
-	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2019, 11, 3, 3600 * 2, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 }
@@ -356,8 +358,8 @@ func TestFindCandidateTransitions(t *testing.T) {
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               era,
 		prevMatch:         nil,
-		lastOffsetMinutes: 0,
-		lastDeltaMinutes:  0,
+		lastOffsetSeconds: 0,
+		lastDeltaSeconds:  0,
 	}
 
 	// Reserve storage for the Transitions
@@ -365,36 +367,36 @@ func TestFindCandidateTransitions(t *testing.T) {
 
 	// Verify compareTransitionToMatchFuzzy() elminates various transitions
 	// to get down to 5:
-	//    * 2018 Mar Sun>=8 (11)
-	//    * 2019 Nov Sun>=1 (4)
-	//    * 2019 Mar Sun>=8 (10)
-	//    * 2019 Nov Sun>=1 (3)
-	//    * 2020 Mar Sun>=8 (8)
-	ts.ResetCandidatePool()
+	//    * 2018 Mar Sun>=8 (Mar 11)
+	//    * 2019 Nov Sun>=1 (Nov 4)
+	//    * 2019 Mar Sun>=8 (Mar 10)
+	//    * 2019 Nov Sun>=1 (Nov 3)
+	//    * 2020 Mar Sun>=8 (Mar 8)
+	ts.resetCandidatePool()
 	findCandidateTransitions(&ts, &match)
-	candidates := ts.GetCandidates()
+	candidates := ts.getCandidates()
 	if !(5 == len(candidates)) {
 		t.Fatal()
 	}
 
 	tt := &candidates[0].transitionTime
-	if !(*tt == DateTuple{2018, 3, 11, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2018, 3, 11, 3600 * 2, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &candidates[1].transitionTime
-	if !(*tt == DateTuple{2018, 11, 4, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2018, 11, 4, 3600 * 2, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &candidates[2].transitionTime
-	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2019, 3, 10, 3600 * 2, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &candidates[3].transitionTime
-	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2019, 11, 3, 3600 * 2, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &candidates[4].transitionTime
-	if !(*tt == DateTuple{2020, 3, 8, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2020, 3, 8, 3600 * 2, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 }
@@ -403,16 +405,16 @@ func TestFindCandidateTransitions(t *testing.T) {
 // Step 2B Pass 3
 //-----------------------------------------------------------------------------
 
-func TestProcessTransitionMatchStatus(t *testing.T) {
+func TestProcessTransitionCompareStatus(t *testing.T) {
 	// UNTIL = 2002-01-02T03:00
 	era := zoneinfo.ZoneEra{
-		OffsetCode:        0,
-		DeltaCode:         0,
-		UntilYear:         2002,
-		UntilMonth:        1,
-		UntilDay:          2,
-		UntilTimeCode:     12,
-		UntilTimeModifier: zoneinfo.SuffixW,
+		OffsetSecondsCode:    0,
+		DeltaMinutes:         0,
+		UntilYear:            2002,
+		UntilMonth:           1,
+		UntilDay:             2,
+		UntilSecondsCode:     3 * 3600 / 15,
+		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
 	// [2000-01-01, 2001-01-01)
@@ -421,8 +423,8 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 		untilDt:           DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 		era:               &era,
 		prevMatch:         nil,
-		lastOffsetMinutes: 0,
-		lastDeltaMinutes:  0,
+		lastOffsetSeconds: 0,
+		lastDeltaSeconds:  0,
 	}
 
 	// This transition occurs before the match, so prior should be filled.
@@ -460,33 +462,33 @@ func TestProcessTransitionMatchStatus(t *testing.T) {
 	var prior *Transition = nil
 	fixTransitionTimes(transitions)
 
-	prior = processTransitionMatchStatus(transition0, prior)
-	if !(matchStatusPrior == transition0.matchStatus) {
-		t.Fatal(transition0.matchStatus)
+	prior = processTransitionCompareStatus(transition0, prior)
+	if !(compareStatusPrior == transition0.compareStatus) {
+		t.Fatal(transition0.compareStatus)
 	}
 	if !(prior == transition0) {
 		t.Fatal(transition0)
 	}
 
-	prior = processTransitionMatchStatus(transition1, prior)
-	if !(matchStatusExactMatch == transition1.matchStatus) {
-		t.Fatal(transition1.matchStatus)
+	prior = processTransitionCompareStatus(transition1, prior)
+	if !(compareStatusExactMatch == transition1.compareStatus) {
+		t.Fatal(transition1.compareStatus)
 	}
 	if !(prior == transition1) {
 		t.Fatal(transition1)
 	}
 
-	prior = processTransitionMatchStatus(transition2, prior)
-	if !(matchStatusWithinMatch == transition2.matchStatus) {
-		t.Fatal(transition2.matchStatus)
+	prior = processTransitionCompareStatus(transition2, prior)
+	if !(compareStatusWithinMatch == transition2.compareStatus) {
+		t.Fatal(transition2.compareStatus)
 	}
 	if !(prior == transition1) {
 		t.Fatal(transition1)
 	}
 
-	prior = processTransitionMatchStatus(transition3, prior)
-	if !(matchStatusFarFuture == transition3.matchStatus) {
-		t.Fatal(transition3.matchStatus)
+	prior = processTransitionCompareStatus(transition3, prior)
+	if !(compareStatusFarFuture == transition3.compareStatus) {
+		t.Fatal(transition3.compareStatus)
 	}
 	if !(prior == transition1) {
 		t.Fatal(transition1)
@@ -507,8 +509,8 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               era,
 		prevMatch:         nil,
-		lastOffsetMinutes: 0,
-		lastDeltaMinutes:  0,
+		lastOffsetSeconds: 0,
+		lastDeltaSeconds:  0,
 	}
 
 	// Reserve storage for the Transitions
@@ -524,11 +526,11 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 		t.Fatal(tt)
 	}
 	tt = &ts.transitions[1].transitionTime
-	if !(*tt == DateTuple{2019, 3, 10, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2019, 3, 10, 3600 * 2, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 	tt = &ts.transitions[2].transitionTime
-	if !(*tt == DateTuple{2019, 11, 3, 15 * 8, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2019, 11, 3, 3600 * 2, zoneinfo.SuffixW}) {
 		t.Fatal(tt)
 	}
 }
@@ -557,7 +559,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// pre-defined typedef in ExtendedZoneProcess::TransitionStorage.
 	var storage TransitionStorage
 	createTransitions(&storage, matches[:numMatches])
-	transitions := storage.GetActives()
+	transitions := storage.getActives()
 	if !(len(transitions) == 3) {
 		t.Fatal(len(transitions))
 	}
@@ -576,7 +578,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("tts:", tts)
 	}
 	ttu := &transition0.transitionTimeU
-	if !(*ttu == DateTuple{2017, 12, 1, 8 * 60, zoneinfo.SuffixU}) {
+	if !(*ttu == DateTuple{2017, 12, 1, 8 * 3600, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
@@ -584,30 +586,30 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// 02:00.
 	transition1 := &transitions[1]
 	tt = &transition1.transitionTime
-	if !(*tt == DateTuple{2018, 3, 11, 2 * 60, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2018, 3, 11, 2 * 3600, zoneinfo.SuffixW}) {
 		t.Fatal("tt:", tt)
 	}
 	tts = &transition1.transitionTimeS
-	if !(*tts == DateTuple{2018, 3, 11, 2 * 60, zoneinfo.SuffixS}) {
+	if !(*tts == DateTuple{2018, 3, 11, 2 * 3600, zoneinfo.SuffixS}) {
 		t.Fatal("tts:", tts)
 	}
 	ttu = &transition1.transitionTimeU
-	if !(*ttu == DateTuple{2018, 3, 11, 10 * 60, zoneinfo.SuffixU}) {
+	if !(*ttu == DateTuple{2018, 3, 11, 10 * 3600, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
 	// Step 3: Verification: Third transition falls back at 2018-11-04 02:00.
 	transition2 := &transitions[2]
 	tt = &transition2.transitionTime
-	if !(*tt == DateTuple{2018, 11, 4, 2 * 60, zoneinfo.SuffixW}) {
+	if !(*tt == DateTuple{2018, 11, 4, 2 * 3600, zoneinfo.SuffixW}) {
 		t.Fatal("tt:", tt)
 	}
 	tts = &transition2.transitionTimeS
-	if !(*tts == DateTuple{2018, 11, 4, 1 * 60, zoneinfo.SuffixS}) {
+	if !(*tts == DateTuple{2018, 11, 4, 1 * 3600, zoneinfo.SuffixS}) {
 		t.Fatal("tts:", tts)
 	}
 	ttu = &transition2.transitionTimeU
-	if !(*ttu == DateTuple{2018, 11, 4, 9 * 60, zoneinfo.SuffixU}) {
+	if !(*ttu == DateTuple{2018, 11, 4, 9 * 3600, zoneinfo.SuffixU}) {
 		t.Fatal("ttu:", ttu)
 	}
 
@@ -621,28 +623,28 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("sdt:", sdt)
 	}
 	udt := &transition0.untilDt
-	if !(*udt == DateTuple{2018, 3, 11, 2 * 60, zoneinfo.SuffixW}) {
+	if !(*udt == DateTuple{2018, 3, 11, 2 * 3600, zoneinfo.SuffixW}) {
 		t.Fatal("udt:", udt)
 	}
 	odt := OffsetDateTime{
-		2017, 12, 1, 0, 0, 0, 0 /*Fold*/, -8 * 60 /*offsetMinutes*/}
+		2017, 12, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600 /*offsetSeconds*/}
 	eps := odt.EpochSeconds()
 	if !(eps == transition0.startEpochSeconds) {
-		t.Fatal(transition0.startEpochSeconds)
+		t.Fatal(eps, transition0.startEpochSeconds)
 	}
 
 	// Step 4: Verification: Second transition startTime is shifted forward one
 	// hour into PDT.
 	sdt = &transition1.startDt
-	if !(*sdt == DateTuple{2018, 3, 11, 3 * 60, zoneinfo.SuffixW}) {
+	if !(*sdt == DateTuple{2018, 3, 11, 3 * 3600, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
 	}
 	udt = &transition1.untilDt
-	if !(*udt == DateTuple{2018, 11, 4, 2 * 60, zoneinfo.SuffixW}) {
+	if !(*udt == DateTuple{2018, 11, 4, 2 * 3600, zoneinfo.SuffixW}) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
-		2018, 3, 11, 3, 0, 0, 0 /*Fold*/, -7 * 60 /*offsetMinutes*/}
+		2018, 3, 11, 3, 0, 0, 0 /*Fold*/, -7 * 3600 /*offsetSeconds*/}
 	eps = odt.EpochSeconds()
 	if !(eps == transition1.startEpochSeconds) {
 		t.Fatal(transition1.startEpochSeconds)
@@ -651,7 +653,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// Step 4: Verification: Third transition startTime is shifted back one hour
 	// into PST.
 	sdt = &transition2.startDt
-	if !(*sdt == DateTuple{2018, 11, 4, 1 * 60, zoneinfo.SuffixW}) {
+	if !(*sdt == DateTuple{2018, 11, 4, 1 * 3600, zoneinfo.SuffixW}) {
 		t.Fatal("sdt:", sdt)
 	}
 	udt = &transition2.untilDt
@@ -659,7 +661,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
-		2018, 11, 4, 1, 0, 0, 0 /*Fold*/, -8 * 60 /*offsetMinutes*/}
+		2018, 11, 4, 1, 0, 0, 0 /*Fold*/, -8 * 3600 /*offsetSeconds*/}
 	eps = odt.EpochSeconds()
 	if !(eps == transition2.startEpochSeconds) {
 		t.Fatal(transition2.startEpochSeconds)
@@ -671,7 +673,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestCreateAbbreviation(t *testing.T) {
-	// If no '%', deltaMinutes and Letter should not matter
+	// If no '%', deltaSeconds and Letter should not matter
 	abbrev := createAbbreviation("SAST", 0, "")
 	if !("SAST" == abbrev) {
 		t.Fatal(abbrev)
@@ -715,7 +717,7 @@ func TestCreateAbbreviation(t *testing.T) {
 		t.Fatal(abbrev)
 	}
 
-	// If '/', then deltaMinutes selects the first or second component.
+	// If '/', then deltaSeconds selects the first or second component.
 	abbrev = createAbbreviation("GMT/BST", 0, "")
 	if !("GMT" == abbrev) {
 		t.Fatal(abbrev)

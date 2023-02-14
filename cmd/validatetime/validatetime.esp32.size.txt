@@ -1,27 +1,28 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-   1774     702      16       9 |    2492      25 | (unknown)
-     66       0       0       0 |      66       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/device/esp
-     57       0       0       0 |      57       0 | /usr/local/lib/tinygo/src/examples/blinky1/usr/local/lib/tinygo/src/internal/task
+   3593     750      13       9 |    4356      22 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
-    114       0       0       0 |     114       0 | Go interface method
-      0      61       0       0 |      61       0 | Go reflect data
-     17       0       0       0 |      17       0 | errors
-   6482      29       0       0 |    6511       0 | github.com/bxparks/AceTimeGo/acetime
-      0   30232    1546       0 |   31778    1546 | github.com/bxparks/AceTimeGo/zonedb
-   1884       0       0       0 |    1884       0 | github.com/bxparks/AceTimeGo/zoneinfo
-     54       0       0       0 |      54       0 | internal/bytealg
-    132       2       0       0 |     134       0 | internal/itoa
-    282      24       0       8 |     306       8 | internal/task
-     25       0       0       0 |      25       0 | machine
-   1082     253       0       0 |    1335       0 | main
-   2659     622       0       0 |    3281       0 | reflect
-   3158     172       0      47 |    3330      47 | runtime
-     87       0       0       0 |      87       0 | runtime/interrupt
-     92       0       0       0 |      92       0 | runtime/volatile
-    453     108       0       0 |     561       0 | strings
+    131       0       0       0 |     131       0 | Go interface method
+      0      88       0       0 |      88       0 | Go reflect data
+     66       0       0       0 |      66       0 | device/esp
+     26       0       0       0 |      26       0 | errors
+   6460      36       0       0 |    6496       0 | github.com/bxparks/AceTimeGo/acetime
+      0   70237    1725       0 |   71962    1725 | github.com/bxparks/AceTimeGo/zonedb
+   2107       0       0       0 |    2107       0 | github.com/bxparks/AceTimeGo/zoneinfo
+     57       0       0       0 |      57       0 | internal/bytealg
+    133       2       0       0 |     135       0 | internal/itoa
+    349      24       0       8 |     373       8 | internal/task
+      9       0       0       0 |       9       0 | machine
+   2592     300       0       0 |    2892       0 | main
+   2600     622       0       0 |    3222       0 | reflect
+   3091     172       0      47 |    3263      47 | runtime
+     78       0       0       0 |      78       0 | runtime/interrupt
+    101       0       0       0 |     101       0 | runtime/volatile
+   1418    1942    1330       0 |    4690    1330 | strconv
+    450     108       0       0 |     558       0 | strings
     143      38       0       0 |     181       0 | sync
-     28       6       0       0 |      34       0 | syscall
-  11542     769     104      92 |   12415     196 | time
+     25       6       0       0 |      31       0 | syscall
+  12296     774      96      92 |   13166     188 | time
+    558     288       0       0 |     846       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  30131   33018    1666    4252 |   64815    5918 | total
+  36283   75387    3164    4252 |  114834    7416 | total

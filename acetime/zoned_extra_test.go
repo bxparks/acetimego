@@ -31,12 +31,8 @@ func TestZonedExtraTypeConstantsMatch(t *testing.T) {
 }
 
 func TestZonedExtraFromEpochSeconds(t *testing.T) {
-	savedEpochYear := GetCurrentEpochYear()
-	SetCurrentEpochYear(2000)
-	defer SetCurrentEpochYear(savedEpochYear)
-
 	manager := NewZoneManager(&zonedbtesting.DataContext)
-	tz := manager.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := manager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	ze := NewZonedExtraFromEpochSeconds(InvalidEpochSeconds, &tz)
 	if !(ze.Zetype == ZonedExtraErr) {
@@ -45,16 +41,12 @@ func TestZonedExtraFromEpochSeconds(t *testing.T) {
 }
 
 func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
-	savedEpochYear := GetCurrentEpochYear()
-	SetCurrentEpochYear(2050)
-	defer SetCurrentEpochYear(savedEpochYear)
-
 	manager := NewZoneManager(&zonedbtesting.DataContext)
-	tz := manager.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := manager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back, and occurs in the overlap.
-	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 60}
+	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600}
 	epochSeconds := odt.EpochSeconds()
 
 	ze := NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
@@ -63,10 +55,10 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	}
 	expected := ZonedExtra{
 		Zetype:              ZonedExtraOverlap,
-		StdOffsetMinutes:    -8 * 60,
-		DstOffsetMinutes:    1 * 60,
-		ReqStdOffsetMinutes: -8 * 60,
-		ReqDstOffsetMinutes: 1 * 60,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    1 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 1 * 3600,
 		Abbrev:              "PDT",
 	}
 	if !(ze == expected) {
@@ -82,10 +74,10 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	}
 	expected = ZonedExtra{
 		Zetype:              ZonedExtraOverlap,
-		StdOffsetMinutes:    -8 * 60,
-		DstOffsetMinutes:    0 * 60,
-		ReqStdOffsetMinutes: -8 * 60,
-		ReqDstOffsetMinutes: 0 * 60,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    0 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 0 * 3600,
 		Abbrev:              "PST",
 	}
 	if !(ze == expected) {
@@ -94,16 +86,12 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 }
 
 func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
-	savedEpochYear := GetCurrentEpochYear()
-	SetCurrentEpochYear(2050)
-	defer SetCurrentEpochYear(savedEpochYear)
-
 	manager := NewZoneManager(&zonedbtesting.DataContext)
-	tz := manager.NewTimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := manager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// spring forward.
-	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 60}
+	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600}
 	epochSeconds := odt.EpochSeconds()
 
 	ze := NewZonedExtraFromEpochSeconds(epochSeconds, &tz)
@@ -112,10 +100,10 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 	}
 	expected := ZonedExtra{
 		Zetype:              ZonedExtraExact,
-		StdOffsetMinutes:    -8 * 60,
-		DstOffsetMinutes:    0 * 60,
-		ReqStdOffsetMinutes: -8 * 60,
-		ReqDstOffsetMinutes: 0 * 60,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    0 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 0 * 3600,
 		Abbrev:              "PST",
 	}
 	if !(ze == expected) {
@@ -130,10 +118,10 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 	}
 	expected = ZonedExtra{
 		Zetype:              ZonedExtraExact,
-		StdOffsetMinutes:    -8 * 60,
-		DstOffsetMinutes:    1 * 60,
-		ReqStdOffsetMinutes: -8 * 60,
-		ReqDstOffsetMinutes: 1 * 60,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    1 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 1 * 3600,
 		Abbrev:              "PDT",
 	}
 	if !(ze == expected) {
