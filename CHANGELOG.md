@@ -1,6 +1,7 @@
 # Changelog
 
 * Unreleased
+* 0.2.0 (2023-02-13, TZDB 2022g)
     * Support one-second resolution for Zone.STDOFF field, instead of
       one-minute.
         * Increases zonedb by about ~1kB on ESP32.
@@ -15,8 +16,8 @@
         * Handles a few zones around ~1930 whose DSTOFF is a 00:20 minutes,
           instead of a multiple of 00:15 minutes.
     * Extend `zonedb` year interval.
-        * The earliest year for TZDB is 1844.
-        * Regenerate the zonedb for years `[1800,2100)`.
+        * Raw TZDB year range is `[1844,2087]`.
+        * Regenerate the zonedb for `[3,10000)`.
         * Increases zonedb flash size for ESP32 from 44kB to 72kB.
     * `cmd/validatetime/`
         * AceTimeGo and the standard `time` library match perfectly,
