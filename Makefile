@@ -1,7 +1,7 @@
 help:
-	@echo 'Usage: make (build | tiny | test | all | clean)'
+	@echo 'Usage: make (build|tiny|test|all|zonedb|clean)'
 
-.PHONY: all build tiny test clean
+.PHONY: all build tiny test clean zonedb
 
 all: build tiny test
 
@@ -18,6 +18,12 @@ tiny:
 	set -e; \
 	for i in cmd/*/Makefile; do \
 		$(MAKE) -C $$(dirname $$i) tiny; \
+	done
+
+zonedb:
+	set -e; \
+	for i in zonedb*/Makefile; do \
+		$(MAKE) -C $$(dirname $$i); \
 	done
 
 # If we use 'go test ./...', the subdirectory is not recognized by vim so the
