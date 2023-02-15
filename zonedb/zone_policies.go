@@ -29323,21 +29323,13 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Belgium {Added anchor rule at year 0}
 // Belize {
 //   Added anchor rule at year 0,
-//   LETTER '-0530' not single character,
-//   LETTER 'CDT' not single character,
-//   LETTER 'CPT' not single character,
-//   LETTER 'CST' not single character,
-//   LETTER 'CWT' not single character,
 //   SAVE (delta_offset) '0:30' different from 1:00,
 // }
 // Bermuda {Added anchor rule at year 0}
 // Brazil {Added anchor rule at year 0}
 // Bulg {Added anchor rule at year 0}
 // C-Eur {Added anchor rule at year 0}
-// CA {
-//   AT '2:01' not on 15-minute boundary,
-//   Added anchor rule at year 0,
-// }
+// CA {Added anchor rule at year 0}
 // CO {Added anchor rule at year 0}
 // CR {Added anchor rule at year 0}
 // Canada {Added anchor rule at year 0}
@@ -29353,9 +29345,6 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Czech {Added anchor rule at year 0}
 // DR {
 //   Added anchor rule at year 0,
-//   LETTER '-0430' not single character,
-//   LETTER 'EDT' not single character,
-//   LETTER 'EST' not single character,
 //   SAVE (delta_offset) '0:30' different from 1:00,
 // }
 // Denver {Added anchor rule at year 0}
@@ -29382,9 +29371,6 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // }
 // GB-Eire {
 //   Added anchor rule at year 0,
-//   LETTER 'BDST' not single character,
-//   LETTER 'BST' not single character,
-//   LETTER 'GMT' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
 // Germany {
@@ -29392,11 +29378,7 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
 // Greece {Added anchor rule at year 0}
-// Guam {
-//   AT '0:01' not on 15-minute boundary,
-//   AT '2:01' not on 15-minute boundary,
-//   Added anchor rule at year 0,
-// }
+// Guam {Added anchor rule at year 0}
 // Guat {Added anchor rule at year 0}
 // HK {Added anchor rule at year 0}
 // Haiti {Added anchor rule at year 0}
@@ -29418,10 +29400,7 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Latvia {Added anchor rule at year 0}
 // Lebanon {Added anchor rule at year 0}
 // Libya {Added anchor rule at year 0}
-// Louisville {
-//   AT '0:01' not on 15-minute boundary,
-//   Added anchor rule at year 0,
-// }
+// Louisville {Added anchor rule at year 0}
 // Macau {Added anchor rule at year 0}
 // Malta {Added anchor rule at year 0}
 // Marengo {Added anchor rule at year 0}
@@ -29429,10 +29408,7 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Menominee {Added anchor rule at year 0}
 // Mexico {Added anchor rule at year 0}
 // Moldova {Added anchor rule at year 0}
-// Moncton {
-//   AT '0:01' not on 15-minute boundary,
-//   Added anchor rule at year 0,
-// }
+// Moncton {Added anchor rule at year 0}
 // Mongol {Added anchor rule at year 0}
 // Morocco {
 //   Added anchor rule at year 0,
@@ -29451,17 +29427,12 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // }
 // Namibia {
 //   Added anchor rule at year 0,
-//   LETTER 'CAT' not single character,
-//   LETTER 'WAT' not single character,
 //   SAVE (delta_offset) '-1:00' different from 1:00,
 // }
 // Nic {Added anchor rule at year 0}
 // PRC {Added anchor rule at year 0}
 // Pakistan {Added anchor rule at year 0}
-// Palestine {
-//   AT '0:01' not on 15-minute boundary,
-//   Added anchor rule at year 0,
-// }
+// Palestine {Added anchor rule at year 0}
 // Para {Added anchor rule at year 0}
 // Perry {Added anchor rule at year 0}
 // Peru {Added anchor rule at year 0}
@@ -29478,12 +29449,6 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Romania {Added anchor rule at year 0}
 // Russia {
 //   Added anchor rule at year 0,
-//   LETTER '+05' not single character,
-//   LETTER 'MDST' not single character,
-//   LETTER 'MMT' not single character,
-//   LETTER 'MSD' not single character,
-//   LETTER 'MSK' not single character,
-//   LETTER 'MST' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
 // RussiaAsia {Added anchor rule at year 0}
@@ -29501,9 +29466,7 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // }
 // SpainAfrica {Added anchor rule at year 0}
 // StJohns {
-//   AT '0:01' not on 15-minute boundary,
 //   Added anchor rule at year 0,
-//   LETTER 'DD' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
 // Starke {Added anchor rule at year 0}
@@ -29517,8 +29480,6 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Toronto {Added anchor rule at year 0}
 // Troll {
 //   Added anchor rule at year 0,
-//   LETTER '+00' not single character,
-//   LETTER '+02' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
 // Tunisia {Added anchor rule at year 0}
@@ -29537,12 +29498,10 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Winn {Added anchor rule at year 0}
 // Yukon {
 //   Added anchor rule at year 0,
-//   LETTER 'DD' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
 // Zion {
 //   Added anchor rule at year 0,
-//   LETTER 'DD' not single character,
 //   SAVE (delta_offset) '2:00' different from 1:00,
 // }
 
