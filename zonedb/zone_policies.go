@@ -29318,12 +29318,12 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Azer {Added anchor rule at year 0}
 // Barb {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '0:30' different from 1:00,
+//   SAVE '0:30' different from 1:00,
 // }
 // Belgium {Added anchor rule at year 0}
 // Belize {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '0:30' different from 1:00,
+//   SAVE '0:30' different from 1:00,
 // }
 // Bermuda {Added anchor rule at year 0}
 // Brazil {Added anchor rule at year 0}
@@ -29338,14 +29338,14 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Chile {Added anchor rule at year 0}
 // Cook {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '0:30' different from 1:00,
+//   SAVE '0:30' different from 1:00,
 // }
 // Cuba {Added anchor rule at year 0}
 // Cyprus {Added anchor rule at year 0}
 // Czech {Added anchor rule at year 0}
 // DR {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '0:30' different from 1:00,
+//   SAVE '0:30' different from 1:00,
 // }
 // Denver {Added anchor rule at year 0}
 // Detroit {Added anchor rule at year 0}
@@ -29360,22 +29360,22 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // EgyptAsia {Added anchor rule at year 0}
 // Eire {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '-1:00' different from 1:00,
+//   SAVE '-1:00' different from 1:00,
 // }
 // Falk {Added anchor rule at year 0}
 // Fiji {Added anchor rule at year 0}
 // Finland {Added anchor rule at year 0}
 // France {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // GB-Eire {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // Germany {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // Greece {Added anchor rule at year 0}
 // Guam {Added anchor rule at year 0}
@@ -29395,7 +29395,7 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Kyrgyz {Added anchor rule at year 0}
 // LH {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '0:30' different from 1:00,
+//   SAVE '0:30' different from 1:00,
 // }
 // Latvia {Added anchor rule at year 0}
 // Lebanon {Added anchor rule at year 0}
@@ -29412,22 +29412,22 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Mongol {Added anchor rule at year 0}
 // Morocco {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '-1:00' different from 1:00,
+//   SAVE '-1:00' different from 1:00,
 // }
 // NBorneo {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '0:20' different from 1:00,
+//   SAVE '0:20' different from 1:00,
 // }
 // NC {Added anchor rule at year 0}
 // NT_YK {Added anchor rule at year 0}
 // NYC {Added anchor rule at year 0}
 // NZ {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '0:30' different from 1:00,
+//   SAVE '0:30' different from 1:00,
 // }
 // Namibia {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '-1:00' different from 1:00,
+//   SAVE '-1:00' different from 1:00,
 // }
 // Nic {Added anchor rule at year 0}
 // PRC {Added anchor rule at year 0}
@@ -29441,7 +29441,7 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Poland {Added anchor rule at year 0}
 // Port {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // Pulaski {Added anchor rule at year 0}
 // ROK {Added anchor rule at year 0}
@@ -29449,7 +29449,7 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Romania {Added anchor rule at year 0}
 // Russia {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // RussiaAsia {Added anchor rule at year 0}
 // SA {Added anchor rule at year 0}
@@ -29458,16 +29458,16 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Shang {Added anchor rule at year 0}
 // SovietZone {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // Spain {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // SpainAfrica {Added anchor rule at year 0}
 // StJohns {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // Starke {Added anchor rule at year 0}
 // Sudan {Added anchor rule at year 0}
@@ -29480,15 +29480,15 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Toronto {Added anchor rule at year 0}
 // Troll {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // Tunisia {Added anchor rule at year 0}
 // Turkey {Added anchor rule at year 0}
 // US {Added anchor rule at year 0}
 // Uruguay {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '0:30' different from 1:00,
-//   SAVE (delta_offset) '1:30' different from 1:00,
+//   SAVE '0:30' different from 1:00,
+//   SAVE '1:30' different from 1:00,
 // }
 // Vanc {Added anchor rule at year 0}
 // Vanuatu {Added anchor rule at year 0}
@@ -29498,11 +29498,11 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Winn {Added anchor rule at year 0}
 // Yukon {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 // Zion {
 //   Added anchor rule at year 0,
-//   SAVE (delta_offset) '2:00' different from 1:00,
+//   SAVE '2:00' different from 1:00,
 // }
 
 
