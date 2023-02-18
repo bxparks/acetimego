@@ -11,21 +11,21 @@ import (
 // the STD offset, the DST offset, and the abbreviation used.
 //-----------------------------------------------------------------------------
 
-// Test that ZonedExtraXxx constants are the same as FindResultXxx constants.
+// Test that ZonedExtraXxx constants are the same as findResultXxx constants.
 func TestZonedExtraTypeConstantsMatch(t *testing.T) {
-	if !(ZonedExtraErr == FindResultErr) {
+	if !(ZonedExtraErr == findResultErr) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraNotFound == FindResultNotFound) {
+	if !(ZonedExtraNotFound == findResultNotFound) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraExact == FindResultExact) {
+	if !(ZonedExtraExact == findResultExact) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraGap == FindResultGap) {
+	if !(ZonedExtraGap == findResultGap) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraOverlap == FindResultOverlap) {
+	if !(ZonedExtraOverlap == findResultOverlap) {
 		t.Fatal("")
 	}
 }

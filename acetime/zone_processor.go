@@ -636,20 +636,20 @@ func createAbbreviation(
 // FindByLocalDateTime() and FindByEpochSeconds()
 //---------------------------------------------------------------------------
 
-// Values of the FindResult.type field.
+// Values of the findResult.type field.
 const (
-	FindResultErr = iota
-	FindResultNotFound
-	FindResultExact
-	FindResultGap
-	FindResultOverlap
+	findResultErr = iota
+	findResultNotFound
+	findResultExact
+	findResultGap
+	findResultOverlap
 )
 
 var (
-	FindResultError = FindResult{frtype: FindResultErr}
+	findResultError = findResult{frtype: findResultErr}
 )
 
-type FindResult struct {
+type findResult struct {
 	frtype              uint8
 	fold                uint8
 	stdOffsetSeconds    int32  // STD offset
@@ -659,30 +659,30 @@ type FindResult struct {
 	abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
-// Find the AtcFindResult at the given epoch_seconds.
+// Find the AtcfindResult at the given epoch_seconds.
 //
 // Adapted from ExtendedZoneProcessor::findByEpochSeconds(epochSeconds)
 // in the AceTime library and atc_processor_find_by_epoch_seconds() in the
 // AceTimeC library.
-func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) FindResult {
+func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) findResult {
 	err := zp.InitForEpochSeconds(epochSeconds)
 	if err != ErrOk {
-		return FindResultError
+		return findResultError
 	}
 
 	tfs := zp.tstorage.findTransitionForSeconds(epochSeconds)
 	transition := tfs.curr
 	if transition == nil {
-		return FindResultError
+		return findResultError
 	}
 
 	var frtype uint8
 	if tfs.num == 2 {
-		frtype = FindResultOverlap
+		frtype = findResultOverlap
 	} else {
-		frtype = FindResultExact
+		frtype = findResultExact
 	}
-	return FindResult{
+	return findResult{
 		frtype:              frtype,
 		fold:                tfs.fold,
 		stdOffsetSeconds:    transition.offsetSeconds,
@@ -693,16 +693,16 @@ func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) FindResult {
 	}
 }
 
-// Return the FindResult at the given LocalDateTime.
+// Return the findResult at the given LocalDateTime.
 //
 // Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDatetime&)
 // in the AceTime library and atc_processor_find_by_local_date_time() in the
 // AceTimeC library.
-func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
+func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) findResult {
 
 	err := zp.InitForYear(ldt.Year)
 	if err != ErrOk {
-		return FindResultError
+		return findResultError
 	}
 
 	tfd := zp.tstorage.findTransitionForDateTime(ldt)
@@ -710,10 +710,10 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 	// Extract the appropriate transition, depending on the requested 'fold'
 	// and the 'tfd.searchStatus'.
 	var transition *transition
-	var result FindResult
+	var result findResult
 	if tfd.num == 1 {
 		transition = tfd.curr
-		result.frtype = FindResultExact
+		result.frtype = findResultExact
 		result.fold = 0
 		result.reqStdOffsetSeconds = transition.offsetSeconds
 		result.reqDstOffsetSeconds = transition.deltaSeconds
@@ -721,11 +721,11 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 		if tfd.prev == nil || tfd.curr == nil {
 			// ldt was far past or far future, and didn't match anything.
 			transition = nil
-			result.frtype = FindResultNotFound
+			result.frtype = findResultNotFound
 			result.fold = 0
 		} else { // gap or overlap
 			if tfd.num == 0 { // gap
-				result.frtype = FindResultGap
+				result.frtype = findResultGap
 				result.fold = 0
 				if ldt.Fold == 0 {
 					// ldt wants to use the 'prev' transition to convert to
@@ -750,7 +750,7 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 				} else {
 					transition = tfd.curr
 				}
-				result.frtype = FindResultOverlap
+				result.frtype = findResultOverlap
 				result.fold = ldt.Fold
 				result.reqStdOffsetSeconds = transition.offsetSeconds
 				result.reqDstOffsetSeconds = transition.deltaSeconds
@@ -759,7 +759,7 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 	}
 
 	if transition == nil {
-		return FindResultError
+		return findResultError
 	}
 
 	result.stdOffsetSeconds = transition.offsetSeconds
