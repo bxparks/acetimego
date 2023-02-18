@@ -243,7 +243,7 @@ func TestCreateTransitionForYear(t *testing.T) {
 	rule := &policy.Rules[5]
 
 	// Nov Sun>=1
-	var transition Transition
+	var transition transition
 	createTransitionForYear(&transition, 2019, rule, &match)
 	if !(transition.offsetSeconds == -3600*8) {
 		t.Fatal(transition.offsetSeconds)
@@ -429,26 +429,26 @@ func TestProcessTransitionCompareStatus(t *testing.T) {
 
 	// This transition occurs before the match, so prior should be filled.
 	// transitionTime = 1999-12-31
-	transitions := []Transition{
-		Transition{
+	transitions := []transition{
+		transition{
 			match:          &match,
 			transitionTime: DateTuple{1999, 12, 31, 0, zoneinfo.SuffixW},
 		},
 		// This occurs at exactly match.startDateTime, so should replace the prior.
 		// transitionTime = 2000-01-01
-		Transition{
+		transition{
 			match:          &match,
 			transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		},
 		// An interior transition. Prior should not change.
 		// transitionTime = 2000-01-02
-		Transition{
+		transition{
 			match:          &match,
 			transitionTime: DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW},
 		},
 		// Occurs after match.untilDateTime, so should be rejected.
 		// transitionTime = 2001-01-02
-		Transition{
+		transition{
 			match:          &match,
 			transitionTime: DateTuple{2001, 1, 2, 0, zoneinfo.SuffixW},
 		},
@@ -459,7 +459,7 @@ func TestProcessTransitionCompareStatus(t *testing.T) {
 	transition3 := &transitions[3]
 
 	// Populate the transitionTimeS and transitionTimeU fields.
-	var prior *Transition = nil
+	var prior *transition = nil
 	fixTransitionTimes(transitions)
 
 	prior = processTransitionCompareStatus(transition0, prior)
@@ -567,7 +567,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// Step 3: Chain the transitions by fixing the transition times.
 	fixTransitionTimes(transitions)
 
-	// Step 3: Verification. The first Transition is extended to -infinity.
+	// Step 3: Verification. The first transition is extended to -infinity.
 	transition0 := &transitions[0]
 	tt := &transition0.transitionTime
 	if !(*tt == DateTuple{2017, 12, 1, 0, zoneinfo.SuffixW}) {

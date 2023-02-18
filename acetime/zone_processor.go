@@ -341,7 +341,7 @@ func createTransitionsFromSimpleMatch(
 }
 
 func createTransitionForYear(
-	t *Transition, year int16, rule *zoneinfo.ZoneRule, match *matchingEra) {
+	t *transition, year int16, rule *zoneinfo.ZoneRule, match *matchingEra) {
 
 	t.match = match
 	t.offsetSeconds = match.era.StdOffsetSeconds()
@@ -351,7 +351,7 @@ func createTransitionForYear(
 		t.deltaSeconds = rule.DstOffsetSeconds()
 		t.letter = rule.Letter
 	} else {
-		// Create a Transition using the matchingEra for the transitionTime.
+		// Create a transition using the matchingEra for the transitionTime.
 		// Used for simple matchingEra.
 		t.transitionTime = match.startDt
 		t.deltaSeconds = match.era.DstOffsetSeconds()
@@ -428,7 +428,7 @@ func findCandidateTransitions(ts *transitionStorage, match *matchingEra) {
 			}
 		}
 
-		// Add Transition for prior year
+		// Add transition for prior year
 		priorYear := getMostRecentPriorYear(rule.FromYear, rule.ToYear, startYear)
 		if priorYear != InvalidYear {
 			t := ts.getFreeAgent()
@@ -482,8 +482,8 @@ func getMostRecentPriorYear(
 }
 
 // Step 2B: Pass 3
-func selectActiveTransitions(transitions []Transition) {
-	var prior *Transition = nil
+func selectActiveTransitions(transitions []transition) {
+	var prior *transition = nil
 	for i := range transitions {
 		transition := &transitions[i]
 		prior = processTransitionCompareStatus(transition, prior)
@@ -497,7 +497,7 @@ func selectActiveTransitions(transitions []Transition) {
 }
 
 func processTransitionCompareStatus(
-	transition *Transition, prior *Transition) *Transition {
+	transition *transition, prior *transition) *transition {
 
 	status := compareTransitionToMatch(transition, transition.match)
 	transition.compareStatus = status
@@ -529,14 +529,14 @@ func processTransitionCompareStatus(
 // Step 4
 //-----------------------------------------------------------------------------
 
-func generateStartUntilTimes(transitions []Transition) {
+func generateStartUntilTimes(transitions []transition) {
 	prev := &transitions[0]
 	isAfterFirst := false
 
 	for i := range transitions {
 		transition := &transitions[i]
 
-		// 1) Update the untilDateTime of the previous Transition
+		// 1) Update the untilDateTime of the previous transition
 		tt := &transition.transitionTime
 		if isAfterFirst {
 			prev.untilDt = *tt
@@ -558,7 +558,7 @@ func generateStartUntilTimes(transitions []Transition) {
 		dateTupleNormalize(&transition.startDt)
 
 		// 3) The epochSecond of the 'transitionTime' is determined by the
-		// UTC offset of the *previous* Transition. However, the
+		// UTC offset of the *previous* transition. However, the
 		// transitionTime can be represented by an illegal time (e.g. 24:00).
 		// So, it is better to use the properly normalized startDateTime
 		// (calculated above) with the *current* UTC offset.
@@ -578,7 +578,7 @@ func generateStartUntilTimes(transitions []Transition) {
 		isAfterFirst = true
 	}
 
-	// The last Transition's until time is the until time of the matchingEra.
+	// The last transition's until time is the until time of the matchingEra.
 	var untilTimeW DateTuple
 	var untilTimeS DateTuple
 	var untilTimeU DateTuple
@@ -596,7 +596,7 @@ func generateStartUntilTimes(transitions []Transition) {
 // Step 5
 //-----------------------------------------------------------------------------
 
-func calcAbbreviations(transitions []Transition) {
+func calcAbbreviations(transitions []transition) {
 
 	for i := range transitions {
 		transition := &transitions[i]
@@ -707,9 +707,9 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 
 	tfd := zp.tstorage.findTransitionForDateTime(ldt)
 
-	// Extract the appropriate Transition, depending on the requested 'fold'
+	// Extract the appropriate transition, depending on the requested 'fold'
 	// and the 'tfd.searchStatus'.
-	var transition *Transition
+	var transition *transition
 	var result FindResult
 	if tfd.num == 1 {
 		transition = tfd.curr

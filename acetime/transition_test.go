@@ -11,47 +11,47 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 		untilDt: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
 
-	transition := Transition{
+	tn := transition{
 		match:          &match,
 		transitionTime: DateTuple{1999, 11, 1, 0, zoneinfo.SuffixW},
 	}
-	status := compareTransitionToMatchFuzzy(&transition, &match)
+	status := compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusPrior) {
 		t.Fatal("fatal")
 	}
 
-	transition = Transition{
+	tn = transition{
 		match:          &match,
 		transitionTime: DateTuple{1999, 12, 1, 0, zoneinfo.SuffixW},
 	}
-	status = compareTransitionToMatchFuzzy(&transition, &match)
+	status = compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusWithinMatch) {
 		t.Fatal("fatal")
 	}
 
-	transition = Transition{
+	tn = transition{
 		match:          &match,
 		transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 	}
-	status = compareTransitionToMatchFuzzy(&transition, &match)
+	status = compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusWithinMatch) {
 		t.Fatal("fatal")
 	}
 
-	transition = Transition{
+	tn = transition{
 		match:          &match,
 		transitionTime: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
-	status = compareTransitionToMatchFuzzy(&transition, &match)
+	status = compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusWithinMatch) {
 		t.Fatal("fatal")
 	}
 
-	transition = Transition{
+	tn = transition{
 		match:          &match,
 		transitionTime: DateTuple{2001, 3, 1, 0, zoneinfo.SuffixW},
 	}
-	status = compareTransitionToMatchFuzzy(&transition, &match)
+	status = compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusFarFuture) {
 		t.Fatal("fatal")
 	}
@@ -79,24 +79,24 @@ func TestCompareTransitionToMatch(t *testing.T) {
 		lastDeltaSeconds:  0,
 	}
 
-	transitions := []Transition{
+	transitions := []transition{
 		// transitionTime = 1999-12-31
-		Transition{
+		transition{
 			match:          &match,
 			transitionTime: DateTuple{1999, 12, 31, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2000-01-01
-		Transition{
+		transition{
 			match:          &match,
 			transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2000-01-02
-		Transition{
+		transition{
 			match:          &match,
 			transitionTime: DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2001-02-03
-		Transition{
+		transition{
 			match:          &match,
 			transitionTime: DateTuple{2001, 2, 3, 0, zoneinfo.SuffixW},
 		},
