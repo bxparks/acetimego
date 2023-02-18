@@ -123,19 +123,19 @@ const (
 	transitionStorageSize = 8
 )
 
-// TransitionStorage holds 4 pools of Transitions indicated by the following
+// transitionStorage holds 4 pools of Transitions indicated by the following
 // half-open (inclusive to exclusive) index ranges:
 //
 //  1. Active pool: [0, indexPrior)
 //  2. Prior pool: [indexPrior, indexCandidate), either 0 or 1 element
 //  3. Candidate pool: [indexCandidate, indexFree)
 //  4. Free agent pool: [indexFree, allocSize), 0 or 1 element
-type TransitionStorage struct {
-	// Index of the most recent prior transition [0,kTransitionStorageSize)
+type transitionStorage struct {
+	// Index of the most recent prior transition [0,transitionStorageSize)
 	indexPrior uint8
-	// Index of the candidate pool [0,kTransitionStorageSize)
+	// Index of the candidate pool [0,transitionStorageSize)
 	indexCandidate uint8
-	// Index of the free agent transition [0, kTransitionStorageSize)
+	// Index of the free agent transition [0, transitionStorageSize)
 	indexFree uint8
 	// Number of allocated transitions.
 	allocSize uint8
@@ -143,7 +143,7 @@ type TransitionStorage struct {
 	transitions [transitionStorageSize]Transition
 }
 
-func (ts *TransitionStorage) init() {
+func (ts *transitionStorage) init() {
 	ts.indexPrior = 0
 	ts.indexCandidate = 0
 	ts.indexFree = 0
@@ -151,24 +151,24 @@ func (ts *TransitionStorage) init() {
 }
 
 // getActives returns the active transitions in the interval [0,indexPrior).
-func (ts *TransitionStorage) getActives() []Transition {
+func (ts *transitionStorage) getActives() []Transition {
 	return ts.transitions[0:ts.indexPrior]
 }
 
 // getCandidates returns the candidate transitions in the interval
 // [indexCandidate,indexFree).
-func (ts *TransitionStorage) getCandidates() []Transition {
+func (ts *transitionStorage) getCandidates() []Transition {
 	return ts.transitions[ts.indexCandidate:ts.indexFree]
 }
 
 // resetCandidatePool deletes the candidate pool by collapsing it into the prior
 // pool.
-func (ts *TransitionStorage) resetCandidatePool() {
+func (ts *transitionStorage) resetCandidatePool() {
 	ts.indexCandidate = ts.indexPrior
 	ts.indexFree = ts.indexPrior
 }
 
-func (ts *TransitionStorage) getFreeAgent() *Transition {
+func (ts *transitionStorage) getFreeAgent() *Transition {
 	if ts.indexFree < transitionStorageSize {
 		if ts.indexFree >= ts.allocSize {
 			ts.allocSize = ts.indexFree + 1
@@ -179,7 +179,7 @@ func (ts *TransitionStorage) getFreeAgent() *Transition {
 	}
 }
 
-func (ts *TransitionStorage) addFreeAgentToActivePool() {
+func (ts *transitionStorage) addFreeAgentToActivePool() {
 	if ts.indexFree >= transitionStorageSize {
 		return
 	}
@@ -188,14 +188,14 @@ func (ts *TransitionStorage) addFreeAgentToActivePool() {
 	ts.indexCandidate = ts.indexFree
 }
 
-func (ts *TransitionStorage) reservePrior() *Transition {
+func (ts *transitionStorage) reservePrior() *Transition {
 	ts.getFreeAgent()
 	ts.indexCandidate++
 	ts.indexFree++
 	return &ts.transitions[ts.indexPrior]
 }
 
-func (ts *TransitionStorage) setFreeAgentAsPriorIfValid() {
+func (ts *transitionStorage) setFreeAgentAsPriorIfValid() {
 	ft := &ts.transitions[ts.indexFree]
 	prior := &ts.transitions[ts.indexPrior]
 	if (prior.isValidPrior && dateTupleCompare(
@@ -210,13 +210,13 @@ func (ts *TransitionStorage) setFreeAgentAsPriorIfValid() {
 	}
 }
 
-func (ts *TransitionStorage) addPriorToCandidatePool() {
+func (ts *transitionStorage) addPriorToCandidatePool() {
 	// This simple decrement works because there is only one prior, and it is
 	// allocated just before the candidate pool.
 	ts.indexCandidate--
 }
 
-func (ts *TransitionStorage) addFreeAgentToCandidatePool() {
+func (ts *transitionStorage) addFreeAgentToCandidatePool() {
 	if ts.indexFree >= transitionStorageSize {
 		return
 	}
@@ -239,14 +239,14 @@ func isCompareStatusActive(status uint8) bool {
 
 // Useful for debugging, commented out instead of deleting.
 //
-//func (ts *TransitionStorage) printPoolSizes() {
+//func (ts *transitionStorage) printPoolSizes() {
 //	fmt.Printf("indexPrior=%d; indexCandidate=%d; indexFree=%d; allocSize=%d\n",
 //		ts.indexPrior, ts.indexCandidate, ts.indexFree, ts.allocSize)
 //}
 
 // addActiveCandidatesToActivePool adds the candidate transitions to the active
 // pool, and returns the last active transition added.
-func (ts *TransitionStorage) addActiveCandidatesToActivePool() *Transition {
+func (ts *transitionStorage) addActiveCandidatesToActivePool() *Transition {
 	// Shift active candidates to the left into the Active pool.
 	iActive := ts.indexPrior
 	iCandidate := ts.indexCandidate
@@ -283,7 +283,7 @@ type TransitionForSeconds struct {
 	num uint8
 }
 
-func (ts *TransitionStorage) findTransitionForSeconds(
+func (ts *transitionStorage) findTransitionForSeconds(
 	epochSeconds ATime) TransitionForSeconds {
 
 	var prev *Transition = nil
@@ -395,7 +395,7 @@ type TransitionForDateTime struct {
 	num uint8
 }
 
-func (ts *TransitionStorage) findTransitionForDateTime(
+func (ts *transitionStorage) findTransitionForDateTime(
 	ldt *LocalDateTime) TransitionForDateTime {
 
 	// Convert LocalDateTime to DateTuple.

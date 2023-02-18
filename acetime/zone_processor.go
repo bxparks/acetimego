@@ -29,12 +29,12 @@ const (
 )
 
 type ZoneProcessor struct {
-	zoneInfo          *zoneinfo.ZoneInfo
-	year              int16
-	isFilled          bool
-	numMatches        uint8
-	matches           [maxMatches]matchingEra
-	transitionStorage TransitionStorage
+	zoneInfo   *zoneinfo.ZoneInfo
+	year       int16
+	isFilled   bool
+	numMatches uint8
+	matches    [maxMatches]matchingEra
+	tstorage   transitionStorage
 }
 
 func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
@@ -65,7 +65,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	zp.year = year
 	zp.isFilled = true
 	zp.numMatches = 0
-	zp.transitionStorage.init()
+	zp.tstorage.init()
 	if year < zp.zoneInfo.StartYear-1 || zp.zoneInfo.UntilYear < year {
 		return ErrGeneric
 	}
@@ -80,10 +80,10 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	}
 
 	// Step 2: Create Transitions.
-	createTransitions(&zp.transitionStorage, zp.matches[:zp.numMatches])
+	createTransitions(&zp.tstorage, zp.matches[:zp.numMatches])
 
 	// Step 3: Fix transition times.
-	transitions := zp.transitionStorage.getActives()
+	transitions := zp.tstorage.getActives()
 	fixTransitionTimes(transitions)
 
 	// Step 4: Generate start and until times.
@@ -114,7 +114,7 @@ func (zp *ZoneProcessor) Name() string {
 // monthDay is a tuple of month and day.
 type monthDay struct {
 	month uint8 // [1,12]
-	day uint8 // [1,31]
+	day   uint8 // [1,31]
 }
 
 // calcStartDayOfMonth Extracts the actual (month, day) pair from the expression
@@ -307,14 +307,14 @@ func creatematchingEra(
 // Step 2
 //-----------------------------------------------------------------------------
 
-func createTransitions(ts *TransitionStorage, matches []matchingEra) {
+func createTransitions(ts *transitionStorage, matches []matchingEra) {
 
 	for i := range matches {
 		createTransitionsForMatch(ts, &matches[i])
 	}
 }
 
-func createTransitionsForMatch(ts *TransitionStorage, match *matchingEra) {
+func createTransitionsForMatch(ts *transitionStorage, match *matchingEra) {
 
 	if match.era.HasPolicy() {
 		// Step 2B
@@ -330,7 +330,7 @@ func createTransitionsForMatch(ts *TransitionStorage, match *matchingEra) {
 //-----------------------------------------------------------------------------
 
 func createTransitionsFromSimpleMatch(
-	ts *TransitionStorage, match *matchingEra) {
+	ts *transitionStorage, match *matchingEra) {
 
 	freeAgent := ts.getFreeAgent()
 	createTransitionForYear(freeAgent, 0, nil, match)
@@ -376,7 +376,7 @@ func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) DateTuple {
 //-----------------------------------------------------------------------------
 
 func createTransitionsFromNamedMatch(
-	ts *TransitionStorage, match *matchingEra) {
+	ts *transitionStorage, match *matchingEra) {
 
 	ts.resetCandidatePool()
 
@@ -397,7 +397,7 @@ func createTransitionsFromNamedMatch(
 }
 
 // Step 2B: Pass 1
-func findCandidateTransitions(ts *TransitionStorage, match *matchingEra) {
+func findCandidateTransitions(ts *transitionStorage, match *matchingEra) {
 
 	policy := match.era.Policy
 	startYear := match.startDt.year
@@ -670,7 +670,7 @@ func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) FindResult {
 		return FindResultError
 	}
 
-	tfs := zp.transitionStorage.findTransitionForSeconds(epochSeconds)
+	tfs := zp.tstorage.findTransitionForSeconds(epochSeconds)
 	transition := tfs.curr
 	if transition == nil {
 		return FindResultError
@@ -705,7 +705,7 @@ func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) FindResult {
 		return FindResultError
 	}
 
-	tfd := zp.transitionStorage.findTransitionForDateTime(ldt)
+	tfd := zp.tstorage.findTransitionForDateTime(ldt)
 
 	// Extract the appropriate Transition, depending on the requested 'fold'
 	// and the 'tfd.searchStatus'.
