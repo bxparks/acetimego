@@ -10,50 +10,50 @@ import (
 // AceTime library.
 
 //-----------------------------------------------------------------------------
-// MonthDay
+// monthDay
 //-----------------------------------------------------------------------------
 
 func TestCalcStartDayOfMonth(t *testing.T) {
 	// 2018-11, Sun>=1
-	monthDay := calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 1)
-	if !(monthDay == MonthDay{11, 4}) {
-		t.Fatal("monthDay:", monthDay)
+	md := calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 1)
+	if !(md == monthDay{11, 4}) {
+		t.Fatal("md:", md)
 	}
 
 	// 2018-11, lastSun
-	monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 0)
-	if !(monthDay == MonthDay{11, 25}) {
-		t.Fatal("monthDay:", monthDay)
+	md = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 0)
+	if !(md == monthDay{11, 25}) {
+		t.Fatal("md:", md)
 	}
 
 	// 2018-11, Sun>=30, should shift to 2018-12-2
-	monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 30)
-	if !(monthDay == MonthDay{12, 2}) {
-		t.Fatal("monthDay:", monthDay)
+	md = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 30)
+	if !(md == monthDay{12, 2}) {
+		t.Fatal("md:", md)
 	}
 
 	// 2018-11, Mon<=7
-	monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -7)
-	if !(monthDay == MonthDay{11, 5}) {
-		t.Fatal("monthDay:", monthDay)
+	md = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -7)
+	if !(md == monthDay{11, 5}) {
+		t.Fatal("md:", md)
 	}
 
 	// 2018-11, Mon<=1, shifts back into October
-	monthDay = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -1)
-	if !(monthDay == MonthDay{10, 29}) {
-		t.Fatal("monthDay:", monthDay)
+	md = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -1)
+	if !(md == monthDay{10, 29}) {
+		t.Fatal("md:", md)
 	}
 
 	// 2018-03, Thu>=9
-	monthDay = calcStartDayOfMonth(2018, 3, IsoWeekdayThursday, 9)
-	if !(monthDay == MonthDay{3, 15}) {
-		t.Fatal("monthDay:", monthDay)
+	md = calcStartDayOfMonth(2018, 3, IsoWeekdayThursday, 9)
+	if !(md == monthDay{3, 15}) {
+		t.Fatal("md:", md)
 	}
 
 	// 2018-03-30 exactly
-	monthDay = calcStartDayOfMonth(2018, 3, 0, 30)
-	if !(monthDay == MonthDay{3, 30}) {
-		t.Fatal("monthDay:", monthDay)
+	md = calcStartDayOfMonth(2018, 3, 0, 30)
+	if !(md == monthDay{3, 30}) {
+		t.Fatal("md:", md)
 	}
 }
 

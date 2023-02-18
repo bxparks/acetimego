@@ -108,13 +108,12 @@ func (zp *ZoneProcessor) Name() string {
 }
 
 //---------------------------------------------------------------------------
-// MonthDay
+// monthDay
 //-----------------------------------------------------------------------------
 
-// MonthDay is a tuple of month and day.
-type MonthDay struct {
+// monthDay is a tuple of month and day.
+type monthDay struct {
 	month uint8 // [1,12]
-
 	day uint8 // [1,31]
 }
 
@@ -135,7 +134,7 @@ type MonthDay struct {
 // but not year boundaries (e.g. Jan to Dec of the previous year, or Dec to
 // Jan of the following year.)
 func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
-	onDayOfMonth int8) (md MonthDay) {
+	onDayOfMonth int8) (md monthDay) {
 
 	if onDayOfWeek == 0 {
 		md.month = month
