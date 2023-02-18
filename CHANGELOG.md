@@ -1,6 +1,10 @@
 # Changelog
 
 * Unreleased
+    * Convert C++ doxygen docs to go doc format.
+    * Unexport various internal functions and structs by lowercasing their
+      names. Could not use `internal/` directory due to circular dependency to
+      `ATime` type.
 * 0.2.0 (2023-02-13, TZDB 2022g)
     * Support one-second resolution for Zone.STDOFF field, instead of
       one-minute.
