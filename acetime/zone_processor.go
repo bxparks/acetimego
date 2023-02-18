@@ -33,7 +33,7 @@ type ZoneProcessor struct {
 	year              int16
 	isFilled          bool
 	numMatches        uint8
-	matches           [maxMatches]MatchingEra
+	matches           [maxMatches]matchingEra
 	transitionStorage TransitionStorage
 }
 
@@ -183,10 +183,10 @@ func findMatches(
 	zoneInfo *zoneinfo.ZoneInfo,
 	startYm YearMonth,
 	untilYm YearMonth,
-	matches []MatchingEra) uint8 {
+	matches []matchingEra) uint8 {
 
 	var iMatch uint8 = 0
-	var prevMatch *MatchingEra = nil
+	var prevMatch *matchingEra = nil
 	var eras []zoneinfo.ZoneEra = zoneInfo.ErasActive()
 
 	for iEra := range eras {
@@ -197,7 +197,7 @@ func findMatches(
 		}
 		if eraOverlapsInterval(prevEra, era, startYm, untilYm) {
 			if iMatch < uint8(len(matches)) {
-				createMatchingEra(&matches[iMatch], prevMatch, era, startYm, untilYm)
+				creatematchingEra(&matches[iMatch], prevMatch, era, startYm, untilYm)
 				prevMatch = &matches[iMatch]
 				iMatch++
 			}
@@ -252,13 +252,13 @@ func compareEraToYearMonth(
 	return 0
 }
 
-// Create a new MatchingEra object around the 'era' which intersects the
+// Create a new matchingEra object around the 'era' which intersects the
 // half-open [startYm, untilYm) interval. The interval is assumed to overlap
 // the ZoneEra using the eraOverlapsInterval() method. The 'prev' ZoneEra is
 // needed to define the startDateTime of the current era.
-func createMatchingEra(
-	newMatch *MatchingEra,
-	prevMatch *MatchingEra,
+func creatematchingEra(
+	newMatch *matchingEra,
+	prevMatch *matchingEra,
 	era *zoneinfo.ZoneEra,
 	startYm YearMonth,
 	untilYm YearMonth) {
@@ -308,14 +308,14 @@ func createMatchingEra(
 // Step 2
 //-----------------------------------------------------------------------------
 
-func createTransitions(ts *TransitionStorage, matches []MatchingEra) {
+func createTransitions(ts *TransitionStorage, matches []matchingEra) {
 
 	for i := range matches {
 		createTransitionsForMatch(ts, &matches[i])
 	}
 }
 
-func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
+func createTransitionsForMatch(ts *TransitionStorage, match *matchingEra) {
 
 	if match.era.HasPolicy() {
 		// Step 2B
@@ -331,7 +331,7 @@ func createTransitionsForMatch(ts *TransitionStorage, match *MatchingEra) {
 //-----------------------------------------------------------------------------
 
 func createTransitionsFromSimpleMatch(
-	ts *TransitionStorage, match *MatchingEra) {
+	ts *TransitionStorage, match *matchingEra) {
 
 	freeAgent := ts.getFreeAgent()
 	createTransitionForYear(freeAgent, 0, nil, match)
@@ -342,7 +342,7 @@ func createTransitionsFromSimpleMatch(
 }
 
 func createTransitionForYear(
-	t *Transition, year int16, rule *zoneinfo.ZoneRule, match *MatchingEra) {
+	t *Transition, year int16, rule *zoneinfo.ZoneRule, match *matchingEra) {
 
 	t.match = match
 	t.offsetSeconds = match.era.StdOffsetSeconds()
@@ -352,8 +352,8 @@ func createTransitionForYear(
 		t.deltaSeconds = rule.DstOffsetSeconds()
 		t.letter = rule.Letter
 	} else {
-		// Create a Transition using the MatchingEra for the transitionTime.
-		// Used for simple MatchingEra.
+		// Create a Transition using the matchingEra for the transitionTime.
+		// Used for simple matchingEra.
 		t.transitionTime = match.startDt
 		t.deltaSeconds = match.era.DstOffsetSeconds()
 		t.letter = ""
@@ -377,7 +377,7 @@ func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) DateTuple {
 //-----------------------------------------------------------------------------
 
 func createTransitionsFromNamedMatch(
-	ts *TransitionStorage, match *MatchingEra) {
+	ts *TransitionStorage, match *matchingEra) {
 
 	ts.resetCandidatePool()
 
@@ -390,7 +390,7 @@ func createTransitionsFromNamedMatch(
 	fixTransitionTimes(transitions)
 
 	// Pass 3: Select only those Transitions which overlap with the actual
-	// start and until times of the MatchingEra.
+	// start and until times of the matchingEra.
 	selectActiveTransitions(transitions)
 	lastTransition := ts.addActiveCandidatesToActivePool()
 	match.lastOffsetSeconds = lastTransition.offsetSeconds
@@ -398,7 +398,7 @@ func createTransitionsFromNamedMatch(
 }
 
 // Step 2B: Pass 1
-func findCandidateTransitions(ts *TransitionStorage, match *MatchingEra) {
+func findCandidateTransitions(ts *TransitionStorage, match *matchingEra) {
 
 	policy := match.era.Policy
 	startYear := match.startDt.year
@@ -579,7 +579,7 @@ func generateStartUntilTimes(transitions []Transition) {
 		isAfterFirst = true
 	}
 
-	// The last Transition's until time is the until time of the MatchingEra.
+	// The last Transition's until time is the until time of the matchingEra.
 	var untilTimeW DateTuple
 	var untilTimeS DateTuple
 	var untilTimeU DateTuple

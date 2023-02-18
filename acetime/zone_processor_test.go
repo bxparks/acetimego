@@ -125,7 +125,7 @@ func TestCompareEraToYearMonth(t *testing.T) {
 	}
 }
 
-func TestCreateMatchingEra(t *testing.T) {
+func TestCreatematchingEra(t *testing.T) {
 	// 14-month interval, from 2000-12 until 2002-02
 	startYm := YearMonth{2000, 12}
 	untilYm := YearMonth{2002, 2}
@@ -158,8 +158,8 @@ func TestCreateMatchingEra(t *testing.T) {
 	}
 
 	// No previous matching era, so startDt is set to startYm.
-	var match1 MatchingEra
-	createMatchingEra(&match1, nil, &era1, startYm, untilYm)
+	var match1 matchingEra
+	creatematchingEra(&match1, nil, &era1, startYm, untilYm)
 	if !(match1.startDt == DateTuple{2000, 12, 1, 3600 * 0, zoneinfo.SuffixW}) {
 		t.Fatal("match1.startDt:", match1.startDt)
 	}
@@ -172,8 +172,8 @@ func TestCreateMatchingEra(t *testing.T) {
 
 	// startDt is set to the prevMatch.untilDt.
 	// untilDt is < untilYm, so is retained.
-	var match2 MatchingEra
-	createMatchingEra(&match2, &match1, &era2, startYm, untilYm)
+	var match2 matchingEra
+	creatematchingEra(&match2, &match1, &era2, startYm, untilYm)
 	if !(match2.startDt == DateTuple{2000, 12, 2, 3600 * 3, zoneinfo.SuffixW}) {
 		t.Fatal("match2.startDt:", match2.startDt)
 	}
@@ -186,8 +186,8 @@ func TestCreateMatchingEra(t *testing.T) {
 
 	// startDt is set to the prevMatch.untilDt.
 	// untilDt is > untilYm so truncated to untilYm.
-	var match3 MatchingEra
-	createMatchingEra(&match3, &match2, &era3, startYm, untilYm)
+	var match3 matchingEra
+	creatematchingEra(&match3, &match2, &era3, startYm, untilYm)
 	if !(match3.startDt == DateTuple{2001, 2, 3, 3600 * 4, zoneinfo.SuffixW}) {
 		t.Fatal("match3.startDt: ", match3.startDt)
 	}
@@ -232,7 +232,7 @@ func TestCreateTransitionForYear(t *testing.T) {
 	era := &info.Eras[0]
 	policy := era.Policy
 
-	match := MatchingEra{
+	match := matchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               era,
@@ -353,7 +353,7 @@ func TestFindCandidateTransitions(t *testing.T) {
 	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	era := &info.Eras[0]
 
-	match := MatchingEra{
+	match := matchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               era,
@@ -418,7 +418,7 @@ func TestProcessTransitionCompareStatus(t *testing.T) {
 	}
 
 	// [2000-01-01, 2001-01-01)
-	match := MatchingEra{
+	match := matchingEra{
 		startDt:           DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 		era:               &era,
@@ -504,7 +504,7 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	era := &info.Eras[0]
 
-	match := MatchingEra{
+	match := matchingEra{
 		startDt:           DateTuple{2018, 12, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2020, 2, 1, 0, zoneinfo.SuffixW},
 		era:               era,
@@ -547,7 +547,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	// Step 1: America/Los_Angeles matches one era, which points to US policy.
 	var startYm = YearMonth{2017, 12}
 	var untilYm = YearMonth{2019, 2}
-	var matches [maxMatches]MatchingEra
+	var matches [maxMatches]matchingEra
 
 	numMatches := findMatches(info, startYm, untilYm, matches[:])
 	if !(1 == numMatches) {

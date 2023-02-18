@@ -5,10 +5,10 @@ import (
 )
 
 //-----------------------------------------------------------------------------
-// MatchingEra
+// matchingEra
 //-----------------------------------------------------------------------------
 
-type MatchingEra struct {
+type matchingEra struct {
 	// The effective start time of the matching ZoneEra, which uses the
 	// UTC offsets of the previous matching era.
 	startDt DateTuple
@@ -19,13 +19,13 @@ type MatchingEra struct {
 	// The ZoneEra that matched the given year. NonNullable.
 	era *zoneinfo.ZoneEra
 
-	// The previous MatchingEra, needed to interpret startDt.
-	prevMatch *MatchingEra
+	// The previous matchingEra, needed to interpret startDt.
+	prevMatch *matchingEra
 
-	// The STD offset of the last Transition in this MatchingEra.
+	// The STD offset of the last Transition in this matchingEra.
 	lastOffsetSeconds int32
 
-	// The DST offset of the last Transition in this MatchingEra.
+	// The DST offset of the last Transition in this matchingEra.
 	lastDeltaSeconds int32
 
 	// The format string from era.FormatIndex
@@ -37,8 +37,8 @@ type MatchingEra struct {
 //-----------------------------------------------------------------------------
 
 type Transition struct {
-	// The MatchingEra which generated this Transition.
-	match *MatchingEra
+	// The matchingEra which generated this Transition.
+	match *matchingEra
 
 	// The original transition time, usually 'w' but sometimes 's' or 'u'. After
 	// expandDateTuple() is called, this field will definitely be a 'w'. We must
@@ -94,7 +94,7 @@ type Transition struct {
 	isValidPrior bool
 
 	// During processTransitionCompareStatus(), this flag indicates how the
-	// transition falls within the time interval of the MatchingEra.
+	// transition falls within the time interval of the matchingEra.
 	compareStatus uint8
 }
 
@@ -453,7 +453,7 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 
 //-----------------------------------------------------------------------------
 
-func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
+func compareTransitionToMatch(t *Transition, match *matchingEra) uint8 {
 	// Find the previous Match offsets.
 	var prevMatchOffsetSeconds int32
 	var prevMatchDeltaSeconds int32
@@ -516,6 +516,6 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 	return compareStatusFarFuture
 }
 
-func compareTransitionToMatchFuzzy(t *Transition, m *MatchingEra) uint8 {
+func compareTransitionToMatchFuzzy(t *Transition, m *matchingEra) uint8 {
 	return dateTupleCompareFuzzy(&t.transitionTime, &m.startDt, &m.untilDt)
 }

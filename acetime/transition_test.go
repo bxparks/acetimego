@@ -6,7 +6,7 @@ import (
 )
 
 func TestCompareTransitionToMatchFuzzy(t *testing.T) {
-	match := MatchingEra{
+	match := matchingEra{
 		startDt: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		untilDt: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
@@ -69,8 +69,8 @@ func TestCompareTransitionToMatch(t *testing.T) {
 		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
-	// MatchingEra=[2000-01-01, 2001-01-01)
-	match := MatchingEra{
+	// matchingEra=[2000-01-01, 2001-01-01)
+	match := matchingEra{
 		startDt:           DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		untilDt:           DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 		era:               &era,
