@@ -6,6 +6,11 @@ import (
 
 // A DateTuple is an internal version of [LocalDateTime] which also tracks the
 // `s`, `w` or `u` suffixes given in the TZ database files.
+//
+// TODO: We only need about 24-bits (3-bytes) the seconds field. It should be
+// possible to reduce this struct by 1-byte so that the object fits entirely
+// within 8-bytes, a multiple of 4 or 8 bytes which reduces memory consumption
+// on 32-bit and 64-bit processors.
 type DateTuple struct {
 	year    int16 // [0,10000]
 	month   uint8 // [1-12]
