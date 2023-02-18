@@ -8,6 +8,8 @@ import (
 	"strings"
 )
 
+// BuildUint8Pad2 converts the uint8 `n` into a decimal string of 2 spaces wide,
+// padded on the left by the `pad` character.
 func BuildUint8Pad2(b *strings.Builder, n uint8, pad byte) {
 	if n >= 100 {
 		b.WriteByte('*')
@@ -27,6 +29,8 @@ func BuildUint8Pad2(b *strings.Builder, n uint8, pad byte) {
 	b.WriteByte(c0)
 }
 
+// BuildUint8Pad2 converts uint16 `n` into a decimal string of 4-spaces wide,
+// padded on the left by the `pad` character.
 func BuildUint16Pad4(b *strings.Builder, n uint16, pad byte) {
 	if n >= 10000 {
 		b.WriteByte('*')
@@ -50,6 +54,7 @@ func BuildUint16Pad4(b *strings.Builder, n uint16, pad byte) {
 	BuildUint8Pad2(b, d10, d10pad)
 }
 
+// BuildUint64 converts uint64 `n` into a decimal string with no padding.
 func BuildUint64(b *strings.Builder, n uint64) {
 	// max uint64 is 1.8447e19, so 20 digits should be enough.
 	var buf [20]uint8
@@ -76,8 +81,8 @@ func BuildUint64(b *strings.Builder, n uint64) {
 	}
 }
 
-// Convert the offsetSeconds into a string of the form +/-hh:mm, ignoring
-// the remaining seconds component if any.
+// BuildTimeOffset converts the offsetSeconds into a string of the form
+// +/-hh:mm, ignoring the remaining seconds component if any.
 func BuildTimeOffset(b *strings.Builder, offsetSeconds int32) {
 	sign, h, m, _ := secondsToHMS(offsetSeconds)
 	var c byte

@@ -5,27 +5,27 @@ import (
 )
 
 //-----------------------------------------------------------------------------
-// MatchingEra
+// matchingEra
 //-----------------------------------------------------------------------------
 
-type MatchingEra struct {
+type matchingEra struct {
 	// The effective start time of the matching ZoneEra, which uses the
 	// UTC offsets of the previous matching era.
-	startDt DateTuple
+	startDt dateTuple
 
 	// The effective until time of the matching ZoneEra.
-	untilDt DateTuple
+	untilDt dateTuple
 
 	// The ZoneEra that matched the given year. NonNullable.
 	era *zoneinfo.ZoneEra
 
-	// The previous MatchingEra, needed to interpret startDt.
-	prevMatch *MatchingEra
+	// The previous matchingEra, needed to interpret startDt.
+	prevMatch *matchingEra
 
-	// The STD offset of the last Transition in this MatchingEra.
+	// The STD offset of the last transition in this matchingEra.
 	lastOffsetSeconds int32
 
-	// The DST offset of the last Transition in this MatchingEra.
+	// The DST offset of the last transition in this matchingEra.
 	lastDeltaSeconds int32
 
 	// The format string from era.FormatIndex
@@ -33,29 +33,29 @@ type MatchingEra struct {
 }
 
 //-----------------------------------------------------------------------------
-// Transition
+// transition
 //-----------------------------------------------------------------------------
 
-type Transition struct {
-	// The MatchingEra which generated this Transition.
-	match *MatchingEra
+type transition struct {
+	// The matchingEra which generated this transition.
+	match *matchingEra
 
 	// The original transition time, usually 'w' but sometimes 's' or 'u'. After
 	// expandDateTuple() is called, this field will definitely be a 'w'. We must
 	// remember that the transitionTime* fields are expressed using the UTC
-	// offset of the *previous* Transition.
-	transitionTime DateTuple
+	// offset of the *previous* transition.
+	transitionTime dateTuple
 
 	//union {
 
 	// Version of transitionTime in 's' mode, using the UTC offset of the
-	// *previous* Transition. Valid before
+	// *previous* transition. Valid before
 	// ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	transitionTimeS DateTuple
+	transitionTimeS dateTuple
 
-	// Start time expressed using the UTC offset of the current Transition.
+	// Start time expressed using the UTC offset of the current transition.
 	// Valid after ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	startDt DateTuple
+	startDt dateTuple
 
 	//}
 
@@ -64,11 +64,11 @@ type Transition struct {
 	// Version of transitionTime in 'u' mode, using the UTC offset of the
 	// *previous* transition. Valid before
 	// ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	transitionTimeU DateTuple
+	transitionTimeU dateTuple
 
-	// Until time expressed using the UTC offset of the current Transition.
+	// Until time expressed using the UTC offset of the current transition.
 	// Valid after ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	untilDt DateTuple
+	untilDt dateTuple
 
 	//}
 
@@ -94,11 +94,11 @@ type Transition struct {
 	isValidPrior bool
 
 	// During processTransitionCompareStatus(), this flag indicates how the
-	// transition falls within the time interval of the MatchingEra.
+	// transition falls within the time interval of the matchingEra.
 	compareStatus uint8
 }
 
-func fixTransitionTimes(transitions []Transition) {
+func fixTransitionTimes(transitions []transition) {
 	if len(transitions) == 0 {
 		return
 	}
@@ -123,27 +123,27 @@ const (
 	transitionStorageSize = 8
 )
 
-// TransitionStorage holds 4 pools of Transitions indicated by the following
+// transitionStorage holds 4 pools of Transitions indicated by the following
 // half-open (inclusive to exclusive) index ranges:
 //
 //  1. Active pool: [0, indexPrior)
 //  2. Prior pool: [indexPrior, indexCandidate), either 0 or 1 element
 //  3. Candidate pool: [indexCandidate, indexFree)
 //  4. Free agent pool: [indexFree, allocSize), 0 or 1 element
-type TransitionStorage struct {
-	// Index of the most recent prior transition [0,kTransitionStorageSize)
+type transitionStorage struct {
+	// Index of the most recent prior transition [0,transitionStorageSize)
 	indexPrior uint8
-	// Index of the candidate pool [0,kTransitionStorageSize)
+	// Index of the candidate pool [0,transitionStorageSize)
 	indexCandidate uint8
-	// Index of the free agent transition [0, kTransitionStorageSize)
+	// Index of the free agent transition [0, transitionStorageSize)
 	indexFree uint8
 	// Number of allocated transitions.
 	allocSize uint8
-	// Pool of Transition objects.
-	transitions [transitionStorageSize]Transition
+	// Pool of transition objects.
+	transitions [transitionStorageSize]transition
 }
 
-func (ts *TransitionStorage) init() {
+func (ts *transitionStorage) init() {
 	ts.indexPrior = 0
 	ts.indexCandidate = 0
 	ts.indexFree = 0
@@ -151,24 +151,24 @@ func (ts *TransitionStorage) init() {
 }
 
 // getActives returns the active transitions in the interval [0,indexPrior).
-func (ts *TransitionStorage) getActives() []Transition {
+func (ts *transitionStorage) getActives() []transition {
 	return ts.transitions[0:ts.indexPrior]
 }
 
 // getCandidates returns the candidate transitions in the interval
 // [indexCandidate,indexFree).
-func (ts *TransitionStorage) getCandidates() []Transition {
+func (ts *transitionStorage) getCandidates() []transition {
 	return ts.transitions[ts.indexCandidate:ts.indexFree]
 }
 
 // resetCandidatePool deletes the candidate pool by collapsing it into the prior
 // pool.
-func (ts *TransitionStorage) resetCandidatePool() {
+func (ts *transitionStorage) resetCandidatePool() {
 	ts.indexCandidate = ts.indexPrior
 	ts.indexFree = ts.indexPrior
 }
 
-func (ts *TransitionStorage) getFreeAgent() *Transition {
+func (ts *transitionStorage) getFreeAgent() *transition {
 	if ts.indexFree < transitionStorageSize {
 		if ts.indexFree >= ts.allocSize {
 			ts.allocSize = ts.indexFree + 1
@@ -179,7 +179,7 @@ func (ts *TransitionStorage) getFreeAgent() *Transition {
 	}
 }
 
-func (ts *TransitionStorage) addFreeAgentToActivePool() {
+func (ts *transitionStorage) addFreeAgentToActivePool() {
 	if ts.indexFree >= transitionStorageSize {
 		return
 	}
@@ -188,14 +188,14 @@ func (ts *TransitionStorage) addFreeAgentToActivePool() {
 	ts.indexCandidate = ts.indexFree
 }
 
-func (ts *TransitionStorage) reservePrior() *Transition {
+func (ts *transitionStorage) reservePrior() *transition {
 	ts.getFreeAgent()
 	ts.indexCandidate++
 	ts.indexFree++
 	return &ts.transitions[ts.indexPrior]
 }
 
-func (ts *TransitionStorage) setFreeAgentAsPriorIfValid() {
+func (ts *transitionStorage) setFreeAgentAsPriorIfValid() {
 	ft := &ts.transitions[ts.indexFree]
 	prior := &ts.transitions[ts.indexPrior]
 	if (prior.isValidPrior && dateTupleCompare(
@@ -210,13 +210,13 @@ func (ts *TransitionStorage) setFreeAgentAsPriorIfValid() {
 	}
 }
 
-func (ts *TransitionStorage) addPriorToCandidatePool() {
+func (ts *transitionStorage) addPriorToCandidatePool() {
 	// This simple decrement works because there is only one prior, and it is
 	// allocated just before the candidate pool.
 	ts.indexCandidate--
 }
 
-func (ts *TransitionStorage) addFreeAgentToCandidatePool() {
+func (ts *transitionStorage) addFreeAgentToCandidatePool() {
 	if ts.indexFree >= transitionStorageSize {
 		return
 	}
@@ -239,14 +239,14 @@ func isCompareStatusActive(status uint8) bool {
 
 // Useful for debugging, commented out instead of deleting.
 //
-//func (ts *TransitionStorage) printPoolSizes() {
+//func (ts *transitionStorage) printPoolSizes() {
 //	fmt.Printf("indexPrior=%d; indexCandidate=%d; indexFree=%d; allocSize=%d\n",
 //		ts.indexPrior, ts.indexCandidate, ts.indexFree, ts.allocSize)
 //}
 
 // addActiveCandidatesToActivePool adds the candidate transitions to the active
 // pool, and returns the last active transition added.
-func (ts *TransitionStorage) addActiveCandidatesToActivePool() *Transition {
+func (ts *transitionStorage) addActiveCandidatesToActivePool() *transition {
 	// Shift active candidates to the left into the Active pool.
 	iActive := ts.indexPrior
 	iCandidate := ts.indexCandidate
@@ -269,9 +269,9 @@ func (ts *TransitionStorage) addActiveCandidatesToActivePool() *Transition {
 
 //-----------------------------------------------------------------------------
 
-type TransitionForSeconds struct {
-	// The matching Transition, nil if not found.
-	curr *Transition
+type transitionForSeconds struct {
+	// The matching transition, nil if not found.
+	curr *transition
 
 	// 0 for the first or exact transition; 1 for the second transition
 	fold uint8
@@ -283,12 +283,12 @@ type TransitionForSeconds struct {
 	num uint8
 }
 
-func (ts *TransitionStorage) findTransitionForSeconds(
-	epochSeconds ATime) TransitionForSeconds {
+func (ts *transitionStorage) findTransitionForSeconds(
+	epochSeconds ATime) transitionForSeconds {
 
-	var prev *Transition = nil
-	var curr *Transition = nil
-	var next *Transition = nil
+	var prev *transition = nil
+	var curr *transition = nil
+	var next *transition = nil
 
 	transitions := ts.getActives()
 	for i := range transitions {
@@ -302,7 +302,7 @@ func (ts *TransitionStorage) findTransitionForSeconds(
 	}
 
 	fold, num := calculateFoldAndOverlap(epochSeconds, prev, curr, next)
-	return TransitionForSeconds{curr, fold, num}
+	return transitionForSeconds{curr, fold, num}
 }
 
 // calculateFold determines the 'fold' parameter at the given epochSeconds. This
@@ -311,9 +311,9 @@ func (ts *TransitionStorage) findTransitionForSeconds(
 // LocalDateTime that occurred a second time.
 func calculateFoldAndOverlap(
 	epochSeconds ATime,
-	prev *Transition,
-	curr *Transition,
-	next *Transition) (fold uint8, num uint8) {
+	prev *transition,
+	curr *transition,
+	next *transition) (fold uint8, num uint8) {
 
 	if curr == nil {
 		fold = 0
@@ -382,24 +382,24 @@ func calculateFoldAndOverlap(
 //   - num=0, prev==prev, curr=curr: datetime in gap
 //   - num=0, prev==prev, curr=NULL: datetime is far future
 //
-// Adapted from TransitionForDateTime in Transition.h of the AceTime library,
+// Adapted from transitionForDateTime in transition.h of the AceTime library,
 // and transition.h from the AceTimeC library.
-type TransitionForDateTime struct {
+type transitionForDateTime struct {
 	// The previous transition, or null if the first transition matches.
-	prev *Transition
+	prev *transition
 
 	// The matching transition or null if not found.
-	curr *Transition
+	curr *transition
 
 	// Number of matches for given LocalDateTime: 0, 1, or 2.
 	num uint8
 }
 
-func (ts *TransitionStorage) findTransitionForDateTime(
-	ldt *LocalDateTime) TransitionForDateTime {
+func (ts *transitionStorage) findTransitionForDateTime(
+	ldt *LocalDateTime) transitionForDateTime {
 
-	// Convert LocalDateTime to DateTuple.
-	localDt := DateTuple{
+	// Convert LocalDateTime to dateTuple.
+	localDt := dateTuple{
 		ldt.Year,
 		ldt.Month,
 		ldt.Day,
@@ -409,8 +409,8 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 
 	// Examine adjacent pairs of Transitions, looking for an exact match, gap,
 	// or overlap.
-	var prev *Transition = nil
-	var curr *Transition = nil
+	var prev *transition = nil
+	var curr *transition = nil
 	var num uint8 = 0
 	transitions := ts.getActives()
 	for i := range transitions {
@@ -448,12 +448,12 @@ func (ts *TransitionStorage) findTransitionForDateTime(
 		curr = prev
 	}
 
-	return TransitionForDateTime{prev, curr, num}
+	return transitionForDateTime{prev, curr, num}
 }
 
 //-----------------------------------------------------------------------------
 
-func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
+func compareTransitionToMatch(t *transition, match *matchingEra) uint8 {
 	// Find the previous Match offsets.
 	var prevMatchOffsetSeconds int32
 	var prevMatchDeltaSeconds int32
@@ -466,9 +466,9 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 	}
 
 	// Expand start times.
-	var stw DateTuple
-	var sts DateTuple
-	var stu DateTuple
+	var stw dateTuple
+	var sts dateTuple
+	var stu dateTuple
 	dateTupleExpand(
 		&match.startDt,
 		prevMatchOffsetSeconds,
@@ -477,14 +477,14 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 		&sts,
 		&stu)
 
-	// Transition times.
+	// transition times.
 	ttw := &t.transitionTime
 	tts := &t.transitionTimeS
 	ttu := &t.transitionTimeU
 
-	// Compare Transition to Match, where equality is assumed if *any* of the
-	// 'w', 's', or 'u' versions of the DateTuple are equal. This prevents
-	// duplicate Transition instances from being created in a few cases.
+	// Compare transition to Match, where equality is assumed if *any* of the
+	// 'w', 's', or 'u' versions of the dateTuple are equal. This prevents
+	// duplicate transition instances from being created in a few cases.
 	if dateTupleCompare(ttw, &stw) == 0 ||
 		dateTupleCompare(tts, &sts) == 0 ||
 		dateTupleCompare(ttu, &stu) == 0 {
@@ -501,7 +501,7 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 	// are needed. We just make sure we compare 'w' with 'w', 's' with 's',
 	// and 'u' with 'u'.
 	matchUntil := &match.untilDt
-	var transitionTime *DateTuple
+	var transitionTime *dateTuple
 	if matchUntil.suffix == zoneinfo.SuffixS {
 		transitionTime = tts
 	} else if matchUntil.suffix == zoneinfo.SuffixU {
@@ -516,6 +516,6 @@ func compareTransitionToMatch(t *Transition, match *MatchingEra) uint8 {
 	return compareStatusFarFuture
 }
 
-func compareTransitionToMatchFuzzy(t *Transition, m *MatchingEra) uint8 {
+func compareTransitionToMatchFuzzy(t *transition, m *matchingEra) uint8 {
 	return dateTupleCompareFuzzy(&t.transitionTime, &m.startDt, &m.untilDt)
 }

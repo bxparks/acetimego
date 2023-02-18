@@ -76,7 +76,7 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	}
 
 	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
-	if result.frtype == FindResultNotFound {
+	if result.frtype == findResultNotFound {
 		return OffsetDateTimeError
 	}
 
@@ -103,11 +103,11 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	}
 
 	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
-	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
+	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return OffsetDateTimeError
 	}
 
-	// Convert FindResult into OffsetDateTime using the request offset, and the
+	// Convert findResult into OffsetDateTime using the request offset, and the
 	// result fold.
 	odt := OffsetDateTime{
 		Year:          ldt.Year,
@@ -120,11 +120,11 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 		Fold:          result.fold,
 	}
 
-	// Special processor for kAtcFindResultGap: Convert to epochSeconds using the
+	// Special processor for kAtcfindResultGap: Convert to epochSeconds using the
 	// reqStdOffsetSeconds and reqDstOffsetSeconds, then convert back to
 	// OffsetDateTime using the target stdOffsetSeconds and
 	// dstOffsetSeconds.
-	if result.frtype == FindResultGap {
+	if result.frtype == findResultGap {
 		epochSeconds := odt.EpochSeconds()
 		targetOffsetSeconds := result.stdOffsetSeconds + result.dstOffsetSeconds
 		odt = NewOffsetDateTimeFromEpochSeconds(epochSeconds, targetOffsetSeconds)
@@ -146,7 +146,7 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 	}
 
 	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
-	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
+	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return ZonedExtraError
 	}
 
@@ -175,7 +175,7 @@ func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 	}
 
 	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
-	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
+	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return ZonedExtraError
 	}
 
