@@ -269,7 +269,7 @@ func (ts *transitionStorage) addActiveCandidatesToActivePool() *transition {
 
 //-----------------------------------------------------------------------------
 
-type TransitionForSeconds struct {
+type transitionForSeconds struct {
 	// The matching transition, nil if not found.
 	curr *transition
 
@@ -284,7 +284,7 @@ type TransitionForSeconds struct {
 }
 
 func (ts *transitionStorage) findTransitionForSeconds(
-	epochSeconds ATime) TransitionForSeconds {
+	epochSeconds ATime) transitionForSeconds {
 
 	var prev *transition = nil
 	var curr *transition = nil
@@ -302,7 +302,7 @@ func (ts *transitionStorage) findTransitionForSeconds(
 	}
 
 	fold, num := calculateFoldAndOverlap(epochSeconds, prev, curr, next)
-	return TransitionForSeconds{curr, fold, num}
+	return transitionForSeconds{curr, fold, num}
 }
 
 // calculateFold determines the 'fold' parameter at the given epochSeconds. This
@@ -382,9 +382,9 @@ func calculateFoldAndOverlap(
 //   - num=0, prev==prev, curr=curr: datetime in gap
 //   - num=0, prev==prev, curr=NULL: datetime is far future
 //
-// Adapted from TransitionForDateTime in transition.h of the AceTime library,
+// Adapted from transitionForDateTime in transition.h of the AceTime library,
 // and transition.h from the AceTimeC library.
-type TransitionForDateTime struct {
+type transitionForDateTime struct {
 	// The previous transition, or null if the first transition matches.
 	prev *transition
 
@@ -396,7 +396,7 @@ type TransitionForDateTime struct {
 }
 
 func (ts *transitionStorage) findTransitionForDateTime(
-	ldt *LocalDateTime) TransitionForDateTime {
+	ldt *LocalDateTime) transitionForDateTime {
 
 	// Convert LocalDateTime to DateTuple.
 	localDt := DateTuple{
@@ -448,7 +448,7 @@ func (ts *transitionStorage) findTransitionForDateTime(
 		curr = prev
 	}
 
-	return TransitionForDateTime{prev, curr, num}
+	return transitionForDateTime{prev, curr, num}
 }
 
 //-----------------------------------------------------------------------------
