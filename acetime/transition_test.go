@@ -65,7 +65,7 @@ func TestCompareTransitionToMatch(t *testing.T) {
 		UntilYear:            2,
 		UntilMonth:           1,
 		UntilDay:             2,
-		UntilSecondsCode:     3 * 3600,
+		UntilSecondsCode:     3 * 3600 / 15,
 		UntilSecondsModifier: zoneinfo.SuffixW,
 	}
 
