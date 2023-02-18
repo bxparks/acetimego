@@ -263,7 +263,7 @@ func creatematchingEra(
 	untilYm yearMonth) {
 
 	// If prevMatch is nil, set startDate to be earlier than all valid ZoneEra.
-	var startDate DateTuple
+	var startDate dateTuple
 	if prevMatch == nil {
 		startDate.year = InvalidYear
 		startDate.month = 1
@@ -277,19 +277,19 @@ func creatematchingEra(
 		startDate.seconds = prevMatch.era.UntilSeconds()
 		startDate.suffix = prevMatch.era.UntilSuffix()
 	}
-	lowerBound := DateTuple{startYm.year, startYm.month, 1, 0, zoneinfo.SuffixW}
+	lowerBound := dateTuple{startYm.year, startYm.month, 1, 0, zoneinfo.SuffixW}
 	if dateTupleCompare(&startDate, &lowerBound) < 0 {
 		startDate = lowerBound
 	}
 
-	untilDate := DateTuple{
+	untilDate := dateTuple{
 		era.UntilYear,
 		era.UntilMonth,
 		era.UntilDay,
 		era.UntilSeconds(),
 		era.UntilSuffix(),
 	}
-	upperBound := DateTuple{untilYm.year, untilYm.month, 1, 0, zoneinfo.SuffixW}
+	upperBound := dateTuple{untilYm.year, untilYm.month, 1, 0, zoneinfo.SuffixW}
 	if dateTupleCompare(&upperBound, &untilDate) < 0 {
 		untilDate = upperBound
 	}
@@ -359,10 +359,10 @@ func createTransitionForYear(
 	}
 }
 
-func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) DateTuple {
+func getTransitionTime(year int16, rule *zoneinfo.ZoneRule) dateTuple {
 	md := calcStartDayOfMonth(
 		year, rule.InMonth, rule.OnDayOfWeek, rule.OnDayOfMonth)
-	return DateTuple{
+	return dateTuple{
 		year:    year,
 		month:   md.month,
 		day:     md.day,
@@ -579,9 +579,9 @@ func generateStartUntilTimes(transitions []transition) {
 	}
 
 	// The last transition's until time is the until time of the matchingEra.
-	var untilTimeW DateTuple
-	var untilTimeS DateTuple
-	var untilTimeU DateTuple
+	var untilTimeW dateTuple
+	var untilTimeS dateTuple
+	var untilTimeU dateTuple
 	dateTupleExpand(
 		&prev.match.untilDt,
 		prev.offsetSeconds,

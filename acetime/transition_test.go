@@ -7,13 +7,13 @@ import (
 
 func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 	match := matchingEra{
-		startDt: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
-		untilDt: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
+		startDt: dateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
+		untilDt: dateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
 
 	tn := transition{
 		match:          &match,
-		transitionTime: DateTuple{1999, 11, 1, 0, zoneinfo.SuffixW},
+		transitionTime: dateTuple{1999, 11, 1, 0, zoneinfo.SuffixW},
 	}
 	status := compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusPrior) {
@@ -22,7 +22,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	tn = transition{
 		match:          &match,
-		transitionTime: DateTuple{1999, 12, 1, 0, zoneinfo.SuffixW},
+		transitionTime: dateTuple{1999, 12, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusWithinMatch) {
@@ -31,7 +31,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	tn = transition{
 		match:          &match,
-		transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
+		transitionTime: dateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusWithinMatch) {
@@ -40,7 +40,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	tn = transition{
 		match:          &match,
-		transitionTime: DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
+		transitionTime: dateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusWithinMatch) {
@@ -49,7 +49,7 @@ func TestCompareTransitionToMatchFuzzy(t *testing.T) {
 
 	tn = transition{
 		match:          &match,
-		transitionTime: DateTuple{2001, 3, 1, 0, zoneinfo.SuffixW},
+		transitionTime: dateTuple{2001, 3, 1, 0, zoneinfo.SuffixW},
 	}
 	status = compareTransitionToMatchFuzzy(&tn, &match)
 	if !(status == compareStatusFarFuture) {
@@ -71,8 +71,8 @@ func TestCompareTransitionToMatch(t *testing.T) {
 
 	// matchingEra=[2000-01-01, 2001-01-01)
 	match := matchingEra{
-		startDt:           DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
-		untilDt:           DateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
+		startDt:           dateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
+		untilDt:           dateTuple{2001, 1, 1, 0, zoneinfo.SuffixW},
 		era:               &era,
 		prevMatch:         nil,
 		lastOffsetSeconds: 0,
@@ -83,22 +83,22 @@ func TestCompareTransitionToMatch(t *testing.T) {
 		// transitionTime = 1999-12-31
 		transition{
 			match:          &match,
-			transitionTime: DateTuple{1999, 12, 31, 0, zoneinfo.SuffixW},
+			transitionTime: dateTuple{1999, 12, 31, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2000-01-01
 		transition{
 			match:          &match,
-			transitionTime: DateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
+			transitionTime: dateTuple{2000, 1, 1, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2000-01-02
 		transition{
 			match:          &match,
-			transitionTime: DateTuple{2000, 1, 2, 0, zoneinfo.SuffixW},
+			transitionTime: dateTuple{2000, 1, 2, 0, zoneinfo.SuffixW},
 		},
 		// transitionTime = 2001-02-03
 		transition{
 			match:          &match,
-			transitionTime: DateTuple{2001, 2, 3, 0, zoneinfo.SuffixW},
+			transitionTime: dateTuple{2001, 2, 3, 0, zoneinfo.SuffixW},
 		},
 	}
 	transition0 := &transitions[0]

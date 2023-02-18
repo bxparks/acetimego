@@ -11,10 +11,10 @@ import (
 type matchingEra struct {
 	// The effective start time of the matching ZoneEra, which uses the
 	// UTC offsets of the previous matching era.
-	startDt DateTuple
+	startDt dateTuple
 
 	// The effective until time of the matching ZoneEra.
-	untilDt DateTuple
+	untilDt dateTuple
 
 	// The ZoneEra that matched the given year. NonNullable.
 	era *zoneinfo.ZoneEra
@@ -44,18 +44,18 @@ type transition struct {
 	// expandDateTuple() is called, this field will definitely be a 'w'. We must
 	// remember that the transitionTime* fields are expressed using the UTC
 	// offset of the *previous* transition.
-	transitionTime DateTuple
+	transitionTime dateTuple
 
 	//union {
 
 	// Version of transitionTime in 's' mode, using the UTC offset of the
 	// *previous* transition. Valid before
 	// ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	transitionTimeS DateTuple
+	transitionTimeS dateTuple
 
 	// Start time expressed using the UTC offset of the current transition.
 	// Valid after ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	startDt DateTuple
+	startDt dateTuple
 
 	//}
 
@@ -64,11 +64,11 @@ type transition struct {
 	// Version of transitionTime in 'u' mode, using the UTC offset of the
 	// *previous* transition. Valid before
 	// ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	transitionTimeU DateTuple
+	transitionTimeU dateTuple
 
 	// Until time expressed using the UTC offset of the current transition.
 	// Valid after ExtendedZoneProcessor::generateStartUntilTimes() is called.
-	untilDt DateTuple
+	untilDt dateTuple
 
 	//}
 
@@ -398,8 +398,8 @@ type transitionForDateTime struct {
 func (ts *transitionStorage) findTransitionForDateTime(
 	ldt *LocalDateTime) transitionForDateTime {
 
-	// Convert LocalDateTime to DateTuple.
-	localDt := DateTuple{
+	// Convert LocalDateTime to dateTuple.
+	localDt := dateTuple{
 		ldt.Year,
 		ldt.Month,
 		ldt.Day,
@@ -466,9 +466,9 @@ func compareTransitionToMatch(t *transition, match *matchingEra) uint8 {
 	}
 
 	// Expand start times.
-	var stw DateTuple
-	var sts DateTuple
-	var stu DateTuple
+	var stw dateTuple
+	var sts dateTuple
+	var stu dateTuple
 	dateTupleExpand(
 		&match.startDt,
 		prevMatchOffsetSeconds,
@@ -483,7 +483,7 @@ func compareTransitionToMatch(t *transition, match *matchingEra) uint8 {
 	ttu := &t.transitionTimeU
 
 	// Compare transition to Match, where equality is assumed if *any* of the
-	// 'w', 's', or 'u' versions of the DateTuple are equal. This prevents
+	// 'w', 's', or 'u' versions of the dateTuple are equal. This prevents
 	// duplicate transition instances from being created in a few cases.
 	if dateTupleCompare(ttw, &stw) == 0 ||
 		dateTupleCompare(tts, &sts) == 0 ||
@@ -501,7 +501,7 @@ func compareTransitionToMatch(t *transition, match *matchingEra) uint8 {
 	// are needed. We just make sure we compare 'w' with 'w', 's' with 's',
 	// and 'u' with 'u'.
 	matchUntil := &match.untilDt
-	var transitionTime *DateTuple
+	var transitionTime *dateTuple
 	if matchUntil.suffix == zoneinfo.SuffixS {
 		transitionTime = tts
 	} else if matchUntil.suffix == zoneinfo.SuffixU {
