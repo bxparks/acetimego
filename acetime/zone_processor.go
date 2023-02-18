@@ -16,11 +16,12 @@ type yearMonth struct {
 	month uint8
 }
 
-type Err uint8
+// Error type returned by some internal functions.
+type errType uint8
 
 const (
-	ErrOk Err = iota
-	ErrGeneric
+	errOk errType = iota
+	errGeneric
 )
 
 const (
@@ -57,9 +58,9 @@ func (zp *ZoneProcessor) IsLink() bool {
 	return zp.zoneInfo.IsLink()
 }
 
-func (zp *ZoneProcessor) InitForYear(year int16) Err {
+func (zp *ZoneProcessor) InitForYear(year int16) errType {
 	if zp.isFilledForYear(year) {
-		return ErrOk
+		return errOk
 	}
 
 	zp.year = year
@@ -67,7 +68,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	zp.numMatches = 0
 	zp.tstorage.init()
 	if year < zp.zoneInfo.StartYear-1 || zp.zoneInfo.UntilYear < year {
-		return ErrGeneric
+		return errGeneric
 	}
 
 	startYm := yearMonth{year - 1, 12}
@@ -76,7 +77,7 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	// Step 1: Find matches.
 	zp.numMatches = findMatches(zp.zoneInfo, startYm, untilYm, zp.matches[:])
 	if zp.numMatches == 0 {
-		return ErrGeneric
+		return errGeneric
 	}
 
 	// Step 2: Create Transitions.
@@ -92,13 +93,13 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 	// Step 5: Calc abbreviations.
 	calcAbbreviations(transitions)
 
-	return ErrOk
+	return errOk
 }
 
-func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) Err {
+func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) errType {
 	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	if ldt.IsError() {
-		return ErrGeneric
+		return errGeneric
 	}
 	return zp.InitForYear(ldt.Year)
 }
@@ -666,7 +667,7 @@ type findResult struct {
 // AceTimeC library.
 func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) findResult {
 	err := zp.InitForEpochSeconds(epochSeconds)
-	if err != ErrOk {
+	if err != errOk {
 		return findResultError
 	}
 
@@ -701,7 +702,7 @@ func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) findResult {
 func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) findResult {
 
 	err := zp.InitForYear(ldt.Year)
-	if err != ErrOk {
+	if err != errOk {
 		return findResultError
 	}
 

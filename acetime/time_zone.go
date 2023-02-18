@@ -71,7 +71,7 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	}
 
 	err := tz.zoneProcessor.InitForEpochSeconds(epochSeconds)
-	if err != ErrOk {
+	if err != errOk {
 		return OffsetDateTimeError
 	}
 
