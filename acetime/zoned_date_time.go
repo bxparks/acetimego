@@ -113,7 +113,7 @@ func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
 		b.WriteString(" UTC")
 	} else {
 		// Append the "+/-hh:mm[tz]"
-		BuildUTCOffset(b, zdt.OffsetSeconds)
+		BuildTimeOffset(b, zdt.OffsetSeconds)
 		b.WriteByte('[')
 		b.WriteString(zdt.Tz.Name())
 		b.WriteByte(']')

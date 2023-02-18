@@ -87,39 +87,9 @@ func (odt *OffsetDateTime) String() string {
 func (odt *OffsetDateTime) BuildString(b *strings.Builder) {
 	ldt := odt.LocalDateTime()
 	ldt.BuildString(b)
-	BuildUTCOffset(b, odt.OffsetSeconds)
-}
 
-// Extract the UTC offset as +/-hh:mm. Ignore the seconds field for time zones
-// before Jan 7, 1972 (Africa/Monrovia was the last one) whose UTC Offset is
-// shifted in units of seconds instead of whole minutes.
-func BuildUTCOffset(b *strings.Builder, offsetSeconds int32) {
-	s, h, m, _ := secondsToHMS(offsetSeconds)
-	var c byte
-	if s < 0 {
-		c = '-'
-	} else {
-		c = '+'
-	}
-
-	b.WriteByte(c)
-	BuildUint8Pad2(b, h, '0')
-	b.WriteByte(':')
-	BuildUint8Pad2(b, m, '0')
-}
-
-func secondsToHMS(seconds int32) (sign int8, h uint8, m uint8, s uint8) {
-	if seconds < 0 {
-		sign = -1
-		seconds = -seconds
-	} else {
-		sign = 1
-	}
-	s = uint8(seconds % 60)
-	minutes := seconds / 60
-	m = uint8(minutes % 60)
-	hours := uint8(minutes / 60)
-	h = hours
-
-	return
+	// Convert the OffsetSeconds to +/-hh:mm, ignoring any remaining seconds. This
+	// is valid for any time after Jan 7, 1972 when Africa/Monrovia became the
+	// last zone to convert to a UTC Offset in whole minutes.
+	BuildTimeOffset(b, odt.OffsetSeconds)
 }

@@ -75,3 +75,36 @@ func BuildUint64(b *strings.Builder, n uint64) {
 		b.WriteByte(c)
 	}
 }
+
+// Convert the offsetSeconds into a string of the form +/-hh:mm, ignoring
+// the remaining seconds component if any.
+func BuildTimeOffset(b *strings.Builder, offsetSeconds int32) {
+	sign, h, m, _ := secondsToHMS(offsetSeconds)
+	var c byte
+	if sign < 0 {
+		c = '-'
+	} else {
+		c = '+'
+	}
+
+	b.WriteByte(c)
+	BuildUint8Pad2(b, h, '0')
+	b.WriteByte(':')
+	BuildUint8Pad2(b, m, '0')
+}
+
+func secondsToHMS(seconds int32) (sign int8, h uint8, m uint8, s uint8) {
+	if seconds < 0 {
+		sign = -1
+		seconds = -seconds
+	} else {
+		sign = 1
+	}
+	s = uint8(seconds % 60)
+	minutes := seconds / 60
+	m = uint8(minutes % 60)
+	hours := uint8(minutes / 60)
+	h = hours
+
+	return
+}
