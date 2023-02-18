@@ -20,7 +20,9 @@ const (
 	daysToConverterEpochFromUnixEpoch = 10957
 )
 
-// Convert to days relative to "converter epoch"
+// Convert to days relative to "converter epoch". From
+// https://howardhinnant.github.io/date_algorithms.html and
+// AceTime/EpochConverterHinnant.h.
 func ConvertToDays(year int16, month uint8, day uint8) int32 {
 	var yearPrime int16 = year // [0, 10000], begins on Mar 1
 	var monthPrime uint8       // [0,11], Mar = 0
@@ -49,7 +51,9 @@ func ConvertToDays(year int16, month uint8, day uint8) int32 {
 	return dayOfEpochPrime
 }
 
-// Convert from days relative to "converter epoch".
+// Convert from days relative to "converter epoch". From
+// https://howardhinnant.github.io/date_algorithms.html and
+// AceTime/EpochConverterHinnant.h.
 func ConvertFromDays(epochDays int32) (year int16, month uint8, day uint8) {
 	// epoch_prime days is relative to 0000-03-01
 	var dayOfEpochPrime int32 = epochDays +
