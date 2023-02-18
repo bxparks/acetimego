@@ -9,7 +9,7 @@ import (
 // ZoneProcessor
 //-----------------------------------------------------------------------------
 
-type YearMonth struct {
+type yearMonth struct {
 	// year [0,10000]
 	year int16
 	// month [1,12]
@@ -70,8 +70,8 @@ func (zp *ZoneProcessor) InitForYear(year int16) Err {
 		return ErrGeneric
 	}
 
-	startYm := YearMonth{year - 1, 12}
-	untilYm := YearMonth{year + 1, 2}
+	startYm := yearMonth{year - 1, 12}
+	untilYm := yearMonth{year + 1, 2}
 
 	// Step 1: Find matches.
 	zp.numMatches = findMatches(zp.zoneInfo, startYm, untilYm, zp.matches[:])
@@ -180,8 +180,8 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 
 func findMatches(
 	zoneInfo *zoneinfo.ZoneInfo,
-	startYm YearMonth,
-	untilYm YearMonth,
+	startYm yearMonth,
+	untilYm yearMonth,
 	matches []matchingEra) uint8 {
 
 	var iMatch uint8 = 0
@@ -217,8 +217,8 @@ func findMatches(
 func eraOverlapsInterval(
 	prevEra *zoneinfo.ZoneEra,
 	era *zoneinfo.ZoneEra,
-	startYm YearMonth,
-	untilYm YearMonth) bool {
+	startYm yearMonth,
+	untilYm yearMonth) bool {
 
 	return (prevEra == nil ||
 		compareEraToYearMonth(prevEra, untilYm.year, untilYm.month) < 0) &&
@@ -259,8 +259,8 @@ func creatematchingEra(
 	newMatch *matchingEra,
 	prevMatch *matchingEra,
 	era *zoneinfo.ZoneEra,
-	startYm YearMonth,
-	untilYm YearMonth) {
+	startYm yearMonth,
+	untilYm yearMonth) {
 
 	// If prevMatch is nil, set startDate to be earlier than all valid ZoneEra.
 	var startDate DateTuple

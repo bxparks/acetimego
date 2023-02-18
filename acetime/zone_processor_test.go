@@ -127,8 +127,8 @@ func TestCompareEraToYearMonth(t *testing.T) {
 
 func TestCreatematchingEra(t *testing.T) {
 	// 14-month interval, from 2000-12 until 2002-02
-	startYm := YearMonth{2000, 12}
-	untilYm := YearMonth{2002, 2}
+	startYm := yearMonth{2000, 12}
+	untilYm := yearMonth{2002, 2}
 
 	// UNTIL = 2000-12-02 3:00
 	era1 := zoneinfo.ZoneEra{
@@ -545,8 +545,8 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	// Step 1: America/Los_Angeles matches one era, which points to US policy.
-	var startYm = YearMonth{2017, 12}
-	var untilYm = YearMonth{2019, 2}
+	var startYm = yearMonth{2017, 12}
+	var untilYm = yearMonth{2019, 2}
 	var matches [maxMatches]matchingEra
 
 	numMatches := findMatches(info, startYm, untilYm, matches[:])
