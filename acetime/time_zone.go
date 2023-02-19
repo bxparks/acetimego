@@ -63,13 +63,13 @@ func (tz *TimeZone) ZoneID() uint32 {
 	}
 }
 
-// OffsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given
+// offsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given
 // epochSeconds.
 //
 // Adapted from atc_time_zone_offset_date_time_from_epoch_seconds() in the
 // AceTimeC library and, TimeZone::getOffsetDateTime(epochSeconds) from the
 // AceTime library.
-func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
+func (tz *TimeZone) offsetDateTimeFromEpochSeconds(
 	epochSeconds ATime) OffsetDateTime {
 
 	// UTC (or Error)
@@ -95,13 +95,13 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	return odt
 }
 
-// OffsetDateTimeFromLocalDateTime calculates the OffsetDateTime from the given
+// offsetDateTimeFromLocalDateTime calculates the OffsetDateTime from the given
 // LocalDateTime.
 //
 // Adapted from atc_time_zone_offset_date_time_from_local_date_time() from the
 // AceTimeC library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
 // the AceTime library.
-func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
+func (tz *TimeZone) offsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime) OffsetDateTime {
 
 	// UTC (or Error)

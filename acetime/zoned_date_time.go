@@ -57,7 +57,7 @@ func (zdt *ZonedDateTime) EpochSeconds() ATime {
 func NewZonedDateTimeFromEpochSeconds(
 	epochSeconds ATime, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.OffsetDateTimeFromEpochSeconds(epochSeconds)
+	odt := tz.offsetDateTimeFromEpochSeconds(epochSeconds)
 	return ZonedDateTime{
 		Year:          odt.Year,
 		Month:         odt.Month,
@@ -74,7 +74,7 @@ func NewZonedDateTimeFromEpochSeconds(
 func NewZonedDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.OffsetDateTimeFromLocalDateTime(ldt)
+	odt := tz.offsetDateTimeFromLocalDateTime(ldt)
 	return ZonedDateTime{
 		Year:          odt.Year,
 		Month:         odt.Month,
