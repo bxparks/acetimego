@@ -6,7 +6,8 @@
       0      57       0       0 |      57       0 | Go reflect data
      66       0       0       0 |      66       0 | device/esp
      13       0       0       0 |      13       0 | errors
-   6438      36       0       0 |    6474       0 | github.com/bxparks/AceTimeGo/acetime
+   6216      36       0       0 |    6252       0 | github.com/bxparks/AceTimeGo/acetime
+    222       0       0       0 |     222       0 | github.com/bxparks/AceTimeGo/strbuild
     188       0       0       0 |     188       0 | github.com/bxparks/AceTimeGo/zoneinfo
      60       0       0       0 |      60       0 | internal/bytealg
     139       2       0       0 |     141       0 | internal/itoa

@@ -18,7 +18,8 @@
      75       0       0       0 |      75       0 | Go interface method
       0      53       0       0 |      53       0 | Go reflect data
      47       0       0       0 |      47       0 | errors
-   7478      36       0       0 |    7514       0 | github.com/bxparks/AceTimeGo/acetime
+   7183      36       0       0 |    7219       0 | github.com/bxparks/AceTimeGo/acetime
+    295       0       0       0 |     295       0 | github.com/bxparks/AceTimeGo/strbuild
     186       0       0       0 |     186       0 | github.com/bxparks/AceTimeGo/zoneinfo
      80       0       0       0 |      80       0 | internal/bytealg
     162       2       0       0 |     164       0 | internal/itoa
