@@ -140,7 +140,7 @@ func (tz *TimeZone) offsetDateTimeFromLocalDateTime(
 	return odt
 }
 
-func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
+func (tz *TimeZone) zonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 	if tz.processor == nil {
 		return ZonedExtra{
 			Zetype:              ZonedExtraExact,
@@ -167,7 +167,7 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 	}
 }
 
-func (tz *TimeZone) ZonedExtraFromLocalDateTime(
+func (tz *TimeZone) zonedExtraFromLocalDateTime(
 	ldt *LocalDateTime) ZonedExtra {
 
 	if tz.processor == nil {

@@ -30,7 +30,7 @@ func NewZonedExtraFromEpochSeconds(
 	if epochSeconds == InvalidEpochSeconds {
 		return ZonedExtraError
 	}
-	return tz.ZonedExtraFromEpochSeconds(epochSeconds)
+	return tz.zonedExtraFromEpochSeconds(epochSeconds)
 }
 
 func NewZonedExtraFromLocalDateTime(
@@ -39,5 +39,5 @@ func NewZonedExtraFromLocalDateTime(
 	if ldt.IsError() {
 		return ZonedExtraError
 	}
-	return tz.ZonedExtraFromLocalDateTime(ldt)
+	return tz.zonedExtraFromLocalDateTime(ldt)
 }
