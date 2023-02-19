@@ -27,7 +27,7 @@ var (
 	TimeZoneError = TimeZone{TztypeError, nil}
 )
 
-func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
+func newTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 
 	var processor zoneProcessor
 	processor.initForZoneInfo(zoneInfo)
