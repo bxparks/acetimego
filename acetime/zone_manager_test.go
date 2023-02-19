@@ -62,7 +62,7 @@ func TestZoneManagerNewTimeZoneFromName_Error(t *testing.T) {
 
 func TestZoneManagerNewTimeZoneFromIndex_Error(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zm.TimeZoneFromIndex(zm.ZoneCount()) // one past the end
+	tz := zm.timeZoneFromIndex(zm.ZoneCount()) // one past the end
 	if !(tz.IsError()) {
 		t.Fatal(tz)
 	}

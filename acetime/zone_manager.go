@@ -29,7 +29,9 @@ func (zm *ZoneManager) TimeZoneFromName(name string) TimeZone {
 	return newTimeZoneFromZoneInfo(info)
 }
 
-func (zm *ZoneManager) TimeZoneFromIndex(index uint16) TimeZone {
+// TODO: The "index" of a ZoneInfo is currently not exported, so this function
+// is not useful to the end-user. Maybe remove it altogether.
+func (zm *ZoneManager) timeZoneFromIndex(index uint16) TimeZone {
 	if index >= zm.ZoneCount() {
 		return TimeZoneError
 	}
