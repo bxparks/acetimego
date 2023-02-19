@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/strbuild"
 	"strings"
 )
 
@@ -91,5 +92,5 @@ func (odt *OffsetDateTime) BuildString(b *strings.Builder) {
 	// Convert the OffsetSeconds to +/-hh:mm, ignoring any remaining seconds. This
 	// is valid for any time after Jan 7, 1972 when Africa/Monrovia became the
 	// last zone to convert to a UTC Offset in whole minutes.
-	BuildTimeOffset(b, odt.OffsetSeconds)
+	strbuild.TimeOffset(b, odt.OffsetSeconds)
 }

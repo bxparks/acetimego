@@ -1,16 +1,21 @@
-// Low-level conversion routines from uint8 and uint16 to ASCII strings.
-// The goal is to eliminate the dependency to fmt.Sprintf() to save memory on
-// TinyGo microcontrollers.
-
-package acetime
+// Routines to convert various values to a string inside a strings.Builder
+// object. The goal is to eliminate the dependency to fmt.Sprintf() to save
+// memory on TinyGo microcontrollers. A limited number of primitive types are
+// supported:
+//
+//   - uint8
+//   - uint16
+//   - uint64
+//   - timeOffset int32
+package strbuild
 
 import (
 	"strings"
 )
 
-// BuildUint8Pad2 converts the uint8 `n` into a decimal string of 2 spaces wide,
+// Uint8Pad2 converts the uint8 `n` into a decimal string of 2 spaces wide,
 // padded on the left by the `pad` character.
-func BuildUint8Pad2(b *strings.Builder, n uint8, pad byte) {
+func Uint8Pad2(b *strings.Builder, n uint8, pad byte) {
 	if n >= 100 {
 		b.WriteByte('*')
 		b.WriteByte('*')
@@ -29,9 +34,9 @@ func BuildUint8Pad2(b *strings.Builder, n uint8, pad byte) {
 	b.WriteByte(c0)
 }
 
-// BuildUint8Pad2 converts uint16 `n` into a decimal string of 4-spaces wide,
+// Uint8Pad2 converts uint16 `n` into a decimal string of 4-spaces wide,
 // padded on the left by the `pad` character.
-func BuildUint16Pad4(b *strings.Builder, n uint16, pad byte) {
+func Uint16Pad4(b *strings.Builder, n uint16, pad byte) {
 	if n >= 10000 {
 		b.WriteByte('*')
 		b.WriteByte('*')
@@ -48,14 +53,14 @@ func BuildUint16Pad4(b *strings.Builder, n uint16, pad byte) {
 		b.WriteByte(pad)
 		d10pad = pad
 	} else {
-		BuildUint8Pad2(b, d32, pad)
+		Uint8Pad2(b, d32, pad)
 		d10pad = '0'
 	}
-	BuildUint8Pad2(b, d10, d10pad)
+	Uint8Pad2(b, d10, d10pad)
 }
 
-// BuildUint64 converts uint64 `n` into a decimal string with no padding.
-func BuildUint64(b *strings.Builder, n uint64) {
+// Uint64 converts uint64 `n` into a decimal string with no padding.
+func Uint64(b *strings.Builder, n uint64) {
 	// max uint64 is 1.8447e19, so 20 digits should be enough.
 	var buf [20]uint8
 	var i uint8
@@ -81,9 +86,9 @@ func BuildUint64(b *strings.Builder, n uint64) {
 	}
 }
 
-// BuildTimeOffset converts the offsetSeconds into a string of the form
+// TimeOffset converts the offsetSeconds into a string of the form
 // +/-hh:mm, ignoring the remaining seconds component if any.
-func BuildTimeOffset(b *strings.Builder, offsetSeconds int32) {
+func TimeOffset(b *strings.Builder, offsetSeconds int32) {
 	sign, h, m, _ := secondsToHMS(offsetSeconds)
 	var c byte
 	if sign < 0 {
@@ -93,9 +98,9 @@ func BuildTimeOffset(b *strings.Builder, offsetSeconds int32) {
 	}
 
 	b.WriteByte(c)
-	BuildUint8Pad2(b, h, '0')
+	Uint8Pad2(b, h, '0')
 	b.WriteByte(':')
-	BuildUint8Pad2(b, m, '0')
+	Uint8Pad2(b, m, '0')
 }
 
 func secondsToHMS(seconds int32) (sign int8, h uint8, m uint8, s uint8) {

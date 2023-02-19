@@ -6,6 +6,7 @@ package main
 
 import (
 	"github.com/bxparks/AceTimeGo/acetime"
+	"github.com/bxparks/AceTimeGo/strbuild"
 	"github.com/bxparks/AceTimeGo/zonedb"
 	"runtime"
 	"strings"
@@ -43,11 +44,11 @@ func PrintMemUsage() {
 
 	var b strings.Builder
 	print("TotalAlloc = ")
-	acetime.BuildUint64(&b, m.TotalAlloc)
+	strbuild.Uint64(&b, m.TotalAlloc)
 	print(b.String())
 	print("\tSys = ")
 	b.Reset()
-	acetime.BuildUint64(&b, m.Sys)
+	strbuild.Uint64(&b, m.Sys)
 	print(b.String())
 	print("\n")
 

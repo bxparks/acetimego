@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/strbuild"
 	"strings"
 )
 
@@ -113,7 +114,7 @@ func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
 		b.WriteString(" UTC")
 	} else {
 		// Append the "+/-hh:mm[tz]"
-		BuildTimeOffset(b, zdt.OffsetSeconds)
+		strbuild.TimeOffset(b, zdt.OffsetSeconds)
 		b.WriteByte('[')
 		b.WriteString(zdt.Tz.Name())
 		b.WriteByte(']')
