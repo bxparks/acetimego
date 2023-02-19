@@ -74,58 +74,58 @@ func TestConvertToDays(t *testing.T) {
 
 func TestConvertFromDays(t *testing.T) {
 	var days int32 = 0
-	year, month, day := ConvertFromDays(days)
+	year, month, day := convertFromDays(days)
 	if year != 2000 || month != 1 || day != 1 {
 		t.Fatalf(
-			`ConvertFromDays(%d) should return (2000, 1, 1) but was (%d, %d, %d)`,
+			`convertFromDays(%d) should return (2000, 1, 1) but was (%d, %d, %d)`,
 			days, year, month, day)
 	}
 
 	days = 1
-	year, month, day = ConvertFromDays(days)
+	year, month, day = convertFromDays(days)
 	if year != 2000 || month != 1 || day != 2 {
 		t.Fatalf(
-			`ConvertFromDays(%d) should return (2000, 1, 2) but was (%d, %d, %d)`,
+			`convertFromDays(%d) should return (2000, 1, 2) but was (%d, %d, %d)`,
 			days, year, month, day)
 	}
 
 	days = -1
-	year, month, day = ConvertFromDays(days)
+	year, month, day = convertFromDays(days)
 	if year != 1999 || month != 12 || day != 31 {
 		t.Fatalf(
-			`ConvertFromDays(%d) should return (1999, 12, 31) but was (%d, %d, %d)`,
+			`convertFromDays(%d) should return (1999, 12, 31) but was (%d, %d, %d)`,
 			days, year, month, day)
 	}
 
 	days = 18263
-	year, month, day = ConvertFromDays(days)
+	year, month, day = convertFromDays(days)
 	if year != 2050 || month != 1 || day != 1 {
 		t.Fatalf(
-			`ConvertFromDays(%d) should return (2050, 1, 1) but was (%d, %d, %d)`,
+			`convertFromDays(%d) should return (2050, 1, 1) but was (%d, %d, %d)`,
 			days, year, month, day)
 	}
 
 	days = 36525
-	year, month, day = ConvertFromDays(days)
+	year, month, day = convertFromDays(days)
 	if year != 2100 || month != 1 || day != 1 {
 		t.Fatalf(
-			`ConvertFromDays(%d) should return (2100, 1, 1) but was (%d, %d, %d)`,
+			`convertFromDays(%d) should return (2100, 1, 1) but was (%d, %d, %d)`,
 			days, year, month, day)
 	}
 
 	days = -36524
-	year, month, day = ConvertFromDays(days)
+	year, month, day = convertFromDays(days)
 	if year != 1900 || month != 1 || day != 1 {
 		t.Fatalf(
-			`ConvertFromDays(%d) should return (1900, 1, 2) but was (%d, %d, %d)`,
+			`convertFromDays(%d) should return (1900, 1, 2) but was (%d, %d, %d)`,
 			days, year, month, day)
 	}
 
 	days = 146097
-	year, month, day = ConvertFromDays(days)
+	year, month, day = convertFromDays(days)
 	if year != 2400 || month != 1 || day != 1 {
 		t.Fatalf(
-			`ConvertFromDays(%d) should return (2400, 1, 1) but was (%d, %d, %d)`,
+			`convertFromDays(%d) should return (2400, 1, 1) but was (%d, %d, %d)`,
 			days, year, month, day)
 	}
 }

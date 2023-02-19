@@ -99,7 +99,7 @@ func LocalDateToDayOfWeek(year int16, month uint8, day uint8) uint8 {
 // LocalDateFromEpochDays converts epoch days to (y, m, d).
 func LocalDateFromEpochDays(days int32) (year int16, month uint8, day uint8) {
 	days -= daysToConverterEpochFromUnixEpoch
-	year, month, day = ConvertFromDays(days)
+	year, month, day = convertFromDays(days)
 	return
 }
 

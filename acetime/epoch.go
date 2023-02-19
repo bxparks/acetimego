@@ -11,7 +11,7 @@ package acetime
 type ATime int64
 
 const (
-	// The base epoch year used by the convertToDays() and ConvertFromDays()
+	// The base epoch year used by the convertToDays() and convertFromDays()
 	// functions below. This must be a multiple of 400.
 	converterEpochYear = 2000
 
@@ -54,7 +54,7 @@ func convertToDays(year int16, month uint8, day uint8) int32 {
 // Convert from days relative to "converter epoch". From
 // https://howardhinnant.github.io/date_algorithms.html and
 // AceTime/EpochConverterHinnant.h.
-func ConvertFromDays(epochDays int32) (year int16, month uint8, day uint8) {
+func convertFromDays(epochDays int32) (year int16, month uint8, day uint8) {
 	// epoch_prime days is relative to 0000-03-01
 	var dayOfEpochPrime int32 = epochDays +
 		(converterEpochYear/400)*146097 - 60
