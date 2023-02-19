@@ -29,6 +29,7 @@ type ZoneRecordContext struct {
 	TzDatabaseVersion string
 	StartYear         int16
 	UntilYear         int16
+	MaxTransitions		int16
 	LetterData        string
 	LetterOffsets     []uint8
 	FormatData        string
@@ -51,6 +52,7 @@ type ZoneDataContext struct {
 	TzDatabaseVersion   string
 	StartYear           int16
 	UntilYear           int16
+	MaxTransitions      int16
 	LetterData          string
 	LetterOffsets       []uint8
 	FormatData          string
