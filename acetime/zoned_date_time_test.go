@@ -499,7 +499,7 @@ var epochSeconds ATime
 var zdt ZonedDateTime
 var ldt = LocalDateTime{2023, 1, 19, 22, 11, 0, 0 /*Fold*/}
 var zoneManager = NewZoneManager(&zonedbtesting.DataContext)
-var tz = zoneManager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+var tz = zoneManager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 func BenchmarkZonedDateTimeFromEpochSeconds_Cache(b *testing.B) {
 	for n := 0; n < b.N; n++ {

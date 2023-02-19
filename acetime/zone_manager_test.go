@@ -30,7 +30,7 @@ func TestZoneManagerZoneNames(t *testing.T) {
 
 func TestZoneManagerNewTimeZoneFromID(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zm.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := zm.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	if !(tz.Name() == "America/Los_Angeles") {
 		t.Fatal(tz.Name())
 	}
@@ -38,7 +38,7 @@ func TestZoneManagerNewTimeZoneFromID(t *testing.T) {
 
 func TestZoneManagerNewTimeZoneFromID_Error(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
-	tz := zm.TimeZoneFromID(0 /*should not exist*/)
+	tz := zm.TimeZoneFromZoneID(0 /*should not exist*/)
 	if !(tz.IsError()) {
 		t.Fatal(tz)
 	}
