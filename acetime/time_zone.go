@@ -28,7 +28,6 @@ var (
 )
 
 func newTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
-
 	var processor zoneProcessor
 	processor.initForZoneInfo(zoneInfo)
 	return TimeZone{TztypeProcessor, &processor}
@@ -56,6 +55,14 @@ func (tz *TimeZone) Name() string {
 	}
 }
 
+func (tz *TimeZone) ZoneID() uint32 {
+	if tz.processor == nil {
+		return 0 // AceTimeTool guarantees that 0 is invalid
+	} else {
+		return tz.processor.zoneInfo.ZoneID
+	}
+}
+
 // OffsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given
 // epochSeconds.
 //
@@ -65,7 +72,7 @@ func (tz *TimeZone) Name() string {
 func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	epochSeconds ATime) OffsetDateTime {
 
-	// UTC
+	// UTC (or Error)
 	if tz.processor == nil {
 		return NewOffsetDateTimeFromEpochSeconds(epochSeconds, 0)
 	}
