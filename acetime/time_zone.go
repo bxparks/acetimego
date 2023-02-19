@@ -12,11 +12,11 @@ const (
 
 // A TimeZone represents one of the IANA TZ time zones. It has reference
 // semantics meaning that a copy of this will point to same underlying
-// ZoneProcessor ands its cache. A TimeZone can be passed around by value or by
+// zoneProcessor and its cache. A TimeZone can be passed around by value or by
 // pointer because it is a light-weight object.
 type TimeZone struct {
-	tztype        uint8
-	zoneProcessor *ZoneProcessor
+	tztype    uint8
+	processor *zoneProcessor
 }
 
 var (
@@ -29,9 +29,9 @@ var (
 
 func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
 
-	var zoneProcessor ZoneProcessor
-	zoneProcessor.InitForZoneInfo(zoneInfo)
-	return TimeZone{TztypeProcessor, &zoneProcessor}
+	var processor zoneProcessor
+	processor.initForZoneInfo(zoneInfo)
+	return TimeZone{TztypeProcessor, &processor}
 }
 
 func (tz *TimeZone) IsError() bool {
@@ -39,11 +39,11 @@ func (tz *TimeZone) IsError() bool {
 }
 
 func (tz *TimeZone) IsUTC() bool {
-	return tz.zoneProcessor == nil
+	return tz.processor == nil
 }
 
 func (tz *TimeZone) IsLink() bool {
-	return tz.zoneProcessor.IsLink()
+	return tz.processor.isLink()
 }
 
 func (tz *TimeZone) Name() string {
@@ -52,7 +52,7 @@ func (tz *TimeZone) Name() string {
 	} else if tz.tztype == TztypeUTC {
 		return "UTC"
 	} else {
-		return tz.zoneProcessor.Name()
+		return tz.processor.name()
 	}
 }
 
@@ -66,16 +66,16 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	epochSeconds ATime) OffsetDateTime {
 
 	// UTC
-	if tz.zoneProcessor == nil {
+	if tz.processor == nil {
 		return NewOffsetDateTimeFromEpochSeconds(epochSeconds, 0)
 	}
 
-	err := tz.zoneProcessor.InitForEpochSeconds(epochSeconds)
+	err := tz.processor.initForEpochSeconds(epochSeconds)
 	if err != errOk {
 		return OffsetDateTimeError
 	}
 
-	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
+	result := tz.processor.findByEpochSeconds(epochSeconds)
 	if result.frtype == findResultNotFound {
 		return OffsetDateTimeError
 	}
@@ -98,11 +98,11 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime) OffsetDateTime {
 
 	// UTC (or Error)
-	if tz.zoneProcessor == nil {
+	if tz.processor == nil {
 		return NewOffsetDateTimeFromLocalDateTime(ldt, 0)
 	}
 
-	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
+	result := tz.processor.findByLocalDateTime(ldt)
 	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return OffsetDateTimeError
 	}
@@ -134,7 +134,7 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 }
 
 func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
-	if tz.zoneProcessor == nil {
+	if tz.processor == nil {
 		return ZonedExtra{
 			Zetype:              ZonedExtraExact,
 			StdOffsetSeconds:    0,
@@ -145,7 +145,7 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 		}
 	}
 
-	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
+	result := tz.processor.findByEpochSeconds(epochSeconds)
 	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return ZonedExtraError
 	}
@@ -163,7 +163,7 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 	ldt *LocalDateTime) ZonedExtra {
 
-	if tz.zoneProcessor == nil {
+	if tz.processor == nil {
 		return ZonedExtra{
 			Zetype:              ZonedExtraExact,
 			StdOffsetSeconds:    0,
@@ -174,7 +174,7 @@ func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 		}
 	}
 
-	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
+	result := tz.processor.findByLocalDateTime(ldt)
 	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return ZonedExtraError
 	}

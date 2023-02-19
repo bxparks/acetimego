@@ -63,10 +63,10 @@ func TestZoneProcessorToString(t *testing.T) {
 	zoneManager := NewZoneManager(&zonedbtesting.DataContext)
 	zoneInfo := zoneManager.store.ZoneInfoByID(
 		zonedbtesting.ZoneIDAmerica_Los_Angeles)
-	var zp ZoneProcessor
-	zp.InitForZoneInfo(zoneInfo)
-	if !(zp.Name() == "America/Los_Angeles") {
-		t.Fatal(zp.Name(), zp)
+	var zp zoneProcessor
+	zp.initForZoneInfo(zoneInfo)
+	if !(zp.name() == "America/Los_Angeles") {
+		t.Fatal(zp.name(), zp)
 	}
 }
 
@@ -74,12 +74,12 @@ func TestZoneProcessorInitForYear(t *testing.T) {
 	zoneManager := NewZoneManager(&zonedbtesting.DataContext)
 	zoneInfo := zoneManager.store.ZoneInfoByID(
 		zonedbtesting.ZoneIDAmerica_Los_Angeles)
-	var zp ZoneProcessor
-	zp.InitForZoneInfo(zoneInfo)
+	var zp zoneProcessor
+	zp.initForZoneInfo(zoneInfo)
 	if zp.isFilled {
 		t.Fatal(zp)
 	}
-	zp.InitForYear(2023)
+	zp.initForYear(2023)
 	if !zp.isFilled {
 		t.Fatal(zp)
 	}

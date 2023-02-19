@@ -6,7 +6,7 @@ import (
 )
 
 //-----------------------------------------------------------------------------
-// ZoneProcessor
+// zoneProcessor
 //-----------------------------------------------------------------------------
 
 type yearMonth struct {
@@ -29,7 +29,7 @@ const (
 	maxInteriorYears = 4
 )
 
-type ZoneProcessor struct {
+type zoneProcessor struct {
 	zoneInfo   *zoneinfo.ZoneInfo
 	year       int16
 	isFilled   bool
@@ -38,27 +38,27 @@ type ZoneProcessor struct {
 	tstorage   transitionStorage
 }
 
-func (zp *ZoneProcessor) isFilledForYear(year int16) bool {
+func (zp *zoneProcessor) isFilledForYear(year int16) bool {
 	return zp.isFilled && (year == zp.year)
 }
 
-// InitForZoneInfo initializes the ZoneProcessor for the given zoneInfo.
-func (zp *ZoneProcessor) InitForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
+// initForZoneInfo initializes the zoneProcessor for the given zoneInfo.
+func (zp *zoneProcessor) initForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
 
 	zp.zoneInfo = zoneInfo
 	zp.isFilled = false
 }
 
 // Clear cache, used only for tests.
-func (zp *ZoneProcessor) reset() {
+func (zp *zoneProcessor) reset() {
 	zp.isFilled = false
 }
 
-func (zp *ZoneProcessor) IsLink() bool {
+func (zp *zoneProcessor) isLink() bool {
 	return zp.zoneInfo.IsLink()
 }
 
-func (zp *ZoneProcessor) InitForYear(year int16) errType {
+func (zp *zoneProcessor) initForYear(year int16) errType {
 	if zp.isFilledForYear(year) {
 		return errOk
 	}
@@ -96,15 +96,15 @@ func (zp *ZoneProcessor) InitForYear(year int16) errType {
 	return errOk
 }
 
-func (zp *ZoneProcessor) InitForEpochSeconds(epochSeconds ATime) errType {
+func (zp *zoneProcessor) initForEpochSeconds(epochSeconds ATime) errType {
 	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	if ldt.IsError() {
 		return errGeneric
 	}
-	return zp.InitForYear(ldt.Year)
+	return zp.initForYear(ldt.Year)
 }
 
-func (zp *ZoneProcessor) Name() string {
+func (zp *zoneProcessor) name() string {
 	return zp.zoneInfo.Name
 }
 
@@ -634,7 +634,7 @@ func createAbbreviation(
 }
 
 //---------------------------------------------------------------------------
-// FindByLocalDateTime() and FindByEpochSeconds()
+// findByLocalDateTime() and findByEpochSeconds()
 //---------------------------------------------------------------------------
 
 // Values of the findResult.type field.
@@ -665,8 +665,8 @@ type findResult struct {
 // Adapted from ExtendedZoneProcessor::findByEpochSeconds(epochSeconds)
 // in the AceTime library and atc_processor_find_by_epoch_seconds() in the
 // AceTimeC library.
-func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) findResult {
-	err := zp.InitForEpochSeconds(epochSeconds)
+func (zp *zoneProcessor) findByEpochSeconds(epochSeconds ATime) findResult {
+	err := zp.initForEpochSeconds(epochSeconds)
 	if err != errOk {
 		return findResultError
 	}
@@ -699,9 +699,9 @@ func (zp *ZoneProcessor) FindByEpochSeconds(epochSeconds ATime) findResult {
 // Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDatetime&)
 // in the AceTime library and atc_processor_find_by_local_date_time() in the
 // AceTimeC library.
-func (zp *ZoneProcessor) FindByLocalDateTime(ldt *LocalDateTime) findResult {
+func (zp *zoneProcessor) findByLocalDateTime(ldt *LocalDateTime) findResult {
 
-	err := zp.InitForYear(ldt.Year)
+	err := zp.initForYear(ldt.Year)
 	if err != errOk {
 		return findResultError
 	}
