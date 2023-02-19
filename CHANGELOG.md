@@ -5,6 +5,10 @@
     * Unexport various internal functions and structs by lowercasing their
       names. Could not use `internal/` directory due to circular dependency to
       `ATime` type.
+    * Move `strutil.go` utilities to new `strbuild` package and simplify
+      names of various functions.
+        * These low-level functions are used by some of the utilities in `cmd`.
+        * Avoids cluttering the API of the `acetime` package.
 * 0.2.0 (2023-02-13, TZDB 2022g)
     * Support one-second resolution for Zone.STDOFF field, instead of
       one-minute.
