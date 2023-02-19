@@ -105,7 +105,7 @@ func LocalDateFromEpochDays(days int32) (year int16, month uint8, day uint8) {
 
 // LocalDateToEpochDays converts (y, m, d) to epoch days.
 func LocalDateToEpochDays(year int16, month uint8, day uint8) int32 {
-	converterDays := ConvertToDays(year, month, day)
+	converterDays := convertToDays(year, month, day)
 	return converterDays + daysToConverterEpochFromUnixEpoch
 }
 
