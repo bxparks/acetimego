@@ -76,9 +76,9 @@ func DaysInYearMonth(year int16, month uint8) uint8 {
 	}
 }
 
-// DayOfWeek returns the ISO week number (Monday=1, Sunday=7) of the given
+// LocalDateToDayOfWeek returns the ISO week number (Monday=1, Sunday=7) of the given
 // (year, month, day).
-func DayOfWeek(year int16, month uint8, day uint8) uint8 {
+func LocalDateToDayOfWeek(year int16, month uint8, day uint8) uint8 {
 	// The "y" starts in March to shift leap year calculation to end.
 	var y int16 = year
 	if month < 3 {
