@@ -31,6 +31,19 @@
 // Original Years: [1844,2087]
 // Generated Years: [1967,2012]
 //
+// Memory:
+//   Rules: 144
+//   Policies: 8
+//   Eras: 70
+//   Zones: 48
+//   Links: 12
+//   Registry: 0
+//   Formats: 38
+//   Letters: 7
+//   Fragments: 0
+//   Names: 77
+//   TOTAL: 404
+//
 // DO NOT EDIT
 
 package zonedbtesting

@@ -33,6 +33,19 @@
 // Original Years: [1844,2087]
 // Generated Years: [1844,2087]
 //
+// Memory:
+//   Rules: 25812
+//   Policies: 536
+//   Eras: 27328
+//   Zones: 4212
+//   Links: 2940
+//   Registry: 0
+//   Formats: 1228
+//   Letters: 106
+//   Fragments: 0
+//   Names: 9675
+//   TOTAL: 71837
+//
 // DO NOT EDIT
 
 package zonedb
