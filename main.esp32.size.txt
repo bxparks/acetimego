@@ -1,0 +1,18 @@
+   code  rodata    data     bss |   flash     ram | package
+------------------------------- | --------------- | -------
+   1120     160       0       7 |    1280       7 | (unknown)
+      0       0       0    4096 |       0    4096 | C stack
+      9       0       0       0 |       9       0 | Go interface method
+     66       0       0       0 |      66       0 | device/esp
+    216       0       0       0 |     216       0 | gitlab.com/bxparks/coding/tinygo/ds3231
+     91      18       0       0 |     109       0 | gitlab.com/bxparks/coding/tinygo/segwriter
+    484       0       0       0 |     484       0 | gitlab.com/bxparks/coding/tinygo/tm1637
+    331      24       0       8 |     355       8 | internal/task
+    590       0       0       0 |     590       0 | machine
+    130       0       0       0 |     130       0 | main
+   1880     103       0      57 |    1983      57 | runtime
+     55       0       0       0 |      55       0 | runtime/interrupt
+    141       0       0       0 |     141       0 | runtime/volatile
+   1010      32       8       0 |    1050       8 | tinygo.org/x/drivers/i2csoft
+------------------------------- | --------------- | -------
+   6123     337       8    4168 |    6468    4176 | total
