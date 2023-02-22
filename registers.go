@@ -3,6 +3,8 @@ package ds3231
 // The I2C address which this device listens to.
 const Address = 0x68
 
+type Mode uint8
+
 // Registers
 const (
 	REG_TIMEDATE = 0x00

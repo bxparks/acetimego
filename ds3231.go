@@ -5,17 +5,25 @@
 package ds3231 // import "tinygo.org/x/drivers/ds3231"
 
 import (
-	"time"
-
 	"tinygo.org/x/drivers"
 )
-
-type Mode uint8
 
 // Device wraps an I2C connection to a DS3231 device.
 type Device struct {
 	bus     drivers.I2C
-	Address uint16
+	address uint8
+}
+
+// The date (year, month, day) and time (hour, minute, second) fields supported
+// by the DS3231 RTC chip.
+type DateTime struct {
+	Year    uint8
+	Month   uint8 // [1, 12]
+	Day     uint8 // [1, 31]
+	Hour    uint8 // [0, 23]
+	Minute  uint8 // [0, 59]
+	Second  uint8 // [0, 59]
+	Weekday uint8 // [1, 7], interpretation undefined, increments every day
 }
 
 // New creates a new DS3231 connection. The I2C bus must already be
@@ -25,7 +33,7 @@ type Device struct {
 func New(bus drivers.I2C) Device {
 	return Device{
 		bus:     bus,
-		Address: Address,
+		address: Address,
 	}
 }
 
@@ -34,109 +42,57 @@ func (d *Device) Configure() bool {
 	return true
 }
 
-// IsTimeValid return true/false is the time in the device is valid
-func (d *Device) IsTimeValid() bool {
-	data := []byte{0}
-	err := d.bus.ReadRegister(uint8(d.Address), REG_STATUS, data)
-	if err != nil {
-		return false
-	}
-	return (data[0] & (1 << OSF)) == 0x00
-}
-
-// IsRunning returns if the oscillator is running
-func (d *Device) IsRunning() bool {
-	data := []uint8{0}
-	err := d.bus.ReadRegister(uint8(d.Address), REG_CONTROL, data)
-	if err != nil {
-		return false
-	}
-	return (data[0] & (1 << EOSC)) == 0x00
-}
-
-// SetRunning starts the internal oscillator
-func (d *Device) SetRunning(isRunning bool) error {
-	data := []uint8{0}
-	err := d.bus.ReadRegister(uint8(d.Address), REG_CONTROL, data)
-	if err != nil {
-		return err
-	}
-	if isRunning {
-		data[0] &^= uint8(1 << EOSC)
-	} else {
-		data[0] |= 1 << EOSC
-	}
-	err = d.bus.WriteRegister(uint8(d.Address), REG_CONTROL, data)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
 // SetTime sets the date and time in the DS3231
-func (d *Device) SetTime(dt time.Time) error {
-	data := []byte{0}
-	err := d.bus.ReadRegister(uint8(d.Address), REG_STATUS, data)
+func (d *Device) SetTime(dt DateTime) error {
+	data := [1]byte{0}
+	err := d.bus.ReadRegister(uint8(d.address), REG_STATUS, data[:])
 	if err != nil {
 		return err
 	}
 	data[0] &^= 1 << OSF
-	err = d.bus.WriteRegister(uint8(d.Address), REG_STATUS, data)
+	err = d.bus.WriteRegister(uint8(d.address), REG_STATUS, data[:])
 	if err != nil {
 		return err
 	}
 
-	data = make([]uint8, 7)
-	data[0] = uint8ToBCD(uint8(dt.Second()))
-	data[1] = uint8ToBCD(uint8(dt.Minute()))
-	data[2] = uint8ToBCD(uint8(dt.Hour()))
-
-	year := uint8(dt.Year() - 2000)
-	centuryFlag := uint8(0)
-	if year >= 100 {
-		year -= 100
-		centuryFlag = 1 << 7
+	var tdata = [7]uint8{
+		uint8ToBCD(dt.Second),
+		uint8ToBCD(dt.Minute),
+		uint8ToBCD(dt.Hour),
+		uint8ToBCD(dt.Weekday),
+		uint8ToBCD(dt.Day),
+		uint8ToBCD(dt.Month),
+		uint8ToBCD(dt.Year),
 	}
 
-	data[3] = uint8ToBCD(uint8(dt.Weekday()))
-	data[4] = uint8ToBCD(uint8(dt.Day()))
-	data[5] = uint8ToBCD(uint8(dt.Month()) | centuryFlag)
-	data[6] = uint8ToBCD(year)
-
-	err = d.bus.WriteRegister(uint8(d.Address), REG_TIMEDATE, data)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	err = d.bus.WriteRegister(uint8(d.address), REG_TIMEDATE, tdata[:])
+	return err
 }
 
 // ReadTime returns the date and time
-func (d *Device) ReadTime() (dt time.Time, err error) {
-	data := make([]uint8, 7)
-	err = d.bus.ReadRegister(uint8(d.Address), REG_TIMEDATE, data)
+func (d *Device) ReadTime() (dt DateTime, err error) {
+	var data [7]uint8
+	err = d.bus.ReadRegister(uint8(d.address), REG_TIMEDATE, data[:])
 	if err != nil {
 		return
 	}
-	second := bcdToInt(data[0] & 0x7F)
-	minute := bcdToInt(data[1])
-	hour := hoursBCDToInt(data[2])
-	day := bcdToInt(data[4])
-	monthRaw := data[5]
-	year := bcdToInt(data[6]) + 2000
-	if monthRaw&(1<<7) != 0x00 {
-		year += 100
-	}
-	month := time.Month(bcdToInt(monthRaw & 0x7F))
 
-	dt = time.Date(year, month, day, hour, minute, second, 0, time.UTC)
+	dt = DateTime{
+		Second:  bcdToUint8(data[0] & 0x7F),
+		Minute:  bcdToUint8(data[1]),
+		Hour:    bcdToUint8(data[2] & 0x3F),
+		Weekday: data[3],
+		Day:     bcdToUint8(data[4]),
+		Month:   bcdToUint8(data[5] & 0x7F),
+		Year:    bcdToUint8(data[6]),
+	}
 	return
 }
 
 // ReadTemperature returns the temperature in millicelsius (mC)
 func (d *Device) ReadTemperature() (int32, error) {
-	data := make([]uint8, 2)
-	err := d.bus.ReadRegister(uint8(d.Address), REG_TEMP, data)
+	var data [2]uint8
+	err := d.bus.ReadRegister(uint8(d.address), REG_TEMP, data[:])
 	if err != nil {
 		return 0, err
 	}
@@ -148,20 +104,7 @@ func uint8ToBCD(value uint8) uint8 {
 	return value + 6*(value/10)
 }
 
-// bcdToInt converts BCD from the DS3231 to int
-func bcdToInt(value uint8) int {
-	return int(value - 6*(value>>4))
-}
-
-// hoursBCDToInt converts the BCD hours to int
-func hoursBCDToInt(value uint8) (hour int) {
-	if value&0x40 != 0x00 {
-		hour = bcdToInt(value & 0x1F)
-		if (value & 0x20) != 0x00 {
-			hour += 12
-		}
-	} else {
-		hour = bcdToInt(value)
-	}
-	return
+// bcdToUint8 converts BCD from the DS3231 to int
+func bcdToUint8(value uint8) uint8 {
+	return value - 6*(value>>4)
 }
