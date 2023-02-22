@@ -47,7 +47,7 @@ func (tz *TimeZone) IsLink() bool {
 
 func (tz *TimeZone) Name() string {
 	if tz.tztype == TztypeError {
-		return "<Error>"
+		return "Err" // Can be rendered on 7-segment LED
 	} else if tz.tztype == TztypeUTC {
 		return "UTC"
 	} else {

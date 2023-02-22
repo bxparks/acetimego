@@ -44,7 +44,7 @@ func TestTimeZoneUTC(t *testing.T) {
 
 func TestTimeZoneError(t *testing.T) {
 	tz := TimeZoneError
-	if !(tz.Name() == "<Error>") {
+	if !(tz.Name() == "Err") {
 		t.Fatal(tz)
 	}
 	if !(tz.ZoneID() == 0) {
