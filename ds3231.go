@@ -17,7 +17,7 @@ type Device struct {
 // The date (year, month, day) and time (hour, minute, second) fields supported
 // by the DS3231 RTC chip.
 type DateTime struct {
-	Year    uint8
+	Year    uint8 // [0, 99]
 	Month   uint8 // [1, 12]
 	Day     uint8 // [1, 31]
 	Hour    uint8 // [0, 23]
