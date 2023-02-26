@@ -5,123 +5,136 @@ import (
 )
 
 func TestPositiveTemp(t *testing.T) {
-	temp := toCentiC(0, 0)
+	var rawTemp uint16 = 0 << 8 | 0
+	temp := ToCentiC(rawTemp)
 	if !(temp == 0) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0, 0)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3200) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(0, 0b01000000)
+	rawTemp = 0 << 8 | 0b01000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == 25) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0, 0b01000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3245) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(0, 0b10000000)
+	rawTemp = 0 << 8 | 0b10000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == 50) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0, 0b10000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3290) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(0, 0b11000000)
+	rawTemp = 0 << 8 | 0b11000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == 75) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0, 0b11000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3335) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(1, 0)
+	rawTemp = 1 << 8 | 0
+	temp = ToCentiC(rawTemp)
 	if !(temp == 100) {
 		t.Error(temp)
 	}
-	temp = toCentiF(1, 0)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3380) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(1, 0b01000000)
+	rawTemp = 1 << 8 | 0b01000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == 125) {
 		t.Error(temp)
 	}
-	temp = toCentiF(1, 0b01000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3425) {
 		t.Error(temp)
 	}
 
 	// 127.75C, highest temp possible on DS3231
-	temp = toCentiC(0x7f, 0b11000000)
+	rawTemp = 0x7f << 8 | 0b11000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == 12775) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0x7f, 0b11000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 26195) {
 		t.Error(temp)
 	}
 }
 
 func TestNegativeTemp(t *testing.T) {
-	temp := toCentiC(0xff, 0b11000000)
+	var rawTemp uint16 = 0xff << 8 | 0b11000000
+	temp := ToCentiC(rawTemp)
 	if !(temp == -25) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0xff, 0b11000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3155) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(0xff, 0b10000000)
+	rawTemp = 0xff << 8 | 0b10000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == -50) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0xff, 0b10000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3110) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(0xff, 0b01000000)
+	rawTemp = 0xff << 8 | 0b01000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == -75) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0xff, 0b01000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3065) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(0xff, 0)
+	rawTemp = 0xff << 8 | 0
+	temp = ToCentiC(rawTemp)
 	if !(temp == -100) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0xff, 0)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 3020) {
 		t.Error(temp)
 	}
 
-	temp = toCentiC(0xfe, 0b11000000)
+	rawTemp = 0xfe << 8 | 0b11000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == -125) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0xfe, 0b11000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == 2975) {
 		t.Error(temp)
 	}
 
 	// -128.00C, lowest temp possible on DS3231
-	temp = toCentiC(0x80, 0b00000000)
+	rawTemp = 0x80 << 8 | 0b00000000
+	temp = ToCentiC(rawTemp)
 	if !(temp == -12800) {
 		t.Error(temp)
 	}
-	temp = toCentiF(0x80, 0b00000000)
+	temp = ToCentiF(rawTemp)
 	if !(temp == -19840) {
 		t.Error(temp)
 	}

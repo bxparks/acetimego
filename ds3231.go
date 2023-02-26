@@ -117,36 +117,22 @@ func (d *Device) ReadTime() (dt DateTime, err error) {
 	return
 }
 
-// ReadTempCentiC returns the temperature in centi Celsius (0.01 C).
-func (d *Device) ReadTempCentiC() (int16, error) {
-	msb, lsb, err := d.readTemp()
-	if err != nil {
-		return 0, err
-	}
-	return toCentiC(msb, lsb), err
-}
-
-// ReadTempCentiF returns the temperature in centi Fahrenheit (0.01 F).
-func (d *Device) ReadTempCentiF() (int16, error) {
-	msb, lsb, err := d.readTemp()
-	if err != nil {
-		return 0, err
-	}
-	return toCentiF(msb, lsb), nil
-}
-
-func (d *Device) readTemp() (msb uint8, lsb uint8, err error) {
+// Read the temperature as a uint16 containing the raw (msb, lsb) pair. It
+// represents the temperature in units of (1/256) deg Celsius. To convert to
+// centi Celsius or centi Fahrenheit, use ToCentiC() or ToCentiF().
+func (d *Device) ReadTemp() (rawTemp uint16, err error) {
 	var data [2]uint8
 	err = d.bus.ReadRegister(uint8(d.address), REG_TEMP, data[:])
-	msb = data[0]
-	lsb = data[1]
-	return
+	msb := data[0]
+	lsb := data[1]
+	rawTemp = (uint16(msb) << 8) | uint16(lsb)
+	return rawTemp, err
 }
 
-// Convert the (msb, lsb) temperature readings to centi Celsius (units of
-// 0.01C). The DS3231 has a precision of 2 bits after the decimal point, in
-// other words, 0.25C. The lowest temperature is -128.00C. The highest
-// temperature is 127.75C.
+// Convert the raw temperature readings (units of 1/256 Celsius) to centi
+// Celsius (units of 0.01C). The DS3231 has a precision of 2 bits after the
+// decimal point, in other words, 0.25C. The lowest temperature is -128.00C. The
+// highest temperature is 127.75C.
 //
 // According to the DS3231 datasheet: "The temperature is encoded in two's
 // complement format. The upper 8 bits, the integer portion, are at location 11h
@@ -159,19 +145,17 @@ func (d *Device) readTemp() (msb uint8, lsb uint8, err error) {
 // representing temperature in units of (1/256) degrees Celsius. We can convert
 // this into an integer in units of (1/100) degrees Celsius without loss of
 // information because the DS3231 only uses the top 2 bits of the `lsb` portion.
-func toCentiC(msb uint8, lsb uint8) int16 {
-	c256 := int16((uint16(msb) << 8) | uint16(lsb)) // units of (1/256) Celsius
-
-	c100 := c256 / 64 * 25 // (* 100 / 256), always integral, no loss of bits
+func ToCentiC(rawTemp uint16) int16 {
+	c100 := int16(rawTemp) / 64 * 25 // (*100/256), always integral
 	return c100
 }
 
-// Convert (msb, lsb) temperature reading into centi Fahrenheit (units of
-// 0.01F). The DS3231 has a precision of 2 bits after the decimal point in
-// Celsius, which corresponds to 0.45F. The lowest temperature is -198.40F. The
-// highest temperature is 261.95F.
-func toCentiF(msb uint8, lsb uint8) int16 {
-	c100 := toCentiC(msb, lsb)
+// Convert raw temperature reading (units of 1/256 Celsius) into centi
+// Fahrenheit (units of 0.01F). The DS3231 has a precision of 2 bits after the
+// decimal point in Celsius, which corresponds to 0.45F. The lowest temperature
+// is -198.40F. The highest temperature is 261.95F.
+func ToCentiF(rawTemp uint16) int16 {
+	c100 := ToCentiC(rawTemp)
 	f100 := c100/5*9 + 3200 // always integral, with no loss of bits
 	return f100
 }
