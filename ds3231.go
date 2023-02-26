@@ -99,7 +99,7 @@ func (d *Device) ReadTime() (dt DateTime, err error) {
 	}
 
 	var century uint8
-	if data[5] & 0x80 != 0 {
+	if data[5]&0x80 != 0 {
 		century = 1
 	} else {
 		century = 0
@@ -117,34 +117,63 @@ func (d *Device) ReadTime() (dt DateTime, err error) {
 	return
 }
 
-// ReadTemperature returns the temperature in millicelsius (mC)
-func (d *Device) ReadTemperature() (int32, error) {
-	var data [2]uint8
-	err := d.bus.ReadRegister(uint8(d.address), REG_TEMP, data[:])
+// ReadTempCentiC returns the temperature in centi Celsius (0.01 C).
+func (d *Device) ReadTempCentiC() (int16, error) {
+	msb, lsb, err := d.readTemp()
 	if err != nil {
 		return 0, err
 	}
-	return toMilliCelsius(data[0], data[1]), nil
+	return toCentiC(msb, lsb), err
 }
 
-// Convert raw temperature bytes to Celsius in units of 1/1000.
+// ReadTempCentiF returns the temperature in centi Fahrenheit (0.01 F).
+func (d *Device) ReadTempCentiF() (int16, error) {
+	msb, lsb, err := d.readTemp()
+	if err != nil {
+		return 0, err
+	}
+	return toCentiF(msb, lsb), nil
+}
+
+func (d *Device) readTemp() (msb uint8, lsb uint8, err error) {
+	var data [2]uint8
+	err = d.bus.ReadRegister(uint8(d.address), REG_TEMP, data[:])
+	msb = data[0]
+	lsb = data[1]
+	return
+}
+
+// Convert the (msb, lsb) temperature readings to centi Celsius (units of
+// 0.01C). The DS3231 has a precision of 2 bits after the decimal point, in
+// other words, 0.25C. The lowest temperature is -128.00C. The highest
+// temperature is 127.75C.
 //
-// According to the DS3231 datasheet, "The temperature is encoded in two's
+// According to the DS3231 datasheet: "The temperature is encoded in two's
 // complement format. The upper 8 bits, the integer portion, are at location 11h
 // and the lower 2 bits, the fractional portion, are in the upper nibble at
 // location 12h. For example, 00011001 01b = +25.25C."
 //
-// One way to think about this format is a signed 8.8 fixed point type, where
-// the `msb` represents the integer portion, and the `lsb` represents the
-// fractional portion. The second, equivalent interpretation is to consider the
-// (msb, lsb) pair as a signed 16-bit integer representing temperature in units
-// of (1/256) degrees Celsius. We can convert this into an integer in units of
-// (1/1000) degrees Celsius without loss of information because the DS3231 only
-// uses the top 2 bits of the `lsb` portion.
-func toMilliCelsius(msb uint8, lsb uint8) int32 {
-	t256 := int16((uint16(msb) << 8) | uint16(lsb)) // units of (1/256) Celsius
-	t1000 := int32(t256) * 1000 / 256 // always integral, same as (* 250 / 64)
-	return t1000 // units of (1/1000) Celsius
+// This format is a signed 8.8 fixed point type, where the `msb` represents the
+// integer portion, and the `lsb` represents the fractional portion.
+// Equivalently, we can consider the (msb, lsb) pair as a signed 16-bit integer
+// representing temperature in units of (1/256) degrees Celsius. We can convert
+// this into an integer in units of (1/100) degrees Celsius without loss of
+// information because the DS3231 only uses the top 2 bits of the `lsb` portion.
+func toCentiC(msb uint8, lsb uint8) int16 {
+	c256 := int16((uint16(msb) << 8) | uint16(lsb)) // units of (1/256) Celsius
+
+	c100 := c256 / 64 * 25 // (* 100 / 256), always integral, no loss of bits
+	return c100
+}
+
+// Convert (msb, lsb) temperature reading into centi Fahrenheit (units of
+// 0.01F). The DS3231 has a precision of 2 bits after the decimal point in
+// Celsius, which corresponds to 0.45F. The lowest temperature is -198.40F. The
+// highest temperature is 261.95F.
+func toCentiF(msb uint8, lsb uint8) int16 {
+	c100 := toCentiC(msb, lsb)
+	f100 := c100/5*9 + 3200 // always integral, with no loss of bits
+	return f100
 }
 
 // uint8ToBCD converts a byte to BCD for the DS3231
