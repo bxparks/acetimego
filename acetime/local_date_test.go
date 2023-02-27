@@ -69,6 +69,31 @@ func TestLocalDateToWeekday(t *testing.T) {
 	}
 }
 
+func TestLocalDateToYearday(t *testing.T) {
+	if LocalDateToYearday(2000, 1, 1) != 1 {
+		t.Fatal(LocalDateToYearday(2000, 1, 1))
+	}
+	if LocalDateToYearday(2000, 1, 2) != 2 {
+		t.Fatal(LocalDateToYearday(2000, 1, 2))
+	}
+	if LocalDateToYearday(2000, 2, 28) != 59 {
+		t.Fatal(LocalDateToYearday(2000, 2, 28))
+	}
+	if LocalDateToYearday(2000, 2, 29) != 60 { // leap year
+		t.Fatal(LocalDateToYearday(2000, 2, 29))
+	}
+	if LocalDateToYearday(2000, 3, 1) != 61 {
+		t.Fatal(LocalDateToYearday(2000, 3, 1))
+	}
+	if LocalDateToYearday(2000, 12, 31) != 366 {
+		t.Fatal(LocalDateToYearday(2000, 3, 1))
+	}
+
+	if LocalDateToYearday(2001, 12, 31) != 365 { // non leap
+		t.Fatal(LocalDateToYearday(2001, 3, 1))
+	}
+}
+
 func TestLocalDateFromEpochDays(t *testing.T) {
 	y, m, d := LocalDateFromEpochDays(0)
 	if y != 1970 || m != 1 || d != 1 {

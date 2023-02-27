@@ -62,6 +62,23 @@ var daysInMonth = [12]uint8{
 	31, /*Dec=31*/
 }
 
+// Number of cummulative days in all months prior to the month at given index.
+// Assume non-leap year. 0=Jan, 11=Dec.
+var daysPriorToMonth = [12]uint16{
+	0,   /*Jan=31*/
+	31,  /*Feb=28*/
+	59,  /*Mar=31*/
+	90,  /*Apr=30*/
+	120, /*May=31*/
+	151, /*Jun=30*/
+	181, /*Jul=31*/
+	212, /*Aug=31*/
+	243, /*Sep=30*/
+	273, /*Oct=31*/
+	304, /*Nov=30*/
+	334, /*Dec=31*/
+}
+
 // IsLeapYear returns true if the given year is a leap year, false otherwise.
 func IsLeapYear(year int16) bool {
 	return ((year%4 == 0) && (year%100 != 0)) || (year%400 == 0)
@@ -96,6 +113,16 @@ func LocalDateToWeekday(year int16, month uint8, day uint8) IsoWeekday {
 	} else {
 		return IsoWeekday((d+1)%7 + 1)
 	}
+}
+
+// LocalDateToYearday returns the day of the year for the given (year, month,
+// day). Jan 1 returns 1.
+func LocalDateToYearday(year int16, month uint8, day uint8) uint16 {
+	daysPrior := daysPriorToMonth[month-1]
+	if IsLeapYear(year) && month > 2 {
+		daysPrior++
+	}
+	return daysPrior + uint16(day)
 }
 
 // LocalDateFromEpochDays converts epoch days to (y, m, d).
