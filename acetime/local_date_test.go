@@ -69,6 +69,30 @@ func TestLocalDateToWeekday(t *testing.T) {
 	}
 }
 
+func TestWeekdayName(t *testing.T) {
+	if Monday.Name() != "Monday" {
+		t.Fatal(Monday.Name())
+	}
+	if Tuesday.Name() != "Tuesday" {
+		t.Fatal(Tuesday.Name())
+	}
+	if Wednesday.Name() != "Wednesday" {
+		t.Fatal(Wednesday.Name())
+	}
+	if Thursday.Name() != "Thursday" {
+		t.Fatal(Thursday.Name())
+	}
+	if Friday.Name() != "Friday" {
+		t.Fatal(Friday.Name())
+	}
+	if Saturday.Name() != "Saturday" {
+		t.Fatal(Saturday.Name())
+	}
+	if Sunday.Name() != "Sunday" {
+		t.Fatal(Sunday.Name())
+	}
+}
+
 func TestLocalDateToYearday(t *testing.T) {
 	if LocalDateToYearday(2000, 1, 1) != 1 {
 		t.Fatal(LocalDateToYearday(2000, 1, 1))

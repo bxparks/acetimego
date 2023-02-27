@@ -6,6 +6,7 @@ const (
 
 type IsoWeekday uint8
 
+// ISO Weekday starts with Monday=1, Sunday=7.
 const (
 	Monday IsoWeekday = iota + 1
 	Tuesday
@@ -15,6 +16,17 @@ const (
 	Saturday
 	Sunday
 )
+
+var weekdayStrings = []string{
+	"Err",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+	"Sunday",
+}
 
 // Offsets used to calculate the day of the week of a particular (year, month,
 // day). The element represents the number of days that the first of month of
@@ -95,8 +107,7 @@ func DaysInYearMonth(year int16, month uint8) uint8 {
 	}
 }
 
-// LocalDateToWeekday returns the ISO week day (Monday=1, Sunday=7) of the
-// given (year, month, day).
+// LocalDateToWeekday returns the ISO week day of the given (year, month, day).
 func LocalDateToWeekday(year int16, month uint8, day uint8) IsoWeekday {
 	// The "y" starts in March to shift leap year calculation to end.
 	var y int16 = year
@@ -178,4 +189,10 @@ func LocalDateDecrementOneDay(y int16, m uint8, d uint8) (
 		}
 	}
 	return
+}
+
+// Return the human readable English name for the weekday (e.g. "Sunday").
+// The 3-letter abbreviation can be retrieved with a string slice.
+func (wd IsoWeekday) Name() string {
+	return weekdayStrings[wd]
 }

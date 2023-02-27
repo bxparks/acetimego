@@ -11,6 +11,7 @@
         * Avoids cluttering the API of the `acetime` package.
     * Rename `LocalDateToDayOfWeek()` to `LocalDateToWeekday()`
         * For better consistency with standard `time` package.
+        * Add IsoWeekday.Name() method.
     * Add `LocalDateToYearday()`
         * Returns the day of year of `(year, month, day)`.
 * 0.2.0 (2023-02-13, TZDB 2022g)
