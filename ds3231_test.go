@@ -5,7 +5,7 @@ import (
 )
 
 func TestPositiveTemp(t *testing.T) {
-	var rawTemp uint16 = 0 << 8 | 0
+	var rawTemp uint16 = 0<<8 | 0
 	temp := ToCentiC(rawTemp)
 	if !(temp == 0) {
 		t.Error(temp)
@@ -15,7 +15,7 @@ func TestPositiveTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 0 << 8 | 0b01000000
+	rawTemp = 0<<8 | 0b01000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == 25) {
 		t.Error(temp)
@@ -25,7 +25,7 @@ func TestPositiveTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 0 << 8 | 0b10000000
+	rawTemp = 0<<8 | 0b10000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == 50) {
 		t.Error(temp)
@@ -35,7 +35,7 @@ func TestPositiveTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 0 << 8 | 0b11000000
+	rawTemp = 0<<8 | 0b11000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == 75) {
 		t.Error(temp)
@@ -45,7 +45,7 @@ func TestPositiveTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 1 << 8 | 0
+	rawTemp = 1<<8 | 0
 	temp = ToCentiC(rawTemp)
 	if !(temp == 100) {
 		t.Error(temp)
@@ -55,7 +55,7 @@ func TestPositiveTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 1 << 8 | 0b01000000
+	rawTemp = 1<<8 | 0b01000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == 125) {
 		t.Error(temp)
@@ -66,7 +66,7 @@ func TestPositiveTemp(t *testing.T) {
 	}
 
 	// 127.75C, highest temp possible on DS3231
-	rawTemp = 0x7f << 8 | 0b11000000
+	rawTemp = 0x7f<<8 | 0b11000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == 12775) {
 		t.Error(temp)
@@ -78,7 +78,7 @@ func TestPositiveTemp(t *testing.T) {
 }
 
 func TestNegativeTemp(t *testing.T) {
-	var rawTemp uint16 = 0xff << 8 | 0b11000000
+	var rawTemp uint16 = 0xff<<8 | 0b11000000
 	temp := ToCentiC(rawTemp)
 	if !(temp == -25) {
 		t.Error(temp)
@@ -88,7 +88,7 @@ func TestNegativeTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 0xff << 8 | 0b10000000
+	rawTemp = 0xff<<8 | 0b10000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == -50) {
 		t.Error(temp)
@@ -98,7 +98,7 @@ func TestNegativeTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 0xff << 8 | 0b01000000
+	rawTemp = 0xff<<8 | 0b01000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == -75) {
 		t.Error(temp)
@@ -108,7 +108,7 @@ func TestNegativeTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 0xff << 8 | 0
+	rawTemp = 0xff<<8 | 0
 	temp = ToCentiC(rawTemp)
 	if !(temp == -100) {
 		t.Error(temp)
@@ -118,7 +118,7 @@ func TestNegativeTemp(t *testing.T) {
 		t.Error(temp)
 	}
 
-	rawTemp = 0xfe << 8 | 0b11000000
+	rawTemp = 0xfe<<8 | 0b11000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == -125) {
 		t.Error(temp)
@@ -129,7 +129,7 @@ func TestNegativeTemp(t *testing.T) {
 	}
 
 	// -128.00C, lowest temp possible on DS3231
-	rawTemp = 0x80 << 8 | 0b00000000
+	rawTemp = 0x80<<8 | 0b00000000
 	temp = ToCentiC(rawTemp)
 	if !(temp == -12800) {
 		t.Error(temp)
