@@ -99,6 +99,13 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 	return NewZonedDateTimeFromEpochSeconds(epochSeconds, tz)
 }
 
+// Return additional information about the current date time in the ZonedExtra
+// object.
+func (zdt *ZonedDateTime) ZonedExtra() ZonedExtra {
+	ldt := zdt.LocalDateTime()
+	return NewZonedExtraFromLocalDateTime(&ldt, zdt.Tz)
+}
+
 func (zdt *ZonedDateTime) String() string {
 	var b strings.Builder
 	zdt.BuildString(&b)

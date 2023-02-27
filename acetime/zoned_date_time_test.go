@@ -469,6 +469,32 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 }
 
 //-----------------------------------------------------------------------------
+
+func TestZonedDateTimeToZonedExtra(t *testing.T) {
+	zm := NewZoneManager(&zonedbtesting.DataContext)
+	tzLosAngeles := zm.TimeZoneFromName("America/Los_Angeles")
+
+	ldt := LocalDateTime{2022, 8, 30, 20, 0, 0, 0 /*Fold*/}
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tzLosAngeles)
+	if zdt.IsError() {
+		t.Fatal(zdt)
+	}
+
+	extra := zdt.ZonedExtra()
+	expected := ZonedExtra{
+		Zetype:              ZonedExtraExact,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    1 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 1 * 3600,
+		Abbrev:              "PDT",
+	}
+	if !(extra == expected) {
+		t.Fatal(extra)
+	}
+}
+
+//-----------------------------------------------------------------------------
 // Test US/Pacific which is a Link to America/Los_Angeles
 //-----------------------------------------------------------------------------
 

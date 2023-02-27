@@ -14,6 +14,8 @@
         * Add IsoWeekday.Name() method.
     * Add `LocalDateToYearday()`
         * Returns the day of year of `(year, month, day)`.
+    * Add `ZonedDateTime.ZonedExtra()` convenience method.
+        * For easier access to extra information about the given date time.
 * 0.2.0 (2023-02-13, TZDB 2022g)
     * Support one-second resolution for Zone.STDOFF field, instead of
       one-minute.
