@@ -111,13 +111,22 @@ func (d *Device) ReadTime() (dt DateTime, err error) {
 // Read the temperature as a uint16 containing the raw (msb, lsb) pair. It
 // represents the temperature in units of (1/256) deg Celsius. To convert to
 // centi Celsius or centi Fahrenheit, use ToCentiC() or ToCentiF().
-func (d *Device) ReadTemp() (rawTemp uint16, err error) {
+func (d *Device) ReadTemp() (temp Temp, err error) {
 	var data [2]uint8
 	err = d.bus.ReadRegister(uint8(d.address), REG_TEMP, data[:])
 	msb := data[0]
 	lsb := data[1]
-	rawTemp = (uint16(msb) << 8) | uint16(lsb)
-	return rawTemp, err
+	temp = Temp((uint16(msb) << 8) | uint16(lsb))
+	return temp, err
+}
+
+// The raw temperature value from the DS3231. Two 8-bit integers merged into a
+// single 16-bit integer.
+type Temp uint16
+
+// Create a new Temp instance from the msb and lsb bytes.
+func NewTemp(msb uint8, lsb uint8) Temp {
+	return Temp(uint16(msb) << 8 | uint16(lsb))
 }
 
 // Convert the raw temperature readings (units of 1/256 Celsius) to centi
@@ -136,8 +145,8 @@ func (d *Device) ReadTemp() (rawTemp uint16, err error) {
 // representing temperature in units of (1/256) degrees Celsius. We can convert
 // this into an integer in units of (1/100) degrees Celsius without loss of
 // information because the DS3231 only uses the top 2 bits of the `lsb` portion.
-func ToCentiC(rawTemp uint16) int16 {
-	c100 := int16(rawTemp) / 64 * 25 // (*100/256), always integral
+func (temp Temp) CentiC() int16 {
+	c100 := int16(temp) / 64 * 25 // (*100/256), always integral
 	return c100
 }
 
@@ -145,8 +154,8 @@ func ToCentiC(rawTemp uint16) int16 {
 // Fahrenheit (units of 0.01F). The DS3231 has a precision of 2 bits after the
 // decimal point in Celsius, which corresponds to 0.45F. The lowest temperature
 // is -198.40F. The highest temperature is 261.95F.
-func ToCentiF(rawTemp uint16) int16 {
-	c100 := ToCentiC(rawTemp)
+func (temp Temp) CentiF() int16 {
+	c100 := temp.CentiC()
 	f100 := c100/5*9 + 3200 // always integral, with no loss of bits
 	return f100
 }
