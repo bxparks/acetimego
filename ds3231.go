@@ -72,17 +72,13 @@ func (d *Device) SetTime(dt DateTime) error {
 		return err
 	}
 
-	var century uint8
-	if dt.Century != 0 {
-		century = 0x80
-	}
 	var tdata = [7]uint8{
 		uint8ToBCD(dt.Second),
 		uint8ToBCD(dt.Minute),
 		uint8ToBCD(dt.Hour),
 		uint8ToBCD(dt.Weekday),
 		uint8ToBCD(dt.Day),
-		uint8ToBCD(dt.Month) | century,
+		uint8ToBCD(dt.Month) | (dt.Century << 7),
 		uint8ToBCD(dt.Year),
 	}
 
@@ -98,12 +94,7 @@ func (d *Device) ReadTime() (dt DateTime, err error) {
 		return
 	}
 
-	var century uint8
-	if data[5]&0x80 != 0 {
-		century = 1
-	} else {
-		century = 0
-	}
+	century := (data[5] & 0x80) >> 7
 	dt = DateTime{
 		Second:  bcdToUint8(data[0] & 0x7F),
 		Minute:  bcdToUint8(data[1]),
