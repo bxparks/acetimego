@@ -148,7 +148,7 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 		if onDayOfMonth == 0 {
 			onDayOfMonth = daysInMonth - 6
 		}
-		dow := LocalDateToDayOfWeek(year, month, uint8(onDayOfMonth))
+		dow := uint8(LocalDateToWeekday(year, month, uint8(onDayOfMonth)))
 		dayOfWeekShift := (onDayOfWeek - dow + 7) % 7
 		day := onDayOfMonth + int8(dayOfWeekShift)
 		if day > daysInMonth {
@@ -160,7 +160,7 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 		md.day = uint8(day)
 	} else {
 		onDayOfMonth = -onDayOfMonth
-		dow := LocalDateToDayOfWeek(year, month, uint8(onDayOfMonth))
+		dow := uint8(LocalDateToWeekday(year, month, uint8(onDayOfMonth)))
 		dayOfWeekShift := (dow - onDayOfWeek + 7) % 7
 		day := onDayOfMonth - int8(dayOfWeekShift)
 		if day < 1 {

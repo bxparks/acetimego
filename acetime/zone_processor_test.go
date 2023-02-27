@@ -15,37 +15,37 @@ import (
 
 func TestCalcStartDayOfMonth(t *testing.T) {
 	// 2018-11, Sun>=1
-	md := calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 1)
+	md := calcStartDayOfMonth(2018, 11, uint8(Sunday), 1)
 	if !(md == monthDay{11, 4}) {
 		t.Fatal("md:", md)
 	}
 
 	// 2018-11, lastSun
-	md = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 0)
+	md = calcStartDayOfMonth(2018, 11, uint8(Sunday), 0)
 	if !(md == monthDay{11, 25}) {
 		t.Fatal("md:", md)
 	}
 
 	// 2018-11, Sun>=30, should shift to 2018-12-2
-	md = calcStartDayOfMonth(2018, 11, IsoWeekdaySunday, 30)
+	md = calcStartDayOfMonth(2018, 11, uint8(Sunday), 30)
 	if !(md == monthDay{12, 2}) {
 		t.Fatal("md:", md)
 	}
 
 	// 2018-11, Mon<=7
-	md = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -7)
+	md = calcStartDayOfMonth(2018, 11, uint8(Monday), -7)
 	if !(md == monthDay{11, 5}) {
 		t.Fatal("md:", md)
 	}
 
 	// 2018-11, Mon<=1, shifts back into October
-	md = calcStartDayOfMonth(2018, 11, IsoWeekdayMonday, -1)
+	md = calcStartDayOfMonth(2018, 11, uint8(Monday), -1)
 	if !(md == monthDay{10, 29}) {
 		t.Fatal("md:", md)
 	}
 
 	// 2018-03, Thu>=9
-	md = calcStartDayOfMonth(2018, 3, IsoWeekdayThursday, 9)
+	md = calcStartDayOfMonth(2018, 3, uint8(Thursday), 9)
 	if !(md == monthDay{3, 15}) {
 		t.Fatal("md:", md)
 	}
