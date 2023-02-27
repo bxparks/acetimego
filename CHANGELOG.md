@@ -9,6 +9,10 @@
       names of various functions.
         * These low-level functions are used by some of the utilities in `cmd`.
         * Avoids cluttering the API of the `acetime` package.
+    * Rename `LocalDateToDayOfWeek()` to `LocalDateToWeekday()`
+        * For better consistency with standard `time` package.
+    * Add `LocalDateToYearday()`
+        * Returns the day of year of `(year, month, day)`.
 * 0.2.0 (2023-02-13, TZDB 2022g)
     * Support one-second resolution for Zone.STDOFF field, instead of
       one-minute.
