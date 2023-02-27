@@ -4,14 +4,16 @@ const (
 	InvalidYear = int16(-(1 << 15)) // math.MinInt16
 )
 
+type IsoWeekday uint8
+
 const (
-	IsoWeekdayMonday = iota + 1
-	IsoWeekdayTuesday
-	IsoWeekdayWednesday
-	IsoWeekdayThursday
-	IsoWeekdayFriday
-	IsoWeekdaySaturday
-	IsoWeekdaySunday
+	Monday IsoWeekday = iota + 1
+	Tuesday
+	Wednesday
+	Thursday
+	Friday
+	Saturday
+	Sunday
 )
 
 // Offsets used to calculate the day of the week of a particular (year, month,
@@ -25,11 +27,11 @@ const (
 //
 // For example:
 //
-//   - daysOfWeek[3] is 3 because April (index=3) 1st is shifted by 3
+//   - weekdayOffset[3] is 3 because April (index=3) 1st is shifted by 3
 //     days because March has 31 days (28 + 3).
-//   - daysOfWeek[4] is 5 because May (index=4) 1st is shifted by 2
+//   - weekdayOffset[4] is 5 because May (index=4) 1st is shifted by 2
 //     additional days from April, because April has 30 days (28 + 2).
-var daysOfWeek = [12]uint8{
+var weekdayOffset = [12]uint8{
 	5, /*Jan=31*/
 	1, /*Feb=28*/
 	0, /*Mar=31, start of "year"*/
@@ -76,9 +78,9 @@ func DaysInYearMonth(year int16, month uint8) uint8 {
 	}
 }
 
-// LocalDateToDayOfWeek returns the ISO week number (Monday=1, Sunday=7) of the given
-// (year, month, day).
-func LocalDateToDayOfWeek(year int16, month uint8, day uint8) uint8 {
+// LocalDateToWeekday returns the ISO week day (Monday=1, Sunday=7) of the
+// given (year, month, day).
+func LocalDateToWeekday(year int16, month uint8, day uint8) IsoWeekday {
 	// The "y" starts in March to shift leap year calculation to end.
 	var y int16 = year
 	if month < 3 {
@@ -86,13 +88,13 @@ func LocalDateToDayOfWeek(year int16, month uint8, day uint8) uint8 {
 	}
 
 	var d int16 = y + y/4 - y/100 + y/400 +
-		int16(daysOfWeek[month-1]) + int16(day)
+		int16(weekdayOffset[month-1]) + int16(day)
 
 	// 2000-01-01 was a Saturday=6, so set the offsets accordingly
 	if d < -1 {
-		return uint8((d+1)%7 + 8)
+		return IsoWeekday((d+1)%7 + 8)
 	} else {
-		return uint8((d+1)%7 + 1)
+		return IsoWeekday((d+1)%7 + 1)
 	}
 }
 

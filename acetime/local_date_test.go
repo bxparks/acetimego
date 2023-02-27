@@ -51,20 +51,20 @@ func TestDaysInYearMonth(t *testing.T) {
 	}
 }
 
-func TestDayOfWeeek(t *testing.T) {
-	if LocalDateToDayOfWeek(2000, 1, 1) != 6 {
+func TestLocalDateToWeekday(t *testing.T) {
+	if LocalDateToWeekday(2000, 1, 1) != Saturday {
 		t.Fatalf(`(2000, 1, 1) should be a Saturday`)
 	}
-	if LocalDateToDayOfWeek(2000, 1, 2) != 7 {
+	if LocalDateToWeekday(2000, 1, 2) != Sunday {
 		t.Fatalf(`(2000, 1, 2) should be a Sunday`)
 	}
-	if LocalDateToDayOfWeek(2000, 12, 31) != 7 {
+	if LocalDateToWeekday(2000, 12, 31) != Sunday {
 		t.Fatalf(`(2000, 12, 31) should be a Sunday`)
 	}
-	if LocalDateToDayOfWeek(2022, 12, 23) != 5 {
+	if LocalDateToWeekday(2022, 12, 23) != Friday {
 		t.Fatalf(`(2022, 12, 23) should be a Friday`)
 	}
-	if LocalDateToDayOfWeek(2022, 12, 25) != 7 {
+	if LocalDateToWeekday(2022, 12, 25) != Sunday {
 		t.Fatalf(`(2022, 12, 25) should be a Sunday`)
 	}
 }
