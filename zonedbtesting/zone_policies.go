@@ -139,7 +139,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	// Rule    US    2007    max    -    Mar    Sun>=8    2:00    1:00    D
 	{
 		FromYear: 2007,
-		ToYear: 9999,
+		ToYear: 32766,
 		InMonth: 3,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 8,
@@ -151,7 +151,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
 	{
 		FromYear: 2007,
-		ToYear: 9999,
+		ToYear: 32766,
 		InMonth: 11,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 1,
@@ -169,8 +169,8 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// Anchor: Rule    WS    2011    only    -    Apr    Sat>=1    4:00    0    -
 	{
-		FromYear: 0,
-		ToYear: 0,
+		FromYear: -32767,
+		ToYear: -32767,
 		InMonth: 1,
 		OnDayOfWeek: 0,
 		OnDayOfMonth: 1,
@@ -252,9 +252,9 @@ const ZoneRulesData = "\xaf\x07\xd6\x07\x0a\x07\x00\x00\xe0\x01\x00\x02" +
 		"\xb7\x07\xb7\x07\x02\x07\x00\x00\xe0\x01\x3c\x01" +
 		"\xb8\x07\xc2\x07\x04\x07\x00\x00\xe0\x01\x3c\x01" +
 		"\xc3\x07\xd6\x07\x04\x07\x01\x00\xe0\x01\x3c\x01" +
-		"\xd7\x07\x0f\x27\x03\x07\x08\x00\xe0\x01\x3c\x01" +
-		"\xd7\x07\x0f\x27\x0b\x07\x01\x00\xe0\x01\x00\x02" +
-		"\x00\x00\x00\x00\x01\x00\x01\x00\x00\x00\x00\x00" +
+		"\xd7\x07\xfe\x7f\x03\x07\x08\x00\xe0\x01\x3c\x01" +
+		"\xd7\x07\xfe\x7f\x0b\x07\x01\x00\xe0\x01\x00\x02" +
+		"\x01\x80\x01\x80\x01\x00\x01\x00\x00\x00\x00\x00" +
 		"\xda\x07\xda\x07\x09\x07\x00\x00\x00\x00\x3c\x00" +
 		"\xdb\x07\xdb\x07\x04\x06\x01\x00\xc0\x03\x00\x00" +
 		"\xdb\x07\xdb\x07\x09\x06\x00\x00\xd0\x02\x3c\x00" +
@@ -424,6 +424,6 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Notable zone policies: 1
 // ---------------------------------------------------------------------------
 
-// WS {Added anchor rule at year 0}
+// WS {Added anchor rule at year -32767}
 
 

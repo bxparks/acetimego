@@ -113,7 +113,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
-		UntilYear: 10000,
+		UntilYear: 32767,
 		UntilMonth: 1,
 		UntilDay: 1,
 		UntilSecondsCode: 0, // 0 / 15
@@ -133,7 +133,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
-		UntilYear: 10000,
+		UntilYear: 32767,
 		UntilMonth: 1,
 		UntilDay: 1,
 		UntilSecondsCode: 0, // 0 / 15
@@ -153,7 +153,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
-		UntilYear: 10000,
+		UntilYear: 32767,
 		UntilMonth: 1,
 		UntilDay: 1,
 		UntilSecondsCode: 0, // 0 / 15
@@ -187,7 +187,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
 		OffsetSecondsRemainder: 0,
-		UntilYear: 10000,
+		UntilYear: 32767,
 		UntilMonth: 1,
 		UntilDay: 1,
 		UntilSecondsCode: 0, // 0 / 15
@@ -202,11 +202,11 @@ const ZoneEraCount = 5
 const ZoneEraChunkSize = 14
 
 // ZoneErasData contains the ZoneEraRecords data as a hex encoded string.
-const ZoneErasData = "\x04\x00\x01\x00\x80\xf8\x10\x27\x00\x01\x01\x00\x00\x00" +
-		"\x03\x00\x01\x00\x50\xfb\x10\x27\x00\x01\x01\x00\x00\x00" +
-		"\x05\x00\x00\x00\x00\x00\x10\x27\x00\x01\x01\x00\x00\x00" +
+const ZoneErasData = "\x04\x00\x01\x00\x80\xf8\xff\x7f\x00\x01\x01\x00\x00\x00" +
+		"\x03\x00\x01\x00\x50\xfb\xff\x7f\x00\x01\x01\x00\x00\x00" +
+		"\x05\x00\x00\x00\x00\x00\xff\x7f\x00\x01\x01\x00\x00\x00" +
 		"\x02\x00\x02\x00\xb0\xf5\xdb\x07\x00\x0c\x1d\x00\x80\x16" +
-		"\x01\x00\x02\x00\x30\x0c\x10\x27\x00\x01\x01\x00\x00\x00"
+		"\x01\x00\x02\x00\x30\x0c\xff\x7f\x00\x01\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
 // ZoneInfoRecords is an array of zoneinfo.ZoneInfoRecord items concatenated
@@ -628,7 +628,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // ---------------------------------------------------------------------------
 
 // Pacific/Apia {
-//   WS {Added anchor rule at year 0}
+//   WS {Added anchor rule at year -32767}
 // }
 
 
