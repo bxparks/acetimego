@@ -7,17 +7,17 @@ const (
 	// The minimum value of ZoneRule::FromYear and ZoneRule::ToYear. Used
 	// by synthetic entries for certain zones, to guarantee that all zones have at
 	// least one transition.
-	MinZoneRuleYear = 0
+	MinZoneRuleYear int16 = -32767
 
 	// The maximum value of ZoneRule::FromYear and ZoneRule::ToYear,
 	// representing the sentinel value "max" in the TO and FROM columns of the
 	// TZDB files. Must be less than MaxZoneEraUntilYear.
-	MaxZoneRuleYear = 9999
+	MaxZoneRuleYear int16 = 32766
 
 	// The maximum value of ZoneEra::UntilYear, representing the sentinel value
 	// "-" in the UNTIL column of the TZDB files. Must be greater than
 	// MaxZoneRuleYear.
-	MaxZoneEraUntilYear = MaxZoneRuleYear + 1
+	MaxZoneEraUntilYear int16 = MaxZoneRuleYear + 1
 )
 
 //-----------------------------------------------------------------------------
