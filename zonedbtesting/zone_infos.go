@@ -28,11 +28,13 @@
 //
 // Supported Zones: 5 (4 zones, 1 links)
 // Unsupported Zones: 591 (347 zones, 244 links)
-// Original Years: [1844,2087]
+// Original Years:  [1844,2087]
 // Generated Years: [1967,2012]
+// Estimator Years: [1967,2024]
+// Max Buffer Size: 6
 //
 // Memory:
-//   Rules: 144
+//   Rules: 156
 //   Policies: 8
 //   Eras: 70
 //   Zones: 48
@@ -42,7 +44,7 @@
 //   Letters: 7
 //   Fragments: 0
 //   Names: 77
-//   TOTAL: 404
+//   TOTAL: 416
 //
 // DO NOT EDIT
 
@@ -627,9 +629,6 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Notable zones: 0
 // ---------------------------------------------------------------------------
 
-// Pacific/Apia {
-//   WS {Added anchor rule at year -32767}
-// }
 
 
 // ---------------------------------------------------------------------------

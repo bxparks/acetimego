@@ -209,9 +209,9 @@ func TestGetTransitionTime(t *testing.T) {
 	era := &info.Eras[0]
 	policy := era.Policy
 
-	// Rule 5, [2007,9999]
+	// Rule 6, [2007,9999]
 	// Rule    US    2007    max    -    Nov    Sun>=1    2:00    0    S
-	rule := &policy.Rules[5]
+	rule := &policy.Rules[6]
 
 	// Nov 4 2018
 	dt := getTransitionTime(2018, rule)
@@ -240,7 +240,7 @@ func TestCreateTransitionForYear(t *testing.T) {
 		lastOffsetSeconds: 0,
 		lastDeltaSeconds:  0,
 	}
-	rule := &policy.Rules[5]
+	rule := &policy.Rules[6]
 
 	// Nov Sun>=1
 	var transition transition

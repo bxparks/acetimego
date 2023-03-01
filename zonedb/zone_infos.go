@@ -11,7 +11,7 @@
 //     --delta_granularity 60
 //     --until_at_granularity 1
 //     --db_namespace zonedb
-//     --start_year 3
+//     --start_year 1800
 //     --until_year 10000
 //
 // using the TZ Database files
@@ -30,8 +30,10 @@
 //
 // Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
-// Original Years: [1844,2087]
+// Original Years:  [1844,2087]
 // Generated Years: [1844,2087]
+// Estimator Years: [1800,2090]
+// Max Buffer Size: 8
 //
 // Memory:
 //   Rules: 25812
@@ -37744,1432 +37746,531 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // ---------------------------------------------------------------------------
 
 // Africa/Abidjan {STDOFF '-0:16:08' not at :00 or :30 mark}
-// Africa/Algiers {
-//   STDOFF '0:12:12' not at :00 or :30 mark,
-//   Algeria {Added anchor rule at year -32767}
-// }
+// Africa/Algiers {STDOFF '0:12:12' not at :00 or :30 mark}
 // Africa/Bissau {STDOFF '-1:02:20' not at :00 or :30 mark}
-// Africa/Cairo {
-//   STDOFF '2:05:09' not at :00 or :30 mark,
-//   Egypt {Added anchor rule at year -32767}
-// }
+// Africa/Cairo {STDOFF '2:05:09' not at :00 or :30 mark}
 // Africa/Casablanca {
 //   STDOFF '-0:30:20' not at :00 or :30 mark,
-//   Morocco {
-//     Added anchor rule at year -32767,
-//     SAVE '-1:00' different from 1:00,
-//   }
+//   Morocco {SAVE '-1:00' different from 1:00}
 // }
 // Africa/Ceuta {
 //   STDOFF '-0:21:16' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Spain {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
-//   SpainAfrica {Added anchor rule at year -32767}
+//   Spain {SAVE '2:00' different from 1:00}
 // }
 // Africa/El_Aaiun {
 //   STDOFF '-0:52:48' not at :00 or :30 mark,
-//   Morocco {
-//     Added anchor rule at year -32767,
-//     SAVE '-1:00' different from 1:00,
-//   }
+//   Morocco {SAVE '-1:00' different from 1:00}
 // }
 // Africa/Johannesburg {
 //   RULES not fixed but FORMAT is missing '%' or '/',
 //   STDOFF '1:52:00' not at :00 or :30 mark,
-//   SA {Added anchor rule at year -32767}
 // }
-// Africa/Juba {
-//   STDOFF '2:06:28' not at :00 or :30 mark,
-//   Sudan {Added anchor rule at year -32767}
-// }
-// Africa/Khartoum {
-//   STDOFF '2:10:08' not at :00 or :30 mark,
-//   Sudan {Added anchor rule at year -32767}
-// }
+// Africa/Juba {STDOFF '2:06:28' not at :00 or :30 mark}
+// Africa/Khartoum {STDOFF '2:10:08' not at :00 or :30 mark}
 // Africa/Lagos {STDOFF '0:13:35' not at :00 or :30 mark}
 // Africa/Maputo {STDOFF '2:10:20' not at :00 or :30 mark}
 // Africa/Monrovia {STDOFF '-0:43:08' not at :00 or :30 mark}
 // Africa/Nairobi {STDOFF '2:27:16' not at :00 or :30 mark}
 // Africa/Ndjamena {STDOFF '1:00:12' not at :00 or :30 mark}
 // Africa/Sao_Tome {STDOFF '0:26:56' not at :00 or :30 mark}
-// Africa/Tripoli {
-//   STDOFF '0:52:44' not at :00 or :30 mark,
-//   Libya {Added anchor rule at year -32767}
-// }
-// Africa/Tunis {
-//   STDOFF '0:40:44' not at :00 or :30 mark,
-//   Tunisia {Added anchor rule at year -32767}
-// }
+// Africa/Tripoli {STDOFF '0:52:44' not at :00 or :30 mark}
+// Africa/Tunis {STDOFF '0:40:44' not at :00 or :30 mark}
 // Africa/Windhoek {
 //   STDOFF '1:08:24' not at :00 or :30 mark,
-//   Namibia {
-//     Added anchor rule at year -32767,
-//     SAVE '-1:00' different from 1:00,
-//   }
+//   Namibia {SAVE '-1:00' different from 1:00}
 // }
 // America/Adak {
 //   STDOFF '12:13:22' not at :00 or :30 mark,
 //   UNTIL time '12:44:35' not multiple of 1-min,
-//   US {Added anchor rule at year -32767}
 // }
 // America/Anchorage {
 //   STDOFF '14:00:24' not at :00 or :30 mark,
 //   UNTIL time '14:31:37' not multiple of 1-min,
-//   US {Added anchor rule at year -32767}
 // }
-// America/Araguaina {
-//   STDOFF '-3:12:48' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Argentina/Buenos_Aires {
-//   STDOFF '-3:53:48' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/Catamarca {
-//   STDOFF '-4:23:08' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/Cordoba {
-//   STDOFF '-4:16:48' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/Jujuy {
-//   STDOFF '-4:21:12' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/La_Rioja {
-//   STDOFF '-4:27:24' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/Mendoza {
-//   STDOFF '-4:35:16' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/Rio_Gallegos {
-//   STDOFF '-4:36:52' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/Salta {
-//   STDOFF '-4:21:40' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/San_Juan {
-//   STDOFF '-4:34:04' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/San_Luis {
-//   STDOFF '-4:25:24' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-//   SanLuis {Added anchor rule at year -32767}
-// }
-// America/Argentina/Tucuman {
-//   STDOFF '-4:20:52' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Argentina/Ushuaia {
-//   STDOFF '-4:33:12' not at :00 or :30 mark,
-//   Arg {Added anchor rule at year -32767}
-// }
-// America/Asuncion {
-//   STDOFF '-3:50:40' not at :00 or :30 mark,
-//   Para {Added anchor rule at year -32767}
-// }
-// America/Bahia {
-//   STDOFF '-2:34:04' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Bahia_Banderas {
-//   STDOFF '-7:01:00' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-// }
+// America/Araguaina {STDOFF '-3:12:48' not at :00 or :30 mark}
+// America/Argentina/Buenos_Aires {STDOFF '-3:53:48' not at :00 or :30 mark}
+// America/Argentina/Catamarca {STDOFF '-4:23:08' not at :00 or :30 mark}
+// America/Argentina/Cordoba {STDOFF '-4:16:48' not at :00 or :30 mark}
+// America/Argentina/Jujuy {STDOFF '-4:21:12' not at :00 or :30 mark}
+// America/Argentina/La_Rioja {STDOFF '-4:27:24' not at :00 or :30 mark}
+// America/Argentina/Mendoza {STDOFF '-4:35:16' not at :00 or :30 mark}
+// America/Argentina/Rio_Gallegos {STDOFF '-4:36:52' not at :00 or :30 mark}
+// America/Argentina/Salta {STDOFF '-4:21:40' not at :00 or :30 mark}
+// America/Argentina/San_Juan {STDOFF '-4:34:04' not at :00 or :30 mark}
+// America/Argentina/San_Luis {STDOFF '-4:25:24' not at :00 or :30 mark}
+// America/Argentina/Tucuman {STDOFF '-4:20:52' not at :00 or :30 mark}
+// America/Argentina/Ushuaia {STDOFF '-4:33:12' not at :00 or :30 mark}
+// America/Asuncion {STDOFF '-3:50:40' not at :00 or :30 mark}
+// America/Bahia {STDOFF '-2:34:04' not at :00 or :30 mark}
+// America/Bahia_Banderas {STDOFF '-7:01:00' not at :00 or :30 mark}
 // America/Barbados {
 //   STDOFF '-3:58:29' not at :00 or :30 mark,
-//   Barb {
-//     Added anchor rule at year -32767,
-//     SAVE '0:30' different from 1:00,
-//   }
+//   Barb {SAVE '0:30' different from 1:00}
 // }
-// America/Belem {
-//   STDOFF '-3:13:56' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
+// America/Belem {STDOFF '-3:13:56' not at :00 or :30 mark}
 // America/Belize {
 //   STDOFF '-5:52:48' not at :00 or :30 mark,
-//   Belize {
-//     Added anchor rule at year -32767,
-//     SAVE '0:30' different from 1:00,
-//   }
+//   Belize {SAVE '0:30' different from 1:00}
 // }
-// America/Boa_Vista {
-//   STDOFF '-4:02:40' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Bogota {
-//   STDOFF '-4:56:16' not at :00 or :30 mark,
-//   CO {Added anchor rule at year -32767}
-// }
-// America/Boise {
-//   STDOFF '-7:44:49' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
-// America/Cambridge_Bay {
-//   Canada {Added anchor rule at year -32767}
-//   NT_YK {Added anchor rule at year -32767}
-// }
-// America/Campo_Grande {
-//   STDOFF '-3:38:28' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Cancun {
-//   STDOFF '-5:47:04' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-// }
+// America/Boa_Vista {STDOFF '-4:02:40' not at :00 or :30 mark}
+// America/Bogota {STDOFF '-4:56:16' not at :00 or :30 mark}
+// America/Boise {STDOFF '-7:44:49' not at :00 or :30 mark}
+// America/Campo_Grande {STDOFF '-3:38:28' not at :00 or :30 mark}
+// America/Cancun {STDOFF '-5:47:04' not at :00 or :30 mark}
 // America/Caracas {STDOFF '-4:27:44' not at :00 or :30 mark}
 // America/Cayenne {STDOFF '-3:29:20' not at :00 or :30 mark}
-// America/Chicago {
-//   STDOFF '-5:50:36' not at :00 or :30 mark,
-//   Chicago {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Chihuahua {
-//   STDOFF '-7:04:20' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-// }
-// America/Ciudad_Juarez {
-//   STDOFF '-7:05:56' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Costa_Rica {
-//   STDOFF '-5:36:13' not at :00 or :30 mark,
-//   CR {Added anchor rule at year -32767}
-// }
-// America/Cuiaba {
-//   STDOFF '-3:44:20' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Danmarkshavn {
-//   STDOFF '-1:14:40' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-// }
+// America/Chicago {STDOFF '-5:50:36' not at :00 or :30 mark}
+// America/Chihuahua {STDOFF '-7:04:20' not at :00 or :30 mark}
+// America/Ciudad_Juarez {STDOFF '-7:05:56' not at :00 or :30 mark}
+// America/Costa_Rica {STDOFF '-5:36:13' not at :00 or :30 mark}
+// America/Cuiaba {STDOFF '-3:44:20' not at :00 or :30 mark}
+// America/Danmarkshavn {STDOFF '-1:14:40' not at :00 or :30 mark}
 // America/Dawson {
 //   STDOFF '-9:17:40' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   NT_YK {Added anchor rule at year -32767}
-//   Yukon {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Yukon {SAVE '2:00' different from 1:00}
 // }
-// America/Dawson_Creek {
-//   STDOFF '-8:00:56' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Vanc {Added anchor rule at year -32767}
-// }
-// America/Denver {
-//   STDOFF '-6:59:56' not at :00 or :30 mark,
-//   Denver {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Detroit {
-//   STDOFF '-5:32:11' not at :00 or :30 mark,
-//   Detroit {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Edmonton {
-//   STDOFF '-7:33:52' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Edm {Added anchor rule at year -32767}
-// }
-// America/Eirunepe {
-//   STDOFF '-4:39:28' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/El_Salvador {
-//   STDOFF '-5:56:48' not at :00 or :30 mark,
-//   Salv {Added anchor rule at year -32767}
-// }
-// America/Fort_Nelson {
-//   STDOFF '-8:10:47' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Vanc {Added anchor rule at year -32767}
-// }
-// America/Fortaleza {
-//   STDOFF '-2:34:00' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Glace_Bay {
-//   STDOFF '-3:59:48' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Halifax {Added anchor rule at year -32767}
-// }
+// America/Dawson_Creek {STDOFF '-8:00:56' not at :00 or :30 mark}
+// America/Denver {STDOFF '-6:59:56' not at :00 or :30 mark}
+// America/Detroit {STDOFF '-5:32:11' not at :00 or :30 mark}
+// America/Edmonton {STDOFF '-7:33:52' not at :00 or :30 mark}
+// America/Eirunepe {STDOFF '-4:39:28' not at :00 or :30 mark}
+// America/El_Salvador {STDOFF '-5:56:48' not at :00 or :30 mark}
+// America/Fort_Nelson {STDOFF '-8:10:47' not at :00 or :30 mark}
+// America/Fortaleza {STDOFF '-2:34:00' not at :00 or :30 mark}
+// America/Glace_Bay {STDOFF '-3:59:48' not at :00 or :30 mark}
 // America/Goose_Bay {
 //   STDOFF '-4:01:40' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   StJohns {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   StJohns {SAVE '2:00' different from 1:00}
 // }
-// America/Grand_Turk {
-//   STDOFF '-4:44:32' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
-// America/Guatemala {
-//   STDOFF '-6:02:04' not at :00 or :30 mark,
-//   Guat {Added anchor rule at year -32767}
-// }
-// America/Guayaquil {
-//   STDOFF '-5:19:20' not at :00 or :30 mark,
-//   Ecuador {Added anchor rule at year -32767}
-// }
+// America/Grand_Turk {STDOFF '-4:44:32' not at :00 or :30 mark}
+// America/Guatemala {STDOFF '-6:02:04' not at :00 or :30 mark}
+// America/Guayaquil {STDOFF '-5:19:20' not at :00 or :30 mark}
 // America/Guyana {STDOFF '-3:52:39' not at :00 or :30 mark}
-// America/Halifax {
-//   STDOFF '-4:14:24' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Halifax {Added anchor rule at year -32767}
-// }
-// America/Havana {
-//   STDOFF '-5:29:28' not at :00 or :30 mark,
-//   Cuba {Added anchor rule at year -32767}
-// }
-// America/Hermosillo {
-//   STDOFF '-7:23:52' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-// }
-// America/Indiana/Indianapolis {
-//   STDOFF '-5:44:38' not at :00 or :30 mark,
-//   Indianapolis {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Indiana/Knox {
-//   STDOFF '-5:46:30' not at :00 or :30 mark,
-//   Starke {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Indiana/Marengo {
-//   STDOFF '-5:45:23' not at :00 or :30 mark,
-//   Marengo {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Indiana/Petersburg {
-//   STDOFF '-5:49:07' not at :00 or :30 mark,
-//   Pike {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Indiana/Tell_City {
-//   STDOFF '-5:47:03' not at :00 or :30 mark,
-//   Perry {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Indiana/Vevay {
-//   STDOFF '-5:40:16' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
-// America/Indiana/Vincennes {
-//   STDOFF '-5:50:07' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-//   Vincennes {Added anchor rule at year -32767}
-// }
-// America/Indiana/Winamac {
-//   STDOFF '-5:46:25' not at :00 or :30 mark,
-//   Pulaski {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Inuvik {
-//   Canada {Added anchor rule at year -32767}
-//   NT_YK {Added anchor rule at year -32767}
-// }
-// America/Iqaluit {
-//   Canada {Added anchor rule at year -32767}
-//   NT_YK {Added anchor rule at year -32767}
-// }
-// America/Jamaica {
-//   STDOFF '-5:07:10' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
+// America/Halifax {STDOFF '-4:14:24' not at :00 or :30 mark}
+// America/Havana {STDOFF '-5:29:28' not at :00 or :30 mark}
+// America/Hermosillo {STDOFF '-7:23:52' not at :00 or :30 mark}
+// America/Indiana/Indianapolis {STDOFF '-5:44:38' not at :00 or :30 mark}
+// America/Indiana/Knox {STDOFF '-5:46:30' not at :00 or :30 mark}
+// America/Indiana/Marengo {STDOFF '-5:45:23' not at :00 or :30 mark}
+// America/Indiana/Petersburg {STDOFF '-5:49:07' not at :00 or :30 mark}
+// America/Indiana/Tell_City {STDOFF '-5:47:03' not at :00 or :30 mark}
+// America/Indiana/Vevay {STDOFF '-5:40:16' not at :00 or :30 mark}
+// America/Indiana/Vincennes {STDOFF '-5:50:07' not at :00 or :30 mark}
+// America/Indiana/Winamac {STDOFF '-5:46:25' not at :00 or :30 mark}
+// America/Jamaica {STDOFF '-5:07:10' not at :00 or :30 mark}
 // America/Juneau {
 //   STDOFF '15:02:19' not at :00 or :30 mark,
 //   UNTIL time '15:33:32' not multiple of 1-min,
-//   US {Added anchor rule at year -32767}
 // }
-// America/Kentucky/Louisville {
-//   STDOFF '-5:43:02' not at :00 or :30 mark,
-//   Louisville {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Kentucky/Monticello {
-//   STDOFF '-5:39:24' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
+// America/Kentucky/Louisville {STDOFF '-5:43:02' not at :00 or :30 mark}
+// America/Kentucky/Monticello {STDOFF '-5:39:24' not at :00 or :30 mark}
 // America/La_Paz {STDOFF '-4:32:36' not at :00 or :30 mark}
-// America/Lima {
-//   STDOFF '-5:08:12' not at :00 or :30 mark,
-//   Peru {Added anchor rule at year -32767}
-// }
-// America/Los_Angeles {
-//   STDOFF '-7:52:58' not at :00 or :30 mark,
-//   CA {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Maceio {
-//   STDOFF '-2:22:52' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Managua {
-//   STDOFF '-5:45:08' not at :00 or :30 mark,
-//   Nic {Added anchor rule at year -32767}
-// }
-// America/Manaus {
-//   STDOFF '-4:00:04' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
+// America/Lima {STDOFF '-5:08:12' not at :00 or :30 mark}
+// America/Los_Angeles {STDOFF '-7:52:58' not at :00 or :30 mark}
+// America/Maceio {STDOFF '-2:22:52' not at :00 or :30 mark}
+// America/Managua {STDOFF '-5:45:08' not at :00 or :30 mark}
+// America/Manaus {STDOFF '-4:00:04' not at :00 or :30 mark}
 // America/Martinique {STDOFF '-4:04:20' not at :00 or :30 mark}
-// America/Matamoros {
-//   Mexico {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Mazatlan {
-//   STDOFF '-7:05:40' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-// }
-// America/Menominee {
-//   STDOFF '-5:50:27' not at :00 or :30 mark,
-//   Menominee {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Merida {
-//   STDOFF '-5:58:28' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-// }
+// America/Mazatlan {STDOFF '-7:05:40' not at :00 or :30 mark}
+// America/Menominee {STDOFF '-5:50:27' not at :00 or :30 mark}
+// America/Merida {STDOFF '-5:58:28' not at :00 or :30 mark}
 // America/Metlakatla {
 //   STDOFF '15:13:42' not at :00 or :30 mark,
 //   UNTIL time '15:44:55' not multiple of 1-min,
-//   US {Added anchor rule at year -32767}
 // }
-// America/Mexico_City {
-//   STDOFF '-6:36:36' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-// }
-// America/Miquelon {
-//   STDOFF '-3:44:40' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-// }
-// America/Moncton {
-//   STDOFF '-4:19:08' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Moncton {Added anchor rule at year -32767}
-// }
-// America/Monterrey {
-//   STDOFF '-6:41:16' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
+// America/Mexico_City {STDOFF '-6:36:36' not at :00 or :30 mark}
+// America/Miquelon {STDOFF '-3:44:40' not at :00 or :30 mark}
+// America/Moncton {STDOFF '-4:19:08' not at :00 or :30 mark}
+// America/Monterrey {STDOFF '-6:41:16' not at :00 or :30 mark}
 // America/Montevideo {
 //   STDOFF '-3:44:51' not at :00 or :30 mark,
 //   Uruguay {
-//     Added anchor rule at year -32767,
 //     SAVE '0:30' different from 1:00,
 //     SAVE '1:30' different from 1:00,
 //   }
 // }
-// America/New_York {
-//   STDOFF '-4:56:02' not at :00 or :30 mark,
-//   NYC {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
+// America/New_York {STDOFF '-4:56:02' not at :00 or :30 mark}
 // America/Nome {
 //   STDOFF '12:58:22' not at :00 or :30 mark,
 //   UNTIL time '13:29:35' not multiple of 1-min,
-//   US {Added anchor rule at year -32767}
 // }
-// America/Noronha {
-//   STDOFF '-2:09:40' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/North_Dakota/Beulah {
-//   STDOFF '-6:47:07' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
-// America/North_Dakota/Center {
-//   STDOFF '-6:45:12' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
-// America/North_Dakota/New_Salem {
-//   STDOFF '-6:45:39' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
-// America/Nuuk {
-//   STDOFF '-3:26:56' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-// }
-// America/Ojinaga {
-//   STDOFF '-6:57:40' not at :00 or :30 mark,
-//   Mexico {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
+// America/Noronha {STDOFF '-2:09:40' not at :00 or :30 mark}
+// America/North_Dakota/Beulah {STDOFF '-6:47:07' not at :00 or :30 mark}
+// America/North_Dakota/Center {STDOFF '-6:45:12' not at :00 or :30 mark}
+// America/North_Dakota/New_Salem {STDOFF '-6:45:39' not at :00 or :30 mark}
+// America/Nuuk {STDOFF '-3:26:56' not at :00 or :30 mark}
+// America/Ojinaga {STDOFF '-6:57:40' not at :00 or :30 mark}
 // America/Panama {STDOFF '-5:18:08' not at :00 or :30 mark}
 // America/Paramaribo {STDOFF '-3:40:40' not at :00 or :30 mark}
-// America/Phoenix {
-//   STDOFF '-7:28:18' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
-// America/Port-au-Prince {
-//   STDOFF '-4:49:20' not at :00 or :30 mark,
-//   Haiti {Added anchor rule at year -32767}
-// }
-// America/Porto_Velho {
-//   STDOFF '-4:15:36' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Puerto_Rico {
-//   STDOFF '-4:24:25' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
-// America/Punta_Arenas {
-//   STDOFF '-4:43:40' not at :00 or :30 mark,
-//   Chile {Added anchor rule at year -32767}
-// }
-// America/Rankin_Inlet {
-//   Canada {Added anchor rule at year -32767}
-//   NT_YK {Added anchor rule at year -32767}
-// }
-// America/Recife {
-//   STDOFF '-2:19:36' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Regina {
-//   STDOFF '-6:58:36' not at :00 or :30 mark,
-//   Regina {Added anchor rule at year -32767}
-// }
-// America/Resolute {
-//   Canada {Added anchor rule at year -32767}
-//   NT_YK {Added anchor rule at year -32767}
-// }
-// America/Rio_Branco {
-//   STDOFF '-4:31:12' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Santarem {
-//   STDOFF '-3:38:48' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Santiago {
-//   STDOFF '-4:42:45' not at :00 or :30 mark,
-//   Chile {Added anchor rule at year -32767}
-// }
+// America/Phoenix {STDOFF '-7:28:18' not at :00 or :30 mark}
+// America/Port-au-Prince {STDOFF '-4:49:20' not at :00 or :30 mark}
+// America/Porto_Velho {STDOFF '-4:15:36' not at :00 or :30 mark}
+// America/Puerto_Rico {STDOFF '-4:24:25' not at :00 or :30 mark}
+// America/Punta_Arenas {STDOFF '-4:43:40' not at :00 or :30 mark}
+// America/Recife {STDOFF '-2:19:36' not at :00 or :30 mark}
+// America/Regina {STDOFF '-6:58:36' not at :00 or :30 mark}
+// America/Rio_Branco {STDOFF '-4:31:12' not at :00 or :30 mark}
+// America/Santarem {STDOFF '-3:38:48' not at :00 or :30 mark}
+// America/Santiago {STDOFF '-4:42:45' not at :00 or :30 mark}
 // America/Santo_Domingo {
 //   STDOFF '-4:39:36' not at :00 or :30 mark,
-//   DR {
-//     Added anchor rule at year -32767,
-//     SAVE '0:30' different from 1:00,
-//   }
-//   US {Added anchor rule at year -32767}
+//   DR {SAVE '0:30' different from 1:00}
 // }
-// America/Sao_Paulo {
-//   STDOFF '-3:06:28' not at :00 or :30 mark,
-//   Brazil {Added anchor rule at year -32767}
-// }
-// America/Scoresbysund {
-//   STDOFF '-1:27:52' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-// }
-// America/Sitka {
-//   STDOFF '14:58:47' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
+// America/Sao_Paulo {STDOFF '-3:06:28' not at :00 or :30 mark}
+// America/Scoresbysund {STDOFF '-1:27:52' not at :00 or :30 mark}
+// America/Sitka {STDOFF '14:58:47' not at :00 or :30 mark}
 // America/St_Johns {
 //   STDOFF '-3:30:52' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   StJohns {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   StJohns {SAVE '2:00' different from 1:00}
 // }
-// America/Swift_Current {
-//   STDOFF '-7:11:20' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Regina {Added anchor rule at year -32767}
-//   Swift {Added anchor rule at year -32767}
-// }
-// America/Tegucigalpa {
-//   STDOFF '-5:48:52' not at :00 or :30 mark,
-//   Hond {Added anchor rule at year -32767}
-// }
-// America/Thule {
-//   STDOFF '-4:35:08' not at :00 or :30 mark,
-//   Thule {Added anchor rule at year -32767}
-// }
-// America/Tijuana {
-//   STDOFF '-7:48:04' not at :00 or :30 mark,
-//   CA {Added anchor rule at year -32767}
-//   Mexico {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// America/Toronto {
-//   STDOFF '-5:17:32' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Toronto {Added anchor rule at year -32767}
-// }
-// America/Vancouver {
-//   STDOFF '-8:12:28' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Vanc {Added anchor rule at year -32767}
-// }
+// America/Swift_Current {STDOFF '-7:11:20' not at :00 or :30 mark}
+// America/Tegucigalpa {STDOFF '-5:48:52' not at :00 or :30 mark}
+// America/Thule {STDOFF '-4:35:08' not at :00 or :30 mark}
+// America/Tijuana {STDOFF '-7:48:04' not at :00 or :30 mark}
+// America/Toronto {STDOFF '-5:17:32' not at :00 or :30 mark}
+// America/Vancouver {STDOFF '-8:12:28' not at :00 or :30 mark}
 // America/Whitehorse {
 //   STDOFF '-9:00:12' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   NT_YK {Added anchor rule at year -32767}
-//   Yukon {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Yukon {SAVE '2:00' different from 1:00}
 // }
-// America/Winnipeg {
-//   STDOFF '-6:28:36' not at :00 or :30 mark,
-//   Canada {Added anchor rule at year -32767}
-//   Winn {Added anchor rule at year -32767}
-// }
+// America/Winnipeg {STDOFF '-6:28:36' not at :00 or :30 mark}
 // America/Yakutat {
 //   STDOFF '14:41:05' not at :00 or :30 mark,
 //   UNTIL time '15:12:18' not multiple of 1-min,
-//   US {Added anchor rule at year -32767}
-// }
-// America/Yellowknife {
-//   Canada {Added anchor rule at year -32767}
-//   NT_YK {Added anchor rule at year -32767}
-// }
-// Antarctica/Macquarie {
-//   AT {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// Antarctica/Palmer {
-//   Arg {Added anchor rule at year -32767}
-//   Chile {Added anchor rule at year -32767}
 // }
 // Antarctica/Troll {
-//   Troll {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Troll {SAVE '2:00' different from 1:00}
 // }
-// Asia/Almaty {
-//   STDOFF '5:07:48' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Amman {
-//   STDOFF '2:23:44' not at :00 or :30 mark,
-//   Jordan {Added anchor rule at year -32767}
-// }
+// Asia/Almaty {STDOFF '5:07:48' not at :00 or :30 mark}
+// Asia/Amman {STDOFF '2:23:44' not at :00 or :30 mark}
 // Asia/Anadyr {
 //   STDOFF '11:49:56' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Aqtau {
-//   STDOFF '3:21:04' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Aqtobe {
-//   STDOFF '3:48:40' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Ashgabat {
-//   STDOFF '3:53:32' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Atyrau {
-//   STDOFF '3:27:44' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Baghdad {
-//   STDOFF '2:57:40' not at :00 or :30 mark,
-//   Iraq {Added anchor rule at year -32767}
-// }
-// Asia/Baku {
-//   STDOFF '3:19:24' not at :00 or :30 mark,
-//   Azer {Added anchor rule at year -32767}
-//   EUAsia {Added anchor rule at year -32767}
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
+// Asia/Aqtau {STDOFF '3:21:04' not at :00 or :30 mark}
+// Asia/Aqtobe {STDOFF '3:48:40' not at :00 or :30 mark}
+// Asia/Ashgabat {STDOFF '3:53:32' not at :00 or :30 mark}
+// Asia/Atyrau {STDOFF '3:27:44' not at :00 or :30 mark}
+// Asia/Baghdad {STDOFF '2:57:40' not at :00 or :30 mark}
+// Asia/Baku {STDOFF '3:19:24' not at :00 or :30 mark}
 // Asia/Bangkok {STDOFF '6:42:04' not at :00 or :30 mark}
 // Asia/Barnaul {
 //   STDOFF '5:35:00' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Beirut {
-//   STDOFF '2:22:00' not at :00 or :30 mark,
-//   Lebanon {Added anchor rule at year -32767}
-// }
-// Asia/Bishkek {
-//   STDOFF '4:58:24' not at :00 or :30 mark,
-//   Kyrgyz {Added anchor rule at year -32767}
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
+// Asia/Beirut {STDOFF '2:22:00' not at :00 or :30 mark}
+// Asia/Bishkek {STDOFF '4:58:24' not at :00 or :30 mark}
 // Asia/Chita {
 //   STDOFF '7:33:52' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Choibalsan {
-//   STDOFF '7:38:00' not at :00 or :30 mark,
-//   Mongol {Added anchor rule at year -32767}
-// }
+// Asia/Choibalsan {STDOFF '7:38:00' not at :00 or :30 mark}
 // Asia/Colombo {
 //   RULES delta offset '0:30' different from 1:00,
 //   STDOFF '5:19:24' not at :00 or :30 mark,
 // }
-// Asia/Damascus {
-//   STDOFF '2:25:12' not at :00 or :30 mark,
-//   Syria {Added anchor rule at year -32767}
-// }
-// Asia/Dhaka {
-//   STDOFF '6:01:40' not at :00 or :30 mark,
-//   Dhaka {Added anchor rule at year -32767}
-// }
+// Asia/Damascus {STDOFF '2:25:12' not at :00 or :30 mark}
+// Asia/Dhaka {STDOFF '6:01:40' not at :00 or :30 mark}
 // Asia/Dili {STDOFF '8:22:20' not at :00 or :30 mark}
 // Asia/Dubai {STDOFF '3:41:12' not at :00 or :30 mark}
-// Asia/Dushanbe {
-//   STDOFF '4:35:12' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Famagusta {
-//   STDOFF '2:15:48' not at :00 or :30 mark,
-//   Cyprus {Added anchor rule at year -32767}
-//   EUAsia {Added anchor rule at year -32767}
-// }
+// Asia/Dushanbe {STDOFF '4:35:12' not at :00 or :30 mark}
+// Asia/Famagusta {STDOFF '2:15:48' not at :00 or :30 mark}
 // Asia/Gaza {
 //   STDOFF '2:17:52' not at :00 or :30 mark,
-//   EgyptAsia {Added anchor rule at year -32767}
-//   Jordan {Added anchor rule at year -32767}
-//   Palestine {Added anchor rule at year -32767}
-//   Zion {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Zion {SAVE '2:00' different from 1:00}
 // }
 // Asia/Hebron {
 //   STDOFF '2:20:23' not at :00 or :30 mark,
-//   EgyptAsia {Added anchor rule at year -32767}
-//   Jordan {Added anchor rule at year -32767}
-//   Palestine {Added anchor rule at year -32767}
-//   Zion {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Zion {SAVE '2:00' different from 1:00}
 // }
 // Asia/Ho_Chi_Minh {STDOFF '7:06:30' not at :00 or :30 mark}
 // Asia/Hong_Kong {
 //   RULES delta offset '0:30' different from 1:00,
 //   STDOFF '7:36:42' not at :00 or :30 mark,
-//   HK {Added anchor rule at year -32767}
 // }
-// Asia/Hovd {
-//   STDOFF '6:06:36' not at :00 or :30 mark,
-//   Mongol {Added anchor rule at year -32767}
-// }
+// Asia/Hovd {STDOFF '6:06:36' not at :00 or :30 mark}
 // Asia/Irkutsk {
 //   STDOFF '6:57:05' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Jakarta {STDOFF '7:07:12' not at :00 or :30 mark}
 // Asia/Jayapura {STDOFF '9:22:48' not at :00 or :30 mark}
 // Asia/Jerusalem {
 //   STDOFF '2:20:54' not at :00 or :30 mark,
-//   Zion {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Zion {SAVE '2:00' different from 1:00}
 // }
 // Asia/Kabul {STDOFF '4:36:48' not at :00 or :30 mark}
 // Asia/Kamchatka {
 //   STDOFF '10:34:36' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Karachi {
-//   STDOFF '4:28:12' not at :00 or :30 mark,
-//   Pakistan {Added anchor rule at year -32767}
-// }
+// Asia/Karachi {STDOFF '4:28:12' not at :00 or :30 mark}
 // Asia/Kathmandu {STDOFF '5:41:16' not at :00 or :30 mark}
 // Asia/Khandyga {
 //   STDOFF '9:02:13' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Kolkata {STDOFF '5:53:28' not at :00 or :30 mark}
 // Asia/Krasnoyarsk {
 //   STDOFF '6:11:26' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Kuching {
 //   STDOFF '7:21:20' not at :00 or :30 mark,
-//   NBorneo {
-//     Added anchor rule at year -32767,
-//     SAVE '0:20' different from 1:00,
-//   }
+//   NBorneo {SAVE '0:20' different from 1:00}
 // }
-// Asia/Macau {
-//   STDOFF '7:34:10' not at :00 or :30 mark,
-//   Macau {Added anchor rule at year -32767}
-// }
+// Asia/Macau {STDOFF '7:34:10' not at :00 or :30 mark}
 // Asia/Magadan {
 //   STDOFF '10:03:12' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Makassar {STDOFF '7:57:36' not at :00 or :30 mark}
-// Asia/Manila {
-//   STDOFF '-15:56:00' not at :00 or :30 mark,
-//   Phil {Added anchor rule at year -32767}
-// }
-// Asia/Nicosia {
-//   STDOFF '2:13:28' not at :00 or :30 mark,
-//   Cyprus {Added anchor rule at year -32767}
-//   EUAsia {Added anchor rule at year -32767}
-// }
+// Asia/Manila {STDOFF '-15:56:00' not at :00 or :30 mark}
+// Asia/Nicosia {STDOFF '2:13:28' not at :00 or :30 mark}
 // Asia/Novokuznetsk {
 //   STDOFF '5:48:48' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Novosibirsk {
 //   STDOFF '5:31:40' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Omsk {
 //   STDOFF '4:53:30' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Oral {
-//   STDOFF '3:25:24' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
+// Asia/Oral {STDOFF '3:25:24' not at :00 or :30 mark}
 // Asia/Pontianak {STDOFF '7:17:20' not at :00 or :30 mark}
 // Asia/Pyongyang {STDOFF '8:23:00' not at :00 or :30 mark}
 // Asia/Qatar {STDOFF '3:26:08' not at :00 or :30 mark}
-// Asia/Qostanay {
-//   STDOFF '4:14:28' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Qyzylorda {
-//   STDOFF '4:21:52' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
+// Asia/Qostanay {STDOFF '4:14:28' not at :00 or :30 mark}
+// Asia/Qyzylorda {STDOFF '4:21:52' not at :00 or :30 mark}
 // Asia/Riyadh {STDOFF '3:06:52' not at :00 or :30 mark}
 // Asia/Sakhalin {
 //   STDOFF '9:30:48' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Samarkand {
-//   STDOFF '4:27:53' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Seoul {
-//   STDOFF '8:27:52' not at :00 or :30 mark,
-//   ROK {Added anchor rule at year -32767}
-// }
-// Asia/Shanghai {
-//   STDOFF '8:05:43' not at :00 or :30 mark,
-//   PRC {Added anchor rule at year -32767}
-//   Shang {Added anchor rule at year -32767}
-// }
+// Asia/Samarkand {STDOFF '4:27:53' not at :00 or :30 mark}
+// Asia/Seoul {STDOFF '8:27:52' not at :00 or :30 mark}
+// Asia/Shanghai {STDOFF '8:05:43' not at :00 or :30 mark}
 // Asia/Singapore {
 //   RULES delta offset '0:20' different from 1:00,
 //   STDOFF '6:55:25' not at :00 or :30 mark,
 // }
 // Asia/Srednekolymsk {
 //   STDOFF '10:14:52' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Taipei {
-//   STDOFF '8:06:00' not at :00 or :30 mark,
-//   Taiwan {Added anchor rule at year -32767}
-// }
-// Asia/Tashkent {
-//   STDOFF '4:37:11' not at :00 or :30 mark,
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Tbilisi {
-//   STDOFF '2:59:11' not at :00 or :30 mark,
-//   E-EurAsia {Added anchor rule at year -32767}
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
-// Asia/Tehran {
-//   STDOFF '3:25:44' not at :00 or :30 mark,
-//   Iran {Added anchor rule at year -32767}
-// }
+// Asia/Taipei {STDOFF '8:06:00' not at :00 or :30 mark}
+// Asia/Tashkent {STDOFF '4:37:11' not at :00 or :30 mark}
+// Asia/Tbilisi {STDOFF '2:59:11' not at :00 or :30 mark}
+// Asia/Tehran {STDOFF '3:25:44' not at :00 or :30 mark}
 // Asia/Thimphu {STDOFF '5:58:36' not at :00 or :30 mark}
-// Asia/Tokyo {
-//   STDOFF '9:18:59' not at :00 or :30 mark,
-//   Japan {Added anchor rule at year -32767}
-// }
+// Asia/Tokyo {STDOFF '9:18:59' not at :00 or :30 mark}
 // Asia/Tomsk {
 //   STDOFF '5:39:51' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Ulaanbaatar {
-//   STDOFF '7:07:32' not at :00 or :30 mark,
-//   Mongol {Added anchor rule at year -32767}
-// }
+// Asia/Ulaanbaatar {STDOFF '7:07:32' not at :00 or :30 mark}
 // Asia/Urumqi {STDOFF '5:50:20' not at :00 or :30 mark}
 // Asia/Ust-Nera {
 //   STDOFF '9:32:54' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Vladivostok {
 //   STDOFF '8:47:31' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Yakutsk {
 //   STDOFF '8:38:58' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Yangon {STDOFF '6:24:47' not at :00 or :30 mark}
 // Asia/Yekaterinburg {
 //   STDOFF '4:02:33' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Yerevan {
-//   STDOFF '2:58:00' not at :00 or :30 mark,
-//   Armenia {Added anchor rule at year -32767}
-//   RussiaAsia {Added anchor rule at year -32767}
-// }
+// Asia/Yerevan {STDOFF '2:58:00' not at :00 or :30 mark}
 // Atlantic/Azores {
 //   RULES not fixed but FORMAT is missing '%' or '/',
 //   STDOFF '-1:42:40' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Port {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
-//   W-Eur {Added anchor rule at year -32767}
+//   Port {SAVE '2:00' different from 1:00}
 // }
-// Atlantic/Bermuda {
-//   STDOFF '-4:19:18' not at :00 or :30 mark,
-//   Bermuda {Added anchor rule at year -32767}
-//   Canada {Added anchor rule at year -32767}
-//   US {Added anchor rule at year -32767}
-// }
-// Atlantic/Canary {
-//   STDOFF '-1:01:36' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-// }
+// Atlantic/Bermuda {STDOFF '-4:19:18' not at :00 or :30 mark}
+// Atlantic/Canary {STDOFF '-1:01:36' not at :00 or :30 mark}
 // Atlantic/Cape_Verde {STDOFF '-1:34:04' not at :00 or :30 mark}
-// Atlantic/Faroe {
-//   STDOFF '-0:27:04' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-// }
+// Atlantic/Faroe {STDOFF '-0:27:04' not at :00 or :30 mark}
 // Atlantic/Madeira {
 //   RULES not fixed but FORMAT is missing '%' or '/',
 //   STDOFF '-1:07:36' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Port {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Port {SAVE '2:00' different from 1:00}
 // }
 // Atlantic/South_Georgia {STDOFF '-2:26:08' not at :00 or :30 mark}
-// Atlantic/Stanley {
-//   STDOFF '-3:51:24' not at :00 or :30 mark,
-//   Falk {Added anchor rule at year -32767}
-// }
-// Australia/Adelaide {
-//   STDOFF '9:14:20' not at :00 or :30 mark,
-//   AS {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// Australia/Brisbane {
-//   STDOFF '10:12:08' not at :00 or :30 mark,
-//   AQ {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// Australia/Broken_Hill {
-//   STDOFF '9:25:48' not at :00 or :30 mark,
-//   AN {Added anchor rule at year -32767}
-//   AS {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// Australia/Darwin {
-//   STDOFF '8:43:20' not at :00 or :30 mark,
-//   Aus {Added anchor rule at year -32767}
-// }
-// Australia/Eucla {
-//   STDOFF '8:35:28' not at :00 or :30 mark,
-//   AW {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// Australia/Hobart {
-//   STDOFF '9:49:16' not at :00 or :30 mark,
-//   AT {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// Australia/Lindeman {
-//   STDOFF '9:55:56' not at :00 or :30 mark,
-//   AQ {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-//   Holiday {Added anchor rule at year -32767}
-// }
+// Atlantic/Stanley {STDOFF '-3:51:24' not at :00 or :30 mark}
+// Australia/Adelaide {STDOFF '9:14:20' not at :00 or :30 mark}
+// Australia/Brisbane {STDOFF '10:12:08' not at :00 or :30 mark}
+// Australia/Broken_Hill {STDOFF '9:25:48' not at :00 or :30 mark}
+// Australia/Darwin {STDOFF '8:43:20' not at :00 or :30 mark}
+// Australia/Eucla {STDOFF '8:35:28' not at :00 or :30 mark}
+// Australia/Hobart {STDOFF '9:49:16' not at :00 or :30 mark}
+// Australia/Lindeman {STDOFF '9:55:56' not at :00 or :30 mark}
 // Australia/Lord_Howe {
 //   STDOFF '10:36:20' not at :00 or :30 mark,
-//   LH {
-//     Added anchor rule at year -32767,
-//     SAVE '0:30' different from 1:00,
-//   }
+//   LH {SAVE '0:30' different from 1:00}
 // }
-// Australia/Melbourne {
-//   STDOFF '9:39:52' not at :00 or :30 mark,
-//   AV {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// Australia/Perth {
-//   STDOFF '7:43:24' not at :00 or :30 mark,
-//   AW {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// Australia/Sydney {
-//   STDOFF '10:04:52' not at :00 or :30 mark,
-//   AN {Added anchor rule at year -32767}
-//   Aus {Added anchor rule at year -32767}
-// }
-// CET {
-//   C-Eur {Added anchor rule at year -32767}
-// }
-// CST6CDT {
-//   US {Added anchor rule at year -32767}
-// }
-// EET {
-//   EU {Added anchor rule at year -32767}
-// }
-// EST5EDT {
-//   US {Added anchor rule at year -32767}
-// }
-// Europe/Andorra {
-//   STDOFF '0:06:04' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-// }
+// Australia/Melbourne {STDOFF '9:39:52' not at :00 or :30 mark}
+// Australia/Perth {STDOFF '7:43:24' not at :00 or :30 mark}
+// Australia/Sydney {STDOFF '10:04:52' not at :00 or :30 mark}
+// Europe/Andorra {STDOFF '0:06:04' not at :00 or :30 mark}
 // Europe/Astrakhan {
 //   STDOFF '3:12:12' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Europe/Athens {
-//   STDOFF '1:34:52' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Greece {Added anchor rule at year -32767}
-// }
-// Europe/Belgrade {
-//   STDOFF '1:22:00' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-// }
+// Europe/Athens {STDOFF '1:34:52' not at :00 or :30 mark}
+// Europe/Belgrade {STDOFF '1:22:00' not at :00 or :30 mark}
 // Europe/Berlin {
 //   STDOFF '0:53:28' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Germany {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
-//   SovietZone {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Germany {SAVE '2:00' different from 1:00}
+//   SovietZone {SAVE '2:00' different from 1:00}
 // }
 // Europe/Brussels {
 //   STDOFF '0:17:30' not at :00 or :30 mark,
 //   UNTIL time '00:17:30' not multiple of 1-min,
-//   Belgium {Added anchor rule at year -32767}
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
 // }
-// Europe/Bucharest {
-//   STDOFF '1:44:24' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   E-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Romania {Added anchor rule at year -32767}
-// }
-// Europe/Budapest {
-//   STDOFF '1:16:20' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Hungary {Added anchor rule at year -32767}
-// }
+// Europe/Bucharest {STDOFF '1:44:24' not at :00 or :30 mark}
+// Europe/Budapest {STDOFF '1:16:20' not at :00 or :30 mark}
 // Europe/Chisinau {
 //   STDOFF '1:55:20' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   E-Eur {Added anchor rule at year -32767}
-//   Moldova {Added anchor rule at year -32767}
-//   Romania {Added anchor rule at year -32767}
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Dublin {
 //   STDOFF '-0:25:21' not at :00 or :30 mark,
-//   Eire {
-//     Added anchor rule at year -32767,
-//     SAVE '-1:00' different from 1:00,
-//   }
-//   GB-Eire {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Eire {SAVE '-1:00' different from 1:00}
+//   GB-Eire {SAVE '2:00' different from 1:00}
 // }
 // Europe/Gibraltar {
 //   STDOFF '-0:21:24' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   GB-Eire {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   GB-Eire {SAVE '2:00' different from 1:00}
 // }
-// Europe/Helsinki {
-//   STDOFF '1:39:49' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Finland {Added anchor rule at year -32767}
-// }
-// Europe/Istanbul {
-//   STDOFF '1:55:52' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Turkey {Added anchor rule at year -32767}
-// }
+// Europe/Helsinki {STDOFF '1:39:49' not at :00 or :30 mark}
+// Europe/Istanbul {STDOFF '1:55:52' not at :00 or :30 mark}
 // Europe/Kaliningrad {
 //   STDOFF '1:22:00' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   Poland {Added anchor rule at year -32767}
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Kirov {
 //   STDOFF '3:18:48' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Kyiv {
 //   STDOFF '2:02:04' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Lisbon {
 //   STDOFF '-0:36:45' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Port {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
-//   W-Eur {Added anchor rule at year -32767}
+//   Port {SAVE '2:00' different from 1:00}
 // }
 // Europe/London {
 //   STDOFF '-0:01:15' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   GB-Eire {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   GB-Eire {SAVE '2:00' different from 1:00}
 // }
 // Europe/Madrid {
 //   STDOFF '-0:14:44' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Spain {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Spain {SAVE '2:00' different from 1:00}
 // }
-// Europe/Malta {
-//   STDOFF '0:58:04' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Italy {Added anchor rule at year -32767}
-//   Malta {Added anchor rule at year -32767}
-// }
+// Europe/Malta {STDOFF '0:58:04' not at :00 or :30 mark}
 // Europe/Minsk {
 //   STDOFF '1:50:16' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Moscow {
 //   STDOFF '2:30:17' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Paris {
 //   STDOFF '0:09:21' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   France {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   France {SAVE '2:00' different from 1:00}
 // }
 // Europe/Prague {
 //   RULES delta offset '-1:00' different from 1:00,
 //   STDOFF '0:57:44' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   Czech {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
 // }
 // Europe/Riga {
 //   STDOFF '1:36:34' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Latvia {Added anchor rule at year -32767}
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Europe/Rome {
-//   STDOFF '0:49:56' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Italy {Added anchor rule at year -32767}
-// }
+// Europe/Rome {STDOFF '0:49:56' not at :00 or :30 mark}
 // Europe/Samara {
 //   STDOFF '3:20:20' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Saratov {
 //   STDOFF '3:04:18' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Simferopol {
 //   STDOFF '2:16:24' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Europe/Sofia {
-//   STDOFF '1:33:16' not at :00 or :30 mark,
-//   Bulg {Added anchor rule at year -32767}
-//   C-Eur {Added anchor rule at year -32767}
-//   E-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-// }
+// Europe/Sofia {STDOFF '1:33:16' not at :00 or :30 mark}
 // Europe/Tallinn {
 //   STDOFF '1:39:00' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Europe/Tirane {
-//   STDOFF '1:19:20' not at :00 or :30 mark,
-//   Albania {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-// }
+// Europe/Tirane {STDOFF '1:19:20' not at :00 or :30 mark}
 // Europe/Ulyanovsk {
 //   STDOFF '3:13:36' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Europe/Vienna {
-//   STDOFF '1:05:21' not at :00 or :30 mark,
-//   Austria {Added anchor rule at year -32767}
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-// }
+// Europe/Vienna {STDOFF '1:05:21' not at :00 or :30 mark}
 // Europe/Vilnius {
 //   STDOFF '1:41:16' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Volgograd {
 //   STDOFF '2:57:40' not at :00 or :30 mark,
-//   Russia {
-//     Added anchor rule at year -32767,
-//     SAVE '2:00' different from 1:00,
-//   }
+//   Russia {SAVE '2:00' different from 1:00}
 // }
-// Europe/Warsaw {
-//   STDOFF '1:24:00' not at :00 or :30 mark,
-//   C-Eur {Added anchor rule at year -32767}
-//   EU {Added anchor rule at year -32767}
-//   Poland {Added anchor rule at year -32767}
-//   W-Eur {Added anchor rule at year -32767}
-// }
-// Europe/Zurich {
-//   STDOFF '0:34:08' not at :00 or :30 mark,
-//   EU {Added anchor rule at year -32767}
-//   Swiss {Added anchor rule at year -32767}
-// }
+// Europe/Warsaw {STDOFF '1:24:00' not at :00 or :30 mark}
+// Europe/Zurich {STDOFF '0:34:08' not at :00 or :30 mark}
 // Indian/Chagos {STDOFF '4:49:40' not at :00 or :30 mark}
 // Indian/Maldives {STDOFF '4:54:00' not at :00 or :30 mark}
-// Indian/Mauritius {
-//   STDOFF '3:50:00' not at :00 or :30 mark,
-//   Mauritius {Added anchor rule at year -32767}
-// }
-// MET {
-//   C-Eur {Added anchor rule at year -32767}
-// }
-// MST7MDT {
-//   US {Added anchor rule at year -32767}
-// }
-// PST8PDT {
-//   US {Added anchor rule at year -32767}
-// }
-// Pacific/Apia {
-//   STDOFF '12:33:04' not at :00 or :30 mark,
-//   WS {Added anchor rule at year -32767}
-// }
+// Indian/Mauritius {STDOFF '3:50:00' not at :00 or :30 mark}
+// Pacific/Apia {STDOFF '12:33:04' not at :00 or :30 mark}
 // Pacific/Auckland {
 //   STDOFF '11:39:04' not at :00 or :30 mark,
-//   NZ {
-//     Added anchor rule at year -32767,
-//     SAVE '0:30' different from 1:00,
-//   }
+//   NZ {SAVE '0:30' different from 1:00}
 // }
 // Pacific/Bougainville {STDOFF '10:22:16' not at :00 or :30 mark}
-// Pacific/Chatham {
-//   STDOFF '12:13:48' not at :00 or :30 mark,
-//   Chatham {Added anchor rule at year -32767}
-// }
-// Pacific/Easter {
-//   STDOFF '-7:17:28' not at :00 or :30 mark,
-//   Chile {Added anchor rule at year -32767}
-// }
-// Pacific/Efate {
-//   STDOFF '11:13:16' not at :00 or :30 mark,
-//   Vanuatu {Added anchor rule at year -32767}
-// }
+// Pacific/Chatham {STDOFF '12:13:48' not at :00 or :30 mark}
+// Pacific/Easter {STDOFF '-7:17:28' not at :00 or :30 mark}
+// Pacific/Efate {STDOFF '11:13:16' not at :00 or :30 mark}
 // Pacific/Fakaofo {STDOFF '-11:24:56' not at :00 or :30 mark}
-// Pacific/Fiji {
-//   STDOFF '11:55:44' not at :00 or :30 mark,
-//   Fiji {Added anchor rule at year -32767}
-// }
-// Pacific/Galapagos {
-//   STDOFF '-5:58:24' not at :00 or :30 mark,
-//   Ecuador {Added anchor rule at year -32767}
-// }
+// Pacific/Fiji {STDOFF '11:55:44' not at :00 or :30 mark}
+// Pacific/Galapagos {STDOFF '-5:58:24' not at :00 or :30 mark}
 // Pacific/Gambier {STDOFF '-8:59:48' not at :00 or :30 mark}
 // Pacific/Guadalcanal {STDOFF '10:39:48' not at :00 or :30 mark}
-// Pacific/Guam {
-//   STDOFF '-14:21:00' not at :00 or :30 mark,
-//   Guam {Added anchor rule at year -32767}
-// }
-// Pacific/Honolulu {
-//   STDOFF '-10:31:26' not at :00 or :30 mark,
-//   US {Added anchor rule at year -32767}
-// }
+// Pacific/Guam {STDOFF '-14:21:00' not at :00 or :30 mark}
+// Pacific/Honolulu {STDOFF '-10:31:26' not at :00 or :30 mark}
 // Pacific/Kiritimati {STDOFF '-10:29:20' not at :00 or :30 mark}
 // Pacific/Kosrae {STDOFF '-13:08:04' not at :00 or :30 mark}
 // Pacific/Kwajalein {STDOFF '11:09:20' not at :00 or :30 mark}
 // Pacific/Marquesas {STDOFF '-9:18:00' not at :00 or :30 mark}
 // Pacific/Nauru {STDOFF '11:07:40' not at :00 or :30 mark}
 // Pacific/Niue {STDOFF '-11:19:40' not at :00 or :30 mark}
-// Pacific/Norfolk {
-//   STDOFF '11:11:52' not at :00 or :30 mark,
-//   AN {Added anchor rule at year -32767}
-// }
-// Pacific/Noumea {
-//   STDOFF '11:05:48' not at :00 or :30 mark,
-//   NC {Added anchor rule at year -32767}
-// }
+// Pacific/Norfolk {STDOFF '11:11:52' not at :00 or :30 mark}
+// Pacific/Noumea {STDOFF '11:05:48' not at :00 or :30 mark}
 // Pacific/Pago_Pago {STDOFF '12:37:12' not at :00 or :30 mark}
 // Pacific/Palau {STDOFF '-15:02:04' not at :00 or :30 mark}
 // Pacific/Pitcairn {STDOFF '-8:40:20' not at :00 or :30 mark}
 // Pacific/Port_Moresby {STDOFF '9:48:40' not at :00 or :30 mark}
 // Pacific/Rarotonga {
 //   STDOFF '13:20:56' not at :00 or :30 mark,
-//   Cook {
-//     Added anchor rule at year -32767,
-//     SAVE '0:30' different from 1:00,
-//   }
+//   Cook {SAVE '0:30' different from 1:00}
 // }
 // Pacific/Tahiti {STDOFF '-9:58:16' not at :00 or :30 mark}
 // Pacific/Tarawa {STDOFF '11:32:04' not at :00 or :30 mark}
-// Pacific/Tongatapu {
-//   STDOFF '12:19:12' not at :00 or :30 mark,
-//   Tonga {Added anchor rule at year -32767}
-// }
-// WET {
-//   EU {Added anchor rule at year -32767}
-// }
+// Pacific/Tongatapu {STDOFF '12:19:12' not at :00 or :30 mark}
 
 
 // ---------------------------------------------------------------------------

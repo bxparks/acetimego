@@ -28,11 +28,13 @@
 //
 // Supported Zones: 5 (4 zones, 1 links)
 // Unsupported Zones: 591 (347 zones, 244 links)
-// Original Years: [1844,2087]
+// Original Years:  [1844,2087]
 // Generated Years: [1967,2012]
+// Estimator Years: [1967,2024]
+// Max Buffer Size: 6
 //
 // Memory:
-//   Rules: 144
+//   Rules: 156
 //   Policies: 8
 //   Eras: 70
 //   Zones: 48
@@ -42,7 +44,7 @@
 //   Letters: 7
 //   Fragments: 0
 //   Names: 77
-//   TOTAL: 404
+//   TOTAL: 416
 //
 // DO NOT EDIT
 
@@ -78,16 +80,28 @@ var (
 // from all ZonePolicyRecords.
 //
 // Supported zone policies: 2
-// numRules: 12
+// numRules: 13
 // ---------------------------------------------------------------------------
 
 var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	// ---------------------------------------------------------------------------
 	// PolicyName: US
 	// RuleIndex: 0
-	// RuleCount: 6
+	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
+	// Anchor: Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
+	{
+		FromYear: -32767,
+		ToYear: -32767,
+		InMonth: 1,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtSecondsCode: 0, // 0 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 2, // "S"
+	},
 	// Rule    US    1967    2006    -    Oct    lastSun    2:00    0    S
 	{
 		FromYear: 1967,
@@ -163,7 +177,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: WS
-	// RuleIndex: 6
+	// RuleIndex: 7
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -243,12 +257,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 }
 
-const ZoneRuleCount = 12
+const ZoneRuleCount = 13
 
 const ZoneRuleChunkSize = 12
 
 // ZoneRulesData contains the ZoneRuleRecords data as a hex encoded string.
-const ZoneRulesData = "\xaf\x07\xd6\x07\x0a\x07\x00\x00\xe0\x01\x00\x02" +
+const ZoneRulesData = "\x01\x80\x01\x80\x01\x00\x01\x00\x00\x00\x00\x02" +
+		"\xaf\x07\xd6\x07\x0a\x07\x00\x00\xe0\x01\x00\x02" +
 		"\xb7\x07\xb7\x07\x02\x07\x00\x00\xe0\x01\x3c\x01" +
 		"\xb8\x07\xc2\x07\x04\x07\x00\x00\xe0\x01\x3c\x01" +
 		"\xc3\x07\xd6\x07\x04\x07\x01\x00\xe0\x01\x3c\x01" +
@@ -268,8 +283,8 @@ const ZoneRulesData = "\xaf\x07\xd6\x07\x0a\x07\x00\x00\xe0\x01\x00\x02" +
 
 var ZonePolicyRecords = []zoneinfo.ZonePolicyRecord{
 	{RuleIndex: 0, RuleCount: 0}, // 0: PolicyName: (None)
-	{RuleIndex: 0, RuleCount: 6}, // 1: PolicyName: US
-	{RuleIndex: 6, RuleCount: 6}, // 2: PolicyName: WS
+	{RuleIndex: 0, RuleCount: 7}, // 1: PolicyName: US
+	{RuleIndex: 7, RuleCount: 6}, // 2: PolicyName: WS
 
 }
 
@@ -279,8 +294,8 @@ const ZonePolicyChunkSize = 4
 
 // ZonePoliciesData contains the ZonePolicyRecords data as a hex encoded string.
 const ZonePoliciesData = "\x00\x00\x00\x00" +
-		"\x00\x00\x06\x00" +
-		"\x06\x00\x06\x00"
+		"\x00\x00\x07\x00" +
+		"\x07\x00\x06\x00"
 
 // ---------------------------------------------------------------------------
 // Unsupported zone policies: 132
@@ -421,9 +436,8 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 
 
 // ---------------------------------------------------------------------------
-// Notable zone policies: 1
+// Notable zone policies: 0
 // ---------------------------------------------------------------------------
 
-// WS {Added anchor rule at year -32767}
 
 

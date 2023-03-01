@@ -16,6 +16,12 @@
         * Returns the day of year of `(year, month, day)`.
     * Add `ZonedDateTime.ZonedExtra()` convenience method.
         * For easier access to extra information about the given date time.
+    * Always generate anchor rules in zonedb.
+        * Allows `zone_processor.go` to work over all years `[0,10000)`
+          even with truncated zonedb (e.g. `[2000,2100)`).
+        * Accuracy is guaranteed only for the requested interval (e.g.
+          `[2000,2100)`.
+        * But the code won't crash outside of that interval.
 * 0.2.0 (2023-02-13, TZDB 2022g)
     * Support one-second resolution for Zone.STDOFF field, instead of
       one-minute.
