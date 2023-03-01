@@ -1,6 +1,8 @@
 package acetime
 
 const (
+	// Sentinel year value that is guaranteed to not appear in a zonedb entry.
+	// Used by internal functions to indicate that something was not found.
 	InvalidYear = int16(-(1 << 15)) // math.MinInt16
 )
 
