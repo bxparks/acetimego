@@ -37,7 +37,7 @@
 // Max Buffer Size: 8
 //
 // Memory:
-//   Rules: 25812
+//   Rules: 25896
 //   Policies: 536
 //   Eras: 27328
 //   Zones: 4212
@@ -47,7 +47,7 @@
 //   Letters: 106
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 71837
+//   TOTAL: 71921
 //
 // DO NOT EDIT
 
