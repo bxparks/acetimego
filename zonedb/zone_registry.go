@@ -11,6 +11,7 @@
 //     --delta_granularity 60
 //     --until_at_granularity 1
 //     --db_namespace zonedb
+//     --generate_int16_years
 //     --start_year 1800
 //     --until_year 10000
 //

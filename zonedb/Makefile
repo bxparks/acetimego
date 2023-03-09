@@ -11,7 +11,7 @@ UNTIL_YEAR := 10000
 #	* one-second resolution for STDOFF, UNTIL, AT
 #	* one-minute resolution for DSTOFF and SAVE.
 #
-# Here are a few zones in the 1930 whose DSTOFF or SAVe are at 00:20 minutes,
+# Here are a few zones in the 1930 whose DSTOFF or SAVE are at 00:20 minutes,
 # instead of multiples of 00:15.
 #
 # * Asia/Brunei : Minute not equal:  1935-09-14 00:20:00 +0820 +0820
@@ -35,6 +35,7 @@ all:
 		--delta_granularity 60 \
 		--until_at_granularity 1 \
 		--db_namespace zonedb \
+		--generate_int16_years \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 

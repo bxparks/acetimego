@@ -14,6 +14,7 @@ all: Makefile
 		--language go \
 		--scope extended \
 		--db_namespace zonedbtesting \
+		--generate_int16_years \
 		--include_list include_list.txt \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
