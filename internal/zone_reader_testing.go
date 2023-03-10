@@ -2,24 +2,14 @@
 // directory. Unfortunately this has a dependency to the `zonedbtesting` and
 // `zonedb` packages, which has a circular dependency to the `zoneinfo` package.
 
-package test
+package internal
 
 import (
-	"github.com/bxparks/AceTimeGo/zonedb"
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
 	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"testing"
 )
 
-// Verify that data encoded in ZoneInfosData is identical to ZoneInfoRecords.
-func TestZoneInfoReader(t *testing.T) {
-	verifyZoneInfoReader(
-		t, &zonedbtesting.DataContext, &zonedbtesting.RecordContext)
-	verifyZoneInfoReader(
-		t, &zonedb.DataContext, &zonedb.RecordContext)
-}
-
-func verifyZoneInfoReader(
+func VerifyZoneInfoReader(
 	t *testing.T, c *zoneinfo.ZoneDataContext, cc *zoneinfo.ZoneRecordContext) {
 
 	reader := zoneinfo.NewZoneInfoReader(
@@ -46,15 +36,7 @@ func verifyZoneInfoReader(
 	}
 }
 
-// Verify that data encoded in ZoneErasData is identical to ZoneEraRecords.
-func TestZoneEraReader(t *testing.T) {
-	verifyZoneEraReader(
-		t, &zonedbtesting.DataContext, &zonedbtesting.RecordContext)
-	verifyZoneEraReader(
-		t, &zonedb.DataContext, &zonedb.RecordContext)
-}
-
-func verifyZoneEraReader(
+func VerifyZoneEraReader(
 	t *testing.T, c *zoneinfo.ZoneDataContext, cc *zoneinfo.ZoneRecordContext) {
 
 	reader := zoneinfo.NewZoneEraReader(
@@ -96,15 +78,7 @@ func verifyZoneEraReader(
 	}
 }
 
-// Verify that data encoded in ZoneErasData is identical to ZoneEraRecords.
-func TestZonePolicyReader(t *testing.T) {
-	verifyZonePolicyReader(
-		t, &zonedbtesting.DataContext, &zonedbtesting.RecordContext)
-	verifyZonePolicyReader(
-		t, &zonedb.DataContext, &zonedb.RecordContext)
-}
-
-func verifyZonePolicyReader(
+func VerifyZonePolicyReader(
 	t *testing.T, c *zoneinfo.ZoneDataContext, cc *zoneinfo.ZoneRecordContext) {
 
 	reader := zoneinfo.NewZonePolicyReader(
@@ -122,15 +96,7 @@ func verifyZonePolicyReader(
 	}
 }
 
-// Verify that data encoded in ZoneErasData is identical to ZoneEraRecords.
-func TestZoneRuleReader(t *testing.T) {
-	verifyZoneRuleReader(
-		t, &zonedbtesting.DataContext, &zonedbtesting.RecordContext)
-	verifyZoneRuleReader(
-		t, &zonedb.DataContext, &zonedb.RecordContext)
-}
-
-func verifyZoneRuleReader(
+func VerifyZoneRuleReader(
 	t *testing.T, c *zoneinfo.ZoneDataContext, cc *zoneinfo.ZoneRecordContext) {
 
 	reader := zoneinfo.NewZoneRuleReader(
