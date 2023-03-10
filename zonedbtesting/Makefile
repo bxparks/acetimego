@@ -32,6 +32,7 @@ zonedb.json: Makefile
 		--until_year $(UNTIL_YEAR)
 
 test:
+	go test
 
 clean:
 	rm -rf tzfiles
