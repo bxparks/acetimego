@@ -35,7 +35,9 @@ func NewZoneStore(c *ZoneDataContext) *ZoneStore {
 		infoReader: ZoneInfoReader{NewDataIO(c.ZoneInfosData), c.ZoneInfoChunkSize},
 		eraReader:  ZoneEraReader{NewDataIO(c.ZoneErasData), c.ZoneEraChunkSize},
 		policyReader: ZonePolicyReader{
-			NewDataIO(c.ZonePoliciesData), c.ZonePolicyChunkSize},
+			NewDataIO(c.ZonePoliciesData),
+			c.ZonePolicyChunkSize,
+		},
 		ruleReader: ZoneRuleReader{NewDataIO(c.ZoneRulesData), c.ZoneRuleChunkSize},
 	}
 	store.isSorted = store.IsSorted()

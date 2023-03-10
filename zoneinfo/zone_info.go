@@ -4,20 +4,18 @@ package zoneinfo
 // the information contained in the IANA TZ database.
 
 const (
-	// The minimum value of ZoneRule::FromYear and ZoneRule::ToYear. Used
-	// by synthetic entries for certain zones, to guarantee that all zones have at
-	// least one transition.
-	MinZoneRuleYear int16 = -32767
+	// The minimum value of ZoneRule.FromYear and ZoneRule.ToYear. Used by
+	// synthetic rule entries for certain zones, to guarantee that all zones have
+	// at least one transition.
+	MinYear int16 = -32767
 
-	// The maximum value of ZoneRule::FromYear and ZoneRule::ToYear,
-	// representing the sentinel value "max" in the TO and FROM columns of the
-	// TZDB files. Must be less than MaxZoneEraUntilYear.
-	MaxZoneRuleYear int16 = 32766
+	// The maximum value of ZoneRule.ToYear, representing the sentinel value "max"
+	// in the TO columns of the TZDB files. Must be less than MaxUntilYear.
+	MaxToYear int16 = 32766
 
-	// The maximum value of ZoneEra::UntilYear, representing the sentinel value
-	// "-" in the UNTIL column of the TZDB files. Must be greater than
-	// MaxZoneRuleYear.
-	MaxZoneEraUntilYear int16 = MaxZoneRuleYear + 1
+	// The maximum value of ZoneEra.UntilYear, representing the sentinel value
+	// "-" in the UNTIL column of the TZDB files. Must be greater than MaxYear.
+	MaxUntilYear int16 = MaxToYear + 1
 )
 
 //-----------------------------------------------------------------------------
@@ -29,7 +27,7 @@ type ZoneRecordContext struct {
 	TzDatabaseVersion string
 	StartYear         int16
 	UntilYear         int16
-	MaxTransitions		int16
+	MaxTransitions    int16
 	LetterData        string
 	LetterOffsets     []uint8
 	FormatData        string
@@ -119,7 +117,7 @@ type ZoneRule struct {
 	DeltaMinutes int8
 
 	// Determined by the LETTER column. Determines the substitution into the '%s'
-	// field (implemented here by just a '%') of the ZoneInfo::Format field.
+	// field (implemented here by just a '%') of the ZoneInfo.Format field.
 	// Most comment values in the raw TZDB files are "S", "D", and "-". The "-" is
 	// stored as "" (empty string).
 	//
@@ -197,6 +195,8 @@ type ZonePolicyRecord struct {
 
 //---------------------------------------------------------------------------
 
+// The Suffix* constants are stored in the upper nibble of various uint8 fields
+// named XxxModifier below.
 const (
 	SuffixW uint8 = 0x00 // Represents 'w' or wall time.
 	SuffixS uint8 = 0x10 // Represents 's' or standard time.
@@ -239,11 +239,6 @@ type ZoneEra struct {
 	// functionality. This also makes the string-replacement code a little
 	// simpler. For example, 'E%sT' is stored as 'E%T', and the LETTER
 	// substitution is performed on the '%' character.
-	//
-	// This field will never be a 'nil' if it was derived from an actual
-	// entry from the TZ database. There is an internal object named
-	// `ExtendedZoneProcessor::kAnchorEra` which does set this field to nil.
-	// Maybe it should be set to ""?
 	Format string
 
 	// The remainder seconds [0-14] from OffsetSecondsCode.
