@@ -35,4 +35,4 @@ test:
 	go test
 
 clean:
-	rm -rf tzfiles
+	rm -rf tzfiles zonedb.json
