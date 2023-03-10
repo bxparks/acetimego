@@ -213,14 +213,14 @@ func findMatches(
 //
 // This can be visualized by the following diagram:
 //
-//          start          until
-//            [              )
-//  -------------)[--------------)[-----------------
-//            prev.until       era.until
+//	        start          until
+//	          [              )
+//	-------------)[--------------)[-----------------
+//	          prev.until       era.until
 //
 // The 2 intervals overlap if:
 //
-//  (prev.until < until) && (era.until > start)
+//	(prev.until < until) && (era.until > start)
 //
 // If `prev == nil`, then `prev.until` is assigned to be `-infinity`, so the
 // `era` extends back to earliest possible time.
