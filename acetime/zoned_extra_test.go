@@ -11,28 +11,28 @@ import (
 // the STD offset, the DST offset, and the abbreviation used.
 //-----------------------------------------------------------------------------
 
-// Test that ZonedExtraXxx constants are the same as FindResultXxx constants.
+// Test that ZonedExtraXxx constants are the same as findResultXxx constants.
 func TestZonedExtraTypeConstantsMatch(t *testing.T) {
-	if !(ZonedExtraErr == FindResultErr) {
+	if !(ZonedExtraErr == findResultErr) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraNotFound == FindResultNotFound) {
+	if !(ZonedExtraNotFound == findResultNotFound) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraExact == FindResultExact) {
+	if !(ZonedExtraExact == findResultExact) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraGap == FindResultGap) {
+	if !(ZonedExtraGap == findResultGap) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraOverlap == FindResultOverlap) {
+	if !(ZonedExtraOverlap == findResultOverlap) {
 		t.Fatal("")
 	}
 }
 
 func TestZonedExtraFromEpochSeconds(t *testing.T) {
 	manager := NewZoneManager(&zonedbtesting.DataContext)
-	tz := manager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := manager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	ze := NewZonedExtraFromEpochSeconds(InvalidEpochSeconds, &tz)
 	if !(ze.Zetype == ZonedExtraErr) {
@@ -42,7 +42,7 @@ func TestZonedExtraFromEpochSeconds(t *testing.T) {
 
 func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 	manager := NewZoneManager(&zonedbtesting.DataContext)
-	tz := manager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := manager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back, and occurs in the overlap.
@@ -87,7 +87,7 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 
 func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 	manager := NewZoneManager(&zonedbtesting.DataContext)
-	tz := manager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+	tz := manager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// spring forward.

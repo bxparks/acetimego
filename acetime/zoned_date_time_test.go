@@ -469,6 +469,32 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 }
 
 //-----------------------------------------------------------------------------
+
+func TestZonedDateTimeToZonedExtra(t *testing.T) {
+	zm := NewZoneManager(&zonedbtesting.DataContext)
+	tzLosAngeles := zm.TimeZoneFromName("America/Los_Angeles")
+
+	ldt := LocalDateTime{2022, 8, 30, 20, 0, 0, 0 /*Fold*/}
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tzLosAngeles)
+	if zdt.IsError() {
+		t.Fatal(zdt)
+	}
+
+	extra := zdt.ZonedExtra()
+	expected := ZonedExtra{
+		Zetype:              ZonedExtraExact,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    1 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 1 * 3600,
+		Abbrev:              "PDT",
+	}
+	if !(extra == expected) {
+		t.Fatal(extra)
+	}
+}
+
+//-----------------------------------------------------------------------------
 // Test US/Pacific which is a Link to America/Los_Angeles
 //-----------------------------------------------------------------------------
 
@@ -499,7 +525,7 @@ var epochSeconds ATime
 var zdt ZonedDateTime
 var ldt = LocalDateTime{2023, 1, 19, 22, 11, 0, 0 /*Fold*/}
 var zoneManager = NewZoneManager(&zonedbtesting.DataContext)
-var tz = zoneManager.TimeZoneFromID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+var tz = zoneManager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 func BenchmarkZonedDateTimeFromEpochSeconds_Cache(b *testing.B) {
 	for n := 0; n < b.N; n++ {
@@ -509,7 +535,7 @@ func BenchmarkZonedDateTimeFromEpochSeconds_Cache(b *testing.B) {
 
 func BenchmarkZonedDateTimeFromEpochSeconds_NoCache(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		tz.zoneProcessor.reset()
+		tz.processor.reset()
 		zdt = NewZonedDateTimeFromEpochSeconds(3423423, &tz)
 	}
 }
@@ -522,7 +548,7 @@ func BenchmarkZonedDateTimeFromLocalDateTime_Cache(b *testing.B) {
 
 func BenchmarkZonedDateTimeFromLocalDateTime_NoCache(b *testing.B) {
 	for n := 0; n < b.N; n++ {
-		tz.zoneProcessor.reset()
+		tz.processor.reset()
 		zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	}
 }

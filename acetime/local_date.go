@@ -1,18 +1,34 @@
 package acetime
 
 const (
+	// Sentinel year value that is guaranteed to not appear in a zonedb entry.
+	// Used by internal functions to indicate that something was not found.
 	InvalidYear = int16(-(1 << 15)) // math.MinInt16
 )
 
+type IsoWeekday uint8
+
+// ISO Weekday starts with Monday=1, Sunday=7.
 const (
-	IsoWeekdayMonday = iota + 1
-	IsoWeekdayTuesday
-	IsoWeekdayWednesday
-	IsoWeekdayThursday
-	IsoWeekdayFriday
-	IsoWeekdaySaturday
-	IsoWeekdaySunday
+	Monday IsoWeekday = iota + 1
+	Tuesday
+	Wednesday
+	Thursday
+	Friday
+	Saturday
+	Sunday
 )
+
+var weekdayStrings = []string{
+	"Err",
+	"Monday",
+	"Tuesday",
+	"Wednesday",
+	"Thursday",
+	"Friday",
+	"Saturday",
+	"Sunday",
+}
 
 // Offsets used to calculate the day of the week of a particular (year, month,
 // day). The element represents the number of days that the first of month of
@@ -25,11 +41,11 @@ const (
 //
 // For example:
 //
-//   - daysOfWeek[3] is 3 because April (index=3) 1st is shifted by 3
+//   - weekdayOffset[3] is 3 because April (index=3) 1st is shifted by 3
 //     days because March has 31 days (28 + 3).
-//   - daysOfWeek[4] is 5 because May (index=4) 1st is shifted by 2
+//   - weekdayOffset[4] is 5 because May (index=4) 1st is shifted by 2
 //     additional days from April, because April has 30 days (28 + 2).
-var daysOfWeek = [12]uint8{
+var weekdayOffset = [12]uint8{
 	5, /*Jan=31*/
 	1, /*Feb=28*/
 	0, /*Mar=31, start of "year"*/
@@ -60,6 +76,23 @@ var daysInMonth = [12]uint8{
 	31, /*Dec=31*/
 }
 
+// Number of cummulative days in all months prior to the month at given index.
+// Assume non-leap year. 0=Jan, 11=Dec.
+var daysPriorToMonth = [12]uint16{
+	0,   /*Jan=31*/
+	31,  /*Feb=28*/
+	59,  /*Mar=31*/
+	90,  /*Apr=30*/
+	120, /*May=31*/
+	151, /*Jun=30*/
+	181, /*Jul=31*/
+	212, /*Aug=31*/
+	243, /*Sep=30*/
+	273, /*Oct=31*/
+	304, /*Nov=30*/
+	334, /*Dec=31*/
+}
+
 // IsLeapYear returns true if the given year is a leap year, false otherwise.
 func IsLeapYear(year int16) bool {
 	return ((year%4 == 0) && (year%100 != 0)) || (year%400 == 0)
@@ -76,9 +109,8 @@ func DaysInYearMonth(year int16, month uint8) uint8 {
 	}
 }
 
-// DayOfWeek returns the ISO week number (Monday=1, Sunday=7) of the given
-// (year, month, day).
-func DayOfWeek(year int16, month uint8, day uint8) uint8 {
+// LocalDateToWeekday returns the ISO week day of the given (year, month, day).
+func LocalDateToWeekday(year int16, month uint8, day uint8) IsoWeekday {
 	// The "y" starts in March to shift leap year calculation to end.
 	var y int16 = year
 	if month < 3 {
@@ -86,26 +118,36 @@ func DayOfWeek(year int16, month uint8, day uint8) uint8 {
 	}
 
 	var d int16 = y + y/4 - y/100 + y/400 +
-		int16(daysOfWeek[month-1]) + int16(day)
+		int16(weekdayOffset[month-1]) + int16(day)
 
 	// 2000-01-01 was a Saturday=6, so set the offsets accordingly
 	if d < -1 {
-		return uint8((d+1)%7 + 8)
+		return IsoWeekday((d+1)%7 + 8)
 	} else {
-		return uint8((d+1)%7 + 1)
+		return IsoWeekday((d+1)%7 + 1)
 	}
+}
+
+// LocalDateToYearday returns the day of the year for the given (year, month,
+// day). Jan 1 returns 1.
+func LocalDateToYearday(year int16, month uint8, day uint8) uint16 {
+	daysPrior := daysPriorToMonth[month-1]
+	if IsLeapYear(year) && month > 2 {
+		daysPrior++
+	}
+	return daysPrior + uint16(day)
 }
 
 // LocalDateFromEpochDays converts epoch days to (y, m, d).
 func LocalDateFromEpochDays(days int32) (year int16, month uint8, day uint8) {
 	days -= daysToConverterEpochFromUnixEpoch
-	year, month, day = ConvertFromDays(days)
+	year, month, day = convertFromDays(days)
 	return
 }
 
 // LocalDateToEpochDays converts (y, m, d) to epoch days.
 func LocalDateToEpochDays(year int16, month uint8, day uint8) int32 {
-	converterDays := ConvertToDays(year, month, day)
+	converterDays := convertToDays(year, month, day)
 	return converterDays + daysToConverterEpochFromUnixEpoch
 }
 
@@ -149,4 +191,10 @@ func LocalDateDecrementOneDay(y int16, m uint8, d uint8) (
 		}
 	}
 	return
+}
+
+// Return the human readable English name for the weekday (e.g. "Sunday").
+// The 3-letter abbreviation can be retrieved with a string slice.
+func (wd IsoWeekday) Name() string {
+	return weekdayStrings[wd]
 }

@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/strbuild"
 	"strings"
 )
 
@@ -68,15 +69,15 @@ func (ldt *LocalDateTime) String() string {
 }
 
 func (ldt *LocalDateTime) BuildString(b *strings.Builder) {
-	BuildUint16Pad4(b, uint16(ldt.Year), '0')
+	strbuild.Uint16Pad4(b, uint16(ldt.Year), '0')
 	b.WriteByte('-')
-	BuildUint8Pad2(b, ldt.Month, '0')
+	strbuild.Uint8Pad2(b, ldt.Month, '0')
 	b.WriteByte('-')
-	BuildUint8Pad2(b, ldt.Day, '0')
+	strbuild.Uint8Pad2(b, ldt.Day, '0')
 	b.WriteByte('T')
-	BuildUint8Pad2(b, ldt.Hour, '0')
+	strbuild.Uint8Pad2(b, ldt.Hour, '0')
 	b.WriteByte(':')
-	BuildUint8Pad2(b, ldt.Minute, '0')
+	strbuild.Uint8Pad2(b, ldt.Minute, '0')
 	b.WriteByte(':')
-	BuildUint8Pad2(b, ldt.Second, '0')
+	strbuild.Uint8Pad2(b, ldt.Second, '0')
 }

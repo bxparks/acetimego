@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/AceTimeGo/strbuild"
 	"strings"
 )
 
@@ -56,7 +57,7 @@ func (zdt *ZonedDateTime) EpochSeconds() ATime {
 func NewZonedDateTimeFromEpochSeconds(
 	epochSeconds ATime, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.OffsetDateTimeFromEpochSeconds(epochSeconds)
+	odt := tz.offsetDateTimeFromEpochSeconds(epochSeconds)
 	return ZonedDateTime{
 		Year:          odt.Year,
 		Month:         odt.Month,
@@ -73,7 +74,7 @@ func NewZonedDateTimeFromEpochSeconds(
 func NewZonedDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.OffsetDateTimeFromLocalDateTime(ldt)
+	odt := tz.offsetDateTimeFromLocalDateTime(ldt)
 	return ZonedDateTime{
 		Year:          odt.Year,
 		Month:         odt.Month,
@@ -98,6 +99,13 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 	return NewZonedDateTimeFromEpochSeconds(epochSeconds, tz)
 }
 
+// Return additional information about the current date time in the ZonedExtra
+// object.
+func (zdt *ZonedDateTime) ZonedExtra() ZonedExtra {
+	ldt := zdt.LocalDateTime()
+	return NewZonedExtraFromLocalDateTime(&ldt, zdt.Tz)
+}
+
 func (zdt *ZonedDateTime) String() string {
 	var b strings.Builder
 	zdt.BuildString(&b)
@@ -113,7 +121,7 @@ func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
 		b.WriteString(" UTC")
 	} else {
 		// Append the "+/-hh:mm[tz]"
-		BuildUTCOffset(b, zdt.OffsetSeconds)
+		strbuild.TimeOffset(b, zdt.OffsetSeconds)
 		b.WriteByte('[')
 		b.WriteString(zdt.Tz.Name())
 		b.WriteByte(']')

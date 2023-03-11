@@ -1,6 +1,28 @@
 # Changelog
 
 * Unreleased
+* 0.3.0 (2023-03-10, TZDB 2022g)
+    * Convert C++ doxygen docs to go doc format.
+    * Unexport various internal functions and structs by lowercasing their
+      names. Could not use `internal/` directory due to circular dependency to
+      `ATime` type.
+    * Move `strutil.go` utilities to new `strbuild` package and simplify
+      names of various functions.
+        * These low-level functions are used by some of the utilities in `cmd`.
+        * Avoids cluttering the API of the `acetime` package.
+    * Rename `LocalDateToDayOfWeek()` to `LocalDateToWeekday()`
+        * For better consistency with standard `time` package.
+        * Add IsoWeekday.Name() method.
+    * Add `LocalDateToYearday()`
+        * Returns the day of year of `(year, month, day)`.
+    * Add `ZonedDateTime.ZonedExtra()` convenience method.
+        * For easier access to extra information about the given date time.
+    * Always generate anchor rules in zonedb.
+        * Allows `zone_processor.go` to work over all years `[0,10000)`
+          even with truncated zonedb (e.g. `[2000,2100)`).
+        * Accuracy is guaranteed only for the requested interval (e.g.
+          `[2000,2100)`.
+        * But the code won't crash outside of that interval.
 * 0.2.0 (2023-02-13, TZDB 2022g)
     * Support one-second resolution for Zone.STDOFF field, instead of
       one-minute.

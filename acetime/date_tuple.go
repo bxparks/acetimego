@@ -4,9 +4,14 @@ import (
 	"github.com/bxparks/AceTimeGo/zoneinfo"
 )
 
-// A DateTuple is an internal version of [LocalDateTime] which also tracks the
+// A dateTuple is an internal version of [LocalDateTime] which also tracks the
 // `s`, `w` or `u` suffixes given in the TZ database files.
-type DateTuple struct {
+//
+// TODO: We only need about 24-bits (3-bytes) the seconds field. It should be
+// possible to reduce this struct by 1-byte so that the object fits entirely
+// within 8-bytes, a multiple of 4 or 8 bytes which reduces memory consumption
+// on 32-bit and 64-bit processors.
+type dateTuple struct {
 	year    int16 // [0,10000]
 	month   uint8 // [1-12]
 	day     uint8 // [1-31]
@@ -14,9 +19,9 @@ type DateTuple struct {
 	suffix  uint8 // zoneinfo.SuffixS, zoneinfo.SuffixW, zoneinfo.SuffixU
 }
 
-// dateTupleCompare compare 2 DateTuple instances (a, b) and returns -1, 0, 1
+// dateTupleCompare compare 2 dateTuple instances (a, b) and returns -1, 0, 1
 // depending on whether a is less than, equal, or greater than b, respectively.
-func dateTupleCompare(a *DateTuple, b *DateTuple) int8 {
+func dateTupleCompare(a *dateTuple, b *dateTuple) int8 {
 	if a.year < b.year {
 		return -1
 	}
@@ -45,14 +50,14 @@ func dateTupleCompare(a *DateTuple, b *DateTuple) int8 {
 }
 
 // dateTupleSubtract returns the number of seconds of (a - b).
-func dateTupleSubtract(a *DateTuple, b *DateTuple) ATime {
+func dateTupleSubtract(a *dateTuple, b *dateTuple) ATime {
 	da := LocalDateToEpochDays(a.year, a.month, a.day)
 	db := LocalDateToEpochDays(b.year, b.month, b.day)
 
 	return ATime(da-db)*86400 + ATime(a.seconds-b.seconds)
 }
 
-func dateTupleNormalize(dt *DateTuple) {
+func dateTupleNormalize(dt *dateTuple) {
 	const oneDayAsSeconds = 60 * 60 * 24
 
 	if dt.seconds <= -oneDayAsSeconds {
@@ -69,15 +74,15 @@ func dateTupleNormalize(dt *DateTuple) {
 }
 
 // dateTupleExpand converts the given 'tt', offsetSeconds, and deltaSeconds into
-// the 'w', 's' and 'u' versions of the DateTuple. It is allowed for 'ttw' to
+// the 'w', 's' and 'u' versions of the dateTuple. It is allowed for 'ttw' to
 // be an alias of 'tt'.
 func dateTupleExpand(
-	tt *DateTuple,
+	tt *dateTuple,
 	offsetSeconds int32,
 	deltaSeconds int32,
-	ttw *DateTuple,
-	tts *DateTuple,
-	ttu *DateTuple) {
+	ttw *dateTuple,
+	tts *dateTuple,
+	ttu *dateTuple) {
 
 	if tt.suffix == zoneinfo.SuffixS {
 		*tts = *tt
@@ -151,7 +156,7 @@ const (
 //     month slop,
 //   - compareStatusExactMatch is never returned.
 func dateTupleCompareFuzzy(
-	t *DateTuple, start *DateTuple, until *DateTuple) uint8 {
+	t *dateTuple, start *dateTuple, until *dateTuple) uint8 {
 
 	// Use int32 because a delta year of 2730 or greater will exceed
 	// the range of an int16.

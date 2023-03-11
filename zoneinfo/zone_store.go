@@ -2,8 +2,18 @@ package zoneinfo
 
 // Functions that convert a ZoneXxxRecord to a ZoneXxx instance.
 
+// InvalidIndex is returned by the FindByID() function to indicate that a ZoneID
+// was not found. The max number of entries that can be described by a `uint16`
+// is `2^16-1`, so the index of a valid entry can never be `2^16-1`.
 const InvalidIndex = 1<<16 - 1
 
+// A ZoneStore knows how to materialize a zoneinfo object (ZoneRule, ZonePolicy,
+// ZoneEra, ZoneInfo) from the underlying persistent data storage described by
+// the ZoneDataContext. It also knows how to search the underlying data storage
+// for a ZoneInfo object by its Name (e.g. "America/Los_Angeles" or by a uint32
+// integer ID (e.g. ZoneIDAmerica_Los_Angeles = 0xb7f7e8f2). It performs the
+// search operation without loading the entire database into memory because it
+// knows the internal layout of the database.
 type ZoneStore struct {
 	context      *ZoneDataContext
 	nameIO       StringIO16
@@ -25,7 +35,9 @@ func NewZoneStore(c *ZoneDataContext) *ZoneStore {
 		infoReader: ZoneInfoReader{NewDataIO(c.ZoneInfosData), c.ZoneInfoChunkSize},
 		eraReader:  ZoneEraReader{NewDataIO(c.ZoneErasData), c.ZoneEraChunkSize},
 		policyReader: ZonePolicyReader{
-			NewDataIO(c.ZonePoliciesData), c.ZonePolicyChunkSize},
+			NewDataIO(c.ZonePoliciesData),
+			c.ZonePolicyChunkSize,
+		},
 		ruleReader: ZoneRuleReader{NewDataIO(c.ZoneRulesData), c.ZoneRuleChunkSize},
 	}
 	store.isSorted = store.IsSorted()
@@ -236,6 +248,12 @@ func (store *ZoneStore) IsSorted() bool {
 	return true
 }
 
+// ZoneNameHash is the hash function that converts the zone name (e.g.
+// "America/Los_Angeles" into a uint32 integer. This is intended to be stable
+// and unique for all future versions of AceTimeGo. If a new zone is added in
+// the future that causes a hash collision, a modified form of this function
+// will be created so that previous hashes remain stable, while resolving the
+// hash collision.
 func ZoneNameHash(s string) uint32 {
 	return djb2(s)
 }

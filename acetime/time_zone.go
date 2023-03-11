@@ -12,11 +12,11 @@ const (
 
 // A TimeZone represents one of the IANA TZ time zones. It has reference
 // semantics meaning that a copy of this will point to same underlying
-// ZoneProcessor ands its cache. A TimeZone can be passed around by value or by
+// zoneProcessor and its cache. A TimeZone can be passed around by value or by
 // pointer because it is a light-weight object.
 type TimeZone struct {
-	tztype        uint8
-	zoneProcessor *ZoneProcessor
+	tztype    uint8
+	processor *zoneProcessor
 }
 
 var (
@@ -27,11 +27,10 @@ var (
 	TimeZoneError = TimeZone{TztypeError, nil}
 )
 
-func NewTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
-
-	var zoneProcessor ZoneProcessor
-	zoneProcessor.InitForZoneInfo(zoneInfo)
-	return TimeZone{TztypeProcessor, &zoneProcessor}
+func newTimeZoneFromZoneInfo(zoneInfo *zoneinfo.ZoneInfo) TimeZone {
+	var processor zoneProcessor
+	processor.initForZoneInfo(zoneInfo)
+	return TimeZone{TztypeProcessor, &processor}
 }
 
 func (tz *TimeZone) IsError() bool {
@@ -39,44 +38,52 @@ func (tz *TimeZone) IsError() bool {
 }
 
 func (tz *TimeZone) IsUTC() bool {
-	return tz.zoneProcessor == nil
+	return tz.processor == nil
 }
 
 func (tz *TimeZone) IsLink() bool {
-	return tz.zoneProcessor.IsLink()
+	return tz.processor.isLink()
 }
 
 func (tz *TimeZone) Name() string {
 	if tz.tztype == TztypeError {
-		return "<Error>"
+		return "Err" // Can be rendered on 7-segment LED
 	} else if tz.tztype == TztypeUTC {
 		return "UTC"
 	} else {
-		return tz.zoneProcessor.Name()
+		return tz.processor.name()
 	}
 }
 
-// OffsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given
+func (tz *TimeZone) ZoneID() uint32 {
+	if tz.processor == nil {
+		return 0 // AceTimeTool guarantees that 0 is invalid
+	} else {
+		return tz.processor.zoneInfo.ZoneID
+	}
+}
+
+// offsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given
 // epochSeconds.
 //
 // Adapted from atc_time_zone_offset_date_time_from_epoch_seconds() in the
 // AceTimeC library and, TimeZone::getOffsetDateTime(epochSeconds) from the
 // AceTime library.
-func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
+func (tz *TimeZone) offsetDateTimeFromEpochSeconds(
 	epochSeconds ATime) OffsetDateTime {
 
-	// UTC
-	if tz.zoneProcessor == nil {
+	// UTC (or Error)
+	if tz.processor == nil {
 		return NewOffsetDateTimeFromEpochSeconds(epochSeconds, 0)
 	}
 
-	err := tz.zoneProcessor.InitForEpochSeconds(epochSeconds)
-	if err != ErrOk {
+	err := tz.processor.initForEpochSeconds(epochSeconds)
+	if err != errOk {
 		return OffsetDateTimeError
 	}
 
-	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
-	if result.frtype == FindResultNotFound {
+	result := tz.processor.findByEpochSeconds(epochSeconds)
+	if result.frtype == findResultNotFound {
 		return OffsetDateTimeError
 	}
 
@@ -88,26 +95,26 @@ func (tz *TimeZone) OffsetDateTimeFromEpochSeconds(
 	return odt
 }
 
-// OffsetDateTimeFromLocalDateTime calculates the OffsetDateTime from the given
+// offsetDateTimeFromLocalDateTime calculates the OffsetDateTime from the given
 // LocalDateTime.
 //
 // Adapted from atc_time_zone_offset_date_time_from_local_date_time() from the
 // AceTimeC library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
 // the AceTime library.
-func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
+func (tz *TimeZone) offsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime) OffsetDateTime {
 
 	// UTC (or Error)
-	if tz.zoneProcessor == nil {
+	if tz.processor == nil {
 		return NewOffsetDateTimeFromLocalDateTime(ldt, 0)
 	}
 
-	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
-	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
+	result := tz.processor.findByLocalDateTime(ldt)
+	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return OffsetDateTimeError
 	}
 
-	// Convert FindResult into OffsetDateTime using the request offset, and the
+	// Convert findResult into OffsetDateTime using the request offset, and the
 	// result fold.
 	odt := OffsetDateTime{
 		Year:          ldt.Year,
@@ -120,11 +127,11 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 		Fold:          result.fold,
 	}
 
-	// Special processor for kAtcFindResultGap: Convert to epochSeconds using the
+	// Special processor for kAtcfindResultGap: Convert to epochSeconds using the
 	// reqStdOffsetSeconds and reqDstOffsetSeconds, then convert back to
 	// OffsetDateTime using the target stdOffsetSeconds and
 	// dstOffsetSeconds.
-	if result.frtype == FindResultGap {
+	if result.frtype == findResultGap {
 		epochSeconds := odt.EpochSeconds()
 		targetOffsetSeconds := result.stdOffsetSeconds + result.dstOffsetSeconds
 		odt = NewOffsetDateTimeFromEpochSeconds(epochSeconds, targetOffsetSeconds)
@@ -133,8 +140,8 @@ func (tz *TimeZone) OffsetDateTimeFromLocalDateTime(
 	return odt
 }
 
-func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
-	if tz.zoneProcessor == nil {
+func (tz *TimeZone) zonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
+	if tz.processor == nil {
 		return ZonedExtra{
 			Zetype:              ZonedExtraExact,
 			StdOffsetSeconds:    0,
@@ -145,8 +152,8 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 		}
 	}
 
-	result := tz.zoneProcessor.FindByEpochSeconds(epochSeconds)
-	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
+	result := tz.processor.findByEpochSeconds(epochSeconds)
+	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return ZonedExtraError
 	}
 
@@ -160,10 +167,10 @@ func (tz *TimeZone) ZonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
 	}
 }
 
-func (tz *TimeZone) ZonedExtraFromLocalDateTime(
+func (tz *TimeZone) zonedExtraFromLocalDateTime(
 	ldt *LocalDateTime) ZonedExtra {
 
-	if tz.zoneProcessor == nil {
+	if tz.processor == nil {
 		return ZonedExtra{
 			Zetype:              ZonedExtraExact,
 			StdOffsetSeconds:    0,
@@ -174,8 +181,8 @@ func (tz *TimeZone) ZonedExtraFromLocalDateTime(
 		}
 	}
 
-	result := tz.zoneProcessor.FindByLocalDateTime(ldt)
-	if result.frtype == FindResultErr || result.frtype == FindResultNotFound {
+	result := tz.processor.findByLocalDateTime(ldt)
+	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return ZonedExtraError
 	}
 

@@ -13,12 +13,12 @@ func NewZoneManager(context *zoneinfo.ZoneDataContext) ZoneManager {
 	return ZoneManager{zoneinfo.NewZoneStore(context)}
 }
 
-func (zm *ZoneManager) TimeZoneFromID(zoneID uint32) TimeZone {
+func (zm *ZoneManager) TimeZoneFromZoneID(zoneID uint32) TimeZone {
 	info := zm.store.ZoneInfoByID(zoneID)
 	if info == nil {
 		return TimeZoneError
 	}
-	return NewTimeZoneFromZoneInfo(info)
+	return newTimeZoneFromZoneInfo(info)
 }
 
 func (zm *ZoneManager) TimeZoneFromName(name string) TimeZone {
@@ -26,14 +26,16 @@ func (zm *ZoneManager) TimeZoneFromName(name string) TimeZone {
 	if info == nil {
 		return TimeZoneError
 	}
-	return NewTimeZoneFromZoneInfo(info)
+	return newTimeZoneFromZoneInfo(info)
 }
 
-func (zm *ZoneManager) TimeZoneFromIndex(index uint16) TimeZone {
+// TODO: The "index" of a ZoneInfo is currently not exported, so this function
+// is not useful to the end-user. Maybe remove it altogether.
+func (zm *ZoneManager) timeZoneFromIndex(index uint16) TimeZone {
 	if index >= zm.ZoneCount() {
 		return TimeZoneError
 	}
-	return NewTimeZoneFromZoneInfo(zm.store.ZoneInfo(index))
+	return newTimeZoneFromZoneInfo(zm.store.ZoneInfo(index))
 }
 
 // ZoneCount returns the number of zones (Zones and Links) in the database.
