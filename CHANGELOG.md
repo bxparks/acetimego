@@ -1,6 +1,7 @@
 # Changelog
 
 * Unreleased
+* 0.3.0 (2023-03-10, TZDB 2022g)
     * Convert C++ doxygen docs to go doc format.
     * Unexport various internal functions and structs by lowercasing their
       names. Could not use `internal/` directory due to circular dependency to

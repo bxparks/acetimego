@@ -21,7 +21,7 @@ This library implements the algorithms from the
 [AceTimePython](https://github.com/bxparks/AceTimePython), and
 [AceTimeC](https://github.com/bxparks/AceTimeC) libraries.
 
-**Version**: 0.2.0 (2023-02-13, TZDB version 2022g)
+**Version**: 0.3.0 (2023-03-10, TZDB version 2022g)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
