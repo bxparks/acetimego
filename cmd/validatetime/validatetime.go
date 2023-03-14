@@ -80,12 +80,14 @@ func validateAtTime(t time.Time, atz *acetime.TimeZone) {
 		return
 	}
 
-	year := int16(t.Year())
-	month := uint8(t.Month())
-	day := uint8(t.Day())
-	hour := uint8(t.Hour())
-	minute := uint8(t.Minute())
-	second := uint8(t.Second())
+	h, m, s := t.Clock()
+	y, mm, d := t.Date()
+	year := int16(y)
+	month := uint8(mm)
+	day := uint8(d)
+	hour := uint8(h)
+	minute := uint8(m)
+	second := uint8(s)
 
 	// Validate UnixSeconds. This should always succeed.
 	acetimeEpochSeconds := int64(zdt.EpochSeconds())
