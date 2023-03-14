@@ -1,6 +1,10 @@
 # Changelog
 
 * Unreleased
+    * zonedb
+        * Rename `zonedb` to `zonedball`. Consumes 72050 bytes of flash.
+        * Create `zonedb2000` which supports only year 2000 and onwards.
+          Consumes 34948 bytes of flash, less than 1/2 of `zonedball`.
 * 0.3.0 (2023-03-10, TZDB 2022g)
     * Convert C++ doxygen docs to go doc format.
     * Unexport various internal functions and structs by lowercasing their
