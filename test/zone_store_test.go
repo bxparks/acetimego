@@ -9,7 +9,8 @@
 package test
 
 import (
-	"github.com/bxparks/AceTimeGo/zonedb"
+	"github.com/bxparks/AceTimeGo/zonedb2000"
+	"github.com/bxparks/AceTimeGo/zonedball"
 	"github.com/bxparks/AceTimeGo/zonedbtesting"
 	"github.com/bxparks/AceTimeGo/zoneinfo"
 	"testing"
@@ -21,9 +22,14 @@ func TestZoneStoreZoneCount(t *testing.T) {
 		t.Fatal(store.ZoneCount(), zonedbtesting.DataContext.ZoneInfoCount)
 	}
 
-	store = zoneinfo.NewZoneStore(&zonedb.DataContext)
-	if !(store.ZoneCount() == zonedb.DataContext.ZoneInfoCount) {
-		t.Fatal(store.ZoneCount(), zonedb.DataContext.ZoneInfoCount)
+	store = zoneinfo.NewZoneStore(&zonedb2000.DataContext)
+	if !(store.ZoneCount() == zonedb2000.DataContext.ZoneInfoCount) {
+		t.Fatal(store.ZoneCount(), zonedb2000.DataContext.ZoneInfoCount)
+	}
+
+	store = zoneinfo.NewZoneStore(&zonedball.DataContext)
+	if !(store.ZoneCount() == zonedball.DataContext.ZoneInfoCount) {
+		t.Fatal(store.ZoneCount(), zonedball.DataContext.ZoneInfoCount)
 	}
 }
 
@@ -33,9 +39,14 @@ func TestZoneStoreIsSorted(t *testing.T) {
 		t.Fatal("zonedbtesting should be sorted")
 	}
 
-	store = zoneinfo.NewZoneStore(&zonedb.DataContext)
+	store = zoneinfo.NewZoneStore(&zonedb2000.DataContext)
 	if !store.IsSorted() {
-		t.Fatal("zonedb should be sorted")
+		t.Fatal("zonedb2000 should be sorted")
+	}
+
+	store = zoneinfo.NewZoneStore(&zonedball.DataContext)
+	if !store.IsSorted() {
+		t.Fatal("zonedball should be sorted")
 	}
 }
 
