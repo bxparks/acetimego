@@ -1,20 +1,20 @@
-CMD_NAME := mem_zonedb
+CMD_NAME := mem_zonedball
 TARGETS_UNIX := $(CMD_NAME).out
 TARGETS_TINY := $(CMD_NAME).tiny.out
 TARGETS_TINY_ESP32 := $(CMD_NAME).esp32.out
 
-.PHONY := build tiny tinyesp32 flashesp32 all clean help
+.PHONY := build buildtiny buildesp32 flashesp32 all clean help
 
-all: build
+all: build buildtiny buildesp32
 
 help:
-	@echo 'Usage: make [all | build | tiny | tinyesp32 | flashesp32 | clean]'
+	@echo 'Usage: make [all|build|buildtiny|buildesp32|flashesp32|clean]'
 
 build: $(TARGETS_UNIX)
 
-tiny: $(TARGETS_TINY)
+buildtiny: $(TARGETS_TINY)
 
-tinyesp32: $(TARGETS_TINY_ESP32)
+buildesp32: $(TARGETS_TINY_ESP32)
 
 flashesp32:
 	tinygo flash -x -target=esp32-coreboard-v2
@@ -26,14 +26,14 @@ clean:
 
 # Use normal Go to compile to native host (Linux).
 $(CMD_NAME).out: $(CMD_NAME).go
-	go build -o $@ $<
+	go build -o $@
 
 # Use TinyGo to compile to native host (Linux).
 $(CMD_NAME).tiny.out: $(CMD_NAME).go
 	tinygo build \
 		-size full \
 		-print-allocs=acetime \
-		-o $@ $< \
+		-o $@ \
 		> $(CMD_NAME).tiny.size.txt \
 		2> $(CMD_NAME).tiny.allocs.txt
 
@@ -43,6 +43,6 @@ $(CMD_NAME).esp32.out: $(CMD_NAME).go
 		-size full \
 		-print-allocs=acetime \
 		-target=esp32-coreboard-v2 \
-		-o $@ $< \
+		-o $@ \
 		> $(CMD_NAME).esp32.size.txt \
 		2> $(CMD_NAME).esp32.allocs.txt

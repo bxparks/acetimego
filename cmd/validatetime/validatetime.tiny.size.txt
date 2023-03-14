@@ -1,38 +1,26 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   13714      41     629 |   13780     670 | (unknown)
-     30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
-   1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
-      5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
-    155       0       0       0 |     155       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/exit
-    553       0       0       0 |     553       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/internal
-    161       0       0       0 |     161       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/mman
-    100       0       0       0 |     100       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/signal
-   1258       0       0       0 |    1258       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/string
-    106       0       0       0 |     106       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread
-     16       0       0       0 |      16       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread/x86_64
-    152       0       0       0 |     152       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/time
-     38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/unistd
+     27   13640      37      61 |   13704      98 | (unknown)
    1537    2128       0      56 |    3665      56 | /usr/local/go/src/syscall
-    274       0       0       0 |     274       0 | C musl
+   3850      58      12     536 |    3920     548 | C musl
     239       0       0       0 |     239       0 | Go interface method
       0      92       0       0 |      92       0 | Go reflect data
      55       0       0       0 |      55       0 | errors
-   6984      68       0       0 |    7052       0 | github.com/bxparks/AceTimeGo/acetime
+   6965      64       0       0 |    7029       0 | github.com/bxparks/AceTimeGo/acetime
     299       0       0       0 |     299       0 | github.com/bxparks/AceTimeGo/strbuild
-      0   70237    1833       0 |   72070    1833 | github.com/bxparks/AceTimeGo/zonedb
+      0   70321    1833       0 |   72154    1833 | github.com/bxparks/AceTimeGo/zonedball
    2734       0       0       0 |    2734       0 | github.com/bxparks/AceTimeGo/zoneinfo
      81       0       0       0 |      81       0 | internal/bytealg
     162       2       0       0 |     164       0 | internal/itoa
     479      24       0      16 |     503      16 | internal/task
-   2613     300       0       0 |    2913       0 | main
+   2545     300       0       0 |    2845       0 | main
    3088     678       0       0 |    3766       0 | reflect
    6840     202      12      91 |    7054     103 | runtime
    1738    1942    1338       0 |    5018    1338 | strconv
     567     124       0       0 |     691       0 | strings
     630     200       0       0 |     830       0 | sync
     194    2954       0       0 |    3148       0 | syscall
-  21589    1054     168     160 |   22811     328 | time
+  21414    1054     168     160 |   22636     328 | time
     497     288       0       0 |     785       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  54219   94007    3392     952 |  151618    4344 | total
+  53941   94071    3400     920 |  151412    4320 | total

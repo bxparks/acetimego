@@ -6,7 +6,7 @@ package main
 
 import (
 	"github.com/bxparks/AceTimeGo/acetime"
-	"github.com/bxparks/AceTimeGo/zonedb"
+	"github.com/bxparks/AceTimeGo/zonedball"
 	"time"
 )
 
@@ -21,7 +21,7 @@ const (
 func main() {
 	println("Validating from", startYear, "until", untilYear)
 
-	context := &zonedb.DataContext
+	context := &zonedball.DataContext
 	zm := acetime.NewZoneManager(context)
 	names := zm.ZoneNames()
 	for i, name := range names {

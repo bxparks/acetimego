@@ -34,7 +34,7 @@ all:
 		--offset_granularity 1 \
 		--delta_granularity 60 \
 		--until_at_granularity 1 \
-		--db_namespace zonedb \
+		--db_namespace zonedball \
 		--generate_int16_years \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)

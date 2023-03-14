@@ -1,20 +1,8 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     25   10297      20     629 |   10342     649 | (unknown)
-     30       0       0       0 |      30       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/crt
-   1020       0       0       0 |    1020       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/env
-      5       0       0       0 |       5       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/errno
-    155       0       0       0 |     155       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/exit
-    553       0       0       0 |     553       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/internal
-    161       0       0       0 |     161       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/mman
-    100       0       0       0 |     100       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/signal
-   1258       0       0       0 |    1258       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/string
-    106       0       0       0 |     106       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread
-     16       0       0       0 |      16       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/thread/x86_64
-    152       0       0       0 |     152       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/time
-     38       0       0       0 |      38       0 | /home/brian/src/coding/go/usr/local/lib/tinygo/lib/musl/src/unistd
+     27   10255      16      61 |   10298      77 | (unknown)
    1537    2128       0      56 |    3665      56 | /usr/local/go/src/syscall
-    274       0       0       0 |     274       0 | C musl
+   3850      58      12     536 |    3920     548 | C musl
      86       0       0       0 |      86       0 | Go interface method
       0      53       0       0 |      53       0 | Go reflect data
      47       0       0       0 |      47       0 | errors
@@ -30,4 +18,4 @@
     180    2954       0       0 |    3134       0 | syscall
   18364    1003     168     160 |   19535     328 | time
 ------------------------------- | --------------- | -------
-  35709   17769     200     952 |   53678    1152 | total
+  35693   17785     208     920 |   53686    1128 | total

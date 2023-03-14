@@ -3,18 +3,19 @@ TARGETS_UNIX := $(CMD_NAME).out
 TARGETS_TINY := $(CMD_NAME).tiny.out
 TARGETS_TINY_ESP32 := $(CMD_NAME).esp32.out
 
-.PHONY := build tiny tinyesp32 flashesp32 all clean help
+.PHONY := build buildtiny buildesp32 flashesp32 all clean help
+
+# Does not work in tinygo.
+all: build
+
+help:
+	@echo 'Usage: make [all|build|buildtiny|buildesp32|flashesp32|clean]'
 
 build: $(TARGETS_UNIX)
 
-all: build tiny tinyesp32
+buildtiny: $(TARGETS_TINY)
 
-help:
-	@echo 'Usage: make [all | build | tiny | tinyesp32 | flashesp32 | clean]'
-
-tiny: $(TARGETS_TINY)
-
-tinyesp32: $(TARGETS_TINY_ESP32)
+buildesp32: $(TARGETS_TINY_ESP32)
 
 flashesp32:
 	tinygo flash -x -target=esp32-coreboard-v2

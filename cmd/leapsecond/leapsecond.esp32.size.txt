@@ -1,12 +1,12 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-   2559     696       0       9 |    3255       9 | (unknown)
+   2557     696       0       9 |    3253       9 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
      16       0       0       0 |      16       0 | Go interface method
       0      57       0       0 |      57       0 | Go reflect data
      66       0       0       0 |      66       0 | device/esp
      13       0       0       0 |      13       0 | errors
-   6216      36       0       0 |    6252       0 | github.com/bxparks/AceTimeGo/acetime
+   6214      32       0       0 |    6246       0 | github.com/bxparks/AceTimeGo/acetime
     222       0       0       0 |     222       0 | github.com/bxparks/AceTimeGo/strbuild
     188       0       0       0 |     188       0 | github.com/bxparks/AceTimeGo/zoneinfo
      60       0       0       0 |      60       0 | internal/bytealg
@@ -23,4 +23,4 @@
      20       6       0       0 |      26       0 | syscall
    8606     584      64      76 |    9254     140 | time
 ------------------------------- | --------------- | -------
-  25502    2482      64    4236 |   28048    4300 | total
+  25498    2478      64    4236 |   28040    4300 | total

@@ -1,20 +1,20 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-   3593     750      13       9 |    4356      22 | (unknown)
+   3594     750      13       9 |    4357      22 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
     131       0       0       0 |     131       0 | Go interface method
       0      88       0       0 |      88       0 | Go reflect data
      66       0       0       0 |      66       0 | device/esp
      26       0       0       0 |      26       0 | errors
-   6255      36       0       0 |    6291       0 | github.com/bxparks/AceTimeGo/acetime
+   6221      32       0       0 |    6253       0 | github.com/bxparks/AceTimeGo/acetime
     205       0       0       0 |     205       0 | github.com/bxparks/AceTimeGo/strbuild
-      0   70237    1725       0 |   71962    1725 | github.com/bxparks/AceTimeGo/zonedb
-   2107       0       0       0 |    2107       0 | github.com/bxparks/AceTimeGo/zoneinfo
+      0   70321    1729       0 |   72050    1729 | github.com/bxparks/AceTimeGo/zonedball
+   2108       0       0       0 |    2108       0 | github.com/bxparks/AceTimeGo/zoneinfo
      57       0       0       0 |      57       0 | internal/bytealg
     133       2       0       0 |     135       0 | internal/itoa
     349      24       0       8 |     373       8 | internal/task
       9       0       0       0 |       9       0 | machine
-   2592     300       0       0 |    2892       0 | main
+   2502     300       0       0 |    2802       0 | main
    2600     622       0       0 |    3222       0 | reflect
    3091     172       0      47 |    3263      47 | runtime
      78       0       0       0 |      78       0 | runtime/interrupt
@@ -23,7 +23,7 @@
     450     108       0       0 |     558       0 | strings
     143      38       0       0 |     181       0 | sync
      25       6       0       0 |      31       0 | syscall
-  12296     774      96      92 |   13166     188 | time
+  12009     774      96      92 |   12879     188 | time
     558     288       0       0 |     846       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  36283   75387    3164    4252 |  114834    7416 | total
+  35874   75467    3168    4252 |  114509    7420 | total
