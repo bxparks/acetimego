@@ -1,0 +1,2 @@
+/home/brian/src/AceTimeGo/acetime/time_zone.go:31:6: object allocated on the heap: object size 1040 exceeds maximum stack allocation size 256
+/home/brian/src/AceTimeGo/acetime/zoned_date_time.go:110:6: object allocated on the heap: escapes at line 111
