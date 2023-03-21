@@ -1,49 +1,41 @@
-CMD_NAME := validatetime
-TARGETS_UNIX := $(CMD_NAME).out
-TARGETS_TINY := $(CMD_NAME).tiny.out
-TARGETS_TINY_ESP32 := $(CMD_NAME).esp32.out
+SRCS := main.go transitions.go
 
 .PHONY := build buildtiny buildesp32 flashesp32 all clean help
 
-# Does not work in tinygo.
-all: build
-
 help:
-	@echo 'Usage: make [all|build|buildtiny|buildesp32|flashesp32|clean]'
-
-build: $(TARGETS_UNIX)
-
-buildtiny: $(TARGETS_TINY)
-
-buildesp32: $(TARGETS_TINY_ESP32)
-
-flashesp32:
-	tinygo flash -x -target=esp32-coreboard-v2
-
-clean:
-	rm -f $(TARGETS_UNIX) $(TARGETS_TINY) $(TARGETS_TINY_ESP32)
+	@echo 'Usage: make [build|buildtiny|buildesp32|flashesp32|clean]'
 
 #------------------------------------------------------------------------------
-
 # Use normal Go to compile to native host (Linux).
-$(CMD_NAME).out: $(CMD_NAME).go transitions.go
-	go build -o $@
 
+build: $(SRCS) Makefile
+	go build -o main.out
+
+#------------------------------------------------------------------------------
 # Use TinyGo to compile to native host (Linux).
-$(CMD_NAME).tiny.out: $(CMD_NAME).go transitions.go
+
+buildtiny: $(SRCS) Makefile
 	tinygo build \
 		-size full \
 		-print-allocs=^time$$ \
-		-o $@ \
-		> $(CMD_NAME).tiny.size.txt \
-		2> $(CMD_NAME).tiny.allocs.txt
+		-o tiny.out \
+		> tiny.size.txt
 
+#------------------------------------------------------------------------------
 # Use TinyGo to compile to ESP32.
-$(CMD_NAME).esp32.out: $(CMD_NAME).go transitions.go
+
+buildesp32: $(SRCS) Makefile
 	tinygo build \
 		-size full \
 		-print-allocs=acetime \
 		-target=esp32-coreboard-v2 \
-		-o $@ \
-		> $(CMD_NAME).esp32.size.txt \
-		2> $(CMD_NAME).esp32.allocs.txt
+		-o esp32.out \
+		> esp32.size.txt
+
+flashesp32: $(SRCS) Makefile
+	tinygo flash -x -target=esp32-coreboard-v2
+
+#------------------------------------------------------------------------------
+
+clean:
+	rm -f *.out

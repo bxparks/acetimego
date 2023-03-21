@@ -13,8 +13,8 @@ import (
 const (
 	// The earliest year in the TZ database is 1844, so starting from 1800 should
 	// validate all zones for all years supported by TZDB and AceTimeGo.
-	startYear = 1800
-	untilYear = 2100
+	startYear        = 1800
+	untilYear        = 2100
 	samplingInterval = 22 // hours
 )
 

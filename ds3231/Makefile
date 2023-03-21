@@ -1,4 +1,4 @@
-build:
+buildtiny:
 	tinygo build
 
 test:
