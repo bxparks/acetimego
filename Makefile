@@ -1,7 +1,7 @@
 help:
 	@echo 'Usage: make (build|tiny|test|all|zonedbs|clean)'
 
-.PHONY: all build tiny test clean zonedbs
+.PHONY: all build buildtiny test clean zonedbs
 
 all: build tiny test
 
@@ -14,10 +14,10 @@ build:
 		$(MAKE) -C $$(dirname $$i) build; \
 	done
 
-tiny:
+buildtiny:
 	set -e; \
 	for i in cmd/*/Makefile; do \
-		$(MAKE) -C $$(dirname $$i) tiny; \
+		$(MAKE) -C $$(dirname $$i) buildtiny; \
 	done
 
 zonedbs:
