@@ -1,2 +1,0 @@
-/home/brian/src/AceTimeGo/acetime/local_date_time.go:66:6: object allocated on the heap: escapes at line 67
-/home/brian/src/AceTimeGo/acetime/zoned_date_time.go:110:6: object allocated on the heap: escapes at line 111
