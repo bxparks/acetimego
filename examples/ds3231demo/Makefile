@@ -1,28 +1,21 @@
-CMD_NAME := main
-TARGETS_UNIX := $(CMD_NAME).out
-TARGETS_TINY := $(CMD_NAME).tiny.out
-TARGETS_TINY_ESP32 := $(CMD_NAME).esp32.out
+SRCS := main.go
 
-.PHONY := build tiny tinyesp32 flashesp32 all clean help
-
-tinyesp32: $(TARGETS_TINY_ESP32)
-
-flashesp32:
-	tinygo flash -x -target=esp32-coreboard-v2
-
-clean:
-	rm -f $(TARGETS_UNIX) $(TARGETS_TINY) $(TARGETS_TINY_ESP32)
+.PHONY := buildesp32 flashesp32 clean
 
 #------------------------------------------------------------------------------
 
-# Use TinyGo to compile to ESP32.
-$(CMD_NAME).esp32.out: $(CMD_NAME).go
+buildesp32: $(SRCS)
 	tinygo build \
 		-size full \
 		-print-allocs=acetime \
 		-target=esp32-coreboard-v2 \
-		-o $@ $< \
-		> $(CMD_NAME).esp32.size.txt
+		-o esp32.out \
+		> esp32.size.txt
 
+flashesp32:
+	tinygo flash -x -target=esp32-coreboard-v2
 
-#2> $(CMD_NAME).esp32.allocs.txt
+#------------------------------------------------------------------------------
+
+clean:
+	rm -f *.out

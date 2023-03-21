@@ -1,2 +1,0 @@
-# gitlab.com/bxparks/coding/tinygo/tm1637
-../tm1637/tm1637.go:91:22: ^0x80 (untyped int constant -129) overflows byte

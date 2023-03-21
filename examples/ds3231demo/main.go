@@ -1,37 +1,28 @@
-// A demo program for the ds3231 package that knows how to set and read
-// date/time fields from a DS3231 RTC module.
+//go:build tinygo
+
+//
+// A demo program for the ds3231 package to set and read the date/time fields
+// from a DS3231 RTC module. The date-time is printed to the serial monitor
+// every second.
 
 package main
 
 import (
-	"gitlab.com/bxparks/coding/tinygo/ds3231"
-	"gitlab.com/bxparks/coding/tinygo/segwriter"
-	"gitlab.com/bxparks/coding/tinygo/tm1637"
-	"machine"
+	"github.com/bxparks/AceTimeGo/ds3231"
 	"time"
-	"tinygo.org/x/drivers/i2csoft"
 )
 
-const (
-	numDigits   = 4
-	delayMicros = 1
-	brightness  = 2
+var (
+	rtc = ds3231.New(i2c)
 )
 
 func main() {
-	tm := tm1637.New(machine.GPIO33, machine.GPIO32, delayMicros, numDigits)
-	tm.Configure()
-	tm.SetBrightness(brightness)
-	numWriter := segwriter.NewNumberWriter(&tm)
-
-	i2c := i2csoft.New(machine.SCL_PIN, machine.SDA_PIN)
-	i2c.Configure(i2csoft.I2CConfig{Frequency: 400e3})
-	rtc := ds3231.New(i2c)
+	setupI2C()
 	rtc.Configure()
 
 	// Set Date
 	dt := ds3231.DateTime{
-		Year:   32,
+		Year:   23,
 		Month:  2,
 		Day:    21,
 		Hour:   21,
@@ -40,20 +31,16 @@ func main() {
 	}
 	rtc.SetTime(dt)
 
+	year := 2000 + int16(dt.Year)
 	for {
 		dt, err := rtc.ReadTime()
-		if err != nil {
-			numWriter.WriteHexChar(0, segwriter.HexCharMinus)
-			numWriter.WriteHexChar(1, segwriter.HexCharMinus)
-			numWriter.WriteHexChar(2, segwriter.HexCharMinus)
-			numWriter.WriteHexChar(3, segwriter.HexCharMinus)
-			continue
-		}
 
-		numWriter.WriteDec2(0, dt.Hour, segwriter.HexChar(0))
-		numWriter.WriteDec2(2, dt.Minute, segwriter.HexChar(0))
-		tm.SetDecimalPoint(1, true)
-		tm.Flush()
+		if err == nil {
+			println(year, "-", dt.Month, "-", dt.Day, " ",
+				dt.Hour, ":", dt.Minute, ":", dt.Second)
+		} else {
+			println("Err")
+		}
 		time.Sleep(time.Millisecond * 1000)
 	}
 }
