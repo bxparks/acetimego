@@ -8,16 +8,18 @@ jobs:
     container: ghcr.io/tinygo-org/tinygo
 
     steps:
-    - name: Checkout AceTimeGo
-      uses: actions/checkout@v3
-
     - name: Checkout Go language
       uses: actions/setup-go@v3
       with:
         go-version: 'stable'
 
-    - name: TinyGo version check
-      run: tinygo version
+    - name: Go version checks
+      run: |
+        go version
+        tinygo version
+
+    - name: Checkout AceTimeGo
+      uses: actions/checkout@v3
 
     - name: Build
       run: |
