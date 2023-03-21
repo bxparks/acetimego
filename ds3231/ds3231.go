@@ -1,3 +1,5 @@
+//go:build tinygo
+//
 // Package ds3231 provides a driver for the DS3231 RTC
 //
 // Datasheet:

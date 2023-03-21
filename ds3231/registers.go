@@ -1,3 +1,5 @@
+//go:build tinygo
+
 package ds3231
 
 // The I2C address which this device listens to.
