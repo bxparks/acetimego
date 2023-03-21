@@ -1,6 +1,6 @@
 SRCS := main.go
 
-.PHONY := build buildtiny buildesp32 flashesp32 all clean help
+.PHONY := build buildtiny buildesp32 flashesp32 clean help
 
 help:
 	@echo 'Usage: make [build|buildtiny|buildesp32|flashesp32|clean]'

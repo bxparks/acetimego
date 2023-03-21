@@ -3,14 +3,15 @@ help:
 
 all: build buildtiny buildesp32
 
-# Dummy target to support recursive 'test' target in ../Makefile.
-test:
-
 build:
 	set -e; \
 	for i in */Makefile; do \
 		$(MAKE) -C $$(dirname $$i) $@; \
 	done
+
+test:
+
+#------------------------------------------------------------------------------
 
 buildtiny:
 	set -e; \
@@ -18,11 +19,17 @@ buildtiny:
 		$(MAKE) -C $$(dirname $$i) $@; \
 	done
 
+testtiny:
+
+#------------------------------------------------------------------------------
+
 buildesp32:
 	set -e; \
 	for i in */Makefile; do \
 		$(MAKE) -C $$(dirname $$i) $@; \
 	done
+
+#------------------------------------------------------------------------------
 
 clean:
 	set -e; \

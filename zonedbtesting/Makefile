@@ -6,7 +6,7 @@ TZ_VERSION := 2022g
 START_YEAR := 1980
 UNTIL_YEAR := 10000
 
-all: Makefile
+zonedb: Makefile
 	$(TOOLS)/tzcompiler.sh \
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
@@ -31,8 +31,23 @@ zonedb.json: Makefile
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 
+#------------------------------------------------------------------------------
+
+build:
+	go build
+
 test:
 	go test
+
+#------------------------------------------------------------------------------
+
+buildtiny:
+	# tinygo build
+
+testtiny:
+	tinygo test
+
+#------------------------------------------------------------------------------
 
 clean:
 	rm -rf tzfiles zonedb.json
