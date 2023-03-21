@@ -1,3 +1,5 @@
+SHELL := /usr/bin/env bash
+
 help:
 	@echo 'Usage: make (build|tiny|test|all|zonedbs|clean)'
 
@@ -28,9 +30,15 @@ zonedbs:
 
 # If we use 'go test ./...', the subdirectory is not recognized by vim so the
 # direct navigation in quickfix mode does not work. Use a for-loop instead.
+#
+# TODO: Skip ds3231 until I get TinyGo working under GitHub actions.
 test:
 	set -e; \
 	for i in */Makefile; do \
+		if [[ $$i =~ ds3231 ]]; then \
+			echo "Skipping $$i"; \
+			continue; \
+		fi; \
 		$(MAKE) -C $$(dirname $$i) test; \
 	done
 
