@@ -1,4 +1,4 @@
-SRCS := mem_go_time.go
+SRCS := main.go
 
 .PHONY := build buildtiny buildesp32 flashesp32 all clean help
 
@@ -9,7 +9,7 @@ help:
 # Use normal Go to compile to native host (Linux).
 
 build: $(SRCS) Makefile
-	go build -o mem_go_time.out
+	go build -o main.out
 
 #------------------------------------------------------------------------------
 # Use TinyGo to compile to native host (Linux).

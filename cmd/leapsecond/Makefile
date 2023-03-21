@@ -1,6 +1,6 @@
-SRCS := leapsecond.go
+SRCS := main.go
 
-.PHONY := build buildtiny buildesp32 flashesp32 all clean help
+.PHONY := build buildtiny buildesp32 flashesp32 clean help
 
 help:
 	@echo 'Usage: make [build|buildtiny|buildesp32|flashesp32|clean]'
@@ -9,7 +9,7 @@ help:
 # Use normal Go to compile to native host (Linux).
 
 build: $(SRCS) Makefile
-	go build -o leapsecond.out
+	go build -o main.out
 
 #------------------------------------------------------------------------------
 # Use TinyGo to compile to native host (Linux).

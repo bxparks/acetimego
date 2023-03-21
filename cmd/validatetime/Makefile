@@ -1,4 +1,4 @@
-SRCS := validatetime.go transitions.go
+SRCS := main.go transitions.go
 
 .PHONY := build buildtiny buildesp32 flashesp32 all clean help
 
@@ -9,7 +9,7 @@ help:
 # Use normal Go to compile to native host (Linux).
 
 build: $(SRCS) Makefile
-	go build -o validatetime.out
+	go build -o main.out
 
 #------------------------------------------------------------------------------
 # Use TinyGo to compile to native host (Linux).
@@ -32,7 +32,7 @@ buildesp32: $(SRCS) Makefile
 		-o esp32.out \
 		> esp32.size.txt
 
-flashesp32:
+flashesp32: $(SRCS) Makefile
 	tinygo flash -x -target=esp32-coreboard-v2
 
 #------------------------------------------------------------------------------
