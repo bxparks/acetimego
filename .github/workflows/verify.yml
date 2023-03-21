@@ -4,8 +4,8 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    container: ghcr.io/tinygo-org/tinygo
 
     steps:
     - name: Checkout AceTimeGo
@@ -16,10 +16,13 @@ jobs:
       with:
         go-version: 'stable'
 
+    - name: TinyGo version check
+      run: tinygo version
+
+    - name: Build
+      run: |
+        make build buildtiny
+
     - name: Tests
       run: |
-        make test
-
-    - name: Cmds
-      run: |
-        make -C cmd build
+        make test testtiny
