@@ -8,12 +8,7 @@ jobs:
     container: ghcr.io/tinygo-org/tinygo
 
     steps:
-    - name: Checkout Go language
-      uses: actions/setup-go@v3
-      with:
-        go-version: 'stable'
-
-    - name: Go version checks
+    - name: Check Go Versions
       run: |
         go version
         tinygo version
