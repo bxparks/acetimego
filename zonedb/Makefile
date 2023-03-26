@@ -20,7 +20,7 @@ zonedb:
 		--offset_granularity 1 \
 		--delta_granularity 60 \
 		--until_at_granularity 1 \
-		--db_namespace zonedb2000 \
+		--db_namespace zonedb \
 		--generate_int16_years \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
