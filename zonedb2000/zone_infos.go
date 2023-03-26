@@ -2141,14 +2141,14 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // ---------------------------------------------------------------------------
 
 // Africa/Casablanca {
-//   Morocco {SAVE '-1:00' different from 1:00}
+//   Morocco {SAVE '-1:00' is a negative DST}
 // }
 // Africa/El_Aaiun {
-//   Morocco {SAVE '-1:00' different from 1:00}
+//   Morocco {SAVE '-1:00' is a negative DST}
 // }
 // Africa/Johannesburg {RULES not fixed but FORMAT is missing '%' or '/'}
 // Africa/Windhoek {
-//   Namibia {SAVE '-1:00' different from 1:00}
+//   Namibia {SAVE '-1:00' is a negative DST}
 // }
 // America/Goose_Bay {
 //   StJohns {SAVE '2:00' different from 1:00}
@@ -2165,7 +2165,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 //   LH {SAVE '0:30' different from 1:00}
 // }
 // Europe/Dublin {
-//   Eire {SAVE '-1:00' different from 1:00}
+//   Eire {SAVE '-1:00' is a negative DST}
 // }
 // Pacific/Chatham {STDOFF '12:45' not at :00 or :30 mark}
 

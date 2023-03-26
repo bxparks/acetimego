@@ -913,10 +913,10 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Notable zone policies: 6
 // ---------------------------------------------------------------------------
 
-// Eire {SAVE '-1:00' different from 1:00}
+// Eire {SAVE '-1:00' is a negative DST}
 // LH {SAVE '0:30' different from 1:00}
-// Morocco {SAVE '-1:00' different from 1:00}
-// Namibia {SAVE '-1:00' different from 1:00}
+// Morocco {SAVE '-1:00' is a negative DST}
+// Namibia {SAVE '-1:00' is a negative DST}
 // StJohns {SAVE '2:00' different from 1:00}
 // Troll {SAVE '2:00' different from 1:00}
 

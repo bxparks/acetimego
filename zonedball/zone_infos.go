@@ -3535,12 +3535,15 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // ---------------------------------------------------------------------------
 
 // Africa/Abidjan {STDOFF '-0:16:08' not at :00 or :30 mark}
-// Africa/Algiers {STDOFF '0:12:12' not at :00 or :30 mark}
+// Africa/Algiers {
+//   STDOFF '0:09:21' not at :00 or :30 mark,
+//   STDOFF '0:12:12' not at :00 or :30 mark,
+// }
 // Africa/Bissau {STDOFF '-1:02:20' not at :00 or :30 mark}
 // Africa/Cairo {STDOFF '2:05:09' not at :00 or :30 mark}
 // Africa/Casablanca {
 //   STDOFF '-0:30:20' not at :00 or :30 mark,
-//   Morocco {SAVE '-1:00' different from 1:00}
+//   Morocco {SAVE '-1:00' is a negative DST}
 // }
 // Africa/Ceuta {
 //   STDOFF '-0:21:16' not at :00 or :30 mark,
@@ -3548,7 +3551,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // }
 // Africa/El_Aaiun {
 //   STDOFF '-0:52:48' not at :00 or :30 mark,
-//   Morocco {SAVE '-1:00' different from 1:00}
+//   Morocco {SAVE '-1:00' is a negative DST}
 // }
 // Africa/Johannesburg {
 //   RULES not fixed but FORMAT is missing '%' or '/',
@@ -3558,37 +3561,84 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // Africa/Khartoum {STDOFF '2:10:08' not at :00 or :30 mark}
 // Africa/Lagos {STDOFF '0:13:35' not at :00 or :30 mark}
 // Africa/Maputo {STDOFF '2:10:20' not at :00 or :30 mark}
-// Africa/Monrovia {STDOFF '-0:43:08' not at :00 or :30 mark}
-// Africa/Nairobi {STDOFF '2:27:16' not at :00 or :30 mark}
+// Africa/Monrovia {
+//   STDOFF '-0:43:08' not at :00 or :30 mark,
+//   STDOFF '-0:44:30' not at :00 or :30 mark,
+// }
+// Africa/Nairobi {
+//   STDOFF '2:27:16' not at :00 or :30 mark,
+//   STDOFF '2:45' not at :00 or :30 mark,
+// }
 // Africa/Ndjamena {STDOFF '1:00:12' not at :00 or :30 mark}
-// Africa/Sao_Tome {STDOFF '0:26:56' not at :00 or :30 mark}
+// Africa/Sao_Tome {
+//   STDOFF '-0:36:45' not at :00 or :30 mark,
+//   STDOFF '0:26:56' not at :00 or :30 mark,
+// }
 // Africa/Tripoli {STDOFF '0:52:44' not at :00 or :30 mark}
-// Africa/Tunis {STDOFF '0:40:44' not at :00 or :30 mark}
+// Africa/Tunis {
+//   STDOFF '0:09:21' not at :00 or :30 mark,
+//   STDOFF '0:40:44' not at :00 or :30 mark,
+// }
 // Africa/Windhoek {
 //   STDOFF '1:08:24' not at :00 or :30 mark,
-//   Namibia {SAVE '-1:00' different from 1:00}
+//   Namibia {SAVE '-1:00' is a negative DST}
 // }
 // America/Adak {
+//   STDOFF '-11:46:38' not at :00 or :30 mark,
 //   STDOFF '12:13:22' not at :00 or :30 mark,
 //   UNTIL time '12:44:35' not multiple of 1-min,
 // }
 // America/Anchorage {
+//   STDOFF '-9:59:36' not at :00 or :30 mark,
 //   STDOFF '14:00:24' not at :00 or :30 mark,
 //   UNTIL time '14:31:37' not multiple of 1-min,
 // }
 // America/Araguaina {STDOFF '-3:12:48' not at :00 or :30 mark}
-// America/Argentina/Buenos_Aires {STDOFF '-3:53:48' not at :00 or :30 mark}
-// America/Argentina/Catamarca {STDOFF '-4:23:08' not at :00 or :30 mark}
+// America/Argentina/Buenos_Aires {
+//   STDOFF '-3:53:48' not at :00 or :30 mark,
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+// }
+// America/Argentina/Catamarca {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:23:08' not at :00 or :30 mark,
+// }
 // America/Argentina/Cordoba {STDOFF '-4:16:48' not at :00 or :30 mark}
-// America/Argentina/Jujuy {STDOFF '-4:21:12' not at :00 or :30 mark}
-// America/Argentina/La_Rioja {STDOFF '-4:27:24' not at :00 or :30 mark}
-// America/Argentina/Mendoza {STDOFF '-4:35:16' not at :00 or :30 mark}
-// America/Argentina/Rio_Gallegos {STDOFF '-4:36:52' not at :00 or :30 mark}
-// America/Argentina/Salta {STDOFF '-4:21:40' not at :00 or :30 mark}
-// America/Argentina/San_Juan {STDOFF '-4:34:04' not at :00 or :30 mark}
-// America/Argentina/San_Luis {STDOFF '-4:25:24' not at :00 or :30 mark}
-// America/Argentina/Tucuman {STDOFF '-4:20:52' not at :00 or :30 mark}
-// America/Argentina/Ushuaia {STDOFF '-4:33:12' not at :00 or :30 mark}
+// America/Argentina/Jujuy {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:21:12' not at :00 or :30 mark,
+// }
+// America/Argentina/La_Rioja {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:27:24' not at :00 or :30 mark,
+// }
+// America/Argentina/Mendoza {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:35:16' not at :00 or :30 mark,
+// }
+// America/Argentina/Rio_Gallegos {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:36:52' not at :00 or :30 mark,
+// }
+// America/Argentina/Salta {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:21:40' not at :00 or :30 mark,
+// }
+// America/Argentina/San_Juan {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:34:04' not at :00 or :30 mark,
+// }
+// America/Argentina/San_Luis {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:25:24' not at :00 or :30 mark,
+// }
+// America/Argentina/Tucuman {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:20:52' not at :00 or :30 mark,
+// }
+// America/Argentina/Ushuaia {
+//   STDOFF '-4:16:48' not at :00 or :30 mark,
+//   STDOFF '-4:33:12' not at :00 or :30 mark,
+// }
 // America/Asuncion {STDOFF '-3:50:40' not at :00 or :30 mark}
 // America/Bahia {STDOFF '-2:34:04' not at :00 or :30 mark}
 // America/Bahia_Banderas {STDOFF '-7:01:00' not at :00 or :30 mark}
@@ -3606,7 +3656,10 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // America/Boise {STDOFF '-7:44:49' not at :00 or :30 mark}
 // America/Campo_Grande {STDOFF '-3:38:28' not at :00 or :30 mark}
 // America/Cancun {STDOFF '-5:47:04' not at :00 or :30 mark}
-// America/Caracas {STDOFF '-4:27:44' not at :00 or :30 mark}
+// America/Caracas {
+//   STDOFF '-4:27:40' not at :00 or :30 mark,
+//   STDOFF '-4:27:44' not at :00 or :30 mark,
+// }
 // America/Cayenne {STDOFF '-3:29:20' not at :00 or :30 mark}
 // America/Chicago {STDOFF '-5:50:36' not at :00 or :30 mark}
 // America/Chihuahua {STDOFF '-7:04:20' not at :00 or :30 mark}
@@ -3628,15 +3681,28 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // America/Fortaleza {STDOFF '-2:34:00' not at :00 or :30 mark}
 // America/Glace_Bay {STDOFF '-3:59:48' not at :00 or :30 mark}
 // America/Goose_Bay {
+//   STDOFF '-3:30:52' not at :00 or :30 mark,
 //   STDOFF '-4:01:40' not at :00 or :30 mark,
 //   StJohns {SAVE '2:00' different from 1:00}
 // }
-// America/Grand_Turk {STDOFF '-4:44:32' not at :00 or :30 mark}
+// America/Grand_Turk {
+//   STDOFF '-4:44:32' not at :00 or :30 mark,
+//   STDOFF '-5:07:10' not at :00 or :30 mark,
+// }
 // America/Guatemala {STDOFF '-6:02:04' not at :00 or :30 mark}
-// America/Guayaquil {STDOFF '-5:19:20' not at :00 or :30 mark}
-// America/Guyana {STDOFF '-3:52:39' not at :00 or :30 mark}
+// America/Guayaquil {
+//   STDOFF '-5:14:00' not at :00 or :30 mark,
+//   STDOFF '-5:19:20' not at :00 or :30 mark,
+// }
+// America/Guyana {
+//   STDOFF '-3:45' not at :00 or :30 mark,
+//   STDOFF '-3:52:39' not at :00 or :30 mark,
+// }
 // America/Halifax {STDOFF '-4:14:24' not at :00 or :30 mark}
-// America/Havana {STDOFF '-5:29:28' not at :00 or :30 mark}
+// America/Havana {
+//   STDOFF '-5:29:28' not at :00 or :30 mark,
+//   STDOFF '-5:29:36' not at :00 or :30 mark,
+// }
 // America/Hermosillo {STDOFF '-7:23:52' not at :00 or :30 mark}
 // America/Indiana/Indianapolis {STDOFF '-5:44:38' not at :00 or :30 mark}
 // America/Indiana/Knox {STDOFF '-5:46:30' not at :00 or :30 mark}
@@ -3648,22 +3714,30 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // America/Indiana/Winamac {STDOFF '-5:46:25' not at :00 or :30 mark}
 // America/Jamaica {STDOFF '-5:07:10' not at :00 or :30 mark}
 // America/Juneau {
+//   STDOFF '-8:57:41' not at :00 or :30 mark,
 //   STDOFF '15:02:19' not at :00 or :30 mark,
 //   UNTIL time '15:33:32' not multiple of 1-min,
 // }
 // America/Kentucky/Louisville {STDOFF '-5:43:02' not at :00 or :30 mark}
 // America/Kentucky/Monticello {STDOFF '-5:39:24' not at :00 or :30 mark}
 // America/La_Paz {STDOFF '-4:32:36' not at :00 or :30 mark}
-// America/Lima {STDOFF '-5:08:12' not at :00 or :30 mark}
+// America/Lima {
+//   STDOFF '-5:08:12' not at :00 or :30 mark,
+//   STDOFF '-5:08:36' not at :00 or :30 mark,
+// }
 // America/Los_Angeles {STDOFF '-7:52:58' not at :00 or :30 mark}
 // America/Maceio {STDOFF '-2:22:52' not at :00 or :30 mark}
-// America/Managua {STDOFF '-5:45:08' not at :00 or :30 mark}
+// America/Managua {
+//   STDOFF '-5:45:08' not at :00 or :30 mark,
+//   STDOFF '-5:45:12' not at :00 or :30 mark,
+// }
 // America/Manaus {STDOFF '-4:00:04' not at :00 or :30 mark}
 // America/Martinique {STDOFF '-4:04:20' not at :00 or :30 mark}
 // America/Mazatlan {STDOFF '-7:05:40' not at :00 or :30 mark}
 // America/Menominee {STDOFF '-5:50:27' not at :00 or :30 mark}
 // America/Merida {STDOFF '-5:58:28' not at :00 or :30 mark}
 // America/Metlakatla {
+//   STDOFF '-8:46:18' not at :00 or :30 mark,
 //   STDOFF '15:13:42' not at :00 or :30 mark,
 //   UNTIL time '15:44:55' not multiple of 1-min,
 // }
@@ -3680,6 +3754,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // }
 // America/New_York {STDOFF '-4:56:02' not at :00 or :30 mark}
 // America/Nome {
+//   STDOFF '-11:01:38' not at :00 or :30 mark,
 //   STDOFF '12:58:22' not at :00 or :30 mark,
 //   UNTIL time '13:29:35' not multiple of 1-min,
 // }
@@ -3689,13 +3764,26 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // America/North_Dakota/New_Salem {STDOFF '-6:45:39' not at :00 or :30 mark}
 // America/Nuuk {STDOFF '-3:26:56' not at :00 or :30 mark}
 // America/Ojinaga {STDOFF '-6:57:40' not at :00 or :30 mark}
-// America/Panama {STDOFF '-5:18:08' not at :00 or :30 mark}
-// America/Paramaribo {STDOFF '-3:40:40' not at :00 or :30 mark}
+// America/Panama {
+//   STDOFF '-5:18:08' not at :00 or :30 mark,
+//   STDOFF '-5:19:36' not at :00 or :30 mark,
+// }
+// America/Paramaribo {
+//   STDOFF '-3:40:36' not at :00 or :30 mark,
+//   STDOFF '-3:40:40' not at :00 or :30 mark,
+//   STDOFF '-3:40:52' not at :00 or :30 mark,
+// }
 // America/Phoenix {STDOFF '-7:28:18' not at :00 or :30 mark}
-// America/Port-au-Prince {STDOFF '-4:49:20' not at :00 or :30 mark}
+// America/Port-au-Prince {
+//   STDOFF '-4:49' not at :00 or :30 mark,
+//   STDOFF '-4:49:20' not at :00 or :30 mark,
+// }
 // America/Porto_Velho {STDOFF '-4:15:36' not at :00 or :30 mark}
 // America/Puerto_Rico {STDOFF '-4:24:25' not at :00 or :30 mark}
-// America/Punta_Arenas {STDOFF '-4:43:40' not at :00 or :30 mark}
+// America/Punta_Arenas {
+//   STDOFF '-4:42:45' not at :00 or :30 mark,
+//   STDOFF '-4:43:40' not at :00 or :30 mark,
+// }
 // America/Recife {STDOFF '-2:19:36' not at :00 or :30 mark}
 // America/Regina {STDOFF '-6:58:36' not at :00 or :30 mark}
 // America/Rio_Branco {STDOFF '-4:31:12' not at :00 or :30 mark}
@@ -3703,11 +3791,15 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // America/Santiago {STDOFF '-4:42:45' not at :00 or :30 mark}
 // America/Santo_Domingo {
 //   STDOFF '-4:39:36' not at :00 or :30 mark,
+//   STDOFF '-4:40' not at :00 or :30 mark,
 //   DR {SAVE '0:30' different from 1:00}
 // }
 // America/Sao_Paulo {STDOFF '-3:06:28' not at :00 or :30 mark}
 // America/Scoresbysund {STDOFF '-1:27:52' not at :00 or :30 mark}
-// America/Sitka {STDOFF '14:58:47' not at :00 or :30 mark}
+// America/Sitka {
+//   STDOFF '-9:01:13' not at :00 or :30 mark,
+//   STDOFF '14:58:47' not at :00 or :30 mark,
+// }
 // America/St_Johns {
 //   STDOFF '-3:30:52' not at :00 or :30 mark,
 //   StJohns {SAVE '2:00' different from 1:00}
@@ -3724,6 +3816,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // }
 // America/Winnipeg {STDOFF '-6:28:36' not at :00 or :30 mark}
 // America/Yakutat {
+//   STDOFF '-9:18:55' not at :00 or :30 mark,
 //   STDOFF '14:41:05' not at :00 or :30 mark,
 //   UNTIL time '15:12:18' not multiple of 1-min,
 // }
@@ -3740,7 +3833,10 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // Asia/Aqtobe {STDOFF '3:48:40' not at :00 or :30 mark}
 // Asia/Ashgabat {STDOFF '3:53:32' not at :00 or :30 mark}
 // Asia/Atyrau {STDOFF '3:27:44' not at :00 or :30 mark}
-// Asia/Baghdad {STDOFF '2:57:40' not at :00 or :30 mark}
+// Asia/Baghdad {
+//   STDOFF '2:57:36' not at :00 or :30 mark,
+//   STDOFF '2:57:40' not at :00 or :30 mark,
+// }
 // Asia/Baku {STDOFF '3:19:24' not at :00 or :30 mark}
 // Asia/Bangkok {STDOFF '6:42:04' not at :00 or :30 mark}
 // Asia/Barnaul {
@@ -3755,11 +3851,14 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // }
 // Asia/Choibalsan {STDOFF '7:38:00' not at :00 or :30 mark}
 // Asia/Colombo {
-//   RULES delta offset '0:30' different from 1:00,
 //   STDOFF '5:19:24' not at :00 or :30 mark,
+//   STDOFF '5:19:32' not at :00 or :30 mark,
 // }
 // Asia/Damascus {STDOFF '2:25:12' not at :00 or :30 mark}
-// Asia/Dhaka {STDOFF '6:01:40' not at :00 or :30 mark}
+// Asia/Dhaka {
+//   STDOFF '5:53:20' not at :00 or :30 mark,
+//   STDOFF '6:01:40' not at :00 or :30 mark,
+// }
 // Asia/Dili {STDOFF '8:22:20' not at :00 or :30 mark}
 // Asia/Dubai {STDOFF '3:41:12' not at :00 or :30 mark}
 // Asia/Dushanbe {STDOFF '4:35:12' not at :00 or :30 mark}
@@ -3773,18 +3872,19 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 //   Zion {SAVE '2:00' different from 1:00}
 // }
 // Asia/Ho_Chi_Minh {STDOFF '7:06:30' not at :00 or :30 mark}
-// Asia/Hong_Kong {
-//   RULES delta offset '0:30' different from 1:00,
-//   STDOFF '7:36:42' not at :00 or :30 mark,
-// }
+// Asia/Hong_Kong {STDOFF '7:36:42' not at :00 or :30 mark}
 // Asia/Hovd {STDOFF '6:06:36' not at :00 or :30 mark}
 // Asia/Irkutsk {
 //   STDOFF '6:57:05' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Jakarta {STDOFF '7:07:12' not at :00 or :30 mark}
+// Asia/Jakarta {
+//   STDOFF '7:07:12' not at :00 or :30 mark,
+//   STDOFF '7:20' not at :00 or :30 mark,
+// }
 // Asia/Jayapura {STDOFF '9:22:48' not at :00 or :30 mark}
 // Asia/Jerusalem {
+//   STDOFF '2:20:40' not at :00 or :30 mark,
 //   STDOFF '2:20:54' not at :00 or :30 mark,
 //   Zion {SAVE '2:00' different from 1:00}
 // }
@@ -3794,12 +3894,19 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 //   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Karachi {STDOFF '4:28:12' not at :00 or :30 mark}
-// Asia/Kathmandu {STDOFF '5:41:16' not at :00 or :30 mark}
+// Asia/Kathmandu {
+//   STDOFF '5:41:16' not at :00 or :30 mark,
+//   STDOFF '5:45' not at :00 or :30 mark,
+// }
 // Asia/Khandyga {
 //   STDOFF '9:02:13' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
 // }
-// Asia/Kolkata {STDOFF '5:53:28' not at :00 or :30 mark}
+// Asia/Kolkata {
+//   STDOFF '5:21:10' not at :00 or :30 mark,
+//   STDOFF '5:53:20' not at :00 or :30 mark,
+//   STDOFF '5:53:28' not at :00 or :30 mark,
+// }
 // Asia/Krasnoyarsk {
 //   STDOFF '6:11:26' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
@@ -3814,7 +3921,10 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 //   Russia {SAVE '2:00' different from 1:00}
 // }
 // Asia/Makassar {STDOFF '7:57:36' not at :00 or :30 mark}
-// Asia/Manila {STDOFF '-15:56:00' not at :00 or :30 mark}
+// Asia/Manila {
+//   STDOFF '-15:56:00' not at :00 or :30 mark,
+//   STDOFF '8:04:00' not at :00 or :30 mark,
+// }
 // Asia/Nicosia {STDOFF '2:13:28' not at :00 or :30 mark}
 // Asia/Novokuznetsk {
 //   STDOFF '5:48:48' not at :00 or :30 mark,
@@ -3843,8 +3953,9 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // Asia/Seoul {STDOFF '8:27:52' not at :00 or :30 mark}
 // Asia/Shanghai {STDOFF '8:05:43' not at :00 or :30 mark}
 // Asia/Singapore {
-//   RULES delta offset '0:20' different from 1:00,
+//   RULES '0:20' not at :00 or :30 mark,
 //   STDOFF '6:55:25' not at :00 or :30 mark,
+//   STDOFF '7:20' not at :00 or :30 mark,
 // }
 // Asia/Srednekolymsk {
 //   STDOFF '10:14:52' not at :00 or :30 mark,
@@ -3876,6 +3987,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // }
 // Asia/Yangon {STDOFF '6:24:47' not at :00 or :30 mark}
 // Asia/Yekaterinburg {
+//   STDOFF '3:45:05' not at :00 or :30 mark,
 //   STDOFF '4:02:33' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
 // }
@@ -3883,6 +3995,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // Atlantic/Azores {
 //   RULES not fixed but FORMAT is missing '%' or '/',
 //   STDOFF '-1:42:40' not at :00 or :30 mark,
+//   STDOFF '-1:54:32' not at :00 or :30 mark,
 //   Port {SAVE '2:00' different from 1:00}
 // }
 // Atlantic/Bermuda {STDOFF '-4:19:18' not at :00 or :30 mark}
@@ -3900,7 +4013,10 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // Australia/Brisbane {STDOFF '10:12:08' not at :00 or :30 mark}
 // Australia/Broken_Hill {STDOFF '9:25:48' not at :00 or :30 mark}
 // Australia/Darwin {STDOFF '8:43:20' not at :00 or :30 mark}
-// Australia/Eucla {STDOFF '8:35:28' not at :00 or :30 mark}
+// Australia/Eucla {
+//   STDOFF '8:35:28' not at :00 or :30 mark,
+//   STDOFF '8:45' not at :00 or :30 mark,
+// }
 // Australia/Hobart {STDOFF '9:49:16' not at :00 or :30 mark}
 // Australia/Lindeman {STDOFF '9:55:56' not at :00 or :30 mark}
 // Australia/Lord_Howe {
@@ -3929,12 +4045,14 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // Europe/Bucharest {STDOFF '1:44:24' not at :00 or :30 mark}
 // Europe/Budapest {STDOFF '1:16:20' not at :00 or :30 mark}
 // Europe/Chisinau {
+//   STDOFF '1:44:24' not at :00 or :30 mark,
+//   STDOFF '1:55' not at :00 or :30 mark,
 //   STDOFF '1:55:20' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Dublin {
 //   STDOFF '-0:25:21' not at :00 or :30 mark,
-//   Eire {SAVE '-1:00' different from 1:00}
+//   Eire {SAVE '-1:00' is a negative DST}
 //   GB-Eire {SAVE '2:00' different from 1:00}
 // }
 // Europe/Gibraltar {
@@ -3942,7 +4060,10 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 //   GB-Eire {SAVE '2:00' different from 1:00}
 // }
 // Europe/Helsinki {STDOFF '1:39:49' not at :00 or :30 mark}
-// Europe/Istanbul {STDOFF '1:55:52' not at :00 or :30 mark}
+// Europe/Istanbul {
+//   STDOFF '1:55:52' not at :00 or :30 mark,
+//   STDOFF '1:56:56' not at :00 or :30 mark,
+// }
 // Europe/Kaliningrad {
 //   STDOFF '1:22:00' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
@@ -3969,11 +4090,13 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // }
 // Europe/Malta {STDOFF '0:58:04' not at :00 or :30 mark}
 // Europe/Minsk {
+//   STDOFF '1:50' not at :00 or :30 mark,
 //   STDOFF '1:50:16' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Moscow {
 //   STDOFF '2:30:17' not at :00 or :30 mark,
+//   STDOFF '2:31:19' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Paris {
@@ -3981,7 +4104,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 //   France {SAVE '2:00' different from 1:00}
 // }
 // Europe/Prague {
-//   RULES delta offset '-1:00' different from 1:00,
+//   RULES '-1:00' is a negative DST,
 //   STDOFF '0:57:44' not at :00 or :30 mark,
 // }
 // Europe/Riga {
@@ -3998,10 +4121,14 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 //   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Simferopol {
+//   STDOFF '2:16' not at :00 or :30 mark,
 //   STDOFF '2:16:24' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
 // }
-// Europe/Sofia {STDOFF '1:33:16' not at :00 or :30 mark}
+// Europe/Sofia {
+//   STDOFF '1:33:16' not at :00 or :30 mark,
+//   STDOFF '1:56:56' not at :00 or :30 mark,
+// }
 // Europe/Tallinn {
 //   STDOFF '1:39:00' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
@@ -4013,6 +4140,8 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // }
 // Europe/Vienna {STDOFF '1:05:21' not at :00 or :30 mark}
 // Europe/Vilnius {
+//   STDOFF '1:24:00' not at :00 or :30 mark,
+//   STDOFF '1:35:36' not at :00 or :30 mark,
 //   STDOFF '1:41:16' not at :00 or :30 mark,
 //   Russia {SAVE '2:00' different from 1:00}
 // }
@@ -4021,17 +4150,30 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 //   Russia {SAVE '2:00' different from 1:00}
 // }
 // Europe/Warsaw {STDOFF '1:24:00' not at :00 or :30 mark}
-// Europe/Zurich {STDOFF '0:34:08' not at :00 or :30 mark}
+// Europe/Zurich {
+//   STDOFF '0:29:46' not at :00 or :30 mark,
+//   STDOFF '0:34:08' not at :00 or :30 mark,
+// }
 // Indian/Chagos {STDOFF '4:49:40' not at :00 or :30 mark}
 // Indian/Maldives {STDOFF '4:54:00' not at :00 or :30 mark}
 // Indian/Mauritius {STDOFF '3:50:00' not at :00 or :30 mark}
-// Pacific/Apia {STDOFF '12:33:04' not at :00 or :30 mark}
+// Pacific/Apia {
+//   STDOFF '-11:26:56' not at :00 or :30 mark,
+//   STDOFF '12:33:04' not at :00 or :30 mark,
+// }
 // Pacific/Auckland {
 //   STDOFF '11:39:04' not at :00 or :30 mark,
 //   NZ {SAVE '0:30' different from 1:00}
 // }
-// Pacific/Bougainville {STDOFF '10:22:16' not at :00 or :30 mark}
-// Pacific/Chatham {STDOFF '12:13:48' not at :00 or :30 mark}
+// Pacific/Bougainville {
+//   STDOFF '10:22:16' not at :00 or :30 mark,
+//   STDOFF '9:48:32' not at :00 or :30 mark,
+// }
+// Pacific/Chatham {
+//   STDOFF '12:13:48' not at :00 or :30 mark,
+//   STDOFF '12:15' not at :00 or :30 mark,
+//   STDOFF '12:45' not at :00 or :30 mark,
+// }
 // Pacific/Easter {STDOFF '-7:17:28' not at :00 or :30 mark}
 // Pacific/Efate {STDOFF '11:13:16' not at :00 or :30 mark}
 // Pacific/Fakaofo {STDOFF '-11:24:56' not at :00 or :30 mark}
@@ -4039,27 +4181,55 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // Pacific/Galapagos {STDOFF '-5:58:24' not at :00 or :30 mark}
 // Pacific/Gambier {STDOFF '-8:59:48' not at :00 or :30 mark}
 // Pacific/Guadalcanal {STDOFF '10:39:48' not at :00 or :30 mark}
-// Pacific/Guam {STDOFF '-14:21:00' not at :00 or :30 mark}
+// Pacific/Guam {
+//   STDOFF '-14:21:00' not at :00 or :30 mark,
+//   STDOFF '9:39:00' not at :00 or :30 mark,
+// }
 // Pacific/Honolulu {STDOFF '-10:31:26' not at :00 or :30 mark}
-// Pacific/Kiritimati {STDOFF '-10:29:20' not at :00 or :30 mark}
-// Pacific/Kosrae {STDOFF '-13:08:04' not at :00 or :30 mark}
+// Pacific/Kiritimati {
+//   STDOFF '-10:29:20' not at :00 or :30 mark,
+//   STDOFF '-10:40' not at :00 or :30 mark,
+// }
+// Pacific/Kosrae {
+//   STDOFF '-13:08:04' not at :00 or :30 mark,
+//   STDOFF '10:51:56' not at :00 or :30 mark,
+// }
 // Pacific/Kwajalein {STDOFF '11:09:20' not at :00 or :30 mark}
 // Pacific/Marquesas {STDOFF '-9:18:00' not at :00 or :30 mark}
 // Pacific/Nauru {STDOFF '11:07:40' not at :00 or :30 mark}
-// Pacific/Niue {STDOFF '-11:19:40' not at :00 or :30 mark}
-// Pacific/Norfolk {STDOFF '11:11:52' not at :00 or :30 mark}
+// Pacific/Niue {
+//   STDOFF '-11:19:40' not at :00 or :30 mark,
+//   STDOFF '-11:20' not at :00 or :30 mark,
+// }
+// Pacific/Norfolk {
+//   STDOFF '11:11:52' not at :00 or :30 mark,
+//   STDOFF '11:12' not at :00 or :30 mark,
+// }
 // Pacific/Noumea {STDOFF '11:05:48' not at :00 or :30 mark}
-// Pacific/Pago_Pago {STDOFF '12:37:12' not at :00 or :30 mark}
-// Pacific/Palau {STDOFF '-15:02:04' not at :00 or :30 mark}
+// Pacific/Pago_Pago {
+//   STDOFF '-11:22:48' not at :00 or :30 mark,
+//   STDOFF '12:37:12' not at :00 or :30 mark,
+// }
+// Pacific/Palau {
+//   STDOFF '-15:02:04' not at :00 or :30 mark,
+//   STDOFF '8:57:56' not at :00 or :30 mark,
+// }
 // Pacific/Pitcairn {STDOFF '-8:40:20' not at :00 or :30 mark}
-// Pacific/Port_Moresby {STDOFF '9:48:40' not at :00 or :30 mark}
+// Pacific/Port_Moresby {
+//   STDOFF '9:48:32' not at :00 or :30 mark,
+//   STDOFF '9:48:40' not at :00 or :30 mark,
+// }
 // Pacific/Rarotonga {
+//   STDOFF '-10:39:04' not at :00 or :30 mark,
 //   STDOFF '13:20:56' not at :00 or :30 mark,
 //   Cook {SAVE '0:30' different from 1:00}
 // }
 // Pacific/Tahiti {STDOFF '-9:58:16' not at :00 or :30 mark}
 // Pacific/Tarawa {STDOFF '11:32:04' not at :00 or :30 mark}
-// Pacific/Tongatapu {STDOFF '12:19:12' not at :00 or :30 mark}
+// Pacific/Tongatapu {
+//   STDOFF '12:19:12' not at :00 or :30 mark,
+//   STDOFF '12:20' not at :00 or :30 mark,
+// }
 
 
 // ---------------------------------------------------------------------------

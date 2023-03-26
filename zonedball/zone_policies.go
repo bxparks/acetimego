@@ -2441,15 +2441,15 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 // Belize {SAVE '0:30' different from 1:00}
 // Cook {SAVE '0:30' different from 1:00}
 // DR {SAVE '0:30' different from 1:00}
-// Eire {SAVE '-1:00' different from 1:00}
+// Eire {SAVE '-1:00' is a negative DST}
 // France {SAVE '2:00' different from 1:00}
 // GB-Eire {SAVE '2:00' different from 1:00}
 // Germany {SAVE '2:00' different from 1:00}
 // LH {SAVE '0:30' different from 1:00}
-// Morocco {SAVE '-1:00' different from 1:00}
+// Morocco {SAVE '-1:00' is a negative DST}
 // NBorneo {SAVE '0:20' different from 1:00}
 // NZ {SAVE '0:30' different from 1:00}
-// Namibia {SAVE '-1:00' different from 1:00}
+// Namibia {SAVE '-1:00' is a negative DST}
 // Port {SAVE '2:00' different from 1:00}
 // Russia {SAVE '2:00' different from 1:00}
 // SovietZone {SAVE '2:00' different from 1:00}
