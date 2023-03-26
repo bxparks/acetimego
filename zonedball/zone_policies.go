@@ -2434,32 +2434,83 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 
 
 // ---------------------------------------------------------------------------
-// Notable zone policies: 22
+// Notable zone policies: 27
 // ---------------------------------------------------------------------------
 
 // Barb {SAVE '0:30' different from 1:00}
-// Belize {SAVE '0:30' different from 1:00}
+// Belize {
+//   LETTER '-0530' not single character,
+//   LETTER 'CDT' not single character,
+//   LETTER 'CPT' not single character,
+//   LETTER 'CST' not single character,
+//   LETTER 'CWT' not single character,
+//   SAVE '0:30' different from 1:00,
+// }
+// CA {AT '2:01' not multiple of :15 min}
 // Cook {SAVE '0:30' different from 1:00}
-// DR {SAVE '0:30' different from 1:00}
+// DR {
+//   LETTER '-0430' not single character,
+//   LETTER 'EDT' not single character,
+//   LETTER 'EST' not single character,
+//   SAVE '0:30' different from 1:00,
+// }
 // Eire {SAVE '-1:00' is a negative DST}
 // France {SAVE '2:00' different from 1:00}
-// GB-Eire {SAVE '2:00' different from 1:00}
+// GB-Eire {
+//   LETTER 'BDST' not single character,
+//   LETTER 'BST' not single character,
+//   LETTER 'GMT' not single character,
+//   SAVE '2:00' different from 1:00,
+// }
 // Germany {SAVE '2:00' different from 1:00}
+// Guam {
+//   AT '0:01' not multiple of :15 min,
+//   AT '2:01' not multiple of :15 min,
+// }
 // LH {SAVE '0:30' different from 1:00}
+// Louisville {AT '0:01' not multiple of :15 min}
+// Moncton {AT '0:01' not multiple of :15 min}
 // Morocco {SAVE '-1:00' is a negative DST}
 // NBorneo {SAVE '0:20' different from 1:00}
 // NZ {SAVE '0:30' different from 1:00}
-// Namibia {SAVE '-1:00' is a negative DST}
+// Namibia {
+//   LETTER 'CAT' not single character,
+//   LETTER 'WAT' not single character,
+//   SAVE '-1:00' is a negative DST,
+// }
+// Palestine {AT '0:01' not multiple of :15 min}
 // Port {SAVE '2:00' different from 1:00}
-// Russia {SAVE '2:00' different from 1:00}
+// Russia {
+//   LETTER '+05' not single character,
+//   LETTER 'MDST' not single character,
+//   LETTER 'MMT' not single character,
+//   LETTER 'MSD' not single character,
+//   LETTER 'MSK' not single character,
+//   LETTER 'MST' not single character,
+//   SAVE '2:00' different from 1:00,
+// }
 // SovietZone {SAVE '2:00' different from 1:00}
 // Spain {SAVE '2:00' different from 1:00}
-// StJohns {SAVE '2:00' different from 1:00}
-// Troll {SAVE '2:00' different from 1:00}
+// StJohns {
+//   AT '0:01' not multiple of :15 min,
+//   LETTER 'DD' not single character,
+//   SAVE '2:00' different from 1:00,
+// }
+// Troll {
+//   LETTER '+00' not single character,
+//   LETTER '+02' not single character,
+//   SAVE '2:00' different from 1:00,
+// }
 // Uruguay {
 //   SAVE '0:30' different from 1:00,
 //   SAVE '1:30' different from 1:00,
 // }
-// Yukon {SAVE '2:00' different from 1:00}
-// Zion {SAVE '2:00' different from 1:00}
+// Yukon {
+//   LETTER 'DD' not single character,
+//   SAVE '2:00' different from 1:00,
+// }
+// Zion {
+//   LETTER 'DD' not single character,
+//   SAVE '2:00' different from 1:00,
+// }
 

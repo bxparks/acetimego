@@ -2137,7 +2137,7 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 
 
 // ---------------------------------------------------------------------------
-// Notable zones: 4
+// Notable zones: 6
 // ---------------------------------------------------------------------------
 
 // Africa/Casablanca {
@@ -2148,26 +2148,56 @@ const ZoneInfosData = "\xae\x73\x59\x00\xea\x01\x00\x00\x00\x00\xc5\x00" +
 // }
 // Africa/Johannesburg {RULES not fixed but FORMAT is missing '%' or '/'}
 // Africa/Windhoek {
-//   Namibia {SAVE '-1:00' is a negative DST}
+//   Namibia {
+//     LETTER 'CAT' not single character,
+//     LETTER 'WAT' not single character,
+//     SAVE '-1:00' is a negative DST,
+//   }
+// }
+// America/Belize {
+//   Belize {LETTER 'CST' not single character}
 // }
 // America/Goose_Bay {
-//   StJohns {SAVE '2:00' different from 1:00}
+//   StJohns {
+//     AT '0:01' not multiple of :15 min,
+//     LETTER 'DD' not single character,
+//     SAVE '2:00' different from 1:00,
+//   }
+// }
+// America/Moncton {
+//   Moncton {AT '0:01' not multiple of :15 min}
 // }
 // America/St_Johns {
-//   StJohns {SAVE '2:00' different from 1:00}
+//   StJohns {
+//     AT '0:01' not multiple of :15 min,
+//     LETTER 'DD' not single character,
+//     SAVE '2:00' different from 1:00,
+//   }
 // }
+// Antarctica/Casey {UNTIL '0:01' not multiple of :15 min}
 // Antarctica/Troll {
-//   Troll {SAVE '2:00' different from 1:00}
+//   Troll {
+//     LETTER '+00' not single character,
+//     LETTER '+02' not single character,
+//     SAVE '2:00' different from 1:00,
+//   }
 // }
-// Asia/Kathmandu {STDOFF '5:45' not at :00 or :30 mark}
-// Australia/Eucla {STDOFF '8:45' not at :00 or :30 mark}
+// Asia/Gaza {
+//   UNTIL '0:01' not multiple of :15 min,
+//   Palestine {AT '0:01' not multiple of :15 min}
+// }
+// Asia/Hebron {
+//   Palestine {AT '0:01' not multiple of :15 min}
+// }
+// Asia/Kathmandu {STDOFF '5:45' not multiple of :30 min}
+// Australia/Eucla {STDOFF '8:45' not multiple of :30 min}
 // Australia/Lord_Howe {
 //   LH {SAVE '0:30' different from 1:00}
 // }
 // Europe/Dublin {
 //   Eire {SAVE '-1:00' is a negative DST}
 // }
-// Pacific/Chatham {STDOFF '12:45' not at :00 or :30 mark}
+// Pacific/Chatham {STDOFF '12:45' not multiple of :30 min}
 
 
 // ---------------------------------------------------------------------------

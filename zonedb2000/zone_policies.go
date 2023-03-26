@@ -910,13 +910,28 @@ const ZonePoliciesData = "\x00\x00\x00\x00" +
 
 
 // ---------------------------------------------------------------------------
-// Notable zone policies: 6
+// Notable zone policies: 9
 // ---------------------------------------------------------------------------
 
+// Belize {LETTER 'CST' not single character}
 // Eire {SAVE '-1:00' is a negative DST}
 // LH {SAVE '0:30' different from 1:00}
+// Moncton {AT '0:01' not multiple of :15 min}
 // Morocco {SAVE '-1:00' is a negative DST}
-// Namibia {SAVE '-1:00' is a negative DST}
-// StJohns {SAVE '2:00' different from 1:00}
-// Troll {SAVE '2:00' different from 1:00}
+// Namibia {
+//   LETTER 'CAT' not single character,
+//   LETTER 'WAT' not single character,
+//   SAVE '-1:00' is a negative DST,
+// }
+// Palestine {AT '0:01' not multiple of :15 min}
+// StJohns {
+//   AT '0:01' not multiple of :15 min,
+//   LETTER 'DD' not single character,
+//   SAVE '2:00' different from 1:00,
+// }
+// Troll {
+//   LETTER '+00' not single character,
+//   LETTER '+02' not single character,
+//   SAVE '2:00' different from 1:00,
+// }
 
