@@ -45,18 +45,18 @@ func Uint16Pad4(b *strings.Builder, n uint16, pad byte) {
 		return
 	}
 
-	d32 := uint8(n / 100)
-	d10 := uint8(n % 100)
-	var d10pad byte
-	if d32 == 0 {
+	hi := uint8(n / 100)
+	lo := uint8(n % 100)
+	var lopad byte
+	if hi == 0 {
 		b.WriteByte(pad)
 		b.WriteByte(pad)
-		d10pad = pad
+		lopad = pad
 	} else {
-		Uint8Pad2(b, d32, pad)
-		d10pad = '0'
+		Uint8Pad2(b, hi, pad)
+		lopad = '0'
 	}
-	Uint8Pad2(b, d10, d10pad)
+	Uint8Pad2(b, lo, lopad)
 }
 
 // Uint64 converts uint64 `n` into a decimal string with no padding.
