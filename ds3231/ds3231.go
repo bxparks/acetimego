@@ -69,7 +69,7 @@ func (d *Device) SetTime(dt DateTime) error {
 		return err
 	}
 	data[0] &^= 1 << OSF
-	err = d.bus.WriteRegister(uint8(d.address), REG_STATUS, data[:])
+	err = d.bus.WriteRegister(d.address, REG_STATUS, data[:])
 	if err != nil {
 		return err
 	}
@@ -84,14 +84,14 @@ func (d *Device) SetTime(dt DateTime) error {
 		uint8ToBCD(dt.Year),
 	}
 
-	err = d.bus.WriteRegister(uint8(d.address), REG_TIMEDATE, tdata[:])
+	err = d.bus.WriteRegister(d.address, REG_TIMEDATE, tdata[:])
 	return err
 }
 
 // ReadTime returns the date and time
 func (d *Device) ReadTime() (dt DateTime, err error) {
 	var data [7]uint8
-	err = d.bus.ReadRegister(uint8(d.address), REG_TIMEDATE, data[:])
+	err = d.bus.ReadRegister(d.address, REG_TIMEDATE, data[:])
 	if err != nil {
 		return
 	}
@@ -115,7 +115,7 @@ func (d *Device) ReadTime() (dt DateTime, err error) {
 // centi Celsius or centi Fahrenheit, use ToCentiC() or ToCentiF().
 func (d *Device) ReadTemp() (temp Temp, err error) {
 	var data [2]uint8
-	err = d.bus.ReadRegister(uint8(d.address), REG_TEMP, data[:])
+	err = d.bus.ReadRegister(d.address, REG_TEMP, data[:])
 	msb := data[0]
 	lsb := data[1]
 	temp = Temp((uint16(msb) << 8) | uint16(lsb))
