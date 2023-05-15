@@ -76,11 +76,11 @@ func TestZoneProcessorInitForYear(t *testing.T) {
 		zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	var zp zoneProcessor
 	zp.initForZoneInfo(zoneInfo)
-	if zp.isFilled {
+	if zp.year != InvalidYear {
 		t.Fatal(zp)
 	}
 	zp.initForYear(2023)
-	if !zp.isFilled {
+	if zp.year == InvalidYear {
 		t.Fatal(zp)
 	}
 }

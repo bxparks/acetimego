@@ -32,26 +32,25 @@ const (
 type zoneProcessor struct {
 	zoneInfo   *zoneinfo.ZoneInfo
 	year       int16
-	isFilled   bool
 	numMatches uint8
 	matches    [maxMatches]matchingEra
 	tstorage   transitionStorage
 }
 
 func (zp *zoneProcessor) isFilledForYear(year int16) bool {
-	return zp.isFilled && (year == zp.year)
+	return year == zp.year
 }
 
 // initForZoneInfo initializes the zoneProcessor for the given zoneInfo.
 func (zp *zoneProcessor) initForZoneInfo(zoneInfo *zoneinfo.ZoneInfo) {
 
 	zp.zoneInfo = zoneInfo
-	zp.isFilled = false
+	zp.year = InvalidYear
 }
 
 // Clear cache, used only for tests.
 func (zp *zoneProcessor) reset() {
-	zp.isFilled = false
+	zp.year = InvalidYear
 }
 
 func (zp *zoneProcessor) isLink() bool {
@@ -64,7 +63,6 @@ func (zp *zoneProcessor) initForYear(year int16) errType {
 	}
 
 	zp.year = year
-	zp.isFilled = true
 	zp.numMatches = 0
 	zp.tstorage.init()
 	if year < zp.zoneInfo.StartYear-1 || zp.zoneInfo.UntilYear < year {
