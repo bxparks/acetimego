@@ -7,7 +7,7 @@ START_YEAR := 2000
 UNTIL_YEAR := 10000
 
 
-# The zonedb format for AceTimeGo now supports:
+# The zonedb format for acetimego now supports:
 #	* one-second resolution for STDOFF, UNTIL, AT
 #	* one-minute resolution for DSTOFF and SAVE.
 zonedb:
