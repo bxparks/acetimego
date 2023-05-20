@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
+	"github.com/bxparks/acetimego/zonedbtesting"
 	"testing"
 )
 

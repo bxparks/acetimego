@@ -8,7 +8,7 @@
 package main
 
 import (
-	"github.com/bxparks/AceTimeGo/ds3231"
+	"github.com/bxparks/acetimego/ds3231"
 	"time"
 )
 

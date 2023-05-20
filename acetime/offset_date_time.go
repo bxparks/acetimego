@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/internal/strbuild"
+	"github.com/bxparks/acetimego/internal/strbuild"
 	"strings"
 )
 

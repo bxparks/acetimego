@@ -4,7 +4,7 @@
       0       0       0    4096 |       0    4096 | C stack
       4       0       0       0 |       4       0 | Go interface method
      66       0       0       0 |      66       0 | device/esp
-    265       0       0       0 |     265       0 | github.com/bxparks/AceTimeGo/ds3231
+    265       0       0       0 |     265       0 | github.com/bxparks/acetimego/ds3231
     331      24       0       8 |     355       8 | internal/task
     590       0       0       0 |     590       0 | machine
     127       6       8       0 |     141       8 | main

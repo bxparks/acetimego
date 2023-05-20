@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/zoneinfo"
+	"github.com/bxparks/acetimego/zoneinfo"
 )
 
 // ZoneManager creates TimeZone objects from its ZoneID or its Zone Name.

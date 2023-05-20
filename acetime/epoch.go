@@ -5,7 +5,7 @@ package acetime
 //
 // Other versions of AceTimeXXX uses a 32-bit integer for the `ATime` type
 // because they want to support small 8-bit microcontrollers. For TinyGo, we
-// assume we assume that AceTimeGo will normally be used on 32-bit processors
+// assume we assume that acetimego will normally be used on 32-bit processors
 // (e.g. ESP32), so we will use 64-bit integers. It increases the flash usage by
 // only 100-200 bytes on the ESP32.
 type ATime int64

@@ -9,8 +9,8 @@
 package test
 
 import (
-	"github.com/bxparks/AceTimeGo/acetime"
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
+	"github.com/bxparks/acetimego/acetime"
+	"github.com/bxparks/acetimego/zonedbtesting"
 	"testing"
 	"time"
 )

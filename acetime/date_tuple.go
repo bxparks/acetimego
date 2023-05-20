@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/zoneinfo"
+	"github.com/bxparks/acetimego/zoneinfo"
 )
 
 // A dateTuple is an internal version of [LocalDateTime] which also tracks the
