@@ -5,9 +5,9 @@
 package main
 
 import (
-	"github.com/bxparks/AceTimeGo/acetime"
-	"github.com/bxparks/AceTimeGo/internal/strbuild"
-	"github.com/bxparks/AceTimeGo/zonedb"
+	"github.com/bxparks/acetimego/acetime"
+	"github.com/bxparks/acetimego/internal/strbuild"
+	"github.com/bxparks/acetimego/zonedb"
 	"runtime"
 	"strings"
 )

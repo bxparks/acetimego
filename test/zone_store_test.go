@@ -9,10 +9,10 @@
 package test
 
 import (
-	"github.com/bxparks/AceTimeGo/zonedb"
-	"github.com/bxparks/AceTimeGo/zonedball"
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
-	"github.com/bxparks/AceTimeGo/zoneinfo"
+	"github.com/bxparks/acetimego/zonedb"
+	"github.com/bxparks/acetimego/zonedball"
+	"github.com/bxparks/acetimego/zonedbtesting"
+	"github.com/bxparks/acetimego/zoneinfo"
 	"testing"
 )
 

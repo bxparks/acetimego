@@ -250,7 +250,7 @@ func (store *ZoneStore) IsSorted() bool {
 
 // ZoneNameHash is the hash function that converts the zone name (e.g.
 // "America/Los_Angeles" into a uint32 integer. This is intended to be stable
-// and unique for all future versions of AceTimeGo. If a new zone is added in
+// and unique for all future versions of acetimego. If a new zone is added in
 // the future that causes a hash collision, a modified form of this function
 // will be created so that previous hashes remain stable, while resolving the
 // hash collision.

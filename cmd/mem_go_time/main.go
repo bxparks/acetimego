@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/bxparks/AceTimeGo/internal/strbuild"
+	"github.com/bxparks/acetimego/internal/strbuild"
 	"runtime"
 	"strings"
 	"time"

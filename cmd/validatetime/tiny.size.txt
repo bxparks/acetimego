@@ -6,10 +6,10 @@
     239       0       0       0 |     239       0 | Go interface method
       0      92       0       0 |      92       0 | Go reflect data
      55       0       0       0 |      55       0 | errors
-   6972      64       0       0 |    7036       0 | github.com/bxparks/AceTimeGo/acetime
-    299       0       0       0 |     299       0 | github.com/bxparks/AceTimeGo/internal/strbuild
-      0   70321    1833       0 |   72154    1833 | github.com/bxparks/AceTimeGo/zonedball
-   2734       0       0       0 |    2734       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   6972      64       0       0 |    7036       0 | github.com/bxparks/acetimego/acetime
+    299       0       0       0 |     299       0 | github.com/bxparks/acetimego/internal/strbuild
+      0   70321    1833       0 |   72154    1833 | github.com/bxparks/acetimego/zonedball
+   2734       0       0       0 |    2734       0 | github.com/bxparks/acetimego/zoneinfo
      81       0       0       0 |      81       0 | internal/bytealg
     162       2       0       0 |     164       0 | internal/itoa
     479      24       0      16 |     503      16 | internal/task

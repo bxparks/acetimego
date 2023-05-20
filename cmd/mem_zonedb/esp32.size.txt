@@ -3,10 +3,10 @@
    1213       4       4       5 |    1221       9 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
      66       0       0       0 |      66       0 | device/esp
-   5673      35       0       0 |    5708       0 | github.com/bxparks/AceTimeGo/acetime
-    406       0       0       0 |     406       0 | github.com/bxparks/AceTimeGo/strbuild
-      0   33400    1548       0 |   34948    1548 | github.com/bxparks/AceTimeGo/zonedb
-   1960       0       0       0 |    1960       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   5673      35       0       0 |    5708       0 | github.com/bxparks/acetimego/acetime
+    406       0       0       0 |     406       0 | github.com/bxparks/acetimego/strbuild
+      0   33400    1548       0 |   34948    1548 | github.com/bxparks/acetimego/zonedb
+   1960       0       0       0 |    1960       0 | github.com/bxparks/acetimego/zoneinfo
      54       0       0       0 |      54       0 | internal/bytealg
     302      24       0       8 |     326       8 | internal/task
       9       0       0       0 |       9       0 | machine

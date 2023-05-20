@@ -1,18 +1,18 @@
-// Validate AceTimeGo/acetime package against std.time package.
+// Validate acetimego/acetime package against std.time package.
 //
 // $ go run validatetime.go
 
 package main
 
 import (
-	"github.com/bxparks/AceTimeGo/acetime"
-	"github.com/bxparks/AceTimeGo/zonedball"
+	"github.com/bxparks/acetimego/acetime"
+	"github.com/bxparks/acetimego/zonedball"
 	"time"
 )
 
 const (
 	// The earliest year in the TZ database is 1844, so starting from 1800 should
-	// validate all zones for all years supported by TZDB and AceTimeGo.
+	// validate all zones for all years supported by TZDB and acetimego.
 	startYear        = 1800
 	untilYear        = 2100
 	samplingInterval = 22 // hours

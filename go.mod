@@ -1,4 +1,4 @@
-module github.com/bxparks/AceTimeGo
+module github.com/bxparks/acetimego
 
 go 1.19
 
