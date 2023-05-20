@@ -684,8 +684,8 @@ func TestCreateAbbreviation(t *testing.T) {
 		t.Fatal(abbrev)
 	}
 
-	// If '%', and Letter is "", remove the "%" (unlike AceTimeC where Letter is
-	// NULL.
+	// If '%', and Letter is "", remove the "%" (unlike acetimec library where
+	// Letter is NULL)
 	abbrev = createAbbreviation("SA%ST", 0, "")
 	if !("SAST" == abbrev) {
 		t.Fatal(abbrev)

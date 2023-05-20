@@ -9,7 +9,7 @@ import (
 //-----------------------------------------------------------------------------
 // ZonedDateTime.
 // Much of the following tests adapted from zoned_date_time_test.c from the
-// AceTimeC library, which in turn, were adopted from
+// acetimec library, which in turn, were adopted from
 // ZonedDateTimeExtendedTest.ino in the AceTime library.
 //-----------------------------------------------------------------------------
 

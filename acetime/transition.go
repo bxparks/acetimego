@@ -383,7 +383,7 @@ func calculateFoldAndOverlap(
 //   - num=0, prev==prev, curr=NULL: datetime is far future
 //
 // Adapted from transitionForDateTime in transition.h of the AceTime library,
-// and transition.h from the AceTimeC library.
+// and transition.h from the acetimec library.
 type transitionForDateTime struct {
 	// The previous transition, or null if the first transition matches.
 	prev *transition
