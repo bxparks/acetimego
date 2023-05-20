@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedb/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedb
-//     --tz_version 2022g
+//     --tz_version 2023c
 //     --action zonedb
 //     --language go
 //     --scope extended
@@ -27,9 +27,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2022g
+// from https://github.com/eggert/tz/releases/tag/2023c
 //
-// Supported Zones: 596 (351 zones, 245 links)
+// Supported Zones: 596 (350 zones, 246 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Original Years:  [1844,2087]
@@ -39,22 +39,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 647
+//   Eras: 646
 //   Policies: 83
-//   Rules: 655
+//   Rules: 735
 //
 // Memory:
-//   Rules: 7860
+//   Rules: 8820
 //   Policies: 332
-//   Eras: 9058
-//   Zones: 4212
-//   Links: 2940
+//   Eras: 9044
+//   Zones: 4200
+//   Links: 2952
 //   Registry: 0
 //   Formats: 712
 //   Letters: 30
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 34819
+//   TOTAL: 35765
 //
 // DO NOT EDIT
 
@@ -68,7 +68,7 @@ import (
 // from all ZonePolicyRecords.
 //
 // Supported zone policies: 83
-// numRules: 655
+// numRules: 735
 // ---------------------------------------------------------------------------
 
 var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
@@ -2033,7 +2033,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	// ---------------------------------------------------------------------------
 	// PolicyName: Egypt
 	// RuleIndex: 148
-	// RuleCount: 15
+	// RuleCount: 17
 	// ---------------------------------------------------------------------------
 
 	// Anchor: Rule    Egypt    1966    1994    -    Oct     1    3:00    0    -
@@ -2216,10 +2216,34 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
+	// Rule    Egypt    2023    max    -    Apr    lastFri     0:00    1:00    S
+	{
+		FromYear: 2023,
+		ToYear: 32766,
+		InMonth: 4,
+		OnDayOfWeek: 5,
+		OnDayOfMonth: 0,
+		AtSecondsCode: 0, // 0 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule    Egypt    2023    max    -    Oct    lastThu    24:00    0    -
+	{
+		FromYear: 2023,
+		ToYear: 32766,
+		InMonth: 10,
+		OnDayOfWeek: 4,
+		OnDayOfMonth: 0,
+		AtSecondsCode: 5760, // 86400 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Eire
-	// RuleIndex: 163
+	// RuleIndex: 165
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -2274,7 +2298,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Falk
-	// RuleIndex: 167
+	// RuleIndex: 169
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -2353,7 +2377,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Fiji
-	// RuleIndex: 173
+	// RuleIndex: 175
 	// RuleCount: 13
 	// ---------------------------------------------------------------------------
 
@@ -2516,7 +2540,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Guam
-	// RuleIndex: 186
+	// RuleIndex: 188
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -2535,7 +2559,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Guat
-	// RuleIndex: 187
+	// RuleIndex: 189
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -2590,7 +2614,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: HK
-	// RuleIndex: 191
+	// RuleIndex: 193
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -2609,7 +2633,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Haiti
-	// RuleIndex: 192
+	// RuleIndex: 194
 	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
@@ -2712,7 +2736,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Holiday
-	// RuleIndex: 200
+	// RuleIndex: 202
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -2731,7 +2755,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Hond
-	// RuleIndex: 201
+	// RuleIndex: 203
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -2786,7 +2810,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Iran
-	// RuleIndex: 205
+	// RuleIndex: 207
 	// RuleCount: 28
 	// ---------------------------------------------------------------------------
 
@@ -3129,7 +3153,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Iraq
-	// RuleIndex: 233
+	// RuleIndex: 235
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -3184,7 +3208,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Japan
-	// RuleIndex: 237
+	// RuleIndex: 239
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -3203,7 +3227,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Jordan
-	// RuleIndex: 238
+	// RuleIndex: 240
 	// RuleCount: 14
 	// ---------------------------------------------------------------------------
 
@@ -3378,7 +3402,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Kyrgyz
-	// RuleIndex: 252
+	// RuleIndex: 254
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -3433,7 +3457,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: LH
-	// RuleIndex: 256
+	// RuleIndex: 258
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -3560,7 +3584,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Lebanon
-	// RuleIndex: 266
+	// RuleIndex: 268
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -3615,7 +3639,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Libya
-	// RuleIndex: 270
+	// RuleIndex: 272
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -3670,7 +3694,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Macau
-	// RuleIndex: 274
+	// RuleIndex: 276
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -3689,7 +3713,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Mauritius
-	// RuleIndex: 275
+	// RuleIndex: 277
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -3744,7 +3768,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Mexico
-	// RuleIndex: 279
+	// RuleIndex: 281
 	// RuleCount: 8
 	// ---------------------------------------------------------------------------
 
@@ -3847,7 +3871,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Moldova
-	// RuleIndex: 287
+	// RuleIndex: 289
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -3890,7 +3914,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Moncton
-	// RuleIndex: 290
+	// RuleIndex: 292
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -3945,7 +3969,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Mongol
-	// RuleIndex: 294
+	// RuleIndex: 296
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -4036,7 +4060,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Morocco
-	// RuleIndex: 301
+	// RuleIndex: 303
 	// RuleCount: 170
 	// ---------------------------------------------------------------------------
 
@@ -4484,13 +4508,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2023    only    -    Apr    30     2:00    0    -
+	// Rule    Morocco    2023    only    -    Apr    23     2:00    0    -
 	{
 		FromYear: 2023,
 		ToYear: 2023,
 		InMonth: 4,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 30,
+		OnDayOfMonth: 23,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -4676,13 +4700,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2031    only    -    Feb     2     2:00    0    -
+	// Rule    Morocco    2031    only    -    Jan    26     2:00    0    -
 	{
 		FromYear: 2031,
 		ToYear: 2031,
-		InMonth: 2,
+		InMonth: 1,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 2,
+		OnDayOfMonth: 26,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -4868,13 +4892,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2038    only    -    Nov     7     2:00    0    -
+	// Rule    Morocco    2038    only    -    Oct    31     2:00    0    -
 	{
 		FromYear: 2038,
 		ToYear: 2038,
-		InMonth: 11,
+		InMonth: 10,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 7,
+		OnDayOfMonth: 31,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -5060,13 +5084,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2046    only    -    Aug    12     2:00    0    -
+	// Rule    Morocco    2046    only    -    Aug     5     2:00    0    -
 	{
 		FromYear: 2046,
 		ToYear: 2046,
 		InMonth: 8,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 12,
+		OnDayOfMonth: 5,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -5252,13 +5276,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2054    only    -    May    17     2:00    0    -
+	// Rule    Morocco    2054    only    -    May    10     2:00    0    -
 	{
 		FromYear: 2054,
 		ToYear: 2054,
 		InMonth: 5,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 17,
+		OnDayOfMonth: 10,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -5444,13 +5468,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2062    only    -    Feb    19     2:00    0    -
+	// Rule    Morocco    2062    only    -    Feb    12     2:00    0    -
 	{
 		FromYear: 2062,
 		ToYear: 2062,
 		InMonth: 2,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 19,
+		OnDayOfMonth: 12,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -5636,13 +5660,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2069    only    -    Nov    24     2:00    0    -
+	// Rule    Morocco    2069    only    -    Nov    17     2:00    0    -
 	{
 		FromYear: 2069,
 		ToYear: 2069,
 		InMonth: 11,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 24,
+		OnDayOfMonth: 17,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -5828,13 +5852,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2077    only    -    Aug    29     2:00    0    -
+	// Rule    Morocco    2077    only    -    Aug    22     2:00    0    -
 	{
 		FromYear: 2077,
 		ToYear: 2077,
 		InMonth: 8,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 29,
+		OnDayOfMonth: 22,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -5948,13 +5972,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2082    only    -    Jul     5     2:00    0    -
+	// Rule    Morocco    2082    only    -    Jun    28     2:00    0    -
 	{
 		FromYear: 2082,
 		ToYear: 2082,
-		InMonth: 7,
+		InMonth: 6,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 5,
+		OnDayOfMonth: 28,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -6020,13 +6044,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: -60,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Morocco    2085    only    -    Jun     3     2:00    0    -
+	// Rule    Morocco    2085    only    -    May    27     2:00    0    -
 	{
 		FromYear: 2085,
 		ToYear: 2085,
-		InMonth: 6,
+		InMonth: 5,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 3,
+		OnDayOfMonth: 27,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
@@ -6083,7 +6107,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NC
-	// RuleIndex: 471
+	// RuleIndex: 473
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6102,7 +6126,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NT_YK
-	// RuleIndex: 472
+	// RuleIndex: 474
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -6157,7 +6181,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: NZ
-	// RuleIndex: 476
+	// RuleIndex: 478
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -6236,7 +6260,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Namibia
-	// RuleIndex: 482
+	// RuleIndex: 484
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -6291,7 +6315,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Nic
-	// RuleIndex: 486
+	// RuleIndex: 488
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -6370,7 +6394,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: PRC
-	// RuleIndex: 492
+	// RuleIndex: 494
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6389,7 +6413,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Pakistan
-	// RuleIndex: 493
+	// RuleIndex: 495
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -6468,8 +6492,8 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Palestine
-	// RuleIndex: 499
-	// RuleCount: 33
+	// RuleIndex: 501
+	// RuleCount: 111
 	// ---------------------------------------------------------------------------
 
 	// Anchor: Rule Palestine    1999    2003    -    Oct    Fri>=15    0:00    0    -
@@ -6844,10 +6868,10 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
 	},
-	// Rule Palestine    2022    max    -    Oct    Sat<=30    2:00    0    -
+	// Rule Palestine    2022    2035    -    Oct    Sat<=30    2:00    0    -
 	{
 		FromYear: 2022,
-		ToYear: 32766,
+		ToYear: 2035,
 		InMonth: 10,
 		OnDayOfWeek: 6,
 		OnDayOfMonth: -30,
@@ -6856,9 +6880,525 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2023    max    -    Mar    Sat<=30    2:00    1:00    S
+	// Rule Palestine    2023    only    -    Apr    29    2:00    1:00    S
 	{
 		FromYear: 2023,
+		ToYear: 2023,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2024    only    -    Apr    13    2:00    1:00    S
+	{
+		FromYear: 2024,
+		ToYear: 2024,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2025    only    -    Apr     5    2:00    1:00    S
+	{
+		FromYear: 2025,
+		ToYear: 2025,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2026    2054    -    Mar    Sat<=30    2:00    1:00    S
+	{
+		FromYear: 2026,
+		ToYear: 2054,
+		InMonth: 3,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: -30,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2036    only    -    Oct    18    2:00    0    -
+	{
+		FromYear: 2036,
+		ToYear: 2036,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 18,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2037    only    -    Oct    10    2:00    0    -
+	{
+		FromYear: 2037,
+		ToYear: 2037,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2038    only    -    Sep    25    2:00    0    -
+	{
+		FromYear: 2038,
+		ToYear: 2038,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2039    only    -    Sep    17    2:00    0    -
+	{
+		FromYear: 2039,
+		ToYear: 2039,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 17,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2039    only    -    Oct    22    2:00    1:00    S
+	{
+		FromYear: 2039,
+		ToYear: 2039,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2039    2067    -    Oct    Sat<=30    2:00    0    -
+	{
+		FromYear: 2039,
+		ToYear: 2067,
+		InMonth: 10,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: -30,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2040    only    -    Sep     1    2:00    0    -
+	{
+		FromYear: 2040,
+		ToYear: 2040,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2040    only    -    Oct    13    2:00    1:00    S
+	{
+		FromYear: 2040,
+		ToYear: 2040,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2041    only    -    Aug    24    2:00    0    -
+	{
+		FromYear: 2041,
+		ToYear: 2041,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2041    only    -    Sep    28    2:00    1:00    S
+	{
+		FromYear: 2041,
+		ToYear: 2041,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2042    only    -    Aug    16    2:00    0    -
+	{
+		FromYear: 2042,
+		ToYear: 2042,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2042    only    -    Sep    20    2:00    1:00    S
+	{
+		FromYear: 2042,
+		ToYear: 2042,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2043    only    -    Aug     1    2:00    0    -
+	{
+		FromYear: 2043,
+		ToYear: 2043,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2043    only    -    Sep    12    2:00    1:00    S
+	{
+		FromYear: 2043,
+		ToYear: 2043,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2044    only    -    Jul    23    2:00    0    -
+	{
+		FromYear: 2044,
+		ToYear: 2044,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 23,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2044    only    -    Aug    27    2:00    1:00    S
+	{
+		FromYear: 2044,
+		ToYear: 2044,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2045    only    -    Jul    15    2:00    0    -
+	{
+		FromYear: 2045,
+		ToYear: 2045,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2045    only    -    Aug    19    2:00    1:00    S
+	{
+		FromYear: 2045,
+		ToYear: 2045,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 19,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2046    only    -    Jun    30    2:00    0    -
+	{
+		FromYear: 2046,
+		ToYear: 2046,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 30,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2046    only    -    Aug    11    2:00    1:00    S
+	{
+		FromYear: 2046,
+		ToYear: 2046,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 11,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2047    only    -    Jun    22    2:00    0    -
+	{
+		FromYear: 2047,
+		ToYear: 2047,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2047    only    -    Jul    27    2:00    1:00    S
+	{
+		FromYear: 2047,
+		ToYear: 2047,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2048    only    -    Jun     6    2:00    0    -
+	{
+		FromYear: 2048,
+		ToYear: 2048,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2048    only    -    Jul    18    2:00    1:00    S
+	{
+		FromYear: 2048,
+		ToYear: 2048,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 18,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2049    only    -    May    29    2:00    0    -
+	{
+		FromYear: 2049,
+		ToYear: 2049,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2049    only    -    Jul     3    2:00    1:00    S
+	{
+		FromYear: 2049,
+		ToYear: 2049,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 3,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2050    only    -    May    21    2:00    0    -
+	{
+		FromYear: 2050,
+		ToYear: 2050,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2050    only    -    Jun    25    2:00    1:00    S
+	{
+		FromYear: 2050,
+		ToYear: 2050,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2051    only    -    May     6    2:00    0    -
+	{
+		FromYear: 2051,
+		ToYear: 2051,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2051    only    -    Jun    17    2:00    1:00    S
+	{
+		FromYear: 2051,
+		ToYear: 2051,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 17,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2052    only    -    Apr    27    2:00    0    -
+	{
+		FromYear: 2052,
+		ToYear: 2052,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 27,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2052    only    -    Jun     1    2:00    1:00    S
+	{
+		FromYear: 2052,
+		ToYear: 2052,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2053    only    -    Apr    12    2:00    0    -
+	{
+		FromYear: 2053,
+		ToYear: 2053,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2053    only    -    May    24    2:00    1:00    S
+	{
+		FromYear: 2053,
+		ToYear: 2053,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2054    only    -    Apr     4    2:00    0    -
+	{
+		FromYear: 2054,
+		ToYear: 2054,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2054    only    -    May    16    2:00    1:00    S
+	{
+		FromYear: 2054,
+		ToYear: 2054,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 16,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2055    only    -    May     1    2:00    1:00    S
+	{
+		FromYear: 2055,
+		ToYear: 2055,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 1,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2056    only    -    Apr    22    2:00    1:00    S
+	{
+		FromYear: 2056,
+		ToYear: 2056,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 22,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2057    only    -    Apr     7    2:00    1:00    S
+	{
+		FromYear: 2057,
+		ToYear: 2057,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 7,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2058    max    -    Mar    Sat<=30    2:00    1:00    S
+	{
+		FromYear: 2058,
 		ToYear: 32766,
 		InMonth: 3,
 		OnDayOfWeek: 6,
@@ -6868,10 +7408,430 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
 	},
+	// Rule Palestine    2068    only    -    Oct    20    2:00    0    -
+	{
+		FromYear: 2068,
+		ToYear: 2068,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2069    only    -    Oct    12    2:00    0    -
+	{
+		FromYear: 2069,
+		ToYear: 2069,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2070    only    -    Oct     4    2:00    0    -
+	{
+		FromYear: 2070,
+		ToYear: 2070,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2071    only    -    Sep    19    2:00    0    -
+	{
+		FromYear: 2071,
+		ToYear: 2071,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 19,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2072    only    -    Sep    10    2:00    0    -
+	{
+		FromYear: 2072,
+		ToYear: 2072,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2072    only    -    Oct    15    2:00    1:00    S
+	{
+		FromYear: 2072,
+		ToYear: 2072,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2073    only    -    Sep     2    2:00    0    -
+	{
+		FromYear: 2073,
+		ToYear: 2073,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2073    only    -    Oct     7    2:00    1:00    S
+	{
+		FromYear: 2073,
+		ToYear: 2073,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 7,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2074    only    -    Aug    18    2:00    0    -
+	{
+		FromYear: 2074,
+		ToYear: 2074,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 18,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2074    only    -    Sep    29    2:00    1:00    S
+	{
+		FromYear: 2074,
+		ToYear: 2074,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2075    only    -    Aug    10    2:00    0    -
+	{
+		FromYear: 2075,
+		ToYear: 2075,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2075    only    -    Sep    14    2:00    1:00    S
+	{
+		FromYear: 2075,
+		ToYear: 2075,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 14,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2075    max    -    Oct    Sat<=30    2:00    0    -
+	{
+		FromYear: 2075,
+		ToYear: 32766,
+		InMonth: 10,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: -30,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2076    only    -    Jul    25    2:00    0    -
+	{
+		FromYear: 2076,
+		ToYear: 2076,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 25,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2076    only    -    Sep     5    2:00    1:00    S
+	{
+		FromYear: 2076,
+		ToYear: 2076,
+		InMonth: 9,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2077    only    -    Jul    17    2:00    0    -
+	{
+		FromYear: 2077,
+		ToYear: 2077,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 17,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2077    only    -    Aug    28    2:00    1:00    S
+	{
+		FromYear: 2077,
+		ToYear: 2077,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 28,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2078    only    -    Jul     9    2:00    0    -
+	{
+		FromYear: 2078,
+		ToYear: 2078,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 9,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2078    only    -    Aug    13    2:00    1:00    S
+	{
+		FromYear: 2078,
+		ToYear: 2078,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2079    only    -    Jun    24    2:00    0    -
+	{
+		FromYear: 2079,
+		ToYear: 2079,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 24,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2079    only    -    Aug     5    2:00    1:00    S
+	{
+		FromYear: 2079,
+		ToYear: 2079,
+		InMonth: 8,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2080    only    -    Jun    15    2:00    0    -
+	{
+		FromYear: 2080,
+		ToYear: 2080,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2080    only    -    Jul    20    2:00    1:00    S
+	{
+		FromYear: 2080,
+		ToYear: 2080,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 20,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2081    only    -    Jun     7    2:00    0    -
+	{
+		FromYear: 2081,
+		ToYear: 2081,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 7,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2081    only    -    Jul    12    2:00    1:00    S
+	{
+		FromYear: 2081,
+		ToYear: 2081,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 12,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2082    only    -    May    23    2:00    0    -
+	{
+		FromYear: 2082,
+		ToYear: 2082,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 23,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2082    only    -    Jul     4    2:00    1:00    S
+	{
+		FromYear: 2082,
+		ToYear: 2082,
+		InMonth: 7,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 4,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2083    only    -    May    15    2:00    0    -
+	{
+		FromYear: 2083,
+		ToYear: 2083,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 15,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2083    only    -    Jun    19    2:00    1:00    S
+	{
+		FromYear: 2083,
+		ToYear: 2083,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 19,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2084    only    -    Apr    29    2:00    0    -
+	{
+		FromYear: 2084,
+		ToYear: 2084,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 29,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2084    only    -    Jun    10    2:00    1:00    S
+	{
+		FromYear: 2084,
+		ToYear: 2084,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 10,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2085    only    -    Apr    21    2:00    0    -
+	{
+		FromYear: 2085,
+		ToYear: 2085,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 21,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2085    only    -    Jun     2    2:00    1:00    S
+	{
+		FromYear: 2085,
+		ToYear: 2085,
+		InMonth: 6,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 2,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2086    only    -    Apr    13    2:00    0    -
+	{
+		FromYear: 2086,
+		ToYear: 2086,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 13,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule Palestine    2086    only    -    May    18    2:00    1:00    S
+	{
+		FromYear: 2086,
+		ToYear: 2086,
+		InMonth: 5,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 18,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Para
-	// RuleIndex: 532
+	// RuleIndex: 612
 	// RuleCount: 11
 	// ---------------------------------------------------------------------------
 
@@ -7010,7 +7970,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Peru
-	// RuleIndex: 543
+	// RuleIndex: 623
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7029,7 +7989,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Phil
-	// RuleIndex: 544
+	// RuleIndex: 624
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7048,7 +8008,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: ROK
-	// RuleIndex: 545
+	// RuleIndex: 625
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7067,7 +8027,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Russia
-	// RuleIndex: 546
+	// RuleIndex: 626
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -7122,7 +8082,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: RussiaAsia
-	// RuleIndex: 550
+	// RuleIndex: 630
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -7177,7 +8137,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SA
-	// RuleIndex: 554
+	// RuleIndex: 634
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7196,7 +8156,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Salv
-	// RuleIndex: 555
+	// RuleIndex: 635
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7215,7 +8175,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SanLuis
-	// RuleIndex: 556
+	// RuleIndex: 636
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7258,7 +8218,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: StJohns
-	// RuleIndex: 559
+	// RuleIndex: 639
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -7337,7 +8297,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Sudan
-	// RuleIndex: 565
+	// RuleIndex: 645
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7356,7 +8316,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Syria
-	// RuleIndex: 566
+	// RuleIndex: 646
 	// RuleCount: 13
 	// ---------------------------------------------------------------------------
 
@@ -7519,7 +8479,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Taiwan
-	// RuleIndex: 579
+	// RuleIndex: 659
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7538,7 +8498,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Thule
-	// RuleIndex: 580
+	// RuleIndex: 660
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -7617,7 +8577,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Tonga
-	// RuleIndex: 586
+	// RuleIndex: 666
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -7708,7 +8668,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Troll
-	// RuleIndex: 593
+	// RuleIndex: 673
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7751,7 +8711,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Tunisia
-	// RuleIndex: 596
+	// RuleIndex: 676
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -7830,7 +8790,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Turkey
-	// RuleIndex: 602
+	// RuleIndex: 682
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -7885,7 +8845,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: US
-	// RuleIndex: 606
+	// RuleIndex: 686
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -7964,7 +8924,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Uruguay
-	// RuleIndex: 612
+	// RuleIndex: 692
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -8055,7 +9015,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Vanuatu
-	// RuleIndex: 619
+	// RuleIndex: 699
 	// RuleCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8074,7 +9034,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: WS
-	// RuleIndex: 620
+	// RuleIndex: 700
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -8153,7 +9113,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Winn
-	// RuleIndex: 626
+	// RuleIndex: 706
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -8208,7 +9168,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Zion
-	// RuleIndex: 630
+	// RuleIndex: 710
 	// RuleCount: 25
 	// ---------------------------------------------------------------------------
 
@@ -8549,63 +9509,63 @@ var ZonePolicyRecords = []zoneinfo.ZonePolicyRecord{
 	{RuleIndex: 139, RuleCount: 4}, // 24: PolicyName: EU
 	{RuleIndex: 143, RuleCount: 4}, // 25: PolicyName: EUAsia
 	{RuleIndex: 147, RuleCount: 1}, // 26: PolicyName: Ecuador
-	{RuleIndex: 148, RuleCount: 15}, // 27: PolicyName: Egypt
-	{RuleIndex: 163, RuleCount: 4}, // 28: PolicyName: Eire
-	{RuleIndex: 167, RuleCount: 6}, // 29: PolicyName: Falk
-	{RuleIndex: 173, RuleCount: 13}, // 30: PolicyName: Fiji
-	{RuleIndex: 186, RuleCount: 1}, // 31: PolicyName: Guam
-	{RuleIndex: 187, RuleCount: 4}, // 32: PolicyName: Guat
-	{RuleIndex: 191, RuleCount: 1}, // 33: PolicyName: HK
-	{RuleIndex: 192, RuleCount: 8}, // 34: PolicyName: Haiti
-	{RuleIndex: 200, RuleCount: 1}, // 35: PolicyName: Holiday
-	{RuleIndex: 201, RuleCount: 4}, // 36: PolicyName: Hond
-	{RuleIndex: 205, RuleCount: 28}, // 37: PolicyName: Iran
-	{RuleIndex: 233, RuleCount: 4}, // 38: PolicyName: Iraq
-	{RuleIndex: 237, RuleCount: 1}, // 39: PolicyName: Japan
-	{RuleIndex: 238, RuleCount: 14}, // 40: PolicyName: Jordan
-	{RuleIndex: 252, RuleCount: 4}, // 41: PolicyName: Kyrgyz
-	{RuleIndex: 256, RuleCount: 10}, // 42: PolicyName: LH
-	{RuleIndex: 266, RuleCount: 4}, // 43: PolicyName: Lebanon
-	{RuleIndex: 270, RuleCount: 4}, // 44: PolicyName: Libya
-	{RuleIndex: 274, RuleCount: 1}, // 45: PolicyName: Macau
-	{RuleIndex: 275, RuleCount: 4}, // 46: PolicyName: Mauritius
-	{RuleIndex: 279, RuleCount: 8}, // 47: PolicyName: Mexico
-	{RuleIndex: 287, RuleCount: 3}, // 48: PolicyName: Moldova
-	{RuleIndex: 290, RuleCount: 4}, // 49: PolicyName: Moncton
-	{RuleIndex: 294, RuleCount: 7}, // 50: PolicyName: Mongol
-	{RuleIndex: 301, RuleCount: 170}, // 51: PolicyName: Morocco
-	{RuleIndex: 471, RuleCount: 1}, // 52: PolicyName: NC
-	{RuleIndex: 472, RuleCount: 4}, // 53: PolicyName: NT_YK
-	{RuleIndex: 476, RuleCount: 6}, // 54: PolicyName: NZ
-	{RuleIndex: 482, RuleCount: 4}, // 55: PolicyName: Namibia
-	{RuleIndex: 486, RuleCount: 6}, // 56: PolicyName: Nic
-	{RuleIndex: 492, RuleCount: 1}, // 57: PolicyName: PRC
-	{RuleIndex: 493, RuleCount: 6}, // 58: PolicyName: Pakistan
-	{RuleIndex: 499, RuleCount: 33}, // 59: PolicyName: Palestine
-	{RuleIndex: 532, RuleCount: 11}, // 60: PolicyName: Para
-	{RuleIndex: 543, RuleCount: 1}, // 61: PolicyName: Peru
-	{RuleIndex: 544, RuleCount: 1}, // 62: PolicyName: Phil
-	{RuleIndex: 545, RuleCount: 1}, // 63: PolicyName: ROK
-	{RuleIndex: 546, RuleCount: 4}, // 64: PolicyName: Russia
-	{RuleIndex: 550, RuleCount: 4}, // 65: PolicyName: RussiaAsia
-	{RuleIndex: 554, RuleCount: 1}, // 66: PolicyName: SA
-	{RuleIndex: 555, RuleCount: 1}, // 67: PolicyName: Salv
-	{RuleIndex: 556, RuleCount: 3}, // 68: PolicyName: SanLuis
-	{RuleIndex: 559, RuleCount: 6}, // 69: PolicyName: StJohns
-	{RuleIndex: 565, RuleCount: 1}, // 70: PolicyName: Sudan
-	{RuleIndex: 566, RuleCount: 13}, // 71: PolicyName: Syria
-	{RuleIndex: 579, RuleCount: 1}, // 72: PolicyName: Taiwan
-	{RuleIndex: 580, RuleCount: 6}, // 73: PolicyName: Thule
-	{RuleIndex: 586, RuleCount: 7}, // 74: PolicyName: Tonga
-	{RuleIndex: 593, RuleCount: 3}, // 75: PolicyName: Troll
-	{RuleIndex: 596, RuleCount: 6}, // 76: PolicyName: Tunisia
-	{RuleIndex: 602, RuleCount: 4}, // 77: PolicyName: Turkey
-	{RuleIndex: 606, RuleCount: 6}, // 78: PolicyName: US
-	{RuleIndex: 612, RuleCount: 7}, // 79: PolicyName: Uruguay
-	{RuleIndex: 619, RuleCount: 1}, // 80: PolicyName: Vanuatu
-	{RuleIndex: 620, RuleCount: 6}, // 81: PolicyName: WS
-	{RuleIndex: 626, RuleCount: 4}, // 82: PolicyName: Winn
-	{RuleIndex: 630, RuleCount: 25}, // 83: PolicyName: Zion
+	{RuleIndex: 148, RuleCount: 17}, // 27: PolicyName: Egypt
+	{RuleIndex: 165, RuleCount: 4}, // 28: PolicyName: Eire
+	{RuleIndex: 169, RuleCount: 6}, // 29: PolicyName: Falk
+	{RuleIndex: 175, RuleCount: 13}, // 30: PolicyName: Fiji
+	{RuleIndex: 188, RuleCount: 1}, // 31: PolicyName: Guam
+	{RuleIndex: 189, RuleCount: 4}, // 32: PolicyName: Guat
+	{RuleIndex: 193, RuleCount: 1}, // 33: PolicyName: HK
+	{RuleIndex: 194, RuleCount: 8}, // 34: PolicyName: Haiti
+	{RuleIndex: 202, RuleCount: 1}, // 35: PolicyName: Holiday
+	{RuleIndex: 203, RuleCount: 4}, // 36: PolicyName: Hond
+	{RuleIndex: 207, RuleCount: 28}, // 37: PolicyName: Iran
+	{RuleIndex: 235, RuleCount: 4}, // 38: PolicyName: Iraq
+	{RuleIndex: 239, RuleCount: 1}, // 39: PolicyName: Japan
+	{RuleIndex: 240, RuleCount: 14}, // 40: PolicyName: Jordan
+	{RuleIndex: 254, RuleCount: 4}, // 41: PolicyName: Kyrgyz
+	{RuleIndex: 258, RuleCount: 10}, // 42: PolicyName: LH
+	{RuleIndex: 268, RuleCount: 4}, // 43: PolicyName: Lebanon
+	{RuleIndex: 272, RuleCount: 4}, // 44: PolicyName: Libya
+	{RuleIndex: 276, RuleCount: 1}, // 45: PolicyName: Macau
+	{RuleIndex: 277, RuleCount: 4}, // 46: PolicyName: Mauritius
+	{RuleIndex: 281, RuleCount: 8}, // 47: PolicyName: Mexico
+	{RuleIndex: 289, RuleCount: 3}, // 48: PolicyName: Moldova
+	{RuleIndex: 292, RuleCount: 4}, // 49: PolicyName: Moncton
+	{RuleIndex: 296, RuleCount: 7}, // 50: PolicyName: Mongol
+	{RuleIndex: 303, RuleCount: 170}, // 51: PolicyName: Morocco
+	{RuleIndex: 473, RuleCount: 1}, // 52: PolicyName: NC
+	{RuleIndex: 474, RuleCount: 4}, // 53: PolicyName: NT_YK
+	{RuleIndex: 478, RuleCount: 6}, // 54: PolicyName: NZ
+	{RuleIndex: 484, RuleCount: 4}, // 55: PolicyName: Namibia
+	{RuleIndex: 488, RuleCount: 6}, // 56: PolicyName: Nic
+	{RuleIndex: 494, RuleCount: 1}, // 57: PolicyName: PRC
+	{RuleIndex: 495, RuleCount: 6}, // 58: PolicyName: Pakistan
+	{RuleIndex: 501, RuleCount: 111}, // 59: PolicyName: Palestine
+	{RuleIndex: 612, RuleCount: 11}, // 60: PolicyName: Para
+	{RuleIndex: 623, RuleCount: 1}, // 61: PolicyName: Peru
+	{RuleIndex: 624, RuleCount: 1}, // 62: PolicyName: Phil
+	{RuleIndex: 625, RuleCount: 1}, // 63: PolicyName: ROK
+	{RuleIndex: 626, RuleCount: 4}, // 64: PolicyName: Russia
+	{RuleIndex: 630, RuleCount: 4}, // 65: PolicyName: RussiaAsia
+	{RuleIndex: 634, RuleCount: 1}, // 66: PolicyName: SA
+	{RuleIndex: 635, RuleCount: 1}, // 67: PolicyName: Salv
+	{RuleIndex: 636, RuleCount: 3}, // 68: PolicyName: SanLuis
+	{RuleIndex: 639, RuleCount: 6}, // 69: PolicyName: StJohns
+	{RuleIndex: 645, RuleCount: 1}, // 70: PolicyName: Sudan
+	{RuleIndex: 646, RuleCount: 13}, // 71: PolicyName: Syria
+	{RuleIndex: 659, RuleCount: 1}, // 72: PolicyName: Taiwan
+	{RuleIndex: 660, RuleCount: 6}, // 73: PolicyName: Thule
+	{RuleIndex: 666, RuleCount: 7}, // 74: PolicyName: Tonga
+	{RuleIndex: 673, RuleCount: 3}, // 75: PolicyName: Troll
+	{RuleIndex: 676, RuleCount: 6}, // 76: PolicyName: Tunisia
+	{RuleIndex: 682, RuleCount: 4}, // 77: PolicyName: Turkey
+	{RuleIndex: 686, RuleCount: 6}, // 78: PolicyName: US
+	{RuleIndex: 692, RuleCount: 7}, // 79: PolicyName: Uruguay
+	{RuleIndex: 699, RuleCount: 1}, // 80: PolicyName: Vanuatu
+	{RuleIndex: 700, RuleCount: 6}, // 81: PolicyName: WS
+	{RuleIndex: 706, RuleCount: 4}, // 82: PolicyName: Winn
+	{RuleIndex: 710, RuleCount: 25}, // 83: PolicyName: Zion
 
 }
 

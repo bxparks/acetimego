@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedb/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedb
-//     --tz_version 2022g
+//     --tz_version 2023c
 //     --action zonedb
 //     --language go
 //     --scope extended
@@ -27,9 +27,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2022g
+// from https://github.com/eggert/tz/releases/tag/2023c
 //
-// Supported Zones: 596 (351 zones, 245 links)
+// Supported Zones: 596 (350 zones, 246 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Original Years:  [1844,2087]
@@ -39,22 +39,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 647
+//   Eras: 646
 //   Policies: 83
-//   Rules: 655
+//   Rules: 735
 //
 // Memory:
-//   Rules: 7860
+//   Rules: 8820
 //   Policies: 332
-//   Eras: 9058
-//   Zones: 4212
-//   Links: 2940
+//   Eras: 9044
+//   Zones: 4200
+//   Links: 2952
 //   Registry: 0
 //   Formats: 712
 //   Letters: 30
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 34819
+//   TOTAL: 35765
 //
 // DO NOT EDIT
 
@@ -97,7 +97,7 @@ var RecordContext = zoneinfo.ZoneRecordContext{
 // Zone Indexes. Index into the ZoneInfoRecords array. Intended for unit tests
 // which need direct access to the zoneinfo.ZoneInfo struct.
 //
-// Total: 596 (351 zones, 245 links)
+// Total: 596 (350 zones, 246 links)
 // ---------------------------------------------------------------------------
 
 const (

@@ -11,6 +11,7 @@
         * Add `examples/ds3231demo`
     * Rename project from `AceTimeGo` to `acetimego`
         * More consistent with Go library naming convention.
+    * Upgrade to TZDB 2023c
 * 0.3.0 (2023-03-10, TZDB 2022g)
     * Convert C++ doxygen docs to go doc format.
     * Unexport various internal functions and structs by lowercasing their
