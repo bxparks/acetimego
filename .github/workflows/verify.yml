@@ -21,7 +21,7 @@ jobs:
       run: |
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-    - name: Checkout AceTimeGo
+    - name: Checkout acetimego
       uses: actions/checkout@v3
 
     - name: Build
