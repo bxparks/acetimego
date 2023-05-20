@@ -6,10 +6,10 @@
       0      88       0       0 |      88       0 | Go reflect data
      66       0       0       0 |      66       0 | device/esp
      26       0       0       0 |      26       0 | errors
-   6221      32       0       0 |    6253       0 | github.com/bxparks/AceTimeGo/acetime
-    205       0       0       0 |     205       0 | github.com/bxparks/AceTimeGo/strbuild
-      0   70321    1729       0 |   72050    1729 | github.com/bxparks/AceTimeGo/zonedball
-   2108       0       0       0 |    2108       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   6221      32       0       0 |    6253       0 | github.com/bxparks/acetimego/acetime
+    205       0       0       0 |     205       0 | github.com/bxparks/acetimego/strbuild
+      0   70321    1729       0 |   72050    1729 | github.com/bxparks/acetimego/zonedball
+   2108       0       0       0 |    2108       0 | github.com/bxparks/acetimego/zoneinfo
      57       0       0       0 |      57       0 | internal/bytealg
     133       2       0       0 |     135       0 | internal/itoa
     349      24       0       8 |     373       8 | internal/task

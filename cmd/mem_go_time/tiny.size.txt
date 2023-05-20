@@ -6,7 +6,7 @@
      86       0       0       0 |      86       0 | Go interface method
       0      53       0       0 |      53       0 | Go reflect data
      47       0       0       0 |      47       0 | errors
-    161       0       0       0 |     161       0 | github.com/bxparks/AceTimeGo/internal/strbuild
+    161       0       0       0 |     161       0 | github.com/bxparks/acetimego/internal/strbuild
      26       0       0       0 |      26       0 | internal/bytealg
     162       2       0       0 |     164       0 | internal/itoa
     479      24       0      16 |     503      16 | internal/task

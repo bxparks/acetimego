@@ -6,9 +6,9 @@
 // It seems to normalize the 2016-12-31T23:59:60 into 2017-01-01T00:00:00, which
 // makes sense because Time stores only the epochSeconds component.
 //
-// In AceTimeGo/acetime, the ZonedDateTime struct stores the broken down
+// In acetimego/acetime, the ZonedDateTime struct stores the broken down
 // date-time components, so in theory it may support leap seconds. However,
-// AceTimeGo also explicitly does not support leap seconds. The retains the
+// acetimego also explicitly does not support leap seconds. The retains the
 // broken down 23:59:60 time, but when converted to epochSeconds, it returns a
 // value identical to 00:00:00.
 //
@@ -25,7 +25,7 @@
 package main
 
 import (
-	"github.com/bxparks/AceTimeGo/acetime"
+	"github.com/bxparks/acetimego/acetime"
 	"time"
 )
 

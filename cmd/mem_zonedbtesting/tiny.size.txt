@@ -2,10 +2,10 @@
 ------------------------------- | --------------- | -------
      27    4335      22      38 |    4384      60 | (unknown)
    3002      27       4     536 |    3033     540 | C musl
-   6485      67       0       0 |    6552       0 | github.com/bxparks/AceTimeGo/acetime
-    470       0       0       0 |     470       0 | github.com/bxparks/AceTimeGo/internal/strbuild
-      0     395     254       0 |     649     254 | github.com/bxparks/AceTimeGo/zonedbtesting
-   2444       0       0       0 |    2444       0 | github.com/bxparks/AceTimeGo/zoneinfo
+   6485      67       0       0 |    6552       0 | github.com/bxparks/acetimego/acetime
+    470       0       0       0 |     470       0 | github.com/bxparks/acetimego/internal/strbuild
+      0     395     254       0 |     649     254 | github.com/bxparks/acetimego/zonedbtesting
+   2444       0       0       0 |    2444       0 | github.com/bxparks/acetimego/zoneinfo
      63       0       0       0 |      63       0 | internal/bytealg
     365      24       0      16 |     389      16 | internal/task
     316     165       0       0 |     481       0 | main

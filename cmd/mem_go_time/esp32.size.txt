@@ -6,7 +6,7 @@
       0      57       0       0 |      57       0 | Go reflect data
      66       0       0       0 |      66       0 | device/esp
      22       0       0       0 |      22       0 | errors
-    209       0       0       0 |     209       0 | github.com/bxparks/AceTimeGo/strbuild
+    209       0       0       0 |     209       0 | github.com/bxparks/acetimego/strbuild
     139       2       0       0 |     141       0 | internal/itoa
     351      24       0       8 |     375       8 | internal/task
       9       0       0       0 |       9       0 | machine
