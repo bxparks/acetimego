@@ -6,6 +6,11 @@
         * Repurpose `zonedb` to support only year 2000 and onwards.
           Consumes 34948 bytes of flash, less than 1/2 of `zonedball`.
     * Replace out-of-band `isFilled` with in-band `year!=InvalidYear`.
+    * Support DS3231 RTC chip under TinyGo
+        * Add `ds3231` package
+        * Add `examples/ds3231demo`
+    * Rename project from `AceTimeGo` to `acetimego`
+        * More consistent with Go library naming convention.
 * 0.3.0 (2023-03-10, TZDB 2022g)
     * Convert C++ doxygen docs to go doc format.
     * Unexport various internal functions and structs by lowercasing their
