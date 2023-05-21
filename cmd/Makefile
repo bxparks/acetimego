@@ -1,10 +1,7 @@
 help:
-	@echo 'Usage: make (build | tiny | tinyesp32 | all | clean)'
+	@echo 'Usage: make (build|tiny|tinyesp32|all|clean)'
 
-all: build tiny tinyesp32
-
-# Dummy target to support recursive 'test' target in ../Makefile.
-test:
+all: build buildtiny buildesp32
 
 build:
 	set -e; \
@@ -12,17 +9,27 @@ build:
 		$(MAKE) -C $$(dirname $$i) $@; \
 	done
 
-tiny:
+test:
+
+#------------------------------------------------------------------------------
+
+buildtiny:
 	set -e; \
 	for i in */Makefile; do \
 		$(MAKE) -C $$(dirname $$i) $@; \
 	done
 
-tinyesp32:
+testtiny:
+
+#------------------------------------------------------------------------------
+
+buildesp32:
 	set -e; \
 	for i in */Makefile; do \
 		$(MAKE) -C $$(dirname $$i) $@; \
 	done
+
+#------------------------------------------------------------------------------
 
 clean:
 	set -e; \

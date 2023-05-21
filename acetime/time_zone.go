@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/zoneinfo"
+	"github.com/bxparks/acetimego/zoneinfo"
 )
 
 const (
@@ -67,7 +67,7 @@ func (tz *TimeZone) ZoneID() uint32 {
 // epochSeconds.
 //
 // Adapted from atc_time_zone_offset_date_time_from_epoch_seconds() in the
-// AceTimeC library and, TimeZone::getOffsetDateTime(epochSeconds) from the
+// acetimec library and, TimeZone::getOffsetDateTime(epochSeconds) from the
 // AceTime library.
 func (tz *TimeZone) offsetDateTimeFromEpochSeconds(
 	epochSeconds ATime) OffsetDateTime {
@@ -99,7 +99,7 @@ func (tz *TimeZone) offsetDateTimeFromEpochSeconds(
 // LocalDateTime.
 //
 // Adapted from atc_time_zone_offset_date_time_from_local_date_time() from the
-// AceTimeC library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
+// acetimec library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
 // the AceTime library.
 func (tz *TimeZone) offsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime) OffsetDateTime {

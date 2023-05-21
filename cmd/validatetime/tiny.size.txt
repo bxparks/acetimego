@@ -1,0 +1,26 @@
+   code  rodata    data     bss |   flash     ram | package
+------------------------------- | --------------- | -------
+     27   14223      37      61 |   14287      98 | (unknown)
+   1537    2128       0      56 |    3665      56 | /usr/local/go/src/syscall
+   3850      58      12     536 |    3920     548 | C musl
+    239       0       0       0 |     239       0 | Go interface method
+      0      92       0       0 |      92       0 | Go reflect data
+     55       0       0       0 |      55       0 | errors
+   6972      64       0       0 |    7036       0 | github.com/bxparks/acetimego/acetime
+    299       0       0       0 |     299       0 | github.com/bxparks/acetimego/internal/strbuild
+      0   70321    1833       0 |   72154    1833 | github.com/bxparks/acetimego/zonedball
+   2734       0       0       0 |    2734       0 | github.com/bxparks/acetimego/zoneinfo
+     81       0       0       0 |      81       0 | internal/bytealg
+    162       2       0       0 |     164       0 | internal/itoa
+    479      24       0      16 |     503      16 | internal/task
+   2545     300       0       0 |    2845       0 | main
+   3088     678       0       0 |    3766       0 | reflect
+   6868     239      12      91 |    7119     103 | runtime
+   1769    1942    1338       0 |    5049    1338 | strconv
+    611     124       0       0 |     735       0 | strings
+    630     200       0       0 |     830       0 | sync
+    194    2954       0       0 |    3148       0 | syscall
+  22322    1114     168     160 |   23604     328 | time
+    497     288       0       0 |     785       0 | unicode/utf8
+------------------------------- | --------------- | -------
+  54959   94751    3400     920 |  153110    4320 | total

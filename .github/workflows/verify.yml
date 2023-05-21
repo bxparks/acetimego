@@ -1,25 +1,33 @@
-name: Go Tests
+name: Go Verify
 
 on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
+    # We should use the `tinygo` image, but there's a permission problem with
+    # it. The `tinygo-dev` image seems to work.
+    container: ghcr.io/tinygo-org/tinygo-dev
+
     steps:
-    - name: Checkout AceTimeGo
+    - name: Check Go Versions
+      run: |
+        go version
+        tinygo version
+
+    # See comment in https://github.com/bxparks/playgroundgo
+    - name: Fix Git Permission Error
+      run: |
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+    - name: Checkout acetimego
       uses: actions/checkout@v3
 
-    - name: Checkout Go language
-      uses: actions/setup-go@v3
-      with:
-        go-version: 'stable'
-
-    - name: Tests
+    - name: Build
       run: |
-        make test
+        make build buildtiny
 
-    - name: Cmds
+    - name: Test
       run: |
-        make -C cmd build
+        make test testtiny

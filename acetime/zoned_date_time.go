@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/strbuild"
+	"github.com/bxparks/acetimego/internal/strbuild"
 	"strings"
 )
 
@@ -97,6 +97,28 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 		return ZonedDateTimeError
 	}
 	return NewZonedDateTimeFromEpochSeconds(epochSeconds, tz)
+}
+
+// Normalize should be called if any of its date or time fields are changed
+// manually. This corrects for invalid date or time fields, for example:
+//  1. time fields which not exist (i.e. in a DST shift-forward gap),
+//  2. dates which are inconsistent (e.g. Feb 29 in a non-leap year),
+//  3. or changing the date from a DST date to a non-DST date, or vise versa.
+func (zdt *ZonedDateTime) Normalize() {
+	if zdt.IsError() {
+		return
+	}
+
+	ldt := zdt.LocalDateTime()
+	odt := zdt.Tz.offsetDateTimeFromLocalDateTime(&ldt)
+	zdt.Year = odt.Year
+	zdt.Month = odt.Month
+	zdt.Day = odt.Day
+	zdt.Hour = odt.Hour
+	zdt.Minute = odt.Minute
+	zdt.Second = odt.Second
+	zdt.Fold = odt.Fold
+	zdt.OffsetSeconds = odt.OffsetSeconds
 }
 
 // Return additional information about the current date time in the ZonedExtra

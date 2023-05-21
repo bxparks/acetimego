@@ -9,9 +9,10 @@
 package test
 
 import (
-	"github.com/bxparks/AceTimeGo/zonedb"
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
-	"github.com/bxparks/AceTimeGo/zoneinfo"
+	"github.com/bxparks/acetimego/zonedb"
+	"github.com/bxparks/acetimego/zonedball"
+	"github.com/bxparks/acetimego/zonedbtesting"
+	"github.com/bxparks/acetimego/zoneinfo"
 	"testing"
 )
 
@@ -25,6 +26,11 @@ func TestZoneStoreZoneCount(t *testing.T) {
 	if !(store.ZoneCount() == zonedb.DataContext.ZoneInfoCount) {
 		t.Fatal(store.ZoneCount(), zonedb.DataContext.ZoneInfoCount)
 	}
+
+	store = zoneinfo.NewZoneStore(&zonedball.DataContext)
+	if !(store.ZoneCount() == zonedball.DataContext.ZoneInfoCount) {
+		t.Fatal(store.ZoneCount(), zonedball.DataContext.ZoneInfoCount)
+	}
 }
 
 func TestZoneStoreIsSorted(t *testing.T) {
@@ -36,6 +42,11 @@ func TestZoneStoreIsSorted(t *testing.T) {
 	store = zoneinfo.NewZoneStore(&zonedb.DataContext)
 	if !store.IsSorted() {
 		t.Fatal("zonedb should be sorted")
+	}
+
+	store = zoneinfo.NewZoneStore(&zonedball.DataContext)
+	if !store.IsSorted() {
+		t.Fatal("zonedball should be sorted")
 	}
 }
 

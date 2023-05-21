@@ -1,8 +1,8 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
-	"github.com/bxparks/AceTimeGo/zoneinfo"
+	"github.com/bxparks/acetimego/zonedbtesting"
+	"github.com/bxparks/acetimego/zoneinfo"
 	"testing"
 )
 
@@ -76,11 +76,11 @@ func TestZoneProcessorInitForYear(t *testing.T) {
 		zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	var zp zoneProcessor
 	zp.initForZoneInfo(zoneInfo)
-	if zp.isFilled {
+	if zp.year != InvalidYear {
 		t.Fatal(zp)
 	}
 	zp.initForYear(2023)
-	if !zp.isFilled {
+	if zp.year == InvalidYear {
 		t.Fatal(zp)
 	}
 }
@@ -684,8 +684,8 @@ func TestCreateAbbreviation(t *testing.T) {
 		t.Fatal(abbrev)
 	}
 
-	// If '%', and Letter is "", remove the "%" (unlike AceTimeC where Letter is
-	// NULL.
+	// If '%', and Letter is "", remove the "%" (unlike acetimec library where
+	// Letter is NULL)
 	abbrev = createAbbreviation("SA%ST", 0, "")
 	if !("SAST" == abbrev) {
 		t.Fatal(abbrev)

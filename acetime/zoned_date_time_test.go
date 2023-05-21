@@ -1,7 +1,7 @@
 package acetime
 
 import (
-	"github.com/bxparks/AceTimeGo/zonedbtesting"
+	"github.com/bxparks/acetimego/zonedbtesting"
 	"testing"
 	"unsafe"
 )
@@ -9,7 +9,7 @@ import (
 //-----------------------------------------------------------------------------
 // ZonedDateTime.
 // Much of the following tests adapted from zoned_date_time_test.c from the
-// AceTimeC library, which in turn, were adopted from
+// acetimec library, which in turn, were adopted from
 // ZonedDateTimeExtendedTest.ino in the AceTime library.
 //-----------------------------------------------------------------------------
 
@@ -513,6 +513,58 @@ func TestZonedDateTimeForLink(t *testing.T) {
 
 	if !(ladt.EpochSeconds() == padt.EpochSeconds()) {
 		t.Fatal("epochSeconds not equal")
+	}
+}
+
+//-----------------------------------------------------------------------------
+// Test Normalize()
+//-----------------------------------------------------------------------------
+
+// Test ported from test(ZonedDateTimExtendedTest, normalize) in AceTime
+// library.
+func TestZonedDateTimeNormalize(t *testing.T) {
+	zm := NewZoneManager(&zonedbtesting.DataContext)
+	tz := zm.TimeZoneFromName("America/Los_Angeles")
+
+	// Start with epochSeconds = 946684800. Should translate to
+	// 1999-12-31T16:00:00-08:00. Note: epochSeconds = 0 does not work because
+	// zonedbtesting database is not valid before 1980.
+	zdt := NewZonedDateTimeFromEpochSeconds(946684800, &tz)
+	if zdt.IsError() {
+		t.Fatal(zdt)
+	}
+	ldt := zdt.LocalDateTime()
+	expected := LocalDateTime{1999, 12, 31, 16, 0, 0, 0 /*Fold*/}
+	if ldt != expected {
+		t.Fatal(zdt)
+	}
+
+	// Set date-time to 2021-04-20T09:00:00, which happens to be in DST.
+	zdt.Year = 2021
+	zdt.Month = 4
+	zdt.Day = 20
+	zdt.Hour = 9
+	zdt.Minute = 0
+	zdt.Second = 0
+
+	// If we blindly use the resulting epochSeconds to convert to the
+	// LocalDateTime, we will be off by one hour, because the previous
+	// OffsetDateTime had an offset of (-08:00), which does not match offset of
+	// the explicitly specified date (-07:00).
+	epochSeconds := zdt.EpochSeconds()
+	newDt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	ldt = newDt.LocalDateTime()
+	expected = LocalDateTime{2021, 4, 20, 10, 0, 0, 0 /*Fold*/}
+	if ldt != expected {
+		t.Fatal(newDt)
+	}
+
+	// We must Normalize() after mutation.
+	zdt.Normalize()
+	ldt = zdt.LocalDateTime()
+	expected = LocalDateTime{2021, 4, 20, 9, 0, 0, 0 /*Fold*/}
+	if ldt != expected {
+		t.Fatal(zdt.Year)
 	}
 }
 
