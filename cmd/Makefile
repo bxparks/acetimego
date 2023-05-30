@@ -1,8 +1,13 @@
+.PHONY: help
 help:
 	@echo 'Usage: make (build|tiny|tinyesp32|all|clean)'
 
+.PHONY: all
 all: build buildtiny buildesp32
 
+#------------------------------------------------------------------------------
+
+.PHONY: build
 build:
 	set -e; \
 	for i in */Makefile; do \
@@ -13,6 +18,7 @@ test:
 
 #------------------------------------------------------------------------------
 
+.PHONY: buildtiny
 buildtiny:
 	set -e; \
 	for i in */Makefile; do \
@@ -23,6 +29,7 @@ testtiny:
 
 #------------------------------------------------------------------------------
 
+.PHONY: buildesp32
 buildesp32:
 	set -e; \
 	for i in */Makefile; do \
@@ -31,6 +38,7 @@ buildesp32:
 
 #------------------------------------------------------------------------------
 
+.PHONY: clean
 clean:
 	set -e; \
 	for i in */Makefile; do \
