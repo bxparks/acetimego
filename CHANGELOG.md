@@ -1,6 +1,7 @@
 # Changelog
 
 * Unreleased
+    * Add `examples/helloacetime` demo.
 * 0.4.0 (2023-05-21, TZDB 2023c)
     * Rename project from `AceTimeGo` to `acetimego`
         * More consistent with Go library naming convention.
