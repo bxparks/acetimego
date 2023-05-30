@@ -38,7 +38,7 @@ func (zdt *ZonedDateTime) LocalDateTime() LocalDateTime {
 	}
 }
 
-func (zdt *ZonedDateTime) EpochSeconds() ATime {
+func (zdt *ZonedDateTime) EpochSeconds() Time {
 	if zdt.IsError() {
 		return InvalidEpochSeconds
 	}
@@ -55,7 +55,7 @@ func (zdt *ZonedDateTime) EpochSeconds() ATime {
 }
 
 func NewZonedDateTimeFromEpochSeconds(
-	epochSeconds ATime, tz *TimeZone) ZonedDateTime {
+	epochSeconds Time, tz *TimeZone) ZonedDateTime {
 
 	odt := tz.offsetDateTimeFromEpochSeconds(epochSeconds)
 	return ZonedDateTime{

@@ -25,7 +25,7 @@ type ZonedExtra struct {
 }
 
 func NewZonedExtraFromEpochSeconds(
-	epochSeconds ATime, tz *TimeZone) ZonedExtra {
+	epochSeconds Time, tz *TimeZone) ZonedExtra {
 
 	if epochSeconds == InvalidEpochSeconds {
 		return ZonedExtraError

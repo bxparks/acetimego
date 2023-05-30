@@ -3,12 +3,12 @@ package acetime
 // The type of the "seconds from epoch" in this library. This type is the
 // equivalent of C lang `time_t`, or the Go lang [time.Time].
 //
-// Other versions of AceTimeXXX uses a 32-bit integer for the `ATime` type
+// Other versions of AceTimeXXX uses a 32-bit integer for the `Time` type
 // because they want to support small 8-bit microcontrollers. For TinyGo, we
 // assume we assume that acetimego will normally be used on 32-bit processors
 // (e.g. ESP32), so we will use 64-bit integers. It increases the flash usage by
 // only 100-200 bytes on the ESP32.
-type ATime int64
+type Time int64
 
 const (
 	// The base epoch year used by the convertToDays() and convertFromDays()

@@ -70,7 +70,7 @@ func (tz *TimeZone) ZoneID() uint32 {
 // acetimec library and, TimeZone::getOffsetDateTime(epochSeconds) from the
 // AceTime library.
 func (tz *TimeZone) offsetDateTimeFromEpochSeconds(
-	epochSeconds ATime) OffsetDateTime {
+	epochSeconds Time) OffsetDateTime {
 
 	// UTC (or Error)
 	if tz.processor == nil {
@@ -140,7 +140,7 @@ func (tz *TimeZone) offsetDateTimeFromLocalDateTime(
 	return odt
 }
 
-func (tz *TimeZone) zonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
+func (tz *TimeZone) zonedExtraFromEpochSeconds(epochSeconds Time) ZonedExtra {
 	if tz.processor == nil {
 		return ZonedExtra{
 			Zetype:              ZonedExtraExact,

@@ -73,7 +73,7 @@ type transition struct {
 	//}
 
 	// The calculated transition time of the given rule.
-	startEpochSeconds ATime
+	startEpochSeconds Time
 
 	// The base offset seconds, not the total effective UTC offset.
 	offsetSeconds int32
@@ -284,7 +284,7 @@ type transitionForSeconds struct {
 }
 
 func (ts *transitionStorage) findTransitionForSeconds(
-	epochSeconds ATime) transitionForSeconds {
+	epochSeconds Time) transitionForSeconds {
 
 	var prev *transition = nil
 	var curr *transition = nil
@@ -310,7 +310,7 @@ func (ts *transitionStorage) findTransitionForSeconds(
 // indicates that the LocalDateTime was the first ocurrence. A 1 indicates a
 // LocalDateTime that occurred a second time.
 func calculateFoldAndOverlap(
-	epochSeconds ATime,
+	epochSeconds Time,
 	prev *transition,
 	curr *transition,
 	next *transition) (fold uint8, num uint8) {

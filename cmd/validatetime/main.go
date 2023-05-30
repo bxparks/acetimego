@@ -73,7 +73,7 @@ func validateAtTime(t time.Time, atz *acetime.TimeZone) {
 	// ambiguous during an overlap.
 	unixSeconds := t.Unix()
 	zdt := acetime.NewZonedDateTimeFromEpochSeconds(
-		acetime.ATime(unixSeconds), atz)
+		acetime.Time(unixSeconds), atz)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
 			unixSeconds)

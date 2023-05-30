@@ -35,7 +35,7 @@ func main() {
 
 	for {
 		now := time.Now().Unix()
-		aceNow := acetime.ATime(now)
+		aceNow := acetime.Time(now)
 		srcZdt := acetime.NewZonedDateTimeFromEpochSeconds(aceNow, &srcTz)
 		dstZdt := srcZdt.ConvertToTimeZone(&dstTz)
 		print("src:")

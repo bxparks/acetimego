@@ -44,7 +44,7 @@ func TestZonedDateTimeFromUTC(t *testing.T) {
 	}
 
 	// Create a ZonedDateTime from a random epochSeconds.
-	epochSeconds := ATime(-32423234)
+	epochSeconds := Time(-32423234)
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -74,7 +74,7 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.TimeZoneFromName("America/Los_Angeles")
 
-	var epochSeconds ATime = 946684800
+	var epochSeconds Time = 946684800
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -90,7 +90,7 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.TimeZoneFromName("America/Los_Angeles")
-	var epochSeconds ATime = 2524608000
+	var epochSeconds Time = 2524608000
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -106,7 +106,7 @@ func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.TimeZoneFromName("Etc/UTC")
-	var epochSeconds ATime = (1 << 31) - 1
+	var epochSeconds Time = (1 << 31) - 1
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
 		t.Fatal(zdt)
@@ -122,7 +122,7 @@ func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 func TestNewZonedDateTimeFromEpochSeconds_Invalid(t *testing.T) {
 	zm := NewZoneManager(&zonedbtesting.DataContext)
 	tz := zm.TimeZoneFromName("Etc/UTC")
-	var epochSeconds ATime = InvalidEpochSeconds
+	var epochSeconds Time = InvalidEpochSeconds
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if !zdt.IsError() {
 		t.Fatal(zdt)
@@ -573,7 +573,7 @@ func TestZonedDateTimeNormalize(t *testing.T) {
 // $ go test -run=NOMATCH -bench=.
 //-----------------------------------------------------------------------------
 
-var epochSeconds ATime
+var epochSeconds Time
 var zdt ZonedDateTime
 var ldt = LocalDateTime{2023, 1, 19, 22, 11, 0, 0 /*Fold*/}
 var zoneManager = NewZoneManager(&zonedbtesting.DataContext)
