@@ -1,6 +1,22 @@
 # Changelog
 
 * Unreleased
+* 0.5.0 (2023-05-31, TZDB 2023c)
+    * Add `examples/helloacetime` demo.
+    * Rename `ATime` to `Time`.
+        * Causes no conflict with `time.Time` because the package prefix
+          `acetime` is always required.
+    * `ZonedExtra`
+        * Rename `ZonedExtra.Zetype` to `FoldType`.
+        * Rename `ZonedExtraXxx` to `FoldTypeXxx` for self-documentation.
+        * Add `OffsetSeconds()` convenience method which calculates
+          `StdOffsetSeconds + DstOffsetSeconds`.
+    * `OffsetDateTime`, `ZonedDateTime`
+        * Use struct embedding feature of Go lang to simplify and reuse code.
+        * `LocalDateTime` embeds into `OffsetDateTime`.
+        * `OffsetDateTime` embeds into `ZonedDateTime`.
+    * Added to `AceTimeValidation`
+        * Validated with AceTimeC and C++ Hinnant libraries from [1800,2100).
 * 0.4.0 (2023-05-21, TZDB 2023c)
     * Rename project from `AceTimeGo` to `acetimego`
         * More consistent with Go library naming convention.

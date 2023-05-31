@@ -1,9 +1,5 @@
 SRCS := main.go
 
-.PHONY: help
-help:
-	@echo 'Usage: make [build|buildtiny|buildesp32|flashesp32|clean]'
-
 #------------------------------------------------------------------------------
 # Use normal Go to compile to native host (Linux).
 
@@ -18,7 +14,7 @@ build: $(SRCS) Makefile
 buildtiny: $(SRCS) Makefile
 	tinygo build \
 		-size full \
-		-print-allocs=acetime \
+		-print-allocs=^time$$ \
 		-o tiny.out \
 		> tiny.size.txt
 

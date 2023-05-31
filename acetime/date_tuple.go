@@ -50,11 +50,11 @@ func dateTupleCompare(a *dateTuple, b *dateTuple) int8 {
 }
 
 // dateTupleSubtract returns the number of seconds of (a - b).
-func dateTupleSubtract(a *dateTuple, b *dateTuple) ATime {
+func dateTupleSubtract(a *dateTuple, b *dateTuple) Time {
 	da := LocalDateToEpochDays(a.year, a.month, a.day)
 	db := LocalDateToEpochDays(b.year, b.month, b.day)
 
-	return ATime(da-db)*86400 + ATime(a.seconds-b.seconds)
+	return Time(da-db)*86400 + Time(a.seconds-b.seconds)
 }
 
 func dateTupleNormalize(dt *dateTuple) {

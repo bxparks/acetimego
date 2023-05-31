@@ -1,30 +1,21 @@
 SRCS := main.go
 
-.PHONY := build buildtiny buildesp32 flashesp32 clean help
-
-help:
-	@echo 'Usage: make [build|buildtiny|buildesp32|flashesp32|clean]'
-
 #------------------------------------------------------------------------------
-# Use normal Go to compile to native host (Linux).
 
-build: $(SRCS) Makefile
+.PHONY: build
+build:
 	go build -o main.out
 
 #------------------------------------------------------------------------------
-# Use TinyGo to compile to native host (Linux).
 
-buildtiny: $(SRCS) Makefile
-	tinygo build \
-		-size full \
-		-print-allocs=^time$$ \
-		-o tiny.out \
-		> tiny.size.txt
+.PHONY: buildtiny
+buildtiny:
+	tinygo build -o tiny.out
 
 #------------------------------------------------------------------------------
-# Use TinyGo to compile to ESP32.
 
-buildesp32: $(SRCS) Makefile
+.PHONY: buildesp32
+buildesp32: $(SRCS)
 	tinygo build \
 		-size full \
 		-print-allocs=acetime \
@@ -32,10 +23,12 @@ buildesp32: $(SRCS) Makefile
 		-o esp32.out \
 		> esp32.size.txt
 
-flashesp32: $(SRCS) Makefile
+.PHONY: flashesp32
+flashesp32:
 	tinygo flash -x -target=esp32-coreboard-v2
 
 #------------------------------------------------------------------------------
 
+.PHONY: clean
 clean:
 	rm -f *.out

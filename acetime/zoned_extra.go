@@ -1,22 +1,24 @@
 package acetime
 
+// FoldType
 const (
-	ZonedExtraErr = iota
-	ZonedExtraNotFound
-	ZonedExtraExact
-	ZonedExtraGap
-	ZonedExtraOverlap
+	FoldTypeErr = iota
+	FoldTypeNotFound
+	FoldTypeExact
+	FoldTypeGap
+	FoldTypeOverlap
 )
 
 var (
-	ZonedExtraError = ZonedExtra{Zetype: ZonedExtraErr}
+	ZonedExtraError = ZonedExtra{FoldType: FoldTypeErr}
 )
 
 // ZonedExtra contains information about a specific instant in time (either at a
 // specific epochSeconds or a specific LocalDateTime) which are not fully
-// captured by the ZonedDateTime instance.
+// captured by the OffsetDateTime. These include the STD offset, the DST offset,
+// and the abbreviation.
 type ZonedExtra struct {
-	Zetype              uint8  // type of match (e.g. gap, overlap)
+	FoldType            uint8  // type of fold (e.g. gap, overlap)
 	StdOffsetSeconds    int32  // STD offset
 	DstOffsetSeconds    int32  // DST offset
 	ReqStdOffsetSeconds int32  // request STD offset
@@ -25,19 +27,24 @@ type ZonedExtra struct {
 }
 
 func NewZonedExtraFromEpochSeconds(
-	epochSeconds ATime, tz *TimeZone) ZonedExtra {
+	epochSeconds Time, tz *TimeZone) ZonedExtra {
 
-	if epochSeconds == InvalidEpochSeconds {
-		return ZonedExtraError
-	}
-	return tz.zonedExtraFromEpochSeconds(epochSeconds)
+	return tz.findZonedExtraForEpochSeconds(epochSeconds)
 }
 
 func NewZonedExtraFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedExtra {
 
-	if ldt.IsError() {
-		return ZonedExtraError
-	}
-	return tz.zonedExtraFromLocalDateTime(ldt)
+	return tz.findZonedExtraForLocalDateTime(ldt)
+}
+
+func (extra *ZonedExtra) IsError() bool {
+	return extra.FoldType == FoldTypeErr
+}
+
+// OffsetSeconds returns the total offset from UTC in seconds (StdOffsetSeconds
+// + DstOffsetSeconds). This is a convenience function because it is needed
+// frequently.
+func (extra *ZonedExtra) OffsetSeconds() int32 {
+	return extra.StdOffsetSeconds + extra.DstOffsetSeconds
 }

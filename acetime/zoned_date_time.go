@@ -6,85 +6,48 @@ import (
 )
 
 var (
-	ZonedDateTimeError = ZonedDateTime{Year: InvalidYear}
+	ZonedDateTimeError = ZonedDateTime{
+		OffsetDateTime: OffsetDateTimeError,
+	}
 )
 
-// ZonedDateTime represents a date/time with its associated TimeZone.
+// ZonedDateTime represents an OffsetDateTime associated with a TimeZone.
+// The intention is that this object contains the most frequently used
+// fields. Additional (and less often used) fields are placed into the
+// ZonedExtra object.
+//
+// An alternative implementation is to insert the ZonedExtra object directly
+// into the ZonedDateTime. But that causes the size of the object to grow from
+// 24 bytes to 64 bytes, which causes the performance of this library to degrade
+// noticeably. The compare_acetimego binary in the AceTimeValidation project
+// saw a performce decrease from 6.3 seconds to 8.1 seconds with the larger
+// ZonedDateTime object.
 type ZonedDateTime struct {
-	Year          int16
-	Month         uint8
-	Day           uint8
-	Hour          uint8
-	Minute        uint8
-	Second        uint8
-	Fold          uint8
-	OffsetSeconds int32
-	Tz            *TimeZone
+	OffsetDateTime
+	Tz *TimeZone
 }
 
 func (zdt *ZonedDateTime) IsError() bool {
-	return zdt.Year == InvalidYear
-}
-
-func (zdt *ZonedDateTime) LocalDateTime() LocalDateTime {
-	return LocalDateTime{
-		Year:   zdt.Year,
-		Month:  zdt.Month,
-		Day:    zdt.Day,
-		Hour:   zdt.Hour,
-		Minute: zdt.Minute,
-		Second: zdt.Second,
-		Fold:   zdt.Fold,
-	}
-}
-
-func (zdt *ZonedDateTime) EpochSeconds() ATime {
-	if zdt.IsError() {
-		return InvalidEpochSeconds
-	}
-	return (&OffsetDateTime{
-		Year:          zdt.Year,
-		Month:         zdt.Month,
-		Day:           zdt.Day,
-		Hour:          zdt.Hour,
-		Minute:        zdt.Minute,
-		Second:        zdt.Second,
-		Fold:          zdt.Fold,
-		OffsetSeconds: zdt.OffsetSeconds,
-	}).EpochSeconds()
+	return zdt.OffsetDateTime.IsError()
 }
 
 func NewZonedDateTimeFromEpochSeconds(
-	epochSeconds ATime, tz *TimeZone) ZonedDateTime {
+	epochSeconds Time, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.offsetDateTimeFromEpochSeconds(epochSeconds)
+	odt := tz.findOffsetDateTimeForEpochSeconds(epochSeconds)
 	return ZonedDateTime{
-		Year:          odt.Year,
-		Month:         odt.Month,
-		Day:           odt.Day,
-		Hour:          odt.Hour,
-		Minute:        odt.Minute,
-		Second:        odt.Second,
-		Fold:          odt.Fold,
-		OffsetSeconds: odt.OffsetSeconds,
-		Tz:            tz,
+		OffsetDateTime: odt,
+		Tz:             tz,
 	}
 }
 
 func NewZonedDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.offsetDateTimeFromLocalDateTime(ldt)
+	odt := tz.findOffsetDateTimeForLocalDateTime(ldt)
 	return ZonedDateTime{
-		Year:          odt.Year,
-		Month:         odt.Month,
-		Day:           odt.Day,
-		Hour:          odt.Hour,
-		Minute:        odt.Minute,
-		Second:        odt.Second,
-		Fold:          odt.Fold,
-		OffsetSeconds: odt.OffsetSeconds,
-		Tz:            tz,
+		OffsetDateTime: odt,
+		Tz:             tz,
 	}
 }
 
@@ -109,25 +72,28 @@ func (zdt *ZonedDateTime) Normalize() {
 		return
 	}
 
-	ldt := zdt.LocalDateTime()
-	odt := zdt.Tz.offsetDateTimeFromLocalDateTime(&ldt)
-	zdt.Year = odt.Year
-	zdt.Month = odt.Month
-	zdt.Day = odt.Day
-	zdt.Hour = odt.Hour
-	zdt.Minute = odt.Minute
-	zdt.Second = odt.Second
-	zdt.Fold = odt.Fold
-	zdt.OffsetSeconds = odt.OffsetSeconds
+	odt := zdt.Tz.findOffsetDateTimeForLocalDateTime(
+		&zdt.OffsetDateTime.LocalDateTime)
+	zdt.OffsetDateTime = odt
 }
 
-// Return additional information about the current date time in the ZonedExtra
-// object.
+// ZonedExtra returns the ZonedExtra object corresponding to the current
+// ZonedDateTime. This is will be always identical to the value returned by
+// NewZonedExtraFromEpochSeconds().
+//
+// It will usually be identical to the value returned by
+// NewZonedExtraFromLocalDateTime() except when the LocalDateTime falls in a gap
+// (FoldTypeGap). In that case, the ZonedDateTime has already been normalized
+// into a real ZonedDateTime, and NewZonedExtraFromLocalDateTime() should be
+// called with the original LocalDateTime if the information about the
+// non-existent LocalDateTime is required.
 func (zdt *ZonedDateTime) ZonedExtra() ZonedExtra {
-	ldt := zdt.LocalDateTime()
-	return NewZonedExtraFromLocalDateTime(&ldt, zdt.Tz)
+	return zdt.Tz.findZonedExtraForLocalDateTime(
+		&zdt.OffsetDateTime.LocalDateTime)
 }
 
+// String returns the given ZonedDateTime in ISO8601 format, in the form of
+// "yyyy-mm-ddThh:mm:ss+/-hh:mm[timezone]".
 func (zdt *ZonedDateTime) String() string {
 	var b strings.Builder
 	zdt.BuildString(&b)
@@ -135,12 +101,11 @@ func (zdt *ZonedDateTime) String() string {
 }
 
 func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
-	ldt := zdt.LocalDateTime()
-	ldt.BuildString(b)
+	zdt.OffsetDateTime.LocalDateTime.BuildString(b)
 
 	if zdt.Tz.IsUTC() {
 		// Append just a "UTC" to simplify the ISO8601.
-		b.WriteString(" UTC")
+		b.WriteString("UTC")
 	} else {
 		// Append the "+/-hh:mm[tz]"
 		strbuild.TimeOffset(b, zdt.OffsetSeconds)

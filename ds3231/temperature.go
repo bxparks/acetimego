@@ -39,4 +39,3 @@ func (temp Temperature) CentiF() int16 {
 	f100 := c100/5*9 + 3200 // always integral, with no loss of bits
 	return f100
 }
-

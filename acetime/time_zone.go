@@ -63,16 +63,16 @@ func (tz *TimeZone) ZoneID() uint32 {
 	}
 }
 
-// offsetDateTimeFromEpochSeconds calculates the OffsetDateTime from the given
-// epochSeconds.
+// findOffsetDateTimeForEpochSeconds returns the OffsetDateTime matching the
+// given epochSeconds.
 //
 // Adapted from atc_time_zone_offset_date_time_from_epoch_seconds() in the
 // acetimec library and, TimeZone::getOffsetDateTime(epochSeconds) from the
 // AceTime library.
-func (tz *TimeZone) offsetDateTimeFromEpochSeconds(
-	epochSeconds ATime) OffsetDateTime {
+func (tz *TimeZone) findOffsetDateTimeForEpochSeconds(
+	epochSeconds Time) OffsetDateTime {
 
-	// UTC (or Error)
+	// UTC or Error
 	if tz.processor == nil {
 		return NewOffsetDateTimeFromEpochSeconds(epochSeconds, 0)
 	}
@@ -83,28 +83,74 @@ func (tz *TimeZone) offsetDateTimeFromEpochSeconds(
 	}
 
 	result := tz.processor.findByEpochSeconds(epochSeconds)
-	if result.frtype == findResultNotFound {
+	if result.frtype == findResultErr || result.frtype == findResultNotFound {
 		return OffsetDateTimeError
 	}
 
 	totalOffsetSeconds := result.stdOffsetSeconds + result.dstOffsetSeconds
 	odt := NewOffsetDateTimeFromEpochSeconds(epochSeconds, totalOffsetSeconds)
-	if !odt.IsError() {
-		odt.Fold = result.fold
-	}
+	odt.Fold = result.fold
+
 	return odt
 }
 
-// offsetDateTimeFromLocalDateTime calculates the OffsetDateTime from the given
-// LocalDateTime.
+// findZonedExtraForEpochSeconds returns the ZonedExtra matching the given
+// epochSeconds.
+//
+// Adapted from atc_time_zone_zoned_extra_from_epoch_seconds() in the
+// acetimec library and, TimeZone::getZonedExtra(epochSeconds) from the
+// AceTime library.
+func (tz *TimeZone) findZonedExtraForEpochSeconds(
+	epochSeconds Time) ZonedExtra {
+
+	// UTC or Error
+	if tz.processor == nil {
+		var foldType uint8
+		if epochSeconds == InvalidEpochSeconds {
+			foldType = FoldTypeErr
+		} else {
+			foldType = FoldTypeExact
+		}
+		return ZonedExtra{
+			FoldType:            foldType,
+			StdOffsetSeconds:    0,
+			DstOffsetSeconds:    0,
+			ReqStdOffsetSeconds: 0,
+			ReqDstOffsetSeconds: 0,
+			Abbrev:              "UTC",
+		}
+	}
+
+	err := tz.processor.initForEpochSeconds(epochSeconds)
+	if err != errOk {
+		return ZonedExtraError
+	}
+
+	result := tz.processor.findByEpochSeconds(epochSeconds)
+	if result.frtype == findResultErr || result.frtype == findResultNotFound {
+		return ZonedExtraError
+	}
+
+	return ZonedExtra{
+		FoldType:            result.frtype,
+		StdOffsetSeconds:    result.stdOffsetSeconds,
+		DstOffsetSeconds:    result.dstOffsetSeconds,
+		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,
+		ReqDstOffsetSeconds: result.reqDstOffsetSeconds,
+		Abbrev:              result.abbrev,
+	}
+}
+
+// findOffsetDateTimeForLocalDateTime returns the matching OffsetDateTime from
+// the given LocalDateTime.
 //
 // Adapted from atc_time_zone_offset_date_time_from_local_date_time() from the
-// acetimec library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
+// acetimec library, and TimeZone::getOffsetDateTime(const LocalDateTime&) from
 // the AceTime library.
-func (tz *TimeZone) offsetDateTimeFromLocalDateTime(
+func (tz *TimeZone) findOffsetDateTimeForLocalDateTime(
 	ldt *LocalDateTime) OffsetDateTime {
 
-	// UTC (or Error)
+	// UTC or Error
 	if tz.processor == nil {
 		return NewOffsetDateTimeFromLocalDateTime(ldt, 0)
 	}
@@ -117,15 +163,10 @@ func (tz *TimeZone) offsetDateTimeFromLocalDateTime(
 	// Convert findResult into OffsetDateTime using the request offset, and the
 	// result fold.
 	odt := OffsetDateTime{
-		Year:          ldt.Year,
-		Month:         ldt.Month,
-		Day:           ldt.Day,
-		Hour:          ldt.Hour,
-		Minute:        ldt.Minute,
-		Second:        ldt.Second,
+		LocalDateTime: *ldt,
 		OffsetSeconds: result.reqStdOffsetSeconds + result.reqDstOffsetSeconds,
-		Fold:          result.fold,
 	}
+	odt.Fold = result.fold
 
 	// Special processor for kAtcfindResultGap: Convert to epochSeconds using the
 	// reqStdOffsetSeconds and reqDstOffsetSeconds, then convert back to
@@ -140,39 +181,25 @@ func (tz *TimeZone) offsetDateTimeFromLocalDateTime(
 	return odt
 }
 
-func (tz *TimeZone) zonedExtraFromEpochSeconds(epochSeconds ATime) ZonedExtra {
-	if tz.processor == nil {
-		return ZonedExtra{
-			Zetype:              ZonedExtraExact,
-			StdOffsetSeconds:    0,
-			DstOffsetSeconds:    0,
-			ReqStdOffsetSeconds: 0,
-			ReqDstOffsetSeconds: 0,
-			Abbrev:              "UTC",
-		}
-	}
-
-	result := tz.processor.findByEpochSeconds(epochSeconds)
-	if result.frtype == findResultErr || result.frtype == findResultNotFound {
-		return ZonedExtraError
-	}
-
-	return ZonedExtra{
-		Zetype:              result.frtype,
-		StdOffsetSeconds:    result.stdOffsetSeconds,
-		DstOffsetSeconds:    result.dstOffsetSeconds,
-		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,
-		ReqDstOffsetSeconds: result.reqDstOffsetSeconds,
-		Abbrev:              result.abbrev,
-	}
-}
-
-func (tz *TimeZone) zonedExtraFromLocalDateTime(
+// findZonedExtraForLocalDateTime returns the matching ZonedExtra from the
+// given LocalDateTime.
+//
+// Adapted from atc_time_zone_zoned_extra_from_local_date_time() from the
+// acetimec library, and TimeZone::getZonedExtra(const LocalDateTime&) from
+// the AceTime library.
+func (tz *TimeZone) findZonedExtraForLocalDateTime(
 	ldt *LocalDateTime) ZonedExtra {
 
+	// UTC or Error
 	if tz.processor == nil {
+		var foldType uint8
+		if ldt.IsError() {
+			foldType = FoldTypeErr
+		} else {
+			foldType = FoldTypeExact
+		}
 		return ZonedExtra{
-			Zetype:              ZonedExtraExact,
+			FoldType:            foldType,
 			StdOffsetSeconds:    0,
 			DstOffsetSeconds:    0,
 			ReqStdOffsetSeconds: 0,
@@ -187,7 +214,7 @@ func (tz *TimeZone) zonedExtraFromLocalDateTime(
 	}
 
 	return ZonedExtra{
-		Zetype:              result.frtype,
+		FoldType:            result.frtype,
 		StdOffsetSeconds:    result.stdOffsetSeconds,
 		DstOffsetSeconds:    result.dstOffsetSeconds,
 		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,

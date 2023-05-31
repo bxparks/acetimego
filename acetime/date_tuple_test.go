@@ -40,7 +40,7 @@ func TestDateTupleCompare(t *testing.T) {
 
 func TestDateTupleSubtract(t *testing.T) {
 	var dta, dtb dateTuple
-	var diff ATime
+	var diff Time
 
 	dta = dateTuple{2000, 1, 1, 0, zoneinfo.SuffixW}      // 2000-01-01 00:00
 	dtb = dateTuple{2000, 1, 1, 1 * 60, zoneinfo.SuffixW} // 2000-01-01 00:01
@@ -75,7 +75,7 @@ func TestDateTupleSubtract(t *testing.T) {
 // Epoch.currentEpochYear.
 func TestDateTupleSubtractNoOverflow(t *testing.T) {
 	var dta, dtb dateTuple
-	var diff ATime
+	var diff Time
 
 	dta = dateTuple{6000, 1, 1, 0, zoneinfo.SuffixW}      // 6000-01-01 00:00
 	dtb = dateTuple{6000, 1, 1, 1 * 60, zoneinfo.SuffixW} // 6000-01-01 00:01

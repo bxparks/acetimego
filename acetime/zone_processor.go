@@ -94,7 +94,7 @@ func (zp *zoneProcessor) initForYear(year int16) errType {
 	return errOk
 }
 
-func (zp *zoneProcessor) initForEpochSeconds(epochSeconds ATime) errType {
+func (zp *zoneProcessor) initForEpochSeconds(epochSeconds Time) errType {
 	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	if ldt.IsError() {
 		return errGeneric
@@ -576,9 +576,9 @@ func generateStartUntilTimes(transitions []transition) {
 		// hasn't been clobbered by 'untilDateTime' yet. Not sure if this saves
 		// any CPU time though, since we still need to mutiply by 900.
 		st := &transition.startDt
-		offsetSeconds := ATime(st.seconds -
+		offsetSeconds := Time(st.seconds -
 			(transition.offsetSeconds + transition.deltaSeconds))
-		epochSeconds := 86400 * ATime(
+		epochSeconds := 86400 * Time(
 			LocalDateToEpochDays(st.year, st.month, st.day))
 		transition.startEpochSeconds = epochSeconds + offsetSeconds
 
@@ -672,7 +672,7 @@ type findResult struct {
 // Adapted from ExtendedZoneProcessor::findByEpochSeconds(epochSeconds)
 // in the AceTime library and atc_processor_find_by_epoch_seconds() in the
 // acetimec library.
-func (zp *zoneProcessor) findByEpochSeconds(epochSeconds ATime) findResult {
+func (zp *zoneProcessor) findByEpochSeconds(epochSeconds Time) findResult {
 	err := zp.initForEpochSeconds(epochSeconds)
 	if err != errOk {
 		return findResultError
@@ -703,7 +703,7 @@ func (zp *zoneProcessor) findByEpochSeconds(epochSeconds ATime) findResult {
 
 // Return the findResult at the given LocalDateTime.
 //
-// Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDatetime&)
+// Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDateTime&)
 // in the AceTime library and atc_processor_find_by_local_date_time() in the
 // acetimec library.
 func (zp *zoneProcessor) findByLocalDateTime(ldt *LocalDateTime) findResult {

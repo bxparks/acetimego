@@ -6,7 +6,10 @@ import (
 )
 
 func TestOffsetDateTimeSize(t *testing.T) {
-	odt := OffsetDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/, -8 * 3600}
+	odt := OffsetDateTime{
+		LocalDateTime: LocalDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/},
+		OffsetSeconds: -8 * 3600,
+	}
 	size := unsafe.Sizeof(odt)
 	if !(size == 12) {
 		t.Fatal("Sizeof(OffsetDateTime): ", size)
@@ -14,22 +17,34 @@ func TestOffsetDateTimeSize(t *testing.T) {
 }
 
 func TestOffsetDateTimeIsError(t *testing.T) {
-	odt := OffsetDateTime{2000, 1, 1, 0, 0, 0, 0, 0}
+	odt := OffsetDateTime{
+		LocalDateTime: LocalDateTime{2000, 1, 1, 0, 0, 0, 0},
+		OffsetSeconds: 0,
+	}
 	if odt.IsError() {
 		t.Fatal(odt)
 	}
 }
 
 func TestOffsetDateTimeEpochSeconds(t *testing.T) {
-	odt := OffsetDateTime{1970, 1, 1, 0, 0, 0, 0 /*Fold*/, 0 /*OffsetSeconds*/}
+	odt := OffsetDateTime{
+		LocalDateTime: LocalDateTime{1970, 1, 1, 0, 0, 0, 0 /*Fold*/},
+		OffsetSeconds: 0,
+	}
 	if !(odt.EpochSeconds() == 0) {
 		t.Fatal(odt)
 	}
-	odt = OffsetDateTime{1970, 1, 1, 0, 0, 1, 0 /*Fold*/, 0 /*OffsetSeconds*/}
+	odt = OffsetDateTime{
+		LocalDateTime: LocalDateTime{1970, 1, 1, 0, 0, 1, 0 /*Fold*/},
+		OffsetSeconds: 0,
+	}
 	if !(odt.EpochSeconds() == 1) {
 		t.Fatal(odt)
 	}
-	odt = OffsetDateTime{1970, 1, 1, 0, 0, 1, 0 /*Fold*/, -1 /*OffsetSeconds*/}
+	odt = OffsetDateTime{
+		LocalDateTime: LocalDateTime{1970, 1, 1, 0, 0, 1, 0 /*Fold*/},
+		OffsetSeconds: -1,
+	}
 	if !(odt.EpochSeconds() == 2) {
 		t.Fatal(odt)
 	}
@@ -60,13 +75,19 @@ func TestNewOffsetDateTimeFromEpochSeconds(t *testing.T) {
 }
 
 func TestOffsetDateTimeToString(t *testing.T) {
-	odt := OffsetDateTime{2023, 1, 19, 16, 9, 1, 0 /*Fold*/, -8*3600 - 30*60}
+	odt := OffsetDateTime{
+		LocalDateTime: LocalDateTime{2023, 1, 19, 16, 9, 1, 0 /*Fold*/},
+		OffsetSeconds: -8*3600 - 30*60,
+	}
 	s := odt.String()
 	if !(s == "2023-01-19T16:09:01-08:30") {
 		t.Fatal(s, odt)
 	}
 
-	odt = OffsetDateTime{2023, 1, 19, 16, 9, 1, 0 /*Fold*/, 8*3600 + 15*60}
+	odt = OffsetDateTime{
+		LocalDateTime: LocalDateTime{2023, 1, 19, 16, 9, 1, 0 /*Fold*/},
+		OffsetSeconds: 8*3600 + 15*60,
+	}
 	s = odt.String()
 	if !(s == "2023-01-19T16:09:01+08:15") {
 		t.Fatal(s, odt)

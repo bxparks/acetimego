@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	InvalidEpochSeconds = ATime(-(1 << 63)) // math.MinInt64
+	InvalidEpochSeconds = Time(-(1 << 63)) // math.MinInt64
 )
 
 var (
@@ -31,17 +31,17 @@ func (ldt *LocalDateTime) IsError() bool {
 	return ldt.Year == InvalidYear
 }
 
-func (ldt *LocalDateTime) EpochSeconds() ATime {
+func (ldt *LocalDateTime) EpochSeconds() Time {
 	if ldt.IsError() {
 		return InvalidEpochSeconds
 	}
 
 	days := LocalDateToEpochDays(ldt.Year, ldt.Month, ldt.Day)
 	seconds := LocalTimeToSeconds(ldt.Hour, ldt.Minute, ldt.Second)
-	return ATime(days)*86400 + ATime(seconds)
+	return Time(days)*86400 + Time(seconds)
 }
 
-func NewLocalDateTimeFromEpochSeconds(epochSeconds ATime) LocalDateTime {
+func NewLocalDateTimeFromEpochSeconds(epochSeconds Time) LocalDateTime {
 	if epochSeconds == InvalidEpochSeconds {
 		return LocalDateTimeError
 	}

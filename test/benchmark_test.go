@@ -35,7 +35,7 @@ var (
 	// for-loops that do nothing.
 	zdt          acetime.ZonedDateTime
 	ldt          acetime.LocalDateTime
-	epochSeconds acetime.ATime
+	epochSeconds acetime.Time
 	atYear       int16
 	atMonth      uint8
 	atDay        uint8
