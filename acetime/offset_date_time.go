@@ -6,7 +6,9 @@ import (
 )
 
 var (
-	OffsetDateTimeError = OffsetDateTime{Year: InvalidYear}
+	OffsetDateTimeError = OffsetDateTime{
+		LocalDateTime: LocalDateTimeError,
+	}
 )
 
 // An OffsetDateTime represents a [LocalDateTime] with a fixed OffsetSeconds
@@ -14,13 +16,7 @@ var (
 // [ZonedDateTime], but it may be useful for end-user applications which need to
 // represent a datetime with fixed offsets.
 type OffsetDateTime struct {
-	Year          int16
-	Month         uint8
-	Day           uint8
-	Hour          uint8
-	Minute        uint8
-	Second        uint8
-	Fold          uint8
+	LocalDateTime
 	OffsetSeconds int32
 }
 
@@ -28,13 +24,13 @@ func NewOffsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, offsetSeconds int32) OffsetDateTime {
 
 	return OffsetDateTime{
-		ldt.Year, ldt.Month, ldt.Day,
-		ldt.Hour, ldt.Minute, ldt.Second,
-		ldt.Fold, offsetSeconds}
+		LocalDateTime: *ldt,
+		OffsetSeconds: offsetSeconds,
+	}
 }
 
 func (odt *OffsetDateTime) IsError() bool {
-	return odt.Year == InvalidYear
+	return odt.LocalDateTime.IsError()
 }
 
 func (odt *OffsetDateTime) EpochSeconds() Time {
@@ -42,10 +38,7 @@ func (odt *OffsetDateTime) EpochSeconds() Time {
 		return InvalidEpochSeconds
 	}
 
-	epochSeconds := (&LocalDateTime{
-		odt.Year, odt.Month, odt.Day,
-		odt.Hour, odt.Minute, odt.Second, odt.Fold,
-	}).EpochSeconds()
+	epochSeconds := odt.LocalDateTime.EpochSeconds()
 	if epochSeconds == InvalidEpochSeconds {
 		return epochSeconds
 	}
@@ -62,20 +55,8 @@ func NewOffsetDateTimeFromEpochSeconds(
 	epochSeconds += Time(offsetSeconds)
 	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
 	return OffsetDateTime{
-		ldt.Year, ldt.Month, ldt.Day,
-		ldt.Hour, ldt.Minute, ldt.Second,
-		0 /*Fold*/, offsetSeconds}
-}
-
-func (odt *OffsetDateTime) LocalDateTime() LocalDateTime {
-	return LocalDateTime{
-		Year:   odt.Year,
-		Month:  odt.Month,
-		Day:    odt.Day,
-		Hour:   odt.Hour,
-		Minute: odt.Minute,
-		Second: odt.Second,
-		Fold:   odt.Fold,
+		LocalDateTime: ldt,
+		OffsetSeconds: offsetSeconds,
 	}
 }
 
@@ -86,8 +67,7 @@ func (odt *OffsetDateTime) String() string {
 }
 
 func (odt *OffsetDateTime) BuildString(b *strings.Builder) {
-	ldt := odt.LocalDateTime()
-	ldt.BuildString(b)
+	odt.LocalDateTime.BuildString(b)
 
 	// Convert the OffsetSeconds to +/-hh:mm, ignoring any remaining seconds. This
 	// is valid for any time after Jan 7, 1972 when Africa/Monrovia became the

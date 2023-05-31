@@ -703,7 +703,7 @@ func (zp *zoneProcessor) findByEpochSeconds(epochSeconds Time) findResult {
 
 // Return the findResult at the given LocalDateTime.
 //
-// Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDatetime&)
+// Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDateTime&)
 // in the AceTime library and atc_processor_find_by_local_date_time() in the
 // acetimec library.
 func (zp *zoneProcessor) findByLocalDateTime(ldt *LocalDateTime) findResult {

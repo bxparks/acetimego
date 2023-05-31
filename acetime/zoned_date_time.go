@@ -66,8 +66,7 @@ func (zdt *ZonedDateTime) Normalize() {
 		return
 	}
 
-	ldt := zdt.LocalDateTime()
-	odt, extra := zdt.Tz.findForLocalDateTime(&ldt)
+	odt, extra := zdt.Tz.findForLocalDateTime(&zdt.OffsetDateTime.LocalDateTime)
 	zdt.OffsetDateTime = odt
 	zdt.ZonedExtra = extra
 }
@@ -79,12 +78,11 @@ func (zdt *ZonedDateTime) String() string {
 }
 
 func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
-	ldt := zdt.LocalDateTime()
-	ldt.BuildString(b)
+	zdt.OffsetDateTime.LocalDateTime.BuildString(b)
 
 	if zdt.Tz.IsUTC() {
 		// Append just a "UTC" to simplify the ISO8601.
-		b.WriteString(" UTC")
+		b.WriteString("UTC")
 	} else {
 		// Append the "+/-hh:mm[tz]"
 		strbuild.TimeOffset(b, zdt.OffsetSeconds)

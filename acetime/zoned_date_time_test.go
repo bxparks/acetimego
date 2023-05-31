@@ -16,12 +16,23 @@ import (
 func TestZonedDateTimeSize(t *testing.T) {
 	zdt := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2000, 1, 1, 1, 2, 3, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 	}
 	size := unsafe.Sizeof(zdt)
 	if !(size == 64) { // assumes 64-bit alignment for *TimeZone pointer
 		t.Fatal("Sizeof(ZonedDateTime): ", size)
+	}
+}
+
+func TestZonedDateTimeUtcToString(t *testing.T) {
+	tz := TimeZoneUTC
+	ldt := LocalDateTime{2023, 1, 19, 17, 3, 23, 0 /*Fold*/}
+	zdt := NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	s := zdt.String()
+	if !(s == "2023-01-19T17:03:23UTC") {
+		t.Fatal(s, zdt)
 	}
 }
 
@@ -56,7 +67,7 @@ func TestZonedDateTimeFromUTC(t *testing.T) {
 
 	// Create the expected LocalDateTime.
 	expected := NewLocalDateTimeFromEpochSeconds(epochSeconds)
-	ldt := zdt.LocalDateTime()
+	ldt := zdt.OffsetDateTime.LocalDateTime
 	if !(expected == ldt) {
 		t.Fatal(expected, zdt)
 	}
@@ -65,7 +76,7 @@ func TestZonedDateTimeFromUTC(t *testing.T) {
 	ldt = LocalDateTime{2023, 1, 19, 17, 3, 23, 0 /*Fold*/}
 	zdt = NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
 	s := zdt.String()
-	if !(s == "2023-01-19T17:03:23 UTC") {
+	if !(s == "2023-01-19T17:03:23UTC") {
 		t.Fatal(s, zdt)
 	}
 }
@@ -84,7 +95,10 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 		t.Fatal(zdt)
 	}
 	expected := ZonedDateTime{
-		OffsetDateTime: OffsetDateTime{1999, 12, 31, 16, 0, 0, 0, -8 * 3600},
+		OffsetDateTime: OffsetDateTime{
+			LocalDateTime: LocalDateTime{1999, 12, 31, 16, 0, 0, 0},
+			OffsetSeconds: -8 * 3600,
+		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST",
 		},
@@ -107,7 +121,10 @@ func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 		t.Fatal(zdt)
 	}
 	expected := ZonedDateTime{
-		OffsetDateTime: OffsetDateTime{2049, 12, 31, 16, 0, 0, 0, -8 * 3600},
+		OffsetDateTime: OffsetDateTime{
+			LocalDateTime: LocalDateTime{2049, 12, 31, 16, 0, 0, 0},
+			OffsetSeconds: -8 * 3600,
+		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST",
 		},
@@ -130,9 +147,12 @@ func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 		t.Fatal(zdt)
 	}
 	expected := ZonedDateTime{
-		OffsetDateTime: OffsetDateTime{2038, 1, 19, 3, 14, 7, 0, 0},
-		ZonedExtra:     ZonedExtra{ZonedExtraExact, 0, 0, 0, 0, "UTC"},
-		Tz:             &tz,
+		OffsetDateTime: OffsetDateTime{
+			LocalDateTime: LocalDateTime{2038, 1, 19, 3, 14, 7, 0},
+			OffsetSeconds: 0,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, 0, 0, 0, 0, "UTC"},
+		Tz:         &tz,
 	}
 	if !(zdt == expected) {
 		t.Fatal(zdt)
@@ -161,7 +181,10 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back.
-	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600}
+	odt := OffsetDateTime{
+		LocalDateTime: LocalDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/},
+		OffsetSeconds: -7 * 3600,
+	}
 	epochSeconds := odt.EpochSeconds()
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
@@ -169,7 +192,8 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600,
+			LocalDateTime: LocalDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/},
+			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
@@ -189,7 +213,8 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2022, 11, 6, 1, 29, 0, 1 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2022, 11, 6, 1, 29, 0, 1 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
@@ -209,7 +234,8 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2022, 11, 6, 2, 29, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2022, 11, 6, 2, 29, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -225,7 +251,10 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 
 	// Start our sampling at 01:29:00-08:00, which is 31 minutes before the DST
 	// spring forward.
-	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600}
+	odt := OffsetDateTime{
+		LocalDateTime: LocalDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/},
+		OffsetSeconds: -8 * 3600,
+	}
 	epochSeconds := odt.EpochSeconds()
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
 	if zdt.IsError() {
@@ -233,7 +262,8 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -250,7 +280,8 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2022, 3, 13, 3, 29, 0, 0 /*Fold*/, -7 * 3600,
+			LocalDateTime: LocalDateTime{2022, 3, 13, 3, 29, 0, 0 /*Fold*/},
+			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
@@ -277,7 +308,8 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -298,7 +330,8 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -323,7 +356,8 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -344,7 +378,8 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -370,7 +405,8 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2018, 3, 11, 1, 59, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -387,7 +423,8 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2018, 3, 11, 1, 59, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -413,7 +450,8 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 	// fold == 0 to indicate only one match
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600,
+			LocalDateTime: LocalDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/},
+			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraGap, -8 * 3600, 3600, -8 * 3600, 0, "PDT"},
 		Tz:         &tz,
@@ -433,7 +471,8 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 	// fold == 0 to indicate the 1st transition
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 3, 11, 1, 1, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2018, 3, 11, 1, 1, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraGap, -8 * 3600, 0, -8 * 3600, 3600, "PST"},
 		Tz:         &tz,
@@ -455,7 +494,8 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600,
+			LocalDateTime: LocalDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/},
+			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
@@ -474,7 +514,8 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600,
+			LocalDateTime: LocalDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/},
+			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
@@ -499,7 +540,8 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 3600,
+			LocalDateTime: LocalDateTime{2018, 11, 4, 0, 59, 0, 0 /*Fold*/},
+			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
@@ -518,7 +560,8 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 3600,
+			LocalDateTime: LocalDateTime{2018, 11, 4, 0, 59, 0, 0 /*Fold*/},
+			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
@@ -543,7 +586,8 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 11, 4, 1, 1, 0, 0 /*Fold*/, -7 * 3600,
+			LocalDateTime: LocalDateTime{2018, 11, 4, 1, 1, 0, 0 /*Fold*/},
+			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
@@ -562,7 +606,8 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 11, 4, 1, 1, 0, 1 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2018, 11, 4, 1, 1, 0, 1 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
@@ -586,7 +631,8 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -603,7 +649,8 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 	}
 	expected = ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 3600,
+			LocalDateTime: LocalDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/},
+			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
@@ -634,7 +681,8 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 	}
 	expected := ZonedDateTime{
 		OffsetDateTime: OffsetDateTime{
-			2022, 8, 30, 23, 0, 0, 0 /*Fold*/, -4 * 3600,
+			LocalDateTime: LocalDateTime{2022, 8, 30, 23, 0, 0, 0 /*Fold*/},
+			OffsetSeconds: -4 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
 			ZonedExtraExact, -5 * 3600, 3600, -5 * 3600, 3600, "EDT",
@@ -710,7 +758,7 @@ func TestZonedDateTimeNormalize(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	ldt := zdt.LocalDateTime()
+	ldt := zdt.OffsetDateTime.LocalDateTime
 	expected := LocalDateTime{1999, 12, 31, 16, 0, 0, 0 /*Fold*/}
 	if ldt != expected {
 		t.Fatal(zdt)
@@ -730,7 +778,7 @@ func TestZonedDateTimeNormalize(t *testing.T) {
 	// the explicitly specified date (-07:00).
 	epochSeconds := zdt.EpochSeconds()
 	newDt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
-	ldt = newDt.LocalDateTime()
+	ldt = newDt.OffsetDateTime.LocalDateTime
 	expected = LocalDateTime{2021, 4, 20, 10, 0, 0, 0 /*Fold*/}
 	if ldt != expected {
 		t.Fatal(newDt)
@@ -738,7 +786,7 @@ func TestZonedDateTimeNormalize(t *testing.T) {
 
 	// We must Normalize() after mutation.
 	zdt.Normalize()
-	ldt = zdt.LocalDateTime()
+	ldt = zdt.OffsetDateTime.LocalDateTime
 	expected = LocalDateTime{2021, 4, 20, 9, 0, 0, 0 /*Fold*/}
 	if ldt != expected {
 		t.Fatal(zdt.Year)
@@ -766,7 +814,10 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// fall-back, and occurs in the overlap.
-	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600}
+	odt := OffsetDateTime{
+		LocalDateTime: LocalDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/},
+		OffsetSeconds: -7 * 3600,
+	}
 	epochSeconds := odt.EpochSeconds()
 
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
@@ -813,7 +864,10 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 
 	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
 	// spring forward.
-	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600}
+	odt := OffsetDateTime{
+		LocalDateTime: LocalDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/},
+		OffsetSeconds: -8 * 3600,
+	}
 	epochSeconds := odt.EpochSeconds()
 
 	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)

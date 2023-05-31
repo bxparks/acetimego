@@ -116,7 +116,7 @@ func (tz *TimeZone) findForEpochSeconds(
 // given LocalDateTime.
 //
 // Adapted from atc_time_zone_offset_date_time_from_local_date_time() from the
-// acetimec library, and TimeZone::getOffsetDateTime(const LocalDatetime&) from
+// acetimec library, and TimeZone::getOffsetDateTime(const LocalDateTime&) from
 // the AceTime library.
 func (tz *TimeZone) findForLocalDateTime(
 	ldt *LocalDateTime) (OffsetDateTime, ZonedExtra) {
@@ -144,15 +144,10 @@ func (tz *TimeZone) findForLocalDateTime(
 	// Convert findResult into OffsetDateTime using the request offset, and the
 	// result fold.
 	odt := OffsetDateTime{
-		Year:          ldt.Year,
-		Month:         ldt.Month,
-		Day:           ldt.Day,
-		Hour:          ldt.Hour,
-		Minute:        ldt.Minute,
-		Second:        ldt.Second,
+		LocalDateTime: *ldt,
 		OffsetSeconds: result.reqStdOffsetSeconds + result.reqDstOffsetSeconds,
-		Fold:          result.fold,
 	}
+	odt.Fold = result.fold
 
 	// Special processor for kAtcfindResultGap: Convert to epochSeconds using the
 	// reqStdOffsetSeconds and reqDstOffsetSeconds, then convert back to
