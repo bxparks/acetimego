@@ -1,5 +1,11 @@
 // Validate acetimego/acetime package against std.time package.
 //
+// As of 2023-05-31, using go v1.20.4, there are differences between go.time and
+// acetimego over the years [2000,2100) for several (but not all) timezones.
+// Since acetimego matches many other 3rd party timezone libraries (e.g. C++
+// Hinnant, Python zoneinfo, C libc) over this year interval, I have to conclude
+// that the problem is with go.time.
+//
 // $ go run validatetime.go
 
 package main
@@ -13,7 +19,7 @@ import (
 const (
 	// The earliest year in the TZ database is 1844, so starting from 1800 should
 	// validate all zones for all years supported by TZDB and acetimego.
-	startYear        = 1800
+	startYear        = 2000
 	untilYear        = 2100
 	samplingInterval = 22 // hours
 )
