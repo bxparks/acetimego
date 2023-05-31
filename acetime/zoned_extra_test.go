@@ -10,21 +10,21 @@ import (
 // the STD offset, the DST offset, and the abbreviation used.
 //-----------------------------------------------------------------------------
 
-// Test that ZonedExtraXxx constants are the same as findResultXxx constants.
-func TestZonedExtraTypeConstantsMatch(t *testing.T) {
-	if !(ZonedExtraErr == findResultErr) {
+// Test that FoldTypeXxx constants are the same as findResultXxx constants.
+func TestFoldTypeTypeConstantsMatch(t *testing.T) {
+	if !(FoldTypeErr == findResultErr) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraNotFound == findResultNotFound) {
+	if !(FoldTypeNotFound == findResultNotFound) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraExact == findResultExact) {
+	if !(FoldTypeExact == findResultExact) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraGap == findResultGap) {
+	if !(FoldTypeGap == findResultGap) {
 		t.Fatal("")
 	}
-	if !(ZonedExtraOverlap == findResultOverlap) {
+	if !(FoldTypeOverlap == findResultOverlap) {
 		t.Fatal("")
 	}
 }

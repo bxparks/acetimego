@@ -1,22 +1,23 @@
 package acetime
 
+// FoldType
 const (
-	ZonedExtraErr = iota
-	ZonedExtraNotFound
-	ZonedExtraExact
-	ZonedExtraGap
-	ZonedExtraOverlap
+	FoldTypeErr = iota
+	FoldTypeNotFound
+	FoldTypeExact
+	FoldTypeGap
+	FoldTypeOverlap
 )
 
 var (
-	ZonedExtraError = ZonedExtra{Zetype: ZonedExtraErr}
+	ZonedExtraError = ZonedExtra{FoldType: FoldTypeErr}
 )
 
 // ZonedExtra contains information about a specific instant in time (either at a
 // specific epochSeconds or a specific LocalDateTime) which are not fully
 // captured by the OffsetDateTime instance.
 type ZonedExtra struct {
-	Zetype              uint8  // type of match (e.g. gap, overlap)
+	FoldType            uint8  // type of fold (e.g. gap, overlap)
 	StdOffsetSeconds    int32  // STD offset
 	DstOffsetSeconds    int32  // DST offset
 	ReqStdOffsetSeconds int32  // request STD offset
@@ -25,5 +26,5 @@ type ZonedExtra struct {
 }
 
 func (extra *ZonedExtra) IsError() bool {
-	return extra.Zetype == ZonedExtraErr
+	return extra.FoldType == FoldTypeErr
 }

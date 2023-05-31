@@ -76,7 +76,7 @@ func (tz *TimeZone) findForEpochSeconds(
 	if tz.processor == nil {
 		odt := NewOffsetDateTimeFromEpochSeconds(epochSeconds, 0)
 		extra := ZonedExtra{
-			Zetype:              ZonedExtraExact,
+			FoldType:            FoldTypeExact,
 			StdOffsetSeconds:    0,
 			DstOffsetSeconds:    0,
 			ReqStdOffsetSeconds: 0,
@@ -101,7 +101,7 @@ func (tz *TimeZone) findForEpochSeconds(
 	odt.Fold = result.fold
 
 	extra := ZonedExtra{
-		Zetype:              result.frtype,
+		FoldType:            result.frtype,
 		StdOffsetSeconds:    result.stdOffsetSeconds,
 		DstOffsetSeconds:    result.dstOffsetSeconds,
 		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,
@@ -125,7 +125,7 @@ func (tz *TimeZone) findForLocalDateTime(
 	if tz.processor == nil {
 		odt := NewOffsetDateTimeFromLocalDateTime(ldt, 0)
 		extra := ZonedExtra{
-			Zetype:              ZonedExtraExact,
+			FoldType:            FoldTypeExact,
 			StdOffsetSeconds:    0,
 			DstOffsetSeconds:    0,
 			ReqStdOffsetSeconds: 0,
@@ -160,7 +160,7 @@ func (tz *TimeZone) findForLocalDateTime(
 	}
 
 	extra := ZonedExtra{
-		Zetype:              result.frtype,
+		FoldType:            result.frtype,
 		StdOffsetSeconds:    result.stdOffsetSeconds,
 		DstOffsetSeconds:    result.dstOffsetSeconds,
 		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,

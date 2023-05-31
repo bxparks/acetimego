@@ -100,7 +100,7 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST",
+			FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST",
 		},
 		Tz: &tz,
 	}
@@ -126,7 +126,7 @@ func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST",
+			FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST",
 		},
 		Tz: &tz,
 	}
@@ -151,7 +151,7 @@ func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 			LocalDateTime: LocalDateTime{2038, 1, 19, 3, 14, 7, 0},
 			OffsetSeconds: 0,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, 0, 0, 0, 0, "UTC"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, 0, 0, 0, 0, "UTC"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -196,7 +196,7 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+			FoldTypeOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 		},
 		Tz: &tz,
 	}
@@ -217,7 +217,7 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
+			FoldTypeOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
 		},
 		Tz: &tz,
 	}
@@ -237,7 +237,7 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 			LocalDateTime: LocalDateTime{2022, 11, 6, 2, 29, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -265,7 +265,7 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 			LocalDateTime: LocalDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -284,7 +284,7 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+			FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 		},
 		Tz: &tz,
 	}
@@ -311,7 +311,7 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 			LocalDateTime: LocalDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -333,7 +333,7 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 			LocalDateTime: LocalDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -359,7 +359,7 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 			LocalDateTime: LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -381,7 +381,7 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 			LocalDateTime: LocalDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -408,7 +408,7 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 			LocalDateTime: LocalDateTime{2018, 3, 11, 1, 59, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -426,7 +426,7 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 			LocalDateTime: LocalDateTime{2018, 3, 11, 1, 59, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -453,7 +453,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 			LocalDateTime: LocalDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/},
 			OffsetSeconds: -7 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraGap, -8 * 3600, 3600, -8 * 3600, 0, "PDT"},
+		ZonedExtra: ZonedExtra{FoldTypeGap, -8 * 3600, 3600, -8 * 3600, 0, "PDT"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -474,7 +474,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 			LocalDateTime: LocalDateTime{2018, 3, 11, 1, 1, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraGap, -8 * 3600, 0, -8 * 3600, 3600, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeGap, -8 * 3600, 0, -8 * 3600, 3600, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -498,7 +498,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+			FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 		},
 		Tz: &tz,
 	}
@@ -518,7 +518,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+			FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 		},
 		Tz: &tz,
 	}
@@ -544,7 +544,7 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+			FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 		},
 		Tz: &tz,
 	}
@@ -564,7 +564,7 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+			FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 		},
 		Tz: &tz,
 	}
@@ -590,7 +590,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 			OffsetSeconds: -7 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+			FoldTypeOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 		},
 		Tz: &tz,
 	}
@@ -610,7 +610,7 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 			OffsetSeconds: -8 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
+			FoldTypeOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
 		},
 		Tz: &tz,
 	}
@@ -634,7 +634,7 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 			LocalDateTime: LocalDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -652,7 +652,7 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 			LocalDateTime: LocalDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/},
 			OffsetSeconds: -8 * 3600,
 		},
-		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		ZonedExtra: ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
 		Tz:         &tz,
 	}
 	if !(zdt == expected) {
@@ -685,7 +685,7 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 			OffsetSeconds: -4 * 3600,
 		},
 		ZonedExtra: ZonedExtra{
-			ZonedExtraExact, -5 * 3600, 3600, -5 * 3600, 3600, "EDT",
+			FoldTypeExact, -5 * 3600, 3600, -5 * 3600, 3600, "EDT",
 		},
 		Tz: &tzNewYork,
 	}
@@ -707,7 +707,7 @@ func TestZonedDateTimeToZonedExtra(t *testing.T) {
 	}
 
 	expected := ZonedExtra{
-		Zetype:              ZonedExtraExact,
+		FoldType:            FoldTypeExact,
 		StdOffsetSeconds:    -8 * 3600,
 		DstOffsetSeconds:    1 * 3600,
 		ReqStdOffsetSeconds: -8 * 3600,
@@ -826,7 +826,7 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 		t.Fatal(ze)
 	}
 	expected := ZonedExtra{
-		Zetype:              ZonedExtraOverlap,
+		FoldType:            FoldTypeOverlap,
 		StdOffsetSeconds:    -8 * 3600,
 		DstOffsetSeconds:    1 * 3600,
 		ReqStdOffsetSeconds: -8 * 3600,
@@ -846,7 +846,7 @@ func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
 		t.Fatal(ze)
 	}
 	expected = ZonedExtra{
-		Zetype:              ZonedExtraOverlap,
+		FoldType:            FoldTypeOverlap,
 		StdOffsetSeconds:    -8 * 3600,
 		DstOffsetSeconds:    0 * 3600,
 		ReqStdOffsetSeconds: -8 * 3600,
@@ -876,7 +876,7 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 		t.Fatal(ze)
 	}
 	expected := ZonedExtra{
-		Zetype:              ZonedExtraExact,
+		FoldType:            FoldTypeExact,
 		StdOffsetSeconds:    -8 * 3600,
 		DstOffsetSeconds:    0 * 3600,
 		ReqStdOffsetSeconds: -8 * 3600,
@@ -895,7 +895,7 @@ func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
 		t.Fatal(ze)
 	}
 	expected = ZonedExtra{
-		Zetype:              ZonedExtraExact,
+		FoldType:            FoldTypeExact,
 		StdOffsetSeconds:    -8 * 3600,
 		DstOffsetSeconds:    1 * 3600,
 		ReqStdOffsetSeconds: -8 * 3600,
