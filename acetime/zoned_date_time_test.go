@@ -14,9 +14,13 @@ import (
 //-----------------------------------------------------------------------------
 
 func TestZonedDateTimeSize(t *testing.T) {
-	zdt := ZonedDateTime{2000, 1, 1, 1, 2, 3, 0 /*Fold*/, -8 * 3600, nil}
+	zdt := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2000, 1, 1, 1, 2, 3, 0 /*Fold*/, -8 * 3600,
+		},
+	}
 	size := unsafe.Sizeof(zdt)
-	if !(size == 24) { // assumes 64-bit alignment for *TimeZone pointer
+	if !(size == 64) { // assumes 64-bit alignment for *TimeZone pointer
 		t.Fatal("Sizeof(ZonedDateTime): ", size)
 	}
 }
@@ -79,7 +83,14 @@ func TestNewZonedDateTimeFromEpochSeconds(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{1999, 12, 31, 16, 0, 0, 0, -8 * 3600, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{1999, 12, 31, 16, 0, 0, 0, -8 * 3600},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 	if !(epochSeconds == zdt.EpochSeconds()) {
@@ -95,7 +106,14 @@ func TestNewZonedDateTimeFromEpochSeconds_2050(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2049, 12, 31, 16, 0, 0, 0, -8 * 3600, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{2049, 12, 31, 16, 0, 0, 0, -8 * 3600},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 	if !(epochSeconds == zdt.EpochSeconds()) {
@@ -111,7 +129,12 @@ func TestNewZonedDateTimeFromEpochSeconds_UnixMax(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2038, 1, 19, 3, 14, 7, 0, 0, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{2038, 1, 19, 3, 14, 7, 0, 0},
+		ZonedExtra:     ZonedExtra{ZonedExtraExact, 0, 0, 0, 0, "UTC"},
+		Tz:             &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 	if !(epochSeconds == zdt.EpochSeconds()) {
@@ -144,9 +167,16 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
-
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -157,9 +187,16 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2022, 11, 6, 1, 29, 0, 1 /*Fold*/, -8 * 3600, &tz}) {
-
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2022, 11, 6, 1, 29, 0, 1 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -170,9 +207,14 @@ func TestNewZonedDateTimeFromEpochSeconds_FallBack(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2022, 11, 6, 2, 29, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
-
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2022, 11, 6, 2, 29, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 }
@@ -189,9 +231,14 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
-
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -201,9 +248,16 @@ func TestNewZonedDateTimeFromEpochSeconds_SpringForward(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2022, 3, 13, 3, 29, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
-
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2022, 3, 13, 3, 29, 0, 0 /*Fold*/, -7 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 }
@@ -221,7 +275,14 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 	epochSeconds := zdt.EpochSeconds()
@@ -235,7 +296,14 @@ func TestNewZonedDateTimeFromLocalDateTime(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2000, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 	epochSeconds = zdt.EpochSeconds()
@@ -253,7 +321,14 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 	epochSeconds := zdt.EpochSeconds()
@@ -267,7 +342,14 @@ func TestNewZonedDateTimeFromLocalDateTime_2050(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2050, 1, 1, 0, 0, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 	epochSeconds = zdt.EpochSeconds()
@@ -286,9 +368,14 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
-
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -298,9 +385,14 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeDst(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
-
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 3, 11, 1, 59, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 }
@@ -319,7 +411,14 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 		t.Fatal(zdt)
 	}
 	// fold == 0 to indicate only one match
-	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraGap, -8 * 3600, 3600, -8 * 3600, 0, "PDT"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -332,7 +431,14 @@ func TestNewZonedDateTimeFromLocalDateTime_InGap(t *testing.T) {
 		t.Fatal(zdt)
 	}
 	// fold == 0 to indicate the 1st transition
-	if !(zdt == ZonedDateTime{2018, 3, 11, 1, 1, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 3, 11, 1, 1, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraGap, -8 * 3600, 0, -8 * 3600, 3600, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 }
@@ -347,7 +453,16 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -357,7 +472,16 @@ func TestNewZonedDateTimeFromLocalDateTime_InDst(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 3, 11, 3, 1, 0, 0 /*Fold*/, -7 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 }
@@ -373,9 +497,16 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
-
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -385,9 +516,16 @@ func TestNewZonedDateTimeFromLocalDateTime_BeforeSdt(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{
-		2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
-
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 11, 4, 0, 59, 0, 0 /*Fold*/, -7 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 }
@@ -403,7 +541,16 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 1, 1, 0, 0 /*Fold*/, -7 * 3600, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 11, 4, 1, 1, 0, 0 /*Fold*/, -7 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -413,7 +560,16 @@ func TestNewZonedDateTimeFromLocalDateTime_InOverlap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 1, 1, 0, 1 /*Fold*/, -8 * 3600, &tz}) {
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 11, 4, 1, 1, 0, 1 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
+		},
+		Tz: &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 }
@@ -428,7 +584,14 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 
@@ -438,7 +601,14 @@ func TestNewZonedDateTimeFromLocalDateTime_AfterOverlap(t *testing.T) {
 	if zdt.IsError() {
 		t.Fatal(zdt)
 	}
-	if !(zdt == ZonedDateTime{2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 3600, &tz}) {
+	expected = ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2018, 11, 4, 2, 1, 0, 0 /*Fold*/, -8 * 3600,
+		},
+		ZonedExtra: ZonedExtra{ZonedExtraExact, -8 * 3600, 0, -8 * 3600, 0, "PST"},
+		Tz:         &tz,
+	}
+	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
 }
@@ -462,8 +632,16 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 	if nydt.IsError() {
 		t.Fatal(nydt)
 	}
-	if !(nydt == ZonedDateTime{
-		2022, 8, 30, 23, 0, 0, 0 /*Fold*/, -4 * 3600, &tzNewYork}) {
+	expected := ZonedDateTime{
+		OffsetDateTime: OffsetDateTime{
+			2022, 8, 30, 23, 0, 0, 0 /*Fold*/, -4 * 3600,
+		},
+		ZonedExtra: ZonedExtra{
+			ZonedExtraExact, -5 * 3600, 3600, -5 * 3600, 3600, "EDT",
+		},
+		Tz: &tzNewYork,
+	}
+	if !(nydt == expected) {
 		t.Fatal(nydt)
 	}
 }
@@ -480,7 +658,6 @@ func TestZonedDateTimeToZonedExtra(t *testing.T) {
 		t.Fatal(zdt)
 	}
 
-	extra := zdt.ZonedExtra()
 	expected := ZonedExtra{
 		Zetype:              ZonedExtraExact,
 		StdOffsetSeconds:    -8 * 3600,
@@ -489,8 +666,8 @@ func TestZonedDateTimeToZonedExtra(t *testing.T) {
 		ReqDstOffsetSeconds: 1 * 3600,
 		Abbrev:              "PDT",
 	}
-	if !(extra == expected) {
-		t.Fatal(extra)
+	if !(zdt.ZonedExtra == expected) {
+		t.Fatal(zdt.ZonedExtra)
 	}
 }
 
@@ -565,6 +742,114 @@ func TestZonedDateTimeNormalize(t *testing.T) {
 	expected = LocalDateTime{2021, 4, 20, 9, 0, 0, 0 /*Fold*/}
 	if ldt != expected {
 		t.Fatal(zdt.Year)
+	}
+}
+
+//-----------------------------------------------------------------------------
+// ZonedExtra tests
+//-----------------------------------------------------------------------------
+
+func TestZonedExtraFromEpochSeconds(t *testing.T) {
+	manager := NewZoneManager(&zonedbtesting.DataContext)
+	tz := manager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+
+	zdt := NewZonedDateTimeFromEpochSeconds(InvalidEpochSeconds, &tz)
+	ze := zdt.ZonedExtra
+	if !(ze.IsError()) {
+		t.Fatal(ze)
+	}
+}
+
+func TestZonedExtraFromEpochSeconds_FallBack(t *testing.T) {
+	manager := NewZoneManager(&zonedbtesting.DataContext)
+	tz := manager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+
+	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
+	// fall-back, and occurs in the overlap.
+	odt := OffsetDateTime{2022, 11, 6, 1, 29, 0, 0 /*Fold*/, -7 * 3600}
+	epochSeconds := odt.EpochSeconds()
+
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	ze := zdt.ZonedExtra
+	if ze.IsError() {
+		t.Fatal(ze)
+	}
+	expected := ZonedExtra{
+		Zetype:              ZonedExtraOverlap,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    1 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 1 * 3600,
+		Abbrev:              "PDT",
+	}
+	if !(ze == expected) {
+		t.Fatal(ze)
+	}
+
+	// Go forward an hour, should be 01:29:00-08:00, which is again in the
+	// overlap.
+	epochSeconds += 3600
+	zdt = NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	ze = zdt.ZonedExtra
+	if ze.IsError() {
+		t.Fatal(ze)
+	}
+	expected = ZonedExtra{
+		Zetype:              ZonedExtraOverlap,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    0 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 0 * 3600,
+		Abbrev:              "PST",
+	}
+	if !(ze == expected) {
+		t.Fatal(ze)
+	}
+}
+
+func TestZonedExtraFromEpochSeconds_SpringForward(t *testing.T) {
+	manager := NewZoneManager(&zonedbtesting.DataContext)
+	tz := manager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
+
+	// Start our sampling at 01:29:00-07:00, which is 31 minutes before the DST
+	// spring forward.
+	odt := OffsetDateTime{2022, 3, 13, 1, 29, 0, 0 /*Fold*/, -8 * 3600}
+	epochSeconds := odt.EpochSeconds()
+
+	zdt := NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	ze := zdt.ZonedExtra
+	if ze.IsError() {
+		t.Fatal(ze)
+	}
+	expected := ZonedExtra{
+		Zetype:              ZonedExtraExact,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    0 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 0 * 3600,
+		Abbrev:              "PST",
+	}
+	if !(ze == expected) {
+		t.Fatal(ze)
+	}
+
+	// Go forward an hour. Should be 01:29:00-08:00.
+	epochSeconds += 3600
+	zdt = NewZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+	ze = zdt.ZonedExtra
+	if ze.IsError() {
+		t.Fatal(ze)
+	}
+	expected = ZonedExtra{
+		Zetype:              ZonedExtraExact,
+		StdOffsetSeconds:    -8 * 3600,
+		DstOffsetSeconds:    1 * 3600,
+		ReqStdOffsetSeconds: -8 * 3600,
+		ReqDstOffsetSeconds: 1 * 3600,
+		Abbrev:              "PDT",
+	}
+	if !(ze == expected) {
+		t.Fatal(ze)
 	}
 }
 

@@ -6,85 +6,42 @@ import (
 )
 
 var (
-	ZonedDateTimeError = ZonedDateTime{Year: InvalidYear}
+	ZonedDateTimeError = ZonedDateTime{
+		OffsetDateTime: OffsetDateTimeError,
+		ZonedExtra:     ZonedExtraError,
+	}
 )
 
 // ZonedDateTime represents a date/time with its associated TimeZone.
 type ZonedDateTime struct {
-	Year          int16
-	Month         uint8
-	Day           uint8
-	Hour          uint8
-	Minute        uint8
-	Second        uint8
-	Fold          uint8
-	OffsetSeconds int32
-	Tz            *TimeZone
+	OffsetDateTime
+	ZonedExtra
+	Tz *TimeZone
 }
 
 func (zdt *ZonedDateTime) IsError() bool {
-	return zdt.Year == InvalidYear
-}
-
-func (zdt *ZonedDateTime) LocalDateTime() LocalDateTime {
-	return LocalDateTime{
-		Year:   zdt.Year,
-		Month:  zdt.Month,
-		Day:    zdt.Day,
-		Hour:   zdt.Hour,
-		Minute: zdt.Minute,
-		Second: zdt.Second,
-		Fold:   zdt.Fold,
-	}
-}
-
-func (zdt *ZonedDateTime) EpochSeconds() Time {
-	if zdt.IsError() {
-		return InvalidEpochSeconds
-	}
-	return (&OffsetDateTime{
-		Year:          zdt.Year,
-		Month:         zdt.Month,
-		Day:           zdt.Day,
-		Hour:          zdt.Hour,
-		Minute:        zdt.Minute,
-		Second:        zdt.Second,
-		Fold:          zdt.Fold,
-		OffsetSeconds: zdt.OffsetSeconds,
-	}).EpochSeconds()
+	return zdt.OffsetDateTime.IsError() || zdt.ZonedExtra.IsError()
 }
 
 func NewZonedDateTimeFromEpochSeconds(
 	epochSeconds Time, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.offsetDateTimeFromEpochSeconds(epochSeconds)
+	odt, extra := tz.findForEpochSeconds(epochSeconds)
 	return ZonedDateTime{
-		Year:          odt.Year,
-		Month:         odt.Month,
-		Day:           odt.Day,
-		Hour:          odt.Hour,
-		Minute:        odt.Minute,
-		Second:        odt.Second,
-		Fold:          odt.Fold,
-		OffsetSeconds: odt.OffsetSeconds,
-		Tz:            tz,
+		OffsetDateTime: odt,
+		ZonedExtra:     extra,
+		Tz:             tz,
 	}
 }
 
 func NewZonedDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, tz *TimeZone) ZonedDateTime {
 
-	odt := tz.offsetDateTimeFromLocalDateTime(ldt)
+	odt, extra := tz.findForLocalDateTime(ldt)
 	return ZonedDateTime{
-		Year:          odt.Year,
-		Month:         odt.Month,
-		Day:           odt.Day,
-		Hour:          odt.Hour,
-		Minute:        odt.Minute,
-		Second:        odt.Second,
-		Fold:          odt.Fold,
-		OffsetSeconds: odt.OffsetSeconds,
-		Tz:            tz,
+		OffsetDateTime: odt,
+		ZonedExtra:     extra,
+		Tz:             tz,
 	}
 }
 
@@ -110,22 +67,9 @@ func (zdt *ZonedDateTime) Normalize() {
 	}
 
 	ldt := zdt.LocalDateTime()
-	odt := zdt.Tz.offsetDateTimeFromLocalDateTime(&ldt)
-	zdt.Year = odt.Year
-	zdt.Month = odt.Month
-	zdt.Day = odt.Day
-	zdt.Hour = odt.Hour
-	zdt.Minute = odt.Minute
-	zdt.Second = odt.Second
-	zdt.Fold = odt.Fold
-	zdt.OffsetSeconds = odt.OffsetSeconds
-}
-
-// Return additional information about the current date time in the ZonedExtra
-// object.
-func (zdt *ZonedDateTime) ZonedExtra() ZonedExtra {
-	ldt := zdt.LocalDateTime()
-	return NewZonedExtraFromLocalDateTime(&ldt, zdt.Tz)
+	odt, extra := zdt.Tz.findForLocalDateTime(&ldt)
+	zdt.OffsetDateTime = odt
+	zdt.ZonedExtra = extra
 }
 
 func (zdt *ZonedDateTime) String() string {
