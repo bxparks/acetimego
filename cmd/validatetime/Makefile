@@ -7,6 +7,8 @@ SRCS := main.go transitions.go
 build: $(SRCS) Makefile
 	go build -o main.out
 
+buildtiny:
+
 #------------------------------------------------------------------------------
 
 .PHONY: clean
