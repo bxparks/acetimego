@@ -6,9 +6,8 @@
 //     --tz_version 2023c
 //     --action zonedb
 //     --language go
-//     --scope extended
+//     --scope complete
 //     --db_namespace zonedbtesting
-//     --generate_int16_years
 //     --include_list include_list.txt
 //     --start_year 1980
 //     --until_year 10000

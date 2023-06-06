@@ -1,6 +1,8 @@
 # Changelog
 
 * Unreleased
+    * zonedb
+        * Simplify `tzcompiler.py` flags in various Makefiles.
 * 0.5.0 (2023-05-31, TZDB 2023c)
     * Add `examples/helloacetime` demo.
     * Rename `ATime` to `Time`.

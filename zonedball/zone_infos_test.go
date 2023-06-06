@@ -6,12 +6,8 @@
 //     --tz_version 2023c
 //     --action zonedb
 //     --language go
-//     --scope extended
-//     --offset_granularity 1
-//     --delta_granularity 60
-//     --until_at_granularity 1
+//     --scope complete
 //     --db_namespace zonedball
-//     --generate_int16_years
 //     --start_year 1800
 //     --until_year 10000
 //

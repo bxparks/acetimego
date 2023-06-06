@@ -30,12 +30,8 @@ zonedb:
 		--tag $(TZ_VERSION) \
 		--action zonedb \
 		--language go \
-		--scope extended \
-		--offset_granularity 1 \
-		--delta_granularity 60 \
-		--until_at_granularity 1 \
+		--scope complete \
 		--db_namespace zonedball \
-		--generate_int16_years \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 
@@ -46,10 +42,6 @@ zonedb.json: Makefile
 		--action zonedb \
 		--language json \
 		--scope extended \
-		--offset_granularity 1 \
-		--delta_granularity 60 \
-		--until_at_granularity 1 \
-		--generate_int16_years \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 

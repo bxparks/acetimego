@@ -12,9 +12,8 @@ zonedb: Makefile
 		--tag $(TZ_VERSION) \
 		--action zonedb \
 		--language go \
-		--scope extended \
+		--scope complete \
 		--db_namespace zonedbtesting \
-		--generate_int16_years \
 		--include_list include_list.txt \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
@@ -25,8 +24,7 @@ zonedb.json: Makefile
 		--tag $(TZ_VERSION) \
 		--action zonedb \
 		--language json \
-		--scope extended \
-		--generate_int16_years \
+		--scope complete \
 		--include_list include_list.txt \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
