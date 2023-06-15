@@ -10,7 +10,7 @@
 //     --db_namespace zonedbtesting
 //     --include_list include_list.txt
 //     --start_year 1980
-//     --until_year 10000
+//     --until_year 2200
 //
 // using the TZ Database files
 //
@@ -29,9 +29,12 @@
 // Supported Zones: 5 (4 zones, 1 links)
 // Unsupported Zones: 591 (346 zones, 245 links)
 //
+// Requested Years: [1980,2200]
+// Accurate Years: [1980,32767]
+//
 // Original Years:  [1844,2087]
 // Generated Years: [1967,2012]
-// Lower/Upper Truncated: [True, False]
+// Lower/Upper Truncated: [True,False]
 //
 // Estimator Years: [1967,2024]
 // Max Buffer Size: 6
@@ -78,7 +81,9 @@ import (
 var RecordContext = zoneinfo.ZoneRecordContext{
 	TzDatabaseVersion: TzDatabaseVersion,
 	StartYear: 1980,
-	UntilYear: 10000,
+	UntilYear: 2200,
+	StartYearAccurate: 1980,
+	UntilYearAccurate: 32767,
 	MaxTransitions: 6,
 	LetterData: LetterData,
 	LetterOffsets: LetterOffsets,
