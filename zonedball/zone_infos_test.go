@@ -4,8 +4,8 @@
 //     --input_dir /home/brian/src/acetimego/zonedball/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedball
 //     --tz_version 2023c
-//     --action zonedb
-//     --language go
+//     --actions zonedb
+//     --languages go
 //     --scope complete
 //     --db_namespace zonedball
 //     --start_year 1800

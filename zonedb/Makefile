@@ -14,8 +14,8 @@ zonedb:
 	$(TOOLS)/tzcompiler.sh \
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
-		--action zonedb \
-		--language go \
+		--actions zonedb \
+		--languages go \
 		--scope complete \
 		--db_namespace zonedb \
 		--start_year $(START_YEAR) \
@@ -25,8 +25,8 @@ zonedb.json: Makefile
 	$(TOOLS)/tzcompiler.sh \
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
-		--action zonedb \
-		--language json \
+		--actions json \
+		--languages go \
 		--scope complete \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
