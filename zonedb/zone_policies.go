@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedb/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedb
-//     --tz_version 2023c
+//     --tz_version 2023d
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2023c
+// from https://github.com/eggert/tz/releases/tag/2023d
 //
-// Supported Zones: 596 (350 zones, 246 links)
+// Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [2000,2200]
@@ -40,22 +40,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 646
+//   Eras: 655
 //   Policies: 83
 //   Rules: 735
 //
 // Memory:
 //   Rules: 8820
 //   Policies: 332
-//   Eras: 9044
-//   Zones: 4200
-//   Links: 2952
+//   Eras: 9170
+//   Zones: 4212
+//   Links: 2940
 //   Registry: 0
 //   Formats: 712
 //   Letters: 30
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 35765
+//   TOTAL: 35891
 //
 // DO NOT EDIT
 
@@ -681,13 +681,13 @@ const ZoneRulesData = "\x01\x80\x01\x80\x01\x00\x01\x00\x00\x00\x00\x07" +
 	"\x17\x08\x17\x08\x09\x00\x13\x00\xe0\x01\x00\x00" +
 	"\x18\x08\x18\x08\x09\x00\x0a\x00\xe0\x01\x00\x00" +
 	"\x18\x08\x18\x08\x0a\x00\x0f\x00\xe0\x01\x3c\x07" +
+	"\x18\x08\xfe\x7f\x0a\x06\xe2\x00\xe0\x01\x00\x00" +
 	"\x19\x08\x19\x08\x09\x00\x02\x00\xe0\x01\x00\x00" +
 	"\x19\x08\x19\x08\x0a\x00\x07\x00\xe0\x01\x3c\x07" +
 	"\x1a\x08\x1a\x08\x08\x00\x12\x00\xe0\x01\x00\x00" +
 	"\x1a\x08\x1a\x08\x09\x00\x1d\x00\xe0\x01\x3c\x07" +
 	"\x1b\x08\x1b\x08\x08\x00\x0a\x00\xe0\x01\x00\x00" +
 	"\x1b\x08\x1b\x08\x09\x00\x0e\x00\xe0\x01\x3c\x07" +
-	"\x1b\x08\xfe\x7f\x0a\x06\xe2\x00\xe0\x01\x00\x00" +
 	"\x1c\x08\x1c\x08\x07\x00\x19\x00\xe0\x01\x00\x00" +
 	"\x1c\x08\x1c\x08\x09\x00\x05\x00\xe0\x01\x3c\x07" +
 	"\x1d\x08\x1d\x08\x07\x00\x11\x00\xe0\x01\x00\x00" +

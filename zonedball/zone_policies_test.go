@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedball/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedball
-//     --tz_version 2023c
+//     --tz_version 2023d
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2023c
+// from https://github.com/eggert/tz/releases/tag/2023d
 //
-// Supported Zones: 596 (350 zones, 246 links)
+// Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [1800,2200]
@@ -40,22 +40,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 1949
+//   Eras: 1961
 //   Policies: 134
 //   Rules: 2238
 //
 // Memory:
 //   Rules: 26856
 //   Policies: 536
-//   Eras: 27286
-//   Zones: 4200
-//   Links: 2952
+//   Eras: 27454
+//   Zones: 4212
+//   Links: 2940
 //   Registry: 0
 //   Formats: 1228
 //   Letters: 106
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 72839
+//   TOTAL: 73007
 //
 // DO NOT EDIT
 
@@ -18961,6 +18961,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
 	},
+	// Rule Palestine    2072    max    -    Oct    Sat<=30    2:00    0    -
+	{
+		FromYear: 2072,
+		ToYear: 32766,
+		InMonth: 10,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: -30,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
 	// Rule Palestine    2073    only    -    Sep     2    2:00    0    -
 	{
 		FromYear: 2073,
@@ -19032,18 +19044,6 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
-	},
-	// Rule Palestine    2075    max    -    Oct    Sat<=30    2:00    0    -
-	{
-		FromYear: 2075,
-		ToYear: 32766,
-		InMonth: 10,
-		OnDayOfWeek: 6,
-		OnDayOfMonth: -30,
-		AtSecondsCode: 480, // 7200 / 15
-		AtSecondsModifier: 0, // SuffixW + remainder=0
-		DeltaMinutes: 0,
-		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2076    only    -    Jul    25    2:00    0    -
 	{

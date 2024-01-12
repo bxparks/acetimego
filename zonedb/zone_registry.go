@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedb/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedb
-//     --tz_version 2023c
+//     --tz_version 2023d
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2023c
+// from https://github.com/eggert/tz/releases/tag/2023d
 //
-// Supported Zones: 596 (350 zones, 246 links)
+// Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [2000,2200]
@@ -40,22 +40,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 646
+//   Eras: 655
 //   Policies: 83
 //   Rules: 735
 //
 // Memory:
 //   Rules: 8820
 //   Policies: 332
-//   Eras: 9044
-//   Zones: 4200
-//   Links: 2952
+//   Eras: 9170
+//   Zones: 4212
+//   Links: 2940
 //   Registry: 0
 //   Formats: 712
 //   Letters: 30
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 35765
+//   TOTAL: 35891
 //
 // DO NOT EDIT
 
@@ -69,7 +69,7 @@ import (
 // Zone Context
 // ---------------------------------------------------------------------------
 
-const TzDatabaseVersion string = "2023c"
+const TzDatabaseVersion string = "2023d"
 
 // DataContext contains references to various XxxData objects and strings. These
 // are the binary encoded versions of the various XxxRecord objects. This object
@@ -111,7 +111,7 @@ var DataContext = zoneinfo.ZoneDataContext{
 // where saving variable length strings is more difficult than a fixed width
 // integer.
 //
-// Total: 596 (350 zones, 246 links)
+// Total: 596 (351 zones, 245 links)
 // ---------------------------------------------------------------------------
 
 const (
