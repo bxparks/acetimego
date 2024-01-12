@@ -96,6 +96,8 @@ func (store *ZoneStore) fillZoneInfo(info *ZoneInfo, record *ZoneInfoRecord) {
 	info.ZoneID = record.ZoneID
 	info.StartYear = store.context.StartYear
 	info.UntilYear = store.context.UntilYear
+	info.StartYearAccurate = store.context.StartYearAccurate
+	info.UntilYearAccurate = store.context.UntilYearAccurate
 	info.Eras = eras
 	info.Target = target
 }

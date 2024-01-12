@@ -2,9 +2,9 @@ TARGETS := zone_infos.go zone_policies.go zone_registry.go
 
 TOOLS := $(abspath ../../AceTimeTools)
 TZ_REPO := $(abspath ../../tz)
-TZ_VERSION := 2023c
+TZ_VERSION := 2023d
 START_YEAR := 2000
-UNTIL_YEAR := 10000
+UNTIL_YEAR := 2200
 
 
 # The zonedb format for acetimego now supports:
@@ -14,14 +14,10 @@ zonedb:
 	$(TOOLS)/tzcompiler.sh \
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
-		--action zonedb \
-		--language go \
-		--scope extended \
-		--offset_granularity 1 \
-		--delta_granularity 60 \
-		--until_at_granularity 1 \
+		--actions zonedb \
+		--languages go \
+		--scope complete \
 		--db_namespace zonedb \
-		--generate_int16_years \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 
@@ -29,13 +25,9 @@ zonedb.json: Makefile
 	$(TOOLS)/tzcompiler.sh \
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
-		--action zonedb \
-		--language json \
-		--scope extended \
-		--offset_granularity 1 \
-		--delta_granularity 60 \
-		--until_at_granularity 1 \
-		--generate_int16_years \
+		--actions json \
+		--languages go \
+		--scope complete \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 

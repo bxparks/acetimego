@@ -27,6 +27,8 @@ type ZoneRecordContext struct {
 	TzDatabaseVersion string
 	StartYear         int16
 	UntilYear         int16
+	StartYearAccurate int16
+	UntilYearAccurate int16
 	MaxTransitions    int16
 	LetterData        string
 	LetterOffsets     []uint8
@@ -50,6 +52,8 @@ type ZoneDataContext struct {
 	TzDatabaseVersion   string
 	StartYear           int16
 	UntilYear           int16
+	StartYearAccurate   int16
+	UntilYearAccurate   int16
 	MaxTransitions      int16
 	LetterData          string
 	LetterOffsets       []uint8
@@ -351,11 +355,21 @@ type ZoneInfo struct {
 	// and serialization.
 	ZoneID uint32
 
-	// Start year of the zone files.
+	// TODO: Maybe replace the StartYear, UntilYear, StartYearAccurate,
+	// UntilYearAccurate with reference to ZoneContext, now that 4 fields are
+	// copied from ZoneContext.
+
+	// Start year of the zone files as requested.
 	StartYear int16
 
-	// Until year of the zone files.
+	// Until year of the zone files as requested.
 	UntilYear int16
+
+	// Start year of accurate transitions. MinYear indicates -Infinity.
+	StartYearAccurate int16
+
+	// Until year of accurate transitions. MaxUntilYear indicates -Infinity.
+	UntilYearAccurate int16
 
 	// A slice of ZoneEra instances. For a normal Zone, num(Eras) is greater than
 	// 0, and the ZoneEra entries are arranged in increasing order

@@ -3,17 +3,13 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedball/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedball
-//     --tz_version 2023c
-//     --action zonedb
-//     --language go
-//     --scope extended
-//     --offset_granularity 1
-//     --delta_granularity 60
-//     --until_at_granularity 1
+//     --tz_version 2023d
+//     --actions zonedb
+//     --languages go
+//     --scope complete
 //     --db_namespace zonedball
-//     --generate_int16_years
 //     --start_year 1800
-//     --until_year 10000
+//     --until_year 2200
 //
 // using the TZ Database files
 //
@@ -27,34 +23,39 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2023c
+// from https://github.com/eggert/tz/releases/tag/2023d
 //
-// Supported Zones: 596 (350 zones, 246 links)
+// Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
+//
+// Requested Years: [1800,2200]
+// Accurate Years: [-32767,32767]
 //
 // Original Years:  [1844,2087]
 // Generated Years: [1844,2087]
+// Lower/Upper Truncated: [False,False]
+//
 // Estimator Years: [1800,2090]
 // Max Buffer Size: 8
 //
 // Records:
 //   Infos: 596
-//   Eras: 1949
+//   Eras: 1961
 //   Policies: 134
 //   Rules: 2238
 //
 // Memory:
 //   Rules: 26856
 //   Policies: 536
-//   Eras: 27286
-//   Zones: 4200
-//   Links: 2952
+//   Eras: 27454
+//   Zones: 4212
+//   Links: 2940
 //   Registry: 0
 //   Formats: 1228
 //   Letters: 106
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 72839
+//   TOTAL: 73007
 //
 // DO NOT EDIT
 
@@ -79,7 +80,9 @@ import (
 var RecordContext = zoneinfo.ZoneRecordContext{
 	TzDatabaseVersion: TzDatabaseVersion,
 	StartYear: 1800,
-	UntilYear: 10000,
+	UntilYear: 2200,
+	StartYearAccurate: -32767,
+	UntilYearAccurate: 32767,
 	MaxTransitions: 8,
 	LetterData: LetterData,
 	LetterOffsets: LetterOffsets,
@@ -97,7 +100,7 @@ var RecordContext = zoneinfo.ZoneRecordContext{
 // Zone Indexes. Index into the ZoneInfoRecords array. Intended for unit tests
 // which need direct access to the zoneinfo.ZoneInfo struct.
 //
-// Total: 596 (350 zones, 246 links)
+// Total: 596 (351 zones, 245 links)
 // ---------------------------------------------------------------------------
 
 const (

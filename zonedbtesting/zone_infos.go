@@ -3,15 +3,14 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedbtesting/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedbtesting
-//     --tz_version 2023c
-//     --action zonedb
-//     --language go
-//     --scope extended
+//     --tz_version 2023d
+//     --actions zonedb
+//     --languages go
+//     --scope complete
 //     --db_namespace zonedbtesting
-//     --generate_int16_years
 //     --include_list include_list.txt
 //     --start_year 1980
-//     --until_year 10000
+//     --until_year 2200
 //
 // using the TZ Database files
 //
@@ -25,13 +24,18 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2023c
+// from https://github.com/eggert/tz/releases/tag/2023d
 //
 // Supported Zones: 5 (4 zones, 1 links)
-// Unsupported Zones: 591 (346 zones, 245 links)
+// Unsupported Zones: 591 (347 zones, 244 links)
+//
+// Requested Years: [1980,2200]
+// Accurate Years: [1980,32767]
 //
 // Original Years:  [1844,2087]
 // Generated Years: [1967,2012]
+// Lower/Upper Truncated: [True,False]
+//
 // Estimator Years: [1967,2024]
 // Max Buffer Size: 6
 //
@@ -130,7 +134,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 	"\xbc\x1a\xe3\xd8\x02\x00\x02\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
-// Unsupported zones: 346
+// Unsupported zones: 347
 // ---------------------------------------------------------------------------
 
 // Africa/Abidjan {Zone missing from include list}
@@ -277,6 +281,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Antarctica/Palmer {Zone missing from include list}
 // Antarctica/Rothera {Zone missing from include list}
 // Antarctica/Troll {Zone missing from include list}
+// Antarctica/Vostok {Zone missing from include list}
 // Asia/Almaty {Zone missing from include list}
 // Asia/Amman {Zone missing from include list}
 // Asia/Anadyr {Zone missing from include list}
@@ -488,7 +493,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 
 
 // ---------------------------------------------------------------------------
-// Unsuported links: 245
+// Unsuported links: 244
 // ---------------------------------------------------------------------------
 
 // Africa/Accra {Link missing from include list}
@@ -578,7 +583,6 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Antarctica/McMurdo {Link missing from include list}
 // Antarctica/South_Pole {Link missing from include list}
 // Antarctica/Syowa {Link missing from include list}
-// Antarctica/Vostok {Link missing from include list}
 // Arctic/Longyearbyen {Link missing from include list}
 // Asia/Aden {Link missing from include list}
 // Asia/Ashkhabad {Link missing from include list}
