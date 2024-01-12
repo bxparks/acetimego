@@ -1,6 +1,7 @@
 # Changelog
 
 * Unreleased
+* 0.5.1 (2024-01-12, TZDB 2023d)
     * zonedb
         * Simplify `tzcompiler.py` flags in various Makefiles.
     * Upgrade TZDB to 2023d
