@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedbtesting/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedbtesting
-//     --tz_version 2023d
+//     --tz_version 2024a
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -24,7 +24,7 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2023d
+// from https://github.com/eggert/tz/releases/tag/2024a
 //
 // Supported Zones: 5 (4 zones, 1 links)
 // Unsupported Zones: 591 (347 zones, 244 links)
@@ -70,7 +70,7 @@ import (
 // Zone Context
 // ---------------------------------------------------------------------------
 
-const TzDatabaseVersion string = "2023d"
+const TzDatabaseVersion string = "2024a"
 
 // DataContext contains references to various XxxData objects and strings. These
 // are the binary encoded versions of the various XxxRecord objects. This object
