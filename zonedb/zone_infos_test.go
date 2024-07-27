@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedb/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedb
-//     --tz_version 2023d
+//     --tz_version 2024a
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,7 +23,7 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2023d
+// from https://github.com/eggert/tz/releases/tag/2024a
 //
 // Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
@@ -40,14 +40,14 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 655
+//   Eras: 657
 //   Policies: 83
 //   Rules: 735
 //
 // Memory:
 //   Rules: 8820
 //   Policies: 332
-//   Eras: 9170
+//   Eras: 9198
 //   Zones: 4212
 //   Links: 2940
 //   Registry: 0
@@ -55,7 +55,7 @@
 //   Letters: 30
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 35891
+//   TOTAL: 35919
 //
 // DO NOT EDIT
 
@@ -70,7 +70,7 @@ import (
 // across all zones.
 //
 // Supported zones: 351
-// numEras: 655
+// numEras: 657
 // ---------------------------------------------------------------------------
 
 var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
@@ -5523,7 +5523,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Almaty
 	// EraIndex: 326
-	// EraCount: 2
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             6:00 RussiaAsia    +06/+07    2004 Oct 31  2:00s
@@ -5540,12 +5540,26 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             6:00    -    +06
+	//             6:00    -    +06    2024 Mar  1  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2024,
+		UntilMonth: 3,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             5:00    -    +05
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 12, // "+05"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 32767,
 		UntilMonth: 1,
@@ -5556,7 +5570,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Amman
-	// EraIndex: 328
+	// EraIndex: 329
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -5590,7 +5604,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Anadyr
-	// EraIndex: 330
+	// EraIndex: 331
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -5638,7 +5652,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Aqtau
-	// EraIndex: 333
+	// EraIndex: 334
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -5672,7 +5686,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Aqtobe
-	// EraIndex: 335
+	// EraIndex: 336
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -5706,7 +5720,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ashgabat
-	// EraIndex: 337
+	// EraIndex: 338
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -5726,7 +5740,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Atyrau
-	// EraIndex: 338
+	// EraIndex: 339
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -5774,7 +5788,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Baghdad
-	// EraIndex: 341
+	// EraIndex: 342
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -5794,7 +5808,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Baku
-	// EraIndex: 342
+	// EraIndex: 343
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -5814,7 +5828,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Bangkok
-	// EraIndex: 343
+	// EraIndex: 344
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -5834,7 +5848,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Barnaul
-	// EraIndex: 344
+	// EraIndex: 345
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -5896,7 +5910,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Beirut
-	// EraIndex: 348
+	// EraIndex: 349
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -5916,7 +5930,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Bishkek
-	// EraIndex: 349
+	// EraIndex: 350
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -5950,7 +5964,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Chita
-	// EraIndex: 351
+	// EraIndex: 352
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -6012,7 +6026,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Choibalsan
-	// EraIndex: 355
+	// EraIndex: 356
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -6046,7 +6060,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Colombo
-	// EraIndex: 357
+	// EraIndex: 358
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -6080,7 +6094,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Damascus
-	// EraIndex: 359
+	// EraIndex: 360
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -6114,7 +6128,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dhaka
-	// EraIndex: 361
+	// EraIndex: 362
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -6148,7 +6162,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dili
-	// EraIndex: 363
+	// EraIndex: 364
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -6182,7 +6196,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dubai
-	// EraIndex: 365
+	// EraIndex: 366
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6202,7 +6216,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dushanbe
-	// EraIndex: 366
+	// EraIndex: 367
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6222,7 +6236,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Famagusta
-	// EraIndex: 367
+	// EraIndex: 368
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -6270,7 +6284,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Gaza
-	// EraIndex: 370
+	// EraIndex: 371
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
@@ -6388,7 +6402,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hebron
-	// EraIndex: 378
+	// EraIndex: 379
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -6422,7 +6436,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ho_Chi_Minh
-	// EraIndex: 380
+	// EraIndex: 381
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6442,7 +6456,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hong_Kong
-	// EraIndex: 381
+	// EraIndex: 382
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6462,7 +6476,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hovd
-	// EraIndex: 382
+	// EraIndex: 383
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6482,7 +6496,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Irkutsk
-	// EraIndex: 383
+	// EraIndex: 384
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -6530,7 +6544,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jakarta
-	// EraIndex: 386
+	// EraIndex: 387
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6550,7 +6564,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jayapura
-	// EraIndex: 387
+	// EraIndex: 388
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6570,7 +6584,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jerusalem
-	// EraIndex: 388
+	// EraIndex: 389
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6590,7 +6604,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kabul
-	// EraIndex: 389
+	// EraIndex: 390
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6610,7 +6624,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kamchatka
-	// EraIndex: 390
+	// EraIndex: 391
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -6658,7 +6672,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Karachi
-	// EraIndex: 393
+	// EraIndex: 394
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6678,7 +6692,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kathmandu
-	// EraIndex: 394
+	// EraIndex: 395
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6698,7 +6712,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Khandyga
-	// EraIndex: 395
+	// EraIndex: 396
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -6774,7 +6788,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kolkata
-	// EraIndex: 400
+	// EraIndex: 401
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6794,7 +6808,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Krasnoyarsk
-	// EraIndex: 401
+	// EraIndex: 402
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -6842,7 +6856,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kuching
-	// EraIndex: 404
+	// EraIndex: 405
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6862,7 +6876,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Macau
-	// EraIndex: 405
+	// EraIndex: 406
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6882,7 +6896,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Magadan
-	// EraIndex: 406
+	// EraIndex: 407
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -6944,7 +6958,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Makassar
-	// EraIndex: 410
+	// EraIndex: 411
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6964,7 +6978,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Manila
-	// EraIndex: 411
+	// EraIndex: 412
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -6984,7 +6998,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Nicosia
-	// EraIndex: 412
+	// EraIndex: 413
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7004,7 +7018,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Novokuznetsk
-	// EraIndex: 413
+	// EraIndex: 414
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7052,7 +7066,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Novosibirsk
-	// EraIndex: 416
+	// EraIndex: 417
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -7114,7 +7128,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Omsk
-	// EraIndex: 420
+	// EraIndex: 421
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7162,7 +7176,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Oral
-	// EraIndex: 423
+	// EraIndex: 424
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -7196,7 +7210,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Pontianak
-	// EraIndex: 425
+	// EraIndex: 426
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7216,7 +7230,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Pyongyang
-	// EraIndex: 426
+	// EraIndex: 427
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7264,7 +7278,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qatar
-	// EraIndex: 429
+	// EraIndex: 430
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7284,8 +7298,8 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qostanay
-	// EraIndex: 430
-	// EraCount: 2
+	// EraIndex: 431
+	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
@@ -7302,12 +7316,26 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             6:00    -    +06
+	//             6:00    -    +06    2024 Mar  1  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
 		FormatIndex: 16, // "+06"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2024,
+		UntilMonth: 3,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             5:00    -    +05
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 12, // "+05"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 32767,
 		UntilMonth: 1,
@@ -7318,7 +7346,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qyzylorda
-	// EraIndex: 432
+	// EraIndex: 434
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7366,7 +7394,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Riyadh
-	// EraIndex: 435
+	// EraIndex: 437
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7386,7 +7414,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Sakhalin
-	// EraIndex: 436
+	// EraIndex: 438
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -7448,7 +7476,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Samarkand
-	// EraIndex: 440
+	// EraIndex: 442
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7468,7 +7496,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Seoul
-	// EraIndex: 441
+	// EraIndex: 443
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7488,7 +7516,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Shanghai
-	// EraIndex: 442
+	// EraIndex: 444
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7508,7 +7536,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Singapore
-	// EraIndex: 443
+	// EraIndex: 445
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7528,7 +7556,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Srednekolymsk
-	// EraIndex: 444
+	// EraIndex: 446
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7576,7 +7604,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Taipei
-	// EraIndex: 447
+	// EraIndex: 449
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7596,7 +7624,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tashkent
-	// EraIndex: 448
+	// EraIndex: 450
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7616,7 +7644,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tbilisi
-	// EraIndex: 449
+	// EraIndex: 451
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7664,7 +7692,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tehran
-	// EraIndex: 452
+	// EraIndex: 454
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7684,7 +7712,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Thimphu
-	// EraIndex: 453
+	// EraIndex: 455
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7704,7 +7732,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tokyo
-	// EraIndex: 454
+	// EraIndex: 456
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7724,7 +7752,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tomsk
-	// EraIndex: 455
+	// EraIndex: 457
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -7800,7 +7828,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ulaanbaatar
-	// EraIndex: 460
+	// EraIndex: 462
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7820,7 +7848,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Urumqi
-	// EraIndex: 461
+	// EraIndex: 463
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -7840,7 +7868,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ust-Nera
-	// EraIndex: 462
+	// EraIndex: 464
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -7902,7 +7930,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Vladivostok
-	// EraIndex: 466
+	// EraIndex: 468
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7950,7 +7978,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yakutsk
-	// EraIndex: 469
+	// EraIndex: 471
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -7998,7 +8026,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yangon
-	// EraIndex: 472
+	// EraIndex: 474
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8018,7 +8046,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yekaterinburg
-	// EraIndex: 473
+	// EraIndex: 475
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -8066,7 +8094,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yerevan
-	// EraIndex: 476
+	// EraIndex: 478
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -8100,7 +8128,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Azores
-	// EraIndex: 478
+	// EraIndex: 480
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8120,7 +8148,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Bermuda
-	// EraIndex: 479
+	// EraIndex: 481
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8140,46 +8168,6 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Canary
-	// EraIndex: 480
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	//              0:00    EU    WE%sT
-	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 107, // "WE%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 0, // 0 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: Atlantic/Cape_Verde
-	// EraIndex: 481
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	//             -1:00    -    -01
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 39, // "-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: Atlantic/Faroe
 	// EraIndex: 482
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
@@ -8199,8 +8187,48 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// ZoneName: Atlantic/Madeira
+	// ZoneName: Atlantic/Cape_Verde
 	// EraIndex: 483
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
+
+	//             -1:00    -    -01
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 39, // "-01"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -240, // -3600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Faroe
+	// EraIndex: 484
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
+
+	//              0:00    EU    WE%sT
+	{
+		PolicyIndex: 24, // PolicyName: EU
+		FormatIndex: 107, // "WE%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 0, // 0 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: Atlantic/Madeira
+	// EraIndex: 485
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8220,7 +8248,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/South_Georgia
-	// EraIndex: 484
+	// EraIndex: 486
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8240,7 +8268,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Stanley
-	// EraIndex: 485
+	// EraIndex: 487
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -8274,7 +8302,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Adelaide
-	// EraIndex: 487
+	// EraIndex: 489
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8294,7 +8322,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Brisbane
-	// EraIndex: 488
+	// EraIndex: 490
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8314,7 +8342,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Broken_Hill
-	// EraIndex: 489
+	// EraIndex: 491
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -8348,7 +8376,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Darwin
-	// EraIndex: 491
+	// EraIndex: 493
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8368,7 +8396,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Eucla
-	// EraIndex: 492
+	// EraIndex: 494
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8388,7 +8416,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Hobart
-	// EraIndex: 493
+	// EraIndex: 495
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8408,7 +8436,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Lindeman
-	// EraIndex: 494
+	// EraIndex: 496
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8428,7 +8456,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Lord_Howe
-	// EraIndex: 495
+	// EraIndex: 497
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8448,7 +8476,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Melbourne
-	// EraIndex: 496
+	// EraIndex: 498
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8468,7 +8496,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Perth
-	// EraIndex: 497
+	// EraIndex: 499
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8488,7 +8516,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Sydney
-	// EraIndex: 498
+	// EraIndex: 500
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8508,7 +8536,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: CET
-	// EraIndex: 499
+	// EraIndex: 501
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8528,7 +8556,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: CST6CDT
-	// EraIndex: 500
+	// EraIndex: 502
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8548,7 +8576,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: EET
-	// EraIndex: 501
+	// EraIndex: 503
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8568,7 +8596,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: EST
-	// EraIndex: 502
+	// EraIndex: 504
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8588,7 +8616,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: EST5EDT
-	// EraIndex: 503
+	// EraIndex: 505
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8608,7 +8636,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT
-	// EraIndex: 504
+	// EraIndex: 506
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8628,7 +8656,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+1
-	// EraIndex: 505
+	// EraIndex: 507
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8648,7 +8676,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+10
-	// EraIndex: 506
+	// EraIndex: 508
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8668,7 +8696,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+11
-	// EraIndex: 507
+	// EraIndex: 509
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8688,7 +8716,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+12
-	// EraIndex: 508
+	// EraIndex: 510
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8708,7 +8736,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+2
-	// EraIndex: 509
+	// EraIndex: 511
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8728,7 +8756,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+3
-	// EraIndex: 510
+	// EraIndex: 512
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8748,7 +8776,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+4
-	// EraIndex: 511
+	// EraIndex: 513
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8768,7 +8796,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+5
-	// EraIndex: 512
+	// EraIndex: 514
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8788,7 +8816,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+6
-	// EraIndex: 513
+	// EraIndex: 515
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8808,7 +8836,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+7
-	// EraIndex: 514
+	// EraIndex: 516
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8828,7 +8856,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+8
-	// EraIndex: 515
+	// EraIndex: 517
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8848,7 +8876,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+9
-	// EraIndex: 516
+	// EraIndex: 518
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8868,7 +8896,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-1
-	// EraIndex: 517
+	// EraIndex: 519
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8888,7 +8916,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-10
-	// EraIndex: 518
+	// EraIndex: 520
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8908,7 +8936,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-11
-	// EraIndex: 519
+	// EraIndex: 521
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8928,7 +8956,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-12
-	// EraIndex: 520
+	// EraIndex: 522
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8948,7 +8976,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-13
-	// EraIndex: 521
+	// EraIndex: 523
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8968,7 +8996,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-14
-	// EraIndex: 522
+	// EraIndex: 524
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -8988,7 +9016,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-2
-	// EraIndex: 523
+	// EraIndex: 525
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9008,7 +9036,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-3
-	// EraIndex: 524
+	// EraIndex: 526
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9028,7 +9056,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-4
-	// EraIndex: 525
+	// EraIndex: 527
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9048,7 +9076,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-5
-	// EraIndex: 526
+	// EraIndex: 528
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9068,7 +9096,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-6
-	// EraIndex: 527
+	// EraIndex: 529
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9088,7 +9116,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-7
-	// EraIndex: 528
+	// EraIndex: 530
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9108,7 +9136,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-8
-	// EraIndex: 529
+	// EraIndex: 531
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9128,7 +9156,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-9
-	// EraIndex: 530
+	// EraIndex: 532
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9148,7 +9176,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/UTC
-	// EraIndex: 531
+	// EraIndex: 533
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9168,7 +9196,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Andorra
-	// EraIndex: 532
+	// EraIndex: 534
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9188,7 +9216,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Astrakhan
-	// EraIndex: 533
+	// EraIndex: 535
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -9250,7 +9278,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Athens
-	// EraIndex: 537
+	// EraIndex: 539
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9270,46 +9298,6 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Belgrade
-	// EraIndex: 538
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	//             1:00    EU    CE%sT
-	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 240, // 3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: Europe/Berlin
-	// EraIndex: 539
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	//             1:00    EU    CE%sT
-	{
-		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 71, // "CE%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 240, // 3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: Europe/Brussels
 	// EraIndex: 540
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
@@ -9329,17 +9317,17 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// ZoneName: Europe/Bucharest
+	// ZoneName: Europe/Berlin
 	// EraIndex: 541
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	//             2:00    EU    EE%sT
+	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 24, // PolicyName: EU
-		FormatIndex: 77, // "EE%T"
+		FormatIndex: 71, // "CE%T"
 		DeltaMinutes: 0,
-		OffsetSecondsCode: 480, // 7200 / 15
+		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 32767,
 		UntilMonth: 1,
@@ -9349,7 +9337,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// ZoneName: Europe/Budapest
+	// ZoneName: Europe/Brussels
 	// EraIndex: 542
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
@@ -9369,8 +9357,48 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// ZoneName: Europe/Chisinau
+	// ZoneName: Europe/Bucharest
 	// EraIndex: 543
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
+
+	//             2:00    EU    EE%sT
+	{
+		PolicyIndex: 24, // PolicyName: EU
+		FormatIndex: 77, // "EE%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 480, // 7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Budapest
+	// EraIndex: 544
+	// EraCount: 1
+	// ---------------------------------------------------------------------------
+
+	//             1:00    EU    CE%sT
+	{
+		PolicyIndex: 24, // PolicyName: EU
+		FormatIndex: 71, // "CE%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 240, // 3600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: Europe/Chisinau
+	// EraIndex: 545
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9390,7 +9418,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Dublin
-	// EraIndex: 544
+	// EraIndex: 546
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9410,7 +9438,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Gibraltar
-	// EraIndex: 545
+	// EraIndex: 547
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9430,7 +9458,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Helsinki
-	// EraIndex: 546
+	// EraIndex: 548
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9450,7 +9478,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Istanbul
-	// EraIndex: 547
+	// EraIndex: 549
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
@@ -9582,7 +9610,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kaliningrad
-	// EraIndex: 556
+	// EraIndex: 558
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -9630,7 +9658,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kirov
-	// EraIndex: 559
+	// EraIndex: 561
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -9678,7 +9706,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kyiv
-	// EraIndex: 562
+	// EraIndex: 564
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9698,7 +9726,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Lisbon
-	// EraIndex: 563
+	// EraIndex: 565
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9718,7 +9746,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/London
-	// EraIndex: 564
+	// EraIndex: 566
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9738,7 +9766,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Madrid
-	// EraIndex: 565
+	// EraIndex: 567
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9758,7 +9786,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Malta
-	// EraIndex: 566
+	// EraIndex: 568
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9778,7 +9806,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Minsk
-	// EraIndex: 567
+	// EraIndex: 569
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -9812,7 +9840,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Moscow
-	// EraIndex: 569
+	// EraIndex: 571
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -9860,7 +9888,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Paris
-	// EraIndex: 572
+	// EraIndex: 574
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9880,7 +9908,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Prague
-	// EraIndex: 573
+	// EraIndex: 575
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9900,7 +9928,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Riga
-	// EraIndex: 574
+	// EraIndex: 576
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -9948,7 +9976,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Rome
-	// EraIndex: 577
+	// EraIndex: 579
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -9968,7 +9996,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Samara
-	// EraIndex: 578
+	// EraIndex: 580
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -10016,7 +10044,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Saratov
-	// EraIndex: 581
+	// EraIndex: 583
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -10078,7 +10106,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Simferopol
-	// EraIndex: 585
+	// EraIndex: 587
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -10126,7 +10154,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Sofia
-	// EraIndex: 588
+	// EraIndex: 590
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10146,7 +10174,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Tallinn
-	// EraIndex: 589
+	// EraIndex: 591
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -10194,7 +10222,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Tirane
-	// EraIndex: 592
+	// EraIndex: 594
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10214,7 +10242,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Ulyanovsk
-	// EraIndex: 593
+	// EraIndex: 595
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -10276,7 +10304,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Vienna
-	// EraIndex: 597
+	// EraIndex: 599
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10296,7 +10324,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Vilnius
-	// EraIndex: 598
+	// EraIndex: 600
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -10344,7 +10372,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Volgograd
-	// EraIndex: 601
+	// EraIndex: 603
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -10420,7 +10448,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Warsaw
-	// EraIndex: 606
+	// EraIndex: 608
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10440,7 +10468,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Zurich
-	// EraIndex: 607
+	// EraIndex: 609
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10460,7 +10488,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: HST
-	// EraIndex: 608
+	// EraIndex: 610
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10480,7 +10508,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Chagos
-	// EraIndex: 609
+	// EraIndex: 611
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10500,7 +10528,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Maldives
-	// EraIndex: 610
+	// EraIndex: 612
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10520,7 +10548,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Mauritius
-	// EraIndex: 611
+	// EraIndex: 613
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10540,7 +10568,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: MET
-	// EraIndex: 612
+	// EraIndex: 614
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10560,7 +10588,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: MST
-	// EraIndex: 613
+	// EraIndex: 615
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10580,7 +10608,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: MST7MDT
-	// EraIndex: 614
+	// EraIndex: 616
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10600,7 +10628,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: PST8PDT
-	// EraIndex: 615
+	// EraIndex: 617
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10620,7 +10648,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Apia
-	// EraIndex: 616
+	// EraIndex: 618
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -10654,7 +10682,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Auckland
-	// EraIndex: 618
+	// EraIndex: 620
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10674,7 +10702,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Bougainville
-	// EraIndex: 619
+	// EraIndex: 621
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -10708,7 +10736,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Chatham
-	// EraIndex: 621
+	// EraIndex: 623
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10728,7 +10756,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Easter
-	// EraIndex: 622
+	// EraIndex: 624
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10748,7 +10776,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Efate
-	// EraIndex: 623
+	// EraIndex: 625
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10768,7 +10796,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Fakaofo
-	// EraIndex: 624
+	// EraIndex: 626
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -10802,7 +10830,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Fiji
-	// EraIndex: 626
+	// EraIndex: 628
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10822,7 +10850,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Galapagos
-	// EraIndex: 627
+	// EraIndex: 629
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10842,7 +10870,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Gambier
-	// EraIndex: 628
+	// EraIndex: 630
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10862,7 +10890,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Guadalcanal
-	// EraIndex: 629
+	// EraIndex: 631
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10882,7 +10910,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Guam
-	// EraIndex: 630
+	// EraIndex: 632
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -10916,7 +10944,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Honolulu
-	// EraIndex: 632
+	// EraIndex: 634
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10936,7 +10964,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kanton
-	// EraIndex: 633
+	// EraIndex: 635
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10956,7 +10984,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kiritimati
-	// EraIndex: 634
+	// EraIndex: 636
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -10976,7 +11004,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kosrae
-	// EraIndex: 635
+	// EraIndex: 637
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -11010,7 +11038,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kwajalein
-	// EraIndex: 637
+	// EraIndex: 639
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11030,7 +11058,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Marquesas
-	// EraIndex: 638
+	// EraIndex: 640
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11050,7 +11078,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Nauru
-	// EraIndex: 639
+	// EraIndex: 641
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11070,7 +11098,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Niue
-	// EraIndex: 640
+	// EraIndex: 642
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11090,7 +11118,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Norfolk
-	// EraIndex: 641
+	// EraIndex: 643
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -11138,7 +11166,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Noumea
-	// EraIndex: 644
+	// EraIndex: 646
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11158,7 +11186,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Pago_Pago
-	// EraIndex: 645
+	// EraIndex: 647
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11178,7 +11206,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Palau
-	// EraIndex: 646
+	// EraIndex: 648
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11198,7 +11226,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Pitcairn
-	// EraIndex: 647
+	// EraIndex: 649
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11218,7 +11246,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Port_Moresby
-	// EraIndex: 648
+	// EraIndex: 650
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11238,7 +11266,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Rarotonga
-	// EraIndex: 649
+	// EraIndex: 651
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11258,7 +11286,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tahiti
-	// EraIndex: 650
+	// EraIndex: 652
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11278,7 +11306,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tarawa
-	// EraIndex: 651
+	// EraIndex: 653
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11298,7 +11326,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tongatapu
-	// EraIndex: 652
+	// EraIndex: 654
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
@@ -11332,7 +11360,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: WET
-	// EraIndex: 654
+	// EraIndex: 656
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
@@ -11461,7 +11489,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0506ab50,
 		NameIndex: 273, // "Asia/Jakarta"
-		EraIndex: 386,
+		EraIndex: 387,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11501,7 +11529,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x06532bba,
 		NameIndex: 536, // "Pacific/Fakaofo"
-		EraIndex: 624,
+		EraIndex: 626,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -11525,7 +11553,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0903e442,
 		NameIndex: 316, // "Asia/Tbilisi"
-		EraIndex: 449,
+		EraIndex: 451,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -11557,7 +11585,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0af0e91d,
 		NameIndex: 257, // "Asia/Colombo"
-		EraIndex: 357,
+		EraIndex: 358,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -11565,7 +11593,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0b87d921,
 		NameIndex: 373, // "CET"
-		EraIndex: 499,
+		EraIndex: 501,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11573,7 +11601,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0b87e1a3,
 		NameIndex: 386, // "EET"
-		EraIndex: 501,
+		EraIndex: 503,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11581,7 +11609,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0b87e371,
 		NameIndex: 387, // "EST"
-		EraIndex: 502,
+		EraIndex: 504,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11597,7 +11625,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0b87f034,
 		NameIndex: 497, // "HST"
-		EraIndex: 608,
+		EraIndex: 610,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11605,7 +11633,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0b8803ab,
 		NameIndex: 517, // "MET"
-		EraIndex: 612,
+		EraIndex: 614,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11613,7 +11641,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0b880579,
 		NameIndex: 518, // "MST"
-		EraIndex: 613,
+		EraIndex: 615,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11661,7 +11689,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0b882e35,
 		NameIndex: 594, // "WET"
-		EraIndex: 654,
+		EraIndex: 656,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11757,7 +11785,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0fe559a3,
 		NameIndex: 358, // "Australia/Melbourne"
-		EraIndex: 496,
+		EraIndex: 498,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11797,7 +11825,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x13ae5104,
 		NameIndex: 309, // "Asia/Samarkand"
-		EraIndex: 440,
+		EraIndex: 442,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11805,7 +11833,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x148d21bc,
 		NameIndex: 237, // "Asia/Amman"
-		EraIndex: 328,
+		EraIndex: 329,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -11813,7 +11841,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x148f710e,
 		NameIndex: 239, // "Asia/Aqtau"
-		EraIndex: 333,
+		EraIndex: 334,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -11821,7 +11849,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x14ae863b,
 		NameIndex: 253, // "Asia/Chita"
-		EraIndex: 351,
+		EraIndex: 352,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -11837,7 +11865,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x14c07b8b,
 		NameIndex: 260, // "Asia/Dhaka"
-		EraIndex: 361,
+		EraIndex: 362,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -11845,7 +11873,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x14c79f77,
 		NameIndex: 262, // "Asia/Dubai"
-		EraIndex: 365,
+		EraIndex: 366,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11861,7 +11889,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x153b5601,
 		NameIndex: 276, // "Asia/Kabul"
-		EraIndex: 389,
+		EraIndex: 390,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11885,7 +11913,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x155f88b9,
 		NameIndex: 289, // "Asia/Macau"
-		EraIndex: 405,
+		EraIndex: 406,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11893,7 +11921,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x15a8330b,
 		NameIndex: 302, // "Asia/Qatar"
-		EraIndex: 429,
+		EraIndex: 430,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11901,7 +11929,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x15ce82da,
 		NameIndex: 310, // "Asia/Seoul"
-		EraIndex: 441,
+		EraIndex: 443,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11909,7 +11937,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x15e606a8,
 		NameIndex: 321, // "Asia/Tokyo"
-		EraIndex: 454,
+		EraIndex: 456,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11917,7 +11945,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x15e60e60,
 		NameIndex: 322, // "Asia/Tomsk"
-		EraIndex: 455,
+		EraIndex: 457,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -11933,7 +11961,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x170380d1,
 		NameIndex: 320, // "Asia/Thimphu"
-		EraIndex: 453,
+		EraIndex: 455,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -11965,7 +11993,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1a76c057,
 		NameIndex: 300, // "Asia/Pontianak"
-		EraIndex: 425,
+		EraIndex: 426,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12013,7 +12041,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1fa788b5,
 		NameIndex: 246, // "Asia/Baku"
-		EraIndex: 342,
+		EraIndex: 343,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12021,7 +12049,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1fa8c394,
 		NameIndex: 261, // "Asia/Dili"
-		EraIndex: 363,
+		EraIndex: 364,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -12029,7 +12057,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1faa4875,
 		NameIndex: 265, // "Asia/Gaza"
-		EraIndex: 370,
+		EraIndex: 371,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -12037,7 +12065,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1fab0fe3,
 		NameIndex: 270, // "Asia/Hovd"
-		EraIndex: 382,
+		EraIndex: 383,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12045,7 +12073,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1faeddac,
 		NameIndex: 297, // "Asia/Omsk"
-		EraIndex: 420,
+		EraIndex: 421,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -12053,7 +12081,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1faef0a0,
 		NameIndex: 298, // "Asia/Oral"
-		EraIndex: 423,
+		EraIndex: 424,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -12069,7 +12097,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x20f2d127,
 		NameIndex: 268, // "Asia/Ho_Chi_Minh"
-		EraIndex: 380,
+		EraIndex: 381,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12077,7 +12105,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x20fbb063,
 		NameIndex: 259, // "Asia/Damascus"
-		EraIndex: 359,
+		EraIndex: 360,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -12093,7 +12121,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x23359b5e,
 		NameIndex: 528, // "Pacific/Apia"
-		EraIndex: 616,
+		EraIndex: 618,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -12101,7 +12129,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x23383ba5,
 		NameIndex: 537, // "Pacific/Fiji"
-		EraIndex: 626,
+		EraIndex: 628,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12109,7 +12137,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2338f9ed,
 		NameIndex: 542, // "Pacific/Guam"
-		EraIndex: 630,
+		EraIndex: 632,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -12117,7 +12145,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x233ca014,
 		NameIndex: 553, // "Pacific/Niue"
-		EraIndex: 640,
+		EraIndex: 642,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12141,7 +12169,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2428e8a3,
 		NameIndex: 347, // "Australia/Adelaide"
-		EraIndex: 487,
+		EraIndex: 489,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12149,7 +12177,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x25062f86,
 		NameIndex: 529, // "Pacific/Auckland"
-		EraIndex: 618,
+		EraIndex: 620,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12157,7 +12185,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x262ca836,
 		NameIndex: 567, // "Pacific/Tongatapu"
-		EraIndex: 652,
+		EraIndex: 654,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -12189,7 +12217,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2876bdff,
 		NameIndex: 352, // "Australia/Darwin"
-		EraIndex: 491,
+		EraIndex: 493,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12205,7 +12233,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x289b4f8b,
 		NameIndex: 264, // "Asia/Famagusta"
-		EraIndex: 367,
+		EraIndex: 368,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -12229,7 +12257,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x29de34a8,
 		NameIndex: 329, // "Asia/Vladivostok"
-		EraIndex: 466,
+		EraIndex: 468,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -12285,7 +12313,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2f0de999,
 		NameIndex: 531, // "Pacific/Chatham"
-		EraIndex: 621,
+		EraIndex: 623,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12309,7 +12337,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x30c4e096,
 		NameIndex: 476, // "Europe/Tallinn"
-		EraIndex: 589,
+		EraIndex: 591,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -12325,7 +12353,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x30f0cc4e,
 		NameIndex: 324, // "Asia/Ulaanbaatar"
-		EraIndex: 460,
+		EraIndex: 462,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12357,7 +12385,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x32bf951a,
 		NameIndex: 354, // "Australia/Hobart"
-		EraIndex: 493,
+		EraIndex: 495,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12365,7 +12393,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x32fc5c3c,
 		NameIndex: 263, // "Asia/Dushanbe"
-		EraIndex: 366,
+		EraIndex: 367,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12373,7 +12401,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x33013174,
 		NameIndex: 343, // "Atlantic/South_Georgia"
-		EraIndex: 484,
+		EraIndex: 486,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12445,7 +12473,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3d4bb1c4,
 		NameIndex: 335, // "Atlantic/Bermuda"
-		EraIndex: 479,
+		EraIndex: 481,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12509,7 +12537,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3ed0f389,
 		NameIndex: 485, // "Europe/Volgograd"
-		EraIndex: 601,
+		EraIndex: 603,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -12525,7 +12553,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f1cc4,
 		NameIndex: 394, // "Etc/GMT+10"
-		EraIndex: 506,
+		EraIndex: 508,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12533,7 +12561,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f1cc5,
 		NameIndex: 395, // "Etc/GMT+11"
-		EraIndex: 507,
+		EraIndex: 509,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12541,7 +12569,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f1cc6,
 		NameIndex: 396, // "Etc/GMT+12"
-		EraIndex: 508,
+		EraIndex: 510,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12549,7 +12577,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f2546,
 		NameIndex: 407, // "Etc/GMT-10"
-		EraIndex: 518,
+		EraIndex: 520,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12557,7 +12585,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f2547,
 		NameIndex: 408, // "Etc/GMT-11"
-		EraIndex: 519,
+		EraIndex: 521,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12565,7 +12593,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f2548,
 		NameIndex: 409, // "Etc/GMT-12"
-		EraIndex: 520,
+		EraIndex: 522,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12573,7 +12601,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f2549,
 		NameIndex: 410, // "Etc/GMT-13"
-		EraIndex: 521,
+		EraIndex: 523,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12581,7 +12609,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f254a,
 		NameIndex: 411, // "Etc/GMT-14"
-		EraIndex: 522,
+		EraIndex: 524,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12605,7 +12633,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4318fa27,
 		NameIndex: 429, // "Europe/Athens"
-		EraIndex: 537,
+		EraIndex: 539,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12629,7 +12657,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x44644c20,
 		NameIndex: 432, // "Europe/Berlin"
-		EraIndex: 539,
+		EraIndex: 541,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12645,7 +12673,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x456f7c3c,
 		NameIndex: 501, // "Indian/Chagos"
-		EraIndex: 609,
+		EraIndex: 611,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12677,7 +12705,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4785f921,
 		NameIndex: 327, // "Asia/Ust-Nera"
-		EraIndex: 462,
+		EraIndex: 464,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -12685,7 +12713,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4a275f62,
 		NameIndex: 440, // "Europe/Dublin"
-		EraIndex: 544,
+		EraIndex: 546,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12693,7 +12721,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4b0fcf78,
 		NameIndex: 294, // "Asia/Nicosia"
-		EraIndex: 412,
+		EraIndex: 413,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12709,7 +12737,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4d1e9776,
 		NameIndex: 364, // "Australia/Sydney"
-		EraIndex: 498,
+		EraIndex: 500,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12749,7 +12777,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4fedc9c0,
 		NameIndex: 348, // "Australia/Brisbane"
-		EraIndex: 488,
+		EraIndex: 490,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12773,7 +12801,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x527f5245,
 		NameIndex: 278, // "Asia/Karachi"
-		EraIndex: 393,
+		EraIndex: 394,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12797,7 +12825,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x53720c3a,
 		NameIndex: 540, // "Pacific/Gambier"
-		EraIndex: 628,
+		EraIndex: 630,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12853,7 +12881,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x577f28ac,
 		NameIndex: 269, // "Asia/Hong_Kong"
-		EraIndex: 381,
+		EraIndex: 382,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12861,7 +12889,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x57ca7135,
 		NameIndex: 550, // "Pacific/Marquesas"
-		EraIndex: 638,
+		EraIndex: 640,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12909,7 +12937,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5becd23a,
 		NameIndex: 275, // "Asia/Jerusalem"
-		EraIndex: 388,
+		EraIndex: 389,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12925,7 +12953,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5c00a70b,
 		NameIndex: 451, // "Europe/Lisbon"
-		EraIndex: 563,
+		EraIndex: 565,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12933,7 +12961,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5c5e1772,
 		NameIndex: 337, // "Atlantic/Cape_Verde"
-		EraIndex: 481,
+		EraIndex: 483,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12941,7 +12969,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5c6a84ae,
 		NameIndex: 453, // "Europe/London"
-		EraIndex: 564,
+		EraIndex: 566,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12973,7 +13001,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5dbd1535,
 		NameIndex: 455, // "Europe/Madrid"
-		EraIndex: 565,
+		EraIndex: 567,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -12989,7 +13017,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5e10f7a4,
 		NameIndex: 530, // "Pacific/Bougainville"
-		EraIndex: 619,
+		EraIndex: 621,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -13005,7 +13033,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5ec266fc,
 		NameIndex: 460, // "Europe/Moscow"
-		EraIndex: 569,
+		EraIndex: 571,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -13029,7 +13057,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x603aebd0,
 		NameIndex: 556, // "Pacific/Pago_Pago"
-		EraIndex: 645,
+		EraIndex: 647,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13077,8 +13105,8 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x654fe522,
 		NameIndex: 303, // "Asia/Qostanay"
-		EraIndex: 430,
-		EraCount: 2,
+		EraIndex: 431,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 215: Zone America/Indiana/Knox
@@ -13093,7 +13121,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x65ee5d48,
 		NameIndex: 465, // "Europe/Prague"
-		EraIndex: 573,
+		EraIndex: 575,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13181,7 +13209,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x69264f93,
 		NameIndex: 295, // "Asia/Novokuznetsk"
-		EraIndex: 413,
+		EraIndex: 414,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -13221,7 +13249,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6aa21c85,
 		NameIndex: 291, // "Asia/Makassar"
-		EraIndex: 410,
+		EraIndex: 411,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13229,7 +13257,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6ab2975b,
 		NameIndex: 443, // "Europe/Helsinki"
-		EraIndex: 546,
+		EraIndex: 548,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13253,7 +13281,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6bc0b139,
 		NameIndex: 468, // "Europe/Samara"
-		EraIndex: 578,
+		EraIndex: 580,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -13317,7 +13345,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6ea95b47,
 		NameIndex: 477, // "Europe/Tirane"
-		EraIndex: 592,
+		EraIndex: 594,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13365,7 +13393,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x71282e81,
 		NameIndex: 304, // "Asia/Qyzylorda"
-		EraIndex: 432,
+		EraIndex: 434,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -13373,7 +13401,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x72c06cd9,
 		NameIndex: 283, // "Asia/Kolkata"
-		EraIndex: 400,
+		EraIndex: 401,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13389,7 +13417,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x734cc2e5,
 		NameIndex: 483, // "Europe/Vienna"
-		EraIndex: 597,
+		EraIndex: 599,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13413,7 +13441,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x73baf9d7,
 		NameIndex: 277, // "Asia/Kamchatka"
-		EraIndex: 390,
+		EraIndex: 391,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -13469,7 +13497,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x75185c19,
 		NameIndex: 486, // "Europe/Warsaw"
-		EraIndex: 606,
+		EraIndex: 608,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13613,7 +13641,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x7b09c02a,
 		NameIndex: 508, // "Indian/Mauritius"
-		EraIndex: 611,
+		EraIndex: 613,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13621,7 +13649,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x7bb3e1c4,
 		NameIndex: 345, // "Atlantic/Stanley"
-		EraIndex: 485,
+		EraIndex: 487,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -13693,7 +13721,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x7d8195b9,
 		NameIndex: 489, // "Europe/Zurich"
-		EraIndex: 607,
+		EraIndex: 609,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13717,7 +13745,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x801b003b,
 		NameIndex: 286, // "Asia/Kuching"
-		EraIndex: 404,
+		EraIndex: 405,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13725,7 +13753,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x81b5c037,
 		NameIndex: 341, // "Atlantic/Madeira"
-		EraIndex: 483,
+		EraIndex: 485,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13757,7 +13785,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8305073a,
 		NameIndex: 546, // "Pacific/Kiritimati"
-		EraIndex: 634,
+		EraIndex: 636,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13781,7 +13809,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x87bb3a9e,
 		NameIndex: 330, // "Asia/Yakutsk"
-		EraIndex: 469,
+		EraIndex: 471,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -13797,7 +13825,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8837d8bd,
 		NameIndex: 558, // "Pacific/Pitcairn"
-		EraIndex: 647,
+		EraIndex: 649,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13821,7 +13849,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8a2bce28,
 		NameIndex: 534, // "Pacific/Efate"
-		EraIndex: 623,
+		EraIndex: 625,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13861,7 +13889,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8acc41ae,
 		NameIndex: 552, // "Pacific/Nauru"
-		EraIndex: 639,
+		EraIndex: 641,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13869,7 +13897,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8adc72a3,
 		NameIndex: 388, // "EST5EDT"
-		EraIndex: 503,
+		EraIndex: 505,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13877,7 +13905,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8af04a36,
 		NameIndex: 557, // "Pacific/Palau"
-		EraIndex: 646,
+		EraIndex: 648,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13901,7 +13929,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8cf99e44,
 		NameIndex: 353, // "Australia/Eucla"
-		EraIndex: 492,
+		EraIndex: 494,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13941,7 +13969,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8db8269d,
 		NameIndex: 361, // "Australia/Perth"
-		EraIndex: 497,
+		EraIndex: 499,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13957,7 +13985,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8e216759,
 		NameIndex: 548, // "Pacific/Kwajalein"
-		EraIndex: 637,
+		EraIndex: 639,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -13997,7 +14025,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8f4eb4be,
 		NameIndex: 554, // "Pacific/Norfolk"
-		EraIndex: 641,
+		EraIndex: 643,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -14029,7 +14057,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9185c8cc,
 		NameIndex: 333, // "Asia/Yerevan"
-		EraIndex: 476,
+		EraIndex: 478,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -14045,7 +14073,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x928aa4a6,
 		NameIndex: 254, // "Asia/Choibalsan"
-		EraIndex: 355,
+		EraIndex: 356,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -14085,7 +14113,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x93ed1c8e,
 		NameIndex: 301, // "Asia/Pyongyang"
-		EraIndex: 426,
+		EraIndex: 427,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -14125,7 +14153,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9685a4d9,
 		NameIndex: 282, // "Asia/Khandyga"
-		EraIndex: 395,
+		EraIndex: 396,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -14197,7 +14225,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x97f6764b,
 		NameIndex: 427, // "Europe/Andorra"
-		EraIndex: 532,
+		EraIndex: 534,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14245,7 +14273,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9869681c,
 		NameIndex: 507, // "Indian/Maldives"
-		EraIndex: 610,
+		EraIndex: 612,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14277,7 +14305,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9981a3b0,
 		NameIndex: 562, // "Pacific/Rarotonga"
-		EraIndex: 649,
+		EraIndex: 651,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14285,7 +14313,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9a96ce6f,
 		NameIndex: 280, // "Asia/Kathmandu"
-		EraIndex: 394,
+		EraIndex: 395,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14317,7 +14345,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9ce0197c,
 		NameIndex: 436, // "Europe/Budapest"
-		EraIndex: 542,
+		EraIndex: 544,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14325,7 +14353,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9ceffbed,
 		NameIndex: 244, // "Asia/Baghdad"
-		EraIndex: 341,
+		EraIndex: 342,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14349,7 +14377,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da14,
 		NameIndex: 393, // "Etc/GMT+1"
-		EraIndex: 505,
+		EraIndex: 507,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14357,7 +14385,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da15,
 		NameIndex: 397, // "Etc/GMT+2"
-		EraIndex: 509,
+		EraIndex: 511,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14365,7 +14393,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da16,
 		NameIndex: 398, // "Etc/GMT+3"
-		EraIndex: 510,
+		EraIndex: 512,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14373,7 +14401,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da17,
 		NameIndex: 399, // "Etc/GMT+4"
-		EraIndex: 511,
+		EraIndex: 513,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14381,7 +14409,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da18,
 		NameIndex: 400, // "Etc/GMT+5"
-		EraIndex: 512,
+		EraIndex: 514,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14389,7 +14417,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da19,
 		NameIndex: 401, // "Etc/GMT+6"
-		EraIndex: 513,
+		EraIndex: 515,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14397,7 +14425,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da1a,
 		NameIndex: 402, // "Etc/GMT+7"
-		EraIndex: 514,
+		EraIndex: 516,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14405,7 +14433,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da1b,
 		NameIndex: 403, // "Etc/GMT+8"
-		EraIndex: 515,
+		EraIndex: 517,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14413,7 +14441,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da1c,
 		NameIndex: 404, // "Etc/GMT+9"
-		EraIndex: 516,
+		EraIndex: 518,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14429,7 +14457,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da56,
 		NameIndex: 406, // "Etc/GMT-1"
-		EraIndex: 517,
+		EraIndex: 519,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14437,7 +14465,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da57,
 		NameIndex: 412, // "Etc/GMT-2"
-		EraIndex: 523,
+		EraIndex: 525,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14445,7 +14473,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da58,
 		NameIndex: 413, // "Etc/GMT-3"
-		EraIndex: 524,
+		EraIndex: 526,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14453,7 +14481,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da59,
 		NameIndex: 414, // "Etc/GMT-4"
-		EraIndex: 525,
+		EraIndex: 527,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14461,7 +14489,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5a,
 		NameIndex: 415, // "Etc/GMT-5"
-		EraIndex: 526,
+		EraIndex: 528,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14469,7 +14497,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5b,
 		NameIndex: 416, // "Etc/GMT-6"
-		EraIndex: 527,
+		EraIndex: 529,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14477,7 +14505,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5c,
 		NameIndex: 417, // "Etc/GMT-7"
-		EraIndex: 528,
+		EraIndex: 530,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14485,7 +14513,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5d,
 		NameIndex: 418, // "Etc/GMT-8"
-		EraIndex: 529,
+		EraIndex: 531,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14493,7 +14521,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5e,
 		NameIndex: 419, // "Etc/GMT-9"
-		EraIndex: 530,
+		EraIndex: 532,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14517,7 +14545,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d6e3aaf,
 		NameIndex: 247, // "Asia/Bangkok"
-		EraIndex: 343,
+		EraIndex: 344,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14541,7 +14569,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9dba4997,
 		NameIndex: 248, // "Asia/Barnaul"
-		EraIndex: 344,
+		EraIndex: 345,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -14557,7 +14585,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9e09d6e6,
 		NameIndex: 445, // "Europe/Istanbul"
-		EraIndex: 547,
+		EraIndex: 549,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -14605,7 +14633,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa2a435cb,
 		NameIndex: 296, // "Asia/Novosibirsk"
-		EraIndex: 416,
+		EraIndex: 417,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -14621,7 +14649,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa2c1e347,
 		NameIndex: 450, // "Europe/Kyiv"
-		EraIndex: 562,
+		EraIndex: 564,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14637,7 +14665,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa2c57587,
 		NameIndex: 466, // "Europe/Riga"
-		EraIndex: 574,
+		EraIndex: 576,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -14645,7 +14673,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa2c58fd7,
 		NameIndex: 467, // "Europe/Rome"
-		EraIndex: 577,
+		EraIndex: 579,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14670,14 +14698,14 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 		ZoneID: 0xa61f41fa,
 		NameIndex: 236, // "Asia/Almaty"
 		EraIndex: 326,
-		EraCount: 2,
+		EraCount: 3,
 		TargetIndex: 0,
 	},
 	// 414: Zone Asia/Anadyr
 	{
 		ZoneID: 0xa63cebd1,
 		NameIndex: 238, // "Asia/Anadyr"
-		EraIndex: 330,
+		EraIndex: 331,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -14685,7 +14713,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa67dcc4e,
 		NameIndex: 240, // "Asia/Aqtobe"
-		EraIndex: 335,
+		EraIndex: 336,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -14693,7 +14721,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa6b6e068,
 		NameIndex: 243, // "Asia/Atyrau"
-		EraIndex: 338,
+		EraIndex: 339,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -14709,7 +14737,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa748b67d,
 		NameIndex: 357, // "Australia/Lord_Howe"
-		EraIndex: 495,
+		EraIndex: 497,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14717,7 +14745,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa7ba7f68,
 		NameIndex: 561, // "Pacific/Port_Moresby"
-		EraIndex: 648,
+		EraIndex: 650,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14733,7 +14761,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa7f3d5fd,
 		NameIndex: 249, // "Asia/Beirut"
-		EraIndex: 348,
+		EraIndex: 349,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14773,7 +14801,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa952f752,
 		NameIndex: 539, // "Pacific/Galapagos"
-		EraIndex: 627,
+		EraIndex: 629,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14837,7 +14865,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xad58aa18,
 		NameIndex: 438, // "Europe/Chisinau"
-		EraIndex: 543,
+		EraIndex: 545,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -14869,7 +14897,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb06eada3,
 		NameIndex: 349, // "Australia/Broken_Hill"
-		EraIndex: 489,
+		EraIndex: 491,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -14877,7 +14905,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb0728553,
 		NameIndex: 250, // "Asia/Bishkek"
-		EraIndex: 349,
+		EraIndex: 350,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -14949,7 +14977,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb5eef250,
 		NameIndex: 267, // "Asia/Hebron"
-		EraIndex: 378,
+		EraIndex: 379,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -14989,7 +15017,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xba87598d,
 		NameIndex: 241, // "Asia/Ashgabat"
-		EraIndex: 337,
+		EraIndex: 338,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15045,7 +15073,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xbf8e337d,
 		NameIndex: 313, // "Asia/Srednekolymsk"
-		EraIndex: 444,
+		EraIndex: 446,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -15085,7 +15113,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xc156c944,
 		NameIndex: 292, // "Asia/Manila"
-		EraIndex: 411,
+		EraIndex: 412,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15181,7 +15209,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xc6833c2f,
 		NameIndex: 274, // "Asia/Jayapura"
-		EraIndex: 387,
+		EraIndex: 388,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15277,7 +15305,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xcd973d93,
 		NameIndex: 306, // "Asia/Riyadh"
-		EraIndex: 435,
+		EraIndex: 437,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15309,7 +15337,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xcf54f7e7,
 		NameIndex: 533, // "Pacific/Easter"
-		EraIndex: 622,
+		EraIndex: 624,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15317,7 +15345,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xcf8581fa,
 		NameIndex: 312, // "Asia/Singapore"
-		EraIndex: 443,
+		EraIndex: 445,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15325,7 +15353,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd0376c6a,
 		NameIndex: 284, // "Asia/Krasnoyarsk"
-		EraIndex: 401,
+		EraIndex: 402,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -15357,7 +15385,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd1a844ae,
 		NameIndex: 314, // "Asia/Taipei"
-		EraIndex: 447,
+		EraIndex: 449,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15365,7 +15393,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd1f02254,
 		NameIndex: 317, // "Asia/Tehran"
-		EraIndex: 452,
+		EraIndex: 454,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15397,7 +15425,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd33b2f28,
 		NameIndex: 447, // "Europe/Kaliningrad"
-		EraIndex: 556,
+		EraIndex: 558,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -15437,7 +15465,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd5379735,
 		NameIndex: 326, // "Asia/Urumqi"
-		EraIndex: 461,
+		EraIndex: 463,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15469,7 +15497,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd8e2de58,
 		NameIndex: 391, // "Etc/GMT"
-		EraIndex: 504,
+		EraIndex: 506,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15485,7 +15513,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd8e31abc,
 		NameIndex: 423, // "Etc/UTC"
-		EraIndex: 531,
+		EraIndex: 533,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15509,7 +15537,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd99ee2dc,
 		NameIndex: 527, // "PST8PDT"
-		EraIndex: 615,
+		EraIndex: 617,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15525,7 +15553,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xda9eb724,
 		NameIndex: 472, // "Europe/Simferopol"
-		EraIndex: 585,
+		EraIndex: 587,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -15549,7 +15577,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdd512f0e,
 		NameIndex: 545, // "Pacific/Kanton"
-		EraIndex: 633,
+		EraIndex: 635,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15557,7 +15585,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdd54a8be,
 		NameIndex: 331, // "Asia/Yangon"
-		EraIndex: 472,
+		EraIndex: 474,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15565,7 +15593,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdd63b8ce,
 		NameIndex: 484, // "Europe/Vilnius"
-		EraIndex: 598,
+		EraIndex: 600,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -15581,7 +15609,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xde5139a8,
 		NameIndex: 547, // "Pacific/Kosrae"
-		EraIndex: 635,
+		EraIndex: 637,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -15597,7 +15625,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdee07337,
 		NameIndex: 434, // "Europe/Brussels"
-		EraIndex: 540,
+		EraIndex: 542,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15621,7 +15649,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdfbf213f,
 		NameIndex: 271, // "Asia/Irkutsk"
-		EraIndex: 383,
+		EraIndex: 384,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -15629,7 +15657,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe03783d0,
 		NameIndex: 479, // "Europe/Ulyanovsk"
-		EraIndex: 593,
+		EraIndex: 595,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -15637,7 +15665,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe05029e2,
 		NameIndex: 356, // "Australia/Lindeman"
-		EraIndex: 494,
+		EraIndex: 496,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15645,7 +15673,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe0532b3a,
 		NameIndex: 431, // "Europe/Belgrade"
-		EraIndex: 538,
+		EraIndex: 540,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15677,7 +15705,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe110a971,
 		NameIndex: 339, // "Atlantic/Faroe"
-		EraIndex: 482,
+		EraIndex: 484,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15709,7 +15737,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe22256e1,
 		NameIndex: 428, // "Europe/Astrakhan"
-		EraIndex: 533,
+		EraIndex: 535,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -15741,7 +15769,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe4315da4,
 		NameIndex: 471, // "Europe/Saratov"
-		EraIndex: 581,
+		EraIndex: 583,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -15749,7 +15777,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe551b788,
 		NameIndex: 555, // "Pacific/Noumea"
-		EraIndex: 644,
+		EraIndex: 646,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15781,7 +15809,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe6e70af9,
 		NameIndex: 543, // "Pacific/Honolulu"
-		EraIndex: 632,
+		EraIndex: 634,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15829,7 +15857,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xebacc19b,
 		NameIndex: 290, // "Asia/Magadan"
-		EraIndex: 406,
+		EraIndex: 407,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -15853,7 +15881,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf0e87d00,
 		NameIndex: 374, // "CST6CDT"
-		EraIndex: 500,
+		EraIndex: 502,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15861,7 +15889,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf24c2446,
 		NameIndex: 565, // "Pacific/Tahiti"
-		EraIndex: 650,
+		EraIndex: 652,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15869,7 +15897,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf2517e63,
 		NameIndex: 566, // "Pacific/Tarawa"
-		EraIndex: 651,
+		EraIndex: 653,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15877,7 +15905,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf2af9375,
 		NameIndex: 519, // "MST7MDT"
-		EraIndex: 614,
+		EraIndex: 616,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15893,7 +15921,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf3924254,
 		NameIndex: 315, // "Asia/Tashkent"
-		EraIndex: 448,
+		EraIndex: 450,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15901,7 +15929,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf4a1c9bd,
 		NameIndex: 308, // "Asia/Sakhalin"
-		EraIndex: 436,
+		EraIndex: 438,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -15909,7 +15937,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf4dd25f0,
 		NameIndex: 541, // "Pacific/Guadalcanal"
-		EraIndex: 629,
+		EraIndex: 631,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15941,7 +15969,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf895a7f5,
 		NameIndex: 311, // "Asia/Shanghai"
-		EraIndex: 442,
+		EraIndex: 444,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15949,7 +15977,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf8e325fc,
 		NameIndex: 441, // "Europe/Gibraltar"
-		EraIndex: 545,
+		EraIndex: 547,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -15965,7 +15993,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf93ed918,
 		NameIndex: 334, // "Atlantic/Azores"
-		EraIndex: 478,
+		EraIndex: 480,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -16021,7 +16049,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfaf5abef,
 		NameIndex: 449, // "Europe/Kirov"
-		EraIndex: 559,
+		EraIndex: 561,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -16029,7 +16057,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb1560f3,
 		NameIndex: 456, // "Europe/Malta"
-		EraIndex: 566,
+		EraIndex: 568,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -16037,7 +16065,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb19cc66,
 		NameIndex: 458, // "Europe/Minsk"
-		EraIndex: 567,
+		EraIndex: 569,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -16045,7 +16073,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb349ec5,
 		NameIndex: 435, // "Europe/Bucharest"
-		EraIndex: 541,
+		EraIndex: 543,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -16061,7 +16089,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb4bc2a3,
 		NameIndex: 463, // "Europe/Paris"
-		EraIndex: 572,
+		EraIndex: 574,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -16069,7 +16097,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb544c6e,
 		NameIndex: 332, // "Asia/Yekaterinburg"
-		EraIndex: 473,
+		EraIndex: 475,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -16077,7 +16105,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb898656,
 		NameIndex: 474, // "Europe/Sofia"
-		EraIndex: 588,
+		EraIndex: 590,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -16101,7 +16129,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfc23f2c2,
 		NameIndex: 336, // "Atlantic/Canary"
-		EraIndex: 480,
+		EraIndex: 482,
 		EraCount: 1,
 		TargetIndex: 0,
 	},

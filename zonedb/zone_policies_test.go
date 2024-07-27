@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedb/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedb
-//     --tz_version 2023d
+//     --tz_version 2024a
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,7 +23,7 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2023d
+// from https://github.com/eggert/tz/releases/tag/2024a
 //
 // Supported Zones: 596 (351 zones, 245 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
@@ -40,14 +40,14 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 655
+//   Eras: 657
 //   Policies: 83
 //   Rules: 735
 //
 // Memory:
 //   Rules: 8820
 //   Policies: 332
-//   Eras: 9170
+//   Eras: 9198
 //   Zones: 4212
 //   Links: 2940
 //   Registry: 0
@@ -55,7 +55,7 @@
 //   Letters: 30
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 35891
+//   TOTAL: 35919
 //
 // DO NOT EDIT
 
@@ -6893,25 +6893,25 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
 	},
-	// Rule Palestine    2024    only    -    Apr    13    2:00    1:00    S
+	// Rule Palestine    2024    only    -    Apr    20    2:00    1:00    S
 	{
 		FromYear: 2024,
 		ToYear: 2024,
 		InMonth: 4,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 13,
+		OnDayOfMonth: 20,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
 	},
-	// Rule Palestine    2025    only    -    Apr     5    2:00    1:00    S
+	// Rule Palestine    2025    only    -    Apr    12    2:00    1:00    S
 	{
 		FromYear: 2025,
 		ToYear: 2025,
 		InMonth: 4,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 5,
+		OnDayOfMonth: 12,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -6977,30 +6977,6 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2039    only    -    Oct    22    2:00    1:00    S
-	{
-		FromYear: 2039,
-		ToYear: 2039,
-		InMonth: 10,
-		OnDayOfWeek: 0,
-		OnDayOfMonth: 22,
-		AtSecondsCode: 480, // 7200 / 15
-		AtSecondsModifier: 0, // SuffixW + remainder=0
-		DeltaMinutes: 60,
-		LetterIndex: 7, // "S"
-	},
-	// Rule Palestine    2039    2067    -    Oct    Sat<=30    2:00    0    -
-	{
-		FromYear: 2039,
-		ToYear: 2067,
-		InMonth: 10,
-		OnDayOfWeek: 6,
-		OnDayOfMonth: -30,
-		AtSecondsCode: 480, // 7200 / 15
-		AtSecondsModifier: 0, // SuffixW + remainder=0
-		DeltaMinutes: 0,
-		LetterIndex: 0, // ""
-	},
 	// Rule Palestine    2040    only    -    Sep     1    2:00    0    -
 	{
 		FromYear: 2040,
@@ -7013,17 +6989,29 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2040    only    -    Oct    13    2:00    1:00    S
+	// Rule Palestine    2040    only    -    Oct    20    2:00    1:00    S
 	{
 		FromYear: 2040,
 		ToYear: 2040,
 		InMonth: 10,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 13,
+		OnDayOfMonth: 20,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2040    2067    -    Oct    Sat<=30    2:00    0    -
+	{
+		FromYear: 2040,
+		ToYear: 2067,
+		InMonth: 10,
+		OnDayOfWeek: 6,
+		OnDayOfMonth: -30,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
 	},
 	// Rule Palestine    2041    only    -    Aug    24    2:00    0    -
 	{
@@ -7037,13 +7025,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2041    only    -    Sep    28    2:00    1:00    S
+	// Rule Palestine    2041    only    -    Oct     5    2:00    1:00    S
 	{
 		FromYear: 2041,
 		ToYear: 2041,
-		InMonth: 9,
+		InMonth: 10,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 28,
+		OnDayOfMonth: 5,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7061,13 +7049,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2042    only    -    Sep    20    2:00    1:00    S
+	// Rule Palestine    2042    only    -    Sep    27    2:00    1:00    S
 	{
 		FromYear: 2042,
 		ToYear: 2042,
 		InMonth: 9,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 20,
+		OnDayOfMonth: 27,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7085,13 +7073,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2043    only    -    Sep    12    2:00    1:00    S
+	// Rule Palestine    2043    only    -    Sep    19    2:00    1:00    S
 	{
 		FromYear: 2043,
 		ToYear: 2043,
 		InMonth: 9,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 12,
+		OnDayOfMonth: 19,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7109,13 +7097,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2044    only    -    Aug    27    2:00    1:00    S
+	// Rule Palestine    2044    only    -    Sep     3    2:00    1:00    S
 	{
 		FromYear: 2044,
 		ToYear: 2044,
-		InMonth: 8,
+		InMonth: 9,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 27,
+		OnDayOfMonth: 3,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7133,13 +7121,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2045    only    -    Aug    19    2:00    1:00    S
+	// Rule Palestine    2045    only    -    Aug    26    2:00    1:00    S
 	{
 		FromYear: 2045,
 		ToYear: 2045,
 		InMonth: 8,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 19,
+		OnDayOfMonth: 26,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7157,13 +7145,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2046    only    -    Aug    11    2:00    1:00    S
+	// Rule Palestine    2046    only    -    Aug    18    2:00    1:00    S
 	{
 		FromYear: 2046,
 		ToYear: 2046,
 		InMonth: 8,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 11,
+		OnDayOfMonth: 18,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7181,13 +7169,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2047    only    -    Jul    27    2:00    1:00    S
+	// Rule Palestine    2047    only    -    Aug     3    2:00    1:00    S
 	{
 		FromYear: 2047,
 		ToYear: 2047,
-		InMonth: 7,
+		InMonth: 8,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 27,
+		OnDayOfMonth: 3,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7205,13 +7193,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2048    only    -    Jul    18    2:00    1:00    S
+	// Rule Palestine    2048    only    -    Jul    25    2:00    1:00    S
 	{
 		FromYear: 2048,
 		ToYear: 2048,
 		InMonth: 7,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 18,
+		OnDayOfMonth: 25,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7229,13 +7217,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2049    only    -    Jul     3    2:00    1:00    S
+	// Rule Palestine    2049    only    -    Jul    10    2:00    1:00    S
 	{
 		FromYear: 2049,
 		ToYear: 2049,
 		InMonth: 7,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 3,
+		OnDayOfMonth: 10,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7253,13 +7241,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2050    only    -    Jun    25    2:00    1:00    S
+	// Rule Palestine    2050    only    -    Jul     2    2:00    1:00    S
 	{
 		FromYear: 2050,
 		ToYear: 2050,
-		InMonth: 6,
+		InMonth: 7,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 25,
+		OnDayOfMonth: 2,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7277,13 +7265,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2051    only    -    Jun    17    2:00    1:00    S
+	// Rule Palestine    2051    only    -    Jun    24    2:00    1:00    S
 	{
 		FromYear: 2051,
 		ToYear: 2051,
 		InMonth: 6,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 17,
+		OnDayOfMonth: 24,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7301,13 +7289,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2052    only    -    Jun     1    2:00    1:00    S
+	// Rule Palestine    2052    only    -    Jun     8    2:00    1:00    S
 	{
 		FromYear: 2052,
 		ToYear: 2052,
 		InMonth: 6,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 1,
+		OnDayOfMonth: 8,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7325,13 +7313,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2053    only    -    May    24    2:00    1:00    S
+	// Rule Palestine    2053    only    -    May    31    2:00    1:00    S
 	{
 		FromYear: 2053,
 		ToYear: 2053,
 		InMonth: 5,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 24,
+		OnDayOfMonth: 31,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7349,57 +7337,69 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2054    only    -    May    16    2:00    1:00    S
+	// Rule Palestine    2054    only    -    May    23    2:00    1:00    S
 	{
 		FromYear: 2054,
 		ToYear: 2054,
 		InMonth: 5,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 16,
+		OnDayOfMonth: 23,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
 	},
-	// Rule Palestine    2055    only    -    May     1    2:00    1:00    S
+	// Rule Palestine    2055    only    -    May     8    2:00    1:00    S
 	{
 		FromYear: 2055,
 		ToYear: 2055,
 		InMonth: 5,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 1,
+		OnDayOfMonth: 8,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
 	},
-	// Rule Palestine    2056    only    -    Apr    22    2:00    1:00    S
+	// Rule Palestine    2056    only    -    Apr    29    2:00    1:00    S
 	{
 		FromYear: 2056,
 		ToYear: 2056,
 		InMonth: 4,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 22,
+		OnDayOfMonth: 29,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
 	},
-	// Rule Palestine    2057    only    -    Apr     7    2:00    1:00    S
+	// Rule Palestine    2057    only    -    Apr    14    2:00    1:00    S
 	{
 		FromYear: 2057,
 		ToYear: 2057,
 		InMonth: 4,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 7,
+		OnDayOfMonth: 14,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 7, // "S"
 	},
-	// Rule Palestine    2058    max    -    Mar    Sat<=30    2:00    1:00    S
+	// Rule Palestine    2058    only    -    Apr     6    2:00    1:00    S
 	{
 		FromYear: 2058,
+		ToYear: 2058,
+		InMonth: 4,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 6,
+		AtSecondsCode: 480, // 7200 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 60,
+		LetterIndex: 7, // "S"
+	},
+	// Rule Palestine    2059    max    -    Mar    Sat<=30    2:00    1:00    S
+	{
+		FromYear: 2059,
 		ToYear: 32766,
 		InMonth: 3,
 		OnDayOfWeek: 6,
@@ -7469,13 +7469,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2072    only    -    Oct    15    2:00    1:00    S
+	// Rule Palestine    2072    only    -    Oct    22    2:00    1:00    S
 	{
 		FromYear: 2072,
 		ToYear: 2072,
 		InMonth: 10,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 15,
+		OnDayOfMonth: 22,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7505,13 +7505,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2073    only    -    Oct     7    2:00    1:00    S
+	// Rule Palestine    2073    only    -    Oct    14    2:00    1:00    S
 	{
 		FromYear: 2073,
 		ToYear: 2073,
 		InMonth: 10,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 7,
+		OnDayOfMonth: 14,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7529,13 +7529,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2074    only    -    Sep    29    2:00    1:00    S
+	// Rule Palestine    2074    only    -    Oct     6    2:00    1:00    S
 	{
 		FromYear: 2074,
 		ToYear: 2074,
-		InMonth: 9,
+		InMonth: 10,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 29,
+		OnDayOfMonth: 6,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7553,13 +7553,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2075    only    -    Sep    14    2:00    1:00    S
+	// Rule Palestine    2075    only    -    Sep    21    2:00    1:00    S
 	{
 		FromYear: 2075,
 		ToYear: 2075,
 		InMonth: 9,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 14,
+		OnDayOfMonth: 21,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7577,13 +7577,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2076    only    -    Sep     5    2:00    1:00    S
+	// Rule Palestine    2076    only    -    Sep    12    2:00    1:00    S
 	{
 		FromYear: 2076,
 		ToYear: 2076,
 		InMonth: 9,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 5,
+		OnDayOfMonth: 12,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7601,13 +7601,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2077    only    -    Aug    28    2:00    1:00    S
+	// Rule Palestine    2077    only    -    Sep     4    2:00    1:00    S
 	{
 		FromYear: 2077,
 		ToYear: 2077,
-		InMonth: 8,
+		InMonth: 9,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 28,
+		OnDayOfMonth: 4,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7625,13 +7625,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2078    only    -    Aug    13    2:00    1:00    S
+	// Rule Palestine    2078    only    -    Aug    20    2:00    1:00    S
 	{
 		FromYear: 2078,
 		ToYear: 2078,
 		InMonth: 8,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 13,
+		OnDayOfMonth: 20,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7649,13 +7649,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2079    only    -    Aug     5    2:00    1:00    S
+	// Rule Palestine    2079    only    -    Aug    12    2:00    1:00    S
 	{
 		FromYear: 2079,
 		ToYear: 2079,
 		InMonth: 8,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 5,
+		OnDayOfMonth: 12,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7673,13 +7673,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2080    only    -    Jul    20    2:00    1:00    S
+	// Rule Palestine    2080    only    -    Jul    27    2:00    1:00    S
 	{
 		FromYear: 2080,
 		ToYear: 2080,
 		InMonth: 7,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 20,
+		OnDayOfMonth: 27,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7697,13 +7697,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2081    only    -    Jul    12    2:00    1:00    S
+	// Rule Palestine    2081    only    -    Jul    19    2:00    1:00    S
 	{
 		FromYear: 2081,
 		ToYear: 2081,
 		InMonth: 7,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 12,
+		OnDayOfMonth: 19,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7721,13 +7721,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2082    only    -    Jul     4    2:00    1:00    S
+	// Rule Palestine    2082    only    -    Jul    11    2:00    1:00    S
 	{
 		FromYear: 2082,
 		ToYear: 2082,
 		InMonth: 7,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 4,
+		OnDayOfMonth: 11,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7745,13 +7745,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2083    only    -    Jun    19    2:00    1:00    S
+	// Rule Palestine    2083    only    -    Jun    26    2:00    1:00    S
 	{
 		FromYear: 2083,
 		ToYear: 2083,
 		InMonth: 6,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 19,
+		OnDayOfMonth: 26,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7769,13 +7769,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2084    only    -    Jun    10    2:00    1:00    S
+	// Rule Palestine    2084    only    -    Jun    17    2:00    1:00    S
 	{
 		FromYear: 2084,
 		ToYear: 2084,
 		InMonth: 6,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 10,
+		OnDayOfMonth: 17,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7793,13 +7793,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2085    only    -    Jun     2    2:00    1:00    S
+	// Rule Palestine    2085    only    -    Jun     9    2:00    1:00    S
 	{
 		FromYear: 2085,
 		ToYear: 2085,
 		InMonth: 6,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 2,
+		OnDayOfMonth: 9,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
@@ -7817,13 +7817,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule Palestine    2086    only    -    May    18    2:00    1:00    S
+	// Rule Palestine    2086    only    -    May    25    2:00    1:00    S
 	{
 		FromYear: 2086,
 		ToYear: 2086,
 		InMonth: 5,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 18,
+		OnDayOfMonth: 25,
 		AtSecondsCode: 480, // 7200 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,

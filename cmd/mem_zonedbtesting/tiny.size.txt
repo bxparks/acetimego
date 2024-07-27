@@ -1,15 +1,17 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     27    4335      22      38 |    4384      60 | (unknown)
+      0       1       4      14 |       5      18 | (padding)
+     27    4442      18      24 |    4487      42 | (unknown)
    3002      27       4     536 |    3033     540 | C musl
-   6485      67       0       0 |    6552       0 | github.com/bxparks/acetimego/acetime
+      0      32       0       0 |      32       0 | Go types
+   6491      63       0       0 |    6554       0 | github.com/bxparks/acetimego/acetime
     470       0       0       0 |     470       0 | github.com/bxparks/acetimego/internal/strbuild
-      0     395     254       0 |     649     254 | github.com/bxparks/acetimego/zonedbtesting
-   2444       0       0       0 |    2444       0 | github.com/bxparks/acetimego/zoneinfo
+      0     395     262       0 |     657     262 | github.com/bxparks/acetimego/zonedbtesting
+   2446       0       0       0 |    2446       0 | github.com/bxparks/acetimego/zoneinfo
      63       0       0       0 |      63       0 | internal/bytealg
     365      24       0      16 |     389      16 | internal/task
     316     165       0       0 |     481       0 | main
-   3270     165       8      91 |    3443      99 | runtime
+   3434     172       8      91 |    3614      99 | runtime
     635     124       0       0 |     759       0 | strings
 ------------------------------- | --------------- | -------
-  17077    5302     288     681 |   22667     969 | total
+  17249    5445     296     681 |   22990     977 | total
