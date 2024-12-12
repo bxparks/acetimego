@@ -680,57 +680,90 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 
 func TestCreateAbbreviation(t *testing.T) {
 	// If no '%', deltaSeconds and Letter should not matter
-	abbrev := createAbbreviation("SAST", 0, "")
+	abbrev := createAbbreviation("SAST", 0, 0, "")
 	if !("SAST" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
-	abbrev = createAbbreviation("SAST", 60, "A")
+	abbrev = createAbbreviation("SAST", 0, 60, "A")
 	if !("SAST" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
 	// If '%', and Letter is "", remove the "%" (unlike acetimec library where
 	// Letter is NULL)
-	abbrev = createAbbreviation("SA%ST", 0, "")
+	abbrev = createAbbreviation("SA%ST", 0, 0, "")
 	if !("SAST" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
 	// If '%', then replaced with (non-null) letterString.
-	abbrev = createAbbreviation("P%T", 60, "D")
+	abbrev = createAbbreviation("P%T", 0, 60, "D")
 	if !("PDT" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
-	abbrev = createAbbreviation("P%T", 0, "S")
+	abbrev = createAbbreviation("P%T", 0, 0, "S")
 	if !("PST" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
-	abbrev = createAbbreviation("P%T", 0, "")
+	abbrev = createAbbreviation("P%T", 0, 0, "")
 	if !("PT" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
-	abbrev = createAbbreviation("%", 60, "CAT")
+	abbrev = createAbbreviation("%", 0, 60, "CAT")
 	if !("CAT" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
-	abbrev = createAbbreviation("%", 0, "WAT")
+	abbrev = createAbbreviation("%", 0, 0, "WAT")
 	if !("WAT" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
 	// If '/', then deltaSeconds selects the first or second component.
-	abbrev = createAbbreviation("GMT/BST", 0, "")
+	abbrev = createAbbreviation("GMT/BST", 0, 0, "")
 	if !("GMT" == abbrev) {
 		t.Fatal(abbrev)
 	}
 
-	abbrev = createAbbreviation("GMT/BST", 60, "")
+	abbrev = createAbbreviation("GMT/BST", 0, 60, "")
 	if !("BST" == abbrev) {
+		t.Fatal(abbrev)
+	}
+}
+
+func TestCreateAbbreviationPercentZ(t *testing.T) {
+	abbrev := createAbbreviation("", 0, 0, "")
+	if !("+00" == abbrev) {
+		t.Fatal(abbrev)
+	}
+	abbrev = createAbbreviation("", 3600, 0, "")
+	if !("+01" == abbrev) {
+		t.Fatal(abbrev)
+	}
+	abbrev = createAbbreviation("", -3600, 0, "")
+	if !("-01" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	abbrev = createAbbreviation("", 3600, 120, "")
+	if !("+0102" == abbrev) {
+		t.Fatal(abbrev)
+	}
+	abbrev = createAbbreviation("", -3600, -120, "")
+	if !("-0102" == abbrev) {
+		t.Fatal(abbrev)
+	}
+
+	abbrev = createAbbreviation("", 3600, 123, "")
+	if !("+010203" == abbrev) {
+		t.Fatal(abbrev)
+	}
+	abbrev = createAbbreviation("", -3600, -123, "")
+	if !("-010203" == abbrev) {
 		t.Fatal(abbrev)
 	}
 }
