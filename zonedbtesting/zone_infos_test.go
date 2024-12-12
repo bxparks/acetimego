@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedbtesting/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedbtesting
-//     --tz_version 2024a
+//     --tz_version 2024b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -24,10 +24,10 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2024a
+// from https://github.com/eggert/tz/releases/tag/2024b
 //
 // Supported Zones: 5 (4 zones, 1 links)
-// Unsupported Zones: 591 (347 zones, 244 links)
+// Unsupported Zones: 591 (335 zones, 256 links)
 //
 // Requested Years: [1980,2200]
 // Accurate Years: [1980,32767]
@@ -52,11 +52,11 @@
 //   Zones: 48
 //   Links: 12
 //   Registry: 0
-//   Formats: 38
+//   Formats: 24
 //   Letters: 7
 //   Fragments: 0
 //   Names: 77
-//   TOTAL: 416
+//   TOTAL: 402
 //
 // DO NOT EDIT
 
@@ -84,7 +84,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    US    P%sT
 	{
 		PolicyIndex: 1, // PolicyName: US
-		FormatIndex: 4, // "P%T"
+		FormatIndex: 3, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -104,7 +104,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 1, // PolicyName: US
-		FormatIndex: 3, // "E%T"
+		FormatIndex: 2, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -124,7 +124,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 0 - UTC
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 5, // "UTC"
+		FormatIndex: 4, // "UTC"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -141,10 +141,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
-	//             -11:00    WS    -11/-10    2011 Dec 29 24:00
+	//             -11:00    WS    %z    2011 Dec 29 24:00
 	{
 		PolicyIndex: 2, // PolicyName: WS
-		FormatIndex: 2, // "-11/-10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -155,10 +155,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              13:00    WS    +13/+14
+	//              13:00    WS    %z
 	{
 		PolicyIndex: 2, // PolicyName: WS
-		FormatIndex: 1, // "+13/+14"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
 		OffsetSecondsRemainder: 0,

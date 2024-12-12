@@ -2,7 +2,7 @@ TARGETS := zone_infos.go zone_policies.go zone_registry.go
 
 TOOLS := $(abspath ../../AceTimeTools)
 TZ_REPO := $(abspath ../../tz)
-TZ_VERSION := 2024a
+TZ_VERSION := 2024b
 START_YEAR := 1800  # smaller than min year in TZDB
 UNTIL_YEAR := 2200
 

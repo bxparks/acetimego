@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedball/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedball
-//     --tz_version 2024a
+//     --tz_version 2024b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2024a
+// from https://github.com/eggert/tz/releases/tag/2024b
 //
-// Supported Zones: 596 (351 zones, 245 links)
+// Supported Zones: 596 (339 zones, 257 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [1800,2200]
@@ -40,22 +40,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 1963
+//   Eras: 1941
 //   Policies: 134
-//   Rules: 2234
+//   Rules: 2231
 //
 // Memory:
-//   Rules: 26808
+//   Rules: 26772
 //   Policies: 536
-//   Eras: 27482
-//   Zones: 4212
-//   Links: 2940
+//   Eras: 27174
+//   Zones: 4068
+//   Links: 3084
 //   Registry: 0
-//   Formats: 1228
+//   Formats: 600
 //   Letters: 106
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 72987
+//   TOTAL: 72015
 //
 // DO NOT EDIT
 
