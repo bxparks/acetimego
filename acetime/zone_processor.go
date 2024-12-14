@@ -1,6 +1,7 @@
 package acetime
 
 import (
+	"github.com/bxparks/acetimego/internal/strbuild"
 	"github.com/bxparks/acetimego/zoneinfo"
 	"strings"
 )
@@ -610,16 +611,52 @@ func calcAbbreviations(transitions []transition) {
 		transition := &transitions[i]
 		transition.abbrev = createAbbreviation(
 			transition.match.era.Format,
+			transition.offsetSeconds,
 			transition.deltaSeconds,
 			transition.letter)
 	}
 }
 
 func createAbbreviation(
-	format string, deltaSeconds int32, letter string) string {
+	format string,
+	offsetSeconds int32,
+	deltaSeconds int32,
+	letter string) string {
 
-	// Check if FORMAT contains a '%'.
-	if strings.IndexByte(format, '%') >= 0 {
+	// Check for empty FORMAT which indicates '%z'. Format as [+/-][hh[mm[ss]]]
+	if len(format) == 0 {
+		totalSeconds := offsetSeconds + deltaSeconds
+		var secs int32
+		if totalSeconds >= 0 {
+			secs = totalSeconds
+		} else {
+			secs = -totalSeconds
+		}
+		h, m, s := LocalTimeFromSeconds(secs)
+		var b strings.Builder
+
+		// leading sign
+		var leading byte
+		if totalSeconds >= 0 {
+			leading = '+'
+		} else {
+			leading = '-'
+		}
+		b.WriteByte(leading)
+		// hours
+		strbuild.Uint8Pad2(&b, h, '0')
+		// minutes if needed
+		if m != 0 || s != 0 {
+			strbuild.Uint8Pad2(&b, m, '0')
+		}
+		// seconds if needed
+		if s != 0 {
+			strbuild.Uint8Pad2(&b, s, '0')
+		}
+		return b.String()
+
+	// Check if FORMAT contains a '%' which represents '%s'
+	} else if strings.IndexByte(format, '%') >= 0 {
 		// If RULES column empty, then letter == "" because Go lang does not allow
 		// strings to be set to nil. So we cannot distinguish between "" and not
 		// existing. In Go lang then, always replace "%" with "".

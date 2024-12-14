@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedbtesting/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedbtesting
-//     --tz_version 2024a
+//     --tz_version 2024b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -24,10 +24,10 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2024a
+// from https://github.com/eggert/tz/releases/tag/2024b
 //
 // Supported Zones: 5 (4 zones, 1 links)
-// Unsupported Zones: 591 (347 zones, 244 links)
+// Unsupported Zones: 591 (335 zones, 256 links)
 //
 // Requested Years: [1980,2200]
 // Accurate Years: [1980,32767]
@@ -52,11 +52,11 @@
 //   Zones: 48
 //   Links: 12
 //   Registry: 0
-//   Formats: 38
+//   Formats: 24
 //   Letters: 7
 //   Fragments: 0
 //   Names: 77
-//   TOTAL: 416
+//   TOTAL: 402
 //
 // DO NOT EDIT
 
@@ -68,8 +68,7 @@ package zonedbtesting
 
 // All ZoneEra.Format entries concatenated together.
 const FormatData = "" +
-	"+13/+14" +
-	"-11/-10" +
+	"%z" +
 	"E%T" +
 	"P%T" +
 	"UTC" +
@@ -87,7 +86,7 @@ const NameData = "America/Los_Angeles" +
 // at index `i` given by the `ZoneEra.Format` field is
 // `FormatData[FormatOffsets[i]:FormatOffsets[i+1]]`.
 var FormatOffsets = []uint16{
-	0, 0, 7, 14, 17, 20, 23,
+	0, 0, 2, 5, 8, 11,
 }
 
 // Byte offset into NameData for each index. The actual Letter string
@@ -109,11 +108,11 @@ const ZoneEraCount = 5
 const ZoneEraChunkSize = 14
 
 // ZoneErasData contains the ZoneEraRecords data as a hex encoded string.
-const ZoneErasData = "\x04\x00\x01\x00\x80\xf8\xff\x7f\x00\x01\x01\x00\x00\x00" +
-	"\x03\x00\x01\x00\x50\xfb\xff\x7f\x00\x01\x01\x00\x00\x00" +
-	"\x05\x00\x00\x00\x00\x00\xff\x7f\x00\x01\x01\x00\x00\x00" +
-	"\x02\x00\x02\x00\xb0\xf5\xdb\x07\x00\x0c\x1d\x00\x80\x16" +
-	"\x01\x00\x02\x00\x30\x0c\xff\x7f\x00\x01\x01\x00\x00\x00"
+const ZoneErasData = "\x03\x00\x01\x00\x80\xf8\xff\x7f\x00\x01\x01\x00\x00\x00" +
+	"\x02\x00\x01\x00\x50\xfb\xff\x7f\x00\x01\x01\x00\x00\x00" +
+	"\x04\x00\x00\x00\x00\x00\xff\x7f\x00\x01\x01\x00\x00\x00" +
+	"\x00\x00\x02\x00\xb0\xf5\xdb\x07\x00\x0c\x1d\x00\x80\x16" +
+	"\x00\x00\x02\x00\x30\x0c\xff\x7f\x00\x01\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
 // ZoneInfoRecords is an array of zoneinfo.ZoneInfoRecord items concatenated
@@ -134,7 +133,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 	"\xbc\x1a\xe3\xd8\x02\x00\x02\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
-// Unsupported zones: 347
+// Unsupported zones: 335
 // ---------------------------------------------------------------------------
 
 // Africa/Abidjan {Zone missing from include list}
@@ -296,7 +295,6 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Asia/Beirut {Zone missing from include list}
 // Asia/Bishkek {Zone missing from include list}
 // Asia/Chita {Zone missing from include list}
-// Asia/Choibalsan {Zone missing from include list}
 // Asia/Colombo {Zone missing from include list}
 // Asia/Damascus {Zone missing from include list}
 // Asia/Dhaka {Zone missing from include list}
@@ -376,11 +374,6 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Australia/Melbourne {Zone missing from include list}
 // Australia/Perth {Zone missing from include list}
 // Australia/Sydney {Zone missing from include list}
-// CET {Zone missing from include list}
-// CST6CDT {Zone missing from include list}
-// EET {Zone missing from include list}
-// EST {Zone missing from include list}
-// EST5EDT {Zone missing from include list}
 // Etc/GMT {Zone missing from include list}
 // Etc/GMT+1 {Zone missing from include list}
 // Etc/GMT+10 {Zone missing from include list}
@@ -446,14 +439,9 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Europe/Volgograd {Zone missing from include list}
 // Europe/Warsaw {Zone missing from include list}
 // Europe/Zurich {Zone missing from include list}
-// HST {Zone missing from include list}
 // Indian/Chagos {Zone missing from include list}
 // Indian/Maldives {Zone missing from include list}
 // Indian/Mauritius {Zone missing from include list}
-// MET {Zone missing from include list}
-// MST {Zone missing from include list}
-// MST7MDT {Zone missing from include list}
-// PST8PDT {Zone missing from include list}
 // Pacific/Auckland {Zone missing from include list}
 // Pacific/Bougainville {Zone missing from include list}
 // Pacific/Chatham {Zone missing from include list}
@@ -483,17 +471,17 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Pacific/Tahiti {Zone missing from include list}
 // Pacific/Tarawa {Zone missing from include list}
 // Pacific/Tongatapu {Zone missing from include list}
-// WET {Zone missing from include list}
 
 
 // ---------------------------------------------------------------------------
-// Notable zones: 0
+// Notable zones: 1
 // ---------------------------------------------------------------------------
 
+// Pacific/Apia {RULES not fixed but FORMAT is missing '%s' or '/'}
 
 
 // ---------------------------------------------------------------------------
-// Unsuported links: 244
+// Unsuported links: 256
 // ---------------------------------------------------------------------------
 
 // Africa/Accra {Link missing from include list}
@@ -589,6 +577,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Asia/Bahrain {Link missing from include list}
 // Asia/Brunei {Link missing from include list}
 // Asia/Calcutta {Link missing from include list}
+// Asia/Choibalsan {Link missing from include list}
 // Asia/Chongqing {Link missing from include list}
 // Asia/Chungking {Link missing from include list}
 // Asia/Dacca {Link missing from include list}
@@ -628,6 +617,8 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Brazil/DeNoronha {Link missing from include list}
 // Brazil/East {Link missing from include list}
 // Brazil/West {Link missing from include list}
+// CET {Link missing from include list}
+// CST6CDT {Link missing from include list}
 // Canada/Atlantic {Link missing from include list}
 // Canada/Central {Link missing from include list}
 // Canada/Eastern {Link missing from include list}
@@ -639,6 +630,9 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Chile/Continental {Link missing from include list}
 // Chile/EasterIsland {Link missing from include list}
 // Cuba {Link missing from include list}
+// EET {Link missing from include list}
+// EST {Link missing from include list}
+// EST5EDT {Link missing from include list}
 // Egypt {Link missing from include list}
 // Eire {Link missing from include list}
 // Etc/GMT+0 {Link missing from include list}
@@ -681,6 +675,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // GMT-0 {Link missing from include list}
 // GMT0 {Link missing from include list}
 // Greenwich {Link missing from include list}
+// HST {Link missing from include list}
 // Hongkong {Link missing from include list}
 // Iceland {Link missing from include list}
 // Indian/Antananarivo {Link missing from include list}
@@ -697,6 +692,9 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // Japan {Link missing from include list}
 // Kwajalein {Link missing from include list}
 // Libya {Link missing from include list}
+// MET {Link missing from include list}
+// MST {Link missing from include list}
+// MST7MDT {Link missing from include list}
 // Mexico/BajaNorte {Link missing from include list}
 // Mexico/BajaSur {Link missing from include list}
 // Mexico/General {Link missing from include list}
@@ -704,6 +702,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // NZ-CHAT {Link missing from include list}
 // Navajo {Link missing from include list}
 // PRC {Link missing from include list}
+// PST8PDT {Link missing from include list}
 // Pacific/Chuuk {Link missing from include list}
 // Pacific/Enderbury {Link missing from include list}
 // Pacific/Funafuti {Link missing from include list}
@@ -739,6 +738,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // UTC {Link missing from include list}
 // Universal {Link missing from include list}
 // W-SU {Link missing from include list}
+// WET {Link missing from include list}
 // Zulu {Link missing from include list}
 
 

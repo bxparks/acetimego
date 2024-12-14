@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedb/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedb
-//     --tz_version 2024a
+//     --tz_version 2024b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2024a
+// from https://github.com/eggert/tz/releases/tag/2024b
 //
-// Supported Zones: 596 (351 zones, 245 links)
+// Supported Zones: 596 (339 zones, 257 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [2000,2200]
@@ -40,22 +40,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 657
-//   Policies: 83
-//   Rules: 735
+//   Eras: 644
+//   Policies: 82
+//   Rules: 731
 //
 // Memory:
-//   Rules: 8820
-//   Policies: 332
-//   Eras: 9198
-//   Zones: 4212
-//   Links: 2940
+//   Rules: 8772
+//   Policies: 328
+//   Eras: 9016
+//   Zones: 4068
+//   Links: 3084
 //   Registry: 0
-//   Formats: 712
+//   Formats: 290
 //   Letters: 30
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 35919
+//   TOTAL: 35263
 //
 // DO NOT EDIT
 
@@ -69,7 +69,7 @@ import (
 // Zone Context
 // ---------------------------------------------------------------------------
 
-const TzDatabaseVersion string = "2024a"
+const TzDatabaseVersion string = "2024b"
 
 // DataContext contains references to various XxxData objects and strings. These
 // are the binary encoded versions of the various XxxRecord objects. This object
@@ -111,7 +111,7 @@ var DataContext = zoneinfo.ZoneDataContext{
 // where saving variable length strings is more difficult than a fixed width
 // integer.
 //
-// Total: 596 (351 zones, 245 links)
+// Total: 596 (339 zones, 257 links)
 // ---------------------------------------------------------------------------
 
 const (

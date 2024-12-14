@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedball/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedball
-//     --tz_version 2024a
+//     --tz_version 2024b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2024a
+// from https://github.com/eggert/tz/releases/tag/2024b
 //
-// Supported Zones: 596 (351 zones, 245 links)
+// Supported Zones: 596 (339 zones, 257 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [1800,2200]
@@ -40,22 +40,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 1963
+//   Eras: 1941
 //   Policies: 134
-//   Rules: 2234
+//   Rules: 2231
 //
 // Memory:
-//   Rules: 26808
+//   Rules: 26772
 //   Policies: 536
-//   Eras: 27482
-//   Zones: 4212
-//   Links: 2940
+//   Eras: 27174
+//   Zones: 4068
+//   Links: 3084
 //   Registry: 0
-//   Formats: 1228
+//   Formats: 600
 //   Letters: 106
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 72987
+//   TOTAL: 72015
 //
 // DO NOT EDIT
 
@@ -69,7 +69,7 @@ import (
 // from all ZonePolicyRecords.
 //
 // Supported zone policies: 134
-// numRules: 2234
+// numRules: 2231
 // ---------------------------------------------------------------------------
 
 var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
@@ -14399,14 +14399,14 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 25, // "S"
 	},
-	// Rule    Mexico    1931    only    -    May    1    23:00    1:00    D
+	// Rule    Mexico    1931    only    -    April    30    0:00    1:00    D
 	{
 		FromYear: 1931,
 		ToYear: 1931,
-		InMonth: 5,
+		InMonth: 4,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 1,
-		AtSecondsCode: 5520, // 82800 / 15
+		OnDayOfMonth: 30,
+		AtSecondsCode: 0, // 0 / 15
 		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 13, // "D"
@@ -20219,7 +20219,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 	// ---------------------------------------------------------------------------
 	// PolicyName: Port
 	// RuleIndex: 1622
-	// RuleCount: 49
+	// RuleCount: 46
 	// ---------------------------------------------------------------------------
 
 	// Anchor: Rule    Port    1916    only    -    Nov     1     1:00    0    -
@@ -20258,77 +20258,29 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Port    1917    only    -    Feb    28    23:00s    1:00    S
+	// Rule    Port    1917    1921    -    Mar     1     0:00    1:00    S
 	{
 		FromYear: 1917,
-		ToYear: 1917,
-		InMonth: 2,
+		ToYear: 1921,
+		InMonth: 3,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 28,
-		AtSecondsCode: 5520, // 82800 / 15
-		AtSecondsModifier: 16, // SuffixS + remainder=0
+		OnDayOfMonth: 1,
+		AtSecondsCode: 0, // 0 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
 	},
-	// Rule    Port    1917    1921    -    Oct    14    23:00s    0    -
+	// Rule    Port    1917    1921    -    Oct    14    24:00    0    -
 	{
 		FromYear: 1917,
 		ToYear: 1921,
 		InMonth: 10,
 		OnDayOfWeek: 0,
 		OnDayOfMonth: 14,
-		AtSecondsCode: 5520, // 82800 / 15
-		AtSecondsModifier: 16, // SuffixS + remainder=0
+		AtSecondsCode: 5760, // 86400 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
-	},
-	// Rule    Port    1918    only    -    Mar     1    23:00s    1:00    S
-	{
-		FromYear: 1918,
-		ToYear: 1918,
-		InMonth: 3,
-		OnDayOfWeek: 0,
-		OnDayOfMonth: 1,
-		AtSecondsCode: 5520, // 82800 / 15
-		AtSecondsModifier: 16, // SuffixS + remainder=0
-		DeltaMinutes: 60,
-		LetterIndex: 25, // "S"
-	},
-	// Rule    Port    1919    only    -    Feb    28    23:00s    1:00    S
-	{
-		FromYear: 1919,
-		ToYear: 1919,
-		InMonth: 2,
-		OnDayOfWeek: 0,
-		OnDayOfMonth: 28,
-		AtSecondsCode: 5520, // 82800 / 15
-		AtSecondsModifier: 16, // SuffixS + remainder=0
-		DeltaMinutes: 60,
-		LetterIndex: 25, // "S"
-	},
-	// Rule    Port    1920    only    -    Feb    29    23:00s    1:00    S
-	{
-		FromYear: 1920,
-		ToYear: 1920,
-		InMonth: 2,
-		OnDayOfWeek: 0,
-		OnDayOfMonth: 29,
-		AtSecondsCode: 5520, // 82800 / 15
-		AtSecondsModifier: 16, // SuffixS + remainder=0
-		DeltaMinutes: 60,
-		LetterIndex: 25, // "S"
-	},
-	// Rule    Port    1921    only    -    Feb    28    23:00s    1:00    S
-	{
-		FromYear: 1921,
-		ToYear: 1921,
-		InMonth: 2,
-		OnDayOfWeek: 0,
-		OnDayOfMonth: 28,
-		AtSecondsCode: 5520, // 82800 / 15
-		AtSecondsModifier: 16, // SuffixS + remainder=0
-		DeltaMinutes: 60,
-		LetterIndex: 25, // "S"
 	},
 	// Rule    Port    1924    only    -    Apr    16    23:00s    1:00    S
 	{
@@ -20342,13 +20294,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
 	},
-	// Rule    Port    1924    only    -    Oct    14    23:00s    0    -
+	// Rule    Port    1924    only    -    Oct     4    23:00s    0    -
 	{
 		FromYear: 1924,
 		ToYear: 1924,
 		InMonth: 10,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 14,
+		OnDayOfMonth: 4,
 		AtSecondsCode: 5520, // 82800 / 15
 		AtSecondsModifier: 16, // SuffixS + remainder=0
 		DeltaMinutes: 0,
@@ -20558,13 +20510,13 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
 	},
-	// Rule    Port    1940    1941    -    Oct     5    23:00s    0    -
+	// Rule    Port    1940    only    -    Oct     7    23:00s    0    -
 	{
 		FromYear: 1940,
-		ToYear: 1941,
+		ToYear: 1940,
 		InMonth: 10,
 		OnDayOfWeek: 0,
-		OnDayOfMonth: 5,
+		OnDayOfMonth: 7,
 		AtSecondsCode: 5520, // 82800 / 15
 		AtSecondsModifier: 16, // SuffixS + remainder=0
 		DeltaMinutes: 0,
@@ -20581,6 +20533,18 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		AtSecondsModifier: 16, // SuffixS + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
+	},
+	// Rule    Port    1941    only    -    Oct     5    23:00s    0    -
+	{
+		FromYear: 1941,
+		ToYear: 1941,
+		InMonth: 10,
+		OnDayOfWeek: 0,
+		OnDayOfMonth: 5,
+		AtSecondsCode: 5520, // 82800 / 15
+		AtSecondsModifier: 16, // SuffixS + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
 	},
 	// Rule    Port    1942    1945    -    Mar    Sat>=8    23:00s    1:00    S
 	{
@@ -20690,10 +20654,10 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Port    1947    1965    -    Apr    Sun>=1     2:00s    1:00    S
+	// Rule    Port    1947    1966    -    Apr    Sun>=1     2:00s    1:00    S
 	{
 		FromYear: 1947,
-		ToYear: 1965,
+		ToYear: 1966,
 		InMonth: 4,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 1,
@@ -20714,58 +20678,70 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Port    1977    only    -    Mar    27     0:00s    1:00    S
+	// Rule    Port    1976    only    -    Sep    lastSun     1:00    0    -
+	{
+		FromYear: 1976,
+		ToYear: 1976,
+		InMonth: 9,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
+		AtSecondsCode: 240, // 3600 / 15
+		AtSecondsModifier: 0, // SuffixW + remainder=0
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
+	},
+	// Rule    Port    1977    only    -    Mar    lastSun     0:00s    1:00    S
 	{
 		FromYear: 1977,
 		ToYear: 1977,
 		InMonth: 3,
-		OnDayOfWeek: 0,
-		OnDayOfMonth: 27,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
 		AtSecondsCode: 0, // 0 / 15
 		AtSecondsModifier: 16, // SuffixS + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
 	},
-	// Rule    Port    1977    only    -    Sep    25     0:00s    0    -
+	// Rule    Port    1977    only    -    Sep    lastSun     0:00s    0    -
 	{
 		FromYear: 1977,
 		ToYear: 1977,
 		InMonth: 9,
-		OnDayOfWeek: 0,
-		OnDayOfMonth: 25,
+		OnDayOfWeek: 7,
+		OnDayOfMonth: 0,
 		AtSecondsCode: 0, // 0 / 15
 		AtSecondsModifier: 16, // SuffixS + remainder=0
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Port    1978    1979    -    Apr    Sun>=1     0:00s    1:00    S
+	// Rule    Port    1978    1980    -    Apr    Sun>=1     1:00s    1:00    S
 	{
 		FromYear: 1978,
-		ToYear: 1979,
+		ToYear: 1980,
 		InMonth: 4,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 1,
-		AtSecondsCode: 0, // 0 / 15
+		AtSecondsCode: 240, // 3600 / 15
 		AtSecondsModifier: 16, // SuffixS + remainder=0
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
 	},
-	// Rule    Port    1978    only    -    Oct     1     0:00s    0    -
+	// Rule    Port    1978    only    -    Oct     1     1:00s    0    -
 	{
 		FromYear: 1978,
 		ToYear: 1978,
 		InMonth: 10,
 		OnDayOfWeek: 0,
 		OnDayOfMonth: 1,
-		AtSecondsCode: 0, // 0 / 15
+		AtSecondsCode: 240, // 3600 / 15
 		AtSecondsModifier: 16, // SuffixS + remainder=0
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Port    1979    1982    -    Sep    lastSun     1:00s    0    -
+	// Rule    Port    1979    1980    -    Sep    lastSun     1:00s    0    -
 	{
 		FromYear: 1979,
-		ToYear: 1982,
+		ToYear: 1980,
 		InMonth: 9,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 0,
@@ -20774,10 +20750,10 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 0,
 		LetterIndex: 0, // ""
 	},
-	// Rule    Port    1980    only    -    Mar    lastSun     0:00s    1:00    S
+	// Rule    Port    1981    1986    -    Mar    lastSun     0:00s    1:00    S
 	{
-		FromYear: 1980,
-		ToYear: 1980,
+		FromYear: 1981,
+		ToYear: 1986,
 		InMonth: 3,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 0,
@@ -20786,34 +20762,22 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 		DeltaMinutes: 60,
 		LetterIndex: 25, // "S"
 	},
-	// Rule    Port    1981    1982    -    Mar    lastSun     1:00s    1:00    S
+	// Rule    Port    1981    1985    -    Sep    lastSun     0:00s    0    -
 	{
 		FromYear: 1981,
-		ToYear: 1982,
-		InMonth: 3,
+		ToYear: 1985,
+		InMonth: 9,
 		OnDayOfWeek: 7,
 		OnDayOfMonth: 0,
-		AtSecondsCode: 240, // 3600 / 15
+		AtSecondsCode: 0, // 0 / 15
 		AtSecondsModifier: 16, // SuffixS + remainder=0
-		DeltaMinutes: 60,
-		LetterIndex: 25, // "S"
-	},
-	// Rule    Port    1983    only    -    Mar    lastSun     2:00s    1:00    S
-	{
-		FromYear: 1983,
-		ToYear: 1983,
-		InMonth: 3,
-		OnDayOfWeek: 7,
-		OnDayOfMonth: 0,
-		AtSecondsCode: 480, // 7200 / 15
-		AtSecondsModifier: 16, // SuffixS + remainder=0
-		DeltaMinutes: 60,
-		LetterIndex: 25, // "S"
+		DeltaMinutes: 0,
+		LetterIndex: 0, // ""
 	},
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Pulaski
-	// RuleIndex: 1671
+	// RuleIndex: 1668
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -20880,7 +20844,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: ROK
-	// RuleIndex: 1676
+	// RuleIndex: 1673
 	// RuleCount: 15
 	// ---------------------------------------------------------------------------
 
@@ -21067,7 +21031,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Regina
-	// RuleIndex: 1691
+	// RuleIndex: 1688
 	// RuleCount: 18
 	// ---------------------------------------------------------------------------
 
@@ -21290,7 +21254,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Romania
-	// RuleIndex: 1709
+	// RuleIndex: 1706
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -21417,7 +21381,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Russia
-	// RuleIndex: 1719
+	// RuleIndex: 1716
 	// RuleCount: 17
 	// ---------------------------------------------------------------------------
 
@@ -21628,7 +21592,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: RussiaAsia
-	// RuleIndex: 1736
+	// RuleIndex: 1733
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -21707,7 +21671,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SA
-	// RuleIndex: 1742
+	// RuleIndex: 1739
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -21750,7 +21714,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Salv
-	// RuleIndex: 1745
+	// RuleIndex: 1742
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -21793,7 +21757,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SanLuis
-	// RuleIndex: 1748
+	// RuleIndex: 1745
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -21836,7 +21800,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Shang
-	// RuleIndex: 1751
+	// RuleIndex: 1748
 	// RuleCount: 15
 	// ---------------------------------------------------------------------------
 
@@ -22023,7 +21987,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SovietZone
-	// RuleIndex: 1766
+	// RuleIndex: 1763
 	// RuleCount: 4
 	// ---------------------------------------------------------------------------
 
@@ -22078,7 +22042,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Spain
-	// RuleIndex: 1770
+	// RuleIndex: 1767
 	// RuleCount: 31
 	// ---------------------------------------------------------------------------
 
@@ -22457,7 +22421,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: SpainAfrica
-	// RuleIndex: 1801
+	// RuleIndex: 1798
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -22584,7 +22548,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: StJohns
-	// RuleIndex: 1811
+	// RuleIndex: 1808
 	// RuleCount: 20
 	// ---------------------------------------------------------------------------
 
@@ -22831,7 +22795,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Starke
-	// RuleIndex: 1831
+	// RuleIndex: 1828
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -22910,7 +22874,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Sudan
-	// RuleIndex: 1837
+	// RuleIndex: 1834
 	// RuleCount: 5
 	// ---------------------------------------------------------------------------
 
@@ -22977,7 +22941,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Swift
-	// RuleIndex: 1842
+	// RuleIndex: 1839
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -23056,7 +23020,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Swiss
-	// RuleIndex: 1848
+	// RuleIndex: 1845
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -23099,7 +23063,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Syria
-	// RuleIndex: 1851
+	// RuleIndex: 1848
 	// RuleCount: 42
 	// ---------------------------------------------------------------------------
 
@@ -23610,7 +23574,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Taiwan
-	// RuleIndex: 1893
+	// RuleIndex: 1890
 	// RuleCount: 16
 	// ---------------------------------------------------------------------------
 
@@ -23809,7 +23773,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Thule
-	// RuleIndex: 1909
+	// RuleIndex: 1906
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -23900,7 +23864,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Tonga
-	// RuleIndex: 1916
+	// RuleIndex: 1913
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -23991,7 +23955,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Toronto
-	// RuleIndex: 1923
+	// RuleIndex: 1920
 	// RuleCount: 19
 	// ---------------------------------------------------------------------------
 
@@ -24226,7 +24190,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Troll
-	// RuleIndex: 1942
+	// RuleIndex: 1939
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -24269,7 +24233,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Tunisia
-	// RuleIndex: 1945
+	// RuleIndex: 1942
 	// RuleCount: 26
 	// ---------------------------------------------------------------------------
 
@@ -24588,7 +24552,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Turkey
-	// RuleIndex: 1971
+	// RuleIndex: 1968
 	// RuleCount: 46
 	// ---------------------------------------------------------------------------
 
@@ -25147,7 +25111,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: US
-	// RuleIndex: 2017
+	// RuleIndex: 2014
 	// RuleCount: 14
 	// ---------------------------------------------------------------------------
 
@@ -25322,7 +25286,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Uruguay
-	// RuleIndex: 2031
+	// RuleIndex: 2028
 	// RuleCount: 49
 	// ---------------------------------------------------------------------------
 
@@ -25917,7 +25881,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Vanc
-	// RuleIndex: 2080
+	// RuleIndex: 2077
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -26044,7 +26008,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Vanuatu
-	// RuleIndex: 2090
+	// RuleIndex: 2087
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -26135,7 +26099,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Vincennes
-	// RuleIndex: 2097
+	// RuleIndex: 2094
 	// RuleCount: 10
 	// ---------------------------------------------------------------------------
 
@@ -26262,7 +26226,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: W-Eur
-	// RuleIndex: 2107
+	// RuleIndex: 2104
 	// RuleCount: 7
 	// ---------------------------------------------------------------------------
 
@@ -26353,7 +26317,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: WS
-	// RuleIndex: 2114
+	// RuleIndex: 2111
 	// RuleCount: 6
 	// ---------------------------------------------------------------------------
 
@@ -26432,7 +26396,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Winn
-	// RuleIndex: 2120
+	// RuleIndex: 2117
 	// RuleCount: 25
 	// ---------------------------------------------------------------------------
 
@@ -26739,7 +26703,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Yukon
-	// RuleIndex: 2145
+	// RuleIndex: 2142
 	// RuleCount: 3
 	// ---------------------------------------------------------------------------
 
@@ -26782,7 +26746,7 @@ var ZoneRuleRecords = []zoneinfo.ZoneRuleRecord{
 
 	// ---------------------------------------------------------------------------
 	// PolicyName: Zion
-	// RuleIndex: 2148
+	// RuleIndex: 2145
 	// RuleCount: 86
 	// ---------------------------------------------------------------------------
 
@@ -27926,43 +27890,43 @@ var ZonePolicyRecords = []zoneinfo.ZonePolicyRecord{
 	{RuleIndex: 1589, RuleCount: 7}, // 95: PolicyName: Phil
 	{RuleIndex: 1596, RuleCount: 5}, // 96: PolicyName: Pike
 	{RuleIndex: 1601, RuleCount: 21}, // 97: PolicyName: Poland
-	{RuleIndex: 1622, RuleCount: 49}, // 98: PolicyName: Port
-	{RuleIndex: 1671, RuleCount: 5}, // 99: PolicyName: Pulaski
-	{RuleIndex: 1676, RuleCount: 15}, // 100: PolicyName: ROK
-	{RuleIndex: 1691, RuleCount: 18}, // 101: PolicyName: Regina
-	{RuleIndex: 1709, RuleCount: 10}, // 102: PolicyName: Romania
-	{RuleIndex: 1719, RuleCount: 17}, // 103: PolicyName: Russia
-	{RuleIndex: 1736, RuleCount: 6}, // 104: PolicyName: RussiaAsia
-	{RuleIndex: 1742, RuleCount: 3}, // 105: PolicyName: SA
-	{RuleIndex: 1745, RuleCount: 3}, // 106: PolicyName: Salv
-	{RuleIndex: 1748, RuleCount: 3}, // 107: PolicyName: SanLuis
-	{RuleIndex: 1751, RuleCount: 15}, // 108: PolicyName: Shang
-	{RuleIndex: 1766, RuleCount: 4}, // 109: PolicyName: SovietZone
-	{RuleIndex: 1770, RuleCount: 31}, // 110: PolicyName: Spain
-	{RuleIndex: 1801, RuleCount: 10}, // 111: PolicyName: SpainAfrica
-	{RuleIndex: 1811, RuleCount: 20}, // 112: PolicyName: StJohns
-	{RuleIndex: 1831, RuleCount: 6}, // 113: PolicyName: Starke
-	{RuleIndex: 1837, RuleCount: 5}, // 114: PolicyName: Sudan
-	{RuleIndex: 1842, RuleCount: 6}, // 115: PolicyName: Swift
-	{RuleIndex: 1848, RuleCount: 3}, // 116: PolicyName: Swiss
-	{RuleIndex: 1851, RuleCount: 42}, // 117: PolicyName: Syria
-	{RuleIndex: 1893, RuleCount: 16}, // 118: PolicyName: Taiwan
-	{RuleIndex: 1909, RuleCount: 7}, // 119: PolicyName: Thule
-	{RuleIndex: 1916, RuleCount: 7}, // 120: PolicyName: Tonga
-	{RuleIndex: 1923, RuleCount: 19}, // 121: PolicyName: Toronto
-	{RuleIndex: 1942, RuleCount: 3}, // 122: PolicyName: Troll
-	{RuleIndex: 1945, RuleCount: 26}, // 123: PolicyName: Tunisia
-	{RuleIndex: 1971, RuleCount: 46}, // 124: PolicyName: Turkey
-	{RuleIndex: 2017, RuleCount: 14}, // 125: PolicyName: US
-	{RuleIndex: 2031, RuleCount: 49}, // 126: PolicyName: Uruguay
-	{RuleIndex: 2080, RuleCount: 10}, // 127: PolicyName: Vanc
-	{RuleIndex: 2090, RuleCount: 7}, // 128: PolicyName: Vanuatu
-	{RuleIndex: 2097, RuleCount: 10}, // 129: PolicyName: Vincennes
-	{RuleIndex: 2107, RuleCount: 7}, // 130: PolicyName: W-Eur
-	{RuleIndex: 2114, RuleCount: 6}, // 131: PolicyName: WS
-	{RuleIndex: 2120, RuleCount: 25}, // 132: PolicyName: Winn
-	{RuleIndex: 2145, RuleCount: 3}, // 133: PolicyName: Yukon
-	{RuleIndex: 2148, RuleCount: 86}, // 134: PolicyName: Zion
+	{RuleIndex: 1622, RuleCount: 46}, // 98: PolicyName: Port
+	{RuleIndex: 1668, RuleCount: 5}, // 99: PolicyName: Pulaski
+	{RuleIndex: 1673, RuleCount: 15}, // 100: PolicyName: ROK
+	{RuleIndex: 1688, RuleCount: 18}, // 101: PolicyName: Regina
+	{RuleIndex: 1706, RuleCount: 10}, // 102: PolicyName: Romania
+	{RuleIndex: 1716, RuleCount: 17}, // 103: PolicyName: Russia
+	{RuleIndex: 1733, RuleCount: 6}, // 104: PolicyName: RussiaAsia
+	{RuleIndex: 1739, RuleCount: 3}, // 105: PolicyName: SA
+	{RuleIndex: 1742, RuleCount: 3}, // 106: PolicyName: Salv
+	{RuleIndex: 1745, RuleCount: 3}, // 107: PolicyName: SanLuis
+	{RuleIndex: 1748, RuleCount: 15}, // 108: PolicyName: Shang
+	{RuleIndex: 1763, RuleCount: 4}, // 109: PolicyName: SovietZone
+	{RuleIndex: 1767, RuleCount: 31}, // 110: PolicyName: Spain
+	{RuleIndex: 1798, RuleCount: 10}, // 111: PolicyName: SpainAfrica
+	{RuleIndex: 1808, RuleCount: 20}, // 112: PolicyName: StJohns
+	{RuleIndex: 1828, RuleCount: 6}, // 113: PolicyName: Starke
+	{RuleIndex: 1834, RuleCount: 5}, // 114: PolicyName: Sudan
+	{RuleIndex: 1839, RuleCount: 6}, // 115: PolicyName: Swift
+	{RuleIndex: 1845, RuleCount: 3}, // 116: PolicyName: Swiss
+	{RuleIndex: 1848, RuleCount: 42}, // 117: PolicyName: Syria
+	{RuleIndex: 1890, RuleCount: 16}, // 118: PolicyName: Taiwan
+	{RuleIndex: 1906, RuleCount: 7}, // 119: PolicyName: Thule
+	{RuleIndex: 1913, RuleCount: 7}, // 120: PolicyName: Tonga
+	{RuleIndex: 1920, RuleCount: 19}, // 121: PolicyName: Toronto
+	{RuleIndex: 1939, RuleCount: 3}, // 122: PolicyName: Troll
+	{RuleIndex: 1942, RuleCount: 26}, // 123: PolicyName: Tunisia
+	{RuleIndex: 1968, RuleCount: 46}, // 124: PolicyName: Turkey
+	{RuleIndex: 2014, RuleCount: 14}, // 125: PolicyName: US
+	{RuleIndex: 2028, RuleCount: 49}, // 126: PolicyName: Uruguay
+	{RuleIndex: 2077, RuleCount: 10}, // 127: PolicyName: Vanc
+	{RuleIndex: 2087, RuleCount: 7}, // 128: PolicyName: Vanuatu
+	{RuleIndex: 2094, RuleCount: 10}, // 129: PolicyName: Vincennes
+	{RuleIndex: 2104, RuleCount: 7}, // 130: PolicyName: W-Eur
+	{RuleIndex: 2111, RuleCount: 6}, // 131: PolicyName: WS
+	{RuleIndex: 2117, RuleCount: 25}, // 132: PolicyName: Winn
+	{RuleIndex: 2142, RuleCount: 3}, // 133: PolicyName: Yukon
+	{RuleIndex: 2145, RuleCount: 86}, // 134: PolicyName: Zion
 
 }
 

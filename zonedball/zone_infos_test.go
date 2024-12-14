@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeTools/src/acetimetools/tzcompiler.py
 //     --input_dir /home/brian/src/acetimego/zonedball/tzfiles
 //     --output_dir /home/brian/src/acetimego/zonedball
-//     --tz_version 2024a
+//     --tz_version 2024b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2024a
+// from https://github.com/eggert/tz/releases/tag/2024b
 //
-// Supported Zones: 596 (351 zones, 245 links)
+// Supported Zones: 596 (339 zones, 257 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [1800,2200]
@@ -40,22 +40,22 @@
 //
 // Records:
 //   Infos: 596
-//   Eras: 1963
+//   Eras: 1941
 //   Policies: 134
-//   Rules: 2234
+//   Rules: 2231
 //
 // Memory:
-//   Rules: 26808
+//   Rules: 26772
 //   Policies: 536
-//   Eras: 27482
-//   Zones: 4212
-//   Links: 2940
+//   Eras: 27174
+//   Zones: 4068
+//   Links: 3084
 //   Registry: 0
-//   Formats: 1228
+//   Formats: 600
 //   Letters: 106
 //   Fragments: 0
 //   Names: 9675
-//   TOTAL: 72987
+//   TOTAL: 72015
 //
 // DO NOT EDIT
 
@@ -69,8 +69,8 @@ import (
 // ZoneEraRecords is an array of ZoneEraRecord items concatenated together
 // across all zones.
 //
-// Supported zones: 351
-// numEras: 1963
+// Supported zones: 339
+// numEras: 1941
 // ---------------------------------------------------------------------------
 
 var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
@@ -83,7 +83,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -0:16:08 - LMT 1912 Jan 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -65, // -968 / 15
 		OffsetSecondsRemainder: 7,
@@ -97,7 +97,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -117,7 +117,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 0:12:12 - LMT 1891 Mar 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 48, // 732 / 15
 		OffsetSecondsRemainder: 12,
@@ -131,7 +131,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:09:21    -    PMT    1911 Mar 11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 166, // "PMT"
+		FormatIndex: 82, // "PMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 37, // 561 / 15
 		OffsetSecondsRemainder: 6,
@@ -145,7 +145,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    Algeria    WE%sT    1940 Feb 25  2:00
 	{
 		PolicyIndex: 8, // PolicyName: Algeria
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -159,7 +159,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Algeria    CE%sT    1946 Oct  7
 	{
 		PolicyIndex: 8, // PolicyName: Algeria
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -173,7 +173,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    -    WET    1956 Jan 29
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 185, // "WET"
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -187,7 +187,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1963 Apr 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -201,7 +201,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    Algeria    WE%sT    1977 Oct 21
 	{
 		PolicyIndex: 8, // PolicyName: Algeria
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -215,7 +215,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Algeria    CE%sT    1979 Oct 26
 	{
 		PolicyIndex: 8, // PolicyName: Algeria
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -229,7 +229,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    Algeria    WE%sT    1981 May
 	{
 		PolicyIndex: 8, // PolicyName: Algeria
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -243,7 +243,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -263,7 +263,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -1:02:20 - LMT 1912 Jan 1 1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -250, // -3740 / 15
 		OffsetSecondsRemainder: 10,
@@ -274,10 +274,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -1:00    -    -01    1975
+	//             -1:00    -    %z    1975
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 54, // "-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -291,7 +291,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -311,7 +311,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 2:05:09 - LMT 1900 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 500, // 7509 / 15
 		OffsetSecondsRemainder: 9,
@@ -325,7 +325,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Egypt    EE%sT
 	{
 		PolicyIndex: 42, // PolicyName: Egypt
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -345,7 +345,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -0:30:20 - LMT 1913 Oct 26
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -122, // -1820 / 15
 		OffsetSecondsRemainder: 10,
@@ -356,10 +356,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              0:00    Morocco    +00/+01    1984 Mar 16
+	//              0:00    Morocco    %z    1984 Mar 16
 	{
 		PolicyIndex: 81, // PolicyName: Morocco
-		FormatIndex: 3, // "+00/+01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -370,10 +370,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              1:00    -    +01    1986
+	//              1:00    -    %z    1986
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 5, // "+01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -384,10 +384,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              0:00    Morocco    +00/+01    2018 Oct 28  3:00
+	//              0:00    Morocco    %z    2018 Oct 28  3:00
 	{
 		PolicyIndex: 81, // PolicyName: Morocco
-		FormatIndex: 3, // "+00/+01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -398,10 +398,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              1:00    Morocco    +01/+00
+	//              1:00    Morocco    %z
 	{
 		PolicyIndex: 81, // PolicyName: Morocco
-		FormatIndex: 6, // "+01/+00"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -421,7 +421,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -0:21:16 - LMT 1901 Jan 1 0:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -86, // -1276 / 15
 		OffsetSecondsRemainder: 14,
@@ -435,7 +435,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    WET    1918 May  6 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 185, // "WET"
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -449,7 +449,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    1:00    WEST    1918 Oct  7 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 184, // "WEST"
+		FormatIndex: 100, // "WEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -463,7 +463,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    WET    1924
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 185, // "WET"
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -477,7 +477,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    Spain    WE%sT    1929
 	{
 		PolicyIndex: 110, // PolicyName: Spain
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -491,7 +491,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    WET    1967
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 185, // "WET"
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -505,7 +505,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00 SpainAfrica WE%sT    1984 Mar 16
 	{
 		PolicyIndex: 111, // PolicyName: SpainAfrica
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -519,7 +519,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    -    CET    1986
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -533,7 +533,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -553,7 +553,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -0:52:48 - LMT 1934 Jan
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -212, // -3168 / 15
 		OffsetSecondsRemainder: 12,
@@ -564,10 +564,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -1:00    -    -01    1976 Apr 14
+	//             -1:00    -    %z    1976 Apr 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 54, // "-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -578,10 +578,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              0:00    Morocco    +00/+01    2018 Oct 28  3:00
+	//              0:00    Morocco    %z    2018 Oct 28  3:00
 	{
 		PolicyIndex: 81, // PolicyName: Morocco
-		FormatIndex: 3, // "+00/+01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -592,10 +592,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              1:00    Morocco    +01/+00
+	//              1:00    Morocco    %z
 	{
 		PolicyIndex: 81, // PolicyName: Morocco
-		FormatIndex: 6, // "+01/+00"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -615,7 +615,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 1:52:00 - LMT 1892 Feb 8
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 448, // 6720 / 15
 		OffsetSecondsRemainder: 0,
@@ -629,7 +629,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:30    -    SAST    1903 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 173, // "SAST"
+		FormatIndex: 89, // "SAST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 360, // 5400 / 15
 		OffsetSecondsRemainder: 0,
@@ -643,7 +643,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    SA    SAST
 	{
 		PolicyIndex: 105, // PolicyName: SA
-		FormatIndex: 173, // "SAST"
+		FormatIndex: 89, // "SAST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -663,7 +663,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 2:06:28 - LMT 1931
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 505, // 7588 / 15
 		OffsetSecondsRemainder: 13,
@@ -677,7 +677,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Sudan    CA%sT    2000 Jan 15 12:00
 	{
 		PolicyIndex: 114, // PolicyName: Sudan
-		FormatIndex: 106, // "CA%T"
+		FormatIndex: 23, // "CA%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -691,7 +691,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    EAT    2021 Feb  1 00:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 117, // "EAT"
+		FormatIndex: 34, // "EAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -705,7 +705,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    CAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 107, // "CAT"
+		FormatIndex: 24, // "CAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -725,7 +725,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 2:10:08 - LMT 1931
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 520, // 7808 / 15
 		OffsetSecondsRemainder: 8,
@@ -739,7 +739,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Sudan    CA%sT    2000 Jan 15 12:00
 	{
 		PolicyIndex: 114, // PolicyName: Sudan
-		FormatIndex: 106, // "CA%T"
+		FormatIndex: 23, // "CA%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -753,7 +753,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    EAT    2017 Nov  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 117, // "EAT"
+		FormatIndex: 34, // "EAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -767,7 +767,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    CAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 107, // "CAT"
+		FormatIndex: 24, // "CAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -787,7 +787,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 0:13:35 - LMT 1905 Jul 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 54, // 815 / 15
 		OffsetSecondsRemainder: 5,
@@ -801,7 +801,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    -    GMT    1908 Jul  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -815,7 +815,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:13:35    -    LMT    1914 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 54, // 815 / 15
 		OffsetSecondsRemainder: 5,
@@ -826,10 +826,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             0:30    -    +0030    1919 Sep  1
+	//             0:30    -    %z    1919 Sep  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 4, // "+0030"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 120, // 1800 / 15
 		OffsetSecondsRemainder: 0,
@@ -843,7 +843,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    WAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 182, // "WAT"
+		FormatIndex: 98, // "WAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -860,15 +860,15 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
-	// 2:10:20 - LMT 1903 Mar
+	// 2:10:18 - LMT 1909
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
-		OffsetSecondsCode: 521, // 7820 / 15
-		OffsetSecondsRemainder: 5,
-		UntilYear: 1903,
-		UntilMonth: 3,
+		OffsetSecondsCode: 521, // 7818 / 15
+		OffsetSecondsRemainder: 3,
+		UntilYear: 1909,
+		UntilMonth: 1,
 		UntilDay: 1,
 		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
@@ -877,7 +877,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    CAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 107, // "CAT"
+		FormatIndex: 24, // "CAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -897,7 +897,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -0:43:08 - LMT 1882
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -173, // -2588 / 15
 		OffsetSecondsRemainder: 7,
@@ -911,7 +911,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -0:43:08 -    MMT    1919 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -173, // -2588 / 15
 		OffsetSecondsRemainder: 7,
@@ -925,7 +925,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -0:44:30 -    MMT    1972 Jan 7
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -178, // -2670 / 15
 		OffsetSecondsRemainder: 0,
@@ -939,7 +939,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -959,7 +959,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 2:27:16 - LMT 1908 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 589, // 8836 / 15
 		OffsetSecondsRemainder: 1,
@@ -970,10 +970,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             2:30    -    +0230    1928 Jun 30 24:00
+	//             2:30    -    %z    1928 Jun 30 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 10, // "+0230"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 600, // 9000 / 15
 		OffsetSecondsRemainder: 0,
@@ -987,7 +987,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    EAT    1930 Jan  4 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 117, // "EAT"
+		FormatIndex: 34, // "EAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -998,10 +998,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             2:30    -    +0230    1936 Dec 31 24:00
+	//             2:30    -    %z    1936 Dec 31 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 10, // "+0230"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 600, // 9000 / 15
 		OffsetSecondsRemainder: 0,
@@ -1012,10 +1012,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             2:45    -    +0245    1942 Jul 31 24:00
+	//             2:45    -    %z    1942 Jul 31 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 11, // "+0245"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 660, // 9900 / 15
 		OffsetSecondsRemainder: 0,
@@ -1029,7 +1029,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    EAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 117, // "EAT"
+		FormatIndex: 34, // "EAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1049,7 +1049,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 1:00:12 - LMT 1912 Jan 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3612 / 15
 		OffsetSecondsRemainder: 12,
@@ -1063,7 +1063,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    WAT    1979 Oct 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 182, // "WAT"
+		FormatIndex: 98, // "WAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1077,7 +1077,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    1:00    WAST    1980 Mar  8
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 181, // "WAST"
+		FormatIndex: 97, // "WAST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1091,7 +1091,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    WAT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 182, // "WAT"
+		FormatIndex: 98, // "WAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1111,7 +1111,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 0:26:56 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 107, // 1616 / 15
 		OffsetSecondsRemainder: 11,
@@ -1125,7 +1125,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -0:36:45 -    LMT    1912 Jan  1 00:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -147, // -2205 / 15
 		OffsetSecondsRemainder: 0,
@@ -1139,7 +1139,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT    2018 Jan  1 01:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -1153,7 +1153,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    -    WAT    2019 Jan  1 02:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 182, // "WAT"
+		FormatIndex: 98, // "WAT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1167,7 +1167,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -1187,7 +1187,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 0:52:44 - LMT 1920
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 210, // 3164 / 15
 		OffsetSecondsRemainder: 14,
@@ -1201,7 +1201,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Libya    CE%sT    1959
 	{
 		PolicyIndex: 70, // PolicyName: Libya
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1215,7 +1215,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1982
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -1229,7 +1229,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Libya    CE%sT    1990 May  4
 	{
 		PolicyIndex: 70, // PolicyName: Libya
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1243,7 +1243,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1996 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -1257,7 +1257,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Libya    CE%sT    1997 Oct  4
 	{
 		PolicyIndex: 70, // PolicyName: Libya
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1271,7 +1271,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2012 Nov 10  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -1285,7 +1285,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Libya    CE%sT    2013 Oct 25  2:00
 	{
 		PolicyIndex: 70, // PolicyName: Libya
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1299,7 +1299,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -1319,7 +1319,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 0:40:44 - LMT 1881 May 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 162, // 2444 / 15
 		OffsetSecondsRemainder: 14,
@@ -1333,7 +1333,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:09:21    -    PMT    1911 Mar 11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 166, // "PMT"
+		FormatIndex: 82, // "PMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 37, // 561 / 15
 		OffsetSecondsRemainder: 6,
@@ -1347,7 +1347,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Tunisia    CE%sT
 	{
 		PolicyIndex: 123, // PolicyName: Tunisia
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1367,7 +1367,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 1:08:24 - LMT 1892 Feb 8
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 273, // 4104 / 15
 		OffsetSecondsRemainder: 9,
@@ -1378,10 +1378,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             1:30    -    +0130    1903 Mar
+	//             1:30    -    %z    1903 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 7, // "+0130"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 360, // 5400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1395,7 +1395,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    SAST    1942 Sep 20  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 173, // "SAST"
+		FormatIndex: 89, // "SAST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -1409,7 +1409,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    1:00    SAST    1943 Mar 21  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 173, // "SAST"
+		FormatIndex: 89, // "SAST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -1423,7 +1423,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    SAST    1990 Mar 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 173, // "SAST"
+		FormatIndex: 89, // "SAST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -1457,7 +1457,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 12:13:22 - LMT 1867 Oct 19 12:44:35
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2933, // 44002 / 15
 		OffsetSecondsRemainder: 7,
@@ -1471,7 +1471,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:46:38 -    LMT    1900 Aug 20 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2827, // -42398 / 15
 		OffsetSecondsRemainder: 7,
@@ -1485,7 +1485,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:00    -    NST    1942
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 159, // "NST"
+		FormatIndex: 75, // "NST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1499,7 +1499,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:00    US    N%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1513,7 +1513,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:00    -    NST    1967 Apr
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 159, // "NST"
+		FormatIndex: 75, // "NST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1527,7 +1527,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:00    -    BST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 104, // "BST"
+		FormatIndex: 21, // "BST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1541,7 +1541,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:00    US    B%sT    1983 Oct 30  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 101, // "B%T"
+		FormatIndex: 18, // "B%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -1555,7 +1555,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:00    US    AH%sT    1983 Nov 30
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 94, // "AH%T"
+		FormatIndex: 11, // "AH%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -1569,7 +1569,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:00    US    H%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 131, // "H%T"
+		FormatIndex: 48, // "H%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -1589,7 +1589,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 14:00:24 - LMT 1867 Oct 19 14:31:37
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3361, // 50424 / 15
 		OffsetSecondsRemainder: 9,
@@ -1603,7 +1603,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:59:36 -    LMT    1900 Aug 20 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2399, // -35976 / 15
 		OffsetSecondsRemainder: 9,
@@ -1617,7 +1617,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:00    -    AST    1942
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -1631,7 +1631,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:00    US    A%sT    1967 Apr
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -1645,7 +1645,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:00    -    AHST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 95, // "AHST"
+		FormatIndex: 12, // "AHST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -1659,7 +1659,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:00    US    AH%sT    1983 Oct 30  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 94, // "AH%T"
+		FormatIndex: 11, // "AH%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -1673,7 +1673,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    Y%sT    1983 Nov 30
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1687,7 +1687,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    AK%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 96, // "AK%T"
+		FormatIndex: 13, // "AK%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1707,7 +1707,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -3:12:48 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -772, // -11568 / 15
 		OffsetSecondsRemainder: 12,
@@ -1718,10 +1718,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    1990 Sep 17
+	//             -3:00    Brazil    %z    1990 Sep 17
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1732,10 +1732,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1995 Sep 14
+	//             -3:00    -    %z    1995 Sep 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1746,10 +1746,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2003 Sep 24
+	//             -3:00    Brazil    %z    2003 Sep 24
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1760,10 +1760,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2012 Oct 21
+	//             -3:00    -    %z    2012 Oct 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1774,10 +1774,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2013 Sep
+	//             -3:00    Brazil    %z    2013 Sep
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1788,10 +1788,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1811,7 +1811,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -3:53:48 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -936, // -14028 / 15
 		OffsetSecondsRemainder: 12,
@@ -1825,7 +1825,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -1836,10 +1836,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1850,10 +1850,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1864,10 +1864,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1878,10 +1878,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1892,10 +1892,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02
+	//             -3:00    Arg    %z
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1915,7 +1915,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:23:08 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1053, // -15788 / 15
 		OffsetSecondsRemainder: 7,
@@ -1929,7 +1929,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -1940,10 +1940,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1954,10 +1954,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1968,10 +1968,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1991 Mar  3
+	//             -3:00    Arg    %z    1991 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -1982,10 +1982,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 Oct 20
+	//             -4:00    -    %z    1991 Oct 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -1996,10 +1996,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2010,10 +2010,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2024,10 +2024,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2004 Jun  1
+	//             -3:00    -    %z    2004 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2038,10 +2038,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Jun 20
+	//             -4:00    -    %z    2004 Jun 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2052,10 +2052,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Oct 18
+	//             -3:00    Arg    %z    2008 Oct 18
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2066,10 +2066,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2089,7 +2089,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:16:48 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -2103,7 +2103,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -2114,10 +2114,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2128,10 +2128,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2142,10 +2142,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1991 Mar  3
+	//             -3:00    Arg    %z    1991 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2156,10 +2156,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 Oct 20
+	//             -4:00    -    %z    1991 Oct 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2170,10 +2170,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2184,10 +2184,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2198,10 +2198,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02
+	//             -3:00    Arg    %z
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2221,7 +2221,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:21:12 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1045, // -15672 / 15
 		OffsetSecondsRemainder: 3,
@@ -2235,7 +2235,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -2246,10 +2246,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2260,10 +2260,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2274,10 +2274,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1990 Mar  4
+	//             -3:00    Arg    %z    1990 Mar  4
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2288,10 +2288,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1990 Oct 28
+	//             -4:00    -    %z    1990 Oct 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2302,10 +2302,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    1:00    -03    1991 Mar 17
+	//             -4:00    1:00    %z    1991 Mar 17
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2316,10 +2316,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 Oct  6
+	//             -4:00    -    %z    1991 Oct  6
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2330,10 +2330,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    1:00    -02    1992
+	//             -3:00    1:00    %z    1992
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2344,10 +2344,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2358,10 +2358,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2372,10 +2372,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Oct 18
+	//             -3:00    Arg    %z    2008 Oct 18
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2386,10 +2386,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2409,7 +2409,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:27:24 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1070, // -16044 / 15
 		OffsetSecondsRemainder: 6,
@@ -2423,7 +2423,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -2434,10 +2434,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2448,10 +2448,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2462,10 +2462,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1991 Mar  1
+	//             -3:00    Arg    %z    1991 Mar  1
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2476,10 +2476,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 May  7
+	//             -4:00    -    %z    1991 May  7
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2490,10 +2490,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2504,10 +2504,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2518,10 +2518,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2004 Jun  1
+	//             -3:00    -    %z    2004 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2532,10 +2532,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Jun 20
+	//             -4:00    -    %z    2004 Jun 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2546,10 +2546,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Oct 18
+	//             -3:00    Arg    %z    2008 Oct 18
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2560,10 +2560,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2583,7 +2583,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:35:16 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1102, // -16516 / 15
 		OffsetSecondsRemainder: 14,
@@ -2597,7 +2597,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -2608,10 +2608,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2622,10 +2622,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2636,10 +2636,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1990 Mar  4
+	//             -3:00    Arg    %z    1990 Mar  4
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2650,10 +2650,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1990 Oct 15
+	//             -4:00    -    %z    1990 Oct 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2664,10 +2664,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    1:00    -03    1991 Mar  1
+	//             -4:00    1:00    %z    1991 Mar  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2678,10 +2678,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 Oct 15
+	//             -4:00    -    %z    1991 Oct 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2692,10 +2692,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    1:00    -03    1992 Mar  1
+	//             -4:00    1:00    %z    1992 Mar  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2706,10 +2706,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1992 Oct 18
+	//             -4:00    -    %z    1992 Oct 18
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2720,10 +2720,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2734,10 +2734,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2748,10 +2748,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2004 May 23
+	//             -3:00    -    %z    2004 May 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2762,10 +2762,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Sep 26
+	//             -4:00    -    %z    2004 Sep 26
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2776,10 +2776,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Oct 18
+	//             -3:00    Arg    %z    2008 Oct 18
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2790,10 +2790,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2813,7 +2813,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:36:52 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1108, // -16612 / 15
 		OffsetSecondsRemainder: 8,
@@ -2827,7 +2827,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -2838,10 +2838,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2852,10 +2852,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2866,10 +2866,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2880,10 +2880,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2894,10 +2894,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2004 Jun  1
+	//             -3:00    -    %z    2004 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2908,10 +2908,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Jun 20
+	//             -4:00    -    %z    2004 Jun 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2922,10 +2922,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Oct 18
+	//             -3:00    Arg    %z    2008 Oct 18
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2936,10 +2936,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -2959,7 +2959,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:21:40 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1047, // -15700 / 15
 		OffsetSecondsRemainder: 5,
@@ -2973,7 +2973,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -2984,10 +2984,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -2998,10 +2998,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3012,10 +3012,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1991 Mar  3
+	//             -3:00    Arg    %z    1991 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3026,10 +3026,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 Oct 20
+	//             -4:00    -    %z    1991 Oct 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3040,10 +3040,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3054,10 +3054,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3068,10 +3068,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Oct 18
+	//             -3:00    Arg    %z    2008 Oct 18
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3082,10 +3082,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3105,7 +3105,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:34:04 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1097, // -16444 / 15
 		OffsetSecondsRemainder: 11,
@@ -3119,7 +3119,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -3130,10 +3130,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3144,10 +3144,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3158,10 +3158,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1991 Mar  1
+	//             -3:00    Arg    %z    1991 Mar  1
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3172,10 +3172,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 May  7
+	//             -4:00    -    %z    1991 May  7
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3186,10 +3186,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3200,10 +3200,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3214,10 +3214,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2004 May 31
+	//             -3:00    -    %z    2004 May 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3228,10 +3228,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Jul 25
+	//             -4:00    -    %z    2004 Jul 25
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3242,10 +3242,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Oct 18
+	//             -3:00    Arg    %z    2008 Oct 18
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3256,10 +3256,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3279,7 +3279,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:25:24 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1062, // -15924 / 15
 		OffsetSecondsRemainder: 6,
@@ -3293,7 +3293,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -3304,10 +3304,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3318,10 +3318,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3332,10 +3332,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1990
+	//             -3:00    Arg    %z    1990
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3346,10 +3346,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    1:00    -02    1990 Mar 14
+	//             -3:00    1:00    %z    1990 Mar 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3360,10 +3360,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1990 Oct 15
+	//             -4:00    -    %z    1990 Oct 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3374,10 +3374,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    1:00    -03    1991 Mar  1
+	//             -4:00    1:00    %z    1991 Mar  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3388,10 +3388,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 Jun  1
+	//             -4:00    -    %z    1991 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3402,10 +3402,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1999 Oct  3
+	//             -3:00    -    %z    1999 Oct  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3416,10 +3416,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    1:00    -03    2000 Mar  3
+	//             -4:00    1:00    %z    2000 Mar  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3430,10 +3430,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2004 May 31
+	//             -3:00    -    %z    2004 May 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3444,10 +3444,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Jul 25
+	//             -4:00    -    %z    2004 Jul 25
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3458,10 +3458,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Jan 21
+	//             -3:00    Arg    %z    2008 Jan 21
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3472,10 +3472,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    SanLuis    -04/-03    2009 Oct 11
+	//             -4:00    SanLuis    %z    2009 Oct 11
 	{
 		PolicyIndex: 107, // PolicyName: SanLuis
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3486,10 +3486,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3509,7 +3509,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:20:52 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1044, // -15652 / 15
 		OffsetSecondsRemainder: 8,
@@ -3523,7 +3523,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -3534,10 +3534,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3548,10 +3548,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3562,10 +3562,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1991 Mar  3
+	//             -3:00    Arg    %z    1991 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3576,10 +3576,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1991 Oct 20
+	//             -4:00    -    %z    1991 Oct 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3590,10 +3590,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3604,10 +3604,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3618,10 +3618,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2004 Jun  1
+	//             -3:00    -    %z    2004 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3632,10 +3632,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Jun 13
+	//             -4:00    -    %z    2004 Jun 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3646,10 +3646,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02
+	//             -3:00    Arg    %z
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3669,7 +3669,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:33:12 - LMT 1894 Oct 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1093, // -16392 / 15
 		OffsetSecondsRemainder: 3,
@@ -3683,7 +3683,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:16:48 -    CMT    1920 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1028, // -15408 / 15
 		OffsetSecondsRemainder: 12,
@@ -3694,10 +3694,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1930 Dec
+	//             -4:00    -    %z    1930 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3708,10 +3708,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3722,10 +3722,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1999 Oct  3
+	//             -3:00    Arg    %z    1999 Oct  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3736,10 +3736,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    2000 Mar  3
+	//             -4:00    Arg    %z    2000 Mar  3
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3750,10 +3750,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2004 May 30
+	//             -3:00    -    %z    2004 May 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3764,10 +3764,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Jun 20
+	//             -4:00    -    %z    2004 Jun 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3778,10 +3778,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    2008 Oct 18
+	//             -3:00    Arg    %z    2008 Oct 18
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3792,10 +3792,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3815,7 +3815,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -3:50:40 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -923, // -13840 / 15
 		OffsetSecondsRemainder: 5,
@@ -3829,7 +3829,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:50:40 -    AMT    1931 Oct 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "AMT"
+		FormatIndex: 14, // "AMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -923, // -13840 / 15
 		OffsetSecondsRemainder: 5,
@@ -3840,10 +3840,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1972 Oct
+	//             -4:00    -    %z    1972 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3854,10 +3854,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1974 Apr
+	//             -3:00    -    %z    1974 Apr
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3868,10 +3868,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Para    -04/-03
+	//             -4:00    Para    %z
 	{
 		PolicyIndex: 92, // PolicyName: Para
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -3891,7 +3891,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -2:34:04 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -617, // -9244 / 15
 		OffsetSecondsRemainder: 11,
@@ -3902,10 +3902,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2003 Sep 24
+	//             -3:00    Brazil    %z    2003 Sep 24
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3916,10 +3916,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2011 Oct 16
+	//             -3:00    -    %z    2011 Oct 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3930,10 +3930,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2012 Oct 21
+	//             -3:00    Brazil    %z    2012 Oct 21
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3944,10 +3944,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -3961,13 +3961,13 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Bahia_Banderas
 	// EraIndex: 262
-	// EraCount: 9
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// -7:01:00 - LMT 1922 Jan 1 7:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1684, // -25260 / 15
 		OffsetSecondsRemainder: 0,
@@ -3978,24 +3978,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -7:00    -    MST    1927 Jun 10 23:00
+	//             -7:00    -    MST    1927 Jun 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1927,
 		UntilMonth: 6,
 		UntilDay: 10,
-		UntilSecondsCode: 5520, // 82800 / 15
+		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -6:00    -    CST    1930 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4009,7 +4009,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    1932 Apr  1
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4023,7 +4023,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1942 Apr 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4034,26 +4034,12 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -7:00    -    MST    1949 Jan 14
+	//             -7:00    -    MST    1970
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1949,
-		UntilMonth: 1,
-		UntilDay: 14,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -8:00    -    PST    1970
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1970,
 		UntilMonth: 1,
@@ -4065,7 +4051,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    2010 Apr  4  2:00
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4079,7 +4065,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Mexico    C%sT
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4092,14 +4078,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Barbados
-	// EraIndex: 271
+	// EraIndex: 270
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -3:58:29 - LMT 1911 Aug 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -954, // -14309 / 15
 		OffsetSecondsRemainder: 1,
@@ -4113,7 +4099,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Barb    A%sT    1944
 	{
 		PolicyIndex: 14, // PolicyName: Barb
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4127,7 +4113,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Barb    AST/-0330 1945
 	{
 		PolicyIndex: 14, // PolicyName: Barb
-		FormatIndex: 99, // "AST/-0330"
+		FormatIndex: 16, // "AST/-0330"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4141,7 +4127,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Barb    A%sT
 	{
 		PolicyIndex: 14, // PolicyName: Barb
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4154,14 +4140,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Belem
-	// EraIndex: 275
+	// EraIndex: 274
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -3:13:56 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -776, // -11636 / 15
 		OffsetSecondsRemainder: 4,
@@ -4172,10 +4158,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    1988 Sep 12
+	//             -3:00    Brazil    %z    1988 Sep 12
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -4186,10 +4172,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -4202,14 +4188,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Belize
-	// EraIndex: 278
+	// EraIndex: 277
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -5:52:48 - LMT 1912 Apr 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1412, // -21168 / 15
 		OffsetSecondsRemainder: 12,
@@ -4236,14 +4222,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Boa_Vista
-	// EraIndex: 280
+	// EraIndex: 279
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -4:02:40 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -971, // -14560 / 15
 		OffsetSecondsRemainder: 5,
@@ -4254,10 +4240,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03    1988 Sep 12
+	//             -4:00    Brazil    %z    1988 Sep 12
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4268,10 +4254,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1999 Sep 30
+	//             -4:00    -    %z    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4282,10 +4268,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03    2000 Oct 15
+	//             -4:00    Brazil    %z    2000 Oct 15
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4296,10 +4282,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04
+	//             -4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4312,14 +4298,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Bogota
-	// EraIndex: 285
+	// EraIndex: 284
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -4:56:16 - LMT 1884 Mar 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1186, // -17776 / 15
 		OffsetSecondsRemainder: 14,
@@ -4333,7 +4319,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:56:16 -    BMT    1914 Nov 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "BMT"
+		FormatIndex: 19, // "BMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1186, // -17776 / 15
 		OffsetSecondsRemainder: 14,
@@ -4344,10 +4330,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    CO    -05/-04
+	//             -5:00    CO    %z
 	{
 		PolicyIndex: 22, // PolicyName: CO
-		FormatIndex: 69, // "-05/-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -4360,14 +4346,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Boise
-	// EraIndex: 288
+	// EraIndex: 287
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -7:44:49 - LMT 1883 Nov 18 20:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1860, // -27889 / 15
 		OffsetSecondsRemainder: 11,
@@ -4381,7 +4367,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    US    P%sT    1923 May 13  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -4395,7 +4381,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT    1974
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4409,7 +4395,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST    1974 Feb  3  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4423,7 +4409,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4436,14 +4422,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Cambridge_Bay
-	// EraIndex: 293
+	// EraIndex: 292
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1920
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -4457,7 +4443,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    NT_YK    M%sT    1999 Oct 31  2:00
 	{
 		PolicyIndex: 84, // PolicyName: NT_YK
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4471,7 +4457,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Canada    C%sT    2000 Oct 29  2:00
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4485,7 +4471,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2000 Nov  5  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -4499,7 +4485,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    2001 Apr  1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4513,7 +4499,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Canada    M%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4526,14 +4512,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Campo_Grande
-	// EraIndex: 299
+	// EraIndex: 298
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -3:38:28 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -874, // -13108 / 15
 		OffsetSecondsRemainder: 2,
@@ -4544,10 +4530,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03
+	//             -4:00    Brazil    %z
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4560,14 +4546,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Cancun
-	// EraIndex: 301
-	// EraCount: 5
+	// EraIndex: 300
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -5:47:04 - LMT 1922 Jan 1 6:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1389, // -20824 / 15
 		OffsetSecondsRemainder: 11,
@@ -4578,24 +4564,52 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -6:00    -    CST    1981 Dec 23
+	//             -6:00    -    CST    1981 Dec 26  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1981,
 		UntilMonth: 12,
-		UntilDay: 23,
+		UntilDay: 26,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -5:00    -    EST    1983 Jan  4  0:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 40, // "EST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1200, // -18000 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1983,
+		UntilMonth: 1,
+		UntilDay: 4,
 		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -6:00    Mexico    C%sT    1997 Oct 26  2:00
+	{
+		PolicyIndex: 77, // PolicyName: Mexico
+		FormatIndex: 22, // "C%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1440, // -21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1997,
+		UntilMonth: 10,
+		UntilDay: 26,
+		UntilSecondsCode: 480, // 7200 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -5:00    Mexico    E%sT    1998 Aug  2  2:00
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -4609,7 +4623,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Mexico    C%sT    2015 Feb  1  2:00
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4623,7 +4637,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -4636,14 +4650,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Caracas
-	// EraIndex: 306
+	// EraIndex: 307
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -4:27:44 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1071, // -16064 / 15
 		OffsetSecondsRemainder: 1,
@@ -4657,7 +4671,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:27:40 -    CMT    1912 Feb 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1071, // -16060 / 15
 		OffsetSecondsRemainder: 5,
@@ -4668,10 +4682,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:30    -    -0430    1965 Jan  1  0:00
+	//             -4:30    -    %z    1965 Jan  1  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 67, // "-0430"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1080, // -16200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4682,10 +4696,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2007 Dec  9  3:00
+	//             -4:00    -    %z    2007 Dec  9  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4696,10 +4710,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:30    -    -0430    2016 May  1  2:30
+	//             -4:30    -    %z    2016 May  1  2:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 67, // "-0430"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1080, // -16200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4710,10 +4724,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04
+	//             -4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4726,14 +4740,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Cayenne
-	// EraIndex: 312
+	// EraIndex: 313
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -3:29:20 - LMT 1911 Jul 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -838, // -12560 / 15
 		OffsetSecondsRemainder: 10,
@@ -4744,10 +4758,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1967 Oct
+	//             -4:00    -    %z    1967 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -4758,10 +4772,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -4774,14 +4788,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Chicago
-	// EraIndex: 315
+	// EraIndex: 316
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// -5:50:36 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1403, // -21036 / 15
 		OffsetSecondsRemainder: 9,
@@ -4795,7 +4809,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1920
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4809,7 +4823,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Chicago    C%sT    1936 Mar  1  2:00
 	{
 		PolicyIndex: 26, // PolicyName: Chicago
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4823,7 +4837,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1936 Nov 15  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -4837,7 +4851,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Chicago    C%sT    1942
 	{
 		PolicyIndex: 26, // PolicyName: Chicago
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4851,7 +4865,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4865,7 +4879,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Chicago    C%sT    1967
 	{
 		PolicyIndex: 26, // PolicyName: Chicago
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4879,7 +4893,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4892,14 +4906,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Chihuahua
-	// EraIndex: 323
+	// EraIndex: 324
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// -7:04:20 - LMT 1922 Jan 1 7:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1698, // -25460 / 15
 		OffsetSecondsRemainder: 10,
@@ -4910,24 +4924,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -7:00    -    MST    1927 Jun 10 23:00
+	//             -7:00    -    MST    1927 Jun 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1927,
 		UntilMonth: 6,
 		UntilDay: 10,
-		UntilSecondsCode: 5520, // 82800 / 15
+		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -6:00    -    CST    1930 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4941,7 +4955,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    1932 Apr  1
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -4955,7 +4969,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1996
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4969,7 +4983,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Mexico    C%sT    1998
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4983,7 +4997,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1998 Apr Sun>=1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -4997,7 +5011,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    2022 Oct 30  2:00
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5011,7 +5025,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5024,14 +5038,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Ciudad_Juarez
-	// EraIndex: 332
+	// EraIndex: 333
 	// EraCount: 11
 	// ---------------------------------------------------------------------------
 
 	// -7:05:56 - LMT 1922 Jan 1 7:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1704, // -25556 / 15
 		OffsetSecondsRemainder: 4,
@@ -5042,24 +5056,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -7:00    -    MST    1927 Jun 10 23:00
+	//             -7:00    -    MST    1927 Jun 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1927,
 		UntilMonth: 6,
 		UntilDay: 10,
-		UntilSecondsCode: 5520, // 82800 / 15
+		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -6:00    -    CST    1930 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5073,7 +5087,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    1932 Apr  1
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5087,7 +5101,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1996
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5101,7 +5115,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Mexico    C%sT    1998
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5115,7 +5129,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1998 Apr Sun>=1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5129,7 +5143,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    2010
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5143,7 +5157,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT    2022 Oct 30  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5157,7 +5171,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    2022 Nov 30  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5171,7 +5185,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5184,14 +5198,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Costa_Rica
-	// EraIndex: 343
+	// EraIndex: 344
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -5:36:13 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1345, // -20173 / 15
 		OffsetSecondsRemainder: 2,
@@ -5205,7 +5219,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:36:13 -    SJMT    1921 Jan 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 175, // "SJMT"
+		FormatIndex: 91, // "SJMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1345, // -20173 / 15
 		OffsetSecondsRemainder: 2,
@@ -5219,7 +5233,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    CR    C%sT
 	{
 		PolicyIndex: 23, // PolicyName: CR
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5232,14 +5246,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Cuiaba
-	// EraIndex: 346
+	// EraIndex: 347
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -3:44:20 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -898, // -13460 / 15
 		OffsetSecondsRemainder: 10,
@@ -5250,10 +5264,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03    2003 Sep 24
+	//             -4:00    Brazil    %z    2003 Sep 24
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -5264,10 +5278,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2004 Oct  1
+	//             -4:00    -    %z    2004 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -5278,10 +5292,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03
+	//             -4:00    Brazil    %z
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -5294,14 +5308,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Danmarkshavn
-	// EraIndex: 350
+	// EraIndex: 351
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -1:14:40 - LMT 1916 Jul 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -299, // -4480 / 15
 		OffsetSecondsRemainder: 5,
@@ -5312,10 +5326,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1980 Apr  6  2:00
+	//             -3:00    -    %z    1980 Apr  6  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5326,10 +5340,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    EU    -03/-02    1996
+	//             -3:00    EU    %z    1996
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5343,7 +5357,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    -    GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -5356,14 +5370,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Dawson
-	// EraIndex: 354
+	// EraIndex: 355
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -9:17:40 - LMT 1900 Aug 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2231, // -33460 / 15
 		OffsetSecondsRemainder: 5,
@@ -5377,7 +5391,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -9:00    NT_YK    Y%sT    1965
 	{
 		PolicyIndex: 84, // PolicyName: NT_YK
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -5391,7 +5405,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -9:00    Yukon    Y%sT    1973 Oct 28  0:00
 	{
 		PolicyIndex: 133, // PolicyName: Yukon
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -5405,7 +5419,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    -    PST    1980
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5419,7 +5433,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Canada    P%sT    2020 Nov  1
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5433,7 +5447,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5446,14 +5460,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Dawson_Creek
-	// EraIndex: 360
+	// EraIndex: 361
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -8:00:56 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1924, // -28856 / 15
 		OffsetSecondsRemainder: 4,
@@ -5467,7 +5481,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Canada    P%sT    1947
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5481,7 +5495,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Vanc    P%sT    1972 Aug 30  2:00
 	{
 		PolicyIndex: 127, // PolicyName: Vanc
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5495,7 +5509,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5508,14 +5522,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Denver
-	// EraIndex: 364
+	// EraIndex: 365
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -6:59:56 - LMT 1883 Nov 18 19:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25196 / 15
 		OffsetSecondsRemainder: 4,
@@ -5529,7 +5543,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT    1920
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5543,7 +5557,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Denver    M%sT    1942
 	{
 		PolicyIndex: 33, // PolicyName: Denver
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5557,7 +5571,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5571,7 +5585,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Denver    M%sT    1967
 	{
 		PolicyIndex: 33, // PolicyName: Denver
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5585,7 +5599,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5598,14 +5612,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Detroit
-	// EraIndex: 370
+	// EraIndex: 371
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// -5:32:11 - LMT 1905
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1329, // -19931 / 15
 		OffsetSecondsRemainder: 4,
@@ -5619,7 +5633,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1915 May 15  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5633,7 +5647,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1942
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5647,7 +5661,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5661,7 +5675,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Detroit    E%sT    1967 Jun 14  0:01
 	{
 		PolicyIndex: 34, // PolicyName: Detroit
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5675,7 +5689,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1969
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5689,7 +5703,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1973
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5703,7 +5717,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1975
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5717,7 +5731,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1975 Apr 27  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5731,7 +5745,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5744,14 +5758,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Edmonton
-	// EraIndex: 380
+	// EraIndex: 381
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -7:33:52 - LMT 1906 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1816, // -27232 / 15
 		OffsetSecondsRemainder: 8,
@@ -5765,7 +5779,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Edm    M%sT    1987
 	{
 		PolicyIndex: 41, // PolicyName: Edm
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5779,7 +5793,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Canada    M%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -5792,14 +5806,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Eirunepe
-	// EraIndex: 383
+	// EraIndex: 384
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -4:39:28 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1118, // -16768 / 15
 		OffsetSecondsRemainder: 2,
@@ -5810,10 +5824,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    Brazil    -05/-04    1988 Sep 12
+	//             -5:00    Brazil    %z    1988 Sep 12
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 69, // "-05/-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5824,10 +5838,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    1993 Sep 28
+	//             -5:00    -    %z    1993 Sep 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5838,10 +5852,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    Brazil    -05/-04    1994 Sep 22
+	//             -5:00    Brazil    %z    1994 Sep 22
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 69, // "-05/-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5852,10 +5866,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    2008 Jun 24  0:00
+	//             -5:00    -    %z    2008 Jun 24  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5866,10 +5880,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2013 Nov 10
+	//             -4:00    -    %z    2013 Nov 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -5880,10 +5894,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05
+	//             -5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -5896,14 +5910,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/El_Salvador
-	// EraIndex: 390
+	// EraIndex: 391
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -5:56:48 - LMT 1921
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1428, // -21408 / 15
 		OffsetSecondsRemainder: 12,
@@ -5917,7 +5931,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Salv    C%sT
 	{
 		PolicyIndex: 106, // PolicyName: Salv
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -5930,14 +5944,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Fort_Nelson
-	// EraIndex: 392
+	// EraIndex: 393
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -8:10:47 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1964, // -29447 / 15
 		OffsetSecondsRemainder: 13,
@@ -5951,7 +5965,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Vanc    P%sT    1946
 	{
 		PolicyIndex: 127, // PolicyName: Vanc
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5965,7 +5979,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    -    PST    1947
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5979,7 +5993,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Vanc    P%sT    1987
 	{
 		PolicyIndex: 127, // PolicyName: Vanc
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -5993,7 +6007,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Canada    P%sT    2015 Mar  8  2:00
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -6007,7 +6021,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -6020,14 +6034,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Fortaleza
-	// EraIndex: 398
+	// EraIndex: 399
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -2:34:00 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -616, // -9240 / 15
 		OffsetSecondsRemainder: 0,
@@ -6038,10 +6052,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    1990 Sep 17
+	//             -3:00    Brazil    %z    1990 Sep 17
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -6052,10 +6066,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1999 Sep 30
+	//             -3:00    -    %z    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -6066,10 +6080,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2000 Oct 22
+	//             -3:00    Brazil    %z    2000 Oct 22
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -6080,10 +6094,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2001 Sep 13
+	//             -3:00    -    %z    2001 Sep 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -6094,10 +6108,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2002 Oct  1
+	//             -3:00    Brazil    %z    2002 Oct  1
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -6108,10 +6122,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -6124,14 +6138,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Glace_Bay
-	// EraIndex: 405
+	// EraIndex: 406
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -3:59:48 - LMT 1902 Jun 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14388 / 15
 		OffsetSecondsRemainder: 12,
@@ -6145,7 +6159,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT    1953
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6159,7 +6173,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Halifax    A%sT    1954
 	{
 		PolicyIndex: 56, // PolicyName: Halifax
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6173,7 +6187,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST    1972
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6187,7 +6201,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Halifax    A%sT    1974
 	{
 		PolicyIndex: 56, // PolicyName: Halifax
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6201,7 +6215,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6214,14 +6228,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Goose_Bay
-	// EraIndex: 411
+	// EraIndex: 412
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// -4:01:40 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -967, // -14500 / 15
 		OffsetSecondsRemainder: 5,
@@ -6235,7 +6249,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30:52 -    NST    1918
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 159, // "NST"
+		FormatIndex: 75, // "NST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -844, // -12652 / 15
 		OffsetSecondsRemainder: 8,
@@ -6249,7 +6263,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30:52 Canada N%sT    1919
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -844, // -12652 / 15
 		OffsetSecondsRemainder: 8,
@@ -6263,7 +6277,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30:52 -    NST    1935 Mar 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 159, // "NST"
+		FormatIndex: 75, // "NST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -844, // -12652 / 15
 		OffsetSecondsRemainder: 8,
@@ -6277,7 +6291,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30    -    NST    1936
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 159, // "NST"
+		FormatIndex: 75, // "NST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6291,7 +6305,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30    StJohns    N%sT    1942 May 11
 	{
 		PolicyIndex: 112, // PolicyName: StJohns
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6305,7 +6319,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30    Canada    N%sT    1946
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6319,7 +6333,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30    StJohns    N%sT    1966 Mar 15  2:00
 	{
 		PolicyIndex: 112, // PolicyName: StJohns
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6333,7 +6347,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    StJohns    A%sT    2011 Nov
 	{
 		PolicyIndex: 112, // PolicyName: StJohns
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6347,7 +6361,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6360,14 +6374,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Grand_Turk
-	// EraIndex: 421
+	// EraIndex: 422
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -4:44:32 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1139, // -17072 / 15
 		OffsetSecondsRemainder: 13,
@@ -6381,7 +6395,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:07:10 -    KMT    1912 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 147, // "KMT"
+		FormatIndex: 64, // "KMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1229, // -18430 / 15
 		OffsetSecondsRemainder: 5,
@@ -6395,7 +6409,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1979
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -6409,7 +6423,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    2015 Mar  8  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -6423,7 +6437,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST    2018 Mar 11  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6437,7 +6451,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -6450,14 +6464,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Guatemala
-	// EraIndex: 427
+	// EraIndex: 428
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -6:02:04 - LMT 1918 Oct 5
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1449, // -21724 / 15
 		OffsetSecondsRemainder: 11,
@@ -6471,7 +6485,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Guat    C%sT
 	{
 		PolicyIndex: 53, // PolicyName: Guat
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6484,14 +6498,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Guayaquil
-	// EraIndex: 429
+	// EraIndex: 430
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -5:19:20 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1278, // -19160 / 15
 		OffsetSecondsRemainder: 10,
@@ -6505,7 +6519,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:14:00 -    QMT    1931
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 171, // "QMT"
+		FormatIndex: 87, // "QMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1256, // -18840 / 15
 		OffsetSecondsRemainder: 0,
@@ -6516,10 +6530,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    Ecuador    -05/-04
+	//             -5:00    Ecuador    %z
 	{
 		PolicyIndex: 40, // PolicyName: Ecuador
-		FormatIndex: 69, // "-05/-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -6532,14 +6546,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Guyana
-	// EraIndex: 432
+	// EraIndex: 433
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -3:52:39 - LMT 1911 Aug 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -931, // -13959 / 15
 		OffsetSecondsRemainder: 6,
@@ -6550,10 +6564,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1915 Mar  1
+	//             -4:00    -    %z    1915 Mar  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6564,10 +6578,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:45    -    -0345    1975 Aug  1
+	//             -3:45    -    %z    1975 Aug  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 64, // "-0345"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -900, // -13500 / 15
 		OffsetSecondsRemainder: 0,
@@ -6578,10 +6592,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1992 Mar 29  1:00
+	//             -3:00    -    %z    1992 Mar 29  1:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -6592,10 +6606,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04
+	//             -4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6608,14 +6622,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Halifax
-	// EraIndex: 437
+	// EraIndex: 438
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -4:14:24 - LMT 1902 Jun 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1018, // -15264 / 15
 		OffsetSecondsRemainder: 6,
@@ -6629,7 +6643,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Halifax    A%sT    1918
 	{
 		PolicyIndex: 56, // PolicyName: Halifax
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6643,7 +6657,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT    1919
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6657,7 +6671,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Halifax    A%sT    1942 Feb  9  2:00s
 	{
 		PolicyIndex: 56, // PolicyName: Halifax
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6671,7 +6685,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT    1946
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6685,7 +6699,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Halifax    A%sT    1974
 	{
 		PolicyIndex: 56, // PolicyName: Halifax
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6699,7 +6713,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -6712,14 +6726,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Havana
-	// EraIndex: 444
+	// EraIndex: 445
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -5:29:28 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1318, // -19768 / 15
 		OffsetSecondsRemainder: 2,
@@ -6733,7 +6747,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:29:36 -    HMT    1925 Jul 19 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 137, // "HMT"
+		FormatIndex: 54, // "HMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1319, // -19776 / 15
 		OffsetSecondsRemainder: 9,
@@ -6747,7 +6761,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Cuba    C%sT
 	{
 		PolicyIndex: 29, // PolicyName: Cuba
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -6760,14 +6774,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Hermosillo
-	// EraIndex: 447
-	// EraCount: 9
+	// EraIndex: 448
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// -7:23:52 - LMT 1922 Jan 1 7:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1776, // -26632 / 15
 		OffsetSecondsRemainder: 8,
@@ -6778,24 +6792,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -7:00    -    MST    1927 Jun 10 23:00
+	//             -7:00    -    MST    1927 Jun 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1927,
 		UntilMonth: 6,
 		UntilDay: 10,
-		UntilSecondsCode: 5520, // 82800 / 15
+		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -6:00    -    CST    1930 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6809,7 +6823,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    1932 Apr  1
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -6823,7 +6837,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1942 Apr 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6834,28 +6848,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -7:00    -    MST    1949 Jan 14
+	//             -7:00    -    MST    1996
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
-		UntilYear: 1949,
-		UntilMonth: 1,
-		UntilDay: 14,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -8:00    -    PST    1970
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1920, // -28800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1970,
+		UntilYear: 1996,
 		UntilMonth: 1,
 		UntilDay: 1,
 		UntilSecondsCode: 0, // 0 / 15
@@ -6865,7 +6865,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    1999
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -6879,7 +6879,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -6899,7 +6899,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:44:38 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1379, // -20678 / 15
 		OffsetSecondsRemainder: 7,
@@ -6913,7 +6913,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1920
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6927,7 +6927,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00 Indianapolis C%sT    1942
 	{
 		PolicyIndex: 60, // PolicyName: Indianapolis
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6941,7 +6941,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6955,7 +6955,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00 Indianapolis C%sT    1955 Apr 24  2:00
 	{
 		PolicyIndex: 60, // PolicyName: Indianapolis
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6969,7 +6969,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1957 Sep 29  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -6983,7 +6983,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1958 Apr 27  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -6997,7 +6997,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7011,7 +7011,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1971
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7025,7 +7025,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2006
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7039,7 +7039,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7059,7 +7059,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:46:30 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1386, // -20790 / 15
 		OffsetSecondsRemainder: 0,
@@ -7073,7 +7073,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1947
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7087,7 +7087,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Starke    C%sT    1962 Apr 29  2:00
 	{
 		PolicyIndex: 113, // PolicyName: Starke
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7101,7 +7101,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1963 Oct 27  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7115,7 +7115,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1991 Oct 27  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7129,7 +7129,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7143,7 +7143,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7163,7 +7163,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:45:23 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1382, // -20723 / 15
 		OffsetSecondsRemainder: 7,
@@ -7177,7 +7177,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1951
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7191,7 +7191,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Marengo    C%sT    1961 Apr 30  2:00
 	{
 		PolicyIndex: 74, // PolicyName: Marengo
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7205,7 +7205,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7219,7 +7219,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1974 Jan  6  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7233,7 +7233,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    1:00    CDT    1974 Oct 27  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 108, // "CDT"
+		FormatIndex: 25, // "CDT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7247,7 +7247,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1976
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7261,7 +7261,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2006
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7275,7 +7275,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7295,7 +7295,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:49:07 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1397, // -20947 / 15
 		OffsetSecondsRemainder: 8,
@@ -7309,7 +7309,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1955
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7323,7 +7323,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Pike    C%sT    1965 Apr 25  2:00
 	{
 		PolicyIndex: 96, // PolicyName: Pike
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7337,7 +7337,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1966 Oct 30  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7351,7 +7351,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1977 Oct 30  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7365,7 +7365,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7379,7 +7379,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    2007 Nov  4  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7393,7 +7393,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7413,7 +7413,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:47:03 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1389, // -20823 / 15
 		OffsetSecondsRemainder: 12,
@@ -7427,7 +7427,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7441,7 +7441,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00 Perry    C%sT    1964 Apr 26  2:00
 	{
 		PolicyIndex: 93, // PolicyName: Perry
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7455,7 +7455,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1967 Oct 29  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7469,7 +7469,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1969 Apr 27  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7483,7 +7483,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1971
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7497,7 +7497,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7511,7 +7511,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7531,7 +7531,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:40:16 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1362, // -20416 / 15
 		OffsetSecondsRemainder: 14,
@@ -7545,7 +7545,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1954 Apr 25  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7559,7 +7559,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7573,7 +7573,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1973
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7587,7 +7587,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2006
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7601,7 +7601,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7621,7 +7621,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:50:07 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1401, // -21007 / 15
 		OffsetSecondsRemainder: 8,
@@ -7635,7 +7635,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7649,7 +7649,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00 Vincennes    C%sT    1964 Apr 26  2:00
 	{
 		PolicyIndex: 129, // PolicyName: Vincennes
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7663,7 +7663,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7677,7 +7677,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1971
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7691,7 +7691,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7705,7 +7705,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    2007 Nov  4  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7719,7 +7719,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7739,7 +7739,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:46:25 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1386, // -20785 / 15
 		OffsetSecondsRemainder: 5,
@@ -7753,7 +7753,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7767,7 +7767,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Pulaski    C%sT    1961 Apr 30  2:00
 	{
 		PolicyIndex: 99, // PolicyName: Pulaski
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7781,7 +7781,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7795,7 +7795,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1971
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7809,7 +7809,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2006 Apr  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7823,7 +7823,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    2007 Mar 11  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7837,7 +7837,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7857,7 +7857,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 0 - -00 1953
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -7871,7 +7871,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    NT_YK    P%sT    1979 Apr lastSun  2:00
 	{
 		PolicyIndex: 84, // PolicyName: NT_YK
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -7885,7 +7885,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    NT_YK    M%sT    1980
 	{
 		PolicyIndex: 84, // PolicyName: NT_YK
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -7899,7 +7899,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Canada    M%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -7919,7 +7919,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 0 - -00 1942 Aug
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -7933,7 +7933,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    NT_YK    E%sT    1999 Oct 31  2:00
 	{
 		PolicyIndex: 84, // PolicyName: NT_YK
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7947,7 +7947,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Canada    C%sT    2000 Oct 29  2:00
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -7961,7 +7961,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Canada    E%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -7981,7 +7981,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:07:10 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1229, // -18430 / 15
 		OffsetSecondsRemainder: 5,
@@ -7995,7 +7995,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:07:10 -    KMT    1912 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 147, // "KMT"
+		FormatIndex: 64, // "KMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1229, // -18430 / 15
 		OffsetSecondsRemainder: 5,
@@ -8009,7 +8009,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1974
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8023,7 +8023,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1984
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8037,7 +8037,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8057,7 +8057,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// 15:02:19 - LMT 1867 Oct 19 15:33:32
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3609, // 54139 / 15
 		OffsetSecondsRemainder: 4,
@@ -8071,7 +8071,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:57:41 -    LMT    1900 Aug 20 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2151, // -32261 / 15
 		OffsetSecondsRemainder: 4,
@@ -8085,7 +8085,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    1942
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8099,7 +8099,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    US    P%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8113,7 +8113,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8127,7 +8127,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    US    P%sT    1980 Apr 27  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8141,7 +8141,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    Y%sT    1980 Oct 26  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8155,7 +8155,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    US    P%sT    1983 Oct 30  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8169,7 +8169,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    Y%sT    1983 Nov 30
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8183,7 +8183,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    AK%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 96, // "AK%T"
+		FormatIndex: 13, // "AK%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8203,7 +8203,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:43:02 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1373, // -20582 / 15
 		OffsetSecondsRemainder: 13,
@@ -8217,7 +8217,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1921
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8231,7 +8231,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00 Louisville C%sT    1942
 	{
 		PolicyIndex: 71, // PolicyName: Louisville
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8245,7 +8245,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8259,7 +8259,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00 Louisville C%sT    1961 Jul 23  2:00
 	{
 		PolicyIndex: 71, // PolicyName: Louisville
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8273,7 +8273,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1968
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8287,7 +8287,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    1974 Jan  6  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8301,7 +8301,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    1:00    CDT    1974 Oct 27  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 108, // "CDT"
+		FormatIndex: 25, // "CDT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8315,7 +8315,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8335,7 +8335,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:39:24 - LMT 1883 Nov 18 18:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1358, // -20364 / 15
 		OffsetSecondsRemainder: 6,
@@ -8349,7 +8349,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8363,7 +8363,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1968
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8377,7 +8377,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    2000 Oct 29  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8391,7 +8391,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8411,7 +8411,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:32:36 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1091, // -16356 / 15
 		OffsetSecondsRemainder: 9,
@@ -8425,7 +8425,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:32:36 -    CMT    1931 Oct 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1091, // -16356 / 15
 		OffsetSecondsRemainder: 9,
@@ -8439,7 +8439,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:32:36 1:00    BST    1932 Mar 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 104, // "BST"
+		FormatIndex: 21, // "BST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1091, // -16356 / 15
 		OffsetSecondsRemainder: 9,
@@ -8450,10 +8450,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04
+	//             -4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8473,7 +8473,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:08:12 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1233, // -18492 / 15
 		OffsetSecondsRemainder: 3,
@@ -8487,7 +8487,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:08:36 -    LMT    1908 Jul 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1235, // -18516 / 15
 		OffsetSecondsRemainder: 9,
@@ -8498,10 +8498,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    Peru    -05/-04
+	//             -5:00    Peru    %z
 	{
 		PolicyIndex: 94, // PolicyName: Peru
-		FormatIndex: 69, // "-05/-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8521,7 +8521,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -7:52:58 - LMT 1883 Nov 18 20:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1892, // -28378 / 15
 		OffsetSecondsRemainder: 2,
@@ -8535,7 +8535,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    US    P%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8549,7 +8549,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    CA    P%sT    1967
 	{
 		PolicyIndex: 21, // PolicyName: CA
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8563,7 +8563,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    US    P%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8583,7 +8583,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -2:22:52 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -572, // -8572 / 15
 		OffsetSecondsRemainder: 8,
@@ -8594,10 +8594,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    1990 Sep 17
+	//             -3:00    Brazil    %z    1990 Sep 17
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8608,10 +8608,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1995 Oct 13
+	//             -3:00    -    %z    1995 Oct 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8622,10 +8622,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    1996 Sep  4
+	//             -3:00    Brazil    %z    1996 Sep  4
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8636,10 +8636,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1999 Sep 30
+	//             -3:00    -    %z    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8650,10 +8650,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2000 Oct 22
+	//             -3:00    Brazil    %z    2000 Oct 22
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8664,10 +8664,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2001 Sep 13
+	//             -3:00    -    %z    2001 Sep 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8678,10 +8678,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2002 Oct  1
+	//             -3:00    Brazil    %z    2002 Oct  1
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8692,10 +8692,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -8715,7 +8715,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -5:45:08 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1381, // -20708 / 15
 		OffsetSecondsRemainder: 7,
@@ -8729,7 +8729,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:45:12 -    MMT    1934 Jun 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1381, // -20712 / 15
 		OffsetSecondsRemainder: 3,
@@ -8743,7 +8743,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1973 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8757,7 +8757,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1975 Feb 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8771,7 +8771,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Nic    C%sT    1992 Jan  1  4:00
 	{
 		PolicyIndex: 88, // PolicyName: Nic
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8785,7 +8785,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1992 Sep 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8799,7 +8799,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1993
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8813,7 +8813,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1997
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -8827,7 +8827,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Nic    C%sT
 	{
 		PolicyIndex: 88, // PolicyName: Nic
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -8847,7 +8847,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:00:04 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -961, // -14404 / 15
 		OffsetSecondsRemainder: 11,
@@ -8858,10 +8858,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03    1988 Sep 12
+	//             -4:00    Brazil    %z    1988 Sep 12
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8872,10 +8872,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1993 Sep 28
+	//             -4:00    -    %z    1993 Sep 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8886,10 +8886,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03    1994 Sep 22
+	//             -4:00    Brazil    %z    1994 Sep 22
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8900,10 +8900,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04
+	//             -4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8923,7 +8923,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -4:04:20 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -978, // -14660 / 15
 		OffsetSecondsRemainder: 10,
@@ -8937,7 +8937,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:04:20 -    FFMT    1911 May  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 124, // "FFMT"
+		FormatIndex: 41, // "FFMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -978, // -14660 / 15
 		OffsetSecondsRemainder: 10,
@@ -8951,7 +8951,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST    1980 Apr  6
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8965,7 +8965,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    1:00    ADT    1980 Sep 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 90, // "ADT"
+		FormatIndex: 7, // "ADT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8979,7 +8979,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -8999,7 +8999,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// -6:30:00 - LMT 1922 Jan 1 6:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1560, // -23400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9013,7 +9013,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1988
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9027,7 +9027,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1989
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9041,7 +9041,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Mexico    C%sT    2010
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9055,7 +9055,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9069,13 +9069,13 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Mazatlan
 	// EraIndex: 602
-	// EraCount: 8
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -7:05:40 - LMT 1922 Jan 1 7:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1703, // -25540 / 15
 		OffsetSecondsRemainder: 5,
@@ -9086,24 +9086,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -7:00    -    MST    1927 Jun 10 23:00
+	//             -7:00    -    MST    1927 Jun 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1927,
 		UntilMonth: 6,
 		UntilDay: 10,
-		UntilSecondsCode: 5520, // 82800 / 15
+		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -6:00    -    CST    1930 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9117,7 +9117,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    1932 Apr  1
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -9131,7 +9131,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1942 Apr 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9142,26 +9142,12 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -7:00    -    MST    1949 Jan 14
+	//             -7:00    -    MST    1970
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1949,
-		UntilMonth: 1,
-		UntilDay: 14,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -8:00    -    PST    1970
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1970,
 		UntilMonth: 1,
@@ -9173,7 +9159,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -9186,14 +9172,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Menominee
-	// EraIndex: 610
+	// EraIndex: 609
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -5:50:27 - LMT 1885 Sep 18 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1402, // -21027 / 15
 		OffsetSecondsRemainder: 3,
@@ -9207,7 +9193,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9221,7 +9207,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00 Menominee    C%sT    1969 Apr 27  2:00
 	{
 		PolicyIndex: 76, // PolicyName: Menominee
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9235,7 +9221,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1973 Apr 29  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -9249,7 +9235,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9262,14 +9248,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Merida
-	// EraIndex: 615
+	// EraIndex: 614
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -5:58:28 - LMT 1922 Jan 1 6:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1434, // -21508 / 15
 		OffsetSecondsRemainder: 2,
@@ -9280,38 +9266,38 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -6:00    -    CST    1981 Dec 23
+	//             -6:00    -    CST    1981 Dec 26  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1981,
 		UntilMonth: 12,
-		UntilDay: 23,
-		UntilSecondsCode: 0, // 0 / 15
+		UntilDay: 26,
+		UntilSecondsCode: 480, // 7200 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    EST    1982 Dec  2
+	//             -5:00    -    EST    1982 Nov  2  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1982,
-		UntilMonth: 12,
+		UntilMonth: 11,
 		UntilDay: 2,
-		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsCode: 480, // 7200 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -6:00    Mexico    C%sT
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9324,14 +9310,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Metlakatla
-	// EraIndex: 619
+	// EraIndex: 618
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// 15:13:42 - LMT 1867 Oct 19 15:44:55
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3654, // 54822 / 15
 		OffsetSecondsRemainder: 12,
@@ -9345,7 +9331,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:46:18 -    LMT    1900 Aug 20 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2106, // -31578 / 15
 		OffsetSecondsRemainder: 12,
@@ -9359,7 +9345,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    1942
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -9373,7 +9359,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    US    P%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -9387,7 +9373,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -9401,7 +9387,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    US    P%sT    1983 Oct 30  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -9415,7 +9401,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    2015 Nov  1  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -9429,7 +9415,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    AK%sT    2018 Nov  4  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 96, // "AK%T"
+		FormatIndex: 13, // "AK%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9443,7 +9429,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    2019 Jan 20  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -9457,7 +9443,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    AK%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 96, // "AK%T"
+		FormatIndex: 13, // "AK%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9470,14 +9456,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Mexico_City
-	// EraIndex: 629
+	// EraIndex: 628
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -6:36:36 - LMT 1922 Jan 1 7:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1587, // -23796 / 15
 		OffsetSecondsRemainder: 9,
@@ -9488,24 +9474,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -7:00    -    MST    1927 Jun 10 23:00
+	//             -7:00    -    MST    1927 Jun 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1927,
 		UntilMonth: 6,
 		UntilDay: 10,
-		UntilSecondsCode: 5520, // 82800 / 15
+		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -6:00    -    CST    1930 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9519,7 +9505,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    1932 Apr  1
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -9533,7 +9519,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Mexico    C%sT    2001 Sep 30  2:00
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9547,7 +9533,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    2002 Feb 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9561,7 +9547,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Mexico    C%sT
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -9574,14 +9560,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Miquelon
-	// EraIndex: 636
+	// EraIndex: 635
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -3:44:40 - LMT 1911 Jun 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -899, // -13480 / 15
 		OffsetSecondsRemainder: 5,
@@ -9595,7 +9581,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST    1980 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9606,10 +9592,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1987
+	//             -3:00    -    %z    1987
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -9620,10 +9606,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Canada    -03/-02
+	//             -3:00    Canada    %z
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -9636,14 +9622,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Moncton
-	// EraIndex: 640
+	// EraIndex: 639
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// -4:19:08 - LMT 1883 Dec 9
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1037, // -15548 / 15
 		OffsetSecondsRemainder: 7,
@@ -9657,7 +9643,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    1902 Jun 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -9671,7 +9657,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT    1933
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9685,7 +9671,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Moncton    A%sT    1942
 	{
 		PolicyIndex: 79, // PolicyName: Moncton
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9699,7 +9685,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT    1946
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9713,7 +9699,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Moncton    A%sT    1973
 	{
 		PolicyIndex: 79, // PolicyName: Moncton
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9727,7 +9713,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT    1993
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9741,7 +9727,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Moncton    A%sT    2007
 	{
 		PolicyIndex: 79, // PolicyName: Moncton
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9755,7 +9741,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -9768,14 +9754,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Monterrey
-	// EraIndex: 649
-	// EraCount: 4
+	// EraIndex: 648
+	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -6:41:16 - LMT 1922 Jan 1 6:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1606, // -24076 / 15
 		OffsetSecondsRemainder: 14,
@@ -9786,792 +9772,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -6:00    -    CST    1988
+	//             -7:00    -    MST    1927 Jun 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1440, // -21600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1988,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -6:00    US    C%sT    1989
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1440, // -21600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1989,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -6:00    Mexico    C%sT
-	{
-		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1440, // -21600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/Montevideo
-	// EraIndex: 653
-	// EraCount: 11
-	// ---------------------------------------------------------------------------
-
-	// -3:44:51 - LMT 1908 Jun 10
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -900, // -13491 / 15
-		OffsetSecondsRemainder: 9,
-		UntilYear: 1908,
-		UntilMonth: 6,
-		UntilDay: 10,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:44:51 -    MMT    1920 May  1
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -900, // -13491 / 15
-		OffsetSecondsRemainder: 9,
-		UntilYear: 1920,
-		UntilMonth: 5,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -4:00    -    -04    1923 Oct  1
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -960, // -14400 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1923,
-		UntilMonth: 10,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:30    Uruguay    -0330/-03 1942 Dec 14
-	{
-		PolicyIndex: 126, // PolicyName: Uruguay
-		FormatIndex: 63, // "-0330/-03"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -840, // -12600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1942,
-		UntilMonth: 12,
-		UntilDay: 14,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    Uruguay    -03/-0230 1960
-	{
-		PolicyIndex: 126, // PolicyName: Uruguay
-		FormatIndex: 61, // "-03/-0230"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1960,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    Uruguay    -03/-02    1968
-	{
-		PolicyIndex: 126, // PolicyName: Uruguay
-		FormatIndex: 60, // "-03/-02"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1968,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    Uruguay    -03/-0230 1970
-	{
-		PolicyIndex: 126, // PolicyName: Uruguay
-		FormatIndex: 61, // "-03/-0230"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1970,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    Uruguay    -03/-02    1974
-	{
-		PolicyIndex: 126, // PolicyName: Uruguay
-		FormatIndex: 60, // "-03/-02"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1974,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    Uruguay    -03/-0130 1974 Mar 10
-	{
-		PolicyIndex: 126, // PolicyName: Uruguay
-		FormatIndex: 59, // "-03/-0130"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1974,
-		UntilMonth: 3,
-		UntilDay: 10,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    Uruguay    -03/-0230 1974 Dec 22
-	{
-		PolicyIndex: 126, // PolicyName: Uruguay
-		FormatIndex: 61, // "-03/-0230"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1974,
-		UntilMonth: 12,
-		UntilDay: 22,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    Uruguay    -03/-02
-	{
-		PolicyIndex: 126, // PolicyName: Uruguay
-		FormatIndex: 60, // "-03/-02"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/New_York
-	// EraIndex: 664
-	// EraCount: 6
-	// ---------------------------------------------------------------------------
-
-	// -4:56:02 - LMT 1883 Nov 18 17:00u
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1185, // -17762 / 15
-		OffsetSecondsRemainder: 13,
-		UntilYear: 1883,
-		UntilMonth: 11,
-		UntilDay: 18,
-		UntilSecondsCode: 4080, // 61200 / 15
-		UntilSecondsModifier: 32, // SuffixU + remainder=0
-	},
-
-	//             -5:00    US    E%sT    1920
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1200, // -18000 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1920,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -5:00    NYC    E%sT    1942
-	{
-		PolicyIndex: 85, // PolicyName: NYC
-		FormatIndex: 116, // "E%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1200, // -18000 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1942,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -5:00    US    E%sT    1946
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1200, // -18000 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1946,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -5:00    NYC    E%sT    1967
-	{
-		PolicyIndex: 85, // PolicyName: NYC
-		FormatIndex: 116, // "E%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1200, // -18000 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1967,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -5:00    US    E%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1200, // -18000 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/Nome
-	// EraIndex: 670
-	// EraCount: 9
-	// ---------------------------------------------------------------------------
-
-	// 12:58:22 - LMT 1867 Oct 19 13:29:35
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 3113, // 46702 / 15
-		OffsetSecondsRemainder: 7,
-		UntilYear: 1867,
-		UntilMonth: 10,
-		UntilDay: 19,
-		UntilSecondsCode: 3238, // 48575 / 15
-		UntilSecondsModifier: 5, // SuffixW + remainder=5
-	},
-
-	//             -11:01:38 -    LMT    1900 Aug 20 12:00
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2647, // -39698 / 15
-		OffsetSecondsRemainder: 7,
-		UntilYear: 1900,
-		UntilMonth: 8,
-		UntilDay: 20,
-		UntilSecondsCode: 2880, // 43200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -11:00    -    NST    1942
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 159, // "NST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2640, // -39600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1942,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -11:00    US    N%sT    1946
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 158, // "N%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2640, // -39600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1946,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -11:00    -    NST    1967 Apr
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 159, // "NST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2640, // -39600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1967,
-		UntilMonth: 4,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -11:00    -    BST    1969
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 104, // "BST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2640, // -39600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1969,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -11:00    US    B%sT    1983 Oct 30  2:00
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 101, // "B%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2640, // -39600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1983,
-		UntilMonth: 10,
-		UntilDay: 30,
-		UntilSecondsCode: 480, // 7200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//              -9:00    US    Y%sT    1983 Nov 30
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 190, // "Y%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2160, // -32400 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1983,
-		UntilMonth: 11,
-		UntilDay: 30,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//              -9:00    US    AK%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 96, // "AK%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2160, // -32400 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/Noronha
-	// EraIndex: 679
-	// EraCount: 7
-	// ---------------------------------------------------------------------------
-
-	// -2:09:40 - LMT 1914
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -519, // -7780 / 15
-		OffsetSecondsRemainder: 5,
-		UntilYear: 1914,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -2:00    Brazil    -02/-01    1990 Sep 17
-	{
-		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 57, // "-02/-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1990,
-		UntilMonth: 9,
-		UntilDay: 17,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -2:00    -    -02    1999 Sep 30
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1999,
-		UntilMonth: 9,
-		UntilDay: 30,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -2:00    Brazil    -02/-01    2000 Oct 15
-	{
-		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 57, // "-02/-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 2000,
-		UntilMonth: 10,
-		UntilDay: 15,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -2:00    -    -02    2001 Sep 13
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 2001,
-		UntilMonth: 9,
-		UntilDay: 13,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -2:00    Brazil    -02/-01    2002 Oct  1
-	{
-		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 57, // "-02/-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 2002,
-		UntilMonth: 10,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -2:00    -    -02
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/North_Dakota/Beulah
-	// EraIndex: 686
-	// EraCount: 3
-	// ---------------------------------------------------------------------------
-
-	// -6:47:07 - LMT 1883 Nov 18 19:00u
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1629, // -24427 / 15
-		OffsetSecondsRemainder: 8,
-		UntilYear: 1883,
-		UntilMonth: 11,
-		UntilDay: 18,
-		UntilSecondsCode: 4560, // 68400 / 15
-		UntilSecondsModifier: 32, // SuffixU + remainder=0
-	},
-
-	//             -7:00    US    M%sT    2010 Nov  7  2:00
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1680, // -25200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 2010,
-		UntilMonth: 11,
-		UntilDay: 7,
-		UntilSecondsCode: 480, // 7200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -6:00    US    C%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1440, // -21600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/North_Dakota/Center
-	// EraIndex: 689
-	// EraCount: 3
-	// ---------------------------------------------------------------------------
-
-	// -6:45:12 - LMT 1883 Nov 18 19:00u
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1621, // -24312 / 15
-		OffsetSecondsRemainder: 3,
-		UntilYear: 1883,
-		UntilMonth: 11,
-		UntilDay: 18,
-		UntilSecondsCode: 4560, // 68400 / 15
-		UntilSecondsModifier: 32, // SuffixU + remainder=0
-	},
-
-	//             -7:00    US    M%sT    1992 Oct 25  2:00
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1680, // -25200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1992,
-		UntilMonth: 10,
-		UntilDay: 25,
-		UntilSecondsCode: 480, // 7200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -6:00    US    C%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1440, // -21600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/North_Dakota/New_Salem
-	// EraIndex: 692
-	// EraCount: 3
-	// ---------------------------------------------------------------------------
-
-	// -6:45:39 - LMT 1883 Nov 18 19:00u
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1623, // -24339 / 15
-		OffsetSecondsRemainder: 6,
-		UntilYear: 1883,
-		UntilMonth: 11,
-		UntilDay: 18,
-		UntilSecondsCode: 4560, // 68400 / 15
-		UntilSecondsModifier: 32, // SuffixU + remainder=0
-	},
-
-	//             -7:00    US    M%sT    2003 Oct 26  2:00
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1680, // -25200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 2003,
-		UntilMonth: 10,
-		UntilDay: 26,
-		UntilSecondsCode: 480, // 7200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -6:00    US    C%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1440, // -21600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/Nuuk
-	// EraIndex: 695
-	// EraCount: 5
-	// ---------------------------------------------------------------------------
-
-	// -3:26:56 - LMT 1916 Jul 28
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -828, // -12416 / 15
-		OffsetSecondsRemainder: 4,
-		UntilYear: 1916,
-		UntilMonth: 7,
-		UntilDay: 28,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    -    -03    1980 Apr  6  2:00
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1980,
-		UntilMonth: 4,
-		UntilDay: 6,
-		UntilSecondsCode: 480, // 7200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -3:00    EU    -03/-02    2023 Mar 26  1:00u
-	{
-		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 60, // "-03/-02"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -720, // -10800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 2023,
-		UntilMonth: 3,
-		UntilDay: 26,
-		UntilSecondsCode: 240, // 3600 / 15
-		UntilSecondsModifier: 32, // SuffixU + remainder=0
-	},
-
-	//             -2:00    -    -02    2023 Oct 29  1:00u
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 2023,
-		UntilMonth: 10,
-		UntilDay: 29,
-		UntilSecondsCode: 240, // 3600 / 15
-		UntilSecondsModifier: 32, // SuffixU + remainder=0
-	},
-
-	//             -2:00    EU    -02/-01
-	{
-		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 57, // "-02/-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: America/Ojinaga
-	// EraIndex: 700
-	// EraCount: 11
-	// ---------------------------------------------------------------------------
-
-	// -6:57:40 - LMT 1922 Jan 1 7:00u
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1671, // -25060 / 15
-		OffsetSecondsRemainder: 5,
-		UntilYear: 1922,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 1680, // 25200 / 15
-		UntilSecondsModifier: 32, // SuffixU + remainder=0
-	},
-
-	//             -7:00    -    MST    1927 Jun 10 23:00
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1927,
 		UntilMonth: 6,
 		UntilDay: 10,
-		UntilSecondsCode: 5520, // 82800 / 15
+		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -6:00    -    CST    1930 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -10585,7 +9803,817 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    1932 Apr  1
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1680, // -25200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1932,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -6:00    -    CST    1988
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 30, // "CST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1440, // -21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1988,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -6:00    US    C%sT    1989
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 22, // "C%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1440, // -21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1989,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -6:00    Mexico    C%sT
+	{
+		PolicyIndex: 77, // PolicyName: Mexico
+		FormatIndex: 22, // "C%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1440, // -21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Montevideo
+	// EraIndex: 655
+	// EraCount: 11
+	// ---------------------------------------------------------------------------
+
+	// -3:44:51 - LMT 1908 Jun 10
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -900, // -13491 / 15
+		OffsetSecondsRemainder: 9,
+		UntilYear: 1908,
+		UntilMonth: 6,
+		UntilDay: 10,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:44:51 -    MMT    1920 May  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 69, // "MMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -900, // -13491 / 15
+		OffsetSecondsRemainder: 9,
+		UntilYear: 1920,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -4:00    -    %z    1923 Oct  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -960, // -14400 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1923,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:30    Uruguay    %z    1942 Dec 14
+	{
+		PolicyIndex: 126, // PolicyName: Uruguay
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -840, // -12600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1942,
+		UntilMonth: 12,
+		UntilDay: 14,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    Uruguay    %z    1960
+	{
+		PolicyIndex: 126, // PolicyName: Uruguay
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1960,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    Uruguay    %z    1968
+	{
+		PolicyIndex: 126, // PolicyName: Uruguay
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1968,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    Uruguay    %z    1970
+	{
+		PolicyIndex: 126, // PolicyName: Uruguay
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1970,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    Uruguay    %z    1974
+	{
+		PolicyIndex: 126, // PolicyName: Uruguay
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1974,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    Uruguay    %z    1974 Mar 10
+	{
+		PolicyIndex: 126, // PolicyName: Uruguay
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1974,
+		UntilMonth: 3,
+		UntilDay: 10,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    Uruguay    %z    1974 Dec 22
+	{
+		PolicyIndex: 126, // PolicyName: Uruguay
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1974,
+		UntilMonth: 12,
+		UntilDay: 22,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    Uruguay    %z
+	{
+		PolicyIndex: 126, // PolicyName: Uruguay
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/New_York
+	// EraIndex: 666
+	// EraCount: 6
+	// ---------------------------------------------------------------------------
+
+	// -4:56:02 - LMT 1883 Nov 18 17:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1185, // -17762 / 15
+		OffsetSecondsRemainder: 13,
+		UntilYear: 1883,
+		UntilMonth: 11,
+		UntilDay: 18,
+		UntilSecondsCode: 4080, // 61200 / 15
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
+	},
+
+	//             -5:00    US    E%sT    1920
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 33, // "E%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1200, // -18000 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1920,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -5:00    NYC    E%sT    1942
+	{
+		PolicyIndex: 85, // PolicyName: NYC
+		FormatIndex: 33, // "E%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1200, // -18000 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1942,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -5:00    US    E%sT    1946
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 33, // "E%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1200, // -18000 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1946,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -5:00    NYC    E%sT    1967
+	{
+		PolicyIndex: 85, // PolicyName: NYC
+		FormatIndex: 33, // "E%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1200, // -18000 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1967,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -5:00    US    E%sT
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 33, // "E%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1200, // -18000 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Nome
+	// EraIndex: 672
+	// EraCount: 9
+	// ---------------------------------------------------------------------------
+
+	// 12:58:22 - LMT 1867 Oct 19 13:29:35
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 3113, // 46702 / 15
+		OffsetSecondsRemainder: 7,
+		UntilYear: 1867,
+		UntilMonth: 10,
+		UntilDay: 19,
+		UntilSecondsCode: 3238, // 48575 / 15
+		UntilSecondsModifier: 5, // SuffixW + remainder=5
+	},
+
+	//             -11:01:38 -    LMT    1900 Aug 20 12:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2647, // -39698 / 15
+		OffsetSecondsRemainder: 7,
+		UntilYear: 1900,
+		UntilMonth: 8,
+		UntilDay: 20,
+		UntilSecondsCode: 2880, // 43200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -11:00    -    NST    1942
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 75, // "NST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2640, // -39600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1942,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -11:00    US    N%sT    1946
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 74, // "N%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2640, // -39600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1946,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -11:00    -    NST    1967 Apr
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 75, // "NST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2640, // -39600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1967,
+		UntilMonth: 4,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -11:00    -    BST    1969
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 21, // "BST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2640, // -39600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1969,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -11:00    US    B%sT    1983 Oct 30  2:00
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 18, // "B%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2640, // -39600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1983,
+		UntilMonth: 10,
+		UntilDay: 30,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//              -9:00    US    Y%sT    1983 Nov 30
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 106, // "Y%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2160, // -32400 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1983,
+		UntilMonth: 11,
+		UntilDay: 30,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//              -9:00    US    AK%sT
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 13, // "AK%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -2160, // -32400 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Noronha
+	// EraIndex: 681
+	// EraCount: 7
+	// ---------------------------------------------------------------------------
+
+	// -2:09:40 - LMT 1914
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -519, // -7780 / 15
+		OffsetSecondsRemainder: 5,
+		UntilYear: 1914,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -2:00    Brazil    %z    1990 Sep 17
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -480, // -7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1990,
+		UntilMonth: 9,
+		UntilDay: 17,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -2:00    -    %z    1999 Sep 30
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -480, // -7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1999,
+		UntilMonth: 9,
+		UntilDay: 30,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -2:00    Brazil    %z    2000 Oct 15
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -480, // -7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2000,
+		UntilMonth: 10,
+		UntilDay: 15,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -2:00    -    %z    2001 Sep 13
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -480, // -7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2001,
+		UntilMonth: 9,
+		UntilDay: 13,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -2:00    Brazil    %z    2002 Oct  1
+	{
+		PolicyIndex: 18, // PolicyName: Brazil
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -480, // -7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2002,
+		UntilMonth: 10,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -2:00    -    %z
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -480, // -7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/North_Dakota/Beulah
+	// EraIndex: 688
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
+
+	// -6:47:07 - LMT 1883 Nov 18 19:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1629, // -24427 / 15
+		OffsetSecondsRemainder: 8,
+		UntilYear: 1883,
+		UntilMonth: 11,
+		UntilDay: 18,
+		UntilSecondsCode: 4560, // 68400 / 15
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
+	},
+
+	//             -7:00    US    M%sT    2010 Nov  7  2:00
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 68, // "M%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1680, // -25200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2010,
+		UntilMonth: 11,
+		UntilDay: 7,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -6:00    US    C%sT
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 22, // "C%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1440, // -21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/North_Dakota/Center
+	// EraIndex: 691
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
+
+	// -6:45:12 - LMT 1883 Nov 18 19:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1621, // -24312 / 15
+		OffsetSecondsRemainder: 3,
+		UntilYear: 1883,
+		UntilMonth: 11,
+		UntilDay: 18,
+		UntilSecondsCode: 4560, // 68400 / 15
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
+	},
+
+	//             -7:00    US    M%sT    1992 Oct 25  2:00
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 68, // "M%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1680, // -25200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1992,
+		UntilMonth: 10,
+		UntilDay: 25,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -6:00    US    C%sT
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 22, // "C%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1440, // -21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/North_Dakota/New_Salem
+	// EraIndex: 694
+	// EraCount: 3
+	// ---------------------------------------------------------------------------
+
+	// -6:45:39 - LMT 1883 Nov 18 19:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1623, // -24339 / 15
+		OffsetSecondsRemainder: 6,
+		UntilYear: 1883,
+		UntilMonth: 11,
+		UntilDay: 18,
+		UntilSecondsCode: 4560, // 68400 / 15
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
+	},
+
+	//             -7:00    US    M%sT    2003 Oct 26  2:00
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 68, // "M%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1680, // -25200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2003,
+		UntilMonth: 10,
+		UntilDay: 26,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -6:00    US    C%sT
+	{
+		PolicyIndex: 125, // PolicyName: US
+		FormatIndex: 22, // "C%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1440, // -21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Nuuk
+	// EraIndex: 697
+	// EraCount: 5
+	// ---------------------------------------------------------------------------
+
+	// -3:26:56 - LMT 1916 Jul 28
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -828, // -12416 / 15
+		OffsetSecondsRemainder: 4,
+		UntilYear: 1916,
+		UntilMonth: 7,
+		UntilDay: 28,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    -    %z    1980 Apr  6  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1980,
+		UntilMonth: 4,
+		UntilDay: 6,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -3:00    EU    %z    2023 Mar 26  1:00u
+	{
+		PolicyIndex: 38, // PolicyName: EU
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -720, // -10800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2023,
+		UntilMonth: 3,
+		UntilDay: 26,
+		UntilSecondsCode: 240, // 3600 / 15
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
+	},
+
+	//             -2:00    -    %z    2023 Oct 29  1:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -480, // -7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 2023,
+		UntilMonth: 10,
+		UntilDay: 29,
+		UntilSecondsCode: 240, // 3600 / 15
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
+	},
+
+	//             -2:00    EU    %z
+	{
+		PolicyIndex: 38, // PolicyName: EU
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -480, // -7200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 32767,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	// ---------------------------------------------------------------------------
+	// ZoneName: America/Ojinaga
+	// EraIndex: 702
+	// EraCount: 11
+	// ---------------------------------------------------------------------------
+
+	// -6:57:40 - LMT 1922 Jan 1 7:00u
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 66, // "LMT"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1671, // -25060 / 15
+		OffsetSecondsRemainder: 5,
+		UntilYear: 1922,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 1680, // 25200 / 15
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
+	},
+
+	//             -7:00    -    MST    1927 Jun 10
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 73, // "MST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1680, // -25200 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1927,
+		UntilMonth: 6,
+		UntilDay: 10,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -6:00    -    CST    1930 Nov 15
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 30, // "CST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1440, // -21600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1930,
+		UntilMonth: 11,
+		UntilDay: 15,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -7:00    Mexico    M%sT    1932 Apr  1
+	{
+		PolicyIndex: 77, // PolicyName: Mexico
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10599,7 +10627,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1996
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -10613,7 +10641,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Mexico    C%sT    1998
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -10627,7 +10655,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    1998 Apr Sun>=1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -10641,7 +10669,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Mexico    M%sT    2010
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10655,7 +10683,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT    2022 Oct 30  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10669,7 +10697,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST    2022 Nov 30  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -10683,7 +10711,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    US    C%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -10696,14 +10724,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Panama
-	// EraIndex: 711
+	// EraIndex: 713
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -5:18:08 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1273, // -19088 / 15
 		OffsetSecondsRemainder: 7,
@@ -10717,7 +10745,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:19:36 -    CMT    1908 Apr 22
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1279, // -19176 / 15
 		OffsetSecondsRemainder: 9,
@@ -10731,7 +10759,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -10744,14 +10772,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Paramaribo
-	// EraIndex: 714
+	// EraIndex: 716
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -3:40:40 - LMT 1911
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -883, // -13240 / 15
 		OffsetSecondsRemainder: 5,
@@ -10765,7 +10793,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:40:52 -    PMT    1935
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 166, // "PMT"
+		FormatIndex: 82, // "PMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -884, // -13252 / 15
 		OffsetSecondsRemainder: 8,
@@ -10779,7 +10807,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:40:36 -    PMT    1945 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 166, // "PMT"
+		FormatIndex: 82, // "PMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -883, // -13236 / 15
 		OffsetSecondsRemainder: 9,
@@ -10790,10 +10818,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:30    -    -0330    1984 Oct
+	//             -3:30    -    %z    1984 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 62, // "-0330"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -10804,10 +10832,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -10820,14 +10848,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Phoenix
-	// EraIndex: 719
+	// EraIndex: 721
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -7:28:18 - LMT 1883 Nov 18 19:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1794, // -26898 / 15
 		OffsetSecondsRemainder: 12,
@@ -10841,7 +10869,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT    1944 Jan  1  0:01
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10855,7 +10883,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST    1944 Apr  1  0:01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10869,7 +10897,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT    1944 Oct  1  0:01
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10883,7 +10911,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST    1967
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10897,7 +10925,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    US    M%sT    1968 Mar 21
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10911,7 +10939,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -10924,14 +10952,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Port-au-Prince
-	// EraIndex: 726
+	// EraIndex: 728
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -4:49:20 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1158, // -17360 / 15
 		OffsetSecondsRemainder: 10,
@@ -10945,7 +10973,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:49    -    PPMT    1917 Jan 24 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 167, // "PPMT"
+		FormatIndex: 83, // "PPMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1156, // -17340 / 15
 		OffsetSecondsRemainder: 0,
@@ -10959,7 +10987,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Haiti    E%sT
 	{
 		PolicyIndex: 55, // PolicyName: Haiti
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -10972,14 +11000,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Porto_Velho
-	// EraIndex: 729
+	// EraIndex: 731
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -4:15:36 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1023, // -15336 / 15
 		OffsetSecondsRemainder: 9,
@@ -10990,10 +11018,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03    1988 Sep 12
+	//             -4:00    Brazil    %z    1988 Sep 12
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11004,10 +11032,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04
+	//             -4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11020,14 +11048,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Puerto_Rico
-	// EraIndex: 732
+	// EraIndex: 734
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -4:24:25 - LMT 1899 Mar 28 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1058, // -15865 / 15
 		OffsetSecondsRemainder: 5,
@@ -11041,7 +11069,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST    1942 May  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11055,7 +11083,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    US    A%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11069,7 +11097,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11082,14 +11110,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Punta_Arenas
-	// EraIndex: 736
+	// EraIndex: 738
 	// EraCount: 14
 	// ---------------------------------------------------------------------------
 
 	// -4:43:40 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1135, // -17020 / 15
 		OffsetSecondsRemainder: 5,
@@ -11103,7 +11131,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:42:45 -    SMT    1910 Jan 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1131, // -16965 / 15
 		OffsetSecondsRemainder: 0,
@@ -11114,10 +11142,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    1916 Jul  1
+	//             -5:00    -    %z    1916 Jul  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11131,7 +11159,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:42:45 -    SMT    1918 Sep 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1131, // -16965 / 15
 		OffsetSecondsRemainder: 0,
@@ -11142,10 +11170,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1919 Jul  1
+	//             -4:00    -    %z    1919 Jul  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11159,7 +11187,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:42:45 -    SMT    1927 Sep  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1131, // -16965 / 15
 		OffsetSecondsRemainder: 0,
@@ -11170,10 +11198,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    Chile    -05/-04    1932 Sep  1
+	//             -5:00    Chile    %z    1932 Sep  1
 	{
 		PolicyIndex: 27, // PolicyName: Chile
-		FormatIndex: 69, // "-05/-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11184,10 +11212,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1942 Jun  1
+	//             -4:00    -    %z    1942 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11198,10 +11226,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    1942 Aug  1
+	//             -5:00    -    %z    1942 Aug  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11212,10 +11240,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1946 Aug 28 24:00
+	//             -4:00    -    %z    1946 Aug 28 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11226,10 +11254,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    1:00    -04    1947 Mar 31 24:00
+	//             -5:00    1:00    %z    1947 Mar 31 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11240,10 +11268,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    1947 May 21 23:00
+	//             -5:00    -    %z    1947 May 21 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11254,10 +11282,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Chile    -04/-03    2016 Dec  4
+	//             -4:00    Chile    %z    2016 Dec  4
 	{
 		PolicyIndex: 27, // PolicyName: Chile
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11268,10 +11296,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11284,14 +11312,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Rankin_Inlet
-	// EraIndex: 750
+	// EraIndex: 752
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1957
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -11305,7 +11333,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    NT_YK    C%sT    2000 Oct 29  2:00
 	{
 		PolicyIndex: 84, // PolicyName: NT_YK
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -11319,7 +11347,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2001 Apr  1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11333,7 +11361,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Canada    C%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -11346,14 +11374,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Recife
-	// EraIndex: 754
+	// EraIndex: 756
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// -2:19:36 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -559, // -8376 / 15
 		OffsetSecondsRemainder: 9,
@@ -11364,10 +11392,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    1990 Sep 17
+	//             -3:00    Brazil    %z    1990 Sep 17
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11378,10 +11406,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    1999 Sep 30
+	//             -3:00    -    %z    1999 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11392,10 +11420,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2000 Oct 15
+	//             -3:00    Brazil    %z    2000 Oct 15
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11406,10 +11434,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03    2001 Sep 13
+	//             -3:00    -    %z    2001 Sep 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11420,10 +11448,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    2002 Oct  1
+	//             -3:00    Brazil    %z    2002 Oct  1
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11434,10 +11462,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11450,14 +11478,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Regina
-	// EraIndex: 761
+	// EraIndex: 763
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -6:58:36 - LMT 1905 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1675, // -25116 / 15
 		OffsetSecondsRemainder: 9,
@@ -11471,7 +11499,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Regina    M%sT    1960 Apr lastSun  2:00
 	{
 		PolicyIndex: 101, // PolicyName: Regina
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -11485,7 +11513,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -11498,14 +11526,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Resolute
-	// EraIndex: 764
+	// EraIndex: 766
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1947 Aug 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -11519,7 +11547,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    NT_YK    C%sT    2000 Oct 29  2:00
 	{
 		PolicyIndex: 84, // PolicyName: NT_YK
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -11533,7 +11561,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2001 Apr  1  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11547,7 +11575,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Canada    C%sT    2006 Oct 29  2:00
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -11561,7 +11589,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    -    EST    2007 Mar 11  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
+		FormatIndex: 40, // "EST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11575,7 +11603,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Canada    C%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -11588,14 +11616,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Rio_Branco
-	// EraIndex: 770
+	// EraIndex: 772
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -4:31:12 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1085, // -16272 / 15
 		OffsetSecondsRemainder: 3,
@@ -11606,10 +11634,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    Brazil    -05/-04    1988 Sep 12
+	//             -5:00    Brazil    %z    1988 Sep 12
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 69, // "-05/-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11620,10 +11648,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    2008 Jun 24  0:00
+	//             -5:00    -    %z    2008 Jun 24  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11634,10 +11662,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2013 Nov 10
+	//             -4:00    -    %z    2013 Nov 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11648,10 +11676,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05
+	//             -5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11664,14 +11692,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Santarem
-	// EraIndex: 775
+	// EraIndex: 777
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -3:38:48 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -876, // -13128 / 15
 		OffsetSecondsRemainder: 12,
@@ -11682,10 +11710,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Brazil    -04/-03    1988 Sep 12
+	//             -4:00    Brazil    %z    1988 Sep 12
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11696,10 +11724,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    2008 Jun 24  0:00
+	//             -4:00    -    %z    2008 Jun 24  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11710,10 +11738,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11726,14 +11754,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Santiago
-	// EraIndex: 779
+	// EraIndex: 781
 	// EraCount: 14
 	// ---------------------------------------------------------------------------
 
 	// -4:42:45 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1131, // -16965 / 15
 		OffsetSecondsRemainder: 0,
@@ -11747,7 +11775,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:42:45 -    SMT    1910 Jan 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1131, // -16965 / 15
 		OffsetSecondsRemainder: 0,
@@ -11758,10 +11786,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    1916 Jul  1
+	//             -5:00    -    %z    1916 Jul  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11775,7 +11803,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:42:45 -    SMT    1918 Sep 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1131, // -16965 / 15
 		OffsetSecondsRemainder: 0,
@@ -11786,10 +11814,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1919 Jul  1
+	//             -4:00    -    %z    1919 Jul  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11803,7 +11831,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:42:45 -    SMT    1927 Sep  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1131, // -16965 / 15
 		OffsetSecondsRemainder: 0,
@@ -11814,10 +11842,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    Chile    -05/-04    1932 Sep  1
+	//             -5:00    Chile    %z    1932 Sep  1
 	{
 		PolicyIndex: 27, // PolicyName: Chile
-		FormatIndex: 69, // "-05/-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11828,10 +11856,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1942 Jun  1
+	//             -4:00    -    %z    1942 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11842,10 +11870,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    1942 Aug  1
+	//             -5:00    -    %z    1942 Aug  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11856,10 +11884,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    -    -04    1946 Jul 14 24:00
+	//             -4:00    -    %z    1946 Jul 14 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11870,10 +11898,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    1:00    -03    1946 Aug 28 24:00
+	//             -4:00    1:00    %z    1946 Aug 28 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11884,10 +11912,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    1:00    -04    1947 Mar 31 24:00
+	//             -5:00    1:00    %z    1947 Mar 31 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11898,10 +11926,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    1947 May 21 23:00
+	//             -5:00    -    %z    1947 May 21 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -11912,10 +11940,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Chile    -04/-03
+	//             -4:00    Chile    %z
 	{
 		PolicyIndex: 27, // PolicyName: Chile
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11928,14 +11956,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Santo_Domingo
-	// EraIndex: 793
+	// EraIndex: 795
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -4:39:36 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1119, // -16776 / 15
 		OffsetSecondsRemainder: 9,
@@ -11949,7 +11977,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:40    -    SDMT    1933 Apr  1 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 174, // "SDMT"
+		FormatIndex: 90, // "SDMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1120, // -16800 / 15
 		OffsetSecondsRemainder: 0,
@@ -11977,7 +12005,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST    2000 Oct 29  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -11991,7 +12019,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    US    E%sT    2000 Dec  3  1:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -12005,7 +12033,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    -    AST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 98, // "AST"
+		FormatIndex: 15, // "AST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -12018,14 +12046,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Sao_Paulo
-	// EraIndex: 799
+	// EraIndex: 801
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -3:06:28 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -746, // -11188 / 15
 		OffsetSecondsRemainder: 2,
@@ -12036,10 +12064,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02    1963 Oct 23  0:00
+	//             -3:00    Brazil    %z    1963 Oct 23  0:00
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12050,10 +12078,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    1:00    -02    1964
+	//             -3:00    1:00    %z    1964
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12064,10 +12092,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Brazil    -03/-02
+	//             -3:00    Brazil    %z
 	{
 		PolicyIndex: 18, // PolicyName: Brazil
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12080,14 +12108,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Scoresbysund
-	// EraIndex: 803
+	// EraIndex: 805
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -1:27:52 - LMT 1916 Jul 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -352, // -5272 / 15
 		OffsetSecondsRemainder: 8,
@@ -12098,10 +12126,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -2:00    -    -02    1980 Apr  6  2:00
+	//             -2:00    -    %z    1980 Apr  6  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -12112,10 +12140,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -2:00    C-Eur    -02/-01    1981 Mar 29
+	//             -2:00    C-Eur    %z    1981 Mar 29
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 57, // "-02/-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -12126,10 +12154,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -1:00    EU    -01/+00 2024 Mar 31
+	//             -1:00    EU    %z    2024 Mar 31
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 55, // "-01/+00"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -12140,10 +12168,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -2:00    EU    -02/-01
+	//             -2:00    EU    %z
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 57, // "-02/-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -12156,14 +12184,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Sitka
-	// EraIndex: 808
+	// EraIndex: 810
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 14:58:47 - LMT 1867 Oct 19 15:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3595, // 53927 / 15
 		OffsetSecondsRemainder: 2,
@@ -12177,7 +12205,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:01:13 -    LMT    1900 Aug 20 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2165, // -32473 / 15
 		OffsetSecondsRemainder: 2,
@@ -12191,7 +12219,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    1942
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12205,7 +12233,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    US    P%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12219,7 +12247,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    -    PST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12233,7 +12261,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -8:00    US    P%sT    1983 Oct 30  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12247,7 +12275,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    Y%sT    1983 Nov 30
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -12261,7 +12289,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    AK%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 96, // "AK%T"
+		FormatIndex: 13, // "AK%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -12274,14 +12302,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/St_Johns
-	// EraIndex: 816
+	// EraIndex: 818
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// -3:30:52 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -844, // -12652 / 15
 		OffsetSecondsRemainder: 8,
@@ -12295,7 +12323,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30:52 StJohns N%sT    1918
 	{
 		PolicyIndex: 112, // PolicyName: StJohns
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -844, // -12652 / 15
 		OffsetSecondsRemainder: 8,
@@ -12309,7 +12337,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30:52 Canada    N%sT    1919
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -844, // -12652 / 15
 		OffsetSecondsRemainder: 8,
@@ -12323,7 +12351,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30:52 StJohns N%sT    1935 Mar 30
 	{
 		PolicyIndex: 112, // PolicyName: StJohns
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -844, // -12652 / 15
 		OffsetSecondsRemainder: 8,
@@ -12337,7 +12365,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30    StJohns    N%sT    1942 May 11
 	{
 		PolicyIndex: 112, // PolicyName: StJohns
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -12351,7 +12379,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30    Canada    N%sT    1946
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -12365,7 +12393,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30    StJohns    N%sT    2011 Nov
 	{
 		PolicyIndex: 112, // PolicyName: StJohns
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -12379,7 +12407,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:30    Canada    N%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 158, // "N%T"
+		FormatIndex: 74, // "N%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -840, // -12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -12392,14 +12420,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Swift_Current
-	// EraIndex: 824
+	// EraIndex: 826
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -7:11:20 - LMT 1905 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1726, // -25880 / 15
 		OffsetSecondsRemainder: 10,
@@ -12413,7 +12441,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Canada    M%sT    1946 Apr lastSun  2:00
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -12427,7 +12455,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Regina    M%sT    1950
 	{
 		PolicyIndex: 101, // PolicyName: Regina
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -12441,7 +12469,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    Swift    M%sT    1972 Apr lastSun  2:00
 	{
 		PolicyIndex: 115, // PolicyName: Swift
-		FormatIndex: 151, // "M%T"
+		FormatIndex: 68, // "M%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -12455,7 +12483,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    -    CST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -12468,14 +12496,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Tegucigalpa
-	// EraIndex: 829
+	// EraIndex: 831
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -5:48:52 - LMT 1921 Apr
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1396, // -20932 / 15
 		OffsetSecondsRemainder: 8,
@@ -12489,7 +12517,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Hond    C%sT
 	{
 		PolicyIndex: 58, // PolicyName: Hond
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -12502,14 +12530,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Thule
-	// EraIndex: 831
+	// EraIndex: 833
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -4:35:08 - LMT 1916 Jul 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1101, // -16508 / 15
 		OffsetSecondsRemainder: 7,
@@ -12523,7 +12551,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Thule    A%sT
 	{
 		PolicyIndex: 119, // PolicyName: Thule
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -12536,14 +12564,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Tijuana
-	// EraIndex: 833
-	// EraCount: 19
+	// EraIndex: 835
+	// EraCount: 25
 	// ---------------------------------------------------------------------------
 
 	// -7:48:04 - LMT 1922 Jan 1 7:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1873, // -28084 / 15
 		OffsetSecondsRemainder: 11,
@@ -12557,7 +12585,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST    1924
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -12568,24 +12596,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -8:00    -    PST    1927 Jun 10 23:00
+	//             -8:00    -    PST    1927 Jun 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1927,
 		UntilMonth: 6,
 		UntilDay: 10,
-		UntilSecondsCode: 5520, // 82800 / 15
+		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//             -7:00    -    MST    1930 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -12599,7 +12627,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    -    PST    1931 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12613,7 +12641,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    1:00    PDT    1931 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 162, // "PDT"
+		FormatIndex: 78, // "PDT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12627,7 +12655,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    -    PST    1942 Apr 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12641,7 +12669,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    1:00    PWT    1945 Aug 14 23:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 170, // "PWT"
+		FormatIndex: 86, // "PWT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12652,16 +12680,16 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -8:00    1:00    PPT    1945 Nov 12
+	//             -8:00    1:00    PPT    1945 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 168, // "PPT"
+		FormatIndex: 84, // "PPT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1945,
 		UntilMonth: 11,
-		UntilDay: 12,
+		UntilDay: 15,
 		UntilSecondsCode: 0, // 0 / 15
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
@@ -12669,7 +12697,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    -    PST    1948 Apr  5
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12683,7 +12711,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    1:00    PDT    1949 Jan 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 162, // "PDT"
+		FormatIndex: 78, // "PDT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12694,10 +12722,94 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
+	//             -8:00    -    PST    1950 May  1
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 85, // "PST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1920, // -28800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1950,
+		UntilMonth: 5,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -8:00    1:00    PDT    1950 Sep 24
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 78, // "PDT"
+		DeltaMinutes: 60,
+		OffsetSecondsCode: -1920, // -28800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1950,
+		UntilMonth: 9,
+		UntilDay: 24,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -8:00    -    PST    1951 Apr 29  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 85, // "PST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1920, // -28800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1951,
+		UntilMonth: 4,
+		UntilDay: 29,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -8:00    1:00    PDT    1951 Sep 30  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 78, // "PDT"
+		DeltaMinutes: 60,
+		OffsetSecondsCode: -1920, // -28800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1951,
+		UntilMonth: 9,
+		UntilDay: 30,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -8:00    -    PST    1952 Apr 27  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 85, // "PST"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -1920, // -28800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1952,
+		UntilMonth: 4,
+		UntilDay: 27,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -8:00    1:00    PDT    1952 Sep 28  2:00
+	{
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 78, // "PDT"
+		DeltaMinutes: 60,
+		OffsetSecondsCode: -1920, // -28800 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1952,
+		UntilMonth: 9,
+		UntilDay: 28,
+		UntilSecondsCode: 480, // 7200 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
 	//             -8:00    -    PST    1954
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12711,7 +12823,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    CA    P%sT    1961
 	{
 		PolicyIndex: 21, // PolicyName: CA
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12725,7 +12837,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    -    PST    1976
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12739,7 +12851,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    US    P%sT    1996
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12753,7 +12865,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Mexico    P%sT    2001
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12767,7 +12879,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    US    P%sT    2002 Feb 20
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12781,7 +12893,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Mexico    P%sT    2010
 	{
 		PolicyIndex: 77, // PolicyName: Mexico
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12795,7 +12907,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    US    P%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12808,14 +12920,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Toronto
-	// EraIndex: 852
+	// EraIndex: 860
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -5:17:32 - LMT 1895
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1271, // -19052 / 15
 		OffsetSecondsRemainder: 13,
@@ -12829,7 +12941,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Canada    E%sT    1919
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -12843,7 +12955,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Toronto    E%sT    1942 Feb  9  2:00s
 	{
 		PolicyIndex: 121, // PolicyName: Toronto
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -12857,7 +12969,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Canada    E%sT    1946
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -12871,7 +12983,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Toronto    E%sT    1974
 	{
 		PolicyIndex: 121, // PolicyName: Toronto
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -12885,7 +12997,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -5:00    Canada    E%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 116, // "E%T"
+		FormatIndex: 33, // "E%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -12898,14 +13010,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Vancouver
-	// EraIndex: 858
+	// EraIndex: 866
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -8:12:28 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1970, // -29548 / 15
 		OffsetSecondsRemainder: 2,
@@ -12919,7 +13031,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Vanc    P%sT    1987
 	{
 		PolicyIndex: 127, // PolicyName: Vanc
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12933,7 +13045,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Canada    P%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -12946,14 +13058,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Whitehorse
-	// EraIndex: 861
+	// EraIndex: 869
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -9:00:12 - LMT 1900 Aug 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2161, // -32412 / 15
 		OffsetSecondsRemainder: 3,
@@ -12967,7 +13079,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -9:00    NT_YK    Y%sT    1965
 	{
 		PolicyIndex: 84, // PolicyName: NT_YK
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -12981,7 +13093,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -9:00    Yukon    Y%sT    1966 Feb 27  0:00
 	{
 		PolicyIndex: 133, // PolicyName: Yukon
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -12995,7 +13107,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    -    PST    1980
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 169, // "PST"
+		FormatIndex: 85, // "PST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13009,7 +13121,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -8:00    Canada    P%sT    2020 Nov  1
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13023,7 +13135,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:00    -    MST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
+		FormatIndex: 73, // "MST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -13036,14 +13148,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Winnipeg
-	// EraIndex: 867
+	// EraIndex: 875
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -6:28:36 - LMT 1887 Jul 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1555, // -23316 / 15
 		OffsetSecondsRemainder: 9,
@@ -13057,7 +13169,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Winn    C%sT    2006
 	{
 		PolicyIndex: 132, // PolicyName: Winn
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13071,7 +13183,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -6:00    Canada    C%sT
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13084,14 +13196,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: America/Yakutat
-	// EraIndex: 870
+	// EraIndex: 878
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 14:41:05 - LMT 1867 Oct 19 15:12:18
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3524, // 52865 / 15
 		OffsetSecondsRemainder: 5,
@@ -13105,7 +13217,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:18:55 -    LMT    1900 Aug 20 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2236, // -33535 / 15
 		OffsetSecondsRemainder: 5,
@@ -13119,7 +13231,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    -    YST    1942
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 191, // "YST"
+		FormatIndex: 107, // "YST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -13133,7 +13245,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    Y%sT    1946
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -13147,7 +13259,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    -    YST    1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 191, // "YST"
+		FormatIndex: 107, // "YST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -13161,7 +13273,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    Y%sT    1983 Nov 30
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 190, // "Y%T"
+		FormatIndex: 106, // "Y%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -13175,7 +13287,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              -9:00    US    AK%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 96, // "AK%T"
+		FormatIndex: 13, // "AK%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -13188,14 +13300,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Casey
-	// EraIndex: 877
+	// EraIndex: 885
 	// EraCount: 18
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1969
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13206,10 +13318,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    2009 Oct 18  2:00
+	//              8:00    -    %z    2009 Oct 18  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13220,10 +13332,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    2010 Mar  5  2:00
+	//             11:00    -    %z    2010 Mar  5  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13234,10 +13346,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    2011 Oct 28  2:00
+	//              8:00    -    %z    2011 Oct 28  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13248,10 +13360,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    2012 Feb 21 17:00u
+	//             11:00    -    %z    2012 Feb 21 17:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13262,10 +13374,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//              8:00    -    +08    2016 Oct 22
+	//              8:00    -    %z    2016 Oct 22
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13276,10 +13388,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    2018 Mar 11  4:00
+	//             11:00    -    %z    2018 Mar 11  4:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13290,10 +13402,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    2018 Oct  7  4:00
+	//              8:00    -    %z    2018 Oct  7  4:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13304,10 +13416,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    2019 Mar 17  3:00
+	//             11:00    -    %z    2019 Mar 17  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13318,10 +13430,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    2019 Oct  4  3:00
+	//              8:00    -    %z    2019 Oct  4  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13332,10 +13444,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    2020 Mar  8  3:00
+	//             11:00    -    %z    2020 Mar  8  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13346,10 +13458,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    2020 Oct  4  0:01
+	//              8:00    -    %z    2020 Oct  4  0:01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13360,10 +13472,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    2021 Mar 14  0:00
+	//             11:00    -    %z    2021 Mar 14  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13374,10 +13486,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    2021 Oct  3  0:01
+	//              8:00    -    %z    2021 Oct  3  0:01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13388,10 +13500,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    2022 Mar 13  0:00
+	//             11:00    -    %z    2022 Mar 13  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13402,10 +13514,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    2022 Oct  2  0:01
+	//              8:00    -    %z    2022 Oct  2  0:01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13416,10 +13528,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    2023 Mar  9  3:00
+	//             11:00    -    %z    2023 Mar  9  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13430,10 +13542,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08
+	//              8:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13446,14 +13558,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Davis
-	// EraIndex: 895
+	// EraIndex: 903
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1957 Jan 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13464,10 +13576,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    1964 Nov
+	//             7:00    -    %z    1964 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -13481,7 +13593,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0    -    -00    1969 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13492,10 +13604,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    2009 Oct 18  2:00
+	//             7:00    -    %z    2009 Oct 18  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -13506,10 +13618,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    2010 Mar 10 20:00u
+	//             5:00    -    %z    2010 Mar 10 20:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13520,10 +13632,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             7:00    -    +07    2011 Oct 28  2:00
+	//             7:00    -    %z    2011 Oct 28  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -13534,10 +13646,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    2012 Feb 21 20:00u
+	//             5:00    -    %z    2012 Feb 21 20:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13548,10 +13660,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             7:00    -    +07
+	//             7:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -13564,14 +13676,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Macquarie
-	// EraIndex: 903
+	// EraIndex: 911
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1899 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13585,7 +13697,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    AEST    1916 Oct  1  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 93, // "AEST"
+		FormatIndex: 10, // "AEST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13599,7 +13711,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    1:00    AEDT    1917 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 92, // "AEDT"
+		FormatIndex: 9, // "AEDT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13613,7 +13725,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Aus    AE%sT    1919 Apr  1  0:00s
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13627,7 +13739,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0    -    -00    1948 Mar 25
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13641,7 +13753,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Aus    AE%sT    1967
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13655,7 +13767,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AT    AE%sT    2010
 	{
 		PolicyIndex: 4, // PolicyName: AT
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13669,7 +13781,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    1:00    AEDT    2011
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 92, // "AEDT"
+		FormatIndex: 9, // "AEDT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13683,7 +13795,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AT    AE%sT
 	{
 		PolicyIndex: 4, // PolicyName: AT
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13696,14 +13808,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Mawson
-	// EraIndex: 912
+	// EraIndex: 920
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1954 Feb 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13714,10 +13826,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    2009 Oct 18  2:00
+	//             6:00    -    %z    2009 Oct 18  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -13728,10 +13840,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13744,14 +13856,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Palmer
-	// EraIndex: 915
+	// EraIndex: 923
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1965
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13762,10 +13874,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Arg    -04/-03    1969 Oct  5
+	//             -4:00    Arg    %z    1969 Oct  5
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -13776,10 +13888,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Arg    -03/-02    1982 May
+	//             -3:00    Arg    %z    1982 May
 	{
 		PolicyIndex: 9, // PolicyName: Arg
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13790,10 +13902,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Chile    -04/-03    2016 Dec  4
+	//             -4:00    Chile    %z    2016 Dec  4
 	{
 		PolicyIndex: 27, // PolicyName: Chile
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -13804,10 +13916,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13820,14 +13932,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Rothera
-	// EraIndex: 920
+	// EraIndex: 928
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1976 Dec 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13838,10 +13950,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -13854,14 +13966,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Troll
-	// EraIndex: 922
+	// EraIndex: 930
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 2005 Feb 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13888,14 +14000,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Antarctica/Vostok
-	// EraIndex: 924
+	// EraIndex: 932
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1957 Dec 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13906,10 +14018,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    1994 Feb
+	//             7:00    -    %z    1994 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -13923,7 +14035,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0    -    -00    1994 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -13934,10 +14046,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    2023 Dec 18  2:00
+	//             7:00    -    %z    2023 Dec 18  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -13948,10 +14060,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13964,14 +14076,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Almaty
-	// EraIndex: 929
+	// EraIndex: 937
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 5:07:48 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1231, // 18468 / 15
 		OffsetSecondsRemainder: 3,
@@ -13982,10 +14094,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1930 Jun 21
+	//             5:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -13996,10 +14108,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00 RussiaAsia +06/+07    1991 Mar 31  2:00s
+	//             6:00 RussiaAsia %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14010,10 +14122,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1992 Jan 19  2:00s
+	//             5:00 RussiaAsia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14024,10 +14136,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             6:00 RussiaAsia    +06/+07    2004 Oct 31  2:00s
+	//             6:00 RussiaAsia    %z    2004 Oct 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14038,10 +14150,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             6:00    -    +06    2024 Mar  1  0:00
+	//             6:00    -    %z    2024 Mar  1  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14052,10 +14164,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14068,14 +14180,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Amman
-	// EraIndex: 936
+	// EraIndex: 944
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 2:23:44 - LMT 1931
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 574, // 8624 / 15
 		OffsetSecondsRemainder: 14,
@@ -14089,7 +14201,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Jordan    EE%sT    2022 Oct 28 0:00s
 	{
 		PolicyIndex: 65, // PolicyName: Jordan
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -14100,10 +14212,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             3:00    -    +03
+	//             3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -14116,14 +14228,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Anadyr
-	// EraIndex: 939
+	// EraIndex: 947
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 11:49:56 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2839, // 42596 / 15
 		OffsetSecondsRemainder: 11,
@@ -14134,10 +14246,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             12:00    -    +12    1930 Jun 21
+	//             12:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -14148,10 +14260,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             13:00    Russia    +13/+14    1982 Apr  1  0:00s
+	//             13:00    Russia    %z    1982 Apr  1  0:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 51, // "+13/+14"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
 		OffsetSecondsRemainder: 0,
@@ -14162,10 +14274,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             12:00    Russia    +12/+13    1991 Mar 31  2:00s
+	//             12:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 45, // "+12/+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -14176,10 +14288,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    1992 Jan 19  2:00s
+	//             11:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14190,10 +14302,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             12:00    Russia    +12/+13    2010 Mar 28  2:00s
+	//             12:00    Russia    %z    2010 Mar 28  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 45, // "+12/+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -14204,10 +14316,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
+	//             11:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14218,10 +14330,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             12:00    -    +12
+	//             12:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -14234,14 +14346,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Aqtau
-	// EraIndex: 947
+	// EraIndex: 955
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 3:21:04 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 804, // 12064 / 15
 		OffsetSecondsRemainder: 4,
@@ -14252,10 +14364,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04    1930 Jun 21
+	//             4:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14266,10 +14378,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1981 Oct  1
+	//             5:00    -    %z    1981 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14280,10 +14392,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    1982 Apr  1
+	//             6:00    -    %z    1982 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14294,10 +14406,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	//             5:00 RussiaAsia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14308,10 +14420,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	//             4:00 RussiaAsia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14322,10 +14434,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1994 Sep 25  2:00s
+	//             5:00 RussiaAsia    %z    1994 Sep 25  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14336,10 +14448,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
+	//             4:00 RussiaAsia    %z    2004 Oct 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14350,10 +14462,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14366,14 +14478,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Aqtobe
-	// EraIndex: 956
+	// EraIndex: 964
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 3:48:40 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 914, // 13720 / 15
 		OffsetSecondsRemainder: 10,
@@ -14384,10 +14496,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04    1930 Jun 21
+	//             4:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14398,10 +14510,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1981 Apr  1
+	//             5:00    -    %z    1981 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14412,10 +14524,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    1:00    +06    1981 Oct  1
+	//             5:00    1:00    %z    1981 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14426,10 +14538,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    1982 Apr  1
+	//             6:00    -    %z    1982 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14440,10 +14552,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	//             5:00 RussiaAsia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14454,10 +14566,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	//             4:00 RussiaAsia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14468,10 +14580,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
+	//             5:00 RussiaAsia    %z    2004 Oct 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14482,10 +14594,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14498,14 +14610,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ashgabat
-	// EraIndex: 965
+	// EraIndex: 973
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 3:53:32 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 934, // 14012 / 15
 		OffsetSecondsRemainder: 2,
@@ -14516,10 +14628,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04    1930 Jun 21
+	//             4:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14530,10 +14642,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00
+	//             5:00 RussiaAsia    %z    1991 Mar 31  2:00
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14544,10 +14656,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00
+	//             4:00 RussiaAsia    %z    1992 Jan 19  2:00
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14558,10 +14670,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14574,14 +14686,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Atyrau
-	// EraIndex: 970
+	// EraIndex: 978
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 3:27:44 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 830, // 12464 / 15
 		OffsetSecondsRemainder: 14,
@@ -14592,10 +14704,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03    1930 Jun 21
+	//             3:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -14606,10 +14718,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1981 Oct  1
+	//             5:00    -    %z    1981 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14620,10 +14732,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    1982 Apr  1
+	//             6:00    -    %z    1982 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14634,10 +14746,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	//             5:00 RussiaAsia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14648,10 +14760,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	//             4:00 RussiaAsia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14662,10 +14774,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1999 Mar 28  2:00s
+	//             5:00 RussiaAsia    %z    1999 Mar 28  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14676,10 +14788,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
+	//             4:00 RussiaAsia    %z    2004 Oct 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14690,10 +14802,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -14706,14 +14818,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Baghdad
-	// EraIndex: 979
+	// EraIndex: 987
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 2:57:40 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 710, // 10660 / 15
 		OffsetSecondsRemainder: 10,
@@ -14727,7 +14839,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:57:36    -    BMT    1918
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "BMT"
+		FormatIndex: 19, // "BMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 710, // 10656 / 15
 		OffsetSecondsRemainder: 6,
@@ -14738,10 +14850,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03    1982 May
+	//             3:00    -    %z    1982 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -14752,10 +14864,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    Iraq    +03/+04
+	//             3:00    Iraq    %z
 	{
 		PolicyIndex: 62, // PolicyName: Iraq
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -14768,14 +14880,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Baku
-	// EraIndex: 983
+	// EraIndex: 991
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 3:19:24 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 797, // 11964 / 15
 		OffsetSecondsRemainder: 9,
@@ -14786,10 +14898,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03    1957 Mar
+	//             3:00    -    %z    1957 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -14800,10 +14912,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00 RussiaAsia +04/+05    1991 Mar 31  2:00s
+	//             4:00 RussiaAsia %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14814,10 +14926,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             3:00 RussiaAsia    +03/+04    1992 Sep lastSun  2:00s
+	//             3:00 RussiaAsia    %z    1992 Sep lastSun  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -14828,10 +14940,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00    -    +04    1996
+	//             4:00    -    %z    1996
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14842,10 +14954,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    EUAsia    +04/+05    1997
+	//             4:00    EUAsia    %z    1997
 	{
 		PolicyIndex: 39, // PolicyName: EUAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14856,10 +14968,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    Azer    +04/+05
+	//             4:00    Azer    %z
 	{
 		PolicyIndex: 13, // PolicyName: Azer
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -14872,14 +14984,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Bangkok
-	// EraIndex: 990
+	// EraIndex: 998
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 6:42:04 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1608, // 24124 / 15
 		OffsetSecondsRemainder: 4,
@@ -14893,7 +15005,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             6:42:04    -    BMT    1920 Apr
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "BMT"
+		FormatIndex: 19, // "BMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1608, // 24124 / 15
 		OffsetSecondsRemainder: 4,
@@ -14904,10 +15016,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07
+	//             7:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -14920,14 +15032,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Barnaul
-	// EraIndex: 993
+	// EraIndex: 1001
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 5:35:00 - LMT 1919 Dec 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1340, // 20100 / 15
 		OffsetSecondsRemainder: 0,
@@ -14938,10 +15050,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    -    +06    1930 Jun 21
+	//              6:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14952,10 +15064,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	//              7:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -14966,10 +15078,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	//              6:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -14980,10 +15092,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    1995 May 28
+	//              7:00    Russia    %z    1995 May 28
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -14994,10 +15106,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
+	//              6:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -15008,10 +15120,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07    2014 Oct 26  2:00s
+	//              7:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15022,10 +15134,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    -    +06    2016 Mar 27  2:00s
+	//              6:00    -    %z    2016 Mar 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -15036,10 +15148,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07
+	//              7:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15052,14 +15164,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Beirut
-	// EraIndex: 1002
+	// EraIndex: 1010
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 2:22:00 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 568, // 8520 / 15
 		OffsetSecondsRemainder: 0,
@@ -15073,7 +15185,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Lebanon    EE%sT
 	{
 		PolicyIndex: 69, // PolicyName: Lebanon
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15086,14 +15198,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Bishkek
-	// EraIndex: 1004
+	// EraIndex: 1012
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 4:58:24 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1193, // 17904 / 15
 		OffsetSecondsRemainder: 9,
@@ -15104,10 +15216,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1930 Jun 21
+	//             5:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -15118,10 +15230,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00 RussiaAsia +06/+07    1991 Mar 31  2:00s
+	//             6:00 RussiaAsia %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -15132,10 +15244,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1991 Aug 31  2:00
+	//             5:00 RussiaAsia    %z    1991 Aug 31  2:00
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -15146,10 +15258,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    Kyrgyz    +05/+06    2005 Aug 12
+	//             5:00    Kyrgyz    %z    2005 Aug 12
 	{
 		PolicyIndex: 66, // PolicyName: Kyrgyz
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -15160,10 +15272,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06
+	//             6:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -15176,14 +15288,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Chita
-	// EraIndex: 1010
+	// EraIndex: 1018
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 7:33:52 - LMT 1919 Dec 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1815, // 27232 / 15
 		OffsetSecondsRemainder: 7,
@@ -15194,10 +15306,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    1930 Jun 21
+	//              8:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15208,10 +15320,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    Russia    +09/+10    1991 Mar 31  2:00s
+	//              9:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -15222,10 +15334,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              8:00    Russia    +08/+09    1992 Jan 19  2:00s
+	//              8:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 31, // "+08/+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15236,10 +15348,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              9:00    Russia    +09/+10    2011 Mar 27  2:00s
+	//              9:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -15250,10 +15362,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    -    +10    2014 Oct 26  2:00s
+	//             10:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -15264,10 +15376,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              8:00    -    +08    2016 Mar 27  2:00
+	//              8:00    -    %z    2016 Mar 27  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15278,88 +15390,12 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    -    +09
+	//              9:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: Asia/Choibalsan
-	// EraIndex: 1018
-	// EraCount: 5
-	// ---------------------------------------------------------------------------
-
-	// 7:38:00 - LMT 1905 Aug
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 1832, // 27480 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1905,
-		UntilMonth: 8,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             7:00    -    +07    1978
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 1680, // 25200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1978,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             8:00    -    +08    1983 Apr
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 1920, // 28800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1983,
-		UntilMonth: 4,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             9:00    Mongol    +09/+10    2008 Mar 31
-	{
-		PolicyIndex: 80, // PolicyName: Mongol
-		FormatIndex: 34, // "+09/+10"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 2160, // 32400 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 2008,
-		UntilMonth: 3,
-		UntilDay: 31,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             8:00    Mongol    +08/+09
-	{
-		PolicyIndex: 80, // PolicyName: Mongol
-		FormatIndex: 31, // "+08/+09"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 32767,
 		UntilMonth: 1,
@@ -15370,14 +15406,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Colombo
-	// EraIndex: 1023
+	// EraIndex: 1026
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 5:19:24 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1277, // 19164 / 15
 		OffsetSecondsRemainder: 9,
@@ -15391,7 +15427,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:19:32    -    MMT    1906
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1278, // 19172 / 15
 		OffsetSecondsRemainder: 2,
@@ -15402,10 +15438,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    -    +0530    1942 Jan  5
+	//             5:30    -    %z    1942 Jan  5
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 20, // "+0530"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15416,10 +15452,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    0:30    +06    1942 Sep
+	//             5:30    0:30    %z    1942 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 30,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15430,10 +15466,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    1:00    +0630    1945 Oct 16  2:00
+	//             5:30    1:00    %z    1945 Oct 16  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15444,10 +15480,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    -    +0530    1996 May 25  0:00
+	//             5:30    -    %z    1996 May 25  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 20, // "+0530"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15458,10 +15494,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:30    -    +0630    1996 Oct 26  0:30
+	//             6:30    -    %z    1996 Oct 26  0:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1560, // 23400 / 15
 		OffsetSecondsRemainder: 0,
@@ -15472,10 +15508,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    2006 Apr 15  0:30
+	//             6:00    -    %z    2006 Apr 15  0:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -15486,10 +15522,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    -    +0530
+	//             5:30    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 20, // "+0530"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15502,14 +15538,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Damascus
-	// EraIndex: 1032
+	// EraIndex: 1035
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 2:25:12 - LMT 1920
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 580, // 8712 / 15
 		OffsetSecondsRemainder: 12,
@@ -15523,7 +15559,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Syria    EE%sT    2022 Oct 28 0:00
 	{
 		PolicyIndex: 117, // PolicyName: Syria
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15534,10 +15570,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03
+	//             3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15550,14 +15586,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dhaka
-	// EraIndex: 1035
+	// EraIndex: 1038
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 6:01:40 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1446, // 21700 / 15
 		OffsetSecondsRemainder: 10,
@@ -15571,7 +15607,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:53:20    -    HMT    1941 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 137, // "HMT"
+		FormatIndex: 54, // "HMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1413, // 21200 / 15
 		OffsetSecondsRemainder: 5,
@@ -15582,10 +15618,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:30    -    +0630    1942 May 15
+	//             6:30    -    %z    1942 May 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1560, // 23400 / 15
 		OffsetSecondsRemainder: 0,
@@ -15596,10 +15632,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    -    +0530    1942 Sep
+	//             5:30    -    %z    1942 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 20, // "+0530"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15610,10 +15646,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:30    -    +0630    1951 Sep 30
+	//             6:30    -    %z    1951 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1560, // 23400 / 15
 		OffsetSecondsRemainder: 0,
@@ -15624,10 +15660,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    2009
+	//             6:00    -    %z    2009
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -15638,10 +15674,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    Dhaka    +06/+07
+	//             6:00    Dhaka    %z
 	{
 		PolicyIndex: 35, // PolicyName: Dhaka
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -15654,28 +15690,28 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dili
-	// EraIndex: 1042
+	// EraIndex: 1045
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
-	// 8:22:20 - LMT 1912 Jan 1
+	// 8:22:20 - LMT 1911 Dec 31 16:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2009, // 30140 / 15
 		OffsetSecondsRemainder: 5,
-		UntilYear: 1912,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
+		UntilYear: 1911,
+		UntilMonth: 12,
+		UntilDay: 31,
+		UntilSecondsCode: 3840, // 57600 / 15
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             8:00    -    +08    1942 Feb 21 23:00
+	//             8:00    -    %z    1942 Feb 21 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15686,10 +15722,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1976 May  3
+	//             9:00    -    %z    1976 May  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -15700,10 +15736,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    -    +08    2000 Sep 17  0:00
+	//             8:00    -    %z    2000 Sep 17  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15714,10 +15750,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09
+	//             9:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -15730,14 +15766,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dubai
-	// EraIndex: 1047
+	// EraIndex: 1050
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 3:41:12 - LMT 1920
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 884, // 13272 / 15
 		OffsetSecondsRemainder: 12,
@@ -15748,10 +15784,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04
+	//             4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -15764,14 +15800,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Dushanbe
-	// EraIndex: 1049
+	// EraIndex: 1052
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 4:35:12 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1100, // 16512 / 15
 		OffsetSecondsRemainder: 12,
@@ -15782,10 +15818,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1930 Jun 21
+	//             5:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -15796,10 +15832,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00 RussiaAsia +06/+07    1991 Mar 31  2:00s
+	//             6:00 RussiaAsia %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -15810,10 +15846,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00    1:00    +06    1991 Sep  9  2:00s
+	//             5:00    1:00    %z    1991 Sep  9  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -15824,10 +15860,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -15840,14 +15876,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Famagusta
-	// EraIndex: 1054
+	// EraIndex: 1057
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 2:15:48 - LMT 1921 Nov 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 543, // 8148 / 15
 		OffsetSecondsRemainder: 3,
@@ -15861,7 +15897,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Cyprus    EE%sT    1998 Sep
 	{
 		PolicyIndex: 30, // PolicyName: Cyprus
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15875,7 +15911,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EUAsia    EE%sT    2016 Sep  8
 	{
 		PolicyIndex: 39, // PolicyName: EUAsia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15886,10 +15922,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03    2017 Oct 29 1:00u
+	//             3:00    -    %z    2017 Oct 29 1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -15903,7 +15939,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EUAsia    EE%sT
 	{
 		PolicyIndex: 39, // PolicyName: EUAsia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15916,14 +15952,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Gaza
-	// EraIndex: 1059
+	// EraIndex: 1062
 	// EraCount: 12
 	// ---------------------------------------------------------------------------
 
 	// 2:17:52 - LMT 1900 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 551, // 8272 / 15
 		OffsetSecondsRemainder: 7,
@@ -15937,7 +15973,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Zion    EET/EEST 1948 May 15
 	{
 		PolicyIndex: 134, // PolicyName: Zion
-		FormatIndex: 121, // "EET/EEST"
+		FormatIndex: 38, // "EET/EEST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15951,7 +15987,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00 EgyptAsia    EE%sT    1967 Jun  5
 	{
 		PolicyIndex: 43, // PolicyName: EgyptAsia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15965,7 +16001,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Zion    I%sT    1996
 	{
 		PolicyIndex: 134, // PolicyName: Zion
-		FormatIndex: 139, // "I%T"
+		FormatIndex: 56, // "I%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15979,7 +16015,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Jordan    EE%sT    1999
 	{
 		PolicyIndex: 65, // PolicyName: Jordan
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -15993,7 +16029,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00 Palestine    EE%sT    2008 Aug 29  0:00
 	{
 		PolicyIndex: 91, // PolicyName: Palestine
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16007,7 +16043,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2008 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16021,7 +16057,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00 Palestine    EE%sT    2010
 	{
 		PolicyIndex: 91, // PolicyName: Palestine
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16035,7 +16071,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2010 Mar 27  0:01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16049,7 +16085,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00 Palestine    EE%sT    2011 Aug  1
 	{
 		PolicyIndex: 91, // PolicyName: Palestine
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16063,7 +16099,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2012
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16077,7 +16113,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00 Palestine    EE%sT
 	{
 		PolicyIndex: 91, // PolicyName: Palestine
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16090,14 +16126,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hebron
-	// EraIndex: 1071
+	// EraIndex: 1074
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 2:20:23 - LMT 1900 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 561, // 8423 / 15
 		OffsetSecondsRemainder: 8,
@@ -16111,7 +16147,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Zion    EET/EEST 1948 May 15
 	{
 		PolicyIndex: 134, // PolicyName: Zion
-		FormatIndex: 121, // "EET/EEST"
+		FormatIndex: 38, // "EET/EEST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16125,7 +16161,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00 EgyptAsia    EE%sT    1967 Jun  5
 	{
 		PolicyIndex: 43, // PolicyName: EgyptAsia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16139,7 +16175,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Zion    I%sT    1996
 	{
 		PolicyIndex: 134, // PolicyName: Zion
-		FormatIndex: 139, // "I%T"
+		FormatIndex: 56, // "I%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16153,7 +16189,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Jordan    EE%sT    1999
 	{
 		PolicyIndex: 65, // PolicyName: Jordan
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16167,7 +16203,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00 Palestine    EE%sT
 	{
 		PolicyIndex: 91, // PolicyName: Palestine
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16180,14 +16216,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ho_Chi_Minh
-	// EraIndex: 1077
+	// EraIndex: 1080
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// 7:06:30 - LMT 1906 Jul 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1706, // 25590 / 15
 		OffsetSecondsRemainder: 0,
@@ -16201,7 +16237,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             7:06:30    -    PLMT    1911 May  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 164, // "PLMT"
+		FormatIndex: 80, // "PLMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1706, // 25590 / 15
 		OffsetSecondsRemainder: 0,
@@ -16212,10 +16248,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    1942 Dec 31 23:00
+	//             7:00    -    %z    1942 Dec 31 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16226,10 +16262,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    -    +08    1945 Mar 14 23:00
+	//             8:00    -    %z    1945 Mar 14 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16240,10 +16276,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1945 Sep  1 24:00
+	//             9:00    -    %z    1945 Sep  1 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -16254,10 +16290,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    1947 Apr  1
+	//             7:00    -    %z    1947 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16268,10 +16304,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    -    +08    1955 Jul  1 01:00
+	//             8:00    -    %z    1955 Jul  1 01:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16282,10 +16318,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    1959 Dec 31 23:00
+	//             7:00    -    %z    1959 Dec 31 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16296,10 +16332,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    -    +08    1975 Jun 13
+	//             8:00    -    %z    1975 Jun 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16310,10 +16346,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07
+	//             7:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16326,14 +16362,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hong_Kong
-	// EraIndex: 1087
+	// EraIndex: 1090
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 7:36:42 - LMT 1904 Oct 29 17:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1826, // 27402 / 15
 		OffsetSecondsRemainder: 12,
@@ -16347,7 +16383,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    -    HKT    1941 Jun 15  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 135, // "HKT"
+		FormatIndex: 52, // "HKT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16361,7 +16397,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    1:00    HKST    1941 Oct  1  4:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 134, // "HKST"
+		FormatIndex: 51, // "HKST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16375,7 +16411,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    0:30    HKWT    1941 Dec 25
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 136, // "HKWT"
+		FormatIndex: 53, // "HKWT"
 		DeltaMinutes: 30,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16389,7 +16425,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    JST    1945 Nov 18  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 145, // "JST"
+		FormatIndex: 62, // "JST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -16403,7 +16439,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    HK    HK%sT
 	{
 		PolicyIndex: 54, // PolicyName: HK
-		FormatIndex: 133, // "HK%T"
+		FormatIndex: 50, // "HK%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16416,14 +16452,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Hovd
-	// EraIndex: 1093
+	// EraIndex: 1096
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 6:06:36 - LMT 1905 Aug
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1466, // 21996 / 15
 		OffsetSecondsRemainder: 6,
@@ -16434,10 +16470,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    1978
+	//             6:00    -    %z    1978
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -16448,10 +16484,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    Mongol    +07/+08
+	//             7:00    Mongol    %z
 	{
 		PolicyIndex: 80, // PolicyName: Mongol
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16464,14 +16500,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Irkutsk
-	// EraIndex: 1096
+	// EraIndex: 1099
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 6:57:05 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1668, // 25025 / 15
 		OffsetSecondsRemainder: 5,
@@ -16485,7 +16521,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              6:57:05 -    IMT    1920 Jan 25
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 140, // "IMT"
+		FormatIndex: 57, // "IMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1668, // 25025 / 15
 		OffsetSecondsRemainder: 5,
@@ -16496,10 +16532,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              7:00    -    +07    1930 Jun 21
+	//              7:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16510,10 +16546,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    Russia    +08/+09    1991 Mar 31  2:00s
+	//              8:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 31, // "+08/+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16524,10 +16560,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    1992 Jan 19  2:00s
+	//              7:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16538,10 +16574,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              8:00    Russia    +08/+09    2011 Mar 27  2:00s
+	//              8:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 31, // "+08/+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16552,10 +16588,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              9:00    -    +09    2014 Oct 26  2:00s
+	//              9:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -16566,10 +16602,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              8:00    -    +08
+	//              8:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16582,14 +16618,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jakarta
-	// EraIndex: 1104
+	// EraIndex: 1107
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 7:07:12 - LMT 1867 Aug 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1708, // 25632 / 15
 		OffsetSecondsRemainder: 12,
@@ -16603,7 +16639,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             7:07:12    -    BMT    1923 Dec 31 16:40u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "BMT"
+		FormatIndex: 19, // "BMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1708, // 25632 / 15
 		OffsetSecondsRemainder: 12,
@@ -16614,10 +16650,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             7:20    -    +0720    1932 Nov
+	//             7:20    -    %z    1932 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 27, // "+0720"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1760, // 26400 / 15
 		OffsetSecondsRemainder: 0,
@@ -16628,10 +16664,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1942 Mar 23
+	//             7:30    -    %z    1942 Mar 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -16642,10 +16678,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1945 Sep 23
+	//             9:00    -    %z    1945 Sep 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -16656,10 +16692,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1948 May
+	//             7:30    -    %z    1948 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -16670,10 +16706,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    -    +08    1950 May
+	//             8:00    -    %z    1950 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -16684,10 +16720,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1964
+	//             7:30    -    %z    1964
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -16701,7 +16737,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             7:00    -    WIB
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 186, // "WIB"
+		FormatIndex: 102, // "WIB"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16714,14 +16750,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jayapura
-	// EraIndex: 1113
+	// EraIndex: 1116
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 9:22:48 - LMT 1932 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2251, // 33768 / 15
 		OffsetSecondsRemainder: 3,
@@ -16732,10 +16768,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1944 Sep  1
+	//             9:00    -    %z    1944 Sep  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -16746,10 +16782,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:30    -    +0930    1964
+	//             9:30    -    %z    1964
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 35, // "+0930"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2280, // 34200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16763,7 +16799,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    WIT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 187, // "WIT"
+		FormatIndex: 103, // "WIT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -16776,14 +16812,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Jerusalem
-	// EraIndex: 1117
+	// EraIndex: 1120
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 2:20:54 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 563, // 8454 / 15
 		OffsetSecondsRemainder: 9,
@@ -16797,7 +16833,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:20:40    -    JMT    1918
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 144, // "JMT"
+		FormatIndex: 61, // "JMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 562, // 8440 / 15
 		OffsetSecondsRemainder: 10,
@@ -16811,7 +16847,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Zion    I%sT
 	{
 		PolicyIndex: 134, // PolicyName: Zion
-		FormatIndex: 139, // "I%T"
+		FormatIndex: 56, // "I%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16824,14 +16860,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kabul
-	// EraIndex: 1120
+	// EraIndex: 1123
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 4:36:48 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1107, // 16608 / 15
 		OffsetSecondsRemainder: 3,
@@ -16842,10 +16878,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04    1945
+	//             4:00    -    %z    1945
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -16856,10 +16892,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:30    -    +0430
+	//             4:30    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 17, // "+0430"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1080, // 16200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16872,14 +16908,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kamchatka
-	// EraIndex: 1123
+	// EraIndex: 1126
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 10:34:36 - LMT 1922 Nov 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2538, // 38076 / 15
 		OffsetSecondsRemainder: 6,
@@ -16890,10 +16926,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11    1930 Jun 21
+	//             11:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -16904,10 +16940,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             12:00    Russia    +12/+13    1991 Mar 31  2:00s
+	//             12:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 45, // "+12/+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16918,10 +16954,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    1992 Jan 19  2:00s
+	//             11:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -16932,10 +16968,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             12:00    Russia    +12/+13    2010 Mar 28  2:00s
+	//             12:00    Russia    %z    2010 Mar 28  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 45, // "+12/+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16946,10 +16982,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
+	//             11:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -16960,10 +16996,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             12:00    -    +12
+	//             12:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -16976,14 +17012,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Karachi
-	// EraIndex: 1130
+	// EraIndex: 1133
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 4:28:12 - LMT 1907
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1072, // 16092 / 15
 		OffsetSecondsRemainder: 12,
@@ -16994,10 +17030,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    -    +0530    1942 Sep
+	//             5:30    -    %z    1942 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 20, // "+0530"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17008,10 +17044,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    1:00    +0630    1945 Oct 15
+	//             5:30    1:00    %z    1945 Oct 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17022,10 +17058,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    -    +0530    1951 Sep 30
+	//             5:30    -    %z    1951 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 20, // "+0530"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17036,10 +17072,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1971 Mar 26
+	//             5:00    -    %z    1971 Mar 26
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -17053,7 +17089,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:00 Pakistan    PK%sT
 	{
 		PolicyIndex: 90, // PolicyName: Pakistan
-		FormatIndex: 163, // "PK%T"
+		FormatIndex: 79, // "PK%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -17066,14 +17102,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kathmandu
-	// EraIndex: 1136
+	// EraIndex: 1139
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 5:41:16 - LMT 1920
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1365, // 20476 / 15
 		OffsetSecondsRemainder: 1,
@@ -17084,10 +17120,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    -    +0530    1986
+	//             5:30    -    %z    1986
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 20, // "+0530"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17098,10 +17134,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:45    -    +0545
+	//             5:45    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 21, // "+0545"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1380, // 20700 / 15
 		OffsetSecondsRemainder: 0,
@@ -17114,14 +17150,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Khandyga
-	// EraIndex: 1139
+	// EraIndex: 1142
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 9:02:13 - LMT 1919 Dec 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2168, // 32533 / 15
 		OffsetSecondsRemainder: 13,
@@ -17132,10 +17168,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    1930 Jun 21
+	//              8:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17146,10 +17182,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    Russia    +09/+10    1991 Mar 31  2:00s
+	//              9:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -17160,10 +17196,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              8:00    Russia    +08/+09    1992 Jan 19  2:00s
+	//              8:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 31, // "+08/+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17174,10 +17210,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              9:00    Russia    +09/+10    2004
+	//              9:00    Russia    %z    2004
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -17188,10 +17224,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
+	//             10:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 37, // "+10/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -17202,10 +17238,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    -    +11    2011 Sep 13  0:00s
+	//             11:00    -    %z    2011 Sep 13  0:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -17216,10 +17252,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    -    +10    2014 Oct 26  2:00s
+	//             10:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -17230,10 +17266,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              9:00    -    +09
+	//              9:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -17246,14 +17282,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kolkata
-	// EraIndex: 1148
+	// EraIndex: 1151
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 5:53:28 - LMT 1854 Jun 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1413, // 21208 / 15
 		OffsetSecondsRemainder: 13,
@@ -17267,7 +17303,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:53:20    -    HMT    1870
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 137, // "HMT"
+		FormatIndex: 54, // "HMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1413, // 21200 / 15
 		OffsetSecondsRemainder: 5,
@@ -17281,7 +17317,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:21:10    -    MMT    1906 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1284, // 19270 / 15
 		OffsetSecondsRemainder: 10,
@@ -17295,7 +17331,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:30    -    IST    1941 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 141, // "IST"
+		FormatIndex: 58, // "IST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17306,10 +17342,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    1:00    +0630    1942 May 15
+	//             5:30    1:00    %z    1942 May 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17323,7 +17359,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:30    -    IST    1942 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 141, // "IST"
+		FormatIndex: 58, // "IST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17334,10 +17370,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    1:00    +0630    1945 Oct 15
+	//             5:30    1:00    %z    1945 Oct 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17351,7 +17387,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             5:30    -    IST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 141, // "IST"
+		FormatIndex: 58, // "IST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17364,14 +17400,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Krasnoyarsk
-	// EraIndex: 1156
+	// EraIndex: 1159
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 6:11:26 - LMT 1920 Jan 6
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1485, // 22286 / 15
 		OffsetSecondsRemainder: 11,
@@ -17382,10 +17418,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    -    +06    1930 Jun 21
+	//              6:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -17396,10 +17432,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	//              7:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -17410,10 +17446,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	//              6:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -17424,10 +17460,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    2011 Mar 27  2:00s
+	//              7:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -17438,10 +17474,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              8:00    -    +08    2014 Oct 26  2:00s
+	//              8:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17452,10 +17488,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07
+	//              7:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -17468,14 +17504,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Kuching
-	// EraIndex: 1163
+	// EraIndex: 1166
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 7:21:20 - LMT 1926 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1765, // 26480 / 15
 		OffsetSecondsRemainder: 5,
@@ -17486,10 +17522,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1933
+	//             7:30    -    %z    1933
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -17500,10 +17536,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00 NBorneo  +08/+0820    1942 Feb 16
+	//             8:00 NBorneo    %z    1942 Feb 16
 	{
 		PolicyIndex: 82, // PolicyName: NBorneo
-		FormatIndex: 30, // "+08/+0820"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17514,10 +17550,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1945 Sep 12
+	//             9:00    -    %z    1945 Sep 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -17528,10 +17564,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    -    +08
+	//             8:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17544,14 +17580,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Macau
-	// EraIndex: 1168
+	// EraIndex: 1171
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 7:34:10 - LMT 1904 Oct 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1816, // 27250 / 15
 		OffsetSecondsRemainder: 10,
@@ -17565,7 +17601,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    -    CST    1941 Dec 21 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17576,10 +17612,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    Macau    +09/+10    1945 Sep 30 24:00
+	//             9:00    Macau    %z    1945 Sep 30 24:00
 	{
 		PolicyIndex: 72, // PolicyName: Macau
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -17593,7 +17629,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    Macau    C%sT
 	{
 		PolicyIndex: 72, // PolicyName: Macau
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17606,14 +17642,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Magadan
-	// EraIndex: 1172
+	// EraIndex: 1175
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 10:03:12 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2412, // 36192 / 15
 		OffsetSecondsRemainder: 12,
@@ -17624,10 +17660,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:00    -    +10    1930 Jun 21
+	//             10:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -17638,10 +17674,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    1991 Mar 31  2:00s
+	//             11:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -17652,10 +17688,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    Russia    +10/+11    1992 Jan 19  2:00s
+	//             10:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 37, // "+10/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -17666,10 +17702,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
+	//             11:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -17680,10 +17716,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             12:00    -    +12    2014 Oct 26  2:00s
+	//             12:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -17694,10 +17730,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    -    +10    2016 Apr 24  2:00s
+	//             10:00    -    %z    2016 Apr 24  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -17708,10 +17744,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    -    +11
+	//             11:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -17724,14 +17760,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Makassar
-	// EraIndex: 1180
+	// EraIndex: 1183
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 7:57:36 - LMT 1920
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1910, // 28656 / 15
 		OffsetSecondsRemainder: 6,
@@ -17745,7 +17781,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             7:57:36    -    MMT    1932 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1910, // 28656 / 15
 		OffsetSecondsRemainder: 6,
@@ -17756,10 +17792,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    -    +08    1942 Feb  9
+	//             8:00    -    %z    1942 Feb  9
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17770,10 +17806,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1945 Sep 23
+	//             9:00    -    %z    1945 Sep 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -17787,7 +17823,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    -    WITA
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 188, // "WITA"
+		FormatIndex: 104, // "WITA"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17800,14 +17836,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Manila
-	// EraIndex: 1185
+	// EraIndex: 1188
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -15:56:00 - LMT 1844 Dec 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -3824, // -57360 / 15
 		OffsetSecondsRemainder: 0,
@@ -17821,7 +17857,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:04:00 -    LMT    1899 May 11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1936, // 29040 / 15
 		OffsetSecondsRemainder: 0,
@@ -17835,7 +17871,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    Phil    P%sT    1942 May
 	{
 		PolicyIndex: 95, // PolicyName: Phil
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17849,7 +17885,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    JST    1944 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 145, // "JST"
+		FormatIndex: 62, // "JST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -17863,7 +17899,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    Phil    P%sT
 	{
 		PolicyIndex: 95, // PolicyName: Phil
-		FormatIndex: 161, // "P%T"
+		FormatIndex: 77, // "P%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -17876,14 +17912,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Nicosia
-	// EraIndex: 1190
+	// EraIndex: 1193
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 2:13:28 - LMT 1921 Nov 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 533, // 8008 / 15
 		OffsetSecondsRemainder: 13,
@@ -17897,7 +17933,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Cyprus    EE%sT    1998 Sep
 	{
 		PolicyIndex: 30, // PolicyName: Cyprus
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -17911,7 +17947,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EUAsia    EE%sT
 	{
 		PolicyIndex: 39, // PolicyName: EUAsia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -17924,14 +17960,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Novokuznetsk
-	// EraIndex: 1193
+	// EraIndex: 1196
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 5:48:48 - LMT 1924 May 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1395, // 20928 / 15
 		OffsetSecondsRemainder: 3,
@@ -17942,10 +17978,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    -    +06    1930 Jun 21
+	//              6:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -17956,10 +17992,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	//              7:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -17970,10 +18006,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	//              6:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -17984,10 +18020,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    2010 Mar 28  2:00s
+	//              7:00    Russia    %z    2010 Mar 28  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -17998,10 +18034,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
+	//              6:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18012,10 +18048,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07
+	//              7:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -18028,14 +18064,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Novosibirsk
-	// EraIndex: 1200
+	// EraIndex: 1203
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 5:31:40 - LMT 1919 Dec 14 6:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1326, // 19900 / 15
 		OffsetSecondsRemainder: 10,
@@ -18046,10 +18082,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    -    +06    1930 Jun 21
+	//              6:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18060,10 +18096,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	//              7:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -18074,10 +18110,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	//              6:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18088,10 +18124,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    1993 May 23
+	//              7:00    Russia    %z    1993 May 23
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -18102,10 +18138,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
+	//              6:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18116,10 +18152,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07    2014 Oct 26  2:00s
+	//              7:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -18130,10 +18166,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    -    +06    2016 Jul 24  2:00s
+	//              6:00    -    %z    2016 Jul 24  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18144,10 +18180,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07
+	//              7:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -18160,14 +18196,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Omsk
-	// EraIndex: 1209
+	// EraIndex: 1212
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 4:53:30 - LMT 1919 Nov 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1174, // 17610 / 15
 		OffsetSecondsRemainder: 0,
@@ -18178,10 +18214,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              5:00    -    +05    1930 Jun 21
+	//              5:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18192,10 +18228,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    1991 Mar 31  2:00s
+	//              6:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18206,10 +18242,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              5:00    Russia    +05/+06    1992 Jan 19  2:00s
+	//              5:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18220,10 +18256,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
+	//              6:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18234,10 +18270,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07    2014 Oct 26  2:00s
+	//              7:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -18248,10 +18284,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    -    +06
+	//              6:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18264,14 +18300,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Oral
-	// EraIndex: 1216
+	// EraIndex: 1219
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// 3:25:24 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 821, // 12324 / 15
 		OffsetSecondsRemainder: 9,
@@ -18282,10 +18318,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03    1930 Jun 21
+	//             3:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -18296,10 +18332,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1981 Apr  1
+	//             5:00    -    %z    1981 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18310,10 +18346,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    1:00    +06    1981 Oct  1
+	//             5:00    1:00    %z    1981 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18324,10 +18360,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    1982 Apr  1
+	//             6:00    -    %z    1982 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18338,10 +18374,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1989 Mar 26  2:00s
+	//             5:00 RussiaAsia    %z    1989 Mar 26  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18352,10 +18388,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	//             4:00 RussiaAsia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18366,10 +18402,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1992 Mar 29  2:00s
+	//             5:00 RussiaAsia    %z    1992 Mar 29  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18380,10 +18416,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    2004 Oct 31  2:00s
+	//             4:00 RussiaAsia    %z    2004 Oct 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18394,10 +18430,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18410,14 +18446,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Pontianak
-	// EraIndex: 1226
+	// EraIndex: 1229
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 7:17:20 - LMT 1908 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1749, // 26240 / 15
 		OffsetSecondsRemainder: 5,
@@ -18431,7 +18467,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             7:17:20    -    PMT    1932 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 166, // "PMT"
+		FormatIndex: 82, // "PMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1749, // 26240 / 15
 		OffsetSecondsRemainder: 5,
@@ -18442,10 +18478,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1942 Jan 29
+	//             7:30    -    %z    1942 Jan 29
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18456,10 +18492,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1945 Sep 23
+	//             9:00    -    %z    1945 Sep 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18470,10 +18506,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1948 May
+	//             7:30    -    %z    1948 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18484,10 +18520,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    -    +08    1950 May
+	//             8:00    -    %z    1950 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -18498,10 +18534,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1964
+	//             7:30    -    %z    1964
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18515,7 +18551,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    -    WITA    1988 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 188, // "WITA"
+		FormatIndex: 104, // "WITA"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -18529,7 +18565,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             7:00    -    WIB
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 186, // "WIB"
+		FormatIndex: 102, // "WIB"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -18542,14 +18578,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Pyongyang
-	// EraIndex: 1235
+	// EraIndex: 1238
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 8:23:00 - LMT 1908 Apr 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2012, // 30180 / 15
 		OffsetSecondsRemainder: 0,
@@ -18563,7 +18599,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:30    -    KST    1912 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 148, // "KST"
+		FormatIndex: 65, // "KST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2040, // 30600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18577,7 +18613,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    JST    1945 Aug 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 145, // "JST"
+		FormatIndex: 62, // "JST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18591,7 +18627,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    KST    2015 Aug 15 00:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 148, // "KST"
+		FormatIndex: 65, // "KST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18605,7 +18641,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:30    -    KST    2018 May  4 23:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 148, // "KST"
+		FormatIndex: 65, // "KST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2040, // 30600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18619,7 +18655,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    KST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 148, // "KST"
+		FormatIndex: 65, // "KST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18632,14 +18668,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qatar
-	// EraIndex: 1241
+	// EraIndex: 1244
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 3:26:08 - LMT 1920
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 824, // 12368 / 15
 		OffsetSecondsRemainder: 8,
@@ -18650,10 +18686,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04    1972 Jun
+	//             4:00    -    %z    1972 Jun
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18664,10 +18700,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03
+	//             3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -18680,14 +18716,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qostanay
-	// EraIndex: 1244
+	// EraIndex: 1247
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// 4:14:28 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1017, // 15268 / 15
 		OffsetSecondsRemainder: 13,
@@ -18698,10 +18734,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04    1930 Jun 21
+	//             4:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18712,10 +18748,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1981 Apr  1
+	//             5:00    -    %z    1981 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18726,10 +18762,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    1:00    +06    1981 Oct  1
+	//             5:00    1:00    %z    1981 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18740,10 +18776,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    1982 Apr  1
+	//             6:00    -    %z    1982 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18754,10 +18790,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	//             5:00 RussiaAsia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18768,10 +18804,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    1992 Jan 19  2:00s
+	//             4:00 RussiaAsia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18782,10 +18818,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
+	//             5:00 RussiaAsia    %z    2004 Oct 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18796,10 +18832,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             6:00    -    +06    2024 Mar  1  0:00
+	//             6:00    -    %z    2024 Mar  1  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18810,10 +18846,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18826,14 +18862,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Qyzylorda
-	// EraIndex: 1254
+	// EraIndex: 1257
 	// EraCount: 12
 	// ---------------------------------------------------------------------------
 
 	// 4:21:52 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1047, // 15712 / 15
 		OffsetSecondsRemainder: 7,
@@ -18844,10 +18880,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04    1930 Jun 21
+	//             4:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18858,10 +18894,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1981 Apr  1
+	//             5:00    -    %z    1981 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18872,10 +18908,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    1:00    +06    1981 Oct  1
+	//             5:00    1:00    %z    1981 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18886,10 +18922,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    1982 Apr  1
+	//             6:00    -    %z    1982 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18900,10 +18936,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1991 Mar 31  2:00s
+	//             5:00 RussiaAsia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18914,10 +18950,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    1991 Sep 29  2:00s
+	//             4:00 RussiaAsia    %z    1991 Sep 29  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -18928,10 +18964,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1992 Jan 19  2:00s
+	//             5:00 RussiaAsia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18942,10 +18978,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             6:00 RussiaAsia    +06/+07    1992 Mar 29  2:00s
+	//             6:00 RussiaAsia    %z    1992 Mar 29  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18956,10 +18992,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    2004 Oct 31  2:00s
+	//             5:00 RussiaAsia    %z    2004 Oct 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -18970,10 +19006,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             6:00    -    +06    2018 Dec 21  0:00
+	//             6:00    -    %z    2018 Dec 21  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -18984,10 +19020,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19000,14 +19036,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Riyadh
-	// EraIndex: 1266
+	// EraIndex: 1269
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 3:06:52 - LMT 1947 Mar 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 747, // 11212 / 15
 		OffsetSecondsRemainder: 7,
@@ -19018,10 +19054,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03
+	//             3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19034,14 +19070,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Sakhalin
-	// EraIndex: 1268
+	// EraIndex: 1271
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 9:30:48 - LMT 1905 Aug 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2283, // 34248 / 15
 		OffsetSecondsRemainder: 3,
@@ -19052,10 +19088,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    -    +09    1945 Aug 25
+	//              9:00    -    %z    1945 Aug 25
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19066,10 +19102,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    1991 Mar 31  2:00s
+	//             11:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19080,10 +19116,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    Russia    +10/+11    1992 Jan 19  2:00s
+	//             10:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 37, // "+10/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19094,10 +19130,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    1997 Mar lastSun  2:00s
+	//             11:00    Russia    %z    1997 Mar lastSun  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19108,10 +19144,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
+	//             10:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 37, // "+10/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19122,10 +19158,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    -    +11    2014 Oct 26  2:00s
+	//             11:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19136,10 +19172,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    -    +10    2016 Mar 27  2:00s
+	//             10:00    -    %z    2016 Mar 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19150,10 +19186,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    -    +11
+	//             11:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19166,14 +19202,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Samarkand
-	// EraIndex: 1277
+	// EraIndex: 1280
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 4:27:53 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1071, // 16073 / 15
 		OffsetSecondsRemainder: 8,
@@ -19184,10 +19220,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04    1930 Jun 21
+	//             4:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19198,10 +19234,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1981 Apr  1
+	//             5:00    -    %z    1981 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19212,10 +19248,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    1:00    +06    1981 Oct  1
+	//             5:00    1:00    %z    1981 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19226,10 +19262,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06    1982 Apr  1
+	//             6:00    -    %z    1982 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19240,10 +19276,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1992
+	//             5:00 RussiaAsia    %z    1992
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19254,10 +19290,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19270,14 +19306,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Seoul
-	// EraIndex: 1284
+	// EraIndex: 1287
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 8:27:52 - LMT 1908 Apr 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2031, // 30472 / 15
 		OffsetSecondsRemainder: 7,
@@ -19291,7 +19327,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:30    -    KST    1912 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 148, // "KST"
+		FormatIndex: 65, // "KST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2040, // 30600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19305,7 +19341,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    JST    1945 Sep  8
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 145, // "JST"
+		FormatIndex: 62, // "JST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19319,7 +19355,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    ROK    K%sT    1954 Mar 21
 	{
 		PolicyIndex: 100, // PolicyName: ROK
-		FormatIndex: 146, // "K%T"
+		FormatIndex: 63, // "K%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19333,7 +19369,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:30    ROK    K%sT    1961 Aug 10
 	{
 		PolicyIndex: 100, // PolicyName: ROK
-		FormatIndex: 146, // "K%T"
+		FormatIndex: 63, // "K%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2040, // 30600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19347,7 +19383,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    ROK    K%sT
 	{
 		PolicyIndex: 100, // PolicyName: ROK
-		FormatIndex: 146, // "K%T"
+		FormatIndex: 63, // "K%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19360,14 +19396,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Shanghai
-	// EraIndex: 1290
+	// EraIndex: 1293
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 8:05:43 - LMT 1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1942, // 29143 / 15
 		OffsetSecondsRemainder: 13,
@@ -19381,7 +19417,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    Shang    C%sT    1949 May 28
 	{
 		PolicyIndex: 108, // PolicyName: Shang
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19395,7 +19431,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    PRC    C%sT
 	{
 		PolicyIndex: 89, // PolicyName: PRC
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19408,14 +19444,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Singapore
-	// EraIndex: 1293
+	// EraIndex: 1296
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 6:55:25 - LMT 1901 Jan 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1661, // 24925 / 15
 		OffsetSecondsRemainder: 10,
@@ -19429,7 +19465,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             6:55:25    -    SMT    1905 Jun  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1661, // 24925 / 15
 		OffsetSecondsRemainder: 10,
@@ -19440,10 +19476,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    1933 Jan  1
+	//             7:00    -    %z    1933 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -19454,10 +19490,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    0:20    +0720    1936 Jan  1
+	//             7:00    0:20    %z    1936 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 27, // "+0720"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 20,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -19468,10 +19504,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:20    -    +0720    1941 Sep  1
+	//             7:20    -    %z    1941 Sep  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 27, // "+0720"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1760, // 26400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19482,10 +19518,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1942 Feb 16
+	//             7:30    -    %z    1942 Feb 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19496,10 +19532,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1945 Sep 12
+	//             9:00    -    %z    1945 Sep 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19510,10 +19546,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:30    -    +0730    1981 Dec 31 16:00u
+	//             7:30    -    %z    1981 Dec 31 16:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 28, // "+0730"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1800, // 27000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19524,10 +19560,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             8:00    -    +08
+	//             8:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19540,14 +19576,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Srednekolymsk
-	// EraIndex: 1302
+	// EraIndex: 1305
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 10:14:52 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2459, // 36892 / 15
 		OffsetSecondsRemainder: 7,
@@ -19558,10 +19594,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:00    -    +10    1930 Jun 21
+	//             10:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19572,10 +19608,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    1991 Mar 31  2:00s
+	//             11:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19586,10 +19622,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    Russia    +10/+11    1992 Jan 19  2:00s
+	//             10:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 37, // "+10/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19600,10 +19636,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
+	//             11:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19614,10 +19650,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             12:00    -    +12    2014 Oct 26  2:00s
+	//             12:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -19628,10 +19664,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    -    +11
+	//             11:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19644,14 +19680,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Taipei
-	// EraIndex: 1309
+	// EraIndex: 1312
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 8:06:00 - LMT 1896 Jan 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1944, // 29160 / 15
 		OffsetSecondsRemainder: 0,
@@ -19665,7 +19701,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    -    CST    1937 Oct  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 113, // "CST"
+		FormatIndex: 30, // "CST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19679,7 +19715,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    JST    1945 Sep 21  1:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 145, // "JST"
+		FormatIndex: 62, // "JST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19693,7 +19729,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             8:00    Taiwan    C%sT
 	{
 		PolicyIndex: 118, // PolicyName: Taiwan
-		FormatIndex: 105, // "C%T"
+		FormatIndex: 22, // "C%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19706,14 +19742,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tashkent
-	// EraIndex: 1313
+	// EraIndex: 1316
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 4:37:11 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1108, // 16631 / 15
 		OffsetSecondsRemainder: 11,
@@ -19724,10 +19760,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1930 Jun 21
+	//             5:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19738,10 +19774,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00 RussiaAsia    +06/+07    1991 Mar 31  2:00
+	//             6:00 RussiaAsia    %z    1991 Mar 31  2:00
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19752,10 +19788,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00 RussiaAsia    +05/+06    1992
+	//             5:00 RussiaAsia    %z    1992
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19766,10 +19802,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -19782,14 +19818,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tbilisi
-	// EraIndex: 1318
+	// EraIndex: 1321
 	// EraCount: 11
 	// ---------------------------------------------------------------------------
 
 	// 2:59:11 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 716, // 10751 / 15
 		OffsetSecondsRemainder: 11,
@@ -19803,7 +19839,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:59:11    -    TBMT    1924 May  2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 178, // "TBMT"
+		FormatIndex: 94, // "TBMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 716, // 10751 / 15
 		OffsetSecondsRemainder: 11,
@@ -19814,10 +19850,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03    1957 Mar
+	//             3:00    -    %z    1957 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19828,10 +19864,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00 RussiaAsia +04/+05    1991 Mar 31  2:00s
+	//             4:00 RussiaAsia %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19842,10 +19878,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             3:00 RussiaAsia +03/+04    1992
+	//             3:00 RussiaAsia %z    1992
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19856,10 +19892,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00 E-EurAsia    +03/+04    1994 Sep lastSun
+	//             3:00 E-EurAsia    %z    1994 Sep lastSun
 	{
 		PolicyIndex: 37, // PolicyName: E-EurAsia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19870,10 +19906,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00 E-EurAsia    +04/+05    1996 Oct lastSun
+	//             4:00 E-EurAsia    %z    1996 Oct lastSun
 	{
 		PolicyIndex: 37, // PolicyName: E-EurAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19884,10 +19920,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    1:00    +05    1997 Mar lastSun
+	//             4:00    1:00    %z    1997 Mar lastSun
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19898,10 +19934,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00 E-EurAsia    +04/+05    2004 Jun 27
+	//             4:00 E-EurAsia    %z    2004 Jun 27
 	{
 		PolicyIndex: 37, // PolicyName: E-EurAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19912,10 +19948,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00 RussiaAsia    +03/+04    2005 Mar lastSun  2:00
+	//             3:00 RussiaAsia    %z    2005 Mar lastSun  2:00
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -19926,10 +19962,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    -    +04
+	//             4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -19942,14 +19978,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tehran
-	// EraIndex: 1329
+	// EraIndex: 1332
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 3:25:44 - LMT 1916
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 822, // 12344 / 15
 		OffsetSecondsRemainder: 14,
@@ -19963,7 +19999,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:25:44    -    TMT    1935 Jun 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 179, // "TMT"
+		FormatIndex: 95, // "TMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 822, // 12344 / 15
 		OffsetSecondsRemainder: 14,
@@ -19974,10 +20010,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:30    Iran    +0330/+0430 1977 Oct 20 24:00
+	//             3:30    Iran    %z    1977 Oct 20 24:00
 	{
 		PolicyIndex: 61, // PolicyName: Iran
-		FormatIndex: 14, // "+0330/+0430"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 840, // 12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -19988,10 +20024,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    Iran    +04/+05    1979
+	//             4:00    Iran    %z    1979
 	{
 		PolicyIndex: 61, // PolicyName: Iran
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20002,10 +20038,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:30    Iran    +0330/+0430
+	//             3:30    Iran    %z
 	{
 		PolicyIndex: 61, // PolicyName: Iran
-		FormatIndex: 14, // "+0330/+0430"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 840, // 12600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20018,14 +20054,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Thimphu
-	// EraIndex: 1334
+	// EraIndex: 1337
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 5:58:36 - LMT 1947 Aug 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1434, // 21516 / 15
 		OffsetSecondsRemainder: 6,
@@ -20036,10 +20072,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:30    -    +0530    1987 Oct
+	//             5:30    -    %z    1987 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 20, // "+0530"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1320, // 19800 / 15
 		OffsetSecondsRemainder: 0,
@@ -20050,10 +20086,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06
+	//             6:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20066,14 +20102,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tokyo
-	// EraIndex: 1337
+	// EraIndex: 1340
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 9:18:59 - LMT 1887 Dec 31 15:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2235, // 33539 / 15
 		OffsetSecondsRemainder: 14,
@@ -20087,7 +20123,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    Japan    J%sT
 	{
 		PolicyIndex: 64, // PolicyName: Japan
-		FormatIndex: 143, // "J%T"
+		FormatIndex: 60, // "J%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20100,14 +20136,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Tomsk
-	// EraIndex: 1339
+	// EraIndex: 1342
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 5:39:51 - LMT 1919 Dec 22
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1359, // 20391 / 15
 		OffsetSecondsRemainder: 6,
@@ -20118,10 +20154,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    -    +06    1930 Jun 21
+	//              6:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20132,10 +20168,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    1991 Mar 31  2:00s
+	//              7:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -20146,10 +20182,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    1992 Jan 19  2:00s
+	//              6:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20160,10 +20196,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    Russia    +07/+08    2002 May  1  3:00
+	//              7:00    Russia    %z    2002 May  1  3:00
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 26, // "+07/+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -20174,10 +20210,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              6:00    Russia    +06/+07    2011 Mar 27  2:00s
+	//              6:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 23, // "+06/+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20188,10 +20224,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07    2014 Oct 26  2:00s
+	//              7:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -20202,10 +20238,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    -    +06    2016 May 29  2:00s
+	//              6:00    -    %z    2016 May 29  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20216,10 +20252,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              7:00    -    +07
+	//              7:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -20232,14 +20268,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ulaanbaatar
-	// EraIndex: 1348
+	// EraIndex: 1351
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 7:07:32 - LMT 1905 Aug
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1710, // 25652 / 15
 		OffsetSecondsRemainder: 2,
@@ -20250,10 +20286,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             7:00    -    +07    1978
+	//             7:00    -    %z    1978
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -20264,10 +20300,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             8:00    Mongol    +08/+09
+	//             8:00    Mongol    %z
 	{
 		PolicyIndex: 80, // PolicyName: Mongol
-		FormatIndex: 31, // "+08/+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -20280,14 +20316,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Urumqi
-	// EraIndex: 1351
+	// EraIndex: 1354
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 5:50:20 - LMT 1928
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1401, // 21020 / 15
 		OffsetSecondsRemainder: 5,
@@ -20298,10 +20334,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06
+	//             6:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20314,14 +20350,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Ust-Nera
-	// EraIndex: 1353
+	// EraIndex: 1356
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 9:32:54 - LMT 1919 Dec 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2291, // 34374 / 15
 		OffsetSecondsRemainder: 9,
@@ -20332,10 +20368,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    1930 Jun 21
+	//              8:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -20346,10 +20382,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    Russia    +09/+10    1981 Apr  1
+	//              9:00    Russia    %z    1981 Apr  1
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20360,10 +20396,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    1991 Mar 31  2:00s
+	//             11:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20374,10 +20410,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    Russia    +10/+11    1992 Jan 19  2:00s
+	//             10:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 37, // "+10/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20388,10 +20424,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    Russia    +11/+12    2011 Mar 27  2:00s
+	//             11:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20402,10 +20438,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             12:00    -    +12    2011 Sep 13  0:00s
+	//             12:00    -    %z    2011 Sep 13  0:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -20416,10 +20452,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    -    +11    2014 Oct 26  2:00s
+	//             11:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20430,10 +20466,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    -    +10
+	//             10:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20446,14 +20482,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Vladivostok
-	// EraIndex: 1362
+	// EraIndex: 1365
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 8:47:31 - LMT 1922 Nov 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2110, // 31651 / 15
 		OffsetSecondsRemainder: 1,
@@ -20464,10 +20500,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    -    +09    1930 Jun 21
+	//              9:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20478,10 +20514,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:00    Russia    +10/+11    1991 Mar 31  2:00s
+	//             10:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 37, // "+10/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20492,10 +20528,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              9:00    Russia    +09/+10    1992 Jan 19  2:00s
+	//              9:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20506,10 +20542,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    Russia    +10/+11    2011 Mar 27  2:00s
+	//             10:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 37, // "+10/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20520,10 +20556,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    -    +11    2014 Oct 26  2:00s
+	//             11:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20534,10 +20570,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    -    +10
+	//             10:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20550,14 +20586,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yakutsk
-	// EraIndex: 1369
+	// EraIndex: 1372
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 8:38:58 - LMT 1919 Dec 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2075, // 31138 / 15
 		OffsetSecondsRemainder: 13,
@@ -20568,10 +20604,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:00    -    +08    1930 Jun 21
+	//              8:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -20582,10 +20618,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    Russia    +09/+10    1991 Mar 31  2:00s
+	//              9:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20596,10 +20632,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              8:00    Russia    +08/+09    1992 Jan 19  2:00s
+	//              8:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 31, // "+08/+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -20610,10 +20646,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              9:00    Russia    +09/+10    2011 Mar 27  2:00s
+	//              9:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 34, // "+09/+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20624,10 +20660,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             10:00    -    +10    2014 Oct 26  2:00s
+	//             10:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20638,10 +20674,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              9:00    -    +09
+	//              9:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20654,14 +20690,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yangon
-	// EraIndex: 1376
+	// EraIndex: 1379
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 6:24:47 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1539, // 23087 / 15
 		OffsetSecondsRemainder: 2,
@@ -20675,7 +20711,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             6:24:47    -    RMT    1920
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 172, // "RMT"
+		FormatIndex: 88, // "RMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1539, // 23087 / 15
 		OffsetSecondsRemainder: 2,
@@ -20686,10 +20722,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:30    -    +0630    1942 May
+	//             6:30    -    %z    1942 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1560, // 23400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20700,10 +20736,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             9:00    -    +09    1945 May  3
+	//             9:00    -    %z    1945 May  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20714,10 +20750,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:30    -    +0630
+	//             6:30    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 24, // "+0630"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1560, // 23400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20730,14 +20766,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yekaterinburg
-	// EraIndex: 1381
+	// EraIndex: 1384
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 4:02:33 - LMT 1916 Jul 3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 970, // 14553 / 15
 		OffsetSecondsRemainder: 3,
@@ -20751,7 +20787,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:45:05 -    PMT    1919 Jul 15  4:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 166, // "PMT"
+		FormatIndex: 82, // "PMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 900, // 13505 / 15
 		OffsetSecondsRemainder: 5,
@@ -20762,10 +20798,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    -    +04    1930 Jun 21
+	//              4:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20776,10 +20812,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              5:00    Russia    +05/+06    1991 Mar 31  2:00s
+	//              5:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20790,10 +20826,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    Russia    +04/+05    1992 Jan 19  2:00s
+	//              4:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20804,10 +20840,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              5:00    Russia    +05/+06    2011 Mar 27  2:00s
+	//              5:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 19, // "+05/+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20818,10 +20854,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              6:00    -    +06    2014 Oct 26  2:00s
+	//              6:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -20832,10 +20868,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              5:00    -    +05
+	//              5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -20848,14 +20884,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Asia/Yerevan
-	// EraIndex: 1389
+	// EraIndex: 1392
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 2:58:00 - LMT 1924 May 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 712, // 10680 / 15
 		OffsetSecondsRemainder: 0,
@@ -20866,10 +20902,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03    1957 Mar
+	//             3:00    -    %z    1957 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -20880,10 +20916,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00 RussiaAsia +04/+05    1991 Mar 31  2:00s
+	//             4:00 RussiaAsia %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20894,10 +20930,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             3:00 RussiaAsia    +03/+04    1995 Sep 24  2:00s
+	//             3:00 RussiaAsia    %z    1995 Sep 24  2:00s
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -20908,10 +20944,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             4:00    -    +04    1997
+	//             4:00    -    %z    1997
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20922,10 +20958,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00 RussiaAsia    +04/+05    2011
+	//             4:00 RussiaAsia    %z    2011
 	{
 		PolicyIndex: 104, // PolicyName: RussiaAsia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20936,10 +20972,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00    Armenia    +04/+05
+	//             4:00    Armenia    %z
 	{
 		PolicyIndex: 10, // PolicyName: Armenia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -20952,14 +20988,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Azores
-	// EraIndex: 1396
-	// EraCount: 15
+	// EraIndex: 1399
+	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// -1:42:40 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -411, // -6160 / 15
 		OffsetSecondsRemainder: 5,
@@ -20973,7 +21009,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -1:54:32 -    HMT    1912 Jan  1  2:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 137, // "HMT"
+		FormatIndex: 54, // "HMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -459, // -6872 / 15
 		OffsetSecondsRemainder: 13,
@@ -20984,178 +21020,80 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -2:00    Port    -02/-01    1942 Apr 25 22:00s
+	//             -2:00    Port    %z    1966 Oct  2  2:00s
 	{
 		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 57, // "-02/-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1942,
-		UntilMonth: 4,
-		UntilDay: 25,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -2:00    Port    +00    1942 Aug 15 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 2, // "+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1942,
-		UntilMonth: 8,
-		UntilDay: 15,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -2:00    Port    -02/-01    1943 Apr 17 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 57, // "-02/-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1943,
-		UntilMonth: 4,
-		UntilDay: 17,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -2:00    Port    +00    1943 Aug 28 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 2, // "+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1943,
-		UntilMonth: 8,
-		UntilDay: 28,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -2:00    Port    -02/-01    1944 Apr 22 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 57, // "-02/-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1944,
-		UntilMonth: 4,
-		UntilDay: 22,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -2:00    Port    +00    1944 Aug 26 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 2, // "+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1944,
-		UntilMonth: 8,
-		UntilDay: 26,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -2:00    Port    -02/-01    1945 Apr 21 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 57, // "-02/-01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1945,
-		UntilMonth: 4,
-		UntilDay: 21,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -2:00    Port    +00    1945 Aug 25 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 2, // "+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -480, // -7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1945,
-		UntilMonth: 8,
-		UntilDay: 25,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -2:00    Port    -02/-01    1966 Apr  3  2:00
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 57, // "-02/-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1966,
-		UntilMonth: 4,
-		UntilDay: 3,
+		UntilMonth: 10,
+		UntilDay: 2,
 		UntilSecondsCode: 480, // 7200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	//             -1:00    Port    -01/+00    1983 Sep 25  1:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 55, // "-01/+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1983,
-		UntilMonth: 9,
-		UntilDay: 25,
-		UntilSecondsCode: 240, // 3600 / 15
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             -1:00    W-Eur    -01/+00    1992 Sep 27  1:00s
+	//             -1:00    -    %z    1982 Mar 28  0:00s
 	{
-		PolicyIndex: 130, // PolicyName: W-Eur
-		FormatIndex: 55, // "-01/+00"
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -240, // -3600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1982,
+		UntilMonth: 3,
+		UntilDay: 28,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 16, // SuffixS + remainder=0
+	},
+
+	//             -1:00    Port    %z    1986
+	{
+		PolicyIndex: 98, // PolicyName: Port
+		FormatIndex: 0, // ""
+		DeltaMinutes: 0,
+		OffsetSecondsCode: -240, // -3600 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1986,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//             -1:00    EU    %z    1992 Dec 27  1:00s
+	{
+		PolicyIndex: 38, // PolicyName: EU
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1992,
-		UntilMonth: 9,
+		UntilMonth: 12,
 		UntilDay: 27,
 		UntilSecondsCode: 240, // 3600 / 15
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              0:00    EU    WE%sT    1993 Mar 28  1:00u
+	//              0:00    EU    WE%sT    1993 Jun 17  1:00u
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1993,
-		UntilMonth: 3,
-		UntilDay: 28,
+		UntilMonth: 6,
+		UntilDay: 17,
 		UntilSecondsCode: 240, // 3600 / 15
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -1:00    EU    -01/+00
+	//             -1:00    EU    %z
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 55, // "-01/+00"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -21168,14 +21106,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Bermuda
-	// EraIndex: 1411
+	// EraIndex: 1407
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -4:19:18 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1038, // -15558 / 15
 		OffsetSecondsRemainder: 12,
@@ -21189,7 +21127,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:19:18 Bermuda BMT/BST 1930 Jan 1  2:00
 	{
 		PolicyIndex: 17, // PolicyName: Bermuda
-		FormatIndex: 103, // "BMT/BST"
+		FormatIndex: 20, // "BMT/BST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1038, // -15558 / 15
 		OffsetSecondsRemainder: 12,
@@ -21203,7 +21141,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Bermuda    A%sT    1974 Apr 28  2:00
 	{
 		PolicyIndex: 17, // PolicyName: Bermuda
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -21217,7 +21155,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    Canada    A%sT    1976
 	{
 		PolicyIndex: 24, // PolicyName: Canada
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -21231,7 +21169,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -4:00    US    A%sT
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 87, // "A%T"
+		FormatIndex: 4, // "A%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -21244,14 +21182,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Canary
-	// EraIndex: 1416
+	// EraIndex: 1412
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -1:01:36 - LMT 1922 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -247, // -3696 / 15
 		OffsetSecondsRemainder: 9,
@@ -21262,10 +21200,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -1:00    -    -01    1946 Sep 30  1:00
+	//             -1:00    -    %z    1946 Sep 30  1:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 54, // "-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -21279,7 +21217,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    WET    1980 Apr  6  0:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 185, // "WET"
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -21293,7 +21231,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    1:00    WEST    1980 Sep 28  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 184, // "WEST"
+		FormatIndex: 100, // "WEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -21307,7 +21245,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    EU    WE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -21320,14 +21258,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Cape_Verde
-	// EraIndex: 1421
+	// EraIndex: 1417
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -1:34:04 - LMT 1912 Jan 01 2:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -377, // -5644 / 15
 		OffsetSecondsRemainder: 11,
@@ -21338,10 +21276,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -2:00    -    -02    1942 Sep
+	//             -2:00    -    %z    1942 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21352,10 +21290,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -2:00    1:00    -01    1945 Oct 15
+	//             -2:00    1:00    %z    1945 Oct 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 54, // "-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21366,10 +21304,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -2:00    -    -02    1975 Nov 25  2:00
+	//             -2:00    -    %z    1975 Nov 25  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21380,10 +21318,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -1:00    -    -01
+	//             -1:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 54, // "-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -21396,14 +21334,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Faroe
-	// EraIndex: 1426
+	// EraIndex: 1422
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -0:27:04 - LMT 1908 Jan 11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -109, // -1624 / 15
 		OffsetSecondsRemainder: 11,
@@ -21417,7 +21355,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    WET    1981
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 185, // "WET"
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -21431,7 +21369,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    EU    WE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -21444,14 +21382,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Madeira
-	// EraIndex: 1429
-	// EraCount: 13
+	// EraIndex: 1425
+	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -1:07:36 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -271, // -4056 / 15
 		OffsetSecondsRemainder: 9,
@@ -21465,7 +21403,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -1:07:36 -    FMT    1912 Jan  1  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 125, // "FMT"
+		FormatIndex: 42, // "FMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -271, // -4056 / 15
 		OffsetSecondsRemainder: 9,
@@ -21476,150 +21414,52 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -1:00    Port    -01/+00    1942 Apr 25 22:00s
+	//             -1:00    Port    %z    1966 Oct  2  2:00s
 	{
 		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 55, // "-01/+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1942,
-		UntilMonth: 4,
-		UntilDay: 25,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -1:00    Port    +01    1942 Aug 15 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 5, // "+01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1942,
-		UntilMonth: 8,
-		UntilDay: 15,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -1:00    Port    -01/+00    1943 Apr 17 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 55, // "-01/+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1943,
-		UntilMonth: 4,
-		UntilDay: 17,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -1:00    Port    +01    1943 Aug 28 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 5, // "+01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1943,
-		UntilMonth: 8,
-		UntilDay: 28,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -1:00    Port    -01/+00    1944 Apr 22 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 55, // "-01/+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1944,
-		UntilMonth: 4,
-		UntilDay: 22,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -1:00    Port    +01    1944 Aug 26 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 5, // "+01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1944,
-		UntilMonth: 8,
-		UntilDay: 26,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -1:00    Port    -01/+00    1945 Apr 21 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 55, // "-01/+00"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1945,
-		UntilMonth: 4,
-		UntilDay: 21,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -1:00    Port    +01    1945 Aug 25 22:00s
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 5, // "+01"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -240, // -3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 1945,
-		UntilMonth: 8,
-		UntilDay: 25,
-		UntilSecondsCode: 5280, // 79200 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
-	},
-
-	//             -1:00    Port    -01/+00    1966 Apr  3  2:00
-	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 55, // "-01/+00"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1966,
-		UntilMonth: 4,
-		UntilDay: 3,
+		UntilMonth: 10,
+		UntilDay: 2,
 		UntilSecondsCode: 480, // 7200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
+		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              0:00    Port    WE%sT    1983 Sep 25  1:00s
+	//              0:00    -    WET    1982 Apr  4
 	{
-		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 183, // "WE%T"
+		PolicyIndex: 0, // PolicyName: (none)
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
-		UntilYear: 1983,
-		UntilMonth: 9,
-		UntilDay: 25,
-		UntilSecondsCode: 240, // 3600 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
+		UntilYear: 1982,
+		UntilMonth: 4,
+		UntilDay: 4,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
+	},
+
+	//              0:00    Port    WE%sT    1986 Jul 31
+	{
+		PolicyIndex: 98, // PolicyName: Port
+		FormatIndex: 99, // "WE%T"
+		DeltaMinutes: 0,
+		OffsetSecondsCode: 0, // 0 / 15
+		OffsetSecondsRemainder: 0,
+		UntilYear: 1986,
+		UntilMonth: 7,
+		UntilDay: 31,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
 	//              0:00    EU    WE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -21632,14 +21472,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/South_Georgia
-	// EraIndex: 1442
+	// EraIndex: 1431
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -2:26:08 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -585, // -8768 / 15
 		OffsetSecondsRemainder: 7,
@@ -21650,10 +21490,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -2:00    -    -02
+	//             -2:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21666,14 +21506,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Atlantic/Stanley
-	// EraIndex: 1444
+	// EraIndex: 1433
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -3:51:24 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -926, // -13884 / 15
 		OffsetSecondsRemainder: 6,
@@ -21687,7 +21527,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -3:51:24 -    SMT    1912 Mar 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -926, // -13884 / 15
 		OffsetSecondsRemainder: 6,
@@ -21698,10 +21538,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Falk    -04/-03    1983 May
+	//             -4:00    Falk    %z    1983 May
 	{
 		PolicyIndex: 45, // PolicyName: Falk
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -21712,10 +21552,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    Falk    -03/-02    1985 Sep 15
+	//             -3:00    Falk    %z    1985 Sep 15
 	{
 		PolicyIndex: 45, // PolicyName: Falk
-		FormatIndex: 60, // "-03/-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -21726,10 +21566,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -4:00    Falk    -04/-03    2010 Sep  5  2:00
+	//             -4:00    Falk    %z    2010 Sep  5  2:00
 	{
 		PolicyIndex: 45, // PolicyName: Falk
-		FormatIndex: 66, // "-04/-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -21740,10 +21580,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -3:00    -    -03
+	//             -3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -21756,14 +21596,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Adelaide
-	// EraIndex: 1450
+	// EraIndex: 1439
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 9:14:20 - LMT 1895 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2217, // 33260 / 15
 		OffsetSecondsRemainder: 5,
@@ -21777,7 +21617,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    ACST    1899 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 89, // "ACST"
+		FormatIndex: 6, // "ACST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -21791,7 +21631,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:30    Aus    AC%sT    1971
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 88, // "AC%T"
+		FormatIndex: 5, // "AC%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2280, // 34200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21805,7 +21645,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:30    AS    AC%sT
 	{
 		PolicyIndex: 3, // PolicyName: AS
-		FormatIndex: 88, // "AC%T"
+		FormatIndex: 5, // "AC%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2280, // 34200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21818,14 +21658,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Brisbane
-	// EraIndex: 1454
+	// EraIndex: 1443
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 10:12:08 - LMT 1895
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2448, // 36728 / 15
 		OffsetSecondsRemainder: 8,
@@ -21839,7 +21679,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Aus    AE%sT    1971
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -21853,7 +21693,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AQ    AE%sT
 	{
 		PolicyIndex: 2, // PolicyName: AQ
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -21866,14 +21706,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Broken_Hill
-	// EraIndex: 1457
+	// EraIndex: 1446
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 9:25:48 - LMT 1895 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2263, // 33948 / 15
 		OffsetSecondsRemainder: 3,
@@ -21887,7 +21727,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    AEST    1896 Aug 23
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 93, // "AEST"
+		FormatIndex: 10, // "AEST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -21901,7 +21741,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:00    -    ACST    1899 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 89, // "ACST"
+		FormatIndex: 6, // "ACST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -21915,7 +21755,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:30    Aus    AC%sT    1971
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 88, // "AC%T"
+		FormatIndex: 5, // "AC%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2280, // 34200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21929,7 +21769,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:30    AN    AC%sT    2000
 	{
 		PolicyIndex: 1, // PolicyName: AN
-		FormatIndex: 88, // "AC%T"
+		FormatIndex: 5, // "AC%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2280, // 34200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21943,7 +21783,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:30    AS    AC%sT
 	{
 		PolicyIndex: 3, // PolicyName: AS
-		FormatIndex: 88, // "AC%T"
+		FormatIndex: 5, // "AC%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2280, // 34200 / 15
 		OffsetSecondsRemainder: 0,
@@ -21956,14 +21796,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Darwin
-	// EraIndex: 1463
+	// EraIndex: 1452
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 8:43:20 - LMT 1895 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2093, // 31400 / 15
 		OffsetSecondsRemainder: 5,
@@ -21977,7 +21817,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              9:00    -    ACST    1899 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 89, // "ACST"
+		FormatIndex: 6, // "ACST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -21991,7 +21831,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              9:30    Aus    AC%sT
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 88, // "AC%T"
+		FormatIndex: 5, // "AC%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2280, // 34200 / 15
 		OffsetSecondsRemainder: 0,
@@ -22004,14 +21844,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Eucla
-	// EraIndex: 1466
+	// EraIndex: 1455
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 8:35:28 - LMT 1895 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2061, // 30928 / 15
 		OffsetSecondsRemainder: 13,
@@ -22022,10 +21862,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:45    Aus +0845/+0945    1943 Jul
+	//              8:45    Aus    %z    1943 Jul
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 32, // "+0845/+0945"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2100, // 31500 / 15
 		OffsetSecondsRemainder: 0,
@@ -22036,10 +21876,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              8:45    AW  +0845/+0945
+	//              8:45    AW    %z
 	{
 		PolicyIndex: 6, // PolicyName: AW
-		FormatIndex: 32, // "+0845/+0945"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2100, // 31500 / 15
 		OffsetSecondsRemainder: 0,
@@ -22052,14 +21892,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Hobart
-	// EraIndex: 1469
+	// EraIndex: 1458
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 9:49:16 - LMT 1895 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2357, // 35356 / 15
 		OffsetSecondsRemainder: 1,
@@ -22073,7 +21913,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AT    AE%sT    1919 Oct 24
 	{
 		PolicyIndex: 4, // PolicyName: AT
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22087,7 +21927,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Aus    AE%sT    1967
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22101,7 +21941,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AT    AE%sT
 	{
 		PolicyIndex: 4, // PolicyName: AT
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22114,14 +21954,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Lindeman
-	// EraIndex: 1473
+	// EraIndex: 1462
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 9:55:56 - LMT 1895
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2383, // 35756 / 15
 		OffsetSecondsRemainder: 11,
@@ -22135,7 +21975,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Aus    AE%sT    1971
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22149,7 +21989,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AQ    AE%sT    1992 Jul
 	{
 		PolicyIndex: 2, // PolicyName: AQ
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22163,7 +22003,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Holiday    AE%sT
 	{
 		PolicyIndex: 57, // PolicyName: Holiday
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22176,14 +22016,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Lord_Howe
-	// EraIndex: 1477
+	// EraIndex: 1466
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 10:36:20 - LMT 1895 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2545, // 38180 / 15
 		OffsetSecondsRemainder: 5,
@@ -22197,7 +22037,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    AEST    1981 Mar
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 93, // "AEST"
+		FormatIndex: 10, // "AEST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22208,10 +22048,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:30    LH    +1030/+1130 1985 Jul
+	//             10:30    LH    %z    1985 Jul
 	{
 		PolicyIndex: 67, // PolicyName: LH
-		FormatIndex: 39, // "+1030/+1130"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2520, // 37800 / 15
 		OffsetSecondsRemainder: 0,
@@ -22222,10 +22062,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:30    LH    +1030/+11
+	//             10:30    LH    %z
 	{
 		PolicyIndex: 67, // PolicyName: LH
-		FormatIndex: 38, // "+1030/+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2520, // 37800 / 15
 		OffsetSecondsRemainder: 0,
@@ -22238,14 +22078,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Melbourne
-	// EraIndex: 1481
+	// EraIndex: 1470
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 9:39:52 - LMT 1895 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2319, // 34792 / 15
 		OffsetSecondsRemainder: 7,
@@ -22259,7 +22099,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Aus    AE%sT    1971
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22273,7 +22113,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AV    AE%sT
 	{
 		PolicyIndex: 5, // PolicyName: AV
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22286,14 +22126,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Perth
-	// EraIndex: 1484
+	// EraIndex: 1473
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 7:43:24 - LMT 1895 Dec
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1853, // 27804 / 15
 		OffsetSecondsRemainder: 9,
@@ -22307,7 +22147,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    Aus    AW%sT    1943 Jul
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 100, // "AW%T"
+		FormatIndex: 17, // "AW%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -22321,7 +22161,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              8:00    AW    AW%sT
 	{
 		PolicyIndex: 6, // PolicyName: AW
-		FormatIndex: 100, // "AW%T"
+		FormatIndex: 17, // "AW%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -22334,14 +22174,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Australia/Sydney
-	// EraIndex: 1487
+	// EraIndex: 1476
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 10:04:52 - LMT 1895 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2419, // 36292 / 15
 		OffsetSecondsRemainder: 7,
@@ -22355,7 +22195,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Aus    AE%sT    1971
 	{
 		PolicyIndex: 11, // PolicyName: Aus
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22369,7 +22209,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    AN    AE%sT
 	{
 		PolicyIndex: 1, // PolicyName: AN
-		FormatIndex: 91, // "AE%T"
+		FormatIndex: 8, // "AE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22381,115 +22221,15 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// ZoneName: CET
-	// EraIndex: 1490
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// 1:00 C-Eur CE%sT
-	{
-		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 240, // 3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: CST6CDT
-	// EraIndex: 1491
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// -6:00 US C%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 105, // "C%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1440, // -21600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: EET
-	// EraIndex: 1492
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// 2:00 EU EE%sT
-	{
-		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 480, // 7200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: EST
-	// EraIndex: 1493
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// -5:00 - EST
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 123, // "EST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1200, // -18000 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: EST5EDT
-	// EraIndex: 1494
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// -5:00 US E%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 116, // "E%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1200, // -18000 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT
-	// EraIndex: 1495
+	// EraIndex: 1479
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 0 - GMT
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -22502,14 +22242,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+1
-	// EraIndex: 1496
+	// EraIndex: 1480
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -1 - -01
+	// -1 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 54, // "-01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -240, // -3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -22522,14 +22262,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+10
-	// EraIndex: 1497
+	// EraIndex: 1481
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -10 - -10
+	// -10 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 78, // "-10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22542,14 +22282,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+11
-	// EraIndex: 1498
+	// EraIndex: 1482
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -11 - -11
+	// -11 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "-11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -22562,14 +22302,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+12
-	// EraIndex: 1499
+	// EraIndex: 1483
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -12 - -12
+	// -12 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 86, // "-12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2880, // -43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -22582,14 +22322,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+2
-	// EraIndex: 1500
+	// EraIndex: 1484
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -2 - -02
+	// -2 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 56, // "-02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -480, // -7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -22602,14 +22342,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+3
-	// EraIndex: 1501
+	// EraIndex: 1485
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -3 - -03
+	// -3 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 58, // "-03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -720, // -10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -22622,14 +22362,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+4
-	// EraIndex: 1502
+	// EraIndex: 1486
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -4 - -04
+	// -4 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 65, // "-04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -960, // -14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -22642,14 +22382,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+5
-	// EraIndex: 1503
+	// EraIndex: 1487
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -5 - -05
+	// -5 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22662,14 +22402,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+6
-	// EraIndex: 1504
+	// EraIndex: 1488
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -6 - -06
+	// -6 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 70, // "-06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -22682,14 +22422,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+7
-	// EraIndex: 1505
+	// EraIndex: 1489
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -7 - -07
+	// -7 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 72, // "-07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -22702,14 +22442,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+8
-	// EraIndex: 1506
+	// EraIndex: 1490
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -8 - -08
+	// -8 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 74, // "-08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -22722,14 +22462,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT+9
-	// EraIndex: 1507
+	// EraIndex: 1491
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// -9 - -09
+	// -9 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 76, // "-09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -22742,14 +22482,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-1
-	// EraIndex: 1508
+	// EraIndex: 1492
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 1 - +01
+	// 1 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 5, // "+01"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -22762,14 +22502,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-10
-	// EraIndex: 1509
+	// EraIndex: 1493
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 10 - +10
+	// 10 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22782,14 +22522,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-11
-	// EraIndex: 1510
+	// EraIndex: 1494
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 11 - +11
+	// 11 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -22802,14 +22542,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-12
-	// EraIndex: 1511
+	// EraIndex: 1495
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 12 - +12
+	// 12 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -22822,14 +22562,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-13
-	// EraIndex: 1512
+	// EraIndex: 1496
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 13 - +13
+	// 13 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 50, // "+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
 		OffsetSecondsRemainder: 0,
@@ -22842,14 +22582,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-14
-	// EraIndex: 1513
+	// EraIndex: 1497
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 14 - +14
+	// 14 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 52, // "+14"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3360, // 50400 / 15
 		OffsetSecondsRemainder: 0,
@@ -22862,14 +22602,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-2
-	// EraIndex: 1514
+	// EraIndex: 1498
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 2 - +02
+	// 2 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 8, // "+02"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -22882,14 +22622,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-3
-	// EraIndex: 1515
+	// EraIndex: 1499
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 3 - +03
+	// 3 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -22902,14 +22642,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-4
-	// EraIndex: 1516
+	// EraIndex: 1500
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 4 - +04
+	// 4 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -22922,14 +22662,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-5
-	// EraIndex: 1517
+	// EraIndex: 1501
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 5 - +05
+	// 5 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -22942,14 +22682,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-6
-	// EraIndex: 1518
+	// EraIndex: 1502
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 6 - +06
+	// 6 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -22962,14 +22702,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-7
-	// EraIndex: 1519
+	// EraIndex: 1503
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 7 - +07
+	// 7 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 25, // "+07"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1680, // 25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -22982,14 +22722,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-8
-	// EraIndex: 1520
+	// EraIndex: 1504
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 8 - +08
+	// 8 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 29, // "+08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1920, // 28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -23002,14 +22742,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/GMT-9
-	// EraIndex: 1521
+	// EraIndex: 1505
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
-	// 9 - +09
+	// 9 - %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -23022,14 +22762,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Etc/UTC
-	// EraIndex: 1522
+	// EraIndex: 1506
 	// EraCount: 1
 	// ---------------------------------------------------------------------------
 
 	// 0 - UTC
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 180, // "UTC"
+		FormatIndex: 96, // "UTC"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -23042,14 +22782,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Andorra
-	// EraIndex: 1523
+	// EraIndex: 1507
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 0:06:04 - LMT 1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 24, // 364 / 15
 		OffsetSecondsRemainder: 4,
@@ -23063,7 +22803,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    -    WET    1946 Sep 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 185, // "WET"
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -23077,7 +22817,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1985 Mar 31  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23091,7 +22831,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23104,14 +22844,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Astrakhan
-	// EraIndex: 1527
+	// EraIndex: 1511
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 3:12:12 - LMT 1924 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 768, // 11532 / 15
 		OffsetSecondsRemainder: 12,
@@ -23122,10 +22862,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              3:00    -    +03    1930 Jun 21
+	//              3:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -23136,10 +22876,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    Russia    +04/+05    1989 Mar 26  2:00s
+	//              4:00    Russia    %z    1989 Mar 26  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -23150,10 +22890,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	//              3:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -23164,10 +22904,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04    1992 Mar 29  2:00s
+	//              4:00    -    %z    1992 Mar 29  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -23178,10 +22918,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
+	//              3:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -23192,10 +22932,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04    2014 Oct 26  2:00s
+	//              4:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -23206,10 +22946,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    -    +03    2016 Mar 27  2:00s
+	//              3:00    -    %z    2016 Mar 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -23220,10 +22960,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04
+	//              4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -23236,14 +22976,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Athens
-	// EraIndex: 1536
+	// EraIndex: 1520
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 1:34:52 - LMT 1895 Sep 14
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 379, // 5692 / 15
 		OffsetSecondsRemainder: 7,
@@ -23257,7 +22997,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:34:52    -    AMT    1916 Jul 28  0:01
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 97, // "AMT"
+		FormatIndex: 14, // "AMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 379, // 5692 / 15
 		OffsetSecondsRemainder: 7,
@@ -23271,7 +23011,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Greece    EE%sT    1941 Apr 30
 	{
 		PolicyIndex: 51, // PolicyName: Greece
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23285,7 +23025,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Greece    CE%sT    1944 Apr  4
 	{
 		PolicyIndex: 51, // PolicyName: Greece
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23299,7 +23039,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Greece    EE%sT    1981
 	{
 		PolicyIndex: 51, // PolicyName: Greece
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23313,7 +23053,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23326,14 +23066,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Belgrade
-	// EraIndex: 1542
+	// EraIndex: 1526
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 1:22:00 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 328, // 4920 / 15
 		OffsetSecondsRemainder: 0,
@@ -23347,7 +23087,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1941 Apr 18 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23361,7 +23101,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1945
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23375,7 +23115,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1945 May  8  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23389,7 +23129,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    1:00    CEST    1945 Sep 16  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 110, // "CEST"
+		FormatIndex: 27, // "CEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23403,7 +23143,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1982 Nov 27
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23417,7 +23157,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23430,14 +23170,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Berlin
-	// EraIndex: 1549
+	// EraIndex: 1533
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 0:53:28 - LMT 1893 Apr
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 213, // 3208 / 15
 		OffsetSecondsRemainder: 13,
@@ -23451,7 +23191,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1945 May 24  2:00
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23465,7 +23205,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00 SovietZone    CE%sT    1946
 	{
 		PolicyIndex: 109, // PolicyName: SovietZone
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23479,7 +23219,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Germany    CE%sT    1980
 	{
 		PolicyIndex: 50, // PolicyName: Germany
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23493,7 +23233,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23506,14 +23246,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Brussels
-	// EraIndex: 1554
+	// EraIndex: 1538
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 0:17:30 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 70, // 1050 / 15
 		OffsetSecondsRemainder: 0,
@@ -23527,7 +23267,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:17:30    -    BMT    1892 May  1 00:17:30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "BMT"
+		FormatIndex: 19, // "BMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 70, // 1050 / 15
 		OffsetSecondsRemainder: 0,
@@ -23541,7 +23281,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    -    WET    1914 Nov  8
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 185, // "WET"
+		FormatIndex: 101, // "WET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -23555,7 +23295,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1916 May  1  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23569,7 +23309,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1918 Nov 11 11:00u
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23583,7 +23323,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    Belgium    WE%sT    1940 May 20  2:00s
 	{
 		PolicyIndex: 15, // PolicyName: Belgium
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -23597,7 +23337,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Sep  3
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23611,7 +23351,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Belgium    CE%sT    1977
 	{
 		PolicyIndex: 15, // PolicyName: Belgium
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23625,7 +23365,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23638,14 +23378,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Bucharest
-	// EraIndex: 1563
+	// EraIndex: 1547
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 1:44:24 - LMT 1891 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 417, // 6264 / 15
 		OffsetSecondsRemainder: 9,
@@ -23659,7 +23399,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:44:24    -    BMT    1931 Jul 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "BMT"
+		FormatIndex: 19, // "BMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 417, // 6264 / 15
 		OffsetSecondsRemainder: 9,
@@ -23673,7 +23413,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Romania    EE%sT    1981 Mar 29  2:00s
 	{
 		PolicyIndex: 102, // PolicyName: Romania
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23687,7 +23427,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    C-Eur    EE%sT    1991
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23701,7 +23441,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Romania    EE%sT    1994
 	{
 		PolicyIndex: 102, // PolicyName: Romania
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23715,7 +23455,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    E-Eur    EE%sT    1997
 	{
 		PolicyIndex: 36, // PolicyName: E-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23729,7 +23469,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23742,14 +23482,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Budapest
-	// EraIndex: 1570
+	// EraIndex: 1554
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 1:16:20 - LMT 1890 Nov 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 305, // 4580 / 15
 		OffsetSecondsRemainder: 5,
@@ -23763,7 +23503,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1918
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23777,7 +23517,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Hungary    CE%sT    1941 Apr  7 23:00
 	{
 		PolicyIndex: 59, // PolicyName: Hungary
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23791,7 +23531,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1945
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23805,7 +23545,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Hungary    CE%sT    1984
 	{
 		PolicyIndex: 59, // PolicyName: Hungary
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23819,7 +23559,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23832,14 +23572,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Chisinau
-	// EraIndex: 1576
+	// EraIndex: 1560
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// 1:55:20 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 461, // 6920 / 15
 		OffsetSecondsRemainder: 5,
@@ -23853,7 +23593,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:55    -    CMT    1918 Feb 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 112, // "CMT"
+		FormatIndex: 29, // "CMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 460, // 6900 / 15
 		OffsetSecondsRemainder: 0,
@@ -23867,7 +23607,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:44:24    -    BMT    1931 Jul 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "BMT"
+		FormatIndex: 19, // "BMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 417, // 6264 / 15
 		OffsetSecondsRemainder: 9,
@@ -23881,7 +23621,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Romania    EE%sT    1940 Aug 15
 	{
 		PolicyIndex: 102, // PolicyName: Romania
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23895,7 +23635,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    1:00    EEST    1941 Jul 17
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 119, // "EEST"
+		FormatIndex: 36, // "EEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23909,7 +23649,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Aug 24
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -23923,7 +23663,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    Russia    MSK/MSD    1990 May  6  2:00
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -23937,7 +23677,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Russia    EE%sT    1992
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23951,7 +23691,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    E-Eur    EE%sT    1997
 	{
 		PolicyIndex: 36, // PolicyName: E-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23965,7 +23705,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Moldova    EE%sT
 	{
 		PolicyIndex: 78, // PolicyName: Moldova
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -23978,14 +23718,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Dublin
-	// EraIndex: 1586
+	// EraIndex: 1570
 	// EraCount: 11
 	// ---------------------------------------------------------------------------
 
 	// -0:25:21 - LMT 1880 Aug 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -102, // -1521 / 15
 		OffsetSecondsRemainder: 9,
@@ -23999,7 +23739,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -0:25:21 -    DMT    1916 May 21  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 115, // "DMT"
+		FormatIndex: 32, // "DMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -102, // -1521 / 15
 		OffsetSecondsRemainder: 9,
@@ -24013,7 +23753,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -0:25:21 1:00    IST    1916 Oct  1  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 141, // "IST"
+		FormatIndex: 58, // "IST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -102, // -1521 / 15
 		OffsetSecondsRemainder: 9,
@@ -24041,7 +23781,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    GB-Eire    GMT/IST    1940 Feb 25  2:00s
 	{
 		PolicyIndex: 49, // PolicyName: GB-Eire
-		FormatIndex: 129, // "GMT/IST"
+		FormatIndex: 46, // "GMT/IST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24055,7 +23795,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    1:00    IST    1946 Oct  6  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 141, // "IST"
+		FormatIndex: 58, // "IST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24069,7 +23809,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT    1947 Mar 16  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24083,7 +23823,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    1:00    IST    1947 Nov  2  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 141, // "IST"
+		FormatIndex: 58, // "IST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24097,7 +23837,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    -    GMT    1948 Apr 18  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24111,7 +23851,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    GB-Eire    GMT/IST    1968 Oct 27
 	{
 		PolicyIndex: 49, // PolicyName: GB-Eire
-		FormatIndex: 129, // "GMT/IST"
+		FormatIndex: 46, // "GMT/IST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24125,7 +23865,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    Eire    IST/GMT
 	{
 		PolicyIndex: 44, // PolicyName: Eire
-		FormatIndex: 142, // "IST/GMT"
+		FormatIndex: 59, // "IST/GMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -24138,14 +23878,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Gibraltar
-	// EraIndex: 1597
+	// EraIndex: 1581
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -0:21:24 - LMT 1880 Aug 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -86, // -1284 / 15
 		OffsetSecondsRemainder: 6,
@@ -24173,7 +23913,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1982
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -24187,7 +23927,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -24200,14 +23940,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Helsinki
-	// EraIndex: 1601
+	// EraIndex: 1585
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 1:39:49 - LMT 1878 May 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 399, // 5989 / 15
 		OffsetSecondsRemainder: 4,
@@ -24221,7 +23961,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:39:49    -    HMT    1921 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 137, // "HMT"
+		FormatIndex: 54, // "HMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 399, // 5989 / 15
 		OffsetSecondsRemainder: 4,
@@ -24235,7 +23975,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Finland    EE%sT    1983
 	{
 		PolicyIndex: 47, // PolicyName: Finland
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24249,7 +23989,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24262,14 +24002,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Istanbul
-	// EraIndex: 1605
+	// EraIndex: 1589
 	// EraCount: 13
 	// ---------------------------------------------------------------------------
 
 	// 1:55:52 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 463, // 6952 / 15
 		OffsetSecondsRemainder: 7,
@@ -24283,7 +24023,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:56:56    -    IMT    1910 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 140, // "IMT"
+		FormatIndex: 57, // "IMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 467, // 7016 / 15
 		OffsetSecondsRemainder: 11,
@@ -24297,7 +24037,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Turkey    EE%sT    1978 Jun 29
 	{
 		PolicyIndex: 124, // PolicyName: Turkey
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24308,10 +24048,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    Turkey    +03/+04    1984 Nov  1  2:00
+	//             3:00    Turkey    %z    1984 Nov  1  2:00
 	{
 		PolicyIndex: 124, // PolicyName: Turkey
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24325,7 +24065,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Turkey    EE%sT    2007
 	{
 		PolicyIndex: 124, // PolicyName: Turkey
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24339,7 +24079,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT    2011 Mar 27  1:00u
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24353,7 +24093,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2011 Mar 28  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24367,7 +24107,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT    2014 Mar 30  1:00u
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24381,7 +24121,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2014 Mar 31  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24395,7 +24135,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT    2015 Oct 25  1:00u
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24409,7 +24149,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    1:00    EEST    2015 Nov  8  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 119, // "EEST"
+		FormatIndex: 36, // "EEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24423,7 +24163,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT    2016 Sep  7
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24434,10 +24174,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             3:00    -    +03
+	//             3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24450,14 +24190,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kaliningrad
-	// EraIndex: 1618
+	// EraIndex: 1602
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 1:22:00 - LMT 1893 Apr
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 328, // 4920 / 15
 		OffsetSecondsRemainder: 0,
@@ -24471,7 +24211,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    C-Eur    CE%sT    1945 Apr 10
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -24485,7 +24225,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    Poland    EE%sT    1946 Apr  7
 	{
 		PolicyIndex: 97, // PolicyName: Poland
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24499,7 +24239,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    1989 Mar 26  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24513,7 +24253,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    Russia    EE%sT    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24524,10 +24264,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    -    +03    2014 Oct 26  2:00s
+	//              3:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24541,7 +24281,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    -    EET
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24554,14 +24294,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kirov
-	// EraIndex: 1625
+	// EraIndex: 1609
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 3:18:48 - LMT 1919 Jul 1 0:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 795, // 11928 / 15
 		OffsetSecondsRemainder: 3,
@@ -24572,10 +24312,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//              3:00    -    +03    1930 Jun 21
+	//              3:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24586,10 +24326,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    Russia    +04/+05    1989 Mar 26  2:00s
+	//              4:00    Russia    %z    1989 Mar 26  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -24603,7 +24343,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24614,10 +24354,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04    1992 Mar 29  2:00s
+	//              4:00    -    %z    1992 Mar 29  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -24631,7 +24371,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24645,7 +24385,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -24659,7 +24399,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24672,14 +24412,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Kyiv
-	// EraIndex: 1633
+	// EraIndex: 1617
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 2:02:04 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 488, // 7324 / 15
 		OffsetSecondsRemainder: 4,
@@ -24693,7 +24433,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:02:04    -    KMT    1924 May  2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 147, // "KMT"
+		FormatIndex: 64, // "KMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 488, // 7324 / 15
 		OffsetSecondsRemainder: 4,
@@ -24707,7 +24447,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24721,7 +24461,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    MSK    1941 Sep 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24735,7 +24475,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1943 Nov  6
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -24749,7 +24489,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    Russia    MSK/MSD    1990 Jul  1  2:00
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -24763,7 +24503,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    1:00    EEST    1991 Sep 29  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 119, // "EEST"
+		FormatIndex: 36, // "EEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24777,7 +24517,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    C-Eur    EE%sT    1996 May 13
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24791,7 +24531,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -24804,14 +24544,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Lisbon
-	// EraIndex: 1642
+	// EraIndex: 1626
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// -0:36:45 - LMT 1884
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -147, // -2205 / 15
 		OffsetSecondsRemainder: 0,
@@ -24825,7 +24565,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -0:36:45 -    LMT    1912 Jan  1  0:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -147, // -2205 / 15
 		OffsetSecondsRemainder: 0,
@@ -24836,24 +24576,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//              0:00    Port    WE%sT    1966 Apr  3  2:00
+	//              0:00    Port    WE%sT    1966 Oct  2  2:00s
 	{
 		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 1966,
-		UntilMonth: 4,
-		UntilDay: 3,
+		UntilMonth: 10,
+		UntilDay: 2,
 		UntilSecondsCode: 480, // 7200 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
+		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
 	//              1:00    -    CET    1976 Sep 26  1:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -24864,24 +24604,24 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              0:00    Port    WE%sT    1983 Sep 25  1:00s
+	//              0:00    Port    WE%sT    1986
 	{
 		PolicyIndex: 98, // PolicyName: Port
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
-		UntilYear: 1983,
-		UntilMonth: 9,
-		UntilDay: 25,
-		UntilSecondsCode: 240, // 3600 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
+		UntilYear: 1986,
+		UntilMonth: 1,
+		UntilDay: 1,
+		UntilSecondsCode: 0, // 0 / 15
+		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              0:00    W-Eur    WE%sT    1992 Sep 27  1:00s
+	//              0:00    EU    WE%sT    1992 Sep 27  1:00u
 	{
-		PolicyIndex: 130, // PolicyName: W-Eur
-		FormatIndex: 183, // "WE%T"
+		PolicyIndex: 38, // PolicyName: EU
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24889,13 +24629,13 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilMonth: 9,
 		UntilDay: 27,
 		UntilSecondsCode: 240, // 3600 / 15
-		UntilSecondsModifier: 16, // SuffixS + remainder=0
+		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
 	//              1:00    EU    CE%sT    1996 Mar 31  1:00u
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -24909,7 +24649,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    EU    WE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24922,14 +24662,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/London
-	// EraIndex: 1650
+	// EraIndex: 1634
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -0:01:15 - LMT 1847 Dec 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -5, // -75 / 15
 		OffsetSecondsRemainder: 0,
@@ -24957,7 +24697,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    -    BST    1971 Oct 31  2:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 104, // "BST"
+		FormatIndex: 21, // "BST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -24985,7 +24725,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    EU    GMT/BST
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 128, // "GMT/BST"
+		FormatIndex: 45, // "GMT/BST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -24998,14 +24738,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Madrid
-	// EraIndex: 1655
+	// EraIndex: 1639
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -0:14:44 - LMT 1901 Jan 1 0:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -59, // -884 / 15
 		OffsetSecondsRemainder: 1,
@@ -25019,7 +24759,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              0:00    Spain    WE%sT    1940 Mar 16 23:00
 	{
 		PolicyIndex: 110, // PolicyName: Spain
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -25033,7 +24773,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    Spain    CE%sT    1979
 	{
 		PolicyIndex: 110, // PolicyName: Spain
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25047,7 +24787,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25060,14 +24800,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Malta
-	// EraIndex: 1659
+	// EraIndex: 1643
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 0:58:04 - LMT 1893 Nov 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 232, // 3484 / 15
 		OffsetSecondsRemainder: 4,
@@ -25081,7 +24821,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Italy    CE%sT    1973 Mar 31
 	{
 		PolicyIndex: 63, // PolicyName: Italy
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25095,7 +24835,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Malta    CE%sT    1981
 	{
 		PolicyIndex: 73, // PolicyName: Malta
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25109,7 +24849,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25122,14 +24862,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Minsk
-	// EraIndex: 1663
+	// EraIndex: 1647
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 1:50:16 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 441, // 6616 / 15
 		OffsetSecondsRemainder: 1,
@@ -25143,7 +24883,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:50    -    MMT    1924 May  2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 440, // 6600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25157,7 +24897,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25171,7 +24911,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    MSK    1941 Jun 28
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25185,7 +24925,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Jul  3
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25199,7 +24939,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    Russia    MSK/MSD    1990
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25213,7 +24953,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    MSK    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25227,7 +24967,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Russia    EE%sT    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25238,10 +24978,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             3:00    -    +03
+	//             3:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25254,14 +24994,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Moscow
-	// EraIndex: 1672
+	// EraIndex: 1656
 	// EraCount: 11
 	// ---------------------------------------------------------------------------
 
 	// 2:30:17 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 601, // 9017 / 15
 		OffsetSecondsRemainder: 2,
@@ -25275,7 +25015,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:30:17 -    MMT    1916 Jul  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 601, // 9017 / 15
 		OffsetSecondsRemainder: 2,
@@ -25317,7 +25057,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    1922 Oct
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25331,7 +25071,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    -    EET    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25345,7 +25085,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25359,7 +25099,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    Russia    EE%sT    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25373,7 +25113,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25387,7 +25127,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -25401,7 +25141,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25414,14 +25154,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Paris
-	// EraIndex: 1683
+	// EraIndex: 1667
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 0:09:21 - LMT 1891 Mar 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 37, // 561 / 15
 		OffsetSecondsRemainder: 6,
@@ -25435,7 +25175,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:09:21    -    PMT    1911 Mar 11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 166, // "PMT"
+		FormatIndex: 82, // "PMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 37, // 561 / 15
 		OffsetSecondsRemainder: 6,
@@ -25449,7 +25189,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    France    WE%sT    1940 Jun 14 23:00
 	{
 		PolicyIndex: 48, // PolicyName: France
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -25463,7 +25203,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Aug 25
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25477,7 +25217,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:00    France    WE%sT    1945 Sep 16  3:00
 	{
 		PolicyIndex: 48, // PolicyName: France
-		FormatIndex: 183, // "WE%T"
+		FormatIndex: 99, // "WE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -25491,7 +25231,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    France    CE%sT    1977
 	{
 		PolicyIndex: 48, // PolicyName: France
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25505,7 +25245,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25518,14 +25258,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Prague
-	// EraIndex: 1690
+	// EraIndex: 1674
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 0:57:44 - LMT 1850
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 230, // 3464 / 15
 		OffsetSecondsRemainder: 14,
@@ -25539,7 +25279,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:57:44    -    PMT    1891 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 166, // "PMT"
+		FormatIndex: 82, // "PMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 230, // 3464 / 15
 		OffsetSecondsRemainder: 14,
@@ -25553,7 +25293,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1945 May  9
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25567,7 +25307,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Czech    CE%sT    1946 Dec  1  3:00
 	{
 		PolicyIndex: 31, // PolicyName: Czech
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25581,7 +25321,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -1:00    GMT    1947 Feb 23  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 127, // "GMT"
+		FormatIndex: 44, // "GMT"
 		DeltaMinutes: -60,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25595,7 +25335,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Czech    CE%sT    1979
 	{
 		PolicyIndex: 31, // PolicyName: Czech
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25609,7 +25349,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25622,14 +25362,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Riga
-	// EraIndex: 1697
+	// EraIndex: 1681
 	// EraCount: 15
 	// ---------------------------------------------------------------------------
 
 	// 1:36:34 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 386, // 5794 / 15
 		OffsetSecondsRemainder: 4,
@@ -25643,7 +25383,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:36:34    -    RMT    1918 Apr 15  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 172, // "RMT"
+		FormatIndex: 88, // "RMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 386, // 5794 / 15
 		OffsetSecondsRemainder: 4,
@@ -25657,7 +25397,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:36:34    1:00    LST    1918 Sep 16  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 150, // "LST"
+		FormatIndex: 67, // "LST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 386, // 5794 / 15
 		OffsetSecondsRemainder: 4,
@@ -25671,7 +25411,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:36:34    -    RMT    1919 Apr  1  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 172, // "RMT"
+		FormatIndex: 88, // "RMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 386, // 5794 / 15
 		OffsetSecondsRemainder: 4,
@@ -25685,7 +25425,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:36:34    1:00    LST    1919 May 22  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 150, // "LST"
+		FormatIndex: 67, // "LST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 386, // 5794 / 15
 		OffsetSecondsRemainder: 4,
@@ -25699,7 +25439,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:36:34    -    RMT    1926 May 11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 172, // "RMT"
+		FormatIndex: 88, // "RMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 386, // 5794 / 15
 		OffsetSecondsRemainder: 4,
@@ -25713,7 +25453,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1940 Aug  5
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25727,7 +25467,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    MSK    1941 Jul
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25741,7 +25481,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Oct 13
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25755,7 +25495,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    Russia    MSK/MSD    1989 Mar lastSun  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25769,7 +25509,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    1:00    EEST    1989 Sep lastSun  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 119, // "EEST"
+		FormatIndex: 36, // "EEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25783,7 +25523,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Latvia    EE%sT    1997 Jan 21
 	{
 		PolicyIndex: 68, // PolicyName: Latvia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25797,7 +25537,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT    2000 Feb 29
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25811,7 +25551,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2001 Jan  2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25825,7 +25565,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -25838,14 +25578,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Rome
-	// EraIndex: 1712
+	// EraIndex: 1696
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 0:49:56 - LMT 1866 Dec 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 199, // 2996 / 15
 		OffsetSecondsRemainder: 11,
@@ -25859,7 +25599,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:49:56    -    RMT    1893 Oct 31 23:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 172, // "RMT"
+		FormatIndex: 88, // "RMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 199, // 2996 / 15
 		OffsetSecondsRemainder: 11,
@@ -25873,7 +25613,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Italy    CE%sT    1943 Sep 10
 	{
 		PolicyIndex: 63, // PolicyName: Italy
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25887,7 +25627,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Jun  4
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25901,7 +25641,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Italy    CE%sT    1980
 	{
 		PolicyIndex: 63, // PolicyName: Italy
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25915,7 +25655,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -25928,14 +25668,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Samara
-	// EraIndex: 1718
+	// EraIndex: 1702
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// 3:20:20 - LMT 1919 Jul 1 0:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 801, // 12020 / 15
 		OffsetSecondsRemainder: 5,
@@ -25946,10 +25686,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//              3:00    -    +03    1930 Jun 21
+	//              3:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -25960,10 +25700,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    -    +04    1935 Jan 27
+	//              4:00    -    %z    1935 Jan 27
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -25974,10 +25714,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    Russia    +04/+05    1989 Mar 26  2:00s
+	//              4:00    Russia    %z    1989 Mar 26  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -25988,10 +25728,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	//              3:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26002,10 +25742,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              2:00    Russia    +02/+03    1991 Sep 29  2:00s
+	//              2:00    Russia    %z    1991 Sep 29  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 9, // "+02/+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26016,10 +25756,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    -    +03    1991 Oct 20  3:00
+	//              3:00    -    %z    1991 Oct 20  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26030,10 +25770,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    Russia    +04/+05    2010 Mar 28  2:00s
+	//              4:00    Russia    %z    2010 Mar 28  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26044,10 +25784,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
+	//              3:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26058,10 +25798,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04
+	//              4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26074,14 +25814,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Saratov
-	// EraIndex: 1728
+	// EraIndex: 1712
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 3:04:18 - LMT 1919 Jul 1 0:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 737, // 11058 / 15
 		OffsetSecondsRemainder: 3,
@@ -26092,10 +25832,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//              3:00    -    +03    1930 Jun 21
+	//              3:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26106,10 +25846,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    Russia    +04/+05    1988 Mar 27  2:00s
+	//              4:00    Russia    %z    1988 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26120,10 +25860,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	//              3:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26134,10 +25874,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04    1992 Mar 29  2:00s
+	//              4:00    -    %z    1992 Mar 29  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26148,10 +25888,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
+	//              3:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26162,10 +25902,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04    2014 Oct 26  2:00s
+	//              4:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26176,10 +25916,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    -    +03    2016 Dec  4  2:00s
+	//              3:00    -    %z    2016 Dec  4  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26190,10 +25930,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04
+	//              4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26206,14 +25946,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Simferopol
-	// EraIndex: 1737
+	// EraIndex: 1721
 	// EraCount: 15
 	// ---------------------------------------------------------------------------
 
 	// 2:16:24 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 545, // 8184 / 15
 		OffsetSecondsRemainder: 9,
@@ -26227,7 +25967,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:16    -    SMT    1924 May  2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 176, // "SMT"
+		FormatIndex: 92, // "SMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 544, // 8160 / 15
 		OffsetSecondsRemainder: 0,
@@ -26241,7 +25981,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    -    EET    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26255,7 +25995,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK    1941 Nov
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26269,7 +26009,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              1:00    C-Eur    CE%sT    1944 Apr 13
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26283,7 +26023,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    1990
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26297,7 +26037,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK    1990 Jul  1  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26311,7 +26051,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    -    EET    1992 Mar 20
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26325,7 +26065,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    C-Eur    EE%sT    1994 May
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26339,7 +26079,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    C-Eur    MSK/MSD    1996 Mar 31  0:00s
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26353,7 +26093,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    1:00    MSD    1996 Oct 27  3:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 154, // "MSD"
+		FormatIndex: 70, // "MSD"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26367,7 +26107,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK    1997 Mar lastSun  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26381,7 +26121,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              2:00    EU    EE%sT    2014 Mar 30  2:00
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26395,7 +26135,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26409,7 +26149,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26422,14 +26162,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Sofia
-	// EraIndex: 1752
+	// EraIndex: 1736
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// 1:33:16 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 373, // 5596 / 15
 		OffsetSecondsRemainder: 1,
@@ -26443,7 +26183,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:56:56    -    IMT    1894 Nov 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 140, // "IMT"
+		FormatIndex: 57, // "IMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 467, // 7016 / 15
 		OffsetSecondsRemainder: 11,
@@ -26457,7 +26197,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1942 Nov  2  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26471,7 +26211,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1945
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26485,7 +26225,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1945 Apr  2  3:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26499,7 +26239,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1979 Mar 31 23:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26513,7 +26253,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Bulg    EE%sT    1982 Sep 26  3:00
 	{
 		PolicyIndex: 19, // PolicyName: Bulg
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26527,7 +26267,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    C-Eur    EE%sT    1991
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26541,7 +26281,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    E-Eur    EE%sT    1997
 	{
 		PolicyIndex: 36, // PolicyName: E-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26555,7 +26295,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26568,14 +26308,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Tallinn
-	// EraIndex: 1762
+	// EraIndex: 1746
 	// EraCount: 13
 	// ---------------------------------------------------------------------------
 
 	// 1:39:00 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 396, // 5940 / 15
 		OffsetSecondsRemainder: 0,
@@ -26589,7 +26329,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:39:00    -    TMT    1918 Feb
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 179, // "TMT"
+		FormatIndex: 95, // "TMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 396, // 5940 / 15
 		OffsetSecondsRemainder: 0,
@@ -26603,7 +26343,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1919 Jul
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26617,7 +26357,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:39:00    -    TMT    1921 May
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 179, // "TMT"
+		FormatIndex: 95, // "TMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 396, // 5940 / 15
 		OffsetSecondsRemainder: 0,
@@ -26631,7 +26371,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1940 Aug  6
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26645,7 +26385,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    MSK    1941 Sep 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26659,7 +26399,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Sep 22
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26673,7 +26413,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    Russia    MSK/MSD    1989 Mar 26  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26687,7 +26427,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    1:00    EEST    1989 Sep 24  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 119, // "EEST"
+		FormatIndex: 36, // "EEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26701,7 +26441,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    C-Eur    EE%sT    1998 Sep 22
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26715,7 +26455,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT    1999 Oct 31  4:00
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26729,7 +26469,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2002 Feb 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26743,7 +26483,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26756,14 +26496,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Tirane
-	// EraIndex: 1775
+	// EraIndex: 1759
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 1:19:20 - LMT 1914
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 317, // 4760 / 15
 		OffsetSecondsRemainder: 5,
@@ -26777,7 +26517,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1940 Jun 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26791,7 +26531,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Albania    CE%sT    1984 Jul
 	{
 		PolicyIndex: 7, // PolicyName: Albania
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26805,7 +26545,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26818,14 +26558,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Ulyanovsk
-	// EraIndex: 1779
+	// EraIndex: 1763
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 3:13:36 - LMT 1919 Jul 1 0:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 774, // 11616 / 15
 		OffsetSecondsRemainder: 6,
@@ -26836,10 +26576,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//              3:00    -    +03    1930 Jun 21
+	//              3:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26850,10 +26590,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    Russia    +04/+05    1989 Mar 26  2:00s
+	//              4:00    Russia    %z    1989 Mar 26  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26864,10 +26604,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    Russia    +03/+04    1991 Mar 31  2:00s
+	//              3:00    Russia    %z    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26878,10 +26618,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              2:00    Russia    +02/+03    1992 Jan 19  2:00s
+	//              2:00    Russia    %z    1992 Jan 19  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 9, // "+02/+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -26892,10 +26632,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    Russia    +03/+04    2011 Mar 27  2:00s
+	//              3:00    Russia    %z    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 13, // "+03/+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26906,10 +26646,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04    2014 Oct 26  2:00s
+	//              4:00    -    %z    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26920,10 +26660,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              3:00    -    +03    2016 Mar 27  2:00s
+	//              3:00    -    %z    2016 Mar 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -26934,10 +26674,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04
+	//              4:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -26950,14 +26690,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Vienna
-	// EraIndex: 1788
+	// EraIndex: 1772
 	// EraCount: 8
 	// ---------------------------------------------------------------------------
 
 	// 1:05:21 - LMT 1893 Apr
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 261, // 3921 / 15
 		OffsetSecondsRemainder: 6,
@@ -26971,7 +26711,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1920
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26985,7 +26725,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Austria    CE%sT    1940 Apr  1  2:00s
 	{
 		PolicyIndex: 12, // PolicyName: Austria
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -26999,7 +26739,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1945 Apr  2  2:00s
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27013,7 +26753,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    1:00    CEST    1945 Apr 12  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 110, // "CEST"
+		FormatIndex: 27, // "CEST"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27027,7 +26767,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1946
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27041,7 +26781,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Austria    CE%sT    1981
 	{
 		PolicyIndex: 12, // PolicyName: Austria
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27055,7 +26795,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27068,14 +26808,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Vilnius
-	// EraIndex: 1796
+	// EraIndex: 1780
 	// EraCount: 15
 	// ---------------------------------------------------------------------------
 
 	// 1:41:16 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 405, // 6076 / 15
 		OffsetSecondsRemainder: 1,
@@ -27089,7 +26829,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:24:00    -    WMT    1917
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 189, // "WMT"
+		FormatIndex: 105, // "WMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 336, // 5040 / 15
 		OffsetSecondsRemainder: 0,
@@ -27103,7 +26843,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:35:36    -    KMT    1919 Oct 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 147, // "KMT"
+		FormatIndex: 64, // "KMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 382, // 5736 / 15
 		OffsetSecondsRemainder: 6,
@@ -27117,7 +26857,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1920 Jul 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27131,7 +26871,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1920 Oct  9
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -27145,7 +26885,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    -    CET    1940 Aug  3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 111, // "CET"
+		FormatIndex: 28, // "CET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27159,7 +26899,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    -    MSK    1941 Jun 24
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27173,7 +26913,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Aug
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27187,7 +26927,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             3:00    Russia    MSK/MSD    1989 Mar 26  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27201,7 +26941,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Russia    EE%sT    1991 Sep 29  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -27215,7 +26955,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    C-Eur    EE%sT    1998
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -27229,7 +26969,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    1998 Mar 29  1:00u
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -27243,7 +26983,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT    1999 Oct 31  1:00u
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27257,7 +26997,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    -    EET    2003 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 120, // "EET"
+		FormatIndex: 37, // "EET"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -27271,7 +27011,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    EU    EE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -27284,14 +27024,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Volgograd
-	// EraIndex: 1811
+	// EraIndex: 1795
 	// EraCount: 11
 	// ---------------------------------------------------------------------------
 
 	// 2:57:40 - LMT 1920 Jan 3
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 710, // 10660 / 15
 		OffsetSecondsRemainder: 10,
@@ -27302,10 +27042,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              3:00    -    +03    1930 Jun 21
+	//              3:00    -    %z    1930 Jun 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 12, // "+03"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27316,10 +27056,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    -    +04    1961 Nov 11
+	//              4:00    -    %z    1961 Nov 11
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -27330,10 +27070,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              4:00    Russia    +04/+05    1988 Mar 27  2:00s
+	//              4:00    Russia    %z    1988 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -27347,7 +27087,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    1991 Mar 31  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27358,10 +27098,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04    1992 Mar 29  2:00s
+	//              4:00    -    %z    1992 Mar 29  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -27375,7 +27115,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    Russia    MSK/MSD    2011 Mar 27  2:00s
 	{
 		PolicyIndex: 103, // PolicyName: Russia
-		FormatIndex: 156, // "MSK/MSD"
+		FormatIndex: 72, // "MSK/MSD"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27389,7 +27129,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              4:00    -    MSK    2014 Oct 26  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -27403,7 +27143,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK    2018 Oct 28  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27414,10 +27154,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//              4:00    -    +04    2020 Dec 27  2:00s
+	//              4:00    -    %z    2020 Dec 27  2:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 15, // "+04"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -27431,7 +27171,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              3:00    -    MSK
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 155, // "MSK"
+		FormatIndex: 71, // "MSK"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 720, // 10800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27444,14 +27184,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Warsaw
-	// EraIndex: 1822
+	// EraIndex: 1806
 	// EraCount: 9
 	// ---------------------------------------------------------------------------
 
 	// 1:24:00 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 336, // 5040 / 15
 		OffsetSecondsRemainder: 0,
@@ -27465,7 +27205,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:24:00    -    WMT    1915 Aug  5
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 189, // "WMT"
+		FormatIndex: 105, // "WMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 336, // 5040 / 15
 		OffsetSecondsRemainder: 0,
@@ -27479,7 +27219,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1918 Sep 16  3:00
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27493,7 +27233,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             2:00    Poland    EE%sT    1922 Jun
 	{
 		PolicyIndex: 97, // PolicyName: Poland
-		FormatIndex: 118, // "EE%T"
+		FormatIndex: 35, // "EE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 480, // 7200 / 15
 		OffsetSecondsRemainder: 0,
@@ -27507,7 +27247,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Poland    CE%sT    1940 Jun 23  2:00
 	{
 		PolicyIndex: 97, // PolicyName: Poland
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27521,7 +27261,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    C-Eur    CE%sT    1944 Oct
 	{
 		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27535,7 +27275,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Poland    CE%sT    1977
 	{
 		PolicyIndex: 97, // PolicyName: Poland
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27549,7 +27289,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    W-Eur    CE%sT    1988
 	{
 		PolicyIndex: 130, // PolicyName: W-Eur
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27563,7 +27303,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27576,14 +27316,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Europe/Zurich
-	// EraIndex: 1831
+	// EraIndex: 1815
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 0:34:08 - LMT 1853 Jul 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 136, // 2048 / 15
 		OffsetSecondsRemainder: 8,
@@ -27597,7 +27337,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             0:29:46    -    BMT    1894 Jun
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 102, // "BMT"
+		FormatIndex: 19, // "BMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 119, // 1786 / 15
 		OffsetSecondsRemainder: 1,
@@ -27611,7 +27351,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    Swiss    CE%sT    1981
 	{
 		PolicyIndex: 116, // PolicyName: Swiss
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27625,7 +27365,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             1:00    EU    CE%sT
 	{
 		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 109, // "CE%T"
+		FormatIndex: 26, // "CE%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 240, // 3600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27637,35 +27377,15 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// ZoneName: HST
-	// EraIndex: 1835
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// -10:00 - HST
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 138, // "HST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -2400, // -36000 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Chagos
-	// EraIndex: 1836
+	// EraIndex: 1819
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 4:49:40 - LMT 1907
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1158, // 17380 / 15
 		OffsetSecondsRemainder: 10,
@@ -27676,10 +27396,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05    1996
+	//             5:00    -    %z    1996
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -27690,10 +27410,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             6:00    -    +06
+	//             6:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 22, // "+06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1440, // 21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27706,14 +27426,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Maldives
-	// EraIndex: 1839
+	// EraIndex: 1822
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 4:54:00 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1176, // 17640 / 15
 		OffsetSecondsRemainder: 0,
@@ -27727,7 +27447,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             4:54:00    -    MMT    1960
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 153, // "MMT"
+		FormatIndex: 69, // "MMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1176, // 17640 / 15
 		OffsetSecondsRemainder: 0,
@@ -27738,10 +27458,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             5:00    -    +05
+	//             5:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 18, // "+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 1200, // 18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -27754,14 +27474,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Indian/Mauritius
-	// EraIndex: 1842
+	// EraIndex: 1825
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 3:50:00 - LMT 1907
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 920, // 13800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27772,10 +27492,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             4:00 Mauritius    +04/+05
+	//             4:00 Mauritius    %z
 	{
 		PolicyIndex: 75, // PolicyName: Mauritius
-		FormatIndex: 16, // "+04/+05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 960, // 14400 / 15
 		OffsetSecondsRemainder: 0,
@@ -27787,95 +27507,15 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	},
 
 	// ---------------------------------------------------------------------------
-	// ZoneName: MET
-	// EraIndex: 1844
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// 1:00 C-Eur ME%sT
-	{
-		PolicyIndex: 20, // PolicyName: C-Eur
-		FormatIndex: 152, // "ME%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 240, // 3600 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: MST
-	// EraIndex: 1845
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// -7:00 - MST
-	{
-		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 157, // "MST"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1680, // -25200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: MST7MDT
-	// EraIndex: 1846
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// -7:00 US M%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 151, // "M%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1680, // -25200 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: PST8PDT
-	// EraIndex: 1847
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// -8:00 US P%sT
-	{
-		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 161, // "P%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: -1920, // -28800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Apia
-	// EraIndex: 1848
+	// EraIndex: 1827
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 12:33:04 - LMT 1892 Jul 5
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3012, // 45184 / 15
 		OffsetSecondsRemainder: 4,
@@ -27889,7 +27529,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:26:56 -    LMT    1911
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2748, // -41216 / 15
 		OffsetSecondsRemainder: 4,
@@ -27900,10 +27540,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -11:30    -    -1130    1950
+	//             -11:30    -    %z    1950
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 85, // "-1130"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2760, // -41400 / 15
 		OffsetSecondsRemainder: 0,
@@ -27914,10 +27554,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -11:00    WS    -11/-10    2011 Dec 29 24:00
+	//             -11:00    WS    %z    2011 Dec 29 24:00
 	{
 		PolicyIndex: 131, // PolicyName: WS
-		FormatIndex: 83, // "-11/-10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -27928,10 +27568,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              13:00    WS    +13/+14
+	//              13:00    WS    %z
 	{
 		PolicyIndex: 131, // PolicyName: WS
-		FormatIndex: 51, // "+13/+14"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
 		OffsetSecondsRemainder: 0,
@@ -27944,14 +27584,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Auckland
-	// EraIndex: 1853
+	// EraIndex: 1832
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 11:39:04 - LMT 1868 Nov 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2796, // 41944 / 15
 		OffsetSecondsRemainder: 4,
@@ -27965,7 +27605,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             11:30    NZ    NZ%sT    1946 Jan  1
 	{
 		PolicyIndex: 86, // PolicyName: NZ
-		FormatIndex: 160, // "NZ%T"
+		FormatIndex: 76, // "NZ%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2760, // 41400 / 15
 		OffsetSecondsRemainder: 0,
@@ -27979,7 +27619,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             12:00    NZ    NZ%sT
 	{
 		PolicyIndex: 86, // PolicyName: NZ
-		FormatIndex: 160, // "NZ%T"
+		FormatIndex: 76, // "NZ%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -27992,14 +27632,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Bougainville
-	// EraIndex: 1856
+	// EraIndex: 1835
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// 10:22:16 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2489, // 37336 / 15
 		OffsetSecondsRemainder: 1,
@@ -28013,7 +27653,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              9:48:32 -    PMMT    1895
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 165, // "PMMT"
+		FormatIndex: 81, // "PMMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2354, // 35312 / 15
 		OffsetSecondsRemainder: 2,
@@ -28024,10 +27664,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:00    -    +10    1942 Jul
+	//             10:00    -    %z    1942 Jul
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28038,10 +27678,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    -    +09    1945 Aug 21
+	//              9:00    -    %z    1945 Aug 21
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -28052,10 +27692,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:00    -    +10    2014 Dec 28  2:00
+	//             10:00    -    %z    2014 Dec 28  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28066,10 +27706,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11
+	//             11:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28082,14 +27722,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Chatham
-	// EraIndex: 1862
+	// EraIndex: 1841
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 12:13:48 - LMT 1868 Nov 2
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2935, // 44028 / 15
 		OffsetSecondsRemainder: 3,
@@ -28100,10 +27740,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             12:15    -    +1215    1946 Jan  1
+	//             12:15    -    %z    1946 Jan  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 46, // "+1215"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2940, // 44100 / 15
 		OffsetSecondsRemainder: 0,
@@ -28114,10 +27754,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             12:45    Chatham    +1245/+1345
+	//             12:45    Chatham    %z
 	{
 		PolicyIndex: 25, // PolicyName: Chatham
-		FormatIndex: 49, // "+1245/+1345"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3060, // 45900 / 15
 		OffsetSecondsRemainder: 0,
@@ -28130,14 +27770,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Easter
-	// EraIndex: 1865
+	// EraIndex: 1844
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -7:17:28 - LMT 1890
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1750, // -26248 / 15
 		OffsetSecondsRemainder: 2,
@@ -28151,7 +27791,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -7:17:28 -    EMT    1932 Sep
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 122, // "EMT"
+		FormatIndex: 39, // "EMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1750, // -26248 / 15
 		OffsetSecondsRemainder: 2,
@@ -28162,10 +27802,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -7:00    Chile    -07/-06    1982 Mar 14 3:00u
+	//             -7:00    Chile    %z    1982 Mar 14 3:00u
 	{
 		PolicyIndex: 27, // PolicyName: Chile
-		FormatIndex: 73, // "-07/-06"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1680, // -25200 / 15
 		OffsetSecondsRemainder: 0,
@@ -28176,10 +27816,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 32, // SuffixU + remainder=0
 	},
 
-	//             -6:00    Chile    -06/-05
+	//             -6:00    Chile    %z
 	{
 		PolicyIndex: 27, // PolicyName: Chile
-		FormatIndex: 71, // "-06/-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28192,14 +27832,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Efate
-	// EraIndex: 1869
+	// EraIndex: 1848
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 11:13:16 - LMT 1912 Jan 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2693, // 40396 / 15
 		OffsetSecondsRemainder: 1,
@@ -28210,10 +27850,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    Vanuatu    +11/+12
+	//             11:00    Vanuatu    %z
 	{
 		PolicyIndex: 128, // PolicyName: Vanuatu
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28226,14 +27866,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Fakaofo
-	// EraIndex: 1871
+	// EraIndex: 1850
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -11:24:56 - LMT 1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2740, // -41096 / 15
 		OffsetSecondsRemainder: 4,
@@ -28244,10 +27884,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -11:00    -    -11    2011 Dec 30
+	//             -11:00    -    %z    2011 Dec 30
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "-11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28258,10 +27898,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             13:00    -    +13
+	//             13:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 50, // "+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
 		OffsetSecondsRemainder: 0,
@@ -28274,14 +27914,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Fiji
-	// EraIndex: 1874
+	// EraIndex: 1853
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 11:55:44 - LMT 1915 Oct 26
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2862, // 42944 / 15
 		OffsetSecondsRemainder: 14,
@@ -28292,10 +27932,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             12:00    Fiji    +12/+13
+	//             12:00    Fiji    %z
 	{
 		PolicyIndex: 46, // PolicyName: Fiji
-		FormatIndex: 45, // "+12/+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -28308,14 +27948,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Galapagos
-	// EraIndex: 1876
+	// EraIndex: 1855
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -5:58:24 - LMT 1931
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1434, // -21504 / 15
 		OffsetSecondsRemainder: 6,
@@ -28326,10 +27966,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -5:00    -    -05    1986
+	//             -5:00    -    %z    1986
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 68, // "-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1200, // -18000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28340,10 +27980,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -6:00    Ecuador    -06/-05
+	//             -6:00    Ecuador    %z
 	{
 		PolicyIndex: 40, // PolicyName: Ecuador
-		FormatIndex: 71, // "-06/-05"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1440, // -21600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28356,14 +27996,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Gambier
-	// EraIndex: 1879
+	// EraIndex: 1858
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -8:59:48 - LMT 1912 Oct 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32388 / 15
 		OffsetSecondsRemainder: 12,
@@ -28374,10 +28014,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              -9:00    -    -09
+	//              -9:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 76, // "-09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2160, // -32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -28390,14 +28030,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Guadalcanal
-	// EraIndex: 1881
+	// EraIndex: 1860
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 10:39:48 - LMT 1912 Oct 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2559, // 38388 / 15
 		OffsetSecondsRemainder: 3,
@@ -28408,10 +28048,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    -    +11
+	//             11:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28424,14 +28064,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Guam
-	// EraIndex: 1883
+	// EraIndex: 1862
 	// EraCount: 6
 	// ---------------------------------------------------------------------------
 
 	// -14:21:00 - LMT 1844 Dec 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -3444, // -51660 / 15
 		OffsetSecondsRemainder: 0,
@@ -28445,7 +28085,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              9:39:00 -    LMT    1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2316, // 34740 / 15
 		OffsetSecondsRemainder: 0,
@@ -28459,7 +28099,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    GST    1941 Dec 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 130, // "GST"
+		FormatIndex: 47, // "GST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28470,10 +28110,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    -    +09    1944 Jul 31
+	//              9:00    -    %z    1944 Jul 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -28487,7 +28127,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    Guam    G%sT    2000 Dec 23
 	{
 		PolicyIndex: 52, // PolicyName: Guam
-		FormatIndex: 126, // "G%T"
+		FormatIndex: 43, // "G%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28501,7 +28141,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             10:00    -    ChST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 114, // "ChST"
+		FormatIndex: 31, // "ChST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28514,14 +28154,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Honolulu
-	// EraIndex: 1889
+	// EraIndex: 1868
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// -10:31:26 - LMT 1896 Jan 13 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2526, // -37886 / 15
 		OffsetSecondsRemainder: 4,
@@ -28535,7 +28175,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:30    -    HST    1933 Apr 30  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 138, // "HST"
+		FormatIndex: 55, // "HST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2520, // -37800 / 15
 		OffsetSecondsRemainder: 0,
@@ -28549,7 +28189,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:30    1:00    HDT    1933 May 21 12:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 132, // "HDT"
+		FormatIndex: 49, // "HDT"
 		DeltaMinutes: 60,
 		OffsetSecondsCode: -2520, // -37800 / 15
 		OffsetSecondsRemainder: 0,
@@ -28563,7 +28203,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:30    US    H%sT    1947 Jun  8  2:00
 	{
 		PolicyIndex: 125, // PolicyName: US
-		FormatIndex: 131, // "H%T"
+		FormatIndex: 48, // "H%T"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2520, // -37800 / 15
 		OffsetSecondsRemainder: 0,
@@ -28577,7 +28217,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:00    -    HST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 138, // "HST"
+		FormatIndex: 55, // "HST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28590,14 +28230,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kanton
-	// EraIndex: 1894
+	// EraIndex: 1873
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 0 - -00 1937 Aug 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 53, // "-00"
+		FormatIndex: 3, // "-00"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
@@ -28608,10 +28248,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -12:00    -    -12    1979 Oct
+	//             -12:00    -    %z    1979 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 86, // "-12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2880, // -43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -28622,10 +28262,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -11:00    -    -11    1994 Dec 31
+	//             -11:00    -    %z    1994 Dec 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "-11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28636,10 +28276,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              13:00    -    +13
+	//              13:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 50, // "+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
 		OffsetSecondsRemainder: 0,
@@ -28652,14 +28292,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kiritimati
-	// EraIndex: 1898
+	// EraIndex: 1877
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// -10:29:20 - LMT 1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2518, // -37760 / 15
 		OffsetSecondsRemainder: 10,
@@ -28670,10 +28310,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -10:40    -    -1040    1979 Oct
+	//             -10:40    -    %z    1979 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 81, // "-1040"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2560, // -38400 / 15
 		OffsetSecondsRemainder: 0,
@@ -28684,10 +28324,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -10:00    -    -10    1994 Dec 31
+	//             -10:00    -    %z    1994 Dec 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 78, // "-10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28698,10 +28338,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              14:00    -    +14
+	//              14:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 52, // "+14"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3360, // 50400 / 15
 		OffsetSecondsRemainder: 0,
@@ -28714,14 +28354,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kosrae
-	// EraIndex: 1902
+	// EraIndex: 1881
 	// EraCount: 10
 	// ---------------------------------------------------------------------------
 
 	// -13:08:04 - LMT 1844 Dec 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -3153, // -47284 / 15
 		OffsetSecondsRemainder: 11,
@@ -28735,7 +28375,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//              10:51:56 -    LMT    1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2607, // 39116 / 15
 		OffsetSecondsRemainder: 11,
@@ -28746,10 +28386,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              11:00    -    +11    1914 Oct
+	//              11:00    -    %z    1914 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28760,10 +28400,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//               9:00    -    +09    1919 Feb  1
+	//               9:00    -    %z    1919 Feb  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -28774,10 +28414,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              11:00    -    +11    1937
+	//              11:00    -    %z    1937
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28788,10 +28428,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              10:00    -    +10    1941 Apr  1
+	//              10:00    -    %z    1941 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28802,10 +28442,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//               9:00    -    +09    1945 Aug
+	//               9:00    -    %z    1945 Aug
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -28816,10 +28456,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              11:00    -    +11    1969 Oct
+	//              11:00    -    %z    1969 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28830,10 +28470,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              12:00    -    +12    1999
+	//              12:00    -    %z    1999
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -28844,10 +28484,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              11:00    -    +11
+	//              11:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28860,14 +28500,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Kwajalein
-	// EraIndex: 1912
+	// EraIndex: 1891
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 11:09:20 - LMT 1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2677, // 40160 / 15
 		OffsetSecondsRemainder: 5,
@@ -28878,10 +28518,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              11:00    -    +11    1937
+	//              11:00    -    %z    1937
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28892,10 +28532,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              10:00    -    +10    1941 Apr  1
+	//              10:00    -    %z    1941 Apr  1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -28906,10 +28546,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//               9:00    -    +09    1944 Feb  6
+	//               9:00    -    %z    1944 Feb  6
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -28920,10 +28560,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              11:00    -    +11    1969 Oct
+	//              11:00    -    %z    1969 Oct
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -28934,10 +28574,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -12:00    -    -12    1993 Aug 20 24:00
+	//             -12:00    -    %z    1993 Aug 20 24:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 86, // "-12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2880, // -43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -28948,10 +28588,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              12:00    -    +12
+	//              12:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -28964,14 +28604,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Marquesas
-	// EraIndex: 1919
+	// EraIndex: 1898
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -9:18:00 - LMT 1912 Oct 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2232, // -33480 / 15
 		OffsetSecondsRemainder: 0,
@@ -28982,10 +28622,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              -9:30    -    -0930
+	//              -9:30    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 77, // "-0930"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2280, // -34200 / 15
 		OffsetSecondsRemainder: 0,
@@ -28998,14 +28638,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Nauru
-	// EraIndex: 1921
+	// EraIndex: 1900
 	// EraCount: 5
 	// ---------------------------------------------------------------------------
 
 	// 11:07:40 - LMT 1921 Jan 15
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2670, // 40060 / 15
 		OffsetSecondsRemainder: 10,
@@ -29016,10 +28656,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:30    -    +1130    1942 Aug 29
+	//             11:30    -    %z    1942 Aug 29
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "+1130"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2760, // 41400 / 15
 		OffsetSecondsRemainder: 0,
@@ -29030,10 +28670,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              9:00    -    +09    1945 Sep  8
+	//              9:00    -    %z    1945 Sep  8
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -29044,10 +28684,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:30    -    +1130    1979 Feb 10  2:00
+	//             11:30    -    %z    1979 Feb 10  2:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "+1130"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2760, // 41400 / 15
 		OffsetSecondsRemainder: 0,
@@ -29058,10 +28698,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             12:00    -    +12
+	//             12:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -29074,14 +28714,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Niue
-	// EraIndex: 1926
+	// EraIndex: 1905
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -11:19:40 - LMT 1952 Oct 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2719, // -40780 / 15
 		OffsetSecondsRemainder: 5,
@@ -29092,10 +28732,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -11:20    -    -1120    1964 Jul
+	//             -11:20    -    %z    1964 Jul
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 84, // "-1120"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2720, // -40800 / 15
 		OffsetSecondsRemainder: 0,
@@ -29106,10 +28746,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -11:00    -    -11
+	//             -11:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 82, // "-11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -29122,14 +28762,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Norfolk
-	// EraIndex: 1929
+	// EraIndex: 1908
 	// EraCount: 7
 	// ---------------------------------------------------------------------------
 
 	// 11:11:52 - LMT 1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2687, // 40312 / 15
 		OffsetSecondsRemainder: 7,
@@ -29140,10 +28780,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:12    -    +1112    1951
+	//             11:12    -    %z    1951
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 42, // "+1112"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2688, // 40320 / 15
 		OffsetSecondsRemainder: 0,
@@ -29154,10 +28794,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:30    -    +1130    1974 Oct 27 02:00s
+	//             11:30    -    %z    1974 Oct 27 02:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "+1130"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2760, // 41400 / 15
 		OffsetSecondsRemainder: 0,
@@ -29168,10 +28808,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:30    1:00    +1230    1975 Mar  2 02:00s
+	//             11:30    1:00    %z    1975 Mar  2 02:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 48, // "+1230"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 60,
 		OffsetSecondsCode: 2760, // 41400 / 15
 		OffsetSecondsRemainder: 0,
@@ -29182,10 +28822,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:30    -    +1130    2015 Oct  4 02:00s
+	//             11:30    -    %z    2015 Oct  4 02:00s
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 43, // "+1130"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2760, // 41400 / 15
 		OffsetSecondsRemainder: 0,
@@ -29196,10 +28836,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 16, // SuffixS + remainder=0
 	},
 
-	//             11:00    -    +11    2019 Jul
+	//             11:00    -    %z    2019 Jul
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 40, // "+11"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -29210,10 +28850,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    AN    +11/+12
+	//             11:00    AN    %z
 	{
 		PolicyIndex: 1, // PolicyName: AN
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -29226,14 +28866,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Noumea
-	// EraIndex: 1936
+	// EraIndex: 1915
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 11:05:48 - LMT 1912 Jan 13
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2663, // 39948 / 15
 		OffsetSecondsRemainder: 3,
@@ -29244,10 +28884,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             11:00    NC    +11/+12
+	//             11:00    NC    %z
 	{
 		PolicyIndex: 83, // PolicyName: NC
-		FormatIndex: 41, // "+11/+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2640, // 39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -29260,14 +28900,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Pago_Pago
-	// EraIndex: 1938
+	// EraIndex: 1917
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 12:37:12 - LMT 1892 Jul 5
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3028, // 45432 / 15
 		OffsetSecondsRemainder: 12,
@@ -29281,7 +28921,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:22:48 -    LMT    1911
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2732, // -40968 / 15
 		OffsetSecondsRemainder: 12,
@@ -29295,7 +28935,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -11:00    -    SST
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 177, // "SST"
+		FormatIndex: 93, // "SST"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2640, // -39600 / 15
 		OffsetSecondsRemainder: 0,
@@ -29308,14 +28948,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Palau
-	// EraIndex: 1941
+	// EraIndex: 1920
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -15:02:04 - LMT 1844 Dec 31
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -3609, // -54124 / 15
 		OffsetSecondsRemainder: 11,
@@ -29329,7 +28969,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//               8:57:56 -    LMT    1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2151, // 32276 / 15
 		OffsetSecondsRemainder: 11,
@@ -29340,10 +28980,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//               9:00    -    +09
+	//               9:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 33, // "+09"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2160, // 32400 / 15
 		OffsetSecondsRemainder: 0,
@@ -29356,14 +28996,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Pitcairn
-	// EraIndex: 1944
+	// EraIndex: 1923
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// -8:40:20 - LMT 1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2082, // -31220 / 15
 		OffsetSecondsRemainder: 10,
@@ -29374,10 +29014,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -8:30    -    -0830    1998 Apr 27  0:00
+	//             -8:30    -    %z    1998 Apr 27  0:00
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 75, // "-0830"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2040, // -30600 / 15
 		OffsetSecondsRemainder: 0,
@@ -29388,10 +29028,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -8:00    -    -08
+	//             -8:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 74, // "-08"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -1920, // -28800 / 15
 		OffsetSecondsRemainder: 0,
@@ -29404,14 +29044,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Port_Moresby
-	// EraIndex: 1947
+	// EraIndex: 1926
 	// EraCount: 3
 	// ---------------------------------------------------------------------------
 
 	// 9:48:40 - LMT 1880
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2354, // 35320 / 15
 		OffsetSecondsRemainder: 10,
@@ -29425,7 +29065,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             9:48:32    -    PMMT    1895
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 165, // "PMMT"
+		FormatIndex: 81, // "PMMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2354, // 35312 / 15
 		OffsetSecondsRemainder: 2,
@@ -29436,10 +29076,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             10:00    -    +10
+	//             10:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 36, // "+10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2400, // 36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -29452,14 +29092,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Rarotonga
-	// EraIndex: 1950
+	// EraIndex: 1929
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 13:20:56 - LMT 1899 Dec 26
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3203, // 48056 / 15
 		OffsetSecondsRemainder: 11,
@@ -29473,7 +29113,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 	//             -10:39:04 -    LMT    1952 Oct 16
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2557, // -38344 / 15
 		OffsetSecondsRemainder: 11,
@@ -29484,10 +29124,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -10:30    -    -1030    1978 Nov 12
+	//             -10:30    -    %z    1978 Nov 12
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 80, // "-1030"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2520, // -37800 / 15
 		OffsetSecondsRemainder: 0,
@@ -29498,10 +29138,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -10:00    Cook    -10/-0930
+	//             -10:00    Cook    %z
 	{
 		PolicyIndex: 28, // PolicyName: Cook
-		FormatIndex: 79, // "-10/-0930"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -29514,14 +29154,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tahiti
-	// EraIndex: 1954
+	// EraIndex: 1933
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// -9:58:16 - LMT 1912 Oct 1
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2394, // -35896 / 15
 		OffsetSecondsRemainder: 14,
@@ -29532,10 +29172,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             -10:00    -    -10
+	//             -10:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 78, // "-10"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: -2400, // -36000 / 15
 		OffsetSecondsRemainder: 0,
@@ -29548,14 +29188,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tarawa
-	// EraIndex: 1956
+	// EraIndex: 1935
 	// EraCount: 2
 	// ---------------------------------------------------------------------------
 
 	// 11:32:04 - LMT 1901
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2768, // 41524 / 15
 		OffsetSecondsRemainder: 4,
@@ -29566,10 +29206,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//              12:00    -    +12
+	//              12:00    -    %z
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 44, // "+12"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2880, // 43200 / 15
 		OffsetSecondsRemainder: 0,
@@ -29582,14 +29222,14 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 
 	// ---------------------------------------------------------------------------
 	// ZoneName: Pacific/Tongatapu
-	// EraIndex: 1958
+	// EraIndex: 1937
 	// EraCount: 4
 	// ---------------------------------------------------------------------------
 
 	// 12:19:12 - LMT 1945 Sep 10
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 149, // "LMT"
+		FormatIndex: 66, // "LMT"
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2956, // 44352 / 15
 		OffsetSecondsRemainder: 12,
@@ -29600,10 +29240,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             12:20    -    +1220    1961
+	//             12:20    -    %z    1961
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 47, // "+1220"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 2960, // 44400 / 15
 		OffsetSecondsRemainder: 0,
@@ -29614,10 +29254,10 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             13:00    -    +13    1999
+	//             13:00    -    %z    1999
 	{
 		PolicyIndex: 0, // PolicyName: (none)
-		FormatIndex: 50, // "+13"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
 		OffsetSecondsRemainder: 0,
@@ -29628,32 +29268,12 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 		UntilSecondsModifier: 0, // SuffixW + remainder=0
 	},
 
-	//             13:00    Tonga    +13/+14
+	//             13:00    Tonga    %z
 	{
 		PolicyIndex: 120, // PolicyName: Tonga
-		FormatIndex: 51, // "+13/+14"
+		FormatIndex: 0, // ""
 		DeltaMinutes: 0,
 		OffsetSecondsCode: 3120, // 46800 / 15
-		OffsetSecondsRemainder: 0,
-		UntilYear: 32767,
-		UntilMonth: 1,
-		UntilDay: 1,
-		UntilSecondsCode: 0, // 0 / 15
-		UntilSecondsModifier: 0, // SuffixW + remainder=0
-	},
-
-	// ---------------------------------------------------------------------------
-	// ZoneName: WET
-	// EraIndex: 1962
-	// EraCount: 1
-	// ---------------------------------------------------------------------------
-
-	// 0:00 EU WE%sT
-	{
-		PolicyIndex: 38, // PolicyName: EU
-		FormatIndex: 183, // "WE%T"
-		DeltaMinutes: 0,
-		OffsetSecondsCode: 0, // 0 / 15
 		OffsetSecondsRemainder: 0,
 		UntilYear: 32767,
 		UntilMonth: 1,
@@ -29669,7 +29289,7 @@ var ZoneEraRecords = []zoneinfo.ZoneEraRecord{
 // ZoneInfoRecords is an array of ZoneInfoRecord items concatenated together
 // across all zones.
 //
-// Total: 596 (351 zones, 245 links)
+// Total: 596 (339 zones, 257 links)
 // ---------------------------------------------------------------------------
 
 var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
@@ -29733,7 +29353,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x04b14e6e,
 		NameIndex: 204, // "America/St_Johns"
-		EraIndex: 816,
+		EraIndex: 818,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -29765,7 +29385,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x04f9958e,
 		NameIndex: 175, // "America/North_Dakota/New_Salem"
-		EraIndex: 692,
+		EraIndex: 694,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -29773,7 +29393,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0506ab50,
 		NameIndex: 273, // "Asia/Jakarta"
-		EraIndex: 1104,
+		EraIndex: 1107,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -29790,7 +29410,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 		ZoneID: 0x0532189e,
 		NameIndex: 156, // "America/Mazatlan"
 		EraIndex: 602,
-		EraCount: 8,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 15: Link America/St_Barthelemy -> America/Puerto_Rico
@@ -29813,7 +29433,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x06532bba,
 		NameIndex: 536, // "Pacific/Fakaofo"
-		EraIndex: 1871,
+		EraIndex: 1850,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -29821,8 +29441,8 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x065d21c4,
 		NameIndex: 126, // "America/Hermosillo"
-		EraIndex: 447,
-		EraCount: 9,
+		EraIndex: 448,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 19: Link Mexico/BajaSur -> America/Mazatlan
@@ -29837,7 +29457,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0903e442,
 		NameIndex: 316, // "Asia/Tbilisi"
-		EraIndex: 1318,
+		EraIndex: 1321,
 		EraCount: 11,
 		TargetIndex: 0,
 	},
@@ -29861,7 +29481,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0a7b7efe,
 		NameIndex: 82, // "America/Boa_Vista"
-		EraIndex: 280,
+		EraIndex: 279,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -29869,33 +29489,33 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0af0e91d,
 		NameIndex: 257, // "Asia/Colombo"
-		EraIndex: 1023,
+		EraIndex: 1026,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
-	// 25: Zone CET
+	// 25: Link CET -> Europe/Brussels
 	{
 		ZoneID: 0x0b87d921,
 		NameIndex: 373, // "CET"
-		EraIndex: 1490,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 529, // Europe/Brussels
 	},
-	// 26: Zone EET
+	// 26: Link EET -> Europe/Athens
 	{
 		ZoneID: 0x0b87e1a3,
 		NameIndex: 386, // "EET"
-		EraIndex: 1492,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 155, // Europe/Athens
 	},
-	// 27: Zone EST
+	// 27: Link EST -> America/Panama
 	{
 		ZoneID: 0x0b87e371,
 		NameIndex: 387, // "EST"
-		EraIndex: 1493,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 445, // America/Panama
 	},
 	// 28: Link GMT -> Etc/GMT
 	{
@@ -29905,29 +29525,29 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 		EraCount: 0, // IsLink=true
 		TargetIndex: 513, // Etc/GMT
 	},
-	// 29: Zone HST
+	// 29: Link HST -> Pacific/Honolulu
 	{
 		ZoneID: 0x0b87f034,
 		NameIndex: 497, // "HST"
-		EraIndex: 1835,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 552, // Pacific/Honolulu
 	},
-	// 30: Zone MET
+	// 30: Link MET -> Europe/Brussels
 	{
 		ZoneID: 0x0b8803ab,
 		NameIndex: 517, // "MET"
-		EraIndex: 1844,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 529, // Europe/Brussels
 	},
-	// 31: Zone MST
+	// 31: Link MST -> America/Phoenix
 	{
 		ZoneID: 0x0b880579,
 		NameIndex: 518, // "MST"
-		EraIndex: 1845,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 127, // America/Phoenix
 	},
 	// 32: Link PRC -> Asia/Shanghai
 	{
@@ -29969,19 +29589,19 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 		EraCount: 0, // IsLink=true
 		TargetIndex: 515, // Etc/UTC
 	},
-	// 37: Zone WET
+	// 37: Link WET -> Europe/Lisbon
 	{
 		ZoneID: 0x0b882e35,
 		NameIndex: 594, // "WET"
-		EraIndex: 1962,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 195, // Europe/Lisbon
 	},
 	// 38: Zone America/Guatemala
 	{
 		ZoneID: 0x0c8259f7,
 		NameIndex: 121, // "America/Guatemala"
-		EraIndex: 427,
+		EraIndex: 428,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -30053,7 +29673,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0e86d203,
 		NameIndex: 229, // "Antarctica/Rothera"
-		EraIndex: 920,
+		EraIndex: 928,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -30069,7 +29689,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x0fe559a3,
 		NameIndex: 358, // "Australia/Melbourne"
-		EraIndex: 1481,
+		EraIndex: 1470,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30077,7 +29697,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1063bfc9,
 		NameIndex: 199, // "America/Sao_Paulo"
-		EraIndex: 799,
+		EraIndex: 801,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -30101,7 +29721,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x123f8d2a,
 		NameIndex: 200, // "America/Scoresbysund"
-		EraIndex: 803,
+		EraIndex: 805,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -30109,7 +29729,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x13ae5104,
 		NameIndex: 309, // "Asia/Samarkand"
-		EraIndex: 1277,
+		EraIndex: 1280,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -30117,7 +29737,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x148d21bc,
 		NameIndex: 237, // "Asia/Amman"
-		EraIndex: 936,
+		EraIndex: 944,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30125,7 +29745,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x148f710e,
 		NameIndex: 239, // "Asia/Aqtau"
-		EraIndex: 947,
+		EraIndex: 955,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -30133,7 +29753,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x14ae863b,
 		NameIndex: 253, // "Asia/Chita"
-		EraIndex: 1010,
+		EraIndex: 1018,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -30149,7 +29769,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x14c07b8b,
 		NameIndex: 260, // "Asia/Dhaka"
-		EraIndex: 1035,
+		EraIndex: 1038,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -30157,7 +29777,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x14c79f77,
 		NameIndex: 262, // "Asia/Dubai"
-		EraIndex: 1047,
+		EraIndex: 1050,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -30166,14 +29786,14 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 		ZoneID: 0x14f6329a,
 		NameIndex: 77, // "America/Bahia_Banderas"
 		EraIndex: 262,
-		EraCount: 9,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 62: Zone Asia/Kabul
 	{
 		ZoneID: 0x153b5601,
 		NameIndex: 276, // "Asia/Kabul"
-		EraIndex: 1120,
+		EraIndex: 1123,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30197,7 +29817,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x155f88b9,
 		NameIndex: 289, // "Asia/Macau"
-		EraIndex: 1168,
+		EraIndex: 1171,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -30205,7 +29825,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x15a8330b,
 		NameIndex: 302, // "Asia/Qatar"
-		EraIndex: 1241,
+		EraIndex: 1244,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30213,7 +29833,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x15ce82da,
 		NameIndex: 310, // "Asia/Seoul"
-		EraIndex: 1284,
+		EraIndex: 1287,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -30221,7 +29841,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x15e606a8,
 		NameIndex: 321, // "Asia/Tokyo"
-		EraIndex: 1337,
+		EraIndex: 1340,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -30229,7 +29849,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x15e60e60,
 		NameIndex: 322, // "Asia/Tomsk"
-		EraIndex: 1339,
+		EraIndex: 1342,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -30245,7 +29865,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x170380d1,
 		NameIndex: 320, // "Asia/Thimphu"
-		EraIndex: 1334,
+		EraIndex: 1337,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30253,7 +29873,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x17e64958,
 		NameIndex: 122, // "America/Guayaquil"
-		EraIndex: 429,
+		EraIndex: 430,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30277,7 +29897,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1a76c057,
 		NameIndex: 300, // "Asia/Pontianak"
-		EraIndex: 1226,
+		EraIndex: 1229,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -30301,7 +29921,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1e2a7654,
 		NameIndex: 169, // "America/New_York"
-		EraIndex: 664,
+		EraIndex: 666,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -30325,7 +29945,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1fa788b5,
 		NameIndex: 246, // "Asia/Baku"
-		EraIndex: 983,
+		EraIndex: 991,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -30333,7 +29953,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1fa8c394,
 		NameIndex: 261, // "Asia/Dili"
-		EraIndex: 1042,
+		EraIndex: 1045,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -30341,7 +29961,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1faa4875,
 		NameIndex: 265, // "Asia/Gaza"
-		EraIndex: 1059,
+		EraIndex: 1062,
 		EraCount: 12,
 		TargetIndex: 0,
 	},
@@ -30349,7 +29969,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1fab0fe3,
 		NameIndex: 270, // "Asia/Hovd"
-		EraIndex: 1093,
+		EraIndex: 1096,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30357,7 +29977,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1faeddac,
 		NameIndex: 297, // "Asia/Omsk"
-		EraIndex: 1209,
+		EraIndex: 1212,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -30365,7 +29985,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x1faef0a0,
 		NameIndex: 298, // "Asia/Oral"
-		EraIndex: 1216,
+		EraIndex: 1219,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -30381,7 +30001,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x20f2d127,
 		NameIndex: 268, // "Asia/Ho_Chi_Minh"
-		EraIndex: 1077,
+		EraIndex: 1080,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -30389,7 +30009,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x20fbb063,
 		NameIndex: 259, // "Asia/Damascus"
-		EraIndex: 1032,
+		EraIndex: 1035,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30405,7 +30025,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x23359b5e,
 		NameIndex: 528, // "Pacific/Apia"
-		EraIndex: 1848,
+		EraIndex: 1827,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -30413,7 +30033,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x23383ba5,
 		NameIndex: 537, // "Pacific/Fiji"
-		EraIndex: 1874,
+		EraIndex: 1853,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -30421,7 +30041,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2338f9ed,
 		NameIndex: 542, // "Pacific/Guam"
-		EraIndex: 1883,
+		EraIndex: 1862,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -30429,7 +30049,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x233ca014,
 		NameIndex: 553, // "Pacific/Niue"
-		EraIndex: 1926,
+		EraIndex: 1905,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30453,7 +30073,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2428e8a3,
 		NameIndex: 347, // "Australia/Adelaide"
-		EraIndex: 1450,
+		EraIndex: 1439,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -30461,7 +30081,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x25062f86,
 		NameIndex: 529, // "Pacific/Auckland"
-		EraIndex: 1853,
+		EraIndex: 1832,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30469,7 +30089,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x262ca836,
 		NameIndex: 567, // "Pacific/Tongatapu"
-		EraIndex: 1958,
+		EraIndex: 1937,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -30477,8 +30097,8 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x269a1deb,
 		NameIndex: 164, // "America/Monterrey"
-		EraIndex: 649,
-		EraCount: 4,
+		EraIndex: 648,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 101: Link Etc/Greenwich -> Etc/GMT
@@ -30501,7 +30121,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2876bdff,
 		NameIndex: 352, // "Australia/Darwin"
-		EraIndex: 1463,
+		EraIndex: 1452,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30517,7 +30137,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x289b4f8b,
 		NameIndex: 264, // "Asia/Famagusta"
-		EraIndex: 1054,
+		EraIndex: 1057,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -30541,7 +30161,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x29de34a8,
 		NameIndex: 329, // "Asia/Vladivostok"
-		EraIndex: 1362,
+		EraIndex: 1365,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -30557,7 +30177,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2ad018ee,
 		NameIndex: 114, // "America/Fortaleza"
-		EraIndex: 398,
+		EraIndex: 399,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -30565,7 +30185,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2c6f6b1f,
 		NameIndex: 216, // "America/Vancouver"
-		EraIndex: 858,
+		EraIndex: 866,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30597,7 +30217,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x2f0de999,
 		NameIndex: 531, // "Pacific/Chatham"
-		EraIndex: 1862,
+		EraIndex: 1841,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30621,7 +30241,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x30c4e096,
 		NameIndex: 476, // "Europe/Tallinn"
-		EraIndex: 1762,
+		EraIndex: 1746,
 		EraCount: 13,
 		TargetIndex: 0,
 	},
@@ -30637,7 +30257,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x30f0cc4e,
 		NameIndex: 324, // "Asia/Ulaanbaatar"
-		EraIndex: 1348,
+		EraIndex: 1351,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30669,7 +30289,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x32bf951a,
 		NameIndex: 354, // "Australia/Hobart"
-		EraIndex: 1469,
+		EraIndex: 1458,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -30677,7 +30297,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x32fc5c3c,
 		NameIndex: 263, // "Asia/Dushanbe"
-		EraIndex: 1049,
+		EraIndex: 1052,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -30685,7 +30305,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x33013174,
 		NameIndex: 343, // "Atlantic/South_Georgia"
-		EraIndex: 1442,
+		EraIndex: 1431,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -30693,7 +30313,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x34b5af01,
 		NameIndex: 181, // "America/Phoenix"
-		EraIndex: 719,
+		EraIndex: 721,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -30717,7 +30337,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x399cd863,
 		NameIndex: 226, // "Antarctica/Mawson"
-		EraIndex: 912,
+		EraIndex: 920,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30733,7 +30353,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3be064f4,
 		NameIndex: 89, // "America/Caracas"
-		EraIndex: 306,
+		EraIndex: 307,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -30741,7 +30361,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3c617269,
 		NameIndex: 91, // "America/Cayenne"
-		EraIndex: 312,
+		EraIndex: 313,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30757,7 +30377,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3d4bb1c4,
 		NameIndex: 335, // "Atlantic/Bermuda"
-		EraIndex: 1411,
+		EraIndex: 1407,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -30821,7 +30441,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3ed0f389,
 		NameIndex: 485, // "Europe/Volgograd"
-		EraIndex: 1811,
+		EraIndex: 1795,
 		EraCount: 11,
 		TargetIndex: 0,
 	},
@@ -30829,7 +30449,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f437e0f,
 		NameIndex: 112, // "America/Fort_Nelson"
-		EraIndex: 392,
+		EraIndex: 393,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -30837,7 +30457,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f1cc4,
 		NameIndex: 394, // "Etc/GMT+10"
-		EraIndex: 1497,
+		EraIndex: 1481,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -30845,7 +30465,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f1cc5,
 		NameIndex: 395, // "Etc/GMT+11"
-		EraIndex: 1498,
+		EraIndex: 1482,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -30853,7 +30473,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f1cc6,
 		NameIndex: 396, // "Etc/GMT+12"
-		EraIndex: 1499,
+		EraIndex: 1483,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -30861,7 +30481,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f2546,
 		NameIndex: 407, // "Etc/GMT-10"
-		EraIndex: 1509,
+		EraIndex: 1493,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -30869,7 +30489,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f2547,
 		NameIndex: 408, // "Etc/GMT-11"
-		EraIndex: 1510,
+		EraIndex: 1494,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -30877,7 +30497,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f2548,
 		NameIndex: 409, // "Etc/GMT-12"
-		EraIndex: 1511,
+		EraIndex: 1495,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -30885,7 +30505,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f2549,
 		NameIndex: 410, // "Etc/GMT-13"
-		EraIndex: 1512,
+		EraIndex: 1496,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -30893,7 +30513,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x3f8f254a,
 		NameIndex: 411, // "Etc/GMT-14"
-		EraIndex: 1513,
+		EraIndex: 1497,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -30901,7 +30521,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x40962f4f,
 		NameIndex: 228, // "Antarctica/Palmer"
-		EraIndex: 915,
+		EraIndex: 923,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -30917,7 +30537,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4318fa27,
 		NameIndex: 429, // "Europe/Athens"
-		EraIndex: 1536,
+		EraIndex: 1520,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -30941,7 +30561,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x44644c20,
 		NameIndex: 432, // "Europe/Berlin"
-		EraIndex: 1549,
+		EraIndex: 1533,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -30957,7 +30577,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x456f7c3c,
 		NameIndex: 501, // "Indian/Chagos"
-		EraIndex: 1836,
+		EraIndex: 1819,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -30989,7 +30609,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4785f921,
 		NameIndex: 327, // "Asia/Ust-Nera"
-		EraIndex: 1353,
+		EraIndex: 1356,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -30997,7 +30617,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4a275f62,
 		NameIndex: 440, // "Europe/Dublin"
-		EraIndex: 1586,
+		EraIndex: 1570,
 		EraCount: 11,
 		TargetIndex: 0,
 	},
@@ -31005,7 +30625,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4b0fcf78,
 		NameIndex: 294, // "Asia/Nicosia"
-		EraIndex: 1190,
+		EraIndex: 1193,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -31013,7 +30633,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4b92b5d4,
 		NameIndex: 93, // "America/Chicago"
-		EraIndex: 315,
+		EraIndex: 316,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -31021,7 +30641,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4d1e9776,
 		NameIndex: 364, // "Australia/Sydney"
-		EraIndex: 1487,
+		EraIndex: 1476,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -31045,7 +30665,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4f966fd4,
 		NameIndex: 233, // "Antarctica/Vostok"
-		EraIndex: 924,
+		EraIndex: 932,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -31061,7 +30681,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x4fedc9c0,
 		NameIndex: 348, // "Australia/Brisbane"
-		EraIndex: 1454,
+		EraIndex: 1443,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -31085,7 +30705,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x527f5245,
 		NameIndex: 278, // "Asia/Karachi"
-		EraIndex: 1130,
+		EraIndex: 1133,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -31109,7 +30729,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x53720c3a,
 		NameIndex: 540, // "Pacific/Gambier"
-		EraIndex: 1879,
+		EraIndex: 1858,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -31117,7 +30737,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x54e0e3e8,
 		NameIndex: 218, // "America/Whitehorse"
-		EraIndex: 861,
+		EraIndex: 869,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -31165,7 +30785,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x577f28ac,
 		NameIndex: 269, // "Asia/Hong_Kong"
-		EraIndex: 1087,
+		EraIndex: 1090,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -31173,7 +30793,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x57ca7135,
 		NameIndex: 550, // "Pacific/Marquesas"
-		EraIndex: 1919,
+		EraIndex: 1898,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -31181,7 +30801,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x59674330,
 		NameIndex: 162, // "America/Miquelon"
-		EraIndex: 636,
+		EraIndex: 635,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -31221,7 +30841,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5becd23a,
 		NameIndex: 275, // "Asia/Jerusalem"
-		EraIndex: 1117,
+		EraIndex: 1120,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -31237,7 +30857,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5c00a70b,
 		NameIndex: 451, // "Europe/Lisbon"
-		EraIndex: 1642,
+		EraIndex: 1626,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -31245,7 +30865,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5c5e1772,
 		NameIndex: 337, // "Atlantic/Cape_Verde"
-		EraIndex: 1421,
+		EraIndex: 1417,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -31253,7 +30873,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5c6a84ae,
 		NameIndex: 453, // "Europe/London"
-		EraIndex: 1650,
+		EraIndex: 1634,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -31285,7 +30905,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5dbd1535,
 		NameIndex: 455, // "Europe/Madrid"
-		EraIndex: 1655,
+		EraIndex: 1639,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -31293,7 +30913,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5e07fe24,
 		NameIndex: 163, // "America/Moncton"
-		EraIndex: 640,
+		EraIndex: 639,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -31301,7 +30921,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5e10f7a4,
 		NameIndex: 530, // "Pacific/Bougainville"
-		EraIndex: 1856,
+		EraIndex: 1835,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -31317,7 +30937,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x5ec266fc,
 		NameIndex: 460, // "Europe/Moscow"
-		EraIndex: 1672,
+		EraIndex: 1656,
 		EraCount: 11,
 		TargetIndex: 0,
 	},
@@ -31341,7 +30961,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x603aebd0,
 		NameIndex: 556, // "Pacific/Pago_Pago"
-		EraIndex: 1938,
+		EraIndex: 1917,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -31381,7 +31001,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x63ff66be,
 		NameIndex: 98, // "America/Costa_Rica"
-		EraIndex: 343,
+		EraIndex: 344,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -31389,7 +31009,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x654fe522,
 		NameIndex: 303, // "Asia/Qostanay"
-		EraIndex: 1244,
+		EraIndex: 1247,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -31405,7 +31025,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x65ee5d48,
 		NameIndex: 465, // "Europe/Prague"
-		EraIndex: 1690,
+		EraIndex: 1674,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -31453,7 +31073,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6752ca31,
 		NameIndex: 186, // "America/Puerto_Rico"
-		EraIndex: 732,
+		EraIndex: 734,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -31493,7 +31113,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x69264f93,
 		NameIndex: 295, // "Asia/Novokuznetsk"
-		EraIndex: 1193,
+		EraIndex: 1196,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -31525,15 +31145,15 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6aa1df72,
 		NameIndex: 213, // "America/Tijuana"
-		EraIndex: 833,
-		EraCount: 19,
+		EraIndex: 835,
+		EraCount: 25,
 		TargetIndex: 0,
 	},
 	// 232: Zone Asia/Makassar
 	{
 		ZoneID: 0x6aa21c85,
 		NameIndex: 291, // "Asia/Makassar"
-		EraIndex: 1180,
+		EraIndex: 1183,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -31541,7 +31161,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6ab2975b,
 		NameIndex: 443, // "Europe/Helsinki"
-		EraIndex: 1601,
+		EraIndex: 1585,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -31557,7 +31177,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6b1aac77,
 		NameIndex: 185, // "America/Porto_Velho"
-		EraIndex: 729,
+		EraIndex: 731,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -31565,7 +31185,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6bc0b139,
 		NameIndex: 468, // "Europe/Samara"
-		EraIndex: 1718,
+		EraIndex: 1702,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -31581,7 +31201,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6cb9484a,
 		NameIndex: 108, // "America/Edmonton"
-		EraIndex: 380,
+		EraIndex: 381,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -31589,7 +31209,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6cf24e5b,
 		NameIndex: 104, // "America/Dawson_Creek"
-		EraIndex: 360,
+		EraIndex: 361,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -31613,7 +31233,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6e216197,
 		NameIndex: 118, // "America/Grand_Turk"
-		EraIndex: 421,
+		EraIndex: 422,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -31629,7 +31249,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x6ea95b47,
 		NameIndex: 477, // "Europe/Tirane"
-		EraIndex: 1775,
+		EraIndex: 1759,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -31677,7 +31297,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x71282e81,
 		NameIndex: 304, // "Asia/Qyzylorda"
-		EraIndex: 1254,
+		EraIndex: 1257,
 		EraCount: 12,
 		TargetIndex: 0,
 	},
@@ -31685,7 +31305,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x72c06cd9,
 		NameIndex: 283, // "Asia/Kolkata"
-		EraIndex: 1148,
+		EraIndex: 1151,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -31693,7 +31313,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x7347fc60,
 		NameIndex: 95, // "America/Ciudad_Juarez"
-		EraIndex: 332,
+		EraIndex: 333,
 		EraCount: 11,
 		TargetIndex: 0,
 	},
@@ -31701,7 +31321,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x734cc2e5,
 		NameIndex: 483, // "Europe/Vienna"
-		EraIndex: 1788,
+		EraIndex: 1772,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -31725,7 +31345,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x73baf9d7,
 		NameIndex: 277, // "Asia/Kamchatka"
-		EraIndex: 1123,
+		EraIndex: 1126,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -31733,7 +31353,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x740caec1,
 		NameIndex: 196, // "America/Santarem"
-		EraIndex: 775,
+		EraIndex: 777,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -31741,7 +31361,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x7410c9bc,
 		NameIndex: 197, // "America/Santiago"
-		EraIndex: 779,
+		EraIndex: 781,
 		EraCount: 14,
 		TargetIndex: 0,
 	},
@@ -31781,7 +31401,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x75185c19,
 		NameIndex: 486, // "Europe/Warsaw"
-		EraIndex: 1822,
+		EraIndex: 1806,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -31789,7 +31409,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x752ad652,
 		NameIndex: 110, // "America/El_Salvador"
-		EraIndex: 390,
+		EraIndex: 391,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -31805,7 +31425,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x75a0d177,
 		NameIndex: 198, // "America/Santo_Domingo"
-		EraIndex: 793,
+		EraIndex: 795,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -31885,7 +31505,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x792e851b,
 		NameIndex: 214, // "America/Toronto"
-		EraIndex: 852,
+		EraIndex: 860,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -31925,7 +31545,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x7b09c02a,
 		NameIndex: 508, // "Indian/Mauritius"
-		EraIndex: 1842,
+		EraIndex: 1825,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -31933,7 +31553,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x7bb3e1c4,
 		NameIndex: 345, // "Atlantic/Stanley"
-		EraIndex: 1444,
+		EraIndex: 1433,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -32005,7 +31625,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x7d8195b9,
 		NameIndex: 489, // "Europe/Zurich"
-		EraIndex: 1831,
+		EraIndex: 1815,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -32029,7 +31649,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x801b003b,
 		NameIndex: 286, // "Asia/Kuching"
-		EraIndex: 1163,
+		EraIndex: 1166,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -32037,8 +31657,8 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x81b5c037,
 		NameIndex: 341, // "Atlantic/Madeira"
-		EraIndex: 1429,
-		EraCount: 13,
+		EraIndex: 1425,
+		EraCount: 6,
 		TargetIndex: 0,
 	},
 	// 296: Link America/Atikokan -> America/Panama
@@ -32069,7 +31689,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8305073a,
 		NameIndex: 546, // "Pacific/Kiritimati"
-		EraIndex: 1898,
+		EraIndex: 1877,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -32085,7 +31705,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x84de2686,
 		NameIndex: 160, // "America/Metlakatla"
-		EraIndex: 619,
+		EraIndex: 618,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -32093,7 +31713,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x87bb3a9e,
 		NameIndex: 330, // "Asia/Yakutsk"
-		EraIndex: 1369,
+		EraIndex: 1372,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -32101,7 +31721,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8827d776,
 		NameIndex: 94, // "America/Chihuahua"
-		EraIndex: 323,
+		EraIndex: 324,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -32109,7 +31729,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8837d8bd,
 		NameIndex: 558, // "Pacific/Pitcairn"
-		EraIndex: 1944,
+		EraIndex: 1923,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32133,7 +31753,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8a2bce28,
 		NameIndex: 534, // "Pacific/Efate"
-		EraIndex: 1869,
+		EraIndex: 1848,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -32173,23 +31793,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8acc41ae,
 		NameIndex: 552, // "Pacific/Nauru"
-		EraIndex: 1921,
+		EraIndex: 1900,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
-	// 313: Zone EST5EDT
+	// 313: Link EST5EDT -> America/New_York
 	{
 		ZoneID: 0x8adc72a3,
 		NameIndex: 388, // "EST5EDT"
-		EraIndex: 1494,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 78, // America/New_York
 	},
 	// 314: Zone Pacific/Palau
 	{
 		ZoneID: 0x8af04a36,
 		NameIndex: 557, // "Pacific/Palau"
-		EraIndex: 1941,
+		EraIndex: 1920,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32205,7 +31825,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8c7dafc7,
 		NameIndex: 219, // "America/Winnipeg"
-		EraIndex: 867,
+		EraIndex: 875,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32213,7 +31833,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8cf99e44,
 		NameIndex: 353, // "Australia/Eucla"
-		EraIndex: 1466,
+		EraIndex: 1455,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32253,7 +31873,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8db8269d,
 		NameIndex: 361, // "Australia/Perth"
-		EraIndex: 1484,
+		EraIndex: 1473,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32269,7 +31889,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8e216759,
 		NameIndex: 548, // "Pacific/Kwajalein"
-		EraIndex: 1912,
+		EraIndex: 1891,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -32277,7 +31897,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8e4a7bdc,
 		NameIndex: 182, // "America/Port-au-Prince"
-		EraIndex: 726,
+		EraIndex: 728,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32309,7 +31929,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x8f4eb4be,
 		NameIndex: 554, // "Pacific/Norfolk"
-		EraIndex: 1929,
+		EraIndex: 1908,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -32341,7 +31961,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9185c8cc,
 		NameIndex: 333, // "Asia/Yerevan"
-		EraIndex: 1389,
+		EraIndex: 1392,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -32349,23 +31969,23 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x925cfbc1,
 		NameIndex: 106, // "America/Detroit"
-		EraIndex: 370,
+		EraIndex: 371,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
-	// 335: Zone Asia/Choibalsan
+	// 335: Link Asia/Choibalsan -> Asia/Ulaanbaatar
 	{
 		ZoneID: 0x928aa4a6,
 		NameIndex: 254, // "Asia/Choibalsan"
-		EraIndex: 1018,
-		EraCount: 5,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 120, // Asia/Ulaanbaatar
 	},
 	// 336: Zone Antarctica/Macquarie
 	{
 		ZoneID: 0x92f47626,
 		NameIndex: 225, // "Antarctica/Macquarie"
-		EraIndex: 903,
+		EraIndex: 911,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -32373,7 +31993,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x93256c81,
 		NameIndex: 80, // "America/Belize"
-		EraIndex: 278,
+		EraIndex: 277,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -32389,7 +32009,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x93d7bc62,
 		NameIndex: 83, // "America/Bogota"
-		EraIndex: 285,
+		EraIndex: 284,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32397,7 +32017,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x93ed1c8e,
 		NameIndex: 301, // "Asia/Pyongyang"
-		EraIndex: 1235,
+		EraIndex: 1238,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -32413,8 +32033,8 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x953331be,
 		NameIndex: 88, // "America/Cancun"
-		EraIndex: 301,
-		EraCount: 5,
+		EraIndex: 300,
+		EraCount: 7,
 		TargetIndex: 0,
 	},
 	// 343: Link America/Cayman -> America/Panama
@@ -32429,7 +32049,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9681f8dd,
 		NameIndex: 115, // "America/Glace_Bay"
-		EraIndex: 405,
+		EraIndex: 406,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -32437,7 +32057,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9685a4d9,
 		NameIndex: 282, // "Asia/Khandyga"
-		EraIndex: 1139,
+		EraIndex: 1142,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -32453,7 +32073,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x969a52eb,
 		NameIndex: 100, // "America/Cuiaba"
-		EraIndex: 346,
+		EraIndex: 347,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -32461,7 +32081,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x978d8d12,
 		NameIndex: 103, // "America/Dawson"
-		EraIndex: 354,
+		EraIndex: 355,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -32477,7 +32097,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x97d10b2a,
 		NameIndex: 105, // "America/Denver"
-		EraIndex: 364,
+		EraIndex: 365,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -32493,7 +32113,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x97da580b,
 		NameIndex: 79, // "America/Belem"
-		EraIndex: 275,
+		EraIndex: 274,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32501,7 +32121,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x97dfc8d8,
 		NameIndex: 84, // "America/Boise"
-		EraIndex: 288,
+		EraIndex: 287,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -32509,7 +32129,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x97f6764b,
 		NameIndex: 427, // "Europe/Andorra"
-		EraIndex: 1523,
+		EraIndex: 1507,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -32541,7 +32161,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x98059b15,
 		NameIndex: 171, // "America/Nome"
-		EraIndex: 670,
+		EraIndex: 672,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -32549,7 +32169,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9805b5a9,
 		NameIndex: 176, // "America/Nuuk"
-		EraIndex: 695,
+		EraIndex: 697,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -32557,7 +32177,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9869681c,
 		NameIndex: 507, // "Indian/Maldives"
-		EraIndex: 1839,
+		EraIndex: 1822,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32573,7 +32193,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x99104ce2,
 		NameIndex: 202, // "America/Sitka"
-		EraIndex: 808,
+		EraIndex: 810,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -32581,7 +32201,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9921dd68,
 		NameIndex: 211, // "America/Thule"
-		EraIndex: 831,
+		EraIndex: 833,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -32589,7 +32209,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9981a3b0,
 		NameIndex: 562, // "Pacific/Rarotonga"
-		EraIndex: 1950,
+		EraIndex: 1929,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -32597,7 +32217,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9a96ce6f,
 		NameIndex: 280, // "Asia/Kathmandu"
-		EraIndex: 1136,
+		EraIndex: 1139,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32613,7 +32233,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9b52b384,
 		NameIndex: 173, // "America/North_Dakota/Beulah"
-		EraIndex: 686,
+		EraIndex: 688,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32629,7 +32249,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9ce0197c,
 		NameIndex: 436, // "Europe/Budapest"
-		EraIndex: 1570,
+		EraIndex: 1554,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -32637,7 +32257,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9ceffbed,
 		NameIndex: 244, // "Asia/Baghdad"
-		EraIndex: 979,
+		EraIndex: 987,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -32661,7 +32281,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da14,
 		NameIndex: 393, // "Etc/GMT+1"
-		EraIndex: 1496,
+		EraIndex: 1480,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32669,7 +32289,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da15,
 		NameIndex: 397, // "Etc/GMT+2"
-		EraIndex: 1500,
+		EraIndex: 1484,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32677,7 +32297,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da16,
 		NameIndex: 398, // "Etc/GMT+3"
-		EraIndex: 1501,
+		EraIndex: 1485,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32685,7 +32305,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da17,
 		NameIndex: 399, // "Etc/GMT+4"
-		EraIndex: 1502,
+		EraIndex: 1486,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32693,7 +32313,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da18,
 		NameIndex: 400, // "Etc/GMT+5"
-		EraIndex: 1503,
+		EraIndex: 1487,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32701,7 +32321,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da19,
 		NameIndex: 401, // "Etc/GMT+6"
-		EraIndex: 1504,
+		EraIndex: 1488,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32709,7 +32329,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da1a,
 		NameIndex: 402, // "Etc/GMT+7"
-		EraIndex: 1505,
+		EraIndex: 1489,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32717,7 +32337,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da1b,
 		NameIndex: 403, // "Etc/GMT+8"
-		EraIndex: 1506,
+		EraIndex: 1490,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32725,7 +32345,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da1c,
 		NameIndex: 404, // "Etc/GMT+9"
-		EraIndex: 1507,
+		EraIndex: 1491,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32741,7 +32361,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da56,
 		NameIndex: 406, // "Etc/GMT-1"
-		EraIndex: 1508,
+		EraIndex: 1492,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32749,7 +32369,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da57,
 		NameIndex: 412, // "Etc/GMT-2"
-		EraIndex: 1514,
+		EraIndex: 1498,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32757,7 +32377,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da58,
 		NameIndex: 413, // "Etc/GMT-3"
-		EraIndex: 1515,
+		EraIndex: 1499,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32765,7 +32385,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da59,
 		NameIndex: 414, // "Etc/GMT-4"
-		EraIndex: 1516,
+		EraIndex: 1500,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32773,7 +32393,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5a,
 		NameIndex: 415, // "Etc/GMT-5"
-		EraIndex: 1517,
+		EraIndex: 1501,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32781,7 +32401,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5b,
 		NameIndex: 416, // "Etc/GMT-6"
-		EraIndex: 1518,
+		EraIndex: 1502,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32789,7 +32409,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5c,
 		NameIndex: 417, // "Etc/GMT-7"
-		EraIndex: 1519,
+		EraIndex: 1503,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32797,7 +32417,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5d,
 		NameIndex: 418, // "Etc/GMT-8"
-		EraIndex: 1520,
+		EraIndex: 1504,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32805,7 +32425,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d13da5e,
 		NameIndex: 419, // "Etc/GMT-9"
-		EraIndex: 1521,
+		EraIndex: 1505,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -32821,7 +32441,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d352764,
 		NameIndex: 193, // "America/Rio_Branco"
-		EraIndex: 770,
+		EraIndex: 772,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -32829,7 +32449,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9d6e3aaf,
 		NameIndex: 247, // "Asia/Bangkok"
-		EraIndex: 990,
+		EraIndex: 998,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32845,7 +32465,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9da42814,
 		NameIndex: 174, // "America/North_Dakota/Center"
-		EraIndex: 689,
+		EraIndex: 691,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32853,7 +32473,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9dba4997,
 		NameIndex: 248, // "Asia/Barnaul"
-		EraIndex: 993,
+		EraIndex: 1001,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -32869,7 +32489,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9e09d6e6,
 		NameIndex: 445, // "Europe/Istanbul"
-		EraIndex: 1605,
+		EraIndex: 1589,
 		EraCount: 13,
 		TargetIndex: 0,
 	},
@@ -32893,7 +32513,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0x9ff7bd0b,
 		NameIndex: 123, // "America/Guyana"
-		EraIndex: 432,
+		EraIndex: 433,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -32909,7 +32529,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa0e15675,
 		NameIndex: 125, // "America/Havana"
-		EraIndex: 444,
+		EraIndex: 445,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -32917,7 +32537,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa2a435cb,
 		NameIndex: 296, // "Asia/Novosibirsk"
-		EraIndex: 1200,
+		EraIndex: 1203,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -32933,7 +32553,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa2c1e347,
 		NameIndex: 450, // "Europe/Kyiv"
-		EraIndex: 1633,
+		EraIndex: 1617,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -32949,7 +32569,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa2c57587,
 		NameIndex: 466, // "Europe/Riga"
-		EraIndex: 1697,
+		EraIndex: 1681,
 		EraCount: 15,
 		TargetIndex: 0,
 	},
@@ -32957,7 +32577,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa2c58fd7,
 		NameIndex: 467, // "Europe/Rome"
-		EraIndex: 1712,
+		EraIndex: 1696,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -32981,7 +32601,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa61f41fa,
 		NameIndex: 236, // "Asia/Almaty"
-		EraIndex: 929,
+		EraIndex: 937,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -32989,7 +32609,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa63cebd1,
 		NameIndex: 238, // "Asia/Anadyr"
-		EraIndex: 939,
+		EraIndex: 947,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -32997,7 +32617,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa67dcc4e,
 		NameIndex: 240, // "Asia/Aqtobe"
-		EraIndex: 956,
+		EraIndex: 964,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -33005,7 +32625,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa6b6e068,
 		NameIndex: 243, // "Asia/Atyrau"
-		EraIndex: 970,
+		EraIndex: 978,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -33021,7 +32641,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa748b67d,
 		NameIndex: 357, // "Australia/Lord_Howe"
-		EraIndex: 1477,
+		EraIndex: 1466,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33029,7 +32649,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa7ba7f68,
 		NameIndex: 561, // "Pacific/Port_Moresby"
-		EraIndex: 1947,
+		EraIndex: 1926,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -33045,7 +32665,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa7f3d5fd,
 		NameIndex: 249, // "Asia/Beirut"
-		EraIndex: 1002,
+		EraIndex: 1010,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -33085,7 +32705,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xa952f752,
 		NameIndex: 539, // "Pacific/Galapagos"
-		EraIndex: 1876,
+		EraIndex: 1855,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -33109,7 +32729,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xab5116fb,
 		NameIndex: 172, // "America/Noronha"
-		EraIndex: 679,
+		EraIndex: 681,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33141,7 +32761,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xacd172d8,
 		NameIndex: 159, // "America/Merida"
-		EraIndex: 615,
+		EraIndex: 614,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33149,7 +32769,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xad58aa18,
 		NameIndex: 438, // "Europe/Chisinau"
-		EraIndex: 1576,
+		EraIndex: 1560,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -33181,7 +32801,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb06eada3,
 		NameIndex: 349, // "Australia/Broken_Hill"
-		EraIndex: 1457,
+		EraIndex: 1446,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -33189,7 +32809,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb0728553,
 		NameIndex: 250, // "Asia/Bishkek"
-		EraIndex: 1004,
+		EraIndex: 1012,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -33229,7 +32849,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb319e4c4,
 		NameIndex: 180, // "America/Paramaribo"
-		EraIndex: 714,
+		EraIndex: 716,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -33237,7 +32857,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb3863854,
 		NameIndex: 178, // "America/Panama"
-		EraIndex: 711,
+		EraIndex: 713,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -33261,7 +32881,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb5eef250,
 		NameIndex: 267, // "Asia/Hebron"
-		EraIndex: 1071,
+		EraIndex: 1074,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -33269,7 +32889,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb649541e,
 		NameIndex: 117, // "America/Goose_Bay"
-		EraIndex: 411,
+		EraIndex: 412,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -33285,7 +32905,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb8730494,
 		NameIndex: 190, // "America/Recife"
-		EraIndex: 754,
+		EraIndex: 756,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33293,7 +32913,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xb875371c,
 		NameIndex: 191, // "America/Regina"
-		EraIndex: 761,
+		EraIndex: 763,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -33301,7 +32921,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xba87598d,
 		NameIndex: 241, // "Asia/Ashgabat"
-		EraIndex: 965,
+		EraIndex: 973,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -33325,7 +32945,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xbc5b7183,
 		NameIndex: 124, // "America/Halifax"
-		EraIndex: 437,
+		EraIndex: 438,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33357,7 +32977,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xbf8e337d,
 		NameIndex: 313, // "Asia/Srednekolymsk"
-		EraIndex: 1302,
+		EraIndex: 1305,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33373,7 +32993,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xbfd6fd4c,
 		NameIndex: 210, // "America/Tegucigalpa"
-		EraIndex: 829,
+		EraIndex: 831,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -33397,7 +33017,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xc156c944,
 		NameIndex: 292, // "Asia/Manila"
-		EraIndex: 1185,
+		EraIndex: 1188,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -33453,7 +33073,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xc2c3bce7,
 		NameIndex: 187, // "America/Punta_Arenas"
-		EraIndex: 736,
+		EraIndex: 738,
 		EraCount: 14,
 		TargetIndex: 0,
 	},
@@ -33493,7 +33113,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xc6833c2f,
 		NameIndex: 274, // "Asia/Jayapura"
-		EraIndex: 1113,
+		EraIndex: 1116,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33501,7 +33121,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xc7093459,
 		NameIndex: 192, // "America/Resolute"
-		EraIndex: 764,
+		EraIndex: 766,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -33525,7 +33145,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xc8de4984,
 		NameIndex: 189, // "America/Rankin_Inlet"
-		EraIndex: 750,
+		EraIndex: 752,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33557,7 +33177,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xcbbc3b04,
 		NameIndex: 78, // "America/Barbados"
-		EraIndex: 271,
+		EraIndex: 270,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33589,7 +33209,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xcd973d93,
 		NameIndex: 306, // "Asia/Riyadh"
-		EraIndex: 1266,
+		EraIndex: 1269,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -33621,7 +33241,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xcf54f7e7,
 		NameIndex: 533, // "Pacific/Easter"
-		EraIndex: 1865,
+		EraIndex: 1844,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33629,7 +33249,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xcf8581fa,
 		NameIndex: 312, // "Asia/Singapore"
-		EraIndex: 1293,
+		EraIndex: 1296,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -33637,7 +33257,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd0376c6a,
 		NameIndex: 284, // "Asia/Krasnoyarsk"
-		EraIndex: 1156,
+		EraIndex: 1159,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33653,7 +33273,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd0d93f43,
 		NameIndex: 161, // "America/Mexico_City"
-		EraIndex: 629,
+		EraIndex: 628,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33669,7 +33289,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd1a844ae,
 		NameIndex: 314, // "Asia/Taipei"
-		EraIndex: 1309,
+		EraIndex: 1312,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33677,7 +33297,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd1f02254,
 		NameIndex: 317, // "Asia/Tehran"
-		EraIndex: 1329,
+		EraIndex: 1332,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -33709,7 +33329,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd33b2f28,
 		NameIndex: 447, // "Europe/Kaliningrad"
-		EraIndex: 1618,
+		EraIndex: 1602,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33749,7 +33369,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd5379735,
 		NameIndex: 326, // "Asia/Urumqi"
-		EraIndex: 1351,
+		EraIndex: 1354,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -33757,7 +33377,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd5a44aff,
 		NameIndex: 86, // "America/Cambridge_Bay"
-		EraIndex: 293,
+		EraIndex: 292,
 		EraCount: 6,
 		TargetIndex: 0,
 	},
@@ -33781,7 +33401,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd8e2de58,
 		NameIndex: 391, // "Etc/GMT"
-		EraIndex: 1495,
+		EraIndex: 1479,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -33797,7 +33417,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd8e31abc,
 		NameIndex: 423, // "Etc/UTC"
-		EraIndex: 1522,
+		EraIndex: 1506,
 		EraCount: 1,
 		TargetIndex: 0,
 	},
@@ -33805,7 +33425,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xd8ee31e9,
 		NameIndex: 220, // "America/Yakutat"
-		EraIndex: 870,
+		EraIndex: 878,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33817,13 +33437,13 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 		EraCount: 10,
 		TargetIndex: 0,
 	},
-	// 518: Zone PST8PDT
+	// 518: Link PST8PDT -> America/Los_Angeles
 	{
 		ZoneID: 0xd99ee2dc,
 		NameIndex: 527, // "PST8PDT"
-		EraIndex: 1847,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 450, // America/Los_Angeles
 	},
 	// 519: Link Europe/Bratislava -> Europe/Prague
 	{
@@ -33837,7 +33457,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xda9eb724,
 		NameIndex: 472, // "Europe/Simferopol"
-		EraIndex: 1737,
+		EraIndex: 1721,
 		EraCount: 15,
 		TargetIndex: 0,
 	},
@@ -33861,7 +33481,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdd512f0e,
 		NameIndex: 545, // "Pacific/Kanton"
-		EraIndex: 1894,
+		EraIndex: 1873,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33869,7 +33489,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdd54a8be,
 		NameIndex: 331, // "Asia/Yangon"
-		EraIndex: 1376,
+		EraIndex: 1379,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -33877,7 +33497,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdd63b8ce,
 		NameIndex: 484, // "Europe/Vilnius"
-		EraIndex: 1796,
+		EraIndex: 1780,
 		EraCount: 15,
 		TargetIndex: 0,
 	},
@@ -33893,7 +33513,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xde5139a8,
 		NameIndex: 547, // "Pacific/Kosrae"
-		EraIndex: 1902,
+		EraIndex: 1881,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -33909,7 +33529,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdee07337,
 		NameIndex: 434, // "Europe/Brussels"
-		EraIndex: 1554,
+		EraIndex: 1538,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -33917,7 +33537,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdef98e55,
 		NameIndex: 209, // "America/Swift_Current"
-		EraIndex: 824,
+		EraIndex: 826,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -33933,7 +33553,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xdfbf213f,
 		NameIndex: 271, // "Asia/Irkutsk"
-		EraIndex: 1096,
+		EraIndex: 1099,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -33941,7 +33561,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe03783d0,
 		NameIndex: 479, // "Europe/Ulyanovsk"
-		EraIndex: 1779,
+		EraIndex: 1763,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -33949,7 +33569,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe05029e2,
 		NameIndex: 356, // "Australia/Lindeman"
-		EraIndex: 1473,
+		EraIndex: 1462,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -33957,7 +33577,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe0532b3a,
 		NameIndex: 431, // "Europe/Belgrade"
-		EraIndex: 1542,
+		EraIndex: 1526,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -33973,7 +33593,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe0e9c583,
 		NameIndex: 158, // "America/Menominee"
-		EraIndex: 610,
+		EraIndex: 609,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -33989,7 +33609,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe110a971,
 		NameIndex: 339, // "Atlantic/Faroe"
-		EraIndex: 1426,
+		EraIndex: 1422,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -34005,7 +33625,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe2022583,
 		NameIndex: 222, // "Antarctica/Casey"
-		EraIndex: 877,
+		EraIndex: 885,
 		EraCount: 18,
 		TargetIndex: 0,
 	},
@@ -34013,7 +33633,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe2144b45,
 		NameIndex: 223, // "Antarctica/Davis"
-		EraIndex: 895,
+		EraIndex: 903,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -34021,7 +33641,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe22256e1,
 		NameIndex: 428, // "Europe/Astrakhan"
-		EraIndex: 1527,
+		EraIndex: 1511,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -34045,7 +33665,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe33f085b,
 		NameIndex: 232, // "Antarctica/Troll"
-		EraIndex: 922,
+		EraIndex: 930,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -34053,7 +33673,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe4315da4,
 		NameIndex: 471, // "Europe/Saratov"
-		EraIndex: 1728,
+		EraIndex: 1712,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -34061,7 +33681,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe551b788,
 		NameIndex: 555, // "Pacific/Noumea"
-		EraIndex: 1936,
+		EraIndex: 1915,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -34093,7 +33713,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xe6e70af9,
 		NameIndex: 543, // "Pacific/Honolulu"
-		EraIndex: 1889,
+		EraIndex: 1868,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -34141,7 +33761,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xebacc19b,
 		NameIndex: 290, // "Asia/Magadan"
-		EraIndex: 1172,
+		EraIndex: 1175,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -34149,7 +33769,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xebfde83f,
 		NameIndex: 177, // "America/Ojinaga"
-		EraIndex: 700,
+		EraIndex: 702,
 		EraCount: 11,
 		TargetIndex: 0,
 	},
@@ -34161,19 +33781,19 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 		EraCount: 0, // IsLink=true
 		TargetIndex: 93, // Pacific/Guam
 	},
-	// 561: Zone CST6CDT
+	// 561: Link CST6CDT -> America/Chicago
 	{
 		ZoneID: 0xf0e87d00,
 		NameIndex: 374, // "CST6CDT"
-		EraIndex: 1491,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 167, // America/Chicago
 	},
 	// 562: Zone Pacific/Tahiti
 	{
 		ZoneID: 0xf24c2446,
 		NameIndex: 565, // "Pacific/Tahiti"
-		EraIndex: 1954,
+		EraIndex: 1933,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -34181,17 +33801,17 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf2517e63,
 		NameIndex: 566, // "Pacific/Tarawa"
-		EraIndex: 1956,
+		EraIndex: 1935,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
-	// 564: Zone MST7MDT
+	// 564: Link MST7MDT -> America/Denver
 	{
 		ZoneID: 0xf2af9375,
 		NameIndex: 519, // "MST7MDT"
-		EraIndex: 1846,
-		EraCount: 1,
-		TargetIndex: 0,
+		EraIndex: 0,
+		EraCount: 0, // IsLink=true
+		TargetIndex: 350, // America/Denver
 	},
 	// 565: Link Canada/Eastern -> America/Toronto
 	{
@@ -34205,7 +33825,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf3924254,
 		NameIndex: 315, // "Asia/Tashkent"
-		EraIndex: 1313,
+		EraIndex: 1316,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -34213,7 +33833,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf4a1c9bd,
 		NameIndex: 308, // "Asia/Sakhalin"
-		EraIndex: 1268,
+		EraIndex: 1271,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -34221,7 +33841,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf4dd25f0,
 		NameIndex: 541, // "Pacific/Guadalcanal"
-		EraIndex: 1881,
+		EraIndex: 1860,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
@@ -34245,7 +33865,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf554d204,
 		NameIndex: 102, // "America/Danmarkshavn"
-		EraIndex: 350,
+		EraIndex: 351,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -34253,7 +33873,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf895a7f5,
 		NameIndex: 311, // "Asia/Shanghai"
-		EraIndex: 1290,
+		EraIndex: 1293,
 		EraCount: 3,
 		TargetIndex: 0,
 	},
@@ -34261,7 +33881,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf8e325fc,
 		NameIndex: 441, // "Europe/Gibraltar"
-		EraIndex: 1597,
+		EraIndex: 1581,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -34277,8 +33897,8 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf93ed918,
 		NameIndex: 334, // "Atlantic/Azores"
-		EraIndex: 1396,
-		EraCount: 15,
+		EraIndex: 1399,
+		EraCount: 8,
 		TargetIndex: 0,
 	},
 	// 576: Link Pacific/Wallis -> Pacific/Tarawa
@@ -34301,7 +33921,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xf9b29683,
 		NameIndex: 109, // "America/Eirunepe"
-		EraIndex: 383,
+		EraIndex: 384,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -34309,7 +33929,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfa214780,
 		NameIndex: 165, // "America/Montevideo"
-		EraIndex: 653,
+		EraIndex: 655,
 		EraCount: 11,
 		TargetIndex: 0,
 	},
@@ -34333,7 +33953,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfaf5abef,
 		NameIndex: 449, // "Europe/Kirov"
-		EraIndex: 1625,
+		EraIndex: 1609,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -34341,7 +33961,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb1560f3,
 		NameIndex: 456, // "Europe/Malta"
-		EraIndex: 1659,
+		EraIndex: 1643,
 		EraCount: 4,
 		TargetIndex: 0,
 	},
@@ -34349,7 +33969,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb19cc66,
 		NameIndex: 458, // "Europe/Minsk"
-		EraIndex: 1663,
+		EraIndex: 1647,
 		EraCount: 9,
 		TargetIndex: 0,
 	},
@@ -34357,7 +33977,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb349ec5,
 		NameIndex: 435, // "Europe/Bucharest"
-		EraIndex: 1563,
+		EraIndex: 1547,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -34373,7 +33993,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb4bc2a3,
 		NameIndex: 463, // "Europe/Paris"
-		EraIndex: 1683,
+		EraIndex: 1667,
 		EraCount: 7,
 		TargetIndex: 0,
 	},
@@ -34381,7 +34001,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb544c6e,
 		NameIndex: 332, // "Asia/Yekaterinburg"
-		EraIndex: 1381,
+		EraIndex: 1384,
 		EraCount: 8,
 		TargetIndex: 0,
 	},
@@ -34389,7 +34009,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfb898656,
 		NameIndex: 474, // "Europe/Sofia"
-		EraIndex: 1752,
+		EraIndex: 1736,
 		EraCount: 10,
 		TargetIndex: 0,
 	},
@@ -34413,7 +34033,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfc23f2c2,
 		NameIndex: 336, // "Atlantic/Canary"
-		EraIndex: 1416,
+		EraIndex: 1412,
 		EraCount: 5,
 		TargetIndex: 0,
 	},
@@ -34437,7 +34057,7 @@ var ZoneInfoRecords = []zoneinfo.ZoneInfoRecord{
 	{
 		ZoneID: 0xfec3e7a6,
 		NameIndex: 87, // "America/Campo_Grande"
-		EraIndex: 299,
+		EraIndex: 298,
 		EraCount: 2,
 		TargetIndex: 0,
 	},
