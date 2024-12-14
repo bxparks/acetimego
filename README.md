@@ -37,7 +37,7 @@ This library implements the algorithms equivalent to the following libraries:
 * [acetimepy](https://github.com/bxparks/acetimepy) for Python,
 * [acetimec](https://github.com/bxparks/acetimec) for C.
 
-**Version**: 0.5.2 (2024-07-26, TZDB 2024a)
+**Version**: 0.6.0 (2024-12-14, TZDB 2024b)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
