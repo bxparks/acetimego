@@ -43,8 +43,9 @@ func leapAceTime() {
 	println("==== 2016 Leap second by acetime package")
 	atz := acetime.TimeZoneUTC
 
-	ldt := acetime.LocalDateTime{2016, 12, 31, 23, 59, 59, 0 /*Fold*/}
-	zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &atz)
+	ldt := acetime.LocalDateTime{2016, 12, 31, 23, 59, 59}
+	zdt := acetime.ZonedDateTimeFromLocalDateTime(
+		&ldt, &atz, acetime.DisambiguateCompatible)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
 			ldt.String())
@@ -53,8 +54,9 @@ func leapAceTime() {
 	seconds := zdt.EpochSeconds()
 	println(zdt.String(), "; seconds=", seconds)
 
-	ldt = acetime.LocalDateTime{2016, 12, 31, 23, 59, 60, 0 /*Fold*/}
-	zdt = acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &atz)
+	ldt = acetime.LocalDateTime{2016, 12, 31, 23, 59, 60}
+	zdt = acetime.ZonedDateTimeFromLocalDateTime(
+		&ldt, &atz, acetime.DisambiguateCompatible)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
 			ldt.String())
@@ -63,8 +65,9 @@ func leapAceTime() {
 	seconds = zdt.EpochSeconds()
 	println(zdt.String(), "; seconds=", seconds)
 
-	ldt = acetime.LocalDateTime{2017, 1, 1, 0, 0, 0, 0 /*Fold*/}
-	zdt = acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &atz)
+	ldt = acetime.LocalDateTime{2017, 1, 1, 0, 0, 0}
+	zdt = acetime.ZonedDateTimeFromLocalDateTime(
+		&ldt, &atz, acetime.DisambiguateCompatible)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
 			ldt.String())

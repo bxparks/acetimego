@@ -1,6 +1,6 @@
 package acetime
 
-// FoldType
+// FoldType. Must be identical to findResult enums.
 const (
 	FoldTypeErr = iota
 	FoldTypeNotFound
@@ -26,16 +26,16 @@ type ZonedExtra struct {
 	Abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
-func NewZonedExtraFromEpochSeconds(
+func ZonedExtraFromEpochSeconds(
 	epochSeconds Time, tz *TimeZone) ZonedExtra {
 
 	return tz.findZonedExtraForEpochSeconds(epochSeconds)
 }
 
-func NewZonedExtraFromLocalDateTime(
-	ldt *LocalDateTime, tz *TimeZone) ZonedExtra {
+func ZonedExtraFromLocalDateTime(
+	ldt *LocalDateTime, tz *TimeZone, disambiguate uint8) ZonedExtra {
 
-	return tz.findZonedExtraForLocalDateTime(ldt)
+	return tz.findZonedExtraForLocalDateTime(ldt, disambiguate)
 }
 
 func (extra *ZonedExtra) IsError() bool {

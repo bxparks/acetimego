@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeSuite/compiler/src/acetimecompiler/tzcompiler.py
 //     --input_dir /home/brian/src/AceTimeSuite/libraries/acetimego/zonedball/tzfiles
 //     --output_dir /home/brian/src/AceTimeSuite/libraries/acetimego/zonedball
-//     --tz_version 2025a
+//     --tz_version 2025b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2025a
+// from https://github.com/eggert/tz/releases/tag/2025b
 //
-// Supported Zones: 596 (339 zones, 257 links)
+// Supported Zones: 597 (340 zones, 257 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [1800,2200]
@@ -39,23 +39,23 @@
 // Max Buffer Size: 8
 //
 // Records:
-//   Infos: 596
-//   Eras: 1942
+//   Infos: 597
+//   Eras: 1956
 //   Policies: 134
 //   Rules: 2235
 //
 // Memory:
 //   Rules: 26820
 //   Policies: 536
-//   Eras: 27188
-//   Zones: 4068
+//   Eras: 27384
+//   Zones: 4080
 //   Links: 3084
 //   Registry: 0
 //   Formats: 600
 //   Letters: 106
 //   Fragments: 0
-//   Names: 9675
-//   TOTAL: 72077
+//   Names: 9694
+//   TOTAL: 72304
 //
 // DO NOT EDIT
 
@@ -100,21 +100,21 @@ var RecordContext = zoneinfo.ZoneRecordContext{
 // Zone Indexes. Index into the ZoneInfoRecords array. Intended for unit tests
 // which need direct access to the zoneinfo.ZoneInfo struct.
 //
-// Total: 596 (339 zones, 257 links)
+// Total: 597 (340 zones, 257 links)
 // ---------------------------------------------------------------------------
 
 const (
 	ZoneInfoIndexAfrica_Abidjan uint16 = 468 // Africa/Abidjan
 	ZoneInfoIndexAfrica_Accra uint16 = 269 // Africa/Accra
 	ZoneInfoIndexAfrica_Addis_Ababa uint16 = 16 // Africa/Addis_Ababa
-	ZoneInfoIndexAfrica_Algiers uint16 = 517 // Africa/Algiers
+	ZoneInfoIndexAfrica_Algiers uint16 = 518 // Africa/Algiers
 	ZoneInfoIndexAfrica_Asmara uint16 = 254 // Africa/Asmara
 	ZoneInfoIndexAfrica_Asmera uint16 = 255 // Africa/Asmera
 	ZoneInfoIndexAfrica_Bamako uint16 = 259 // Africa/Bamako
 	ZoneInfoIndexAfrica_Bangui uint16 = 260 // Africa/Bangui
 	ZoneInfoIndexAfrica_Banjul uint16 = 261 // Africa/Banjul
 	ZoneInfoIndexAfrica_Bissau uint16 = 265 // Africa/Bissau
-	ZoneInfoIndexAfrica_Blantyre uint16 = 536 // Africa/Blantyre
+	ZoneInfoIndexAfrica_Blantyre uint16 = 537 // Africa/Blantyre
 	ZoneInfoIndexAfrica_Brazzaville uint16 = 131 // Africa/Brazzaville
 	ZoneInfoIndexAfrica_Bujumbura uint16 = 13 // Africa/Bujumbura
 	ZoneInfoIndexAfrica_Cairo uint16 = 270 // Africa/Cairo
@@ -129,15 +129,15 @@ const (
 	ZoneInfoIndexAfrica_Freetown uint16 = 225 // Africa/Freetown
 	ZoneInfoIndexAfrica_Gaborone uint16 = 121 // Africa/Gaborone
 	ZoneInfoIndexAfrica_Harare uint16 = 297 // Africa/Harare
-	ZoneInfoIndexAfrica_Johannesburg uint16 = 511 // Africa/Johannesburg
-	ZoneInfoIndexAfrica_Juba uint16 = 507 // Africa/Juba
+	ZoneInfoIndexAfrica_Johannesburg uint16 = 512 // Africa/Johannesburg
+	ZoneInfoIndexAfrica_Juba uint16 = 508 // Africa/Juba
 	ZoneInfoIndexAfrica_Kampala uint16 = 466 // Africa/Kampala
-	ZoneInfoIndexAfrica_Khartoum uint16 = 586 // Africa/Khartoum
+	ZoneInfoIndexAfrica_Khartoum uint16 = 587 // Africa/Khartoum
 	ZoneInfoIndexAfrica_Kigali uint16 = 308 // Africa/Kigali
 	ZoneInfoIndexAfrica_Kinshasa uint16 = 219 // Africa/Kinshasa
 	ZoneInfoIndexAfrica_Lagos uint16 = 273 // Africa/Lagos
 	ZoneInfoIndexAfrica_Libreville uint16 = 3 // Africa/Libreville
-	ZoneInfoIndexAfrica_Lome uint16 = 508 // Africa/Lome
+	ZoneInfoIndexAfrica_Lome uint16 = 509 // Africa/Lome
 	ZoneInfoIndexAfrica_Luanda uint16 = 319 // Africa/Luanda
 	ZoneInfoIndexAfrica_Lubumbashi uint16 = 248 // Africa/Lubumbashi
 	ZoneInfoIndexAfrica_Lusaka uint16 = 320 // Africa/Lusaka
@@ -163,7 +163,7 @@ const (
 	ZoneInfoIndexAmerica_Anguilla uint16 = 436 // America/Anguilla
 	ZoneInfoIndexAmerica_Antigua uint16 = 463 // America/Antigua
 	ZoneInfoIndexAmerica_Araguaina uint16 = 247 // America/Araguaina
-	ZoneInfoIndexAmerica_Argentina_Buenos_Aires uint16 = 505 // America/Argentina/Buenos_Aires
+	ZoneInfoIndexAmerica_Argentina_Buenos_Aires uint16 = 506 // America/Argentina/Buenos_Aires
 	ZoneInfoIndexAmerica_Argentina_Catamarca uint16 = 318 // America/Argentina/Catamarca
 	ZoneInfoIndexAmerica_Argentina_ComodRivadavia uint16 = 90 // America/Argentina/ComodRivadavia
 	ZoneInfoIndexAmerica_Argentina_Cordoba uint16 = 461 // America/Argentina/Cordoba
@@ -174,7 +174,7 @@ const (
 	ZoneInfoIndexAmerica_Argentina_Salta uint16 = 207 // America/Argentina/Salta
 	ZoneInfoIndexAmerica_Argentina_San_Juan uint16 = 141 // America/Argentina/San_Juan
 	ZoneInfoIndexAmerica_Argentina_San_Luis uint16 = 142 // America/Argentina/San_Luis
-	ZoneInfoIndexAmerica_Argentina_Tucuman uint16 = 554 // America/Argentina/Tucuman
+	ZoneInfoIndexAmerica_Argentina_Tucuman uint16 = 555 // America/Argentina/Tucuman
 	ZoneInfoIndexAmerica_Argentina_Ushuaia uint16 = 122 // America/Argentina/Ushuaia
 	ZoneInfoIndexAmerica_Aruba uint16 = 349 // America/Aruba
 	ZoneInfoIndexAmerica_Asuncion uint16 = 175 // America/Asuncion
@@ -190,8 +190,8 @@ const (
 	ZoneInfoIndexAmerica_Bogota uint16 = 339 // America/Bogota
 	ZoneInfoIndexAmerica_Boise uint16 = 353 // America/Boise
 	ZoneInfoIndexAmerica_Buenos_Aires uint16 = 224 // America/Buenos_Aires
-	ZoneInfoIndexAmerica_Cambridge_Bay uint16 = 510 // America/Cambridge_Bay
-	ZoneInfoIndexAmerica_Campo_Grande uint16 = 595 // America/Campo_Grande
+	ZoneInfoIndexAmerica_Cambridge_Bay uint16 = 511 // America/Cambridge_Bay
+	ZoneInfoIndexAmerica_Campo_Grande uint16 = 596 // America/Campo_Grande
 	ZoneInfoIndexAmerica_Cancun uint16 = 342 // America/Cancun
 	ZoneInfoIndexAmerica_Caracas uint16 = 132 // America/Caracas
 	ZoneInfoIndexAmerica_Catamarca uint16 = 174 // America/Catamarca
@@ -203,17 +203,18 @@ const (
 	ZoneInfoIndexAmerica_Coral_Harbour uint16 = 430 // America/Coral_Harbour
 	ZoneInfoIndexAmerica_Cordoba uint16 = 198 // America/Cordoba
 	ZoneInfoIndexAmerica_Costa_Rica uint16 = 213 // America/Costa_Rica
+	ZoneInfoIndexAmerica_Coyhaique uint16 = 486 // America/Coyhaique
 	ZoneInfoIndexAmerica_Creston uint16 = 212 // America/Creston
 	ZoneInfoIndexAmerica_Cuiaba uint16 = 347 // America/Cuiaba
 	ZoneInfoIndexAmerica_Curacao uint16 = 230 // America/Curacao
-	ZoneInfoIndexAmerica_Danmarkshavn uint16 = 571 // America/Danmarkshavn
+	ZoneInfoIndexAmerica_Danmarkshavn uint16 = 572 // America/Danmarkshavn
 	ZoneInfoIndexAmerica_Dawson uint16 = 348 // America/Dawson
 	ZoneInfoIndexAmerica_Dawson_Creek uint16 = 239 // America/Dawson_Creek
 	ZoneInfoIndexAmerica_Denver uint16 = 350 // America/Denver
 	ZoneInfoIndexAmerica_Detroit uint16 = 334 // America/Detroit
-	ZoneInfoIndexAmerica_Dominica uint16 = 490 // America/Dominica
+	ZoneInfoIndexAmerica_Dominica uint16 = 491 // America/Dominica
 	ZoneInfoIndexAmerica_Edmonton uint16 = 238 // America/Edmonton
-	ZoneInfoIndexAmerica_Eirunepe uint16 = 578 // America/Eirunepe
+	ZoneInfoIndexAmerica_Eirunepe uint16 = 579 // America/Eirunepe
 	ZoneInfoIndexAmerica_El_Salvador uint16 = 264 // America/El_Salvador
 	ZoneInfoIndexAmerica_Ensenada uint16 = 283 // America/Ensenada
 	ZoneInfoIndexAmerica_Fort_Nelson uint16 = 144 // America/Fort_Nelson
@@ -224,7 +225,7 @@ const (
 	ZoneInfoIndexAmerica_Goose_Bay uint16 = 449 // America/Goose_Bay
 	ZoneInfoIndexAmerica_Grand_Turk uint16 = 242 // America/Grand_Turk
 	ZoneInfoIndexAmerica_Grenada uint16 = 346 // America/Grenada
-	ZoneInfoIndexAmerica_Guadeloupe uint16 = 487 // America/Guadeloupe
+	ZoneInfoIndexAmerica_Guadeloupe uint16 = 488 // America/Guadeloupe
 	ZoneInfoIndexAmerica_Guatemala uint16 = 38 // America/Guatemala
 	ZoneInfoIndexAmerica_Guayaquil uint16 = 72 // America/Guayaquil
 	ZoneInfoIndexAmerica_Guyana uint16 = 402 // America/Guyana
@@ -246,9 +247,9 @@ const (
 	ZoneInfoIndexAmerica_Jujuy uint16 = 361 // America/Jujuy
 	ZoneInfoIndexAmerica_Juneau uint16 = 417 // America/Juneau
 	ZoneInfoIndexAmerica_Kentucky_Louisville uint16 = 74 // America/Kentucky/Louisville
-	ZoneInfoIndexAmerica_Kentucky_Monticello uint16 = 528 // America/Kentucky/Monticello
+	ZoneInfoIndexAmerica_Kentucky_Monticello uint16 = 529 // America/Kentucky/Monticello
 	ZoneInfoIndexAmerica_Knox_IN uint16 = 467 // America/Knox_IN
-	ZoneInfoIndexAmerica_Kralendijk uint16 = 553 // America/Kralendijk
+	ZoneInfoIndexAmerica_Kralendijk uint16 = 554 // America/Kralendijk
 	ZoneInfoIndexAmerica_La_Paz uint16 = 428 // America/La_Paz
 	ZoneInfoIndexAmerica_Lima uint16 = 357 // America/Lima
 	ZoneInfoIndexAmerica_Los_Angeles uint16 = 450 // America/Los_Angeles
@@ -259,17 +260,17 @@ const (
 	ZoneInfoIndexAmerica_Manaus uint16 = 432 // America/Manaus
 	ZoneInfoIndexAmerica_Marigot uint16 = 137 // America/Marigot
 	ZoneInfoIndexAmerica_Martinique uint16 = 181 // America/Martinique
-	ZoneInfoIndexAmerica_Matamoros uint16 = 522 // America/Matamoros
+	ZoneInfoIndexAmerica_Matamoros uint16 = 523 // America/Matamoros
 	ZoneInfoIndexAmerica_Mazatlan uint16 = 14 // America/Mazatlan
 	ZoneInfoIndexAmerica_Mendoza uint16 = 163 // America/Mendoza
-	ZoneInfoIndexAmerica_Menominee uint16 = 537 // America/Menominee
+	ZoneInfoIndexAmerica_Menominee uint16 = 538 // America/Menominee
 	ZoneInfoIndexAmerica_Merida uint16 = 433 // America/Merida
 	ZoneInfoIndexAmerica_Metlakatla uint16 = 301 // America/Metlakatla
-	ZoneInfoIndexAmerica_Mexico_City uint16 = 497 // America/Mexico_City
+	ZoneInfoIndexAmerica_Mexico_City uint16 = 498 // America/Mexico_City
 	ZoneInfoIndexAmerica_Miquelon uint16 = 188 // America/Miquelon
 	ZoneInfoIndexAmerica_Moncton uint16 = 202 // America/Moncton
 	ZoneInfoIndexAmerica_Monterrey uint16 = 100 // America/Monterrey
-	ZoneInfoIndexAmerica_Montevideo uint16 = 579 // America/Montevideo
+	ZoneInfoIndexAmerica_Montevideo uint16 = 580 // America/Montevideo
 	ZoneInfoIndexAmerica_Montreal uint16 = 87 // America/Montreal
 	ZoneInfoIndexAmerica_Montserrat uint16 = 73 // America/Montserrat
 	ZoneInfoIndexAmerica_Nassau uint16 = 435 // America/Nassau
@@ -281,14 +282,14 @@ const (
 	ZoneInfoIndexAmerica_North_Dakota_Center uint16 = 396 // America/North_Dakota/Center
 	ZoneInfoIndexAmerica_North_Dakota_New_Salem uint16 = 11 // America/North_Dakota/New_Salem
 	ZoneInfoIndexAmerica_Nuuk uint16 = 359 // America/Nuuk
-	ZoneInfoIndexAmerica_Ojinaga uint16 = 559 // America/Ojinaga
+	ZoneInfoIndexAmerica_Ojinaga uint16 = 560 // America/Ojinaga
 	ZoneInfoIndexAmerica_Panama uint16 = 445 // America/Panama
 	ZoneInfoIndexAmerica_Pangnirtung uint16 = 112 // America/Pangnirtung
 	ZoneInfoIndexAmerica_Paramaribo uint16 = 444 // America/Paramaribo
 	ZoneInfoIndexAmerica_Phoenix uint16 = 127 // America/Phoenix
 	ZoneInfoIndexAmerica_Port_au_Prince uint16 = 325 // America/Port-au-Prince
-	ZoneInfoIndexAmerica_Port_of_Spain uint16 = 512 // America/Port_of_Spain
-	ZoneInfoIndexAmerica_Porto_Acre uint16 = 486 // America/Porto_Acre
+	ZoneInfoIndexAmerica_Port_of_Spain uint16 = 513 // America/Port_of_Spain
+	ZoneInfoIndexAmerica_Porto_Acre uint16 = 487 // America/Porto_Acre
 	ZoneInfoIndexAmerica_Porto_Velho uint16 = 235 // America/Porto_Velho
 	ZoneInfoIndexAmerica_Puerto_Rico uint16 = 222 // America/Puerto_Rico
 	ZoneInfoIndexAmerica_Punta_Arenas uint16 = 472 // America/Punta_Arenas
@@ -298,8 +299,8 @@ const (
 	ZoneInfoIndexAmerica_Regina uint16 = 452 // America/Regina
 	ZoneInfoIndexAmerica_Resolute uint16 = 478 // America/Resolute
 	ZoneInfoIndexAmerica_Rio_Branco uint16 = 393 // America/Rio_Branco
-	ZoneInfoIndexAmerica_Rosario uint16 = 531 // America/Rosario
-	ZoneInfoIndexAmerica_Santa_Isabel uint16 = 594 // America/Santa_Isabel
+	ZoneInfoIndexAmerica_Rosario uint16 = 532 // America/Rosario
+	ZoneInfoIndexAmerica_Santa_Isabel uint16 = 595 // America/Santa_Isabel
 	ZoneInfoIndexAmerica_Santarem uint16 = 257 // America/Santarem
 	ZoneInfoIndexAmerica_Santiago uint16 = 258 // America/Santiago
 	ZoneInfoIndexAmerica_Santo_Domingo uint16 = 266 // America/Santo_Domingo
@@ -313,10 +314,10 @@ const (
 	ZoneInfoIndexAmerica_St_Lucia uint16 = 10 // America/St_Lucia
 	ZoneInfoIndexAmerica_St_Thomas uint16 = 443 // America/St_Thomas
 	ZoneInfoIndexAmerica_St_Vincent uint16 = 300 // America/St_Vincent
-	ZoneInfoIndexAmerica_Swift_Current uint16 = 530 // America/Swift_Current
+	ZoneInfoIndexAmerica_Swift_Current uint16 = 531 // America/Swift_Current
 	ZoneInfoIndexAmerica_Tegucigalpa uint16 = 462 // America/Tegucigalpa
 	ZoneInfoIndexAmerica_Thule uint16 = 363 // America/Thule
-	ZoneInfoIndexAmerica_Thunder_Bay uint16 = 577 // America/Thunder_Bay
+	ZoneInfoIndexAmerica_Thunder_Bay uint16 = 578 // America/Thunder_Bay
 	ZoneInfoIndexAmerica_Tijuana uint16 = 231 // America/Tijuana
 	ZoneInfoIndexAmerica_Toronto uint16 = 276 // America/Toronto
 	ZoneInfoIndexAmerica_Tortola uint16 = 277 // America/Tortola
@@ -324,21 +325,21 @@ const (
 	ZoneInfoIndexAmerica_Virgin uint16 = 469 // America/Virgin
 	ZoneInfoIndexAmerica_Whitehorse uint16 = 180 // America/Whitehorse
 	ZoneInfoIndexAmerica_Winnipeg uint16 = 316 // America/Winnipeg
-	ZoneInfoIndexAmerica_Yakutat uint16 = 516 // America/Yakutat
+	ZoneInfoIndexAmerica_Yakutat uint16 = 517 // America/Yakutat
 	ZoneInfoIndexAmerica_Yellowknife uint16 = 48 // America/Yellowknife
-	ZoneInfoIndexAntarctica_Casey uint16 = 541 // Antarctica/Casey
-	ZoneInfoIndexAntarctica_Davis uint16 = 542 // Antarctica/Davis
+	ZoneInfoIndexAntarctica_Casey uint16 = 542 // Antarctica/Casey
+	ZoneInfoIndexAntarctica_Davis uint16 = 543 // Antarctica/Davis
 	ZoneInfoIndexAntarctica_DumontDUrville uint16 = 189 // Antarctica/DumontDUrville
 	ZoneInfoIndexAntarctica_Macquarie uint16 = 336 // Antarctica/Macquarie
 	ZoneInfoIndexAntarctica_Mawson uint16 = 130 // Antarctica/Mawson
 	ZoneInfoIndexAntarctica_McMurdo uint16 = 246 // Antarctica/McMurdo
 	ZoneInfoIndexAntarctica_Palmer uint16 = 153 // Antarctica/Palmer
 	ZoneInfoIndexAntarctica_Rothera uint16 = 47 // Antarctica/Rothera
-	ZoneInfoIndexAntarctica_South_Pole uint16 = 488 // Antarctica/South_Pole
-	ZoneInfoIndexAntarctica_Syowa uint16 = 545 // Antarctica/Syowa
-	ZoneInfoIndexAntarctica_Troll uint16 = 546 // Antarctica/Troll
+	ZoneInfoIndexAntarctica_South_Pole uint16 = 489 // Antarctica/South_Pole
+	ZoneInfoIndexAntarctica_Syowa uint16 = 546 // Antarctica/Syowa
+	ZoneInfoIndexAntarctica_Troll uint16 = 547 // Antarctica/Troll
 	ZoneInfoIndexAntarctica_Vostok uint16 = 171 // Antarctica/Vostok
-	ZoneInfoIndexArctic_Longyearbyen uint16 = 502 // Arctic/Longyearbyen
+	ZoneInfoIndexArctic_Longyearbyen uint16 = 503 // Arctic/Longyearbyen
 	ZoneInfoIndexAsia_Aden uint16 = 80 // Asia/Aden
 	ZoneInfoIndexAsia_Almaty uint16 = 413 // Asia/Almaty
 	ZoneInfoIndexAsia_Amman uint16 = 55 // Asia/Amman
@@ -359,7 +360,7 @@ const (
 	ZoneInfoIndexAsia_Calcutta uint16 = 123 // Asia/Calcutta
 	ZoneInfoIndexAsia_Chita uint16 = 57 // Asia/Chita
 	ZoneInfoIndexAsia_Choibalsan uint16 = 335 // Asia/Choibalsan
-	ZoneInfoIndexAsia_Chongqing uint16 = 574 // Asia/Chongqing
+	ZoneInfoIndexAsia_Chongqing uint16 = 575 // Asia/Chongqing
 	ZoneInfoIndexAsia_Chungking uint16 = 479 // Asia/Chungking
 	ZoneInfoIndexAsia_Colombo uint16 = 24 // Asia/Colombo
 	ZoneInfoIndexAsia_Dacca uint16 = 58 // Asia/Dacca
@@ -375,7 +376,7 @@ const (
 	ZoneInfoIndexAsia_Ho_Chi_Minh uint16 = 88 // Asia/Ho_Chi_Minh
 	ZoneInfoIndexAsia_Hong_Kong uint16 = 186 // Asia/Hong_Kong
 	ZoneInfoIndexAsia_Hovd uint16 = 84 // Asia/Hovd
-	ZoneInfoIndexAsia_Irkutsk uint16 = 532 // Asia/Irkutsk
+	ZoneInfoIndexAsia_Irkutsk uint16 = 533 // Asia/Irkutsk
 	ZoneInfoIndexAsia_Istanbul uint16 = 128 // Asia/Istanbul
 	ZoneInfoIndexAsia_Jakarta uint16 = 12 // Asia/Jakarta
 	ZoneInfoIndexAsia_Jayapura uint16 = 477 // Asia/Jayapura
@@ -388,13 +389,13 @@ const (
 	ZoneInfoIndexAsia_Katmandu uint16 = 420 // Asia/Katmandu
 	ZoneInfoIndexAsia_Khandyga uint16 = 345 // Asia/Khandyga
 	ZoneInfoIndexAsia_Kolkata uint16 = 251 // Asia/Kolkata
-	ZoneInfoIndexAsia_Krasnoyarsk uint16 = 495 // Asia/Krasnoyarsk
+	ZoneInfoIndexAsia_Krasnoyarsk uint16 = 496 // Asia/Krasnoyarsk
 	ZoneInfoIndexAsia_Kuala_Lumpur uint16 = 2 // Asia/Kuala_Lumpur
 	ZoneInfoIndexAsia_Kuching uint16 = 294 // Asia/Kuching
 	ZoneInfoIndexAsia_Kuwait uint16 = 458 // Asia/Kuwait
 	ZoneInfoIndexAsia_Macao uint16 = 64 // Asia/Macao
 	ZoneInfoIndexAsia_Macau uint16 = 65 // Asia/Macau
-	ZoneInfoIndexAsia_Magadan uint16 = 558 // Asia/Magadan
+	ZoneInfoIndexAsia_Magadan uint16 = 559 // Asia/Magadan
 	ZoneInfoIndexAsia_Makassar uint16 = 232 // Asia/Makassar
 	ZoneInfoIndexAsia_Manila uint16 = 465 // Asia/Manila
 	ZoneInfoIndexAsia_Muscat uint16 = 471 // Asia/Muscat
@@ -410,40 +411,40 @@ const (
 	ZoneInfoIndexAsia_Qostanay uint16 = 214 // Asia/Qostanay
 	ZoneInfoIndexAsia_Qyzylorda uint16 = 250 // Asia/Qyzylorda
 	ZoneInfoIndexAsia_Rangoon uint16 = 240 // Asia/Rangoon
-	ZoneInfoIndexAsia_Riyadh uint16 = 489 // Asia/Riyadh
-	ZoneInfoIndexAsia_Saigon uint16 = 492 // Asia/Saigon
-	ZoneInfoIndexAsia_Sakhalin uint16 = 567 // Asia/Sakhalin
+	ZoneInfoIndexAsia_Riyadh uint16 = 490 // Asia/Riyadh
+	ZoneInfoIndexAsia_Saigon uint16 = 493 // Asia/Saigon
+	ZoneInfoIndexAsia_Sakhalin uint16 = 568 // Asia/Sakhalin
 	ZoneInfoIndexAsia_Samarkand uint16 = 54 // Asia/Samarkand
 	ZoneInfoIndexAsia_Seoul uint16 = 67 // Asia/Seoul
-	ZoneInfoIndexAsia_Shanghai uint16 = 572 // Asia/Shanghai
-	ZoneInfoIndexAsia_Singapore uint16 = 494 // Asia/Singapore
+	ZoneInfoIndexAsia_Shanghai uint16 = 573 // Asia/Shanghai
+	ZoneInfoIndexAsia_Singapore uint16 = 495 // Asia/Singapore
 	ZoneInfoIndexAsia_Srednekolymsk uint16 = 460 // Asia/Srednekolymsk
-	ZoneInfoIndexAsia_Taipei uint16 = 499 // Asia/Taipei
-	ZoneInfoIndexAsia_Tashkent uint16 = 566 // Asia/Tashkent
+	ZoneInfoIndexAsia_Taipei uint16 = 500 // Asia/Taipei
+	ZoneInfoIndexAsia_Tashkent uint16 = 567 // Asia/Tashkent
 	ZoneInfoIndexAsia_Tbilisi uint16 = 20 // Asia/Tbilisi
-	ZoneInfoIndexAsia_Tehran uint16 = 500 // Asia/Tehran
+	ZoneInfoIndexAsia_Tehran uint16 = 501 // Asia/Tehran
 	ZoneInfoIndexAsia_Tel_Aviv uint16 = 70 // Asia/Tel_Aviv
-	ZoneInfoIndexAsia_Thimbu uint16 = 501 // Asia/Thimbu
+	ZoneInfoIndexAsia_Thimbu uint16 = 502 // Asia/Thimbu
 	ZoneInfoIndexAsia_Thimphu uint16 = 71 // Asia/Thimphu
 	ZoneInfoIndexAsia_Tokyo uint16 = 68 // Asia/Tokyo
 	ZoneInfoIndexAsia_Tomsk uint16 = 69 // Asia/Tomsk
 	ZoneInfoIndexAsia_Ujung_Pandang uint16 = 199 // Asia/Ujung_Pandang
 	ZoneInfoIndexAsia_Ulaanbaatar uint16 = 120 // Asia/Ulaanbaatar
 	ZoneInfoIndexAsia_Ulan_Bator uint16 = 129 // Asia/Ulan_Bator
-	ZoneInfoIndexAsia_Urumqi uint16 = 509 // Asia/Urumqi
+	ZoneInfoIndexAsia_Urumqi uint16 = 510 // Asia/Urumqi
 	ZoneInfoIndexAsia_Ust_Nera uint16 = 164 // Asia/Ust-Nera
 	ZoneInfoIndexAsia_Vientiane uint16 = 305 // Asia/Vientiane
 	ZoneInfoIndexAsia_Vladivostok uint16 = 108 // Asia/Vladivostok
 	ZoneInfoIndexAsia_Yakutsk uint16 = 302 // Asia/Yakutsk
-	ZoneInfoIndexAsia_Yangon uint16 = 524 // Asia/Yangon
-	ZoneInfoIndexAsia_Yekaterinburg uint16 = 588 // Asia/Yekaterinburg
+	ZoneInfoIndexAsia_Yangon uint16 = 525 // Asia/Yangon
+	ZoneInfoIndexAsia_Yekaterinburg uint16 = 589 // Asia/Yekaterinburg
 	ZoneInfoIndexAsia_Yerevan uint16 = 333 // Asia/Yerevan
-	ZoneInfoIndexAtlantic_Azores uint16 = 575 // Atlantic/Azores
+	ZoneInfoIndexAtlantic_Azores uint16 = 576 // Atlantic/Azores
 	ZoneInfoIndexAtlantic_Bermuda uint16 = 135 // Atlantic/Bermuda
-	ZoneInfoIndexAtlantic_Canary uint16 = 592 // Atlantic/Canary
+	ZoneInfoIndexAtlantic_Canary uint16 = 593 // Atlantic/Canary
 	ZoneInfoIndexAtlantic_Cape_Verde uint16 = 196 // Atlantic/Cape_Verde
 	ZoneInfoIndexAtlantic_Faeroe uint16 = 6 // Atlantic/Faeroe
-	ZoneInfoIndexAtlantic_Faroe uint16 = 539 // Atlantic/Faroe
+	ZoneInfoIndexAtlantic_Faroe uint16 = 540 // Atlantic/Faroe
 	ZoneInfoIndexAtlantic_Jan_Mayen uint16 = 190 // Atlantic/Jan_Mayen
 	ZoneInfoIndexAtlantic_Madeira uint16 = 295 // Atlantic/Madeira
 	ZoneInfoIndexAtlantic_Reykjavik uint16 = 77 // Atlantic/Reykjavik
@@ -460,29 +461,29 @@ const (
 	ZoneInfoIndexAustralia_Eucla uint16 = 317 // Australia/Eucla
 	ZoneInfoIndexAustralia_Hobart uint16 = 124 // Australia/Hobart
 	ZoneInfoIndexAustralia_LHI uint16 = 310 // Australia/LHI
-	ZoneInfoIndexAustralia_Lindeman uint16 = 534 // Australia/Lindeman
+	ZoneInfoIndexAustralia_Lindeman uint16 = 535 // Australia/Lindeman
 	ZoneInfoIndexAustralia_Lord_Howe uint16 = 418 // Australia/Lord_Howe
 	ZoneInfoIndexAustralia_Melbourne uint16 = 49 // Australia/Melbourne
 	ZoneInfoIndexAustralia_NSW uint16 = 311 // Australia/NSW
 	ZoneInfoIndexAustralia_North uint16 = 321 // Australia/North
 	ZoneInfoIndexAustralia_Perth uint16 = 322 // Australia/Perth
-	ZoneInfoIndexAustralia_Queensland uint16 = 503 // Australia/Queensland
+	ZoneInfoIndexAustralia_Queensland uint16 = 504 // Australia/Queensland
 	ZoneInfoIndexAustralia_South uint16 = 323 // Australia/South
 	ZoneInfoIndexAustralia_Sydney uint16 = 168 // Australia/Sydney
-	ZoneInfoIndexAustralia_Tasmania uint16 = 551 // Australia/Tasmania
+	ZoneInfoIndexAustralia_Tasmania uint16 = 552 // Australia/Tasmania
 	ZoneInfoIndexAustralia_Victoria uint16 = 5 // Australia/Victoria
-	ZoneInfoIndexAustralia_West uint16 = 526 // Australia/West
+	ZoneInfoIndexAustralia_West uint16 = 527 // Australia/West
 	ZoneInfoIndexAustralia_Yancowinna uint16 = 331 // Australia/Yancowinna
 	ZoneInfoIndexBrazil_Acre uint16 = 217 // Brazil/Acre
 	ZoneInfoIndexBrazil_DeNoronha uint16 = 366 // Brazil/DeNoronha
 	ZoneInfoIndexBrazil_East uint16 = 218 // Brazil/East
 	ZoneInfoIndexBrazil_West uint16 = 220 // Brazil/West
 	ZoneInfoIndexCET uint16 = 25 // CET
-	ZoneInfoIndexCST6CDT uint16 = 561 // CST6CDT
+	ZoneInfoIndexCST6CDT uint16 = 562 // CST6CDT
 	ZoneInfoIndexCanada_Atlantic uint16 = 178 // Canada/Atlantic
 	ZoneInfoIndexCanada_Central uint16 = 211 // Canada/Central
-	ZoneInfoIndexCanada_Eastern uint16 = 565 // Canada/Eastern
-	ZoneInfoIndexCanada_Mountain uint16 = 590 // Canada/Mountain
+	ZoneInfoIndexCanada_Eastern uint16 = 566 // Canada/Eastern
+	ZoneInfoIndexCanada_Mountain uint16 = 591 // Canada/Mountain
 	ZoneInfoIndexCanada_Newfoundland uint16 = 446 // Canada/Newfoundland
 	ZoneInfoIndexCanada_Pacific uint16 = 154 // Canada/Pacific
 	ZoneInfoIndexCanada_Saskatchewan uint16 = 268 // Canada/Saskatchewan
@@ -495,7 +496,7 @@ const (
 	ZoneInfoIndexEST5EDT uint16 = 313 // EST5EDT
 	ZoneInfoIndexEgypt uint16 = 41 // Egypt
 	ZoneInfoIndexEire uint16 = 286 // Eire
-	ZoneInfoIndexEtc_GMT uint16 = 513 // Etc/GMT
+	ZoneInfoIndexEtc_GMT uint16 = 514 // Etc/GMT
 	ZoneInfoIndexEtc_GMT_PLUS_0 uint16 = 372 // Etc/GMT+0
 	ZoneInfoIndexEtc_GMT_PLUS_1 uint16 = 373 // Etc/GMT+1
 	ZoneInfoIndexEtc_GMT_PLUS_10 uint16 = 145 // Etc/GMT+10
@@ -524,78 +525,78 @@ const (
 	ZoneInfoIndexEtc_GMT_7 uint16 = 389 // Etc/GMT-7
 	ZoneInfoIndexEtc_GMT_8 uint16 = 390 // Etc/GMT-8
 	ZoneInfoIndexEtc_GMT_9 uint16 = 391 // Etc/GMT-9
-	ZoneInfoIndexEtc_GMT0 uint16 = 569 // Etc/GMT0
+	ZoneInfoIndexEtc_GMT0 uint16 = 570 // Etc/GMT0
 	ZoneInfoIndexEtc_Greenwich uint16 = 101 // Etc/Greenwich
-	ZoneInfoIndexEtc_UCT uint16 = 514 // Etc/UCT
-	ZoneInfoIndexEtc_UTC uint16 = 515 // Etc/UTC
+	ZoneInfoIndexEtc_UCT uint16 = 515 // Etc/UCT
+	ZoneInfoIndexEtc_UTC uint16 = 516 // Etc/UTC
 	ZoneInfoIndexEtc_Universal uint16 = 116 // Etc/Universal
-	ZoneInfoIndexEtc_Zulu uint16 = 570 // Etc/Zulu
+	ZoneInfoIndexEtc_Zulu uint16 = 571 // Etc/Zulu
 	ZoneInfoIndexEurope_Amsterdam uint16 = 51 // Europe/Amsterdam
 	ZoneInfoIndexEurope_Andorra uint16 = 354 // Europe/Andorra
-	ZoneInfoIndexEurope_Astrakhan uint16 = 543 // Europe/Astrakhan
+	ZoneInfoIndexEurope_Astrakhan uint16 = 544 // Europe/Astrakhan
 	ZoneInfoIndexEurope_Athens uint16 = 155 // Europe/Athens
-	ZoneInfoIndexEurope_Belfast uint16 = 496 // Europe/Belfast
-	ZoneInfoIndexEurope_Belgrade uint16 = 535 // Europe/Belgrade
+	ZoneInfoIndexEurope_Belfast uint16 = 497 // Europe/Belfast
+	ZoneInfoIndexEurope_Belgrade uint16 = 536 // Europe/Belgrade
 	ZoneInfoIndexEurope_Berlin uint16 = 158 // Europe/Berlin
-	ZoneInfoIndexEurope_Bratislava uint16 = 519 // Europe/Bratislava
-	ZoneInfoIndexEurope_Brussels uint16 = 529 // Europe/Brussels
-	ZoneInfoIndexEurope_Bucharest uint16 = 585 // Europe/Bucharest
+	ZoneInfoIndexEurope_Bratislava uint16 = 520 // Europe/Bratislava
+	ZoneInfoIndexEurope_Brussels uint16 = 530 // Europe/Brussels
+	ZoneInfoIndexEurope_Bucharest uint16 = 586 // Europe/Bucharest
 	ZoneInfoIndexEurope_Budapest uint16 = 369 // Europe/Budapest
 	ZoneInfoIndexEurope_Busingen uint16 = 464 // Europe/Busingen
 	ZoneInfoIndexEurope_Chisinau uint16 = 434 // Europe/Chisinau
-	ZoneInfoIndexEurope_Copenhagen uint16 = 538 // Europe/Copenhagen
+	ZoneInfoIndexEurope_Copenhagen uint16 = 539 // Europe/Copenhagen
 	ZoneInfoIndexEurope_Dublin uint16 = 165 // Europe/Dublin
-	ZoneInfoIndexEurope_Gibraltar uint16 = 573 // Europe/Gibraltar
+	ZoneInfoIndexEurope_Gibraltar uint16 = 574 // Europe/Gibraltar
 	ZoneInfoIndexEurope_Guernsey uint16 = 138 // Europe/Guernsey
 	ZoneInfoIndexEurope_Helsinki uint16 = 233 // Europe/Helsinki
-	ZoneInfoIndexEurope_Isle_of_Man uint16 = 557 // Europe/Isle_of_Man
+	ZoneInfoIndexEurope_Isle_of_Man uint16 = 558 // Europe/Isle_of_Man
 	ZoneInfoIndexEurope_Istanbul uint16 = 399 // Europe/Istanbul
 	ZoneInfoIndexEurope_Jersey uint16 = 185 // Europe/Jersey
-	ZoneInfoIndexEurope_Kaliningrad uint16 = 504 // Europe/Kaliningrad
+	ZoneInfoIndexEurope_Kaliningrad uint16 = 505 // Europe/Kaliningrad
 	ZoneInfoIndexEurope_Kiev uint16 = 406 // Europe/Kiev
-	ZoneInfoIndexEurope_Kirov uint16 = 582 // Europe/Kirov
+	ZoneInfoIndexEurope_Kirov uint16 = 583 // Europe/Kirov
 	ZoneInfoIndexEurope_Kyiv uint16 = 407 // Europe/Kyiv
 	ZoneInfoIndexEurope_Lisbon uint16 = 195 // Europe/Lisbon
 	ZoneInfoIndexEurope_Ljubljana uint16 = 457 // Europe/Ljubljana
 	ZoneInfoIndexEurope_London uint16 = 197 // Europe/London
 	ZoneInfoIndexEurope_Luxembourg uint16 = 79 // Europe/Luxembourg
 	ZoneInfoIndexEurope_Madrid uint16 = 201 // Europe/Madrid
-	ZoneInfoIndexEurope_Malta uint16 = 583 // Europe/Malta
+	ZoneInfoIndexEurope_Malta uint16 = 584 // Europe/Malta
 	ZoneInfoIndexEurope_Mariehamn uint16 = 39 // Europe/Mariehamn
-	ZoneInfoIndexEurope_Minsk uint16 = 584 // Europe/Minsk
+	ZoneInfoIndexEurope_Minsk uint16 = 585 // Europe/Minsk
 	ZoneInfoIndexEurope_Monaco uint16 = 204 // Europe/Monaco
 	ZoneInfoIndexEurope_Moscow uint16 = 205 // Europe/Moscow
 	ZoneInfoIndexEurope_Nicosia uint16 = 262 // Europe/Nicosia
 	ZoneInfoIndexEurope_Oslo uint16 = 408 // Europe/Oslo
-	ZoneInfoIndexEurope_Paris uint16 = 587 // Europe/Paris
+	ZoneInfoIndexEurope_Paris uint16 = 588 // Europe/Paris
 	ZoneInfoIndexEurope_Podgorica uint16 = 76 // Europe/Podgorica
 	ZoneInfoIndexEurope_Prague uint16 = 216 // Europe/Prague
 	ZoneInfoIndexEurope_Riga uint16 = 409 // Europe/Riga
 	ZoneInfoIndexEurope_Rome uint16 = 410 // Europe/Rome
 	ZoneInfoIndexEurope_Samara uint16 = 236 // Europe/Samara
-	ZoneInfoIndexEurope_San_Marino uint16 = 491 // Europe/San_Marino
+	ZoneInfoIndexEurope_San_Marino uint16 = 492 // Europe/San_Marino
 	ZoneInfoIndexEurope_Sarajevo uint16 = 229 // Europe/Sarajevo
-	ZoneInfoIndexEurope_Saratov uint16 = 547 // Europe/Saratov
-	ZoneInfoIndexEurope_Simferopol uint16 = 520 // Europe/Simferopol
+	ZoneInfoIndexEurope_Saratov uint16 = 548 // Europe/Saratov
+	ZoneInfoIndexEurope_Simferopol uint16 = 521 // Europe/Simferopol
 	ZoneInfoIndexEurope_Skopje uint16 = 237 // Europe/Skopje
-	ZoneInfoIndexEurope_Sofia uint16 = 589 // Europe/Sofia
+	ZoneInfoIndexEurope_Sofia uint16 = 590 // Europe/Sofia
 	ZoneInfoIndexEurope_Stockholm uint16 = 194 // Europe/Stockholm
 	ZoneInfoIndexEurope_Tallinn uint16 = 118 // Europe/Tallinn
 	ZoneInfoIndexEurope_Tirane uint16 = 244 // Europe/Tirane
 	ZoneInfoIndexEurope_Tiraspol uint16 = 459 // Europe/Tiraspol
-	ZoneInfoIndexEurope_Ulyanovsk uint16 = 533 // Europe/Ulyanovsk
+	ZoneInfoIndexEurope_Ulyanovsk uint16 = 534 // Europe/Ulyanovsk
 	ZoneInfoIndexEurope_Uzhgorod uint16 = 437 // Europe/Uzhgorod
-	ZoneInfoIndexEurope_Vaduz uint16 = 591 // Europe/Vaduz
+	ZoneInfoIndexEurope_Vaduz uint16 = 592 // Europe/Vaduz
 	ZoneInfoIndexEurope_Vatican uint16 = 484 // Europe/Vatican
 	ZoneInfoIndexEurope_Vienna uint16 = 253 // Europe/Vienna
-	ZoneInfoIndexEurope_Vilnius uint16 = 525 // Europe/Vilnius
+	ZoneInfoIndexEurope_Vilnius uint16 = 526 // Europe/Vilnius
 	ZoneInfoIndexEurope_Volgograd uint16 = 143 // Europe/Volgograd
 	ZoneInfoIndexEurope_Warsaw uint16 = 263 // Europe/Warsaw
 	ZoneInfoIndexEurope_Zagreb uint16 = 284 // Europe/Zagreb
-	ZoneInfoIndexEurope_Zaporozhye uint16 = 556 // Europe/Zaporozhye
+	ZoneInfoIndexEurope_Zaporozhye uint16 = 557 // Europe/Zaporozhye
 	ZoneInfoIndexEurope_Zurich uint16 = 291 // Europe/Zurich
 	ZoneInfoIndexGB uint16 = 0 // GB
-	ZoneInfoIndexGB_Eire uint16 = 581 // GB-Eire
+	ZoneInfoIndexGB_Eire uint16 = 582 // GB-Eire
 	ZoneInfoIndexGMT uint16 = 28 // GMT
 	ZoneInfoIndexGMT_PLUS_0 uint16 = 42 // GMT+0
 	ZoneInfoIndexGMT_0 uint16 = 43 // GMT-0
@@ -603,7 +604,7 @@ const (
 	ZoneInfoIndexGreenwich uint16 = 480 // Greenwich
 	ZoneInfoIndexHST uint16 = 29 // HST
 	ZoneInfoIndexHongkong uint16 = 184 // Hongkong
-	ZoneInfoIndexIceland uint16 = 549 // Iceland
+	ZoneInfoIndexIceland uint16 = 550 // Iceland
 	ZoneInfoIndexIndian_Antananarivo uint16 = 400 // Indian/Antananarivo
 	ZoneInfoIndexIndian_Chagos uint16 = 160 // Indian/Chagos
 	ZoneInfoIndexIndian_Christmas uint16 = 226 // Indian/Christmas
@@ -613,7 +614,7 @@ const (
 	ZoneInfoIndexIndian_Mahe uint16 = 161 // Indian/Mahe
 	ZoneInfoIndexIndian_Maldives uint16 = 360 // Indian/Maldives
 	ZoneInfoIndexIndian_Mauritius uint16 = 281 // Indian/Mauritius
-	ZoneInfoIndexIndian_Mayotte uint16 = 550 // Indian/Mayotte
+	ZoneInfoIndexIndian_Mayotte uint16 = 551 // Indian/Mayotte
 	ZoneInfoIndexIndian_Reunion uint16 = 249 // Indian/Reunion
 	ZoneInfoIndexIran uint16 = 288 // Iran
 	ZoneInfoIndexIsrael uint16 = 454 // Israel
@@ -623,67 +624,67 @@ const (
 	ZoneInfoIndexLibya uint16 = 45 // Libya
 	ZoneInfoIndexMET uint16 = 30 // MET
 	ZoneInfoIndexMST uint16 = 31 // MST
-	ZoneInfoIndexMST7MDT uint16 = 564 // MST7MDT
-	ZoneInfoIndexMexico_BajaNorte uint16 = 593 // Mexico/BajaNorte
+	ZoneInfoIndexMST7MDT uint16 = 565 // MST7MDT
+	ZoneInfoIndexMexico_BajaNorte uint16 = 594 // Mexico/BajaNorte
 	ZoneInfoIndexMexico_BajaSur uint16 = 19 // Mexico/BajaSur
 	ZoneInfoIndexMexico_General uint16 = 338 // Mexico/General
 	ZoneInfoIndexNZ uint16 = 1 // NZ
 	ZoneInfoIndexNZ_CHAT uint16 = 169 // NZ-CHAT
 	ZoneInfoIndexNavajo uint16 = 474 // Navajo
 	ZoneInfoIndexPRC uint16 = 32 // PRC
-	ZoneInfoIndexPST8PDT uint16 = 518 // PST8PDT
+	ZoneInfoIndexPST8PDT uint16 = 519 // PST8PDT
 	ZoneInfoIndexPacific_Apia uint16 = 91 // Pacific/Apia
 	ZoneInfoIndexPacific_Auckland uint16 = 98 // Pacific/Auckland
 	ZoneInfoIndexPacific_Bougainville uint16 = 203 // Pacific/Bougainville
 	ZoneInfoIndexPacific_Chatham uint16 = 115 // Pacific/Chatham
 	ZoneInfoIndexPacific_Chuuk uint16 = 306 // Pacific/Chuuk
-	ZoneInfoIndexPacific_Easter uint16 = 493 // Pacific/Easter
+	ZoneInfoIndexPacific_Easter uint16 = 494 // Pacific/Easter
 	ZoneInfoIndexPacific_Efate uint16 = 307 // Pacific/Efate
 	ZoneInfoIndexPacific_Enderbury uint16 = 209 // Pacific/Enderbury
 	ZoneInfoIndexPacific_Fakaofo uint16 = 17 // Pacific/Fakaofo
 	ZoneInfoIndexPacific_Fiji uint16 = 92 // Pacific/Fiji
-	ZoneInfoIndexPacific_Funafuti uint16 = 521 // Pacific/Funafuti
+	ZoneInfoIndexPacific_Funafuti uint16 = 522 // Pacific/Funafuti
 	ZoneInfoIndexPacific_Galapagos uint16 = 426 // Pacific/Galapagos
 	ZoneInfoIndexPacific_Gambier uint16 = 179 // Pacific/Gambier
-	ZoneInfoIndexPacific_Guadalcanal uint16 = 568 // Pacific/Guadalcanal
+	ZoneInfoIndexPacific_Guadalcanal uint16 = 569 // Pacific/Guadalcanal
 	ZoneInfoIndexPacific_Guam uint16 = 93 // Pacific/Guam
-	ZoneInfoIndexPacific_Honolulu uint16 = 552 // Pacific/Honolulu
+	ZoneInfoIndexPacific_Honolulu uint16 = 553 // Pacific/Honolulu
 	ZoneInfoIndexPacific_Johnston uint16 = 441 // Pacific/Johnston
-	ZoneInfoIndexPacific_Kanton uint16 = 523 // Pacific/Kanton
+	ZoneInfoIndexPacific_Kanton uint16 = 524 // Pacific/Kanton
 	ZoneInfoIndexPacific_Kiritimati uint16 = 299 // Pacific/Kiritimati
-	ZoneInfoIndexPacific_Kosrae uint16 = 527 // Pacific/Kosrae
+	ZoneInfoIndexPacific_Kosrae uint16 = 528 // Pacific/Kosrae
 	ZoneInfoIndexPacific_Kwajalein uint16 = 324 // Pacific/Kwajalein
-	ZoneInfoIndexPacific_Majuro uint16 = 540 // Pacific/Majuro
+	ZoneInfoIndexPacific_Majuro uint16 = 541 // Pacific/Majuro
 	ZoneInfoIndexPacific_Marquesas uint16 = 187 // Pacific/Marquesas
-	ZoneInfoIndexPacific_Midway uint16 = 544 // Pacific/Midway
+	ZoneInfoIndexPacific_Midway uint16 = 545 // Pacific/Midway
 	ZoneInfoIndexPacific_Nauru uint16 = 312 // Pacific/Nauru
 	ZoneInfoIndexPacific_Niue uint16 = 94 // Pacific/Niue
 	ZoneInfoIndexPacific_Norfolk uint16 = 329 // Pacific/Norfolk
-	ZoneInfoIndexPacific_Noumea uint16 = 548 // Pacific/Noumea
+	ZoneInfoIndexPacific_Noumea uint16 = 549 // Pacific/Noumea
 	ZoneInfoIndexPacific_Pago_Pago uint16 = 208 // Pacific/Pago_Pago
 	ZoneInfoIndexPacific_Palau uint16 = 314 // Pacific/Palau
 	ZoneInfoIndexPacific_Pitcairn uint16 = 304 // Pacific/Pitcairn
 	ZoneInfoIndexPacific_Pohnpei uint16 = 104 // Pacific/Pohnpei
-	ZoneInfoIndexPacific_Ponape uint16 = 555 // Pacific/Ponape
+	ZoneInfoIndexPacific_Ponape uint16 = 556 // Pacific/Ponape
 	ZoneInfoIndexPacific_Port_Moresby uint16 = 419 // Pacific/Port_Moresby
 	ZoneInfoIndexPacific_Rarotonga uint16 = 364 // Pacific/Rarotonga
-	ZoneInfoIndexPacific_Saipan uint16 = 560 // Pacific/Saipan
+	ZoneInfoIndexPacific_Saipan uint16 = 561 // Pacific/Saipan
 	ZoneInfoIndexPacific_Samoa uint16 = 315 // Pacific/Samoa
-	ZoneInfoIndexPacific_Tahiti uint16 = 562 // Pacific/Tahiti
-	ZoneInfoIndexPacific_Tarawa uint16 = 563 // Pacific/Tarawa
+	ZoneInfoIndexPacific_Tahiti uint16 = 563 // Pacific/Tahiti
+	ZoneInfoIndexPacific_Tarawa uint16 = 564 // Pacific/Tarawa
 	ZoneInfoIndexPacific_Tongatapu uint16 = 99 // Pacific/Tongatapu
 	ZoneInfoIndexPacific_Truk uint16 = 95 // Pacific/Truk
 	ZoneInfoIndexPacific_Wake uint16 = 96 // Pacific/Wake
-	ZoneInfoIndexPacific_Wallis uint16 = 576 // Pacific/Wallis
+	ZoneInfoIndexPacific_Wallis uint16 = 577 // Pacific/Wallis
 	ZoneInfoIndexPacific_Yap uint16 = 455 // Pacific/Yap
 	ZoneInfoIndexPoland uint16 = 482 // Poland
 	ZoneInfoIndexPortugal uint16 = 473 // Portugal
 	ZoneInfoIndexROC uint16 = 33 // ROC
 	ZoneInfoIndexROK uint16 = 34 // ROK
 	ZoneInfoIndexSingapore uint16 = 422 // Singapore
-	ZoneInfoIndexTurkey uint16 = 506 // Turkey
+	ZoneInfoIndexTurkey uint16 = 507 // Turkey
 	ZoneInfoIndexUCT uint16 = 35 // UCT
-	ZoneInfoIndexUS_Alaska uint16 = 580 // US/Alaska
+	ZoneInfoIndexUS_Alaska uint16 = 581 // US/Alaska
 	ZoneInfoIndexUS_Aleutian uint16 = 172 // US/Aleutian
 	ZoneInfoIndexUS_Arizona uint16 = 170 // US/Arizona
 	ZoneInfoIndexUS_Central uint16 = 483 // US/Central
@@ -696,7 +697,7 @@ const (
 	ZoneInfoIndexUS_Pacific uint16 = 425 // US/Pacific
 	ZoneInfoIndexUS_Samoa uint16 = 183 // US/Samoa
 	ZoneInfoIndexUTC uint16 = 36 // UTC
-	ZoneInfoIndexUniversal uint16 = 498 // Universal
+	ZoneInfoIndexUniversal uint16 = 499 // Universal
 	ZoneInfoIndexW_SU uint16 = 289 // W-SU
 	ZoneInfoIndexWET uint16 = 37 // WET
 	ZoneInfoIndexZulu uint16 = 290 // Zulu

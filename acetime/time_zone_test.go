@@ -6,7 +6,7 @@ import (
 )
 
 func TestTimeZoneNormalZone(t *testing.T) {
-	zoneManager := NewZoneManager(&zonedbtesting.DataContext)
+	zoneManager := ZoneManagerFromDataContext(&zonedbtesting.DataContext)
 	tz := zoneManager.TimeZoneFromZoneID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	if !(tz.Name() == "America/Los_Angeles") {
@@ -34,6 +34,9 @@ func TestTimeZoneUTC(t *testing.T) {
 	if !(tz.ZoneID() == 0) {
 		t.Fatal(tz)
 	}
+	if tz.IsLink() {
+		t.Fatal(tz)
+	}
 	if !tz.IsUTC() {
 		t.Fatal(tz)
 	}
@@ -48,6 +51,9 @@ func TestTimeZoneError(t *testing.T) {
 		t.Fatal(tz)
 	}
 	if !(tz.ZoneID() == 0) {
+		t.Fatal(tz)
+	}
+	if tz.IsLink() {
 		t.Fatal(tz)
 	}
 	if !tz.IsUTC() {

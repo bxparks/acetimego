@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeSuite/compiler/src/acetimecompiler/tzcompiler.py
 //     --input_dir /home/brian/src/AceTimeSuite/libraries/acetimego/zonedbtesting/tzfiles
 //     --output_dir /home/brian/src/AceTimeSuite/libraries/acetimego/zonedbtesting
-//     --tz_version 2025a
+//     --tz_version 2025b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -24,10 +24,10 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2025a
+// from https://github.com/eggert/tz/releases/tag/2025b
 //
 // Supported Zones: 5 (4 zones, 1 links)
-// Unsupported Zones: 591 (335 zones, 256 links)
+// Unsupported Zones: 592 (336 zones, 256 links)
 //
 // Requested Years: [1980,2200]
 // Accurate Years: [1980,32767]
@@ -133,7 +133,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 	"\xbc\x1a\xe3\xd8\x02\x00\x02\x00\x01\x00\x00\x00"
 
 // ---------------------------------------------------------------------------
-// Unsupported zones: 335
+// Unsupported zones: 336
 // ---------------------------------------------------------------------------
 
 // Africa/Abidjan {Zone missing from include list}
@@ -188,6 +188,7 @@ const ZoneInfosData = "\x54\x76\x2a\x1e\x01\x00\x01\x00\x01\x00\x00\x00" +
 // America/Chihuahua {Zone missing from include list}
 // America/Ciudad_Juarez {Zone missing from include list}
 // America/Costa_Rica {Zone missing from include list}
+// America/Coyhaique {Zone missing from include list}
 // America/Cuiaba {Zone missing from include list}
 // America/Danmarkshavn {Zone missing from include list}
 // America/Dawson {Zone missing from include list}

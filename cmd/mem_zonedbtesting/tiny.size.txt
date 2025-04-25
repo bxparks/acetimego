@@ -4,14 +4,14 @@
      27    4458      20      24 |    4505      44 | (unknown)
    3002      27       4     536 |    3033     540 | C musl
       0      32       0       0 |      32       0 | Go types
-   6698      63       0       0 |    6761       0 | github.com/bxparks/acetimego/acetime
+   6729      63       0       0 |    6792       0 | github.com/bxparks/acetimego/acetime
     470       0       0       0 |     470       0 | github.com/bxparks/acetimego/internal/strbuild
       0     383     260       0 |     643     260 | github.com/bxparks/acetimego/zonedbtesting
    2446       0       0       0 |    2446       0 | github.com/bxparks/acetimego/zoneinfo
      59       0       0       0 |      59       0 | internal/bytealg
     365      24       0      16 |     389      16 | internal/task
     316     165       0       0 |     481       0 | main
-   3438     172       8      91 |    3618      99 | runtime
+   3401     172       8      91 |    3581      99 | runtime
     575     124       0       0 |     699       0 | strings
 ------------------------------- | --------------- | -------
-  17396    5453     296     681 |   23145     977 | total
+  17390    5453     296     681 |   23139     977 | total

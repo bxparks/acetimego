@@ -3,7 +3,7 @@
 //   $ /home/brian/src/AceTimeSuite/compiler/src/acetimecompiler/tzcompiler.py
 //     --input_dir /home/brian/src/AceTimeSuite/libraries/acetimego/zonedb/tzfiles
 //     --output_dir /home/brian/src/AceTimeSuite/libraries/acetimego/zonedb
-//     --tz_version 2025a
+//     --tz_version 2025b
 //     --actions zonedb
 //     --languages go
 //     --scope complete
@@ -23,9 +23,9 @@
 //   northamerica
 //   southamerica
 //
-// from https://github.com/eggert/tz/releases/tag/2025a
+// from https://github.com/eggert/tz/releases/tag/2025b
 //
-// Supported Zones: 596 (339 zones, 257 links)
+// Supported Zones: 597 (340 zones, 257 links)
 // Unsupported Zones: 0 (0 zones, 0 links)
 //
 // Requested Years: [2000,2200]
@@ -39,23 +39,23 @@
 // Max Buffer Size: 7
 //
 // Records:
-//   Infos: 596
-//   Eras: 645
+//   Infos: 597
+//   Eras: 647
 //   Policies: 82
 //   Rules: 731
 //
 // Memory:
 //   Rules: 8772
 //   Policies: 328
-//   Eras: 9030
-//   Zones: 4068
+//   Eras: 9058
+//   Zones: 4080
 //   Links: 3084
 //   Registry: 0
 //   Formats: 290
 //   Letters: 30
 //   Fragments: 0
-//   Names: 9675
-//   TOTAL: 35277
+//   Names: 9694
+//   TOTAL: 35336
 //
 // DO NOT EDIT
 
@@ -69,7 +69,7 @@ import (
 // Zone Context
 // ---------------------------------------------------------------------------
 
-const TzDatabaseVersion string = "2025a"
+const TzDatabaseVersion string = "2025b"
 
 // DataContext contains references to various XxxData objects and strings. These
 // are the binary encoded versions of the various XxxRecord objects. This object
@@ -111,7 +111,7 @@ var DataContext = zoneinfo.ZoneDataContext{
 // where saving variable length strings is more difficult than a fixed width
 // integer.
 //
-// Total: 596 (339 zones, 257 links)
+// Total: 597 (340 zones, 257 links)
 // ---------------------------------------------------------------------------
 
 const (
@@ -214,6 +214,7 @@ const (
 	ZoneIDAmerica_Coral_Harbour uint32 = 0xabcb7569 // America/Coral_Harbour
 	ZoneIDAmerica_Cordoba uint32 = 0x5c8a7600 // America/Cordoba
 	ZoneIDAmerica_Costa_Rica uint32 = 0x63ff66be // America/Costa_Rica
+	ZoneIDAmerica_Coyhaique uint32 = 0xcc3314ee // America/Coyhaique
 	ZoneIDAmerica_Creston uint32 = 0x62a70204 // America/Creston
 	ZoneIDAmerica_Cuiaba uint32 = 0x969a52eb // America/Cuiaba
 	ZoneIDAmerica_Curacao uint32 = 0x6a879184 // America/Curacao

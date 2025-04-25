@@ -2,7 +2,7 @@ TARGETS := zone_infos.go zone_policies.go zone_registry.go
 
 TOOLS := $(abspath ../../../compiler)
 TZ_REPO := $(abspath ../../../../tz)
-TZ_VERSION := 2025a
+TZ_VERSION := 2025b
 START_YEAR := 2000
 UNTIL_YEAR := 2200
 

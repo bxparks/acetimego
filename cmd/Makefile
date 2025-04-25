@@ -14,10 +14,11 @@ test:
 
 #------------------------------------------------------------------------------
 
+# NOTE: Only cmd/mem* modules support TinyGo
 .PHONY: buildtiny
 buildtiny:
 	set -e; \
-	for i in */Makefile; do \
+	for i in mem*/Makefile; do \
 		$(MAKE) -C $$(dirname $$i) $@; \
 	done
 
@@ -25,10 +26,11 @@ testtiny:
 
 #------------------------------------------------------------------------------
 
+# NOTE: Only cmd/mem* modules support TinyGo
 .PHONY: buildesp32
 buildesp32:
 	set -e; \
-	for i in */Makefile; do \
+	for i in mem*/Makefile; do \
 		$(MAKE) -C $$(dirname $$i) $@; \
 	done
 
