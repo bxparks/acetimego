@@ -29,9 +29,9 @@ const (
 // An alternative implementation is to insert the ZonedExtra object directly
 // into the ZonedDateTime. But that causes the size of the object to grow from
 // 24 bytes to 64 bytes, which causes the performance of this library to degrade
-// noticeably. The compare_acetimego binary in the AceTimeValidation project
-// saw a performce decrease from 6.3 seconds to 8.1 seconds with the larger
-// ZonedDateTime object.
+// noticeably. The validation/tools/compare_acetimego binary saw a performce
+// decrease from 6.3 seconds to 8.1 seconds with the larger ZonedDateTime
+// object.
 type ZonedDateTime struct {
 	OffsetDateTime
 	Tz       *TimeZone
