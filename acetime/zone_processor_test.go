@@ -60,7 +60,7 @@ func TestCalcStartDayOfMonth(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestZoneProcessorToString(t *testing.T) {
-	zoneManager := NewZoneManager(&zonedbtesting.DataContext)
+	zoneManager := ZoneManagerFromDataContext(&zonedbtesting.DataContext)
 	zoneInfo := zoneManager.store.ZoneInfoByID(
 		zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	var zp zoneProcessor
@@ -71,7 +71,7 @@ func TestZoneProcessorToString(t *testing.T) {
 }
 
 func TestZoneProcessorInitForYear(t *testing.T) {
-	zoneManager := NewZoneManager(&zonedbtesting.DataContext)
+	zoneManager := ZoneManagerFromDataContext(&zonedbtesting.DataContext)
 	zoneInfo := zoneManager.store.ZoneInfoByID(
 		zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	var zp zoneProcessor
@@ -204,7 +204,7 @@ func TestCreatematchingEra(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestGetTransitionTime(t *testing.T) {
-	manager := NewZoneManager(&zonedbtesting.DataContext)
+	manager := ZoneManagerFromDataContext(&zonedbtesting.DataContext)
 	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	era := &info.Eras[0]
 	policy := era.Policy
@@ -227,7 +227,7 @@ func TestGetTransitionTime(t *testing.T) {
 }
 
 func TestCreateTransitionForYear(t *testing.T) {
-	manager := NewZoneManager(&zonedbtesting.DataContext)
+	manager := ZoneManagerFromDataContext(&zonedbtesting.DataContext)
 	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	era := &info.Eras[0]
 	policy := era.Policy
@@ -349,7 +349,7 @@ func TestGetMostRecentPriorYear(t *testing.T) {
 }
 
 func TestFindCandidateTransitions(t *testing.T) {
-	manager := NewZoneManager(&zonedbtesting.DataContext)
+	manager := ZoneManagerFromDataContext(&zonedbtesting.DataContext)
 	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	era := &info.Eras[0]
 
@@ -500,7 +500,7 @@ func TestProcessTransitionCompareStatus(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestCreateTransitionsFromNamedMatch(t *testing.T) {
-	manager := NewZoneManager(&zonedbtesting.DataContext)
+	manager := ZoneManagerFromDataContext(&zonedbtesting.DataContext)
 	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 	era := &info.Eras[0]
 
@@ -541,7 +541,7 @@ func TestCreateTransitionsFromNamedMatch(t *testing.T) {
 //-----------------------------------------------------------------------------
 
 func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
-	manager := NewZoneManager(&zonedbtesting.DataContext)
+	manager := ZoneManagerFromDataContext(&zonedbtesting.DataContext)
 	info := manager.store.ZoneInfoByID(zonedbtesting.ZoneIDAmerica_Los_Angeles)
 
 	// Step 1: America/Los_Angeles matches one era, which points to US policy.
@@ -627,7 +627,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("udt:", udt)
 	}
 	odt := OffsetDateTime{
-		LocalDateTime: LocalDateTime{2017, 12, 1, 0, 0, 0, 0 /*Fold*/},
+		LocalDateTime: LocalDateTime{2017, 12, 1, 0, 0, 0},
 		OffsetSeconds: -8 * 3600,
 	}
 	eps := odt.EpochSeconds()
@@ -646,7 +646,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
-		LocalDateTime: LocalDateTime{2018, 3, 11, 3, 0, 0, 0 /*Fold*/},
+		LocalDateTime: LocalDateTime{2018, 3, 11, 3, 0, 0},
 		OffsetSeconds: -7 * 3600,
 	}
 	eps = odt.EpochSeconds()
@@ -665,7 +665,7 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
-		LocalDateTime: LocalDateTime{2018, 11, 4, 1, 0, 0, 0 /*Fold*/},
+		LocalDateTime: LocalDateTime{2018, 11, 4, 1, 0, 0},
 		OffsetSeconds: -8 * 3600,
 	}
 	eps = odt.EpochSeconds()

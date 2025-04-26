@@ -276,10 +276,18 @@ type transitionForSeconds struct {
 	// 0 for the first or exact transition; 1 for the second transition
 	fold uint8
 
-	// Number of occurrences of the resulting LocalDateTime: 0, 1, or 2. This is
-	// needed because a fold=0 can mean that the LocalDateTime occurs exactly
-	// once, or that the first of two occurrences of LocalDateTime was selected by
-	// the epochSeconds.
+	// Number of matching transition objects for the given epochSeconds. This can
+	// be 0, 1, or 2.
+	//
+	// A `num` of 0 means that a transition could not be found, which is an error
+	// condition. The `fold` will also be set to 0, and `curr` should be nil.
+	//
+	// If `num` is 1, only single transition matched the epochSeconds, and the
+	// `fold` will always be 0.
+	//
+	// If `num` is 2, then 2 transitions matched the epochSeconds, and the
+	// `fold` parameter can be either 0 (earlier) or 1 (later) to disambiguate the
+	// two.
 	num uint8
 }
 
@@ -305,10 +313,24 @@ func (ts *transitionStorage) findTransitionForSeconds(
 	return transitionForSeconds{curr, fold, num}
 }
 
-// calculateFold determines the 'fold' parameter at the given epochSeconds. This
-// will become the output parameter of the corresponding LocalDateTime. A 0
-// indicates that the LocalDateTime was the first ocurrence. A 1 indicates a
-// LocalDateTime that occurred a second time.
+// calculateFoldAndOverlap determines the `fold` and `num` parameters at the
+// given epochSeconds.
+//
+// The `num` parameter is the number of transitions which can shadow a given
+// epochSeconds. It is 0 if `curr` is nil, which means that epochSeconds cannot
+// be mapped to any transition. It is 1 if the epochSeconds in the `curr`
+// transition is unique and does not overlap with the `prev` or `next`
+// transition. It is 2 if the epochSeconds in the `curr` transition maps to a
+// LocalDateTime that overlaps with either the `prev` or `next` transition. (In
+// theory, I suppose it could overlap with both, but it is improbable that any
+// timezone in the TZDB will ever let that happen.)
+//
+// The `fold` parameter specifies whether the `curr` transition is the first
+// instance (0) or the second instance (1). It is relevant only if `num` is 2.
+// If `num` is 0 or 1, `fold` will always be 0. If `num` is 2, then `fold`
+// indicates whether `curr` is the earlier (0) or later (1) transition of the
+// overlap. This `fold` parameter will be copied into the corresponding `fold`
+// parameter in LocalDateTime.
 func calculateFoldAndOverlap(
 	epochSeconds Time,
 	prev *transition,
@@ -331,7 +353,8 @@ func calculateFoldAndOverlap(
 			// sprint forward, or unchanged
 			isOverlap = false
 		} else {
-			isOverlap = epochSeconds-curr.startEpochSeconds < -shiftSeconds
+			delta := epochSeconds - curr.startEpochSeconds
+			isOverlap = delta < -shiftSeconds
 		}
 	}
 	if isOverlap {
@@ -341,7 +364,7 @@ func calculateFoldAndOverlap(
 		return
 	}
 
-	// Check if within backward overlap shawdow from next
+	// Check if within backward overlap shadow from next
 	if next == nil {
 		isOverlap = false
 	} else {
@@ -376,14 +399,15 @@ func calculateFoldAndOverlap(
 // The result returned by findTransitionForDateTime(). There are 5
 // possibilities:
 //
-//   - num=0, prev==NULL, curr=curr: datetime is far past
+//   - num=0, prev==NULL, curr=curr: datetime is far past (should not happen)
 //   - num=1, prev==prev, curr=prev: exact match to datetime
 //   - num=2, prev==prev, curr=curr: datetime in overlap
 //   - num=0, prev==prev, curr=curr: datetime in gap
-//   - num=0, prev==prev, curr=NULL: datetime is far future
+//   - num=0, prev==prev, curr=NULL: datetime is far future (should not happen)
 //
-// Adapted from transitionForDateTime in transition.h of the AceTime library,
-// and transition.h from the acetimec library.
+// Adapted from TransitionForDateTime struct in Transition.h of the AceTime
+// library, and TransitionForDateTime in transition.h from the acetimec
+// library.
 type transitionForDateTime struct {
 	// The previous transition, or null if the first transition matches.
 	prev *transition

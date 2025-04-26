@@ -20,11 +20,26 @@ type OffsetDateTime struct {
 	OffsetSeconds int32
 }
 
-func NewOffsetDateTimeFromLocalDateTime(
+func OffsetDateTimeFromLocalDateTime(
 	ldt *LocalDateTime, offsetSeconds int32) OffsetDateTime {
 
 	return OffsetDateTime{
 		LocalDateTime: *ldt,
+		OffsetSeconds: offsetSeconds,
+	}
+}
+
+func OffsetDateTimeFromEpochSeconds(
+	epochSeconds Time, offsetSeconds int32) OffsetDateTime {
+
+	if epochSeconds == InvalidEpochSeconds {
+		return OffsetDateTimeError
+	}
+
+	epochSeconds += Time(offsetSeconds)
+	ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
+	return OffsetDateTime{
+		LocalDateTime: ldt,
 		OffsetSeconds: offsetSeconds,
 	}
 }
@@ -43,21 +58,6 @@ func (odt *OffsetDateTime) EpochSeconds() Time {
 		return epochSeconds
 	}
 	return epochSeconds - Time(odt.OffsetSeconds)
-}
-
-func NewOffsetDateTimeFromEpochSeconds(
-	epochSeconds Time, offsetSeconds int32) OffsetDateTime {
-
-	if epochSeconds == InvalidEpochSeconds {
-		return OffsetDateTimeError
-	}
-
-	epochSeconds += Time(offsetSeconds)
-	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
-	return OffsetDateTime{
-		LocalDateTime: ldt,
-		OffsetSeconds: offsetSeconds,
-	}
 }
 
 func (odt *OffsetDateTime) String() string {

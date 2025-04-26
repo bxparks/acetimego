@@ -1,23 +1,27 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-     27   11674      16      61 |   11717      77 | (unknown)
-   1519    2128       0      56 |    3647      56 | /usr/local/go/src/syscall
+      0      34       4      14 |      38      18 | (padding)
+     27   12373      12      54 |   12412      66 | (unknown)
+   1576    3703       0      72 |    5279      72 | /usr/local/go/src/syscall
    3850      58      12     536 |    3920     548 | C musl
-     75       0       0       0 |      75       0 | Go interface method
-      0      53       0       0 |      53       0 | Go reflect data
-     47       0       0       0 |      47       0 | errors
-   7194      32       0       0 |    7226       0 | github.com/bxparks/acetimego/acetime
+    284       0       0       0 |     284       0 | Go interface assert
+     29       0       0       0 |      29       0 | Go interface method
+      0     696       0       0 |     696       0 | Go types
+     43       0       0       0 |      43       0 | errors
+   7305      31       0       0 |    7336       0 | github.com/bxparks/acetimego/acetime
     295       0       0       0 |     295       0 | github.com/bxparks/acetimego/internal/strbuild
-    186       0       0       0 |     186       0 | github.com/bxparks/acetimego/zoneinfo
+    171       0       0       0 |     171       0 | github.com/bxparks/acetimego/zoneinfo
      80       0       0       0 |      80       0 | internal/bytealg
-    162       2       0       0 |     164       0 | internal/itoa
+    155       2       0       0 |     157       0 | internal/itoa
     479      24       0      16 |     503      16 | internal/task
-    850     137       0       0 |     987       0 | main
-   3081     678       0       0 |    3759       0 | reflect
-   6718     239      12      91 |    6969     103 | runtime
-    613     124       0       0 |     737       0 | strings
-    620     200       0       0 |     820       0 | sync
-    189    2954       0       0 |    3143       0 | syscall
-  17958     938     168     128 |   19064     296 | time
+    882     134       0       0 |    1016       0 | main
+   4819     622       0       0 |    5441       0 | reflect
+   6714     243      12      91 |    6969     103 | runtime
+    665     124       0       0 |     789       0 | strings
+    628     200       0       0 |     828       0 | sync
+     90      75       0       1 |     165       1 | sync/atomic
+    202    1379       0       0 |    1581       0 | syscall
+  18015     938     168     128 |   19121     296 | time
+    319     288       0       0 |     607       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  43943   19241     208     888 |   63392    1096 | total
+  46628   20924     208     912 |   67760    1120 | total

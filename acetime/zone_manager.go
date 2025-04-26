@@ -9,7 +9,7 @@ type ZoneManager struct {
 	store *zoneinfo.ZoneStore
 }
 
-func NewZoneManager(context *zoneinfo.ZoneDataContext) ZoneManager {
+func ZoneManagerFromDataContext(context *zoneinfo.ZoneDataContext) ZoneManager {
 	return ZoneManager{zoneinfo.NewZoneStore(context)}
 }
 
@@ -18,7 +18,7 @@ func (zm *ZoneManager) TimeZoneFromZoneID(zoneID uint32) TimeZone {
 	if info == nil {
 		return TimeZoneError
 	}
-	return newTimeZoneFromZoneInfo(info)
+	return timeZoneFromZoneInfo(info)
 }
 
 func (zm *ZoneManager) TimeZoneFromName(name string) TimeZone {
@@ -26,7 +26,7 @@ func (zm *ZoneManager) TimeZoneFromName(name string) TimeZone {
 	if info == nil {
 		return TimeZoneError
 	}
-	return newTimeZoneFromZoneInfo(info)
+	return timeZoneFromZoneInfo(info)
 }
 
 // TODO: The "index" of a ZoneInfo is currently not exported, so this function
@@ -35,7 +35,7 @@ func (zm *ZoneManager) timeZoneFromIndex(index uint16) TimeZone {
 	if index >= zm.ZoneCount() {
 		return TimeZoneError
 	}
-	return newTimeZoneFromZoneInfo(zm.store.ZoneInfo(index))
+	return timeZoneFromZoneInfo(zm.store.ZoneInfo(index))
 }
 
 // ZoneCount returns the number of zones (Zones and Links) in the database.

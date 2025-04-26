@@ -17,7 +17,7 @@ func main() {
 	PrintMemUsage()
 
 	print("---- Create ZonedDateTime using zonedball\n")
-	zm := acetime.NewZoneManager(&zonedball.DataContext)
+	zm := acetime.ZoneManagerFromDataContext(&zonedball.DataContext)
 	name := "America/Los_Angeles"
 	tz := zm.TimeZoneFromName(name)
 	if tz.IsError() {
@@ -25,8 +25,9 @@ func main() {
 		print(name)
 		print("\n")
 	}
-	ldt := acetime.LocalDateTime{2023, 1, 19, 18, 36, 0, 0 /*Fold*/}
-	zdt := acetime.NewZonedDateTimeFromLocalDateTime(&ldt, &tz)
+	ldt := acetime.LocalDateTime{2023, 1, 19, 18, 36, 0}
+	zdt := acetime.ZonedDateTimeFromLocalDateTime(
+		&ldt, &tz, acetime.DisambiguateCompatible)
 	print("zdt:")
 	print(zdt.String())
 	print("\n")

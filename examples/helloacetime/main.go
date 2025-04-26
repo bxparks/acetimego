@@ -16,7 +16,7 @@ const (
 )
 
 func main() {
-	zm := acetime.NewZoneManager(&zonedb.DataContext)
+	zm := acetime.ZoneManagerFromDataContext(&zonedb.DataContext)
 	srcTz := zm.TimeZoneFromName(srcName)
 	if srcTz.IsError() {
 		print("ERROR: Could not find TimeZone for ")
@@ -36,7 +36,7 @@ func main() {
 	for {
 		now := time.Now().Unix()
 		aceNow := acetime.Time(now)
-		srcZdt := acetime.NewZonedDateTimeFromEpochSeconds(aceNow, &srcTz)
+		srcZdt := acetime.ZonedDateTimeFromEpochSeconds(aceNow, &srcTz)
 		dstZdt := srcZdt.ConvertToTimeZone(&dstTz)
 		print("src:")
 		print(srcZdt.String())

@@ -96,7 +96,7 @@ func (zp *zoneProcessor) initForYear(year int16) errType {
 }
 
 func (zp *zoneProcessor) initForEpochSeconds(epochSeconds Time) errType {
-	ldt := NewLocalDateTimeFromEpochSeconds(epochSeconds)
+	ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
 	if ldt.IsError() {
 		return errGeneric
 	}
@@ -655,7 +655,7 @@ func createAbbreviation(
 		}
 		return b.String()
 
-	// Check if FORMAT contains a '%' which represents '%s'
+		// Check if FORMAT contains a '%' which represents '%s'
 	} else if strings.IndexByte(format, '%') >= 0 {
 		// If RULES column empty, then letter == "" because Go lang does not allow
 		// strings to be set to nil. So we cannot distinguish between "" and not
@@ -681,7 +681,7 @@ func createAbbreviation(
 // findByLocalDateTime() and findByEpochSeconds()
 //---------------------------------------------------------------------------
 
-// Values of the findResult.type field.
+// Values of the findResult.frtype field. Must be identical to FoldType enums.
 const (
 	findResultErr = iota
 	findResultNotFound
@@ -694,9 +694,27 @@ var (
 	findResultError = findResult{frtype: findResultErr}
 )
 
+// The `fold` parameter is set to 0 to mean "earlier", and 1 to mean "later".
+// However, this means slightly different things for overlap versus gap.
+//
+// For findByEpochSeconds(), the `fold` parameter is relevant only if
+// epochSeconds falls in an overlap (frtrype==findResultOverlap). During an
+// overlap, a fold=0 means that the requested epochSeconds matched a backwards
+// shadow of a later transition (e.g. the first time 1:30am was seen before a
+// fallback from 2am to 1am). A fold=1 means that the requested epochSeconds
+// matched the forward shadow of an earlier transition (e.g. the second time
+// 1:30am was seen after a fallback from 2am to 1am).
+//
+// For findByLocalDateTime(), the `fold` parameter is relevant for both
+// findResultGap and findResultOverlap. If the requested LocalDateTime is in an
+// overlap, `fold=0` means that the SelectEarlier option was requested, and
+// `fold=1` means that the SelectLater option was requested. If the
+// LocalDateTime is in a gap, `fold=0` means the earlier transition was
+// requested by SelectLater, and `fold=1` means that the later transition was
+// selected using SelectEarlier.
 type findResult struct {
-	frtype              uint8
-	fold                uint8
+	frtype              uint8  // findResult type
+	fold                uint8  // earlier (0) or later (1) transition
 	stdOffsetSeconds    int32  // STD offset
 	dstOffsetSeconds    int32  // DST offset
 	reqStdOffsetSeconds int32  // request STD offset
@@ -704,7 +722,7 @@ type findResult struct {
 	abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
-// Find the AtcfindResult at the given epoch_seconds.
+// Find the findResult at the given epoch_seconds.
 //
 // Adapted from ExtendedZoneProcessor::findByEpochSeconds(epochSeconds)
 // in the AceTime library and atc_processor_find_by_epoch_seconds() in the
@@ -738,12 +756,28 @@ func (zp *zoneProcessor) findByEpochSeconds(epochSeconds Time) findResult {
 	}
 }
 
+// Disambiguation of duplicate LocalDateTime (in overlap) or missing
+// LocalDateTime (in gap).
+//
+// - Compatible (default, earlier for overlap, later for gap)
+// - Earlier (always pick the earlier transition)
+// - Later (always pick the later transition)
+// - Reversed (opposite of Compatible)
+const (
+	DisambiguateCompatible = iota
+	DisambiguateEarlier
+	DisambiguateLater
+	DisambiguateReversed
+)
+
 // Return the findResult at the given LocalDateTime.
 //
 // Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDateTime&)
 // in the AceTime library and atc_processor_find_by_local_date_time() in the
 // acetimec library.
-func (zp *zoneProcessor) findByLocalDateTime(ldt *LocalDateTime) findResult {
+func (zp *zoneProcessor) findByLocalDateTime(
+	ldt *LocalDateTime,
+	disambiguate uint8) findResult {
 
 	err := zp.initForYear(ldt.Year)
 	if err != errOk {
@@ -771,32 +805,36 @@ func (zp *zoneProcessor) findByLocalDateTime(ldt *LocalDateTime) findResult {
 		} else { // gap or overlap
 			if tfd.num == 0 { // gap
 				result.frtype = findResultGap
-				result.fold = 0
-				if ldt.Fold == 0 {
-					// ldt wants to use the 'prev' transition to convert to
-					// epochSeconds.
+				if disambiguate == DisambiguateCompatible ||
+					disambiguate == DisambiguateLater {
+					// Want the later LocalDateTime, so want the requested offsetSeconds
+					// and deltaSeconds from the earlier (prev) transition.
 					result.reqStdOffsetSeconds = tfd.prev.offsetSeconds
 					result.reqDstOffsetSeconds = tfd.prev.deltaSeconds
+					result.fold = 0
 					// But after normalization, it will be shifted into the curr
 					// transition, so select 'curr' as the target transition.
 					transition = tfd.curr
 				} else {
-					// ldt wants to use the 'curr' transition to convert to
-					// epochSeconds.
+					// Want the earlier LocalDateTime, so want the requested offsetSeconds
+					// and deltaSeconds from the later (curr) transition.
 					result.reqStdOffsetSeconds = tfd.curr.offsetSeconds
 					result.reqDstOffsetSeconds = tfd.curr.deltaSeconds
+					result.fold = 1
 					// But after normalization, it will be shifted into the prev
 					// transition, so select 'prev' as the target transition.
 					transition = tfd.prev
 				}
-			} else {
-				if ldt.Fold == 0 {
+			} else { // overlap
+				if disambiguate == DisambiguateCompatible ||
+					disambiguate == DisambiguateEarlier {
 					transition = tfd.prev
+					result.fold = 0
 				} else {
 					transition = tfd.curr
+					result.fold = 1
 				}
 				result.frtype = findResultOverlap
-				result.fold = ldt.Fold
 				result.reqStdOffsetSeconds = transition.offsetSeconds
 				result.reqDstOffsetSeconds = transition.deltaSeconds
 			}

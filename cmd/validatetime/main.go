@@ -28,7 +28,7 @@ func main() {
 	println("Validating from", startYear, "until", untilYear)
 
 	context := &zonedball.DataContext
-	zm := acetime.NewZoneManager(context)
+	zm := acetime.ZoneManagerFromDataContext(context)
 	names := zm.ZoneNames()
 	for i, name := range names {
 		print("[", i, "] Zone ", name, ": ")
@@ -78,7 +78,7 @@ func validateAtTime(t time.Time, atz *acetime.TimeZone) {
 	// identifies the time. We can't use the components because those can be
 	// ambiguous during an overlap.
 	unixSeconds := t.Unix()
-	zdt := acetime.NewZonedDateTimeFromEpochSeconds(
+	zdt := acetime.ZonedDateTimeFromEpochSeconds(
 		acetime.Time(unixSeconds), atz)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
