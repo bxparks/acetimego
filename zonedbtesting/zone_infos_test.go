@@ -5,7 +5,7 @@
 //     --output_dir /home/brian/src/AceTimeSuite/libraries/acetimego/zonedbtesting
 //     --tz_version 2025b
 //     --actions zonedb
-//     --languages go
+//     --language go
 //     --scope complete
 //     --db_namespace zonedbtesting
 //     --include_list include_list.txt

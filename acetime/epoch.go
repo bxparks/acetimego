@@ -54,13 +54,14 @@ func convertToDays(year int16, month uint8, day uint8) int32 {
 // Convert from days relative to "converter epoch". From
 // https://howardhinnant.github.io/date_algorithms.html and
 // AceTime/EpochConverterHinnant.h.
-func convertFromDays(epochDays int32) (year int16, month uint8, day uint8) {
+func convertFromDays(converterDays int32) (year int16, month uint8, day uint8) {
 	// epoch_prime days is relative to 0000-03-01
-	var dayOfEpochPrime int32 = epochDays +
+	var dayOfEpochPrime int32 = converterDays +
 		(converterEpochYear/400)*146097 - 60
 
-	var era uint16 = uint16(uint32(dayOfEpochPrime) / 146097)          // [0,24]
-	var dayOfEra uint32 = uint32(dayOfEpochPrime) - 146097*uint32(era) // [0,146096]
+	var era uint16 = uint16(uint32(dayOfEpochPrime) / 146097) // [0,24]
+	var dayOfEra uint32 = uint32(dayOfEpochPrime) -
+		146097*uint32(era) // [0,146096]
 	var yearOfEra uint16 = uint16((dayOfEra - dayOfEra/1460 +
 		dayOfEra/36524 -
 		dayOfEra/146096) / 365) // [0,399]

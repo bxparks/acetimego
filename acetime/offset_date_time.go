@@ -7,57 +7,59 @@ import (
 
 var (
 	OffsetDateTimeError = OffsetDateTime{
-		LocalDateTime: LocalDateTimeError,
+		PlainDateTime: PlainDateTimeError,
 	}
 )
 
-// An OffsetDateTime represents a [LocalDateTime] with a fixed OffsetSeconds
+// An OffsetDateTime represents a [PlainDateTime] with a fixed OffsetSeconds
 // relative to UTC. This is mostly useful for the implementation of
 // [ZonedDateTime], but it may be useful for end-user applications which need to
 // represent a datetime with fixed offsets.
 type OffsetDateTime struct {
-	LocalDateTime
+	PlainDateTime
 	OffsetSeconds int32
 }
 
-func OffsetDateTimeFromLocalDateTime(
-	ldt *LocalDateTime, offsetSeconds int32) OffsetDateTime {
+func OffsetDateTimeFromPlainDateTime(
+	pdt *PlainDateTime, offsetSeconds int32) OffsetDateTime {
 
 	return OffsetDateTime{
-		LocalDateTime: *ldt,
+		PlainDateTime: *pdt,
 		OffsetSeconds: offsetSeconds,
 	}
 }
 
-func OffsetDateTimeFromEpochSeconds(
-	epochSeconds Time, offsetSeconds int32) OffsetDateTime {
+// Converts from Unix unixSeconds.
+func OffsetDateTimeFromUnixSeconds(
+	unixSeconds Time, offsetSeconds int32) OffsetDateTime {
 
-	if epochSeconds == InvalidEpochSeconds {
+	if unixSeconds == InvalidUnixSeconds {
 		return OffsetDateTimeError
 	}
 
-	epochSeconds += Time(offsetSeconds)
-	ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
+	unixSeconds += Time(offsetSeconds)
+	pdt := PlainDateTimeFromUnixSeconds(unixSeconds)
 	return OffsetDateTime{
-		LocalDateTime: ldt,
+		PlainDateTime: pdt,
 		OffsetSeconds: offsetSeconds,
 	}
 }
 
 func (odt *OffsetDateTime) IsError() bool {
-	return odt.LocalDateTime.IsError()
+	return odt.PlainDateTime.IsError()
 }
 
-func (odt *OffsetDateTime) EpochSeconds() Time {
+// Converts to Unix unixSeconds.
+func (odt *OffsetDateTime) UnixSeconds() Time {
 	if odt.IsError() {
-		return InvalidEpochSeconds
+		return InvalidUnixSeconds
 	}
 
-	epochSeconds := odt.LocalDateTime.EpochSeconds()
-	if epochSeconds == InvalidEpochSeconds {
-		return epochSeconds
+	unixSeconds := odt.PlainDateTime.UnixSeconds()
+	if unixSeconds == InvalidUnixSeconds {
+		return unixSeconds
 	}
-	return epochSeconds - Time(odt.OffsetSeconds)
+	return unixSeconds - Time(odt.OffsetSeconds)
 }
 
 func (odt *OffsetDateTime) String() string {
@@ -67,7 +69,7 @@ func (odt *OffsetDateTime) String() string {
 }
 
 func (odt *OffsetDateTime) BuildString(b *strings.Builder) {
-	odt.LocalDateTime.BuildString(b)
+	odt.PlainDateTime.BuildString(b)
 
 	// Convert the OffsetSeconds to +/-hh:mm, ignoring any remaining seconds. This
 	// is valid for any time after Jan 7, 1972 when Africa/Monrovia became the

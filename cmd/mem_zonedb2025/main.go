@@ -7,7 +7,7 @@ package main
 import (
 	"github.com/bxparks/acetimego/acetime"
 	"github.com/bxparks/acetimego/internal/strbuild"
-	"github.com/bxparks/acetimego/zonedb"
+	"github.com/bxparks/acetimego/zonedb2025"
 	"runtime"
 	"strings"
 )
@@ -17,7 +17,7 @@ func main() {
 	PrintMemUsage()
 
 	print("---- Create ZonedDateTime using zonedb\n")
-	zm := acetime.ZoneManagerFromDataContext(&zonedb.DataContext)
+	zm := acetime.ZoneManagerFromDataContext(&zonedb2025.DataContext)
 	name := "America/Los_Angeles"
 	tz := zm.TimeZoneFromName(name)
 	if tz.IsError() {
@@ -25,9 +25,9 @@ func main() {
 		print(name)
 		print("\n")
 	}
-	ldt := acetime.LocalDateTime{2023, 1, 19, 18, 36, 0}
-	zdt := acetime.ZonedDateTimeFromLocalDateTime(
-		&ldt, &tz, acetime.DisambiguateCompatible)
+	pdt := acetime.PlainDateTime{2023, 1, 19, 18, 36, 0}
+	zdt := acetime.ZonedDateTimeFromPlainDateTime(
+		&pdt, &tz, acetime.DisambiguateCompatible)
 	print("zdt:")
 	print(zdt.String())
 	print("\n")

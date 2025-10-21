@@ -71,8 +71,8 @@ func TestDateTupleSubtract(t *testing.T) {
 	}
 }
 
-// Test that there is no overflow for year 6000, which is far beyond the
-// Epoch.currentEpochYear.
+// Test that there is no overflow for year 6000, which is far beyond
+// acetime.converterEpochYear.
 func TestDateTupleSubtractNoOverflow(t *testing.T) {
 	var dta, dtb dateTuple
 	var diff Time

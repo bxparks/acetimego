@@ -4,7 +4,7 @@ import (
 	"github.com/bxparks/acetimego/zoneinfo"
 )
 
-// A dateTuple is an internal version of [LocalDateTime] which also tracks the
+// A dateTuple is an internal version of [PlainDateTime] which also tracks the
 // `s`, `w` or `u` suffixes given in the TZ database files.
 //
 // TODO: We only need about 24-bits (3-bytes) the seconds field. It should be
@@ -51,8 +51,8 @@ func dateTupleCompare(a *dateTuple, b *dateTuple) int8 {
 
 // dateTupleSubtract returns the number of seconds of (a - b).
 func dateTupleSubtract(a *dateTuple, b *dateTuple) Time {
-	da := LocalDateToEpochDays(a.year, a.month, a.day)
-	db := LocalDateToEpochDays(b.year, b.month, b.day)
+	da := PlainDateToUnixDays(a.year, a.month, a.day)
+	db := PlainDateToUnixDays(b.year, b.month, b.day)
 
 	return Time(da-db)*86400 + Time(a.seconds-b.seconds)
 }
@@ -61,11 +61,11 @@ func dateTupleNormalize(dt *dateTuple) {
 	const oneDayAsSeconds = 60 * 60 * 24
 
 	if dt.seconds <= -oneDayAsSeconds {
-		dt.year, dt.month, dt.day = LocalDateDecrementOneDay(
+		dt.year, dt.month, dt.day = PlainDateDecrementOneDay(
 			dt.year, dt.month, dt.day)
 		dt.seconds += oneDayAsSeconds
 	} else if oneDayAsSeconds <= dt.seconds {
-		dt.year, dt.month, dt.day = LocalDateIncrementOneDay(
+		dt.year, dt.month, dt.day = PlainDateIncrementOneDay(
 			dt.year, dt.month, dt.day)
 		dt.seconds -= oneDayAsSeconds
 	} else {

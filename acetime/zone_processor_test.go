@@ -627,12 +627,12 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("udt:", udt)
 	}
 	odt := OffsetDateTime{
-		LocalDateTime: LocalDateTime{2017, 12, 1, 0, 0, 0},
+		PlainDateTime: PlainDateTime{2017, 12, 1, 0, 0, 0},
 		OffsetSeconds: -8 * 3600,
 	}
-	eps := odt.EpochSeconds()
-	if !(eps == transition0.startEpochSeconds) {
-		t.Fatal(eps, transition0.startEpochSeconds)
+	eps := odt.UnixSeconds()
+	if !(eps == transition0.startUnixSeconds) {
+		t.Fatal(eps, transition0.startUnixSeconds)
 	}
 
 	// Step 4: Verification: Second transition startTime is shifted forward one
@@ -646,12 +646,12 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
-		LocalDateTime: LocalDateTime{2018, 3, 11, 3, 0, 0},
+		PlainDateTime: PlainDateTime{2018, 3, 11, 3, 0, 0},
 		OffsetSeconds: -7 * 3600,
 	}
-	eps = odt.EpochSeconds()
-	if !(eps == transition1.startEpochSeconds) {
-		t.Fatal(transition1.startEpochSeconds)
+	eps = odt.UnixSeconds()
+	if !(eps == transition1.startUnixSeconds) {
+		t.Fatal(transition1.startUnixSeconds)
 	}
 
 	// Step 4: Verification: Third transition startTime is shifted back one hour
@@ -665,12 +665,12 @@ func TestFixTransitionTimesGenerateStartUntilTimes(t *testing.T) {
 		t.Fatal("udt:", udt)
 	}
 	odt = OffsetDateTime{
-		LocalDateTime: LocalDateTime{2018, 11, 4, 1, 0, 0},
+		PlainDateTime: PlainDateTime{2018, 11, 4, 1, 0, 0},
 		OffsetSeconds: -8 * 3600,
 	}
-	eps = odt.EpochSeconds()
-	if !(eps == transition2.startEpochSeconds) {
-		t.Fatal(transition2.startEpochSeconds)
+	eps = odt.UnixSeconds()
+	if !(eps == transition2.startUnixSeconds) {
+		t.Fatal(transition2.startUnixSeconds)
 	}
 }
 

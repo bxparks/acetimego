@@ -15,9 +15,9 @@ zonedb:
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
 		--actions zonedb \
-		--languages go \
+		--language go \
 		--scope complete \
-		--db_namespace zonedb \
+		--db_namespace zonedb2000 \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)
 
@@ -26,7 +26,7 @@ zonedb.json: Makefile
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
 		--actions json \
-		--languages go \
+		--language go \
 		--scope complete \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)

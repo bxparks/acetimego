@@ -74,11 +74,11 @@ func validateZoneName(zm *acetime.ZoneManager, name string) {
 func validateAtTime(t time.Time, atz *acetime.TimeZone) {
 	name := atz.Name()
 
-	// Create acetime.ZonedDateTime based on the EpochSeconds, which uniquely
+	// Create acetime.ZonedDateTime based on the UnixSeconds, which uniquely
 	// identifies the time. We can't use the components because those can be
 	// ambiguous during an overlap.
 	unixSeconds := t.Unix()
-	zdt := acetime.ZonedDateTimeFromEpochSeconds(
+	zdt := acetime.ZonedDateTimeFromUnixSeconds(
 		acetime.Time(unixSeconds), atz)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
@@ -96,10 +96,10 @@ func validateAtTime(t time.Time, atz *acetime.TimeZone) {
 	second := uint8(s)
 
 	// Validate UnixSeconds. This should always succeed.
-	acetimeEpochSeconds := int64(zdt.EpochSeconds())
-	if acetimeEpochSeconds != unixSeconds {
-		println("ERROR: ", name, ": EpochSeconds not equal",
-			acetimeEpochSeconds, unixSeconds)
+	acetimeUnixSeconds := int64(zdt.UnixSeconds())
+	if acetimeUnixSeconds != unixSeconds {
+		println("ERROR: ", name, ": UnixSeconds not equal",
+			acetimeUnixSeconds, unixSeconds)
 		return
 	}
 
