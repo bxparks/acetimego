@@ -6,7 +6,7 @@ package main
 
 import (
 	"github.com/bxparks/acetimego/acetime"
-	"github.com/bxparks/acetimego/zonedb"
+	"github.com/bxparks/acetimego/zonedb2000"
 	"time"
 )
 
@@ -16,7 +16,7 @@ const (
 )
 
 func main() {
-	zm := acetime.ZoneManagerFromDataContext(&zonedb.DataContext)
+	zm := acetime.ZoneManagerFromDataContext(&zonedb2000.DataContext)
 	srcTz := zm.TimeZoneFromName(srcName)
 	if srcTz.IsError() {
 		print("ERROR: Could not find TimeZone for ")
@@ -36,7 +36,7 @@ func main() {
 	for {
 		now := time.Now().Unix()
 		aceNow := acetime.Time(now)
-		srcZdt := acetime.ZonedDateTimeFromEpochSeconds(aceNow, &srcTz)
+		srcZdt := acetime.ZonedDateTimeFromUnixSeconds(aceNow, &srcTz)
 		dstZdt := srcZdt.ConvertToTimeZone(&dstTz)
 		print("src:")
 		print(srcZdt.String())

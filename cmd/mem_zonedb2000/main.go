@@ -1,4 +1,4 @@
-// Print the memory usage of acetime library when using the zonedball database.
+// Print the memory usage of acetime library when using the zonedb database.
 //
 //$ go run mem_zone_registry.go
 
@@ -7,7 +7,7 @@ package main
 import (
 	"github.com/bxparks/acetimego/acetime"
 	"github.com/bxparks/acetimego/internal/strbuild"
-	"github.com/bxparks/acetimego/zonedball"
+	"github.com/bxparks/acetimego/zonedb2000"
 	"runtime"
 	"strings"
 )
@@ -16,8 +16,8 @@ func main() {
 	print("---- Initial memory usage\n")
 	PrintMemUsage()
 
-	print("---- Create ZonedDateTime using zonedball\n")
-	zm := acetime.ZoneManagerFromDataContext(&zonedball.DataContext)
+	print("---- Create ZonedDateTime using zonedb\n")
+	zm := acetime.ZoneManagerFromDataContext(&zonedb2000.DataContext)
 	name := "America/Los_Angeles"
 	tz := zm.TimeZoneFromName(name)
 	if tz.IsError() {

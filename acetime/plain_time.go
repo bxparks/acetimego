@@ -1,13 +1,13 @@
 package acetime
 
-// LocalTimeToSeconds converts (hour, minute, second) to seconds.
-func LocalTimeToSeconds(hour uint8, minute uint8, second uint8) int32 {
+// PlainTimeToSeconds converts (hour, minute, second) to seconds.
+func PlainTimeToSeconds(hour uint8, minute uint8, second uint8) int32 {
 	return ((int32(hour)*60)+int32(minute))*60 + int32(second)
 }
 
-// LocalTimeFromSeconds extracts the (hour, minute, second) components from the
+// PlainTimeFromSeconds extracts the (hour, minute, second) components from the
 // seconds. The seconds is assumed to be positive.
-func LocalTimeFromSeconds(seconds int32) (
+func PlainTimeFromSeconds(seconds int32) (
 	hour uint8, minute uint8, second uint8) {
 
 	// The compiler will probably combine the mod (%) and division (/) operations

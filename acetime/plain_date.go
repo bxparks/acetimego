@@ -109,8 +109,8 @@ func DaysInYearMonth(year int16, month uint8) uint8 {
 	}
 }
 
-// LocalDateToWeekday returns the ISO week day of the given (year, month, day).
-func LocalDateToWeekday(year int16, month uint8, day uint8) IsoWeekday {
+// PlainDateToWeekday returns the ISO week day of the given (year, month, day).
+func PlainDateToWeekday(year int16, month uint8, day uint8) IsoWeekday {
 	// The "y" starts in March to shift leap year calculation to end.
 	var y int16 = year
 	if month < 3 {
@@ -128,9 +128,9 @@ func LocalDateToWeekday(year int16, month uint8, day uint8) IsoWeekday {
 	}
 }
 
-// LocalDateToYearday returns the day of the year for the given (year, month,
+// PlainDateToYearday returns the day of the year for the given (year, month,
 // day). Jan 1 returns 1.
-func LocalDateToYearday(year int16, month uint8, day uint8) uint16 {
+func PlainDateToYearday(year int16, month uint8, day uint8) uint16 {
 	daysPrior := daysPriorToMonth[month-1]
 	if IsLeapYear(year) && month > 2 {
 		daysPrior++
@@ -138,22 +138,22 @@ func LocalDateToYearday(year int16, month uint8, day uint8) uint16 {
 	return daysPrior + uint16(day)
 }
 
-// LocalDateFromEpochDays converts epoch days to (y, m, d).
-func LocalDateFromEpochDays(days int32) (year int16, month uint8, day uint8) {
+// PlainDateFromUnixDays converts Unix epoch days to (y, m, d).
+func PlainDateFromUnixDays(days int32) (year int16, month uint8, day uint8) {
 	days -= daysToConverterEpochFromUnixEpoch
 	year, month, day = convertFromDays(days)
 	return
 }
 
-// LocalDateToEpochDays converts (y, m, d) to epoch days.
-func LocalDateToEpochDays(year int16, month uint8, day uint8) int32 {
+// PlainDateToUnixDays converts (y, m, d) to Unix epoch days.
+func PlainDateToUnixDays(year int16, month uint8, day uint8) int32 {
 	converterDays := convertToDays(year, month, day)
 	return converterDays + daysToConverterEpochFromUnixEpoch
 }
 
-// LocalDateIncrementOneDay returns the given (year, month, day) incremented by
+// PlainDateIncrementOneDay returns the given (year, month, day) incremented by
 // one day, taking proper account of leap years.
-func LocalDateIncrementOneDay(y int16, m uint8, d uint8) (
+func PlainDateIncrementOneDay(y int16, m uint8, d uint8) (
 	yy int16, mm uint8, dd uint8) {
 
 	dd = d + 1
@@ -171,9 +171,9 @@ func LocalDateIncrementOneDay(y int16, m uint8, d uint8) (
 	return
 }
 
-// LocalDateIncrementOneDay returns the given (year, month, day) decremented by
+// PlainDateIncrementOneDay returns the given (year, month, day) decremented by
 // one day, taking proper account of leap years.
-func LocalDateDecrementOneDay(y int16, m uint8, d uint8) (
+func PlainDateDecrementOneDay(y int16, m uint8, d uint8) (
 	yy int16, mm uint8, dd uint8) {
 
 	dd = d - 1

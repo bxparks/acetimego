@@ -26,9 +26,9 @@ func main() {
 		print(name)
 		print("\n")
 	}
-	ldt := acetime.LocalDateTime{2023, 1, 19, 18, 36, 0}
-	zdt := acetime.ZonedDateTimeFromLocalDateTime(
-		&ldt, &tz, acetime.DisambiguateCompatible)
+	pdt := acetime.PlainDateTime{2023, 1, 19, 18, 36, 0}
+	zdt := acetime.ZonedDateTimeFromPlainDateTime(
+		&pdt, &tz, acetime.DisambiguateCompatible)
 	print("zdt:")
 	print(zdt.String())
 	print("\n")

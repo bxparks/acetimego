@@ -1,6 +1,25 @@
 # Changelog
 
 - unreleased
+- 0.8.0 (2025-10-21, TZDB 2025b)
+    - **Breaking** Rename LocalXxx to PlainXxx, following the conventions
+      used by more modern timezone libraries (JavaScript Temporal, Python
+      whenever).
+        - LocalDate -> PlainDate
+        - LocalDateTime -> PlainDateTime
+        - LocalTime -> PlainTime
+    - **Breaking** Zone database refactoring.
+        - Rename `zonedb` package to `zonedb2000`.
+        - Add new `zonedb2025` package which contains timezone data from the
+          year 2025 and onwards. Reduces size of the database from 35 kB to
+          about 26 kB.
+    - **Breaking** Rename `EpochSeconds()` to `UnixSeconds()`
+        - Also rename `EpochDays()` to `UnixDays().
+        - The acetimego library uses a 64-bit integer for its acetime.Time type.
+          It does not need to provide a user-configurable EpochDate. Therefore,
+          we can always use the Unix epoch of 1970-01-01.
+        - Using `UnixSeconds()` makes this convention self-documenting, and
+          avoid confusion over which Epoch date is being used.
 - 0.7.0 (2025-04-25, TZDB 2025b)
     - merge various AceTime projects into single AceTimeSuite repo
     - [upgrade to TZDB 2025a](https://lists.iana.org/hyperkitty/list/tz-announce@iana.org/thread/MWII7R3HMCEDNUCIYQKSSTYYR7UWK4OQ/)
@@ -48,7 +67,7 @@
           `StdOffsetSeconds + DstOffsetSeconds`.
     - `OffsetDateTime`, `ZonedDateTime`
         - Use struct embedding feature of Go lang to simplify and reuse code.
-        - `LocalDateTime` embeds into `OffsetDateTime`.
+        - `PlainDateTime` embeds into `OffsetDateTime`.
         - `OffsetDateTime` embeds into `ZonedDateTime`.
     - Added to `AceTimeValidation`
         - Validated with AceTimeC and C++ Hinnant libraries from [1800,2100).
@@ -73,10 +92,10 @@
       names of various functions.
         - These low-level functions are used by some of the utilities in `cmd`.
         - Avoids cluttering the API of the `acetime` package.
-    - Rename `LocalDateToDayOfWeek()` to `LocalDateToWeekday()`
+    - Rename `PlainDateToDayOfWeek()` to `PlainDateToWeekday()`
         - For better consistency with standard `time` package.
         - Add IsoWeekday.Name() method.
-    - Add `LocalDateToYearday()`
+    - Add `PlainDateToYearday()`
         - Returns the day of year of `(year, month, day)`.
     - Add `ZonedDateTime.ZonedExtra()` convenience method.
         - For easier access to extra information about the given date time.

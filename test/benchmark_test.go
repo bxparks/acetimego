@@ -10,8 +10,8 @@
 // goarch: amd64
 // pkg: github.com/bxparks/acetimego/test
 // cpu: Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz
-// BenchmarkZonedDateTimeFromLocalDateTime-4           3037        378853 ns/op
-// BenchmarkZonedDateTimeToEpochSeconds-4              2800        414800 ns/op
+// BenchmarkZonedDateTimeFromPlainDateTime-4           3037        378853 ns/op
+// BenchmarkZonedDateTimeToUnixSeconds-4              2800        414800 ns/op
 // BenchmarkZonedDateTimeRoundTrip-4                   1225        964319 ns/op
 // BenchmarkGoTimeDate-4                                781       1534750 ns/op
 // BenchmarkGoTimeUnixSeconds-4                        4754        245158 ns/op
@@ -47,15 +47,15 @@ var (
 
 	// Temporary variables to prevent the compiler from optimizing away the
 	// for-loops that do nothing.
-	zdt          acetime.ZonedDateTime
-	ldt          acetime.LocalDateTime
-	epochSeconds acetime.Time
-	atYear       int16
-	atMonth      uint8
-	atDay        uint8
-	atHour       uint8
-	atMinute     uint8
-	atSecond     uint8
+	zdt         acetime.ZonedDateTime
+	pdt         acetime.PlainDateTime
+	unixSeconds acetime.Time
+	atYear      int16
+	atMonth     uint8
+	atDay       uint8
+	atHour      uint8
+	atMinute    uint8
+	atSecond    uint8
 
 	// Temporary variables to prevent the compiler from optimizing away the
 	// for-loops that do nothing.
@@ -72,14 +72,14 @@ var (
 //-----------------------------------------------------------------------------
 
 // Test date-time -> ZonedDateTime
-func BenchmarkZonedDateTimeFromLocalDateTime(b *testing.B) {
+func BenchmarkZonedDateTimeFromPlainDateTime(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		for year := startYear; year < untilYear; year++ {
 			for month := uint8(startMonth); month <= endMonth; month++ {
 				for day := uint8(1); day <= 28; day++ {
-					ldt = acetime.LocalDateTime{year, month, day, 9, 0, 0}
-					zdt = acetime.ZonedDateTimeFromLocalDateTime(
-						&ldt, &tz, acetime.DisambiguateCompatible)
+					pdt = acetime.PlainDateTime{year, month, day, 9, 0, 0}
+					zdt = acetime.ZonedDateTimeFromPlainDateTime(
+						&pdt, &tz, acetime.DisambiguateCompatible)
 					atYear = zdt.Year
 					atMonth = zdt.Month
 					atDay = zdt.Day
@@ -92,15 +92,15 @@ func BenchmarkZonedDateTimeFromLocalDateTime(b *testing.B) {
 	}
 }
 
-// Test date-time -> ZonedDateTime -> epochSeconds
-func BenchmarkZonedDateTimeToEpochSeconds(b *testing.B) {
+// Test date-time -> ZonedDateTime -> unixSeconds
+func BenchmarkZonedDateTimeToUnixSeconds(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		for year := startYear; year < untilYear; year++ {
 			for month := uint8(startMonth); month <= endMonth; month++ {
 				for day := uint8(1); day <= 28; day++ {
-					ldt = acetime.LocalDateTime{year, month, day, 9, 0, 0}
-					zdt = acetime.ZonedDateTimeFromLocalDateTime(
-						&ldt, &tz, acetime.DisambiguateCompatible)
+					pdt = acetime.PlainDateTime{year, month, day, 9, 0, 0}
+					zdt = acetime.ZonedDateTimeFromPlainDateTime(
+						&pdt, &tz, acetime.DisambiguateCompatible)
 					atYear = zdt.Year
 					atMonth = zdt.Month
 					atDay = zdt.Day
@@ -108,22 +108,22 @@ func BenchmarkZonedDateTimeToEpochSeconds(b *testing.B) {
 					atMinute = zdt.Minute
 					atSecond = zdt.Second
 
-					epochSeconds = zdt.EpochSeconds()
+					unixSeconds = zdt.UnixSeconds()
 				}
 			}
 		}
 	}
 }
 
-// Test date-time -> ZonedDateTime -> epochSeconds -> ZonedDateTime
+// Test date-time -> ZonedDateTime -> unixSeconds -> ZonedDateTime
 func BenchmarkZonedDateTimeRoundTrip(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		for year := startYear; year < untilYear; year++ {
 			for month := uint8(startMonth); month <= endMonth; month++ {
 				for day := uint8(1); day <= 28; day++ {
-					ldt = acetime.LocalDateTime{year, month, day, 9, 0, 0}
-					zdt = acetime.ZonedDateTimeFromLocalDateTime(
-						&ldt, &tz, acetime.DisambiguateCompatible)
+					pdt = acetime.PlainDateTime{year, month, day, 9, 0, 0}
+					zdt = acetime.ZonedDateTimeFromPlainDateTime(
+						&pdt, &tz, acetime.DisambiguateCompatible)
 					atYear = zdt.Year
 					atMonth = zdt.Month
 					atDay = zdt.Day
@@ -131,8 +131,8 @@ func BenchmarkZonedDateTimeRoundTrip(b *testing.B) {
 					atMinute = zdt.Minute
 					atSecond = zdt.Second
 
-					epochSeconds = zdt.EpochSeconds()
-					zdt = acetime.ZonedDateTimeFromEpochSeconds(epochSeconds, &tz)
+					unixSeconds = zdt.UnixSeconds()
+					zdt = acetime.ZonedDateTimeFromUnixSeconds(unixSeconds, &tz)
 				}
 			}
 		}
@@ -189,7 +189,7 @@ func BenchmarkGoTimeRoundTrip(b *testing.B) {
 						0 /*nsec*/, loc)
 
 					// Extract year and hours components. time.Time holds only the
-					// epochSeconds, so each call to one of the component methods performs
+					// unixSeconds, so each call to one of the component methods performs
 					// a recalculation of all the breakout components, which is quite
 					// inefficient.
 					goYear = got.Year()

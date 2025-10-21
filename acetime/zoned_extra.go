@@ -14,7 +14,7 @@ var (
 )
 
 // ZonedExtra contains information about a specific instant in time (either at a
-// specific epochSeconds or a specific LocalDateTime) which are not fully
+// specific unixSeconds or a specific PlainDateTime) which are not fully
 // captured by the OffsetDateTime. These include the STD offset, the DST offset,
 // and the abbreviation.
 type ZonedExtra struct {
@@ -26,16 +26,16 @@ type ZonedExtra struct {
 	Abbrev              string // abbreviation (e.g. PST, PDT)
 }
 
-func ZonedExtraFromEpochSeconds(
-	epochSeconds Time, tz *TimeZone) ZonedExtra {
+func ZonedExtraFromUnixSeconds(
+	unixSeconds Time, tz *TimeZone) ZonedExtra {
 
-	return tz.findZonedExtraForEpochSeconds(epochSeconds)
+	return tz.findZonedExtraForUnixSeconds(unixSeconds)
 }
 
-func ZonedExtraFromLocalDateTime(
-	ldt *LocalDateTime, tz *TimeZone, disambiguate uint8) ZonedExtra {
+func ZonedExtraFromPlainDateTime(
+	pdt *PlainDateTime, tz *TimeZone, disambiguate uint8) ZonedExtra {
 
-	return tz.findZonedExtraForLocalDateTime(ldt, disambiguate)
+	return tz.findZonedExtraForPlainDateTime(pdt, disambiguate)
 }
 
 func (extra *ZonedExtra) IsError() bool {

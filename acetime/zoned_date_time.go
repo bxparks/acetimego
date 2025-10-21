@@ -11,8 +11,8 @@ var (
 	}
 )
 
-// Resolved disambiguation of the ZonedDateTime from its EpochSeconds or
-// LocalDateTime.
+// Resolved disambiguation of the ZonedDateTime from its UnixSeconds or
+// PlainDateTime.
 const (
 	ResolvedUnique = iota
 	ResolvedOverlapEarlier
@@ -38,10 +38,11 @@ type ZonedDateTime struct {
 	Resolved uint8
 }
 
-func ZonedDateTimeFromEpochSeconds(
-	epochSeconds Time, tz *TimeZone) ZonedDateTime {
+// Converts from Unix unixSeconds.
+func ZonedDateTimeFromUnixSeconds(
+	unixSeconds Time, tz *TimeZone) ZonedDateTime {
 
-	odt, resolved := tz.findOffsetDateTimeForEpochSeconds(epochSeconds)
+	odt, resolved := tz.findOffsetDateTimeForUnixSeconds(unixSeconds)
 	return ZonedDateTime{
 		OffsetDateTime: odt,
 		Tz:             tz,
@@ -49,12 +50,12 @@ func ZonedDateTimeFromEpochSeconds(
 	}
 }
 
-func ZonedDateTimeFromLocalDateTime(
-	ldt *LocalDateTime,
+func ZonedDateTimeFromPlainDateTime(
+	pdt *PlainDateTime,
 	tz *TimeZone,
 	disambiguate uint8) ZonedDateTime {
 
-	odt, resolved := tz.findOffsetDateTimeForLocalDateTime(ldt, disambiguate)
+	odt, resolved := tz.findOffsetDateTimeForPlainDateTime(pdt, disambiguate)
 	return ZonedDateTime{
 		OffsetDateTime: odt,
 		Tz:             tz,
@@ -70,11 +71,11 @@ func (zdt *ZonedDateTime) ConvertToTimeZone(tz *TimeZone) ZonedDateTime {
 	if zdt.IsError() {
 		return ZonedDateTimeError
 	}
-	epochSeconds := zdt.EpochSeconds()
-	if epochSeconds == InvalidEpochSeconds {
+	unixSeconds := zdt.UnixSeconds()
+	if unixSeconds == InvalidUnixSeconds {
 		return ZonedDateTimeError
 	}
-	return ZonedDateTimeFromEpochSeconds(epochSeconds, tz)
+	return ZonedDateTimeFromUnixSeconds(unixSeconds, tz)
 }
 
 // Normalize should be called if any of its date or time fields are changed
@@ -87,25 +88,25 @@ func (zdt *ZonedDateTime) Normalize(disambiguate uint8) {
 		return
 	}
 
-	odt, resolved := zdt.Tz.findOffsetDateTimeForLocalDateTime(
-		&zdt.OffsetDateTime.LocalDateTime, disambiguate)
+	odt, resolved := zdt.Tz.findOffsetDateTimeForPlainDateTime(
+		&zdt.OffsetDateTime.PlainDateTime, disambiguate)
 	zdt.OffsetDateTime = odt
 	zdt.Resolved = resolved
 }
 
 // ZonedExtra returns the ZonedExtra object corresponding to the current
 // ZonedDateTime. This is will be always identical to the value returned by
-// ZonedExtraFromEpochSeconds().
+// ZonedExtraFromUnixSeconds().
 //
 // It will usually be identical to the value returned by
-// ZonedExtraFromLocalDateTime() except when the LocalDateTime falls in a gap
+// ZonedExtraFromPlainDateTime() except when the PlainDateTime falls in a gap
 // (FoldTypeGap). In that case, the ZonedDateTime has already been normalized
-// into a real ZonedDateTime, and ZonedExtraFromLocalDateTime() should be
-// called with the original LocalDateTime if the information about the
-// non-existent LocalDateTime is required.
+// into a real ZonedDateTime, and ZonedExtraFromPlainDateTime() should be
+// called with the original PlainDateTime if the information about the
+// non-existent PlainDateTime is required.
 func (zdt *ZonedDateTime) ZonedExtra() ZonedExtra {
-	return zdt.Tz.findZonedExtraForEpochSeconds(
-		zdt.OffsetDateTime.EpochSeconds())
+	return zdt.Tz.findZonedExtraForUnixSeconds(
+		zdt.OffsetDateTime.UnixSeconds())
 }
 
 // String returns the given ZonedDateTime in ISO8601 format, in the form of
@@ -117,7 +118,7 @@ func (zdt *ZonedDateTime) String() string {
 }
 
 func (zdt *ZonedDateTime) BuildString(b *strings.Builder) {
-	zdt.OffsetDateTime.LocalDateTime.BuildString(b)
+	zdt.OffsetDateTime.PlainDateTime.BuildString(b)
 
 	if zdt.Tz.IsUTC() {
 		// Append just a "UTC" to simplify the ISO8601.

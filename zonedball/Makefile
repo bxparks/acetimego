@@ -29,7 +29,7 @@ zonedb:
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
 		--actions zonedb \
-		--languages go \
+		--language go \
 		--scope complete \
 		--db_namespace zonedball \
 		--start_year $(START_YEAR) \
@@ -40,7 +40,7 @@ zonedb.json: Makefile
 		--tzrepo $(TZ_REPO) \
 		--tag $(TZ_VERSION) \
 		--actions json \
-		--languages go \
+		--language go \
 		--scope extended \
 		--start_year $(START_YEAR) \
 		--until_year $(UNTIL_YEAR)

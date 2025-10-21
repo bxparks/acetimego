@@ -4,12 +4,12 @@
 // the Time type stores only the number of seconds, it would be unable to
 // distinguish between 23:59:59 and 23:59:60 during a leap second.
 // It seems to normalize the 2016-12-31T23:59:60 into 2017-01-01T00:00:00, which
-// makes sense because Time stores only the epochSeconds component.
+// makes sense because Time stores only the unixSeconds component.
 //
 // In acetimego/acetime, the ZonedDateTime struct stores the broken down
 // date-time components, so in theory it may support leap seconds. However,
 // acetimego also explicitly does not support leap seconds. The retains the
-// broken down 23:59:60 time, but when converted to epochSeconds, it returns a
+// broken down 23:59:60 time, but when converted to unixSeconds, it returns a
 // value identical to 00:00:00.
 //
 // $ go run leapsecond.go
@@ -43,37 +43,37 @@ func leapAceTime() {
 	println("==== 2016 Leap second by acetime package")
 	atz := acetime.TimeZoneUTC
 
-	ldt := acetime.LocalDateTime{2016, 12, 31, 23, 59, 59}
-	zdt := acetime.ZonedDateTimeFromLocalDateTime(
-		&ldt, &atz, acetime.DisambiguateCompatible)
+	pdt := acetime.PlainDateTime{2016, 12, 31, 23, 59, 59}
+	zdt := acetime.ZonedDateTimeFromPlainDateTime(
+		&pdt, &atz, acetime.DisambiguateCompatible)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
-			ldt.String())
+			pdt.String())
 		return
 	}
-	seconds := zdt.EpochSeconds()
+	seconds := zdt.UnixSeconds()
 	println(zdt.String(), "; seconds=", seconds)
 
-	ldt = acetime.LocalDateTime{2016, 12, 31, 23, 59, 60}
-	zdt = acetime.ZonedDateTimeFromLocalDateTime(
-		&ldt, &atz, acetime.DisambiguateCompatible)
+	pdt = acetime.PlainDateTime{2016, 12, 31, 23, 59, 60}
+	zdt = acetime.ZonedDateTimeFromPlainDateTime(
+		&pdt, &atz, acetime.DisambiguateCompatible)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
-			ldt.String())
+			pdt.String())
 		return
 	}
-	seconds = zdt.EpochSeconds()
+	seconds = zdt.UnixSeconds()
 	println(zdt.String(), "; seconds=", seconds)
 
-	ldt = acetime.LocalDateTime{2017, 1, 1, 0, 0, 0}
-	zdt = acetime.ZonedDateTimeFromLocalDateTime(
-		&ldt, &atz, acetime.DisambiguateCompatible)
+	pdt = acetime.PlainDateTime{2017, 1, 1, 0, 0, 0}
+	zdt = acetime.ZonedDateTimeFromPlainDateTime(
+		&pdt, &atz, acetime.DisambiguateCompatible)
 	if zdt.IsError() {
 		println("ERROR: ", name, ": Unable to create ZonedDateTime for ",
-			ldt.String())
+			pdt.String())
 		return
 	}
-	seconds = zdt.EpochSeconds()
+	seconds = zdt.UnixSeconds()
 	println(zdt.String(), "; seconds=", seconds)
 }
 

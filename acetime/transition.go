@@ -73,7 +73,7 @@ type transition struct {
 	//}
 
 	// The calculated transition time of the given rule.
-	startEpochSeconds Time
+	startUnixSeconds Time
 
 	// The base offset seconds, not the total effective UTC offset.
 	offsetSeconds int32
@@ -276,23 +276,23 @@ type transitionForSeconds struct {
 	// 0 for the first or exact transition; 1 for the second transition
 	fold uint8
 
-	// Number of matching transition objects for the given epochSeconds. This can
+	// Number of matching transition objects for the given unixSeconds. This can
 	// be 0, 1, or 2.
 	//
 	// A `num` of 0 means that a transition could not be found, which is an error
 	// condition. The `fold` will also be set to 0, and `curr` should be nil.
 	//
-	// If `num` is 1, only single transition matched the epochSeconds, and the
+	// If `num` is 1, only single transition matched the unixSeconds, and the
 	// `fold` will always be 0.
 	//
-	// If `num` is 2, then 2 transitions matched the epochSeconds, and the
+	// If `num` is 2, then 2 transitions matched the unixSeconds, and the
 	// `fold` parameter can be either 0 (earlier) or 1 (later) to disambiguate the
 	// two.
 	num uint8
 }
 
 func (ts *transitionStorage) findTransitionForSeconds(
-	epochSeconds Time) transitionForSeconds {
+	unixSeconds Time) transitionForSeconds {
 
 	var prev *transition = nil
 	var curr *transition = nil
@@ -301,7 +301,7 @@ func (ts *transitionStorage) findTransitionForSeconds(
 	transitions := ts.getActives()
 	for i := range transitions {
 		next = &transitions[i] // do not use := here (bitten twice by this bug)
-		if next.startEpochSeconds > epochSeconds {
+		if next.startUnixSeconds > unixSeconds {
 			break
 		}
 		prev = curr
@@ -309,19 +309,19 @@ func (ts *transitionStorage) findTransitionForSeconds(
 		next = nil // clear 'next' in case we roll off the array
 	}
 
-	fold, num := calculateFoldAndOverlap(epochSeconds, prev, curr, next)
+	fold, num := calculateFoldAndOverlap(unixSeconds, prev, curr, next)
 	return transitionForSeconds{curr, fold, num}
 }
 
 // calculateFoldAndOverlap determines the `fold` and `num` parameters at the
-// given epochSeconds.
+// given unixSeconds.
 //
 // The `num` parameter is the number of transitions which can shadow a given
-// epochSeconds. It is 0 if `curr` is nil, which means that epochSeconds cannot
-// be mapped to any transition. It is 1 if the epochSeconds in the `curr`
+// unixSeconds. It is 0 if `curr` is nil, which means that unixSeconds cannot
+// be mapped to any transition. It is 1 if the unixSeconds in the `curr`
 // transition is unique and does not overlap with the `prev` or `next`
-// transition. It is 2 if the epochSeconds in the `curr` transition maps to a
-// LocalDateTime that overlaps with either the `prev` or `next` transition. (In
+// transition. It is 2 if the unixSeconds in the `curr` transition maps to a
+// PlainDateTime that overlaps with either the `prev` or `next` transition. (In
 // theory, I suppose it could overlap with both, but it is improbable that any
 // timezone in the TZDB will ever let that happen.)
 //
@@ -330,9 +330,9 @@ func (ts *transitionStorage) findTransitionForSeconds(
 // If `num` is 0 or 1, `fold` will always be 0. If `num` is 2, then `fold`
 // indicates whether `curr` is the earlier (0) or later (1) transition of the
 // overlap. This `fold` parameter will be copied into the corresponding `fold`
-// parameter in LocalDateTime.
+// parameter in PlainDateTime.
 func calculateFoldAndOverlap(
-	epochSeconds Time,
+	unixSeconds Time,
 	prev *transition,
 	curr *transition,
 	next *transition) (fold uint8, num uint8) {
@@ -353,12 +353,12 @@ func calculateFoldAndOverlap(
 			// sprint forward, or unchanged
 			isOverlap = false
 		} else {
-			delta := epochSeconds - curr.startEpochSeconds
+			delta := unixSeconds - curr.startUnixSeconds
 			isOverlap = delta < -shiftSeconds
 		}
 	}
 	if isOverlap {
-		// epochSeconds selects the second match
+		// unixSeconds selects the second match
 		fold = 1
 		num = 2
 		return
@@ -377,12 +377,12 @@ func calculateFoldAndOverlap(
 			isOverlap = false
 		} else {
 			// Check if within the backward overlap shadow from next
-			delta := next.startEpochSeconds - epochSeconds
+			delta := next.startUnixSeconds - unixSeconds
 			isOverlap = delta <= -shiftSeconds
 		}
 	}
 	if isOverlap {
-		// epochSeconds selects the first match
+		// unixSeconds selects the first match
 		fold = 0
 		num = 2
 		return
@@ -415,19 +415,19 @@ type transitionForDateTime struct {
 	// The matching transition or null if not found.
 	curr *transition
 
-	// Number of matches for given LocalDateTime: 0, 1, or 2.
+	// Number of matches for given PlainDateTime: 0, 1, or 2.
 	num uint8
 }
 
 func (ts *transitionStorage) findTransitionForDateTime(
-	ldt *LocalDateTime) transitionForDateTime {
+	pdt *PlainDateTime) transitionForDateTime {
 
-	// Convert LocalDateTime to dateTuple.
+	// Convert PlainDateTime to dateTuple.
 	localDt := dateTuple{
-		ldt.Year,
-		ldt.Month,
-		ldt.Day,
-		int32(ldt.Hour)*60*60 + int32(ldt.Minute)*60,
+		pdt.Year,
+		pdt.Month,
+		pdt.Day,
+		int32(pdt.Hour)*60*60 + int32(pdt.Minute)*60,
 		zoneinfo.SuffixW,
 	}
 

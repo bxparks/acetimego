@@ -95,12 +95,12 @@ func (zp *zoneProcessor) initForYear(year int16) errType {
 	return errOk
 }
 
-func (zp *zoneProcessor) initForEpochSeconds(epochSeconds Time) errType {
-	ldt := LocalDateTimeFromEpochSeconds(epochSeconds)
-	if ldt.IsError() {
+func (zp *zoneProcessor) initForUnixSeconds(unixSeconds Time) errType {
+	pdt := PlainDateTimeFromUnixSeconds(unixSeconds)
+	if pdt.IsError() {
 		return errGeneric
 	}
-	return zp.initForYear(ldt.Year)
+	return zp.initForYear(pdt.Year)
 }
 
 func (zp *zoneProcessor) name() string {
@@ -147,7 +147,7 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 		if onDayOfMonth == 0 {
 			onDayOfMonth = daysInMonth - 6
 		}
-		dow := uint8(LocalDateToWeekday(year, month, uint8(onDayOfMonth)))
+		dow := uint8(PlainDateToWeekday(year, month, uint8(onDayOfMonth)))
 		dayOfWeekShift := (onDayOfWeek - dow + 7) % 7
 		day := onDayOfMonth + int8(dayOfWeekShift)
 		if day > daysInMonth {
@@ -159,7 +159,7 @@ func calcStartDayOfMonth(year int16, month uint8, onDayOfWeek uint8,
 		md.day = uint8(day)
 	} else {
 		onDayOfMonth = -onDayOfMonth
-		dow := uint8(LocalDateToWeekday(year, month, uint8(onDayOfMonth)))
+		dow := uint8(PlainDateToWeekday(year, month, uint8(onDayOfMonth)))
 		dayOfWeekShift := (dow - onDayOfWeek + 7) % 7
 		day := onDayOfMonth - int8(dayOfWeekShift)
 		if day < 1 {
@@ -579,9 +579,9 @@ func generateStartUntilTimes(transitions []transition) {
 		st := &transition.startDt
 		offsetSeconds := Time(st.seconds -
 			(transition.offsetSeconds + transition.deltaSeconds))
-		epochSeconds := 86400 * Time(
-			LocalDateToEpochDays(st.year, st.month, st.day))
-		transition.startEpochSeconds = epochSeconds + offsetSeconds
+		unixSeconds := 86400 * Time(
+			PlainDateToUnixDays(st.year, st.month, st.day))
+		transition.startUnixSeconds = unixSeconds + offsetSeconds
 
 		prev = transition
 		isAfterFirst = true
@@ -632,7 +632,7 @@ func createAbbreviation(
 		} else {
 			secs = -totalSeconds
 		}
-		h, m, s := LocalTimeFromSeconds(secs)
+		h, m, s := PlainTimeFromSeconds(secs)
 		var b strings.Builder
 
 		// leading sign
@@ -678,7 +678,7 @@ func createAbbreviation(
 }
 
 //---------------------------------------------------------------------------
-// findByLocalDateTime() and findByEpochSeconds()
+// findByPlainDateTime() and findByUnixSeconds()
 //---------------------------------------------------------------------------
 
 // Values of the findResult.frtype field. Must be identical to FoldType enums.
@@ -694,24 +694,42 @@ var (
 	findResultError = findResult{frtype: findResultErr}
 )
 
-// The `fold` parameter is set to 0 to mean "earlier", and 1 to mean "later".
-// However, this means slightly different things for overlap versus gap.
+// This object contains the result of a search, either using findByUnixSeconds()
+// or findByPlainDateTime().
 //
-// For findByEpochSeconds(), the `fold` parameter is relevant only if
-// epochSeconds falls in an overlap (frtrype==findResultOverlap). During an
-// overlap, a fold=0 means that the requested epochSeconds matched a backwards
-// shadow of a later transition (e.g. the first time 1:30am was seen before a
-// fallback from 2am to 1am). A fold=1 means that the requested epochSeconds
-// matched the forward shadow of an earlier transition (e.g. the second time
-// 1:30am was seen after a fallback from 2am to 1am).
+// The `frtype` determines the high-level result of the query using the
+// epochSeconds or plainDateTime. It is one of the `findResult` enums:
+// findResultErr, findResultNotFound, findResultExact, findResultGap, or
+// findResultOverlap.
 //
-// For findByLocalDateTime(), the `fold` parameter is relevant for both
-// findResultGap and findResultOverlap. If the requested LocalDateTime is in an
-// overlap, `fold=0` means that the SelectEarlier option was requested, and
-// `fold=1` means that the SelectLater option was requested. If the
-// LocalDateTime is in a gap, `fold=0` means the earlier transition was
-// requested by SelectLater, and `fold=1` means that the later transition was
-// selected using SelectEarlier.
+// The `fold` parameter identifies the transition rule that was used to resolve
+// the search: 0 means "earlier", and 1 means "later". The effect on the
+// resulting ZonedDateTime or ZonedExtra object is slightly different depending
+// overlap versus gap.
+//
+// The `frtype` field is exposed as `ZonedExtra.FoldType`. The `fold` parameter
+// was previously exposed to the end-users, but is now used for internal
+// purposes only. It is combined with the `frtype` to to determine the
+// `ZonedDateTime.resolved` parameter.
+//
+// For findByUnixSeconds(), the `fold` parameter is relevant only if
+// unixSeconds falls in an overlap (frtype==findResultOverlap):
+// - fold=0 means that the requested unixSeconds matched a backwards shadow of a
+// later transition (e.g. the first time 1:30am was seen before a fallback from
+// 2am to 1am),
+// - fold=1 means that the requested unixSeconds matched the forward shadow of
+// an earlier transition (e.g. the second time 1:30am was seen after a fallback
+// from 2am to 1am).
+//
+// For findByPlainDateTime(), the `fold` parameter is relevant for both
+// findResultGap and findResultOverlap.
+// - If the requested PlainDateTime is in an overlap:
+//    - `fold=0` means that the SelectEarlier option was requested, and
+//    - `fold=1` means that the SelectLater option was requested.
+// - If the PlainDateTime is in a gap:
+//    - `fold=0` means the earlier transition was requested by SelectLater, and
+//    - `fold=1` means that the later transition was selected using
+//    SelectEarlier.
 type findResult struct {
 	frtype              uint8  // findResult type
 	fold                uint8  // earlier (0) or later (1) transition
@@ -724,16 +742,16 @@ type findResult struct {
 
 // Find the findResult at the given epoch_seconds.
 //
-// Adapted from ExtendedZoneProcessor::findByEpochSeconds(epochSeconds)
+// Adapted from ExtendedZoneProcessor::findByUnixSeconds(unixSeconds)
 // in the AceTime library and atc_processor_find_by_epoch_seconds() in the
 // acetimec library.
-func (zp *zoneProcessor) findByEpochSeconds(epochSeconds Time) findResult {
-	err := zp.initForEpochSeconds(epochSeconds)
+func (zp *zoneProcessor) findByUnixSeconds(unixSeconds Time) findResult {
+	err := zp.initForUnixSeconds(unixSeconds)
 	if err != errOk {
 		return findResultError
 	}
 
-	tfs := zp.tstorage.findTransitionForSeconds(epochSeconds)
+	tfs := zp.tstorage.findTransitionForSeconds(unixSeconds)
 	transition := tfs.curr
 	if transition == nil {
 		return findResultError
@@ -756,8 +774,8 @@ func (zp *zoneProcessor) findByEpochSeconds(epochSeconds Time) findResult {
 	}
 }
 
-// Disambiguation of duplicate LocalDateTime (in overlap) or missing
-// LocalDateTime (in gap).
+// Disambiguation of duplicate PlainDateTime (in overlap) or missing
+// PlainDateTime (in gap).
 //
 // - Compatible (default, earlier for overlap, later for gap)
 // - Earlier (always pick the earlier transition)
@@ -770,21 +788,21 @@ const (
 	DisambiguateReversed
 )
 
-// Return the findResult at the given LocalDateTime.
+// Return the findResult at the given PlainDateTime.
 //
-// Adapted from ExtendedZoneProcessor::findByLocalDateTime(const LocalDateTime&)
+// Adapted from ExtendedZoneProcessor::findByPlainDateTime(const PlainDateTime&)
 // in the AceTime library and atc_processor_find_by_local_date_time() in the
 // acetimec library.
-func (zp *zoneProcessor) findByLocalDateTime(
-	ldt *LocalDateTime,
+func (zp *zoneProcessor) findByPlainDateTime(
+	pdt *PlainDateTime,
 	disambiguate uint8) findResult {
 
-	err := zp.initForYear(ldt.Year)
+	err := zp.initForYear(pdt.Year)
 	if err != errOk {
 		return findResultError
 	}
 
-	tfd := zp.tstorage.findTransitionForDateTime(ldt)
+	tfd := zp.tstorage.findTransitionForDateTime(pdt)
 
 	// Extract the appropriate transition, depending on the requested 'fold'
 	// and the 'tfd.searchStatus'.
@@ -798,7 +816,7 @@ func (zp *zoneProcessor) findByLocalDateTime(
 		result.reqDstOffsetSeconds = transition.deltaSeconds
 	} else { // num = 0 or 2
 		if tfd.prev == nil || tfd.curr == nil {
-			// ldt was far past or far future, and didn't match anything.
+			// pdt was far past or far future, and didn't match anything.
 			transition = nil
 			result.frtype = findResultNotFound
 			result.fold = 0
@@ -807,7 +825,7 @@ func (zp *zoneProcessor) findByLocalDateTime(
 				result.frtype = findResultGap
 				if disambiguate == DisambiguateCompatible ||
 					disambiguate == DisambiguateLater {
-					// Want the later LocalDateTime, so want the requested offsetSeconds
+					// Want the later PlainDateTime, so want the requested offsetSeconds
 					// and deltaSeconds from the earlier (prev) transition.
 					result.reqStdOffsetSeconds = tfd.prev.offsetSeconds
 					result.reqDstOffsetSeconds = tfd.prev.deltaSeconds
@@ -816,7 +834,7 @@ func (zp *zoneProcessor) findByLocalDateTime(
 					// transition, so select 'curr' as the target transition.
 					transition = tfd.curr
 				} else {
-					// Want the earlier LocalDateTime, so want the requested offsetSeconds
+					// Want the earlier PlainDateTime, so want the requested offsetSeconds
 					// and deltaSeconds from the later (curr) transition.
 					result.reqStdOffsetSeconds = tfd.curr.offsetSeconds
 					result.reqDstOffsetSeconds = tfd.curr.deltaSeconds
