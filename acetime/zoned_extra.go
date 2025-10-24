@@ -1,16 +1,17 @@
 package acetime
 
-// FoldType. Must be identical to findResult enums.
+// FoldKind, the type of the FoldType. Must be identical to findResult enums.
+type FoldType uint8
+
 const (
-	FoldTypeErr = iota
-	FoldTypeNotFound
+	FoldTypeNotFound FoldType = iota
 	FoldTypeExact
 	FoldTypeGap
 	FoldTypeOverlap
 )
 
 var (
-	ZonedExtraError = ZonedExtra{FoldType: FoldTypeErr}
+	ZonedExtraError = ZonedExtra{ResolvedFold: FoldTypeNotFound}
 )
 
 // ZonedExtra contains information about a specific instant in time (either at a
@@ -18,12 +19,12 @@ var (
 // captured by the OffsetDateTime. These include the STD offset, the DST offset,
 // and the abbreviation.
 type ZonedExtra struct {
-	FoldType            uint8  // type of fold (e.g. gap, overlap)
-	StdOffsetSeconds    int32  // STD offset
-	DstOffsetSeconds    int32  // DST offset
-	ReqStdOffsetSeconds int32  // request STD offset
-	ReqDstOffsetSeconds int32  // request DST offset
-	Abbrev              string // abbreviation (e.g. PST, PDT)
+	ResolvedFold        FoldType // type of fold (e.g. gap, overlap)
+	StdOffsetSeconds    int32    // STD offset
+	DstOffsetSeconds    int32    // DST offset
+	ReqStdOffsetSeconds int32    // request STD offset
+	ReqDstOffsetSeconds int32    // request DST offset
+	Abbrev              string   // abbreviation (e.g. PST, PDT)
 }
 
 func ZonedExtraFromUnixSeconds(
@@ -39,7 +40,7 @@ func ZonedExtraFromPlainDateTime(
 }
 
 func (extra *ZonedExtra) IsError() bool {
-	return extra.FoldType == FoldTypeErr
+	return extra.ResolvedFold == FoldTypeNotFound
 }
 
 // OffsetSeconds returns the total offset from UTC in seconds (StdOffsetSeconds

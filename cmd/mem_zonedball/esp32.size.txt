@@ -1,20 +1,22 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-      0       0       3       5 |       3       8 | (padding)
-   1262       4       4       0 |    1270       4 | (unknown)
+      0       0       1       5 |       1       6 | (padding)
+   1207      16       0       0 |    1223       0 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
      66       0       0       0 |      66       0 | device/esp
-   5929      31       0       0 |    5960       0 | github.com/bxparks/acetimego/acetime
-    436       0       0       0 |     436       0 | github.com/bxparks/acetimego/internal/strbuild
-      0   70645    1565       0 |   72210    1565 | github.com/bxparks/acetimego/zonedball
-   1996       0       0       0 |    1996       0 | github.com/bxparks/acetimego/zoneinfo
-     54       0       0       0 |      54       0 | internal/bytealg
-    302      24       0       8 |     326       8 | internal/task
-     20       0       0       0 |      20       0 | machine
-    252     161       0       0 |     413       0 | main
-   2191     172       0      47 |    2363      47 | runtime
-     56       0       0       0 |      56       0 | runtime/interrupt
-    101       0       0       0 |     101       0 | runtime/volatile
-    435     108       0       0 |     543       0 | strings
+   5717      31       0       0 |    5748       0 | github.com/bxparks/acetimego/acetime
+    411       0       0       0 |     411       0 | github.com/bxparks/acetimego/internal/strbuild
+      0   70870    1567       0 |   72437    1567 | github.com/bxparks/acetimego/zonedball
+   1934       0       0       0 |    1934       0 | github.com/bxparks/acetimego/zoneinfo
+     59       0       0       0 |      59       0 | internal/bytealg
+     37       0       0       0 |      37       0 | internal/stringslite
+    292      24       0       8 |     316       8 | internal/task
+      9       0       0       0 |       9       0 | machine
+    264     161       0       0 |     425       0 | main
+     10       0       0       0 |      10       0 | math/bits
+   2301     172       0      63 |    2473      63 | runtime
+     53       0       0       0 |      53       0 | runtime/interrupt
+    107       0       0       0 |     107       0 | runtime/volatile
+    465     108       0       0 |     573       0 | strings
 ------------------------------- | --------------- | -------
-  13100   71145    1572    4156 |   85817    5728 | total
+  12932   71382    1568    4172 |   85882    5740 | total

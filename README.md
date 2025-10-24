@@ -515,12 +515,12 @@ The `ZonedExtra` has the following fields:
 
 ```go
 type ZonedExtra struct {
-  FoldType            uint8  // type of fold (e.g. gap, overlap)
-  StdOffsetSeconds    int32  // STD offset
-  DstOffsetSeconds    int32  // DST offset
-  ReqStdOffsetSeconds int32  // request STD offset
-  ReqDstOffsetSeconds int32  // request DST offset
-  Abbrev              string // abbreviation (e.g. PST, PDT)
+  ResolvedFold        FoldType  // type of fold (e.g. gap, overlap)
+  StdOffsetSeconds    int32     // STD offset
+  DstOffsetSeconds    int32     // DST offset
+  ReqStdOffsetSeconds int32     // request STD offset
+  ReqDstOffsetSeconds int32     // request DST offset
+  Abbrev              string    // abbreviation (e.g. PST, PDT)
 }
 ```
 
@@ -530,8 +530,8 @@ It is created by:
 - `acetime.ZonedExtraFromPlainDateTime(plainDateTime, tz, disambiguate)`
 - `acetime.ZonedDateTime.ZonedExtra()`
 
-The `FoldType` specifies whether the given `PlainDateTime` is within an overlap
-or a gap. It takes 5 values:
+The `ResolvedFold` specifies whether the given `PlainDateTime` is within an
+overlap or a gap. It takes 5 values:
 
 - `FoldTypeErr`: the `ZonedExtra` object is an error indicator, and
   `ZonedExtra.IsError()` returns true

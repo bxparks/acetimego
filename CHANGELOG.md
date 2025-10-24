@@ -1,6 +1,15 @@
 # Changelog
 
 - unreleased
+    - **Breaking** Rename  `ZonedExtra.FoldType` to `ResolvedFold`, because the
+      Go language forces me to capitalize the field "FoldType" whose type is
+      "FoldType".
+    - **Breaking** Use typesafe types for enums (`findResultType` instead of
+      `uint8`, `FoldType` instead of `uint8`).
+    - **Breaking** Simplify `FoldType`.
+        - Merge `FoldTypeErr` into `FoldTypeNotFound`.
+        - Merge `findResultErr` into `findResultNotFound`.
+    - Regenerate memory benchmarks using Go 1.25.3 and TinyGo 0.39.0.
 - 0.8.0 (2025-10-21, TZDB 2025b)
     - **Breaking** Rename LocalXxx to PlainXxx, following the conventions
       used by more modern timezone libraries (JavaScript Temporal, Python

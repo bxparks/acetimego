@@ -13,8 +13,10 @@ var (
 
 // Resolved disambiguation of the ZonedDateTime from its UnixSeconds or
 // PlainDateTime.
+type ResolvedType uint8
+
 const (
-	ResolvedUnique = iota
+	ResolvedUnique ResolvedType = iota
 	ResolvedOverlapEarlier
 	ResolvedOverlapLater
 	ResolvedGapEarlier
@@ -35,7 +37,7 @@ const (
 type ZonedDateTime struct {
 	OffsetDateTime
 	Tz       *TimeZone
-	Resolved uint8
+	Resolved ResolvedType
 }
 
 // Converts from Unix unixSeconds.

@@ -11,19 +11,16 @@ import (
 
 // Test that FoldTypeXxx constants are the same as findResultXxx constants.
 func TestFoldTypeTypeConstantsMatch(t *testing.T) {
-	if !(FoldTypeErr == findResultErr) {
-		t.Fatal("FoldTypeErr")
-	}
-	if !(FoldTypeNotFound == findResultNotFound) {
+	if !(FoldTypeNotFound == FoldType(findResultNotFound)) {
 		t.Fatal("FoldTypeNotFound")
 	}
-	if !(FoldTypeExact == findResultExact) {
+	if !(FoldTypeExact == FoldType(findResultExact)) {
 		t.Fatal("FoldTypeExact")
 	}
-	if !(FoldTypeGap == findResultGap) {
+	if !(FoldTypeGap == FoldType(findResultGap)) {
 		t.Fatal("FoldTypeGap")
 	}
-	if !(FoldTypeOverlap == findResultOverlap) {
+	if !(FoldTypeOverlap == FoldType(findResultOverlap)) {
 		t.Fatal("FoldTypeOverlap")
 	}
 }

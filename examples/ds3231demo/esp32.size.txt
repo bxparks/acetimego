@@ -1,18 +1,18 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-      0       3       0       7 |       3       7 | (padding)
-   1035     181       0       0 |    1216       0 | (unknown)
+      0       2       0       6 |       2       6 | (padding)
+   1037     198       0       0 |    1235       0 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
       4       0       0       0 |       4       0 | Go interface method
-      0      92       0       0 |      92       0 | Go types
+      0      88       0       0 |      88       0 | Go types
      66       0       0       0 |      66       0 | device/esp
-    265       0       0       0 |     265       0 | github.com/bxparks/acetimego/ds3231
-    331      24       0       8 |     355       8 | internal/task
-    601       0       0       0 |     601       0 | machine
-    127       6       8       0 |     141       8 | main
-   2127     110       0      57 |    2237      57 | runtime
-     55       0       0       0 |      55       0 | runtime/interrupt
-    141       0       0       0 |     141       0 | runtime/volatile
-    986      32       8       0 |    1026       8 | tinygo.org/x/drivers/i2csoft
+    279       0       0       0 |     279       0 | github.com/bxparks/acetimego/ds3231
+    320      24       0       8 |     344       8 | internal/task
+    557       0       0       0 |     557       0 | machine
+    132       6       8       0 |     146       8 | main
+   2298     110       0      74 |    2408      74 | runtime
+     56       0       0       0 |      56       0 | runtime/interrupt
+    204       0       0       0 |     204       0 | runtime/volatile
+    910      32       8       0 |     950       8 | tinygo.org/x/drivers/i2csoft
 ------------------------------- | --------------- | -------
-   5738     448      16    4168 |    6202    4184 | total
+   5863     460      16    4184 |    6339    4200 | total

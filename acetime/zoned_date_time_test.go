@@ -925,7 +925,7 @@ func TestZonedDateTimeToZonedExtra(t *testing.T) {
 	}
 
 	expected := ZonedExtra{
-		FoldType:            FoldTypeExact,
+		ResolvedFold:        FoldTypeExact,
 		StdOffsetSeconds:    -8 * 3600,
 		DstOffsetSeconds:    1 * 3600,
 		ReqStdOffsetSeconds: -8 * 3600,
