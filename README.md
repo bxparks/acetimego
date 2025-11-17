@@ -1,4 +1,4 @@
-# acetimego - AceTime time zone library for Go and TinyGo
+# acetimego - a tiny time zone library for Go and TinyGo
 
 [![Go Tests](https://github.com/bxparks/acetimego/actions/workflows/verify.yml/badge.svg)](https://github.com/bxparks/acetimego/actions/workflows/verify.yml)
 
@@ -24,8 +24,6 @@ provided in this library:
     - All timezones with transitions for all years defined by the TZDB database,
       from the year 1844 onwards,
     - Consumes  about 72 kB of flash memory.
-- `zonedbtesting`
-    - A small subset of timezones for internal testing purposes.
 
 To reduce RAM memory consumption, the TZDB is parsed and compiled into binary
 data encoded as `const string` variables, which allows the TinyGo compiler to
@@ -40,7 +38,7 @@ This library implements the algorithms equivalent to the following libraries:
 - [acetimepy](https://github.com/bxparks/acetimepy) for Python,
 - [acetimec](https://github.com/bxparks/acetimec) for C.
 
-**Version**: 0.8.0 (2025-10-21, TZDB 2025b)
+**Version**: 0.9.0 (2025-11-17, TZDB 2025b)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
@@ -76,7 +74,7 @@ import (
 )
 ```
 
-There are 4 database packages which allows the end user to select the range of
+There are 3 database packages which allows the end user to select the range of
 validity of the TZDB, which directly affects the size of the final binary.
 Normally, an application will choose only of the following:
 
@@ -85,7 +83,6 @@ import (
   "github.com/bxparks/acetimego/zonedb2000"
   "github.com/bxparks/acetimego/zonedb2025"
   "github.com/bxparks/acetimego/zonedball"
-  "github.com/bxparks/acetimego/zonedbtesting"
 )
 ```
 
@@ -97,8 +94,6 @@ import (
   kB.
 - `zonedball` contains the entire TZDB, for all timezones, for all years in the
   TZDB from 1844 and onwards. The database size is approximately 72 kB.
-- `zonedbtesting` is used only for testing purposes and contains only a subset
-  of timezones of the world. The database is only 400 bytes.
 
 The `zoneinfo` package:
 
@@ -515,12 +510,12 @@ The `ZonedExtra` has the following fields:
 
 ```go
 type ZonedExtra struct {
-  FoldType            uint8  // type of fold (e.g. gap, overlap)
-  StdOffsetSeconds    int32  // STD offset
-  DstOffsetSeconds    int32  // DST offset
-  ReqStdOffsetSeconds int32  // request STD offset
-  ReqDstOffsetSeconds int32  // request DST offset
-  Abbrev              string // abbreviation (e.g. PST, PDT)
+  ResolvedFold        FoldType  // type of fold (e.g. gap, overlap)
+  StdOffsetSeconds    int32     // STD offset
+  DstOffsetSeconds    int32     // DST offset
+  ReqStdOffsetSeconds int32     // request STD offset
+  ReqDstOffsetSeconds int32     // request DST offset
+  Abbrev              string    // abbreviation (e.g. PST, PDT)
 }
 ```
 
@@ -528,41 +523,36 @@ It is created by:
 
 - `acetime.ZonedExtraFromUnixSeconds(unixSeconds, tz)`
 - `acetime.ZonedExtraFromPlainDateTime(plainDateTime, tz, disambiguate)`
-- `acetime.ZonedDateTime.ZonedExtra()`
 
-The `FoldType` specifies whether the given `PlainDateTime` is within an overlap
-or a gap. It takes 5 values:
+The `ResolvedFold` specifies whether the given `PlainDateTime` is within an
+overlap or a gap. It takes 5 values:
 
-- `FoldTypeErr`: the `ZonedExtra` object is an error indicator, and
-  `ZonedExtra.IsError()` returns true
-- `FoldTypeNotFound`: the `PlainDateTime` was outside a valid range. This
-  shouldn't happen (TODO: Remove?)
+- `FoldTypeNotFound`: an internal error occurred or the `PlainDateTime` was
+  outside a valid range (`ZonedExtra.IsError()` returns `true`)
 - `FoldTypeExact`: the `PlainDateTime` corresponds to a unique date-time value
 - `FoldTypeGap`: the `PlainDateTime` falls in a gap
 - `FoldTypeOverlap`: the `PlainDateTime` falls in an overlap.
 
 The `Abbrev` parameter is the timezone abbreviation that corresponds to the
-given unixSeconds or `PlainDateTime`.
-
-For convenience, `ZonedDateTime` can directly retrieve the corresponding
-`ZonedExtra` object using `ZonedDateTime.ZonedExtra()`.
+given unixSeconds or `PlainDateTime`. For example, for the `America/Los_Angeles`
+time zone, it will be "PST" (Pacific Standard Time) during the winter months,
+and "PDT" (Pacific Daylight Time) during the summer months.
 
 (TODO: add documentation of the various OffsetSeconds parameters.)
 
 ## Bugs And Limitations
 
-`acetimgo` does not support access to a monotonic clock of the underlying
-system. The sole purpose of acetimego is to support timezones and date-times in
-the Gregorian calendar system.
-
-`acetimego` does not support the `time.Duration` object. The difference between
-two `acetime.Time` values can be represented as an `int64`.
-
-`acetimego` does not support date arithmetics such as adding days or months.
-
-`acetimego` does not support generalized formatting of the `ZonedDateTime`
-object similar to `time.Time.Format()`. Only one specific ISO 8601 format is
-supported by the `String()` or `BuildString()` functions.
+- `acetimgo` does not support access to a monotonic clock of the underlying
+  system. The sole purpose of acetimego is to support timezones and date-times
+  in the Gregorian calendar system.
+- `acetimego` does not support the `time.Duration` object. The difference
+  between two `acetime.Time` values can be represented as an `int64`.
+- `acetimego` does not support date arithmetics such as adding days or months.
+- `acetimego` does not support generalized formatting of the `ZonedDateTime`
+  object similar to `time.Time.Format()`. Only one specific ISO 8601 format is
+  supported by the `String()` or `BuildString()` functions.
+- The internal algorithms have been tested primarily from the year 0001 to 9999.
+  There may be bugs outside of that range.
 
 ## License
 

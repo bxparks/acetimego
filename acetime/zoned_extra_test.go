@@ -9,27 +9,8 @@ import (
 // ZonedExtra.
 //-----------------------------------------------------------------------------
 
-// Test that FoldTypeXxx constants are the same as findResultXxx constants.
-func TestFoldTypeTypeConstantsMatch(t *testing.T) {
-	if !(FoldTypeErr == findResultErr) {
-		t.Fatal("FoldTypeErr")
-	}
-	if !(FoldTypeNotFound == findResultNotFound) {
-		t.Fatal("FoldTypeNotFound")
-	}
-	if !(FoldTypeExact == findResultExact) {
-		t.Fatal("FoldTypeExact")
-	}
-	if !(FoldTypeGap == findResultGap) {
-		t.Fatal("FoldTypeGap")
-	}
-	if !(FoldTypeOverlap == findResultOverlap) {
-		t.Fatal("FoldTypeOverlap")
-	}
-}
-
 func TestOffsetSeconds(t *testing.T) {
-	extra := ZonedExtra{FoldTypeExact, 1, 2, 3, 4, "ABC"}
+	extra := ZonedExtra{ResolvedUnique, 1, 2, 3, 4, "ABC"}
 	if extra.OffsetSeconds() != 1+2 {
 		t.Fatal(extra)
 	}
@@ -48,7 +29,7 @@ func TestZonedExtraFromUnixSeconds(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected := ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -62,7 +43,7 @@ func TestZonedExtraFromUnixSeconds_2050(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected := ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -76,7 +57,7 @@ func TestZonedExtraFromUnixSeconds_UnixMax(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, 0, 0, 0, 0, "UTC"}
+	expected := ZonedExtra{ResolvedUnique, 0, 0, 0, 0, "UTC"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -107,20 +88,20 @@ func TestZonedExtraFromUnixSeconds_FallBack(t *testing.T) {
 		t.Fatal(extra)
 	}
 	expected := ZonedExtra{
-		FoldTypeOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
 
 	// Go forward an hour. Should return 01:29:00-08:00, the second time this
-	// was seen, so fold should be 1.
+	// was seen.
 	unixSeconds += 3600
 	extra = ZonedExtraFromUnixSeconds(unixSeconds, &tz)
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -132,7 +113,7 @@ func TestZonedExtraFromUnixSeconds_FallBack(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -152,7 +133,7 @@ func TestZonedExtraFromUnixSeconds_SpringForward(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected := ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -163,7 +144,7 @@ func TestZonedExtraFromUnixSeconds_SpringForward(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -182,7 +163,7 @@ func TestZonedExtraFromPlainDateTime(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected := ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -194,7 +175,7 @@ func TestZonedExtraFromPlainDateTime(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -209,7 +190,7 @@ func TestZonedExtraFromPlainDateTime_2050(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected := ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -221,7 +202,7 @@ func TestZonedExtraFromPlainDateTime_2050(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -237,7 +218,7 @@ func TestZonedExtraFromPlainDateTime_BeforeGap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected := ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -249,7 +230,7 @@ func TestZonedExtraFromPlainDateTime_BeforeGap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -266,7 +247,7 @@ func TestZonedExtraFromPlainDateTime_InGap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeGap, -8 * 3600, 3600, -8 * 3600, 0, "PDT"}
+	expected := ZonedExtra{ResolvedGapLater, -8 * 3600, 3600, -8 * 3600, 0, "PDT"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -278,7 +259,9 @@ func TestZonedExtraFromPlainDateTime_InGap(t *testing.T) {
 		t.Fatal(extra)
 	}
 	// fold == 0 to indicate the 1st transition
-	expected = ZonedExtra{FoldTypeGap, -8 * 3600, 0, -8 * 3600, 3600, "PST"}
+	expected = ZonedExtra{
+		ResolvedGapEarlier, -8 * 3600, 0, -8 * 3600, 3600, "PST",
+	}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -295,7 +278,7 @@ func TestZonedExtraFromPlainDateTime_AfterGap(t *testing.T) {
 		t.Fatal(extra)
 	}
 	expected := ZonedExtra{
-		FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
 	if !(extra == expected) {
 		t.Fatal(extra)
@@ -307,7 +290,7 @@ func TestZonedExtraFromPlainDateTime_AfterGap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -324,7 +307,9 @@ func TestZonedExtraFromPlainDateTime_BeforeOverlap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT"}
+	expected := ZonedExtra{
+		ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+	}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -335,7 +320,7 @@ func TestZonedExtraFromPlainDateTime_BeforeOverlap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -353,7 +338,7 @@ func TestZonedExtraFromPlainDateTime_InOverlap(t *testing.T) {
 		t.Fatal(extra)
 	}
 	expected := ZonedExtra{
-		FoldTypeOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedOverlapEarlier, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
 	if !(extra == expected) {
 		t.Fatal(extra)
@@ -364,7 +349,7 @@ func TestZonedExtraFromPlainDateTime_InOverlap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected = ZonedExtra{ResolvedOverlapLater, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -380,7 +365,7 @@ func TestZonedExtraFromPlainDateTime_AfterOverlap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected := ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}
@@ -391,7 +376,7 @@ func TestZonedExtraFromPlainDateTime_AfterOverlap(t *testing.T) {
 	if extra.IsError() {
 		t.Fatal(extra)
 	}
-	expected = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
+	expected = ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}

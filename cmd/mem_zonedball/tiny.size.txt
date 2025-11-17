@@ -1,17 +1,22 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-      0       6       3      14 |       9      17 | (padding)
-     27    4458      22      24 |    4507      46 | (unknown)
-   3002      27       4     536 |    3033     540 | C musl
+      0       0       5      10 |       5      15 | (padding)
+     27   15059      20     990 |   15106    1010 | (unknown)
+  26972    3610     872  118018 |   31454  118890 | C bdwgc
+  16680    3025      12     576 |   19717     588 | C musl
       0      32       0       0 |      32       0 | Go types
-   6729      63       0       0 |    6792       0 | github.com/bxparks/acetimego/acetime
-    470       0       0       0 |     470       0 | github.com/bxparks/acetimego/internal/strbuild
+   6559      63       0       0 |    6622       0 | github.com/bxparks/acetimego/acetime
+    450       0       0       0 |     450       0 | github.com/bxparks/acetimego/internal/strbuild
       0   70870    1675       0 |   72545    1675 | github.com/bxparks/acetimego/zonedball
-   2446       0       0       0 |    2446       0 | github.com/bxparks/acetimego/zoneinfo
-     59       0       0       0 |      59       0 | internal/bytealg
-    365      24       0      16 |     389      16 | internal/task
-    316     161       0       0 |     477       0 | main
-   3401     172       8      91 |    3581      99 | runtime
-    575     124       0       0 |     699       0 | strings
+   2404       0       0       0 |    2404       0 | github.com/bxparks/acetimego/zoneinfo
+     73       0       0       0 |      73       0 | internal/bytealg
+    153       0       0       0 |     153       0 | internal/futex
+     31       0       0       0 |      31       0 | internal/stringslite
+    529      50       8      96 |     587     104 | internal/task
+    496     161       0       0 |     657       0 | main
+      8       0       0       0 |       8       0 | math/bits
+   1953     253       0     122 |    2206     122 | runtime
+    544     124       0       0 |     668       0 | strings
+     42       0       0       0 |      42       0 | sync/atomic
 ------------------------------- | --------------- | -------
-  17390   75937    1712     681 |   95039    2393 | total
+  56921   93247    2592  119812 |  152760  122404 | total

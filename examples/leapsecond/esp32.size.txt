@@ -1,28 +1,30 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
-      0      10       0       9 |      10       9 | (padding)
-   2979     868       0       0 |    3847       0 | (unknown)
+      0      11       0       9 |      11       9 | (padding)
+   2858     899       0       0 |    3757       0 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
-     89       0       0       0 |      89       0 | Go interface method
-      0     288       0       0 |     288       0 | Go types
+     12       0       0       0 |      12       0 | Go interface method
+      0     280       0       0 |     280       0 | Go types
      66       0       0       0 |      66       0 | device/esp
      13       0       0       0 |      13       0 | errors
-   6332      28       0       0 |    6360       0 | github.com/bxparks/acetimego/acetime
-    222       0       0       0 |     222       0 | github.com/bxparks/acetimego/internal/strbuild
-    190       0       0       0 |     190       0 | github.com/bxparks/acetimego/zoneinfo
+   6180      28       0       0 |    6208       0 | github.com/bxparks/acetimego/acetime
+    224       0       0       0 |     224       0 | github.com/bxparks/acetimego/internal/strbuild
+    179       0       0       0 |     179       0 | github.com/bxparks/acetimego/zoneinfo
      57       0       0       0 |      57       0 | internal/bytealg
-    142       2       0       0 |     144       0 | internal/itoa
-    349      24       0       8 |     373       8 | internal/task
-     20       0       0       0 |      20       0 | machine
-    795     134       0       0 |     929       0 | main
-   3850     591       0       0 |    4441       0 | reflect
-   3186     213       0      47 |    3399      47 | runtime
-     78       0       0       0 |      78       0 | runtime/interrupt
-    101       0       0       0 |     101       0 | runtime/volatile
-    515     108       0       0 |     623       0 | strings
-    167      38       0       0 |     205       0 | sync
+    161       2       0       0 |     163       0 | internal/itoa
+   4094     590      48       0 |    4732      48 | internal/reflectlite
+     37       0       0       0 |      37       0 | internal/stringslite
+    400      62       0       8 |     462       8 | internal/task
+      9       0       0       0 |       9       0 | machine
+    813     137       0       0 |     950       0 | main
+     19       0       0       0 |      19       0 | math/bits
+   3360     213       0      63 |    3573      63 | runtime
+     79       0       0       0 |      79       0 | runtime/interrupt
+    107       0       0       0 |     107       0 | runtime/volatile
+    439     108       0       0 |     547       0 | strings
+    105       0       0       0 |     105       0 | sync
      32       6       0       0 |      38       0 | syscall
-   8678     586      64      76 |    9328     140 | time
-    384     288       0       0 |     672       0 | unicode/utf8
+   8002     532      64      76 |    8598     140 | time
+    368     288       0       0 |     656       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  28245    3184      64    4236 |   31493    4300 | total
+  27614    3156     112    4252 |   30882    4364 | total

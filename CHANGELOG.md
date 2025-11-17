@@ -1,6 +1,18 @@
 # Changelog
 
 - unreleased
+- 0.9.0 (2025-11-17, TZDB 2025b)
+    - **Breaking** Replace  `ZonedExtra.FoldType` with `ZonedExtra.Resolved`
+      which has the same meaning as `ZonedDateTime.Resolved`.
+    - **Breaking** Use typesafe types for enums (`findResultType` instead of
+      `uint8`, `ResolvedType` instead of `uint8`).
+    - **Breaking** Remove `ZonedDataTime.ZonedExtra()` that converts
+      `ZonedDateTime` into a `ZonedExtra`.
+        - Use `ZonedExtraFromPlainDateTime()` or `ZonedExtraFromUnixSeconds()`
+          instead.
+        - For compatibility with `AceTime` and `acetimec` libraries. Simplifies
+          the API.
+    - Regenerate memory benchmarks using Go 1.25.3 and TinyGo 0.39.0.
 - 0.8.0 (2025-10-21, TZDB 2025b)
     - **Breaking** Rename LocalXxx to PlainXxx, following the conventions
       used by more modern timezone libraries (JavaScript Temporal, Python

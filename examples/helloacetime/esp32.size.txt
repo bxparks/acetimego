@@ -1,21 +1,23 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
       0       0       2       5 |       2       7 | (padding)
-   1439       4       0       0 |    1443       0 | (unknown)
+   1381      16       0       0 |    1397       0 | (unknown)
       0       0       0    4096 |       0    4096 | C stack
      66       0       0       0 |      66       0 | device/esp
-   6426      31       0       0 |    6457       0 | github.com/bxparks/acetimego/acetime
-    210       0       0       0 |     210       0 | github.com/bxparks/acetimego/internal/strbuild
+   6181      31       0       0 |    6212       0 | github.com/bxparks/acetimego/acetime
+    212       0       0       0 |     212       0 | github.com/bxparks/acetimego/internal/strbuild
       0   34031    1438       0 |   35469    1438 | github.com/bxparks/acetimego/zonedb2000
-   1856       0       0       0 |    1856       0 | github.com/bxparks/acetimego/zoneinfo
-     57       0       0       0 |      57       0 | internal/bytealg
-    316      24       0       8 |     340       8 | internal/task
-     20       0       0       0 |      20       0 | machine
-    332      77       0       0 |     409       0 | main
-   2587     172       0      59 |    2759      59 | runtime
-     55       0       0       0 |      55       0 | runtime/interrupt
-    117       0       0       0 |     117       0 | runtime/volatile
-    439     108       0       0 |     547       0 | strings
-    174       0       0       0 |     174       0 | time
+   1823       0       0       0 |    1823       0 | github.com/bxparks/acetimego/zoneinfo
+     59       0       0       0 |      59       0 | internal/bytealg
+     37       0       0       0 |      37       0 | internal/stringslite
+    310      24       0       8 |     334       8 | internal/task
+      9       0       0       0 |       9       0 | machine
+    316      77       0       0 |     393       0 | main
+     10       0       0       0 |      10       0 | math/bits
+   2675     172       0      75 |    2847      75 | runtime
+     56       0       0       0 |      56       0 | runtime/interrupt
+    181       0       0       0 |     181       0 | runtime/volatile
+    430     108       0       0 |     538       0 | strings
+    171       0       0       0 |     171       0 | time
 ------------------------------- | --------------- | -------
-  14094   34447    1440    4168 |   49981    5608 | total
+  13917   34459    1440    4184 |   49816    5624 | total

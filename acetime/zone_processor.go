@@ -25,6 +25,7 @@ const (
 	errGeneric
 )
 
+// Sizes of internal buffers
 const (
 	maxMatches       = 4
 	maxInteriorYears = 4
@@ -681,17 +682,18 @@ func createAbbreviation(
 // findByPlainDateTime() and findByUnixSeconds()
 //---------------------------------------------------------------------------
 
-// Values of the findResult.frtype field. Must be identical to FoldType enums.
+// Values of the findResult.frtype field.
+type findResultType uint8
+
 const (
-	findResultErr = iota
-	findResultNotFound
+	findResultNotFound findResultType = iota
 	findResultExact
 	findResultGap
 	findResultOverlap
 )
 
 var (
-	findResultError = findResult{frtype: findResultErr}
+	findResultError = findResult{frtype: findResultNotFound}
 )
 
 // This object contains the result of a search, either using findByUnixSeconds()
@@ -699,45 +701,44 @@ var (
 //
 // The `frtype` determines the high-level result of the query using the
 // epochSeconds or plainDateTime. It is one of the `findResult` enums:
-// findResultErr, findResultNotFound, findResultExact, findResultGap, or
-// findResultOverlap.
+// findResultNotFound, findResultExact, findResultGap, or findResultOverlap.
 //
-// The `fold` parameter identifies the transition rule that was used to resolve
-// the search: 0 means "earlier", and 1 means "later". The effect on the
+// The `foldNumber` parameter identifies the transition rule that was used to
+// resolve the search: 0 means "earlier", and 1 means "later". The effect on the
 // resulting ZonedDateTime or ZonedExtra object is slightly different depending
 // overlap versus gap.
 //
-// The `frtype` field is exposed as `ZonedExtra.FoldType`. The `fold` parameter
-// was previously exposed to the end-users, but is now used for internal
-// purposes only. It is combined with the `frtype` to to determine the
-// `ZonedDateTime.resolved` parameter.
+// The `frtype` and `foldNumber` are combined into `ZonedDateTime.Resolved` and
+// `ZonedExtra.Resolved`.
 //
-// For findByUnixSeconds(), the `fold` parameter is relevant only if
+// For findByUnixSeconds(), the `foldNumber` parameter is relevant only if
 // unixSeconds falls in an overlap (frtype==findResultOverlap):
-// - fold=0 means that the requested unixSeconds matched a backwards shadow of a
-// later transition (e.g. the first time 1:30am was seen before a fallback from
-// 2am to 1am),
-// - fold=1 means that the requested unixSeconds matched the forward shadow of
-// an earlier transition (e.g. the second time 1:30am was seen after a fallback
-// from 2am to 1am).
+// - foldNumber=0 means that the requested unixSeconds matched a backwards
+// shadow of a later transition (e.g. the first time 1:30am was seen before a
+// fallback from 2am to 1am),
+// - foldNumber=1 means that the requested unixSeconds matched the forward
+// shadow of an earlier transition (e.g. the second time 1:30am was seen after a
+// fallback from 2am to 1am).
 //
-// For findByPlainDateTime(), the `fold` parameter is relevant for both
+// For findByPlainDateTime(), the `foldNumber` parameter is relevant for both
 // findResultGap and findResultOverlap.
 // - If the requested PlainDateTime is in an overlap:
-//    - `fold=0` means that the SelectEarlier option was requested, and
-//    - `fold=1` means that the SelectLater option was requested.
+//   - `foldNumber=0` means that the SelectEarlier option was requested, and
+//   - `foldNumber=1` means that the SelectLater option was requested.
+//
 // - If the PlainDateTime is in a gap:
-//    - `fold=0` means the earlier transition was requested by SelectLater, and
-//    - `fold=1` means that the later transition was selected using
-//    SelectEarlier.
+//   - `foldNumber=0` means the earlier transition was requested by
+//     SelectLater, and
+//   - `foldNumber=1` means that the later transition was selected using
+//     SelectEarlier.
 type findResult struct {
-	frtype              uint8  // findResult type
-	fold                uint8  // earlier (0) or later (1) transition
-	stdOffsetSeconds    int32  // STD offset
-	dstOffsetSeconds    int32  // DST offset
-	reqStdOffsetSeconds int32  // request STD offset
-	reqDstOffsetSeconds int32  // request DST offset
-	abbrev              string // abbreviation (e.g. PST, PDT)
+	frtype              findResultType // findResult type
+	foldNumber          uint8          // earlier (0) or later (1) transition
+	stdOffsetSeconds    int32          // STD offset
+	dstOffsetSeconds    int32          // DST offset
+	reqStdOffsetSeconds int32          // request STD offset
+	reqDstOffsetSeconds int32          // request DST offset
+	abbrev              string         // abbreviation (e.g. PST, PDT)
 }
 
 // Find the findResult at the given epoch_seconds.
@@ -757,7 +758,7 @@ func (zp *zoneProcessor) findByUnixSeconds(unixSeconds Time) findResult {
 		return findResultError
 	}
 
-	var frtype uint8
+	var frtype findResultType
 	if tfs.num == 2 {
 		frtype = findResultOverlap
 	} else {
@@ -765,7 +766,7 @@ func (zp *zoneProcessor) findByUnixSeconds(unixSeconds Time) findResult {
 	}
 	return findResult{
 		frtype:              frtype,
-		fold:                tfs.fold,
+		foldNumber:          tfs.fold,
 		stdOffsetSeconds:    transition.offsetSeconds,
 		dstOffsetSeconds:    transition.deltaSeconds,
 		reqStdOffsetSeconds: transition.offsetSeconds,
@@ -804,14 +805,14 @@ func (zp *zoneProcessor) findByPlainDateTime(
 
 	tfd := zp.tstorage.findTransitionForDateTime(pdt)
 
-	// Extract the appropriate transition, depending on the requested 'fold'
+	// Extract the appropriate transition, depending on the requested 'foldNumber'
 	// and the 'tfd.searchStatus'.
 	var transition *transition
 	var result findResult
 	if tfd.num == 1 {
 		transition = tfd.curr
 		result.frtype = findResultExact
-		result.fold = 0
+		result.foldNumber = 0
 		result.reqStdOffsetSeconds = transition.offsetSeconds
 		result.reqDstOffsetSeconds = transition.deltaSeconds
 	} else { // num = 0 or 2
@@ -819,7 +820,7 @@ func (zp *zoneProcessor) findByPlainDateTime(
 			// pdt was far past or far future, and didn't match anything.
 			transition = nil
 			result.frtype = findResultNotFound
-			result.fold = 0
+			result.foldNumber = 0
 		} else { // gap or overlap
 			if tfd.num == 0 { // gap
 				result.frtype = findResultGap
@@ -829,7 +830,7 @@ func (zp *zoneProcessor) findByPlainDateTime(
 					// and deltaSeconds from the earlier (prev) transition.
 					result.reqStdOffsetSeconds = tfd.prev.offsetSeconds
 					result.reqDstOffsetSeconds = tfd.prev.deltaSeconds
-					result.fold = 0
+					result.foldNumber = 0
 					// But after normalization, it will be shifted into the curr
 					// transition, so select 'curr' as the target transition.
 					transition = tfd.curr
@@ -838,7 +839,7 @@ func (zp *zoneProcessor) findByPlainDateTime(
 					// and deltaSeconds from the later (curr) transition.
 					result.reqStdOffsetSeconds = tfd.curr.offsetSeconds
 					result.reqDstOffsetSeconds = tfd.curr.deltaSeconds
-					result.fold = 1
+					result.foldNumber = 1
 					// But after normalization, it will be shifted into the prev
 					// transition, so select 'prev' as the target transition.
 					transition = tfd.prev
@@ -847,10 +848,10 @@ func (zp *zoneProcessor) findByPlainDateTime(
 				if disambiguate == DisambiguateCompatible ||
 					disambiguate == DisambiguateEarlier {
 					transition = tfd.prev
-					result.fold = 0
+					result.foldNumber = 0
 				} else {
 					transition = tfd.curr
-					result.fold = 1
+					result.foldNumber = 1
 				}
 				result.frtype = findResultOverlap
 				result.reqStdOffsetSeconds = transition.offsetSeconds
