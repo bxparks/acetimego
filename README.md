@@ -38,7 +38,7 @@ This library implements the algorithms equivalent to the following libraries:
 - [acetimepy](https://github.com/bxparks/acetimepy) for Python,
 - [acetimec](https://github.com/bxparks/acetimec) for C.
 
-**Version**: 0.8.0 (2025-10-21, TZDB 2025b)
+**Version**: 0.9.0 (2025-11-17, TZDB 2025b)
 
 **Changelog**: [CHANGELOG.md](CHANGELOG.md)
 
@@ -523,7 +523,6 @@ It is created by:
 
 - `acetime.ZonedExtraFromUnixSeconds(unixSeconds, tz)`
 - `acetime.ZonedExtraFromPlainDateTime(plainDateTime, tz, disambiguate)`
-- `acetime.ZonedDateTime.ZonedExtra()`
 
 The `ResolvedFold` specifies whether the given `PlainDateTime` is within an
 overlap or a gap. It takes 5 values:
@@ -538,9 +537,6 @@ The `Abbrev` parameter is the timezone abbreviation that corresponds to the
 given unixSeconds or `PlainDateTime`. For example, for the `America/Los_Angeles`
 time zone, it will be "PST" (Pacific Standard Time) during the winter months,
 and "PDT" (Pacific Daylight Time) during the summer months.
-
-For convenience, `ZonedDateTime` can directly retrieve the corresponding
-`ZonedExtra` object using `ZonedDateTime.ZonedExtra()`.
 
 (TODO: add documentation of the various OffsetSeconds parameters.)
 

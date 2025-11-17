@@ -7,6 +7,16 @@ import (
 )
 
 //-----------------------------------------------------------------------------
+// ZonedDateTimeError
+//-----------------------------------------------------------------------------
+
+func TestZonedDateTimeError(t *testing.T) {
+	if ZonedDateTimeError.Resolved != ResolvedError {
+		t.Fatal("ZonedDateTimeError.Resolved should be ResolvedError")
+	}
+}
+
+//-----------------------------------------------------------------------------
 // ZonedDateTime.
 // Much of the following tests adapted from zoned_date_time_test.c from the
 // acetimec library, which in turn, were adopted from
@@ -108,12 +118,6 @@ func TestZonedDateTimeFromUnixSeconds(t *testing.T) {
 	if !(unixSeconds == zdt.UnixSeconds()) {
 		t.Fatal(zdt)
 	}
-
-	expectedExtra := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra := zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
-	}
 }
 
 func TestZonedDateTimeFromUnixSeconds_2050(t *testing.T) {
@@ -137,12 +141,6 @@ func TestZonedDateTimeFromUnixSeconds_2050(t *testing.T) {
 	}
 	if !(unixSeconds == zdt.UnixSeconds()) {
 		t.Fatal(zdt.UnixSeconds())
-	}
-
-	expectedExtra := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra := zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
 	}
 }
 
@@ -168,11 +166,6 @@ func TestZonedDateTimeFromUnixSeconds_UnixMax(t *testing.T) {
 	if !(unixSeconds == zdt.UnixSeconds()) {
 		t.Fatal(zdt.UnixSeconds())
 	}
-	expectedExtra := ZonedExtra{FoldTypeExact, 0, 0, 0, 0, "UTC"}
-	extra := zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
-	}
 }
 
 func TestZonedDateTimeFromUnixSeconds_Invalid(t *testing.T) {
@@ -185,10 +178,6 @@ func TestZonedDateTimeFromUnixSeconds_Invalid(t *testing.T) {
 	}
 	if !(unixSeconds == zdt.UnixSeconds()) {
 		t.Fatal(zdt)
-	}
-	extra := zdt.ZonedExtra()
-	if !extra.IsError() {
-		t.Fatal(extra)
 	}
 }
 
@@ -217,13 +206,6 @@ func TestZonedDateTimeFromUnixSeconds_FallBack(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra := ZonedExtra{
-		FoldTypeOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
-	}
-	extra := zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
-	}
 
 	// Go forward an hour. Should return 01:29:00-08:00.
 	unixSeconds += 3600
@@ -242,13 +224,6 @@ func TestZonedDateTimeFromUnixSeconds_FallBack(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra = ZonedExtra{
-		FoldTypeOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST",
-	}
-	extra = zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
-	}
 
 	// Go forward another hour. Should return 02:29:00-08:00.
 	unixSeconds += 3600
@@ -266,11 +241,6 @@ func TestZonedDateTimeFromUnixSeconds_FallBack(t *testing.T) {
 	}
 	if !(zdt == expected) {
 		t.Fatal(zdt)
-	}
-	expectedExtra = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra = zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
 	}
 }
 
@@ -299,11 +269,6 @@ func TestZonedDateTimeFromUnixSeconds_SpringForward(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra := zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
-	}
 
 	// An hour later, we spring forward to 03:29:00-07:00.
 	unixSeconds += 3600
@@ -321,13 +286,6 @@ func TestZonedDateTimeFromUnixSeconds_SpringForward(t *testing.T) {
 	}
 	if !(zdt == expected) {
 		t.Fatal(zdt)
-	}
-	expectedExtra = ZonedExtra{
-		FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
-	}
-	extra = zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
 	}
 }
 
@@ -359,11 +317,6 @@ func TestZonedDateTimeFromPlainDateTime(t *testing.T) {
 	if !(unixSeconds == 946684800+8*60*60) {
 		t.Fatal(unixSeconds)
 	}
-	expectedExtra := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra := zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
-	}
 
 	// check that DisambiguateReversed gives identical results, there is only one
 	// match
@@ -386,11 +339,6 @@ func TestZonedDateTimeFromPlainDateTime(t *testing.T) {
 	unixSeconds = zdt.UnixSeconds()
 	if !(unixSeconds == 946684800+8*60*60) {
 		t.Fatal(unixSeconds)
-	}
-	expectedExtra = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra = zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
 	}
 }
 
@@ -418,11 +366,6 @@ func TestZonedDateTimeFromPlainDateTime_2050(t *testing.T) {
 	if !(unixSeconds == 2524608000+8*60*60) {
 		t.Fatal(unixSeconds)
 	}
-	expectedExtra := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra := zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
-	}
 
 	// check that DisambiguateReversed gives identical results, since there is one
 	// match
@@ -445,11 +388,6 @@ func TestZonedDateTimeFromPlainDateTime_2050(t *testing.T) {
 	unixSeconds = zdt.UnixSeconds()
 	if !(unixSeconds == 2524608000+8*60*60) {
 		t.Fatal(unixSeconds)
-	}
-	expectedExtra = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra = zdt.ZonedExtra()
-	if extra != expectedExtra {
-		t.Fatal(extra)
 	}
 }
 
@@ -474,8 +412,10 @@ func TestZonedDateTimeFromPlainDateTime_BeforeGap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra := zdt.ZonedExtra()
+
+	// Check ZonedExtra
+	extra := ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateCompatible)
+	expectedExtra := ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -498,8 +438,10 @@ func TestZonedDateTimeFromPlainDateTime_BeforeGap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra = zdt.ZonedExtra()
+
+	// Check ZonedExtra
+	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateReversed)
+	expectedExtra = ZonedExtra{ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST"}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -528,10 +470,12 @@ func TestZonedDateTimeFromPlainDateTime_InGap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra := ZonedExtra{FoldTypeGap, -8 * 3600, 3600, -8 * 3600, 0, "PDT"}
-	// Instead of calling 'zdt.ZonedExtra()', use the original PlainDateTime,
-	// because the zdt has already been resolved to a real date time.
+
+	// Check ZonedExtra
 	extra := ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateCompatible)
+	expectedExtra := ZonedExtra{
+		ResolvedGapLater, -8 * 3600, 3600, -8 * 3600, 0, "PDT",
+	}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -552,10 +496,12 @@ func TestZonedDateTimeFromPlainDateTime_InGap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra = ZonedExtra{FoldTypeGap, -8 * 3600, 3600, -8 * 3600, 0, "PDT"}
-	// Instead of calling 'zdt.ZonedExtra()', use the original PlainDateTime,
-	// because the zdt has already been resolved to a real date time.
+
+	// Check ZonedExtra
 	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateCompatible)
+	expectedExtra = ZonedExtra{
+		ResolvedGapLater, -8 * 3600, 3600, -8 * 3600, 0, "PDT",
+	}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -576,10 +522,12 @@ func TestZonedDateTimeFromPlainDateTime_InGap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra = ZonedExtra{FoldTypeGap, -8 * 3600, 0, -8 * 3600, 3600, "PST"}
-	// Instead of calling 'zdt.ZonedExtra()', use the original PlainDateTime,
-	// because the zdt has already been resolved to a real date time.
+
+	// Check ZonedExtra
 	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateReversed)
+	expectedExtra = ZonedExtra{
+		ResolvedGapEarlier, -8 * 3600, 0, -8 * 3600, 3600, "PST",
+	}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -600,10 +548,12 @@ func TestZonedDateTimeFromPlainDateTime_InGap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra = ZonedExtra{FoldTypeGap, -8 * 3600, 0, -8 * 3600, 3600, "PST"}
-	// Instead of calling 'zdt.ZonedExtra()', use the original PlainDateTime,
-	// because the zdt has already been resolved to a real date time.
+
+	// Check ZonedExtra
 	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateReversed)
+	expectedExtra = ZonedExtra{
+		ResolvedGapEarlier, -8 * 3600, 0, -8 * 3600, 3600, "PST",
+	}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -630,10 +580,12 @@ func TestZonedDateTimeFromPlainDateTime_AfterGap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
+
+	// Check ZonedExtra
+	extra := ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateCompatible)
 	expectedExtra := ZonedExtra{
-		FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
-	extra := zdt.ZonedExtra()
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -655,10 +607,12 @@ func TestZonedDateTimeFromPlainDateTime_AfterGap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
+
+	// Check ZonedExtra
+	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateReversed)
 	expectedExtra = ZonedExtra{
-		FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
-	extra = zdt.ZonedExtra()
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -686,10 +640,12 @@ func TestZonedDateTimeFromPlainDateTime_BeforeOverlap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
+
+	// Check ZonedExtra
+	extra := ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateCompatible)
 	expectedExtra := ZonedExtra{
-		FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
-	extra := zdt.ZonedExtra()
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -711,10 +667,12 @@ func TestZonedDateTimeFromPlainDateTime_BeforeOverlap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
+
+	// Check ZonedExtra
+	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateReversed)
 	expectedExtra = ZonedExtra{
-		FoldTypeExact, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedUnique, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
-	extra = zdt.ZonedExtra()
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -743,10 +701,12 @@ func TestZonedDateTimeFromPlainDateTime_InOverlap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
+
+	// Check ZonedExtra
+	extra := ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateCompatible)
 	expectedExtra := ZonedExtra{
-		FoldTypeOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedOverlapEarlier, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
-	extra := zdt.ZonedExtra()
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -767,10 +727,12 @@ func TestZonedDateTimeFromPlainDateTime_InOverlap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
+
+	// Check ZonedExtra
+	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateEarlier)
 	expectedExtra = ZonedExtra{
-		FoldTypeOverlap, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
+		ResolvedOverlapEarlier, -8 * 3600, 3600, -8 * 3600, 3600, "PDT",
 	}
-	extra = zdt.ZonedExtra()
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -791,8 +753,12 @@ func TestZonedDateTimeFromPlainDateTime_InOverlap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra = ZonedExtra{FoldTypeOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra = zdt.ZonedExtra()
+
+	// Check ZonedExtra
+	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateLater)
+	expectedExtra = ZonedExtra{
+		ResolvedOverlapLater, -8 * 3600, 0, -8 * 3600, 0, "PST",
+	}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -813,8 +779,12 @@ func TestZonedDateTimeFromPlainDateTime_InOverlap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra = ZonedExtra{FoldTypeOverlap, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra = zdt.ZonedExtra()
+
+	// Check ZonedExtra
+	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateReversed)
+	expectedExtra = ZonedExtra{
+		ResolvedOverlapLater, -8 * 3600, 0, -8 * 3600, 0, "PST",
+	}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -841,8 +811,12 @@ func TestZonedDateTimeFromPlainDateTime_AfterOverlap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra := ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra := zdt.ZonedExtra()
+
+	// Check ZonedExtra
+	extra := ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateCompatible)
+	expectedExtra := ZonedExtra{
+		ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST",
+	}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -864,8 +838,12 @@ func TestZonedDateTimeFromPlainDateTime_AfterOverlap(t *testing.T) {
 	if !(zdt == expected) {
 		t.Fatal(zdt)
 	}
-	expectedExtra = ZonedExtra{FoldTypeExact, -8 * 3600, 0, -8 * 3600, 0, "PST"}
-	extra = zdt.ZonedExtra()
+
+	// Check ZonedExtra
+	extra = ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateReversed)
+	expectedExtra = ZonedExtra{
+		ResolvedUnique, -8 * 3600, 0, -8 * 3600, 0, "PST",
+	}
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -902,10 +880,12 @@ func TestZonedDateTimeConvertToTimeZone(t *testing.T) {
 	if !(nydt == expected) {
 		t.Fatal(nydt)
 	}
+
+	// Check ZonedExtra
+	extra := ZonedExtraFromPlainDateTime(&pdt, &tzNewYork, DisambiguateCompatible)
 	expectedExtra := ZonedExtra{
-		FoldTypeExact, -5 * 3600, 3600, -5 * 3600, 3600, "EDT",
+		ResolvedUnique, -5 * 3600, 3600, -5 * 3600, 3600, "EDT",
 	}
-	extra := nydt.ZonedExtra()
 	if extra != expectedExtra {
 		t.Fatal(extra)
 	}
@@ -924,15 +904,15 @@ func TestZonedDateTimeToZonedExtra(t *testing.T) {
 		t.Fatal(zdt)
 	}
 
+	extra := ZonedExtraFromPlainDateTime(&pdt, &tz, DisambiguateCompatible)
 	expected := ZonedExtra{
-		ResolvedFold:        FoldTypeExact,
+		Resolved:            ResolvedUnique,
 		StdOffsetSeconds:    -8 * 3600,
 		DstOffsetSeconds:    1 * 3600,
 		ReqStdOffsetSeconds: -8 * 3600,
 		ReqDstOffsetSeconds: 1 * 3600,
 		Abbrev:              "PDT",
 	}
-	extra := zdt.ZonedExtra()
 	if !(extra == expected) {
 		t.Fatal(extra)
 	}

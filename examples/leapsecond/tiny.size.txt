@@ -1,31 +1,31 @@
    code  rodata    data     bss |   flash     ram | package
 ------------------------------- | --------------- | -------
       0      26       4      14 |      30      18 | (padding)
-     28   22063      20    1043 |   22111    1063 | (unknown)
-   1438    3420       0      28 |    4858      28 | /usr/local/go/src/syscall
-  26499    3617     872  118017 |   30988  118889 | C bdwgc
-  16680    3025      12     576 |   19717     588 | C musl
+     28   22063      20    1027 |   22111    1047 | (unknown)
+   1438    3451       0      28 |    4889      28 | /usr/local/go/src/syscall
+  26499    3616     872  118017 |   30987  118889 | C bdwgc
+  16680    3026      12     576 |   19718     588 | C musl
     126       0       0       0 |     126       0 | Go interface assert
      96       0       0       0 |      96       0 | Go interface method
       0     472       0       0 |     472       0 | Go types
      43       0       0       0 |      43       0 | errors
-   7174      28       0       0 |    7202       0 | github.com/bxparks/acetimego/acetime
+   7180      28       0       0 |    7208       0 | github.com/bxparks/acetimego/acetime
     301       0       0       0 |     301       0 | github.com/bxparks/acetimego/internal/strbuild
-    166       0       0       0 |     166       0 | github.com/bxparks/acetimego/zoneinfo
+    171       0       0       0 |     171       0 | github.com/bxparks/acetimego/zoneinfo
     170       0       0       0 |     170       0 | internal/bytealg
     167       0       0       0 |     167       0 | internal/futex
     160       2       0       0 |     162       0 | internal/itoa
    4912     622      96       0 |    5630      96 | internal/reflectlite
      39       0       0       0 |      39       0 | internal/stringslite
     544      50       8      96 |     602     104 | internal/task
-   1044     134       0       0 |    1178       0 | main
+   1044     137       0       0 |    1181       0 | main
      27       0       0       0 |      27       0 | math/bits
    5535     324       4      26 |    5863      30 | runtime
-    531     124       0       0 |     655       0 | strings
+    535     124       0       0 |     659       0 | strings
     795      33       0       0 |     828       0 | sync
      90       0       0       0 |      90       0 | sync/atomic
-    201    1658      40      25 |    1899      65 | syscall
-  17557     902     184     112 |   18643     296 | time
+    201    1627      40      25 |    1868      65 | syscall
+  17557     899     184     112 |   18640     296 | time
     377     288       0       0 |     665       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  84700   36788    1240  119937 |  122728  121177 | total
+  84715   36788    1240  119921 |  122743  121161 | total

@@ -16,7 +16,8 @@ var (
 type ResolvedType uint8
 
 const (
-	ResolvedUnique ResolvedType = iota
+	ResolvedError ResolvedType = iota
+	ResolvedUnique
 	ResolvedOverlapEarlier
 	ResolvedOverlapLater
 	ResolvedGapEarlier
@@ -94,21 +95,6 @@ func (zdt *ZonedDateTime) Normalize(disambiguate uint8) {
 		&zdt.OffsetDateTime.PlainDateTime, disambiguate)
 	zdt.OffsetDateTime = odt
 	zdt.Resolved = resolved
-}
-
-// ZonedExtra returns the ZonedExtra object corresponding to the current
-// ZonedDateTime. This is will be always identical to the value returned by
-// ZonedExtraFromUnixSeconds().
-//
-// It will usually be identical to the value returned by
-// ZonedExtraFromPlainDateTime() except when the PlainDateTime falls in a gap
-// (FoldTypeGap). In that case, the ZonedDateTime has already been normalized
-// into a real ZonedDateTime, and ZonedExtraFromPlainDateTime() should be
-// called with the original PlainDateTime if the information about the
-// non-existent PlainDateTime is required.
-func (zdt *ZonedDateTime) ZonedExtra() ZonedExtra {
-	return zdt.Tz.findZonedExtraForUnixSeconds(
-		zdt.OffsetDateTime.UnixSeconds())
 }
 
 // String returns the given ZonedDateTime in ISO8601 format, in the form of

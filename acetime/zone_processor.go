@@ -682,7 +682,7 @@ func createAbbreviation(
 // findByPlainDateTime() and findByUnixSeconds()
 //---------------------------------------------------------------------------
 
-// Values of the findResult.frtype field. Must be identical to FoldType enums.
+// Values of the findResult.frtype field.
 type findResultType uint8
 
 const (
@@ -708,10 +708,8 @@ var (
 // resulting ZonedDateTime or ZonedExtra object is slightly different depending
 // overlap versus gap.
 //
-// The `frtype` field is exposed as `ZonedExtra.FoldType`. The `foldNumber`
-// parameter was previously exposed to the end-users, but is now used for
-// internal purposes only. It is combined with the `frtype` to to determine the
-// `ZonedDateTime.resolved` parameter.
+// The `frtype` and `foldNumber` are combined into `ZonedDateTime.Resolved` and
+// `ZonedExtra.Resolved`.
 //
 // For findByUnixSeconds(), the `foldNumber` parameter is relevant only if
 // unixSeconds falls in an overlap (frtype==findResultOverlap):

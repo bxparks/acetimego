@@ -7,9 +7,9 @@
       0     280       0       0 |     280       0 | Go types
      66       0       0       0 |      66       0 | device/esp
      13       0       0       0 |      13       0 | errors
-   6185      28       0       0 |    6213       0 | github.com/bxparks/acetimego/acetime
+   6180      28       0       0 |    6208       0 | github.com/bxparks/acetimego/acetime
     224       0       0       0 |     224       0 | github.com/bxparks/acetimego/internal/strbuild
-    182       0       0       0 |     182       0 | github.com/bxparks/acetimego/zoneinfo
+    179       0       0       0 |     179       0 | github.com/bxparks/acetimego/zoneinfo
      57       0       0       0 |      57       0 | internal/bytealg
     161       2       0       0 |     163       0 | internal/itoa
    4094     590      48       0 |    4732      48 | internal/reflectlite
@@ -27,4 +27,4 @@
    8002     532      64      76 |    8598     140 | time
     368     288       0       0 |     656       0 | unicode/utf8
 ------------------------------- | --------------- | -------
-  27622    3156     112    4252 |   30890    4364 | total
+  27614    3156     112    4252 |   30882    4364 | total

@@ -108,14 +108,14 @@ func (tz *TimeZone) findZonedExtraForUnixSeconds(
 
 	// UTC or Error
 	if tz.processor == nil {
-		var resolvedFold FoldType
+		var resolved ResolvedType
 		if unixSeconds == InvalidUnixSeconds {
-			resolvedFold = FoldTypeNotFound
+			resolved = ResolvedError
 		} else {
-			resolvedFold = FoldTypeExact
+			resolved = ResolvedUnique
 		}
 		return ZonedExtra{
-			ResolvedFold:        resolvedFold,
+			Resolved:            resolved,
 			StdOffsetSeconds:    0,
 			DstOffsetSeconds:    0,
 			ReqStdOffsetSeconds: 0,
@@ -135,7 +135,7 @@ func (tz *TimeZone) findZonedExtraForUnixSeconds(
 	}
 
 	return ZonedExtra{
-		ResolvedFold:        FoldType(result.frtype),
+		Resolved:            ResolvedUnique,
 		StdOffsetSeconds:    result.stdOffsetSeconds,
 		DstOffsetSeconds:    result.dstOffsetSeconds,
 		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,
@@ -215,14 +215,14 @@ func (tz *TimeZone) findZonedExtraForPlainDateTime(
 
 	// UTC or Error
 	if tz.processor == nil {
-		var resolvedFold FoldType
+		var resolved ResolvedType
 		if pdt.IsError() {
-			resolvedFold = FoldTypeNotFound
+			resolved = ResolvedError
 		} else {
-			resolvedFold = FoldTypeExact
+			resolved = ResolvedUnique
 		}
 		return ZonedExtra{
-			ResolvedFold:        resolvedFold,
+			Resolved:            resolved,
 			StdOffsetSeconds:    0,
 			DstOffsetSeconds:    0,
 			ReqStdOffsetSeconds: 0,
@@ -236,8 +236,9 @@ func (tz *TimeZone) findZonedExtraForPlainDateTime(
 		return ZonedExtraError
 	}
 
+	resolved := resolveForResultTypeAndFold(result.frtype, result.foldNumber)
 	return ZonedExtra{
-		ResolvedFold:        FoldType(result.frtype),
+		Resolved:            resolved,
 		StdOffsetSeconds:    result.stdOffsetSeconds,
 		DstOffsetSeconds:    result.dstOffsetSeconds,
 		ReqStdOffsetSeconds: result.reqStdOffsetSeconds,
